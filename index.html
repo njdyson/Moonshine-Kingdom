@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom v4.2 — Publisher Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variables matching moonshine-rules.css ── */
+    :root {
+      --bg-color: #0d0005;
+      --bg-rgb: 13, 0, 5;
+      --surface: #130207;
+      --text-color: #f5e9d9;
+      --accent-gold: #d4af37;
+      --accent-dim: #8a7329;
+      --table-header: #1f1216;
+      --font-body: 'Raleway', sans-serif;
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { background-color: var(--bg-color); }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      font-size: 11pt;
+    }
+
+    /* ── Hero / Cover ── */
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 50px;
+      min-height: 340px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("Art/Front Page 5.png");
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5) contrast(1.1);
+      z-index: 0;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(to bottom, rgba(var(--bg-rgb), 0.3) 0%, rgba(var(--bg-rgb), 0) 30%, rgba(var(--bg-rgb), 0) 60%, rgba(var(--bg-rgb), 1) 100%),
+        linear-gradient(to right, rgba(var(--bg-rgb), 0.6) 0%, rgba(var(--bg-rgb), 0) 30%, rgba(var(--bg-rgb), 0) 70%, rgba(var(--bg-rgb), 0.6) 100%);
+    }
+    .hero > * { position: relative; z-index: 2; }
+
+    .hero .title-image {
+      max-width: min(480px, 80vw);
+      height: auto;
+      margin-bottom: 12px;
+      filter: brightness(1.12) contrast(1.08);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      letter-spacing: 0.06em;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0,0,0,1);
+      text-transform: uppercase;
+      line-height: 1;
+      font-weight: 400;
+    }
+    .hero .subtitle {
+      font-family: var(--font-body);
+      font-size: 12pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-gold);
+      text-shadow: 2px 2px 0px #000;
+      margin-top: 8px;
+    }
+    .hero .version-badge {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 0.82rem;
+      color: var(--text-color);
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      padding: 5px 16px;
+      letter-spacing: 0.04em;
+      background: rgba(var(--bg-rgb), 0.7);
+    }
+
+    /* ── Page Container ── */
+    .page {
+      width: 210mm;
+      max-width: calc(100% - 40px);
+      margin: 40px auto;
+      padding: 50px 60px;
+      background-color: var(--surface);
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      border: 1px solid #333;
+    }
+
+    /* ── Typography (mirroring rulebook) ── */
+    p { margin: 0 0 1em 0; }
+
+    strong { color: var(--accent-gold); font-weight: 700; }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 22pt;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      line-height: 1.1;
+      border-bottom: 2px solid var(--accent-gold);
+      padding-bottom: 5px;
+      margin-top: 1.8em;
+      margin-bottom: 0.5em;
+      position: relative;
+    }
+    h2:first-child { margin-top: 0; }
+    h2::after {
+      content: '';
+      display: block;
+      border-bottom: 1px solid var(--accent-dim);
+      margin-top: 2px;
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 16pt;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      line-height: 1.1;
+      border-left: 4px solid var(--accent-gold);
+      padding-left: 10px;
+      margin-top: 1.4em;
+      margin-bottom: 0.5em;
+    }
+
+    a { color: var(--accent-gold); text-decoration: none; }
+    a:hover { text-decoration: underline; color: #e8c65a; }
+
+    /* ── Specs Row ── */
+    .specs {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 18px 0 6px;
+    }
+    .spec {
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      padding: 10px 18px;
+      flex: 1 1 120px;
+      min-width: 120px;
+      background: rgba(255,255,255,0.02);
+    }
+    .spec dt {
+      font-family: var(--font-display);
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-gold);
+      margin-bottom: 2px;
+    }
+    .spec dd { font-weight: 700; font-size: 1.05rem; }
+
+    /* ── Board Image ── */
+    .board-section {
+      text-align: center;
+      margin-top: 1.8em;
+    }
+    .board-img {
+      max-width: 100%;
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      filter: brightness(1.12) contrast(1.08);
+    }
+    .board-caption {
+      margin-top: 8px;
+      font-size: 0.88rem;
+      color: #b0a38a;
+      font-style: italic;
+    }
+
+    /* ── File List ── */
+    .file-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1em 0;
+    }
+    .file-list > li {
+      border: 1px solid var(--accent-dim);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.02);
+      transition: background 0.15s;
+    }
+    .file-list > li:hover {
+      background: rgba(212,175,55,0.06);
+    }
+    .file-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .file-row a.file-link {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+    .file-row .spacer { flex: 1; }
+    .pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent-gold);
+      border-radius: 2px;
+      background: rgba(212,175,55,0.08);
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .pdf-btn:hover {
+      background: rgba(212,175,55,0.18);
+      border-color: var(--accent-gold);
+      text-decoration: none;
+      color: #e8c65a;
+    }
+    .file-desc {
+      margin-top: 4px;
+      color: var(--text-color);
+      font-size: 0.92rem;
+      opacity: 0.9;
+    }
+
+    /* ── Note box (matching rulebook .note) ── */
+    .note {
+      background-color: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--accent-gold);
+      padding: 14px 16px;
+      font-style: italic;
+      color: #fcefd0;
+      margin: 1em 0;
+      border-radius: 4px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      color: var(--accent-dim);
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .page {
+        width: auto;
+        max-width: calc(100% - 24px);
+        padding: 32px;
+      }
+      .specs { gap: 8px; }
+      .file-row { gap: 8px; }
+      .file-row .spacer { display: none; }
+      .pdf-btn { margin-left: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ Hero ══════════ -->
+  <header class="hero">
+    <img src="Art/Moonshine Kingdom.png" alt="Moonshine Kingdom" class="title-image">
+    <h1>Publisher Review</h1>
+    <p class="subtitle">A Game of Bootlegging, Backstabbing, and Gang Warfare.</p>
+    <span class="version-badge">Version 4.2 &mdash; Complete Review Package</span>
+  </header>
+
+  <!-- ══════════ Main Content ══════════ -->
+  <div class="page">
+
+    <!-- ── Introduction ── -->
+    <h2>About the Game</h2>
+    <p>
+      In the gaslit streets of <strong>1920s New York City</strong>, Prohibition has sparked a lawless gold rush. Four deadly mobs battle to rule the city's illicit liquor trade through bootlegging, backroom deals, and cold-blooded combat. Players are rival kingpins vying for control of 25 districts across all five boroughs &mdash; brewing moonshine, running speakeasies, completing dangerous contracts, and muscling out the competition.
+    </p>
+    <p>
+      <strong>Moonshine Kingdom</strong> is a deeply thematic strategy board game blending area control, resource management, and asymmetric faction powers into a tense, replayable experience. Each round represents one volatile day in the life of your criminal empire &mdash; from the quiet hum of your stills at dawn, through the dangerous hustle of daylight operations, to the bloody reckoning that comes after dark.
+    </p>
+
+    <div class="specs">
+      <dl class="spec"><dt>Players</dt><dd>2 &ndash; 4</dd></dl>
+      <dl class="spec"><dt>Play Time</dt><dd>90 &ndash; 120 min</dd></dl>
+      <dl class="spec"><dt>Age</dt><dd>14+</dd></dl>
+      <dl class="spec"><dt>Version</dt><dd>4.2</dd></dl>
+    </div>
+
+    <div class="note">
+      Start with the <a href="Moonshine%20Kingdom%20Rules%20v4.2.html">Rulebook</a> for the full gameplay loop, then review the component files below. Print-ready PDFs are included alongside each interactive HTML version.
+    </div>
+
+    <!-- ── Board ── -->
+    <div class="board-section">
+      <h2>The Board</h2>
+      <a href="Board%20(Large).png" target="_blank">
+        <img src="Board%20(Large).png" alt="Moonshine Kingdom game board" class="board-img">
+      </a>
+      <p class="board-caption">25 districts across Manhattan, The Bronx, Queens, Brooklyn, and Staten Island. Click to view full size.</p>
+    </div>
+
+    <!-- ── Rulebook ── -->
+    <h2>Rulebook</h2>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Moonshine%20Kingdom%20Rules%20v4.2.html">Moonshine Kingdom Rules v4.2</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/MK%20Rulebook%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Complete rulebook &mdash; setup, turn structure, all mechanics, and endgame scoring.</div>
+      </li>
+    </ul>
+
+    <!-- ── Player Components ── -->
+    <h2>Player Components</h2>
+    <h3>Faction Playbooks</h3>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Mob%20Playbooks%20v4.2.html">Mob Playbooks v4.2</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Playbooks%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Asymmetric faction sheets for all four mobs &mdash; unique powers, abilities, and strategies.</div>
+      </li>
+    </ul>
+
+    <h3>Player Boards &amp; Reference</h3>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Operations%20Board%20v4.2.html">Operations Board v4.2</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Operations%20Boards%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Personal command board for tracking runners, influence, and actions each round.</div>
+      </li>
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Turn%20Structure%20Flow%20Card%20v4.2.html">Turn Structure Flow Card v4.2</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Turn%20Sequence%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Visual reference card showing the Morning &rarr; Day &rarr; Night phase sequence.</div>
+      </li>
+    </ul>
+
+    <!-- ── Cards ── -->
+    <h2>Cards</h2>
+
+    <h3>Contract Cards</h3>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Contract%20Cards%20v4.2.html">Contract Cards v4.2</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Contract%20Cards%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Gigs, Rackets, and Scores &mdash; timed objectives that reward Respect for completion.</div>
+      </li>
+    </ul>
+
+    <h3>Territory &amp; Venue Cards</h3>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Deeds%20v4.2.html">Deeds v4.2</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Deeds%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Borough deed cards awarded for controlling a majority of districts in each borough.</div>
+      </li>
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Speakeasy%20Cards.html">Speakeasy Cards</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Speakeasy%20Cards%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Speakeasy venue cards that generate revenue and Respect when operated in controlled territory.</div>
+      </li>
+    </ul>
+
+    <h3>Influence &amp; Economy Cards</h3>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Favor%20Cards.html">Favor Cards</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Favor%20Cards%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Political influence cards &mdash; call in favors from crooked officials, police, and underworld contacts.</div>
+      </li>
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Shylock.html">Shylock's Mark</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Shylock%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Loan shark system &mdash; borrow cash now, but the debt comes with escalating consequences.</div>
+      </li>
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Commision.html">The Commission</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Commission%20Cards%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">Endgame commission seats &mdash; high-value Respect awarded for underworld dominance.</div>
+      </li>
+    </ul>
+
+    <!-- ── Tokens & Boards ── -->
+    <h2>Tokens &amp; Boards</h2>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Federal%20Crackdown%20Tracker%20v4.2.html">Federal Crackdown Tracker v4.2</a>
+        </div>
+        <div class="file-desc">10-space pressure tracker used in the Volstead Act (co-op) and Syndicate Wars (2v2) variants. Double-sided.</div>
+      </li>
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Still%20Tokens.html">Still Tokens</a>
+        </div>
+        <div class="file-desc">Distillery tokens (values 2&ndash;12) used in the brewing dice mechanic each morning phase.</div>
+      </li>
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Speakeasy%20Circuit%20v4.2.html">Speakeasy Circuit v4.2</a>
+          <span class="spacer"></span>
+          <a class="pdf-btn" href="PDFs/Speakeasy%20Circuit%20v4.2.pdf">&#9830; PDF</a>
+        </div>
+        <div class="file-desc">The speakeasy network board &mdash; tracks venue locations, supply, and revenue across the city.</div>
+      </li>
+    </ul>
+
+    <!-- ── Simulators ── -->
+    <h2>Design &amp; Balance Tools</h2>
+    <p>Interactive simulators built for playtesting and probability analysis.</p>
+    <ul class="file-list">
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Brew%20Roll%20Simulator.html">Brew Roll Simulator</a>
+        </div>
+        <div class="file-desc">Probability simulator for the brewing mechanic &mdash; validates still token outcomes and balance curves.</div>
+      </li>
+      <li>
+        <div class="file-row">
+          <a class="file-link" href="Combat%20Simulator.html">Combat Simulator</a>
+        </div>
+        <div class="file-desc">Combat resolution simulator &mdash; models attack/defense dice outcomes across different scenarios.</div>
+      </li>
+    </ul>
+
+  </div>
+
+  <footer>
+    &#9830; Moonshine Kingdom v4.2 &mdash; Publisher Review Package &#9830;
+  </footer>
+
+</body>
+</html>

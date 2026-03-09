@@ -1,0 +1,815 @@
+/* ==========================================================================
+   moonshine-rules.css (REVISED BLEED EDITION)
+   Aesthetic upgrades for 1920s Noir Vibe
+   ========================================================================== */
+
+/* ==========================================================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================================================== */
+:root {
+    --bg-color: #0d0005;      /* Deep warm black */
+    --bg-rgb: 13, 0, 5;       /* RGB form for gradient overlays */
+    --text-color: #f5e9d9;    /* Cream/Off-white */
+    --accent-gold: #d4af37;   /* Metallic Gold */
+    --accent-dim: #8a7329;    /* Darker Gold for borders */
+    --table-header: #1f1216;  /* Slightly lighter background for contrast */
+    --font-body: 'Raleway', sans-serif;
+    --font-display: 'Bebas Neue', 'Impact', sans-serif; /* Narrow Art Deco vibe */
+    --front-cover: url("../Art/Front Page 5.png");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--bg-color);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    margin: 0;
+    line-height: 1.3; /* Slightly more breathing room than 1.25 */
+    font-size: 10pt;
+    font-weight: 400;
+    /* justify text for that block-book look */
+    text-align: justify; 
+    hyphens: auto;       /* Prevents massive gaps in justified text */
+}
+
+/* ==========================================================================
+   2. TYPOGRAPHY
+   ========================================================================== */
+p {
+    margin: 0 0 1em 0;
+    orphans: 3; 
+    widows: 3;
+}
+
+ul, ol {
+    margin: 0 0 1em 1.5em;
+    padding: 0;
+}
+
+strong {
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
+/* Headings - Using the Display Font */
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    color: var(--accent-gold);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    font-weight: 400; 
+    page-break-after: avoid; /* Keep headings attached to text below */
+}
+
+h1 {
+    font-size: 48pt;
+    text-align: center;
+    margin-bottom: 0.2em;
+    text-shadow: 0px 4px 10px rgba(0,0,0,0.9);
+}
+
+h2 {
+    font-size: 22pt;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 5px;
+    margin-top: 0.5em; /* More space before new sections */
+    position: relative;
+}
+
+/* Add a double line effect to H2 */
+h2::after {
+    content: '';
+    display: block;
+    border-bottom: 1px solid var(--accent-dim);
+    margin-top: 2px;
+}
+
+h3 {
+    font-size: 16pt;
+    color: #fff; /* White headers for sub-sections pop better */
+    border-left: 4px solid var(--accent-gold);
+    padding-left: 10px;
+}
+
+h4 {
+    font-family: var(--font-body); /* Keep H4 readable/standard */
+    font-weight: 700;
+    font-size: 12pt;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    border-bottom: 1px solid var(--accent-dim);
+    display: inline-block;
+}
+
+/* Glossary icon tint */
+.icon-gold {
+    filter: invert(76%) sepia(30%) saturate(930%) hue-rotate(4deg) brightness(95%) contrast(92%);
+}
+
+.heat {
+    color: #f0c674;
+    font-weight: 600;
+}
+
+.icon {
+    vertical-align: middle;
+    filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 2px;
+}
+
+/* ==========================================================================
+   3. COMPONENTS
+   ========================================================================== */
+
+/* Lists with custom bullets */
+ul.sub-section {
+    list-style: none; /* Kill default bullets */
+}
+
+ul.sub-section > li {
+    position: relative;
+    margin-bottom: 3px;
+    padding-top: 0;
+    padding-left: 1.2em;
+}
+
+ul.sub-section > li::before {
+    content: "♦"; /* Diamond bullet suits the theme */
+    color: var(--accent-gold);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.9em;
+}
+
+ol.sub-section {
+    list-style: decimal;
+    margin-left: 1.5em;
+}
+
+ol.sub-section > li {
+    position: static;
+    margin-bottom: 3px;
+    padding-top: 0;
+    padding-left: 0;
+}
+
+ol.sub-section > li::before {
+    content: none;
+}
+
+ul.sub-section > li:last-child,
+ol.sub-section > li:last-child {
+    margin-bottom: 0;
+}
+
+ol.sub-section[type="a"] {
+    list-style: lower-alpha;
+}
+/* Tables - The "Ledger" Look */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.4em;
+    font-size: 9pt;
+    page-break-inside: avoid; /* Don't split tables across pages */
+    background-color: rgba(255, 255, 255, 0.02); /* Very subtle background */
+}
+
+th, td {
+    padding: 8px 10px;
+    border: 1px solid var(--accent-dim);
+    vertical-align: top;
+    text-align: left;
+}
+
+th {
+    background-color: var(--table-header);
+    color: var(--accent-gold);
+    font-family: var(--font-display);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: normal;
+    border-bottom: 2px solid var(--accent-gold);
+}
+
+/* Striping for readability */
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Specific fix for the Action Table column widths */
+.action-table th:first-child,
+.action-table td:first-child {
+    width: 22%;
+    font-weight: bold;
+    color: var(--accent-gold);
+}
+
+/* Images & Artwork */
+img {
+    filter: brightness(1.12) contrast(1.08);
+}
+
+.cover img, .title-image {
+    max-width: 100%;
+    display: block;
+    margin: 5px auto;
+}
+
+.cover {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.cover img {
+    position: relative;
+    z-index: 1;
+}
+
+.cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+        linear-gradient(to right, rgba(var(--bg-rgb), 0.98) 0%, rgba(var(--bg-rgb), 0) 20%, rgba(var(--bg-rgb), 0) 80%, rgba(var(--bg-rgb), 0.98) 100%),
+        linear-gradient(to bottom, rgba(var(--bg-rgb), 0.92) 0%, rgba(var(--bg-rgb), 0) 20%, rgba(var(--bg-rgb), 0) 80%, rgba(var(--bg-rgb), 0.92) 100%);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.note {
+    background-color: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--accent-gold);
+    padding: 10px;
+    font-style: italic;
+    color: #fcefd0;
+    margin: 1em 0;
+    border-radius: 4px;
+}
+
+.table-pair {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.table-pair > table {
+    width: 48%;
+    margin-bottom: 0.5em;
+}
+
+.table-pair > table:last-child {
+    margin-bottom: 0;
+}
+
+.choice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+
+.choice-list > li {
+    border: 1px solid var(--accent-dim);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.choice-list > li > strong {
+    display: block;
+    font-size: 12pt;
+    color: var(--accent-gold);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+/* --- Action Economy Box --- */
+.action-economy-box {
+    column-span: all;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid var(--accent-dim);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 14px 0 10px;
+    background:
+        linear-gradient(180deg, rgba(212, 175, 55, 0.10) 0%, rgba(212, 175, 55, 0.03) 100%),
+        rgba(255, 255, 255, 0.02);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.action-economy-box p,
+.action-economy-box li {
+    color: var(--text-color);
+}
+
+.flow-diagram {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.flow-step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.flow-box-split {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.flow-box,
+.flow-box-split div {
+    border: 1px solid var(--accent-gold);
+    background: rgba(13, 0, 5, 0.65);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    width: 140px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+}
+
+.flow-box-split div:first-child {
+    margin-bottom: 0;
+}
+
+
+.flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.flow-arrow span {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--accent-gold);
+    line-height: 1;
+}
+
+.flow-arrow p {
+    margin-top: 2px;
+    font-size: 0.74em;
+    font-style: normal;
+    color: #e3d2ae;
+    line-height: 1.2;
+    text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+    .flow-diagram {
+        grid-template-columns: 1fr;
+    }
+
+    .flow-step {
+        flex-direction: column;
+    }
+
+    .flow-arrow span {
+        transform: rotate(90deg);
+    }
+}
+
+/* Tighten Power Plays page to avoid overflow gaps */
+.power-plays {
+    padding-top: 0px;
+}
+
+.power-plays h3 {
+    margin-top: 0.2em;
+}
+
+.power-plays .action-table {
+    margin-bottom: 0.8em;
+}
+
+.page-number {
+    display: none;
+}
+
+.column-break {
+    display: block;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    break-before: column;
+    -webkit-column-break-before: always;
+    column-break-before: always;
+}
+
+/* ==========================================================================
+   4. FRONT PAGE & TOC
+   ========================================================================== */
+.front-page {
+    /* Using Flexbox to center everything perfectly */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.front-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--front-cover);
+    background-size: cover;
+    background-position: center;
+    filter: brightness(1.12) contrast(1.08);
+    z-index: 0;
+}
+
+.front-page > * {
+    position: relative;
+    z-index: 1;
+}
+
+.front-page h1 {
+    font-size: 50pt; /* Massive title */
+    margin: 0;
+    line-height: 1;
+    color: #fff; /* Make it pop against the art */
+    text-shadow: 0 0 20px rgba(0,0,0,1);
+}
+
+.front-page .subtitle {
+    font-family: var(--font-body);
+    font-size: 12pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+    color: var(--accent-gold);
+    text-shadow: 2px 2px 0px #000;
+}
+
+.front-page .intro-paragraph {
+    font-size: 13pt;
+    max-width: 600px;
+    background: rgba(13, 0, 5, 0.7); /* Box behind text for readability */
+    padding: 20px;
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 0 30px #000;
+}
+
+/* TOC Styling */
+.toc-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toc-list a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.toc-text {
+    flex: 0 1 auto;
+}
+
+.toc-dots {
+    flex: 1 1 auto;
+    border-bottom: 1px dotted var(--accent-dim);
+    opacity: 0.5;
+    transform: translateY(-2px);
+}
+
+.toc-page {
+    flex: 0 0 auto;
+    min-width: 2ch;
+    text-align: right;
+}
+
+.toc-list > li > a {
+    font-weight: bold;
+    color: var(--accent-gold);
+    font-size: 12pt;
+    margin-top: 10px;
+}
+
+.toc-list .sub-item {
+    padding-left: 20px;
+}
+
+/* ==========================================================================
+   5. SCREEN STYLES (Browser Viewing)
+   ========================================================================== */
+@media screen {
+    .container,
+    .front-page {
+        width: 210mm;
+        max-width: calc(100% - 40px);
+        min-height: 297mm;
+        margin: 40px auto;
+        padding: 60px;
+        background-color: #130207; /* Slightly lighter than body for card effect */
+        box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        border: 1px solid #333;
+    }
+
+    .container {
+        column-count: 2;
+        column-gap: 30px;
+        column-rule: 1px solid var(--accent-dim);
+    }
+
+    .container.one-column {
+        column-count: 1;
+        column-gap: 0;
+        column-rule: none;
+    }
+
+    .container > h2,
+    .container > h1,
+    .cover,
+    .action-table,
+    table {
+        column-span: all;
+    }
+
+    .page-break + h1,
+    .page-break + h2,
+    .page-break + h3,
+    .page-break + h4,
+    .page-break + h5 {
+        column-span: all;
+        margin-top: 0.2em;
+    }
+
+    .toc-container {
+        column-count: 1;
+    }
+
+    .table-pair {
+        flex-direction: column;
+    }
+
+    .table-pair > table {
+        width: 100%;
+    }
+
+    .front-page {
+        min-height: 297mm;
+    }
+
+    .front-page .title-image {
+        max-width: 75%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container,
+    .front-page {
+        width: auto;
+        max-width: calc(100% - 24px);
+        min-height: auto;
+        padding: 32px;
+    }
+
+    .container {
+        column-count: 1;
+        column-gap: 0;
+        column-rule: none;
+    }
+}
+
+/* ==========================================================================
+   6. PRINT STYLES (A4 PDF Generation)
+   ========================================================================== */
+@media print {
+    @page {
+        /* A4 Size (210mm x 297mm) */
+        size: 210mm 297mm;
+        margin: 0;
+    }
+
+    body {
+        width: 210mm;
+        height: auto;
+        background-color: var(--bg-color) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Page Breaks */
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+        column-span: all;
+        display: block;
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Make page-top headings span full width in two-column layout */
+    .page-break + h1,
+    .page-break + h2,
+    .page-break + h3,
+    .page-break + h4,
+    .page-break + h5 {
+        column-span: all;
+        margin-top: 0.2em;
+    }
+
+    /* 
+       THE CONTAINER (The Actual Page Area)
+       We add padding to account for the bleed (3mm) + Safe Margin (15mm)
+       Total Padding: ~18-20mm (approx 70px)
+    */
+    .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 60px; /* Safe zone */
+        box-shadow: none;
+        background: transparent;
+        position: relative;
+        min-height: 297mm;
+        
+        /* TWO COLUMN LAYOUT for professional look */
+        column-count: 2;
+        column-gap: 30px;
+        column-rule: 1px solid var(--accent-dim); /* Line between columns */
+    }
+
+    /* Force single-column on complex pages */
+    .container.one-column {
+        column-count: 1;
+        column-gap: 0;
+        column-rule: none;
+    }
+
+    
+    /* Elements that should span across both columns */
+    .container > h2, 
+    .container > h1, 
+    .cover,
+    .action-table,
+    table {
+        column-span: all;
+    }
+
+    /* Front Page adjustments for Print */
+    .front-page {
+        width: 100%;
+        height: 297mm; /* Full page height */
+        min-height: 297mm;
+        margin: 0;
+        padding: 12mm 18mm;
+        box-sizing: border-box;
+        /* Center content relative to the print page */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+        background-size: cover;
+        position: relative;
+    }
+
+    .front-page .title-image {
+        max-width: 75%;
+        max-height: 85mm;
+        height: auto;
+    }
+
+    /* Tighten the two-player + police page to keep it on one sheet */
+    .police-page h2,
+    .police-page h3 {
+        margin-top: 0.5em;
+    }
+
+    .police-page p {
+        margin-bottom: 0.6em;
+    }
+
+    .police-page .cover img {
+        max-height: 70mm;
+        height: auto;
+    }
+
+    /* Compress Volstead Act to fit a single page if possible */
+    .volstead .cover img {
+        max-height: 65mm;
+        height: auto;
+    }
+
+    .volstead p,
+    .volstead ul,
+    .volstead ol {
+        margin-bottom: 0.6em;
+    }
+
+    .table-pair {
+        flex-direction: column;
+    }
+
+    .table-pair > table {
+        width: 100%;
+    }
+    
+    .toc-container {
+        column-count: 1; /* TOC looks better single column */
+        page-break-after: always;
+        break-after: page;
+    }
+
+    /* Ensure each page container prints on its own page */
+    body > .front-page,
+    body > .container {
+        page-break-after: always;
+        break-after: page;
+    }
+
+    body > .container:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
+    /* Slightly tighten TOC to keep it within one page */
+    .toc-list a {
+        font-size: 9.5pt;
+        padding: 2px 0;
+        line-height: 1.1;
+    }
+
+    .toc-list > li > a {
+        font-size: 10pt;
+    }
+
+    /* Ensure text is dark enough for print definition (White on Black spreads) */
+    p, li {
+        text-shadow: 0 0 1px rgba(0,0,0,1); /* Prevents text looking too thin */
+    }
+
+    /* Full-width blocks inside multi-column containers */
+    .single-column-block {
+        column-span: all;
+    }
+
+    /* Page numbers (manual) */
+    .page-number {
+        display: block;
+        position: absolute;
+        bottom: 12mm;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 10pt;
+        font-weight: 600;
+        color: var(--accent-gold);
+        letter-spacing: 0.5px;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.85);
+    }
+
+    .front-page .page-number {
+        display: none;
+    }
+
+    /* Hide Scrollbars */
+    ::-webkit-scrollbar { display: none; }
+}

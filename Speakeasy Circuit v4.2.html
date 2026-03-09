@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speakeasy Circuit v4.2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    /* --- Base Styles --- */
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #1c1c1c;
+      font-family: 'Raleway', sans-serif;
+      color: #f7f3ed;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 140mm;
+      /* A5 Portrait Width */
+      height: 205mm;
+      /* A5 Portrait Height */
+      margin: 15px auto;
+      padding: 10px;
+      background-color: #2a2a2a;
+      border: 3px solid #d4af37;
+      border-radius: 8px;
+      page-break-after: avoid;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #f5e9d9;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    strong {
+      color: #d4af37;
+      font-weight: bold;
+    }
+
+    /* --- General Card Styles --- */
+    .card-header {
+      text-align: center;
+      font-size: 1.35em;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 2px solid #d4af37;
+      color: #d4af37;
+      flex-shrink: 0;
+    }
+
+    .rules-summary {
+      font-size: 0.75em;
+      padding: 5px 6px;
+      margin: 0 0 8px 0;
+      background-color: #1c1c1c;
+      border: 1px solid #4a4a4a;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 1.35;
+      flex-shrink: 0;
+    }
+
+    .rules-summary .win-line {
+      display: block;
+      margin-top: 5px;
+      font-weight: 700;
+      color: #f0c674;
+    }
+
+    /* --- TABLE STYLES --- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.7em;
+      color: #f5e9d9;
+      border: 1px solid #d4af37;
+    }
+
+    th,
+    td {
+      border: 1px solid #4a4a4a;
+      padding: 3px; 
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .contracts-table td {
+      padding-top: 4px;
+      padding-bottom: 4px;
+      height: 36px; 
+    }
+
+    th {
+      background-color: #1c1c1c;
+      color: #d4af37;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Borough Headers - Styled like Playbook Section Titles */
+    tr.borough-header td {
+        background-color: #000000;
+        color: #f5e9d9; 
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.9em;
+        line-height: 1.1;
+        padding: 1px 2px;
+        border: 1px solid #4a4a4a;
+    }
+
+    /* --- FRONT CARD CONTENT STYLES --- */
+    .district-name {
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .preferred-cell {
+      text-align: center;
+    }
+
+    .preferred-cell span {
+      display: inline-block;
+      width: 70px;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 3px;
+      color: white;
+      text-transform: capitalize;
+      text-align: center;
+    }
+
+    .order-requirements-container {
+      display: flex;
+      gap: 3px;
+      margin: auto;
+      justify-content: center;
+    }
+
+    .liquor-icon-aid {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    .liquor-icon-aid.inactive {
+      background-color: transparent;
+      border: 1px dotted #777;
+      color: transparent;
+    }
+
+    /* Color Coding */
+    .moonshine {
+      background-color: #646464;
+    }
+
+    .gin {
+      background-color: #9837a5;
+    }
+
+    .rye {
+      background-color: #d4af37;
+      color: #1c1c1c !important;
+    }
+
+    .rum {
+      background-color: #883400;
+    }
+
+    /* --- PRINT STYLES --- */
+    @media print {
+      @page {
+        size: A5 portrait;
+        padding: 4mm;
+      }
+
+      body {
+        padding: 0;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .card {
+        box-shadow: none;
+        background-color: #2a2a2a !important;
+        border-color: #d4af37 !important;
+        color: #faf7f4 !important;
+        margin: auto;
+        max-width: 141mm;
+        height: 201mm;
+      }
+
+      .card:last-child {
+        page-break-after: avoid;
+      }
+      
+      tr.borough-header td {
+          background-color: #000 !important;
+          color: #f5e9d9 !important;
+      }
+
+      strong,
+      .card-header,
+      th,
+      .heat {
+        color: #d4af37 !important;
+      }
+
+      th,
+      .rules-summary {
+        background-color: #1c1c1c !important;
+      }
+
+      td,
+      li,
+      p {
+        color: #fdfdfd !important;
+      }
+
+      .section-title {
+        background-color: #000000 !important;
+        color: #eee !important;
+      }
+
+      .moonshine {
+        background-color: #646464 !important;
+      }
+
+      .gin {
+        background-color: #9837a5 !important;
+      }
+
+      .rye {
+        background-color: #d4af37 !important;
+        color: #1c1c1c !important;
+      }
+
+      .rum {
+        background-color: #883400 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Volstead Act Speakeasy Circuit -->
+  <div class="card">
+    <div class="card-header">The Speakeasy Circuit</div>
+    <div class="rules-summary">
+      To secure a Speakeasy in the Volstead Act, Unload the requested Order (or more) listed below.
+      Once the order is fulfilled, add the Speakeasy card to the completed pile.
+      <span class="win-line"><strong>To Win:</strong> Fulfill every Speakeasy order before the Law locks down the city.</span>
+    </div>
+    <table class="contracts-table">
+      <thead>
+        <tr>
+          <th>District</th>
+          <th>Speakeasy</th>
+          <th style="width:18%">Preferred</th>
+          <th style="width:25%">Order</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Manhattan -->
+        <tr class="borough-header"><td colspan="4">Manhattan</td></tr>
+        <tr>
+          <td class="district-name">The Tenderloin</td>
+          <td>The Haymarket</td>
+          <td class="preferred-cell"><span class="gin">Gin</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">2</span><span
+                class="liquor-icon-aid gin">2</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid inactive"></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">East Harlem</td>
+          <td>The Silver Dollar</td>
+          <td class="preferred-cell"><span class="rye">Rye</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">1</span><span
+                class="liquor-icon-aid gin">1</span><span class="liquor-icon-aid rye">2</span><span
+                class="liquor-icon-aid inactive"></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">Sugar Hill</td>
+          <td>The Cotton Club</td>
+          <td class="preferred-cell"><span class="moonshine">Moonshine</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">1</span><span
+                class="liquor-icon-aid gin">1</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid rum">2</span></div>
+          </td>
+        </tr>
+        
+        <!-- The Bronx -->
+        <tr class="borough-header"><td colspan="4">The Bronx</td></tr>
+        <tr>
+          <td class="district-name">Belmont</td>
+          <td>DeLillo's</td>
+          <td class="preferred-cell"><span class="rye">Rye</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid inactive"></span><span
+                class="liquor-icon-aid gin">2</span><span class="liquor-icon-aid rye">2</span><span
+                class="liquor-icon-aid rum">1</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">Fordham</td>
+          <td>The Penny Whistle</td>
+          <td class="preferred-cell"><span class="moonshine">Moonshine</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">2</span><span
+                class="liquor-icon-aid gin">2</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid inactive"></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">Morris Park</td>
+          <td>Rota's</td>
+          <td class="preferred-cell"><span class="gin">Gin</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid inactive"></span><span
+                class="liquor-icon-aid gin">1</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid rum">2</span></div>
+          </td>
+        </tr>
+
+        <!-- Queens -->
+        <tr class="borough-header"><td colspan="4">Queens</td></tr>
+        <tr>
+          <td class="district-name">Richmond Hill</td>
+          <td>Neir's Tavern</td>
+          <td class="preferred-cell"><span class="gin">Gin</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">2</span><span
+                class="liquor-icon-aid gin">2</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid inactive"></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">Flushing</td>
+          <td>Paradise Alley</td>
+          <td class="preferred-cell"><span class="moonshine">Moonshine</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">2</span><span
+                class="liquor-icon-aid gin">1</span><span class="liquor-icon-aid inactive"></span><span
+                class="liquor-icon-aid rum">2</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">Astoria</td>
+          <td>Bohemian Hall</td>
+          <td class="preferred-cell"><span class="rye">Rye</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid inactive"></span><span
+                class="liquor-icon-aid gin">1</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid rum">2</span></div>
+          </td>
+        </tr>
+        
+        <!-- Brooklyn -->
+        <tr class="borough-header"><td colspan="4">Brooklyn</td></tr>
+        <tr>
+          <td class="district-name">Coney Island</td>
+          <td>Ruby's Joint</td>
+          <td class="preferred-cell"><span class="rye">Rye</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid inactive"></span><span
+                class="liquor-icon-aid inactive"></span><span class="liquor-icon-aid rye">2</span><span
+                class="liquor-icon-aid rum">2</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">Red Hook</td>
+          <td>Sunny's Bar</td>
+          <td class="preferred-cell"><span class="moonshine">Moonshine</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">2</span><span
+                class="liquor-icon-aid gin">1</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid rum">1</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="district-name">Williamsburg</td>
+          <td>Teddy's</td>
+          <td class="preferred-cell"><span class="gin">Gin</span></td>
+          <td>
+            <div class="order-requirements-container"><span class="liquor-icon-aid moonshine">2</span><span
+                class="liquor-icon-aid gin">2</span><span class="liquor-icon-aid rye">1</span><span
+                class="liquor-icon-aid inactive"></span></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+
+</html>

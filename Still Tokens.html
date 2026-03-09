@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Still Tokens</title>
+
+<!-- fonts -->
+<link href="https://fonts.cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+<style>
+@page{margin:0}
+body {
+  margin:0;
+}
+
+/* ───── geometry ───── */
+:root{
+  --sq:0.75in;   /* token size                              */
+  --gap:15px;    /* gutter between tokens                   */
+  --edge:0.25in; /* white margin around the grid            */
+}
+
+.page{
+  padding:var(--edge);
+  break-after:page;
+  display:flex;justify-content:center;      /* centre on paper */
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(5,var(--sq));
+  gap:var(--gap);
+  width:max-content;                         /* shrink-wrap grid */
+}
+
+/* ───── FRONT squares (modified) ───── */
+.square{
+  width:var(--sq);height:var(--sq);position:relative;
+  box-sizing:border-box;
+  border:2px solid #d4af37;
+  font-family:'Raleway',sans-serif;
+  outline: 3px solid #1c1c1c; /* Creates a gap outside the border using the page background color */
+}
+.liquor-type{position:absolute;top:3px;left:50%;transform:translateX(-50%);
+  font:700 9.5px 'Raleway',sans-serif;letter-spacing:1px;text-transform:uppercase;}
+.number{position:absolute;top:52%;left:50%;transform:translate(-50%,-60%);
+  font:700 40px/1 'Roboto Mono',monospace;}
+
+/* Dots Styling */
+.dots{
+  position:absolute;
+  bottom:6px; /* Positioned at the bottom */
+  width:100%;
+  left:0;
+  display:flex;
+  justify-content:center;
+  gap:4px;
+}
+.dot{
+  width:6px;
+  height:6px;
+  background:currentColor; /* Uses the text color of the parent token */
+  border-radius:60%;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.rye       {background:#d4af37;color:#1c1c1c}
+.gin       {background:#9837a5;color:#d4af37}
+.moonshine {background:#646464;color:#d4af37}
+
+
+/* ───── BACK squares with image and border ───── */
+.back-square{
+  background:#1c1c1c;
+  color:#d4af37;
+  position:relative;
+  box-sizing:border-box;
+  border:2px solid #d4af37;
+  outline: 3px solid #1c1c1c;
+  padding: 2px; /* Small padding so the image doesn't touch the border */
+}
+
+.back-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the square without distortion */
+}
+
+
+/* guarantee physical size in print preview */
+@media print{.square{width:var(--sq)!important;height:var(--sq)!important}}
+</style>
+</head>
+
+<body>
+  <!-- FRONT -->
+  <div class="page">
+    <div class="grid" id="frontGrid"></div>
+  </div>
+
+  <!-- BACK -->
+  <div class="page">
+    <div class="grid" id="backGrid"></div>
+  </div>
+
+<script>
+/*** token data (Updated to "Flat Power" distribution) ***/
+const tiles=[
+  {type:'rye',       numbers:[2, 3, 5, 7, 8, 11, 12]},
+  {type:'gin',       numbers:[2, 3, 4, 6, 7, 9, 10, 11]},
+  {type:'moonshine', numbers:[2, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+];
+
+const front=document.getElementById('frontGrid');
+const back =document.getElementById('backGrid');
+
+
+tiles.forEach(({type, numbers}) => {
+    numbers.forEach(number => {
+        // --- Build FRONT token ---
+        const frontSq = document.createElement('div');
+        frontSq.className = `square ${type}`;
+
+        // Logic for determining dot count based on still strength
+        let dotCount;
+        if ([2, 3, 11, 12].includes(number)) {
+            dotCount = 2; // Bad probability rolls (weakest stills)
+        } else if ([4, 5, 9, 10].includes(number)) {
+            dotCount = 1; // Medium probability rolls
+        } else { // Catches 6, 7, 8
+            dotCount = 0; // Best probability rolls (strongest stills)
+        }
+        const dotsHtml = dotCount > 0 ? '<div class="dot"></div>'.repeat(dotCount) : '';
+
+        frontSq.innerHTML=`
+          <div class="liquor-type">${type.toUpperCase()}</div>
+          <div class="number">${number}</div>
+          <div class="dots">${dotsHtml}</div>`;
+        front.appendChild(frontSq);
+
+        // --- Build BACK token ---
+        const backSq = document.createElement('div');
+        backSq.className='square back-square';
+        backSq.innerHTML=`<img src="Art/Still.png" class="back-image" alt="Still">`;
+        back.appendChild(backSq);
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,602 @@
+/* ======================================================================= */
+/* --- Document & Print Setup --- */
+/* ======================================================================= */
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  color: #f5e9d9;
+  background: #ffffff;
+  /* Base font size */
+  font-size: 13px;
+  line-height: 1.2; 
+}
+
+.page {
+  display: grid;
+  grid-template-columns: repeat(2, 63mm);
+  grid-template-rows: repeat(2, 88mm);
+  gap: 10mm;
+  justify-content: center;
+  align-content: center;
+  width: calc(2 * 63mm + 10mm);
+  height: calc(2 * 88mm + 10mm);
+  margin: 10mm auto;
+}
+
+.page-break {
+  page-break-before: always;
+}
+
+/* ======================================================================= */
+/* --- Base Card Structure (Front & Back) --- */
+/* ======================================================================= */
+.card,
+.card-back {
+  box-sizing: border-box;
+  width: 63mm;
+  height: 88mm;
+  border-radius: 0px;
+  border: 2px solid #d4af37;
+  background: #2a2a2a;
+  box-shadow: 0 0 0 10px #2a2a2a;
+  page-break-inside: avoid;
+  /* UPDATED: Increased padding to 6px for more breathing room */
+  padding: 6px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.card.blank,
+.card-back.blank {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* ======================================================================= */
+/* --- Universal Card Front Header --- */
+/* ======================================================================= */
+.card-header {
+  /* UPDATED: Increased to 16mm to fit larger titles/badges */
+  min-height: 16mm; 
+  margin-bottom: 5px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #d4af37;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  flex-grow: 1;
+}
+
+.mission-name,
+.venue {
+  margin: 2px;
+  margin-top: 4px; /* Push down slightly to align with larger badge */
+  padding-right: 50px; 
+  text-transform: uppercase;
+  color: #d4af37;
+  flex-grow: 1;
+  line-height: 1.1;
+  /* UPDATED: Larger Title Font */
+  font-size: 1.4em; 
+  font-weight: 700;
+}
+
+.respect-badge {
+  position: absolute;
+  /* UPDATED: Tucked into the corner */
+  top: -4px; 
+  right: -4px; 
+  /* UPDATED: Larger Badge Size */
+  width: 55px;
+  height: 55px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+  z-index: 10;
+}
+.respect-badge[data-respect="1"] { background-image: url('../Art/shield1.png'); }
+.respect-badge[data-respect="2"] { background-image: url('../Art/shield2.png'); }
+.respect-badge[data-respect="3"] { background-image: url('../Art/shield3.png'); }
+.respect-badge[data-respect="5"] { background-image: url('../Art/shield5.png'); }
+.card .respect-badge[style*="shield-1.png"] { background-image: url('../Art/shield-1.png'); }
+
+/* ======================================================================= */
+/* --- Card Back Styles --- */
+/* ======================================================================= */
+.card-back {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 6px;
+}
+
+.back-title-box {
+  width: 100%;
+  background: rgba(42, 42, 42, 0.85);
+  border: 1px solid #d4af37;
+  border-radius: 4px;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.back-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 1.1em; /* Slightly larger back title */
+  font-weight: 700;
+  color: #d4af37;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Background Images */
+.speakeasy-back { background-image: url('../Art/Speakeasy.png'); justify-content: flex-end; }
+.favor-back { background-image: url('../Art/Bribe.png'); justify-content: flex-end; }
+.card-back.shylock { background-image: url('../Art/Shylock.png'); justify-content: flex-end; }
+.card-back.tammany { background-image: url('../Art/Mayor.png'); justify-content: flex-end; }
+.card-back.patsy { background-image: url('../Art/Patsy.png'); justify-content: flex-end; }
+.card-back.commission { background-image: url('../Art/TheCommission.png'); justify-content: flex-end; }
+.card-back.chicago { background-image: url('../Art/Chicago.png'); justify-content: flex-end; }
+.card-back.rat { background-image: url('../Art/rat.png'); justify-content: flex-end; }
+.borough-back { background-image: url('../Art/City.png'); justify-content: flex-end; }
+.ghetto-back { background-image: url('../Art/Ghetto.png'); justify-content: flex-end;} 
+.card-back.easy { background-image: url('../Art/Easy.png'); justify-content: flex-end; }
+.card-back.medium { background-image: url('../Art/Medium.png'); justify-content: flex-end; }
+.card-back.hard { background-image: url('../Art/Hard.png'); justify-content: flex-end; }
+
+/* ======================================================================= */
+/* --- JOB & FAVOR CARD STYLES --- */
+/* ======================================================================= */
+.Jobs,
+.bonus {
+  margin: 3px 0;
+  font-size: 1em; 
+  text-align: left;
+  border: 1px solid #d4af37;
+  /* UPDATED: Increased internal padding */
+  padding: 5px;
+  border-radius: 4px;
+  background: #3a3a3a;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+}
+
+.Jobs {
+  overflow-y: hidden;
+}
+
+.Job-header,
+.bonus-header {
+  color: #d4af37;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  flex-shrink: 0; 
+}
+
+.Jobs-content,
+.bonus-content {
+  color: #f5e9d9;
+  flex-grow: 0; 
+  display: block;
+}
+
+.bonus {
+  border-style: dashed;
+  background: rgba(77, 104, 79, 0.3);
+}
+
+.Jobs strong,
+.bonus strong {
+  color: #f5e9d9;
+  font-weight: 600;
+}
+
+/* UPDATED: Make the Take List labels Gold to match Playbooks */
+.take-list strong {
+  color: #d4af37 !important;
+  font-weight: 700;
+}
+
+/* --- Job Card Specific --- */
+.deadline-info {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #999696;
+  font-size: 0.8em;
+  padding: 2px;
+  margin-bottom: 2px;
+}
+
+.two-player-exclude::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 15px 0 0;
+  border-radius: 2px;
+  border-color: #b22222 transparent transparent transparent;
+  z-index: 2;
+}
+
+/* --- Favor Card Specific --- */
+.flair {
+  color: #d4af37;
+  font-weight: 600;
+}
+
+.flavour-text {
+  margin-top: auto;
+  padding-top: 8px;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9em;
+  line-height: 1.1;
+  color: #9c9a9a;
+}
+
+.take-list {
+  margin: 0;
+  padding-left: 14px;
+  list-style-type: square;
+  font-size: 1em;
+}
+
+.take-list li {
+  margin-bottom: 1px; 
+}
+
+.take-list li::marker {
+  color: #d4af37;
+}
+
+/* ======================================================================= */
+/* --- BOROUGH CARD STYLES --- */
+/* ======================================================================= */
+.borough-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.borough-image {
+  flex-grow: 1;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 5px;
+  border: 1px solid #555;
+  border-radius: 3px;
+}
+
+.card-rules-text {
+  text-align: center;
+  padding: 3px 0;
+  margin-bottom: 2px;
+  font-size: 1em;
+  font-weight: 700;
+  color: #f5e9d9;
+}
+
+.card-footer-text {
+  font-size: 0.85em;
+  font-style: italic;
+  color: #cccccc;
+  text-align: center;
+  padding-top: 3px;
+  border-top: 1px dashed #555;
+}
+
+.card-footer-text strong {
+  color: #d4af37;
+  font-weight: 700;
+}
+
+/* ======================================================================= */
+/* --- CONTRACT CARD STYLES --- */
+/* ======================================================================= */
+.speakeasy-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  justify-content: space-between; 
+}
+
+
+.speakeasy-image {
+  flex-grow: 1;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 4px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 200px;
+}
+
+.venue-name-box {
+  background: rgba(42, 42, 42, 0.85);
+  border: 1px solid #d4af37;
+  border-radius: 4px;
+  padding: 4px;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+.venue-name-text {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 700;
+  color: #d4af37;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ======================================================================= */
+/* --- JOB CARD LAYOUT STYLES --- */
+/* ======================================================================= */
+.job-card-content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+  justify-content: flex-start; 
+}
+
+.card-body .Jobs,
+.card-body .bonus {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.job-credentials {
+    margin-top: 5px;
+    flex-shrink: 0; 
+}
+
+.job-type-header {
+  font-size: 0.75em;
+  color: #d4af37;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.job-icons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.job-icon {
+  width: 18px;
+  height: 18px;
+  filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
+}
+
+/* ======================================================================= */
+/* --- NEW JOB CARD LAYOUT (IMAGE VARIANT) --- */
+/* ======================================================================= */
+
+/* 1. Wrapper modifications */
+.card.job-image-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* 2. Header Adjustments */
+.job-image-card .card-header {
+  margin-bottom: 0;
+  border-bottom: none; 
+  min-height: 14mm; 
+  padding-bottom: 2px;
+  flex-shrink: 0; 
+}
+
+.job-image-card .mission-name {
+  font-size: 1.35em;
+  margin-top: 2px;
+}
+
+/* 3. Fixed Image Container */
+.job-image-container {
+  width: 100%;
+  height: 40mm;
+  flex-shrink: 0; 
+  background-color: #000;
+  background-size: cover;     
+  background-position: center; 
+  border-top: 1px solid #d4af37;
+  border-bottom: 1px solid #d4af37;
+  margin: 0;
+}
+
+/* 4. Deadline Bar */
+.job-image-card .deadline-bar {
+  background-color: #3a3a3a;
+  color: #d4af37;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 3px 0;
+  border-bottom: 1px solid #d4af37;
+  letter-spacing: 1px;
+  flex-shrink: 0; 
+}
+
+/* 5. Body Adjustments - Vertically Centered Text */
+.job-image-card .card-body {
+  /* Added 6px Top padding to separate from divider */
+  padding: 6px 6px 0 6px; 
+  
+  /* Center text vertically in the remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;     
+  
+  flex-grow: 1; 
+  overflow: hidden;
+}
+
+/* 6. Compact Job Description */
+.job-image-card .Jobs {
+  margin: 0;
+  padding: 0;
+  border: none; 
+  background: transparent; 
+  width: 100%;
+
+  /* NEW: Force vertical centering */
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; /* Vertically center the text inside this box */
+  flex-grow: 1; /* Make this box fill all remaining vertical space in the card */
+}
+
+.job-image-card .Jobs-content {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em; 
+  line-height: 1.15; 
+  font-weight: 400;
+  
+  color: #f5e9d9;
+  text-align: center; 
+  width: 100%;
+}
+
+/* Subtle cash payout line for contract cards */
+.job-image-card .take-value {
+  flex-shrink: 0;
+  margin-top: 3px;
+  padding-top: 3px;
+  border-top: 1px solid rgba(212, 175, 55, 0.45);
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #c9b27a;
+  text-transform: uppercase;
+}
+
+/* 7. Flavor Text - Removed */
+.job-image-card .flavour-text {
+  display: none;
+}
+
+/* 8. Badge Tweak */
+.job-image-card .respect-badge {
+  top: -2px;
+  right: -2px;
+  width: 50px;
+  height: 50px;
+}
+
+/* ======================================================================= */
+/* --- FAVOR CARDS (Scoped Overrides) --- */
+/* ======================================================================= */
+.favor-cards .favor-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.favor-cards .favor-image {
+  flex-grow: 1;
+  min-height: 0;
+  background-size: cover;
+  background-position: center top;
+  border: 1px solid #555;
+  border-radius: 3px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+
+.favor-cards .favor-name-strip {
+  width: calc(100% - 10px);
+  margin: 5px;
+  padding: 4px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(42, 42, 42, 0.85);
+  border: 1px solid #d4af37;
+  border-radius: 4px;
+}
+
+.favor-cards .favor-character {
+  margin: 0;
+  padding: 0;
+  color: #d4af37;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.favor-cards .favor-name-strip .respect-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+}
+
+.favor-cards .favor-footer {
+  margin-top: 2px;
+  padding-top: 1px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.95em;
+  line-height: 1;
+  color: #f5e9d9;
+}
