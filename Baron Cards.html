@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Baron Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/cards.css">
+  <style>
+    /* Baron Card Overrides */
+    .baron-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .baron-card .card-header {
+      min-height: 14mm;
+      margin-bottom: 0;
+      border-bottom: 2px solid #d4af37;
+      padding-bottom: 4px;
+    }
+
+    .baron-card .baron-type {
+      margin: 2px;
+      margin-top: 4px;
+      text-transform: uppercase;
+      color: #d4af37;
+      font-size: 1.4em;
+      font-weight: 700;
+      line-height: 1.1;
+      padding-right: 50px;
+    }
+
+    .baron-card .baron-subtitle {
+      display: block;
+      font-size: 0.55em;
+      font-weight: 400;
+      color: #f5e9d9;
+      text-transform: none;
+      margin-top: 2px;
+    }
+
+    .baron-icon-area {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4mm 2mm;
+    }
+
+    .baron-icon-area img {
+      width: 28mm;
+      height: 28mm;
+      margin-bottom: 3mm;
+    }
+
+    .baron-icon-area .baron-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8em;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1;
+      margin-bottom: 2mm;
+    }
+
+    .baron-rules {
+      margin: 0 2mm;
+      padding: 3mm;
+      border: 1px solid #d4af37;
+      border-radius: 4px;
+      background: #3a3a3a;
+      font-size: 0.82em;
+      line-height: 1.25;
+      color: #f5e9d9;
+      text-align: center;
+    }
+
+    .baron-rules strong {
+      color: #d4af37;
+      font-weight: 700;
+    }
+
+    .baron-footer {
+      margin-top: auto;
+      padding-top: 2mm;
+      text-align: center;
+      font-size: 0.75em;
+      font-style: italic;
+      color: #999;
+      border-top: 1px dashed #555;
+    }
+
+    /* Liquor-specific accent colors */
+    .baron-gin .baron-name { color: #c978d4; }
+    .baron-whisky .baron-name { color: #d4af37; }
+    .baron-moonshine .baron-name { color: #a0a0a0; }
+    .baron-rum .baron-name { color: #b87333; }
+
+    .baron-gin .baron-icon-area img {
+      filter: invert(60%) sepia(30%) saturate(600%) hue-rotate(250deg) brightness(90%) contrast(95%);
+    }
+    .baron-whisky .baron-icon-area img {
+      filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
+    }
+    .baron-moonshine .baron-icon-area img {
+      filter: invert(70%) sepia(0%) saturate(0%) brightness(90%) contrast(95%);
+    }
+    .baron-rum .baron-icon-area img {
+      filter: invert(50%) sepia(60%) saturate(500%) hue-rotate(350deg) brightness(80%) contrast(90%);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Page 1: Baron Card Fronts -->
+  <div class="page">
+
+    <!-- The Gin Baron -->
+    <div class="card baron-card baron-gin">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="baron-type">The Gin Baron<span class="baron-subtitle">Cartel Liquor Baron</span></h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="baron-icon-area">
+        <img src="Art/Icons/Gin.svg" alt="Gin">
+        <div class="baron-name">Gin Baron</div>
+      </div>
+      <div class="baron-rules">
+        <strong>Claim:</strong> Control more <strong>Gin Joints</strong> than any single rival.<br>
+        <strong>Price Fix:</strong> Set Gin's Market Value each Day ($200&ndash;$500).
+      </div>
+      <div class="baron-footer">3 Gin Joints &bull; 3 Respect</div>
+    </div>
+
+    <!-- The Whisky Baron -->
+    <div class="card baron-card baron-whisky">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="baron-type">The Whisky Baron<span class="baron-subtitle">Cartel Liquor Baron</span></h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="baron-icon-area">
+        <img src="Art/Icons/Rye.svg" alt="Whisky">
+        <div class="baron-name">Whisky Baron</div>
+      </div>
+      <div class="baron-rules">
+        <strong>Claim:</strong> Control more <strong>Whisky Bars</strong> than any single rival.<br>
+        <strong>Price Fix:</strong> Set Whisky's Market Value each Day ($200&ndash;$500).
+      </div>
+      <div class="baron-footer">3 Whisky Bars &bull; 3 Respect</div>
+    </div>
+
+    <!-- The Moonshine Baron -->
+    <div class="card baron-card baron-moonshine">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="baron-type">The Moonshine Baron<span class="baron-subtitle">Cartel Liquor Baron</span></h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="baron-icon-area">
+        <img src="Art/Icons/Moonshine.svg" alt="Moonshine">
+        <div class="baron-name">Moonshine Baron</div>
+      </div>
+      <div class="baron-rules">
+        <strong>Claim:</strong> Control more <strong>Moonshine Dens</strong> than any single rival.<br>
+        <strong>Price Fix:</strong> Set Moonshine's Market Value each Day ($200&ndash;$500).
+      </div>
+      <div class="baron-footer">3 Moonshine Dens &bull; 3 Respect</div>
+    </div>
+
+    <!-- The Rum Baron -->
+    <div class="card baron-card baron-rum">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="baron-type">The Rum Baron<span class="baron-subtitle">Cartel Liquor Baron</span></h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="baron-icon-area">
+        <img src="Art/Icons/Rum.svg" alt="Rum">
+        <div class="baron-name">Rum Baron</div>
+      </div>
+      <div class="baron-rules">
+        <strong>Claim:</strong> Control more <strong>Rum Clubs</strong> than any single rival.<br>
+        <strong>Price Fix:</strong> Set Rum's Market Value each Day ($200&ndash;$500).
+      </div>
+      <div class="baron-footer">3 Rum Clubs &bull; 3 Respect</div>
+    </div>
+
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 2: Baron Card Backs -->
+  <div class="page">
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Baron</h3>
+      </div>
+    </div>
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Baron</h3>
+      </div>
+    </div>
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Baron</h3>
+      </div>
+    </div>
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Baron</h3>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
