@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cartel Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/cards.css">
+  <style>
+    /* Cartel Card Overrides — Borough Deed style */
+    .cartel-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cartel-card .card-header {
+      min-height: 16mm;
+      margin-bottom: 0;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 2px;
+    }
+
+    .cartel-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .cartel-image {
+      flex-grow: 1;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 5px;
+      border: 1px solid #555;
+      border-radius: 3px;
+    }
+
+    .cartel-rules {
+      text-align: center;
+      padding: 3px 4px;
+      margin-bottom: 2px;
+      font-size: 0.92em;
+      line-height: 1.2;
+      color: #f5e9d9;
+    }
+
+    .cartel-rules strong {
+      color: #d4af37;
+      font-weight: 700;
+    }
+
+    .cartel-footer {
+      font-size: 0.85em;
+      font-style: italic;
+      color: #cccccc;
+      text-align: center;
+      padding-top: 3px;
+      border-top: 1px dashed #555;
+    }
+
+    .cartel-footer strong {
+      color: #d4af37;
+      font-weight: 700;
+    }
+
+    .cartel-footer .cartel-line {
+      display: block;
+      margin: 0;
+    }
+
+    .cartel-footer .cartel-line + .cartel-line {
+      margin-top: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Page 1: Cartel Card Fronts -->
+  <div class="page">
+
+    <!-- The Gin Cartel -->
+    <div class="card cartel-card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Gin Cartel</h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="cartel-content">
+        <div class="cartel-image" style="background-image: url('Art/Distillation.png');"></div>
+        <div class="cartel-rules">
+          <strong>Claim:</strong> Control more <strong>Gin Joints</strong> than any single rival.<br>
+          <strong>Price Fix:</strong> Set Gin's Market Value each Day ($200&ndash;$500).
+        </div>
+        <div class="cartel-footer">
+          <span class="cartel-line">3 Gin Joints &bull; <strong>3 Respect</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Whisky Cartel -->
+    <div class="card cartel-card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Whisky Cartel</h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="cartel-content">
+        <div class="cartel-image" style="background-image: url('Art/Distillation.png');"></div>
+        <div class="cartel-rules">
+          <strong>Claim:</strong> Control more <strong>Whisky Bars</strong> than any single rival.<br>
+          <strong>Price Fix:</strong> Set Whisky's Market Value each Day ($200&ndash;$500).
+        </div>
+        <div class="cartel-footer">
+          <span class="cartel-line">3 Whisky Bars &bull; <strong>3 Respect</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Moonshine Cartel -->
+    <div class="card cartel-card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Moonshine Cartel</h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="cartel-content">
+        <div class="cartel-image" style="background-image: url('Art/Distillation.png');"></div>
+        <div class="cartel-rules">
+          <strong>Claim:</strong> Control more <strong>Moonshine Dens</strong> than any single rival.<br>
+          <strong>Price Fix:</strong> Set Moonshine's Market Value each Day ($200&ndash;$500).
+        </div>
+        <div class="cartel-footer">
+          <span class="cartel-line">3 Moonshine Dens &bull; <strong>3 Respect</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Rum Cartel -->
+    <div class="card cartel-card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Rum Cartel</h2>
+          <span class="respect-badge" data-respect="3">3</span>
+        </div>
+      </div>
+      <div class="cartel-content">
+        <div class="cartel-image" style="background-image: url('Art/Distillation.png');"></div>
+        <div class="cartel-rules">
+          <strong>Claim:</strong> Control more <strong>Rum Clubs</strong> than any single rival.<br>
+          <strong>Price Fix:</strong> Set Rum's Market Value each Day ($200&ndash;$500).
+        </div>
+        <div class="cartel-footer">
+          <span class="cartel-line">3 Rum Clubs &bull; <strong>3 Respect</strong></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 2: Cartel Card Backs -->
+  <div class="page">
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Cartel</h3>
+      </div>
+    </div>
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Cartel</h3>
+      </div>
+    </div>
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Cartel</h3>
+      </div>
+    </div>
+    <div class="card-back speakeasy-back">
+      <div class="back-title-box">
+        <h3 class="back-title">Cartel</h3>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
