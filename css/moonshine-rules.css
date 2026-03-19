@@ -211,6 +211,13 @@ tr:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.03);
 }
 
+/* Compact table variant — used for the Enlistment Cost Table */
+.compact-table th,
+.compact-table td {
+    padding: 4px 6px;
+    font-size: 8.5pt;
+}
+
 /* Specific fix for the Action Table column widths */
 .action-table th:first-child,
 .action-table td:first-child {
