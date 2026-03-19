@@ -538,10 +538,13 @@ img {
    5. SCREEN STYLES (Browser Viewing)
    ========================================================================== */
 @media screen {
+    body {
+        overflow-x: auto; /* Horizontal scroll if viewport narrower than 210mm */
+    }
+
     .container,
     .front-page {
         width: 210mm;
-        max-width: calc(100% - 40px);
         min-height: 297mm;
         margin: 40px auto;
         padding: 60px;
