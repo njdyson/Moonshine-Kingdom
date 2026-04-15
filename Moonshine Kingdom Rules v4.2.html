@@ -226,7 +226,7 @@
         <h4>The Greed Tax</h4>
         <p>
             If you Unload <b>4 or more total barrels</b> of <b>any combination</b> in a single Play, you generate <b>1
-                Heat</b>.
+                Heat</b>. You choose which of the two spent markers is placed on the Heat Track.
             Three barrels is the maximum safe delivery.
         </p>
 
@@ -348,7 +348,7 @@
             <li><strong>Ghettos:</strong> Gritty districts where mob roots run deep and recruits come cheap. The more
                 Ghetto districts you control, the cheaper it is to <b>Enlist</b> Runners, and the deeper your network
                 of contacts and informants. Your <b>Hand Limit</b> for Contract cards is <b>2 + 1 per Controlled
-                Ghetto</b>. Lose a Ghetto, and you must immediately discard a card from hand to meet
+                Ghetto (max 5)</b>. Lose a Ghetto, and you must immediately discard a card from hand to meet
                 your new limit.
                 Marked on the board with a fist.</li>
             <li><strong>Docks:</strong> Your link to the city's waterways, crucial to <b>Smuggle</b>
@@ -685,8 +685,10 @@
             </tr>
             <tr>
                 <td><strong>Enlist</strong></td>
-                <td>Hire Runners in a Safehouse you Control.<br>Base Cost: $400 per Runner. Discount: -$200 per
-                    Controlled Ghetto (see table below).
+                <td>Hire Runners in a Safehouse you Control. Base cost is <b>$400 per Runner</b>,
+                    reduced by <b>$200 per Controlled Ghetto</b> (minimum <b>$0</b>).
+                    <br><b>Example:</b> Enlisting 3 Runners with 2 Ghettos costs
+                    (3 &times; $400) &minus; (2 &times; $200) = <b>$800</b>.
                 </td>
             </tr>
             <tr>
@@ -702,11 +704,11 @@
             </tr>
             <tr>
                 <td><strong>Hustle</strong></td>
-                <td>Your Boss must be present in a <b>Ghetto</b> District you Control. Draw <b>2 Contract cards</b> from
-                    any combination of the 3
-                    face-down
-                    draw piles. You must immediately discard down to your <b>Hand Limit</b>
-                    (see Hand Limit rule).<br><b>Limit:</b> You may perform this
+                <td>In a <b>Ghetto</b> District you Control, draw <b>2 Contract cards</b> from
+                    any combination of the 3 face-down draw piles. You must immediately discard down to your
+                    <b>Hand Limit</b> (<b>2 + 1 per Controlled Ghetto, max 5</b>).
+                    If a draw pile is empty, shuffle its discard pile to form a new one.
+                    <br><b>Limit:</b> You may perform this
                     action once per Day.</td>
             </tr>
             <tr>
@@ -730,73 +732,6 @@
                 </td>
             </tr>
         </table>
-        <div class="reference-section">
-            <strong>Enlistment Cost Table</strong>
-            <table class="reference-table compact-table">
-                <thead>
-                    <tr>
-                        <th style="width:100px;">Runners Hired</th>
-                        <th colspan="6">Number of Ghettos Controlled</th>
-                    </tr>
-                    <tr class="sub-header">
-                        <th></th> <!-- Empty corner -->
-                        <th>0</th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1</strong></td>
-                        <td>$400</td>
-                        <td>$200</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2</strong></td>
-                        <td>$800</td>
-                        <td>$600</td>
-                        <td>$400</td>
-                        <td>$200</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3</strong></td>
-                        <td>$1,200</td>
-                        <td>$1,000</td>
-                        <td>$800</td>
-                        <td>$600</td>
-                        <td>$400</td>
-                        <td>$200</td>
-                    </tr>
-                    <tr>
-                        <td><strong>4</strong></td>
-                        <td>$1,600</td>
-                        <td>$1,400</td>
-                        <td>$1,200</td>
-                        <td>$1,000</td>
-                        <td>$800</td>
-                        <td>$600</td>
-                    </tr>
-                    <tr>
-                        <td><strong>5</strong></td>
-                        <td>$2,000</td>
-                        <td>$1,800</td>
-                        <td>$1,600</td>
-                        <td>$1,400</td>
-                        <td>$1,200</td>
-                        <td>$1,000</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 
     <div class="container one-column">
@@ -816,7 +751,8 @@
                     barrel that matches the Joint's <b>House Pour</b>, you gain an <b>Action Kickback</b>
                     (return 1 marker from your Stash to your Operations). These actions can be used on your next
                     Play.<br><br>3. <b>The Greed Tax:</b> If you Unload <b>4 or more total barrels</b> of any
-                    combination in a single Play, you generate <b>1 Heat</b>. Three barrels is the maximum safe
+                    combination in a single Play, you generate <b>1 Heat</b>. You choose which of the two
+                    spent markers is placed on the Heat Track. Three barrels is the maximum safe
                     delivery.
                     <br><br>
                     <em>(Note: Refunded actions are returned from your Stash to your <b>Operations</b>).</em>
@@ -956,30 +892,19 @@
         </p>
 
         <h4>1. Nightwatch</h4>
-        <p>There's no limit to how much Liquor can be stored in a District, but you'd better make sure the
-            streets seem quiet when the Nightwatch do their rounds: </p>
-        <ul class="sub-section">
-            <li><strong>Overcrowding:</strong> All Districts with more than <b>5 Mobsters</b> face
-                arrests.
-                Remove excess <b>Runners</b> to bring the count down to 5.
-            </li>
-        </ul>
+        <p>The night patrol sweeps the streets for overcrowding. Any District with more than <b>5 Mobsters</b>
+            faces arrests. Remove excess <b>Runners</b> to bring the count down to 5.</p>
 
         <h4>2. Settle the Books</h4>
         <p>Balance the accounts, in the following order:</p>
         <ol class="sub-section">
             <li><strong>Exchange Deeds:</strong> Check for Borough Control. If a mob now controls more
-                Districts in a Borough than any other rival, the Deed is transferred to the
+                Districts in a Borough than any rival, the Deed is transferred to the
                 new owner. If tied, the Deed returns to the Supply.
             </li>
             <li><strong>Claim Cartel Cards:</strong> Check each Joint type on the board. If a player controls more
                 Joints of a type than any single rival, they claim that liquor's <b>Cartel Card</b>. If tied or
                 unclaimed, the Cartel Card returns to the Supply.</li>
-            <li><strong>Hand Limit Check:</strong> All players must verify they are within their
-                <b>Hand Limit</b> (<b>2 + 1 per Controlled Ghetto</b>). If Borough control changed this
-                Reckoning, players who lost Ghetto districts must immediately discard down to their new limit.
-                Place discarded cards in a face-up discard pile. If a draw pile is empty, shuffle the discard pile
-                to form a new draw pile.</li>
             <li><strong>Resolve Contracts:</strong> Remove 1 marker from each active Contract and return it to your
                 Stash:
                 <ul class="sub-section" style="margin-top: 5px;">
@@ -1051,7 +976,7 @@
         </p>
         <ol class="sub-section">
             <li><strong>Total Respect:</strong> The tied player with the <strong>highest overall Respect</strong> takes the crown.</li>
-            <li><strong>Cold Hard Cash:</strong> If Respect is deadlocked, the tied player with the most <strong>Total Cash</strong> (down to the last crumpled bill) buys the throne.</li>
+            <li><strong>Cold Hard Cash:</strong> If Respect is deadlocked, the tied player with the most <strong>Total Cash</strong> (Include the loose change printed on your Playbook) buys the throne.</li>
         </ol>
         <p>
             <strong>There are no shared victories in <em>Moonshine Kingdom</em>.</strong> You either rule the city alone, or you bleed out in the gutter.
@@ -1080,7 +1005,8 @@
             <li><strong>Shakedown Gets Loud:</strong> If an <b>Extort</b> action earns <b>$500+</b>, you generate 1
                 Heat.</li>
             <li><strong>The Greed Tax:</strong> If you Unload <b>4 or more total barrels</b> of any combination in a
-                single Play, you generate 1 Heat. Three barrels is the maximum safe delivery.</li>
+                single Play, you generate 1 Heat. You choose which of the two spent markers is placed on the
+                Heat Track.</li>
             <li><strong>Torch:</strong> Using the Vipers <b>Torch</b> Play.</li>
         </ul>
         <h3>Police Raids</h3>
