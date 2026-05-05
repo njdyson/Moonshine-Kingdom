@@ -754,6 +754,63 @@ img {
         margin-bottom: 0.6em;
     }
 
+    /* Tighten a few heavy pages that were drifting over the print boundary */
+    .components-page,
+    .goal-page,
+    .shadows-page {
+        padding: 56px;
+    }
+
+    .components-page .cover img,
+    .goal-page .cover img,
+    .shadows-page .cover img {
+        width: 100%;
+        max-height: 68mm;
+        height: auto !important;
+    }
+
+    .components-page h2,
+    .goal-page h2,
+    .shadows-page h2 {
+        margin-top: 0.35em;
+        margin-bottom: 0.4em;
+    }
+
+    .components-page h3,
+    .goal-page h3,
+    .shadows-page h3 {
+        margin-top: 0.4em;
+        margin-bottom: 0.35em;
+    }
+
+    .components-page h4,
+    .goal-page h4,
+    .shadows-page h4 {
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+    }
+
+    .components-page p,
+    .goal-page p,
+    .shadows-page p,
+    .components-page ul,
+    .goal-page ul,
+    .shadows-page ul,
+    .components-page ol,
+    .goal-page ol,
+    .shadows-page ol {
+        margin-bottom: 0.8em;
+    }
+
+    .components-page ul.sub-section > li,
+    .goal-page ul.sub-section > li,
+    .shadows-page ul.sub-section > li,
+    .components-page ol.sub-section > li,
+    .goal-page ol.sub-section > li,
+    .shadows-page ol.sub-section > li {
+        margin-bottom: 2px;
+    }
+
     .table-pair {
         flex-direction: column;
     }
