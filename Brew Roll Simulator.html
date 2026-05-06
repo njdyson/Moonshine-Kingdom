@@ -16,7 +16,7 @@
       --muted: #b9ab88;
       --moonshine: #7a7a7a;
       --gin: #a34db0;
-      --rye: #d4af37;
+      --whisky: #d4af37;
       --rum: #9b6943;
       --white-die: #ece8dc;
       --red-die: #a33030;
@@ -129,7 +129,7 @@
 
     .market-label.moonshine { color: #c8c8c8; }
     .market-label.gin { color: #df8eec; }
-    .market-label.rye { color: #f1cf63; }
+    .market-label.whisky { color: #f1cf63; }
     .market-label.rum { color: #cf9a73; }
 
     .market-value {
@@ -488,7 +488,7 @@
 
     .brew-dot.moonshine { background: #7a7a7a; }
     .brew-dot.gin { background: #a34db0; }
-    .brew-dot.rye { background: #d4af37; }
+    .brew-dot.whisky { background: #d4af37; }
 
     .mob-name {
       font-weight: 700;
@@ -581,7 +581,7 @@
 
     .stills-matrix .row-head.moonshine { color: #cccccc; }
     .stills-matrix .row-head.gin { color: #e198ee; }
-    .stills-matrix .row-head.rye { color: #f1cf63; }
+    .stills-matrix .row-head.whisky { color: #f1cf63; }
 
     .matrix-cell.blank {
       background: #1a1310;
@@ -632,6 +632,33 @@
       gap: 3px;
     }
 
+    .owner-controls {
+      display: grid;
+      gap: 4px;
+    }
+
+    .still-empty {
+      border-style: dashed;
+      background: #1b1410;
+    }
+
+    .claim-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px;
+    }
+
+    .claim-btn {
+      min-width: 0;
+      padding: 5px 4px;
+      font-size: 0.68rem;
+      border-radius: 5px;
+      line-height: 1.1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .mobster {
       display: grid;
       grid-template-columns: 24px 1fr 24px;
@@ -643,6 +670,12 @@
       border-radius: 5px;
       padding: 1px 3px;
       background: #251c17;
+    }
+
+    .mobster.owner {
+      grid-template-columns: 24px 1fr 24px;
+      border-color: rgba(212, 175, 55, 0.45);
+      background: rgba(20, 15, 12, 0.5);
     }
 
     .mobster.locked {
@@ -730,9 +763,9 @@
             <div id="marketGinValue" class="market-value">$300</div>
           </div>
           <div class="market-row">
-            <div class="market-label rye">Rye</div>
-            <input id="marketRye" class="slider" type="range" min="200" max="500" step="100" value="400">
-            <div id="marketRyeValue" class="market-value">$400</div>
+            <div class="market-label whisky">Whisky</div>
+            <input id="marketWhisky" class="slider" type="range" min="200" max="500" step="100" value="400">
+            <div id="marketWhiskyValue" class="market-value">$400</div>
           </div>
         </div>
 
@@ -785,7 +818,7 @@
 
   <script>
     const STILL_POOL = [
-      { type: "rye", numbers: [2, 3, 5, 7, 8, 11, 12] },
+      { type: "whisky", numbers: [2, 3, 5, 7, 8, 11, 12] },
       { type: "gin", numbers: [2, 3, 4, 6, 7, 9, 10, 11] },
       { type: "moonshine", numbers: [2, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
     ];
@@ -793,7 +826,7 @@
     const MARKET_DEFAULTS = {
       moonshine: 200,
       gin: 300,
-      rye: 400
+      whisky: 400
     };
 
     const MAX_MOBS = 4;
@@ -802,7 +835,7 @@
     const MOB_NAMES = ["Irish", "Vipers", "Sicilians", "Knights"];
     const MOB_CLASSES = ["mob-irish", "mob-vipers", "mob-sicilians", "mob-knights"];
     const STILL_NUMBERS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    const TYPE_ROWS = ["moonshine", "gin", "rye"];
+    const TYPE_ROWS = ["moonshine", "gin", "whisky"];
 
     const state = {
       playerCount: 4,
@@ -826,8 +859,8 @@
       marketMoonshineValue: document.getElementById("marketMoonshineValue"),
       marketGin: document.getElementById("marketGin"),
       marketGinValue: document.getElementById("marketGinValue"),
-      marketRye: document.getElementById("marketRye"),
-      marketRyeValue: document.getElementById("marketRyeValue"),
+      marketWhisky: document.getElementById("marketWhisky"),
+      marketWhiskyValue: document.getElementById("marketWhiskyValue"),
       priorityList: document.getElementById("priorityList"),
       randomAssignCount: document.getElementById("randomAssignCount"),
       randomAssignCountValue: document.getElementById("randomAssignCountValue"),
@@ -951,21 +984,26 @@
     }
 
     function rollBrewDice() {
-      let whiteA = d6();
-      let whiteB = d6();
-      while (whiteA === whiteB) {
-        whiteA = d6();
-        whiteB = d6();
-      }
-      state.dice.white = [whiteA, whiteB];
+      state.dice.white = [];
       state.dice.red = [];
       for (let i = 0; i < state.playerCount + 1; i += 1) {
+        state.dice.white.push(d6());
         state.dice.red.push(d6());
       }
       state.dice.selectedWhite = null;
       state.dice.picks = [];
       state.dice.slotWhites = Array(state.playerCount).fill(0);
       updateDistillationView();
+    }
+
+    function getUsedWhiteBeforeSlot(slotIndex) {
+      const used = new Set();
+      for (let i = 0; i < slotIndex; i += 1) {
+        if (state.dice.picks[i]) {
+          used.add(state.dice.picks[i].whiteIndex);
+        }
+      }
+      return used;
     }
 
     function getUsedRedBeforeSlot(slotIndex) {
@@ -980,11 +1018,24 @@
 
     function setPickWhite(slotIndex, whiteIndex) {
       if (slotIndex > state.dice.picks.length) return;
+      const usedBefore = getUsedWhiteBeforeSlot(slotIndex);
+      if (usedBefore.has(whiteIndex)) return;
       state.dice.slotWhites[slotIndex] = whiteIndex;
       if (slotIndex < state.dice.picks.length) {
         state.dice.picks[slotIndex].whiteIndex = whiteIndex;
+        state.dice.picks.splice(slotIndex + 1);
       }
       updateDistillationView();
+    }
+
+    function getAvailableWhiteForSlot(slotIndex) {
+      const usedBefore = getUsedWhiteBeforeSlot(slotIndex);
+      const current = state.dice.slotWhites[slotIndex] || 0;
+      if (!usedBefore.has(current)) return current;
+      for (let i = 0; i < state.dice.white.length; i += 1) {
+        if (!usedBefore.has(i)) return i;
+      }
+      return 0;
     }
 
     function setPickRed(slotIndex, redIndex) {
@@ -995,17 +1046,28 @@
       if (slotIndex === state.dice.picks.length) {
         if (state.dice.picks.length >= state.playerCount) return;
         state.dice.picks.push({
-          whiteIndex: state.dice.slotWhites[slotIndex] || 0,
+          whiteIndex: getAvailableWhiteForSlot(slotIndex),
           redIndex
         });
+        state.dice.slotWhites[slotIndex] = state.dice.picks[slotIndex].whiteIndex;
       } else {
         if (state.dice.picks[slotIndex].redIndex === redIndex) {
-          state.dice.picks.splice(slotIndex, 1);
+          state.dice.picks.splice(slotIndex);
         } else {
           state.dice.picks[slotIndex].redIndex = redIndex;
+          state.dice.picks.splice(slotIndex + 1);
         }
       }
       updateDistillationView();
+    }
+
+    function getRemainingDieIndex(color) {
+      const used = new Set(state.dice.picks.map((pick) => pick[color + "Index"]));
+      const dice = state.dice[color];
+      for (let i = 0; i < dice.length; i += 1) {
+        if (!used.has(i)) return i;
+      }
+      return -1;
     }
 
     function renderPickGrid() {
@@ -1017,7 +1079,7 @@
         const slotMobIndex = activeOrder[i] !== undefined ? activeOrder[i] : i;
         const pick = state.dice.picks[i] || null;
         const slotOpen = i <= state.dice.picks.length;
-        const whiteIndex = pick ? pick.whiteIndex : (state.dice.slotWhites[i] || 0);
+        const whiteIndex = pick ? pick.whiteIndex : getAvailableWhiteForSlot(i);
         const card = document.createElement("div");
         card.className = "pick-card" + (pick ? " pick-w" + whiteIndex : (slotOpen ? "" : " empty"));
 
@@ -1033,7 +1095,7 @@
           removeBtn.className = "pick-remove";
           removeBtn.textContent = "Remove";
           removeBtn.addEventListener("click", () => {
-            state.dice.picks.splice(i, 1);
+            state.dice.picks.splice(i);
             updateDistillationView();
           });
           head.appendChild(removeBtn);
@@ -1045,15 +1107,18 @@
         whiteRow.innerHTML = '<div class="pick-select-label">White</div>';
         const whiteDiceWrap = document.createElement("div");
         whiteDiceWrap.className = "mini-dice";
-        state.dice.white.forEach((value, whiteIdx) => {
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "mini-die white" + (whiteIdx === whiteIndex ? " selected" : "");
-          btn.textContent = String(value);
-          btn.disabled = !slotOpen;
-          btn.addEventListener("click", () => setPickWhite(i, whiteIdx));
-          whiteDiceWrap.appendChild(btn);
-        });
+        if (slotOpen) {
+          const usedWhiteBefore = getUsedWhiteBeforeSlot(i);
+          state.dice.white.forEach((value, whiteIdx) => {
+            if (usedWhiteBefore.has(whiteIdx)) return;
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "mini-die white" + (whiteIdx === whiteIndex ? " selected" : "");
+            btn.textContent = String(value);
+            btn.addEventListener("click", () => setPickWhite(i, whiteIdx));
+            whiteDiceWrap.appendChild(btn);
+          });
+        }
         whiteRow.appendChild(whiteDiceWrap);
         card.appendChild(whiteRow);
 
@@ -1117,32 +1182,32 @@
       return totals;
     }
 
-    function makeMobsterRow(stillIndex, mobIndex) {
-      const row = document.createElement("div");
-      row.className = "mobster";
-      if (mobIndex >= state.playerCount) {
-        row.classList.add("hidden");
-      }
+    function addMobstersToStill(stillIndex, mobIndex, amount) {
+      if (mobIndex >= state.playerCount) return;
+      const mobTotals = getMobTotals();
+      if (amount > 0 && mobTotals[mobIndex] >= MAX_MOBSTERS_PER_MOB) return;
       const still = state.stills[stillIndex];
       const ownerIndex = getStillOwnerIndex(still);
-      const isLocked = ownerIndex !== -1 && ownerIndex !== mobIndex;
+      if (ownerIndex !== -1 && ownerIndex !== mobIndex) return;
+      const current = still.mobsters[mobIndex];
+      const next = Math.max(0, Math.min(MAX_MOBSTERS_PER_STILL, current + amount));
+      still.mobsters[mobIndex] = next;
+      renderStills();
+      updateDistillationView();
+    }
+
+    function makeOwnerRow(stillIndex, mobIndex) {
+      const row = document.createElement("div");
+      row.className = "mobster owner";
+      const still = state.stills[stillIndex];
       const mobTotals = getMobTotals();
-      if (isLocked) {
-        row.classList.add("locked");
-      }
       const currentCount = still.mobsters[mobIndex];
 
       const minus = document.createElement("button");
       minus.type = "button";
       minus.textContent = "-";
-      minus.disabled = isLocked || currentCount === 0;
-      minus.addEventListener("click", () => {
-        if (isLocked) return;
-        const current = state.stills[stillIndex].mobsters[mobIndex];
-        state.stills[stillIndex].mobsters[mobIndex] = Math.max(0, current - 1);
-        renderStills();
-        updateDistillationView();
-      });
+      minus.disabled = currentCount === 0;
+      minus.addEventListener("click", () => addMobstersToStill(stillIndex, mobIndex, -1));
 
       const info = document.createElement("div");
       info.className = "count";
@@ -1152,22 +1217,34 @@
       plus.type = "button";
       plus.textContent = "+";
       plus.disabled =
-        isLocked ||
         currentCount >= MAX_MOBSTERS_PER_STILL ||
         mobTotals[mobIndex] >= MAX_MOBSTERS_PER_MOB;
-      plus.addEventListener("click", () => {
-        if (isLocked) return;
-        if (getMobTotals()[mobIndex] >= MAX_MOBSTERS_PER_MOB) return;
-        const current = state.stills[stillIndex].mobsters[mobIndex];
-        state.stills[stillIndex].mobsters[mobIndex] = Math.min(MAX_MOBSTERS_PER_STILL, current + 1);
-        renderStills();
-        updateDistillationView();
-      });
+      plus.addEventListener("click", () => addMobstersToStill(stillIndex, mobIndex, 1));
 
       row.appendChild(minus);
       row.appendChild(info);
       row.appendChild(plus);
       return row;
+    }
+
+    function makeClaimControls(stillIndex) {
+      const wrap = document.createElement("div");
+      wrap.className = "owner-controls";
+      const grid = document.createElement("div");
+      grid.className = "claim-grid";
+      const mobTotals = getMobTotals();
+      for (let mobIndex = 0; mobIndex < state.playerCount; mobIndex += 1) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "claim-btn mob-name " + mobClass(mobIndex);
+        btn.textContent = mobName(mobIndex);
+        btn.disabled = mobTotals[mobIndex] >= MAX_MOBSTERS_PER_MOB;
+        btn.title = "Place 1 " + mobName(mobIndex) + " Runner here";
+        btn.addEventListener("click", () => addMobstersToStill(stillIndex, mobIndex, 1));
+        grid.appendChild(btn);
+      }
+      wrap.appendChild(grid);
+      return wrap;
     }
 
     function renderStills(activeTargets = null) {
@@ -1232,18 +1309,18 @@
               const ownerIndex = getStillOwnerIndex(still);
               if (ownerIndex !== -1) {
                 card.classList.add("owned", mobClass(ownerIndex));
+              } else {
+                card.classList.add("still-empty");
               }
               if (activeTargets && activeTargets.has(still.number)) {
                 card.classList.add("active");
               }
 
-              const mobsters = document.createElement("div");
-              mobsters.className = "mobsters";
-              for (let mobIndex = 0; mobIndex < MAX_MOBS; mobIndex += 1) {
-                mobsters.appendChild(makeMobsterRow(stillIndex, mobIndex));
+              if (ownerIndex === -1) {
+                card.appendChild(makeClaimControls(stillIndex));
+              } else {
+                card.appendChild(makeOwnerRow(stillIndex, ownerIndex));
               }
-
-              card.appendChild(mobsters);
               stack.appendChild(card);
             });
             td.appendChild(stack);
@@ -1350,7 +1427,7 @@
       els.randomAssignCountValue.textContent = String(n);
     }
 
-    function renderRollTotalsTable(pickSummaries, totalByMob) {
+    function renderRollTotalsTable(pickSummaries, totalByMob, breakdownSummary) {
       const grid = document.createElement("div");
       grid.className = "pick-results-grid";
       grid.style.gridTemplateColumns = "repeat(" + state.playerCount + ", minmax(150px, 1fr))";
@@ -1381,11 +1458,34 @@
             '<div class="brew-type-row">' +
               '<span class="brew-type"><span class="brew-dot moonshine"></span>' + data.byType.moonshine + "</span>" +
               '<span class="brew-type"><span class="brew-dot gin"></span>' + data.byType.gin + "</span>" +
-              '<span class="brew-type"><span class="brew-dot rye"></span>' + data.byType.rye + "</span>" +
+              '<span class="brew-type"><span class="brew-dot whisky"></span>' + data.byType.whisky + "</span>" +
             "</div>";
           card.appendChild(row);
         }
         grid.appendChild(card);
+      }
+
+      if (breakdownSummary) {
+        const breakdownCard = document.createElement("div");
+        breakdownCard.className = "pick-result-card total";
+        breakdownCard.innerHTML =
+          '<div class="pick-result-title">Breakdown (Target ' + breakdownSummary.target + ")</div>" +
+          '<div class="pick-detail">Leftover White ' + breakdownSummary.white + " + Red " + breakdownSummary.red + "</div>";
+
+        for (let mob = 0; mob < state.playerCount; mob += 1) {
+          const row = document.createElement("div");
+          row.className = "pick-result-row";
+          const data = breakdownSummary.mobTotals[mob];
+          row.innerHTML =
+            '<div class="pick-result-head">' +
+              '<span class="mob-name ' + mobClass(mob) + '">' + mobName(mob) + "</span>" +
+              '<span class="stats">' + data.killed + " killed</span>" +
+            "</div>" +
+            '<div class="pick-detail">' + data.exposed + " mobster" + (data.exposed === 1 ? "" : "s") + " exposed at matching stills</div>";
+          breakdownCard.appendChild(row);
+        }
+
+        grid.appendChild(breakdownCard);
       }
 
       const totalCard = document.createElement("div");
@@ -1403,7 +1503,7 @@
           '<div class="brew-type-row">' +
             '<span class="brew-type"><span class="brew-dot moonshine"></span>' + data.byType.moonshine + "</span>" +
             '<span class="brew-type"><span class="brew-dot gin"></span>' + data.byType.gin + "</span>" +
-            '<span class="brew-type"><span class="brew-dot rye"></span>' + data.byType.rye + "</span>" +
+            '<span class="brew-type"><span class="brew-dot whisky"></span>' + data.byType.whisky + "</span>" +
           "</div>";
         totalCard.appendChild(row);
       }
@@ -1440,7 +1540,7 @@
           perMob.push({
             barrels: 0,
             value: 0,
-            byType: { moonshine: 0, gin: 0, rye: 0 }
+            byType: { moonshine: 0, gin: 0, whisky: 0 }
           });
         }
 
@@ -1466,7 +1566,7 @@
         mobTotals.push({
           barrels: 0,
           value: 0,
-          byType: { moonshine: 0, gin: 0, rye: 0 }
+          byType: { moonshine: 0, gin: 0, whisky: 0 }
         });
       }
 
@@ -1483,10 +1583,45 @@
         }
       });
 
-      els.mobResults.innerHTML = "";
-      els.mobResults.appendChild(renderRollTotalsTable(pickSummaries, mobTotals));
+      let breakdownSummary = null;
+      const highlightTargets = new Map(targetCounts);
+      if (state.dice.picks.length === state.playerCount) {
+        const whiteIndex = getRemainingDieIndex("white");
+        const redIndex = getRemainingDieIndex("red");
+        if (whiteIndex !== -1 && redIndex !== -1) {
+          const white = state.dice.white[whiteIndex];
+          const red = state.dice.red[redIndex];
+          const target = white + red;
+          breakdownSummary = {
+            white,
+            red,
+            target,
+            mobTotals: []
+          };
+          highlightTargets.set(target, (highlightTargets.get(target) || 0) + 1);
 
-      renderStills(targetCounts);
+          for (let mob = 0; mob < state.playerCount; mob += 1) {
+            breakdownSummary.mobTotals.push({ exposed: 0, killed: 0 });
+          }
+
+          state.stills.forEach((still) => {
+            if (still.number !== target) return;
+            for (let mob = 0; mob < state.playerCount; mob += 1) {
+              const crew = still.mobsters[mob];
+              const killed = Math.min(crew, barrelsFromCrew(crew));
+              if (crew > 0) {
+                breakdownSummary.mobTotals[mob].exposed += crew;
+                breakdownSummary.mobTotals[mob].killed += killed;
+              }
+            }
+          });
+        }
+      }
+
+      els.mobResults.innerHTML = "";
+      els.mobResults.appendChild(renderRollTotalsTable(pickSummaries, mobTotals, breakdownSummary));
+
+      renderStills(highlightTargets);
     }
 
     function clearMobsters() {
@@ -1501,17 +1636,17 @@
       state.market = { ...MARKET_DEFAULTS };
       els.marketMoonshine.value = String(state.market.moonshine);
       els.marketGin.value = String(state.market.gin);
-      els.marketRye.value = String(state.market.rye);
+      els.marketWhisky.value = String(state.market.whisky);
       setMarket("moonshine", state.market.moonshine);
       setMarket("gin", state.market.gin);
-      setMarket("rye", state.market.rye);
+      setMarket("whisky", state.market.whisky);
     }
 
     function bindEvents() {
       els.playerCount.addEventListener("input", (event) => setPlayerCount(event.target.value));
       els.marketMoonshine.addEventListener("input", (event) => setMarket("moonshine", event.target.value));
       els.marketGin.addEventListener("input", (event) => setMarket("gin", event.target.value));
-      els.marketRye.addEventListener("input", (event) => setMarket("rye", event.target.value));
+      els.marketWhisky.addEventListener("input", (event) => setMarket("whisky", event.target.value));
       els.randomAssignCount.addEventListener("input", (event) => setRandomAssignCount(event.target.value));
       els.rollDiceBtn.addEventListener("click", rollBrewDice);
       els.randomizeMobstersBtn.addEventListener("click", randomizeMobsters);

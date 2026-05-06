@@ -73,7 +73,7 @@
     }
 
     .section-title {
-      font-size: 0.71em; 
+      font-size: 0.75em;
       font-weight: 700;
       margin: 4px 0 3px; 
       padding: 4px 4px;  
@@ -88,8 +88,8 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 3px; 
-      font-size: 0.69em;  
+      margin-bottom: 5px;
+      font-size: 0.73em;
       color: #f5e9d9;
       border: 1px solid #d4af37;
     }
@@ -97,11 +97,11 @@
     th,
     td {
       border: 1px solid #4a4a4a;
-      padding: 3px 4px; 
+      padding: 4px 5px;
       text-align: left;
       vertical-align: top;
       color: #f5e9d9;
-      line-height: 1.3; 
+      line-height: 1.35;
     }
 
     th {
@@ -135,6 +135,11 @@
 
     tr.special-action>td {
       background-color: rgba(240, 198, 116, 0.1);
+    }
+
+    tr.emergency-action>td {
+      background-color: rgba(130, 35, 35, 0.22);
+      border-top: 2px solid #7c2f2f;
     }
 
     .heat {
@@ -204,15 +209,15 @@
     .combat-section {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 5px;
+      gap: 10px;
+      margin-bottom: 7px;
       flex-shrink: 0;
     }
 
     .combat-tables {
       display: flex;
       justify-content: space-between;
-      gap: 5px;
+      gap: 7px;
     }
 
     .combat-tables table {
@@ -230,9 +235,9 @@
     .middle-container {
       display: flex;
       flex-direction: row;
-      gap: 8px; 
+      gap: 10px;
       align-items: stretch;
-      margin: 2px 0;
+      margin: 4px 0;
       flex-grow: 1; 
     }
 
@@ -245,23 +250,23 @@
       border: 1px solid #5a5a5a;
       background-color: #222;
       border-radius: 6px;
-      padding: 4px; 
+      padding: 6px;
     }
     
     .middle-col .section-title {
         margin-top: 0;
-        margin-bottom: 5px;
+        margin-bottom: 7px;
         background-color: #000000 !important;
         color: #d4af37 !important;
         border: 1px solid #4a4a4a;
-        font-size: 0.7em;
+        font-size: 0.74em;
     }
 
     /* Ferocity Table (Now in left col) */
     .ferocity-bonus-table {
       margin-top: 0;
       margin-bottom: 4px;
-      font-size: 0.7em;
+      font-size: 0.74em;
     }
 
     .ferocity-bonus-table td {
@@ -274,8 +279,8 @@
     .flow-container {
       display: flex;
       flex-direction: column;
-      gap: 3px; 
-      font-size: 0.7em; 
+      gap: 5px;
+      font-size: 0.74em;
       width: 100%;
     }
 
@@ -283,10 +288,10 @@
       background-color: #2e2e2e;
       border: 1px solid #4a4a4a;
       border-radius: 4px;
-      padding: 3px 3px; 
+      padding: 5px 4px;
       text-align: center;
       width: 100%;
-      line-height: 1.25;
+      line-height: 1.3;
       display: block;
     }
     
@@ -295,7 +300,7 @@
     }
 
     .raid-header {
-      font-size: 0.7em;
+      font-size: 0.74em;
       text-align: center;
       margin-bottom: 4px;
       font-style: italic;
@@ -303,79 +308,10 @@
       line-height: 1.1;
     }
 
-    /* --- JOB REWARDS (FULL WIDTH) --- */
-    .job-reward-section {
-        margin-top: 2px;
-        border: 1px solid #5a5a5a;
-        background-color: #222;
-        border-radius: 6px;
-        padding: 3px;
-    }
-
-    .job-reward-section .section-title {
-        margin-top: 0;
-        background-color: #000000 !important;
-        color: #d4af37 !important;
-        border: 1px solid #4a4a4a;
-        font-size: 0.7em;
-    }
-    
-    .job-table {
-        width: 100%;
-        border-collapse: collapse;
-        border: none;
-        font-size: 0.7em; 
-        margin-top: 2px;
-    }
-
-    .job-table th {
-        background-color: transparent;
-        color: #d4af37;
-        border: none;
-        border-bottom: 1px solid #555;
-        padding: 2px 0;
-        text-align: center;
-        width: 33%;
-        font-weight: bold;
-    }
-
-    .job-table td {
-        border: none;
-        padding: 3px 0;
-        text-align: center;
-        color: #ddd;
-        border-right: 1px dashed #444;
-    }
-    
-    .job-table td:last-child {
-        border-right: none;
-    }
-    
-    .job-table tr:nth-child(even) td {
-        background-color: #292929;
-    }
-
-    .job-table.enlist-table {
-        font-size: 0.62em;
-        table-layout: fixed;
-    }
-
-    .job-table.enlist-table th,
-    .job-table.enlist-table td {
-        width: auto;
-        padding: 2px 1px;
-        border-right: 1px dashed #444;
-    }
-
-    .job-table.enlist-table th:last-child,
-    .job-table.enlist-table td:last-child {
-        border-right: none;
-    }
-
     .commission-req {
         text-align: center;
-        margin-top: 4px;
-        font-size: 0.65em;
+        margin-top: 6px;
+        font-size: 0.72em;
         font-style: italic;
         color: #aaa;
     }
@@ -387,8 +323,8 @@
       background-color: #222;
       border-radius: 4px;
       padding: 4px;
-      font-size: 0.7em; 
-      line-height: 1.25;
+      font-size: 0.74em;
+      line-height: 1.3;
       flex-shrink: 0;
       text-align: center;
     }
@@ -465,8 +401,7 @@
       .playbook-subtitle,
       .flow-step strong,
       .endgame-header,
-      .contract-bonus,
-      .job-reward-section .section-title {
+      .contract-bonus {
         color: #d4af37 !important;
       }
       
@@ -478,8 +413,7 @@
       .flow-step,
       .raid-header,
       .middle-col,
-      .endgame-section,
-      .job-reward-section {
+      .endgame-section {
         color: #fdfdfd !important;
         border-color: #555 !important;
       }
@@ -521,11 +455,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Extort</td>
-        <td class="action-desc">$200 per Controlled District in a Borough you hold the Deed for (once per Day per Deed). <span class="heat">$500+: <img src="Art/Fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
         <td class="action-desc">Once per Day, at a controlled Dock: send up to 5 Runners to roll for Havana Rum (0 successes = arrests based on Heat).</td>
       </tr>
@@ -553,14 +482,14 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Enlist</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse (see Enlist Cost Table on back).</td>
+        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Fortify</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
-      <tr>
+      <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
         <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
@@ -714,32 +643,10 @@
         </div>
       </div>
     </div>
-    <!-- ENLIST COST TABLE (FULL WIDTH) -->
-    <div class="job-reward-section">
-       <div class="section-title">Enlist Cost Table</div>
-       <table class="job-table enlist-table">
-           <thead>
-               <tr>
-                   <th>Runners</th>
-                   <th>1</th>
-                   <th>2</th>
-                   <th>3</th>
-                   <th>4</th>
-                   <th>5</th>
-               </tr>
-           </thead>
-           <tbody>
-               <tr><td><strong>Standard</strong></td><td>$300</td><td>$600</td><td>$900</td><td>$1200</td><td>$1500</td></tr>
-               <tr><td><strong>Ward Boss</strong></td><td>$200</td><td>$400</td><td>$600</td><td>$800</td><td>$1000</td></tr>
-           </tbody>
-       </table>
-       <div class="commission-req"><strong>Base Cost:</strong> $300 per Runner. If you hold Ward Boss, Enlist costs $200 per Runner.</div>
-    </div>
-
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
       <div class="endgame-header">Winning the Game</div>
-      <strong>Commission:</strong> Gig + Racket + Score, all 4 Favors, <b>or</b> all 4 Cartels.<br>
+      <strong>Commission:</strong> Complete 1 Gig, 1 Racket, and 1 Score.<br>
       <strong>Victory:</strong> Commission Card + <b>20 Respect</b>. Tie? Most Cash.
     </div>
   </div>
@@ -775,11 +682,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Extort</td>
-        <td class="action-desc">$200 per Controlled District in a Borough you hold the Deed for (once per Day per Deed). <span class="heat">$500+: <img src="Art/Fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
         <td class="action-desc">Once per Day, at a controlled Dock: send up to 5 Runners to roll for Havana Rum (0 successes = arrests based on Heat).</td>
       </tr>
@@ -807,14 +709,14 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Enlist</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse (see Enlist Cost Table on back).</td>
+        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Fortify</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
-      <tr>
+      <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
         <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
@@ -969,32 +871,10 @@
         </div>
       </div>
     </div>
-    <!-- ENLIST COST TABLE (FULL WIDTH) -->
-    <div class="job-reward-section">
-       <div class="section-title">Enlist Cost Table</div>
-       <table class="job-table enlist-table">
-           <thead>
-               <tr>
-                   <th>Runners</th>
-                   <th>1</th>
-                   <th>2</th>
-                   <th>3</th>
-                   <th>4</th>
-                   <th>5</th>
-               </tr>
-           </thead>
-           <tbody>
-               <tr><td><strong>Standard</strong></td><td>$300</td><td>$600</td><td>$900</td><td>$1200</td><td>$1500</td></tr>
-               <tr><td><strong>Ward Boss</strong></td><td>$200</td><td>$400</td><td>$600</td><td>$800</td><td>$1000</td></tr>
-           </tbody>
-       </table>
-       <div class="commission-req"><strong>Base Cost:</strong> $300 per Runner. If you hold Ward Boss, Enlist costs $200 per Runner.</div>
-    </div>
-
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
       <div class="endgame-header">Winning the Game</div>
-      <strong>Commission:</strong> Gig + Racket + Score, all 4 Favors, <b>or</b> all 4 Cartels.<br>
+      <strong>Commission:</strong> Complete 1 Gig, 1 Racket, and 1 Score.<br>
       <strong>Victory:</strong> Commission Card + <b>20 Respect</b>. Tie? Most Cash.
     </div>
   </div>
@@ -1030,11 +910,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Extort</td>
-        <td class="action-desc">$200 per Controlled District in a Borough you hold the Deed for (once per Day per Deed). <span class="heat">$500+: <img src="Art/Fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
         <td class="action-desc">Once per Day, at a controlled Dock: send up to 5 Runners to roll for Havana Rum (0 successes = arrests based on Heat).</td>
       </tr>
@@ -1063,14 +938,14 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Enlist</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse (see Enlist Cost Table on back).</td>
+        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Fortify</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
-      <tr>
+      <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
         <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
@@ -1224,32 +1099,10 @@
         </div>
       </div>
     </div>
-    <!-- ENLIST COST TABLE (FULL WIDTH) -->
-    <div class="job-reward-section">
-       <div class="section-title">Enlist Cost Table</div>
-       <table class="job-table enlist-table">
-           <thead>
-               <tr>
-                   <th>Runners</th>
-                   <th>1</th>
-                   <th>2</th>
-                   <th>3</th>
-                   <th>4</th>
-                   <th>5</th>
-               </tr>
-           </thead>
-           <tbody>
-               <tr><td><strong>Standard</strong></td><td>$300</td><td>$600</td><td>$900</td><td>$1200</td><td>$1500</td></tr>
-               <tr><td><strong>Ward Boss</strong></td><td>$200</td><td>$400</td><td>$600</td><td>$800</td><td>$1000</td></tr>
-           </tbody>
-       </table>
-       <div class="commission-req"><strong>Base Cost:</strong> $300 per Runner. If you hold Ward Boss, Enlist costs $200 per Runner.</div>
-    </div>
-
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
       <div class="endgame-header">Winning the Game</div>
-      <strong>Commission:</strong> Gig + Racket + Score, all 4 Favors, <b>or</b> all 4 Cartels.<br>
+      <strong>Commission:</strong> Complete 1 Gig, 1 Racket, and 1 Score.<br>
       <strong>Victory:</strong> Commission Card + <b>20 Respect</b>. Tie? Most Cash.
     </div>
   </div>
@@ -1285,11 +1138,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Extort</td>
-        <td class="action-desc">$200 per Controlled District in a Borough you hold the Deed for (once per Day per Deed). <span class="heat">$500+: <img src="Art/Fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
         <td class="action-desc">Once per Day, at a controlled Dock: send up to 5 Runners to roll for Havana Rum (0 successes = arrests based on Heat).</td>
       </tr>
@@ -1317,14 +1165,14 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Enlist</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse (see Enlist Cost Table on back).</td>
+        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Fortify</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
-      <tr>
+      <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
         <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
@@ -1479,32 +1327,10 @@
         </div>
       </div>
     </div>
-    <!-- ENLIST COST TABLE (FULL WIDTH) -->
-    <div class="job-reward-section">
-       <div class="section-title">Enlist Cost Table</div>
-       <table class="job-table enlist-table">
-           <thead>
-               <tr>
-                   <th>Runners</th>
-                   <th>1</th>
-                   <th>2</th>
-                   <th>3</th>
-                   <th>4</th>
-                   <th>5</th>
-               </tr>
-           </thead>
-           <tbody>
-               <tr><td><strong>Standard</strong></td><td>$300</td><td>$600</td><td>$900</td><td>$1200</td><td>$1500</td></tr>
-               <tr><td><strong>Ward Boss</strong></td><td>$200</td><td>$400</td><td>$600</td><td>$800</td><td>$1000</td></tr>
-           </tbody>
-       </table>
-       <div class="commission-req"><strong>Base Cost:</strong> $300 per Runner. If you hold Ward Boss, Enlist costs $200 per Runner.</div>
-    </div>
-
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
       <div class="endgame-header">Winning the Game</div>
-      <strong>Commission:</strong> Gig + Racket + Score, all 4 Favors, <b>or</b> all 4 Cartels.<br>
+      <strong>Commission:</strong> Complete 1 Gig, 1 Racket, and 1 Score.<br>
       <strong>Victory:</strong> Commission Card + <b>20 Respect</b>. Tie? Most Cash.
     </div>
   </div>
