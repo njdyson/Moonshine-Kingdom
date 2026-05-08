@@ -600,3 +600,58 @@ body {
   line-height: 1;
   color: #f5e9d9;
 }
+
+.favor-cards .card {
+  padding: 5px;
+}
+
+.favor-cards .card-header {
+  min-height: 10mm;
+  margin-bottom: 3px;
+  padding-bottom: 1px;
+}
+
+.favor-cards .venue {
+  margin: 1px 0 0;
+  padding-right: 0;
+  font-size: 1.2em;
+  line-height: 1;
+  text-align: center;
+}
+
+.favor-cards .speakeasy-image {
+  flex: 0 0 210px;
+  min-height: 210px;
+  margin-bottom: 3px;
+  background-position: center top;
+}
+
+.favor-cards .venue-name-box {
+  margin: 4px;
+  padding: 3px;
+}
+
+.favor-cards .venue-name-text {
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+.favor-cards .favor-ability {
+  margin: 0;
+  padding: 4px 2px 0;
+  border-top: none;
+  color: #f5e9d9;
+  font-size: 0.78em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.13;
+}
+
+.favor-cards .favor-ability span {
+  display: block;
+  margin-top: 5px;
+  padding-top: 3px;
+  border-top: 1px dashed #555;
+  color: #d4af37;
+  font-weight: 700;
+}

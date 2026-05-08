@@ -112,6 +112,18 @@ h4 {
     display: inline-block;
 }
 
+h5 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11pt;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    border-left: 3px solid var(--accent-dim);
+    padding-left: 7px;
+    margin-top: 0.35em;
+    margin-bottom: 0.25em;
+}
+
 /* Glossary icon tint */
 .icon-gold {
     filter: invert(76%) sepia(30%) saturate(930%) hue-rotate(4deg) brightness(95%) contrast(92%);
