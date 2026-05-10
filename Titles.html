@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Titles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/cards.css">
+  <style>
+    .title-card .card-header {
+      min-height: 14mm;
+      margin-bottom: 5px;
+      padding: 2px 2px 1px;
+    }
+
+    .title-card .mission-name {
+      margin: 2px;
+      margin-top: 3px;
+      font-size: 1.35em;
+    }
+
+    .title-card .borough-content {
+      justify-content: flex-start;
+    }
+
+    .title-card .borough-image {
+      flex: 0 0 52mm;
+      width: auto;
+      height: 52mm;
+      min-height: 52mm;
+      margin-bottom: 5px;
+    }
+
+    .title-card .respect-badge[data-respect="2"] {
+      background-image: url('Art/shield2-unified.png');
+    }
+
+    .title-footer {
+      padding: 4px 5px 0;
+      border-top: none;
+      font-style: normal;
+      line-height: 1.15;
+    }
+
+    .title-action {
+      display: block;
+      margin: 0;
+      font-size: 1em;
+      line-height: 1.14;
+    }
+
+    .title-heat {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      color: #d4af37;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .title-heat .icon {
+      filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
+      width: 1.25em;
+      height: 1.25em;
+      vertical-align: middle;
+    }
+
+    .cartel-back {
+      background-image: url('Art/Cartel.png');
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sheet 1: Borough Deeds -->
+  <div class="page">
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Manhattan</h2><span class="respect-badge" data-respect="3">3</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Manhattan.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Extort (1 Action):</strong> Once per Day, earn $200 per District you Control in Manhattan. <span class="title-heat">$500+ <img src="Art/Fire.svg" class="icon" alt="Heat"></span></span></div>
+      </div>
+    </div>
+
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">The Bronx</h2><span class="respect-badge" data-respect="3">3</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Bronx.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Extort (1 Action):</strong> Once per Day, earn $200 per District you Control in The Bronx. <span class="title-heat">$500+ <img src="Art/Fire.svg" class="icon" alt="Heat"></span></span></div>
+      </div>
+    </div>
+
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Queens</h2><span class="respect-badge" data-respect="3">3</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Queens.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Extort (1 Action):</strong> Once per Day, earn $200 per District you Control in Queens. <span class="title-heat">$500+ <img src="Art/Fire.svg" class="icon" alt="Heat"></span></span></div>
+      </div>
+    </div>
+
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Brooklyn</h2><span class="respect-badge" data-respect="3">3</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Brooklyn.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Extort (1 Action):</strong> Once per Day, earn $200 per District you Control in Brooklyn. <span class="title-heat">$500+ <img src="Art/Fire.svg" class="icon" alt="Heat"></span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">DEED</h3></div></div>
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">DEED</h3></div></div>
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">DEED</h3></div></div>
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">DEED</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Sheet 2: Remaining Titles -->
+  <div class="page">
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Staten Island</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Staten.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Extort (1 Action):</strong> Once per Day, earn $200 per District you Control in Staten Island. <span class="title-heat">$500+ <img src="Art/Fire.svg" class="icon" alt="Heat"></span></span></div>
+      </div>
+    </div>
+
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Ward Boss</h2><span class="respect-badge" data-respect="3">3</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Ward.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action">While you hold Ward Boss, Enlist costs <strong>$200 per Runner.</strong></span></div>
+      </div>
+    </div>
+
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">The Gin Cartel</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Gin.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Fix (1 Action):</strong> Set Gin's Market Value between $200 and $200 + $100 per Gin Joint you Control.</span></div>
+      </div>
+    </div>
+
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">The Whisky Cartel</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Whisky.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Fix (1 Action):</strong> Set Whisky's Market Value between $200 and $200 + $100 per Whisky Bar you Control.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">DEED</h3></div></div>
+    <div class="card-back ghetto-back"><div class="back-title-box"><h3 class="back-title">WARD BOSS</h3></div></div>
+    <div class="card-back cartel-back"><div class="back-title-box"><h3 class="back-title">CARTEL</h3></div></div>
+    <div class="card-back cartel-back"><div class="back-title-box"><h3 class="back-title">CARTEL</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Sheet 3: Remaining Cartels -->
+  <div class="page">
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">The Moonshine Cartel</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Moonshine.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Fix (1 Action):</strong> Set Moonshine's Market Value between $200 and $200 + $100 per Moonshine Den you Control.</span></div>
+      </div>
+    </div>
+
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">The Rum Cartel</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Rum.png');"></div>
+        <div class="card-footer-text title-footer"><span class="title-action"><strong>Fix (1 Action):</strong> Set Rum's Market Value between $200 and $200 + $100 per Rum Club you Control.</span></div>
+      </div>
+    </div>
+
+    <div class="card blank"></div>
+    <div class="card blank"></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back cartel-back"><div class="back-title-box"><h3 class="back-title">CARTEL</h3></div></div>
+    <div class="card-back cartel-back"><div class="back-title-box"><h3 class="back-title">CARTEL</h3></div></div>
+    <div class="card blank"></div>
+    <div class="card blank"></div>
+  </div>
+</body>
+
+</html>
