@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom: Mob Playbooks v3.3</title>
+  <title>Moonshine Kingdom: Mob Playbooks v4.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
     *,
@@ -262,14 +262,14 @@
         font-size: 0.74em;
     }
 
-    /* Ferocity Table (Now in left col) */
-    .ferocity-bonus-table {
+    /* Threat Table (Now in left col) */
+    .threat-bonus-table {
       margin-top: 0;
       margin-bottom: 4px;
       font-size: 0.74em;
     }
 
-    .ferocity-bonus-table td {
+    .threat-bonus-table td {
       padding: 2px 4px;
       vertical-align: middle;
       border-color: #555;
@@ -481,18 +481,18 @@
     <table>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Enlist</td>
+        <td class="action-name">Recruit</td>
         <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Fortify</td>
+        <td class="action-name">Secure</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
-        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
+        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Secure for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -500,7 +500,7 @@
       <tr class="special-action">
         <td class="action-cost">2</td>
         <td class="action-name">Capo</td>
-        <td class="action-desc">Promote Runner to a 2nd Boss. +2 Ferocity together.</td>
+        <td class="action-desc">Promote Runner to a 2nd Boss. +2 Threat together.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">1</td>
@@ -550,7 +550,7 @@
         <table>
           <thead>
             <tr>
-              <th>Ferocity / Network Level</th>
+              <th>Threat / Network Level</th>
               <th>Success On Roll</th>
             </tr>
           </thead>
@@ -582,19 +582,19 @@
       <!-- LEFT COLUMN: Bonuses & Ambush -->
       <div class="middle-col">
         <div class="section-title">Combat Bonuses</div>  
-        <table class="ferocity-bonus-table">
+        <table class="threat-bonus-table">
             <tbody>
               <tr>
                 <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Ferocity with Boss.</td>
+                <td>+1 Threat with Boss.</td>
               </tr>
               <tr>
                 <td><strong>Safehouse</strong></td>
-                <td>+2 Ferocity Defending.</td>
+                <td>+2 Threat Defending.</td>
               </tr>
               <tr>
                 <td><strong>Ambush</strong></td>
-                <td>+1 Ferocity First Roll.</td>
+                <td>+1 Threat First Roll.</td>
               </tr>
             </tbody>
         </table>
@@ -607,7 +607,7 @@
           </div>
           <div class="flow-step">
             <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Attack</b> (+1 Ferocity) OR <b>Hold Fire</b>.</span>
+            <span>Rival may <b>Attack</b> (+1 Threat) OR <b>Hold Fire</b>.</span>
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
@@ -627,7 +627,7 @@
           <div class="flow-step">
             <strong>2. Fines + Arrests</strong><br>
             Pay <b>$500 per hit Still</b> (or take Shylock's Mark).<br>
-            The Street Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
+            The Muscle Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
           </div>
 
           <div class="flow-step">
@@ -708,18 +708,18 @@
     <table>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Enlist</td>
+        <td class="action-name">Recruit</td>
         <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Fortify</td>
+        <td class="action-name">Secure</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
-        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
+        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Secure for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -778,7 +778,7 @@
         <table>
           <thead>
             <tr>
-              <th>Ferocity / Network Level</th>
+              <th>Threat / Network Level</th>
               <th>Success On Roll</th>
             </tr>
           </thead>
@@ -810,19 +810,19 @@
       <!-- LEFT COLUMN: Bonuses & Ambush -->
       <div class="middle-col">
         <div class="section-title">Combat Bonuses</div>  
-        <table class="ferocity-bonus-table">
+        <table class="threat-bonus-table">
             <tbody>
               <tr>
                 <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Ferocity with Boss.</td>
+                <td>+1 Threat with Boss.</td>
               </tr>
               <tr>
                 <td><strong>Safehouse</strong></td>
-                <td>+2 Ferocity Defending.</td>
+                <td>+2 Threat Defending.</td>
               </tr>
               <tr>
                 <td><strong>Ambush</strong></td>
-                <td>+1 Ferocity First Roll.</td>
+                <td>+1 Threat First Roll.</td>
               </tr>
             </tbody>
         </table>
@@ -835,7 +835,7 @@
           </div>
           <div class="flow-step">
             <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Attack</b> (+1 Ferocity) OR <b>Hold Fire</b>.</span>
+            <span>Rival may <b>Attack</b> (+1 Threat) OR <b>Hold Fire</b>.</span>
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
@@ -855,7 +855,7 @@
           <div class="flow-step">
             <strong>2. Fines + Arrests</strong><br>
             Pay <b>$500 per hit Still</b> (or take Shylock's Mark).<br>
-            The Street Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
+            The Muscle Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
           </div>
 
           <div class="flow-step">
@@ -937,18 +937,18 @@
     <table>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Enlist</td>
+        <td class="action-name">Recruit</td>
         <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Fortify</td>
+        <td class="action-name">Secure</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
-        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
+        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Secure for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -1006,7 +1006,7 @@
         <table>
           <thead>
             <tr>
-              <th>Ferocity / Network Level</th>
+              <th>Threat / Network Level</th>
               <th>Success On Roll</th>
             </tr>
           </thead>
@@ -1038,19 +1038,19 @@
       <!-- LEFT COLUMN: Bonuses & Ambush -->
       <div class="middle-col">
         <div class="section-title">Combat Bonuses</div>  
-        <table class="ferocity-bonus-table">
+        <table class="threat-bonus-table">
             <tbody>
               <tr>
                 <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Ferocity with Boss.</td>
+                <td>+1 Threat with Boss.</td>
               </tr>
               <tr>
                 <td><strong>Safehouse</strong></td>
-                <td>+2 Ferocity Defending.</td>
+                <td>+2 Threat Defending.</td>
               </tr>
               <tr>
                 <td><strong>Ambush</strong></td>
-                <td>+1 Ferocity First Roll.</td>
+                <td>+1 Threat First Roll.</td>
               </tr>
             </tbody>
         </table>
@@ -1063,7 +1063,7 @@
           </div>
           <div class="flow-step">
             <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Attack</b> (+1 Ferocity) OR <b>Hold Fire</b>.</span>
+            <span>Rival may <b>Attack</b> (+1 Threat) OR <b>Hold Fire</b>.</span>
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
@@ -1083,7 +1083,7 @@
           <div class="flow-step">
             <strong>2. Fines + Arrests</strong><br>
             Pay <b>$500 per hit Still</b> (or take Shylock's Mark).<br>
-            The Street Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
+            The Muscle Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
           </div>
 
           <div class="flow-step">
@@ -1164,18 +1164,18 @@
     <table>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Enlist</td>
+        <td class="action-name">Recruit</td>
         <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each, or $200 each if you hold Ward Boss.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Fortify</td>
+        <td class="action-name">Secure</td>
         <td class="action-desc">Place or relocate a Safehouse in a controlled District for $500.</td>
       </tr>
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Crown</td>
-        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Fortify for free.</td>
+        <td class="action-desc">Boss dead? Appoint a new one in any safe district. <b>HQ:</b> Secure for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -1183,7 +1183,7 @@
       <tr class="special-action">
         <td class="action-cost">0</td>
         <td class="action-name">Courage</td>
-        <td class="action-desc">Before you roll in a fight, discard 1 of your barrels in that District to gain +1 Ferocity for that roll (max 4).</td>
+        <td class="action-desc">Before you roll in a fight, discard 1 of your barrels in that District to gain +1 Threat for that roll (max 4).</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">1</td>
@@ -1234,7 +1234,7 @@
         <table>
           <thead>
             <tr>
-              <th>Ferocity / Network Level</th>
+              <th>Threat / Network Level</th>
               <th>Success On Roll</th>
             </tr>
           </thead>
@@ -1266,19 +1266,19 @@
       <!-- LEFT COLUMN: Bonuses & Ambush -->
       <div class="middle-col">
         <div class="section-title">Combat Bonuses</div>  
-        <table class="ferocity-bonus-table">
+        <table class="threat-bonus-table">
             <tbody>
               <tr>
                 <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Ferocity with Boss.</td>
+                <td>+1 Threat with Boss.</td>
               </tr>
               <tr>
                 <td><strong>Safehouse</strong></td>
-                <td>+2 Ferocity Defending.</td>
+                <td>+2 Threat Defending.</td>
               </tr>
               <tr>
                 <td><strong>Ambush</strong></td>
-                <td>+1 Ferocity First Roll.</td>
+                <td>+1 Threat First Roll.</td>
               </tr>
             </tbody>
         </table>
@@ -1291,7 +1291,7 @@
           </div>
           <div class="flow-step">
             <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Attack</b> (+1 Ferocity) OR <b>Hold Fire</b>.</span>
+            <span>Rival may <b>Attack</b> (+1 Threat) OR <b>Hold Fire</b>.</span>
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
@@ -1311,7 +1311,7 @@
           <div class="flow-step">
             <strong>2. Fines + Arrests</strong><br>
             Pay <b>$500 per hit Still</b> (or take Shylock's Mark).<br>
-            The Street Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
+            The Muscle Ratio by hit Stills: <b>1-2=1</b>, <b>3-4=2</b>, <b>5-6=3</b> arrests.
           </div>
 
           <div class="flow-step">

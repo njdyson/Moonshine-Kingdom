@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moonshine Kingdom - Brew Roll Simulator</title>
+  <title>Moonshine Kingdom - Brew Roll Simulator v4.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -139,12 +139,12 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .priority-list {
+    .turn-list {
       display: grid;
       gap: 6px;
     }
 
-    .priority-row {
+    .turn-row {
       display: grid;
       grid-template-columns: 28px 1fr 56px 26px 26px;
       gap: 6px;
@@ -156,18 +156,18 @@
       font-size: 0.78rem;
     }
 
-    .priority-row .pos {
+    .turn-row .pos {
       color: var(--gold);
       font-weight: 800;
       text-align: center;
       font-variant-numeric: tabular-nums;
     }
 
-    .priority-row .name {
+    .turn-row .name {
       font-weight: 700;
     }
 
-    .priority-row .count {
+    .turn-row .count {
       text-align: right;
       color: var(--gold);
       font-weight: 800;
@@ -176,7 +176,7 @@
       font-size: 0.74rem;
     }
 
-    .priority-row button {
+    .turn-row button {
       width: 24px;
       height: 24px;
       padding: 0;
@@ -771,10 +771,10 @@
 
         <div class="control-group">
           <div class="control-head">
-            <span>Priority Order</span>
+            <span>Turn Order</span>
             <strong>Move Up/Down</strong>
           </div>
-          <div id="priorityList" class="priority-list"></div>
+          <div id="turnList" class="turn-list"></div>
         </div>
 
         <div class="control-group">
@@ -841,7 +841,7 @@
       playerCount: 4,
       market: { ...MARKET_DEFAULTS },
       randomAssignCount: 9,
-      priorityOrder: [0, 1, 2, 3],
+      turnOrder: [0, 1, 2, 3],
       stills: [],
       dice: {
         white: [],
@@ -861,7 +861,7 @@
       marketGinValue: document.getElementById("marketGinValue"),
       marketWhisky: document.getElementById("marketWhisky"),
       marketWhiskyValue: document.getElementById("marketWhiskyValue"),
-      priorityList: document.getElementById("priorityList"),
+      turnList: document.getElementById("turnList"),
       randomAssignCount: document.getElementById("randomAssignCount"),
       randomAssignCountValue: document.getElementById("randomAssignCountValue"),
       rollDiceBtn: document.getElementById("rollDiceBtn"),
@@ -902,17 +902,17 @@
       return MOB_CLASSES[index] || "";
     }
 
-    function getActivePriorityOrder() {
-      return state.priorityOrder.slice(0, state.playerCount);
+    function getActiveTurnOrder() {
+      return state.turnOrder.slice(0, state.playerCount);
     }
 
-    function renderPriorityList() {
-      els.priorityList.innerHTML = "";
-      const active = getActivePriorityOrder();
+    function renderTurnList() {
+      els.turnList.innerHTML = "";
+      const active = getActiveTurnOrder();
       const totals = getMobTotals();
       active.forEach((mobIndex, pos) => {
         const row = document.createElement("div");
-        row.className = "priority-row";
+        row.className = "turn-row";
         row.innerHTML =
           '<div class="pos">' + (pos + 1) + "</div>" +
           '<div class="name mob-name ' + mobClass(mobIndex) + '">' + mobName(mobIndex) + "</div>" +
@@ -922,28 +922,28 @@
         up.type = "button";
         up.textContent = "Up";
         up.disabled = pos === 0;
-        up.addEventListener("click", () => movePriority(pos, -1));
+        up.addEventListener("click", () => moveTurn(pos, -1));
 
         const down = document.createElement("button");
         down.type = "button";
         down.textContent = "Dn";
         down.disabled = pos === active.length - 1;
-        down.addEventListener("click", () => movePriority(pos, 1));
+        down.addEventListener("click", () => moveTurn(pos, 1));
 
         row.appendChild(up);
         row.appendChild(down);
-        els.priorityList.appendChild(row);
+        els.turnList.appendChild(row);
       });
     }
 
-    function movePriority(pos, dir) {
+    function moveTurn(pos, dir) {
       const activeCount = state.playerCount;
       const target = pos + dir;
       if (target < 0 || target >= activeCount) return;
-      const tmp = state.priorityOrder[pos];
-      state.priorityOrder[pos] = state.priorityOrder[target];
-      state.priorityOrder[target] = tmp;
-      renderPriorityList();
+      const tmp = state.turnOrder[pos];
+      state.turnOrder[pos] = state.turnOrder[target];
+      state.turnOrder[target] = tmp;
+      renderTurnList();
       updateDistillationView();
     }
 
@@ -971,7 +971,7 @@
           still.mobsters[i] = 0;
         }
       });
-      renderPriorityList();
+      renderTurnList();
       renderStills();
       updateDistillationView();
     }
@@ -1073,7 +1073,7 @@
     function renderPickGrid() {
       els.pickGrid.innerHTML = "";
       els.pickGrid.style.gridTemplateColumns = "repeat(" + state.playerCount + ", minmax(150px, 1fr))";
-      const activeOrder = getActivePriorityOrder();
+      const activeOrder = getActiveTurnOrder();
 
       for (let i = 0; i < state.playerCount; i += 1) {
         const slotMobIndex = activeOrder[i] !== undefined ? activeOrder[i] : i;
@@ -1249,7 +1249,7 @@
 
     function renderStills(activeTargets = null) {
       els.stillsGrid.innerHTML = "";
-      renderPriorityList();
+      renderTurnList();
       const matrix = document.createElement("table");
       matrix.className = "stills-matrix";
 
@@ -1404,7 +1404,7 @@
       state.stills.forEach((still) => {
         still.mobsters = [0, 0, 0, 0];
       });
-      const active = getActivePriorityOrder();
+      const active = getActiveTurnOrder();
       const available = state.stills.map((_, idx) => idx);
 
       active.forEach((mobIndex, pos) => {
@@ -1427,7 +1427,7 @@
       els.randomAssignCountValue.textContent = String(n);
     }
 
-    function renderRollTotalsTable(pickSummaries, totalByMob, breakdownSummary) {
+    function renderRollTotalsTable(pickSummaries, totalByMob, blowbackSummary) {
       const grid = document.createElement("div");
       grid.className = "pick-results-grid";
       grid.style.gridTemplateColumns = "repeat(" + state.playerCount + ", minmax(150px, 1fr))";
@@ -1465,27 +1465,27 @@
         grid.appendChild(card);
       }
 
-      if (breakdownSummary) {
-        const breakdownCard = document.createElement("div");
-        breakdownCard.className = "pick-result-card total";
-        breakdownCard.innerHTML =
-          '<div class="pick-result-title">Breakdown (Target ' + breakdownSummary.target + ")</div>" +
-          '<div class="pick-detail">Leftover White ' + breakdownSummary.white + " + Red " + breakdownSummary.red + "</div>";
+      if (blowbackSummary) {
+        const blowbackCard = document.createElement("div");
+        blowbackCard.className = "pick-result-card total";
+        blowbackCard.innerHTML =
+          '<div class="pick-result-title">Blowback (Target ' + blowbackSummary.target + ")</div>" +
+          '<div class="pick-detail">Leftover White ' + blowbackSummary.white + " + Red " + blowbackSummary.red + "</div>";
 
         for (let mob = 0; mob < state.playerCount; mob += 1) {
           const row = document.createElement("div");
           row.className = "pick-result-row";
-          const data = breakdownSummary.mobTotals[mob];
+          const data = blowbackSummary.mobTotals[mob];
           row.innerHTML =
             '<div class="pick-result-head">' +
               '<span class="mob-name ' + mobClass(mob) + '">' + mobName(mob) + "</span>" +
               '<span class="stats">' + data.killed + " killed</span>" +
             "</div>" +
             '<div class="pick-detail">' + data.exposed + " mobster" + (data.exposed === 1 ? "" : "s") + " exposed at matching stills</div>";
-          breakdownCard.appendChild(row);
+          blowbackCard.appendChild(row);
         }
 
-        grid.appendChild(breakdownCard);
+        grid.appendChild(blowbackCard);
       }
 
       const totalCard = document.createElement("div");
@@ -1583,7 +1583,7 @@
         }
       });
 
-      let breakdownSummary = null;
+      let blowbackSummary = null;
       const highlightTargets = new Map(targetCounts);
       if (state.dice.picks.length === state.playerCount) {
         const whiteIndex = getRemainingDieIndex("white");
@@ -1592,7 +1592,7 @@
           const white = state.dice.white[whiteIndex];
           const red = state.dice.red[redIndex];
           const target = white + red;
-          breakdownSummary = {
+          blowbackSummary = {
             white,
             red,
             target,
@@ -1601,7 +1601,7 @@
           highlightTargets.set(target, (highlightTargets.get(target) || 0) + 1);
 
           for (let mob = 0; mob < state.playerCount; mob += 1) {
-            breakdownSummary.mobTotals.push({ exposed: 0, killed: 0 });
+            blowbackSummary.mobTotals.push({ exposed: 0, killed: 0 });
           }
 
           state.stills.forEach((still) => {
@@ -1610,8 +1610,8 @@
               const crew = still.mobsters[mob];
               const killed = Math.min(crew, barrelsFromCrew(crew));
               if (crew > 0) {
-                breakdownSummary.mobTotals[mob].exposed += crew;
-                breakdownSummary.mobTotals[mob].killed += killed;
+                blowbackSummary.mobTotals[mob].exposed += crew;
+                blowbackSummary.mobTotals[mob].killed += killed;
               }
             }
           });
@@ -1619,7 +1619,7 @@
       }
 
       els.mobResults.innerHTML = "";
-      els.mobResults.appendChild(renderRollTotalsTable(pickSummaries, mobTotals, breakdownSummary));
+      els.mobResults.appendChild(renderRollTotalsTable(pickSummaries, mobTotals, blowbackSummary));
 
       renderStills(highlightTargets);
     }

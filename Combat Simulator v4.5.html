@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moonshine Kingdom - Combat Monte Carlo Simulator</title>
+  <title>Moonshine Kingdom - Combat Monte Carlo Simulator v4.5</title>
   <style>
     :root {
       --bg: #151210;
@@ -304,7 +304,7 @@
 </head>
 <body>
   <div class="app">
-    <h1>Combat Simulator (Monte Carlo)</h1>
+    <h1>Combat Simulator v4.5 (Monte Carlo)</h1>
 
     <section class="layout">
       <aside class="panel">
@@ -557,15 +557,15 @@
       return 5;
     }
 
-    function killThreshold(ferocityLevel) {
-      if (ferocityLevel >= 4) return 2;
-      if (ferocityLevel === 3) return 3;
-      if (ferocityLevel === 2) return 4;
+    function killThreshold(threatLevel) {
+      if (threatLevel >= 4) return 2;
+      if (threatLevel === 3) return 3;
+      if (threatLevel === 2) return 4;
       return 5;
     }
 
-    function hitsFromRoll(dice, ferocityLevel) {
-      const threshold = killThreshold(ferocityLevel);
+    function hitsFromRoll(dice, threatLevel) {
+      const threshold = killThreshold(threatLevel);
       let hits = 0;
       for (let i = 0; i < dice.length; i += 1) {
         if (dice[i] >= threshold) hits += 1;
@@ -596,20 +596,20 @@
       return clamp(baseDice + 1, 0, 5);
     }
 
-    function ferocityForAmbush(occupier) {
+    function threatForAmbush(occupier) {
       let level = 1;
       level += occupier.bosses;
       level += 1;
       return clamp(level, 1, 4);
     }
 
-    function ferocityForAssaultInvader(invader) {
+    function threatForAssaultInvader(invader) {
       let level = 1;
       level += invader.bosses;
       return clamp(level, 1, 4);
     }
 
-    function ferocityForAssaultOccupier(occupier) {
+    function threatForAssaultOccupier(occupier) {
       let level = 1;
       level += occupier.bosses;
       if (occupier.safehouse) level += 2;
@@ -712,11 +712,11 @@
       let occupierFirepowerUses = 0;
 
       if (!config.invader.stealth && alive(invader) && alive(occupier)) {
-        const occFerocity = ferocityForAmbush(occupier);
+        const occThreat = threatForAmbush(occupier);
         if (config.occupier.firepower) occupierFirepowerUses += 1;
         const occDiceCount = attackDiceCount(occupier, config.occupier.firepower);
         const occRoll = rollDice(occDiceCount);
-        const occHits = hitsFromRoll(occRoll, occFerocity);
+        const occHits = hitsFromRoll(occRoll, occThreat);
         const kills = applyCasualties(invader, occHits);
         ambushKills += kills;
       }
@@ -724,15 +724,15 @@
       while (alive(invader) && alive(occupier) && rounds < config.maxRounds) {
         rounds += 1;
 
-        const invFerocity = ferocityForAssaultInvader(invader);
-        const occFerocity = ferocityForAssaultOccupier(occupier);
+        const invThreat = threatForAssaultInvader(invader);
+        const occThreat = threatForAssaultOccupier(occupier);
         if (config.invader.firepower) invaderFirepowerUses += 1;
         const invDiceCount = attackDiceCount(invader, config.invader.firepower);
         const occDiceCount = attackDiceCount(occupier, false);
         const invRoll = rollDice(invDiceCount);
         const occRoll = rollDice(occDiceCount);
-        const invHits = hitsFromRoll(invRoll, invFerocity);
-        const occHits = hitsFromRoll(occRoll, occFerocity);
+        const invHits = hitsFromRoll(invRoll, invThreat);
+        const occHits = hitsFromRoll(occRoll, occThreat);
 
         const occKills = applyCasualties(occupier, invHits);
         const invKills = applyCasualties(invader, occHits);
