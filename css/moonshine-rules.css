@@ -275,6 +275,39 @@ img {
     print-color-adjust: exact;
 }
 
+.single-column-block {
+    column-span: all;
+    break-inside: avoid;
+}
+
+.currencies-hero img {
+    height: 310px;
+    object-fit: cover;
+    object-position: center 18%;
+}
+
+.currencies-page {
+    position: relative;
+    padding-bottom: 315px;
+}
+
+.currency-board {
+    position: absolute;
+    left: 60px;
+    right: 60px;
+    bottom: 60px;
+    margin: 0;
+    text-align: center;
+}
+
+.currency-board img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+}
+
 .note {
     background-color: rgba(212, 175, 55, 0.1);
     border: 1px solid var(--accent-gold);
@@ -636,6 +669,15 @@ img {
         column-count: 1;
         column-gap: 0;
         column-rule: none;
+    }
+
+    .currencies-page {
+        padding-bottom: 32px;
+    }
+
+    .currency-board {
+        position: static;
+        margin-top: 24px;
     }
 }
 
