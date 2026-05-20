@@ -230,6 +230,43 @@ tr:nth-child(even) {
     font-size: 8.5pt;
 }
 
+.muscle-ratio-table {
+    display: grid;
+    grid-template-columns: 1fr 1.45fr 1.15fr;
+    width: 100%;
+    margin: 0.35em 0 0.6em;
+    font-size: 8pt;
+    line-height: 1.15;
+    break-inside: avoid;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid var(--accent-dim);
+    border-left: 1px solid var(--accent-dim);
+}
+
+.muscle-ratio-table .ratio-title {
+    grid-column: 1 / -1;
+    padding: 3px 5px;
+    background-color: var(--table-header);
+    color: var(--accent-gold);
+    font-family: var(--font-display);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-right: 1px solid var(--accent-dim);
+    border-bottom: 2px solid var(--accent-gold);
+}
+
+.muscle-ratio-table .ratio-cell {
+    padding: 3px 5px;
+    border-right: 1px solid var(--accent-dim);
+    border-bottom: 1px solid var(--accent-dim);
+}
+
+.muscle-ratio-table .ratio-head {
+    background-color: #222;
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
 /* Specific fix for the Action Table column widths */
 .action-table th:first-child,
 .action-table td:first-child {
@@ -620,9 +657,29 @@ img {
     .container > h2,
     .container > h1,
     .cover,
-    .action-table,
-    table {
+    .action-table:not(.muscle-ratio-table),
+    table:not(.muscle-ratio-table) {
         column-span: all;
+    }
+
+    .shadows-page .muscle-ratio-table {
+        column-span: none;
+        -webkit-column-span: none;
+        width: 100%;
+        margin: 0.35em 0 0.6em;
+        break-inside: avoid;
+    }
+
+    .shadows-page .column-table {
+        break-inside: avoid;
+        margin: 0.35em 0 0.6em;
+    }
+
+    .shadows-page .muscle-ratio-table th,
+    .shadows-page .muscle-ratio-table td {
+        padding: 3px 5px;
+        font-size: 8pt;
+        line-height: 1.15;
     }
 
     .page-break + h1,
@@ -753,8 +810,8 @@ img {
     .container > h2, 
     .container > h1, 
     .cover,
-    .action-table,
-    table {
+    .action-table:not(.muscle-ratio-table),
+    table:not(.muscle-ratio-table) {
         column-span: all;
     }
 
@@ -863,6 +920,26 @@ img {
     .goal-page ol.sub-section > li,
     .shadows-page ol.sub-section > li {
         margin-bottom: 2px;
+    }
+
+    .shadows-page .muscle-ratio-table {
+        column-span: none;
+        -webkit-column-span: none;
+        width: 100%;
+        margin: 0.35em 0 0.6em;
+        break-inside: avoid;
+    }
+
+    .shadows-page .column-table {
+        break-inside: avoid;
+        margin: 0.35em 0 0.6em;
+    }
+
+    .shadows-page .muscle-ratio-table th,
+    .shadows-page .muscle-ratio-table td {
+        padding: 3px 5px;
+        font-size: 8pt;
+        line-height: 1.15;
     }
 
     .table-pair {

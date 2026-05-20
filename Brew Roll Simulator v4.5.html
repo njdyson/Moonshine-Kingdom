@@ -282,6 +282,11 @@
       background: #1c1511;
     }
 
+    .pick-card.dump {
+      border-color: #7b5b40;
+      background: #211b18;
+    }
+
     .pick-card.pick-w0 {
       border-color: #cfc6b0;
       box-shadow: inset 0 0 0 1px rgba(207, 198, 176, 0.25);
@@ -392,6 +397,32 @@
 
     .pick-remove:hover {
       filter: brightness(1.08);
+    }
+
+    .pick-action-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .pick-mode {
+      padding: 5px 6px;
+      border-radius: 5px;
+      font-size: 0.68rem;
+      background: #2f251d;
+      color: #d9ccb2;
+    }
+
+    .pick-mode.active {
+      border-color: var(--ok);
+      color: #f5f0df;
+      box-shadow: inset 0 0 0 1px rgba(58, 168, 98, 0.35);
+    }
+
+    .pick-mode.dump.active {
+      border-color: #b96e3c;
+      box-shadow: inset 0 0 0 1px rgba(185, 110, 60, 0.38);
     }
 
     .mob-results {
@@ -1047,7 +1078,8 @@
         if (state.dice.picks.length >= state.playerCount) return;
         state.dice.picks.push({
           whiteIndex: getAvailableWhiteForSlot(slotIndex),
-          redIndex
+          redIndex,
+          mode: "produce"
         });
         state.dice.slotWhites[slotIndex] = state.dice.picks[slotIndex].whiteIndex;
       } else {
@@ -1058,6 +1090,13 @@
           state.dice.picks.splice(slotIndex + 1);
         }
       }
+      updateDistillationView();
+    }
+
+    function setPickMode(slotIndex, mode) {
+      const pick = state.dice.picks[slotIndex];
+      if (!pick) return;
+      pick.mode = mode === "dump" ? "dump" : "produce";
       updateDistillationView();
     }
 
@@ -1081,7 +1120,7 @@
         const slotOpen = i <= state.dice.picks.length;
         const whiteIndex = pick ? pick.whiteIndex : getAvailableWhiteForSlot(i);
         const card = document.createElement("div");
-        card.className = "pick-card" + (pick ? " pick-w" + whiteIndex : (slotOpen ? "" : " empty"));
+        card.className = "pick-card" + (pick ? " pick-w" + whiteIndex + (pick.mode === "dump" ? " dump" : "") : (slotOpen ? "" : " empty"));
 
         const head = document.createElement("div");
         head.className = "pick-card-head";
@@ -1147,8 +1186,27 @@
           const target = state.dice.white[pick.whiteIndex] + state.dice.red[pick.redIndex];
           const t = document.createElement("div");
           t.className = "pick-detail";
-          t.innerHTML = "Target: <strong>" + target + "</strong>";
+          t.innerHTML = "Target: <strong>" + target + "</strong> | " + (pick.mode === "dump" ? "Dumped" : "Producing");
           card.appendChild(t);
+
+          const actionRow = document.createElement("div");
+          actionRow.className = "pick-action-row";
+
+          const produceBtn = document.createElement("button");
+          produceBtn.type = "button";
+          produceBtn.className = "pick-mode" + (pick.mode !== "dump" ? " active" : "");
+          produceBtn.textContent = "Produce";
+          produceBtn.addEventListener("click", () => setPickMode(i, "produce"));
+
+          const dumpBtn = document.createElement("button");
+          dumpBtn.type = "button";
+          dumpBtn.className = "pick-mode dump" + (pick.mode === "dump" ? " active" : "");
+          dumpBtn.textContent = "Dump Mash";
+          dumpBtn.addEventListener("click", () => setPickMode(i, "dump"));
+
+          actionRow.appendChild(produceBtn);
+          actionRow.appendChild(dumpBtn);
+          card.appendChild(actionRow);
         } else if (slotOpen) {
           const helper = document.createElement("div");
           helper.className = "pick-help";
@@ -1446,6 +1504,12 @@
         }
 
         card.innerHTML = '<div class="pick-result-title">Pick ' + (i + 1) + " (Target " + pick.target + ")</div>";
+        if (pick.mode === "dump") {
+          card.innerHTML += '<div class="pick-detail">Dumped Mash: dice removed, no Liquor produced, no Stills fire.</div>';
+          grid.appendChild(card);
+          continue;
+        }
+
         for (let mob = 0; mob < state.playerCount; mob += 1) {
           const row = document.createElement("div");
           row.className = "pick-result-row";
@@ -1533,7 +1597,10 @@
         const white = state.dice.white[pick.whiteIndex];
         const red = state.dice.red[pick.redIndex];
         const target = white + red;
-        targetCounts.set(target, (targetCounts.get(target) || 0) + 1);
+        const mode = pick.mode === "dump" ? "dump" : "produce";
+        if (mode !== "dump") {
+          targetCounts.set(target, (targetCounts.get(target) || 0) + 1);
+        }
 
         const perMob = [];
         for (let mob = 0; mob < state.playerCount; mob += 1) {
@@ -1545,6 +1612,7 @@
         }
 
         state.stills.forEach((still) => {
+          if (mode === "dump") return;
           if (still.number !== target) return;
           for (let mob = 0; mob < state.playerCount; mob += 1) {
             const barrels = barrelsFromCrew(still.mobsters[mob]);
@@ -1556,7 +1624,7 @@
           }
         });
 
-        return { white, red, target, mobTotals: perMob };
+        return { white, red, target, mode, mobTotals: perMob };
       });
 
       const activeStills = state.stills.filter((still) => targetCounts.has(still.number));
