@@ -279,7 +279,7 @@
             <li><strong>Runners:</strong> Your foot soldiers. Knuckle-draggers and wheelmen who haul hooch and guard
                 your turf. <b>You are strictly limited to 15 Runners.</b> You cannot build a massive army, and you cannot occupy the whole city. To expand, you must take risks, leave borders thinly guarded, and rely on the <em>threat</em> of violence rather than actual violence.</li>
             <li><strong>Safehouses:</strong> Your fortresses in the chaos. Hidden dens where you stash hooch and
-                <b>Recruit</b> new muscle. They provide cover from Attacks and Police Raids, and allow you to
+                <b>Recruit</b> new muscle. They provide cover from Attacks and allow you to
                 build an
                 efficient supply network.
             </li>
@@ -509,6 +509,8 @@
             <li><strong>Paying for Plays:</strong> Remove the spent marker(s) from your <b>Operations</b> and return
                 them to your
                 <b>Stash</b>. If the Play generates Heat, move the marker to the <b>Heat Track</b> instead.
+                If a two-marker Play generates Heat, choose one of its spent markers to place on the Heat Track and
+                return the other normally.
             </li>
             <li><strong>Laying Low:</strong> When you run out of Influence (or choose to step off the street early), you
                 must <strong>Lay Low</strong>:
@@ -527,7 +529,8 @@
             <tr>
                 <td><strong>Move</strong></td>
                 <td>Move any number of mobsters (carrying max 1 barrel each) to one Connected District. Entering rival
-                    or Police turf triggers Combat.</td>
+                    or Police turf triggers Combat. You may move through Police turf by resolving the Pinned sequence;
+                    any barrels carried into a Police District are seized.</td>
             </tr>
             <tr>
                 <td><strong>Shift</strong> ($100)</td>
@@ -552,7 +555,7 @@
                 <td><strong>Smuggle</strong></td>
                 <td>
                     At a Dock District you Control: Send up to 5 Mobsters from the Dock to roll for Havana Rum
-                    (failed dice = arrests; Runners take the fall first; 3 Rum = 1 Heat).
+                    (failed dice = arrests; Runners take the fall first).
                 </td>
             </tr>
         </table>
@@ -562,9 +565,9 @@
                 <th colspan="2">Title Plays (Cost: 1 Influence)</th>
             </tr>
             <tr>
-                <td><strong>Extort</strong></td>
+                <td><strong>Extort</strong> <img src="Art/Fire.svg" class="icon" alt="Heat"></td>
                 <td><b>Borough Deed required.</b> Once per Day, earn <b>$200</b> per District you Control in that
-                    Borough. Earning <b>$500+</b> generates <b>1 Heat</b>.</td>
+                    Borough. Earning <b>$500+</b> generates Heat.</td>
             </tr>
             <tr>
                 <td><strong>Fix</strong></td>
@@ -591,7 +594,7 @@
 
                     <b>The Kickback:</b> Speakeasies pay in favors for their favorite poison. For every barrel sold that matches the Joint's <b>House Pour</b>, immediately move <b>1 spent Influence marker</b> from your Stash back into an empty slot on your <b>Operations Board</b>. <em>(Note: Your board caps at 5 slots. Any Kickbacks earned beyond your empty slots are wasted).</em><br><br>
 
-                    <b>The Greed Tax:</b> Unloading <b>4+ barrels</b> of any type in a single Play generates <b>1 Heat</b>. <em>Max safe delivery is 3, unless you hold Stephanie St. Clair's Favor.</em>
+                    <b>The Greed Tax:</b> Unloading <b>4+ barrels</b> of any type in a single Play generates Heat. If this Unload was paid for with two different players' markers, you choose which spent marker goes to the Heat Track. <em>Max safe delivery is 3, unless you hold Stephanie St. Clair's Favor.</em>
                 </td>
             </tr>
             <tr>
@@ -669,8 +672,8 @@
         </table>
 
         <h4>East Side Vipers</h4>
-        <p>They move like smoke and strike like snakes. You won't know you're at war until your warehouse is
-            burning.
+        <p>They move like smoke and strike like snakes. You won't know they're there until the shots come from the
+            shadows.
         </p>
         <table class="action-table">
             <tr>
@@ -681,19 +684,17 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>Torch (Cost: 2 Influence)</strong> <img src="Art/Fire.svg" class="icon" alt="Heat"></td>
+                <td><strong>Firepower</strong></td>
                 <td>
-                    Burn down a safehouse in a rival District which has 3 or less mobsters defending it. To
-                    perform this Play, you must have at least one Runner Pinned in the target District. Sacrifice one
-                    of those Pinned Runners; he is removed from the game. The rival's Safehouse is immediately destroyed
-                    (return it to their supply). Any rival mobsters and liquor in the District are unharmed and retain
-                    Control. This Play generates Heat.
+                    Pay $200 per attack to increase your firepower. When you <b>Assault</b> or
+                    <b>Ambush</b>, you roll one additional attack die (up to a maximum of 5). Can't be used when
+                    defending an Assault.
                 </td>
             </tr>
         </table>
 
         <h4>Harlem Knights</h4>
-        <p>Dressed to kill, literally. The Knights write letters with with Chicago Typewriters.</p>
+        <p>Dressed to kill, literally. The Knights hit from the water and leave warehouses burning.</p>
         <table class="action-table">
             <tr>
                 <td><strong>Skiff (Cost: 1 Influence)</strong></td>
@@ -703,11 +704,12 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>Firepower</strong></td>
+                <td><strong>Torch (Cost: 2 Influence)</strong> <img src="Art/Fire.svg" class="icon" alt="Heat"></td>
                 <td>
-                    Pay $200 per attack to increase your firepower. When you <b>Assault</b> or
-                    <b>Ambush</b>, you roll one additional attack die (up to a maximum of 5). Can't be used when
-                    defending an Assault.
+                    Burn down a Safehouse in a rival District. To perform this Play, you must have at least one Runner
+                    Pinned in the target District. Sacrifice one of those Pinned Runners; he is removed from the game.
+                    The rival's Safehouse is immediately destroyed (return it to their supply). Any rival mobsters and
+                    liquor in the District are unharmed and retain Control. This Play generates Heat.
                 </td>
             </tr>
         </table>
@@ -821,27 +823,25 @@
         <ul class="sub-section">
             <li><strong>Blood on the Pavement:</strong> Aggression draws unwanted attention. If the <b>Attacker</b> in
                 a combat Play (the player who initiated Combat) inflicts <b>1 or more kills</b>, they must add 1
-                marker to the Heat track at the conclusion of the Play.
-                <br><em>Note: A multi-round Assault is still a single Play and generates a maximum of 1 Heat.
+                marker <img src="Art/Fire.svg" class="icon" alt="Heat"> to the Heat track at the conclusion of the Play.
+                <br><em>Note: A multi-round Assault is still a single Play and generates Heat only once.
                     Defenders acting in self-defense (during an Ambush or an Assault) never generate Heat.</em>
             </li>
-            <li><strong>Shakedown Gets Loud:</strong> If an <b>Extort</b> Play earns <b>$500+</b>, you generate 1
-                Heat.</li>
+            <li><strong>Shakedown Gets Loud:</strong> If an <b>Extort</b> Play earns <b>$500+</b>, you generate Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
             <li><strong>The Greed Tax:</strong> Triggering The Greed Tax by Unloading <b>4+ barrels</b> generates
-                1 Heat.</li>
-            <li><strong>Torch:</strong> Using the Vipers <b>Torch</b> Play.</li>
+                Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
+            <li><strong>Torch:</strong> Using the Knights <b>Torch</b> Play generates Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
         </ul>
         <h3>Police Raids</h3>
-        <p>A raid is triggered when a player uses the <strong>Rat</strong> Play, or the moment a 5th marker hits the Heat Track (reaching <strong>Boiling Point</strong>). Pause the current turn immediately and roll 2D6. The result targets <b>every</b> matching Still on the board.</p>
+        <p>A raid is triggered when a player uses the <strong>Rat</strong> Play, or the moment a 5th marker hits the Heat Track (reaching <strong>Boiling Point</strong>). Pause the current turn immediately and roll 2D6. The result targets <b>every</b> matching Still on the board. Safehouses do not protect Liquor or mobsters from Police Raids.</p>
 
         <ol class="sub-section">
             <li>
                 <strong>Target Mob Turf (Raids):</strong>
                 For each hit District controlled by a Player:
                 <ul class="sub-section">
-                    <li><strong>Seizures:</strong> All Liquor in the District is confiscated and returned to the supply, unless protected by a Safehouse.</li>
-                    <li><strong>Fines:</strong> The occupying mob must pay a flat fine of <b>$500</b>. If you can't pay, you must take a <b>Shylock's Mark</b> card.</li>
-                    <li><strong>Arrests:</strong> Count the mobsters in the hit District and apply arrests using The Muscle Ratio (<b>1-2 = 1 arrested</b>, <b>3-4 = 2 arrested</b>, <b>5+ = 3 arrested</b>). Safehouses do <strong>not</strong> protect against arrests.</li>
+                    <li><strong>Pay Off the Cops:</strong> Pay a flat <b>$1,000 bribe</b>. The raid is ignored; your mobsters and Liquor remain safe.</li>
+                    <li><strong>Take the Fall:</strong> Pay nothing. All Liquor in the District is confiscated and returned to the supply. Then apply arrests using The Muscle Ratio.</li>
                 </ul>
             </li>
             <li>
@@ -886,9 +886,6 @@
                     <li><strong>Intercepted:</strong> The Coast Guard is on the prowl. For every die that fails to
                         meet the Target Number, <b>1 Mobster</b> is arrested and removed from the board (Runners always
                         take the fall first).
-                    </li>
-                    <li><strong>Making Waves:</strong> If you successfully smuggle <b>3 Rum</b> in a single Play, the
-                        massive shipment draws unwanted attention. You generate <b>1 Heat</b>.
                     </li>
                 </ul>
             </li>
@@ -959,14 +956,13 @@
                 </tbody>
             </table>
         </div><br>
-        <p><b>The Muscle Ratio:</b> These are the same <b>Resolution Tables</b> shown on each Playbook card. Whenever a
-            rule counts a group size to determine a result, the streets pay out by the numbers:
-            <b>1-2 = 1</b>, <b>3-4 = 2</b>, <b>5-6 = 3</b>. Use this for Brewing, Combat, Smuggling, Blowbacks, and
-            Raid arrests.</p>
+        <p><b>Street Math:</b> The same two tables carry the game's math. <b>The Muscle Ratio</b> converts group size
+            into output for Brewing, Blowbacks, Smuggling crew dice, Raid arrests, and Combat dice. The success ladder
+            converts level into target number for both Combat Threat and Smuggling networks.</p>
     </div>
 
     <div class="container">
-        <h2 id="favors">Favors: Deals with the Devils</h2>
+        <h2 id="favors">Favors: Friends with benefits</h2>
         <div class="cover">
             <img src="Art/favors.png" alt="Shylock" height="330px" width="100%">
         </div>
@@ -1195,7 +1191,7 @@
                     <ul class="sub-section" style="margin-top:5px; margin-bottom:5px;">
                         <li><strong>Casualties:</strong> Both sides apply hits (Runners first).
                             Defenders lose Ambush bonus but keep Safehouse/Boss bonuses.</li>
-                        <li><strong>Heat:</strong> If the <strong>Attacker</strong> kills Defenders, gain 1 Heat.
+                        <li><strong>Heat:</strong> If the <strong>Attacker</strong> kills Defenders, gain Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.
                             Defenders gain no Heat for self-defense kills.</li>
                         <li><strong>Repeat:</strong> If both sides stand, remain Pinned. Spend another Influence to Assault again.</li>
                     </ul>
@@ -1342,7 +1338,7 @@
             <h4>5. Victory & Commandeering</h4>
             <ul class="sub-section">
                 <li><strong>Casualties:</strong> The Irish Boss is eliminated. The Knights lose no one this round.</li>
-                <li><strong>Heat:</strong> The Knights killed enemies, so gain <strong>1 Heat</strong>.</li>
+                <li><strong>Heat:</strong> The Knights killed enemies, so gain <strong>Heat</strong> <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
                 <li><strong>Outcome:</strong> The Knights claim the District and choose to
                     <strong>Commandeer</strong> the Safehouse, immediately Securing it with their own Safehouse.
                 </li>
@@ -1365,12 +1361,12 @@
             differences:
         </p>
         <ul class="sub-section">
-            <li><strong>No Warning Shots:</strong> The Police never Ambush, but their blockade is absolute. Any Liquor
-                carried into a Police District is instantly confiscated and returned to the supply. Your mobsters are
-                immediately Pinned.</li>
+            <li><strong>No Warning Shots:</strong> The Police never Ambush, but their blockade is absolute. You may
+                move into Police turf, become Pinned, then Assault, Advance, or Fall Back as normal. Any Liquor carried
+                into a Police District is instantly confiscated and returned to the supply.</li>
             <li><strong>Blue Threat:</strong> Standard Officers defend with Base Threat (Hit on 5+). If the
                 District contains a Precinct, they are heavily armed and defend with Level 3 Threat (Hit on 3+).</li>
-            <li><strong>Killing Cops:</strong> Eliminating Officers generates <b>+1 Heat</b>, exactly like killing
+            <li><strong>Killing Cops:</strong> Eliminating Officers generates Heat <img src="Art/Fire.svg" class="icon" alt="Heat">, exactly like killing
                 rival mobsters.</li>
         </ul>
         <p>
@@ -1378,7 +1374,7 @@
             claim the District and can Commandeer or destroy Precincts exactly like rival Safehouses.
         </p>
         <ul class="sub-section">
-            <li><strong>Torch:</strong> The East Side Vipers may use their <b>Torch</b> Play to burn down a Precinct
+            <li><strong>Torch:</strong> The Harlem Knights may use their <b>Torch</b> Play to burn down a Precinct
                 exactly as if it were a rival Safehouse.</li>
         </ul>
         <p class="note"><b>Tip:</b> With lower player counts, the Law expand more rapidly, since there are usually more
