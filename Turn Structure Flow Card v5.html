@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom Turn Structure Flow Card v4.5</title>
+  <title>Moonshine Kingdom Turn Structure Flow Card v5</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -32,7 +32,10 @@
       color: var(--ink);
       font-family: 'Raleway', sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+      gap: 8mm;
     }
 
     .bleed {
@@ -50,10 +53,10 @@
       border-radius: 10px;
       background: linear-gradient(165deg, #241818 0%, #171010 100%);
       box-shadow: 0 0 0 2px rgba(212,175,55,0.25), 0 12px 28px rgba(0,0,0,0.55);
-      padding: 5mm 6mm 6mm;
+      padding: 4mm 5mm 5mm;
       display: flex;
       flex-direction: column;
-      gap: 3mm;
+      gap: 2mm;
       overflow: hidden;
       page-break-after: always;
     }
@@ -68,7 +71,7 @@
       margin: 0;
       font-family: 'Bebas Neue', sans-serif;
       letter-spacing: 1.5px;
-      font-size: 20pt;
+      font-size: 19pt;
       line-height: 1;
       color: var(--gold);
     }
@@ -126,12 +129,12 @@
 
     .round-note {
       margin: 0;
-      padding: 1.5mm 2mm;
+      padding: 1.2mm 1.8mm;
       border: 1px solid var(--line);
       border-radius: 5px;
       background: rgba(0,0,0,0.22);
-      font-size: 7.1pt;
-      line-height: 1.25;
+      font-size: 6.8pt;
+      line-height: 1.2;
       text-align: center;
     }
 
@@ -139,15 +142,15 @@
       border: 1px solid var(--line);
       border-radius: 7px;
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));
-      padding: 2mm;
+      padding: 1.5mm;
     }
 
     .phase-head {
-      margin: 0 0 1.4mm;
+      margin: 0 0 1mm;
       display: flex;
       align-items: center;
       gap: 2mm;
-      padding-bottom: 1mm;
+      padding-bottom: 0.8mm;
       border-bottom: 1px dashed rgba(212,175,55,0.45);
     }
 
@@ -172,7 +175,7 @@
       margin: 0;
       font-family: 'Bebas Neue', sans-serif;
       letter-spacing: 0.8px;
-      font-size: 12.8pt;
+      font-size: 12.2pt;
       color: var(--gold);
       line-height: 1;
     }
@@ -188,7 +191,7 @@
 
     .step-list {
       display: grid;
-      gap: 1.2mm;
+      gap: 0.9mm;
     }
 
     .step {
@@ -196,7 +199,7 @@
       grid-template-columns: 24mm 1fr;
       gap: 2mm;
       align-items: start;
-      padding: 1.3mm 1.5mm;
+      padding: 1mm 1.3mm;
       border: 1px solid rgba(212,175,55,0.25);
       border-radius: 5px;
       background: rgba(0,0,0,0.18);
@@ -213,14 +216,88 @@
     }
 
     .step-copy {
-      font-size: 7pt;
-      line-height: 1.23;
+      font-size: 6.7pt;
+      line-height: 1.18;
       color: var(--ink);
     }
 
     .step-copy b {
       color: var(--gold);
       font-weight: 700;
+    }
+
+    .ledger-card {
+      gap: 2.5mm;
+    }
+
+    .ledger-note {
+      margin: 0;
+      padding: 2mm;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: rgba(0,0,0,0.22);
+      font-size: 7.2pt;
+      line-height: 1.28;
+      text-align: center;
+    }
+
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      overflow: hidden;
+      border: 1px solid var(--gold-dim);
+      border-radius: 6px;
+    }
+
+    .ledger-table th,
+    .ledger-table td {
+      border: 1px solid rgba(212,175,55,0.28);
+      vertical-align: top;
+    }
+
+    .ledger-table th {
+      padding: 1.5mm 1.8mm;
+      background: rgba(212,175,55,0.18);
+      color: var(--gold);
+      font-size: 7.2pt;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    .ledger-table td {
+      padding: 1.5mm 1.8mm;
+      background: rgba(0,0,0,0.16);
+    }
+
+    .ledger-borough {
+      width: 24mm;
+      color: var(--gold);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12pt;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .ledger-list {
+      margin: 0;
+      padding-left: 4.5mm;
+      font-size: 7.1pt;
+      line-height: 1.24;
+    }
+
+    .ledger-list li {
+      margin: 0 0 0.55mm;
+      padding-left: 0.5mm;
+    }
+
+    .district-kind {
+      color: var(--muted);
+      font-size: 6.4pt;
+      white-space: nowrap;
     }
 
     @media print {
@@ -244,6 +321,13 @@
         padding: 3mm;
         border-radius: 0;
         background: var(--bg);
+        page-break-after: always;
+        break-after: page;
+      }
+
+      .bleed:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
       }
 
       .card {
@@ -351,7 +435,94 @@
         </div>
       </section>
 
-      <p class="round-note" style="margin-top: 6px; border-color: var(--gold-dim);"><b style="color: var(--gold);">Victory Check:</b> After Reckoning, if any player has a <b>Commission Card + 20 Respect</b>, the game ends. Tied? Highest Respect, then Cash.</p>
+    </div>
+  </div>
+
+  <div class="bleed">
+    <div class="card ledger-card">
+      <header class="header">
+        <h1 class="title">Town Planning Ledger</h1>
+        <p class="subtitle">Federal Rebuilding Priority</p>
+      </header>
+
+      <p class="ledger-note">
+        When a Precinct respawns, place it in the first completely <b>Empty</b> District on this list for its home Borough. If no Districts are empty, it remains in the supply.
+      </p>
+
+      <table class="ledger-table" aria-label="Town Planning Ledger">
+        <thead>
+          <tr>
+            <th>Borough</th>
+            <th>Respawn Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ledger-borough">Manhattan</td>
+            <td>
+              <ol class="ledger-list">
+                <li>Sugar Hill <span class="district-kind">(High Society - Rum)</span></li>
+                <li>East Harlem <span class="district-kind">(Whisky Speakeasy)</span></li>
+                <li>The Tenderloin <span class="district-kind">(Gin Speakeasy)</span></li>
+                <li>West Side <span class="district-kind">(Dock)</span></li>
+                <li>The Bowery <span class="district-kind">(Dock)</span></li>
+                <li>Five Points <span class="district-kind">(Ghetto)</span></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="ledger-borough">The Bronx</td>
+            <td>
+              <ol class="ledger-list">
+                <li>Morris Park <span class="district-kind">(High Society - Rum)</span></li>
+                <li>Belmont <span class="district-kind">(Whisky Speakeasy)</span></li>
+                <li>Fordham <span class="district-kind">(Moonshine Speakeasy)</span></li>
+                <li>Throggs Neck <span class="district-kind">(Dock)</span></li>
+                <li>Hunts Point <span class="district-kind">(Ghetto)</span></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="ledger-borough">Queens</td>
+            <td>
+              <ol class="ledger-list">
+                <li>Richmond Hill <span class="district-kind">(High Society - Gin)</span></li>
+                <li>Astoria <span class="district-kind">(Rum Speakeasy)</span></li>
+                <li>Flushing <span class="district-kind">(Moonshine Speakeasy)</span></li>
+                <li>Whitestone <span class="district-kind">(Dock)</span></li>
+                <li>Jamaica <span class="district-kind">(Dock)</span></li>
+                <li>Corona <span class="district-kind">(Ghetto)</span></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="ledger-borough">Brooklyn</td>
+            <td>
+              <ol class="ledger-list">
+                <li>Williamsburg <span class="district-kind">(High Society - Gin)</span></li>
+                <li>Coney Island <span class="district-kind">(Whisky Speakeasy)</span></li>
+                <li>Red Hook <span class="district-kind">(Moonshine Speakeasy)</span></li>
+                <li>Sheepshead Bay <span class="district-kind">(Dock)</span></li>
+                <li>Brownsville <span class="district-kind">(Ghetto)</span></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="ledger-borough">Staten Island</td>
+            <td>
+              <ol class="ledger-list">
+                <li>Stapleton <span class="district-kind">(Ghetto / Police Start)</span></li>
+                <li>Westerleigh <span class="district-kind">(Dock)</span></li>
+                <li>Tottenville <span class="district-kind">(Dock)</span></li>
+              </ol>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="round-note" style="margin-top: auto; border-color: var(--gold-dim);">
+        <b style="color: var(--gold);">Raid Reminder:</b> each Precinct hits one Target-controlled District in its Raid Zone: its own District plus shared-border Districts only. Bridges and Docks do not count.
+      </p>
     </div>
   </div>
 </body>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Moonshine Kingdom Rulebook v4.5</title>
+    <title>Moonshine Kingdom Rulebook v5</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
@@ -147,7 +147,7 @@
 
         <p><strong>The Law (Blue Pieces):</strong> The blue wall that wants to shut you down for good.</p>
         <ul class="sub-section">
-            <li><strong>Police Officers (15) & Precincts (5):</strong> The beat cops and their station houses.</li>
+            <li><strong>Precincts (5):</strong> The station houses that mark Police Turf.</li>
             <li><strong>Federal Crackdown Tracker (1):</strong> The 10-space pressure clock used in co-op and team variants.</li>
         </ul>
 
@@ -415,14 +415,14 @@
             <li>
                 <strong>Establish Turf:</strong><br>
                 First remove Staten Island (nobody starts here), then shuffle the remaining <b>Borough Deeds</b>. Each player draws one card to determine their starting Borough. Place any unclaimed Deeds in the Supply, along with Staten Island.
-                Each Borough Deed dictates your three starting Districts. Place <b>1 Safehouse, 1 Boss, and 2 Runners</b> in your listed <b>Ghetto</b>. Place <b>3 Runners</b> in your listed <b>High Society District</b>. Place <b>3 Runners</b> in your listed <b>Dock</b>.
+                Each Borough Deed dictates your three starting Districts. Place <b>1 Safehouse, 1 Boss, and 2 Runners</b> in your listed <b>Ghetto</b>. Place <b>3 Runners</b> in your listed <b>Dock</b>. Place <b>3 Runners</b> in your listed <b>Speakeasy</b>.
                 <ul class="sub-section">
-                    <li><strong>Manhattan:</strong> Five Points (Ghetto), Sugar Hill (High Society), West Side (Dock).</li>
-                    <li><strong>Bronx:</strong> Hunts Point (Ghetto), Morris Park (High Society), Throggs Neck (Dock).</li>
-                    <li><strong>Queens:</strong> Corona (Ghetto), Richmond Hill (High Society), Jamaica (Dock).</li>
-                    <li><strong>Brooklyn:</strong> Brownsville (Ghetto), Williamsburg (High Society), Sheepshead Bay (Dock).</li>
+                    <li><strong>Manhattan:</strong> Five Points (Ghetto), West Side (Dock), East Harlem (Speakeasy).</li>
+                    <li><strong>Bronx:</strong> Hunts Point (Ghetto), Throggs Neck (Dock), Belmont (Speakeasy).</li>
+                    <li><strong>Queens:</strong> Corona (Ghetto), Jamaica (Dock), Astoria (Speakeasy).</li>
+                    <li><strong>Brooklyn:</strong> Brownsville (Ghetto), Sheepshead Bay (Dock), Coney Island (Speakeasy).</li>
                 </ul>
-                <p><strong>The Blue Wall:</strong> Finally, place <b>1 Police Precinct</b> and <b>3 Officers</b> in every Ghetto District <b>AND every High Society District</b> that was not selected by a player.</p>
+                <p><strong>The Blue Wall:</strong> Remove all Police Officers from the game components. Place <b>1 Precinct</b> in every Borough's <b>High Society</b> District, and <b>1 Precinct</b> in the Staten Island Ghetto (Stapleton).</p>
             </li>
             <li>
                 <strong>Get Your Cut:</strong><br>
@@ -503,7 +503,7 @@
         <p>Operations runs in <strong>Turn Order</strong>, one <strong>Play</strong> at a time.</p>
         <ol class="sub-section">
             <li><strong>Standard Play:</strong> Spend Influence to perform <b>1 Play</b> (Move, Recruit,
-                Shift, etc.) or <b>1 Power Play</b> (e.g. Unload).</li>
+                Push, etc.) or <b>1 Power Play</b> (e.g. Unload).</li>
             <li><strong>Combat Play:</strong> If combat is triggered, resolve it fully before the Play ends.</li>
             <li><strong>Paying for Plays:</strong> Remove the spent marker(s) from your <b>Operations</b> and return
                 them to your
@@ -532,9 +532,8 @@
                     Police won't fire, but instantly confiscate any carried liquor.</td>
             </tr>
             <tr>
-                <td><strong>Shift</strong> ($100)</td>
-                <td>Move any number of barrels from your District to any Connected District. Shifted into rival turf?
-                    It's their hooch now.</td>
+                <td><strong>Push</strong></td>
+                <td>Redistribute any number of barrels between a District you Control and one Connected District. Use this to reorganize your own supply lines, or to trade with a rival (with their permission). Pushed into rival turf? It's their hooch now.<br><b>Cost:</b> $0 across land/bridges, or <b>$200</b> via Docks.</td>
             </tr>
             <tr>
                 <td><strong>Recruit</strong></td>
@@ -599,9 +598,7 @@
             </tr>
             <tr>
                 <td><strong>Rat</strong></td>
-                <td>Tip off the cops to trigger an immediate Police Raid and reset the Heat Track. Since you fed them
-                    the info, you may adjust the <b>2D6 Raid Roll</b> by +1 or -1 to target a rival's operation (or
-                    spare your own).</td>
+                <td>Drop a dime on your rivals. As long as there is at least <b>1 marker</b> on the Heat Track, trigger an immediate Police Raid. The Raid targets the player who currently has the most (or most recent) markers on the track.</td>
             </tr>
             <tr>
                 <td><strong>Rise</strong></td>
@@ -805,58 +802,6 @@
         <p>
             <strong>There are no shared victories in <em>Moonshine Kingdom</em>.</strong> You either rule the city alone, or you bleed out in the gutter.
         </p>
-    </div>
-    <div class="container">
-        <h2 id="heat">Heat: Playing with Fire</h2>
-        <div class="cover">
-            <img src="Art/Raid.png" alt="Mobsters" height="340px" width="100%">
-        </div>
-        <p>
-            <strong>Heat</strong> measures how much the law's breathing down your neck. The <strong>Heat
-                Tracker</strong> is a 5-space communal track. When you generate Heat, you must place one Influence
-            marker on the Heat track. Played right, Heat is a weapon. Played wrong, it's a noose.
-        </p>
-
-        <h3>Gaining Heat</h3>
-        <p>These noisy Plays Heat up the streets one notch:</p>
-        <ul class="sub-section">
-            <li><strong>Blood on the Pavement:</strong> Aggression draws unwanted attention. If the <b>Attacker</b> in
-                a combat Play (the player who initiated Combat) inflicts <b>1 or more kills</b>, they must add 1
-                marker <img src="Art/Fire.svg" class="icon" alt="Heat"> to the Heat track at the conclusion of the Play.
-                <br><em>Note: A multi-round Assault is still a single Play and generates Heat only once.
-                    Defenders acting in self-defense (during an Ambush or an Assault) never generate Heat.</em>
-            </li>
-            <li><strong>Shakedown Gets Loud:</strong> If an <b>Extort</b> Play earns <b>$500+</b>, you generate Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
-            <li><strong>The Greed Tax:</strong> Triggering The Greed Tax by Unloading <b>4+ barrels</b> generates
-                Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
-            <li><strong>Torch:</strong> Using the Knights <b>Torch</b> Play generates Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
-        </ul>
-        <h3>Police Raids</h3>
-        <p>A raid is triggered when a player uses the <strong>Rat</strong> Play, or the moment a 5th marker hits the Heat Track (reaching <strong>Boiling Point</strong>). Pause the current turn immediately and roll 2D6. The result targets <b>every</b> matching Still on the board. Safehouses do not protect Liquor or mobsters from Police Raids.</p>
-
-        <ol class="sub-section">
-            <li>
-                <strong>Target Mob Turf (Raids):</strong>
-                For each hit District controlled by a Player:
-                <ul class="sub-section">
-                    <li><strong>Pay Off the Cops:</strong> Pay a flat <b>$1,000 bribe</b>. The raid is ignored; your mobsters and Liquor remain safe.</li>
-                    <li><strong>Take the Fall:</strong> Pay nothing. All Liquor in the District is confiscated and returned to the supply. Then apply arrests using The Muscle Ratio.</li>
-                </ul>
-            </li>
-            <li>
-                <strong>Target Empty/Police Turf (Blockades):</strong>
-                For each hit District that is Empty or Police-Controlled:
-                <ul class="sub-section">
-                    <li><strong>Empty District:</strong> The Police move in. Place <b>3 Officers</b> in the District. If that Borough does not currently have a Precinct anywhere inside it, place a <b>Precinct</b> here as well.</li>
-                    <li><strong>Police-Controlled District:</strong> Reinforcements arrive. If the District currently contains <b>3 or fewer</b> Officers, add <b>2 Officers</b>.</li>
-                    <li><strong>Component Limit:</strong> The Police force is strictly limited to 15 Officers and 5 Precincts. If the supply is empty, no new Officers are placed during Blockades or Raids.</li>
-                </ul>
-            </li>
-            <li>
-                <strong>Cool Down:</strong> Once the Raid is fully resolved, all Influence markers on the Heat Track are returned to their owners' Stashes, and the paused turn resumes.
-            </li>
-        </ol>
-
     </div>
     <div class="container">
         <!-- Supply Lines Section -->
@@ -1349,43 +1294,81 @@
         </div>
     </div>
     <div class="container">
+        <h2 id="heat">Heat: Playing with Fire</h2>
+        <p>
+            <strong>Heat</strong> measures how much the law is breathing down your neck. The <strong>Heat
+                Tracker</strong> is a 5-space communal powder keg. When you generate Heat, you must place one Influence
+            marker on the track. Played right, Heat is a weapon you can use to sic the Feds on your rivals. Played wrong, it's a noose around your own neck.
+        </p>
+
+        <h3>Drawing Heat</h3>
+        <p>These noisy Plays draw unwanted headlines and push the track up one notch:</p>
+        <ul class="sub-section">
+            <li><strong>Blood on the Pavement:</strong> Violence gets noticed. If the <b>Attacker</b> in
+                a combat Play (the player who initiated Combat) inflicts <b>1 or more kills</b>, they must add 1
+                marker <img src="Art/Fire.svg" class="icon" alt="Heat"> to the Heat track at the conclusion of the Play.
+                <br><em>Note: A multi-round Assault is still a single Play and generates Heat only once.
+                    Defenders acting in self-defense never generate Heat.</em>
+            </li>
+            <li><strong>Shakedowns Get Loud:</strong> If an <b>Extort</b> Play earns <b>$500 or more</b>, locals complain and you generate Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
+            <li><strong>The Greed Tax:</strong> Moving massive product attracts federal eyes. Triggering The Greed Tax by Unloading <b>4+ barrels</b> generates
+                Heat <img src="Art/Fire.svg" class="icon" alt="Heat">.</li>
+        </ul>
+
+        <h3>Police Raids: The Boiling Point</h3>
+        <p>When the <b>5th marker</b> hits the Heat Track (or a rival plays the <b>Rat</b> Power Play), the sirens wail. Pause the current turn immediately. The city is going on lockdown.</p>
+
+        <h4>1. Public Enemy Number One</h4>
+        <p>The Police don't care about fair play; they target the mob with the most markers currently sitting on the Heat Track. That player becomes the <b>Target</b>.</p>
+        <p><strong>The Fresh Scent Rule (Tiebreaker):</strong> If mobs are tied for the most markers, the Police chase the freshest lead: the tied mob whose marker is <b>furthest to the right</b> on the track (the most recently placed). <em>A Raid only ever targets one player.</em></p>
+
+        <h4>2. Precision Strikes</h4>
+        <p>The Feds mobilize from their strongholds. For <b>each</b> Precinct on the board, the Police Raid exactly <b>one</b> District within its <b>Raid Zone</b> that is Controlled by the Target. (A Precinct's Raid Zone is its own District plus any Adjacent District connected by a shared land border. Bridges and Dock routes do not count).</p>
+        <p>The Police strike where it hurts the most, checking valid Districts in this exact order:</p>
+        <ol class="sub-section">
+            <li><strong>The Stash:</strong> The District holding the highest number of Liquor Barrels.</li>
+            <li><strong>The Muscle:</strong> If tied, the District holding the most mobsters.</li>
+            <li><strong>Kingpin's Choice:</strong> If still tied, the Target chooses which of those operations takes the hit.</li>
+        </ol>
+
+        <h4>3. The Ultimatum: Bribe or Bleed</h4>
+        <p>Resolve each hit District separately. For each one, the Target must make a brutal choice:</p>
+        <ul class="sub-section">
+            <li><strong>Pay the Bribe:</strong> Hand <b>$1,000</b> to the bank. The cops look the other way. Your Liquor and mobsters remain safe.</li>
+            <li><strong>Take the Fall:</strong> Pay nothing. The raid is a success. Return <b>all Liquor</b> in the District to the supply, then suffer arrests based on <em>The Muscle Ratio</em> (Runners take the cuffs first).</li>
+        </ul>
+        <p><strong>The Aftermath:</strong> Once all strikes are resolved, the Feds rebuild their broken stations (see <em>Federal Rebuilding</em>). Then, return all Influence markers on the Heat Track to their owners' Stashes and resume the paused turn.</p>
+
+    </div>
+    <div class="container">
         <h2 id="police">The Law: Fighting the Blue Wall</h2>
         <div class="cover">
             <img src="Art/Police.png" alt="Police Mob" height="340px" width="100%">
         </div>
-        <p>
-            The Police are an automated faction that block expansion. They don't take turns, collect liquor, or start
-            firefights; they just hold the line.
-        </p>
-        <p>
-            Moving into a Police District does not trigger an immediate battle. Instead, it creates a
-            <strong>Blockade Standoff</strong>. It functions similarly to Rival Combat, but with the following strict
-            rules:
-        </p>
+        <p>The Police are a static, automated faction. They don't take turns, collect liquor, or Ambush; they just stand firm and guard their turf.</p>
+        
+        <h3>The Blue Wall</h3>
+        <p>Any District containing a Precinct is considered <b>Police Turf</b>.</p>
         <ul class="sub-section">
-            <li><strong>The Blockade (No Ambush):</strong> The Police are stationed to keep the peace, so they will
-                never Ambush. When you Move into their turf, your mobsters immediately become Pinned without taking
-                fire. From there, you must resolve your Pinned status as normal: spend Influence to Assault them,
-                Advance to another safe District, or Fall Back.</li>
-            <li><strong>Confiscation:</strong> You can't sneak hooch past the cops. Any Liquor carried into a Police
-                District is instantly seized and returned to the supply, even if you are just Advancing through.</li>
-            <li><strong>Blue Threat:</strong> Standard Officers defend with Base Threat (Hit on 5+). If the
-                District contains a Precinct, they are heavily armed and defend with Level 3 Threat (Hit on 3+).</li>
-            <li><strong>Killing Cops:</strong> Eliminating Officers generates Heat <img src="Art/Fire.svg" class="icon" alt="Heat">, exactly like killing
-                rival mobsters.</li>
+            <li><strong>Confiscation &amp; Lockdown:</strong> You may freely Move into a Police District. However, you can't sneak hooch past a station house. Any Liquor carried into Police Turf is instantly seized and returned to the supply. Your mobsters are immediately <b>Pinned</b>. From here, you must spend Influence to either <em>Advance</em> (walk through to a safe connected District), <em>Fall Back</em>, or <em>Storm the Precinct</em>.</li>
         </ul>
-        <p>
-            If you eliminate all Officers in a District, you claim it. You can Commandeer or destroy Precincts exactly
-            like rival Safehouses.
-        </p>
-        <ul class="sub-section">
-            <li><strong>Torch:</strong> The Harlem Knights may use their <b>Torch</b> Play to burn down a Precinct
-                exactly as if it were a rival Safehouse.</li>
-        </ul>
-        <p class="note"><b>Tip:</b> With lower player counts, the Law expand more rapidly, since there are usually more
-            empty Districts to Blockade.</p>
-    </div>
 
+        <h3>Storm the Precinct (Cost: 2 Influence)</h3>
+        <p><em>Talk is cheap; dynamite is expensive. If you want to clear a Precinct, you have to burn it to the ground. This is a high-stakes, all-or-nothing Play executed while Pinned.</em></p>
+        <ol class="sub-section">
+            <li><strong>The Charge:</strong> Roll your Attack Dice (calculated via The Muscle Ratio) and apply your current Threat Level.</li>
+            <li><strong>The Toll:</strong> The Police are firing from fortified cover; they do not roll defense dice. Instead, <b>every failed die</b> immediately kills 1 of your mobsters in the crossfire (Runners take the bullet first).</li>
+            <li><strong>The Outcome:</strong> You need exactly <b>2 Hits</b> to break their lines. There is no multi-round combat; you get one shot.
+                <ul class="sub-section" style="margin-top: 5px;">
+                    <li><b>Success (2+ Hits):</b> The Precinct is destroyed (return to supply). You claim Control of the District and may immediately <b>Commandeer</b> it (Secure a Safehouse for free).</li>
+                    <li><b>Failure (0-1 Hits):</b> The assault is broken. Your surviving mobsters are repelled and must immediately <b>Fall Back</b> to the District they entered from.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>Federal Rebuilding (Respawn)</h3>
+        <p>The law never sleeps for long. Immediately after every Police Raid, the city rebuilds its shattered precincts. Any destroyed Precincts currently in the supply are returned to the board in their home Borough. Place each returning Precinct in the first completely <b>Empty</b> District reading top-to-bottom on the <b>Town Planning Ledger</b> (found on the Turn Summary card). <em>If no Districts in that Borough are empty, the Precinct remains in the supply.</em></p>
+    </div>
     <div class="container syndicate-wars">
         <h2 id="consolidation">The Blood Oath: 4-Player Team Variant</h2>
         <p>
@@ -1422,7 +1405,7 @@
         <ul class="sub-section">
             <li><strong>Separate Ledgers:</strong> You do not share Cash, Influence, Contracts, or Hand Limits. You still take individual turns in Turn Order.</li>
             <li><strong>Blood is Thicker:</strong> You cannot <b>Ambush</b> or <b>Assault</b> your partner's mobsters. You may safely <b>Move</b> through their Controlled Districts without triggering combat.</li>
-            <li><strong>The Golden Rule of Turf:</strong> You still cannot share a block. You may not end your Phase with mobsters in a District occupied by your partner. If you <b>Shift</b> Liquor into their District, it instantly becomes their property.</li>
+            <li><strong>The Golden Rule of Turf:</strong> You still cannot share a block. You may not end your Phase with mobsters in a District occupied by your partner. If you <b>Push</b> Liquor into their District, it instantly becomes their property.</li>
             <li><strong>Puppeteering:</strong> Lending Influence to your partner is no longer a fragile truce—it is your strongest weapon. You may freely move Influence to your partner's Operations board to fund their turn (standard Puppeteering Heat rules apply).</li>
         </ul>
 

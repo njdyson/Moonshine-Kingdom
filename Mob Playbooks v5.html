@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom: Mob Playbooks v4.5</title>
+  <title>Moonshine Kingdom: Mob Playbooks v5</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
     *,
@@ -441,8 +441,8 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Shift</td>
-        <td class="action-desc">Pay $100 to shift barrels to a connected District.</td>
+        <td class="action-name">Push</td>
+        <td class="action-desc">Redistribute any number of barrels between a District you Control and one connected District. Trade with a rival only with permission. Pushed into rival turf? It's their hooch now. Cost: $0 by land/bridge, or $200 via Docks.</td>
         
       </tr>
     </table>
@@ -469,7 +469,7 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">Trigger a Raid and reset Heat. You may nudge the Raid total +/-1.</td>
+        <td class="action-desc">Drop a dime on your rivals. If Heat has 1+ markers, trigger a Raid. Police target the player with the most markers; ties hit the tied player with the most recent marker.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -610,35 +610,33 @@
             <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
       <!-- RIGHT COLUMN: Police Raids -->
       <div class="middle-col">
         <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> or <b>5th Heat</b>. Roll <b>2D6</b>: all matching Stills.</div>
+        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
         <div class="flow-container">
           <div class="flow-step">
-            <strong>1. Player Target</strong><br>
-            Choose: pay <b>$1,000</b> to ignore the Raid, or take the fall.
+            <strong>1. Precision Strikes</strong><br>
+            Each Precinct hits 1 Target-controlled District in its Raid Zone: own District + shared-border only. Bridges/Docks do not count.
           </div>
 
           <div class="flow-step">
-            <strong>2. Take the Fall</strong><br>
-            Seize all Liquor, then count mobsters:<br>
-            <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b> arrests.
+            <strong>2. Biggest Operation</strong><br>
+            Highest barrels, then most mobsters, then Target chooses.
           </div>
 
           <div class="flow-step">
-            <strong>3. Reinforcements</strong><br>
-            Empty hit: <b>+3 Officers</b> if available (+Precinct if Borough has none).<br>
-            Police hit with <b>3 or fewer</b> Officers: <b>+2 Officers</b> if available.
+            <strong>3. Penalty</strong><br>
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio.
           </div>
 
           <div class="flow-step">
-            <strong>4. Cool Down</strong><br>
-            Return all Heat markers to owners' Stashes.
+            <strong>4. Rebuild</strong><br>
+            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
           </div>
         </div>
       </div>
@@ -668,8 +666,8 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Shift</td>
-        <td class="action-desc">Pay $100 to shift barrels to a connected District.</td>
+        <td class="action-name">Push</td>
+        <td class="action-desc">Redistribute any number of barrels between a District you Control and one connected District. Trade with a rival only with permission. Pushed into rival turf? It's their hooch now. Cost: $0 by land/bridge, or $200 via Docks.</td>
         
       </tr>
     </table>
@@ -696,7 +694,7 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">Trigger a Raid and reset Heat. You may nudge the Raid total +/-1.</td>
+        <td class="action-desc">Drop a dime on your rivals. If Heat has 1+ markers, trigger a Raid. Police target the player with the most markers; ties hit the tied player with the most recent marker.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -837,35 +835,33 @@
             <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
       <!-- RIGHT COLUMN: Police Raids -->
       <div class="middle-col">
         <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> or <b>5th Heat</b>. Roll <b>2D6</b>: all matching Stills.</div>
+        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
         <div class="flow-container">
           <div class="flow-step">
-            <strong>1. Player Target</strong><br>
-            Choose: pay <b>$1,000</b> to ignore the Raid, or take the fall.
+            <strong>1. Precision Strikes</strong><br>
+            Each Precinct hits 1 Target-controlled District in its Raid Zone: own District + shared-border only. Bridges/Docks do not count.
           </div>
 
           <div class="flow-step">
-            <strong>2. Take the Fall</strong><br>
-            Seize all Liquor, then count mobsters:<br>
-            <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b> arrests.
+            <strong>2. Biggest Operation</strong><br>
+            Highest barrels, then most mobsters, then Target chooses.
           </div>
 
           <div class="flow-step">
-            <strong>3. Reinforcements</strong><br>
-            Empty hit: <b>+3 Officers</b> if available (+Precinct if Borough has none).<br>
-            Police hit with <b>3 or fewer</b> Officers: <b>+2 Officers</b> if available.
+            <strong>3. Penalty</strong><br>
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio.
           </div>
 
           <div class="flow-step">
-            <strong>4. Cool Down</strong><br>
-            Return all Heat markers to owners' Stashes.
+            <strong>4. Rebuild</strong><br>
+            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
           </div>
         </div>
       </div>
@@ -895,8 +891,8 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Shift</td>
-        <td class="action-desc">Pay $100 to shift barrels to a connected District.</td>
+        <td class="action-name">Push</td>
+        <td class="action-desc">Redistribute any number of barrels between a District you Control and one connected District. Trade with a rival only with permission. Pushed into rival turf? It's their hooch now. Cost: $0 by land/bridge, or $200 via Docks.</td>
         
       </tr>
     </table>
@@ -923,7 +919,7 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">Trigger a Raid and reset Heat. You may nudge the Raid total +/-1.</td>
+        <td class="action-desc">Drop a dime on your rivals. If Heat has 1+ markers, trigger a Raid. Police target the player with the most markers; ties hit the tied player with the most recent marker.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -1066,35 +1062,33 @@
             <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
       <!-- RIGHT COLUMN: Police Raids -->
       <div class="middle-col">
         <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> or <b>5th Heat</b>. Roll <b>2D6</b>: all matching Stills.</div>
+        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
         <div class="flow-container">
           <div class="flow-step">
-            <strong>1. Player Target</strong><br>
-            Choose: pay <b>$1,000</b> to ignore the Raid, or take the fall.
+            <strong>1. Precision Strikes</strong><br>
+            Each Precinct hits 1 Target-controlled District in its Raid Zone: own District + shared-border only. Bridges/Docks do not count.
           </div>
 
           <div class="flow-step">
-            <strong>2. Take the Fall</strong><br>
-            Seize all Liquor, then count mobsters:<br>
-            <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b> arrests.
+            <strong>2. Biggest Operation</strong><br>
+            Highest barrels, then most mobsters, then Target chooses.
           </div>
 
           <div class="flow-step">
-            <strong>3. Reinforcements</strong><br>
-            Empty hit: <b>+3 Officers</b> if available (+Precinct if Borough has none).<br>
-            Police hit with <b>3 or fewer</b> Officers: <b>+2 Officers</b> if available.
+            <strong>3. Penalty</strong><br>
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio.
           </div>
 
           <div class="flow-step">
-            <strong>4. Cool Down</strong><br>
-            Return all Heat markers to owners' Stashes.
+            <strong>4. Rebuild</strong><br>
+            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
           </div>
         </div>
       </div>
@@ -1124,8 +1118,8 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Shift</td>
-        <td class="action-desc">Pay $100 to shift barrels to a connected District.</td>
+        <td class="action-name">Push</td>
+        <td class="action-desc">Redistribute any number of barrels between a District you Control and one connected District. Trade with a rival only with permission. Pushed into rival turf? It's their hooch now. Cost: $0 by land/bridge, or $200 via Docks.</td>
         
       </tr>
     </table>
@@ -1152,7 +1146,7 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">Trigger a Raid and reset Heat. You may nudge the Raid total +/-1.</td>
+        <td class="action-desc">Drop a dime on your rivals. If Heat has 1+ markers, trigger a Raid. Police target the player with the most markers; ties hit the tied player with the most recent marker.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -1294,35 +1288,33 @@
             <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> (1 Action)<br><strong>Advance</strong> (1 Action) to a safe district<br>OR <strong>Fall Back</strong> (0 Actions) to origin district.<br><span class="heat">1+ Kill: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
       <!-- RIGHT COLUMN: Police Raids -->
       <div class="middle-col">
         <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> or <b>5th Heat</b>. Roll <b>2D6</b>: all matching Stills.</div>
+        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
         <div class="flow-container">
           <div class="flow-step">
-            <strong>1. Player Target</strong><br>
-            Choose: pay <b>$1,000</b> to ignore the Raid, or take the fall.
+            <strong>1. Precision Strikes</strong><br>
+            Each Precinct hits 1 Target-controlled District in its Raid Zone: own District + shared-border only. Bridges/Docks do not count.
           </div>
 
           <div class="flow-step">
-            <strong>2. Take the Fall</strong><br>
-            Seize all Liquor, then count mobsters:<br>
-            <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b> arrests.
+            <strong>2. Biggest Operation</strong><br>
+            Highest barrels, then most mobsters, then Target chooses.
           </div>
 
           <div class="flow-step">
-            <strong>3. Reinforcements</strong><br>
-            Empty hit: <b>+3 Officers</b> if available (+Precinct if Borough has none).<br>
-            Police hit with <b>3 or fewer</b> Officers: <b>+2 Officers</b> if available.
+            <strong>3. Penalty</strong><br>
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio.
           </div>
 
           <div class="flow-step">
-            <strong>4. Cool Down</strong><br>
-            Return all Heat markers to owners' Stashes.
+            <strong>4. Rebuild</strong><br>
+            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
           </div>
         </div>
       </div>
@@ -1338,6 +1330,7 @@
 </body>
 
 </html>
+
 
 
 
