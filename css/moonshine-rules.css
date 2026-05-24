@@ -108,7 +108,6 @@ h4 {
     font-size: 12pt;
     text-transform: uppercase;
     color: var(--accent-gold);
-    border-bottom: 1px solid var(--accent-dim);
     display: inline-block;
 }
 
@@ -186,6 +185,13 @@ ol.sub-section > li::before {
 ul.sub-section > li:last-child,
 ol.sub-section > li:last-child {
     margin-bottom: 0;
+}
+
+ul.sub-section > li > ul.sub-section,
+ul.sub-section > li > ol.sub-section,
+ol.sub-section > li > ul.sub-section,
+ol.sub-section > li > ol.sub-section {
+    margin-top: 0.45em;
 }
 
 ol.sub-section[type="a"] {

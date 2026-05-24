@@ -351,7 +351,7 @@
         <h1 class="title">Turn Structure Flow</h1>
       </header>
 
-      <div class="flow-rail" aria-label="Round phase rail">
+      <div class="flow-rail" aria-label="Day phase rail">
         <div class="phase-pill pill-1">Shadows<small>Production</small></div>
         <div class="arrow">&rarr;</div>
         <div class="phase-pill pill-2">Operations<small>Action Cycle</small></div>
@@ -360,7 +360,7 @@
       </div>
 
       <p class="round-note">
-        <b>Turn Order</b> runs Turn Token #1 through #4. At round turnover, swap to the <b>other moon phase</b> token set.
+        <b>Turn Order</b> runs Turn Token #1 through #4. At Day turnover, swap to the <b>other moon phase</b> token set.
       </p>
 
       <section class="phase-card">
@@ -374,11 +374,11 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">1 Brew</div>
-            <div class="step-copy"><b>Roll:</b> <b>Turn Token #1</b> rolls <b>(players + 1) Red</b> and <b>(players + 1) White</b>.<br><b>Draft:</b> In Turn Order, each player takes <b>1 Red</b> + <b>1 White</b>; add them for the target number.<br><b>Produce/Dump:</b> Produce to activate matching stills &mdash; <b>Domestic only</b> (Gin, Whisky, Moonshine), yielding <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>; or <b>Dump the Mash</b> for no Liquor and no activation. Dumped dice leave the pool and cannot be Blowback. Supply empty? <b>Dry Tap</b>.<br><b>Blowback:</b> Add the last <b>1 Red</b> + <b>1 White</b>. Matching stills explode; casualties are <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>. Safehouses do not protect.</div>
+            <div class="step-copy"><b>Roll:</b> <b>Turn Token #1</b> rolls <b>(players + 1) Red</b> and <b>(players + 1) White</b>.<br><b>Draft:</b> In Turn Order, each player takes <b>1 Red</b> + <b>1 White</b>; add them for the target number.<br><b>Produce/Dump:</b> Produce to activate matching stills &mdash; <b>Domestic only</b> (Gin, Whisky, Moonshine), yielding <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>; or <b>Dump the Mash</b> for no Liquor and no activation. Dumped dice leave the pool and cannot be Blowback. Supply empty? <b>Dry Tap</b>.<br><b>Blowback:</b> Add the two leftover undrafted dice (<b>1 Red</b> + <b>1 White</b>). Matching stills explode; casualties are <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>. Safehouses do not protect.</div>
           </div>
           <div class="step">
             <div class="step-tag">2 Grease Wheels</div>
-            <div class="step-copy">In order, stake Stash markers on Contracts (<b>Days to Deadline</b>), then move markers to Operations (<b>max 5</b>) for this Day's Plays. Any excess stays in Stash.</div>
+            <div class="step-copy">In order, stake Stash markers on Contracts (<b>Days to Deadline</b>). Staked markers are locked until Reckoning. Then move markers to Operations (<b>max 5</b>) for this Day's Plays.</div>
           </div>
         </div>
       </section>
@@ -394,15 +394,15 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">Take Play</div>
-            <div class="step-copy">Spend influence for <b>1 Play</b> or <b>1 Power Play</b>.<br>Combat plays resolve fully before the Play passes.<br><b>Card Actions:</b> Titles may unlock extra Plays such as Fix and Extort.</div>
+            <div class="step-copy">Spend influence for <b>1 Action</b> (a <b>Play</b>) or <b>1 Power Play</b>.<br>Combat plays resolve fully before the Play passes.<br><b>Card Actions:</b> Titles may unlock extra Plays such as Fix and Extort.</div>
           </div>
           <div class="step">
             <div class="step-tag">Pay + Heat</div>
-            <div class="step-copy">Spent markers return to <b>Stash</b>; if Heat is generated, move marker to <b>Heat Track</b>. <b>House Pour</b> Kickbacks return markers from Stash to Operations. <b>Greed Tax:</b> 4+ barrels in one Unload = Heat.</div>
+            <div class="step-copy">Spent markers return to <b>Stash</b>; if Heat is generated, place <b>1 spent marker</b> on the <b>Heat Track</b>. <b>House Pour</b> Kickbacks return markers from Stash to Operations. <b>Greed Tax:</b> 4+ barrels in one Unload = Heat.</div>
           </div>
           <div class="step">
             <div class="step-tag">Lay Low</div>
-            <div class="step-copy">When you run out of actions or step off the street early: clear remaining Operations markers to <b>Stash</b>, return your current Turn Token, then take the lowest Turn Token of the <b>other moon phase</b> for next round order.</div>
+            <div class="step-copy">When you run out of actions or step off the street early: clear remaining Operations markers to <b>Stash</b>, return your current Turn Token, then take the lowest numbered Turn Token of the <b>other moon phase</b> for next Day's order.</div>
           </div>
         </div>
       </section>
@@ -421,12 +421,12 @@
             <div class="step-copy">District cap: <b>5 mobsters</b> (remove excess runners).</div>
           </div>
           <div class="step">
-            <div class="step-tag">2 Turf Control</div>
-            <div class="step-copy">Exchange Borough Deeds, claim <b>Syndicate Cards</b>, and award <b>Ward Boss</b> for leads over any single rival, with a minimum of <b>2</b> required. Police count as empty.</div>
+            <div class="step-tag">2 Titles</div>
+            <div class="step-copy">Redistribute Borough Deeds, <b>Syndicate Cards</b>, and <b>Ward Boss</b>. Hold the most of that type (minimum <b>2</b>); ties return to Supply. Police count as empty.</div>
           </div>
           <div class="step">
             <div class="step-tag">3 Contracts</div>
-            <div class="step-copy">Resolve contracts after Turf Control. Claim <b>Commission</b> immediately if a new completion finishes Gig + Racket + Score.</div>
+            <div class="step-copy">Return <b>1 marker</b> from each active Contract. If the final marker returns, complete it or botch it to its discard pile. Claim <b>Commission</b> immediately if a new completion finishes Gig + Racket + Score.</div>
           </div>
           <div class="step">
             <div class="step-tag">4 Endgame</div>
@@ -446,7 +446,7 @@
       </header>
 
       <p class="ledger-note">
-        When a Precinct respawns, place it in the first completely <b>Empty</b> District on this list for its home Borough. If no Districts are empty, it remains in the supply.
+        When a Precinct respawns, place it in the first <b>Unoccupied</b> District on this list for its home Borough. If no Districts are unoccupied, it remains in the supply.
       </p>
 
       <table class="ledger-table" aria-label="Town Planning Ledger">
@@ -521,7 +521,7 @@
       </table>
 
       <p class="round-note" style="margin-top: auto; border-color: var(--gold-dim);">
-        <b style="color: var(--gold);">Raid Reminder:</b> each Precinct hits one Target-controlled District in its Raid Zone: its own District plus shared-border Districts only. Bridges and Docks do not count.
+        <b style="color: var(--gold);">Raid Reminder:</b> each Precinct hits one adjacent District in the same Borough that is Controlled by the Target. Hit the tied operation with the most total units; Target chooses ties.
       </p>
     </div>
   </div>
