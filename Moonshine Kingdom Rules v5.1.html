@@ -34,7 +34,7 @@
     <div class="container one-column">
         <h2 id="overview">A Day in the Life of a Kingpin</h2>
         <div class="cover">
-            <img src="Art/Unload 2.png" alt="Unload" height="340px" width="100%">
+            <img src="Art/Street.png" alt="A Day in the Life" height="340px" width="100%">
         </div>
         <p style="font-size: 1.1em;"><b>2-4 Players | 90 - 120 Mins</b></p>
 
@@ -81,7 +81,7 @@
     <div class="container components-page">
         <h2 id="components">Game Components: Tools of the Trade</h2>
         <div class="cover">
-            <img src="Art/Logistics 2.png" alt="Map" height="290px" width="100%">
+            <img src="Art/Components.png" alt="Game Components" height="290px" width="100%">
         </div>
         <p>Your whole damn operation in miniature. Every piece earns, bleeds, or burns.</p>
 
@@ -132,7 +132,7 @@
     <div class="container">
         <h2 id="concepts">Key Concepts: The Underworld at a Glance</h2>
         <div class="cover">
-            <img src="Art/The Kingdom.png" alt="Moonshine Kingdom" height="350px" width="100%">
+            <img src="Art/Unload 2.png" alt="Unload" height="350px" width="100%">
         </div>
 
         <h3 id="mob">Your Mob: The Brains, the Brawn, and the Bastards</h3>
@@ -365,7 +365,7 @@
     <div class="container shadows-page">
         <h2 id="gameplay">Gameplay: Run the Streets</h2>
         <div class="cover">
-            <img src="Art/Distillation.png" alt="Distillation" height="300px" width="100%">
+            <img src="Art/Distillation.png" alt="Run the Streets" height="300px" width="100%">
         </div>
         <p>Days unfold in three brutal phases: <strong>Shadows</strong> (Production), <strong>Operations</strong> (Plays), and
             <strong>Reckoning</strong> (Cleanup). <b>In Turn Order</b> means player #1 acts first, down to #4.
@@ -578,9 +578,10 @@
         <table class="action-table">
             <tr>
                 <td><strong>Courage (Cost: 0)</strong></td>
-                <td>Before you roll in a fight, you may discard <b>1 barrel of your Liquor</b> in the District where
-                    the battle is taking place to gain <b>+1 Threat</b> for that roll (max <b>4</b>). You cannot
-                    discard extra barrels to gain more than <b>+1 Threat</b> from Courage.</td>
+                <td>Before you roll dice for an <b>Ambush</b> or for an <b>Assault</b> that you initiated, you may
+                    discard <b>1 of your Liquor barrels</b> located in that District to gain <b>+1 Threat</b> for that
+                    roll. <em>You cannot use Courage to boost your defense when a rival initiates an Assault against
+                        you.</em></td>
             </tr>
             <tr>
                 <td><strong>Plunder (Cost: 1)</strong></td>
@@ -905,10 +906,10 @@
 
     </div>
 
-    <div class="container"><!-- Combat Rules Page 1 -->
+    <div class="container combat-page"><!-- Combat Rules Page 1 -->
         <h2 id="combat">Combat Rules: Blood on the Streets</h2>
         <div class="cover">
-            <img src="Art/Blockade.png" alt="Waiting to Attack" height="300px" width="100%">
+            <img src="Art/Blockade.png" alt="Combat in the streets" height="320px" width="100%">
         </div>
         <p>
             Violence isn't a backup plan; it's the cost of doing business. Smart Kingpins know a drawn gun can be stronger than a fired one. When talk
@@ -1002,25 +1003,23 @@
                 You greet the invaders with lead.
                 <ul class="sub-section" style="margin-top:5px;">
                     <li><strong>Free Shot:</strong> Only the Occupier rolls dice.</li>
-                    <li><strong>Bonus:</strong> Gain <b>+1 Threat</b> for the Ambush.</li>
-                    <li><strong>Casualties:</strong> Each hit removes one Invader mobster (Runners first). Ambush
-                        generates <b>no Heat</b>. The Invaders are now <strong>Pinned</strong>.</li>
+                    <li><strong>Bonus:</strong> Gain <b>+1 Threat</b>.</li>
+                    <li><strong>Casualties:</strong> Hits remove Invaders (Runners first). No Heat. Invaders are now <strong>Pinned</strong>.</li>
                 </ul>
             </li>
             <li><strong>Hold Fire:</strong>
-                You stand your ground but don't shoot. <em>Why? To save your boys from a slaughter, or to honor a
-                    brokered deal.</em> The Invaders are now <strong>Pinned</strong>.
+                You stand your ground but don't shoot. Maybe they are just passing through? The Invaders are now
+                <strong>Pinned</strong>.
             </li>
             <li><strong>Fold (Cost: 0):</strong>
-                You surrender the room. You may immediately move your mobsters to one <strong>Connected Safe
+                You surrender the District. You may immediately move your mobsters to one <strong>Connected Safe
                     District</strong>.
                 <ul class="sub-section" style="margin-top:5px;">
                     <li><strong>Panic:</strong> Fleeing mobsters cannot carry Liquor; any barrels are left behind. You
                         also cannot pack up a building--your Safehouse remains.</li>
-                    <li><strong>The Takeover:</strong> Because the turf is instantly vacated, the Invader immediately
-                        claims <strong>Control</strong>. They capture your dropped Liquor and may
-                        <strong>Commandeer</strong> or destroy your Safehouse. The Invaders are
-                        <strong>not Pinned</strong>, and their Play ends.</li>
+                    <li><strong>The Takeover:</strong> The Invader immediately claims <strong>Control</strong>, captures
+                        dropped Liquor, and may <strong>Commandeer</strong> or destroy your Safehouse. The Invaders are
+                        <strong>not Pinned</strong>; their Play ends.</li>
                 </ul>
             </li>
         </ol>
@@ -1206,8 +1205,11 @@
                 their turn.</p>
         </div>
     </div>
-    <div class="container">
+    <div class="container heat-page">
         <h2 id="heat">Heat: Playing with Fire</h2>
+        <div class="cover">
+            <img src="Art/Raid.png" alt="Police Raid" height="230px" width="100%">
+        </div>
         <p>
             <strong>Heat</strong> measures how much the law is breathing down your neck. The <strong>Heat
                 Tracker</strong> is a 5-space communal powder keg. When you generate Heat, you must place one Influence
@@ -1265,7 +1267,7 @@
             <li><strong>Confiscation &amp; Lockdown:</strong> You may freely Move into a Police District. However, you can't sneak hooch past a station house. Any Liquor carried into Police Turf is instantly seized and returned to the supply. Your mobsters are immediately <b>Pinned</b>. From here, you must spend Influence to either <em>Advance</em> (walk through to a safe connected District), <em>Fall Back</em>, or <em>Storm the Precinct</em>.</li>
         </ul>
 
-        <h3>Storm the Precinct (Cost: 2 Influence)</h3>
+        <h3>Storm the Precinct (Cost: 1 Influence)</h3>
         <p><em>You don't negotiate with the blue wall; you tear it down. If you want to clear a Precinct, you have to burn it to the ground. This is a high-stakes, all-or-nothing assault. Bring body bags.</em></p>
         <ol class="sub-section">
             <li><strong>The Charge:</strong> Roll your Attack Dice (calculated via The Muscle Ratio) and apply your current Threat Level.</li>

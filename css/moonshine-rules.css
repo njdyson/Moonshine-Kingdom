@@ -31,8 +31,8 @@ body {
     color: var(--text-color);
     font-family: var(--font-body);
     margin: 0;
-    line-height: 1.3; /* Slightly more breathing room than 1.25 */
-    font-size: 10pt;
+    line-height: 1.25;
+    font-size: 9.5pt;
     font-weight: 400;
     /* justify text for that block-book look */
     text-align: justify; 
@@ -202,13 +202,13 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.4em;
-    font-size: 9pt;
+    font-size: 8.75pt;
     page-break-inside: avoid; /* Don't split tables across pages */
     background-color: rgba(255, 255, 255, 0.02); /* Very subtle background */
 }
 
 th, td {
-    padding: 8px 10px;
+    padding: 6px 8px;
     border: 1px solid var(--accent-dim);
     vertical-align: top;
     text-align: left;
@@ -303,6 +303,9 @@ img {
 .cover img {
     position: relative;
     z-index: 1;
+    width: 100%;
+    min-height: 320px;
+    object-fit: cover;
 }
 
 .cover::after {
@@ -324,7 +327,7 @@ img {
 }
 
 .currencies-hero img {
-    height: 310px;
+    height: 340px;
     object-fit: cover;
     object-position: center 18%;
 }
@@ -821,6 +824,10 @@ img {
         column-span: all;
     }
 
+    .container > h2 {
+        margin-top: 0.25em;
+    }
+
     /* Front Page adjustments for Print */
     .front-page {
         width: 100%;
@@ -889,7 +896,7 @@ img {
     .components-page h2,
     .goal-page h2,
     .shadows-page h2 {
-        margin-top: 0.35em;
+        margin-top: 0.25em;
         margin-bottom: 0.4em;
     }
 
