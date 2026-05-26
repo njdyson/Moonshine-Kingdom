@@ -2,9 +2,57 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Shylock Cards v4.5</title>
+  <title>Debt Cards</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/cards.css">
+  <style>
+    .rat-card .card-header {
+      min-height: 20mm;
+    }
+
+    .rat-card .mission-name {
+      padding-right: 62px;
+      font-size: 1.75em;
+    }
+
+    .rat-card .rat-penalty-badge {
+      top: -6px;
+      right: -6px;
+      width: 64px;
+      height: 64px;
+      border: 3px solid #d4af37;
+      border-radius: 50%;
+      background: #5a1111;
+      color: #f5e9d9;
+      text-indent: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 1.05em;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 0 0 3px #2a2a2a;
+    }
+
+    .rat-card .rat-penalty-badge span {
+      display: block;
+      font-size: 0.55em;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .rat-card .card-body {
+      gap: 5px;
+    }
+
+    .rat-card .Jobs-content,
+    .rat-card .bonus-content {
+      font-size: 0.95em;
+      line-height: 1.2;
+    }
+  </style>
 </head>
 <body>
 
@@ -424,6 +472,58 @@
     <div class="card-back shylock">
       <div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div>
     </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ============================================= -->
+  <!-- Page 7 & 8: The Rat Card -->
+  <!-- ============================================= -->
+
+  <!-- Page 7: Front -->
+  <div class="page">
+    <div class="card rat-card">
+      <div class="job-card-content-wrapper">
+        <div class="card-header">
+          <div class="header-top">
+            <h2 class="mission-name">The Rat</h2>
+            <span class="respect-badge rat-penalty-badge">-3<span>Respect</span></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="Jobs">
+            <div class="Job-header">Pariah:</div>
+            <div class="Jobs-content">
+              While you hold this card, you <strong>cannot</strong> perform the <strong>Hustle</strong> Play.
+            </div>
+          </div>
+          <div class="bonus">
+            <div class="bonus-header">Redemption:</div>
+            <div class="bonus-content">
+              Pass this to any rival who plays <strong>Rat</strong>. If a Police Raid triggers naturally (Heat Track hits 5), return this to the Supply.
+            </div>
+          </div>
+        </div>
+        <div class="flavour-text">
+          "You got the Feds on speed dial, but the street has a long memory."
+        </div>
+      </div>
+    </div>
+    <div class="card blank"></div>
+    <div class="card blank"></div>
+    <div class="card blank"></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 8: Back -->
+  <div class="page">
+    <div class="card-back rat">
+      <div class="back-title-box"><h3 class="back-title">The Rat</h3></div>
+    </div>
+    <div class="card-back blank"></div>
+    <div class="card-back blank"></div>
+    <div class="card-back blank"></div>
   </div>
 
   <div class="page-break"></div>

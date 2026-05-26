@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Moonshine Kingdom Rulebook v5</title>
+    <title>Moonshine Kingdom Rulebook v5.1</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
@@ -107,6 +107,7 @@
             <li><strong>Borough Deeds (5):</strong> Proof of your dominion over the city's major territories.</li>
             <li><strong>Ward Boss Card:</strong> The ultimate street credential for ruling the Ghettos.</li>
             <li><strong>Shylock's Mark Cards:</strong> Debt trackers. A lifeline with teeth.</li>
+            <li><strong>The Rat Card (1):</strong> The ultimate sin in cardboard form. A hot-potato mark of shame that kills your street cred and freezes you out of the underworld.</li>
             <li><strong>Favor Cards:</strong> Proof of your binding ties to the city's corrupt elite.</li>
             <li><strong>Commission Cards:</strong> Your ticket to the High Table.</li>
         </ul>
@@ -384,7 +385,7 @@
             <b>The Churn:</b> In <b>Turn Order</b>, draft <b>1 Red</b> and <b>1 White</b> die from the pool. Add them together to get your <b>Brew Number</b>. You must immediately choose one of two options:
         </p>
         <ul class="sub-section">
-            <li><strong>Produce:</strong> <b>Every</b> matching Still fires up, <strong>including rivals'</strong>. Brew <b>Domestic</b> Liquor (Gin, Whisky, or Moonshine) based on your crew size using <em>Brewing Output</em>. First to draft gets the goods; if supply runs dry (<b>Dry Tap</b>), production stops.</li>
+            <li><strong>Produce:</strong> <b>Every</b> matching Still fires up, <strong>including rivals'</strong>. Brew <b>Domestic</b> Liquor (Gin, Whisky, or Moonshine) based on your crew size using <em>The Muscle Ratio</em>. First to draft gets the goods; if supply runs dry (<b>Dry Tap</b>), production stops.</li>
             <li><strong>Dump the Mash:</strong> Discard your drafted dice. No Stills fire. You get nothing, but those dice cannot go to rivals or trigger Blowback.</li>
         </ul>
 
@@ -393,11 +394,11 @@
             Once every boss has drafted, add together the two leftover undrafted dice (<b>1 Red</b>, <b>1 White</b>) to get the <b>Blowback Number</b>.
         </p>
         <p>
-            Copper pipes burst and basements burn. <b>Every matching Still</b> explodes. Tally casualties using <em>The Production Cap</em>. <em>Runners take the shrapnel first; an unprotected Boss goes home in a pine box.</em>
+            Copper pipes burst and basements burn. <b>Every matching Still</b> explodes. Tally casualties using <em>The Muscle Ratio</em>. <em>Runners take the shrapnel first; an unprotected Boss goes home in a pine box.</em>
         </p>
 
-        <div class="muscle-ratio-table" role="table" aria-label="The Production Cap">
-            <div class="ratio-title" role="columnheader">The Production Cap</div>
+        <div class="muscle-ratio-table" role="table" aria-label="The Muscle Ratio">
+            <div class="ratio-title" role="columnheader">The Muscle Ratio</div>
             <div class="ratio-cell ratio-head" role="columnheader">Mobsters</div>
             <div class="ratio-cell ratio-head" role="columnheader">Brewed</div>
             <div class="ratio-cell ratio-head" role="columnheader">Dead</div>
@@ -411,7 +412,7 @@
             <div class="ratio-cell" role="cell">3 Barrels</div>
             <div class="ratio-cell" role="cell">3 Dead</div>
         </div>
-        <p class="note"><strong>Kingpin's Note:</strong> Physical logistics have hard limits. Even if you hold Mayor Walker's Favor and stack 6+ Mobsters in a District, your maximum production is still capped at 3 Barrels. Stacking muscle past 5 is purely for combat superiority.</p>
+        <p class="note"><strong>Kingpin's Note:</strong> The Muscle Ratio is the same count-to-result rule everywhere. For Brewing, Blowbacks, and Raid arrests, it caps at <b>3</b>. In Combat, it keeps scaling to a maximum of <b>5 dice</b>. Extra muscle past those caps does not improve that roll.</p>
 
         <h4>3. Grease the Wheels</h4>
         <ul class="sub-section">
@@ -450,7 +451,7 @@
             <tr>
                 <td><strong>Move</strong></td>
                 <td>Move any number of mobsters (carrying max 1 barrel each) to one Connected District. Entering Rival
-                    or Police turf immediately leaves your mobsters Pinned. Rivals get the choice to Ambush you first;
+                    or Police turf immediately leaves your mobsters Pinned. Rivals get a Standoff choice first;
                     Police won't fire, but instantly smash any carried liquor.</td>
             </tr>
             <tr>
@@ -520,7 +521,10 @@
             </tr>
             <tr>
                 <td><strong>Rat</strong></td>
-                <td>There's no honor among thieves when the sirens wail. Drop a dime on your rivals. As long as there is at least <b>1 marker</b> on the Heat Track, trigger an immediate Police Raid. The Raid targets the player who currently has the most (or most recent) markers on the track.</td>
+                <td>
+                    There's no honor among thieves when the sirens wail. Drop a dime on your rivals. As long as there is at least <b>1 marker</b> on the Heat Track, trigger an immediate Police Raid. The Raid targets the player who currently has the most (or most recent) markers on the track.<br><br>
+                    <b>The Mark of the Snitch:</b> Ratting is the ultimate street sin. When you make this Play, you immediately take the <b>Rat Card</b> from the supply (or snatch it from the rival currently holding it). While you hold this card, you are a pariah; nobody will do business with you, meaning you <b>cannot perform the Hustle Play</b>.
+                </td>
             </tr>
             <tr>
                 <td><strong>Rise</strong></td>
@@ -575,7 +579,8 @@
             <tr>
                 <td><strong>Courage (Cost: 0)</strong></td>
                 <td>Before you roll in a fight, you may discard <b>1 barrel of your Liquor</b> in the District where
-                    the battle is taking place to gain <b>+1 Threat</b> for that roll (max <b>4</b>).</td>
+                    the battle is taking place to gain <b>+1 Threat</b> for that roll (max <b>4</b>). You cannot
+                    discard extra barrels to gain more than <b>+1 Threat</b> from Courage.</td>
             </tr>
             <tr>
                 <td><strong>Plunder (Cost: 1)</strong></td>
@@ -596,16 +601,17 @@
         <table class="action-table">
             <tr>
                 <td><strong>Stealth (Cost: 1)</strong></td>
-                <td>Move up to 5 mobsters (no liquor) into a connected rival district without triggering an Ambush.
-                    You cannot end your Play in this state. You must immediately spend another Influence to either:
+                <td>Move up to 5 mobsters (no liquor) into a connected rival district without triggering a Standoff
+                    (the Defender cannot Ambush or Fold). You cannot end your Play in this state. You must immediately
+                    spend another Influence to either:
                     Assault the district, or Advance to a connected safe district.
                 </td>
             </tr>
             <tr>
                 <td><strong>Firepower</strong></td>
                 <td>
-                    Pay $200 per attack to increase your firepower. When you <b>Assault</b> or
-                    <b>Ambush</b>, you roll one additional attack die (up to a maximum of 5). Can't be used when
+                    Pay a flat $200 when you <b>Assault</b> or <b>Ambush</b> to roll <b>exactly one additional attack
+                        die</b> (up to a maximum of 5). You cannot pay extra to buy multiple dice. Cannot be used when
                     defending an Assault.
                 </td>
             </tr>
@@ -689,6 +695,7 @@
             <li><strong>Criminal Legends:</strong> Gain <b>1, 3, or 5 Respect</b> for each successfully completed Contract in your ledger.</li>
             <li><strong>Market Dominance:</strong> Gain <b>2 Respect</b> for each Syndicate Card you currently hold.</li>
             <li><strong>Blood Debts:</strong> Subtract <b>1 Respect</b> for every unpaid Loan owed to Shylock. <em>(Shylock always gets his due).</em></li>
+            <li><strong>The Squealer's Grave:</strong> Subtract <b>3 Respect</b> if you are stuck holding the <b>Rat Card</b> at the end of the game. <em>(Nobody crowns a rat).</em></li>
         </ul>
 
         <h3>The Final Standoff</h3>
@@ -796,8 +803,8 @@
                 </tbody>
             </table>
         </div><br>
-        <p class="note"><strong>Kingpin's Note:</strong> Physical logistics have hard limits. Even with Mayor Walker's Favor, production stays capped at <b>3 Barrels</b>. Muscle past 5 helps dice-based rolls, not brewing.</p>
-        <p><b>Street Math:</b> <b>The Production Cap</b> handles Brewing, Blowbacks, and Raid arrests. <b>The Muscle Ratio</b> handles Combat dice. The success ladder sets target numbers for Combat Threat and Smuggling networks.</p>
+        <p class="note"><strong>Kingpin's Note:</strong> Physical logistics have hard limits. Even with Mayor Walker's Favor, production stays capped at <b>3 Barrels</b>. Muscle past 5 helps Combat dice, not brewing.</p>
+        <p><b>Street Math:</b> <b>The Muscle Ratio</b> converts mobsters into output, casualties, arrests, or Combat dice. It caps at <b>3</b> for Brewing, Blowbacks, and Raid arrests, and at <b>5 dice</b> for Combat. The success ladder sets target numbers for Combat Threat and Smuggling networks.</p>
     </div>
 
     <div class="container">
@@ -911,7 +918,7 @@
         <h3>1. The Rules of Engagement</h3>
         <p>
             The mechanics of violence rely on two factors:
-            <strong>The Muscle Ratio</strong> (how many dice you roll) and <strong>Threat</strong> (what number kills).
+            <strong>The Muscle Ratio</strong> (how many dice you roll, capped at 5 in Combat) and <strong>Threat</strong> (what number kills).
         </p>
 
         <div class="table-pair">
@@ -985,24 +992,36 @@
             <li><strong>Ambush Bonus (+1):</strong> Occupiers firing the first shot when enemies enter.</li>
         </ul>
 
-        <h3>2. The Ambush: Crossing the Line</h3>
+        <h3>2. The Standoff: Crossing the Line</h3>
         <p>
-            When an opponent <strong>Moves</strong> into a District you control, immediately choose:
-            <strong>Ambush</strong> or <strong>Hold Fire</strong>.
+            When an opponent <strong>Moves</strong> into a District you control, the game pauses. As the Occupier, you
+            must immediately choose one of three responses:
         </p>
         <ol class="sub-section">
             <li><strong>Ambush:</strong>
                 You greet the invaders with lead.
                 <ul class="sub-section" style="margin-top:5px;">
-                    <li><strong>Free Shot:</strong> Only Occupier rolls dice.</li>
+                    <li><strong>Free Shot:</strong> Only the Occupier rolls dice.</li>
                     <li><strong>Bonus:</strong> Gain <b>+1 Threat</b> for the Ambush.</li>
                     <li><strong>Casualties:</strong> Each hit removes one Invader mobster (Runners first). Ambush
-                        generates <b>no Heat</b>.</li>
+                        generates <b>no Heat</b>. The Invaders are now <strong>Pinned</strong>.</li>
                 </ul>
             </li>
             <li><strong>Hold Fire:</strong>
-                You let the invaders enter your territory uncontested. <em>Why? To save your boys from a slaughter, or as part of a brokered deal.</em><br><br>
-                Whether you Ambush or Hold Fire, the Invaders are now <strong>Pinned</strong>.
+                You stand your ground but don't shoot. <em>Why? To save your boys from a slaughter, or to honor a
+                    brokered deal.</em> The Invaders are now <strong>Pinned</strong>.
+            </li>
+            <li><strong>Fold (Cost: 0):</strong>
+                You surrender the room. You may immediately move your mobsters to one <strong>Connected Safe
+                    District</strong>.
+                <ul class="sub-section" style="margin-top:5px;">
+                    <li><strong>Panic:</strong> Fleeing mobsters cannot carry Liquor; any barrels are left behind. You
+                        also cannot pack up a building--your Safehouse remains.</li>
+                    <li><strong>The Takeover:</strong> Because the turf is instantly vacated, the Invader immediately
+                        claims <strong>Control</strong>. They capture your dropped Liquor and may
+                        <strong>Commandeer</strong> or destroy your Safehouse. The Invaders are
+                        <strong>not Pinned</strong>, and their Play ends.</li>
+                </ul>
             </li>
         </ol>
 
@@ -1016,7 +1035,8 @@
         </div>
         <p>
             While Pinned, your mobsters cannot make normal Plays. The standoff stays in your turn: spend Influence to <strong>Assault</strong> or
-            <strong>Advance</strong>, or <strong>Fall Back</strong> for free. Keep choosing until Pinned is resolved, or you run dry and must Fall Back.
+            <strong>Advance</strong>, or, if you are the Invader, <strong>Fall Back</strong> for free. Keep choosing
+            until Pinned is resolved, or the Invader runs dry and must Fall Back.
         </p>
         <p class="note">
             <strong>The Cost of Pride:</strong> A real Kingpin knows an all-out firefight is bad business. Burning 3 or 4 Influence on one stubborn Assault may win the alley, but it leaves rivals free across the city. Talk is cheap; bullets cost time.
@@ -1045,9 +1065,9 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>Fall Back (Cost: 0 Influence)</strong></td>
+                <td><strong>Fall Back (Cost: 0 Influence)</strong><br><em>(Invader Only)</em></td>
                 <td>
-                    <b>Cut and run.</b> Retreat to your origin District. Carried Liquor is left behind for the Defender.
+                    <b>Cut and run.</b> Retreat to the origin District you entered from. Carried Liquor is left behind for the Defender.
                     <br><em>If you have 0 Influence remaining, you must Fall Back.</em>
                 </td>
             </tr>
@@ -1084,8 +1104,8 @@
                 2 Runners, Safehouse), in an attempt to strengthen their Smuggling efficiency.
             </p>
 
-            <h4>1. The Ambush</h4>
-            <p>The Irish (Occupier) fire first. The Knights do not roll yet.</p>
+            <h4>1. The Standoff</h4>
+            <p>The Irish (Occupier) refuse to Fold, choosing to <strong>Ambush</strong>. They fire first. The Knights do not roll yet.</p>
 
             <table class="reference-table" style="margin-top: 0.35em;">
                 <thead>
@@ -1209,7 +1229,7 @@
         </ul>
 
         <h3>Police Raids: The Boiling Point</h3>
-        <p>When the <b>5th marker</b> hits the Heat Track (or a rival plays the <b>Rat</b> Power Play), the sirens wail. Pause the current turn immediately. The city is going on lockdown.</p>
+        <p>When the <b>5th marker</b> hits the Heat Track (or a rival plays the <b>Rat</b> Power Play), the sirens wail. Pause the current turn immediately. The city is going on lockdown. <br><br><i>(Note: If the Raid was triggered naturally by the 5th marker hitting the track, the heat is on everybody and old grudges are forgotten--immediately return the <b>Rat Card</b> to the supply.)</i></p>
 
         <h4>1. Public Enemy Number One</h4>
         <p>The Feds don't care who started the war; they only care who's making the most noise. They target the mob with the most markers currently sitting on the Heat Track. That player becomes the <b>Target</b>.</p>
@@ -1227,7 +1247,7 @@
         <p>Resolve each hit District separately. For each one, the Target must make a brutal choice:</p>
         <ul class="sub-section">
             <li><strong>Pay the Bribe:</strong> Hand <b>$1,000</b> to the bank. The cops look the other way. Your Liquor and mobsters remain safe.</li>
-            <li><strong>Take the Fall:</strong> Pay nothing, and lose everything. The raid is a success. Return <b>all Liquor</b> in the District to the supply, then suffer arrests based on <em>The Production Cap</em> (Runners take the cuffs first).</li>
+            <li><strong>Take the Fall:</strong> Pay nothing, and lose everything. The raid is a success. Return <b>all Liquor</b> in the District to the supply, then suffer arrests based on <em>The Muscle Ratio</em> (capped at 3; Runners take the cuffs first).</li>
         </ul>
         <p><strong>The Aftermath:</strong> Once all strikes are resolved, the Feds rebuild their broken stations (see <em>Federal Rebuilding</em>). Then, return all Influence markers on the Heat Track to their owners' Stashes and resume the paused turn.</p>
 

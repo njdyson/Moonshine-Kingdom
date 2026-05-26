@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom: Mob Playbooks v5</title>
+  <title>Moonshine Kingdom: Mob Playbooks v5.1</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
     *,
@@ -437,7 +437,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival/Police turf leaves them <b>Pinned</b>; rivals may Ambush, Police seize carried liquor.</td>
+        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival turf triggers a Standoff (Ambush, Hold Fire, or Fold); Police turf pins them and seizes carried liquor.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -606,11 +606,11 @@
             Enter Rival District. Turn <b>Pauses</b>.
           </div>
           <div class="flow-step">
-            <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
+            <strong>2. Standoff</strong><br>
+            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold Fire pins invaders; Fold ends the Play.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0, invader only) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
@@ -631,7 +631,7 @@
 
           <div class="flow-step">
             <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Production Cap (1-2=1, 3-4=2, 5+=3).
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
           </div>
 
           <div class="flow-step">
@@ -662,7 +662,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival/Police turf leaves them <b>Pinned</b>; rivals may Ambush, Police seize carried liquor.</td>
+        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival turf triggers a Standoff (Ambush, Hold Fire, or Fold); Police turf pins them and seizes carried liquor.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -725,7 +725,7 @@
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Stealth</td>
-        <td class="action-desc">Move up to 5 mobsters (no liquor) into a connected rival district without triggering Ambush. You must immediately spend another action to Assault the district or Advance to a connected safe district.</td>
+        <td class="action-desc">Move up to 5 mobsters (no liquor) into a connected rival district without triggering a Standoff; the Defender cannot Ambush or Fold. You must immediately spend another action to Assault the district or Advance to a connected safe district.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">-</td>
@@ -831,11 +831,11 @@
             Enter Rival District. Turn <b>Pauses</b>.
           </div>
           <div class="flow-step">
-            <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
+            <strong>2. Standoff</strong><br>
+            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold Fire pins invaders; Fold ends the Play.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0, invader only) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
@@ -856,7 +856,7 @@
 
           <div class="flow-step">
             <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Production Cap (1-2=1, 3-4=2, 5+=3).
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
           </div>
 
           <div class="flow-step">
@@ -887,7 +887,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival/Police turf leaves them <b>Pinned</b>; rivals may Ambush, Police seize carried liquor.</td>
+        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival turf triggers a Standoff (Ambush, Hold Fire, or Fold); Police turf pins them and seizes carried liquor.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -1058,11 +1058,11 @@
             Enter Rival District. Turn <b>Pauses</b>.
           </div>
           <div class="flow-step">
-            <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
+            <strong>2. Standoff</strong><br>
+            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold Fire pins invaders; Fold ends the Play.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0, invader only) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
@@ -1083,7 +1083,7 @@
 
           <div class="flow-step">
             <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Production Cap (1-2=1, 3-4=2, 5+=3).
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
           </div>
 
           <div class="flow-step">
@@ -1114,7 +1114,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival/Police turf leaves them <b>Pinned</b>; rivals may Ambush, Police seize carried liquor.</td>
+        <td class="action-desc">Move any number of mobsters (max 1 barrel each) to a connected district. Rival turf triggers a Standoff (Ambush, Hold Fire, or Fold); Police turf pins them and seizes carried liquor.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -1177,7 +1177,7 @@
       <tr class="special-action">
         <td class="action-cost">0</td>
         <td class="action-name">Courage</td>
-        <td class="action-desc">Before you roll in a fight, discard 1 of your barrels in that District to gain +1 Threat for that roll (max 4).</td>
+        <td class="action-desc">Before you roll in a fight, discard 1 of your barrels in that District to gain +1 Threat for that roll (max 4). You cannot discard extra barrels to gain more than +1 Threat from Courage.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">1</td>
@@ -1284,11 +1284,11 @@
             Enter Rival District. Turn <b>Pauses</b>.
           </div>
           <div class="flow-step">
-            <strong>2. Ambush</strong><br>
-            <span>Rival may <b>Ambush</b> (+1 Threat) OR <b>Hold Fire</b>; invaders are then <b>Pinned</b>.</span>
+            <strong>2. Standoff</strong><br>
+            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold Fire pins invaders; Fold ends the Play.</span>
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong><br>Immediately choose:<br><strong>Assault</strong> rival (1) / <strong>Storm</strong> Precinct (2)<br><strong>Advance</strong> (1) to a safe district<br>OR <strong>Fall Back</strong> (0, invader only) to origin district.<br><span class="heat">Attacker kills: <img src="Art/Fire.svg" class="icon" alt="Heat"></span>
           </div>
         </div>
       </div>
@@ -1309,7 +1309,7 @@
 
           <div class="flow-step">
             <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Production Cap (1-2=1, 3-4=2, 5+=3).
+            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
           </div>
 
           <div class="flow-step">
