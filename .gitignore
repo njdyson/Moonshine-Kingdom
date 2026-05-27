@@ -6,3 +6,7 @@ PDFs/
 # built dist/ is vendored here for deployment.
 mk-online/*
 !mk-online/dist/
+
+# Board image is served from the domain root (one level above mk-online);
+# a copy in mk-online/public/ exists for local dev only — don't ship in dist.
+mk-online/dist/Board (Large).png
