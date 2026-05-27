@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moonshine Kingdom - Combat Monte Carlo Simulator v4.5</title>
+  <title>Moonshine Kingdom - Combat Monte Carlo Simulator v5.1</title>
   <style>
     :root {
       --bg: #151210;
@@ -304,7 +304,7 @@
 </head>
 <body>
   <div class="app">
-    <h1>Combat Simulator v4.5 (Monte Carlo)</h1>
+    <h1>Combat Simulator v5.1 (Monte Carlo)</h1>
 
     <section class="layout">
       <aside class="panel">
@@ -381,14 +381,14 @@
               <input id="trials" type="number" min="1" max="200000" step="1" value="20000">
             </div>
             <div class="field">
-              <label class="label" for="maxRounds">Actions Remaining (after Move)</label>
+              <label class="label" for="maxRounds">Invader Influence Remaining</label>
               <input id="maxRounds" type="number" min="1" max="10" step="1" value="3">
             </div>
           </div>
           <div class="muted" style="font-size:0.8rem; margin-top:2px;">
-            Each trial: Ambush (unless Stealth), then Assault rounds until actions run out.
-            At 0 remaining actions the invader must <strong>Fall Back</strong> (mobsters survive, liquor lost to Defender).
-            The invader may also spend 1 action to <strong>Advance</strong> (retreat with up to 1 barrel each).
+            Each trial: Ambush (unless Stealth), then the Pinned invader spends 1 Influence per Assault round until Influence runs out.
+            At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, liquor lost to Defender).
+            The invader may also spend 1 Influence to <strong>Advance</strong> (retreat with up to 1 barrel each).
           </div>
         </div>
 
@@ -420,7 +420,7 @@
             <div id="mutualCount" class="summary-sub">-</div>
           </div>
           <div class="summary-card">
-            <div class="summary-title">Fall Back (Out of Actions)</div>
+            <div class="summary-title">Fall Back (Out of Influence)</div>
             <div id="unresolvedRate" class="summary-value warn">-</div>
             <div id="unresolvedCount" class="summary-sub">-</div>
             <div class="summary-sub muted" style="margin-top:2px; font-size:0.75rem;">Mobsters survive; liquor left behind</div>
@@ -465,7 +465,7 @@
                 <td id="occFirepowerCost">-</td>
               </tr>
               <tr>
-                <td>Total Actions Used (Move + Assaults)</td>
+                <td>Influence Spent per Trial (Move + Assaults)</td>
                 <td id="totalActionsUsed">-</td>
               </tr>
               <tr>
@@ -832,8 +832,8 @@
 
       els.statusLine.innerHTML =
         "<strong>Complete.</strong> Ran " + config.trials.toLocaleString() + " trials " +
-        "(" + (config.invader.stealth ? "with Stealth (no Ambush)" : "with opening Ambush") + ", " + config.maxRounds + " actions remaining). " +
-        "Fall Back triggers automatically at 0 actions.";
+        "(" + (config.invader.stealth ? "with Stealth (no Ambush)" : "with opening Ambush") + ", " + config.maxRounds + " Influence remaining). " +
+        "Fall Back triggers automatically at 0 Influence.";
     }
 
     function resetAll() {
