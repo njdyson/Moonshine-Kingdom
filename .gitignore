@@ -1,3 +1,8 @@
 # PDFs are generated locally — not tracked in git
 *.pdf
 PDFs/
+
+# mk-online lives in its own repo (github.com/njdyson/mk-online); only the
+# built dist/ is vendored here for deployment.
+mk-online/*
+!mk-online/dist/
