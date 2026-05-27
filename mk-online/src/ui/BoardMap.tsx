@@ -152,7 +152,7 @@ export function BoardMap({
             transformOrigin: "0 0",
           }}
         >
-          <img src="/board.png" alt="Moonshine Kingdom board" className="board-map-img" />
+          <img src="/Board%20(Large).png" alt="Moonshine Kingdom board" className="board-map-img" />
 
           {DISTRICTS.map((d) => (
             <DistrictMarker
