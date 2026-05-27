@@ -101,6 +101,29 @@
       letter-spacing: 0.04em;
       background: rgba(var(--bg-rgb), 0.7);
     }
+    .hero .play-online {
+      display: inline-block;
+      margin-top: 22px;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: #0d0005;
+      background: var(--accent-gold);
+      border: 2px solid var(--accent-gold);
+      border-radius: 4px;
+      padding: 12px 32px;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.4) inset;
+      transition: transform 0.15s, background 0.15s, color 0.15s;
+    }
+    .hero .play-online:hover {
+      background: #e8c65a;
+      border-color: #e8c65a;
+      color: #0d0005;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
 
     /* ── Page Container ── */
     .page {
@@ -277,6 +300,7 @@
     <h1>Game Overview</h1>
     <p class="subtitle">A Game of Bootlegging, Backstabbing, and Gang Warfare.</p>
     <span class="version-badge">Version 4.5</span>
+    <a class="play-online" href="mk-online/dist/index.html">▶ Play Online</a>
   </header>
 
   <!-- ══════════ Main Content ══════════ -->
