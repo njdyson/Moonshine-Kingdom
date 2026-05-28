@@ -217,13 +217,26 @@
 
     .step-copy {
       font-size: 6.7pt;
-      line-height: 1.18;
+      line-height: 1.25;
       color: var(--ink);
     }
 
     .step-copy b {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .sub-tag {
       color: var(--gold);
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-size: 6.2pt;
+      margin-right: 0.4mm;
+    }
+
+    .step-copy .sub-tag + br + .sub-tag {
+      margin-top: 0.4mm;
     }
 
     .ledger-card {
@@ -246,21 +259,23 @@
       border-collapse: collapse;
       table-layout: fixed;
       overflow: hidden;
-      border: 1px solid var(--gold-dim);
+      border: 1.5px solid var(--gold);
       border-radius: 6px;
+      outline: 1.5px solid var(--gold);
+      outline-offset: -1.5px;
     }
 
     .ledger-table th,
     .ledger-table td {
       border: 1px solid rgba(212,175,55,0.28);
-      vertical-align: top;
+      vertical-align: middle;
     }
 
     .ledger-table th {
-      padding: 1.5mm 1.8mm;
+      padding: 1mm 1.3mm;
       background: rgba(212,175,55,0.18);
       color: var(--gold);
-      font-size: 7.2pt;
+      font-size: 6.5pt;
       line-height: 1.1;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -268,43 +283,112 @@
     }
 
     .ledger-table td {
-      padding: 1.5mm 1.8mm;
+      padding: 0.85mm 1.3mm;
       background: rgba(0,0,0,0.16);
+      font-size: 6.5pt;
+    }
+
+    .ledger-crown {
+      width: 2.4mm;
+      height: 2.4mm;
+      vertical-align: middle;
+      margin-left: 1mm;
+      filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
     }
 
     .ledger-borough {
-      width: 24mm;
+      width: 22mm;
       color: var(--gold);
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 12pt;
+      font-size: 11pt;
       letter-spacing: 0.6px;
       text-transform: uppercase;
       line-height: 1;
+      text-align: center;
     }
 
-    .ledger-list {
-      margin: 0;
-      padding-left: 4.5mm;
-      font-size: 7.1pt;
-      line-height: 1.24;
+    .priority-num {
+      width: 6mm;
+      text-align: center !important;
+      color: var(--gold-dim);
+      font-weight: 700;
     }
 
-    .ledger-list li {
-      margin: 0 0 0.55mm;
-      padding-left: 0.5mm;
+    .district-name {
+      font-weight: 700;
+      color: var(--ink);
     }
 
     .district-kind {
       color: var(--muted);
-      font-size: 6.4pt;
-      white-space: nowrap;
+      font-size: 6.2pt;
     }
 
     .start-kind {
       color: var(--gold);
-      font-size: 6.1pt;
+      font-size: 6.2pt;
       font-weight: 700;
       white-space: nowrap;
+    }
+
+    .start-police {
+      color: #7fb4ff;
+      font-size: 6.2pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .raids-section {
+      margin-top: 1mm;
+      border: 1px solid var(--gold-dim);
+      border-radius: 6px;
+      padding: 1.5mm;
+      background: rgba(0,0,0,0.22);
+    }
+
+    .raids-title {
+      margin: 0 0 1mm;
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.8px;
+      font-size: 11pt;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .raids-trigger {
+      margin: 0 0 1.2mm;
+      text-align: center;
+      font-size: 6.6pt;
+      line-height: 1.2;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .raids-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2mm;
+    }
+
+    .raid-step {
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 4px;
+      padding: 1.3mm 1.8mm;
+      background: rgba(0,0,0,0.25);
+      font-size: 7pt;
+      line-height: 1.3;
+    }
+
+    .raid-step strong {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-size: 7.2pt;
+    }
+
+    .raid-step b {
+      color: var(--gold);
     }
 
     @media print {
@@ -381,11 +465,16 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">1 Brew</div>
-            <div class="step-copy"><b>Roll:</b> <b>Turn Token #1</b> rolls <b>(players + 1) Red</b> and <b>(players + 1) White</b>.<br><b>Draft:</b> In Turn Order, each player takes <b>1 Red</b> + <b>1 White</b>; add them for the target number.<br><b>Produce/Dump:</b> Produce to activate matching stills &mdash; <b>Domestic only</b> (Gin, Whisky, Moonshine), yielding <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>; or <b>Dump the Mash</b> for no Liquor and no activation. Dumped dice leave the pool and cannot be Blowback. Supply empty? <b>Dry Tap</b>.<br><b>Blowback:</b> Add the two leftover undrafted dice (<b>1 Red</b> + <b>1 White</b>). Matching stills explode; casualties are <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>. Safehouses do not protect.</div>
+            <div class="step-copy">
+              <span class="sub-tag">Roll:</span> <b>Turn Token #1</b> rolls <b>(players+1) Red</b> &amp; <b>(players+1) White</b>.<br>
+              <span class="sub-tag">Draft:</span> In Turn Order, take <b>1 Red</b> + <b>1 White</b>; sum for the target number.<br>
+              <span class="sub-tag">Produce:</span> Activate matching Domestic stills (Gin, Whisky, Moonshine). Yield <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>. Or <b>Dump the Mash</b> for nothing. Empty supply = <b>Dry Tap</b>.<br>
+              <span class="sub-tag">Blowback:</span> The two leftover undrafted dice (<b>1R + 1W</b>) detonate matching stills. Casualties <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>. Safehouses do not protect.
+            </div>
           </div>
           <div class="step">
             <div class="step-tag">2 Grease Wheels</div>
-            <div class="step-copy">In order, stake Stash markers on Contracts (<b>Days to Deadline</b>). Staked markers are locked until Reckoning. Then move markers to Operations (<b>max 5</b>) for this Day's Plays.</div>
+            <div class="step-copy">In Turn Order, stake Stash markers on Contracts (one per <b>Day to Deadline</b>). Staked markers lock until Reckoning. Move remaining markers to <b>Operations</b> (max 5) for this Day's Plays.</div>
           </div>
         </div>
       </section>
@@ -401,15 +490,19 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">Take Play</div>
-            <div class="step-copy">Spend influence for <b>1 Action</b> (a <b>Play</b>) or <b>1 Power Play</b>.<br>Combat plays resolve fully before the Play passes.<br><b>Card Actions:</b> Titles may unlock extra Plays such as Fix and Extort.</div>
+            <div class="step-copy">Spend Influence for <b>1 Action</b> (a Play) or <b>1 Power Play</b>. Combat resolves fully before the Play ends. Titles may unlock extra Plays (<b>Fix</b>, <b>Extort</b>).</div>
           </div>
           <div class="step">
             <div class="step-tag">Pay + Heat</div>
-            <div class="step-copy">Spent markers return to <b>Stash</b>; if Heat is generated, place <b>1 spent marker</b> on the <b>Heat Track</b>. <b>House Pour</b> Kickbacks return markers from Stash to Operations. <b>Greed Tax:</b> 4+ barrels in one Unload = Heat.</div>
+            <div class="step-copy">
+              <span class="sub-tag">Pay:</span> Spent markers return to <b>Stash</b>.<br>
+              <span class="sub-tag">Heat:</span> If Heat is generated, place 1 spent marker on the <b>Heat Track</b>. <b>Greed Tax:</b> 4+ barrels in one Unload = Heat.<br>
+              <span class="sub-tag">Kickback:</span> <b>House Pour</b> returns markers from Stash to Operations.
+            </div>
           </div>
           <div class="step">
             <div class="step-tag">Lay Low</div>
-            <div class="step-copy">When you run out of actions or step off the street early: clear remaining Operations markers to <b>Stash</b>, return your current Turn Token, then take the lowest numbered Turn Token of the <b>other moon phase</b> for next Day's order.</div>
+            <div class="step-copy">Run dry or step off early: clear Operations markers to <b>Stash</b>, return your Turn Token, then take the lowest <b>opposite moon phase</b> token for next Day's order.</div>
           </div>
         </div>
       </section>
@@ -459,77 +552,199 @@
       <table class="ledger-table" aria-label="Town Planning Ledger">
         <thead>
           <tr>
-            <th>Borough</th>
-            <th>Respawn Priority</th>
+            <th style="width: 22mm; text-align: center;">Borough</th>
+            <th style="width: 6mm; text-align: center;">#</th>
+            <th style="width: 28mm;">District</th>
+            <th>Zone Type</th>
+            <th style="width: 22mm;">Setup Start</th>
           </tr>
         </thead>
         <tbody>
+          <!-- MANHATTAN -->
           <tr>
-            <td class="ledger-borough">Manhattan</td>
-            <td>
-              <ol class="ledger-list">
-                <li>Sugar Hill <span class="district-kind">(High Society - Rum)</span></li>
-                <li>East Harlem <span class="district-kind">(Whisky Speakeasy)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>The Tenderloin <span class="district-kind">(Gin Speakeasy)</span></li>
-                <li>West Side <span class="district-kind">(Dock)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>The Bowery <span class="district-kind">(Dock)</span></li>
-                <li>Five Points <span class="district-kind">(Ghetto)</span> <span class="start-kind">Start: SH+Boss+2R</span></li>
-              </ol>
-            </td>
+            <td rowspan="6" class="ledger-borough">Manhattan</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Sugar Hill</td>
+            <td class="district-kind">Rum Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="start-police">Police Precinct</td>
           </tr>
           <tr>
-            <td class="ledger-borough">The Bronx</td>
-            <td>
-              <ol class="ledger-list">
-                <li>Morris Park <span class="district-kind">(High Society - Rum)</span></li>
-                <li>Belmont <span class="district-kind">(Whisky Speakeasy)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>Fordham <span class="district-kind">(Moonshine Speakeasy)</span></li>
-                <li>Throggs Neck <span class="district-kind">(Dock)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>Hunts Point <span class="district-kind">(Ghetto)</span> <span class="start-kind">Start: SH+Boss+2R</span></li>
-              </ol>
-            </td>
+            <td class="priority-num">2</td>
+            <td class="district-name">East Harlem</td>
+            <td class="district-kind">Whisky Speakeasy</td>
+            <td class="start-kind">3 Runners</td>
           </tr>
           <tr>
-            <td class="ledger-borough">Queens</td>
-            <td>
-              <ol class="ledger-list">
-                <li>Richmond Hill <span class="district-kind">(High Society - Gin)</span></li>
-                <li>Astoria <span class="district-kind">(Rum Speakeasy)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>Flushing <span class="district-kind">(Moonshine Speakeasy)</span></li>
-                <li>Whitestone <span class="district-kind">(Dock)</span></li>
-                <li>Jamaica <span class="district-kind">(Dock)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>Corona <span class="district-kind">(Ghetto)</span> <span class="start-kind">Start: SH+Boss+2R</span></li>
-              </ol>
-            </td>
+            <td class="priority-num">3</td>
+            <td class="district-name">The Tenderloin</td>
+            <td class="district-kind">Gin Speakeasy</td>
+            <td class="start-kind"></td>
           </tr>
           <tr>
-            <td class="ledger-borough">Brooklyn</td>
-            <td>
-              <ol class="ledger-list">
-                <li>Williamsburg <span class="district-kind">(High Society - Gin)</span></li>
-                <li>Coney Island <span class="district-kind">(Whisky Speakeasy)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>Red Hook <span class="district-kind">(Moonshine Speakeasy)</span></li>
-                <li>Sheepshead Bay <span class="district-kind">(Dock)</span> <span class="start-kind">Start: 3R</span></li>
-                <li>Brownsville <span class="district-kind">(Ghetto)</span> <span class="start-kind">Start: SH+Boss+2R</span></li>
-              </ol>
-            </td>
+            <td class="priority-num">4</td>
+            <td class="district-name">West Side</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind">3 Runners</td>
           </tr>
           <tr>
-            <td class="ledger-borough">Staten Island</td>
-            <td>
-              <ol class="ledger-list">
-                <li>Stapleton <span class="district-kind">(Ghetto / Police Start)</span></li>
-                <li>Westerleigh <span class="district-kind">(Dock)</span></li>
-                <li>Tottenville <span class="district-kind">(Dock)</span></li>
-              </ol>
-            </td>
+            <td class="priority-num">5</td>
+            <td class="district-name">The Bowery</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind"></td>
+          </tr>
+          <tr>
+            <td class="priority-num">6</td>
+            <td class="district-name">Five Points</td>
+            <td class="district-kind">Ghetto</td>
+            <td class="start-kind">SH + Boss + 2R</td>
+          </tr>
+
+          <!-- THE BRONX -->
+          <tr>
+            <td rowspan="5" class="ledger-borough">The Bronx</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Morris Park</td>
+            <td class="district-kind">Rum Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="start-police">Police Precinct</td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Belmont</td>
+            <td class="district-kind">Whisky Speakeasy</td>
+            <td class="start-kind">3 Runners</td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Fordham</td>
+            <td class="district-kind">Moonshine Speakeasy</td>
+            <td class="start-kind"></td>
+          </tr>
+          <tr>
+            <td class="priority-num">4</td>
+            <td class="district-name">Throggs Neck</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind">3 Runners</td>
+          </tr>
+          <tr>
+            <td class="priority-num">5</td>
+            <td class="district-name">Hunts Point</td>
+            <td class="district-kind">Ghetto</td>
+            <td class="start-kind">SH + Boss + 2R</td>
+          </tr>
+
+          <!-- QUEENS -->
+          <tr>
+            <td rowspan="6" class="ledger-borough">Queens</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Richmond Hill</td>
+            <td class="district-kind">Gin Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="start-police">Police Precinct</td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Astoria</td>
+            <td class="district-kind">Rum Speakeasy</td>
+            <td class="start-kind">3 Runners</td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Flushing</td>
+            <td class="district-kind">Moonshine Speakeasy</td>
+            <td class="start-kind"></td>
+          </tr>
+          <tr>
+            <td class="priority-num">4</td>
+            <td class="district-name">Whitestone</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind"></td>
+          </tr>
+          <tr>
+            <td class="priority-num">5</td>
+            <td class="district-name">Jamaica</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind">3 Runners</td>
+          </tr>
+          <tr>
+            <td class="priority-num">6</td>
+            <td class="district-name">Corona</td>
+            <td class="district-kind">Ghetto</td>
+            <td class="start-kind">SH + Boss + 2R</td>
+          </tr>
+
+          <!-- BROOKLYN -->
+          <tr>
+            <td rowspan="5" class="ledger-borough">Brooklyn</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Williamsburg</td>
+            <td class="district-kind">Gin Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="start-police">Police Precinct</td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Coney Island</td>
+            <td class="district-kind">Whisky Speakeasy</td>
+            <td class="start-kind">3 Runners</td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Red Hook</td>
+            <td class="district-kind">Moonshine Speakeasy</td>
+            <td class="start-kind"></td>
+          </tr>
+          <tr>
+            <td class="priority-num">4</td>
+            <td class="district-name">Sheepshead Bay</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind">3 Runners</td>
+          </tr>
+          <tr>
+            <td class="priority-num">5</td>
+            <td class="district-name">Brownsville</td>
+            <td class="district-kind">Ghetto</td>
+            <td class="start-kind">SH + Boss + 2R</td>
+          </tr>
+
+          <!-- STATEN ISLAND -->
+          <tr>
+            <td rowspan="3" class="ledger-borough">Staten Island</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Stapleton</td>
+            <td class="district-kind">Ghetto</td>
+            <td class="start-police">Police Precinct</td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Westerleigh</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind"></td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Tottenville</td>
+            <td class="district-kind">Dock</td>
+            <td class="start-kind"></td>
           </tr>
         </tbody>
       </table>
 
-      <p class="round-note" style="margin-top: auto; border-color: var(--gold-dim);">
-        <b style="color: var(--gold);">Raid Reminder:</b> each Precinct hits one adjacent District in the same Borough that is Controlled by the Target. Hit the tied operation with the most total units; Target chooses ties.
-      </p>
+      <section class="raids-section" style="margin-top: auto;">
+        <h2 class="raids-title">Police Raids</h2>
+        <p class="raids-trigger">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target = most Heat markers (ties go to most recent).</p>
+        <div class="raids-grid">
+          <div class="raid-step">
+            <strong>1. Precision Strikes</strong> &mdash; Each Precinct hits 1 adjacent District (same Borough) Controlled by the Target.
+          </div>
+          <div class="raid-step">
+            <strong>2. Biggest Op</strong> &mdash; Highest total units (Mobsters + Barrels) in hit Districts; Target picks ties.
+          </div>
+          <div class="raid-step">
+            <strong>3. Penalty</strong> &mdash; Per hit: pay <b>$1,000</b> to keep all, or lose all Liquor + arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
+          </div>
+          <div class="raid-step">
+            <strong>4. Rebuild</strong> &mdash; Respawn destroyed Precincts via this Ledger, then clear Heat.
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </body>

@@ -153,7 +153,7 @@
     }
 
     .icon {
-      vertical-align: middle;
+      vertical-align: text-bottom;
       filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
       width: 1.25em;
       height: 1.25em;
@@ -198,7 +198,7 @@
     }
 
     .card-back .section-title {
-      margin-top: 4px;
+      margin-top: 2px;
       background-color: #000000;
       color: #d4af37;
       border: 1px solid #4a4a4a;
@@ -209,8 +209,8 @@
     .combat-section {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 7px;
+      gap: 6px;
+      margin-bottom: 3px;
       flex-shrink: 0;
     }
 
@@ -231,35 +231,93 @@
       padding: 3px 2px;
     }
 
-    /* --- MIDDLE SPLIT SECTION --- */
+    /* --- MIDDLE SECTION (single column) --- */
     .middle-container {
       display: flex;
-      flex-direction: row;
-      gap: 10px;
-      align-items: stretch;
-      margin: 4px 0;
-      flex-grow: 1; 
+      flex-direction: column;
+      gap: 2px;
+      margin: 2px 0;
+      flex-grow: 1;
     }
 
-    /* The Columns */
-    .middle-col {
-      flex: 1;
+    .combat-bonuses-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 6px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid #4a4a4a;
+      border-radius: 4px;
+      font-size: 0.72em;
+      text-align: center;
+      color: #f5e9d9;
+    }
+
+    .combat-flow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin-top: 1px;
+    }
+
+    .combat-flow-col {
       display: flex;
       flex-direction: column;
-      width: 50%;
+      gap: 3px;
       border: 1px solid #5a5a5a;
       background-color: #222;
-      border-radius: 6px;
-      padding: 6px;
+      border-radius: 5px;
+      padding: 4px;
     }
-    
-    .middle-col .section-title {
-        margin-top: 0;
-        margin-bottom: 7px;
-        background-color: #000000 !important;
-        color: #d4af37 !important;
-        border: 1px solid #4a4a4a;
-        font-size: 0.74em;
+
+    .flow-col-title {
+      text-align: center;
+      font-weight: 700;
+      color: #d4af37;
+      font-size: 0.78em;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding-bottom: 3px;
+      border-bottom: 1px dashed rgba(212,175,55,0.4);
+    }
+
+    .combat-flow-col .flow-step {
+      text-align: left;
+      font-size: 0.73em;
+      padding: 4px 5px;
+      line-height: 1.3;
+    }
+
+    .combat-actions-table {
+      margin: 2px 0 0;
+      font-size: 0.73em;
+    }
+
+    .combat-actions-table td {
+      padding: 4px 5px;
+      line-height: 1.35;
+    }
+
+    .combat-actions-table td.action-cost {
+      width: 28px;
+      font-size: 1.1em;
+    }
+
+    .combat-actions-table td.action-name {
+      width: 70px;
+    }
+
+    .combat-phase-header td {
+      background-color: #1c1c1c;
+      color: #d4af37;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-size: 0.95em;
+      padding: 3px 5px;
+      border-color: #d4af37;
     }
 
     /* Threat Table (Now in left col) */
@@ -313,7 +371,7 @@
         margin-top: 6px;
         font-size: 0.72em;
         font-style: italic;
-        color: #aaa;
+        color: #cccccc;
     }
 
     /* --- ENDGAME SECTION --- */
@@ -442,8 +500,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Move barrels between a District you Control and one connected District. Rival turf receives them as a gift.</td>
-        
+        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -456,7 +513,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (failed dice = arrests; Runners first).</td>
+        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -505,10 +562,11 @@
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Consigliere </td>
-        <td class="action-desc">Remove any marker from the Heat track. Return it to owners Stash.</td>
+        <td class="action-desc">Remove any marker from the Heat track. Return it to its owner's Stash.</td>
       </tr>
     </table>
-    <p class="commission-req"><strong>Shylock's Mark: </strong> Take $1,500 before endgame. Repay $2,500 before game end or lose -1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Title Plays (1):</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; <b>Fix</b> (set market price).</p>
+    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- Sicilian Syndicate - Back -->
@@ -550,8 +608,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Network Level</th>
-              <th>Success On Roll</th>
+              <th>Threat / Smuggle</th>
+              <th>Success</th>
             </tr>
           </thead>
           <tbody>
@@ -576,70 +634,82 @@
       </div>
     </div>
 
-    <!-- MIDDLE SECTION: SPLIT COLUMNS -->
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
     <div class="middle-container">
-        
-      <!-- LEFT COLUMN: Bonuses & Ambush -->
-      <div class="middle-col">
-        <div class="section-title">Combat Bonuses</div>  
-        <table class="threat-bonus-table">
-            <tbody>
-              <tr>
-                <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Threat with Boss.</td>
-              </tr>
-              <tr>
-                <td><strong>Safehouse</strong></td>
-                <td>+2 Threat Defending.</td>
-              </tr>
-              <tr>
-                <td><strong>Ambush</strong></td>
-                <td>+1 Threat First Roll.</td>
-              </tr>
-            </tbody>
-        </table>
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
 
-        <div class="section-title">Combat Sequence</div>
-        <div class="flow-container">
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong><br>
-            Enter Rival District. Turn <b>Pauses</b>.
+            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong><br>
-            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold pins; Fold ends Play.</span>
+            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Choose: <strong>Assault</strong> (1), <strong>Storm</strong> (1), <strong>Advance</strong> (1), or <strong>Fall Back</strong> (0, invader only).<br><span class="heat">Attacker kills: <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Police</div>
+          <div class="flow-step">
+            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+          </div>
+          <div class="flow-step">
+            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
-      <!-- RIGHT COLUMN: Police Raids -->
-      <div class="middle-col">
-        <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
-        <div class="flow-container">
-          <div class="flow-step">
-            <strong>1. Precision Strikes</strong><br>
-            Each Precinct hits 1 adjacent District in the same Borough that is Controlled by the Target.
-          </div>
 
-          <div class="flow-step">
-            <strong>2. Biggest Operation</strong><br>
-            Highest total units (Mobsters + Liquor Barrels combined), then Target chooses tied operations.
-          </div>
-
-          <div class="flow-step">
-            <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
-          </div>
-
-          <div class="flow-step">
-            <strong>4. Rebuild</strong><br>
-            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
-          </div>
-        </div>
-      </div>
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Assault</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Storm</td>
+          <td class="action-desc">vs Police Precinct. Roll Muscle; failed dice = your casualties. <b>2+ hits:</b> destroy the Precinct & take the District. <b>0&ndash;1 hits:</b> forced Fall Back.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (+1 barrel each) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
     </div>
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
@@ -667,8 +737,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Move barrels between a District you Control and one connected District. Rival turf receives them as a gift.</td>
-        
+        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -681,7 +750,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (failed dice = arrests; Runners first).</td>
+        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -733,7 +802,8 @@
         <td class="action-desc">Pay $200 on Assault/Ambush: +1 attack die (max 5). One die only.</td>
       </tr>
     </table>
-    <p class="commission-req"><strong>Shylock's Mark: </strong> Take $1,500 before endgame. Repay $2,500 before game end or lose -1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Title Plays (1):</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; <b>Fix</b> (set market price).</p>
+    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- East Side Vipers - Back -->
@@ -775,8 +845,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Network Level</th>
-              <th>Success On Roll</th>
+              <th>Threat / Smuggle</th>
+              <th>Success</th>
             </tr>
           </thead>
           <tbody>
@@ -801,70 +871,82 @@
       </div>
     </div>
 
-    <!-- MIDDLE SECTION: SPLIT COLUMNS -->
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
     <div class="middle-container">
-        
-      <!-- LEFT COLUMN: Bonuses & Ambush -->
-      <div class="middle-col">
-        <div class="section-title">Combat Bonuses</div>  
-        <table class="threat-bonus-table">
-            <tbody>
-              <tr>
-                <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Threat with Boss.</td>
-              </tr>
-              <tr>
-                <td><strong>Safehouse</strong></td>
-                <td>+2 Threat Defending.</td>
-              </tr>
-              <tr>
-                <td><strong>Ambush</strong></td>
-                <td>+1 Threat First Roll.</td>
-              </tr>
-            </tbody>
-        </table>
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
 
-        <div class="section-title">Combat Sequence</div>
-        <div class="flow-container">
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong><br>
-            Enter Rival District. Turn <b>Pauses</b>.
+            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong><br>
-            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold pins; Fold ends Play.</span>
+            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Choose: <strong>Assault</strong> (1), <strong>Storm</strong> (1), <strong>Advance</strong> (1), or <strong>Fall Back</strong> (0, invader only).<br><span class="heat">Attacker kills: <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Police</div>
+          <div class="flow-step">
+            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+          </div>
+          <div class="flow-step">
+            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
-      <!-- RIGHT COLUMN: Police Raids -->
-      <div class="middle-col">
-        <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
-        <div class="flow-container">
-          <div class="flow-step">
-            <strong>1. Precision Strikes</strong><br>
-            Each Precinct hits 1 adjacent District in the same Borough that is Controlled by the Target.
-          </div>
 
-          <div class="flow-step">
-            <strong>2. Biggest Operation</strong><br>
-            Highest total units (Mobsters + Liquor Barrels combined), then Target chooses tied operations.
-          </div>
-
-          <div class="flow-step">
-            <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
-          </div>
-
-          <div class="flow-step">
-            <strong>4. Rebuild</strong><br>
-            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
-          </div>
-        </div>
-      </div>
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Assault</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Storm</td>
+          <td class="action-desc">vs Police Precinct. Roll Muscle; failed dice = your casualties. <b>2+ hits:</b> destroy the Precinct & take the District. <b>0&ndash;1 hits:</b> forced Fall Back.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (+1 barrel each) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
     </div>
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
@@ -892,8 +974,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Move barrels between a District you Control and one connected District. Rival turf receives them as a gift.</td>
-        
+        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -906,7 +987,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (failed dice = arrests; Runners first).</td>
+        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -960,7 +1041,8 @@
           are unharmed. <span class="heat"><img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
     </table>
-    <p class="commission-req"><strong>Shylock's Mark: </strong> Take $1,500 before endgame. Repay $2,500 before game end or lose -1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Title Plays (1):</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; <b>Fix</b> (set market price).</p>
+    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- Harlem Knights - Back -->
@@ -1002,8 +1084,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Network Level</th>
-              <th>Success On Roll</th>
+              <th>Threat / Smuggle</th>
+              <th>Success</th>
             </tr>
           </thead>
           <tbody>
@@ -1028,70 +1110,82 @@
       </div>
     </div>
 
-    <!-- MIDDLE SECTION: SPLIT COLUMNS -->
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
     <div class="middle-container">
-        
-      <!-- LEFT COLUMN: Bonuses & Ambush -->
-      <div class="middle-col">
-        <div class="section-title">Combat Bonuses</div>  
-        <table class="threat-bonus-table">
-            <tbody>
-              <tr>
-                <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Threat with Boss.</td>
-              </tr>
-              <tr>
-                <td><strong>Safehouse</strong></td>
-                <td>+2 Threat Defending.</td>
-              </tr>
-              <tr>
-                <td><strong>Ambush</strong></td>
-                <td>+1 Threat First Roll.</td>
-              </tr>
-            </tbody>
-        </table>
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
 
-        <div class="section-title">Combat Sequence</div>
-        <div class="flow-container">
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong><br>
-            Enter Rival District. Turn <b>Pauses</b>.
+            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong><br>
-            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold pins; Fold ends Play.</span>
+            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Choose: <strong>Assault</strong> (1), <strong>Storm</strong> (1), <strong>Advance</strong> (1), or <strong>Fall Back</strong> (0, invader only).<br><span class="heat">Attacker kills: <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Police</div>
+          <div class="flow-step">
+            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+          </div>
+          <div class="flow-step">
+            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
-      <!-- RIGHT COLUMN: Police Raids -->
-      <div class="middle-col">
-        <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
-        <div class="flow-container">
-          <div class="flow-step">
-            <strong>1. Precision Strikes</strong><br>
-            Each Precinct hits 1 adjacent District in the same Borough that is Controlled by the Target.
-          </div>
 
-          <div class="flow-step">
-            <strong>2. Biggest Operation</strong><br>
-            Highest total units (Mobsters + Liquor Barrels combined), then Target chooses tied operations.
-          </div>
-
-          <div class="flow-step">
-            <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
-          </div>
-
-          <div class="flow-step">
-            <strong>4. Rebuild</strong><br>
-            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
-          </div>
-        </div>
-      </div>
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Assault</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Storm</td>
+          <td class="action-desc">vs Police Precinct. Roll Muscle; failed dice = your casualties. <b>2+ hits:</b> destroy the Precinct & take the District. <b>0&ndash;1 hits:</b> forced Fall Back.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (+1 barrel each) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
     </div>
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
@@ -1119,8 +1213,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Move barrels between a District you Control and one connected District. Rival turf receives them as a gift.</td>
-        
+        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -1133,7 +1226,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (failed dice = arrests; Runners first).</td>
+        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -1186,7 +1279,8 @@
           barrel of your choice from the rival District. Defensive hits still kill.</td>
       </tr>
     </table>
-    <p class="commission-req"><strong>Shylock's Mark: </strong> Take $1,500 before endgame. Repay $2,500 before game end or lose -1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Title Plays (1):</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; <b>Fix</b> (set market price).</p>
+    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- Hell's Kitchen Irish - Back -->
@@ -1228,8 +1322,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Network Level</th>
-              <th>Success On Roll</th>
+              <th>Threat / Smuggle</th>
+              <th>Success</th>
             </tr>
           </thead>
           <tbody>
@@ -1254,70 +1348,82 @@
       </div>
     </div>
 
-    <!-- MIDDLE SECTION: SPLIT COLUMNS -->
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
     <div class="middle-container">
-        
-      <!-- LEFT COLUMN: Bonuses & Ambush -->
-      <div class="middle-col">
-        <div class="section-title">Combat Bonuses</div>  
-        <table class="threat-bonus-table">
-            <tbody>
-              <tr>
-                <td style="width: 25%;"><strong>Boss</strong></td>
-                <td>+1 Threat with Boss.</td>
-              </tr>
-              <tr>
-                <td><strong>Safehouse</strong></td>
-                <td>+2 Threat Defending.</td>
-              </tr>
-              <tr>
-                <td><strong>Ambush</strong></td>
-                <td>+1 Threat First Roll.</td>
-              </tr>
-            </tbody>
-        </table>
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
 
-        <div class="section-title">Combat Sequence</div>
-        <div class="flow-container">
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong><br>
-            Enter Rival District. Turn <b>Pauses</b>.
+            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong><br>
-            <span>Rival chooses <b>Ambush</b> (+1 Threat), <b>Hold Fire</b>, or <b>Fold</b>. Ambush/Hold pins; Fold ends Play.</span>
+            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong><br>Choose: <strong>Assault</strong> (1), <strong>Storm</strong> (1), <strong>Advance</strong> (1), or <strong>Fall Back</strong> (0, invader only).<br><span class="heat">Attacker kills: <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span>
+            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+        <div class="combat-flow-col">
+          <div class="flow-col-title">Vs Police</div>
+          <div class="flow-step">
+            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+          </div>
+          <div class="flow-step">
+            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
-      <!-- RIGHT COLUMN: Police Raids -->
-      <div class="middle-col">
-        <div class="section-title">Police Raids</div>
-        <div class="raid-header">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target most markers; ties = most recent.</div>
-        <div class="flow-container">
-          <div class="flow-step">
-            <strong>1. Precision Strikes</strong><br>
-            Each Precinct hits 1 adjacent District in the same Borough that is Controlled by the Target.
-          </div>
 
-          <div class="flow-step">
-            <strong>2. Biggest Operation</strong><br>
-            Highest total units (Mobsters + Liquor Barrels combined), then Target chooses tied operations.
-          </div>
-
-          <div class="flow-step">
-            <strong>3. Penalty</strong><br>
-            Per hit District: pay <b>$1,000</b> to keep all, or lose all Liquor and suffer arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
-          </div>
-
-          <div class="flow-step">
-            <strong>4. Rebuild</strong><br>
-            Respawn destroyed Precincts by Town Planning Ledger, then clear Heat.
-          </div>
-        </div>
-      </div>
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Assault</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Storm</td>
+          <td class="action-desc">vs Police Precinct. Roll Muscle; failed dice = your casualties. <b>2+ hits:</b> destroy the Precinct & take the District. <b>0&ndash;1 hits:</b> forced Fall Back.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (+1 barrel each) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
     </div>
     <!-- NEW ENDGAME SECTION -->
     <div class="endgame-section">
