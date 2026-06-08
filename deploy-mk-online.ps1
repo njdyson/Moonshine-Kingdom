@@ -1,9 +1,9 @@
-# Deploy mk-online: build in c:\mk-online, mirror dist into this repo, commit, push.
+# Deploy mk-online: build in the source repo, mirror dist into this repo, commit, push.
 # Run from this repo's root.
 
 $ErrorActionPreference = 'Stop'
 
-$source = 'C:\mk-online'
+$source = 'C:\Users\nickj\Desktop\MK Online\mk-online'
 $here = $PSScriptRoot
 $dest = Join-Path $here 'mk-online\dist'
 
@@ -34,7 +34,9 @@ try {
         Write-Host '   No changes to commit.' -ForegroundColor Yellow
         return
     }
-    $shortSha = (Push-Location $source; git rev-parse --short HEAD; Pop-Location) | Select-Object -Last 1
+    Push-Location $source
+    $shortSha = git rev-parse --short HEAD
+    Pop-Location
     git commit -m "Deploy mk-online (source $shortSha)"
     Write-Host '==> Pushing...' -ForegroundColor Cyan
     git push origin main
