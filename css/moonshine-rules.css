@@ -799,8 +799,11 @@ img {
         box-shadow: none;
         background: transparent;
         position: relative;
-        min-height: 297mm;
-        
+        /* No min-height in print: a box of exactly 297mm can spill a sub-pixel
+           sliver onto the next page, creating a blank page before the forced
+           break-after. Pagination is handled by break-after on body > .container. */
+        min-height: auto;
+
         /* TWO COLUMN LAYOUT for professional look */
         column-count: 2;
         column-gap: 30px;
@@ -831,8 +834,8 @@ img {
     /* Front Page adjustments for Print */
     .front-page {
         width: 100%;
-        height: 297mm; /* Full page height */
-        min-height: 297mm;
+        height: calc(297mm - 1px); /* a hair under full page height to avoid sub-pixel spill */
+        min-height: auto;
         margin: 0;
         padding: 12mm 18mm;
         box-sizing: border-box;
@@ -1023,4 +1026,10 @@ img {
 
     /* Hide Scrollbars */
     ::-webkit-scrollbar { display: none; }
+}
+
+/* Avoid single-word last lines (orphans): Chromium rebalances wrapping so a
+   paragraph never ends on a lone word. Applies on screen and in print. */
+p, li {
+    text-wrap: pretty;
 }
