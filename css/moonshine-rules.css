@@ -273,6 +273,15 @@ tr:nth-child(even) {
     font-weight: 700;
 }
 
+.muscle-ratio-table.four-col {
+    grid-template-columns: 1fr 1.1fr 1fr 1.25fr;
+}
+
+.muscle-ratio-table .ratio-cell.combat-only {
+    color: #8a8a8a;
+    font-style: italic;
+}
+
 /* Specific fix for the Action Table column widths */
 .action-table th:first-child,
 .action-table td:first-child {
