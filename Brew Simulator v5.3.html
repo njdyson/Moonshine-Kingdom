@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom Brew Simulator v5.3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #140c0c; --panel: #1f1515; --ink: #f5e9d9; --muted: #d1c2ad;
+      --gold: #d4af37; --gold-dim: #8a7329; --line: #4b3b2a;
+    }
+    body {
+      margin: 0; padding: 24px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(212,175,55,0.10), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(212,175,55,0.08), transparent 45%),
+        var(--bg);
+      color: var(--ink); font-family: 'Raleway', sans-serif;
+    }
+    .wrap { max-width: 860px; margin: 0 auto; }
+    h1 { font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 2px; font-size: 34px; margin: 0; }
+    .subtitle { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 20px; }
+    .panel { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 16px; margin-bottom: 16px; }
+    h2 { font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 1px; font-size: 20px; margin: 0 0 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid rgba(212,175,55,0.28); padding: 5px 8px; text-align: center; }
+    th { background: rgba(212,175,55,0.18); color: var(--gold); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+    td.name { text-align: left; font-weight: 700; }
+    input[type=number] {
+      width: 52px; background: #120808; color: var(--ink); border: 1px solid var(--line);
+      border-radius: 4px; padding: 3px 5px; font-family: inherit; text-align: center;
+    }
+    select, button {
+      background: #120808; color: var(--ink); border: 1px solid var(--gold-dim);
+      border-radius: 5px; padding: 6px 12px; font-family: inherit; font-size: 13px;
+    }
+    button.run { background: var(--gold); color: #1a1208; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; }
+    button.run:hover { filter: brightness(1.1); }
+    .controls { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .controls label { font-size: 13px; color: var(--muted); }
+    .note { font-size: 12px; color: var(--muted); line-height: 1.5; margin-top: 10px; }
+    #results table { margin-bottom: 14px; }
+    .best { color: #8fd18f; font-weight: 700; }
+    .worst { color: #e07070; font-weight: 700; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Brew Simulator</h1>
+  <p class="subtitle">Day-1 Shadows Phase Monte Carlo &middot; Rules v5.3</p>
+
+  <div class="panel">
+    <h2>Starting Setup (Town Planning Ledger)</h2>
+    <table id="cfg">
+      <tr><th>Borough</th><th>Pier</th><th>Ghetto Still</th><th>Speakeasy Still</th><th>Dock Still</th></tr>
+      <tr data-b="Manhattan"><td class="name">Manhattan</td>
+        <td><input type="number" class="pier" value="3" min="1" max="6"></td>
+        <td><input type="number" class="still" value="8" min="2" max="12"></td>
+        <td><input type="number" class="still" value="6" min="2" max="12"></td>
+        <td><input type="number" class="still" value="5" min="2" max="12"></td></tr>
+      <tr data-b="The Bronx"><td class="name">The Bronx</td>
+        <td><input type="number" class="pier" value="6" min="1" max="6"></td>
+        <td><input type="number" class="still" value="12" min="2" max="12"></td>
+        <td><input type="number" class="still" value="10" min="2" max="12"></td>
+        <td><input type="number" class="still" value="11" min="2" max="12"></td></tr>
+      <tr data-b="Queens"><td class="name">Queens</td>
+        <td><input type="number" class="pier" value="5" min="1" max="6"></td>
+        <td><input type="number" class="still" value="8" min="2" max="12"></td>
+        <td><input type="number" class="still" value="6" min="2" max="12"></td>
+        <td><input type="number" class="still" value="11" min="2" max="12"></td></tr>
+      <tr data-b="Brooklyn"><td class="name">Brooklyn</td>
+        <td><input type="number" class="pier" value="1" min="1" max="6"></td>
+        <td><input type="number" class="still" value="5" min="2" max="12"></td>
+        <td><input type="number" class="still" value="3" min="2" max="12"></td>
+        <td><input type="number" class="still" value="2" min="2" max="12"></td></tr>
+    </table>
+    <div class="controls" style="margin-top: 12px;">
+      <label>Game:
+        <select id="empty">
+          <option value="">4 players (all boroughs)</option>
+          <option value="Manhattan">3 players — Manhattan empty</option>
+          <option value="The Bronx">3 players — The Bronx empty</option>
+          <option value="Queens">3 players — Queens empty</option>
+          <option value="Brooklyn">3 players — Brooklyn empty</option>
+        </select>
+      </label>
+      <label>Days simulated: <input type="number" id="iters" value="200000" min="1000" step="50000" style="width: 90px;"></label>
+      <button class="run" id="run">Roll the Dice</button>
+    </div>
+    <p class="note">
+      Models the Shadows Phase with all starting districts at 3 Mobsters (Muscle Ratio 2): the communal roll
+      (1 White + players+1 Red), a greedy draft in random seat order (players grab a die that fires a Still,
+      preferring dice that would burn them if left behind; the last seat picks the Blowback victim), private
+      (Pier) vs public (White) mash, and the Blowback on the leftover Red. Net $ values a Moonshine barrel at
+      $200, a lost Runner at $300 (Recruit) and a flipped Still at $200 (Tap).
+    </p>
+  </div>
+
+  <div class="panel" id="results" style="display:none;">
+    <h2>Results</h2>
+    <div id="out"></div>
+  </div>
+</div>
+
+<script>
+const YIELD = 2, CAS = 2, MOON = 200, RECRUIT = 300, RETAP = 200;
+const d6 = () => 1 + Math.floor(Math.random() * 6);
+
+function readConfig() {
+  const cfg = {};
+  document.querySelectorAll('#cfg tr[data-b]').forEach(tr => {
+    const pier = +tr.querySelector('.pier').value;
+    const stills = {};
+    tr.querySelectorAll('.still').forEach(inp => { stills[+inp.value] = true; });
+    cfg[tr.dataset.b] = { pier, stills };
+  });
+  return cfg;
+}
+
+function simulate(cfg, names, N) {
+  const fires = (b, r, W) => !!(cfg[b].stills[cfg[b].pier + r] || cfg[b].stills[W + r]);
+  const dangerous = (b, r, W) => !!cfg[b].stills[W + r];
+  const ownLoss = (b, blow) => cfg[b].stills[blow] ? CAS * RECRUIT + RETAP : 0;
+
+  function pickDie(b, pool, W, isLast) {
+    if (isLast && pool.length === 2) {
+      let best = null;
+      for (let i = 0; i < 2; i++) {
+        const r = pool[i], blow = W + pool[1 - i];
+        const rl = names.filter(n => n !== b).reduce((s, n) => s + ownLoss(n, blow), 0);
+        const s = [fires(b, r, W) ? 1 : 0, -ownLoss(b, blow), rl];
+        if (!best || s[0] > best.s[0] || (s[0] === best.s[0] && (s[1] > best.s[1] ||
+            (s[1] === best.s[1] && s[2] > best.s[2])))) best = { s, i };
+      }
+      return best.i;
+    }
+    const firing = pool.map((r, i) => ({ r, i })).filter(o => fires(b, o.r, W));
+    if (firing.length) {
+      const def = firing.filter(o => dangerous(b, o.r, W));
+      const set = def.length ? def : firing;
+      return set[Math.floor(Math.random() * set.length)].i;
+    }
+    const danger = pool.map((r, i) => ({ r, i })).filter(o => dangerous(b, o.r, W));
+    if (danger.length) return danger[Math.floor(Math.random() * danger.length)].i;
+    return Math.floor(Math.random() * pool.length);
+  }
+
+  const nP = names.length;
+  const st = {}, seat = {};
+  for (const b of names) { st[b] = { fire: 0, blown: 0, net: 0 }; seat[b] = Array.from({ length: nP }, () => ({ n: 0, fire: 0 })); }
+  const leftDist = {};
+  for (let t = 0; t < N; t++) {
+    const order = names.slice();
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    const W = d6();
+    const pool = Array.from({ length: nP + 1 }, d6);
+    const picked = {};
+    order.forEach((b, idx) => {
+      const i = pickDie(b, pool, W, idx === nP - 1);
+      picked[b] = pool[i]; pool.splice(i, 1);
+    });
+    leftDist[pool[0]] = (leftDist[pool[0]] || 0) + 1;
+    const blow = W + pool[0];
+    order.forEach((b, idx) => {
+      seat[b][idx].n++;
+      if (fires(b, picked[b], W)) { st[b].fire++; seat[b][idx].fire++; st[b].net += YIELD * MOON; }
+      if (cfg[b].stills[blow]) { st[b].blown++; st[b].net -= CAS * RECRUIT + RETAP; }
+    });
+  }
+  return { st, seat, leftDist };
+}
+
+document.getElementById('run').addEventListener('click', () => {
+  const cfg = readConfig();
+  const empty = document.getElementById('empty').value;
+  const names = Object.keys(cfg).filter(b => b !== empty);
+  const N = Math.max(1000, +document.getElementById('iters').value || 200000);
+  const { st, seat, leftDist } = simulate(cfg, names, N);
+
+  const nets = names.map(b => st[b].net / N);
+  const hi = Math.max(...nets), lo = Math.min(...nets);
+  let html = '<table><tr><th>Borough</th><th>P(Brew fires)</th><th>P(own Still blown)</th><th>E[net $ / Day]</th></tr>';
+  for (const b of names) {
+    const net = st[b].net / N;
+    const cls = net === hi ? 'best' : net === lo ? 'worst' : '';
+    html += `<tr><td class="name">${b}</td><td>${(100 * st[b].fire / N).toFixed(1)}%</td>` +
+      `<td>${(100 * st[b].blown / N).toFixed(1)}%</td><td class="${cls}">$${net.toFixed(0)}</td></tr>`;
+  }
+  html += '</table>';
+
+  html += '<table><tr><th>Borough</th>' + names.map((_, i) => `<th>Seat ${i + 1} fires</th>`).join('') + '</tr>';
+  for (const b of names) {
+    html += `<tr><td class="name">${b}</td>` +
+      seat[b].map(s => `<td>${(100 * s.fire / s.n).toFixed(0)}%</td>`).join('') + '</tr>';
+  }
+  html += '</table>';
+
+  html += '<table><tr><th colspan="6">Leftover Red die (sets the Blowback)</th></tr><tr>' +
+    [1,2,3,4,5,6].map(r => `<td>${r}: ${(100 * (leftDist[r] || 0) / N).toFixed(0)}%</td>`).join('') + '</tr></table>';
+
+  document.getElementById('out').innerHTML = html;
+  document.getElementById('results').style.display = '';
+});
+</script>
+</body>
+</html>

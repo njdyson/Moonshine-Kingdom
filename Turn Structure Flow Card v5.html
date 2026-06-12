@@ -20,6 +20,11 @@
       --phase-1: #7a4d1f;
       --phase-2: #5e2a2a;
       --phase-3: #3d4f2f;
+      /* Liquor colours */
+      --rum:       #c0732a;
+      --whisky:    #b8860b;
+      --gin:       #3a8c6e;
+      --moonshine: #8a8fa8;
     }
 
     body {
@@ -297,10 +302,10 @@
     }
 
     .ledger-borough {
-      width: 22mm;
+      width: 18mm;
       color: var(--gold);
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 11pt;
+      font-size: 10pt;
       letter-spacing: 0.6px;
       text-transform: uppercase;
       line-height: 1;
@@ -308,7 +313,7 @@
     }
 
     .priority-num {
-      width: 6mm;
+      width: 5mm;
       text-align: center !important;
       color: var(--gold-dim);
       font-weight: 700;
@@ -319,24 +324,40 @@
       color: var(--ink);
     }
 
+    /* Zone type — coloured by liquor */
     .district-kind {
       color: var(--muted);
       font-size: 6.2pt;
     }
+    .kind-rum      { color: var(--rum); font-size: 6.2pt; font-weight: 700; }
+    .kind-whisky   { color: var(--whisky); font-size: 6.2pt; font-weight: 700; }
+    .kind-gin      { color: var(--gin); font-size: 6.2pt; font-weight: 700; }
+    .kind-moonshine{ color: var(--moonshine); font-size: 6.2pt; font-weight: 700; }
+    .kind-dock     { color: var(--muted); font-size: 6.2pt; }
+    .kind-ghetto   { color: var(--muted); font-size: 6.2pt; }
 
-    .start-kind {
-      color: var(--gold);
+    /* Still number cell */
+    .still-num {
+      text-align: center !important;
+      font-weight: 700;
+      font-size: 6.8pt;
+      color: var(--ink);
+    }
+    .still-num.still-blank {
+      color: var(--gold-dim);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    /* Setup labels — plain coloured text, no box */
+    .setup-tag {
       font-size: 6.2pt;
       font-weight: 700;
       white-space: nowrap;
     }
-
-    .start-police {
-      color: #7fb4ff;
-      font-size: 6.2pt;
-      font-weight: 700;
-      white-space: nowrap;
-    }
+    .tag-turf     { color: #e07070; }
+    .tag-runners  { color: var(--gold); }
+    .tag-precinct { color: #7fb4ff; }
 
     .raids-section {
       margin-top: 1mm;
@@ -466,10 +487,10 @@
           <div class="step">
             <div class="step-tag">1 Brew</div>
             <div class="step-copy">
-              <span class="sub-tag">Roll:</span> <b>Turn Token #1</b> rolls <b>(players+1) Red</b> &amp; <b>(players+1) White</b>.<br>
-              <span class="sub-tag">Draft:</span> In Turn Order, take <b>1 Red</b> + <b>1 White</b>; sum for the target number.<br>
-              <span class="sub-tag">Produce:</span> Activate matching Domestic stills (Gin, Whisky, Moonshine). Yield <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>. Or <b>Dump the Mash</b> for nothing. Empty supply = <b>Dry Tap</b>.<br>
-              <span class="sub-tag">Blowback:</span> The two leftover undrafted dice (<b>1R + 1W</b>) detonate matching stills. Casualties <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b>. Safehouses do not protect.
+              <span class="sub-tag">Roll:</span> <b>Turn Token #1</b> rolls <b>1 White</b> (Public Mash — stays on table) + <b>(players+1) Red</b>.<br>
+              <span class="sub-tag">Draft:</span> In Turn Order, each boss takes <b>1 Red</b>. Add it to your <b>Pier number</b> (Private Mash) or the <b>White die</b> (Public Mash) — your choice. No Dock = must use White.<br>
+              <span class="sub-tag">Produce:</span> Every face-up Still you Control matching your Brew Number fires. Yield <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b> mobsters in its District.<br>
+              <span class="sub-tag">Blowback:</span> Leftover Red + White = Blowback Number. Hits every face-up Controlled Still in the city. Gin/Whisky: downgrade one step. Moonshine: casualties by Muscle Ratio, then flip face-down.
             </div>
           </div>
           <div class="step">
@@ -496,8 +517,9 @@
             <div class="step-tag">Pay + Heat</div>
             <div class="step-copy">
               <span class="sub-tag">Pay:</span> Spent markers return to <b>Stash</b>.<br>
-              <span class="sub-tag">Heat:</span> If Heat is generated, place 1 spent marker on the <b>Heat Track</b>. <b>Greed Tax:</b> 4+ barrels in one Unload = Heat.<br>
-              <span class="sub-tag">Kickback:</span> <b>House Pour</b> returns markers from Stash to Operations.
+              <span class="sub-tag">Heat:</span> If Heat is generated, place 1 spent marker on the <b>Heat Track</b>. <b>Greed Tax:</b> Unloading 4+ barrels = Heat.<br>
+              <span class="sub-tag">Kickback:</span> Each barrel matching the Speakeasy's <b>House Pour</b> returns 1 Stash marker to Operations.<br>
+              <span class="sub-tag">Toast:</span> 4+ House Pour barrels at a <b>High Society</b> Speakeasy you Control = take the <b>Favor Card</b> + 1 permanent Influence.
             </div>
           </div>
           <div class="step">
@@ -526,11 +548,11 @@
           </div>
           <div class="step">
             <div class="step-tag">3 Contracts</div>
-            <div class="step-copy">Return <b>1 marker</b> from each active Contract. If the final marker returns, complete it or botch it to its discard pile. Claim <b>Commission</b> immediately if a new completion finishes Gig + Racket + Score.</div>
+            <div class="step-copy">Return <b>1 marker</b> from each active Contract. Objectives checked now, after Sweep and Titles resolve. Final marker = Completed (collect Take) or Botched (discard). Claim <b>Commission Card</b> immediately on completing Gig + Racket + Score.</div>
           </div>
           <div class="step">
-            <div class="step-tag">4 Endgame</div>
-            <div class="step-copy">Commission Card + 20 Respect ends the game; otherwise flip Moon Phase.</div>
+            <div class="step-tag">4 Next Day</div>
+            <div class="step-copy">Commission Card + <b>20+ Respect</b> = game ends. Otherwise flip Moon Marker and begin next Day.</div>
           </div>
         </div>
       </section>
@@ -546,17 +568,18 @@
       </header>
 
       <p class="ledger-note">
-        When a Precinct respawns, place it in the first <b>Unoccupied</b> District on this list for its home Borough. Starting Turf labels show setup placements.
+        Precincts deploy to the first <b>Unoccupied</b> District on this list for their home Borough — at setup (after starting turf is placed) and whenever one respawns. Setup labels show starting placements for occupied Boroughs.
       </p>
 
       <table class="ledger-table" aria-label="Town Planning Ledger">
         <thead>
           <tr>
-            <th style="width: 22mm; text-align: center;">Borough</th>
-            <th style="width: 6mm; text-align: center;">#</th>
-            <th style="width: 28mm;">District</th>
+            <th style="width: 18mm; text-align: center;">Borough</th>
+            <th style="width: 5mm; text-align: center;">#</th>
+            <th style="width: 24mm;">District</th>
             <th>Zone Type</th>
-            <th style="width: 22mm;">Setup Start</th>
+            <th style="width: 8mm; text-align: center;">Still</th>
+            <th style="width: 18mm;">Setup</th>
           </tr>
         </thead>
         <tbody>
@@ -564,144 +587,166 @@
           <tr>
             <td rowspan="6" class="ledger-borough">Manhattan</td>
             <td class="priority-num">1</td>
-            <td class="district-name">Sugar Hill</td>
-            <td class="district-kind">Rum Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
-            <td class="start-police">Police Precinct</td>
+            <td class="district-name">Five Points</td>
+            <td class="kind-ghetto">Ghetto</td>
+            <td class="still-num">8</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
-            <td class="district-name">East Harlem</td>
-            <td class="district-kind">Whisky Speakeasy</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">Sugar Hill</td>
+            <td class="kind-rum">Rum <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="still-num still-blank">—</td>
+            <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
-            <td class="district-name">The Tenderloin</td>
-            <td class="district-kind">Gin Speakeasy</td>
-            <td class="start-kind"></td>
+            <td class="district-name">East Harlem</td>
+            <td class="kind-whisky">Whisky</td>
+            <td class="still-num">6</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
-            <td class="district-name">West Side</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">The Tenderloin</td>
+            <td class="kind-gin">Gin</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
-            <td class="district-name">The Bowery</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind"></td>
+            <td class="district-name">West Side</td>
+            <td class="kind-dock">Dock &middot; Pier 3</td>
+            <td class="still-num">5</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">6</td>
-            <td class="district-name">Five Points</td>
-            <td class="district-kind">Ghetto</td>
-            <td class="start-kind">SH + Boss + 2R</td>
+            <td class="district-name">The Bowery</td>
+            <td class="kind-dock">Dock &middot; Pier 4</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
 
           <!-- THE BRONX -->
           <tr>
             <td rowspan="5" class="ledger-borough">The Bronx</td>
             <td class="priority-num">1</td>
-            <td class="district-name">Morris Park</td>
-            <td class="district-kind">Rum Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
-            <td class="start-police">Police Precinct</td>
+            <td class="district-name">Hunts Point</td>
+            <td class="kind-ghetto">Ghetto</td>
+            <td class="still-num">12</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
-            <td class="district-name">Belmont</td>
-            <td class="district-kind">Whisky Speakeasy</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">Morris Park</td>
+            <td class="kind-whisky">Whisky <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="still-num still-blank">—</td>
+            <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
-            <td class="district-name">Fordham</td>
-            <td class="district-kind">Moonshine Speakeasy</td>
-            <td class="start-kind"></td>
+            <td class="district-name">Belmont</td>
+            <td class="kind-rum">Rum</td>
+            <td class="still-num">10</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
-            <td class="district-name">Throggs Neck</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">Fordham</td>
+            <td class="kind-moonshine">Moonshine</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
-            <td class="district-name">Hunts Point</td>
-            <td class="district-kind">Ghetto</td>
-            <td class="start-kind">SH + Boss + 2R</td>
+            <td class="district-name">Throggs Neck</td>
+            <td class="kind-dock">Dock &middot; Pier 6</td>
+            <td class="still-num">11</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
 
           <!-- QUEENS -->
           <tr>
             <td rowspan="6" class="ledger-borough">Queens</td>
             <td class="priority-num">1</td>
-            <td class="district-name">Richmond Hill</td>
-            <td class="district-kind">Gin Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
-            <td class="start-police">Police Precinct</td>
+            <td class="district-name">Corona</td>
+            <td class="kind-ghetto">Ghetto</td>
+            <td class="still-num">8</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
-            <td class="district-name">Astoria</td>
-            <td class="district-kind">Rum Speakeasy</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">Richmond Hill</td>
+            <td class="kind-gin">Gin <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="still-num still-blank">—</td>
+            <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
-            <td class="district-name">Flushing</td>
-            <td class="district-kind">Moonshine Speakeasy</td>
-            <td class="start-kind"></td>
+            <td class="district-name">Astoria</td>
+            <td class="kind-rum">Rum</td>
+            <td class="still-num">6</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
-            <td class="district-name">Whitestone</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind"></td>
+            <td class="district-name">Flushing</td>
+            <td class="kind-moonshine">Moonshine</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
-            <td class="district-name">Jamaica</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">Whitestone</td>
+            <td class="kind-dock">Dock &middot; Pier 2</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
           <tr>
             <td class="priority-num">6</td>
-            <td class="district-name">Corona</td>
-            <td class="district-kind">Ghetto</td>
-            <td class="start-kind">SH + Boss + 2R</td>
+            <td class="district-name">Jamaica</td>
+            <td class="kind-dock">Dock &middot; Pier 5</td>
+            <td class="still-num">11</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
 
           <!-- BROOKLYN -->
           <tr>
             <td rowspan="5" class="ledger-borough">Brooklyn</td>
             <td class="priority-num">1</td>
-            <td class="district-name">Williamsburg</td>
-            <td class="district-kind">Gin Speakeasy <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
-            <td class="start-police">Police Precinct</td>
+            <td class="district-name">Brownsville</td>
+            <td class="kind-ghetto">Ghetto</td>
+            <td class="still-num">5</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
-            <td class="district-name">Coney Island</td>
-            <td class="district-kind">Whisky Speakeasy</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">Williamsburg</td>
+            <td class="kind-moonshine">Moonshine <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="still-num still-blank">—</td>
+            <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
-            <td class="district-name">Red Hook</td>
-            <td class="district-kind">Moonshine Speakeasy</td>
-            <td class="start-kind"></td>
+            <td class="district-name">Coney Island</td>
+            <td class="kind-whisky">Whisky</td>
+            <td class="still-num">3</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
-            <td class="district-name">Sheepshead Bay</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind">3 Runners</td>
+            <td class="district-name">Red Hook</td>
+            <td class="kind-gin">Gin</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
-            <td class="district-name">Brownsville</td>
-            <td class="district-kind">Ghetto</td>
-            <td class="start-kind">SH + Boss + 2R</td>
+            <td class="district-name">Sheepshead Bay</td>
+            <td class="kind-dock">Dock &middot; Pier 1</td>
+            <td class="still-num">2</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
 
           <!-- STATEN ISLAND -->
@@ -709,20 +754,23 @@
             <td rowspan="3" class="ledger-borough">Staten Island</td>
             <td class="priority-num">1</td>
             <td class="district-name">Stapleton</td>
-            <td class="district-kind">Ghetto</td>
-            <td class="start-police">Police Precinct</td>
+            <td class="kind-ghetto">Ghetto</td>
+            <td class="still-num">12</td>
+            <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Westerleigh</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind"></td>
+            <td class="kind-dock">Dock &middot; Pier 6</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Tottenville</td>
-            <td class="district-kind">Dock</td>
-            <td class="start-kind"></td>
+            <td class="kind-dock">Dock &middot; Pier 1</td>
+            <td class="still-num still-blank">—</td>
+            <td></td>
           </tr>
         </tbody>
       </table>
