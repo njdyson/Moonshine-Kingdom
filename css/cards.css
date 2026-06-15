@@ -146,6 +146,17 @@ body {
   letter-spacing: 1px;
 }
 
+.back-deadline {
+  margin: 3px 0 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #f0cf6f;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 /* Background Images */
 .speakeasy-back { background-image: url('../Art/Speakeasy.png'); justify-content: flex-end; }
 .favor-back { background-image: url('../Art/Bribe.png'); justify-content: flex-end; }
