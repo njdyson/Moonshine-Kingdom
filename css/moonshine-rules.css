@@ -298,7 +298,7 @@ img {
 .cover img, .title-image {
     max-width: 100%;
     display: block;
-    margin: 5px auto;
+    margin: 15px auto;
 }
 
 .cover {
@@ -328,6 +328,10 @@ img {
         linear-gradient(to bottom, rgba(var(--bg-rgb), 0.92) 0%, rgba(var(--bg-rgb), 0) 20%, rgba(var(--bg-rgb), 0) 80%, rgba(var(--bg-rgb), 0.92) 100%);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+}
+
+.cover.no-fade::after {
+    display: none;
 }
 
 .single-column-block {
@@ -910,6 +914,19 @@ img {
     .shadows-page h2 {
         margin-top: 0.25em;
         margin-bottom: 0.4em;
+    }
+
+    .currency-board {
+        position: static;
+        margin-top: 24px;
+    }
+
+    .currencies-page {
+        padding-bottom: 32px;
+    }
+
+    .heat-page .cover img {
+        margin-top: 0;
     }
 
     .components-page h3,

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom: Mob Playbooks v5.1</title>
+  <title>Moonshine Kingdom: Mob Playbooks v5.3</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
     *,
@@ -489,7 +489,7 @@
   <!-- Front -->
   <div class="card sicilian">
     <div class="loose-change-badge"><span>$5</span></div>
-    <div class="card-header">Sicilian Syndicate <span class="playbook-subtitle">Playbook</span></div>
+    <div class="card-header">Sicilian Syndicate</div>
     <div class="section-title">Turf Control</div>
     <table>
       <tr>
@@ -500,7 +500,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
+        <td class="action-desc">Redistribute barrels between two connected Districts you Control, or with rival permission. Cannot push to Police turf.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -508,12 +508,12 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Joint. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell at a controlled Speakeasy. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span><br><b>Toast:</b> 4+ House Pour at a High Society Speakeasy you Control &rarr; take their Favor Card + 1 permanent Influence. Once per District per player.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
+        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -521,17 +521,12 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts (3 with Texas), then discard to Hand Limit 3 (5 with Texas). Once per Day.</td>
+        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">If Heat has 1+ markers, trigger a Raid. Target most Heat markers; ties hit most recent. Take the Rat Card.</td>
-      </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Bribe</td>
-        <td class="action-desc">At controlled High Society: pay $2,500 for its Favor and +1 permanent Influence. Once per District per player.</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger a Raid on the most-marked player (tie: most recent). Take the Rat Card.</td>
       </tr>
     </table>
     <div class="section-title">Empire Building</div>
@@ -539,7 +534,12 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Recruit</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each. If a rival holds Ward Boss, pay them a $100 cut per Runner.</td>
+        <td class="action-desc">Hire Runners at a controlled Safehouse: $300 each. Ward Boss rival collects $100/Runner.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Rig</td>
+        <td class="action-desc"><b>Tap $200</b>: activate Still (Moonshine). <b>Refine $300</b>: add Gin cap. <b>Perfect $500</b>: Whisky. Combine costs to skip tiers.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -549,7 +549,7 @@
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Rise</td>
-        <td class="action-desc">Boss dead? Place a new Boss in your District or any Unoccupied District with 2 Runners. May Secure there for free.</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -557,16 +557,15 @@
       <tr class="special-action">
         <td class="action-cost">2</td>
         <td class="action-name">Capo</td>
-        <td class="action-desc">Promote Runner to a 2nd Boss. +2 Threat together.</td>
+        <td class="action-desc">Promote a Runner to a 2nd Boss. +2 Threat when both attack one District.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">1</td>
-        <td class="action-name">Consigliere </td>
-        <td class="action-desc">Remove any marker from the Heat track. Return it to its owner's Stash.</td>
+        <td class="action-name">Consigliere</td>
+        <td class="action-desc">Remove any 1 marker from the Heat Track. Return it to its owner's Stash.</td>
       </tr>
     </table>
-    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Titles:</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; collect <b>$100/barrel</b> from rival Unloads.</p>
-    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- Sicilian Syndicate - Back -->
@@ -647,29 +646,29 @@
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Police</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+            <strong>1. Move In</strong> - Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
           </div>
           <div class="flow-step">
-            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>2. Pinned</strong> - Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
 
       <table class="combat-actions-table">
         <tr class="combat-phase-header">
-          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+          <td colspan="3">Standoff: Occupier's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
@@ -687,7 +686,7 @@
           <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
         </tr>
         <tr class="combat-phase-header">
-          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+          <td colspan="3">Pinned: Invader's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">1</td>
@@ -726,7 +725,7 @@
   <!-- Front -->
   <div class="card vipers">
     <div class="loose-change-badge"><span>$20</span></div>
-    <div class="card-header">East Side Vipers <span class="playbook-subtitle">Playbook</span></div>
+    <div class="card-header">East Side Vipers</div>
     <div class="section-title">Turf Control</div>
     <table>
       <tr>
@@ -737,7 +736,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
+        <td class="action-desc">Redistribute barrels between two connected Districts you Control, or with rival permission. Cannot push to Police turf.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -745,12 +744,12 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Joint. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell at a controlled Speakeasy. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span><br><b>Toast:</b> 4+ House Pour at a High Society Speakeasy you Control &rarr; take their Favor Card + 1 permanent Influence. Once per District per player.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
+        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -758,17 +757,12 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts (3 with Texas), then discard to Hand Limit 3 (5 with Texas). Once per Day.</td>
+        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">If Heat has 1+ markers, trigger a Raid. Target most Heat markers; ties hit most recent. Take the Rat Card.</td>
-      </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Bribe</td>
-        <td class="action-desc">At controlled High Society: pay $2,500 for its Favor and +1 permanent Influence. Once per District per player.</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger a Raid on the most-marked player (tie: most recent). Take the Rat Card.</td>
       </tr>
     </table>
     <div class="section-title">Empire Building</div>
@@ -776,7 +770,12 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Recruit</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each. If a rival holds Ward Boss, pay them a $100 cut per Runner.</td>
+        <td class="action-desc">Hire Runners at a controlled Safehouse: $300 each. Ward Boss rival collects $100/Runner.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Rig</td>
+        <td class="action-desc"><b>Tap $200</b>: activate Still (Moonshine). <b>Refine $300</b>: add Gin cap. <b>Perfect $500</b>: Whisky. Combine costs to skip tiers.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -786,7 +785,7 @@
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Rise</td>
-        <td class="action-desc">Boss dead? Place a new Boss in your District or any Unoccupied District with 2 Runners. May Secure there for free.</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -794,20 +793,19 @@
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Stealth</td>
-        <td class="action-desc">Move up to 5 mobsters (no liquor) into rival turf. No Standoff: Defender cannot Ambush or Fold. Then Assault or Advance.</td>
+        <td class="action-desc">Move up to 5 Mobsters (no liquor) into rival turf. No Standoff: Defender cannot Ambush or Fold. Must immediately Assault or Advance.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">-</td>
         <td class="action-name">Firepower</td>
-        <td class="action-desc">Pay $200 on Assault/Ambush: +1 attack die (max 5). One die only.</td>
+        <td class="action-desc">Pay $200 on Assault or Ambush: +1 attack die (max 5 total). One purchase only per roll.</td>
       </tr>
     </table>
-    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Titles:</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; collect <b>$100/barrel</b> from rival Unloads.</p>
-    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- East Side Vipers - Back -->
- <div class="card card-back sicilian">
+ <div class="card card-back vipers">
     <div class="back-title">The Lowdown</div>
     <div class="section-title">Resolution Tables</div>
     <div class="combat-section">
@@ -884,29 +882,29 @@
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Police</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+            <strong>1. Move In</strong> - Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
           </div>
           <div class="flow-step">
-            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>2. Pinned</strong> - Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
 
       <table class="combat-actions-table">
         <tr class="combat-phase-header">
-          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+          <td colspan="3">Standoff: Occupier's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
@@ -924,7 +922,7 @@
           <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
         </tr>
         <tr class="combat-phase-header">
-          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+          <td colspan="3">Pinned: Invader's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">1</td>
@@ -963,7 +961,7 @@
   <!-- Front -->
   <div class="card knights">
     <div class="loose-change-badge"><span>$50</span></div>
-    <div class="card-header">Harlem Knights <span class="playbook-subtitle">Playbook</span></div>
+    <div class="card-header">Harlem Knights</div>
     <div class="section-title">Turf Control</div>
     <table>
       <tr>
@@ -974,7 +972,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
+        <td class="action-desc">Redistribute barrels between two connected Districts you Control, or with rival permission. Cannot push to Police turf.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -982,12 +980,12 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Joint. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell at a controlled Speakeasy. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span><br><b>Toast:</b> 4+ House Pour at a High Society Speakeasy you Control &rarr; take their Favor Card + 1 permanent Influence. Once per District per player.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
+        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -995,26 +993,25 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts (3 with Texas), then discard to Hand Limit 3 (5 with Texas). Once per Day.</td>
+        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">If Heat has 1+ markers, trigger a Raid. Target most Heat markers; ties hit most recent. Take the Rat Card.</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger a Raid on the most-marked player (tie: most recent). Take the Rat Card.</td>
       </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Bribe</td>
-        <td class="action-desc">At controlled High Society: pay $2,500 for its Favor and +1 permanent Influence. Once per District per player.</td>
-      </tr>
-      
     </table>
     <div class="section-title">Empire Building</div>
     <table>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Recruit</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each. If a rival holds Ward Boss, pay them a $100 cut per Runner.</td>
+        <td class="action-desc">Hire Runners at a controlled Safehouse: $300 each. Ward Boss rival collects $100/Runner.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Rig</td>
+        <td class="action-desc"><b>Tap $200</b>: activate Still (Moonshine). <b>Refine $300</b>: add Gin cap. <b>Perfect $500</b>: Whisky. Combine costs to skip tiers.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -1024,7 +1021,7 @@
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Rise</td>
-        <td class="action-desc">Boss dead? Place a new Boss in your District or any Unoccupied District with 2 Runners. May Secure there for free.</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -1032,21 +1029,19 @@
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Skiff</td>
-        <td class="action-desc">Move up to 5 mobsters (+ barrels) between any two shoreline Districts.</td>
+        <td class="action-desc">Move up to 5 Mobsters (with or without barrels) between any two Coastal Districts.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">2</td>
         <td class="action-name">Torch</td>
-        <td class="action-desc">Sacrifice a Pinned Runner in a rival district to destroy their Safehouse. Rival Mobsters and liquor
-          are unharmed. <span class="heat"><img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse. Rival Mobsters and liquor are unharmed. <span class="heat"><img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
     </table>
-    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Titles:</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; collect <b>$100/barrel</b> from rival Unloads.</p>
-    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- Harlem Knights - Back -->
-  <div class="card card-back sicilian">
+  <div class="card card-back knights">
     <div class="back-title">The Lowdown</div>
     <div class="section-title">Resolution Tables</div>
     <div class="combat-section">
@@ -1123,29 +1118,29 @@
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Police</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+            <strong>1. Move In</strong> - Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
           </div>
           <div class="flow-step">
-            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>2. Pinned</strong> - Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
 
       <table class="combat-actions-table">
         <tr class="combat-phase-header">
-          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+          <td colspan="3">Standoff: Occupier's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
@@ -1163,7 +1158,7 @@
           <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
         </tr>
         <tr class="combat-phase-header">
-          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+          <td colspan="3">Pinned: Invader's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">1</td>
@@ -1202,7 +1197,7 @@
   <!-- Front -->
   <div class="card irish">
     <div class="loose-change-badge"><span>$10</span></div>
-    <div class="card-header">Hell's Kitchen Irish <span class="playbook-subtitle">Playbook</span></div>
+    <div class="card-header">Hell's Kitchen Irish</div>
     <div class="section-title">Turf Control</div>
     <table>
       <tr>
@@ -1213,7 +1208,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Push</td>
-        <td class="action-desc">Redistribute barrels between two connected Districts. Rival's permission required if not yours; Police destroy on arrival.</td>
+        <td class="action-desc">Redistribute barrels between two connected Districts you Control, or with rival permission. Cannot push to Police turf.</td>
       </tr>
     </table>
     <div class="section-title">Black Market</div>
@@ -1221,12 +1216,12 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Joint. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell at a controlled Speakeasy. <b>House Pour</b>: +1 Kickback/barrel. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span><br><b>Toast:</b> 4+ House Pour at a High Society Speakeasy you Control &rarr; take their Favor Card + 1 permanent Influence. Once per District per player.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send up to 5 Mobsters from the Dock to roll for Havana Rum (fails = arrests, capped at 3).</td>
+        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -1234,17 +1229,12 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts (3 with Texas), then discard to Hand Limit 3 (5 with Texas). Once per Day.</td>
+        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Rat</td>
-        <td class="action-desc">If Heat has 1+ markers, trigger a Raid. Target most Heat markers; ties hit most recent. Take the Rat Card.</td>
-      </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Bribe</td>
-        <td class="action-desc">At controlled High Society: pay $2,500 for its Favor and +1 permanent Influence. Once per District per player.</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger a Raid on the most-marked player (tie: most recent). Take the Rat Card.</td>
       </tr>
     </table>
     <div class="section-title">Empire Building</div>
@@ -1252,7 +1242,12 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Recruit</td>
-        <td class="action-desc">Hire Runners in a controlled Safehouse: $300 each. If a rival holds Ward Boss, pay them a $100 cut per Runner.</td>
+        <td class="action-desc">Hire Runners at a controlled Safehouse: $300 each. Ward Boss rival collects $100/Runner.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Rig</td>
+        <td class="action-desc"><b>Tap $200</b>: activate Still (Moonshine). <b>Refine $300</b>: add Gin cap. <b>Perfect $500</b>: Whisky. Combine costs to skip tiers.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -1262,7 +1257,7 @@
       <tr class="emergency-action">
         <td class="action-cost">2</td>
         <td class="action-name">Rise</td>
-        <td class="action-desc">Boss dead? Place a new Boss in your District or any Unoccupied District with 2 Runners. May Secure there for free.</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
       </tr>
     </table>
     <div class="section-title">Signature Plays</div>
@@ -1270,21 +1265,19 @@
       <tr class="special-action">
         <td class="action-cost">0</td>
         <td class="action-name">Courage</td>
-        <td class="action-desc">Before Ambush or your Assault roll: discard 1 barrel there for +1 Threat. Cannot boost defense vs. rival Assault.</td>
+        <td class="action-desc">Before Ambush or your own Assault roll: discard 1 barrel in that District for +1 Threat. Cannot be used when defending an Assault.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Plunder</td>
-        <td class="action-desc">Perform a special Assault. For each hit, instead of killing a mobster, steal 1 liquor
-          barrel of your choice from the rival District. Defensive hits still kill.</td>
+        <td class="action-desc">Special Assault: each hit steals 1 liquor barrel instead of killing a Mobster. Carry them away if you Advance. Defender hits still kill. No Heat.</td>
       </tr>
     </table>
-    <p class="commission-req" style="margin: 4px 0 2px;"><strong>Titles:</strong> Deeds &rarr; <b>Extort</b> ($200/district). Syndicates &rarr; collect <b>$100/barrel</b> from rival Unloads.</p>
-    <p class="commission-req" style="margin: 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
+    <p class="commission-req" style="margin: 4px 0 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $2,500 by game end, else &minus;1 Respect.</p>
   </div>
 
   <!-- Hell's Kitchen Irish - Back -->
-  <div class="card card-back sicilian">
+  <div class="card card-back irish">
     <div class="back-title">The Lowdown</div>
     <div class="section-title">Resolution Tables</div>
     <div class="combat-section">
@@ -1361,29 +1354,29 @@
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
           <div class="flow-step">
-            <strong>2. Standoff</strong> &mdash; Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> &mdash; Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
           <div class="flow-col-title">Vs Police</div>
           <div class="flow-step">
-            <strong>1. Move In</strong> &mdash; Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
+            <strong>1. Move In</strong> - Enter the Police District. Liquor is <b>seized</b>; mobsters are immediately Pinned. No Standoff.
           </div>
           <div class="flow-step">
-            <strong>2. Pinned</strong> &mdash; Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>2. Pinned</strong> - Invader picks: <b>Storm</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
       </div>
 
       <table class="combat-actions-table">
         <tr class="combat-phase-header">
-          <td colspan="3">Standoff &mdash; Occupier's Choice</td>
+          <td colspan="3">Standoff: Occupier's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
@@ -1401,7 +1394,7 @@
           <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
         </tr>
         <tr class="combat-phase-header">
-          <td colspan="3">Pinned &mdash; Invader's Choice</td>
+          <td colspan="3">Pinned: Invader's Choice</td>
         </tr>
         <tr>
           <td class="action-cost">1</td>

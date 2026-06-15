@@ -21,10 +21,10 @@
       --phase-2: #5e2a2a;
       --phase-3: #3d4f2f;
       /* Liquor colours */
-      --rum:       #c0732a;
-      --whisky:    #b8860b;
-      --gin:       #3a8c6e;
-      --moonshine: #8a8fa8;
+      --rum:       #8b1a2f;
+      --whisky:    #c8a800;
+      --gin:       #c45c8a;
+      --moonshine: #9a9ea8;
     }
 
     body {
@@ -246,6 +246,8 @@
 
     .ledger-card {
       gap: 2.5mm;
+      display: flex;
+      flex-direction: column;
     }
 
     .ledger-note {
@@ -288,9 +290,10 @@
     }
 
     .ledger-table td {
-      padding: 0.85mm 1.3mm;
+      padding: 0.6mm 1.3mm;
       background: rgba(0,0,0,0.16);
       font-size: 6.5pt;
+      line-height: 1;
     }
 
     .ledger-crown {
@@ -329,12 +332,27 @@
       color: var(--muted);
       font-size: 6.2pt;
     }
-    .kind-rum      { color: var(--rum); font-size: 6.2pt; font-weight: 700; }
-    .kind-whisky   { color: var(--whisky); font-size: 6.2pt; font-weight: 700; }
-    .kind-gin      { color: var(--gin); font-size: 6.2pt; font-weight: 700; }
-    .kind-moonshine{ color: var(--moonshine); font-size: 6.2pt; font-weight: 700; }
-    .kind-dock     { color: var(--muted); font-size: 6.2pt; }
-    .kind-ghetto   { color: var(--muted); font-size: 6.2pt; }
+    .kind-rum      { color: var(--rum); font-size: 5.8pt; font-weight: 700; }
+    .kind-whisky   { color: var(--whisky); font-size: 5.8pt; font-weight: 700; }
+    .kind-gin      { color: var(--gin); font-size: 5.8pt; font-weight: 700; }
+    .kind-moonshine{ color: var(--moonshine); font-size: 5.8pt; font-weight: 700; }
+    .kind-dock     { color: var(--muted); font-size: 5.8pt; }
+    .kind-ghetto   { color: var(--muted); font-size: 5.8pt; }
+
+    .zone-icon {
+      width: 9px;
+      height: 9px;
+      vertical-align: middle;
+      margin-right: 1px;
+      display: inline-block;
+    }
+    .zone-icon-rum      { filter: invert(18%) sepia(70%) saturate(900%) hue-rotate(310deg) brightness(85%); }
+    .zone-icon-whisky   { filter: invert(75%) sepia(80%) saturate(700%) hue-rotate(5deg) brightness(95%); }
+    .zone-icon-gin      { filter: invert(55%) sepia(40%) saturate(600%) hue-rotate(280deg) brightness(100%); }
+    .zone-icon-moonshine{ filter: invert(65%) sepia(5%) saturate(300%) brightness(95%); }
+    .zone-icon-dock     { filter: invert(80%) sepia(10%) saturate(300%) brightness(90%); }
+    .zone-icon-ghetto   { filter: invert(80%) sepia(10%) saturate(300%) brightness(90%); }
+    .zone-icon-crown    { filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%); }
 
     /* Still number cell */
     .still-num {
@@ -487,15 +505,18 @@
           <div class="step">
             <div class="step-tag">1 Brew</div>
             <div class="step-copy">
-              <span class="sub-tag">Roll:</span> <b>Turn Token #1</b> rolls <b>1 White</b> (Public Mash — stays on table) + <b>(players+1) Red</b>.<br>
-              <span class="sub-tag">Draft:</span> In Turn Order, each boss takes <b>1 Red</b>. Add it to your <b>Pier number</b> (Private Mash) or the <b>White die</b> (Public Mash) — your choice. No Dock = must use White.<br>
-              <span class="sub-tag">Produce:</span> Every face-up Still you Control matching your Brew Number fires. Yield <b>1-2=1</b>, <b>3-4=2</b>, <b>5+=3</b> mobsters in its District.<br>
-              <span class="sub-tag">Blowback:</span> Leftover Red + White = Blowback Number. Hits every face-up Controlled Still in the city. Gin/Whisky: downgrade one step. Moonshine: casualties by Muscle Ratio, then flip face-down.
+              <span class="sub-tag">Roll:</span> Player #1 rolls <b>1 White</b> (Public Mash) + <b>Red Dice</b> (Players + 1).<br>
+              <span class="sub-tag">Draft:</span> In turn order, draft <b>1 Red</b>. Add to <b>Pier #</b> (Private) OR <b>White die</b> (Public). No Docks = must use White.<br>
+              <span class="sub-tag">Produce:</span> Face-up Stills you Control matching your number fire. Yield barrels based on local Mobsters (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5).<br>
+              <span class="sub-tag">Blowback:</span> Leftover Red + White = Blowback. Hits EVERY matching face-up Still. <b>Gin/Whisky:</b> Downgrade cap. <b>Moonshine:</b> Suffer casualties by Muscle Ratio, then flip face-down.
             </div>
           </div>
           <div class="step">
             <div class="step-tag">2 Grease Wheels</div>
-            <div class="step-copy">In Turn Order, stake Stash markers on Contracts (one per <b>Day to Deadline</b>). Staked markers lock until Reckoning. Move remaining markers to <b>Operations</b> (max 5) for this Day's Plays.</div>
+            <div class="step-copy">
+              <span class="sub-tag">Stake Contracts:</span> Lock Stash markers on cards equal to Days to Deadline.<br>
+              <span class="sub-tag">Fund Ops:</span> Move up to <b>5</b> remaining Stash markers to Operations.
+            </div>
           </div>
         </div>
       </section>
@@ -511,20 +532,18 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">Take Play</div>
-            <div class="step-copy">Spend Influence for <b>1 Action</b> (a Play) or <b>1 Power Play</b>. Combat resolves fully before the Play ends. Borough Deeds unlock <b>Extort</b>; Syndicates tax rival Unloads.</div>
+            <div class="step-copy">Spend Influence for 1 Play (Standard = 1, Power = 2). Combat must resolve fully before the Play ends.</div>
           </div>
           <div class="step">
-            <div class="step-tag">Pay + Heat</div>
+            <div class="step-tag">Resolve</div>
             <div class="step-copy">
-              <span class="sub-tag">Pay:</span> Spent markers return to <b>Stash</b>.<br>
-              <span class="sub-tag">Heat:</span> If Heat is generated, place 1 spent marker on the <b>Heat Track</b>. <b>Greed Tax:</b> Unloading 4+ barrels = Heat.<br>
-              <span class="sub-tag">Kickback:</span> Each barrel matching the Speakeasy's <b>House Pour</b> returns 1 Stash marker to Operations.<br>
-              <span class="sub-tag">Toast:</span> 4+ House Pour barrels at a <b>High Society</b> Speakeasy you Control = take the <b>Favor Card</b> + 1 permanent Influence.
+              <span class="sub-tag">Pay:</span> Spent markers return to Stash. If the Play generated Heat <img src="Art/Icons/fire.svg" class="zone-icon" alt="Heat">, place 1 spent marker on the <b>Heat Track</b>.<br>
+              <span class="sub-tag">Unloads:</span> Selling 4+ barrels = <b>Heat</b>. Selling <em>House Pours</em> = return 1 spent marker to Ops. 4+ House Pours at High Society = <b>Favor Card</b> + 1 permanent marker.
             </div>
           </div>
           <div class="step">
             <div class="step-tag">Lay Low</div>
-            <div class="step-copy">Run dry or step off early: clear Operations markers to <b>Stash</b>, return your Turn Token, then take the lowest <b>opposite moon phase</b> token for next Day's order.</div>
+            <div class="step-copy">When out of Influence (or passing early): clear Ops markers to Stash, and swap Turn Token for the lowest available of the <b>opposite moon phase</b>.</div>
           </div>
         </div>
       </section>
@@ -540,22 +559,23 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">1 The Sweep</div>
-            <div class="step-copy">District cap: <b>5 mobsters</b> (remove excess runners).</div>
+            <div class="step-copy">Remove excess Runners so no District exceeds <b>5 Mobsters</b>.</div>
           </div>
           <div class="step">
-            <div class="step-tag">2 Titles</div>
-            <div class="step-copy">Redistribute Borough Deeds, <b>Syndicate Cards</b>, and <b>Ward Boss</b>. Hold the most of that type (minimum <b>2</b>); ties return to Supply. Police count as empty.</div>
+            <div class="step-tag">2 Stake Your Claim</div>
+            <div class="step-copy">Titles are <b>sticky</b> &mdash; only check for claims. Unheld card: most held (min. 2) takes it. Held card: a rival needs a <b>strict majority</b> to steal it; a tie keeps it with the owner. Owners keep Titles even after abandoning turf. (Police turf counts as empty).</div>
           </div>
           <div class="step">
             <div class="step-tag">3 Contracts</div>
-            <div class="step-copy">Return <b>1 marker</b> from each active Contract. Objectives checked now, after Sweep and Titles resolve. Final marker = Completed (collect Take) or Botched (discard). Claim <b>Commission Card</b> immediately on completing Gig + Racket + Score.</div>
-          </div>
-          <div class="step">
-            <div class="step-tag">4 Next Day</div>
-            <div class="step-copy">Commission Card + <b>20+ Respect</b> = game ends. Otherwise flip Moon Marker and begin next Day.</div>
+            <div class="step-copy">Return 1 marker per active Contract. If final marker is removed, check objective. <b>Success:</b> collect Cash &amp; Respect. <b>Fail:</b> discard. <em>(Complete 1 Gig, Racket, and Score to claim Commission Card).</em></div>
           </div>
         </div>
       </section>
+
+      <p class="round-note" style="margin-top:auto; padding: 2mm 2.5mm;">
+        <b style="display:block; font-size:8.5pt; letter-spacing:0.5px; margin-bottom:1mm;">Final Reckoning</b>
+        Commission Card + <b>20+ Respect</b> = game ends. Otherwise flip the Moon Marker and begin the next Day.
+      </p>
 
     </div>
   </div>
@@ -568,17 +588,18 @@
       </header>
 
       <p class="ledger-note">
-        Precincts deploy to the first <b>Unoccupied</b> District on this list for their home Borough — at setup (after starting turf is placed) and whenever one respawns. Setup labels show starting placements for occupied Boroughs.
+        Precincts deploy to the first <b>Unoccupied</b> District on this list for their home Borough: at setup (after starting turf is placed) and whenever one respawns. Setup labels show starting positions for occupied Boroughs.
       </p>
 
-      <table class="ledger-table" aria-label="Town Planning Ledger">
+      <div style="flex:1;min-height:0;overflow:hidden;">
+      <table class="ledger-table" style="height:100%;" aria-label="Town Planning Ledger">
         <thead>
           <tr>
             <th style="width: 18mm; text-align: center;">Borough</th>
             <th style="width: 5mm; text-align: center;">#</th>
-            <th style="width: 24mm;">District</th>
-            <th>Zone Type</th>
-            <th style="width: 8mm; text-align: center;">Still</th>
+            <th style="width: 28mm;">District</th>
+            <th style="width: 13mm; text-align: center;">Zone</th>
+            <th style="width: 10mm; text-align: center;">Still</th>
             <th style="width: 18mm;">Setup</th>
           </tr>
         </thead>
@@ -588,42 +609,42 @@
             <td rowspan="6" class="ledger-borough">Manhattan</td>
             <td class="priority-num">1</td>
             <td class="district-name">Five Points</td>
-            <td class="kind-ghetto">Ghetto</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ghetto"> Ghetto</td>
             <td class="still-num">8</td>
             <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Sugar Hill</td>
-            <td class="kind-rum">Rum <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="kind-rum" style="text-align:center;"><img src="Art/Icons/Rum.svg" class="zone-icon zone-icon-rum" alt="Rum"> Rum <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">—</td>
             <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">East Harlem</td>
-            <td class="kind-whisky">Whisky</td>
+            <td class="kind-whisky" style="text-align:center;"><img src="Art/Icons/Rye.svg" class="zone-icon zone-icon-whisky" alt="Whisky"> Whisky</td>
             <td class="still-num">6</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">The Tenderloin</td>
-            <td class="kind-gin">Gin</td>
+            <td class="kind-gin" style="text-align:center;"><img src="Art/Icons/Gin.svg" class="zone-icon zone-icon-gin" alt="Gin"> Gin</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
             <td class="district-name">West Side</td>
-            <td class="kind-dock">Dock &middot; Pier 3</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 3</td>
             <td class="still-num">5</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">6</td>
             <td class="district-name">The Bowery</td>
-            <td class="kind-dock">Dock &middot; Pier 4</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 4</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
@@ -633,35 +654,35 @@
             <td rowspan="5" class="ledger-borough">The Bronx</td>
             <td class="priority-num">1</td>
             <td class="district-name">Hunts Point</td>
-            <td class="kind-ghetto">Ghetto</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ghetto"> Ghetto</td>
             <td class="still-num">12</td>
             <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Morris Park</td>
-            <td class="kind-whisky">Whisky <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="kind-whisky" style="text-align:center;"><img src="Art/Icons/Rye.svg" class="zone-icon zone-icon-whisky" alt="Whisky"> Whisky <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">—</td>
             <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Belmont</td>
-            <td class="kind-rum">Rum</td>
+            <td class="kind-rum" style="text-align:center;"><img src="Art/Icons/Rum.svg" class="zone-icon zone-icon-rum" alt="Rum"> Rum</td>
             <td class="still-num">10</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">Fordham</td>
-            <td class="kind-moonshine">Moonshine</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/Moonshine.svg" class="zone-icon zone-icon-moonshine" alt="Moonshine"> Moon</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
             <td class="district-name">Throggs Neck</td>
-            <td class="kind-dock">Dock &middot; Pier 6</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 6</td>
             <td class="still-num">11</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
@@ -671,42 +692,42 @@
             <td rowspan="6" class="ledger-borough">Queens</td>
             <td class="priority-num">1</td>
             <td class="district-name">Corona</td>
-            <td class="kind-ghetto">Ghetto</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ghetto"> Ghetto</td>
             <td class="still-num">8</td>
             <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Richmond Hill</td>
-            <td class="kind-gin">Gin <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="kind-gin" style="text-align:center;"><img src="Art/Icons/Gin.svg" class="zone-icon zone-icon-gin" alt="Gin"> Gin <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">—</td>
             <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Astoria</td>
-            <td class="kind-rum">Rum</td>
+            <td class="kind-rum" style="text-align:center;"><img src="Art/Icons/Rum.svg" class="zone-icon zone-icon-rum" alt="Rum"> Rum</td>
             <td class="still-num">6</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">Flushing</td>
-            <td class="kind-moonshine">Moonshine</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/Moonshine.svg" class="zone-icon zone-icon-moonshine" alt="Moonshine"> Moon</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
             <td class="district-name">Whitestone</td>
-            <td class="kind-dock">Dock &middot; Pier 2</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 2</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
           <tr>
             <td class="priority-num">6</td>
             <td class="district-name">Jamaica</td>
-            <td class="kind-dock">Dock &middot; Pier 5</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 5</td>
             <td class="still-num">11</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
@@ -716,35 +737,35 @@
             <td rowspan="5" class="ledger-borough">Brooklyn</td>
             <td class="priority-num">1</td>
             <td class="district-name">Brownsville</td>
-            <td class="kind-ghetto">Ghetto</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ghetto"> Ghetto</td>
             <td class="still-num">5</td>
             <td><span class="setup-tag tag-turf">Starting Turf</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Williamsburg</td>
-            <td class="kind-moonshine">Moonshine <img src="Art/Icons/Crown.svg" class="ledger-crown" alt="High Society"></td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/Moonshine.svg" class="zone-icon zone-icon-moonshine" alt="Moonshine"> Moon <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">—</td>
             <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Coney Island</td>
-            <td class="kind-whisky">Whisky</td>
+            <td class="kind-whisky" style="text-align:center;"><img src="Art/Icons/Rye.svg" class="zone-icon zone-icon-whisky" alt="Whisky"> Whisky</td>
             <td class="still-num">3</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">Red Hook</td>
-            <td class="kind-gin">Gin</td>
+            <td class="kind-gin" style="text-align:center;"><img src="Art/Icons/Gin.svg" class="zone-icon zone-icon-gin" alt="Gin"> Gin</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
           <tr>
             <td class="priority-num">5</td>
             <td class="district-name">Sheepshead Bay</td>
-            <td class="kind-dock">Dock &middot; Pier 1</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 1</td>
             <td class="still-num">2</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
@@ -754,42 +775,43 @@
             <td rowspan="3" class="ledger-borough">Staten Island</td>
             <td class="priority-num">1</td>
             <td class="district-name">Stapleton</td>
-            <td class="kind-ghetto">Ghetto</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ghetto"> Ghetto</td>
             <td class="still-num">12</td>
             <td><span class="setup-tag tag-precinct">Precinct</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Westerleigh</td>
-            <td class="kind-dock">Dock &middot; Pier 6</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 6</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Tottenville</td>
-            <td class="kind-dock">Dock &middot; Pier 1</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"> 1</td>
             <td class="still-num still-blank">—</td>
             <td></td>
           </tr>
         </tbody>
       </table>
+      </div>
 
-      <section class="raids-section" style="margin-top: auto;">
+      <section class="raids-section">
         <h2 class="raids-title">Police Raids</h2>
-        <p class="raids-trigger">Trigger: <b>Rat</b> with 1+ Heat, or <b>5th Heat</b>. Target = most Heat markers (ties go to most recent).</p>
+        <p class="raids-trigger"><b>Trigger:</b> Rat Card + 1 Heat, OR 5th Heat. <b>Target:</b> Player with most Heat (ties go to most recent).</p>
         <div class="raids-grid">
           <div class="raid-step">
-            <strong>1. Precision Strikes</strong> &mdash; Each Precinct hits 1 adjacent District (same Borough) Controlled by the Target.
+            <strong>1. Identify Leads</strong> &mdash; Each Precinct targets 1 adjacent Target-Controlled District (same Borough).
           </div>
           <div class="raid-step">
-            <strong>2. Biggest Op</strong> &mdash; Highest total units (Mobsters + Barrels) in hit Districts; Target picks ties.
+            <strong>2. The Strike</strong> &mdash; Hits the listed District with the most total units (Mobsters + Barrels). Target chooses ties.
           </div>
           <div class="raid-step">
-            <strong>3. Penalty</strong> &mdash; Per hit: pay <b>$1,000</b> to keep all, or lose all Liquor + arrests by Muscle Ratio (1-2=1, 3-4=2, 5+=3).
+            <strong>3. Ultimatum</strong> &mdash; Per hit: Pay <b>$1,000</b> to bribe the cops OR lose all Liquor &amp; suffer arrests based on Muscle Ratio (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5).
           </div>
           <div class="raid-step">
-            <strong>4. Rebuild</strong> &mdash; Respawn destroyed Precincts via this Ledger, then clear Heat.
+            <strong>4. Aftermath</strong> &mdash; Respawn destroyed Precincts (via Ledger) &amp; clear Heat Track.
           </div>
         </div>
       </section>

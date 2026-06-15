@@ -4,148 +4,138 @@
 <meta charset="utf-8" />
 <title>Still Tokens v4.5</title>
 
-<!-- fonts -->
-<link href="https://fonts.cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
 <style>
 @page{margin:0}
-body {
-  margin:0;
-}
+body { margin:0; }
 
-/* ───── geometry ───── */
 :root{
-  --sq:0.75in;   /* token size                              */
-  --gap:15px;    /* gutter between tokens                   */
-  --edge:0.25in; /* white margin around the grid            */
+  --sq:0.75in;
+  --gap:15px;
+  --edge:0.25in;
+  --token-bg:    #4a4a4a;
+  --token-dark:  #2e2e2e;
+  --token-light: #6a6a6a;
+  --gold-border: #d4af37;
 }
 
 .page{
   padding:var(--edge);
   break-after:page;
-  display:flex;justify-content:center;      /* centre on paper */
+  display:flex;justify-content:center;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(5,var(--sq));
   gap:var(--gap);
-  width:max-content;                         /* shrink-wrap grid */
+  width:max-content;
 }
 
-/* ───── FRONT squares (modified) ───── */
+/* ───── FRONT tokens ───── */
 .square{
   width:var(--sq);height:var(--sq);position:relative;
   box-sizing:border-box;
-  border:2px solid #d4af37;
-  font-family:'Raleway',sans-serif;
-  outline: 3px solid #1c1c1c; /* Creates a gap outside the border using the page background color */
+  border:2px solid var(--gold-border);
+  outline: 3px solid #1c1c1c;
+  background: radial-gradient(circle at 40% 35%, var(--token-light), var(--token-bg) 55%, var(--token-dark));
+  overflow: hidden;
 }
-.liquor-type{position:absolute;top:3px;left:50%;transform:translateX(-50%);
-  font:700 9.5px 'Raleway',sans-serif;letter-spacing:1px;text-transform:uppercase;}
-.number{position:absolute;top:52%;left:50%;transform:translate(-50%,-60%);
-  font:700 40px/1 'Roboto Mono',monospace;}
 
-/* Dots Styling */
-.dots{
+.square::before, .square::after {
+  content:'';
   position:absolute;
-  bottom:6px; /* Positioned at the bottom */
-  width:100%;
-  left:0;
-  display:flex;
-  justify-content:center;
-  gap:4px;
+  width:5px; height:5px;
+  border-radius:50%;
+  background: var(--gold-border);
+  opacity:0.5;
 }
-.dot{
-  width:6px;
-  height:6px;
-  background:currentColor; /* Uses the text color of the parent token */
-  border-radius:60%;
-  border: 1px solid rgba(0,0,0,0.2);
-}
+.square::before { top:4px; left:4px; }
+.square::after  { top:4px; right:4px; }
 
-.whisky       {background:#d4af37;color:#1c1c1c}
-.gin       {background:#9837a5;color:#d4af37}
-.moonshine {background:#646464;color:#d4af37}
-
-
-/* ───── BACK squares with image and border ───── */
-.back-square{
-  background:#1c1c1c;
+.number {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font:700 40px/1 'Roboto Mono',monospace;
   color:#d4af37;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+/* ───── BACK squares ───── */
+.back-square{
   position:relative;
   box-sizing:border-box;
   border:2px solid #d4af37;
   outline: 3px solid #1c1c1c;
-  padding: 2px; /* Small padding so the image doesn't touch the border */
+  width:var(--sq);height:var(--sq);
+  background: #6a6a6a;
+  overflow:hidden;
 }
 
-.back-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures the image fills the square without distortion */
+@media print{
+  .square,.back-square{width:var(--sq)!important;height:var(--sq)!important}
 }
-
-
-/* guarantee physical size in print preview */
-@media print{.square{width:var(--sq)!important;height:var(--sq)!important}}
 </style>
 </head>
 
 <body>
-  <!-- FRONT -->
-  <div class="page">
-    <div class="grid" id="frontGrid"></div>
-  </div>
-
-  <!-- BACK -->
-  <div class="page">
-    <div class="grid" id="backGrid"></div>
-  </div>
+  <div class="page"><div class="grid" id="frontGrid"></div></div>
+  <div class="page"><div class="grid" id="backGrid"></div></div>
 
 <script>
-/*** token data (Updated to "Flat Power" distribution) ***/
-const tiles=[
-  {type:'whisky',       numbers:[2, 3, 5, 7, 8, 11, 12]},
-  {type:'gin',       numbers:[2, 3, 4, 6, 7, 9, 10, 11]},
-  {type:'moonshine', numbers:[2, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
-];
+// 3x: 2, 7, 12 — 2x: 3, 4, 5, 6, 8, 9, 10, 11
+const numbers = [2,2,2, 3,3, 4,4, 5,5, 6,6, 7,7,7, 8,8, 9,9, 10,10, 11,11, 12,12,12];
+const tiles = [{type:'still', numbers}];
 
-const front=document.getElementById('frontGrid');
-const back =document.getElementById('backGrid');
+/* Still SVG — clean pot still silhouette, face-down/dormant */
+const brokenStillSVG = `<svg viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg"
+  style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78%;height:78%;">
+  <!-- Boiler: wide rounded trapezoid -->
+  <path d="M10 62 Q10 40 22 38 Q34 40 34 62 Z" fill="#3a3a3a" stroke="#888" stroke-width="1.4"/>
+  <!-- Boiler top rim -->
+  <ellipse cx="22" cy="40" rx="12" ry="3" fill="#484848" stroke="#999" stroke-width="1.2"/>
+  <!-- Boiler base rim -->
+  <ellipse cx="22" cy="62" rx="12" ry="2.5" fill="#484848" stroke="#888" stroke-width="1"/>
+  <!-- Column: tall narrow rect tapering slightly -->
+  <path d="M18 40 L18 16 Q18 10 22 9 Q26 10 26 16 L26 40 Z" fill="#3a3a3a" stroke="#888" stroke-width="1.2"/>
+  <!-- Column bands -->
+  <line x1="18" y1="32" x2="26" y2="32" stroke="#888" stroke-width="0.8" opacity="0.6"/>
+  <line x1="18" y1="24" x2="26" y2="24" stroke="#888" stroke-width="0.8" opacity="0.6"/>
+  <!-- Column top cap -->
+  <ellipse cx="22" cy="16" rx="5" ry="2" fill="#484848" stroke="#999" stroke-width="1"/>
+  <!-- Lyne arm: horizontal pipe to the right -->
+  <line x1="26" y1="13" x2="48" y2="13" stroke="#888" stroke-width="2.8" stroke-linecap="round"/>
+  <!-- Condenser: vertical pipe dropping down -->
+  <line x1="48" y1="13" x2="48" y2="44" stroke="#888" stroke-width="2.8" stroke-linecap="round"/>
+  <!-- Condenser base cap -->
+  <ellipse cx="48" cy="44" rx="3" ry="1.5" fill="#484848" stroke="#999" stroke-width="1"/>
+  <!-- Spout drip tip -->
+  <line x1="48" y1="45" x2="48" y2="50" stroke="#777" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- X mark — face-down indicator -->
+  <line x1="15" y1="48" x2="29" y2="58" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+  <line x1="29" y1="48" x2="15" y2="58" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+</svg>`;
 
+const front = document.getElementById('frontGrid');
+const back  = document.getElementById('backGrid');
 
-tiles.forEach(({type, numbers}) => {
-    numbers.forEach(number => {
-        // --- Build FRONT token ---
-        const frontSq = document.createElement('div');
-        frontSq.className = `square ${type}`;
+tiles.forEach(({numbers}) => {
+  numbers.forEach(number => {
+    // Front
+    const sq = document.createElement('div');
+    sq.className = 'square';
+    sq.innerHTML = `<div class="number">${number}</div>`;
+    front.appendChild(sq);
 
-        // Logic for determining dot count based on still strength
-        let dotCount;
-        if ([2, 3, 11, 12].includes(number)) {
-            dotCount = 2; // Bad probability rolls (weakest stills)
-        } else if ([4, 5, 9, 10].includes(number)) {
-            dotCount = 1; // Medium probability rolls
-        } else { // Catches 6, 7, 8
-            dotCount = 0; // Best probability rolls (strongest stills)
-        }
-        const dotsHtml = dotCount > 0 ? '<div class="dot"></div>'.repeat(dotCount) : '';
-
-        frontSq.innerHTML=`
-          <div class="liquor-type">${type.toUpperCase()}</div>
-          <div class="number">${number}</div>
-          <div class="dots">${dotsHtml}</div>`;
-        front.appendChild(frontSq);
-
-        // --- Build BACK token ---
-        const backSq = document.createElement('div');
-        backSq.className='square back-square';
-        backSq.innerHTML=`<img src="Art/Still.png" class="back-image" alt="Still">`;
-        back.appendChild(backSq);
-    });
+    // Back — broken still
+    const bk = document.createElement('div');
+    bk.className = 'back-square';
+    bk.innerHTML = brokenStillSVG;
+    back.appendChild(bk);
+  });
 });
 </script>
 </body>
