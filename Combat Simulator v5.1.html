@@ -828,7 +828,7 @@
         " (" + formatNum(totals.actionsUsed / config.trials, 2) + " / trial)";
       els.fallBackRate.textContent =
         formatPct(totals.unresolved, config.trials) +
-        " (" + totals.unresolved.toLocaleString() + " trials — mobsters survive, liquor lost)";
+        " (" + totals.unresolved.toLocaleString() + " trials: mobsters survive, liquor lost)";
 
       els.statusLine.innerHTML =
         "<strong>Complete.</strong> Ran " + config.trials.toLocaleString() + " trials " +

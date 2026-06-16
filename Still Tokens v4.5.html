@@ -86,11 +86,11 @@ body { margin:0; }
   <div class="page"><div class="grid" id="backGrid"></div></div>
 
 <script>
-// 3x: 2, 7, 12 — 2x: 3, 4, 5, 6, 8, 9, 10, 11
+// 3x: 2, 7, 12; 2x: 3, 4, 5, 6, 8, 9, 10, 11
 const numbers = [2,2,2, 3,3, 4,4, 5,5, 6,6, 7,7,7, 8,8, 9,9, 10,10, 11,11, 12,12,12];
 const tiles = [{type:'still', numbers}];
 
-/* Still SVG — clean pot still silhouette, face-down/dormant */
+/* Still SVG - clean pot still silhouette, face-down/dormant */
 const brokenStillSVG = `<svg viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg"
   style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78%;height:78%;">
   <!-- Boiler: wide rounded trapezoid -->
@@ -114,7 +114,7 @@ const brokenStillSVG = `<svg viewBox="0 0 64 72" fill="none" xmlns="http://www.w
   <ellipse cx="48" cy="44" rx="3" ry="1.5" fill="#484848" stroke="#999" stroke-width="1"/>
   <!-- Spout drip tip -->
   <line x1="48" y1="45" x2="48" y2="50" stroke="#777" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- X mark — face-down indicator -->
+  <!-- X mark - face-down indicator -->
   <line x1="15" y1="48" x2="29" y2="58" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
   <line x1="29" y1="48" x2="15" y2="58" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
 </svg>`;
@@ -130,7 +130,7 @@ tiles.forEach(({numbers}) => {
     sq.innerHTML = `<div class="number">${number}</div>`;
     front.appendChild(sq);
 
-    // Back — broken still
+    // Back - broken still
     const bk = document.createElement('div');
     bk.className = 'back-square';
     bk.innerHTML = brokenStillSVG;
