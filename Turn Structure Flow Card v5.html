@@ -584,11 +584,11 @@
     <div class="card ledger-card">
       <header class="header">
         <h1 class="title">Town Planning Ledger</h1>
-        <p class="subtitle">Federal Rebuilding Priority</p>
+        <p class="subtitle">Squad Deployment &amp; Raid Order</p>
       </header>
 
       <p class="ledger-note">
-        Precincts deploy to the first <b>Unoccupied</b> District on this list for their home Borough: at setup (after starting turf is placed) and whenever one respawns. Setup labels show starting positions for occupied Boroughs.
+        At setup (after starting turf is placed), each Borough's <b>Police Squad</b> deploys to the first <b>Unoccupied</b> District on this list. Setup labels show those starting positions. During a Raid, Squads also resolve in this order.
       </p>
 
       <div style="flex:1;min-height:0;overflow:hidden;">
@@ -618,7 +618,7 @@
             <td class="district-name">Sugar Hill</td>
             <td class="kind-rum" style="text-align:center;"><img src="Art/Icons/Rum.svg" class="zone-icon zone-icon-rum" alt="Rum"> Rum <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
-            <td><span class="setup-tag tag-precinct">Precinct</span></td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
@@ -663,7 +663,7 @@
             <td class="district-name">Morris Park</td>
             <td class="kind-whisky" style="text-align:center;"><img src="Art/Icons/Rye.svg" class="zone-icon zone-icon-whisky" alt="Whisky"> Whisky <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
-            <td><span class="setup-tag tag-precinct">Precinct</span></td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
@@ -701,7 +701,7 @@
             <td class="district-name">Richmond Hill</td>
             <td class="kind-gin" style="text-align:center;"><img src="Art/Icons/Gin.svg" class="zone-icon zone-icon-gin" alt="Gin"> Gin <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
-            <td><span class="setup-tag tag-precinct">Precinct</span></td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
@@ -746,7 +746,7 @@
             <td class="district-name">Williamsburg</td>
             <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/Moonshine.svg" class="zone-icon zone-icon-moonshine" alt="Moonshine"> Moon <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
-            <td><span class="setup-tag tag-precinct">Precinct</span></td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
@@ -777,7 +777,7 @@
             <td class="district-name">Stapleton</td>
             <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ghetto"> Ghetto</td>
             <td class="still-num">12</td>
-            <td><span class="setup-tag tag-precinct">Precinct</span></td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
@@ -799,19 +799,19 @@
 
       <section class="raids-section">
         <h2 class="raids-title">Police Raids</h2>
-        <p class="raids-trigger"><b>Trigger:</b> Rat Card + 1 Heat, OR 5th Heat. <b>Target:</b> Player with most Heat (ties go to most recent).</p>
+        <p class="raids-trigger"><b>Trigger:</b> Rat Card + 1 Heat, OR 5th Heat. Resolve every Squad <b>one at a time, in Town Planning Ledger order</b>.</p>
         <div class="raids-grid">
           <div class="raid-step">
-            <strong>1. Identify Leads:</strong> Each Precinct targets 1 adjacent Target-Controlled District (same Borough).
+            <strong>1. Most Wanted:</strong> A Squad looks only at Districts <b>directly Connected within its Borough</b> and steps toward the rival whose marker sits <b>furthest right</b> on the Heat Track. No marker = ignored. No Heat to chase = it holds its corner.
           </div>
           <div class="raid-step">
-            <strong>2. The Strike:</strong> Hits the listed District with the most total units (Mobsters + Barrels). Target chooses ties.
+            <strong>2. The Big Bust:</strong> If that rival holds more than one such District, hit the one with the <b>most units</b> (Mobsters + Barrels); ties break by <b>Ledger order</b>.
           </div>
           <div class="raid-step">
-            <strong>3. Ultimatum:</strong> Per hit: Pay <b>$1,000</b> to bribe the cops OR lose all Liquor &amp; suffer arrests based on Muscle Ratio (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5).
+            <strong>3. The Scatter:</strong> Safehouse destroyed &amp; all Liquor seized. The crew flees to a <b>Connected Safe District</b> (never back toward the Squad); if there's none, the whole crew is <b>arrested</b>. No bribe, no buyout.
           </div>
           <div class="raid-step">
-            <strong>4. Aftermath:</strong> Respawn destroyed Precincts (via Ledger) &amp; clear Heat Track.
+            <strong>4. Aftermath:</strong> The Squad holds the District (impassable; padlocks any Speakeasy/Still). Once all Squads move, Heat markers return to owners' Stashes.
           </div>
         </div>
       </section>

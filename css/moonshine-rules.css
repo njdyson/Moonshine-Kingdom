@@ -102,6 +102,25 @@ h3 {
     padding-left: 10px;
 }
 
+/* An h3 used as a page title above a cover image gets the same gold
+   dividing line as an h2, so titled art pages look consistent. */
+h3:has(+ .cover),
+.reference-section > h3:has(+ .cover) {
+    border-left: none;
+    padding-left: 0;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 5px;
+    position: relative;
+}
+
+h3:has(+ .cover)::after,
+.reference-section > h3:has(+ .cover)::after {
+    content: '';
+    display: block;
+    border-bottom: 1px solid var(--accent-dim);
+    margin-top: 2px;
+}
+
 h4 {
     font-family: var(--font-body); /* Keep H4 readable/standard */
     font-weight: 700;
@@ -299,6 +318,11 @@ img {
     max-width: 100%;
     display: block;
     margin: 15px auto;
+}
+
+/* Cover images sit up against the heading above them; keep only the gap below. */
+.cover img {
+    margin-top: 0;
 }
 
 .cover {
@@ -678,6 +702,7 @@ img {
 
     .container > h2,
     .container > h1,
+    .container h3:has(+ .cover),
     .cover,
     .action-table:not(.muscle-ratio-table),
     table:not(.muscle-ratio-table) {
@@ -832,8 +857,9 @@ img {
 
     
     /* Elements that should span across both columns */
-    .container > h2, 
-    .container > h1, 
+    .container > h2,
+    .container > h1,
+    .container h3:has(+ .cover),
     .cover,
     .action-table:not(.muscle-ratio-table),
     table:not(.muscle-ratio-table) {
