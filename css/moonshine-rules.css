@@ -399,6 +399,9 @@ img {
     color: #fcefd0;
     margin: 1em 0;
     border-radius: 4px;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .table-pair {
@@ -705,8 +708,16 @@ img {
     .container h3:has(+ .cover),
     .cover,
     .action-table:not(.muscle-ratio-table),
-    table:not(.muscle-ratio-table) {
+    table:not(.muscle-ratio-table):not(.smuggle-target-table) {
         column-span: all;
+    }
+
+    .smuggle-target-table {
+        column-span: none;
+        -webkit-column-span: none;
+        break-inside: avoid;
+        width: 100%;
+        margin: 0.35em 0 1em;
     }
 
     .shadows-page .muscle-ratio-table {
@@ -862,8 +873,16 @@ img {
     .container h3:has(+ .cover),
     .cover,
     .action-table:not(.muscle-ratio-table),
-    table:not(.muscle-ratio-table) {
+    table:not(.muscle-ratio-table):not(.smuggle-target-table) {
         column-span: all;
+    }
+
+    .smuggle-target-table {
+        column-span: none;
+        -webkit-column-span: none;
+        break-inside: avoid;
+        width: 100%;
+        margin: 0.35em 0 1em;
     }
 
     .container > h2 {
