@@ -101,9 +101,9 @@ body {
   /* UPDATED: Tucked into the corner */
   top: -4px; 
   right: -4px; 
-  /* UPDATED: Larger Badge Size */
-  width: 55px;
-  height: 55px;
+  /* UPDATED v5.5: slightly smaller badge across the deck, giving images more room */
+  width: 48px;
+  height: 48px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
