@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom Brew Simulator v5.3</title>
+  <title>Moonshine Kingdom Brew Simulator v6.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -48,29 +48,25 @@
 <body>
 <div class="wrap">
   <h1>Brew Simulator</h1>
-  <p class="subtitle">Day-1 Shadows Phase Monte Carlo &middot; Rules v5.4</p>
+  <p class="subtitle">Morning Brew / Blowback Monte Carlo &middot; Rules v6.0</p>
 
   <div class="panel">
     <h2>Starting Setup (Town Planning Ledger)</h2>
     <table id="cfg">
-      <tr><th>Borough</th><th>Pier</th><th>Ghetto Still</th><th>Speakeasy Still</th><th>Dock Still</th></tr>
+      <tr><th>District</th><th>Ghetto Still</th><th>Speakeasy Still</th><th>Dock Still</th></tr>
       <tr data-b="Manhattan"><td class="name">Manhattan</td>
-        <td><input type="number" class="pier" value="3" min="1" max="6"></td>
         <td><input type="number" class="still" value="8" min="2" max="12"></td>
         <td><input type="number" class="still" value="6" min="2" max="12"></td>
         <td><input type="number" class="still" value="5" min="2" max="12"></td></tr>
       <tr data-b="The Bronx"><td class="name">The Bronx</td>
-        <td><input type="number" class="pier" value="6" min="1" max="6"></td>
         <td><input type="number" class="still" value="12" min="2" max="12"></td>
         <td><input type="number" class="still" value="10" min="2" max="12"></td>
         <td><input type="number" class="still" value="11" min="2" max="12"></td></tr>
       <tr data-b="Queens"><td class="name">Queens</td>
-        <td><input type="number" class="pier" value="5" min="1" max="6"></td>
         <td><input type="number" class="still" value="8" min="2" max="12"></td>
         <td><input type="number" class="still" value="6" min="2" max="12"></td>
         <td><input type="number" class="still" value="11" min="2" max="12"></td></tr>
       <tr data-b="Brooklyn"><td class="name">Brooklyn</td>
-        <td><input type="number" class="pier" value="1" min="1" max="6"></td>
         <td><input type="number" class="still" value="5" min="2" max="12"></td>
         <td><input type="number" class="still" value="3" min="2" max="12"></td>
         <td><input type="number" class="still" value="2" min="2" max="12"></td></tr>
@@ -89,11 +85,12 @@
       <button class="run" id="run">Roll the Dice</button>
     </div>
     <p class="note">
-      Models the Shadows Phase with all starting districts at 3 Mobsters (Muscle Ratio 2): the communal roll
-      (1 White + players+1 Red), a greedy draft in random seat order (players grab a die that fires a Still,
-      preferring dice that would burn them if left behind; the last seat picks the Blowback victim), private
-      (Pier) vs public (White) mash, and the Blowback on the leftover Red. Net $ values a Moonshine barrel at
-      $200, a lost Runner at $300 (Recruit) and a flipped Still at $200 (Tap).
+      Models the Morning Brew/Blowback with every starting District at 3 Mobsters (Muscle Ratio 2): the communal
+      roll (1 White "Public Mash" + players+1 Red), a greedy draft in random seat order (each boss grabs a Red die
+      that fires a Still, preferring dice that would burn them via the Blowback if left behind; the last seat sets
+      the Blowback victim). Brew Number = White + your drafted Red. Blowback Number = White + the single leftover
+      Red, and burns EVERY matching Still in the city (only Runner casualties &mdash; the Still keeps running and the
+      block is held). Net $ values a Moonshine barrel at $200 and a lost Runner at $300 (Recruit).
     </p>
   </div>
 
@@ -104,24 +101,28 @@
 </div>
 
 <script>
-const YIELD = 2, CAS = 2, MOON = 200, RECRUIT = 300, RETAP = 200;
+// v6.0: only Moonshine (Grey) is brewed; Muscle Ratio 2 at 3 Mobsters => 2 barrels brewed / 2 casualties.
+// A Still is active automatically (no Tap/Rig/cold). A Blowback only thins the crew (Runner casualties);
+// the Still keeps running and the block is held, so there is no Still-flip / re-Tap cost.
+const YIELD = 2, CAS = 2, MOON = 200, RECRUIT = 300;
 const d6 = () => 1 + Math.floor(Math.random() * 6);
 
 function readConfig() {
   const cfg = {};
   document.querySelectorAll('#cfg tr[data-b]').forEach(tr => {
-    const pier = +tr.querySelector('.pier').value;
     const stills = {};
     tr.querySelectorAll('.still').forEach(inp => { stills[+inp.value] = true; });
-    cfg[tr.dataset.b] = { pier, stills };
+    cfg[tr.dataset.b] = { stills };
   });
   return cfg;
 }
 
 function simulate(cfg, names, N) {
-  const fires = (b, r, W) => !!(cfg[b].stills[cfg[b].pier + r] || cfg[b].stills[W + r]);
+  // Brew Number = White + drafted Red. A Still fires only on this number.
+  const fires = (b, r, W) => !!cfg[b].stills[W + r];
+  // If a Red is LEFT behind, the Blowback Number = White + that Red, bursting your matching Still.
   const dangerous = (b, r, W) => !!cfg[b].stills[W + r];
-  const ownLoss = (b, blow) => cfg[b].stills[blow] ? CAS * RECRUIT + RETAP : 0;
+  const ownLoss = (b, blow) => cfg[b].stills[blow] ? CAS * RECRUIT : 0;
 
   function pickDie(b, pool, W, isLast) {
     if (isLast && pool.length === 2) {
@@ -165,7 +166,7 @@ function simulate(cfg, names, N) {
     order.forEach((b, idx) => {
       seat[b][idx].n++;
       if (fires(b, picked[b], W)) { st[b].fire++; seat[b][idx].fire++; st[b].net += YIELD * MOON; }
-      if (cfg[b].stills[blow]) { st[b].blown++; st[b].net -= CAS * RECRUIT + RETAP; }
+      if (cfg[b].stills[blow]) { st[b].blown++; st[b].net -= CAS * RECRUIT; }
     });
   }
   return { st, seat, leftDist };

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom: Mob Playbooks v5.5</title>
+  <title>Moonshine Kingdom: Mob Playbooks v6.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
     *,
@@ -508,17 +508,22 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Speakeasy. <b>Gin/Whisky/Rum</b>: only if it matches the <b>House Pour</b> (full value + 1 Kickback/barrel). <b>Moonshine</b>: flat $200 anywhere, no Kickback. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Extort</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Payoff</td>
-        <td class="action-desc">Pay a Power Broker's fee for their Favor + 1 permanent Influence. Once each per game. Each Favor held = 1 Respect.</td>
+        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -543,11 +548,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Rig</td>
-        <td class="action-desc"><b>Tap $300</b>: fire up cold Still (Moonshine). <b>Refine $500</b>: add Gin cap. <b>Perfect $800</b>: Whisky. Combine costs to skip tiers.</td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Secure</td>
         <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
       </tr>
@@ -562,7 +562,7 @@
       <tr class="special-action">
         <td class="action-cost">2</td>
         <td class="action-name">Hit</td>
-        <td class="action-desc">While Pinned in a rival District, special Assault: if you score any hits, the rival <b>Boss</b> takes the first hit. <span class="heat">Heat if you kill <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">While Pinned in a rival District, special Open Fire: if you score any hits, the rival <b>Boss</b> takes the first hit. <span class="heat">Heat if you kill <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">1</td>
@@ -612,8 +612,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Smuggle</th>
-              <th>Success</th>
+              <th>Threat</th>
+              <th>Kill On</th>
             </tr>
           </thead>
           <tbody>
@@ -657,7 +657,7 @@
             <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
@@ -695,7 +695,7 @@
         </tr>
         <tr>
           <td class="action-cost">1</td>
-          <td class="action-name">Assault</td>
+          <td class="action-name">Open Fire</td>
           <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
         </tr>
         <tr>
@@ -744,17 +744,22 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Speakeasy. <b>Gin/Whisky/Rum</b>: only if it matches the <b>House Pour</b> (full value + 1 Kickback/barrel). <b>Moonshine</b>: flat $200 anywhere, no Kickback. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Extort</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Payoff</td>
-        <td class="action-desc">Pay a Power Broker's fee for their Favor + 1 permanent Influence. Once each per game. Each Favor held = 1 Respect.</td>
+        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -779,11 +784,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Rig</td>
-        <td class="action-desc"><b>Tap $300</b>: fire up cold Still (Moonshine). <b>Refine $500</b>: add Gin cap. <b>Perfect $800</b>: Whisky. Combine costs to skip tiers.</td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Secure</td>
         <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
       </tr>
@@ -798,12 +798,12 @@
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Stealth</td>
-        <td class="action-desc">Move up to 5 Mobsters (no liquor) into rival turf. No Standoff: Occupier cannot Ambush or Fold. Must immediately Assault or Advance.</td>
+        <td class="action-desc">Move up to 5 Mobsters (no liquor) into a Connected rival District. No Standoff: Occupier cannot Ambush or Fold. Must immediately Open Fire or Advance.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">-</td>
         <td class="action-name">Firepower</td>
-        <td class="action-desc">Pay $200 on Assault or Ambush: +1 attack die (max 5 total). One purchase only per roll.</td>
+        <td class="action-desc">Pay $200 when you Open Fire or Ambush: roll exactly 1 extra attack die (max 5 total). Not on defense.</td>
       </tr>
     </table>
     <p class="commission-req" style="margin: 4px 0 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $3,000 by game end, else &minus;1 Respect.</p>
@@ -848,8 +848,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Smuggle</th>
-              <th>Success</th>
+              <th>Threat</th>
+              <th>Kill On</th>
             </tr>
           </thead>
           <tbody>
@@ -893,7 +893,7 @@
             <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
@@ -931,7 +931,7 @@
         </tr>
         <tr>
           <td class="action-cost">1</td>
-          <td class="action-name">Assault</td>
+          <td class="action-name">Open Fire</td>
           <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
         </tr>
         <tr>
@@ -980,17 +980,22 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Speakeasy. <b>Gin/Whisky/Rum</b>: only if it matches the <b>House Pour</b> (full value + 1 Kickback/barrel). <b>Moonshine</b>: flat $200 anywhere, no Kickback. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Extort</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Payoff</td>
-        <td class="action-desc">Pay a Power Broker's fee for their Favor + 1 permanent Influence. Once each per game. Each Favor held = 1 Respect.</td>
+        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -1015,11 +1020,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Rig</td>
-        <td class="action-desc"><b>Tap $300</b>: fire up cold Still (Moonshine). <b>Refine $500</b>: add Gin cap. <b>Perfect $800</b>: Whisky. Combine costs to skip tiers.</td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Secure</td>
         <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
       </tr>
@@ -1034,7 +1034,7 @@
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Skiff</td>
-        <td class="action-desc">Move up to 5 Mobsters (with or without barrels) from a Coastal District you Control to any other Coastal District.</td>
+        <td class="action-desc">Move up to 5 Mobsters from a Coastal District you Control to any other Coastal District. Cannot be used to flee combat or a Raid.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">2</td>
@@ -1084,8 +1084,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Smuggle</th>
-              <th>Success</th>
+              <th>Threat</th>
+              <th>Kill On</th>
             </tr>
           </thead>
           <tbody>
@@ -1129,7 +1129,7 @@
             <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
@@ -1167,7 +1167,7 @@
         </tr>
         <tr>
           <td class="action-cost">1</td>
-          <td class="action-name">Assault</td>
+          <td class="action-name">Open Fire</td>
           <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
         </tr>
         <tr>
@@ -1216,17 +1216,22 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell at a controlled Speakeasy. <b>Gin/Whisky/Rum</b>: only if it matches the <b>House Pour</b> (full value + 1 Kickback/barrel). <b>Moonshine</b>: flat $200 anywhere, no Kickback. <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Smuggle</td>
-        <td class="action-desc">At a controlled Dock: send a crew (Muscle Ratio) to roll for Havana Rum. More Docks = better odds. Failed dice = arrests.</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Extort</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Payoff</td>
-        <td class="action-desc">Pay a Power Broker's fee for their Favor + 1 permanent Influence. Once each per game. Each Favor held = 1 Respect.</td>
+        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -1251,11 +1256,6 @@
       </tr>
       <tr>
         <td class="action-cost">1</td>
-        <td class="action-name">Rig</td>
-        <td class="action-desc"><b>Tap $300</b>: fire up cold Still (Moonshine). <b>Refine $500</b>: add Gin cap. <b>Perfect $800</b>: Whisky. Combine costs to skip tiers.</td>
-      </tr>
-      <tr>
-        <td class="action-cost">1</td>
         <td class="action-name">Secure</td>
         <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
       </tr>
@@ -1270,12 +1270,12 @@
       <tr class="special-action">
         <td class="action-cost">0</td>
         <td class="action-name">Courage</td>
-        <td class="action-desc">Before Ambush or your own Assault roll: discard 1 barrel in that District for +1 Threat. Cannot be used when defending an Assault.</td>
+        <td class="action-desc">Before an Ambush or an Open Fire you initiated, discard 1 barrel in that District for +1 Threat. Cannot be used on defense when a rival opens fire on you.</td>
       </tr>
       <tr class="special-action">
         <td class="action-cost">1</td>
         <td class="action-name">Plunder</td>
-        <td class="action-desc">Special Assault: each hit steals 1 liquor barrel instead of killing a Mobster. Carry them away if you Advance. Occupier hits still kill. No Heat.</td>
+        <td class="action-desc">Special Open Fire: each hit steals 1 liquor barrel instead of killing a Mobster. Carry them away if you Advance. Occupier hits still kill. No Heat.</td>
       </tr>
     </table>
     <p class="commission-req" style="margin: 4px 0 0;"><strong>Shylock's Mark:</strong> Borrow $1,500. Repay $3,000 by game end, else &minus;1 Respect.</p>
@@ -1320,8 +1320,8 @@
         <table>
           <thead>
             <tr>
-              <th>Threat / Smuggle</th>
-              <th>Success</th>
+              <th>Threat</th>
+              <th>Kill On</th>
             </tr>
           </thead>
           <tbody>
@@ -1365,7 +1365,7 @@
             <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
           </div>
           <div class="flow-step">
-            <strong>3. Pinned</strong> - Invader picks: <b>Assault</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
           </div>
         </div>
         <div class="combat-flow-col">
@@ -1403,7 +1403,7 @@
         </tr>
         <tr>
           <td class="action-cost">1</td>
-          <td class="action-name">Assault</td>
+          <td class="action-name">Open Fire</td>
           <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
         </tr>
         <tr>

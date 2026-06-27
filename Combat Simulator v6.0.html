@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moonshine Kingdom - Combat Monte Carlo Simulator v5.1</title>
+  <title>Moonshine Kingdom - Combat Monte Carlo Simulator v6.0</title>
   <style>
     :root {
       --bg: #151210;
@@ -304,7 +304,7 @@
 </head>
 <body>
   <div class="app">
-    <h1>Combat Simulator v5.1 (Monte Carlo)</h1>
+    <h1>Combat Simulator v6.0 (Monte Carlo)</h1>
 
     <section class="layout">
       <aside class="panel">
@@ -329,10 +329,6 @@
                 <input id="invBoss" type="checkbox" checked>
                 <span>Boss</span>
               </label>
-              <label id="invCapoRow" class="check-row">
-                <input id="invCapo" type="checkbox">
-                <span>Capo</span>
-              </label>
               <label class="check-row">
                 <input id="invFirepower" type="checkbox">
                 <span>Firepower</span>
@@ -352,10 +348,6 @@
               <label class="check-row">
                 <input id="occBoss" type="checkbox" checked>
                 <span>Boss</span>
-              </label>
-              <label id="occCapoRow" class="check-row">
-                <input id="occCapo" type="checkbox">
-                <span>Capo</span>
               </label>
               <label class="check-row">
                 <input id="occSafehouse" type="checkbox" checked>
@@ -386,7 +378,7 @@
             </div>
           </div>
           <div class="muted" style="font-size:0.8rem; margin-top:2px;">
-            Each trial: Ambush (unless Stealth), then the Pinned invader spends 1 Influence per Assault round until Influence runs out.
+            Each trial: Ambush (unless Stealth), then the Pinned invader spends 1 Influence per Open Fire round until Influence runs out.
             At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, liquor lost to Occupier).
             The invader may also spend 1 Influence to <strong>Advance</strong> (retreat with up to 1 barrel each).
           </div>
@@ -437,7 +429,7 @@
             </thead>
             <tbody>
               <tr>
-                <td>Average Assault Rounds per Trial</td>
+                <td>Average Open Fire Rounds per Trial</td>
                 <td id="avgRounds">-</td>
               </tr>
               <tr>
@@ -465,7 +457,7 @@
                 <td id="occFirepowerCost">-</td>
               </tr>
               <tr>
-                <td>Influence Spent per Trial (Move + Assaults)</td>
+                <td>Influence Spent per Trial (Move + Open Fire)</td>
                 <td id="totalActionsUsed">-</td>
               </tr>
               <tr>
@@ -485,14 +477,10 @@
       invRunners: document.getElementById("invRunners"),
       occRunners: document.getElementById("occRunners"),
       invBoss: document.getElementById("invBoss"),
-      invCapoRow: document.getElementById("invCapoRow"),
-      invCapo: document.getElementById("invCapo"),
       invFirepower: document.getElementById("invFirepower"),
       invStealth: document.getElementById("invStealth"),
       invMobsterTotal: document.getElementById("invMobsterTotal"),
       occBoss: document.getElementById("occBoss"),
-      occCapoRow: document.getElementById("occCapoRow"),
-      occCapo: document.getElementById("occCapo"),
       occFirepower: document.getElementById("occFirepower"),
       occSafehouse: document.getElementById("occSafehouse"),
       occMobsterTotal: document.getElementById("occMobsterTotal"),
@@ -544,8 +532,8 @@
       return side.runners + side.bosses;
     }
 
-    function bossCountFromSetup(hasBoss, hasCapo) {
-      return (hasBoss ? 1 : 0) + (hasCapo ? 1 : 0);
+    function bossCountFromSetup(hasBoss) {
+      return hasBoss ? 1 : 0;
     }
 
     function diceFromMobsters(count) {
@@ -603,13 +591,13 @@
       return clamp(level, 1, 4);
     }
 
-    function threatForAssaultInvader(invader) {
+    function threatForOpenFireInvader(invader) {
       let level = 1;
       level += invader.bosses;
       return clamp(level, 1, 4);
     }
 
-    function threatForAssaultOccupier(occupier) {
+    function threatForOpenFireOccupier(occupier) {
       let level = 1;
       level += occupier.bosses;
       if (occupier.safehouse) level += 2;
@@ -645,23 +633,11 @@
       els.fallBackRate.textContent = "-";
     }
 
-    function syncCapoVisibility() {
-      const invBossOn = !!els.invBoss.checked;
-      const occBossOn = !!els.occBoss.checked;
-
-      els.invCapoRow.classList.toggle("is-hidden", !invBossOn);
-      els.occCapoRow.classList.toggle("is-hidden", !occBossOn);
-
-      if (!invBossOn) els.invCapo.checked = false;
-      if (!occBossOn) els.occCapo.checked = false;
-      updateMobsterTotals();
-    }
-
     function updateMobsterTotals() {
       const invRunners = clamp(Number(els.invRunners.value || 0), 0, 15);
       const occRunners = clamp(Number(els.occRunners.value || 0), 0, 15);
-      const invBosses = bossCountFromSetup(!!els.invBoss.checked, !!els.invCapo.checked);
-      const occBosses = bossCountFromSetup(!!els.occBoss.checked, !!els.occCapo.checked);
+      const invBosses = bossCountFromSetup(!!els.invBoss.checked);
+      const occBosses = bossCountFromSetup(!!els.occBoss.checked);
 
       els.invMobsterTotal.textContent = String(invRunners + invBosses);
       els.occMobsterTotal.textContent = String(occRunners + occBosses);
@@ -676,13 +652,13 @@
       return {
         invader: {
           runners: clamp(Number(els.invRunners.value || 0), 0, 15),
-          bosses: bossCountFromSetup(!!els.invBoss.checked, !!els.invCapo.checked),
+          bosses: bossCountFromSetup(!!els.invBoss.checked),
           firepower: !!els.invFirepower.checked,
           stealth: !!els.invStealth.checked
         },
         occupier: {
           runners: clamp(Number(els.occRunners.value || 0), 0, 15),
-          bosses: bossCountFromSetup(!!els.occBoss.checked, !!els.occCapo.checked),
+          bosses: bossCountFromSetup(!!els.occBoss.checked),
           safehouse: !!els.occSafehouse.checked,
           firepower: !!els.occFirepower.checked
         },
@@ -707,7 +683,7 @@
 
       let rounds = 0;
       let ambushKills = 0;
-      let attackerKilledDuringAssault = false;
+      let attackerKilledDuringOpenFire = false;
       let invaderFirepowerUses = 0;
       let occupierFirepowerUses = 0;
 
@@ -724,8 +700,8 @@
       while (alive(invader) && alive(occupier) && rounds < config.maxRounds) {
         rounds += 1;
 
-        const invThreat = threatForAssaultInvader(invader);
-        const occThreat = threatForAssaultOccupier(occupier);
+        const invThreat = threatForOpenFireInvader(invader);
+        const occThreat = threatForOpenFireOccupier(occupier);
         if (config.invader.firepower) invaderFirepowerUses += 1;
         const invDiceCount = attackDiceCount(invader, config.invader.firepower);
         const occDiceCount = attackDiceCount(occupier, false);
@@ -737,7 +713,7 @@
         const occKills = applyCasualties(occupier, invHits);
         const invKills = applyCasualties(invader, occHits);
 
-        if (occKills > 0) attackerKilledDuringAssault = true;
+        if (occKills > 0) attackerKilledDuringOpenFire = true;
       }
 
       let outcome = "unresolved";
@@ -755,7 +731,7 @@
         invaderLosses: invaderStart - mobsterCount(invader),
         occupierLosses: occupierStart - mobsterCount(occupier),
         ambushCasualties: ambushKills,
-        attackerHeat: attackerKilledDuringAssault ? 1 : 0,
+        attackerHeat: attackerKilledDuringOpenFire ? 1 : 0,
         invaderFirepowerCost: invaderFirepowerUses * 200,
         occupierFirepowerCost: occupierFirepowerUses * 200,
         actionsUsed: rounds + 1
@@ -840,16 +816,14 @@
       els.invRunners.value = 3;
       els.occRunners.value = 3;
       els.invBoss.checked = true;
-      els.invCapo.checked = false;
       els.invFirepower.checked = false;
       els.invStealth.checked = false;
       els.occBoss.checked = true;
-      els.occCapo.checked = false;
       els.occFirepower.checked = false;
       els.occSafehouse.checked = true;
       els.trials.value = 20000;
       els.maxRounds.value = 3;
-      syncCapoVisibility();
+      updateMobsterTotals();
       syncFirepowerCostRowVisibility();
       clearResults();
       els.statusLine.innerHTML = "<strong>Ready.</strong> Configure setup and click Run Simulation.";
@@ -858,12 +832,10 @@
     function bind() {
       els.runBtn.addEventListener("click", runSimulation);
       els.resetBtn.addEventListener("click", resetAll);
-      els.invBoss.addEventListener("change", syncCapoVisibility);
-      els.occBoss.addEventListener("change", syncCapoVisibility);
+      els.invBoss.addEventListener("change", updateMobsterTotals);
+      els.occBoss.addEventListener("change", updateMobsterTotals);
       els.invFirepower.addEventListener("change", syncFirepowerCostRowVisibility);
       els.occFirepower.addEventListener("change", syncFirepowerCostRowVisibility);
-      els.invCapo.addEventListener("change", updateMobsterTotals);
-      els.occCapo.addEventListener("change", updateMobsterTotals);
       els.invRunners.addEventListener("input", updateMobsterTotals);
       els.occRunners.addEventListener("input", updateMobsterTotals);
     }

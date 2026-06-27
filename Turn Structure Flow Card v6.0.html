@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom Turn Structure Flow Card v5</title>
+  <title>Moonshine Kingdom Turn Structure Flow Card v6.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -490,7 +490,7 @@
       </div>
 
       <p class="round-note">
-        <b>Turn Order</b> runs Turn Token #1 through #4. At Day turnover, swap to the <b>other moon phase</b> token set.
+        <b>Turn Order</b> runs Turn Token #1 through #4. At Day turnover, swap to <b>tomorrow's set</b> of Turn Tokens.
       </p>
 
       <section class="phase-card">
@@ -503,12 +503,12 @@
         </div>
         <div class="step-list">
           <div class="step">
-            <div class="step-tag">1 Brew</div>
+            <div class="step-tag">1 The Brew</div>
             <div class="step-copy">
-              <span class="sub-tag">Roll:</span> Player #1 rolls <b>1 White</b> (Public Mash) + <b>Red Dice</b> (Players + 1).<br>
-              <span class="sub-tag">Draft:</span> In turn order, draft <b>1 Red</b>. Add to <b>Pier #</b> (Private) OR <b>White die</b> (Public). No Docks = must use White.<br>
-              <span class="sub-tag">Produce:</span> Running Stills you Control matching your number fire. Yield barrels based on local Mobsters (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5).<br>
-              <span class="sub-tag">Blowback:</span> Leftover Red + White = Blowback. Hits EVERY matching running Still. <b>Gin/Whisky:</b> Downgrade cap. <b>Moonshine:</b> Suffer casualties by Muscle Ratio, then the Still goes cold.
+              <span class="sub-tag">Roll:</span> Token #1 rolls <b>1 White</b> + <b>Red Dice</b> (Players + 1).<br>
+              <span class="sub-tag">Draft:</span> In turn order, each boss drafts <b>exactly 1 Red</b>.<br>
+              <span class="sub-tag">Produce:</span> Brew Number = <b>White + your drafted Red</b>. Every active Still you Control matching it brews <b>Moonshine</b> by Muscle Ratio (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5).<br>
+              <span class="sub-tag">Blowback:</span> Leftover Red + White = Blowback. EVERY active Controlled Still matching it bursts: casualties by Muscle Ratio (Runners first), crew thinned in place &mdash; the Still keeps running.
             </div>
           </div>
           <div class="step">
@@ -537,8 +537,8 @@
           <div class="step">
             <div class="step-tag">Resolve</div>
             <div class="step-copy">
-              <span class="sub-tag">Pay:</span> Spent markers return to Reserves. If the Play generated Heat <img src="Art/Icons/fire.svg" class="zone-icon" alt="Heat">, place 1 spent marker on the <b>Heat Track</b>.<br>
-              <span class="sub-tag">Unloads:</span> Sell <b>Gin/Whisky/Rum</b> only at its matching House Pour; <b>Moonshine</b> = flat $200 anywhere. Selling 4+ barrels = <b>Heat</b>. Each House Pour sold = return 1 spent marker to Ops (Moonshine earns none).
+              <span class="sub-tag">Pay:</span> Spent markers return to Reserves. If the Play generated Heat <img src="Art/Icons/fire.svg" class="zone-icon" alt="Heat">, lock 1 spent marker on the <b>Heat Track</b>.<br>
+              <span class="sub-tag">Unload (Power Play):</span> Sell at a Speakeasy you Control &mdash; Standard <b>$300</b>/barrel, High Society <b>$500</b>/barrel. Only <b>Rum</b> pays Kickback (1 spent marker back per Rum); 4+ barrels = <b>Heat</b>.
             </div>
           </div>
           <div class="step">
@@ -559,22 +559,22 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">1 The Sweep</div>
-            <div class="step-copy">Remove excess Runners so no District exceeds <b>5 Mobsters</b>.</div>
+            <div class="step-copy">Remove excess Runners so no District exceeds <b>5 Mobsters</b> (unless you hold Mayor Walker's Favor).</div>
           </div>
           <div class="step">
             <div class="step-tag">2 Stake Your Claim</div>
             <div class="step-copy">Re-count every Title (Borough Deeds and the Ward Boss) against the board right now. Whoever holds a <b>strict majority</b> of that turf (more than any rival) takes or keeps it. No sole leader (tie at the top or empty turf) &rarr; it returns to the Supply. (Police turf counts as empty).</div>
           </div>
           <div class="step">
-            <div class="step-tag">3 Contracts</div>
-            <div class="step-copy">Return 1 marker per active Contract. If final marker is removed, check objective. <b>Success:</b> collect Cash &amp; Respect. <b>Fail:</b> discard. <em>(Complete 1 Gig, Racket, and Score to claim Commission Card).</em></div>
+            <div class="step-tag">3 Settle Accounts</div>
+            <div class="step-copy">Return 1 marker per active Contract to Reserves. If the final marker is removed, check objective. <b>Success:</b> collect Cash &amp; Respect. <b>Fail:</b> discard. <em>(Complete 1 Gig, Racket, and Score to claim Commission Card).</em></div>
           </div>
         </div>
       </section>
 
       <p class="round-note" style="margin-top:auto; padding: 2mm 2.5mm;">
         <b style="display:block; font-size:8.5pt; letter-spacing:0.5px; margin-bottom:1mm;">Final Reckoning</b>
-        Commission Card + <b>20+ Respect</b> = game ends. Otherwise flip the Moon Marker and begin the next Day.
+        Commission Card + <b>20+ Respect</b> = game ends. Otherwise swap to tomorrow's set and begin the next Day.
       </p>
 
     </div>
@@ -588,7 +588,7 @@
       </header>
 
       <p class="ledger-note">
-        At setup (after starting turf is placed), each Borough's <b>Police Squad</b> deploys to the first <b>Unoccupied</b> District on this list. Setup labels show those starting positions. During a Raid, Squads also resolve in this order.
+        At setup, each mainland Borough's <b>Police Squad</b> padlocks its <b>High Society</b> Speakeasy (4 in all; Staten Island gets none). Setup labels show those starting positions. During a Raid, Squads resolve in this list order.
       </p>
 
       <div style="flex:1;min-height:0;overflow:hidden;">
@@ -616,21 +616,21 @@
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Sugar Hill</td>
-            <td class="kind-rum" style="text-align:center;"><img src="Art/Icons/Rum.svg" class="zone-icon zone-icon-rum" alt="Rum"> Rum <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
             <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">East Harlem</td>
-            <td class="kind-whisky" style="text-align:center;"><img src="Art/Icons/Rye.svg" class="zone-icon zone-icon-whisky" alt="Whisky"> Whisky</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num">6</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">The Tenderloin</td>
-            <td class="kind-gin" style="text-align:center;"><img src="Art/Icons/Gin.svg" class="zone-icon zone-icon-gin" alt="Gin"> Gin</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num still-blank">-</td>
             <td></td>
           </tr>
@@ -661,21 +661,21 @@
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Morris Park</td>
-            <td class="kind-whisky" style="text-align:center;"><img src="Art/Icons/Rye.svg" class="zone-icon zone-icon-whisky" alt="Whisky"> Whisky <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
             <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Belmont</td>
-            <td class="kind-rum" style="text-align:center;"><img src="Art/Icons/Rum.svg" class="zone-icon zone-icon-rum" alt="Rum"> Rum</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num">10</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">Fordham</td>
-            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/Moonshine.svg" class="zone-icon zone-icon-moonshine" alt="Moonshine"> Moon</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num still-blank">-</td>
             <td></td>
           </tr>
@@ -699,21 +699,21 @@
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Richmond Hill</td>
-            <td class="kind-gin" style="text-align:center;"><img src="Art/Icons/Gin.svg" class="zone-icon zone-icon-gin" alt="Gin"> Gin <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
             <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Astoria</td>
-            <td class="kind-rum" style="text-align:center;"><img src="Art/Icons/Rum.svg" class="zone-icon zone-icon-rum" alt="Rum"> Rum</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num">6</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">Flushing</td>
-            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/Moonshine.svg" class="zone-icon zone-icon-moonshine" alt="Moonshine"> Moon</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num still-blank">-</td>
             <td></td>
           </tr>
@@ -744,21 +744,21 @@
           <tr>
             <td class="priority-num">2</td>
             <td class="district-name">Williamsburg</td>
-            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/Moonshine.svg" class="zone-icon zone-icon-moonshine" alt="Moonshine"> Moon <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
             <td class="still-num still-blank">-</td>
             <td><span class="setup-tag tag-precinct">Police Squad</span></td>
           </tr>
           <tr>
             <td class="priority-num">3</td>
             <td class="district-name">Coney Island</td>
-            <td class="kind-whisky" style="text-align:center;"><img src="Art/Icons/Rye.svg" class="zone-icon zone-icon-whisky" alt="Whisky"> Whisky</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num">3</td>
             <td><span class="setup-tag tag-runners">3 Runners</span></td>
           </tr>
           <tr>
             <td class="priority-num">4</td>
             <td class="district-name">Red Hook</td>
-            <td class="kind-gin" style="text-align:center;"><img src="Art/Icons/Gin.svg" class="zone-icon zone-icon-gin" alt="Gin"> Gin</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
             <td class="still-num still-blank">-</td>
             <td></td>
           </tr>
@@ -777,7 +777,7 @@
             <td class="district-name">Stapleton</td>
             <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ghetto"> Ghetto</td>
             <td class="still-num">12</td>
-            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
+            <td></td>
           </tr>
           <tr>
             <td class="priority-num">2</td>
@@ -805,7 +805,7 @@
             <strong>1. Most Wanted:</strong> A Squad looks only at Districts <b>directly Connected within its Borough</b> and steps toward the rival whose marker sits <b>furthest right</b> on the Heat Track. No marker = ignored. No Heat to chase = it holds its corner.
           </div>
           <div class="raid-step">
-            <strong>2. The Big Bust:</strong> If that rival holds more than one such District, hit the one with the <b>most units</b> (Mobsters + Barrels); ties break by <b>Ledger order</b>.
+            <strong>2. The Big Bust:</strong> If that rival holds more than one such District, hit the one with the <b>most Barrels</b> (the cops follow the contraband); ties break by <b>Ledger order</b>.
           </div>
           <div class="raid-step">
             <strong>3. The Scatter:</strong> Safehouse destroyed &amp; all Liquor seized. The crew flees to a <b>Connected Safe District</b> (never back toward the Squad); if there's none, the whole crew is <b>arrested</b>. No bribe, no buyout.
