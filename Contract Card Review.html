@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moonshine Kingdom — Contract Card Review</title>
+  <style>
+    :root {
+      --bg: #141010;
+      --panel: #1d1717;
+      --panel2: #241c1c;
+      --ink: #f0e6d2;
+      --muted: #b8a888;
+      --gold: #d4af37;
+      --gold-dim: #8a7424;
+      --line: rgba(212, 175, 55, 0.22);
+      --green: #6fbf73;
+      --amber: #e0b23c;
+      --red: #d9694f;
+      --gig: #6c9bd1;
+      --racket: #c79a4b;
+      --score: #c2603f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Raleway, system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+      padding: 24px 28px 80px;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", Impact, sans-serif;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin: 0 0 2px;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .sub { color: var(--muted); margin: 0 0 20px; font-style: italic; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px 22px;
+    }
+
+    .grid h3 { margin: 0 0 4px; font-size: 12.5px; color: var(--ink); text-transform: uppercase; letter-spacing: .8px; }
+    .grid ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 12.5px; }
+    .grid li { margin-bottom: 2px; }
+    .grid b { color: var(--ink); }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 12.5px; color: var(--muted); }
+    .legend b { color: var(--ink); }
+
+    /* Controls */
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .controls .lbl { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .6px; margin-right: 2px; }
+
+    .chip {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 14px;
+      padding: 4px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all .12s;
+    }
+    .chip:hover { color: var(--ink); border-color: var(--gold-dim); }
+    .chip.active { background: var(--gold); color: #1a1410; border-color: var(--gold); font-weight: 700; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      position: sticky; top: 0;
+      background: #2a2020;
+      color: var(--gold);
+      text-align: left;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      padding: 9px 8px;
+      border-bottom: 2px solid var(--gold-dim);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    thead th.nosort { cursor: default; }
+    thead th .arr { color: var(--muted); font-size: 9px; }
+
+    tbody td { padding: 9px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+    tbody tr:hover { background: rgba(212,175,55,0.05); }
+
+    .name { font-weight: 700; color: var(--ink); white-space: nowrap; }
+    .obj { color: var(--muted); min-width: 240px; max-width: 360px; }
+    .obj b { color: var(--ink); font-weight: 600; }
+    .note { color: var(--muted); font-size: 12.5px; min-width: 200px; max-width: 320px; }
+
+    .tier { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; white-space: nowrap; }
+    .tier-Gig { color: var(--gig); }
+    .tier-Racket { color: var(--racket); }
+    .tier-Score { color: var(--score); }
+
+    .take { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+    .stars { white-space: nowrap; font-size: 13px; letter-spacing: 1px; }
+    .stars .on { color: var(--gold); }
+    .stars .off { color: #4a3f33; }
+    td.theme-hi .stars .on, td.nov-hi .stars .on { color: var(--green); }
+    td.lo .stars .on { color: #7a6a4a; }
+
+    .fit { text-align: center; font-size: 16px; font-weight: 700; }
+    .fit.ok { color: var(--green); }
+    .fit.bad { color: var(--red); }
+
+    .tags { white-space: normal; min-width: 120px; }
+    .tag {
+      display: inline-block;
+      font-size: 10.5px;
+      padding: 1px 7px;
+      border-radius: 10px;
+      margin: 0 3px 3px 0;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .tag.standout { color: var(--green); border-color: rgba(111,191,115,.5); }
+    .tag.mis-tier { color: var(--red); border-color: rgba(217,105,79,.5); }
+    .tag.near-dupe, .tag.most-of-X, .tag.speak-count { color: var(--amber); border-color: rgba(224,178,60,.45); }
+
+    .verdict {
+      min-width: 150px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(212,175,55,0.3);
+      border-radius: 5px;
+      padding: 6px 8px;
+      color: var(--ink);
+      font-size: 12.5px;
+      outline: none;
+      min-height: 32px;
+    }
+    .verdict:focus { border-style: solid; border-color: var(--gold); background: rgba(212,175,55,0.06); }
+    .verdict:empty::before { content: "click to add…"; color: #5e5040; font-style: italic; }
+
+    .count { color: var(--muted); font-size: 12px; margin: 4px 0 14px; }
+    .footer-note { color: #6e5f4a; font-size: 11.5px; margin-top: 24px; }
+    .reset { float: right; font-size: 11px; }
+    a.reset { color: var(--gold-dim); cursor: pointer; }
+  </style>
+</head>
+
+<body>
+  <h1>Contract Card Review</h1>
+  <p class="sub">Moonshine Kingdom v6 deck — 53 live contracts rated for difficulty, theme &amp; novelty. Working notes for playtest tuning.</p>
+
+  <div class="panel">
+    <h2>How to read this</h2>
+    <div class="legend">
+      <span><b>Diff</b> — how hard to actually pull off (★1 trivial → ★5 brutal)</span>
+      <span><b>Fit</b> — <span style="color:var(--green)">✓</span> matched to tier · <span style="color:var(--red)">⚠</span> mis-tuned</span>
+      <span><b>Theme</b> — flavor &amp; name-to-objective fit (★1 generic → ★5 evocative)</span>
+      <span><b>Nov</b> — distinctiveness within the deck (★1 duplicate → ★5 unique)</span>
+    </div>
+    <p style="color:var(--muted); font-size:12.5px; margin:10px 0 0;">Click any column header to sort. Use the chips to filter. The <b>Your verdict</b> column is editable and saves to this browser automatically, so you can review across multiple sittings. <a class="reset" id="resetVerdicts">[clear my verdicts]</a></p>
+  </div>
+
+  <div class="panel">
+    <h2>Patterns worth acting on</h2>
+    <div class="grid">
+      <div>
+        <h3 style="color:var(--red)">Mis-tiered difficulty</h3>
+        <ul>
+          <li><b>The Toll Booth Trap</b> (Gig) — too hard &amp; uncontrollable (needs a Boss kill)</li>
+          <li><b>Tenement Army</b> (Racket) — undertuned; overlaps Ward Boss Title</li>
+          <li><b>Black Hand Rising</b> (Score) — undertuned; subset of Five Families</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--amber)">"Most of resource X" ×5</h3>
+        <ul>
+          <li>Empire State (cash) · Dutchman's Deal (moonshine)</li>
+          <li>Rum Wars (rum) · Butcher's Ledger (runners-N)</li>
+          <li>Irish Goodbye (runners) — <b>thin to ~3</b></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--amber)">"Control N Speakeasies" Scores ×5</h3>
+        <ul>
+          <li>The Cartel · The Dry Spell · The Last Call</li>
+          <li>South Side Stranglehold · King of Queens</li>
+          <li>~⅓ of the Score deck — <b>cut/merge 1–2</b></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--amber)">Near-duplicate pairs</h3>
+        <ul>
+          <li>Market Correction ≈ Cutting the Product</li>
+          <li>Sullivan Scheme ≈ South Side Stranglehold</li>
+          <li>Butcher's Ledger ≈ Irish Goodbye</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--green)">Standouts — leave alone</h3>
+        <ul>
+          <li>The Empty Casket · Hell's Highway</li>
+          <li>The Copper Heist · The Big Sleep</li>
+          <li>The Five Families · The Gatsby Run · Bathtub Chemistry</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Intentional ladders (fine)</h3>
+        <ul>
+          <li><b>Both-liquors:</b> Milk Run → Coney Island → Gatsby Run</li>
+          <li><b>Every-borough:</b> Ghosts → Black Hand → Five Families</li>
+          <li><b>Retired v6:</b> The Pipeline (needed 2 Safehouses)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <span class="lbl">Tier:</span>
+    <span class="chip tierchip active" data-tier="all">All</span>
+    <span class="chip tierchip" data-tier="Gig">Gigs</span>
+    <span class="chip tierchip" data-tier="Racket">Rackets</span>
+    <span class="chip tierchip" data-tier="Score">Scores</span>
+    <span class="lbl" style="margin-left:14px;">Tag:</span>
+    <span class="chip tagchip active" data-tag="all">All</span>
+    <span class="chip tagchip" data-tag="standout">Standouts</span>
+    <span class="chip tagchip" data-tag="mis-tier">Mis-tier</span>
+    <span class="chip tagchip" data-tag="most-of-X">Most-of-X</span>
+    <span class="chip tagchip" data-tag="speak-count">Speak-count</span>
+    <span class="chip tagchip" data-tag="near-dupe">Near-dupe</span>
+    <span class="chip tagchip" data-tag="both-liquors">Both-liquors</span>
+    <span class="chip tagchip" data-tag="dock-rum">Dock-rum</span>
+    <span class="chip tagchip" data-tag="every-borough">Every-borough</span>
+  </div>
+
+  <p class="count" id="count"></p>
+
+  <table id="tbl">
+    <thead>
+      <tr>
+        <th data-key="name">Card <span class="arr"></span></th>
+        <th data-key="tier">Tier <span class="arr"></span></th>
+        <th class="nosort">Objective</th>
+        <th data-key="take">Take <span class="arr"></span></th>
+        <th data-key="diff">Diff <span class="arr"></span></th>
+        <th data-key="fit">Fit <span class="arr"></span></th>
+        <th data-key="theme">Theme <span class="arr"></span></th>
+        <th data-key="nov">Nov <span class="arr"></span></th>
+        <th class="nosort">Tags</th>
+        <th class="nosort">Notes</th>
+        <th class="nosort">Your verdict</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <p class="footer-note">Generated as a playtest-tuning aid · objectives reflect the v6 deck after the Safehouse fixes (Fortress Staten, Omertà's Shadow) and Dock Domination retheme · ratings are subjective design judgement, not playtested data.</p>
+
+  <script>
+    const cards = [
+      // ---- GIGS ----
+      { name: "Five Points Hustle", tier: "Gig", take: 500, obj: "Control <b>Five Points</b> and hold <b>2+ Moonshine</b> there.", diff: 2, fit: true, theme: 3, nov: 3, tags: [], note: "Clean starter objective." },
+      { name: "Moonshine Express", tier: "Gig", take: 500, obj: "<b>Boss</b> in a <b>Speakeasy you Control</b> holding <b>4+ Moonshine</b>.", diff: 2, fit: true, theme: 3, nov: 2, tags: [], note: "Boss+speak+barrels template, shared with The Angel's Share (rum)." },
+      { name: "The Crimson Coup", tier: "Gig", take: 500, obj: "Control <b>3+ Districts</b> in a Borough containing a <b>Rival Safehouse</b>.", diff: 3, fit: true, theme: 3, nov: 4, tags: [], note: "Aggressive land-grab; good." },
+      { name: "Bloody Sunday", tier: "Gig", take: 500, obj: "<b>8+ Runners</b> in Districts <b>Connected</b> to the same <b>Rival Safehouse</b>.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Menacing siege flavor; a little fiddly to verify." },
+      { name: "Empire State", tier: "Gig", take: 500, obj: "Hold more <b>Cash</b> than any other single <b>Rival</b>.", diff: 2, fit: true, theme: 2, nov: 2, tags: ["most-of-X"], note: "Swingy. Name evokes a landmark; objective is a bankroll — weak fit." },
+      { name: "The Toll Booth Trap", tier: "Gig", take: 500, obj: "Ensure at least <b>1 rival mob</b> has <b>no Boss</b> in play.", diff: 4, fit: false, theme: 3, nov: 3, tags: ["mis-tier"], note: "Too hard & uncontrollable for a 1-day Gig — needs a Boss kill you can't always force." },
+      { name: "The Milk Run", tier: "Gig", take: 500, obj: "Hold <b>2+</b> of <b>both Moonshine and Havana Rum</b> across Districts you Control.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["both-liquors"], note: "Entry rung of the both-liquors ladder (→ Coney Island → Gatsby Run)." },
+      { name: "Rum Runner's Regatta", tier: "Gig", take: 500, obj: "Hold <b>4+ Rum</b> in <b>Dock Districts</b> you Control.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "Dock-rum cluster." },
+      { name: "High Roller", tier: "Gig", take: 500, obj: "<b>Boss</b> in <b>The Tenderloin</b> with at least <b>$2,500</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: [], note: "Gambling-district flavor lands." },
+      { name: "Union Dues", tier: "Gig", take: 500, obj: "At least <b>8 Runners</b> in <b>Ghetto Districts</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "Labor theme; mild overlap with Tenement Army." },
+      { name: "Lexington Avenue Laundry", tier: "Gig", take: 500, obj: "Hold <b>$2,500+</b> and <b>no markers</b> on the Heat Track.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "Money-laundering theme strong." },
+      { name: "The Debt Collector", tier: "Gig", take: 500, obj: "Hold <b>5+ Liquor</b> in a Borough whose <b>Deed is held by a rival</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: ["rival-deed"], note: "Pairs with The Beachhead (rival-deed borough)." },
+      { name: "The Insurance Job", tier: "Gig", take: 500, obj: "Control a <b>Dock District</b> and a <b>Speakeasy</b> in the <b>same Borough</b>.", diff: 2, fit: true, theme: 2, nov: 3, tags: [], note: "Easy; 'insurance' theme doesn't connect to the ask." },
+      { name: "The Angel's Share", tier: "Gig", take: 500, obj: "<b>Boss</b> in a <b>Speakeasy you Control</b> holding <b>3+ Havana Rum</b>.", diff: 2, fit: true, theme: 5, nov: 2, tags: [], note: "Excellent name; mechanically the rum twin of Moonshine Express." },
+      { name: "Frame Job", tier: "Gig", take: 500, obj: "<b>0 markers</b> on the Heat Track while a single <b>Rival has 2+</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "Nicely interactive." },
+      { name: "The Quiet Drop", tier: "Gig", take: 500, obj: "<b>3+ Havana Rum</b> in a <b>Staten Island Dock</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "Dock-rum cluster; Staten flavor." },
+      { name: "Full Steam Ahead", tier: "Gig", take: 500, obj: "Control <b>3+ Districts</b>, each holding <b>2+ Moonshine</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: [], note: "Production spread." },
+      { name: "Cross-Town Switch", tier: "Gig", take: 500, obj: "<b>3+ Moonshine</b> in <b>Queens</b> and <b>3+ Rum</b> in <b>Manhattan</b>.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Distinct logistics ask." },
+      { name: "Market Correction", tier: "Gig", take: 500, obj: "<b>5+ Havana Rum</b> in a <b>single District</b>.", diff: 2, fit: true, theme: 2, nov: 2, tags: ["near-dupe"], note: "Near-twin of Cutting the Product (single-District stockpile)." },
+      { name: "Cutting the Product", tier: "Gig", take: 500, obj: "<b>6+ Moonshine</b> in a <b>single District</b> you Control.", diff: 2, fit: true, theme: 4, nov: 2, tags: ["near-dupe"], note: "Good name; near-twin of Market Correction. (Sits on the Racket print sheet.)" },
+      { name: "The Beachhead", tier: "Gig", take: 500, obj: "<b>Safehouse</b> + <b>2+ Rum</b> in one District within a Borough whose <b>Deed is held by a rival</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["rival-deed"], note: "Aggressive beachhead; pairs with Debt Collector. (Sits on the Racket print sheet.)" },
+
+      // ---- RACKETS ----
+      { name: "Cobble Hill Connection", tier: "Racket", take: 1500, obj: "Control <b>2+ Districts</b> in both <b>Brooklyn &amp; Queens</b>.", diff: 3, fit: true, theme: 2, nov: 3, tags: [], note: "Generic ask; real-place name." },
+      { name: "The Sullivan Scheme", tier: "Racket", take: 1500, obj: "Control <b>3+ Speakeasies</b> in <b>Brooklyn &amp; Queens</b>, and have <b>$2,000+</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: ["speak-count", "near-dupe"], note: "Region+speaks overlaps South Side Stranglehold (Score)." },
+      { name: "The Empty Casket", tier: "Racket", take: 1500, obj: "Hold a <b>Borough Deed</b> while you have <b>fewer than 5 mobsters</b> in that Borough.", diff: 3, fit: true, theme: 5, nov: 5, tags: ["standout"], note: "Clever 'hold turf thin' tension; top-tier design." },
+      { name: "Omertà's Shadow", tier: "Racket", take: 1500, obj: "Control a <b>District</b> in <b>every Borough</b> that contains a <b>rival Boss</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: [], note: "Interactive & situational (reworked v6: dropped Safehouse requirement)." },
+      { name: "The Butcher's Ledger", tier: "Racket", take: 1500, obj: "More <b>Runners North of the East River</b> (Manhattan &amp; Bronx) than any rival (ties fail).", diff: 3, fit: true, theme: 3, nov: 2, tags: ["most-of-X", "near-dupe"], note: "'Most runners' — overlaps The Irish Goodbye." },
+      { name: "Coney Island Heist", tier: "Racket", take: 1500, obj: "<b>Safehouse</b> in <b>Coney Island</b> + <b>2+</b> of <b>both</b> liquors there.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["both-liquors"], note: "Mid rung of the both-liquors ladder." },
+      { name: "Fortress Staten", tier: "Racket", take: 1500, obj: "Control <b>all Staten Island</b>, with your <b>Safehouse</b> on one of its <b>Docks</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: [], note: "Distinct geographic lock (reworked v6: single Safehouse)." },
+      { name: "Ghosts in the Shadows", tier: "Racket", take: 1500, obj: "At least <b>2 mobsters</b> in <b>every Borough</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: ["every-borough"], note: "Spread cluster (→ Black Hand → Five Families)." },
+      { name: "High Spirits", tier: "Racket", take: 1500, obj: "Control a <b>High Society Speakeasy</b> + <b>4+ Rum</b> there.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Gated behind a Raid; overlaps Old Guard." },
+      { name: "Hell's Highway", tier: "Racket", take: 1500, obj: "Control a continuous chain of <b>Connected Districts</b> from <b>East Harlem to Flushing</b>.", diff: 4, fit: true, theme: 5, nov: 5, tags: ["standout"], note: "Novel sprawl objective; signature card." },
+      { name: "The Big Squeeze", tier: "Racket", take: 1500, obj: "Hold the <b>Borough Deed</b> for the Borough with the <b>most Liquor</b> (ties fail).", diff: 3, fit: true, theme: 3, nov: 3, tags: [], note: "Solid." },
+      { name: "The Dutchman's Deal", tier: "Racket", take: 1500, obj: "Hold more <b>Moonshine</b> than any single rival (ties fail).", diff: 3, fit: true, theme: 3, nov: 2, tags: ["most-of-X"], note: "'Most moonshine'; nice Dutch Schultz nod." },
+      { name: "Tenement Army", tier: "Racket", take: 1500, obj: "Control <b>3+ Ghetto Districts</b>.", diff: 2, fit: false, theme: 3, nov: 2, tags: ["mis-tier"], note: "Undertuned for a Racket; overlaps the Ward Boss Title and Union Dues." },
+      { name: "Bathtub Chemistry", tier: "Racket", take: 1500, obj: "Hold <b>10+ Moonshine</b> across Districts you Control.", diff: 3, fit: true, theme: 5, nov: 3, tags: [], note: "Great prohibition theme; big stockpile." },
+      { name: "Cuban Prince", tier: "Racket", take: 1500, obj: "Control <b>2+ Dock Districts</b> and hold <b>4+ Rum</b> in each.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "Dock-rum cluster (vs Dock Domination, Regatta)." },
+      { name: "Gentleman Jimmy's Shindig", tier: "Racket", take: 1500, obj: "Control <b>Morris Park</b> with <b>Boss</b>, <b>3+ Rum</b> there, and <b>$2,500+</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: [], note: "Characterful multi-condition." },
+
+      // ---- SCORES ----
+      { name: "Harlem Shakedown", tier: "Score", take: 3000, obj: "Control <b>5+ Districts</b> in <b>Manhattan</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: [], note: "Borough domination." },
+      { name: "The Copper Heist", tier: "Score", take: 3000, obj: "Control Districts with <b>active Stills 10, 11 &amp; 12</b> (one of each).", diff: 4, fit: true, theme: 4, nov: 5, tags: ["standout"], note: "Novel still-number hunt; geography-dependent." },
+      { name: "The Dry Spell", tier: "Score", take: 3000, obj: "Control <b>4+ Speakeasies</b> while holding <b>no Heat</b>.", diff: 5, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Hard: heat discipline + 4 speaks." },
+      { name: "The Last Call", tier: "Score", take: 3000, obj: "Control <b>4+ Speakeasies</b> in <b>Manhattan and the Bronx</b>.", diff: 4, fit: true, theme: 3, nov: 2, tags: ["speak-count"], note: "Speak-count cluster." },
+      { name: "The Cartel", tier: "Score", take: 3000, obj: "Control <b>5+ Speakeasies</b> across the city.", diff: 5, fit: true, theme: 3, nov: 3, tags: ["speak-count"], note: "The base speak-count Score." },
+      { name: "Rum Wars", tier: "Score", take: 3000, obj: "Hold more <b>Havana Rum</b> than any single rival (ties fail).", diff: 3, fit: true, theme: 3, nov: 2, tags: ["most-of-X"], note: "'Most rum' template." },
+      { name: "South Side Stranglehold", tier: "Score", take: 3000, obj: "Control <b>4+ Speakeasies</b> in <b>Brooklyn &amp; Queens</b>.", diff: 4, fit: true, theme: 3, nov: 2, tags: ["speak-count", "near-dupe"], note: "Overlaps Sullivan Scheme + speak-count cluster." },
+      { name: "The Big Sleep", tier: "Score", take: 3000, obj: "Surround a <b>rival Boss</b> so they can't move without entering <b>Hostile turf</b>.", diff: 5, fit: false, theme: 5, nov: 5, tags: ["standout"], note: "Brutal & novel but very uncontrollable — can be un-completable through no fault of yours." },
+      { name: "Dock Domination", tier: "Score", take: 3000, obj: "Control <b>4+ Dock Districts</b>, each holding <b>2+ Rum</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: ["dock-rum"], note: "Reworked v6 off the Harbormaster's pure dock-count." },
+      { name: "The Irish Goodbye", tier: "Score", take: 3000, obj: "More <b>Runners</b> in play than any rival (ties fail).", diff: 3, fit: true, theme: 3, nov: 2, tags: ["most-of-X", "near-dupe"], note: "Overlaps Butcher's Ledger." },
+      { name: "Black Hand Rising", tier: "Score", take: 3000, obj: "Control at least <b>1 District</b> in <b>every Borough</b>.", diff: 3, fit: false, theme: 3, nov: 2, tags: ["mis-tier", "every-borough", "near-dupe"], note: "Undertuned for a Score; strict subset of The Five Families." },
+      { name: "The Gatsby Run", tier: "Score", take: 3000, obj: "Hold <b>4+</b> of <b>both</b> liquors in a <b>single Borough</b>.", diff: 4, fit: true, theme: 5, nov: 3, tags: ["both-liquors"], note: "Apex of the both-liquors ladder; great name." },
+      { name: "The King of Queens", tier: "Score", take: 3000, obj: "Control <b>all 3 Speakeasies</b> in <b>Queens</b>.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Specific speak lock." },
+      { name: "The Grand Tour", tier: "Score", take: 3000, obj: "Control a <b>Standard</b> + <b>High Society Speakeasy</b> + <b>Dock</b>, all at once.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Variety goal; nice change of pace." },
+      { name: "The Old Guard", tier: "Score", take: 3000, obj: "<b>High Society</b> speak w/ <b>3+ Rum</b> and a <b>Standard</b> speak w/ <b>3+ Moonshine</b>.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Combo speak; overlaps High Spirits flavor." },
+      { name: "The Five Families", tier: "Score", take: 3000, obj: "Control a District w/ <b>2+ Moonshine</b> in <b>every Borough</b> (all five).", diff: 4, fit: true, theme: 5, nov: 4, tags: ["every-borough"], note: "Iconic; the strict, well-tuned version of Black Hand Rising." }
+    ];
+
+    const tierOrder = { Gig: 0, Racket: 1, Score: 2 };
+    let curTier = "all", curTag = "all";
+    let sortKey = null, sortDir = 1;
+
+    const tbody = document.getElementById("tbody");
+
+    function stars(n, cls) {
+      let s = '<span class="stars">';
+      for (let i = 1; i <= 5; i++) s += '<span class="' + (i <= n ? 'on' : 'off') + '">' + (i <= n ? '★' : '☆') + '</span>';
+      return s + '</span>';
+    }
+
+    function loadVerdicts() {
+      try { return JSON.parse(localStorage.getItem("mk_verdicts") || "{}"); } catch (e) { return {}; }
+    }
+    function saveVerdict(name, val) {
+      try { const v = loadVerdicts(); v[name] = val; localStorage.setItem("mk_verdicts", JSON.stringify(v)); } catch (e) {}
+    }
+
+    function render() {
+      const verdicts = loadVerdicts();
+      let rows = cards.filter(c =>
+        (curTier === "all" || c.tier === curTier) &&
+        (curTag === "all" || c.tags.includes(curTag))
+      );
+
+      if (sortKey) {
+        rows = rows.slice().sort((a, b) => {
+          let av, bv;
+          if (sortKey === "tier") { av = tierOrder[a.tier]; bv = tierOrder[b.tier]; }
+          else if (sortKey === "fit") { av = a.fit ? 1 : 0; bv = b.fit ? 1 : 0; }
+          else if (sortKey === "name") { av = a.name.toLowerCase(); bv = b.name.toLowerCase(); }
+          else { av = a[sortKey]; bv = b[sortKey]; }
+          if (av < bv) return -1 * sortDir;
+          if (av > bv) return 1 * sortDir;
+          return tierOrder[a.tier] - tierOrder[b.tier];
+        });
+      }
+
+      tbody.innerHTML = rows.map(c => {
+        const tagHtml = c.tags.map(t => '<span class="tag ' + t + '">' + t + '</span>').join('');
+        const v = (verdicts[c.name] || "").replace(/"/g, '&quot;');
+        return '<tr>' +
+          '<td class="name">' + c.name + '</td>' +
+          '<td class="tier tier-' + c.tier + '">' + c.tier + '</td>' +
+          '<td class="obj">' + c.obj + '</td>' +
+          '<td class="take">$' + c.take.toLocaleString() + '</td>' +
+          '<td class="' + (c.diff <= 2 ? 'lo' : '') + '">' + stars(c.diff) + '</td>' +
+          '<td class="fit ' + (c.fit ? 'ok' : 'bad') + '">' + (c.fit ? '✓' : '⚠') + '</td>' +
+          '<td class="' + (c.theme >= 4 ? 'theme-hi' : (c.theme <= 2 ? 'lo' : '')) + '">' + stars(c.theme) + '</td>' +
+          '<td class="' + (c.nov >= 4 ? 'nov-hi' : (c.nov <= 2 ? 'lo' : '')) + '">' + stars(c.nov) + '</td>' +
+          '<td class="tags">' + tagHtml + '</td>' +
+          '<td class="note">' + c.note + '</td>' +
+          '<td><div class="verdict" contenteditable="true" data-name="' + c.name.replace(/"/g, '&quot;') + '">' + v + '</div></td>' +
+          '</tr>';
+      }).join('');
+
+      document.getElementById("count").textContent =
+        rows.length + " of " + cards.length + " contracts shown" +
+        (curTier !== "all" ? " · " + curTier : "") + (curTag !== "all" ? " · tag: " + curTag : "");
+
+      document.querySelectorAll(".verdict").forEach(el => {
+        el.addEventListener("blur", () => saveVerdict(el.dataset.name, el.textContent.trim()));
+      });
+    }
+
+    document.querySelectorAll(".tierchip").forEach(ch => ch.addEventListener("click", () => {
+      document.querySelectorAll(".tierchip").forEach(x => x.classList.remove("active"));
+      ch.classList.add("active"); curTier = ch.dataset.tier; render();
+    }));
+    document.querySelectorAll(".tagchip").forEach(ch => ch.addEventListener("click", () => {
+      document.querySelectorAll(".tagchip").forEach(x => x.classList.remove("active"));
+      ch.classList.add("active"); curTag = ch.dataset.tag; render();
+    }));
+    document.querySelectorAll("th[data-key]").forEach(th => th.addEventListener("click", () => {
+      const k = th.dataset.key;
+      if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = 1; }
+      document.querySelectorAll("th .arr").forEach(a => a.textContent = "");
+      th.querySelector(".arr").textContent = sortDir === 1 ? "▲" : "▼";
+      render();
+    }));
+    document.getElementById("resetVerdicts").addEventListener("click", () => {
+      if (confirm("Clear all your saved verdicts in this browser?")) {
+        try { localStorage.removeItem("mk_verdicts"); } catch (e) {}
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+
+</html>
