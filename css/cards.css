@@ -167,7 +167,8 @@ body {
 .card-back.chicago { background-image: url('../Art/Chicago.png'); justify-content: flex-end; }
 .card-back.rat { background-image: url('../Art/rat.png'); justify-content: flex-end; }
 .borough-back { background-image: url('../Art/City.png'); justify-content: flex-end; }
-.ghetto-back { background-image: url('../Art/Ghetto.png'); justify-content: flex-end;} 
+.ghetto-back { background-image: url('../Art/Ghetto.png'); justify-content: flex-end;}
+.dock-back { background-image: url('../Art/Bridge.png'); justify-content: flex-end;}
 .card-back.easy { background-image: url('../Art/Easy.png'); justify-content: flex-end; }
 .card-back.medium { background-image: url('../Art/Medium.png'); justify-content: flex-end; }
 .card-back.hard { background-image: url('../Art/Hard.png'); justify-content: flex-end; }
