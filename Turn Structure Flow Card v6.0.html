@@ -201,7 +201,7 @@
 
     .step {
       display: grid;
-      grid-template-columns: 24mm 1fr;
+      grid-template-columns: 26mm 1fr;
       gap: 2mm;
       align-items: start;
       padding: 1mm 1.3mm;
@@ -217,7 +217,7 @@
       color: var(--gold);
       font-weight: 700;
       line-height: 1.2;
-      white-space: nowrap;
+      overflow-wrap: break-word;
     }
 
     .step-copy {
@@ -490,7 +490,7 @@
       </div>
 
       <p class="round-note">
-        <b>Turn Order</b> runs Turn Token #1 through #4. At Day turnover, swap to <b>tomorrow's set</b> of Turn Tokens.
+        <b>Turn Order</b> runs Token #1 through #4. At Day turnover, swap to <b>tomorrow's set</b>.
       </p>
 
       <section class="phase-card">
@@ -505,17 +505,20 @@
           <div class="step">
             <div class="step-tag">1 The Brew</div>
             <div class="step-copy">
-              <span class="sub-tag">Roll:</span> Token #1 rolls <b>1 White</b> + <b>Red Dice</b> (Players + 1).<br>
-              <span class="sub-tag">Draft:</span> In turn order, each boss drafts <b>exactly 1 Red</b>.<br>
-              <span class="sub-tag">Produce:</span> Brew Number = <b>White + your drafted Red</b>. Every active Still you Control matching it brews <b>Moonshine</b> by Muscle Ratio (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5).<br>
-              <span class="sub-tag">Blowback:</span> Leftover Red + White = Blowback. EVERY active Controlled Still matching it bursts: casualties by Muscle Ratio (Runners first), crew thinned in place &mdash; the Still keeps running.
+              <span class="sub-tag">Roll:</span> Token #1 rolls <b>1 White</b> + <b>Red</b> (Players + 1).<br>
+              <span class="sub-tag">Draft:</span> In turn order, each boss takes <b>1 Red</b>.<br>
+              <span class="sub-tag">Produce:</span> Brew = <b>White + your Red</b>. Your matching Stills brew <b>Moonshine</b> by Muscle Ratio (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5).
             </div>
           </div>
           <div class="step">
-            <div class="step-tag">2 Grease Wheels</div>
+            <div class="step-tag">2 The Blowback</div>
+            <div class="step-copy">Leftover Red + White. <b>Every</b> matching Still bursts: casualties by Muscle Ratio (Runners first); Still keeps running.</div>
+          </div>
+          <div class="step">
+            <div class="step-tag">3 Grease Wheels</div>
             <div class="step-copy">
-              <span class="sub-tag">Stake Contracts:</span> Lock Reserves markers on cards equal to Days to Deadline.<br>
-              <span class="sub-tag">Fund Ops:</span> Move up to <b>5</b> remaining Reserves markers to Operations.
+              <span class="sub-tag">Stake Contracts:</span> <em>Boss required.</em> Lock Reserves markers = Days to Deadline.<br>
+              <span class="sub-tag">Fund Ops:</span> Move up to <b>5</b> Reserves markers to Operations.
             </div>
           </div>
         </div>
@@ -532,18 +535,18 @@
         <div class="step-list">
           <div class="step">
             <div class="step-tag">Take Play</div>
-            <div class="step-copy">Spend Influence for 1 Play (Standard = 1, Power = 2). Combat must resolve fully before the Play ends.</div>
+            <div class="step-copy">Spend Influence for 1 Play (Standard = 1, Power = 2). Resolve combat before the Play ends.</div>
           </div>
           <div class="step">
             <div class="step-tag">Resolve</div>
             <div class="step-copy">
-              <span class="sub-tag">Pay:</span> Spent markers return to Reserves. If the Play generated Heat <img src="Art/Icons/fire.svg" class="zone-icon" alt="Heat">, lock 1 spent marker on the <b>Heat Track</b>.<br>
-              <span class="sub-tag">Unload (Power Play):</span> Sell at a Speakeasy you Control &mdash; Standard <b>$300</b>/barrel, High Society <b>$500</b>/barrel. Only <b>Rum</b> pays Kickback (1 spent marker back per Rum); 4+ barrels = <b>Heat</b>.
+              <span class="sub-tag">Pay:</span> Spent markers return to Reserves. Heat <img src="Art/Icons/fire.svg" class="zone-icon" alt="Heat"> locks 1 marker on the <b>Heat Track</b>.<br>
+              <span class="sub-tag">Unload (Power Play):</span> Sell at your Speakeasy &mdash; <b>$300</b>/barrel, <b>$500</b> High Society. Only <b>Rum</b> pays Kickback (1 marker back per Rum); 4+ barrels = <b>Heat</b>.
             </div>
           </div>
           <div class="step">
             <div class="step-tag">Lay Low</div>
-            <div class="step-copy">When out of Influence (or passing early): clear Ops markers to Reserves, and claim the lowest available token from <b>tomorrow's set</b> (snag #1 to strike first next Day).</div>
+            <div class="step-copy">Out of Influence (or passing early): clear Ops markers to Reserves; claim the lowest token in <b>tomorrow's set</b> (#1 strikes first next Day).</div>
           </div>
         </div>
       </section>
@@ -563,11 +566,11 @@
           </div>
           <div class="step">
             <div class="step-tag">2 Stake Your Claim</div>
-            <div class="step-copy">Re-count every Title (Borough Deeds and the Ward Boss) against the board right now. Whoever holds a <b>strict majority</b> of that turf (more than any rival) takes or keeps it. No sole leader (tie at the top or empty turf) &rarr; it returns to the Supply. (Police turf counts as empty).</div>
+            <div class="step-copy">Re-count every Title (Borough Deeds, Ward Boss, Harbormaster) now. A <b>strict majority</b> of that turf takes or keeps it; a tie or empty turf returns it to the Supply. (Police turf counts as empty).</div>
           </div>
           <div class="step">
             <div class="step-tag">3 Settle Accounts</div>
-            <div class="step-copy">Return 1 marker per active Contract to Reserves. If the final marker is removed, check objective. <b>Success:</b> collect Cash &amp; Respect. <b>Fail:</b> discard. <em>(Complete 1 Gig, Racket, and Score to claim Commission Card).</em></div>
+            <div class="step-copy">Return 1 marker per active Contract to Reserves. On the final marker, check objective: <b>Success</b> &rarr; collect Cash &amp; Respect; <b>Fail</b> &rarr; discard. <em>(Gig + Racket + Score = Commission Card).</em></div>
           </div>
         </div>
       </section>
@@ -588,18 +591,18 @@
       </header>
 
       <p class="ledger-note">
-        At setup, each mainland Borough's <b>Police Squad</b> padlocks its <b>High Society</b> Speakeasy (4 in all; Staten Island gets none). Setup labels show those starting positions. During a Raid, Squads resolve in this list order.
+        At setup, each mainland Borough's <b>Police Squad</b> padlocks its <b>High Society</b> Speakeasy (4 in all; Staten Island gets none). During a Raid, Squads resolve in this list order.
       </p>
 
       <div style="flex:1;min-height:0;overflow:hidden;">
       <table class="ledger-table" style="height:100%;" aria-label="Town Planning Ledger">
         <thead>
           <tr>
-            <th style="width: 18mm; text-align: center;">Borough</th>
+            <th style="width: 17mm; text-align: center;">Borough</th>
             <th style="width: 5mm; text-align: center;">#</th>
-            <th style="width: 28mm;">District</th>
-            <th style="width: 13mm; text-align: center;">Zone</th>
-            <th style="width: 10mm; text-align: center;">Still</th>
+            <th style="width: 26mm;">District</th>
+            <th style="width: 18mm; text-align: center;">Zone</th>
+            <th style="width: 8mm; text-align: center;">Still</th>
             <th style="width: 18mm;">Setup</th>
           </tr>
         </thead>

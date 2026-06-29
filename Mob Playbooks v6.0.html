@@ -256,7 +256,7 @@
 
     .combat-flow-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 5px;
       margin-top: 1px;
     }
@@ -495,7 +495,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Police turf: Pinned; liquor seized.</td>
+        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Can't enter Police turf.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -508,22 +508,17 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Trade</td>
-        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Extort</td>
-        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Payoff</td>
-        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control. Once per Day. <span class="heat">$500+: Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -531,7 +526,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -649,7 +644,6 @@
       <div class="section-title">Combat Sequence</div>
       <div class="combat-flow-grid">
         <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
             <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
@@ -658,15 +652,6 @@
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
-          </div>
-        </div>
-        <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Police</div>
-          <div class="flow-step">
-            <strong>The Blue Wall</strong> - A District holding a Police Squad is <b>Impassable</b>: no Moving, Pushing, or Attacking in. No storming the law.
-          </div>
-          <div class="flow-step">
-            <strong>They move only on a Raid</strong> - Bait them onto barrel-less crews and let the Squad scatter them harmlessly.
           </div>
         </div>
       </div>
@@ -683,7 +668,7 @@
         <tr>
           <td class="action-cost">0</td>
           <td class="action-name">Hold Fire</td>
-          <td class="action-desc">Pins the Invader without a fight.</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
@@ -731,7 +716,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Police turf: Pinned; liquor seized.</td>
+        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Can't enter Police turf.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -744,22 +729,17 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Trade</td>
-        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Extort</td>
-        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Payoff</td>
-        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control. Once per Day. <span class="heat">$500+: Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -767,7 +747,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -885,7 +865,6 @@
       <div class="section-title">Combat Sequence</div>
       <div class="combat-flow-grid">
         <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
             <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
@@ -894,15 +873,6 @@
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
-          </div>
-        </div>
-        <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Police</div>
-          <div class="flow-step">
-            <strong>The Blue Wall</strong> - A District holding a Police Squad is <b>Impassable</b>: no Moving, Pushing, or Attacking in. No storming the law.
-          </div>
-          <div class="flow-step">
-            <strong>They move only on a Raid</strong> - Bait them onto barrel-less crews and let the Squad scatter them harmlessly.
           </div>
         </div>
       </div>
@@ -919,7 +889,7 @@
         <tr>
           <td class="action-cost">0</td>
           <td class="action-name">Hold Fire</td>
-          <td class="action-desc">Pins the Invader without a fight.</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
@@ -967,7 +937,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Police turf: Pinned; liquor seized.</td>
+        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Can't enter Police turf.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -980,22 +950,17 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Trade</td>
-        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Extort</td>
-        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Payoff</td>
-        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control. Once per Day. <span class="heat">$500+: Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -1003,7 +968,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -1121,7 +1086,6 @@
       <div class="section-title">Combat Sequence</div>
       <div class="combat-flow-grid">
         <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
             <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
@@ -1130,15 +1094,6 @@
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
-          </div>
-        </div>
-        <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Police</div>
-          <div class="flow-step">
-            <strong>The Blue Wall</strong> - A District holding a Police Squad is <b>Impassable</b>: no Moving, Pushing, or Attacking in. No storming the law.
-          </div>
-          <div class="flow-step">
-            <strong>They move only on a Raid</strong> - Bait them onto barrel-less crews and let the Squad scatter them harmlessly.
           </div>
         </div>
       </div>
@@ -1155,7 +1110,7 @@
         <tr>
           <td class="action-cost">0</td>
           <td class="action-name">Hold Fire</td>
-          <td class="action-desc">Pins the Invader without a fight.</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
@@ -1203,7 +1158,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Move</td>
-        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Police turf: Pinned; liquor seized.</td>
+        <td class="action-desc">Move mobsters to a connected district (max 1 barrel each). Rival turf: Standoff. Can't enter Police turf.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
@@ -1216,22 +1171,17 @@
       <tr>
         <td class="action-cost">2</td>
         <td class="action-name">Unload</td>
-        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>Standard $300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Trade</td>
-        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1, no dice. The only way Rum enters the game.</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
       </tr>
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Extort</td>
-        <td class="action-desc">Collect <b>$100 per District</b> you Control anywhere. Once per Day. <span class="heat">$500+ (5+ Districts): Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
-      </tr>
-      <tr>
-        <td class="action-cost">2</td>
-        <td class="action-name">Payoff</td>
-        <td class="action-desc">Hold the broker's gating Deed, then pay their fee for the Favor + 1 permanent Influence. Once each per game.</td>
+        <td class="action-desc">Collect <b>$100 per District</b> you Control. Once per Day. <span class="heat">$500+: Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
       </tr>
     </table>
     <div class="section-title">Diplomacy</div>
@@ -1239,7 +1189,7 @@
       <tr>
         <td class="action-cost">1</td>
         <td class="action-name">Hustle</td>
-        <td class="action-desc">Boss in play: draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
       </tr>
       <tr>
         <td class="action-cost">2</td>
@@ -1357,7 +1307,6 @@
       <div class="section-title">Combat Sequence</div>
       <div class="combat-flow-grid">
         <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Rival</div>
           <div class="flow-step">
             <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
           </div>
@@ -1366,15 +1315,6 @@
           </div>
           <div class="flow-step">
             <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
-          </div>
-        </div>
-        <div class="combat-flow-col">
-          <div class="flow-col-title">Vs Police</div>
-          <div class="flow-step">
-            <strong>The Blue Wall</strong> - A District holding a Police Squad is <b>Impassable</b>: no Moving, Pushing, or Attacking in. No storming the law.
-          </div>
-          <div class="flow-step">
-            <strong>They move only on a Raid</strong> - Bait them onto barrel-less crews and let the Squad scatter them harmlessly.
           </div>
         </div>
       </div>
@@ -1391,7 +1331,7 @@
         <tr>
           <td class="action-cost">0</td>
           <td class="action-name">Hold Fire</td>
-          <td class="action-desc">Pins the Invader without a fight.</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
         </tr>
         <tr>
           <td class="action-cost">0</td>
