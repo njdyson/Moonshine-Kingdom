@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 108" width="200" height="216">
+  <defs></defs>
+  <rect x="33" y="11" width="16" height="8" rx="2.5" fill="#130207" stroke="#d4af37" stroke-width="2.2"></rect>
+  <path d="M24 92 l-3.5 10 M58 92 l3.5 10" stroke="#d4af37" stroke-width="2.6" stroke-linecap="round"></path>
+  <rect x="14" y="18" width="54" height="74" rx="10" fill="#130207" stroke="#d4af37" stroke-width="3"></rect>
+  <circle cx="20.5" cy="27" r="1.5" fill="#8a7329"></circle><circle cx="20.5" cy="55" r="1.5" fill="#8a7329"></circle><circle cx="20.5" cy="83" r="1.5" fill="#8a7329"></circle>
+  <text x="41" y="67" text-anchor="middle" font-family="&#39;Bebas Neue&#39;, Impact, sans-serif" font-size="37" fill="#f5e9d9">7</text>
+  <rect x="65" y="51" width="14" height="6" rx="2" fill="#130207" stroke="#d4af37" stroke-width="1.6"></rect>
+  <rect x="76.5" y="18" width="13" height="76" rx="6.5" fill="#0d0005" stroke="#d4af37" stroke-width="2.4"></rect>
+  <rect x="79.5" y="80.6" width="7.2" height="9.4" rx="1.6" fill="#e8c85a" fill-opacity="1" stroke="#e8c85a" stroke-opacity="1" stroke-width="0.5"></rect><rect x="79.5" y="69.8" width="7.2" height="9.4" rx="1.6" fill="#dcb246" fill-opacity="1" stroke="#dcb246" stroke-opacity="1" stroke-width="0.5"></rect><rect x="79.5" y="59.0" width="7.2" height="9.4" rx="1.6" fill="#d49a37" fill-opacity="1" stroke="#d49a37" stroke-opacity="1" stroke-width="0.5"></rect><rect x="79.5" y="48.2" width="7.2" height="9.4" rx="1.6" fill="#cf7f33" fill-opacity="1" stroke="#cf7f33" stroke-opacity="1" stroke-width="0.5"></rect><rect x="79.5" y="37.4" width="7.2" height="9.4" rx="1.6" fill="#c8632e" fill-opacity="1" stroke="#c8632e" stroke-opacity="1" stroke-width="0.5"></rect><rect x="79.5" y="26.6" width="7.2" height="9.4" rx="1.6" fill="#c0472a" fill-opacity="1" stroke="#c0472a" stroke-opacity="1" stroke-width="0.5"></rect>
+</svg>
