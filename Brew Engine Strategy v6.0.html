@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom — The Brew Engine: A Kingpin's Guide v6.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0d0005;
+      --bg-rgb: 13, 0, 5;
+      --surface: #130207;
+      --text-color: #f5e9d9;
+      --muted: #b8a888;
+      --accent-gold: #d4af37;
+      --accent-dim: #8a7329;
+      --line: rgba(212, 175, 55, 0.22);
+      --green: #6fbf73;
+      --red: #d9694f;
+      --font-body: 'Raleway', sans-serif;
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background-color: var(--bg-color); }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      font-size: 11pt;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 54px 24px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero .eyebrow {
+      font-family: var(--font-body);
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1;
+      font-weight: 400;
+      margin: 6px 0;
+    }
+    .hero .subtitle {
+      font-style: italic;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 8px auto 0;
+    }
+
+    .page {
+      width: 210mm;
+      max-width: calc(100% - 40px);
+      margin: 36px auto;
+      padding: 48px 60px;
+      background-color: var(--surface);
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      border: 1px solid #333;
+    }
+
+    p { margin: 0 0 1em 0; }
+    strong { color: var(--accent-gold); font-weight: 700; }
+    em { color: #fcefd0; }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 22pt;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      line-height: 1.1;
+      border-bottom: 2px solid var(--accent-gold);
+      padding-bottom: 5px;
+      margin-top: 1.8em;
+      margin-bottom: 0.6em;
+    }
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 15pt;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      line-height: 1.1;
+      border-left: 4px solid var(--accent-gold);
+      padding-left: 10px;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    a { color: var(--accent-gold); text-decoration: none; }
+    a:hover { text-decoration: underline; color: #e8c65a; }
+
+    ul, ol { margin: 0 0 1em 1.3em; }
+    li { margin-bottom: 0.4em; }
+
+    .lede {
+      font-size: 12.5pt;
+      color: #fcefd0;
+      border-left: 3px solid var(--accent-dim);
+      padding-left: 16px;
+      margin-bottom: 1.4em;
+    }
+
+    .note {
+      background-color: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--accent-gold);
+      padding: 14px 16px;
+      font-style: italic;
+      color: #fcefd0;
+      margin: 1.2em 0;
+      border-radius: 4px;
+    }
+    .note strong { font-style: normal; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.6em 0 1.2em;
+      font-size: 10pt;
+    }
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 11pt;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      padding-bottom: 5px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      text-align: center;
+    }
+    th {
+      background: rgba(212,175,55,0.14);
+      color: var(--accent-gold);
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      font-size: 10.5pt;
+    }
+    td.left, th.left { text-align: left; }
+    tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+    .good { color: var(--green); font-weight: 700; }
+    .bad  { color: var(--red);  font-weight: 700; }
+    .win td { background: rgba(111,191,115,0.10); }
+
+    .principle {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      border: 1px solid var(--accent-dim);
+      background: rgba(255,255,255,0.02);
+      border-radius: 4px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .principle .num {
+      font-family: var(--font-display);
+      font-size: 26pt;
+      line-height: 0.9;
+      color: var(--accent-gold);
+      min-width: 34px;
+      text-align: center;
+    }
+    .principle h4 {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      letter-spacing: 0.5px;
+      color: #fff;
+      font-weight: 400;
+      margin: 0 0 3px;
+    }
+    .principle p { margin: 0; font-size: 10.5pt; }
+
+    .kingpin {
+      border: 1px solid var(--accent-gold);
+      border-left: 5px solid var(--accent-gold);
+      background: rgba(212,175,55,0.07);
+      padding: 12px 16px;
+      margin: 1.2em 0;
+      border-radius: 4px;
+    }
+    .kingpin .tag {
+      font-family: var(--font-display);
+      letter-spacing: 1px;
+      color: var(--accent-gold);
+      font-size: 11pt;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .kingpin p { margin: 0; font-style: italic; color: #fcefd0; }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      color: var(--accent-dim);
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+    }
+    .disclaimer {
+      font-size: 8.5pt;
+      color: var(--accent-dim);
+      font-style: italic;
+      margin-top: 2em;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .page { width: auto; max-width: calc(100% - 24px); padding: 30px 22px; }
+      table { font-size: 9pt; }
+      th, td { padding: 5px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="eyebrow">Moonshine Kingdom &middot; Kingpin's Guide</div>
+    <h1>The Brew Engine</h1>
+    <p class="subtitle">How the dawn stills really make their money &mdash; and why the smart boss clumps his boilers, spreads his crew, and drafts last.</p>
+  </header>
+
+  <div class="page">
+
+    <p class="lede">
+      Every Day opens in the Shadows, when your stills fire and the barrels flow. It looks like luck. It isn't. Behind the dice sits a small, sharp bit of math, and the bosses who read it right out-earn the ones who don't &mdash; without ever rolling better. This is that math, in plain English.
+    </p>
+
+    <h2>The One Rule That Governs Everything</h2>
+    <p>
+      In the Morning Brew you draft <strong>one</strong> Red die and add it to the public White die. That sum &mdash; your <strong>Brew Number</strong> &mdash; is the only number your empire cooks on this Day. <em>Every</em> Still you Control whose boiler shows that number fires at once; every Still showing a different number sits cold.
+    </p>
+    <p>
+      Read that twice, because the whole strategy falls out of it: <strong>you only ever hit one number per Day.</strong> A boss with a 7-boiler and an 8-boiler never fires both on the same morning. A boss with <em>two</em> 7-boilers fires both, together, off the same lucky roll. Matching numbers stack; mismatched numbers take turns.
+    </p>
+
+    <h2>Three Principles</h2>
+
+    <div class="principle">
+      <div class="num">1</div>
+      <div>
+        <h4>Clump your numbers, never spread them</h4>
+        <p>Boilers that share a number fire as one. Boilers on different numbers mostly sit idle &mdash; and every idle boiler is still a live Blowback target. Spreading your Stills across 5, 6, 7, 8, 9 doesn't diversify your income; it just gives the leftover die five different ways to blow up your crew. <strong>Two matching boilers beat four scattered ones.</strong></p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">2</div>
+      <div>
+        <h4>Spread your crew, don't pile it on</h4>
+        <p>The Muscle Ratio is a staircase: 5&ndash;6 mobsters brew 3 barrels, but you need 9+ to reach the cap of 5, and every runner past that is dead weight. The best rate is around <strong>5&ndash;6 mobsters on a boiler</strong> (3 barrels). Once a Still is well-crewed, the next runner earns far more opening a <em>second matching boiler</em> than deepening the first. Breadth of matching Stills beats depth on one.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">3</div>
+      <div>
+        <h4>Hold the match &mdash; draft position is everything</h4>
+        <p>The last boss to draft chooses which Red gets left behind, and that leftover sets the Blowback. Against a boss stacking 7s, a sharp table denies the 7-Reds <em>and</em> tries to leave one behind to burst the whole stack. Your biggest engine is only as safe as your seat. <strong>When you're exposed, take the low turn-order token and lay low last.</strong></p>
+      </div>
+    </div>
+
+    <h2>The Numbers Behind It</h2>
+    <p>
+      Below is the expected <em>net</em> take per Day &mdash; barrels sold at $200, minus the <strong>$300 Recruit</strong> cost to replace every runner lost to Blowback &mdash; for builds you can actually assemble. "Naive" assumes a sleepy table; "Contested" assumes rivals who deny your Red and try to leave a match behind. Reality sits between them, drifting toward Contested as your stack grows more obvious.
+    </p>
+
+    <table>
+      <caption>Expected net $/Day by build (15 runners + Boss, brewing on 7)</caption>
+      <thead>
+        <tr>
+          <th class="left">Build</th>
+          <th>Barrels/Day</th>
+          <th>Net &mdash; Naive table</th>
+          <th>Net &mdash; Contested table</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="left">1 matching Still (well-crewed)</td><td>2.3</td><td>$395</td><td>$205</td></tr>
+        <tr class="win"><td class="left">2 matching Stills</td><td>2.8</td><td>$474</td><td>$245</td></tr>
+        <tr class="win"><td class="left">3 matching Stills</td><td>4.1</td><td>$711</td><td>$368</td></tr>
+        <tr><td class="left">4 matching Stills (the ceiling)</td><td>3.7</td><td>$631</td><td>$327</td></tr>
+        <tr><td class="left">3 Stills, <em>mismatched</em> 6/7/8</td><td>2.5</td><td class="bad">$257</td><td>$230</td></tr>
+        <tr><td class="left">2 Stills, mismatched 7/8</td><td>2.8</td><td>$382</td><td>$270</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Two things jump out. First, <strong>matching always beats mismatching</strong> at the same runner count &mdash; the mismatched 6/7/8 build earns less <em>and</em> bleeds three times the Recruit cost, because each extra number is another Blowback trap. Second, a determined table roughly halves the clumper's take (the $711 three-stack falls to $368): denial is real, and it's why the boom can't run away with the game on its own.
+    </p>
+
+    <div class="note">
+      <strong>Why you can't just win with 7s.</strong> There are only <strong>four 7-boilers on the whole board</strong> &mdash; one in each mainland Borough, and none on Staten Island. Firing three or four at once means <em>Controlling a district in three or four separate Boroughs at the same time</em>: conquest, expansion, and a lot of scattered turf to defend against Raids and rivals. The engine is real, but every extra boiler is bought with blood and board presence. That cost is the balance.
+    </div>
+
+    <h2>So What's the Optimal Play?</h2>
+    <p>
+      There isn't one build that always wins &mdash; and that's by design. The right answer swings with how contested the board is:
+    </p>
+
+    <table>
+      <caption>Best build by board state</caption>
+      <thead>
+        <tr><th class="left">The board is&hellip;</th><th class="left">Go for&hellip;</th><th class="left">Because</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left"><strong>Quiet</strong><br>(rivals elsewhere)</td>
+          <td class="left">Go wide &mdash; <strong>3&ndash;4 matching boilers</strong></td>
+          <td class="left">Nothing punishes the sprawl, so every matching Still is pure upside.</td>
+        </tr>
+        <tr>
+          <td class="left"><strong>Contested</strong><br>(the usual case)</td>
+          <td class="left"><strong>2&ndash;3 matching boilers</strong>, tight</td>
+          <td class="left">Enough boom to matter; little enough turf that you can still defend it.</td>
+        </tr>
+        <tr>
+          <td class="left"><strong>Cutthroat</strong><br>(everyone's on you)</td>
+          <td class="left">Stay compact &mdash; <strong>1&ndash;2 boilers</strong>, well-crewed</td>
+          <td class="left">Expansion doesn't pay when every new district invites a Raid. Bank the sure money.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The through-line: <strong>build the widest matching engine the board will let you defend, and not one boiler wider.</strong> The skill isn't finding the best build &mdash; it's reading when the table has made the next boiler cost more than it earns.
+    </p>
+
+    <div class="kingpin">
+      <span class="tag">Kingpin's Note</span>
+      <p>The greenhorn spreads his Stills to "cover more numbers" and wonders why he's broke &mdash; he's firing one boiler a day and feeding the rest to the Blowback. The made man cooks one number, crews each boiler just enough, grabs the low token when his stack gets fat, and lets the last Red burn a rival instead. Same dice. Different fortune.</p>
+    </div>
+
+    <p style="margin-top:1.6em;">
+      Want to test it yourself? Open the <a href="Brew%20Simulator%20v6.0.html">Brew Simulator</a> and run a few hundred thousand mornings, or check the <a href="Turn%20Structure%20Flow%20Card%20v6.0.html">Turn Structure card</a> for the Shadows sequence and the boiler numbers Borough by Borough.
+    </p>
+
+    <p class="disclaimer">
+      Figures are Monte Carlo estimates over the v6.0 Morning Brew (Muscle Ratio production, communal Blowback, a 4-player draft), valuing a Moonshine barrel at $200 and a lost runner at the $300 Recruit cost. They isolate the dawn brew only &mdash; Contracts, Speakeasy sales, Titles, and combat all layer on top and can shift what "best" looks like in a given game.
+    </p>
+
+  </div>
+
+  <footer>
+    &#9830; Moonshine Kingdom v6.0 &mdash; The Brew Engine &#9830;
+  </footer>
+
+</body>
+</html>
