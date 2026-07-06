@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom — The Standoff: A Kingpin's Guide to Combat v6.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0d0005;
+      --bg-rgb: 13, 0, 5;
+      --surface: #130207;
+      --text-color: #f5e9d9;
+      --muted: #b8a888;
+      --accent-gold: #d4af37;
+      --accent-dim: #8a7329;
+      --line: rgba(212, 175, 55, 0.22);
+      --green: #6fbf73;
+      --red: #d9694f;
+      --inv: #7db3ff;
+      --occ: #f08b8b;
+      --font-body: 'Raleway', sans-serif;
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background-color: var(--bg-color); }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      font-size: 11pt;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 54px 24px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero .eyebrow {
+      font-size: 10pt; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      letter-spacing: 0.05em; color: #fff; text-transform: uppercase;
+      line-height: 1; font-weight: 400; margin: 6px 0;
+    }
+    .hero .subtitle { font-style: italic; color: var(--muted); max-width: 640px; margin: 8px auto 0; }
+
+    .page {
+      width: 210mm; max-width: calc(100% - 40px);
+      margin: 36px auto; padding: 48px 60px;
+      background-color: var(--surface);
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      border: 1px solid #333;
+    }
+
+    p { margin: 0 0 1em 0; }
+    strong { color: var(--accent-gold); font-weight: 700; }
+    em { color: #fcefd0; }
+
+    h2 {
+      font-family: var(--font-display); font-size: 22pt; color: var(--accent-gold);
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 400; line-height: 1.1;
+      border-bottom: 2px solid var(--accent-gold); padding-bottom: 5px;
+      margin-top: 1.8em; margin-bottom: 0.6em;
+    }
+    h2:first-of-type { margin-top: 0; }
+    h3 {
+      font-family: var(--font-display); font-size: 15pt; color: #fff;
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 400; line-height: 1.1;
+      border-left: 4px solid var(--accent-gold); padding-left: 10px;
+      margin-top: 1.5em; margin-bottom: 0.5em;
+    }
+
+    a { color: var(--accent-gold); text-decoration: none; }
+    a:hover { text-decoration: underline; color: #e8c65a; }
+
+    ul, ol { margin: 0 0 1em 1.3em; }
+    li { margin-bottom: 0.4em; }
+
+    .lede {
+      font-size: 12.5pt; color: #fcefd0;
+      border-left: 3px solid var(--accent-dim); padding-left: 16px; margin-bottom: 1.4em;
+    }
+
+    .note {
+      background-color: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--accent-gold);
+      padding: 14px 16px; font-style: italic; color: #fcefd0;
+      margin: 1.2em 0; border-radius: 4px;
+    }
+    .note strong { font-style: normal; }
+
+    table { width: 100%; border-collapse: collapse; margin: 0.6em 0 1.2em; font-size: 10pt; }
+    caption {
+      caption-side: top; text-align: left;
+      font-family: var(--font-display); font-size: 11pt; letter-spacing: 0.5px;
+      color: var(--muted); padding-bottom: 5px;
+    }
+    th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: center; }
+    th {
+      background: rgba(212,175,55,0.14); color: var(--accent-gold);
+      font-family: var(--font-display); letter-spacing: 0.5px; font-weight: 400; font-size: 10.5pt;
+    }
+    td.left, th.left { text-align: left; }
+    tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+    .good { color: var(--green); font-weight: 700; }
+    .bad  { color: var(--red);  font-weight: 700; }
+    .win td { background: rgba(111,191,115,0.10); }
+
+    .principle {
+      display: flex; gap: 14px; align-items: flex-start;
+      border: 1px solid var(--accent-dim); background: rgba(255,255,255,0.02);
+      border-radius: 4px; padding: 14px 16px; margin-bottom: 12px;
+    }
+    .principle .num {
+      font-family: var(--font-display); font-size: 26pt; line-height: 0.9;
+      color: var(--accent-gold); min-width: 34px; text-align: center;
+    }
+    .principle h4 {
+      font-family: var(--font-display); font-size: 13pt; letter-spacing: 0.5px;
+      color: #fff; font-weight: 400; margin: 0 0 3px;
+    }
+    .principle p { margin: 0; font-size: 10.5pt; }
+
+    .kingpin {
+      border: 1px solid var(--accent-gold); border-left: 5px solid var(--accent-gold);
+      background: rgba(212,175,55,0.07); padding: 12px 16px; margin: 1.2em 0; border-radius: 4px;
+    }
+    .kingpin .tag {
+      font-family: var(--font-display); letter-spacing: 1px; color: var(--accent-gold);
+      font-size: 11pt; display: block; margin-bottom: 3px;
+    }
+    .kingpin p { margin: 0; font-style: italic; color: #fcefd0; }
+
+    .choicebar { display: flex; gap: 10px; flex-wrap: wrap; margin: 0.4em 0 1.2em; }
+    .choice {
+      flex: 1 1 150px; border: 1px solid var(--accent-dim); border-radius: 4px;
+      background: rgba(255,255,255,0.02); padding: 10px 12px;
+    }
+    .choice h4 {
+      font-family: var(--font-display); font-size: 12pt; letter-spacing: 0.5px;
+      color: var(--accent-gold); font-weight: 400; margin: 0 0 4px;
+    }
+    .choice p { margin: 0; font-size: 9.6pt; }
+
+    footer { text-align: center; padding: 28px 20px; color: var(--accent-dim); font-size: 0.82rem; letter-spacing: 0.5px; }
+    .disclaimer {
+      font-size: 8.5pt; color: var(--accent-dim); font-style: italic;
+      margin-top: 2em; border-top: 1px solid var(--line); padding-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .page { width: auto; max-width: calc(100% - 24px); padding: 30px 22px; }
+      table { font-size: 9pt; } th, td { padding: 5px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="eyebrow">Moonshine Kingdom &middot; Kingpin's Guide</div>
+    <h1>The Standoff</h1>
+    <p class="subtitle">A drawn gun is stronger than a fired one. When to shoot, when to fold, and why the smart boss makes his rival pay to pull the trigger.</p>
+  </header>
+
+  <div class="page">
+
+    <p class="lede">
+      Combat isn't how you win &mdash; <em>Respect</em> is. But the turf that carries your Contracts, your Deeds, and your Speakeasies rarely comes quietly, and that makes the gun the price of the crown. The trick is knowing that most firefights are decided <em>before</em> a die is rolled &mdash; in the standoff, in the maths of who holds the better ground. Here's the ground.
+    </p>
+
+    <h2>Two Numbers Run Every Fight</h2>
+    <p>
+      Everything comes down to <strong>how many dice</strong> you roll and <strong>what kills</strong>:
+    </p>
+    <ul>
+      <li><strong>Dice = the Muscle Ratio</strong> &mdash; the same staircase as brewing: 1&ndash;2 mobsters roll 1 die, 3&ndash;4 roll 2, 5&ndash;6 roll 3, 7&ndash;8 roll 4, 9+ roll 5 (the cap). More bodies, more lead &mdash; but with hard diminishing returns.</li>
+      <li><strong>Threat = the kill number.</strong> Base kills on a 5&ndash;6 (one-third of dice). Each +1 Threat widens it: Level 2 kills on 4+, Level 3 on 3+, Level 4 (the max) on 2+ &mdash; five-sixths of every die. <strong>Threat matters far more than dice</strong>, because it multiplies every die you roll.</li>
+    </ul>
+    <p>
+      And Threat is where the defender lives. A dug-in Occupier stacks bonuses an attacker simply cannot match.
+    </p>
+
+    <h2>The Standoff: The Whole Game in Two Questions</h2>
+    <p>
+      When you Move onto turf a rival Controls, the fight pauses. First the <strong class="occ">Occupier</strong> answers; then the <strong class="inv">Invader</strong> chooses, and keeps choosing until the Pin breaks.
+    </p>
+
+    <h3>The Occupier answers first</h3>
+    <div class="choicebar">
+      <div class="choice"><h4>Ambush</h4><p>A <em>free</em> shot at <strong>+1 Threat</strong> before anyone else fires. No Heat. Then the fight is on.</p></div>
+      <div class="choice"><h4>Hold Fire</h4><p>No shot. The Invader is Pinned but unhurt &mdash; a signal: <em>"maybe you're just passing through."</em></p></div>
+      <div class="choice"><h4>Fold</h4><p>Give up the block, flee your crew to safe turf. Lose the liquor, keep the bodies. Costs nothing.</p></div>
+    </div>
+
+    <h3>Then the Invader chooses &mdash; and pays</h3>
+    <div class="choicebar">
+      <div class="choice"><h4>Open Fire &mdash; 1 Influence</h4><p>Both sides roll at once. If <em>you</em> kill, you take Heat. Still standing? Pay again to fire again.</p></div>
+      <div class="choice"><h4>Advance &mdash; 1 Influence</h4><p>Shoot your way out to safe turf, barrels and all. A fighting retreat, not a rout.</p></div>
+      <div class="choice"><h4>Fall Back &mdash; free</h4><p>Cut and run to where you came from, liquor left behind. Forced on you at 0 Influence.</p></div>
+    </div>
+
+    <div class="note">
+      <strong>The asymmetry that defines combat:</strong> the Occupier shoots first and free, adds <strong>+2 Threat from a Safehouse</strong>, and <em>never takes Heat</em> for defending his own corner. The Invader pays Influence for every volley and draws Heat the moment he kills. <strong>Defence is the strong position &mdash; by a wide margin.</strong> Attacking is a premium you pay in dice, in Influence, and in police attention.
+    </div>
+
+    <h2>How Steep Is the Premium?</h2>
+    <p>
+      Below: an Invader (with Boss) storms a <em>Secured</em> district &mdash; 3 Runners, a Boss, and a Safehouse &mdash; spending up to 3 Open Fires. This is the bread-and-butter assault, and the numbers are sobering.
+    </p>
+
+    <table>
+      <caption>Invader's odds vs. a Secured 3-Runner + Boss + Safehouse district</caption>
+      <thead>
+        <tr>
+          <th class="left">Invader Runners</th>
+          <th>Attack Dice</th>
+          <th>Invader Takes It</th>
+          <th>Invader Losses</th>
+          <th>Gains Heat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="left">3 (even numbers)</td><td>2</td><td class="bad">1%</td><td>3.9</td><td>75%</td></tr>
+        <tr><td class="left">4</td><td>3</td><td class="bad">8%</td><td>4.7</td><td>91%</td></tr>
+        <tr><td class="left">5</td><td>3</td><td>25%</td><td>5.0</td><td>95%</td></tr>
+        <tr class="win"><td class="left">6 (2&times; the garrison)</td><td>4</td><td>48%</td><td>5.0</td><td>99%</td></tr>
+        <tr><td class="left">7</td><td>4</td><td>66%</td><td>4.7</td><td>99%</td></tr>
+        <tr><td class="left">9 (3&times; the garrison)</td><td>5</td><td class="good">89%</td><td>4.2</td><td>100%</td></tr>
+        <tr><td class="left">11</td><td>5</td><td class="good">96%</td><td>4.0</td><td>100%</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Read the shape of it: <strong>even numbers is a slaughter</strong> (1% for the attacker), <strong>you need roughly double the garrison for a coin-flip</strong>, and <strong>triple for a confident take</strong> &mdash; and you'll bleed 4&ndash;5 bodies and near-certain Heat doing it. A "few guards behind a Safehouse" genuinely do keep the peace: two Runners plus a Safehouse and Boss hold off a four-man raid two times in three; three Runners hold nine times in ten.
+    </p>
+
+    <h2>Three Principles</h2>
+
+    <div class="principle">
+      <div class="num">1</div>
+      <div>
+        <h4>Never attack into even numbers</h4>
+        <p>The defender's free ambush shot and Safehouse +2 mean a fair fight isn't fair &mdash; it's a 1-in-50 for the attacker. If you mean to take a block, bring <strong>at least double the garrison</strong>, ideally into the next dice tier (5&ndash;6 bodies for 3 dice, 9 for the 5-dice cap). Anything less just donates your crew and your Heat to the man you're attacking.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">2</div>
+      <div>
+        <h4>The Influence tax caps your persistence</h4>
+        <p>Every Open Fire costs 1 Influence &mdash; a Play you're not spending on money or Contracts. Grinding a stubborn alley from 3 volleys to 5 lifts your odds barely (25% &rarr; 31%) while your losses climb and rivals run free across the city. <strong>Commit hard or not at all:</strong> plan the force to win in 2&ndash;3 volleys, and if it's not breaking, Fall Back before you're bled dry. There is no cheap war of attrition here.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">3</div>
+      <div>
+        <h4>Fold to save the crew; fight only for turf worth blood</h4>
+        <p>Folding costs zero casualties &mdash; you trade the block and its barrels for a mobile, intact crew that lives to earn tomorrow. Standing to fight a stronger raider bleeds you <em>whether you hold or not</em> (2&ndash;3 casualties average even at a coin-flip). So fold the empty corner without a second thought; dig in only when your hold odds are high, or the district carries a Contract, a Deed, or a Speakeasy you can't win without.</p>
+      </div>
+    </div>
+
+    <h2>The Occupier's Playbook</h2>
+    <p>
+      When a rival crosses your line, run the read in this order:
+    </p>
+    <table>
+      <caption>Occupier decision: what to do when they Move in</caption>
+      <thead>
+        <tr><th class="left">If&hellip;</th><th class="left">Do this</th><th class="left">Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left">The block is empty scrap you don't need</td>
+          <td class="left"><strong>Fold</strong></td>
+          <td class="left">Keep every body. Turf is cheap; a trained crew isn't. Let them have the corner and make them defend it next.</td>
+        </tr>
+        <tr class="win">
+          <td class="left">You want the block <em>and</em> intend to fight</td>
+          <td class="left"><strong>Ambush</strong></td>
+          <td class="left">The free +1-Threat shot is pure upside &mdash; it strictly beats Hold Fire on both hold-rate and your own losses. If you're fighting at all, shoot first.</td>
+        </tr>
+        <tr>
+          <td class="left">You're unsure they mean to fight</td>
+          <td class="left"><strong>Hold Fire</strong> (a bluff)</td>
+          <td class="left">Not a combat move &mdash; a political one. It lets a passer-by leave without a war, and hides your strength. Use it to keep the peace, not to win the fight.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Why the drawn gun beats the fired one.</strong> Because defence is so strong, the <em>threat</em> of your garrison does more work than the shooting ever will. A rival who can read the table knows a Secured block with three guards is a 90% wall &mdash; so he doesn't attack it; he goes around. Your bodies earn their keep standing still. That is the quiet genius of the standoff: the fights you win are mostly the ones nobody starts.
+    </div>
+
+    <h2>So What's the Optimal Play?</h2>
+    <ul>
+      <li><strong>Defending:</strong> a Safehouse plus 2&ndash;3 Runners and your Boss turns a district into a wall (66&ndash;90% hold vs. a real raid). Secure the turf that carries your win &mdash; Contract sites, Deeds, Speakeasies &mdash; and let the scraps go.</li>
+      <li><strong>Attacking:</strong> only with overwhelming force (2&ndash;3&times; the garrison) into turf you genuinely need, and only when you can afford the Influence and the Heat. A raid that stalls is worse than a raid never launched.</li>
+      <li><strong>Above both:</strong> most of your combat value is <em>positional</em> &mdash; garrisons that deter, standoffs that bluff, folds that preserve. Spend bullets rarely and decisively; spend the <em>threat</em> of them constantly.</li>
+    </ul>
+
+    <div class="kingpin">
+      <span class="tag">Kingpin's Note</span>
+      <p>The hothead charges a Secured block with an even crew and wonders why he's burying four men and holding a Rat's worth of Heat. The made man garrisons the turf his Contracts need, folds the corners that don't earn, and when he finally does move, he moves with three-to-one and ends it in two volleys. Same dice. One of them dies rich.</p>
+    </div>
+
+    <p style="margin-top:1.6em;">
+      Run your own matchups in the <a href="Combat%20Simulator%20v6.0.html">Combat Simulator</a> (dice, Threat, and Heat are all rules-accurate), and see the brewing half of the empire in the companion <a href="Brew%20Engine%20Strategy%20v6.0.html">Brew Engine guide</a>.
+    </p>
+
+    <p class="disclaimer">
+      Figures are Monte Carlo estimates over the v6.0 combat rules (Muscle-Ratio dice capped at 5; Threat from Boss +1, Safehouse +2, Ambush +1; occupier free ambush, simultaneous Open Fire, invader pays 1 Influence per volley and takes Heat on a kill). They model a single fight in isolation &mdash; board position, who moves next, and what the district is worth all shape whether a fight is wise in the first place. Faction signature plays (Firepower, Courage, Plunder, Stealth) shift specific matchups and are not included in the baseline numbers.
+    </p>
+
+  </div>
+
+  <footer>
+    &#9830; Moonshine Kingdom v6.0 &mdash; The Standoff &#9830;
+  </footer>
+
+</body>
+</html>
