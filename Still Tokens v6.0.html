@@ -90,8 +90,12 @@ body { margin:0; }
 // Town Planning Ledger on the Turn Sequence card. Each Borough carries a set
 // of unique Pressure levels (distance from 7), so a Raid tiebreaker on the
 // hottest boiler can never itself tie.
-// 3x: 4, 7, 8 ; 2x: 2, 3, 5, 6, 9, 10, 11, 12
-const numbers = [2,2, 3,3, 4,4,4, 5,5, 6,6, 7,7,7, 8,8,8, 9,9, 10,10, 11,11, 12,12];
+// Balance: each of the 4 mainland Boroughs holds one 7 (its High Society
+// boiler, the peak of the 2d6 curve), giving every mainland Borough an
+// identical best-case brew engine; Staten Island (no police, no High Society)
+// runs cool with no 7.
+// 4x: 7 ; 3x: 4, 6 ; 1x: 12 ; 2x: 2, 3, 5, 8, 9, 10, 11
+const numbers = [2,2, 3,3, 4,4,4, 5,5, 6,6,6, 7,7,7,7, 8,8, 9,9, 10,10, 11,11, 12];
 const tiles = [{type:'still', numbers}];
 
 /* Still SVG - clean pot still silhouette, face-down/dormant */
