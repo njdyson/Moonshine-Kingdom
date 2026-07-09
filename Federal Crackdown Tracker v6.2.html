@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moonshine Kingdom: Federal Crackdown Tracker v6.2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        html, body { margin: 0; padding: 0; height: 100%; }
+        body {
+            background-color: #211c1c;
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background-color: #211c1c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .tracker-strip {
+            width: 291mm;
+            height: 56mm;
+            background-image: linear-gradient(135deg, #2b2525, #1a1616);
+            border: 4px double #d4af37;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            outline: 1px dashed #555;
+            outline-offset: 1mm;
+            padding: 1.5mm 1mm;
+            gap: 1mm;
+        }
+
+        .corner {
+            position: absolute;
+            width: 4mm; height: 4mm;
+            border-color: #d4af37;
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .tl { top: 2mm; left: 2mm; border-width: 1px 0 0 1px; }
+        .tr { top: 2mm; right: 2mm; border-width: 1px 1px 0 0; }
+        .bl { bottom: 2mm; left: 2mm; border-width: 0 0 1px 1px; }
+        .br { bottom: 2mm; right: 2mm; border-width: 0 1px 1px 0; }
+
+        .header-row {
+            display: flex;
+            align-items: baseline;
+            gap: 4mm;
+            line-height: 1;
+        }
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .title-sep { color: #554444; font-size: 0.9rem; }
+        .variant-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: #e6dac3;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .tracker-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            background-color: #141111;
+            padding: 1.5mm 2mm;
+            border-radius: 100px;
+            border: 1px solid #3a3232;
+            box-shadow: inset 0 0 12px #000;
+        }
+
+        .socket {
+            width: 24mm;
+            height: 24mm;
+            border-radius: 50%;
+            border: 2px dashed #8a7329;
+            background: radial-gradient(circle at 50% 50%, #2a2222 0%, #080606 80%);
+            box-shadow: inset 1px 1px 5px rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .socket .num {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: #5e4d1f;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .connector {
+            width: 2mm;
+            height: 2px;
+            background: linear-gradient(to right, #554422, #8a7329, #554422);
+            flex-shrink: 0;
+        }
+
+        .socket.milestone { border-color: #d4af37; border-style: solid; }
+        .socket.milestone .num { color: #8a7329; }
+
+        .socket.final {
+            border: 2px solid #c0392b;
+            box-shadow: inset 1px 1px 5px rgba(0,0,0,0.9), 0 0 6px rgba(192,57,43,0.3);
+        }
+        .socket.final .num { color: #c0392b; }
+
+        .bottom-row { display: flex; align-items: center; justify-content: center; }
+        .rule-text {
+            font-size: 0.58rem;
+            color: #a09585;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .rule-text b { color: #d4af37; }
+
+        .side-indicator {
+            position: absolute;
+            bottom: 2mm; right: 4mm;
+            font-size: 0.45rem;
+            color: #443333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @page { size: A4 landscape; margin: 0; }
+        @media print {
+            html, body { height: auto; overflow: hidden; }
+            body { background-color: #211c1c; display: block; }
+            .page { width: 297mm; height: 210mm; overflow: hidden; page-break-inside: avoid; }
+            .page:first-child { page-break-after: always; }
+            .page:last-child { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="tracker-strip">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="header-row">
+                <span class="main-title">Federal Crackdown</span>
+                <span class="title-sep">&bull;</span>
+                <span class="variant-name">The Blood Oath</span>
+            </div>
+            <div class="tracker-row">
+                <div class="socket milestone"><span class="num">1</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">2</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">3</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">4</span></div>
+                <div class="connector"></div>
+                <div class="socket milestone"><span class="num">5</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">6</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">7</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">8</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">9</span></div>
+                <div class="connector"></div>
+                <div class="socket final"><span class="num">10</span></div>
+            </div>
+            <div class="bottom-row">
+                <span class="rule-text"><b>Advance 1 space</b> per Raid (Rat or Boiling Point). When the token reaches <b>space 10</b>, pause, rank by Respect, and form <b>2v2 Alliances</b> (1st+4th, 2nd+3rd); each Alliance's <b>Target</b> = combined Respect <b>+10</b>. &ensp; (4 Players &bull; Team Variant)</span>
+            </div>
+            <span class="side-indicator">Side A</span>
+        </div>
+    </div>
+    <div class="page">
+        <div class="tracker-strip">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="header-row">
+                <span class="main-title">Federal Crackdown</span>
+                <span class="title-sep">&bull;</span>
+                <span class="variant-name">The Blood Oath</span>
+            </div>
+            <div class="tracker-row">
+                <div class="socket milestone"><span class="num">1</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">2</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">3</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">4</span></div>
+                <div class="connector"></div>
+                <div class="socket milestone"><span class="num">5</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">6</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">7</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">8</span></div>
+                <div class="connector"></div>
+                <div class="socket"><span class="num">9</span></div>
+                <div class="connector"></div>
+                <div class="socket final"><span class="num">10</span></div>
+            </div>
+            <div class="bottom-row">
+                <span class="rule-text"><b>Advance 1 space</b> per Raid (Rat or Boiling Point). When the token reaches <b>space 10</b>, pause, rank by Respect, and form <b>2v2 Alliances</b> (1st+4th, 2nd+3rd); each Alliance's <b>Target</b> = combined Respect <b>+10</b>. &ensp; (4 Players &bull; Team Variant)</span>
+            </div>
+            <span class="side-indicator">Side B</span>
+        </div>
+    </div>
+</body>
+</html>

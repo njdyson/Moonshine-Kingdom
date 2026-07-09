@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Commission Cards v6.2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/cards.css">
+  <style>
+    .card-header {
+      min-height: 14mm;
+      margin-bottom: 3px;
+      padding-bottom: 1px;
+    }
+
+    .card,
+    .card-back {
+      background: #202020;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .commission-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .commission-image {
+      box-sizing: border-box;
+      width: 100%;
+      height: 50mm;
+      flex: 0 0 auto;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 5px;
+      border: 1px solid #e3c66a;
+      border-radius: 3px;
+      filter: brightness(1.1) contrast(1.08) saturate(1.04);
+    }
+
+    .commission-footer {
+      font-style: normal;
+      line-height: 1.1;
+      text-align: center;
+      padding: 2mm 3mm;
+      margin-top: auto;
+      color: #fff4df;
+      font-size: 1.05em;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .commission-footer strong {
+      color: #f0cf6f;
+      font-weight: 700;
+    }
+
+    .card-back.commission-key {
+      background: #202020 url('Art/key.png') center center / cover no-repeat;
+      justify-content: flex-end;
+      filter: brightness(1.1) contrast(1.08) saturate(1.04);
+    }
+
+    .card-back.commission-key .back-title-box {
+      background: rgba(32, 32, 32, 0.9);
+      border-color: #e3c66a;
+    }
+
+    .card-back.commission-key .back-title {
+      color: #f0cf6f;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fronts -->
+  <div class="page">
+    <div class="card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Commission</h2>
+        </div>
+      </div>
+      <div class="commission-content">
+        <div class="commission-image" style="background-image: url('Art/Table.png');"></div>
+        <div class="commission-footer">
+          <strong>Welcome to the Commission.</strong><br>Take your seat at the High Table.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Commission</h2>
+        </div>
+      </div>
+      <div class="commission-content">
+        <div class="commission-image" style="background-image: url('Art/Table.png');"></div>
+        <div class="commission-footer">
+          <strong>Welcome to the Commission.</strong><br>Take your seat at the High Table.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Commission</h2>
+        </div>
+      </div>
+      <div class="commission-content">
+        <div class="commission-image" style="background-image: url('Art/Table.png');"></div>
+        <div class="commission-footer">
+          <strong>Welcome to the Commission.</strong><br>Take your seat at the High Table.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="header-top">
+          <h2 class="mission-name">The Commission</h2>
+        </div>
+      </div>
+      <div class="commission-content">
+        <div class="commission-image" style="background-image: url('Art/Table.png');"></div>
+        <div class="commission-footer">
+          <strong>Welcome to the Commission.</strong><br>Take your seat at the High Table.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Backs -->
+  <div class="page">
+    <div class="card-back commission-key">
+      <div class="back-title-box"><h3 class="back-title">The Commission</h3></div>
+    </div>
+    <div class="card-back commission-key">
+      <div class="back-title-box"><h3 class="back-title">The Commission</h3></div>
+    </div>
+    <div class="card-back commission-key">
+      <div class="back-title-box"><h3 class="back-title">The Commission</h3></div>
+    </div>
+    <div class="card-back commission-key">
+      <div class="back-title-box"><h3 class="back-title">The Commission</h3></div>
+    </div>
+  </div>
+</body>
+</html>

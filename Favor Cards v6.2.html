@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Favor Cards v6.2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/cards.css">
+  <style>
+    .favor-cards .card,
+    .favor-cards .card-back {
+      background-color: #202020;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .favor-cards .card-back.favor-back {
+      background: #202020 url('Art/Bribe.png') center center / cover no-repeat;
+      justify-content: flex-end;
+    }
+
+    .favor-cards .speakeasy-image,
+    .favor-cards .card-back {
+      filter: brightness(1.1) contrast(1.08) saturate(1.04);
+    }
+
+    .favor-cards .venue-name-box,
+    .favor-cards .back-title-box {
+      background: rgba(32, 32, 32, 0.9);
+      border-color: #e3c66a;
+    }
+
+    .favor-cards .venue,
+    .favor-cards .venue-name-text,
+    .favor-cards .back-title {
+      color: #f0cf6f;
+    }
+
+    .favor-cards .favor-ability {
+      color: #fff4df;
+      font-weight: 500;
+    }
+
+    .favor-cards .favor-ability span {
+      color: #f0cf6f;
+      font-weight: 700;
+    }
+
+    /* ===== v5.5 NPC card format ===== */
+    /* Header: left-aligned nickname at deck-standard 1.35em, sized so the 48px
+       respect badge clears the divider with a small margin below. */
+    .favor-cards .card-header { min-height: 11mm; margin-bottom: 3px; padding-bottom: 2px; }
+    .favor-cards .venue { text-align: left; padding-right: 50px; font-size: 1.35em; }
+
+    /* Portrait-shaped image, fixed height so the tallest body (Float + footer) fits. */
+    .favor-cards .speakeasy-image {
+      flex: 0 0 212px;
+      min-height: 212px;
+      margin-bottom: 2px;
+      background-position: center top;
+    }
+
+    /* Cost strip over the image: compact so it covers less of the portrait. */
+    .favor-cards .cost-strip { margin: 4px 8px; padding: 2px 4px; }
+    .favor-cards .cost-strip .venue-name-text { font-size: 0.92em; letter-spacing: 0.5px; }
+
+    /* Ability text below the image. */
+    .favor-cards .favor-ability {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 4px;
+      font-size: 0.78em;
+      line-height: 1.13;
+    }
+    .favor-cards .favor-ability b { color: #f0cf6f; font-weight: 700; }
+
+    /* Gold closing line ("Gain 1 Influence"). */
+    .favor-cards .favor-ability span {
+      display: block;
+      margin: 5px 0 0;
+      padding-top: 3px;
+      border-top: 1px dashed #555;
+      line-height: 1.1;
+      text-align: center;
+      color: #f0cf6f;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body class="favor-cards">
+  <!-- Page 1: Favor Fronts (copy 1) -->
+  <div class="page">
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Brain</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Rothstein.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Float:</b> Lock 1 Influence here for $1,000. Repay $1,000 to return it.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Hostess</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Texas.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Whispers in the Right Ears:</b> When you Hustle, draw 3 Contracts and your Hand Limit rises to 5.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Night Mayor</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Jimmy.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$3,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>City Hall Pass:</b> Your Districts may hold any number of Mobsters during The Sweep.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Queenie</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Queenie.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Untouchable:</b> Ignore the Greed Tax. Unload 4+ barrels in a single Play without Heat.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 2: Backs -->
+  <div class="page">
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 3: Favor Fronts (copy 2) -->
+  <div class="page">
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Brain</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Rothstein.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Float:</b> Lock 1 Influence here for $1,000. Repay $1,000 to return it.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Hostess</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Texas.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Whispers in the Right Ears:</b> When you Hustle, draw 3 Contracts and your Hand Limit rises to 5.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Night Mayor</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Jimmy.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$3,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>City Hall Pass:</b> Your Districts may hold any number of Mobsters during The Sweep.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Queenie</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Queenie.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Untouchable:</b> Ignore the Greed Tax. Unload 4+ barrels in a single Play without Heat.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 4: Backs -->
+  <div class="page">
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 5: Favor Fronts (copy 3) -->
+  <div class="page">
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Brain</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Rothstein.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Float:</b> Lock 1 Influence here for $1,000. Repay $1,000 to return it.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Hostess</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Texas.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Whispers in the Right Ears:</b> When you Hustle, draw 3 Contracts and your Hand Limit rises to 5.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Night Mayor</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Jimmy.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$3,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>City Hall Pass:</b> Your Districts may hold any number of Mobsters during The Sweep.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Queenie</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Queenie.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Untouchable:</b> Ignore the Greed Tax. Unload 4+ barrels in a single Play without Heat.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 6: Backs -->
+  <div class="page">
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 7: Favor Fronts (copy 4) -->
+  <div class="page">
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Brain</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Rothstein.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Float:</b> Lock 1 Influence here for $1,000. Repay $1,000 to return it.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Hostess</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Texas.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Whispers in the Right Ears:</b> When you Hustle, draw 3 Contracts and your Hand Limit rises to 5.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">The Night Mayor</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Jimmy.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$3,000</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>City Hall Pass:</b> Your Districts may hold any number of Mobsters during The Sweep.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Queenie</h2>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Queenie.png');">
+          <div class="venue-name-box cost-strip"><h3 class="venue-name-text">$2,500</h3></div>
+        </div>
+        <p class="card-footer-text favor-ability"><b>Untouchable:</b> Ignore the Greed Tax. Unload 4+ barrels in a single Play without Heat.<br><span>Gain 1 Influence</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Page 8: Backs -->
+  <div class="page">
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+    <div class="card-back favor-back"><div class="back-title-box"><h3 class="back-title">Favor</h3></div></div>
+  </div>
+</body>
+
+</html>

@@ -35,7 +35,8 @@ body {
     font-size: 9.5pt;
     font-weight: 400;
     /* justify text for that block-book look */
-    text-align: justify; 
+    text-align: justify;
+    text-align-last: left; /* keep the final line ragged so it never stretches into gaps */
     hyphens: auto;       /* Prevents massive gaps in justified text */
 }
 

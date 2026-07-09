@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moonshine Kingdom The Ledger v6.2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET --- */
+        *, *::before, *::after {
+            box-sizing: border-box; 
+            -webkit-print-color-adjust: exact; 
+            print-color-adjust: exact;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #211c1c;
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* --- A4 PAGE CONTAINER --- */
+        .page-container {
+            width: 297mm;
+            height: 210mm;
+            background-color: #211c1c;
+            padding: 10mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15mm; 
+        }
+
+        /* --- THE BOARD --- */
+        .dashboard-strip {
+            /* WIDENED to 260mm to fit the Reserves */
+            width: 260mm; 
+            height: 75mm;
+            
+            background-color: #211c1c;
+            background-image: linear-gradient(135deg, #2b2525, #1a1616);
+            border: 4px double #d4af37;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            
+            outline: 1px dashed #555;
+            outline-offset: 1mm;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #d4af37;
+            text-transform: uppercase;
+            margin: 0 0 1mm 0;
+            letter-spacing: 4px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.8);
+        }
+
+        .top-instruction {
+            font-size: 0.75rem;
+            color: #e6dac3; 
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 3mm;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+            padding-bottom: 1mm;
+        }
+
+        .bottom-instruction {
+            margin-top: 3mm;
+            font-size: 0.65rem;
+            color: #a09585;
+            font-style: italic;
+            letter-spacing: 1px;
+            display: flex;
+            gap: 10mm;
+        }
+
+        /* --- SOCKET CONTAINER --- */
+        .socket-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4mm;
+            
+            background-color: #141111;
+            padding: 3mm 8mm; /* Slightly wider padding */
+            border-radius: 100px;
+            border: 1px solid #3a3232;
+            box-shadow: inset 0 0 15px #000;
+        }
+
+        /* --- CLUSTERS --- */
+        .cluster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2mm;
+        }
+
+        .label {
+            font-size: 0.55rem;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* --- DIVIDERS --- */
+        .divider {
+            width: 1px;
+            height: 35mm;
+            background: linear-gradient(to bottom, transparent 0%, #8a6f1f 20%, #8a6f1f 80%, transparent 100%);
+            margin: 0 2mm;
+        }
+        
+        .arrow-divider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #554444;
+            font-size: 16px;
+            margin: 0 2mm;
+        }
+
+        /* --- SOCKETS --- */
+        .socket {
+            width: 26mm;
+            height: 26mm;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        /* 1. The Stash Socket (Solid, darker) */
+        .stash-socket {
+            border: 2px solid #5e4d1f; 
+            background: radial-gradient(circle at 50% 50%, #1a1616 0%, #000000 100%);
+            box-shadow: inset 2px 2px 8px rgba(0,0,0,1);
+        }
+        
+        /* Stash Icon/Text inside socket */
+        .stash-socket::after {
+            content: "RESERVES";
+            font-family: 'Raleway', sans-serif;
+            font-size: 8px;
+            color: #443a3a;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            letter-spacing: 1px;
+        }
+
+        /* 2. Turn Socket (Simple dashed) */
+        .turn-socket {
+            border: 1px dashed #777;
+            background: transparent;
+        }
+
+        /* 3. Action Sockets (Gold dashed, glowing) */
+        .action-socket {
+            border: 2px dashed #b59226; 
+            background: radial-gradient(circle at 50% 50%, #2a2222 0%, #080606 80%);
+            box-shadow: inset 1px 1px 5px rgba(0,0,0,0.9);
+        }
+
+        /* Decoration Corners */
+        .corner {
+            position: absolute;
+            width: 5mm; height: 5mm;
+            border-color: #d4af37;
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .tl { top: 3mm; left: 3mm; border-width: 1px 0 0 1px; }
+        .tr { top: 3mm; right: 3mm; border-width: 1px 1px 0 0; }
+        .bl { bottom: 3mm; left: 3mm; border-width: 0 0 1px 1px; }
+        .br { bottom: 3mm; right: 3mm; border-width: 0 1px 1px 0; }
+
+        /* --- PRINT SETTINGS --- */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        @media print {
+            body { 
+                background-color: #211c1c;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+
+        <!-- BOARD 1 -->
+        <div class="dashboard-strip">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+
+            <div class="main-title">The Ledger</div>
+            <div class="top-instruction">Your Back-Room Desk</div>
+
+            <div class="socket-row">
+                
+                <!-- Turn Section -->
+                <div class="cluster">
+                    <div class="label">Turn</div>
+                    <div class="socket turn-socket"></div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Reserves Section -->
+                <div class="cluster">
+                    <div class="label">Reserves</div>
+                    <div class="socket stash-socket"></div>
+                </div>
+
+                <!-- Flow Indicator -->
+                <div class="arrow-divider">➤</div>
+
+                <!-- Operations Section -->
+                <div class="cluster">
+                    <div class="label">Ledger (Max 5)</div>
+                    <div style="display:flex; gap:4mm;">
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bottom-instruction">
+                <span>Shadows: Reserves &rarr; Ledger</span>
+                <span>•</span>
+                <span>Operations: Ledger &rarr; Reserves / Heat</span>
+            </div>
+        </div>
+
+        <!-- BOARD 2 -->
+        <div class="dashboard-strip">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+
+            <div class="main-title">The Ledger</div>
+            <div class="top-instruction">Your Back-Room Desk</div>
+
+            <div class="socket-row">
+                
+                <!-- Turn Section -->
+                <div class="cluster">
+                    <div class="label">Turn</div>
+                    <div class="socket turn-socket"></div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Reserves Section -->
+                <div class="cluster">
+                    <div class="label">Reserves</div>
+                    <div class="socket stash-socket"></div>
+                </div>
+
+                <!-- Flow Indicator -->
+                <div class="arrow-divider">➤</div>
+
+                <!-- Operations Section -->
+                <div class="cluster">
+                    <div class="label">Ledger (Max 5)</div>
+                    <div style="display:flex; gap:4mm;">
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                        <div class="socket action-socket"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bottom-instruction">
+                <span>Shadows: Reserves &rarr; Ledger</span>
+                <span>•</span>
+                <span>Operations: Ledger &rarr; Reserves / Heat</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

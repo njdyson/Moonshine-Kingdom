@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom Turn Structure Flow Card v6.2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --bg: #140c0c;
+      --panel: #1f1515;
+      --panel-2: #2a1c1c;
+      --ink: #f5e9d9;
+      --muted: #d1c2ad;
+      --gold: #d4af37;
+      --gold-dim: #8a7329;
+      --line: #4b3b2a;
+      --phase-1: #7a4d1f;
+      --phase-2: #5e2a2a;
+      --phase-3: #3d4f2f;
+      /* Liquor colours */
+      --rum:       #8b1a2f;
+      --whisky:    #c8a800;
+      --gin:       #c45c8a;
+      --moonshine: #9a9ea8;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(212,175,55,0.10), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(212,175,55,0.08), transparent 45%),
+        var(--bg);
+      color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8mm;
+    }
+
+    .bleed {
+      padding: 3mm;
+      background: #120808;
+      border-radius: 8px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 140mm;
+      height: 205mm;
+      margin: 0 auto;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      background: linear-gradient(165deg, #241818 0%, #171010 100%);
+      box-shadow: 0 0 0 2px rgba(212,175,55,0.25), 0 12px 28px rgba(0,0,0,0.55);
+      padding: 4mm 5mm 5mm;
+      display: flex;
+      flex-direction: column;
+      gap: 2mm;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .header {
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2mm;
+    }
+
+    .title {
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 1.5px;
+      font-size: 19pt;
+      line-height: 1;
+      color: var(--gold);
+    }
+
+    .subtitle {
+      margin: 1mm 0 0;
+      font-size: 8pt;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .flow-rail {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 2mm;
+      margin-top: 1mm;
+    }
+
+    .phase-pill {
+      text-align: center;
+      border: 1px solid var(--gold-dim);
+      border-radius: 999px;
+      padding: 1.6mm 1mm;
+      font-size: 7.6pt;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: #fff;
+      background: #2a1f1f;
+      white-space: nowrap;
+    }
+
+    .phase-pill small {
+      display: block;
+      font-size: 6.6pt;
+      opacity: 0.9;
+      letter-spacing: 0.2px;
+      font-weight: 600;
+      text-transform: none;
+    }
+
+    .pill-1 { box-shadow: inset 0 0 0 1px rgba(122,77,31,0.8); }
+    .pill-2 { box-shadow: inset 0 0 0 1px rgba(94,42,42,0.9); }
+    .pill-3 { box-shadow: inset 0 0 0 1px rgba(61,79,47,0.9); }
+
+    .arrow {
+      color: var(--gold);
+      font-size: 10pt;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .round-note {
+      margin: 0;
+      padding: 1.2mm 1.8mm;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: rgba(0,0,0,0.22);
+      font-size: 6.8pt;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .phase-card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));
+      padding: 1.5mm;
+    }
+
+    .phase-head {
+      margin: 0 0 1mm;
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      padding-bottom: 0.8mm;
+      border-bottom: 1px dashed rgba(212,175,55,0.45);
+    }
+
+    .phase-index {
+      min-width: 7mm;
+      height: 7mm;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7.6pt;
+      font-weight: 700;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .phase-index.p1 { background: var(--phase-1); }
+    .phase-index.p2 { background: var(--phase-2); }
+    .phase-index.p3 { background: var(--phase-3); }
+
+    .phase-title {
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.8px;
+      font-size: 12.2pt;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .phase-kicker {
+      margin: 0;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 0.9mm;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 26mm 1fr;
+      gap: 2mm;
+      align-items: start;
+      padding: 1mm 1.3mm;
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 5px;
+      background: rgba(0,0,0,0.18);
+    }
+
+    .step-tag {
+      font-size: 6.7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1.2;
+      overflow-wrap: break-word;
+    }
+
+    .step-copy {
+      font-size: 6.7pt;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .step-copy b {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .sub-tag {
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-size: 6.2pt;
+      margin-right: 0.4mm;
+    }
+
+    .step-copy .sub-tag + br + .sub-tag {
+      margin-top: 0.4mm;
+    }
+
+    .ledger-card {
+      gap: 2.5mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ledger-note {
+      margin: 0;
+      padding: 2mm;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: rgba(0,0,0,0.22);
+      font-size: 7.2pt;
+      line-height: 1.28;
+      text-align: center;
+    }
+
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      overflow: hidden;
+      border: 1.5px solid var(--gold);
+      border-radius: 6px;
+      outline: 1.5px solid var(--gold);
+      outline-offset: -1.5px;
+    }
+
+    .ledger-table th,
+    .ledger-table td {
+      border: 1px solid rgba(212,175,55,0.28);
+      vertical-align: middle;
+    }
+
+    .ledger-table th {
+      padding: 1mm 1.3mm;
+      background: rgba(212,175,55,0.18);
+      color: var(--gold);
+      font-size: 6.5pt;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    .ledger-table td {
+      padding: 0.6mm 1.3mm;
+      background: rgba(0,0,0,0.16);
+      font-size: 6.5pt;
+      line-height: 1;
+    }
+
+    .ledger-crown {
+      width: 2.4mm;
+      height: 2.4mm;
+      vertical-align: middle;
+      margin-left: 1mm;
+      filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
+    }
+
+    .ledger-borough {
+      width: 18mm;
+      color: var(--gold);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10pt;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .priority-num {
+      width: 5mm;
+      text-align: center !important;
+      color: var(--gold-dim);
+      font-weight: 700;
+    }
+
+    .district-name {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* Zone type - coloured by liquor */
+    .district-kind {
+      color: var(--muted);
+      font-size: 6.2pt;
+    }
+    .kind-rum      { color: var(--rum); font-size: 5.8pt; font-weight: 700; }
+    .kind-whisky   { color: var(--whisky); font-size: 5.8pt; font-weight: 700; }
+    .kind-gin      { color: var(--gin); font-size: 5.8pt; font-weight: 700; }
+    .kind-moonshine{ color: var(--moonshine); font-size: 5.8pt; font-weight: 700; }
+    .kind-dock     { color: var(--muted); font-size: 5.8pt; }
+    .kind-ghetto   { color: var(--muted); font-size: 5.8pt; }
+
+    .zone-icon {
+      width: 9px;
+      height: 9px;
+      vertical-align: middle;
+      margin-right: 1px;
+      display: inline-block;
+    }
+    .zone-icon-rum      { filter: invert(18%) sepia(70%) saturate(900%) hue-rotate(310deg) brightness(85%); }
+    .zone-icon-whisky   { filter: invert(75%) sepia(80%) saturate(700%) hue-rotate(5deg) brightness(95%); }
+    .zone-icon-gin      { filter: invert(55%) sepia(40%) saturate(600%) hue-rotate(280deg) brightness(100%); }
+    .zone-icon-moonshine{ filter: invert(65%) sepia(5%) saturate(300%) brightness(95%); }
+    .zone-icon-dock     { filter: invert(80%) sepia(10%) saturate(300%) brightness(90%); }
+    .zone-icon-ghetto   { filter: invert(80%) sepia(10%) saturate(300%) brightness(90%); }
+    .zone-icon-crown    { filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%); }
+
+    /* Still number cell */
+    .still-num {
+      text-align: center !important;
+      font-weight: 700;
+      font-size: 6.8pt;
+      color: var(--ink);
+    }
+    .still-num.still-blank {
+      color: var(--gold-dim);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    /* Setup labels - plain coloured text, no box */
+    .setup-tag {
+      font-size: 6.2pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tag-turf     { color: #e07070; }
+    .tag-runners  { color: var(--gold); }
+    .tag-precinct { color: #7fb4ff; }
+
+    .raids-section {
+      margin-top: 1mm;
+      border: 1px solid var(--gold-dim);
+      border-radius: 6px;
+      padding: 1.5mm;
+      background: rgba(0,0,0,0.22);
+    }
+
+    .raids-title {
+      margin: 0 0 1mm;
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.8px;
+      font-size: 11pt;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .raids-trigger {
+      margin: 0 0 1.2mm;
+      text-align: center;
+      font-size: 6.6pt;
+      line-height: 1.2;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .raids-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2mm;
+    }
+
+    .raid-step {
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 4px;
+      padding: 1.3mm 1.8mm;
+      background: rgba(0,0,0,0.25);
+      font-size: 7pt;
+      line-height: 1.3;
+    }
+
+    .raid-step strong {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-size: 7.2pt;
+    }
+
+    .raid-step b {
+      color: var(--gold);
+    }
+
+    @media print {
+      @page {
+        size: A5 portrait;
+        margin: 0;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background: var(--bg);
+      }
+
+      .bleed {
+        width: 148mm;
+        height: 210mm;
+        margin: 0;
+        padding: 3mm;
+        border-radius: 0;
+        background: var(--bg);
+        page-break-after: always;
+        break-after: page;
+      }
+
+      .bleed:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      .card {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .card:last-child {
+        page-break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bleed">
+    <div class="card">
+      <header class="header">
+        <h1 class="title">Turn Structure Flow</h1>
+      </header>
+
+      <div class="flow-rail" aria-label="Day phase rail">
+        <div class="phase-pill pill-1">Shadows<small>Production</small></div>
+        <div class="arrow">&rarr;</div>
+        <div class="phase-pill pill-2">Operations<small>Action Cycle</small></div>
+        <div class="arrow">&rarr;</div>
+        <div class="phase-pill pill-3">Reckoning<small>Cleanup</small></div>
+      </div>
+
+      <p class="round-note">
+        <b>Turn Order</b> runs Token #1 through #4. At Day turnover, swap to <b>tomorrow's set</b>.
+      </p>
+
+      <section class="phase-card">
+        <div class="phase-head">
+          <span class="phase-index p1">1</span>
+          <div>
+            <h2 class="phase-title">Shadows</h2>
+            <p class="phase-kicker">Fill barrels and open new deals</p>
+          </div>
+        </div>
+        <div class="step-list">
+          <div class="step">
+            <div class="step-tag">1 The Brew</div>
+            <div class="step-copy">
+              <span class="sub-tag">Roll:</span> Token #1 rolls <b>1 White</b> + <b>Red</b> (Players + 1).<br>
+              <span class="sub-tag">Draft:</span> In turn order, each boss takes <b>1 Red</b>.<br>
+              <span class="sub-tag">Produce:</span> Brew = <b>White + your Red</b>. Your matching Stills brew <b>Moonshine</b> by Muscle Ratio (<b>1-2</b>=1, <b>3-4</b>=2, <b>5-6</b>=3, <b>7-8</b>=4, <b>9+</b>=5). Boss on the Still: <b>+1 Barrel</b>.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-tag">2 The Blowback</div>
+            <div class="step-copy">Leftover Red + White. <b>Every</b> matching Still bursts: casualties by Muscle Ratio (Runners first); Still keeps running.</div>
+          </div>
+          <div class="step">
+            <div class="step-tag">3 Grease Wheels</div>
+            <div class="step-copy">
+              <span class="sub-tag">Stake Contracts:</span> <em>Boss required.</em> Lock Reserves markers = Days to Deadline.<br>
+              <span class="sub-tag">Fund Ledger:</span> Move up to <b>5</b> Reserves markers to your <b>Ledger</b> slots.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="phase-card">
+        <div class="phase-head">
+          <span class="phase-index p2">2</span>
+          <div>
+            <h2 class="phase-title">Operations</h2>
+            <p class="phase-kicker">Take Plays until everyone lays low</p>
+          </div>
+        </div>
+        <div class="step-list">
+          <div class="step">
+            <div class="step-tag">Take Play</div>
+            <div class="step-copy">Spend Influence for 1 Play (Standard = 1, Power = 2). Resolve combat before the Play ends.</div>
+          </div>
+          <div class="step">
+            <div class="step-tag">Resolve</div>
+            <div class="step-copy">
+              <span class="sub-tag">Pay:</span> Spent markers return to Reserves. Heat <img src="Art/Icons/fire.svg" class="zone-icon" alt="Heat"> locks 1 marker on the <b>Heat Track</b>.<br>
+              <span class="sub-tag">Unload (Power Play):</span> Sell at your Speakeasy &mdash; <b>$300</b>/barrel, <b>$500</b> High Society. Only <b>Rum</b> pays Kickback (1 marker back per Rum); 4+ barrels = <b>Heat</b>.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-tag">Lay Low</div>
+            <div class="step-copy">Out of Influence (or passing early): clear your Ledger slots to Reserves; claim the lowest token in <b>tomorrow's set</b> (#1 strikes first next Day).</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="phase-card">
+        <div class="phase-head">
+          <span class="phase-index p3">3</span>
+          <div>
+            <h2 class="phase-title">Reckoning</h2>
+            <p class="phase-kicker">Resolve simultaneously</p>
+          </div>
+        </div>
+        <div class="step-list">
+          <div class="step">
+            <div class="step-tag">1 The Sweep</div>
+            <div class="step-copy">Remove excess Runners so no District exceeds <b>5 Mobsters</b> (unless you hold Mayor Walker's Favor).</div>
+          </div>
+          <div class="step">
+            <div class="step-tag">2 Stake Your Claim</div>
+            <div class="step-copy">Re-count every Title (Borough Deeds, Ward Boss, Harbormaster) now. A <b>strict majority</b> of that turf takes or keeps it; a tie or empty turf returns it to the Supply. (Police turf counts as empty).</div>
+          </div>
+          <div class="step">
+            <div class="step-tag">3 Settle Accounts</div>
+            <div class="step-copy">Return 1 marker per active Contract to Reserves. On the final marker, check objective: <b>Success</b> &rarr; collect Cash &amp; Respect; <b>Fail</b> &rarr; discard. <em>(Gig + Racket + Score = Notoriety Card, +2 Respect).</em></div>
+          </div>
+        </div>
+      </section>
+
+      <p class="round-note" style="margin-top:auto; padding: 2mm 2.5mm;">
+        <b style="display:block; font-size:8.5pt; letter-spacing:0.5px; margin-bottom:1mm;">Final Reckoning</b>
+        Commission Card + <b>15+ Respect</b> + honor (no Rat Card, no unpaid Mark) = game ends. Otherwise swap to tomorrow's set and begin the next Day.
+      </p>
+
+    </div>
+  </div>
+
+  <div class="bleed">
+    <div class="card ledger-card">
+      <header class="header">
+        <h1 class="title">Town Planning Ledger</h1>
+        <p class="subtitle">Squad Deployment &amp; District Roster</p>
+      </header>
+
+      <p class="ledger-note">
+        At setup, each mainland Borough's <b>Police Squad</b> padlocks its <b>High Society</b> Speakeasy (4 in all; Staten Island gets none). During a Raid, Squads resolve in the numbered <b>Borough</b> order on the board.
+      </p>
+
+      <div style="flex:1;min-height:0;overflow:hidden;">
+      <table class="ledger-table" style="height:100%;" aria-label="Town Planning Ledger">
+        <thead>
+          <tr>
+            <th style="width: 17mm; text-align: center;">Borough</th>
+            <th style="width: 5mm; text-align: center;">#</th>
+            <th style="width: 26mm;">District</th>
+            <th style="width: 18mm; text-align: center;">Zone</th>
+            <th style="width: 8mm; text-align: center;">Still</th>
+            <th style="width: 18mm;">Setup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MANHATTAN -->
+          <tr>
+            <td rowspan="6" class="ledger-borough">Manhattan</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Five Points</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ward"> Ward</td>
+            <td class="still-num">10</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Sugar Hill</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="still-num">7</td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">East Harlem</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">12</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">4</td>
+            <td class="district-name">The Tenderloin</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">8</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="priority-num">5</td>
+            <td class="district-name">West Side</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">11</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">6</td>
+            <td class="district-name">The Bowery</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">9</td>
+            <td></td>
+          </tr>
+
+          <!-- THE BRONX -->
+          <tr>
+            <td rowspan="5" class="ledger-borough">The Bronx</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Hunts Point</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ward"> Ward</td>
+            <td class="still-num">9</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Morris Park</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="still-num">7</td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Belmont</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">11</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">4</td>
+            <td class="district-name">Fordham</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">8</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="priority-num">5</td>
+            <td class="district-name">Throggs Neck</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">10</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+
+          <!-- QUEENS -->
+          <tr>
+            <td rowspan="6" class="ledger-borough">Queens</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Corona</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ward"> Ward</td>
+            <td class="still-num">4</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Richmond Hill</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="still-num">7</td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Astoria</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">2</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">4</td>
+            <td class="district-name">Flushing</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">6</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="priority-num">5</td>
+            <td class="district-name">Whitestone</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">5</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="priority-num">6</td>
+            <td class="district-name">Jamaica</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">3</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+
+          <!-- BROOKLYN -->
+          <tr>
+            <td rowspan="5" class="ledger-borough">Brooklyn</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Brownsville</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ward"> Ward</td>
+            <td class="still-num">5</td>
+            <td><span class="setup-tag tag-turf">Starting Turf</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Williamsburg</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> High Society <img src="Art/Icons/Crown.svg" class="zone-icon zone-icon-crown" alt="Crown"></td>
+            <td class="still-num">7</td>
+            <td><span class="setup-tag tag-precinct">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Coney Island</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">3</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="priority-num">4</td>
+            <td class="district-name">Red Hook</td>
+            <td class="kind-moonshine" style="text-align:center;"><img src="Art/Icons/hat.svg" class="zone-icon zone-icon-moonshine" alt="Speakeasy"> Speakeasy</td>
+            <td class="still-num">6</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="priority-num">5</td>
+            <td class="district-name">Sheepshead Bay</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">4</td>
+            <td><span class="setup-tag tag-runners">3 Runners</span></td>
+          </tr>
+
+          <!-- STATEN ISLAND -->
+          <tr>
+            <td rowspan="3" class="ledger-borough">Staten Island</td>
+            <td class="priority-num">1</td>
+            <td class="district-name">Stapleton</td>
+            <td class="kind-ghetto" style="text-align:center;"><img src="Art/Icons/Fist.svg" class="zone-icon zone-icon-ghetto" alt="Ward"> Ward</td>
+            <td class="still-num">6</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="priority-num">2</td>
+            <td class="district-name">Westerleigh</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">2</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="priority-num">3</td>
+            <td class="district-name">Tottenville</td>
+            <td class="kind-dock" style="text-align:center;"><img src="Art/Icons/anchor.svg" class="zone-icon zone-icon-dock" alt="Dock"></td>
+            <td class="still-num">4</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <section class="raids-section">
+        <h2 class="raids-title">Police Raids</h2>
+        <p class="raids-trigger"><b>Trigger:</b> Rat Play (1+ Heat), OR 5th Heat. Resolve every Squad <b>one at a time, in the numbered Borough order on the board</b>.</p>
+        <div class="raids-grid">
+          <div class="raid-step">
+            <strong>1. Most Wanted:</strong> A Squad looks only at Districts <b>directly Connected within its Borough</b> and steps toward the rival whose marker sits <b>furthest right</b> on the Heat Track. No marker = ignored. No Heat to chase = it holds its corner.
+          </div>
+          <div class="raid-step">
+            <strong>2. The Big Bust:</strong> If that rival holds more than one such District, hit the one with the <b>most Barrels</b> (the cops follow the contraband); ties break to the <b>hottest boiler</b> &mdash; most steam on its Still's <b>Pressure Strip</b> (unique per Borough, so it never ties).
+          </div>
+          <div class="raid-step">
+            <strong>3. The Scatter:</strong> Safehouse destroyed &amp; all Liquor seized. The crew flees to a <b>Connected Safe District</b> (never back toward the Squad); if there's none, the whole crew is <b>arrested</b>. No bribe, no buyout.
+          </div>
+          <div class="raid-step">
+            <strong>4. Aftermath:</strong> The Squad holds the District (impassable; padlocks any Speakeasy/Still). Once all Squads move, Heat markers return to owners' Reserves.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
