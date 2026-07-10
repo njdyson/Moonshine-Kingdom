@@ -453,6 +453,75 @@ img {
     letter-spacing: 0.5px;
 }
 
+/* --- Map Legend Key --- */
+/* Icon-medallion gutter + title/description rows. Replaces the old bulleted
+   key list where diamond bullets collided with the inline icons. */
+.legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0.6em 0 0;
+}
+
+.legend-row {
+    display: grid;
+    grid-template-columns: 52px 1fr;   /* fixed icon gutter + flexible text */
+    gap: 14px;
+    align-items: start;
+    padding: 11px 0;
+    border-top: 1px solid rgba(138, 115, 41, 0.35);
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.legend-row:last-child {
+    border-bottom: 1px solid rgba(138, 115, 41, 0.35);
+}
+
+.legend-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent-gold);
+    background: radial-gradient(circle at 50% 35%,
+                rgba(212, 175, 55, 0.16), rgba(212, 175, 55, 0.04));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Recolor monochrome SVG icons to gold to match the medallion. */
+.legend-badge img {
+    width: 22px;
+    height: 22px;
+    filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg)
+            brightness(87%) contrast(90%);
+}
+
+.legend-badge svg {
+    width: 26px;
+    height: 28px;
+}
+
+.legend-title {
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--accent-gold);
+    font-size: 13pt;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.legend-body {
+    font-size: 9.5pt;
+    line-height: 1.35;
+}
+
+.legend-body strong,
+.legend-body b {
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
 /* --- Power Broker Cards --- */
 /* Power Broker cards. Base values below are the PRINT values, so the on-screen
    full-width view matches the A4 print output exactly (preview without a PDF).

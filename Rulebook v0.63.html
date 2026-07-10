@@ -166,18 +166,70 @@
             <div class="ratio-cell" role="cell">5</div>
         </div>
     </div>
-    <div class="container">
+    <div class="container one-column">
         <h3 id="map">The Map: Know Your Turf</h3>
-        <div class="cover no-fade">
-            <img src="Art/Board (Large).png" alt="The Map" style="width:100%;min-height:0;object-fit:contain;margin-top:8px;">
-        </div>
         <p>Your empire is a broken city: 25 <strong>Districts</strong> across 5 <strong>Boroughs</strong>, each a flavor of poison and profit. Certain key Districts offer unique opportunities:</p>
-        <ul class="sub-section">
-            <li><img src="Art/Icons/Gin.svg" class="icon" alt="Speakeasy"> <strong>Speakeasies:</strong> The only spots where you can <b>Unload</b> Liquor for cash. One premium joint per mainland Borough is a <b>High Society</b> Speakeasy, paying far more per barrel than the rest (see <em>Unload</em>). <em>The booze doesn't set the price; the address does.</em></li>
-            <li><img src="Art/Icons/Fist.svg" class="icon" alt="Ward"> <strong>Wards:</strong> Gritty blocks where mob roots run deep. Hold the most at Reckoning to claim the <b>Ward Boss</b> card and collect Union Tax when rivals Recruit. You can also hire fresh muscle in any Ward you Control (see <em>Recruit</em>).</li>
-            <li><img src="Art/Icons/anchor.svg" class="icon" alt="Docks"> <strong>Docks:</strong> Where the rum comes ashore. At a Dock you Control you may <b>Trade</b> Moonshine for Havana Rum (see <em>Operations: Trade</em>). All Dock Districts connect across the water as if adjacent, so the waterways are the fastest road across the map.</li>
-            <li><strong>Stills:</strong> Every District has a boiler printed on the board, numbered 2–12. The moment you Control the District its Still is active: it fires when its number is brewed, and risks Blowback when the leftovers match.</li>
-        </ul>
+
+        <div class="legend">
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Gin.svg" alt="Speakeasy"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Speakeasies</span>
+                    The only spots where you can <b>Unload</b> Liquor for cash. Most pay a flat <b>$300 per barrel</b> (see <em>Unload</em>). <em>The booze doesn't set the price; the address does.</em>
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Crown.svg" alt="High Society"></div>
+                <div class="legend-body">
+                    <span class="legend-title">High Society</span>
+                    One premium Speakeasy per mainland Borough, paying a massive <b>$500 per barrel</b>. The four start <b>padlocked</b> by the Police until a Raid throws them open (see <em>The Blue Wall</em>).
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Fist.svg" alt="Ward"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Wards</span>
+                    Gritty blocks where mob roots run deep. Hold the most at Reckoning to claim the <b>Ward Boss</b> card and collect Union Tax when rivals Recruit. You can also hire fresh muscle in any Ward you Control (see <em>Recruit</em>).
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/anchor.svg" alt="Docks"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Docks</span>
+                    Where the rum comes ashore. At a Dock you Control you may <b>Trade</b> Moonshine for Havana Rum (see <em>Trade</em>). All Docks connect across the water as if adjacent, so the waterways are the fastest road across the map.
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge">
+                    <svg viewBox="0 0 100 108" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="33" y="11" width="16" height="8" rx="2.5" fill="none" stroke="#d4af37" stroke-width="2.2"/>
+                        <path d="M24 92 l-3.5 10 M58 92 l3.5 10" stroke="#d4af37" stroke-width="2.6" stroke-linecap="round"/>
+                        <rect x="14" y="18" width="54" height="74" rx="10" fill="none" stroke="#d4af37" stroke-width="3"/>
+                        <circle cx="20.5" cy="27" r="1.5" fill="#8a7329"/>
+                        <circle cx="20.5" cy="55" r="1.5" fill="#8a7329"/>
+                        <circle cx="20.5" cy="83" r="1.5" fill="#8a7329"/>
+                        <rect x="65" y="51" width="14" height="6" rx="2" fill="none" stroke="#d4af37" stroke-width="1.6"/>
+                        <rect x="76.5" y="18" width="13" height="76" rx="6.5" fill="none" stroke="#d4af37" stroke-width="2.4"/>
+                        <rect x="79.5" y="80.6" width="7.2" height="9.4" rx="1.6" fill="#e8c85a"/>
+                        <rect x="79.5" y="69.8" width="7.2" height="9.4" rx="1.6" fill="#dcb246"/>
+                        <rect x="79.5" y="59"   width="7.2" height="9.4" rx="1.6" fill="#d49a37"/>
+                        <rect x="79.5" y="48.2" width="7.2" height="9.4" rx="1.6" fill="#cf7f33"/>
+                        <rect x="79.5" y="37.4" width="7.2" height="9.4" rx="1.6" fill="#c8632e"/>
+                        <rect x="79.5" y="26.6" width="7.2" height="9.4" rx="1.6" fill="#c0472a"/>
+                    </svg>
+                </div>
+                <div class="legend-body">
+                    <span class="legend-title">Stills</span>
+                    Every District has a boiler printed on the board, numbered <b>2&ndash;12</b>. The moment you Control it the Still is active: it fires when its number is brewed, and risks <b>Blowback</b> when the leftovers match. Each Borough's <b>Pressure Strip</b> ranks its boilers for Police Raids (see <em>Police Raids</em>).
+                </div>
+            </div>
+
+        </div>
     </div>
     <div class="container currencies-page">
         <h3 id="currencies">The Currencies of the Underworld</h3>
