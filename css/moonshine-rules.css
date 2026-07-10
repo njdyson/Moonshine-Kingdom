@@ -554,11 +554,10 @@ img {
 .broker-portrait {
     flex: 0 0 92px;
     width: 92px;
-    align-self: stretch;       /* fill the card's height so longer cards have no gap below the image */
-    height: auto;
-    min-height: 92px;
+    height: 92px;
+    align-self: center;        /* fixed square, vertically centred in taller cards */
     object-fit: cover;
-    object-position: center 25%;
+    object-position: center 30%;
     border: 1px solid var(--accent-dim);
     filter: sepia(0.15);
 }
@@ -668,6 +667,36 @@ img {
 .action-economy-box p,
 .action-economy-box li {
     color: var(--text-color);
+}
+
+/* --- Turn Procedure (loop + exit) --- */
+.turn-proc .turn-label {
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+    font-size: 11pt;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.turn-proc ol {
+    margin: 0 0 4px;
+    padding-left: 1.4em;
+}
+
+.turn-proc ol li {
+    margin-bottom: 3px;
+}
+
+/* The exit step (Lay Low), set off from the repeating cycle by a rule. */
+.turn-proc .turn-exit {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px dashed var(--accent-dim);
+}
+
+.turn-proc .turn-exit ol {
+    margin-top: 3px;
 }
 
 .flow-diagram {

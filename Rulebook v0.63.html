@@ -495,24 +495,27 @@
     <div class="container one-column">
         <!-- Phase 2 -->
         <h3 id="operations">Phase 2: Operations</h3>
-        <p>Operations runs in <strong>Turn Order</strong>, one <strong>Play</strong> at a time.</p>
-        <ol class="sub-section">
-            <li><strong>Make a Play:</strong> Spend Influence to perform <b>1 Action</b> (a <b>Play</b>): either a Standard Play (Move, Recruit, Push, etc.) or a Power Play (e.g., Unload).</li>
-            <li><strong>Resolve Combat:</strong> If your Play triggers combat, resolve it fully before the Play ends.</li>
-            <li><strong>The Cost of Doing Business:</strong> Remove the spent marker(s) from your <b>Ledger</b> and return
-                them to your <b>Reserves</b>, unless the Play generated Heat, in which case <b>1 spent marker</b>
-                locks onto the <b>Heat Track</b> instead.
-            </li>
-            <li><strong>Laying Low:</strong> When you run out of Influence (or choose to step off the street early), you
-                must <strong>Lay Low</strong>:
-                <ol class="sub-section" type="a" style="margin-top:5px;">
-                    <li><strong>Odd Jobs:</strong> Each unspent Influence marker still sitting in your <b>Ledger</b> slots cashes in for <b>$100</b> as your crew runs small jobs for pocket money. <em>(Markers in your Reserves don't pay.)</em> The markers still clear to your Reserves as normal below; you're paid for not needing the action, not for spending the marker away.</li>
-                    <li>Clear any remaining markers from your <b>Ledger</b> to your <b>Reserves</b>.</li>
-                    <li>Claim the lowest-numbered token left in <b>tomorrow's set</b> <em>(claim #1 to guarantee you strike first tomorrow)</em>.</li>
-                </ol>
-            </li>
-        </ol>
+        <p>Operations runs in <strong>Turn Order</strong>, one <strong>Play</strong> at a time. On your turn you run the same short cycle over and over, then step off the street.</p>
 
+        <div class="action-economy-box turn-proc">
+            <span class="turn-label">Your Turn: repeat until you run out of Influence</span>
+            <ol>
+                <li><strong>Make a Play.</strong> Spend Influence to perform <b>1 Action</b>: a Standard Play (Move, Recruit, Push...) or a Power Play (Unload, Extort...).</li>
+                <li><strong>Resolve any combat</strong> the Play triggers, fully, before the Play ends.</li>
+                <li><strong>Pay the cost.</strong> Return the spent marker(s) from your <b>Ledger</b> to your <b>Reserves</b>, unless the Play drew Heat, in which case <b>1 marker</b> locks onto the <b>Heat Track</b> instead.</li>
+            </ol>
+
+            <div class="turn-exit">
+                <span class="turn-label">Out of Influence (or stepping off early)? Lay Low</span>
+                <ol type="a">
+                    <li><strong>Odd Jobs:</strong> each unspent marker still in your <b>Ledger</b> pays you <b>$100</b> <em>(Reserve markers don't pay)</em>.</li>
+                    <li>Clear any remaining <b>Ledger</b> markers to your <b>Reserves</b>.</li>
+                    <li>Claim the lowest-numbered token left in <b>tomorrow's set</b> <em>(claim #1 to strike first tomorrow)</em>.</li>
+                </ol>
+            </div>
+        </div>
+
+        <h4>Plays: Your Options on the Street</h4>
 
         <table class="action-table">
             <tr>
@@ -791,7 +794,7 @@
                         <span class="broker-fee">$2,500</span>
                     </div>
                     <p class="broker-flavor">The man who fixed the World Series doesn't play the game; he owns the casino.</p>
-                    <p class="broker-power"><b>Float:</b> Rothstein's money is always liquid. Any time during your <b>Operations Phase</b>, lock <b>1 Influence marker</b> from your Reserves onto this card to take <b>$1,000</b> from the bank. Repay the <b>$1,000</b> any time to return the marker. <em>No interest, no Shylock, no questions; the marker sits in his vault until you square up.</em></p>
+                    <p class="broker-power"><b>Float:</b> Rothstein's money is always liquid. Any time during your <b>Operations Phase</b>, lock <b>1 Influence marker</b> from your Reserves onto this card to take <b>$1,000</b> from the bank. Repay the <b>$1,000</b> any time to return the marker. <em>No interest, no questions; the marker sits in his vault until you square up.</em></p>
                 </div>
             </li>
             <li class="broker-card">
