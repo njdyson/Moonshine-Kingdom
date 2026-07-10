@@ -34,10 +34,9 @@ body {
     line-height: 1.25;
     font-size: 9.5pt;
     font-weight: 400;
-    /* justify text for that block-book look */
-    text-align: justify;
-    text-align-last: left; /* keep the final line ragged so it never stretches into gaps */
-    hyphens: auto;       /* Prevents massive gaps in justified text */
+    /* Left-aligned (ragged right): avoids the stretched inter-word gaps that
+       full justification produces on short lines and paragraph ends. */
+    text-align: left;
 }
 
 /* ==========================================================================
@@ -468,7 +467,7 @@ img {
     display: flex;
     flex-direction: row;
     gap: 12px;
-    align-items: flex-start;
+    align-items: stretch;
     border: 1px solid var(--accent-dim);
     background:
         linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, rgba(212, 175, 55, 0.02) 100%),
@@ -486,7 +485,9 @@ img {
 .broker-portrait {
     flex: 0 0 92px;
     width: 92px;
-    height: 92px;
+    align-self: stretch;       /* fill the card's height so longer cards have no gap below the image */
+    height: auto;
+    min-height: 92px;
     object-fit: cover;
     object-position: center 25%;
     border: 1px solid var(--accent-dim);
