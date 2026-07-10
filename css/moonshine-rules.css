@@ -342,6 +342,12 @@ img {
     object-fit: cover;
 }
 
+/* Covers on content-dense pages: honor the smaller inline height so the page
+   fits on one A4 sheet instead of spilling a sliver onto a blank next page. */
+.cover img.tight-cover {
+    min-height: 0;
+}
+
 .cover::after {
     content: "";
     position: absolute;
@@ -456,7 +462,7 @@ img {
     display: flex;
     flex-direction: row;
     gap: 12px;
-    align-items: stretch;
+    align-items: flex-start;
     border: 1px solid var(--accent-dim);
     background:
         linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, rgba(212, 175, 55, 0.02) 100%),
