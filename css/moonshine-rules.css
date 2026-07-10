@@ -348,6 +348,12 @@ img {
     min-height: 0;
 }
 
+/* Heat cover: officers' heads sit in the top of the frame, so a cropped
+   (cover-fit) height must anchor near the top or the caps get chopped. */
+.heat-page .cover img {
+    object-position: center 22%;
+}
+
 .cover::after {
     content: "";
     position: absolute;
