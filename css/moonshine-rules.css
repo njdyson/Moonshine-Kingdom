@@ -443,22 +443,26 @@ img {
 }
 
 /* --- Power Broker Cards --- */
+/* Power Broker cards. Base values below are the PRINT values, so the on-screen
+   full-width view matches the A4 print output exactly (preview without a PDF).
+   Only genuinely narrow phones (<= 600px) get the stacked variant. */
 .broker-list {
     list-style: none;
     padding: 0;
-    margin: 0.6em 0 1em;
+    margin: 0.4em 0 0;
 }
 
 .broker-card {
     display: flex;
-    gap: 14px;
+    flex-direction: row;
+    gap: 12px;
     align-items: stretch;
     border: 1px solid var(--accent-dim);
     background:
         linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, rgba(212, 175, 55, 0.02) 100%),
         rgba(255, 255, 255, 0.02);
-    padding: 12px;
-    margin-bottom: 12px;
+    padding: 8px;
+    margin-bottom: 8px;
     break-inside: avoid;
     page-break-inside: avoid;
 }
@@ -468,10 +472,11 @@ img {
 }
 
 .broker-portrait {
-    flex: 0 0 112px;
-    width: 112px;
-    height: 112px;
+    flex: 0 0 92px;
+    width: 92px;
+    height: 92px;
     object-fit: cover;
+    object-position: center 25%;
     border: 1px solid var(--accent-dim);
     filter: sepia(0.15);
 }
@@ -493,7 +498,7 @@ img {
 
 .broker-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 15pt;
+    font-size: 13pt;
     letter-spacing: 0.5px;
     color: var(--accent-gold);
     line-height: 1.1;
@@ -512,7 +517,7 @@ img {
     flex: 0 0 auto;
     align-self: center;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 13pt;
+    font-size: 11pt;
     letter-spacing: 0.5px;
     color: var(--accent-gold);
     white-space: nowrap;
@@ -525,11 +530,42 @@ img {
 .broker-flavor {
     font-style: italic;
     opacity: 0.85;
-    margin: 0 0 5px;
+    margin: 0 0 3px;
 }
 
 .broker-power {
     margin: 0;
+}
+
+/* Genuinely narrow phones only: stack the portrait above the text. This is
+   below the A4 preview width (~794px), so a browser preview still shows the
+   true print layout. */
+@media screen and (max-width: 600px) {
+    .broker-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .broker-portrait {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 180px;
+        object-position: center 30%;
+    }
+
+    .broker-body {
+        width: 100%;
+    }
+
+    .broker-head {
+        flex-wrap: wrap;
+        gap: 4px 10px;
+    }
+
+    .broker-fee {
+        align-self: flex-start;
+    }
 }
 
 /* --- Action Economy Box --- */
@@ -1127,7 +1163,14 @@ img {
     .table-pair > table {
         width: 100%;
     }
-    
+
+    /* Power Broker cards inherit their (print-matching) base styling; only the
+       flavor/power text needs the print text-shadow removed for crispness. */
+    .broker-flavor,
+    .broker-power {
+        text-shadow: none;
+    }
+
     .toc-container {
         column-count: 1; /* TOC looks better single column */
         page-break-after: always;
