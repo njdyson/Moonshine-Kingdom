@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+  <!-- Flat cap -->
+  <path d="M34 26 C40 18 60 18 64 26 L70 30 L30 30 Z"/>
+  <!-- Head -->
+  <circle cx="50" cy="36" r="9"/>
+  <!-- Body / coat (broad-shouldered muscle) -->
+  <path d="M32 84 L32 58 C32 50 40 46 50 46 C60 46 68 50 68 58 L68 84 L58 84 L58 64 L42 64 L42 84 Z"/>
+</svg>

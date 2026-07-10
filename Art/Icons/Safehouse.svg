@@ -1,0 +1,9 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+  <!-- Roof (filled triangle with eave) -->
+  <path d="M50 16 L88 48 L78 48 L50 25 L22 48 L12 48 Z"/>
+  <!-- House body -->
+  <path d="M24 46 L76 46 L76 84 L58 84 L58 60 L42 60 L42 84 L24 84 Z"/>
+  <!-- Window -->
+  <rect x="30" y="52" width="10" height="10"/>
+  <rect x="60" y="52" width="10" height="10"/>
+</svg>
