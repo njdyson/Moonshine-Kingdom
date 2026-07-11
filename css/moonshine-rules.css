@@ -68,8 +68,12 @@ h1, h2, h3, h4, h5 {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 
-    font-weight: 400; 
-    page-break-after: avoid; /* Keep headings attached to text below */
+    font-weight: 400;
+    /* Keep headings attached to the text below, across both page AND column breaks
+       (column-count layout would otherwise orphan a heading at a column foot). */
+    page-break-after: avoid;
+    break-after: avoid;
+    -webkit-column-break-after: avoid;
 }
 
 h1 {
@@ -174,6 +178,10 @@ ul.sub-section > li {
     margin-bottom: 3px;
     padding-top: 0;
     padding-left: 1.2em;
+    /* Keep a list item whole: don't strand its last line atop the next column. */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 ul.sub-section > li::before {
@@ -195,6 +203,10 @@ ol.sub-section > li {
     margin-bottom: 3px;
     padding-top: 0;
     padding-left: 0;
+    /* Keep a list item whole: don't strand its last line atop the next column. */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 ol.sub-section > li::before {
@@ -414,6 +426,32 @@ img {
     break-inside: avoid;
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
+}
+
+/* Hard-rule callout: for binding rules that must not read as optional "tips".
+   Crimson accent sets it apart from the gold .note (flavour / strategy). */
+.key-rule {
+    background-color: rgba(140, 26, 26, 0.12);
+    border: 1px solid #9c3b33;
+    border-left: 5px solid #9c3b33;
+    padding: 10px 12px;
+    color: #fcefd0;
+    margin: 1em 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.key-rule .rule-label {
+    display: block;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent-gold);
+    font-size: 1.2em;
+    line-height: 1.1;
+    margin-bottom: 5px;
 }
 
 .table-pair {
