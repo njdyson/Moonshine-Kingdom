@@ -90,7 +90,7 @@
       that fires a Still, preferring dice that would burn them via the Blowback if left behind; the last seat sets
       the Blowback victim). Brew Number = White + your drafted Red. Blowback Number = White + the single leftover
       Red, and burns EVERY matching Still in the city (only Runner casualties &mdash; the Still keeps running and the
-      block is held). Net $ values a Moonshine barrel at $200 and a lost Runner at $300 (Recruit).
+      block is held). Net $ values a Moonshine barrel at $200 and a lost Runner at $400 (Recruit). Crack the Whip (a Boss on a firing Still brews +1 barrel) is not modelled here.
     </p>
   </div>
 
@@ -104,7 +104,7 @@
 // v6.0: only Moonshine (Grey) is brewed; Muscle Ratio 2 at 3 Mobsters => 2 barrels brewed / 2 casualties.
 // A Still is active automatically (no Tap/Rig/cold). A Blowback only thins the crew (Runner casualties);
 // the Still keeps running and the block is held, so there is no Still-flip / re-Tap cost.
-const YIELD = 2, CAS = 2, MOON = 200, RECRUIT = 300;
+const YIELD = 2, CAS = 2, MOON = 200, RECRUIT = 400;
 const d6 = () => 1 + Math.floor(Math.random() * 6);
 
 function readConfig() {
