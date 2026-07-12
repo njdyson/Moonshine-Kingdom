@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom Brew Simulator v0.65</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #140c0c; --panel: #1f1515; --ink: #f5e9d9; --muted: #d1c2ad;
+      --gold: #d4af37; --gold-dim: #8a7329; --line: #4b3b2a;
+      --green: #8fd18f; --red: #e07070;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 24px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(212,175,55,0.10), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(212,175,55,0.08), transparent 45%),
+        var(--bg);
+      color: var(--ink); font-family: 'Raleway', sans-serif;
+    }
+    .wrap { max-width: 900px; margin: 0 auto; }
+    h1 { font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 2px; font-size: 34px; margin: 0; }
+    .subtitle { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 20px; }
+    .panel { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 16px; margin-bottom: 16px; }
+    h2 { font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 1px; font-size: 20px; margin: 0 0 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid rgba(212,175,55,0.28); padding: 5px 8px; text-align: center; }
+    th { background: rgba(212,175,55,0.18); color: var(--gold); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+    td.name { text-align: left; font-weight: 700; }
+    input[type=number] {
+      width: 62px; background: #120808; color: var(--ink); border: 1px solid var(--line);
+      border-radius: 4px; padding: 3px 5px; font-family: inherit; text-align: center;
+    }
+    select, button {
+      background: #120808; color: var(--ink); border: 1px solid var(--gold-dim);
+      border-radius: 5px; padding: 6px 12px; font-family: inherit; font-size: 13px;
+    }
+    button.run { background: var(--gold); color: #1a1208; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; }
+    button.run:hover { filter: brightness(1.1); }
+    button.ghost { cursor: pointer; }
+    button.ghost:hover { border-color: var(--gold); }
+    button.mini { padding: 2px 9px; font-size: 12px; cursor: pointer; }
+    .settings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px 18px; }
+    .fld { display: flex; flex-direction: column; gap: 4px; }
+    .fld label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
+    .fld input, .fld select { width: 100%; }
+    .presets { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .presets .lbl { font-size: 12px; color: var(--muted); align-self: center; text-transform: uppercase; letter-spacing: 0.4px; }
+    .note { font-size: 12px; color: var(--muted); line-height: 1.55; margin-top: 10px; }
+    .row-actions { display: flex; gap: 10px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
+    .kpi { border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; background: rgba(255,255,255,0.02); }
+    .kpi .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi .v { font-size: 24px; font-weight: 700; color: var(--gold); margin-top: 3px; }
+    .kpi .v.small { font-size: 18px; }
+    .verdict { margin-top: 6px; font-size: 13px; line-height: 1.5; padding: 10px 12px; border-radius: 6px; border: 1px solid var(--line); background: rgba(212,175,55,0.07); }
+    .good { color: var(--green); font-weight: 700; }
+    .bad { color: var(--red); font-weight: 700; }
+    .best { color: var(--green); font-weight: 700; }
+    .worst { color: var(--red); font-weight: 700; }
+    .bossradio { transform: scale(1.1); }
+    a { color: var(--gold); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Brew Simulator</h1>
+  <p class="subtitle">Morning Brew / Blowback Monte Carlo &middot; Rules v0.65</p>
+
+  <!-- BUILD -->
+  <div class="panel">
+    <h2>Your Build</h2>
+    <table id="buildTbl">
+      <thead>
+        <tr><th>Still</th><th>Boiler #</th><th>Mobsters</th><th>Barrels if it fires</th><th>Boss here?</th><th></th></tr>
+      </thead>
+      <tbody id="buildBody"></tbody>
+    </table>
+    <div class="row-actions">
+      <button class="ghost mini" id="addStill">+ Add Still</button>
+      <span class="note" style="margin:0;">Mobsters = the total crew at that Still (count the Boss if you park him there); this sets the Muscle Ratio (2&rarr;1, 4&rarr;2, 6&rarr;3, 8&rarr;4, 10+&rarr;5 barrels &amp; casualties). The Boss's Still brews +1 with Twist the Valves on.</span>
+    </div>
+    <div class="presets">
+      <span class="lbl">Presets:</span>
+      <button class="ghost mini" data-preset="1">1 matching</button>
+      <button class="ghost mini" data-preset="2">2 matching</button>
+      <button class="ghost mini" data-preset="3">3 matching</button>
+      <button class="ghost mini" data-preset="4">4 matching</button>
+      <button class="ghost mini" data-preset="m678">mismatched 6/7/8</button>
+      <button class="ghost mini" data-preset="m78">mismatched 7/8</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="panel">
+    <h2>The Table &amp; The Money</h2>
+    <div class="settings-grid">
+      <div class="fld"><label>Players</label>
+        <select id="players"><option>2</option><option>3</option><option selected>4</option></select></div>
+      <div class="fld"><label>Rival drafting</label>
+        <select id="contested">
+          <option value="0">Naive (random)</option>
+          <option value="1" selected>Contested (last drafter leaves your number behind)</option>
+        </select></div>
+      <div class="fld"><label>Twist the Valves (+1 on Boss's Still)</label>
+        <select id="crack"><option value="1" selected>On (current rule)</option><option value="0">Off (mechanic dropped)</option></select></div>
+      <div class="fld"><label>Boss in a Blowback</label>
+        <select id="exposed">
+          <option value="1" selected>In the firing line (Boss first)</option>
+          <option value="0">Shielded (Runners first)</option>
+        </select></div>
+      <div class="fld"><label>Barrel value $</label><input type="number" id="barrel" value="200" step="50"></div>
+      <div class="fld"><label>Recruit cost $ / Runner</label><input type="number" id="recruit" value="400" step="50"></div>
+      <div class="fld"><label>Boss loss penalty $ (tempo)</label><input type="number" id="bossCost" value="800" step="100"></div>
+      <div class="fld"><label>Days simulated</label><input type="number" id="iters" value="300000" step="50000"></div>
+    </div>
+    <div class="row-actions">
+      <button class="run" id="run">Roll the Mornings</button>
+    </div>
+    <p class="note">
+      One focal crew (your build) drafts against <em>players</em> rivals for 1 White + (players+1) Red dice, in random seat order.
+      <b>Naive</b> keeps every rival inattentive (random draft). <b>Contested</b> keeps them self-interested too, except the <em>last
+      drafter</em> plays the leave-behind: it takes a safe die and leaves a Still-bursting Red as the leftover Blowback &mdash; the exact
+      threat you draft the low token to dodge. Barrel value defaults to $200 (a conservative net after the Play cost of Unloading; a
+      Speakeasy sale is $300 gross). Losing the Boss is close to body-neutral once you <b>Rise</b> (that Play hands back 2 free Runners), so the Boss loss penalty stands in for the pure tempo: a wasted Play plus the Contract-staking you miss that morning. Set it to taste.
+    </p>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="panel" id="results" style="display:none;">
+    <h2>Your Build</h2>
+    <div class="kpi-grid" id="kpis"></div>
+    <div class="verdict" id="verdict"></div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="panel">
+    <h2>Compare the Standard Builds</h2>
+    <p class="note" style="margin-top:0;">Runs the six reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner), all matching on 7. Use it to refresh the Brew Engine guide's table for the current economy, Twist the Valves, and Blowback rules.</p>
+    <div class="row-actions"><button class="ghost" id="runCompare">Run Comparison</button></div>
+    <div id="compareOut" style="margin-top:12px;"></div>
+  </div>
+
+  <p class="note">
+    A tuning model, not the rulebook: it isolates the dawn Brew and Blowback only. Contracts, Speakeasy sales, Titles, Extort and combat all layer on top.
+    Rivals are modelled only through their drafting; their own Stills and turf are not simulated. See the <a href="Brew%20Engine%20Strategy%20v6.0.html">Brew Engine guide</a> for the strategy this measures.
+  </p>
+</div>
+
+<script>
+// ---- Muscle Ratio: barrels brewed AND casualties = ceil(mobsters/2), capped at 5 ----
+const ratio = m => Math.min(5, Math.ceil(m / 2));
+const d6 = () => 1 + Math.floor(Math.random() * 6);
+
+// ---- Build table UI ----
+const body = document.getElementById('buildBody');
+function stillRow(num, mob, boss) {
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    `<td class="idx"></td>` +
+    `<td><input type="number" class="num" min="2" max="12" value="${num}"></td>` +
+    `<td><input type="number" class="mob" min="1" max="15" value="${mob}"></td>` +
+    `<td class="yield">${ratio(mob)}</td>` +
+    `<td><input type="radio" name="bossStill" class="bossradio"></td>` +
+    `<td><button class="ghost mini rm">&times;</button></td>`;
+  tr.querySelector('.mob').addEventListener('input', e => {
+    tr.querySelector('.yield').textContent = ratio(Math.max(1, +e.target.value || 1));
+  });
+  tr.querySelector('.rm').addEventListener('click', () => { tr.remove(); reindex(); });
+  if (boss) tr.querySelector('.bossradio').checked = true;
+  body.appendChild(tr);
+  reindex();
+}
+function reindex() {
+  [...body.children].forEach((tr, i) => { tr.querySelector('.idx').textContent = i + 1; });
+}
+function loadBuild(rows, bossIdx) {
+  body.innerHTML = '';
+  rows.forEach((r, i) => stillRow(r.num, r.mob, i === bossIdx));
+}
+function readBuild() {
+  const rows = [];
+  let bossStill = -1;
+  [...body.children].forEach((tr, i) => {
+    rows.push({ num: +tr.querySelector('.num').value, mob: Math.max(1, +tr.querySelector('.mob').value || 1) });
+    if (tr.querySelector('.bossradio').checked) bossStill = i;
+  });
+  return { rows, bossStill };
+}
+document.getElementById('addStill').addEventListener('click', () => stillRow(7, 6, false));
+
+// Presets share a ~16-mobster roster (15 Runners + Boss) across the Stills,
+// so wider builds are crewed thinner -- which reproduces the "ceiling" where
+// 4 matching Stills earns LESS than 3 (thinner crews, lower Muscle Ratio each).
+const PRESETS = {
+  '1':   [{num:7,mob:16}],
+  '2':   [{num:7,mob:8},{num:7,mob:8}],
+  '3':   [{num:7,mob:6},{num:7,mob:5},{num:7,mob:5}],
+  '4':   [{num:7,mob:4},{num:7,mob:4},{num:7,mob:4},{num:7,mob:4}],
+  'm678':[{num:6,mob:6},{num:7,mob:5},{num:8,mob:5}],
+  'm78': [{num:7,mob:8},{num:8,mob:8}],
+};
+document.querySelectorAll('[data-preset]').forEach(b =>
+  b.addEventListener('click', () => loadBuild(PRESETS[b.dataset.preset], 0)));
+
+// ---- Simulation ----
+function simulate(rows, bossStill, opts, N) {
+  const boilers = rows.map(s => s.num);
+  let sumB = 0, sumNet = 0, fireDays = 0, blowDays = 0, bossLostDays = 0;
+
+  for (let t = 0; t < N; t++) {
+    const W = d6();
+    const pool = Array.from({ length: opts.players + 1 }, d6);
+    const focalSeat = Math.floor(Math.random() * opts.players);
+    // Reds (1..6) that make one of our Stills fire this morning:
+    const firing = new Set();
+    boilers.forEach(b => { const r = b - W; if (r >= 1 && r <= 6) firing.add(r); });
+    const blowsUs = r => boilers.includes(W + r); // if this Red is LEFT behind, does it burst one of ours?
+
+    let focalPick = null;
+    for (let seat = 0; seat < opts.players; seat++) {
+      const isLast = seat === opts.players - 1;
+      if (seat === focalSeat) {
+        let i = pool.findIndex(r => firing.has(r));           // grab a firing die
+        if (i < 0) i = pool.findIndex(r => blowsUs(r));        // else pull the die that would burn us
+        if (i < 0) i = 0;
+        focalPick = pool[i]; pool.splice(i, 1);
+      } else if (opts.contested && isLast) {
+        // adversarial last drafter: take a safe die, leaving a Still-bursting die behind as the Blowback
+        let i = pool.findIndex(r => !blowsUs(r));
+        if (i < 0) i = 0;
+        pool.splice(i, 1);
+      } else {
+        pool.splice(Math.floor(Math.random() * pool.length), 1); // self-interested / inattentive rival
+      }
+    }
+    const leftover = pool[0];
+    const brewNum = W + focalPick;
+    const blowNum = W + leftover;
+
+    // Brew
+    let barrels = 0, fired = false;
+    rows.forEach((s, i) => {
+      if (s.num === brewNum) {
+        fired = true;
+        let y = ratio(s.mob);
+        if (opts.crack && i === bossStill) y += 1;
+        barrels += y;
+      }
+    });
+    if (fired) fireDays++;
+    let net = barrels * opts.barrel;
+
+    // Blowback
+    let blew = false, bossLost = false;
+    rows.forEach((s, i) => {
+      if (s.num === blowNum) {
+        blew = true;
+        let cas = ratio(s.mob);
+        if (i === bossStill && opts.exposed) { bossLost = true; cas -= 1; } // Boss is first casualty
+        net -= Math.max(0, cas) * opts.recruit;
+      }
+    });
+    if (blew) blowDays++;
+    if (bossLost) { bossLostDays++; net -= opts.bossCost; }
+
+    sumB += barrels; sumNet += net;
+  }
+  return {
+    barrels: sumB / N, net: sumNet / N,
+    pFire: fireDays / N, pBlow: blowDays / N, pBossLost: bossLostDays / N,
+  };
+}
+
+function readOpts() {
+  return {
+    players: +document.getElementById('players').value,
+    contested: document.getElementById('contested').value === '1',
+    crack: document.getElementById('crack').value === '1',
+    exposed: document.getElementById('exposed').value === '1',
+    barrel: +document.getElementById('barrel').value || 0,
+    recruit: +document.getElementById('recruit').value || 0,
+    bossCost: +document.getElementById('bossCost').value || 0,
+  };
+}
+const iters = () => Math.max(2000, +document.getElementById('iters').value || 300000);
+
+document.getElementById('run').addEventListener('click', () => {
+  const { rows, bossStill } = readBuild();
+  if (!rows.length) return;
+  const opts = readOpts(), N = iters();
+  const r = simulate(rows, bossStill, opts, N);
+
+  // Value of parking the Boss = this run minus the same build with the Boss elsewhere.
+  const baseline = simulate(rows, -1, opts, N);
+  const delta = r.net - baseline.net;
+
+  const kpi = (k, v, cls) => `<div class="kpi"><div class="k">${k}</div><div class="v ${cls||''}">${v}</div></div>`;
+  document.getElementById('kpis').innerHTML =
+    kpi('Barrels / Day', r.barrels.toFixed(2)) +
+    kpi('Net $ / Day', '$' + r.net.toFixed(0)) +
+    kpi('Brew fires', (100 * r.pFire).toFixed(0) + '%', 'small') +
+    kpi('A Still blows', (100 * r.pBlow).toFixed(0) + '%', 'small') +
+    kpi('Boss lost / Day', (100 * r.pBossLost).toFixed(1) + '%', 'small') +
+    kpi('Twist the Valves &Delta;', (delta >= 0 ? '+$' : '-$') + Math.abs(delta).toFixed(0), 'small');
+
+  let msg;
+  if (bossStill < 0) {
+    msg = `No Boss parked, so Twist the Valves is idle. Park the Boss on a Still (and keep Twist the Valves on) to see what he's worth.`;
+  } else {
+    const worth = delta >= 0
+      ? `<span class="good">worth +$${delta.toFixed(0)}/Day</span>`
+      : `<span class="bad">costing $${Math.abs(delta).toFixed(0)}/Day</span>`;
+    const risk = opts.exposed
+      ? ` With the Boss in the firing line he goes down about <b>${(100 * r.pBossLost).toFixed(1)}%</b> of Days (roughly one Rise every ${r.pBossLost > 0 ? Math.round(1 / r.pBossLost) : '∞'} Days).`
+      : ` The Boss is shielded, so he never falls to a Blowback here.`;
+    msg = `Parking the Boss is ${worth} versus leaving him off the Stills.${risk}`;
+  }
+  document.getElementById('verdict').innerHTML = msg;
+  document.getElementById('results').style.display = '';
+});
+
+document.getElementById('runCompare').addEventListener('click', () => {
+  const opts = readOpts(), N = iters();
+  const builds = [
+    ['1 matching Still', PRESETS['1']],
+    ['2 matching Stills', PRESETS['2']],
+    ['3 matching Stills', PRESETS['3']],
+    ['4 matching Stills', PRESETS['4']],
+    ['3 mismatched (6/7/8)', PRESETS['m678']],
+    ['2 mismatched (7/8)', PRESETS['m78']],
+  ];
+  const results = builds.map(([name, rows]) => {
+    const r = simulate(rows, opts.crack ? 0 : -1, opts, N); // Boss on Still 1 when Twist the Valves is live
+    return { name, ...r };
+  });
+  const nets = results.map(r => r.net);
+  const hi = Math.max(...nets), lo = Math.min(...nets);
+  let html = '<table><tr><th>Build</th><th>Barrels/Day</th><th>Net $/Day</th><th>Brew fires</th><th>Boss lost/Day</th></tr>';
+  results.forEach(r => {
+    const cls = r.net === hi ? 'best' : r.net === lo ? 'worst' : '';
+    html += `<tr><td class="name">${r.name}</td><td>${r.barrels.toFixed(2)}</td>` +
+      `<td class="${cls}">$${r.net.toFixed(0)}</td><td>${(100*r.pFire).toFixed(0)}%</td>` +
+      `<td>${(100*r.pBossLost).toFixed(1)}%</td></tr>`;
+  });
+  html += '</table>';
+  document.getElementById('compareOut').innerHTML = html;
+});
+
+// ---- Boot ----
+loadBuild(PRESETS['3'], 0);
+</script>
+</body>
+</html>
