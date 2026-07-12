@@ -285,11 +285,11 @@
 
     <h2>The Numbers Behind It</h2>
     <p>
-      Below is the expected <em>net</em> take per Day &mdash; barrels sold at $200, minus the <strong>Recruit</strong> cost to replace every runner lost to Blowback &mdash; for builds you can actually assemble. "Naive" assumes a sleepy table; "Contested" assumes rivals who deny your Red and try to leave a match behind. Reality sits between them, drifting toward Contested as your stack grows more obvious.
+      Below is the expected <em>net</em> take per Day (barrels sold at $200, minus the <strong>$400 Recruit</strong> cost to replace every Runner lost to a Blowback) for builds you can actually crew with one roster. "Naive" is a sleepy table; "Contested" is a sharp one, where the last drafter leaves your Brew Number behind to burst your stack. Reality sits between them, drifting toward Contested as your stack grows more obvious.
     </p>
 
     <table>
-      <caption>Expected net $/Day by build (15 runners + Boss, brewing on 7)</caption>
+      <caption>Expected net $/Day by build, from the v0.65 Brew Simulator (a ~16-mobster roster split across the Stills, brewing on 7, barrels at $200, Recruit at $400, Boss off the Stills)</caption>
       <thead>
         <tr>
           <th class="left">Build</th>
@@ -299,17 +299,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td class="left">1 matching Still (well-crewed)</td><td>2.3</td><td>$395</td><td>$205</td></tr>
-        <tr class="win"><td class="left">2 matching Stills</td><td>2.8</td><td>$474</td><td>$245</td></tr>
-        <tr class="win"><td class="left">3 matching Stills</td><td>4.1</td><td>$711</td><td>$368</td></tr>
-        <tr><td class="left">4 matching Stills (the ceiling)</td><td>3.7</td><td>$631</td><td>$327</td></tr>
-        <tr><td class="left">3 Stills, <em>mismatched</em> 6/7/8</td><td>2.5</td><td class="bad">$257</td><td>$230</td></tr>
-        <tr><td class="left">2 Stills, mismatched 7/8</td><td>2.8</td><td>$382</td><td>$270</td></tr>
+        <tr><td class="left">1 matching Still (well-crewed)</td><td>2.3</td><td>$374</td><td>$307</td></tr>
+        <tr><td class="left">2 matching Stills</td><td>3.7</td><td>$598</td><td>$491</td></tr>
+        <tr class="win"><td class="left">3 matching Stills</td><td>4.1</td><td>$670</td><td>$555</td></tr>
+        <tr><td class="left">4 matching Stills (the ceiling)</td><td>3.7</td><td>$597</td><td>$491</td></tr>
+        <tr><td class="left">3 Stills, <em>mismatched</em> 6/7/8</td><td>2.5</td><td class="bad">$176</td><td class="bad">$14</td></tr>
+        <tr><td class="left">2 Stills, mismatched 7/8</td><td>2.8</td><td>$326</td><td>$187</td></tr>
       </tbody>
     </table>
 
     <p>
-      Two things jump out. First, <strong>matching always beats mismatching</strong> at the same runner count &mdash; the mismatched 6/7/8 build earns less <em>and</em> bleeds three times the Recruit cost, because each extra number is another Blowback trap. Second, a determined table roughly halves the clumper's take (the $711 three-stack falls to $368): denial is real, and it's why the boom can't run away with the game on its own.
+      Two things jump out. First, <strong>matching always beats mismatching</strong> at the same crew &mdash; the mismatched 6/7/8 build earns a fraction as much and bleeds far more to Blowback, because each extra number is another boiler waiting to burst. Second, a sharp table bites hardest where you're spread: leaving your number behind trims the tight three-stack only modestly ($670 to $555), but it guts a mismatched spread almost to nothing ($176 down to $14). The leftover die is a real weapon, and it's why the boom can't run away with the game on its own.
     </p>
 
     <div class="note">
@@ -359,7 +359,7 @@
     </p>
 
     <p class="disclaimer">
-      Figures are Monte Carlo estimates over the Morning Brew (Muscle Ratio production, communal Blowback, a 4-player draft), valuing a Moonshine barrel at $200 and a lost runner at the Recruit cost. <em>These figures were run at the earlier $300 Recruit; at the current $400 the loss-heavy builds (the mismatched spreads) slip a little further, but the ranking holds. Twist the Valves is not included, and adds a flat barrel to whichever build parks its Boss on the stack (at the risk of losing him first if that stack blows).</em> They isolate the dawn brew only &mdash; Contracts, Speakeasy sales, Titles, and combat all layer on top and can shift what "best" looks like in a given game.
+      Figures are Monte Carlo estimates from the v0.65 <a href="Brew%20Simulator%20v0.65.html">Brew Simulator</a> (Muscle Ratio production, communal Blowback, a 4-player draft, a ~16-mobster roster), valuing a Moonshine barrel at $200 and a lost Runner at the $400 Recruit cost, with the Boss off the Stills &mdash; so <b>Twist the Valves</b>, worth a flat barrel on top (at the risk of losing the Boss first if that stack blows), is excluded. They isolate the dawn brew only: Contracts, Speakeasy sales, Titles, Extort, and combat all layer on top and can shift what "best" looks like in a given game.
     </p>
 
   </div>
