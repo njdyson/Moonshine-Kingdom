@@ -131,7 +131,9 @@ h4 {
     font-size: 12pt;
     text-transform: uppercase;
     color: var(--accent-gold);
-    display: inline-block;
+    /* Block (not inline-block): break-after:avoid only applies to block-level
+       boxes, so an inline-block h4 would orphan at a column foot. */
+    display: block;
 }
 
 h5 {
