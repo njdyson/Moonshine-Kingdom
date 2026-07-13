@@ -116,6 +116,24 @@
     tbody tr:hover { background: rgba(212,175,55,0.05); }
 
     .name { font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+    /* Benched (potential-cut) cards: kept in the file, dimmed, revivable */
+    tr.benched td { opacity: 0.5; }
+    tr.benched:hover td { opacity: 0.85; background: rgba(217,105,79,0.05); }
+    tr.benched .name { text-decoration: line-through; text-decoration-color: rgba(217,105,79,0.6); }
+    .bench-pill {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid rgba(217,105,79,.55);
+      border-radius: 9px;
+      padding: 0 6px;
+      margin-left: 7px;
+      vertical-align: middle;
+    }
     .obj { color: var(--muted); min-width: 240px; max-width: 360px; }
     .obj b { color: var(--ink); font-weight: 600; }
     .note { color: var(--muted); font-size: 12.5px; min-width: 200px; max-width: 320px; }
@@ -148,9 +166,9 @@
       color: var(--muted);
       white-space: nowrap;
     }
-    .tag.standout { color: var(--green); border-color: rgba(111,191,115,.5); }
-    .tag.mis-tier { color: var(--red); border-color: rgba(217,105,79,.5); }
-    .tag.near-dupe, .tag.most-of-X, .tag.speak-count { color: var(--amber); border-color: rgba(224,178,60,.45); }
+    .tag.standout, .tag.pressure, .tag.opportunistic { color: var(--green); border-color: rgba(111,191,115,.5); }
+    .tag.mis-tier, .tag.last-swing { color: var(--red); border-color: rgba(217,105,79,.5); }
+    .tag.near-dupe, .tag.most-of-X, .tag.speak-count, .tag.raid-gated { color: var(--amber); border-color: rgba(224,178,60,.45); }
 
     .verdict {
       min-width: 150px;
@@ -175,68 +193,84 @@
 
 <body>
   <h1>Contract Card Review</h1>
-  <p class="sub">Moonshine Kingdom v6 deck — 53 live contracts rated for difficulty, theme &amp; novelty. Working notes for playtest tuning.</p>
+  <p class="sub">Moonshine Kingdom v0.65 deck — 48 live contracts (<b>20 Gigs · 16 Rackets · 12 Scores</b>) + 5 benched, rated for difficulty, theme &amp; novelty. Working notes for playtest tuning.</p>
 
   <div class="panel">
     <h2>How to read this</h2>
     <div class="legend">
-      <span><b>Diff</b> — how hard to actually pull off (★1 trivial → ★5 brutal)</span>
+      <span><b>Diff</b> — how hard to actually pull off <i>and hold to the deadline</i> (★1 trivial → ★5 brutal)</span>
       <span><b>Fit</b> — <span style="color:var(--green)">✓</span> matched to tier · <span style="color:var(--red)">⚠</span> mis-tuned</span>
       <span><b>Theme</b> — flavor &amp; name-to-objective fit (★1 generic → ★5 evocative)</span>
       <span><b>Nov</b> — distinctiveness within the deck (★1 duplicate → ★5 unique)</span>
     </div>
+    <p style="color:var(--muted); font-size:12.5px; margin:10px 0 0;"><b>Difficulty is holding, not reaching.</b> Cards are staked in secret, so a player can prep before starting — the real cost of a Racket (hold +1 Day) or Score (hold +2 Days) is surviving rival interference <i>while your staked Influence is locked on the card</i> (one marker returns each Reckoning). Objectives are measured on the board at the deadline (no tracking), and none rely on Reckoning order, Titles, or the exact post-Sweep mobster count. Contracts pay <b>Respect only</b> (Gig 1 · Racket 3 · Score 5) — the cash "Take" is gone.</p>
     <p style="color:var(--muted); font-size:12.5px; margin:10px 0 0;">Click any column header to sort. Use the chips to filter. The <b>Your verdict</b> column is editable and saves to this browser automatically, so you can review across multiple sittings. <a class="reset" id="resetVerdicts">[clear my verdicts]</a></p>
   </div>
 
   <div class="panel">
-    <h2>Patterns worth acting on</h2>
+    <h2>Where the deck landed <span style="font-weight:400; text-transform:none; letter-spacing:0; color:var(--muted); font-size:12px;">— v0.65 pass · target 20 / 16 / 12 (multiples of 4 for print) · benched cards kept, not deleted</span></h2>
     <div class="grid">
       <div>
-        <h3 style="color:var(--red)">Mis-tiered difficulty</h3>
+        <h3 style="color:var(--green)">Re-tiered this pass</h3>
         <ul>
-          <li><b>The Toll Booth Trap</b> (Gig) — too hard &amp; uncontrollable (needs a Boss kill)</li>
-          <li><b>Tenement Army</b> (Racket) — undertuned; overlaps Ward Boss Title</li>
-          <li><b>Black Hand Rising</b> (Score) — undertuned; subset of Five Families</li>
+          <li><b>The Big Sleep</b> Score → <b>Gig</b> — at 1 Respect it's a cheap opt-in trap rivals won't defend; fragility stops mattering.</li>
+          <li><b>Empire State</b> Gig → <b>Racket</b> — cash race now gives rivals a Day to catch up & knock you down.</li>
         </ul>
       </div>
       <div>
-        <h3 style="color:var(--amber)">"Most of resource X" ×5</h3>
+        <h3 style="color:var(--green)">Reframed as intended (not flaws)</h3>
         <ul>
-          <li>Empire State (cash) · Dutchman's Deal (moonshine)</li>
-          <li>Rum Wars (rum) · Butcher's Ledger (runners-N)</li>
-          <li>Irish Goodbye (runners) — <b>thin to ~3</b></li>
+          <li><b>Toll Booth Trap</b> — opt-in Sicilian timing play; don't have to commit.</li>
+          <li><b>Rum Wars / Dutchman's Deal</b> — Moonshine can't be brewed in Ops & Rum needs Dock Trades, so "most-X" is <i>hard</i> to flip late, not a snapshot.</li>
+          <li><b>Raid-gated</b> cards — police clear by Day 2–3 & you can Rat-and-stroll-in; timing/opportunity, not a gate.</li>
         </ul>
       </div>
       <div>
-        <h3 style="color:var(--amber)">"Control N Speakeasies" Scores ×5</h3>
+        <h3 style="color:var(--green)">Restored / merged</h3>
         <ul>
-          <li>The Cartel · The Dry Spell · The Last Call</li>
-          <li>South Side Stranglehold · King of Queens</li>
-          <li>~⅓ of the Score deck — <b>cut/merge 1–2</b></li>
+          <li><b>Insurance Job</b> — back to its real theme: hold 2 <b>low-pressure Stills</b> (dodgy claim on faulty boilers), using the board's printed pressure gauge.</li>
+          <li><b>Cutting the Product</b> absorbs <b>Market Correction</b> (benched twin).</li>
         </ul>
       </div>
       <div>
-        <h3 style="color:var(--amber)">Near-duplicate pairs</h3>
+        <h3 style="color:var(--red)">On the bench (revivable)</h3>
         <ul>
-          <li>Market Correction ≈ Cutting the Product</li>
-          <li>Sullivan Scheme ≈ South Side Stranglehold</li>
-          <li>Butcher's Ledger ≈ Irish Goodbye</li>
+          <li><b>Market Correction</b> — Rum twin of Cutting the Product</li>
+          <li><b>Tenement Army</b> — shadows Ward Boss + Union Dues</li>
+          <li><b>Last Call · South Side</b> — thinned the speak-count glut</li>
+          <li><b>Black Hand Rising</b> — subset of Five Families (revive if pushed up)</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--green)">New lever: Pressure</h3>
+        <ul>
+          <li>Printed on the map (1–6 bars): 7 = highest, 2 &amp; 12 = lowest.</li>
+          <li>Now used by <b>Insurance Job</b> (low-pressure).</li>
+          <li><b>Room to grow:</b> a high-pressure "ride the boiler" card could complement Copper Heist.</li>
         </ul>
       </div>
       <div>
         <h3 style="color:var(--green)">Standouts — leave alone</h3>
         <ul>
-          <li>The Empty Casket · Hell's Highway</li>
-          <li>The Copper Heist · The Big Sleep</li>
+          <li>The Empty Casket · Hell's Highway · The Copper Heist</li>
           <li>The Five Families · The Gatsby Run · Bathtub Chemistry</li>
+          <li>The Irish Goodbye (recut) · The Dry Spell · Big Sleep (as Gig)</li>
         </ul>
       </div>
       <div>
         <h3>Intentional ladders (fine)</h3>
         <ul>
           <li><b>Both-liquors:</b> Milk Run → Coney Island → Gatsby Run</li>
-          <li><b>Every-borough:</b> Ghosts → Black Hand → Five Families</li>
-          <li><b>Retired v6:</b> The Pipeline (needed 2 Safehouses)</li>
+          <li><b>Every-borough:</b> Ghosts → Five Families</li>
+          <li><b>Dock-rum:</b> Regatta/Quiet Drop → Cuban Prince → Dock Domination</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Order-independence — done ✓</h3>
+        <ul>
+          <li>Runner-count objectives recut (v0.65) to Sweep-stable</li>
+          <li>Borough-Deed reqs recut off Title assignment</li>
+          <li>No card reads differently pre- vs post-Sweep</li>
         </ul>
       </div>
     </div>
@@ -250,7 +284,12 @@
     <span class="chip tierchip" data-tier="Score">Scores</span>
     <span class="lbl" style="margin-left:14px;">Tag:</span>
     <span class="chip tagchip active" data-tag="all">All</span>
+    <span class="chip tagchip" data-tag="__live">Live only</span>
+    <span class="chip tagchip" data-tag="__bench">Bench only</span>
     <span class="chip tagchip" data-tag="standout">Standouts</span>
+    <span class="chip tagchip" data-tag="pressure">Pressure</span>
+    <span class="chip tagchip" data-tag="last-swing">Last-swing</span>
+    <span class="chip tagchip" data-tag="raid-gated">Raid-gated</span>
     <span class="chip tagchip" data-tag="mis-tier">Mis-tier</span>
     <span class="chip tagchip" data-tag="most-of-X">Most-of-X</span>
     <span class="chip tagchip" data-tag="speak-count">Speak-count</span>
@@ -268,7 +307,6 @@
         <th data-key="name">Card <span class="arr"></span></th>
         <th data-key="tier">Tier <span class="arr"></span></th>
         <th class="nosort">Objective</th>
-        <th data-key="take">Take <span class="arr"></span></th>
         <th data-key="diff">Diff <span class="arr"></span></th>
         <th data-key="fit">Fit <span class="arr"></span></th>
         <th data-key="theme">Theme <span class="arr"></span></th>
@@ -281,68 +319,72 @@
     <tbody id="tbody"></tbody>
   </table>
 
-  <p class="footer-note">Generated as a playtest-tuning aid · objectives reflect the v6 deck after the Safehouse fixes (Fortress Staten, Omertà's Shadow) and Dock Domination retheme · ratings are subjective design judgement, not playtested data.</p>
+  <p class="footer-note">Playtest-tuning aid · objectives reflect the v0.65 deck (Runner-count &amp; Borough-Deed recuts applied, contracts pay Respect only) · difficulty is rated as reach + hold-to-deadline against the current rules · ratings are subjective design judgement, not playtested data.</p>
 
   <script>
     const cards = [
-      // ---- GIGS ----
-      { name: "Five Points Hustle", tier: "Gig", take: 500, obj: "Control <b>Five Points</b> and hold <b>2+ Moonshine</b> there.", diff: 2, fit: true, theme: 3, nov: 3, tags: [], note: "Clean starter objective." },
-      { name: "Moonshine Express", tier: "Gig", take: 500, obj: "<b>Boss</b> in a <b>Speakeasy you Control</b> holding <b>4+ Moonshine</b>.", diff: 2, fit: true, theme: 3, nov: 2, tags: [], note: "Boss+speak+barrels template, shared with The Angel's Share (rum)." },
-      { name: "The Crimson Coup", tier: "Gig", take: 500, obj: "Control <b>3+ Districts</b> in a Borough containing a <b>Rival Safehouse</b>.", diff: 3, fit: true, theme: 3, nov: 4, tags: [], note: "Aggressive land-grab; good." },
-      { name: "Bloody Sunday", tier: "Gig", take: 500, obj: "At least <b>5 Mobsters</b> in a District <b>Connected to a rival Safehouse</b>.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Menacing siege flavor; single-district now (easy to verify). v0.65: order-independent recut off the Runner tally." },
-      { name: "Empire State", tier: "Gig", take: 500, obj: "Hold more <b>Cash</b> than any other single <b>Rival</b>.", diff: 2, fit: true, theme: 2, nov: 2, tags: ["most-of-X"], note: "Swingy. Name evokes a landmark; objective is a bankroll — weak fit." },
-      { name: "The Toll Booth Trap", tier: "Gig", take: 500, obj: "Ensure at least <b>1 rival mob</b> has <b>no Boss</b> in play.", diff: 4, fit: false, theme: 3, nov: 3, tags: ["mis-tier"], note: "Too hard & uncontrollable for a 1-day Gig — needs a Boss kill you can't always force." },
-      { name: "The Milk Run", tier: "Gig", take: 500, obj: "Hold <b>2+</b> of <b>both Moonshine and Havana Rum</b> across Districts you Control.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["both-liquors"], note: "Entry rung of the both-liquors ladder (→ Coney Island → Gatsby Run)." },
-      { name: "Rum Runner's Regatta", tier: "Gig", take: 500, obj: "Hold <b>4+ Rum</b> in <b>Dock Districts</b> you Control.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "Dock-rum cluster." },
-      { name: "High Roller", tier: "Gig", take: 500, obj: "<b>Boss</b> in <b>The Tenderloin</b> with at least <b>$2,500</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: [], note: "Gambling-district flavor lands." },
-      { name: "Union Dues", tier: "Gig", take: 500, obj: "Control <b>2+ Ward Districts</b> + <b>$1,500 Cash</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "Labor-dues theme. v0.65: recut off the Sweep-debatable Runner count onto ward control + cash." },
-      { name: "Lexington Avenue Laundry", tier: "Gig", take: 500, obj: "Hold <b>$2,500+</b> and <b>no markers</b> on the Heat Track.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "Money-laundering theme strong." },
-      { name: "The Debt Collector", tier: "Gig", take: 500, obj: "Hold <b>5+ Liquor</b> in a Borough <b>containing a rival Safehouse</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: ["rival-turf"], note: "Pairs with The Beachhead (rival-turf borough). v0.65: re-cut off Borough Deeds onto rival Safehouse." },
-      { name: "The Insurance Job", tier: "Gig", take: 500, obj: "Control a <b>Dock District</b> and a <b>Speakeasy</b> in the <b>same Borough</b>.", diff: 2, fit: true, theme: 2, nov: 3, tags: [], note: "Easy; 'insurance' theme doesn't connect to the ask." },
-      { name: "The Angel's Share", tier: "Gig", take: 500, obj: "<b>Boss</b> in a <b>Speakeasy you Control</b> holding <b>3+ Havana Rum</b>.", diff: 2, fit: true, theme: 5, nov: 2, tags: [], note: "Excellent name; mechanically the rum twin of Moonshine Express." },
-      { name: "Frame Job", tier: "Gig", take: 500, obj: "<b>0 markers</b> on the Heat Track while a single <b>Rival has 2+</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "Nicely interactive." },
-      { name: "The Quiet Drop", tier: "Gig", take: 500, obj: "<b>3+ Havana Rum</b> in a <b>Staten Island Dock</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "Dock-rum cluster; Staten flavor." },
-      { name: "Full Steam Ahead", tier: "Gig", take: 500, obj: "Control <b>3+ Districts</b>, each holding <b>2+ Moonshine</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: [], note: "Production spread." },
-      { name: "Cross-Town Switch", tier: "Gig", take: 500, obj: "<b>3+ Moonshine</b> in <b>Queens</b> and <b>3+ Rum</b> in <b>Manhattan</b>.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Distinct logistics ask." },
-      { name: "Market Correction", tier: "Gig", take: 500, obj: "<b>5+ Havana Rum</b> in a <b>single District</b>.", diff: 2, fit: true, theme: 2, nov: 2, tags: ["near-dupe"], note: "Near-twin of Cutting the Product (single-District stockpile)." },
-      { name: "Cutting the Product", tier: "Gig", take: 500, obj: "<b>6+ Moonshine</b> in a <b>single District</b> you Control.", diff: 2, fit: true, theme: 4, nov: 2, tags: ["near-dupe"], note: "Good name; near-twin of Market Correction. (Sits on the Racket print sheet.)" },
-      { name: "The Beachhead", tier: "Gig", take: 500, obj: "<b>Safehouse</b> + <b>2+ Rum</b> in one District within a Borough <b>containing a rival Safehouse</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["rival-turf"], note: "Aggressive beachhead; pairs with Debt Collector. (Sits on the Racket print sheet.) v0.65: re-cut off Borough Deeds onto rival Safehouse." },
+      // ---- GIGS (1 Day · 1 Respect · measured that same night — minimal interference window) ----
+      { name: "Five Points Hustle", tier: "Gig", obj: "Control <b>Five Points</b> and hold <b>2+ Moonshine</b> there.", diff: 2, fit: true, theme: 3, nov: 3, tags: [], note: "Clean starter. Five Points is a Manhattan Ward w/ Still 10 — easy to brew into if it's your home turf." },
+      { name: "Moonshine Express", tier: "Gig", obj: "<b>Boss</b> in a <b>Speakeasy you Control</b> holding <b>4+ Moonshine</b>.", diff: 2, fit: true, theme: 3, nov: 2, tags: [], note: "Boss+speak+barrels template, twinned with The Angel's Share (rum). 4 barrels is a real stockpile for a Gig." },
+      { name: "The Crimson Coup", tier: "Gig", obj: "Control <b>3+ Districts</b> in a Borough containing a <b>Rival Safehouse</b>.", diff: 3, fit: true, theme: 3, nov: 4, tags: [], note: "Aggressive same-day land-grab into contested turf. Reached and measured in one Operations phase — no long hold, but the interference is live combat, not a wait." },
+      { name: "Bloody Sunday", tier: "Gig", obj: "At least <b>5 Mobsters</b> in a District <b>Land-Connected to a rival Safehouse</b>.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Menacing single-district siege; Sweep-stable at exactly 5 (the Sweep floors, not raises). v0.65: 'Land-Connected' closes the Dock-waterway loophole (every Dock connects to every other by water, which would let you satisfy this from across the map) — now it demands real physical adjacency to the rival's doorstep. Massing 5 next door invites a fight, so it earns its ★3." },
+      { name: "The Toll Booth Trap", tier: "Gig", obj: "Ensure at least <b>1 rival mob</b> has <b>no Boss</b> in play.", diff: 4, fit: true, theme: 3, nov: 3, tags: ["opportunistic"], note: "Kept as a high-skill opt-in Gig (per Nick): you don't have to commit, and the play is to TIME it — stake it when a rival's Boss is already down or boxed and they can't afford to Rise (needs 2 Influence). A Sicilian excels here (Hit targets the Boss). Only 1 Respect, so the gamble is cheap. Hard, but that's the point — not a flaw." },
+      { name: "The Milk Run", tier: "Gig", obj: "Hold <b>2+</b> of <b>both Moonshine and Havana Rum</b> across Districts you Control.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["both-liquors"], note: "Entry rung of the both-liquors ladder (→ Coney Island Heist → Gatsby Run). Needs one Trade at a Dock, so slightly more setup than a pure-Moonshine Gig." },
+      { name: "Rum Runner's Regatta", tier: "Gig", obj: "Hold <b>2+ Rum</b> in <b>each of 2 Dock Districts</b> you Control.", diff: 3, fit: true, theme: 4, nov: 4, tags: ["dock-rum"], note: "v0.65: re-cut to a 2-dock SPREAD (was '4+ Rum across your Docks', which double-dipped with The Quiet Drop — one Staten pile passed both). Now it can't be met by a single stockpile, and it slots cleanly into the dock-rum ladder: Quiet Drop (1 dock, 3) → Regatta (2 docks, 2 each) → Cuban Prince (2 docks, 4 each) → Dock Domination (4 docks). ★2→★3 for the distribution." },
+      { name: "High Roller", tier: "Gig", obj: "<b>Boss</b> in <b>The Tenderloin</b> with at least <b>$2,500</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: [], note: "Fixed named district (Manhattan Speakeasy). If a rival holds the Tenderloin you must take it AND march your Boss in — the cash is the easy half." },
+      { name: "Union Dues", tier: "Gig", obj: "Control <b>2+ Ward Districts</b> + <b>$1,500 Cash</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: [], note: "Only 5 Wards exist, 1 per borough, so 2 means reaching across boroughs — meatier than it reads. Bumped ★2→★3." },
+      { name: "Lexington Avenue Laundry", tier: "Gig", obj: "Hold <b>$2,500+</b> and <b>no markers</b> on the Heat Track.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "Money-laundering theme strong. The heat-clean clause bites if you've been fighting/Extorting, but easy to plan around when staked in secret." },
+      { name: "The Debt Collector", tier: "Gig", obj: "Hold <b>5+ Liquor</b> in a Borough <b>containing a rival Safehouse</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: ["rival-turf"], note: "Pairs with The Beachhead (rival-turf borough). Stockpiling 5 barrels in a borough a rival calls home is the whole tension." },
+      { name: "The Insurance Job", tier: "Gig", obj: "Control <b>2+ Districts</b> whose Still shows <b>low pressure (2 or fewer bars)</b>.", diff: 2, fit: true, theme: 4, nov: 4, tags: ["pressure"], note: "RESTORED THEME: a fraudulent claim on 'faulty' equipment — low-pressure boilers (stills 2/3/11/12, the rare-roll numbers that almost never fire). 7 such districts exist across the map, so 2 is holdable. Uses the board's printed pressure gauge; earlier LLM pass had drifted this to a generic Dock+Speakeasy ask." },
+      { name: "The Angel's Share", tier: "Gig", obj: "<b>Boss</b> in a <b>Speakeasy you Control</b> holding <b>3+ Havana Rum</b>.", diff: 3, fit: true, theme: 5, nov: 2, tags: [], note: "Excellent name; the rum twin of Moonshine Express. Slightly harder than its Moonshine cousin — Rum needs a Trade run — so ★2→★3." },
+      { name: "Frame Job", tier: "Gig", obj: "<b>0 markers</b> on the Heat Track while a single <b>Rival has 2+</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["interactive"], note: "Nicely interactive but partly rival-dependent: you need a rival sitting on 2+ Heat at your Reckoning, which you can't fully control. Watch that it isn't dead when the table plays clean." },
+      { name: "The Quiet Drop", tier: "Gig", obj: "<b>3+ Havana Rum</b> in a <b>Staten Island Dock</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "Dock-rum cluster; Staten flavor. Staten is unowned at setup, so it's a soft target — Trade Rum at Westerleigh/Tottenville and sit." },
+      { name: "Full Steam Ahead", tier: "Gig", obj: "Control <b>3+ Districts</b>, each holding <b>2+ Moonshine</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: [], note: "Production spread across 3 blocks (6 barrels total, distributed) — the distribution is the work, not the brewing." },
+      { name: "Cross-Town Switch", tier: "Gig", obj: "<b>3+ Moonshine</b> in <b>Queens</b> and <b>3+ Rum</b> in <b>Manhattan</b>.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Distinct two-borough logistics ask; the Rum-in-Manhattan half forces a Trade + a cross-map haul." },
+      { name: "Market Correction", tier: "Gig", bench: true, obj: "<b>5+ Havana Rum</b> in a <b>single District</b>.", diff: 3, fit: true, theme: 2, nov: 2, tags: ["near-dupe"], note: "BENCHED (v0.65): merged into Cutting the Product — same single-District stockpile ask. Kept on the bench as the Rum-flavored variant in case we want to swap which liquor the survivor uses. Weaker name/theme than its twin, so it's the one that sits down." },
+      { name: "Cutting the Product", tier: "Gig", obj: "<b>6+ Moonshine</b> in a <b>single District</b> you Control.", diff: 2, fit: true, theme: 4, nov: 3, tags: [], note: "SURVIVOR of the Market Correction merge — better name, native Moonshine (no Trade needed), cleaner theme. Novelty ★2→★3 now that its near-twin is benched. The single-District stockpile Gig." },
+      { name: "The Beachhead", tier: "Gig", obj: "<b>Safehouse</b> + <b>2+ Rum</b> in one District within a Borough <b>containing a rival Safehouse</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["rival-turf"], note: "Aggressive: planting your Safehouse in a rival's borough (via Secure) then holding it. Pairs with Debt Collector." },
+      { name: "The Big Sleep", tier: "Gig", obj: "Surround a <b>rival Boss</b> so they can't move without entering <b>Hostile turf</b>.", diff: 4, fit: true, theme: 5, nov: 5, tags: ["standout", "opportunistic"], note: "MOVED Score→Gig (v0.65). At 5 Respect it was too fragile — the objective lives on a RIVAL'S board (they dodge, Rise a new Boss, a third party frees them) and snapped on the final action. At 1 Respect it becomes a low-stakes OPPORTUNITY: rivals won't defend against a Gig, so they walk into the box; if it whiffs you've lost almost nothing, and you don't have to commit. A Sicilian can time it for when the target can't afford to Rise. Brilliant theme & novelty now correctly priced." },
+      { name: "Last One Standing", tier: "Gig", obj: "Your <b>Boss</b> is in a <b>Speakeasy you Control</b>, with <b>no rival Mobster Land-Connected</b> to it.", diff: 2, fit: true, theme: 4, nov: 4, tags: ["opportunistic", "interactive"], note: "NEW (v0.65). The defensive flip side of The Big Sleep: get your Don somewhere safe and quiet. Cheap tempo/protection Gig that teaches Boss-safety; board-measurable and Land-Connected (Docks don't create a back door). Interactive — a rival can move one Runner adjacent to deny it, so it's not free. Low stakes, opportunistic." },
+      { name: "Ghost Town", tier: "Gig", obj: "Control <b>4+ Districts</b> while holding <b>fewer than 8 Mobsters total</b> on the board.", diff: 3, fit: true, theme: 4, nov: 4, tags: ["opportunistic"], note: "NEW (v0.65). The Gig-level cousin of The Empty Casket — sprawl across 4 districts on modest muscle (Safehouse-anchored blocks + lone Runners), held together by bluff. Leans on the 'expand thin, threaten' pillar. Board-measurable (count your pieces + controlled districts); the Sweep is irrelevant (it caps per-district, not total). Swingy: over-extension is punishable, which is fine at 1 Respect. Pairs with Empty Casket (Racket) as a thin-hold ladder. (Threshold <8 per Nick — <=6 was too punishing across 4 districts.)" },
+      { name: "Rat's Nest", tier: "Gig", obj: "At the deadline, a single <b>Rival</b> holds <b>3+ markers</b> on the <b>Heat Track</b>.", diff: 2, fit: true, theme: 4, nov: 3, tags: ["opportunistic", "interactive"], note: "NEW (v0.65). Weaponize the law: reward for baiting a rival into loud plays or teeing up a Raid on them. You don't need to be clean, just make someone else the most-wanted. Board-measurable (Heat Track is public, markers are owner-colored). Swing/timing caveat: Heat clears at the end of a Raid, so a Raid on the final day empties the track — part of the read. Partly rival-dependent, hence opportunistic; pairs with the Rat play." },
+      { name: "Black Hand Rising", tier: "Gig", obj: "Control at least <b>1 District</b> in <b>4 different Boroughs</b>.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["every-borough"], note: "REVIVED Score→Gig (v0.65). As a Score it was a weak subset of Five Families; as a Gig it's a fast, swingy every-borough DASH (4 of 5 boroughs, 1 district each) — the entry rung of the ladder: Black Hand (Gig, 4 boroughs, bare control) → Ghosts in the Shadows (Racket, all 5, 2 mobsters each) → Five Families (Score, all 5, stocked). Keeps its own art. Spreading into 4 boroughs on Day 1 is a real reach, and holding it is the swing." },
 
-      // ---- RACKETS ----
-      { name: "Cobble Hill Connection", tier: "Racket", take: 1500, obj: "Control <b>2+ Districts</b> in both <b>Brooklyn &amp; Queens</b>.", diff: 3, fit: true, theme: 2, nov: 3, tags: [], note: "Generic ask; real-place name." },
-      { name: "The Sullivan Scheme", tier: "Racket", take: 1500, obj: "Control <b>3+ Speakeasies</b> in <b>Brooklyn &amp; Queens</b>, and have <b>$2,000+</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: ["speak-count", "near-dupe"], note: "Region+speaks overlaps South Side Stranglehold (Score)." },
-      { name: "The Empty Casket", tier: "Racket", take: 1500, obj: "Control <b>3+ Districts</b> in a Borough while holding <b>fewer than 5 mobsters</b> there.", diff: 3, fit: true, theme: 5, nov: 5, tags: ["standout"], note: "Clever 'hold turf thin' tension; top-tier design. v0.65: re-cut off the Deed onto a 3-District control threshold." },
-      { name: "Omertà's Shadow", tier: "Racket", take: 1500, obj: "Control a <b>District</b> in <b>every Borough</b> that contains a <b>rival Boss</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: [], note: "Interactive & situational (reworked v6: dropped Safehouse requirement)." },
-      { name: "The Butcher's Ledger", tier: "Racket", take: 1500, obj: "Control <b>4+ Districts</b> North of the East River (Manhattan &amp; Bronx).", diff: 3, fit: true, theme: 3, nov: 3, tags: ["north"], note: "v0.65: recut off 'most Runners' onto northern control; now distinct from The Irish Goodbye." },
-      { name: "Coney Island Heist", tier: "Racket", take: 1500, obj: "<b>Safehouse</b> in <b>Coney Island</b> + <b>2+</b> of <b>both</b> liquors there.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["both-liquors"], note: "Mid rung of the both-liquors ladder." },
-      { name: "Fortress Staten", tier: "Racket", take: 1500, obj: "Control <b>all Staten Island</b>, with your <b>Safehouse</b> on one of its <b>Docks</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: [], note: "Distinct geographic lock (reworked v6: single Safehouse)." },
-      { name: "Ghosts in the Shadows", tier: "Racket", take: 1500, obj: "At least <b>2 mobsters</b> in <b>every Borough</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: ["every-borough"], note: "Spread cluster (→ Black Hand → Five Families)." },
-      { name: "High Spirits", tier: "Racket", take: 1500, obj: "Control a <b>High Society Speakeasy</b> + <b>4+ Rum</b> there.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Gated behind a Raid; overlaps Old Guard." },
-      { name: "Hell's Highway", tier: "Racket", take: 1500, obj: "Control a continuous chain of <b>Connected Districts</b> from <b>East Harlem to Flushing</b>.", diff: 4, fit: true, theme: 5, nov: 5, tags: ["standout"], note: "Novel sprawl objective; signature card." },
-      { name: "The Big Squeeze", tier: "Racket", take: 1500, obj: "Control <b>3+ Districts</b> in the Borough with the <b>most Liquor</b> (ties fail).", diff: 3, fit: true, theme: 3, nov: 3, tags: [], note: "Solid. v0.65: re-cut off the Deed onto a 3-District control threshold." },
-      { name: "The Dutchman's Deal", tier: "Racket", take: 1500, obj: "Hold more <b>Moonshine</b> than any single rival (ties fail).", diff: 3, fit: true, theme: 3, nov: 2, tags: ["most-of-X"], note: "'Most moonshine'; nice Dutch Schultz nod." },
-      { name: "Tenement Army", tier: "Racket", take: 1500, obj: "Control <b>3+ Ghetto Districts</b>.", diff: 2, fit: false, theme: 3, nov: 2, tags: ["mis-tier"], note: "Undertuned for a Racket; overlaps the Ward Boss Title and Union Dues." },
-      { name: "Bathtub Chemistry", tier: "Racket", take: 1500, obj: "Hold <b>10+ Moonshine</b> across Districts you Control.", diff: 3, fit: true, theme: 5, nov: 3, tags: [], note: "Great prohibition theme; big stockpile." },
-      { name: "Cuban Prince", tier: "Racket", take: 1500, obj: "Control <b>2+ Dock Districts</b> and hold <b>4+ Rum</b> in each.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "Dock-rum cluster (vs Dock Domination, Regatta)." },
-      { name: "Gentleman Jimmy's Shindig", tier: "Racket", take: 1500, obj: "Control <b>Morris Park</b> with <b>Boss</b>, <b>3+ Rum</b> there, and <b>$2,500+</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: [], note: "Characterful multi-condition." },
+      // ---- RACKETS (2 Days · 3 Respect · must survive +1 Day of interference while 2 markers stay locked on the card) ----
+      { name: "Cobble Hill Connection", tier: "Racket", obj: "Control <b>2+ Districts</b> in both <b>Brooklyn &amp; Queens</b>.", diff: 3, fit: true, theme: 2, nov: 3, tags: [], note: "4 districts across two adjacent boroughs, held for a Day. Generic ask + real-place name; the hold is the difficulty, not the reach." },
+      { name: "The Sullivan Scheme", tier: "Racket", obj: "Control <b>3+ Speakeasies</b> in <b>Brooklyn &amp; Queens</b>, and have <b>$2,000+</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: ["speak-count", "near-dupe"], note: "3 held speakeasies + a bankroll, defended a Day. Region+speaks overlaps South Side Stranglehold (Score) — see DISCUSS on the speak-count glut." },
+      { name: "The Empty Casket", tier: "Racket", obj: "Control <b>3+ Districts</b> in a Borough while holding <b>fewer than 5 mobsters</b> there.", diff: 3, fit: true, theme: 5, nov: 5, tags: ["standout"], note: "Clever 'hold turf thin' tension — you WANT to be under-defended, which makes the +1 Day hold genuinely scary. Top-tier design; leave alone." },
+      { name: "Omertà's Shadow", tier: "Racket", obj: "Control a <b>District</b> in <b>every Borough</b> that contains a <b>rival Boss</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: ["interactive"], note: "Interactive & situational — the target set is defined by where rival Bosses sit, which shifts under you daily. Strong, but partly outside your control (watch it in playtest)." },
+      { name: "The Butcher's Ledger", tier: "Racket", obj: "Control <b>4+ Districts</b> North of the East River (Manhattan &amp; Bronx).", diff: 3, fit: true, theme: 3, nov: 3, tags: ["north"], note: "4 of the 11 northern districts, held a Day. v0.65 recut off 'most Runners' → clean board check, now distinct from The Irish Goodbye." },
+      { name: "Coney Island Heist", tier: "Racket", obj: "<b>Safehouse</b> in <b>Coney Island</b> + <b>2+</b> of <b>both</b> liquors there.", diff: 3, fit: true, theme: 4, nov: 3, tags: ["both-liquors"], note: "Mid rung of the both-liquors ladder. Fixed spot (a Brooklyn Speakeasy) + a Trade run + a Secure, then hold — good escalation over The Milk Run." },
+      { name: "Fortress Staten", tier: "Racket", obj: "Control <b>all Staten Island</b>, with your <b>Safehouse</b> on one of its <b>Docks</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: [], note: "All 3 Staten districts + Safehouse on a Dock. Staten is unowned & isolated (Docks-only access), so it's takeable — but holding all 3 against a raid party for a Day is the real test. Distinct geographic lock." },
+      { name: "Ghosts in the Shadows", tier: "Racket", obj: "At least <b>2 mobsters</b> in <b>every Borough</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: ["every-borough"], note: "10 mobsters spread 2-per-borough (incl. reaching Staten) out of 15 — thin everywhere, held a Day. Mid rung of the every-borough ladder (→ Black Hand → Five Families)." },
+      { name: "High Spirits", tier: "Racket", obj: "Control a <b>High Society Speakeasy</b> + <b>4+ Rum</b> there.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["speak-count", "raid-gated"], note: "HARD-GATED: all 4 High Society joints start padlocked by Police and only open after a Raid — so this can't even begin until the board cooperates. Bumped ★3→★4 for the gate. Overlaps Old Guard." },
+      { name: "Hell's Highway", tier: "Racket", obj: "Control a continuous chain of <b>Connected Districts</b> from <b>East Harlem to Flushing</b>.", diff: 4, fit: true, theme: 5, nov: 5, tags: ["standout"], note: "Novel unbroken-chain sprawl across boroughs; any rival breaking one link mid-chain botches it, so the +1 Day hold is brutal. Signature card." },
+      { name: "The Big Squeeze", tier: "Racket", obj: "Control <b>3+ Districts</b> in the Borough with the <b>most Liquor</b> (ties fail).", diff: 3, fit: true, theme: 3, nov: 3, tags: [], note: "Solid. v0.65 recut off the Deed → clean check. The 'most Liquor borough' clause can shift under you, but you largely set it by stockpiling where you're strong." },
+      { name: "The Dutchman's Deal", tier: "Racket", obj: "Hold more <b>Moonshine</b> than any single rival (ties fail).", diff: 3, fit: true, theme: 3, nov: 2, tags: ["most-of-X"], note: "Not a last-action swing (per Nick): Moonshine CAN'T be brewed during Operations, so a rival can only shrink your lead via combat/Plunder/Raid — none of them a clean final-turn flip. You win it by out-producing in Shadows and defending the stockpile. Nice Dutch Schultz nod; the 'most-X' framing is a deliberate change of pace from turf goals." },
+      { name: "Tenement Army", tier: "Racket", bench: true, obj: "Control <b>3+ Ward Districts</b>.", diff: 3, fit: true, theme: 3, nov: 2, tags: ["mis-tier"], note: "BENCHED (v0.65): the mechanic is sound (only 5 Wards exist, so 3 spans 3 boroughs) but it shadows both the Ward Boss Title AND Union Dues — too much overlap to keep at 16 Rackets. Revive if we retheme it away from raw Ward control (e.g. Wards + a mob-strength or barrel condition)." },
+      { name: "Bathtub Chemistry", tier: "Racket", obj: "Hold <b>10+ Moonshine</b> across Districts you Control.", diff: 3, fit: true, theme: 5, nov: 3, tags: [], note: "Great prohibition theme; a 10-barrel stockpile is several days of brewing, so the hold is inherent. Fixed threshold (not a race) — good." },
+      { name: "Cuban Prince", tier: "Racket", obj: "Control <b>2+ Dock Districts</b> and hold <b>4+ Rum</b> in each.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["dock-rum"], note: "8 Rum total across 2 held Docks = a lot of Trades + defence. Top of the dock-rum cluster (vs Regatta, Dock Domination)." },
+      { name: "Gentleman Jimmy's Shindig", tier: "Racket", obj: "Control <b>Morris Park</b> with <b>Boss</b>, <b>3+ Rum</b> there, and <b>$2,500+</b>.", diff: 4, fit: true, theme: 4, nov: 4, tags: ["raid-gated"], note: "Morris Park is the Bronx HIGH SOCIETY joint (padlocked at setup) — but per Nick that's a timing/opportunity feature, not a flaw: police clear by Day 2–3, and you can Rat to empty the district and stroll in. Boss + 3 Rum + cash, held a Day. Reads as a fair, characterful ★4 once the raid-gate is treated as intended." },
+      { name: "Empire State", tier: "Racket", obj: "Hold more <b>Cash</b> than any other single <b>Rival</b>.", diff: 3, fit: true, theme: 3, nov: 3, tags: ["most-of-X"], note: "MOVED Gig→Racket (v0.65). As a Gig, rivals didn't even know they were racing and had no time to react. As a Racket (2-day hold, 3 Respect) it works: the lead is visible in players' cash stacks, rivals get a Day to catch up, and knocking you down forces you to spend/Recruit-defend — turning a passive bankroll into a contested position. Cash is semi-public, so it's playable-toward. A deliberately different, non-turf objective." },
 
-      // ---- SCORES ----
-      { name: "Harlem Shakedown", tier: "Score", take: 3000, obj: "Control <b>5+ Districts</b> in <b>Manhattan</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: [], note: "Borough domination." },
-      { name: "The Copper Heist", tier: "Score", take: 3000, obj: "Control Districts with <b>active Stills 10, 11 &amp; 12</b> (one of each).", diff: 4, fit: true, theme: 4, nov: 5, tags: ["standout"], note: "Novel still-number hunt; geography-dependent." },
-      { name: "The Dry Spell", tier: "Score", take: 3000, obj: "Control <b>4+ Speakeasies</b> while holding <b>no Heat</b>.", diff: 5, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Hard: heat discipline + 4 speaks." },
-      { name: "The Last Call", tier: "Score", take: 3000, obj: "Control <b>4+ Speakeasies</b> in <b>Manhattan and the Bronx</b>.", diff: 4, fit: true, theme: 3, nov: 2, tags: ["speak-count"], note: "Speak-count cluster." },
-      { name: "The Cartel", tier: "Score", take: 3000, obj: "Control <b>5+ Speakeasies</b> across the city.", diff: 5, fit: true, theme: 3, nov: 3, tags: ["speak-count"], note: "The base speak-count Score." },
-      { name: "Rum Wars", tier: "Score", take: 3000, obj: "Hold more <b>Havana Rum</b> than any single rival (ties fail).", diff: 3, fit: true, theme: 3, nov: 2, tags: ["most-of-X"], note: "'Most rum' template." },
-      { name: "South Side Stranglehold", tier: "Score", take: 3000, obj: "Control <b>4+ Speakeasies</b> in <b>Brooklyn &amp; Queens</b>.", diff: 4, fit: true, theme: 3, nov: 2, tags: ["speak-count", "near-dupe"], note: "Overlaps Sullivan Scheme + speak-count cluster." },
-      { name: "The Big Sleep", tier: "Score", take: 3000, obj: "Surround a <b>rival Boss</b> so they can't move without entering <b>Hostile turf</b>.", diff: 5, fit: false, theme: 5, nov: 5, tags: ["standout"], note: "Brutal & novel but very uncontrollable — can be un-completable through no fault of yours." },
-      { name: "Dock Domination", tier: "Score", take: 3000, obj: "Control <b>4+ Dock Districts</b>, each holding <b>2+ Rum</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: ["dock-rum"], note: "Reworked v6 off the Harbormaster's pure dock-count." },
-      { name: "The Irish Goodbye", tier: "Score", take: 3000, obj: "<b>5+ Mobsters</b> in each of <b>3 Districts</b>, in 3 different Boroughs.", diff: 4, fit: true, theme: 4, nov: 4, tags: ["force"], note: "v0.65: recut off 'most Runners' (last-action swing) onto a citywide show of force; order-independent and not gameable by going last." },
-      { name: "Black Hand Rising", tier: "Score", take: 3000, obj: "Control at least <b>1 District</b> in <b>every Borough</b>.", diff: 3, fit: false, theme: 3, nov: 2, tags: ["mis-tier", "every-borough", "near-dupe"], note: "Undertuned for a Score; strict subset of The Five Families." },
-      { name: "The Gatsby Run", tier: "Score", take: 3000, obj: "Hold <b>4+</b> of <b>both</b> liquors in a <b>single Borough</b>.", diff: 4, fit: true, theme: 5, nov: 3, tags: ["both-liquors"], note: "Apex of the both-liquors ladder; great name." },
-      { name: "The King of Queens", tier: "Score", take: 3000, obj: "Control <b>all 3 Speakeasies</b> in <b>Queens</b>.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Specific speak lock." },
-      { name: "The Grand Tour", tier: "Score", take: 3000, obj: "Control a <b>Standard</b> + <b>High Society Speakeasy</b> + <b>Dock</b>, all at once.", diff: 3, fit: true, theme: 4, nov: 4, tags: [], note: "Variety goal; nice change of pace." },
-      { name: "The Old Guard", tier: "Score", take: 3000, obj: "<b>High Society</b> speak w/ <b>3+ Rum</b> and a <b>Standard</b> speak w/ <b>3+ Moonshine</b>.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "Combo speak; overlaps High Spirits flavor." },
-      { name: "The Five Families", tier: "Score", take: 3000, obj: "Control a District w/ <b>2+ Moonshine</b> in <b>every Borough</b> (all five).", diff: 4, fit: true, theme: 5, nov: 4, tags: ["every-borough"], note: "Iconic; the strict, well-tuned version of Black Hand Rising." }
+      // ---- SCORES (3 Days · 5 Respect · must survive +2 Days of interference; 3 markers locked, returning 1/night — you defend while Influence-starved) ----
+      { name: "Harlem Shakedown", tier: "Score", obj: "Control <b>5+ Districts</b> in <b>Manhattan</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: [], note: "5 of Manhattan's 6 districts, held 2 Days — near-total borough domination. The hold, not the grab, is why it's a Score." },
+      { name: "The Copper Heist", tier: "Score", obj: "Control Districts with <b>active Stills 10, 11 &amp; 12</b> (one of each).", diff: 4, fit: true, theme: 4, nov: 5, tags: ["standout"], note: "Novel still-number hunt. Note: Still 12 exists at ONLY ONE district (East Harlem, Manhattan) — a hard single point of failure. Stills 10 & 11 each have two homes. Geography-locked & memorable; leave alone (but know it hinges on East Harlem)." },
+      { name: "Blow the Lid", tier: "Score", obj: "Control <b>3+ high-pressure Stills</b> (5+ bars), each holding <b>2+ Moonshine</b>.", diff: 5, fit: true, theme: 5, nov: 4, tags: ["standout", "pressure"], note: "NEW (v0.65). The high-pressure counterpart to Insurance Job's low-pressure claim. High-pressure Stills (6/7/8 = 5–6 bars) fire — and BLOW — constantly, so you brew on volatile boilers and must hold the barrels through the Blowbacks that keep threatening your crew. 8 qualifying districts exist (2 at still-6, 4 at still-7 = the raid-gated High Society joints, 2 at still-8), so it's reachable but the risk-hold is brutal. Distinct from Copper Heist (a number-hunt, not a risk-hold). Uses the pressure lever at Score stakes." },
+      { name: "The Dry Spell", tier: "Score", bench: true, obj: "Control <b>4+ Speakeasies</b> while holding <b>no Heat</b>.", diff: 5, fit: true, theme: 4, nov: 3, tags: ["speak-count"], note: "BENCHED (v0.65): too close to The Cartel — Nick prefers the Scores simple-but-hard, and a plain speak-count hold is already brutal without the heat-clean rider. Kept for revival if the heat-discipline twist is wanted later on a non-speak objective." },
+      { name: "The Last Call", tier: "Score", bench: true, obj: "Control <b>4+ Speakeasies</b> in <b>Manhattan and the Bronx</b>.", diff: 4, fit: true, theme: 3, nov: 2, tags: ["speak-count"], note: "BENCHED (v0.65): the least distinctive of the five speak-count Scores — a plain northern subset of The Cartel. Thinning the glut to 3 (Cartel/Dry Spell/King of Queens). Revive if a speak Score opens up." },
+      { name: "The Cartel", tier: "Score", obj: "Control <b>5+ Speakeasies</b> across the city.", diff: 5, fit: true, theme: 3, nov: 3, tags: ["speak-count"], note: "The base speak-count Score — the KEEP after thinning the cluster (Dry Spell, Last Call, South Side all benched). WATCH/DISCUSS: holding 5 of 12 speakeasies against rival attacks for 2 Days may be too hard even for a Score; consider softening to '4+ Speakeasies, one in every mainland Borough' — simpler, still a hard citywide hold, and gives it a distinct geographic shape rather than a raw count." },
+      { name: "Rum Wars", tier: "Score", obj: "Hold more <b>Havana Rum</b> than any single rival (ties fail).", diff: 4, fit: true, theme: 3, nov: 2, tags: ["most-of-X"], note: "Re-rated ★3→★4, fit✓ (per Nick): winning the Rum race is genuinely hard, and that's why it's a Score. You stockpile, barricade the Docks (Rum only enters via a Dock Trade), and TIME the deadline for when rivals are low on Moonshine to convert or looking elsewhere. Flipping it late costs a rival Dock access + Trades + a haul — not a one-action snap. A deliberate, defensible resource-war Score." },
+      { name: "South Side Stranglehold", tier: "Score", bench: true, obj: "Control <b>4+ Speakeasies</b> in <b>Brooklyn &amp; Queens</b>.", diff: 4, fit: true, theme: 3, nov: 2, tags: ["speak-count", "near-dupe"], note: "BENCHED (v0.65): near-dupe of the Sullivan Scheme (Racket, same Bkln+Qns speak region) — keeping both a Racket and a Score on the identical region was redundant. Sullivan stays; this sits down. Revive if Sullivan is ever cut instead." },
+      { name: "Dock Domination", tier: "Score", obj: "Control <b>4+ Dock Districts</b>, each holding <b>2+ Rum</b>.", diff: 4, fit: true, theme: 3, nov: 3, tags: ["dock-rum"], note: "4 of 8 Docks + 8 Rum spread across them, held 2 Days. Docks all interconnect by water, which cuts both ways — easy for YOU to reach, easy for rivals to raid." },
+      { name: "The Irish Goodbye", tier: "Score", obj: "<b>5+ Mobsters</b> in each of <b>3 Districts</b>, in 3 different Boroughs.", diff: 4, fit: true, theme: 4, nov: 4, tags: ["force"], note: "15 mobsters (your whole roster) locked 5/5/5 in three boroughs — Sweep-stable and order-independent. A true citywide show of force; the roster cap makes the hold razor-thin. Strong recut." },
+      { name: "The Gatsby Run", tier: "Score", obj: "Hold <b>4+</b> of <b>both</b> liquors in a <b>single Borough</b>.", diff: 4, fit: true, theme: 5, nov: 3, tags: ["both-liquors"], note: "Apex of the both-liquors ladder; great name. 8 barrels (4 Moonshine + 4 Rum via Trade) concentrated in one borough and held 2 Days." },
+      { name: "The King of Queens", tier: "Score", obj: "Control <b>all 3 Speakeasies</b> in <b>Queens</b>.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["speak-count", "raid-gated"], note: "Richmond Hill (one of the 3) is Queens' padlocked High Society joint — so this is raid-gated like High Spirits: you can't finish until a Raid opens it. Specific, thematic speak lock; note the gate in playtest." },
+      { name: "The Grand Tour", tier: "Score", obj: "Control a <b>Standard</b> + <b>High Society Speakeasy</b> + <b>Dock</b> + <b>Ward</b>, all at once.", diff: 4, fit: true, theme: 5, nov: 4, tags: ["raid-gated"], note: "Variety goal; nice change of pace from the count-Scores — now one of EACH key district type (a true 'grand tour' of the city's institutions). v0.65: added the Ward leg — 3 districts with plenty of options was too easy for a Score; 4 forced types (one raid-gated) is a proper ★4 lock. Theme ★4→★5 (the full-set concept is tighter now)." },
+      { name: "The Old Guard", tier: "Score", obj: "<b>High Society</b> speak w/ <b>3+ Rum</b> and a <b>Standard</b> speak w/ <b>3+ Moonshine</b>.", diff: 4, fit: true, theme: 4, nov: 3, tags: ["speak-count", "raid-gated"], note: "Raid-gated (needs a High Society joint open) + two stocked speakeasies of different types. Overlaps High Spirits' flavor; check the two aren't too close." },
+      { name: "The Five Families", tier: "Score", obj: "Control a District w/ <b>2+ Moonshine</b> in <b>every Borough</b> (all five).", diff: 5, fit: true, theme: 5, nov: 4, tags: ["every-borough"], note: "Iconic apex of the every-borough ladder — a stocked district in ALL FIVE boroughs (incl. isolated Staten), 10 barrels distributed, held 2 Days. This is a true ★5; the strict, well-tuned version of Black Hand Rising." }
     ];
 
     const tierOrder = { Gig: 0, Racket: 1, Score: 2 };
@@ -368,7 +410,10 @@
       const verdicts = loadVerdicts();
       let rows = cards.filter(c =>
         (curTier === "all" || c.tier === curTier) &&
-        (curTag === "all" || c.tags.includes(curTag))
+        (curTag === "all" ||
+          (curTag === "__live" ? !c.bench :
+           curTag === "__bench" ? c.bench :
+           c.tags.includes(curTag)))
       );
 
       if (sortKey) {
@@ -387,11 +432,11 @@
       tbody.innerHTML = rows.map(c => {
         const tagHtml = c.tags.map(t => '<span class="tag ' + t + '">' + t + '</span>').join('');
         const v = (verdicts[c.name] || "").replace(/"/g, '&quot;');
-        return '<tr>' +
-          '<td class="name">' + c.name + '</td>' +
+        const benchPill = c.bench ? '<span class="bench-pill">bench</span>' : '';
+        return '<tr class="' + (c.bench ? 'benched' : '') + '">' +
+          '<td class="name">' + c.name + benchPill + '</td>' +
           '<td class="tier tier-' + c.tier + '">' + c.tier + '</td>' +
           '<td class="obj">' + c.obj + '</td>' +
-          '<td class="take">$' + c.take.toLocaleString() + '</td>' +
           '<td class="' + (c.diff <= 2 ? 'lo' : '') + '">' + stars(c.diff) + '</td>' +
           '<td class="fit ' + (c.fit ? 'ok' : 'bad') + '">' + (c.fit ? '✓' : '⚠') + '</td>' +
           '<td class="' + (c.theme >= 4 ? 'theme-hi' : (c.theme <= 2 ? 'lo' : '')) + '">' + stars(c.theme) + '</td>' +
@@ -402,8 +447,13 @@
           '</tr>';
       }).join('');
 
+      const liveTotal = cards.filter(c => !c.bench).length;
+      const shownLive = rows.filter(c => !c.bench).length;
+      const shownBench = rows.length - shownLive;
       document.getElementById("count").textContent =
-        rows.length + " of " + cards.length + " contracts shown" +
+        shownLive + " live" + (shownBench ? " + " + shownBench + " benched" : "") + " shown" +
+        " · deck is " + liveTotal + " live (" +
+        ["Gig","Racket","Score"].map(t => cards.filter(c => c.tier===t && !c.bench).length + " " + t).join(" / ") + ")" +
         (curTier !== "all" ? " · " + curTier : "") + (curTag !== "all" ? " · tag: " + curTag : "");
 
       document.querySelectorAll(".verdict").forEach(el => {
