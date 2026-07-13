@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom — The Ticking Clock: A Kingpin's Guide to Contracts v0.65</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0d0005;
+      --bg-rgb: 13, 0, 5;
+      --surface: #130207;
+      --text-color: #f5e9d9;
+      --muted: #b8a888;
+      --accent-gold: #d4af37;
+      --accent-dim: #8a7329;
+      --line: rgba(212, 175, 55, 0.22);
+      --green: #6fbf73;
+      --red: #d9694f;
+      --gig: #6c9bd1;
+      --racket: #c79a4b;
+      --score: #c2603f;
+      --font-body: 'Raleway', sans-serif;
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background-color: var(--bg-color); }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      font-size: 11pt;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 54px 24px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero .eyebrow {
+      font-family: var(--font-body);
+      font-size: 10pt; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      letter-spacing: 0.05em; color: #fff; text-transform: uppercase;
+      line-height: 1; font-weight: 400; margin: 6px 0;
+    }
+    .hero .subtitle { font-style: italic; color: var(--muted); max-width: 660px; margin: 8px auto 0; }
+
+    .page {
+      width: 210mm; max-width: calc(100% - 40px);
+      margin: 36px auto; padding: 48px 60px;
+      background-color: var(--surface);
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      border: 1px solid #333;
+    }
+
+    p { margin: 0 0 1em 0; }
+    strong { color: var(--accent-gold); font-weight: 700; }
+    em { color: #fcefd0; }
+
+    h2 {
+      font-family: var(--font-display); font-size: 22pt; color: var(--accent-gold);
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 400; line-height: 1.1;
+      border-bottom: 2px solid var(--accent-gold); padding-bottom: 5px;
+      margin-top: 1.8em; margin-bottom: 0.6em;
+    }
+    h2:first-of-type { margin-top: 0; }
+    h3 {
+      font-family: var(--font-display); font-size: 15pt; color: #fff;
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 400; line-height: 1.1;
+      border-left: 4px solid var(--accent-gold); padding-left: 10px;
+      margin-top: 1.5em; margin-bottom: 0.5em;
+    }
+
+    a { color: var(--accent-gold); text-decoration: none; }
+    a:hover { text-decoration: underline; color: #e8c65a; }
+
+    ul, ol { margin: 0 0 1em 1.3em; }
+    li { margin-bottom: 0.4em; }
+
+    .lede {
+      font-size: 12.5pt; color: #fcefd0;
+      border-left: 3px solid var(--accent-dim); padding-left: 16px; margin-bottom: 1.4em;
+    }
+
+    .note {
+      background-color: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--accent-gold);
+      padding: 14px 16px; font-style: italic; color: #fcefd0;
+      margin: 1.2em 0; border-radius: 4px;
+    }
+    .note strong { font-style: normal; }
+
+    table { width: 100%; border-collapse: collapse; margin: 0.6em 0 1.2em; font-size: 10pt; }
+    caption {
+      caption-side: top; text-align: left;
+      font-family: var(--font-display); font-size: 11pt; letter-spacing: 0.5px;
+      color: var(--muted); padding-bottom: 5px;
+    }
+    th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: center; }
+    th {
+      background: rgba(212,175,55,0.14); color: var(--accent-gold);
+      font-family: var(--font-display); letter-spacing: 0.5px; font-weight: 400; font-size: 10.5pt;
+    }
+    td.left, th.left { text-align: left; }
+    tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+    .good { color: var(--green); font-weight: 700; }
+    .bad  { color: var(--red);  font-weight: 700; }
+    .win td { background: rgba(111,191,115,0.10); }
+    .tier-gig { color: var(--gig); font-weight: 700; }
+    .tier-racket { color: var(--racket); font-weight: 700; }
+    .tier-score { color: var(--score); font-weight: 700; }
+
+    .principle {
+      display: flex; gap: 14px; align-items: flex-start;
+      border: 1px solid var(--accent-dim); background: rgba(255,255,255,0.02);
+      border-radius: 4px; padding: 14px 16px; margin-bottom: 12px;
+    }
+    .principle .num {
+      font-family: var(--font-display); font-size: 26pt; line-height: 0.9;
+      color: var(--accent-gold); min-width: 34px; text-align: center;
+    }
+    .principle h4 {
+      font-family: var(--font-display); font-size: 13pt; letter-spacing: 0.5px;
+      color: #fff; font-weight: 400; margin: 0 0 3px;
+    }
+    .principle p { margin: 0; font-size: 10.5pt; }
+
+    .kingpin {
+      border: 1px solid var(--accent-gold); border-left: 5px solid var(--accent-gold);
+      background: rgba(212,175,55,0.07); padding: 12px 16px; margin: 1.2em 0; border-radius: 4px;
+    }
+    .kingpin .tag {
+      font-family: var(--font-display); letter-spacing: 1px; color: var(--accent-gold);
+      font-size: 11pt; display: block; margin-bottom: 3px;
+    }
+    .kingpin p { margin: 0; font-style: italic; color: #fcefd0; }
+
+    .choicebar { display: flex; gap: 10px; flex-wrap: wrap; margin: 0.4em 0 1.2em; }
+    .choice {
+      flex: 1 1 150px; border: 1px solid var(--accent-dim); border-radius: 4px;
+      background: rgba(255,255,255,0.02); padding: 10px 12px;
+    }
+    .choice h4 {
+      font-family: var(--font-display); font-size: 12pt; letter-spacing: 0.5px;
+      color: var(--accent-gold); font-weight: 400; margin: 0 0 4px;
+    }
+    .choice p { margin: 0; font-size: 9.6pt; }
+
+    footer { text-align: center; padding: 28px 20px; color: var(--accent-dim); font-size: 0.82rem; letter-spacing: 0.5px; }
+    .disclaimer {
+      font-size: 8.5pt; color: var(--accent-dim); font-style: italic;
+      margin-top: 2em; border-top: 1px solid var(--line); padding-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .page { width: auto; max-width: calc(100% - 24px); padding: 30px 22px; }
+      table { font-size: 9pt; } th, td { padding: 5px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="eyebrow">Moonshine Kingdom &middot; Kingpin's Guide</div>
+    <h1>The Ticking Clock</h1>
+    <p class="subtitle">Contracts are how you build a legend &mdash; but the moment you stake one, the whole table knows the job you're pulling. Winning is less about reaching the objective than about holding it while four rivals try to tear it down. Here's how to pick your jobs, and when to strike.</p>
+  </header>
+
+  <div class="page">
+
+    <p class="lede">
+      Respect wins the game, and Contracts are the surest road to it &mdash; 1, 3, or 5 of it a card. But a Contract isn't a private errand you run in a quiet corner. You draw and plan in secret; the instant you <em>stake</em>, the card goes <strong>face-up on the table</strong> and becomes a promise everyone can see. That single rule is the whole strategy: a job is not "can I reach this?" but "can I hold this, in plain sight, while the room comes for me?"
+    </p>
+
+    <h2>Staking Is a Declaration of War</h2>
+    <p>
+      When you stake a Contract in the Shadows, you place Influence markers on it equal to its deadline &mdash; <strong>1 for a Gig, 2 for a Racket, 3 for a Score</strong> &mdash; and you turn the card face-up. Now every rival knows exactly what you need and exactly when you need it. One marker peels off each Reckoning; when the last one lifts, the board is checked <em>at that instant</em>, and yesterday's turf counts for nothing.
+    </p>
+    <p>
+      This is what separates the tiers, and it isn't just the size of the ask. It's the <strong>length of the window your rivals get to wreck you</strong>:
+    </p>
+
+    <table>
+      <caption>The three tiers &mdash; what you promise, and how long you're exposed</caption>
+      <thead>
+        <tr>
+          <th class="left">Tier</th>
+          <th>Markers / Deadline</th>
+          <th>Respect</th>
+          <th>Operations phases you're exposed</th>
+          <th class="left">The real difficulty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left"><span class="tier-gig">Gig</span></td>
+          <td>1 &mdash; that Reckoning</td>
+          <td>1</td>
+          <td>1 (today's Operations)</td>
+          <td class="left">Reach it and hold it through one full turn of play &mdash; the card's public the whole time.</td>
+        </tr>
+        <tr>
+          <td class="left"><span class="tier-racket">Racket</span></td>
+          <td>2 &mdash; next Reckoning</td>
+          <td>3</td>
+          <td>2</td>
+          <td class="left">Reach it, then hold through a second Operations phase of rivals who know your plan.</td>
+        </tr>
+        <tr class="win">
+          <td class="left"><span class="tier-score">Score</span></td>
+          <td>3 &mdash; third Reckoning</td>
+          <td>5</td>
+          <td>3</td>
+          <td class="left">Hold it under fire across three Operations phases &mdash; while three markers stay locked on the card.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      You stake once, in the Shadows, and the deadline is checked at a Reckoning &mdash; so a Gig lives through <em>one</em> Operations phase before its check, a Racket <em>two</em>, a Score <em>three</em>. You only ever skip that first morning's Shadows; from then on it's essentially one, two, or three full Days of a rival's undivided attention. Even a Gig is public for a whole turn of play &mdash; there is no such thing as a job nobody can touch.
+    </p>
+
+    <div class="note">
+      <strong>A Score is not a bigger Gig.</strong> The objective is only half the price. The other half is the <em>hold</em>: three Operations phases of rivals stripping your turf, cutting your chains, and baiting your crew &mdash; all while <strong>three of your Influence markers sit frozen on the card</strong>, trickling back just one a night. You reach the objective under-funded and then defend it under-funded, across three turns of play instead of one. That squeeze, not the raw ask, is why a Score is worth five Respect. Never stake one you can't garrison.
+    </div>
+
+    <h2>The Last Token Sees the Whole Table</h2>
+    <p>
+      Staking happens in <strong>turn order</strong>, and because staked cards are public, the boss who acts <em>last</em> holds the sharpest knife in the game. Everyone ahead of you has already turned their jobs face-up. You stake into <strong>complete information</strong>: you can see every objective your rivals are chasing, how many Days each has left, and &mdash; because they've just funded their Ledgers &mdash; roughly <strong>how much Influence each has left to defend with</strong>. They committed blind to each other. You commit knowing everything.
+    </p>
+    <p>
+      That reshuffles what turn order is worth. The <a href="Brew%20Engine%20Strategy%20v6.0.html">Brew guide</a> tells you to grab the <em>low</em> token when your still-stack is fat, so you draft the Blowback and lay low last. Contracts pull the other way: the <strong>late token is a scout's seat</strong>. Which matters more depends on the Day &mdash; but when the jobs are flying, information beats initiative.
+    </p>
+
+    <h3>Three ways to play the late seat</h3>
+    <div class="choicebar">
+      <div class="choice"><h4>Counter</h4><p>A rival stakes a Score you can break &mdash; a chain to sever, a speakeasy to raid, a dock to contest. Skip your own job and spend the next Days <em>wrecking theirs</em>. Denying 5 Respect is as good as scoring it.</p></div>
+      <div class="choice"><h4>Abstain</h4><p>The board is loud and your Influence is thin. Stake <em>nothing</em>. Keep every marker liquid to defend, raid, or pounce &mdash; and make rivals wonder what you're planning while you owe no one a deadline.</p></div>
+      <div class="choice"><h4>Slip the Gig</h4><p>Rivals sink bodies and Influence into a big Score. Under that cover of darkness, quietly stake a modest Gig somewhere they aren't looking. Everyone's watching the front-page job; you pocket a quiet Respect while they brawl.</p></div>
+    </div>
+
+    <div class="note">
+      <strong>Cover of darkness.</strong> The loudest job on the table is a magnet. When two rivals lock horns over a Score &mdash; massing crews, burning Influence, drawing Heat &mdash; the corners of the map go unwatched. That is precisely the moment to stake a small, self-contained Gig you can finish tonight before anyone looks up. A legend isn't only built on front-page heists; it's built on the quiet jobs nobody bothered to stop.
+    </div>
+
+    <h2>Reading a Rival's Staked Job</h2>
+    <p>
+      A face-up Contract is a plan you get to counter. Before you commit your own Day, ask what <em>their</em> job needs &mdash; and whether it has a throat you can get a hand around:
+    </p>
+    <table>
+      <caption>What a staked rival Contract tells you &mdash; and where to cut</caption>
+      <thead>
+        <tr><th class="left">If their job needs&hellip;</th><th class="left">The weak point</th><th class="left">Your move</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left">A <strong>chain or a spread</strong> (Hell's Highway, every-borough jobs)</td>
+          <td class="left">One broken link fails the whole card</td>
+          <td class="left">Take or block a single district in the middle. Cheapest counter in the game.</td>
+        </tr>
+        <tr>
+          <td class="left">A <strong>specific district</strong> (a named speakeasy, a dock, a still-number)</td>
+          <td class="left">It can't be substituted</td>
+          <td class="left">Garrison it first, or contest it late so they can't hold it at the Deadline.</td>
+        </tr>
+        <tr>
+          <td class="left">A <strong>held stockpile</strong> (barrels, most-liquor, cash)</td>
+          <td class="left">Barrels can be Plundered or Raided; docks choked</td>
+          <td class="left">Bleed the pile down, or simply out-stack them before the check.</td>
+        </tr>
+        <tr>
+          <td class="left">A <strong>thin, wide hold</strong> (Ghost Town, Empty Casket)</td>
+          <td class="left">They're deliberately under-defended</td>
+          <td class="left">One hard Move into an unguarded block breaks it. Punish the sprawl.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Three Principles</h2>
+
+    <div class="principle">
+      <div class="num">1</div>
+      <div>
+        <h4>Stake what you can hold, not what you can reach</h4>
+        <p>The board tells you if a job is reachable; only your <em>garrison</em> tells you if it's holdable. Before you stake a Score, count the turf it rides on and ask whether a Safehouse and a couple of Runners can wall each piece across all three Operations phases &mdash; because the moment that card flips, rivals will test every one, and they get three turns of play to do it. A reachable Score you can't defend is 5 Respect handed to whoever hits you first. When in doubt, take the Racket you can fortify over the Score you can only touch.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">2</div>
+      <div>
+        <h4>Mind the frozen markers</h4>
+        <p>Staked Influence is locked &mdash; a Score buries three markers on the card, and you get just one back a night. Stake two Scores at once and you can spend the week nearly broke, unable to raid, Recruit, or fund a defence. <strong>Your staked jobs and your daily hustle draw from the same well.</strong> The made man stakes only as deep as he can still afford to fight; the greenhorn stakes a fistful of jobs and then can't defend a single one.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">3</div>
+      <div>
+        <h4>Load the deadline into a strong Day &mdash; and don't leave it to the last action</h4>
+        <p>The check happens at one instant: the Reckoning your last marker lifts. Stake so that instant lands when <em>you</em> hold the board, not when a rival's turn falls right before it. Beware jobs that swing on a single final action &mdash; a stockpile a rival can Plunder on the last turn, a chain they can cut at the death. Build a margin: reach the objective a Day early and spend the last Day <em>defending</em> it, not scrambling to complete it while the clock runs out.</p>
+      </div>
+    </div>
+
+    <h2>Which Tier, When?</h2>
+    <p>
+      There's no single best tier &mdash; the right stake reads the room, same as everything else in this town:
+    </p>
+    <table>
+      <caption>Best stake by board state</caption>
+      <thead>
+        <tr><th class="left">The board is&hellip;</th><th class="left">Lean toward&hellip;</th><th class="left">Because</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left"><strong>Quiet</strong><br>(rivals sprawled, distracted)</td>
+          <td class="left">A <span class="tier-score">Score</span>, or a Gig under cover</td>
+          <td class="left">No one's free to contest you. Bank the big Respect while the window's open.</td>
+        </tr>
+        <tr>
+          <td class="left"><strong>Contested</strong><br>(the usual grind)</td>
+          <td class="left">A <span class="tier-racket">Racket</span> you can fortify</td>
+          <td class="left">Three Respect on turf you can actually wall through two Operations phases. The workhorse stake.</td>
+        </tr>
+        <tr>
+          <td class="left"><strong>Cutthroat</strong><br>(everyone armed and watching)</td>
+          <td class="left"><span class="tier-gig">Gigs</span>, or abstain and counter</td>
+          <td class="left">Long jobs die in a knife-fight. Score fast and safe, or deny a rival's job instead.</td>
+        </tr>
+        <tr class="win">
+          <td class="left"><strong>You have the late token</strong></td>
+          <td class="left">Whatever the table just told you to</td>
+          <td class="left">Stake into their blind spot, or don't stake at all and break the job that scares you most.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The through-line: <strong>a Contract is a public promise, so stake the one you can keep in front of a hostile room &mdash; and use the late seat to promise last.</strong> The skill isn't finding the fattest job; it's reading which job you can still be holding when the clock runs out.
+    </p>
+
+    <div class="kingpin">
+      <span class="tag">Kingpin's Note</span>
+      <p>The greenhorn flips a Score face-up on Day 1, thin and proud, and spends the week watching rivals dismantle it one district at a time while his Influence sits frozen on the card. The made man drafts late, reads the table, and either quietly pockets a Gig behind someone else's war or stakes nothing at all &mdash; then spends his week cutting the one link that costs a rival five Respect. Same deck. One of them dies a legend.</p>
+    </div>
+
+    <p style="margin-top:1.6em;">
+      Pair this with the two engines that pay for it: the <a href="Brew%20Engine%20Strategy%20v6.0.html">Brew Engine guide</a> for the dawn stills, and <a href="Combat%20Strategy%20v6.0.html">The Standoff</a> for the gun that holds your turf &mdash; because a Contract is only as safe as the garrison behind it. The full deck, tier by tier, lives in the <a href="Contract%20Card%20Review.html">Contract Card Review</a>.
+    </p>
+
+    <p class="disclaimer">
+      A tactical guide to the v0.65 Contract rules: staked markers equal to the deadline (Gig 1 / Racket 2 / Score 3), one returning each Reckoning; the objective checked against the board at the instant the final marker lifts; staked cards laid face-up and public for the whole table. It isolates the Contract layer &mdash; brewing, Titles, the Commission, and combat all interact with it, and a job that looks unwise in isolation can be the right stake once the rest of the board is in view. Figures are illustrative of the rules, not simulator output.
+    </p>
+
+  </div>
+
+  <footer>
+    &#9830; Moonshine Kingdom v0.65 &mdash; The Ticking Clock &#9830;
+  </footer>
+
+</body>
+</html>
