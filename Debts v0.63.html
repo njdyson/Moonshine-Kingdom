@@ -22,8 +22,8 @@
     .favor-cards .favor-ability { color: #fff4df; font-weight: 500; }
 
     /* ===== v5.5 NPC card format (shared with Favor cards) ===== */
-    .favor-cards .card-header { min-height: 11mm; margin-bottom: 3px; padding-bottom: 2px; }
-    .favor-cards .venue { text-align: left; padding-right: 50px; font-size: 1.35em; }
+    .favor-cards .card-header { min-height: 14mm; margin-bottom: 3px; padding-bottom: 2px; }
+    .favor-cards .venue { text-align: left; padding-right: 58px; font-size: 1.35em; }
 
     .favor-cards .speakeasy-image {
       flex: 0 0 212px;
@@ -69,14 +69,18 @@
     .Jobs-content, .bonus-content { color: #fff4df; font-weight: 500; }
     .Jobs-content strong, .bonus-content strong { color: #ffffff; font-weight: 700; }
     .flair { color: #f0cf6f; font-weight: 700; }
-    .rat-card .card-header { min-height: 20mm; }
+    .rat-card .card-header { min-height: 14mm; }
     .rat-card .mission-name { padding-right: 62px; font-size: 1.75em; }
-    .rat-card .rat-penalty-badge { top: -6px; right: -6px; width: 64px; height: 64px; font-size: 34px; }
-    /* The broken-crown badge of dishonor: no Rat and no debtor is ever crowned. */
+    /* The broken-crown badge of dishonor: no Rat and no debtor is ever crowned.
+       One size and corner margin across both cards. */
     .honor-badge {
       background: url('Art/shieldNoCrown.png') center / contain no-repeat;
       border: none;
       text-indent: -9999px;
+      width: 52px;
+      height: 52px;
+      top: 2px;
+      right: 2px;
     }
     .rat-card .card-body { gap: 5px; }
     .rat-card .Jobs-content, .rat-card .bonus-content { font-size: 0.95em; line-height: 1.2; }
@@ -231,9 +235,6 @@
         </div>
       </div>
     </div>
-    <div class="card blank"></div>
-    <div class="card blank"></div>
-    <div class="card blank"></div>
   </div>
 
   <div class="page-break"></div>
@@ -243,9 +244,6 @@
     <div class="card-back rat">
       <div class="back-title-box"><h3 class="back-title">The Rat</h3></div>
     </div>
-    <div class="card-back blank"></div>
-    <div class="card-back blank"></div>
-    <div class="card-back blank"></div>
   </div>
 
 </body>
