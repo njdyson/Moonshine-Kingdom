@@ -46,15 +46,12 @@
     /* Shylock has no gold footer line: the Vig prompt sits centered at the top. */
     .favor-cards .vig-only { text-align: center; }
 
-    /* Plainer Shylock back: solid dark panel, no portrait. */
+    /* Shylock back: the stack of worn bills, title strip at the foot like the other backs.
+       (Declared after the .card-back shorthand below, which resets size/position.) */
     .favor-cards .card-back.shylock-back {
-      background: #202020;
-      background-image: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #202020 url('Art/Cash.png') center / cover no-repeat;
+      justify-content: flex-end;
     }
-    .favor-cards .card-back.shylock-back .back-title-box { width: auto; }
 
     /* ===== Rat card (unchanged styling) ===== */
     .card,
@@ -69,11 +66,11 @@
     .rat-card .card-header { min-height: 20mm; }
     .rat-card .mission-name { padding-right: 62px; font-size: 1.75em; }
     .rat-card .rat-penalty-badge { top: -6px; right: -6px; width: 64px; height: 64px; font-size: 34px; }
-    /* The black badge of dishonor: no Rat and no debtor is ever crowned. */
+    /* The broken-crown badge of dishonor: no Rat and no debtor is ever crowned. */
     .honor-badge {
-      display: flex; align-items: center; justify-content: center;
-      background: #111; border: 2px solid #e3c66a; border-radius: 50%;
-      color: #f5f0e6; font-size: 26px; line-height: 1; text-indent: 0;
+      background: url('Art/shieldNoCrown.png') center / contain no-repeat;
+      border: none;
+      text-indent: -9999px;
     }
     .rat-card .card-body { gap: 5px; }
     .rat-card .Jobs-content, .rat-card .bonus-content { font-size: 0.95em; line-height: 1.2; }
@@ -88,7 +85,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
@@ -100,7 +97,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
@@ -112,7 +109,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
@@ -124,7 +121,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
@@ -151,7 +148,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
@@ -163,7 +160,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
@@ -175,7 +172,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
@@ -187,7 +184,7 @@
         <span class="respect-badge honor-badge">&#9760;</span>
       </div></div>
       <div class="speakeasy-content">
-        <div class="speakeasy-image" style="background-image: url('Art/Shylock.png');">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
           <div class="venue-name-box cost-strip"><h3 class="venue-name-text">Beg $1,500 (1 Influence Play)</h3></div>
         </div>
         <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
