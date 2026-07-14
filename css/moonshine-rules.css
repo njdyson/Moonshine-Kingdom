@@ -269,6 +269,22 @@ tr:nth-child(even) {
     font-size: 8.5pt;
 }
 
+/* Mob Signature Plays page runs long; tighten its tables and headings to fit one page. */
+.mob-plays .action-table {
+    margin-bottom: 0.7em;
+}
+.mob-plays .action-table td {
+    padding: 4px 8px;
+}
+.mob-plays h4 {
+    margin-top: 0.5em;
+    margin-bottom: 0.15em;
+}
+.mob-plays > p {
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+}
+
 .muscle-ratio-table {
     display: grid;
     grid-template-columns: 1fr 1.45fr 1.15fr;

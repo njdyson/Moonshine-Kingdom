@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom: Mob Playbooks v0.7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    /* --- Base Styles --- */
+    body {
+      margin: 0;
+      padding: 15px;
+      background-color: #1c1c1c;
+      font-family: 'Raleway', sans-serif;
+      color: #ffffff;
+      font-size: 16px; 
+    }
+
+    .card {
+      width: 100%;
+      max-width: 140mm; 
+      height: 202mm;    
+      margin: 25px auto;
+      padding: 4mm;     
+      background-color: #2a2a2a;
+      border: 3px solid #d4af37;
+      border-radius: 8px;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .card:not(.card-back) {
+      padding: 4.5mm;
+    }
+
+    strong {
+      color: #d4af37;
+      font-weight: 700;
+    }
+
+    /* --- FRONT CARD STYLES --- */
+    .card-header {
+      text-align: center;
+      font-size: 1.35em; 
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      padding-bottom: 2px;
+      border-bottom: 2px solid #d4af37;
+      color: #d4af37;
+      flex-shrink: 0;
+    }
+
+    .playbook-subtitle {
+      font-size: 0.65em;
+      font-weight: 400;
+      display: block;
+      color: #f5e9d9;
+      margin-top: 2px;
+      text-transform: none;
+    }
+
+    .section-title {
+      font-size: 0.75em;
+      font-weight: 700;
+      margin: 4px 0 3px; 
+      padding: 4px 4px;  
+      color: #f5e9d9;
+      border-radius: 3px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 5px;
+      font-size: 0.73em;
+      color: #f5e9d9;
+      border: 1px solid #d4af37;
+    }
+
+    th,
+    td {
+      border: 1px solid #4a4a4a;
+      padding: 4px 5px;
+      text-align: left;
+      vertical-align: top;
+      color: #f5e9d9;
+      line-height: 1.35;
+    }
+
+    th {
+      background-color: #1c1c1c;
+      color: #d4af37;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    td.action-cost {
+      width: 28px; 
+      text-align: center;
+      font-weight: 700;
+      color: #d4af37;
+      border-right: 1px solid #d4af37;
+      vertical-align: middle;
+      font-size: 1.1em;
+    }
+
+    td.action-name {
+      width: 70px; 
+      font-weight: 700;
+      border-right: 1px solid #4a4a4a;
+      vertical-align: middle;
+    }
+
+    .card:not(.card-back) td {
+      padding-top: 2.5px;
+      padding-bottom: 2.5px;
+      line-height: 1.28;
+    }
+
+    tr.special-action>td {
+      background-color: rgba(240, 198, 116, 0.1);
+    }
+
+    tr.emergency-action>td {
+      background-color: rgba(130, 35, 35, 0.22);
+      border-top: 2px solid #7c2f2f;
+    }
+
+    .heat {
+      color: #f0c674;
+      font-weight: 600;
+    }
+
+    .contract-bonus {
+        color: #8da6e8;
+        font-size: 0.95em;
+    }
+
+    .icon {
+      vertical-align: text-bottom;
+      filter: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
+      width: 1.25em;
+      height: 1.25em;
+      margin: 0 2px;
+    }
+    
+    .shield-icon {
+        height: 1.3em;
+        vertical-align: text-bottom;
+        margin-left: 2px;
+    }
+
+    /* --- Mob-specific colors --- */
+    .sicilian .section-title {
+      background-color: #000000;
+      color: #eee;
+    }
+
+    .vipers .section-title {
+      background-color: #5f0000;
+    }
+
+    .knights .section-title {
+      background-color: #310158;
+    }
+
+    .irish .section-title {
+      background-color: #003600;
+    }
+
+    /* --- BACK CARD STYLES --- */
+    .card-back .back-title {
+      text-align: center;
+      font-size: 1.35em;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      padding-bottom: 0px;
+      border-bottom: 2px solid #d4af37;
+      color: #d4af37;
+      flex-shrink: 0;
+    }
+
+    .card-back .section-title {
+      margin-top: 2px;
+      background-color: #000000;
+      color: #d4af37;
+      border: 1px solid #4a4a4a;
+      margin-bottom: 2px;
+    }
+
+    /* Top Tables (Dice) */
+    .combat-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 3px;
+      flex-shrink: 0;
+    }
+
+    .combat-tables {
+      display: flex;
+      justify-content: space-between;
+      gap: 7px;
+    }
+
+    .combat-tables table {
+      width: 49%;
+      margin: 0;
+    }
+
+    .combat-tables th,
+    .combat-tables td {
+      text-align: center;
+      padding: 3px 2px;
+    }
+
+    /* --- MIDDLE SECTION (single column) --- */
+    .middle-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: 2px 0;
+      flex-grow: 1;
+    }
+
+    .combat-bonuses-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 6px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid #4a4a4a;
+      border-radius: 4px;
+      font-size: 0.72em;
+      text-align: center;
+      color: #f5e9d9;
+    }
+
+    .combat-flow-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+      margin-top: 1px;
+    }
+
+    .combat-flow-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      border: 1px solid #5a5a5a;
+      background-color: #222;
+      border-radius: 5px;
+      padding: 4px;
+    }
+
+    .flow-col-title {
+      text-align: center;
+      font-weight: 700;
+      color: #d4af37;
+      font-size: 0.78em;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding-bottom: 3px;
+      border-bottom: 1px dashed rgba(212,175,55,0.4);
+    }
+
+    .combat-flow-col .flow-step {
+      text-align: left;
+      font-size: 0.73em;
+      padding: 4px 5px;
+      line-height: 1.3;
+    }
+
+    .combat-actions-table {
+      margin: 2px 0 0;
+      font-size: 0.73em;
+    }
+
+    .combat-actions-table td {
+      padding: 4px 5px;
+      line-height: 1.35;
+    }
+
+    .combat-actions-table td.action-cost {
+      width: 28px;
+      font-size: 1.1em;
+    }
+
+    .combat-actions-table td.action-name {
+      width: 70px;
+    }
+
+    .combat-phase-header td {
+      background-color: #1c1c1c;
+      color: #d4af37;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-size: 0.95em;
+      padding: 3px 5px;
+      border-color: #d4af37;
+    }
+
+    /* Threat Table (Now in left col) */
+    .threat-bonus-table {
+      margin-top: 0;
+      margin-bottom: 4px;
+      font-size: 0.74em;
+    }
+
+    .threat-bonus-table td {
+      padding: 2px 4px;
+      vertical-align: middle;
+      border-color: #555;
+    }
+
+    /* Flowcharts */
+    .flow-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 0.74em;
+      width: 100%;
+    }
+
+    .flow-step {
+      background-color: #2e2e2e;
+      border: 1px solid #4a4a4a;
+      border-radius: 4px;
+      padding: 5px 4px;
+      text-align: center;
+      width: 100%;
+      line-height: 1.3;
+      display: block;
+    }
+    
+    .warning {
+        color: #ff6b6b;
+    }
+
+    .raid-header {
+      font-size: 0.74em;
+      text-align: center;
+      margin-bottom: 4px;
+      font-style: italic;
+      color: #ccc;
+      line-height: 1.1;
+    }
+
+    .commission-req {
+        text-align: center;
+        margin-top: 6px;
+        font-size: 0.72em;
+        font-style: italic;
+        color: #cccccc;
+    }
+
+    /* --- ENDGAME SECTION --- */
+    .endgame-section {
+      margin-top: 4px;
+      border: 1px solid #d4af37;
+      background-color: #222;
+      border-radius: 4px;
+      padding: 4px;
+      font-size: 0.74em;
+      line-height: 1.3;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .endgame-header {
+      background-color: #000000;
+      color: #d4af37;
+      border: 1px solid #4a4a4a;
+      font-weight: 700;
+      margin: 0 0 4px;
+      padding: 3px 5px;
+      border-radius: 3px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Loose Change Badge */
+    .loose-change-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 20px;
+      border-radius: 4px;
+      font-size: 0.69em;
+      text-transform: uppercase;
+      z-index: 10;
+      line-height: 1;
+      border: #d8d4b4 1px solid;
+      background-color: #525b54;
+    }
+
+    .loose-change-badge span {
+      color: #d8d4b4;
+      font-weight: 600;
+      font-size: 1.2em;
+      margin-left: 3px;
+    }
+
+
+    @media print {
+      @page {
+        size: A5;
+        padding: 4mm;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      .card {
+        border-width: 2px;
+        max-width: 140mm; 
+        height: 201mm;
+        margin: auto;
+        padding: 4mm;
+        box-shadow: none;
+        overflow: hidden;
+        page-break-after: always;
+        color: #fdfdfd !important;
+      }
+
+      .card:not(.card-back) {
+        padding: 4.5mm;
+      }
+
+      strong,
+      .card-header,
+      th,
+      td.action-cost,
+      .heat,
+      .card-back .back-title,
+      .playbook-subtitle,
+      .flow-step strong,
+      .endgame-header,
+      .contract-bonus {
+        color: #d4af37 !important;
+      }
+      
+      .warning {
+          color: #ffaaaa !important;
+      }
+
+      td,
+      .flow-step,
+      .raid-header,
+      .middle-col,
+      .endgame-section {
+        color: #fdfdfd !important;
+        border-color: #555 !important;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================== -->
+  <!-- SICILIAN SYNDICATE -->
+  <!-- ========================================== -->
+
+  <!-- Front -->
+  <div class="card sicilian">
+    <div class="loose-change-badge"><span>$5</span></div>
+    <div class="card-header">Sicilian Syndicate</div>
+    <div class="section-title">Turf Control</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Move</td>
+        <td class="action-desc">Send any number of mobsters and/or barrels to a connected district (barrels can travel alone). Rival turf: Standoff. Can't enter Police turf.</td>
+      </tr>
+    </table>
+    <div class="section-title">Black Market</div>
+    <table>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Unload</td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Extort <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+        <td class="action-desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <span class="heat">Always Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Beg</td>
+        <td class="action-desc">Take <b>$1,500</b> + a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark any time; while any is unpaid you cannot be crowned.</td>
+      </tr>
+    </table>
+    <div class="section-title">Diplomacy</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Hustle</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Rat</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</td>
+      </tr>
+    </table>
+    <div class="section-title">Empire Building</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Recruit</td>
+        <td class="action-desc">Hire Runners for $400 each, in any Ward you Control or your Safehouse District.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Secure</td>
+        <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
+      </tr>
+      <tr class="emergency-action">
+        <td class="action-cost">2</td>
+        <td class="action-name">Rise</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
+      </tr>
+    </table>
+    <div class="section-title">Signature Plays</div>
+    <table>
+      <tr class="special-action">
+        <td class="action-cost">&mdash;</td>
+        <td class="action-name">Untouchable</td>
+        <td class="action-desc"><b>Trait.</b> The precinct captains are on the payroll: the <b>Sweep</b> never thins your ranks. Your Districts may hold <b>any number of Mobsters</b> at Reckoning.</td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">2</td>
+        <td class="action-name">Hit</td>
+        <td class="action-desc">While Pinned in a rival District, initiate a <b>special attack</b>: if you score any hits, the rival <b>Boss</b> takes the first hit. <span class="heat">Heat if you kill <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">1</td>
+        <td class="action-name">Consigliere</td>
+        <td class="action-desc">Remove any 1 marker from the Heat Track. Return it to its owner's Reserves.</td>
+      </tr>
+    </table>  </div>
+
+  <!-- Sicilian Syndicate - Back -->
+  <div class="card card-back sicilian">
+    <div class="back-title">The Lowdown</div>
+    <div class="section-title">Resolution Tables</div>
+    <div class="combat-section">
+      <div class="combat-tables">
+        <table>
+          <thead>
+            <tr>
+              <th>Crew</th>
+              <th>Muscle Dice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1-2</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>3-4</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>5-6</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>7-8</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>9+</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Threat</th>
+              <th>Kill On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Level 1</td>
+              <td>5-6</td>
+            </tr>
+            <tr>
+              <td>Level 2</td>
+              <td>4-6</td>
+            </tr>
+            <tr>
+              <td>Level 3</td>
+              <td>3-6</td>
+            </tr>
+            <tr>
+              <td>Level 4</td>
+              <td>2-6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
+    <div class="middle-container">
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
+
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-step">
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+          </div>
+          <div class="flow-step">
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+          </div>
+          <div class="flow-step">
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+      </div>
+
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff: Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned: Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Open Fire</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (with any barrels they hold) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
+    </div>
+    <!-- NEW ENDGAME SECTION -->
+    <div class="endgame-section">
+      <div class="endgame-header">Winning the Game</div>
+      <strong>Titles:</strong> Borough Deeds, Ward Boss, Harbormaster &amp; Public Enemy No. 1 (most completed Contract sets) &rarr; <b>2 Respect</b> each.<br>
+      <strong>The Commission:</strong> <b>Bribe</b> ($2,500 each) to own all <b>10 Influence</b>.<br>
+      <strong>Victory:</strong> 10 Influence + <b>15 Respect</b> + honor. Tie? Most Cash.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EAST SIDE VIPERS -->
+  <!-- ========================================== -->
+
+  <!-- Front -->
+  <div class="card vipers">
+    <div class="loose-change-badge"><span>$20</span></div>
+    <div class="card-header">East Side Vipers</div>
+    <div class="section-title">Turf Control</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Move</td>
+        <td class="action-desc">Send any number of mobsters and/or barrels to a connected district (barrels can travel alone). Rival turf: Standoff. Can't enter Police turf.</td>
+      </tr>
+    </table>
+    <div class="section-title">Black Market</div>
+    <table>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Unload</td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Extort <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+        <td class="action-desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <span class="heat">Always Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Beg</td>
+        <td class="action-desc">Take <b>$1,500</b> + a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark any time; while any is unpaid you cannot be crowned.</td>
+      </tr>
+    </table>
+    <div class="section-title">Diplomacy</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Hustle</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Rat</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</td>
+      </tr>
+    </table>
+    <div class="section-title">Empire Building</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Recruit</td>
+        <td class="action-desc">Hire Runners for $400 each, in any Ward you Control or your Safehouse District.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Secure</td>
+        <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
+      </tr>
+      <tr class="emergency-action">
+        <td class="action-cost">2</td>
+        <td class="action-name">Rise</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
+      </tr>
+    </table>
+    <div class="section-title">Signature Plays</div>
+    <table>
+      <tr class="special-action">
+        <td class="action-cost">&mdash;</td>
+        <td class="action-name">Whispers</td>
+        <td class="action-desc"><b>Trait.</b> Nothing happens in this city you don't overhear first. When you <b>Hustle</b>, draw <b>3 Contracts</b> (not 2) and your <b>Hand Limit is 5</b> (not 3).</td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">1</td>
+        <td class="action-name">Stealth</td>
+        <td class="action-desc">Move up to 5 Mobsters (no liquor) into a Connected rival District. No Standoff: Occupier cannot Ambush or Fold. Must immediately Open Fire or Advance.</td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">1</td>
+        <td class="action-name">Tunnel</td>
+        <td class="action-desc">Move up to 5 Mobsters (no liquor) between your <b>Safehouse</b> District and any District you Control, either way. Can't flee combat or a Raid.</td>
+      </tr>
+    </table>  </div>
+
+  <!-- East Side Vipers - Back -->
+ <div class="card card-back vipers">
+    <div class="back-title">The Lowdown</div>
+    <div class="section-title">Resolution Tables</div>
+    <div class="combat-section">
+      <div class="combat-tables">
+        <table>
+          <thead>
+            <tr>
+              <th>Crew</th>
+              <th>Muscle Dice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1-2</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>3-4</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>5-6</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>7-8</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>9+</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Threat</th>
+              <th>Kill On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Level 1</td>
+              <td>5-6</td>
+            </tr>
+            <tr>
+              <td>Level 2</td>
+              <td>4-6</td>
+            </tr>
+            <tr>
+              <td>Level 3</td>
+              <td>3-6</td>
+            </tr>
+            <tr>
+              <td>Level 4</td>
+              <td>2-6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
+    <div class="middle-container">
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
+
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-step">
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+          </div>
+          <div class="flow-step">
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+          </div>
+          <div class="flow-step">
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+      </div>
+
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff: Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned: Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Open Fire</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (with any barrels they hold) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
+    </div>
+    <!-- NEW ENDGAME SECTION -->
+    <div class="endgame-section">
+      <div class="endgame-header">Winning the Game</div>
+      <strong>Titles:</strong> Borough Deeds, Ward Boss, Harbormaster &amp; Public Enemy No. 1 (most completed Contract sets) &rarr; <b>2 Respect</b> each.<br>
+      <strong>The Commission:</strong> <b>Bribe</b> ($2,500 each) to own all <b>10 Influence</b>.<br>
+      <strong>Victory:</strong> 10 Influence + <b>15 Respect</b> + honor. Tie? Most Cash.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- HARLEM KNIGHTS -->
+  <!-- ========================================== -->
+
+  <!-- Front -->
+  <div class="card knights">
+    <div class="loose-change-badge"><span>$50</span></div>
+    <div class="card-header">Harlem Knights</div>
+    <div class="section-title">Turf Control</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Move</td>
+        <td class="action-desc">Send any number of mobsters and/or barrels to a connected district (barrels can travel alone). Rival turf: Standoff. Can't enter Police turf.</td>
+      </tr>
+    </table>
+    <div class="section-title">Black Market</div>
+    <table>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Unload</td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Extort <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+        <td class="action-desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <span class="heat">Always Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Beg</td>
+        <td class="action-desc">Take <b>$1,500</b> + a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark any time; while any is unpaid you cannot be crowned.</td>
+      </tr>
+    </table>
+    <div class="section-title">Diplomacy</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Hustle</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Rat</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</td>
+      </tr>
+    </table>
+    <div class="section-title">Empire Building</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Recruit</td>
+        <td class="action-desc">Hire Runners for $400 each, in any Ward you Control or your Safehouse District.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Secure</td>
+        <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
+      </tr>
+      <tr class="emergency-action">
+        <td class="action-cost">2</td>
+        <td class="action-name">Rise</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
+      </tr>
+    </table>
+    <div class="section-title">Signature Plays</div>
+    <table>
+      <tr class="special-action">
+        <td class="action-cost">&mdash;</td>
+        <td class="action-name">Network</td>
+        <td class="action-desc"><b>Trait.</b> Friends on every pier from Havana to Harlem. Whenever you <b>Trade</b> at a Dock, gain <b>1 extra barrel of Havana Rum</b> free, on top of the swap.</td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">1</td>
+        <td class="action-name">Skiff</td>
+        <td class="action-desc">Move up to 5 Mobsters from a Coastal District you Control to any other Coastal District. Each may carry <b>1 barrel</b> (up to 5). Can't flee combat or a Raid.</td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">2</td>
+        <td class="action-name">Torch</td>
+        <td class="action-desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse. Rival Mobsters and liquor are unharmed. <span class="heat"><img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+    </table>  </div>
+
+  <!-- Harlem Knights - Back -->
+  <div class="card card-back knights">
+    <div class="back-title">The Lowdown</div>
+    <div class="section-title">Resolution Tables</div>
+    <div class="combat-section">
+      <div class="combat-tables">
+        <table>
+          <thead>
+            <tr>
+              <th>Crew</th>
+              <th>Muscle Dice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1-2</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>3-4</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>5-6</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>7-8</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>9+</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Threat</th>
+              <th>Kill On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Level 1</td>
+              <td>5-6</td>
+            </tr>
+            <tr>
+              <td>Level 2</td>
+              <td>4-6</td>
+            </tr>
+            <tr>
+              <td>Level 3</td>
+              <td>3-6</td>
+            </tr>
+            <tr>
+              <td>Level 4</td>
+              <td>2-6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
+    <div class="middle-container">
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
+
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-step">
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+          </div>
+          <div class="flow-step">
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+          </div>
+          <div class="flow-step">
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+      </div>
+
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff: Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned: Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Open Fire</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (with any barrels they hold) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
+    </div>
+    <!-- NEW ENDGAME SECTION -->
+    <div class="endgame-section">
+      <div class="endgame-header">Winning the Game</div>
+      <strong>Titles:</strong> Borough Deeds, Ward Boss, Harbormaster &amp; Public Enemy No. 1 (most completed Contract sets) &rarr; <b>2 Respect</b> each.<br>
+      <strong>The Commission:</strong> <b>Bribe</b> ($2,500 each) to own all <b>10 Influence</b>.<br>
+      <strong>Victory:</strong> 10 Influence + <b>15 Respect</b> + honor. Tie? Most Cash.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- HELL'S KITCHEN IRISH -->
+  <!-- ========================================== -->
+
+  <!-- Front -->
+  <div class="card irish">
+    <div class="loose-change-badge"><span>$10</span></div>
+    <div class="card-header">Hell's Kitchen Irish</div>
+    <div class="section-title">Turf Control</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Move</td>
+        <td class="action-desc">Send any number of mobsters and/or barrels to a connected district (barrels can travel alone). Rival turf: Standoff. Can't enter Police turf.</td>
+      </tr>
+    </table>
+    <div class="section-title">Black Market</div>
+    <table>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Unload</td>
+        <td class="action-desc">Sell <b>Moonshine</b> or <b>Rum</b> at a Speakeasy you Control. <b>$300/barrel</b>; <b>High Society $500/barrel</b>. Only Rum pays <b>Kickback</b> (1 spent Influence back per barrel). <span class="heat">4+ barrels: Greed Tax <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Trade</td>
+        <td class="action-desc">At a Dock you Control: swap <b>Moonshine &rarr; Havana Rum</b> 1:1.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Extort <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+        <td class="action-desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <span class="heat">Always Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Beg</td>
+        <td class="action-desc">Take <b>$1,500</b> + a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark any time; while any is unpaid you cannot be crowned.</td>
+      </tr>
+    </table>
+    <div class="section-title">Diplomacy</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Hustle</td>
+        <td class="action-desc">Draw 2 Contracts, discard to Hand Limit 3. Once per Day.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">2</td>
+        <td class="action-name">Rat</td>
+        <td class="action-desc">1+ markers on Heat Track: trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</td>
+      </tr>
+    </table>
+    <div class="section-title">Empire Building</div>
+    <table>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Recruit</td>
+        <td class="action-desc">Hire Runners for $400 each, in any Ward you Control or your Safehouse District.</td>
+      </tr>
+      <tr>
+        <td class="action-cost">1</td>
+        <td class="action-name">Secure</td>
+        <td class="action-desc">Relocate your one Safehouse to a District you Control for $500 (abandoning its old block).</td>
+      </tr>
+      <tr class="emergency-action">
+        <td class="action-cost">2</td>
+        <td class="action-name">Rise</td>
+        <td class="action-desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</td>
+      </tr>
+    </table>
+    <div class="section-title">Signature Plays</div>
+    <table>
+      <tr class="special-action">
+        <td class="action-cost">&mdash;</td>
+        <td class="action-name">Firepower</td>
+        <td class="action-desc"><b>Trait.</b> They always come heavy. When you <b>Open Fire</b> or <b>Ambush</b>, roll <b>1 extra attack die</b> (max 5). Never when defending an Open Fire.</td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">1</td>
+        <td class="action-name">Plunder</td>
+        <td class="action-desc"><b>Special Attack:</b> Roll Muscle. Each hit steals 1 liquor barrel instead of killing. Carry them away if you Advance (dropped if you Fall Back). Occupier hits still kill. No Heat.</td>
+      </tr>
+      <tr class="special-action">
+        <td class="action-cost">2</td>
+        <td class="action-name">Alchemy</td>
+        <td class="action-desc">Unload <b>Moonshine</b> in any <b>Ward</b> you Control, $300/barrel (no Kickback, no High Society price). Greed Tax still bites at 4+. <span class="heat"><img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+      </tr>
+    </table>  </div>
+
+  <!-- Hell's Kitchen Irish - Back -->
+  <div class="card card-back irish">
+    <div class="back-title">The Lowdown</div>
+    <div class="section-title">Resolution Tables</div>
+    <div class="combat-section">
+      <div class="combat-tables">
+        <table>
+          <thead>
+            <tr>
+              <th>Crew</th>
+              <th>Muscle Dice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1-2</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>3-4</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>5-6</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>7-8</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>9+</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Threat</th>
+              <th>Kill On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Level 1</td>
+              <td>5-6</td>
+            </tr>
+            <tr>
+              <td>Level 2</td>
+              <td>4-6</td>
+            </tr>
+            <tr>
+              <td>Level 3</td>
+              <td>3-6</td>
+            </tr>
+            <tr>
+              <td>Level 4</td>
+              <td>2-6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MIDDLE SECTION: SINGLE COLUMN -->
+    <div class="middle-container">
+      <div class="combat-bonuses-row">
+        <span><strong>Boss:</strong> +1 Threat</span>
+        <span><strong>Safehouse:</strong> +2 Threat as Occupier</span>
+        <span><strong>Ambush:</strong> +1 First Roll</span>
+      </div>
+
+      <div class="section-title">Combat Sequence</div>
+      <div class="combat-flow-grid">
+        <div class="combat-flow-col">
+          <div class="flow-step">
+            <strong>1. Move In</strong> - Enter the Rival District. Turn <b>Pauses</b> for the Occupier's response.
+          </div>
+          <div class="flow-step">
+            <strong>2. Standoff</strong> - Occupier picks: <b>Ambush</b>, <b>Hold Fire</b>, or <b>Fold</b>.
+          </div>
+          <div class="flow-step">
+            <strong>3. Pinned</strong> - Invader picks: <b>Open Fire</b>, <b>Advance</b>, or <b>Fall Back</b>. Until resolved.
+          </div>
+        </div>
+      </div>
+
+      <table class="combat-actions-table">
+        <tr class="combat-phase-header">
+          <td colspan="3">Standoff: Occupier's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Ambush</td>
+          <td class="action-desc">+1 Threat on the first roll. Pins the Invader.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Hold Fire</td>
+          <td class="action-desc">Pins the Invader without a fight, letting them pass through unharmed.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fold</td>
+          <td class="action-desc">Surrender the District. Abandon Safehouse and Liquor.</td>
+        </tr>
+        <tr class="combat-phase-header">
+          <td colspan="3">Pinned: Invader's Choice</td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Open Fire</td>
+          <td class="action-desc">vs Rival. Roll Muscle; both sides kill. <span class="heat">Any kills: Invader <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></span></td>
+        </tr>
+        <tr>
+          <td class="action-cost">1</td>
+          <td class="action-name">Advance</td>
+          <td class="action-desc">Move Pinned mobsters (with any barrels they hold) to a Safe Connected District.</td>
+        </tr>
+        <tr>
+          <td class="action-cost">0</td>
+          <td class="action-name">Fall Back</td>
+          <td class="action-desc">Invader only. Retreat all Pinned units to the District they came from.</td>
+        </tr>
+      </table>
+    </div>
+    <!-- NEW ENDGAME SECTION -->
+    <div class="endgame-section">
+      <div class="endgame-header">Winning the Game</div>
+      <strong>Titles:</strong> Borough Deeds, Ward Boss, Harbormaster &amp; Public Enemy No. 1 (most completed Contract sets) &rarr; <b>2 Respect</b> each.<br>
+      <strong>The Commission:</strong> <b>Bribe</b> ($2,500 each) to own all <b>10 Influence</b>.<br>
+      <strong>Victory:</strong> 10 Influence + <b>15 Respect</b> + honor. Tie? Most Cash.
+    </div>
+  </div>
+  
+</body>
+
+</html>
+
+
+
+
+
