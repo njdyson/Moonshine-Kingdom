@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonshine Kingdom — Contract Deck Fairness Audit</title>
+<style>
+  :root {
+    --bg: #141010;
+    --panel: #1d1717;
+    --panel2: #241c1c;
+    --ink: #f0e6d2;
+    --muted: #b8a888;
+    --gold: #d4af37;
+    --gold-dim: #8a7424;
+    --line: rgba(212, 175, 55, 0.22);
+    --green: #6fbf73;
+    --amber: #e0b23c;
+    --red: #d9694f;
+    --gig: #6c9bd1;
+    --racket: #c79a4b;
+    --score: #c2603f;
+    --bar-track: rgba(255,255,255,0.06);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", Raleway, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 34px 22px 80px; }
+
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+    margin: 0 0 2px;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .sub { color: var(--muted); margin: 0 0 6px; font-style: italic; }
+  .verdict-line { color: var(--ink); margin: 0 0 26px; font-size: 14.5px; }
+  .verdict-line b { color: var(--gold); }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .panel > h2 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  .panel > .lead { color: var(--muted); margin: 0 0 16px; font-size: 13px; }
+  .panel > .lead b { color: var(--ink); }
+
+  /* coverage table */
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .7px; color: var(--gold); padding: 6px 10px; border-bottom: 1px solid var(--gold-dim); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.055); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  .rowname { font-weight: 600; color: var(--ink); }
+  .rowsub { color: var(--muted); font-size: 12px; font-weight: 400; }
+
+  /* coverage bar */
+  .bar { display: flex; align-items: center; gap: 10px; min-width: 200px; }
+  .track { flex: 1; height: 9px; border-radius: 5px; background: var(--bar-track); overflow: hidden; min-width: 90px; }
+  .fill { height: 100%; border-radius: 5px; }
+  .ratio { font-variant-numeric: tabular-nums; font-size: 12.5px; min-width: 34px; text-align: right; color: var(--muted); }
+
+  .flag { display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 2px 8px; border-radius: 11px; white-space: nowrap; }
+  .flag.starved { background: rgba(217,105,79,0.16); color: var(--red); border: 1px solid rgba(217,105,79,0.4); }
+  .flag.thin { background: rgba(224,178,60,0.14); color: var(--amber); border: 1px solid rgba(224,178,60,0.38); }
+  .flag.ok { background: rgba(111,191,115,0.13); color: var(--green); border: 1px solid rgba(111,191,115,0.36); }
+
+  /* borough grid */
+  .boro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .boro {
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 12px 14px;
+  }
+  .boro .bn { font-weight: 700; color: var(--ink); font-size: 13px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline; }
+  .boro .bn .cnt { font-family: Georgia, serif; font-size: 22px; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .boro .dots { display: flex; gap: 3px; flex-wrap: wrap; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); opacity: 0.85; }
+  .dot.empty { background: var(--bar-track); }
+  .boro small { color: var(--muted); font-size: 11px; display: block; margin-top: 7px; }
+
+  /* callouts */
+  .finding { display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .finding:last-child { border-bottom: none; padding-bottom: 0; }
+  .finding .mark { font-family: Georgia, serif; font-size: 15px; font-weight: 700; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .finding.bad .mark { background: rgba(217,105,79,0.16); color: var(--red); }
+  .finding.warn .mark { background: rgba(224,178,60,0.14); color: var(--amber); }
+  .finding.good .mark { background: rgba(111,191,115,0.13); color: var(--green); }
+  .finding .body { align-self: center; }
+  .finding .body b { color: var(--ink); }
+  .finding .body .h { color: var(--gold); font-weight: 700; display: block; margin-bottom: 1px; }
+
+  /* plan */
+  .plan-row { display: grid; grid-template-columns: 84px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .plan-row:last-child { border-bottom: none; }
+  .op { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 3px 0; text-align: center; border-radius: 5px; height: fit-content; }
+  .op.add { background: rgba(111,191,115,0.14); color: var(--green); }
+  .op.swap { background: rgba(224,178,60,0.14); color: var(--amber); }
+  .op.revive { background: rgba(108,155,209,0.16); color: var(--gig); }
+  .op.keep { background: rgba(255,255,255,0.05); color: var(--muted); }
+  .plan-row .what b { color: var(--ink); }
+  .plan-row .what .card { color: var(--gold); font-weight: 700; }
+  .plan-row .what .why { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+  .tier-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .tier-tag.gig { background: rgba(108,155,209,0.18); color: var(--gig); }
+  .tier-tag.racket { background: rgba(199,154,75,0.2); color: var(--racket); }
+  .tier-tag.score { background: rgba(194,96,63,0.2); color: var(--score); }
+
+  .note-box { background: var(--panel2); border-left: 3px solid var(--gold-dim); border-radius: 4px; padding: 12px 15px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .note-box b { color: var(--ink); }
+
+  .foot { color: var(--muted); font-size: 12px; margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--line); font-style: italic; }
+
+  @media (max-width: 560px) {
+    .finding { grid-template-columns: 1fr; }
+    .plan-row { grid-template-columns: 1fr; gap: 6px; }
+    .op { width: fit-content; padding: 3px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Contract Deck &mdash; Fairness Audit</h1>
+  <p class="sub">Does the deck reward the board evenly, or does it hide an edge for players who&rsquo;ve memorised it?</p>
+  <p class="verdict-line">Verdict: the deck is <b>not board-fair</b>. Speakeasies are well covered &mdash; the real gaps are a <b>Ward drought</b> and a lopsided <b>borough spread</b> (Manhattan &amp; Queens rich, the Bronx thin). Companion to the <em>Contract Card Review</em>; live deck = 52 contracts (24&nbsp;Gig / 16&nbsp;Racket / 12&nbsp;Score), target 20&nbsp;/&nbsp;16&nbsp;/&nbsp;12.</p>
+
+  <!-- ================= WHY THIS MATTERS ================= -->
+  <div class="panel">
+    <h2>The principle being tested</h2>
+    <p class="lead">A contract deck should read as a <b>fair map of the board</b>. If it systematically prizes some turf over others, a player who has learned the deck gains an edge invisible to a newcomer &mdash; they grab the turf they <em>know</em> pays, while the table can&rsquo;t see why they&rsquo;re winning. Even coverage keeps the hidden information honest. Measured that way, &ldquo;is the deck Speakeasy-heavy?&rdquo; is the wrong question. The right one is: <b>does every district-type and every borough get its fair share of objectives?</b></p>
+  </div>
+
+  <!-- ================= DISTRICT-TYPE COVERAGE ================= -->
+  <div class="panel">
+    <h2>Coverage by district type</h2>
+    <p class="lead">Contracts that reward a district type, divided by how many of that type sit on the board. <b>~0.75&ndash;1.0 per district is healthy;</b> far below that is dead turf.</p>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>District type</th>
+          <th class="num">On board</th>
+          <th class="num">Contracts</th>
+          <th style="width:230px;">Per&ndash;district coverage</th>
+          <th>Read</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rowname">Speakeasy</span></td>
+          <td class="num">8</td>
+          <td class="num">8</td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:100%;background:var(--green);"></div></div><span class="ratio">1.00</span></div></td>
+          <td><span class="flag ok">Well covered</span></td>
+        </tr>
+        <tr>
+          <td><span class="rowname">High Society</span></td>
+          <td class="num">4</td>
+          <td class="num">3</td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:75%;background:var(--green);"></div></div><span class="ratio">0.75</span></div></td>
+          <td><span class="flag ok">Healthy</span></td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Dock</span></td>
+          <td class="num">8</td>
+          <td class="num">5</td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:63%;background:var(--amber);"></div></div><span class="ratio">0.63</span></div></td>
+          <td><span class="flag ok">Fine (rich ladder)</span></td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Ward</span> <span class="rowsub">&mdash; the drought</span></td>
+          <td class="num">5</td>
+          <td class="num">2</td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:40%;background:var(--red);"></div></div><span class="ratio">0.40</span></div></td>
+          <td><span class="flag starved">Starved</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note-box"><b>Only two live contracts touch Wards</b> &mdash; Union Dues (2+ Wards + cash) and Tenement Army, and Tenement Army is <em>benched</em>. So functionally the five Ward districts share <b>one</b> live objective. A deck-reader knows Ward turf barely pays; a newcomer garrisons it and wonders why it never scores. This is the sharpest fairness leak in the deck.</div>
+  </div>
+
+  <!-- ================= BOROUGH COVERAGE ================= -->
+  <div class="panel">
+    <h2>Coverage by borough</h2>
+    <p class="lead">How many live contracts name or land on each borough (a card can touch more than one). Every borough holds <b>5 districts</b>, so a fair deck spreads roughly evenly &mdash; it doesn&rsquo;t.</p>
+    <div class="boro-grid">
+      <div class="boro">
+        <div class="bn"><span>Manhattan</span><span class="cnt">6</span></div>
+        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <small>Richest &mdash; Harlem, Butcher&rsquo;s Ledger, Hell&rsquo;s Highway&hellip;</small>
+      </div>
+      <div class="boro">
+        <div class="bn"><span>Queens</span><span class="cnt">5</span></div>
+        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <small>King of Queens, Sullivan, Cobble Hill, Hell&rsquo;s Highway&hellip;</small>
+      </div>
+      <div class="boro">
+        <div class="bn"><span>Brooklyn</span><span class="cnt">3</span></div>
+        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <small>Cobble Hill, Coney Island, Sullivan.</small>
+      </div>
+      <div class="boro">
+        <div class="bn"><span>Staten Island</span><span class="cnt">2</span></div>
+        <div class="dots"><span class="dot"></span><span class="dot"></span></div>
+        <small>Quiet Drop, Fortress Staten &mdash; fine for 3 districts.</small>
+      </div>
+      <div class="boro">
+        <div class="bn" style="color:var(--red);"><span>The Bronx</span><span class="cnt" style="color:var(--red);">2</span></div>
+        <div class="dots"><span class="dot" style="background:var(--red);"></span><span class="dot" style="background:var(--red);"></span><span class="dot empty"></span><span class="dot empty"></span><span class="dot empty"></span></div>
+        <small style="color:var(--amber);">Thin &mdash; only Butcher&rsquo;s Ledger &amp; Gentleman Jimmy touch it.</small>
+      </div>
+    </div>
+    <div class="note-box">Manhattan and Queens carry <b>11 of the borough-named objectives between them</b>; the Bronx has 2, both shared with other boroughs. A player who knows this leans their whole empire toward Queens and Manhattan turf. Staten Island&rsquo;s low count is fair (only 3 districts, no Speakeasy/HS); <b>the Bronx is the genuine outlier.</b></div>
+  </div>
+
+  <!-- ================= WHAT'S ALREADY RIGHT ================= -->
+  <div class="panel">
+    <h2>What the deck already gets right</h2>
+    <div class="finding good">
+      <div class="mark">&#10003;</div>
+      <div class="body"><span class="h">Speakeasies are not the problem</span>The stated worry &mdash; &ldquo;dive bars are dead turf&rdquo; &mdash; isn&rsquo;t a <em>contract</em> problem. Speakeasies are the best-covered type on the board (King of Queens, The Cartel, Sullivan, plus 3 benched speak-count cards held in reserve). The v0.65 pass even <b>thinned a &ldquo;speak-count glut.&rdquo;</b> Adding more would re-create it.</div>
+    </div>
+    <div class="finding good">
+      <div class="mark">&#10003;</div>
+      <div class="body"><span class="h">The symmetric-set instinct is already in the deck</span>Your &ldquo;King of X for every borough&rdquo; idea matches an existing design language: the <b>Every-borough ladder</b> (Ghosts in the Shadows &rarr; The Five Families) and the <b>Dock-rum ladder</b> (Regatta / Quiet Drop &rarr; Cuban Prince &rarr; Dock Domination). Board-symmetric sets are a tool the deck already uses &mdash; just not yet for Wards.</div>
+    </div>
+    <div class="finding warn">
+      <div class="mark">!</div>
+      <div class="body"><span class="h">The deck is 4 Gigs over target</span>24 live Gigs against a target of 20. That&rsquo;s <b>swap budget</b> &mdash; we can fix the Ward/Bronx gaps by <em>replacing</em> weak or duplicated Gigs, not only by adding, so the deck lands back on its clean 20&nbsp;/&nbsp;16&nbsp;/&nbsp;12 print count.</div>
+    </div>
+  </div>
+
+  <!-- ================= THE PLAN ================= -->
+  <div class="panel">
+    <h2>Rebalance plan &mdash; toward a board-fair deck</h2>
+    <p class="lead">Fix the two real leaks (Ward drought, Bronx thinness) using the Gig overage as budget. Nothing on the Review&rsquo;s <b>&ldquo;leave alone&rdquo;</b> list is touched. Net count returns to <b>20&nbsp;/&nbsp;16&nbsp;/&nbsp;12</b>.</p>
+
+    <div class="plan-row">
+      <div class="op add">Add</div>
+      <div class="what">
+        <span class="card">The Ward Heeler</span><span class="tier-tag gig">Gig</span> &mdash; <b>Control 2+ Ward Districts holding 2+ Moonshine each.</b>
+        <div class="why">A cheap, early reason to hold Wards &mdash; the tier the drought is worst at. Distinct from Union Dues (cash) and the benched Tenement Army (raw count) by asking for product on the turf. Lifts Ward coverage 0.40&nbsp;&rarr;&nbsp;0.60.</div>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <div class="op add">Add</div>
+      <div class="what">
+        <span class="card">Boss of the Bronx</span><span class="tier-tag racket">Racket</span> &mdash; <b>Control 3+ Districts in the Bronx.</b>
+        <div class="why">Directly answers the borough outlier &mdash; gives the Bronx a home objective the way Harlem Shakedown does for Manhattan. Borough-anchored, mid-tier, no turf-type overlap.</div>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <div class="op swap">Swap</div>
+      <div class="what">
+        Retire <b>Black Hand Rising</b><span class="tier-tag gig">Gig</span> <span class="why" style="display:inline;">(Review flags it a &ldquo;subset of Five Families&rdquo;)</span> to make room for The Ward Heeler.
+        <div class="why">Removes a near-duplicate, funds the Ward add, moves toward the 20-Gig target. Keep it on the bench (revivable).</div>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <div class="op swap">Swap</div>
+      <div class="what">
+        Bench one of the <b>3 surplus Gigs</b> flagged in the Review to hit 20 exactly &mdash; candidate: a second Heat-only or Cash-only Gig (Frame Job / Rat&rsquo;s Nest / Lexington overlap).
+        <div class="why">Trims the over-count without touching turf coverage. Pick the least distinctive per the Review&rsquo;s ratings.</div>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <div class="op keep">Hold</div>
+      <div class="what">
+        <b>Do NOT add more Speakeasy cards.</b>
+        <div class="why">Already at 1.0/district and a glut was deliberately thinned. If dive bars still feel dead in play, the fix is the <em>Night Mayor Title</em> or a turf perk &mdash; not more contracts.</div>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <div class="op revive">Option</div>
+      <div class="what">
+        The full <b>&ldquo;King of X&rdquo; borough-symmetric set</b> (Manhattan / Bronx / Brooklyn to match King of Queens)
+        <div class="why">Tempting for symmetry, but it would push Speakeasy coverage well past 1.0 and re-glut the speak-count cluster. <b>Only pursue if you convert the archetype away from Speakeasies</b> &mdash; e.g. &ldquo;Control all Districts of one <em>type</em> in Borough X&rdquo; &mdash; so each borough card rewards different turf. Parked as a bigger redesign, not this pass.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= COVERAGE AFTER ================= -->
+  <div class="panel">
+    <h2>Coverage after the plan</h2>
+    <p class="lead">The two adds close the gaps without disturbing what works.</p>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Type / Borough</th><th style="width:180px;">Before</th><th style="width:180px;">After</th><th>Change</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rowname">Ward</span> <span class="rowsub">coverage</span></td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:40%;background:var(--red);"></div></div><span class="ratio">0.40</span></div></td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:60%;background:var(--amber);"></div></div><span class="ratio">0.60</span></div></td>
+          <td><span class="flag ok">Drought eased</span></td>
+        </tr>
+        <tr>
+          <td><span class="rowname">The Bronx</span> <span class="rowsub">contracts</span></td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:33%;background:var(--red);"></div></div><span class="ratio">2</span></div></td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:50%;background:var(--amber);"></div></div><span class="ratio">3</span></div></td>
+          <td><span class="flag ok">Outlier fixed</span></td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Speakeasy</span> <span class="rowsub">coverage</span></td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:100%;background:var(--green);"></div></div><span class="ratio">1.00</span></div></td>
+          <td><div class="bar"><div class="track"><div class="fill" style="width:100%;background:var(--green);"></div></div><span class="ratio">1.00</span></div></td>
+          <td><span class="flag ok">Unchanged (good)</span></td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Deck count</span> <span class="rowsub">Gig / Racket / Score</span></td>
+          <td><span class="ratio" style="min-width:0;">24 / 16 / 12</span></td>
+          <td><span class="ratio" style="min-width:0;">20 / 17 / 12</span></td>
+          <td><span class="flag thin">Racket +1 &mdash; retune to 16</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note-box"><b>One loose end to settle:</b> Boss of the Bronx as a Racket pushes Rackets to 17. Either bench a weak existing Racket (the Review flags <em>Empire State</em> and <em>Cobble Hill</em> as candidates) to hold 16, or make Boss of the Bronx a <b>Gig</b> instead &mdash; which also lifts the low-tier count where the Bronx and Wards both need early pull. <b>Recommendation: make it a Gig</b>, so both adds land at the tier the drought actually bites.</div>
+  </div>
+
+  <p class="foot">Data parsed from the live-and-benched card set in <b>Contract Card Review</b> (v0.65, 52 live / 5 benched). Coverage = objective-mentions per board district; a card touching several types counts in each. &ldquo;Leave alone&rdquo; standouts and intentional ladders per the Review were held untouched. Proposed card names &amp; objectives are drafts for tuning, not final wording.</p>
+
+</div>
+</body>
+</html>
