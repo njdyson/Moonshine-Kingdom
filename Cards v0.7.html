@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cards v0.7 &mdash; Deeds, Titles &amp; Debts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/cards.css">
+  <style>
+    /* ===================================================================
+       Merged card sheet: Borough Deeds + the four Titles (from Titles
+       v0.65) and the Debt deck, Shylock's Mark + the Rat (from Debts
+       v0.63). Contracts stay in their own file. Debt-card styles are
+       scoped to .debt so they never bleed onto the Title/Deed cards.
+       =================================================================== */
+
+    /* ---- Titles & Borough Deeds ---- */
+    .title-card .card-header {
+      min-height: 14mm;
+      margin-bottom: 5px;
+      padding: 2px 2px 1px;
+    }
+    .title-card .mission-name {
+      margin: 2px;
+      margin-top: 3px;
+      font-size: 1.35em;
+    }
+    .title-card .borough-content {
+      justify-content: flex-start;
+    }
+    /* Full-height art under the title bar (no footer text). */
+    .title-card .borough-image {
+      flex: 1 1 auto;
+      width: auto;
+      margin-bottom: 0;
+    }
+    .title-card .respect-badge[data-respect="2"] {
+      background-image: url('Art/shield2-unified.png');
+    }
+
+    /* ---- Debt cards: Shylock's Mark (shared v5.5 NPC format) ---- */
+    .card.debt,
+    .card-back.debt {
+      background-color: #202020;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    .card.debt .speakeasy-image { filter: brightness(1.1) contrast(1.08) saturate(1.04); }
+    .card.debt .venue-name-box,
+    .card.debt .back-title-box,
+    .card-back.debt .back-title-box { background: rgba(32, 32, 32, 0.9); border-color: #e3c66a; }
+    .card.debt .venue,
+    .card.debt .venue-name-text,
+    .card.debt .back-title,
+    .card-back.debt .back-title { color: #f0cf6f; }
+    .card.debt .favor-ability { color: #fff4df; font-weight: 500; }
+
+    .card.debt .card-header { min-height: 14mm; margin-bottom: 3px; padding-bottom: 2px; }
+    .card.debt .venue { text-align: left; padding-right: 58px; font-size: 1.35em; }
+
+    .card.debt .speakeasy-image {
+      flex: 0 0 212px;
+      min-height: 212px;
+      margin-bottom: 2px;
+      background-position: center top;
+    }
+
+    .card.debt .favor-ability {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 4px;
+      font-size: 0.78em;
+      line-height: 1.13;
+    }
+    .card.debt .favor-ability b { color: #f0cf6f; font-weight: 700; }
+    /* The Vig sits vertically centred under the portrait, no-crown clause on its own line. */
+    .card.debt .vig-only {
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .card.debt .vig-only b:last-child {
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* Shylock back: worn bills, title strip at the foot like the other backs. */
+    .card-back.debt.shylock-back {
+      background: #202020 url('Art/Cash.png') center / cover no-repeat;
+      justify-content: flex-end;
+    }
+
+    /* ---- The Rat ---- */
+    .card-back.debt.rat { background-size: contain; background-color: #202020; background-position: center center; filter: brightness(1.1) contrast(1.08) saturate(1.04); }
+    .card.debt .Job-header, .card.debt .bonus-header { color: #f0cf6f; }
+    .card.debt .Jobs-content, .card.debt .bonus-content { color: #fff4df; font-weight: 500; }
+    .card.debt .Jobs-content strong, .card.debt .bonus-content strong { color: #ffffff; font-weight: 700; }
+    .card.debt .flair { color: #f0cf6f; font-weight: 700; }
+    .rat-card .card-header { min-height: 14mm; }
+    .rat-card .mission-name { padding-right: 62px; font-size: 1.75em; }
+    /* The broken-crown badge of dishonor: no Rat and no debtor is ever crowned.
+       Same size/offset as the Contract deck's respect badges. */
+    .honor-badge {
+      background: url('Art/shieldNoCrown.png') center / contain no-repeat;
+      border: none;
+      text-indent: -9999px;
+      width: 50px;
+      height: 50px;
+      top: -2px;
+      right: -2px;
+    }
+    .rat-card .card-body { gap: 5px; }
+    .rat-card .Jobs-content, .rat-card .bonus-content { font-size: 0.95em; line-height: 1.2; }
+  </style>
+</head>
+
+<body>
+
+  <!-- =============================================================
+       SHEET A: four Borough Deeds (mainland)
+       ============================================================= -->
+  <div class="page">
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Manhattan</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Manhattan.png');"></div>
+      </div>
+    </div>
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">The Bronx</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Bronx.png');"></div>
+      </div>
+    </div>
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Queens</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Queens.png');"></div>
+      </div>
+    </div>
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Brooklyn</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Brooklyn.png');"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">BOROUGH DEED</h3></div></div>
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">BOROUGH DEED</h3></div></div>
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">BOROUGH DEED</h3></div></div>
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">BOROUGH DEED</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- =============================================================
+       SHEET B: Staten Island deed + three Titles
+       ============================================================= -->
+  <div class="page">
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Staten Island</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Boroughs/Staten.png');"></div>
+      </div>
+    </div>
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Ward Boss</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Ward.png');"></div>
+      </div>
+    </div>
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Harbormaster</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Bridge.png');"></div>
+      </div>
+    </div>
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Night Mayor</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Mayor.png');"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back borough-back"><div class="back-title-box"><h3 class="back-title">BOROUGH DEED</h3></div></div>
+    <div class="card-back ghetto-back"><div class="back-title-box"><h3 class="back-title">WARD BOSS</h3></div></div>
+    <div class="card-back dock-back"><div class="back-title-box"><h3 class="back-title">HARBORMASTER</h3></div></div>
+    <div class="card-back nightmayor-back"><div class="back-title-box"><h3 class="back-title">NIGHT MAYOR</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- =============================================================
+       SHEET C: the two orphan singles (Public Enemy, Rat) sharing a
+       sheet with the first two Shylock's Marks. Front/back aligned.
+       ============================================================= -->
+  <div class="page">
+    <div class="card title-card">
+      <div class="card-header"><div class="header-top"><h2 class="mission-name">Public Enemy No.&nbsp;1</h2><span class="respect-badge" data-respect="2">2</span></div></div>
+      <div class="borough-content">
+        <div class="borough-image" style="background-image: url('Art/Chicago.png');"></div>
+      </div>
+    </div>
+    <div class="card debt rat-card">
+      <div class="job-card-content-wrapper">
+        <div class="card-header">
+          <div class="header-top">
+            <h2 class="mission-name">The Rat</h2>
+            <span class="respect-badge rat-penalty-badge honor-badge">&#9760;</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="Jobs">
+            <div class="Job-header">Pariah:</div>
+            <div class="Jobs-content">
+              While you hold this card, you <strong>cannot Hustle</strong> and <strong>cannot be crowned</strong>.
+            </div>
+          </div>
+          <div class="bonus">
+            <div class="bonus-header">Redemption:</div>
+            <div class="bonus-content">
+              Pass this to any rival who plays <strong>Rat</strong>. If your <strong>Boss</strong> is killed or arrested, return this to the Supply; he takes the shame to his grave.
+            </div>
+          </div>
+        </div>
+        <div class="flavour-text">
+          "You got the Feds on speed dial, but the street has a long memory."
+        </div>
+      </div>
+    </div>
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back chicago"><div class="back-title-box"><h3 class="back-title">PUBLIC ENEMY No.&nbsp;1</h3></div></div>
+    <div class="card-back debt rat"><div class="back-title-box"><h3 class="back-title">The Rat</h3></div></div>
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- =============================================================
+       SHEET D: four Shylock's Marks
+       ============================================================= -->
+  <div class="page">
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- =============================================================
+       SHEET E: the last two Shylock's Marks
+       ============================================================= -->
+  <div class="page">
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+    <div class="card debt">
+      <div class="card-header"><div class="header-top">
+        <h2 class="venue">Shylock&rsquo;s Mark</h2>
+        <span class="respect-badge honor-badge">&#9760;</span>
+      </div></div>
+      <div class="speakeasy-content">
+        <div class="speakeasy-image" style="background-image: url('Art/Shylock Sqaure.png');">
+        </div>
+        <p class="card-footer-text favor-ability vig-only"><b>The Vig:</b> Pay $3,000 any time to discard this Mark. Carry as many as you dare. <b>While any is unpaid, you cannot be crowned.</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page">
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+    <div class="card-back debt shylock-back"><div class="back-title-box"><h3 class="back-title">Shylock's Mark</h3></div></div>
+  </div>
+
+</body>
+</html>

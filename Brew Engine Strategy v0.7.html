@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonshine Kingdom — The Brew Engine: A Kingpin's Guide v0.7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0d0005;
+      --bg-rgb: 13, 0, 5;
+      --surface: #130207;
+      --text-color: #f5e9d9;
+      --muted: #b8a888;
+      --accent-gold: #d4af37;
+      --accent-dim: #8a7329;
+      --line: rgba(212, 175, 55, 0.22);
+      --green: #6fbf73;
+      --red: #d9694f;
+      --silver: #c9cdd4;
+      --font-body: 'Raleway', sans-serif;
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background-color: var(--bg-color); }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      font-size: 11pt;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 54px 24px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero .eyebrow {
+      font-family: var(--font-body);
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1;
+      font-weight: 400;
+      margin: 6px 0;
+    }
+    .hero .subtitle {
+      font-style: italic;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 8px auto 0;
+    }
+
+    .page {
+      width: 210mm;
+      max-width: calc(100% - 40px);
+      margin: 36px auto;
+      padding: 48px 60px;
+      background-color: var(--surface);
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      border: 1px solid #333;
+    }
+
+    p { margin: 0 0 1em 0; }
+    strong { color: var(--accent-gold); font-weight: 700; }
+    em { color: #fcefd0; }
+    .silver { color: var(--silver); font-weight: 700; }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 22pt;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      line-height: 1.1;
+      border-bottom: 2px solid var(--accent-gold);
+      padding-bottom: 5px;
+      margin-top: 1.8em;
+      margin-bottom: 0.6em;
+    }
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 15pt;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      line-height: 1.1;
+      border-left: 4px solid var(--accent-gold);
+      padding-left: 10px;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    a { color: var(--accent-gold); text-decoration: none; }
+    a:hover { text-decoration: underline; color: #e8c65a; }
+
+    ul, ol { margin: 0 0 1em 1.3em; }
+    li { margin-bottom: 0.4em; }
+
+    .lede {
+      font-size: 12.5pt;
+      color: #fcefd0;
+      border-left: 3px solid var(--accent-dim);
+      padding-left: 16px;
+      margin-bottom: 1.4em;
+    }
+
+    .note {
+      background-color: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--accent-gold);
+      padding: 14px 16px;
+      font-style: italic;
+      color: #fcefd0;
+      margin: 1.2em 0;
+      border-radius: 4px;
+    }
+    .note strong { font-style: normal; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.6em 0 1.2em;
+      font-size: 10pt;
+    }
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 11pt;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      padding-bottom: 5px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      text-align: center;
+    }
+    th {
+      background: rgba(212,175,55,0.14);
+      color: var(--accent-gold);
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      font-size: 10.5pt;
+    }
+    td.left, th.left { text-align: left; }
+    tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+    .good { color: var(--green); font-weight: 700; }
+    .bad  { color: var(--red);  font-weight: 700; }
+    .win td { background: rgba(111,191,115,0.10); }
+    .proof td { background: rgba(201,205,212,0.07); }
+
+    .principle {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      border: 1px solid var(--accent-dim);
+      background: rgba(255,255,255,0.02);
+      border-radius: 4px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .principle .num {
+      font-family: var(--font-display);
+      font-size: 26pt;
+      line-height: 0.9;
+      color: var(--accent-gold);
+      min-width: 34px;
+      text-align: center;
+    }
+    .principle h4 {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      letter-spacing: 0.5px;
+      color: #fff;
+      font-weight: 400;
+      margin: 0 0 3px;
+    }
+    .principle p { margin: 0; font-size: 10.5pt; }
+
+    .kingpin {
+      border: 1px solid var(--accent-gold);
+      border-left: 5px solid var(--accent-gold);
+      background: rgba(212,175,55,0.07);
+      padding: 12px 16px;
+      margin: 1.2em 0;
+      border-radius: 4px;
+    }
+    .kingpin .tag {
+      font-family: var(--font-display);
+      letter-spacing: 1px;
+      color: var(--accent-gold);
+      font-size: 11pt;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .kingpin p { margin: 0; font-style: italic; color: #fcefd0; }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      color: var(--accent-dim);
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+    }
+    .disclaimer {
+      font-size: 8.5pt;
+      color: var(--accent-dim);
+      font-style: italic;
+      margin-top: 2em;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .page { width: auto; max-width: calc(100% - 24px); padding: 30px 22px; }
+      table { font-size: 9pt; }
+      th, td { padding: 5px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="eyebrow">Moonshine Kingdom &middot; Kingpin's Guide</div>
+    <h1>The Brew Engine</h1>
+    <p class="subtitle">How the dawn stills really make their money &mdash; and why the boss who owns the docks decides what the whole city cooks.</p>
+  </header>
+
+  <div class="page">
+
+    <p class="lede">
+      Before the sun clears the tenements, the stills are already breathing. Steam in the pipes, mash in the boilers, and out the back a river of clear liquor that turns into a river of dirty cash. It looks like luck &mdash; a roll of the bones and a prayer. It isn't. Behind the dice sits a small, sharp piece of arithmetic, and the bosses who read it right out-earn the ones who don't without ever rolling a better number. This is that arithmetic, in the plain talk of the street.
+    </p>
+
+    <h2>The One Rule That Governs Everything</h2>
+    <p>
+      Every dawn the city cooks a common mash. That's the <span class="silver">Mash&nbsp;die</span> &mdash; grey as the Moonshine it makes &mdash; sitting in the open for all to see. Then, in turn, each boss draws <strong>one</strong> Red die from the pool and lays it beside the Mash. The two together are your <strong>Brew Number</strong>, and that single number is the only tune your empire plays today. <em>Every</em> Still you Control whose boiler shows that number roars to life at once; every Still on a different number sits cold, a dead kettle in a dark room.
+    </p>
+    <p>
+      Read that twice, because the whole trade falls out of it: <strong>you only ever hit one number a day.</strong> A boss with a 7-boiler and an 8-boiler never lights both on the same morning &mdash; one cooks, the other waits its turn. But a boss with <em>two</em> 7-boilers fires both together, off the same lucky pair of dice. Matching numbers stack their yield; mismatched numbers take turns and leave you idle. The whole game of the Brew is deciding which numbers to marry your money to.
+    </p>
+    <p>
+      And here's the gift: you see tomorrow coming. The Mash for the next dawn is set the night before, at the close of the Shadows, and it sits face-up on the board through the entire day's business. So half of every Brew Number on tomorrow's table &mdash; and half of every Blowback that could gut your crew &mdash; is public knowledge a full day early. Seizing the Stills that pair with it, walking your Boss out of harm's way, Laying Low early to grab the first draw of the bones: those aren't hunches. They're the sharpest plays on the board, and the intel is already in your hand.
+    </p>
+
+    <h2>The Hand on the Dice: The Harbormaster</h2>
+    <p>
+      Here is the wrinkle that separates a kingpin from a gambler. That common mash the whole city cooks doesn't fall from heaven. It comes ashore in barrels of molasses, up the piers, over the docks &mdash; and whoever holds the <strong>Harbormaster</strong> Title, the crown for Controlling the most <strong>Dock Districts</strong>, owns that trade. So at the close of each Shadows, the Harbormaster doesn't leave tomorrow's Mash to the roll of a die. He <em>names it.</em> Any face he likes, 1 through 6. Every drop of molasses lands on his wharves, and he decides what the whole town brews at dawn.
+    </p>
+    <p>
+      That turns half of every rival's Brew Number into a <em>political</em> number &mdash; a favour granted or a knife slipped in, depending on whose Stills he means to feed. He will name the face that <strong>lights his own boilers and leaves yours stone cold</strong>, and because the Mash sits in the open all day, the whole table watches the squeeze coming and can do nothing about it after the fact. The only question left worth asking is the one that wins games: <em>what will he pick &mdash; and can he lock me out of my own morning?</em>
+    </p>
+
+    <h3>The Magic of Seven</h3>
+    <p>
+      The answer to "can they lock me out?" comes down to a single, beautiful quirk of arithmetic. A boiler on number <strong>n</strong> can only fire if the Mash leaves a draftable Red (1&ndash;6) to complete it &mdash; that is, if <strong>n minus the Mash</strong> lands between 1 and 6. Work that through for every boiler number and a clear winner falls out:
+    </p>
+
+    <table>
+      <caption>How many of the six Mash faces leave a boiler reachable by a draftable Red</caption>
+      <thead>
+        <tr><th class="left">Boiler #</th><th>Mash faces that keep it alive</th><th># of faces</th><th>Can the Harbormaster starve it?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="left">6</td><td>1&ndash;5</td><td>5 of 6</td><td class="bad">Yes &mdash; names 6</td></tr>
+        <tr class="win"><td class="left"><strong>7</strong></td><td><strong>1&ndash;6 (all)</strong></td><td><strong>6 of 6</strong></td><td class="good">No &mdash; never</td></tr>
+        <tr><td class="left">8</td><td>2&ndash;6</td><td>5 of 6</td><td class="bad">Yes &mdash; names 1</td></tr>
+        <tr><td class="left">9</td><td>3&ndash;6</td><td>4 of 6</td><td class="bad">Yes &mdash; names 1 or 2</td></tr>
+        <tr><td class="left">10</td><td>4&ndash;6</td><td>3 of 6</td><td class="bad">Yes, easily</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Seven is the only lockout-proof number on the board.</strong> Whatever face the Harbormaster names, some Red in the pool always completes a 7 &mdash; so a stack of sevens can never be starved dead, only haggled over in the draft. Every other clump can be shut clean off: name the right face and a wall of 8-boilers, or 9-boilers, fires <em>nothing at all</em> that morning &mdash; cold iron and idle men. On this board, "just cook sevens" isn't a hunch a made man passes down for luck. It's armour.
+    </p>
+
+    <div class="note">
+      <strong>The catch, and it's a cruel one.</strong> There are only <strong>four 7-boilers in the whole city</strong> &mdash; and every last one sits under a <strong>High Society</strong> address, one to a mainland Borough, none out on Staten Island. Those are the $500 rooms, and they open the game <em>padlocked by the Police</em> until a Raid kicks the doors in. So a lockout-proof engine of sevens means prising cop-guarded, silk-lined turf out of three or four separate Boroughs at once &mdash; blood for every boiler. And to deny a rival the Mash on top of that, you'd have to wear the Harbormaster's crown yourself: the most Dock Districts, strung out across the water on the far shore. <strong>No single mob can grip a fat wall of sevens and the docks both</strong> &mdash; the crew stretches until it snaps. You choose a lane. Own the sevens, or own the piers. Almost no one owns both.
+    </div>
+
+    <h2>The Other Way Out: Spread the Ends</h2>
+    <p>
+      Can't fight your way to the sevens? There's a second road to immunity, and it runs against every instinct that says "clump." Instead of piling onto one number, <strong>bracket a low boiler and a high one.</strong> A pair like <strong>3 and 9</strong> can never be starved together: the face that kills the 3 (a high Mash) is the very face that <em>feeds</em> the 9, and the other way round. There is no single number the Harbormaster can name that darkens both ends at once. Squeeze one, you open the other.
+    </p>
+    <p>
+      It costs you something. A spread only ever lights <em>one</em> end a morning, so it never pours like a fat matching stack in a good week &mdash; but it <strong>always pours something</strong>, every single dawn, no matter whose crown sits on the docks. When a hostile Harbormaster is starving the table, that reliability is worth real money, as the ledgers below show. This is the old dockhand's wisdom &mdash; keep a low kettle and a high one, and you never wake up dry. One thing to mind: the low numbers are scarce on the map, just two 2-boilers and two 3-boilers in the whole city, so you bracket the ends. You don't clump them.
+    </p>
+
+    <h2>Read the Docks: The Crown Can't Starve Itself</h2>
+    <p>
+      For all that dread, the Harbormaster wears a collar of his own making. He cooks Moonshine too &mdash; the same common mash the whole city brews &mdash; and the face he names lights <em>his</em> boilers exactly as it darkens yours. He cannot reach for a number that starves your Stills without first making sure it won't starve his own. <strong>His turf is a leash on the number he can pick,</strong> and a boss who reads that leash can walk right up to the crown and pick his pocket.
+    </p>
+    <p>
+      Two things fall out of that, and both are yours to exploit:
+    </p>
+    <ul>
+      <li><strong>You can predict tomorrow's Mash</strong> by reading the Harbormaster's Stills. A crew cooking high boilers (8s, 9s) will name a mid-to-high face to fire them &mdash; they daren't name a low one, because a low Mash leaves their own high Stills cold. Their turf tells you their hand a full Day early.</li>
+      <li><strong>Mirroring is a hard lock.</strong> Build your Stills on the <em>same numbers the Harbormaster holds.</em> Whatever face he names to fire his own boilers fires yours too &mdash; there is no Mash he can pick that lights his engine and darks a matching one. He can only starve you by starving himself, and a boss who cooks Moonshine won't. Ride the crown's own greed.</li>
+    </ul>
+    <p>
+      This is why the truly spiteful shutout &mdash; the 8-stack to $0 in the table below &mdash; only lands on a crew whose numbers <em>don't overlap</em> the Harbormaster's. Match his range and the worst case softens into "we both brew, every morning." The lesson isn't to fear the docks; it's to <em>watch</em> them.
+    </p>
+
+    <h2>The Kill Shot: Mirror, Then Lay Low First</h2>
+    <p>
+      Mirroring gets you a seat at the Harbormaster's table. <strong>Laying Low first takes his chair.</strong> This is the play that turns the crown's own weapon around, and it hinges on a piece of timing most crews sleep on.
+    </p>
+    <p>
+      The Harbormaster sets the Mash at the end of Shadows, in the open, <em>before anyone acts.</em> Then, all through Operations, tomorrow's Turn Tokens are claimed one by one <strong>in the order players Lay Low</strong> &mdash; step off the board first and you claim Token&nbsp;#1, the first draft of tomorrow's Red pool. So the sequence runs: he names the Mash, you read it, and you decide whether to burn today's Operations short to grab first pick tomorrow.
+    </p>
+    <p>
+      Here's why that's murder against a tight-clumped crown. When the Harbormaster cooks a single number, the face he names to fire it leaves <strong>exactly one firing Red in the whole pool</strong> &mdash; name Mash&nbsp;2 to light your 8s and only a 6 completes them. That scarcity is the trap he laid for the table. But with first draft, <em>you</em> take that one golden Red. He built the shortage; you pocket the only key.
+    </p>
+
+    <table>
+      <caption>A mirror crew's fire rate by draft position, vs a Harbormaster clumped on one number (his self-interested Mash leaves just one firing Red)</caption>
+      <thead>
+        <tr><th class="left">You mirror his stills and&hellip;</th><th>You fire</th><th>He fires</th><th>He's denied</th></tr>
+      </thead>
+      <tbody>
+        <tr class="win"><td class="left"><strong>Lay Low first</strong> &mdash; you draft #1</td><td class="good">60%</td><td>11%</td><td class="good">89%</td></tr>
+        <tr><td class="left">Lay Low last &mdash; you draft behind him</td><td class="bad">11%</td><td>60%</td><td>40%</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Same stills, same Mash &mdash; the draft order alone swings your morning from <strong>11% to 60%</strong> and leaves the crown starving <strong>nearly nine mornings in ten.</strong> And the tighter he clumps to threaten the table, the fewer firing Reds exist, and the more first draft is worth. He cannot wriggle free by spreading, because a spread Harbormaster isn't starving anyone in the first place.
+    </p>
+
+    <div class="note">
+      <strong>The price of the chair.</strong> Laying Low ends your Operations for the Day &mdash; every Play you'd still have made (a Move, a hit, an Extort, a Contract staked) is the fare for Token&nbsp;#1. Against a dominant Harbormaster that fare is a bargain; on a quiet board it's a waste. Read the table before you step off: you're spending today's tempo to buy tomorrow's dice, and only the crown's own greed makes the trade pay.
+    </div>
+
+    <h2>Three Principles of the Brew</h2>
+
+    <div class="principle">
+      <div class="num">1</div>
+      <div>
+        <h4>Clump on a number they can't take from you</h4>
+        <p>Boilers that share a number fire as one, so clumping is how you brew big &mdash; but <em>which</em> number you clump on matters as much as how many. A wall of <strong>sevens is Harbormaster-proof</strong>; a wall of 8s or 9s is a light switch the docks can flip off at dawn. So clump, by all means &mdash; but clump on seven, or make your peace with a rival who can leave your kettles cold whenever it suits him.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">2</div>
+      <div>
+        <h4>Spread your crew, don't pile it on</h4>
+        <p>The Muscle Ratio is a staircase, not a ladder: 5&ndash;6 mobsters on a boiler brew 3 barrels, but it takes 9 or more to reach the cap of 5, and every runner you crowd on past that is a mouth to feed for nothing. The sweet spot is around <strong>5&ndash;6 men to a Still</strong>. Once a boiler's well-crewed, the next man you hire earns far more opening a <em>second matching boiler</em> than crammed onto the first. Breadth of fire beats depth on one.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="num">3</div>
+      <div>
+        <h4>Fight for the docks, or mirror the man who holds them</h4>
+        <p>The Harbormaster's crown is a hand on every rival's throat &mdash; but it has two soft spots. First, it's <strong>hard to keep:</strong> eight Docks, strung across the water and all connected as if one, so no runaway holds the whole waterfront for long. Take the piers and you take back the dice. Second, if you can't take them, <strong>mirror them, then Lay Low first:</strong> build on the crown's own numbers, beat him to the first draw, and lift the one Red his own Mash left in the pool. Grievance is the only play that never works. The docks answer to force or to imitation &mdash; never to complaint.</p>
+      </div>
+    </div>
+
+    <h2>Park the Boss: Twist the Valves</h2>
+    <p>
+      One lever the tables leave out: <strong>Twist the Valves</strong>. Any Still that fires with your <strong>Boss</strong> standing on it brews <strong>+1 barrel</strong>. Since your matching boilers all fire off the same Brew Number, park the old man on the stack and pocket a free barrel every morning it lights up. But there's a knife to it: unlike a firefight, a Blowback plays no favourites, so if your number is the one left to burn, the <strong>Boss is the first body on the floor</strong>, not the last, and you're spending a whole turn on a Rise to put a new Don down. Keep your Brew Number off the leftover Red (grab the low token, lay low last) and the same play that saves your barrels saves the Don. <em>A Boss brewing is a Boss earning; a Boss brewing when the table's leaving your number behind is a Boss gambling with his life.</em>
+    </p>
+
+    <h2>The Numbers Behind It</h2>
+    <p>
+      Here is the expected <em>net</em> take per Day for builds you can crew off a single ~16-man roster &mdash; barrels sold at the <strong>$300</strong> Speakeasy rate, less the <strong>$300</strong> it costs to Recruit every Runner a Blowback puts in the ground. The two columns are the two worlds you'll play in: a <strong>Rolled</strong> Mash, when no rival wears the Harbormaster's crown (or you wear it yourself), versus a <strong>Hostile Harbormaster</strong> naming the cruellest face he can against you. Both assume a Contested draft &mdash; a sharp table leaving your Blowback number behind to burn you, too. Read the Hostile column as the <em>ceiling</em> of the threat: a crown that names its face with pure spite, heedless of its own boilers. A real Harbormaster, as the docks-reading above showed, is leashed by his own Stills &mdash; and mirroring or matching his range is how you climb out from under this column entirely.
+    </p>
+
+    <table>
+      <caption>Expected net $/Day (Brew Simulator: 4-player Contested draft, ~16-mobster roster, barrels $300, Recruit $300, Boss parked with Twist the Valves)</caption>
+      <thead>
+        <tr>
+          <th class="left">Build</th>
+          <th>Barrels/Day</th>
+          <th>Net &mdash; Rolled Mash</th>
+          <th>Net &mdash; Hostile Harbormaster</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="win"><td class="left">3 matching <strong>7s</strong> (lockout-proof)</td><td>4.6</td><td>$1,137</td><td class="good">$1,138</td></tr>
+        <tr><td class="left">2 matching 7s</td><td>4.1</td><td>$1,023</td><td>$1,022</td></tr>
+        <tr><td class="left">1 matching 7 (well-crewed)</td><td>2.8</td><td>$676</td><td>$676</td></tr>
+        <tr><td class="left">3 matching <strong>8s</strong> (a number they can starve)</td><td>3.8</td><td>$948</td><td class="bad">$0</td></tr>
+        <tr><td class="left">2 matching 8s</td><td>3.4</td><td>$851</td><td class="bad">$0</td></tr>
+        <tr><td class="left">3 mismatched 6/7/8</td><td>2.8</td><td>$398</td><td>$474</td></tr>
+        <tr class="proof"><td class="left">Spread <strong>3 + 9</strong> (Harbormaster-proof)</td><td>2.0</td><td>$495</td><td class="good">$561</td></tr>
+        <tr class="proof"><td class="left">Spread 3/3 + 9/9</td><td>2.0</td><td>$495</td><td class="good">$560</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Three things jump out. First, the <strong>7-stacks don't flinch</strong>: Rolled or Hostile, the 3&times;7 build banks about $1,137 either way, because no face can starve a seven. That is the immunity, in dollars. Second, and this is the whole rule in one row: the <strong>8-stack goes to <span style="color:var(--red)">exactly zero</span></strong> under a hostile crown. The Harbormaster names Mash&nbsp;1, the 8s can never be completed by a draftable Red, and a build earning $948 a Day on a quiet table brews <em>nothing at all, every single morning</em> &mdash; punished purely for cooking a number the docks can switch off. Third, and the quiet surprise: the <strong>spread builds go <em>up</em></strong> against a Hostile Harbormaster ($495 to $561). A crown naming a low face to starve the clumps is <em>handing the low boiler its number for free</em> &mdash; the spread feeds on exactly the pick that starves everyone else.
+    </p>
+
+    <div class="note">
+      <strong>Why the boom never runs away with the game.</strong> The richest engine is a wide wall of sevens &mdash; but sevens are the rarest, most-fought turf in the city, and holding four means holding ground in four Boroughs at once. The Harbormaster can't touch that engine; rivals with rifles can, and they will. Meanwhile every crew shut out of the sevens has a real answer &mdash; the spread &mdash; that a starving crown only makes <em>stronger.</em> Blood over the boilers, deals struck in the dark, and a waterfront worth going to war for: that's the whole engine, and no one build owns it.
+    </div>
+
+    <h2>So What's the Optimal Play?</h2>
+    <p>
+      There is no one build that always wins &mdash; and that's the point. The right answer swings with the board, and the first thing to read is always the same: <em>who holds the docks?</em>
+    </p>
+
+    <table>
+      <caption>Best build by board state</caption>
+      <thead>
+        <tr><th class="left">The board is&hellip;</th><th class="left">Go for&hellip;</th><th class="left">Because</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left"><strong>You (or nobody) hold the docks</strong></td>
+          <td class="left">Clump wide &mdash; <strong>2&ndash;3 matching boilers</strong> on any number</td>
+          <td class="left">No hostile crown to starve you, so brew the fattest stack the turf allows. If it's you on the docks, feed it every morning.</td>
+        </tr>
+        <tr>
+          <td class="left"><strong>A rival holds the docks</strong></td>
+          <td class="left"><strong>Mirror his numbers</strong>, clump on <strong>7</strong>, or <strong>spread 3 + 9</strong></td>
+          <td class="left">Three lockout-proof answers. Mirroring is cheapest &mdash; his own greed feeds you. Seven brews most but wants High Society turf. The spread is cheap ground and even gains when he starves the table.</td>
+        </tr>
+        <tr>
+          <td class="left"><strong>Cutthroat</strong><br>(everyone's on you)</td>
+          <td class="left">Stay compact &mdash; <strong>1&ndash;2 boilers</strong>, well-crewed, lockout-proof number</td>
+          <td class="left">Expansion doesn't pay when every new district invites a Raid. Bank the sure money on a number they can't dark.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The through-line: <strong>build the widest matching engine the board will let you defend &mdash; on a number the docks can't take from you.</strong> The skill isn't finding the best build; it's reading who owns the piers, and whether your next boiler costs more than it earns once they start naming the Mash.
+    </p>
+
+    <div class="kingpin">
+      <span class="tag">Kingpin's Note</span>
+      <p>The greenhorn scatters his Stills to "cover more numbers," lights one boiler a day, and feeds the rest to the Blowback. The old hand cooks one number and gets rich. The made man does one better: he cooks a number the docks can't take from him, or he brackets the ends so no crown can leave him dry. And when a rival's Harbormaster turns greedy? He doesn't grumble &mdash; he cooks the crown's own numbers, Lays Low ahead of him for the first draw, and lifts the one Red the whole city's been starved of. The Harbormaster set the table. The made man eats first.</p>
+    </div>
+
+    <p style="margin-top:1.6em;">
+      Want to test it at your own table &mdash; or in cold numbers? Open the <a href="Brew%20Simulator%20v0.7.html">Brew Simulator</a>, flip the Mash die to <em>Hostile Harbormaster</em>, and run a few hundred thousand mornings &mdash; or check the <a href="Turn%20Structure%20Flow%20Card%20v0.7.html">Turn Structure card</a> for the Shadows sequence and the boiler numbers, Borough by Borough.
+    </p>
+
+    <p class="disclaimer">
+      Figures are Monte Carlo estimates from the <a href="Brew%20Simulator%20v0.7.html">Brew Simulator</a> (Muscle Ratio production, communal Blowback, a four-player Contested draft, a ~16-mobster roster), valuing a Moonshine barrel at the $300 Speakeasy rate and a lost Runner at the $300 Ward Recruit cost, with the Boss parked and Twist the Valves live. The Hostile Harbormaster is modelled as a rival naming the single Mash face that reaches the fewest of your boiler numbers. The figures isolate the dawn Brew and Blowback alone: Contracts, Speakeasy sales, Titles, Extort, Trade and combat all layer on top and can shift what "best" looks like in any given game.
+    </p>
+
+  </div>
+
+  <footer>
+    &#9830; Moonshine Kingdom v0.7 &mdash; The Brew Engine &#9830;
+  </footer>
+
+</body>
+</html>

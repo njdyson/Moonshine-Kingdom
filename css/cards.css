@@ -169,6 +169,7 @@ body {
 .borough-back { background-image: url('../Art/City.png'); justify-content: flex-end; }
 .ghetto-back { background-image: url('../Art/Ghetto.png'); justify-content: flex-end;}
 .dock-back { background-image: url('../Art/Bridge.png'); justify-content: flex-end;}
+.nightmayor-back { background-image: url('../Art/Mayor.png'); justify-content: flex-end;}
 .card-back.easy { background-image: url('../Art/Easy.png'); justify-content: flex-end; }
 .card-back.medium { background-image: url('../Art/Medium.png'); justify-content: flex-end; }
 .card-back.hard { background-image: url('../Art/Hard.png'); justify-content: flex-end; }
