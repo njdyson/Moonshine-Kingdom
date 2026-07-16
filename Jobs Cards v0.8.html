@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moonshine Kingdom — Jobs Deck v0.8 (Sample)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PALETTE — matches the v0.7 Reskin family
+   ============================================================ */
+:root{
+  --gold:#c9a437;
+  --gold-bright:#e8cc72;
+  --gold-line:#b9932f;
+  --gold-dim:#a98c4f;
+
+  --ink:#efe3cd;
+  --ink-2:#f2e6cf;
+  --body:#d8caae;
+  --muted:#b8a577;
+
+  --panel-a:#241c14;
+  --panel-b:#19130c;
+  --rule:rgba(185,147,47,.28);
+
+  --tier-gig:#b8a577;
+  --tier-racket:#c9a437;
+  --tier-score:#e8cc72;
+}
+
+/* ============================================================
+   PAGE / GALLERY
+   ============================================================ */
+html,body{margin:0}
+body{
+  background:#100c08;
+  background-image:radial-gradient(circle at 50% -10%,#241a11,#0d0a07 65%);
+  color:var(--ink);
+  font-family:Barlow,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+.masthead{text-align:center;padding:34px 20px 6px}
+.masthead-kicker{font:600 9px Barlow;letter-spacing:5px;color:var(--gold-dim);text-transform:uppercase}
+.masthead-title{font:700 40px Cinzel,serif;color:var(--gold-bright);letter-spacing:2px;margin:6px 0 2px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.masthead-sub{font:600 11px Barlow;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+.masthead-note{max-width:660px;margin:14px auto 0;font:400 11px/1.5 Barlow;color:var(--muted);font-style:italic}
+.masthead-note b{color:var(--gold-dim);font-style:normal}
+
+.tier-head{
+  max-width:1100px;margin:38px auto 14px;padding:0 20px;
+  display:flex;align-items:center;gap:10px;
+}
+.tier-head .dia{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.tier-head .lbl{font:700 13px Cinzel,serif;letter-spacing:2.5px;color:var(--gold)}
+.tier-head .meta{font:italic 500 10px Barlow;color:var(--muted)}
+.tier-head .rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)}
+
+.gallery{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;padding:0 20px 10px}
+
+/* ============================================================
+   CARD — 63 x 88mm poker stock, matching css/cards.css
+   Geometry is FIXED: every band has a fixed height so the art
+   well is identical on every card in the deck.
+   ============================================================ */
+.card{
+  position:relative;
+  width:63mm;height:88mm;
+  background:linear-gradient(var(--panel-a),var(--panel-b));
+  border:1.5px solid var(--gold-line);
+  border-radius:3mm;
+  padding:3.2mm 3mm 2.8mm;
+  display:flex;flex-direction:column;
+  box-shadow:0 8px 22px rgba(0,0,0,.55),inset 0 0 46px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+.card::after{
+  content:"";position:absolute;inset:1.4mm;
+  border:.4mm solid rgba(185,147,47,.3);border-radius:2mm;
+  pointer-events:none;z-index:3;
+}
+
+/* --- tier band : fixed 5mm --- */
+.tier{
+  flex:0 0 auto;height:5mm;
+  display:flex;align-items:center;gap:2.4mm;
+  padding-right:12mm;              /* keeps clear of the respect badge */
+  border-bottom:.4mm solid var(--rule);
+}
+.tier-name{font:700 7.5pt Cinzel,serif;letter-spacing:2px;text-transform:uppercase}
+.card--gig    .tier-name{color:var(--tier-gig)}
+.card--racket .tier-name{color:var(--tier-racket)}
+.card--score  .tier-name{color:var(--tier-score)}
+
+.stake{display:flex;align-items:center;gap:1mm}
+.stake-lbl{font:600 5.2pt Barlow;letter-spacing:.8px;color:var(--gold-dim);text-transform:uppercase}
+.pip{width:2.1mm;height:2.1mm;border-radius:50%;background:var(--gold);box-shadow:inset 0 -.3mm 0 rgba(0,0,0,.3)}
+
+/* --- title : fixed 9mm, holds 1 or 2 lines without moving the art --- */
+.title{
+  flex:0 0 9mm;
+  margin:1.6mm 0 0;
+  display:flex;align-items:center;justify-content:center;
+  font:700 13pt/1.02 Cinzel,serif;
+  color:var(--gold-bright);
+  letter-spacing:.3px;text-align:center;
+  padding:0 10mm;                  /* symmetric, so it stays centred under the badge */
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
+}
+.title--long{font-size:10.6pt}
+
+/* --- art well : 57mm x 38mm = EXACTLY 3:2, the native ratio of 55 of the
+   58 job images (1536x1024). Do not change one without the other or
+   object-fit:cover silently crops the art. --- */
+.art{
+  flex:0 0 38mm;
+  margin:1.8mm 0 0;
+  border:.3mm solid rgba(185,147,47,.32);
+  border-radius:1.4mm;
+  background:rgba(0,0,0,.3);
+  overflow:hidden;
+  position:relative;
+}
+.art img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  /* lifts the art off the dark stock in print — same recipe as
+     .job-image-container in Contract Cards v0.7 */
+  filter:brightness(1.1) contrast(1.08) saturate(1.04);
+}
+/* a whisper of vignette only — no scrim, the art needs to stay bright */
+.art::after{
+  content:"";position:absolute;inset:0;
+  box-shadow:inset 0 0 6mm rgba(25,19,12,.28);
+  pointer-events:none;
+}
+
+/* --- the job : fixed 13mm, so 1-line and 3-line cards match --- */
+.job-label{
+  flex:0 0 auto;
+  margin:1.8mm 0 .9mm;
+  text-align:center;
+  font:700 5.4pt Barlow;letter-spacing:2.2px;
+  color:var(--gold-dim);text-transform:uppercase;
+}
+/* The text MUST stay wrapped in a single <span>. Flexing .job directly
+   would make every <b> its own flex item and swallow the whitespace
+   between them ("Move4+ Barrelsacross aBridge"). One child = safe,
+   and lets the text centre in a fixed box so the art never shifts. */
+.job{
+  flex:0 0 13mm;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 .4mm;
+}
+.job > span{
+  font:500 8.6pt/1.3 Barlow;
+  color:var(--ink-2);
+  text-align:center;
+}
+.job b{color:var(--gold-bright);font-weight:700}
+
+/* --- flavour : fixed 5mm, ONE line only --- */
+.flavour{
+  flex:0 0 5mm;
+  margin-top:auto;
+  margin-bottom:.6mm;
+  padding-top:1.6mm;
+  border-top:.4mm solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font:italic 400 6.4pt Barlow;
+  color:var(--muted);
+  text-align:center;
+  white-space:nowrap;overflow:hidden;
+}
+
+/* --- respect : shield badge, tucked top-right like the old deck.
+   Number is baked into the shield art, so the element carries no text. --- */
+.respect{
+  position:absolute;top:.4mm;right:.4mm;z-index:5;
+  width:12.5mm;height:12.5mm;
+  background-size:contain;background-repeat:no-repeat;background-position:center;
+  filter:drop-shadow(0 .4mm .8mm rgba(0,0,0,.65));
+}
+.respect[data-respect="1"]{background-image:url('Art/shield1.png')}
+.respect[data-respect="3"]{background-image:url('Art/shield3.png')}
+.respect[data-respect="5"]{background-image:url('Art/shield5.png')}
+
+/* --- verb tag (design aid — hidden in print) --- */
+.verb{
+  position:absolute;left:0;bottom:0;z-index:4;
+  padding:.6mm 1.6mm;
+  background:rgba(0,0,0,.55);
+  border-top-right-radius:1.5mm;
+  font:600 5pt Barlow;letter-spacing:1px;
+  color:var(--gold-dim);text-transform:uppercase;
+}
+
+/* ============================================================
+   CARD BACK — one design, every card
+   ============================================================ */
+.back{
+  position:relative;
+  width:63mm;height:88mm;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(212,175,55,.10),transparent 58%),
+    linear-gradient(var(--panel-a),var(--panel-b));
+  border:1.5px solid var(--gold-line);
+  border-radius:3mm;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2.6mm;
+  overflow:hidden;
+}
+.back::after{
+  content:"";position:absolute;inset:1.4mm;
+  border:.4mm solid rgba(185,147,47,.3);border-radius:2mm;pointer-events:none;
+}
+.back::before{
+  content:"";position:absolute;inset:3.4mm;
+  border:.25mm solid rgba(185,147,47,.16);border-radius:1.4mm;pointer-events:none;
+}
+.back-dia{width:2.6mm;height:2.6mm;background:var(--gold);transform:rotate(45deg)}
+.back-rule{width:26mm;height:.3mm;background:linear-gradient(90deg,transparent,rgba(201,164,55,.8),transparent)}
+.back-title{
+  font:700 19pt Cinzel,serif;color:var(--gold-bright);
+  letter-spacing:1.5px;text-align:center;line-height:1;
+  text-shadow:0 2px 6px rgba(0,0,0,.6);
+}
+.back-sub{font:600 6pt Barlow;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase}
+.back-foot{
+  position:absolute;bottom:5mm;
+  font:italic 400 6pt Barlow;color:rgba(184,165,119,.65);
+}
+
+.backs{display:none}
+
+
+/* ============================================================
+   DRAFT CARDS — theme locked, objective still open.
+   Not for print; they exist to be argued with.
+   ============================================================ */
+.card--draft{opacity:.97}
+.card--draft .tier-name{color:var(--muted)}
+.pip--tbc{background:none;border:.35mm dashed var(--gold-dim);box-shadow:none}
+.job--blank{
+  display:inline-block;width:44mm;padding:2.2mm 0;
+  border:.35mm dashed rgba(185,147,47,.45);border-radius:1.2mm;
+  font:italic 500 7pt Barlow;color:rgba(184,165,119,.75);
+}
+.respect[data-respect="0"]{
+  background:none;
+  border:.4mm dashed rgba(185,147,47,.5);border-radius:50%;
+  width:11mm;height:11mm;top:1mm;right:1mm;filter:none;
+}
+.need{
+  position:absolute;right:0;bottom:0;z-index:4;
+  padding:.6mm 1.6mm;background:rgba(0,0,0,.55);
+  border-top-left-radius:1.5mm;
+  font:600 5pt Barlow;letter-spacing:1px;
+  color:var(--muted);text-transform:uppercase;
+}
+
+/* ============================================================
+   PRINT — 4-up on A4, front sheet then back sheet (duplex)
+   ============================================================ */
+@media print{
+  @page{size:A4;margin:10mm}
+  html,body{background:#fff}
+  .masthead,.tier-head,.verb{display:none}
+  .gallery,.backs{
+    display:grid;
+    grid-template-columns:repeat(2,63mm);
+    grid-template-rows:repeat(2,88mm);
+    gap:10mm;
+    justify-content:center;align-content:center;
+    padding:0;
+    page-break-after:always;
+  }
+  .card,.back{
+    box-shadow:none;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  /* Drafts are for arguing with, not printing. Must come AFTER the
+     .gallery{display:grid} rule above or source order defeats it. */
+  .gallery--draft,.need{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-kicker">Prohibition · New York · 1926</div>
+  <div class="masthead-title">The Jobs Deck</div>
+  <div class="masthead-sub">v0.8 · Breadth-First Sample · 16 Cards + 10 Drafts</div>
+  <p class="masthead-note">
+    Every Job is an <b>event</b>, not a board state: a verb, an object, and a moment.
+    The Play is the unit &mdash; at the end of a Play, check whether that Play did the thing.
+    Things that happened during the Play count, even if undone before it ended.
+  </p>
+</div>
+
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">GIGS</span>
+  <span class="meta">Stake 1 &middot; 1 Respect &middot; one Play, little setup</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--gig">
+    <div class="tier"><span class="tier-name">Gig</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
+    <h2 class="title">The Milk Run</h2>
+    <div class="art"><img src="Art/Jobs/The Milk Run.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Move <b>4+ Barrels</b> across the <b>Williamsburg Bridge</b> in a single Play.</span></div>
+    <div class="flavour">Every copper watches that bridge. Wave as you go.</div>
+    <div class="respect" data-respect="1"></div>
+    <span class="verb">Move</span>
+  </div>
+  <div class="card card--gig">
+    <div class="tier"><span class="tier-name">Gig</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
+    <h2 class="title">The Beachhead</h2>
+    <div class="art"><img src="Art/Jobs/Beachhead.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Secure your Safehouse into a District <b>Land-Connected to a rival Safehouse</b>.</span></div>
+    <div class="flavour">You should meet the neighbours. They'd rather not.</div>
+    <div class="respect" data-respect="1"></div>
+    <span class="verb">Secure</span>
+  </div>
+  <div class="card card--gig">
+    <div class="tier"><span class="tier-name">Gig</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
+    <h2 class="title">Tenement Army</h2>
+    <div class="art"><img src="Art/Jobs/Tenament Army.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Recruit <b>6+ Runners</b> in a <b>Ward</b> in a single Play.</span></div>
+    <div class="flavour">Word goes round by supper. By dark, you have a crew.</div>
+    <div class="respect" data-respect="1"></div>
+    <span class="verb">Recruit</span>
+  </div>
+  <div class="card card--gig">
+    <div class="tier"><span class="tier-name">Gig</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
+    <h2 class="title">Last Call</h2>
+    <div class="art"><img src="Art/Jobs/Last Call.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Unload <b>4+ Barrels</b> at a single Speakeasy in one Play.</span></div>
+    <div class="flavour">Pour till the taps run dry and the sirens start up.</div>
+    <div class="respect" data-respect="1"></div>
+    <span class="verb">Unload</span>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+</div>
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">RACKETS</span>
+  <span class="meta">Stake 2 &middot; 3 Respect &middot; one Play, real setup first</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--racket">
+    <div class="tier"><span class="tier-name">Racket</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title">Off the Boat</h2>
+    <div class="art"><img src="Art/Jobs/Cuban Prince.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Unload <b>3+ Barrels of Rum</b> at <b>Sunny’s Bar</b>.</span></div>
+    <div class="flavour">Havana to Red Hook, and never once a warehouse.</div>
+    <div class="respect" data-respect="3"></div>
+    <span class="verb">Unload</span>
+  </div>
+  <div class="card card--racket">
+    <div class="tier"><span class="tier-name">Racket</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title">Rum Row</h2>
+    <div class="art"><img src="Art/Jobs/Rum Runners Regatta.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Trade <b>4+ Moonshine</b> at a single <b>Dock</b> in one Play.</span></div>
+    <div class="flavour">Forty ships past the three-mile line, waiting on a lamp.</div>
+    <div class="respect" data-respect="3"></div>
+    <span class="verb">Trade</span>
+  </div>
+  <div class="card card--racket">
+    <div class="tier"><span class="tier-name">Racket</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title">The Eviction</h2>
+    <div class="art"><img src="Art/Jobs/Crimson Coup.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Seize <b>a District</b> containing a <b>rival Safehouse</b>.</span></div>
+    <div class="flavour">Nice place. Pity about the fire.</div>
+    <div class="respect" data-respect="3"></div>
+    <span class="verb">Open Fire</span>
+  </div>
+  <div class="card card--racket">
+    <div class="tier"><span class="tier-name">Racket</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title title--long">The Empty Casket</h2>
+    <div class="art"><img src="Art/Jobs/The Empty Casket.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Rise a new <b>Boss</b> in a <b>Ward</b> you Control.</span></div>
+    <div class="flavour">They buried the wrong man. Ask anyone. Go on — ask.</div>
+    <div class="respect" data-respect="3"></div>
+    <span class="verb">Rise</span>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+</div>
+<div class="gallery">
+  <div class="card card--racket">
+    <div class="tier"><span class="tier-name">Racket</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title title--long">The Copper Heist</h2>
+    <div class="art"><img src="Art/Jobs/Copper Heist.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Seize a District with a <b>Pressure 5+ Still</b>.</span></div>
+    <div class="flavour">The good boilers run hot. So do the men who own them.</div>
+    <div class="respect" data-respect="3"></div>
+    <span class="verb">Open Fire</span>
+  </div>
+  <div class="card card--racket">
+    <div class="tier"><span class="tier-name">Racket</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title title--long">The Big Squeeze</h2>
+    <div class="art"><img src="Art/Jobs/Big Squeeze.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Collect <b>$800+</b> from <b>Manhattan</b> Districts in a single Extort Play.</span></div>
+    <div class="flavour">Every awning on the island pays. Every single one.</div>
+    <div class="respect" data-respect="3"></div>
+    <span class="verb">Extort</span>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+</div>
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">SCORES</span>
+  <span class="meta">Stake 3 &middot; 5 Respect &middot; one Play, and a campaign to earn it</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--score">
+    <div class="tier"><span class="tier-name">Score</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title">Opening Night</h2>
+    <div class="art"><img src="Art/Jobs/Jimmy.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Unload <b>8+ Barrels</b> at a single <b>High Society</b> Speakeasy.</span></div>
+    <div class="flavour">The band plays till four. Nobody asks a thing.</div>
+    <div class="respect" data-respect="5"></div>
+    <span class="verb">Unload</span>
+  </div>
+  <div class="card card--score">
+    <div class="tier"><span class="tier-name">Score</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title title--long">The Toll Booth Trap</h2>
+    <div class="art"><img src="Art/Jobs/Toll Booth Trap.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Kill a <b>rival Boss</b> in <b>Queens</b> with an <b>Open Fire</b> Play.</span></div>
+    <div class="flavour">A toll is a toll. Somebody always pays it.</div>
+    <div class="respect" data-respect="5"></div>
+    <span class="verb">Open Fire</span>
+  </div>
+  <div class="card card--score">
+    <div class="tier"><span class="tier-name">Score</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title">Over the Top</h2>
+    <div class="art"><img src="Art/Jobs/Old Guard.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Seize a District <b>defended by 5+ Mobsters</b>.</span></div>
+    <div class="flavour">These boys went over the top in France. This is a street.</div>
+    <div class="respect" data-respect="5"></div>
+    <span class="verb">Open Fire</span>
+  </div>
+  <div class="card card--score">
+    <div class="tier"><span class="tier-name">Score</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title title--long">The Five Families</h2>
+    <div class="art"><img src="Art/Jobs/Accord.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Collect from a District in <b>all five Boroughs</b> in a single Extort Play.</span></div>
+    <div class="flavour">Not the richest table in town. Just the widest.</div>
+    <div class="respect" data-respect="5"></div>
+    <span class="verb">Extort</span>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+</div>
+<div class="gallery">
+  <div class="card card--score">
+    <div class="tier"><span class="tier-name">Score</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title title--long">The Smuggler’s Run</h2>
+    <div class="art"><img src="Art/Jobs/Quiet Drop.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Move <b>6+ Moonshine</b> from a <b>Staten Island Dock</b> to <b>Throggs Neck</b> in one Play.</span></div>
+    <div class="flavour">Nobody watches Staten Island. Every Dock touches it.</div>
+    <div class="respect" data-respect="5"></div>
+    <span class="verb">Move</span>
+  </div>
+  <div class="card card--score">
+    <div class="tier"><span class="tier-name">Score</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+    <h2 class="title">Rum Wars</h2>
+    <div class="art"><img src="Art/Jobs/Rum Wars.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span>Trade <b>8+ Moonshine</b> at a single <b>Dock</b> in one Play.</span></div>
+    <div class="flavour">The whole fleet, one pier, one night. Try and stop it.</div>
+    <div class="respect" data-respect="5"></div>
+    <span class="verb">Trade</span>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Whispers</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York · 1926</div></div>
+</div>
+
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">DRAFTS</span>
+  <span class="meta">theme first &middot; name, art and flavour set &middot; objective and tier open</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery gallery--draft">
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title">The Black Hand</h2>
+    <div class="art"><img src="Art/Jobs/Black Hand.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">A letter, a palm print, and a week to think it over.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Extort</span>
+    <span class="need">The Bronx</span>
+  </div>
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title title--long">The Insurance Job</h2>
+    <div class="art"><img src="Art/Jobs/Insurance Job.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">He struck the match himself. Slept fine after.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Rat / self</span>
+    <span class="need">—</span>
+  </div>
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title">Fortress Staten</h2>
+    <div class="art"><img src="Art/Jobs/Fortress Staten.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">Nobody's home turf. Everybody's back door.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Secure</span>
+    <span class="need">Staten Island</span>
+  </div>
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title">King of Queens</h2>
+    <div class="art"><img src="Art/Jobs/King of Queens.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">He owns the room. He'd like to own the borough.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Unload</span>
+    <span class="need">Queens</span>
+  </div>
+</div>
+<div class="gallery gallery--draft">
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title">Empire State</h2>
+    <div class="art"><img src="Art/Jobs/Empire State.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">Everything the light touches, and a cut of the rest.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Extort</span>
+    <span class="need">Manhattan</span>
+  </div>
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title">Coney Island</h2>
+    <div class="art"><img src="Art/Jobs/Coney Island.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">Crates off the boardwalk, under a full moon.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Move / Trade</span>
+    <span class="need">Brooklyn</span>
+  </div>
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title title--long">The Irish Goodbye</h2>
+    <div class="art"><img src="Art/Jobs/Goodbye.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">He left O'Sullivan's without saying a word to anyone.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Open Fire</span>
+    <span class="need">—</span>
+  </div>
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title">Poison Panic</h2>
+    <div class="art"><img src="Art/Jobs/Poison Panic.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">One bad batch and the whole city stops drinking.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Unload</span>
+    <span class="need">—</span>
+  </div>
+</div>
+<div class="gallery gallery--draft">
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title">Hell's Highway</h2>
+    <div class="art"><img src="Art/Jobs/Hells Highway.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">Forty miles of bad road and worse intentions.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Move</span>
+    <span class="need">The Bronx</span>
+  </div>
+  <div class="card card--draft">
+    <div class="tier"><span class="tier-name">Draft</span><span class="stake"><span class="stake-lbl">Stake</span><span class="pip pip--tbc"></span></span></div>
+    <h2 class="title title--long">The Butcher's Ledger</h2>
+    <div class="art"><img src="Art/Jobs/Butchers Ledger.png" alt=""></div>
+    <div class="job-label">The Job</div>
+    <div class="job"><span class="job--blank">objective TBC</span></div>
+    <div class="flavour">Every name in it is crossed out but one.</div>
+    <div class="respect" data-respect="0"></div>
+    <span class="verb">Open Fire</span>
+    <span class="need">Queens</span>
+  </div>
+</div>
+
+</body>
+</html>
