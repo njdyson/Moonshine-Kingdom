@@ -3,10 +3,47 @@
 Everything needed to resume the Contracts → Jobs overhaul cold. Written for whoever
 picks this up next, human or agent.
 
-**Status:** design settled, deck ~half written, rulebook not started.
+**Status:** design settled, deck ~26/36 written (10 draft objectives proposed), **rulebook v0.8 drafted**.
 **Live files:** `Jobs Cards v0.8.html` (deck), `Turn Structure and Ledger v0.7 Reskin.html`
-(venue names + Pressure), `Playbooks v0.7 Reskin.html`, `Rulebook v0.7.html` (still describes
-the OLD contract system — it has not been touched).
+(venue names + Pressure), `Playbooks v0.7 Reskin.html`, **`Rulebook v0.8.html` (the Jobs rulebook,
+print-verified 22pp A4)**. `Rulebook v0.7.html` is the superseded contract-system edition.
+
+> **READ §0 FIRST — it supersedes several rows of the §2 decision table.**
+
+## 0. Addendum — 2026-07-16 evening (rulebook drafted; decisions revised with Nick)
+
+- **Claiming — Hustle is now a Shadows step, not an Operations Play.** Grease the Wheels runs:
+  (a) *Yesterday's News*: discard the stale-end Market card, refill (moved here from Reckoning);
+  (b) *Hustle*: in Turn Order, each boss may claim one Job, staking from Reserves — no 1-Influence
+  fee, the stake is the cost; (c) *Fund the Ledger* from what's left. This kills the telegraph
+  problem (holding markers back all day announced a Score) and the two-source mid-day confusion.
+  Reckoning is now just Sweep + Stake Your Claim.
+- **Multi-Job Plays — allowed, but the deck is CURATED against strict nesting.** A "one Job per
+  Play" rule was tried and REJECTED (fiddly exception). Rule of thumb: overlap is fine when
+  *additive* (combined cost ≈ sum, e.g. Five Families + a borough Extort slice) or *Gig-sized*
+  (Last Call inside a bigger Unload); it is forbidden when a Racket+ card sits strictly inside
+  another (a free 8+ Respect swing on one Play). De-nested this pass: **Big Squeeze → Brooklyn
+  $600+** (flavour reworded, "the island" is gone); **King of Queens → Extort Queens $800+** (was
+  Unload at The Triangle, nested inside Opening Night); **Poison Panic → 6+ Moonshine at a $300
+  Speakeasy** (was High Society, same nest); **Rum Row → Staten Island Dock, Rum Wars → mainland
+  Dock** (were 4+/8+ at any Dock, fully nested). Extort quartet now: Empire State M $1,000 (Score),
+  King of Queens Q $800, Big Squeeze Bk $600, Black Hand Bx $600 — all disjoint, all additive with
+  Five Families.
+- **Abandoning:** free, any time on your turn (not a Play); card → discard pile, markers home.
+  Reckoning-only abandon considered and dropped (denial happens at claim, so abandon timing can't
+  fix it); it's the ready patch if playtest shows deny-spam.
+- **Vipers' Whispers RESOLVED:** when they Hustle they may peek at the Jobs deck's top card and
+  claim it face-down instead of a Market card; rivals see the Stake, never the job; reveal on
+  completion. Nick rates it strong — watch in playtest.
+- **Resolution rule wording:** Nick found §2's "write it exactly like this" text confusing; the
+  approved rulebook version is *"A Job is a deed, not a board position… The deed counts even if it
+  didn't survive the Play."* Do not restore the old wording. The rulebook also defines **Seize**
+  (take Control of a District from a rival) since three cards hang on it.
+- **Known gaps for the next agent:** only **4 Gigs** exist but 4-player setup needs 5 to seed the
+  Market — the remaining ~10 cards must skew Gig. **Open Fire is ×6** (worst over-representation).
+  The 10 draft objectives are filled but still in the screen-only draft gallery pending Nick's
+  promotion. Conjunction overlaps were kept deliberately as "skilled moves" (a Boss killed in a
+  Queens Speakeasy fires Toll Booth Trap + Irish Goodbye together) — watch the Queens pile-up.
 
 ---
 
