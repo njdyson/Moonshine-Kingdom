@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moonshine Kingdom Rulebook v0.8 (Provisional): The Bootlegger's Cut</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Link to the shared base css styles-->
+    <link rel="stylesheet" href="css/moonshine-rules.css">
+
+</head>
+
+<body>
+    <div class="front-page">
+        <img src="Art/Moonshine Kingdom.png" alt="Moonshine Kingdom Title" class="title-image">
+
+        <h1>RULEBOOK</h1>
+        <h3 class="subtitle">A Game of Bootlegging, Backstabbing, and Gang Warfare.</h3>
+
+        <p class="intro-paragraph">
+            New York City, 1926. Prohibition was supposed to dry the city out. Instead it lit a fuse.
+            Every basement is a brewery, every back room a bank, and four mobs are clawing for the
+            throne of the liquor trade. Bootlegging, bribery, and intimidation are your tools. Forge
+            fragile alliances, corner the market, and turn the Police loose on your rivals. This city
+            has a thirst that can't be quenched, and only one mob will wear its crown. Carve your name
+            into the skyline, or vanish like cigar smoke in a hurricane.
+        </p>
+    </div>
+    <div class="container one-column">
+        <h2 id="overview">A Day in the Life of a Kingpin</h2>
+        <div class="cover">
+            <img src="Art/Street.png" alt="A Day in the Life" height="330px" width="100%">
+        </div>
+        <p style="font-size: 1.1em;"><b>2-4 Players | 90-120 Mins</b></p>
+
+        <p>
+            <strong style="font-size: 1.1em;">Prohibition didn't stop the drinking; it just made the price go
+                up.</strong>
+        </p>
+        <p>
+            In <strong>Moonshine Kingdom</strong>, you are a rising Kingpin in 1920s New York. Prohibition turned
+            off the taps, sparking a gold rush for anyone ruthless enough to fill the glass. Four rival mobs claw for
+            the boroughs, and this city isn't big enough for all of you. The game plays out over a series of Days,
+            each unfolding in three brutal phases: from the fog of morning to the bloody consequences of night.
+        </p>
+
+        <h4>Morning: Shadows Phase</h4>
+        <p>
+            Dawn breaks over the Hudson. Before the city wakes, the boilers burn. Fire up your Stills, eye the
+            Jobs on the morning Market, and turn cheap mash into liquid gold.
+        </p>
+
+        <h4>Day: Operations Phase</h4>
+        <p>
+            The sun is up, and so is the heat. Command your Runners to smuggle product, seize turf, and strong-arm
+            the competition. Every move costs <strong>Influence</strong>: your political clout. Use it to expand, but
+            remember: violence is loud, and the Police are listening.
+        </p>
+
+        <h4>Night: Reckoning Phase</h4>
+        <p>
+            Twilight settles like a bruise. The guns go quiet, the blood washes into the gutters, and the ledger opens.
+            Claim your turf, watch stale Jobs slide off the Market, and let the Police sweep up the careless. Did you make a killing, or just a mess?
+        </p>
+
+        <h4>The Only Crown Worth Having</h4>
+        <p>
+            Cash buys bullets. But <strong>Respect</strong> buys immortality.
+        </p>
+        <p>
+            Most bosses end the same way: face down in an alley, name forgotten by the morning edition. Not you. You're chasing the kind of legend they whisper about fifty years on: the turf you bled for, the crowns you tore off rival heads, the jobs so brazen the papers set your name in ink an inch tall. That is Respect, the one fortune the grave can't pick from your pockets.
+        </p>
+        <p>
+            But the gutter only carries you so far. The real throne isn't seized at gunpoint; it's <em>bought</em>, from the judges, aldermen, and money men who quietly decide which animal gets to call himself King. Every one of them has a price, paid in cold cash, and each you buy off earns you a marker of <strong>Influence</strong>. Stack it high while your legend towers over the competition, and the city is yours.
+        </p>
+    </div>
+    <div class="container components-page">
+        <h2 id="components">Game Components: Tools of the Trade</h2>
+        <div class="cover">
+            <img src="Art/Components.png" alt="Game Components" height="290px" width="100%">
+        </div>
+        <p>Your whole damn operation in miniature. Every piece earns, bleeds, or burns.</p>
+
+        <p><strong>The City Map (Game Board):</strong> A soot-stained blueprint of 1920s New York, carved into 25 Districts, with a shared 5-space <strong>Heat Track</strong> for Police pressure and a numbered <b>Pressure Strip</b> per Borough ranking its boilers (see <em>Police Raids</em>).</p>
+
+        <p><strong>The Ledger (x4):</strong> Your back-room desk. A slotted player board where you spend the day's actions and cycle your Influence. Every move you make starts here.</p>
+
+        <p><strong>Mob Pieces (x4 Sets):</strong> Each player claims a color and commands:</p>
+        <ul class="sub-section">
+            <li><strong>1 Boss, 15 Runners, and 1 Safehouse:</strong> The brains, the muscle, and the one hideout the whole operation runs out of.</li>
+            <li><strong>10 Influence Markers:</strong> The currency of power. Tokens to pay for daily actions, stake Jobs, absorb Police Heat, and buy your way onto the council. Ten is the ceiling, and it's the crown.</li>
+            <li><strong>1 Mob Playbook:</strong> The family secrets: the dirty tricks and unique abilities only your mob can pull.</li>
+        </ul>
+
+        <p><strong>The Whispers (Cards):</strong> The paper trail of your empire.</p>
+        <ul class="sub-section">
+            <li><strong>Job Cards:</strong> Dirty work with your name on it, drafted from a face-up Market. Pull one off and it builds your legend; pass, and a rival won't.</li>
+            <li><strong>Borough Deeds (5):</strong> The paper that says a Borough is yours. Hold the most turf in one and the Deed comes to you.</li>
+            <li><strong>Titles (4):</strong> The <b>Ward Boss</b>, the <b>Harbormaster</b>, the <b>Night Mayor</b>, and <b>Public Enemy No. 1</b>. Crowns claimed by ruling the streets, the docks, the nightlife, or the headlines.</li>
+            <li><strong>Shylock's Mark Cards:</strong> Debt trackers. A lifeline with teeth.</li>
+            <li><strong>The Rat Card (1):</strong> The ultimate sin in cardboard form. A mark of shame; no Rat is ever crowned.</li>
+        </ul>
+
+        <p><strong>Turn Tokens (8):</strong> Two sets of numbered tokens (1–4). One set dictates today's initiative; the other is claimed to determine tomorrow's order.</p>
+
+        <p><strong>The Turn Sequence Card (1):</strong> A quick reference for the Day's phases. Its reverse holds the <b>Town Planning Ledger</b>, the District roster for setup.</p>
+
+        <p><strong>Liquor Barrels:</strong> The lifeblood of your operation, in two flavors: <b>Moonshine (Grey)</b> and <b>Havana Rum (Brown)</b>. <em>Cheap swill and the good stuff; nothing in between.</em></p>
+
+        <p><strong>The Dice (11):</strong> 5 White, 5 Red, and 1 grey <b>Mash die</b>. White and Red settle grudges on the street and draft the morning mash; the lone Mash die does one job only: <b>The Public Mash</b>.</p>
+
+        <p><strong>The Bankroll (Cash):</strong> Dirty, untraceable bills in denominations of $100, $500, and $1,000. The kind that never sees a bank.</p>
+
+        <p><strong>Police Squads (4 Blue Pieces):</strong> The blue wall that wants to see you swing. Impassable roaming patrols that prowl toward trouble, one to a mainland Borough. At setup they padlock the four <b>High Society</b> Speakeasies (see <em>The Blue Wall</em>).</p>
+
+        <p><strong>Federal Crackdown Tracker (1):</strong> A 10-space pressure clock used in the 4-player team variant.</p>
+
+    </div>
+    <div class="container one-column">
+        <h2 id="concepts">Key Concepts: The Underworld at a Glance</h2>
+        <div class="cover">
+            <img src="Art/Unload 2.png" alt="Unload" class="tight-cover" height="250px" width="100%">
+        </div>
+
+        <h3 id="mob">Your Mob: The Brains, the Brawn, and the Bastards</h3>
+        <p>From the cold steel of the <strong>Sicilian Syndicate</strong> to the fiery grit of the <strong>Hell's
+                Kitchen Irish</strong>, each mob brings their own brand of violence to the city's bloodstained ballet. You command:</p>
+
+        <div class="legend">
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Boss.svg" alt="Boss"></div>
+                <div class="legend-body">
+                    <span class="legend-title">A Boss</span>
+                    Your kingpin, the head of the snake. Bring him into a firefight to make your attacks deadlier, park him at a Still to brew an extra barrel; but if he catches a bullet, your crew is crippled until you crown a successor.
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Runner.svg" alt="Runner"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Runners</span>
+                    Your foot soldiers: knuckle-draggers and wheelmen who haul hooch, guard your turf, and catch your bullets. <b>You are strictly limited to 15 Runners</b>, never enough to occupy the whole city. To expand, leave borders thin and rely on the <em>threat</em> of violence rather than an actual army.
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Safehouse.svg" alt="Safehouse"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Safehouse</span>
+                    Your headquarters. You run a single Safehouse: it locks down Turf even when empty, gives a massive defensive edge in shootouts, and anchors the block where you <b>Recruit</b> fresh muscle. As your empire shifts, so can your base: <b>Secure</b> a District you Control to pull up stakes, or take over a rival's Safehouse when you overrun their turf.
+                </div>
+            </div>
+
+        </div>
+
+        <h3 id="muscle-ratio">The Muscle Ratio: Street Math</h3>
+        <p>One rule converts headcount into results everywhere it matters: barrels brewed, casualties in a Blowback, and dice in a firefight. The math: <b>Mobsters &divide; 2, rounded up</b> (capped at 5). Count your Mobsters (Boss and Runners) in the District and read across:</p>
+
+        <div class="muscle-ratio-table four-col" role="table" aria-label="The Muscle Ratio">
+            <div class="ratio-title" role="columnheader">The Muscle Ratio</div>
+            <div class="ratio-cell ratio-head" role="columnheader">Mobsters</div>
+            <div class="ratio-cell ratio-head" role="columnheader">Brew</div>
+            <div class="ratio-cell ratio-head" role="columnheader">Dead</div>
+            <div class="ratio-cell ratio-head" role="columnheader">Combat Dice</div>
+            <div class="ratio-cell" role="cell"><strong>1 - 2</strong></div>
+            <div class="ratio-cell" role="cell">1</div>
+            <div class="ratio-cell" role="cell">1</div>
+            <div class="ratio-cell" role="cell">1</div>
+            <div class="ratio-cell" role="cell"><strong>3 - 4</strong></div>
+            <div class="ratio-cell" role="cell">2</div>
+            <div class="ratio-cell" role="cell">2</div>
+            <div class="ratio-cell" role="cell">2</div>
+            <div class="ratio-cell" role="cell"><strong>5 - 6</strong></div>
+            <div class="ratio-cell" role="cell">3</div>
+            <div class="ratio-cell" role="cell">3</div>
+            <div class="ratio-cell" role="cell">3</div>
+            <div class="ratio-cell" role="cell"><strong>7 - 8</strong></div>
+            <div class="ratio-cell" role="cell">4</div>
+            <div class="ratio-cell" role="cell">4</div>
+            <div class="ratio-cell" role="cell">4</div>
+            <div class="ratio-cell" role="cell"><strong>9+</strong></div>
+            <div class="ratio-cell" role="cell">5</div>
+            <div class="ratio-cell" role="cell">5</div>
+            <div class="ratio-cell" role="cell">5</div>
+        </div>
+    </div>
+    <div class="container one-column">
+        <h3 id="map">The Map: Know Your Turf</h3>
+        <div class="cover">
+            <img src="Art/Rum Row.png" alt="Rum Row" class="tight-cover" height="340px" width="100%">
+        </div>
+        <p>Your empire is a broken city: 25 <strong>Districts</strong> across 5 <strong>Boroughs</strong>, each a flavor of poison and profit. Certain key Districts offer unique opportunities:</p>
+
+        <div class="legend">
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Gin.svg" alt="Speakeasy"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Speakeasies</span>
+                    The only spots where you can <b>Unload</b> Liquor for cash. Most pay a flat <b>$300 per barrel</b> (see <em>Unload</em>). Hold the most drinking venues (Speakeasies and High Society joints) at Reckoning to claim the <b>Night Mayor</b> Title. <em>The booze doesn't set the price; the address does.</em>
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Crown.svg" alt="High Society"></div>
+                <div class="legend-body">
+                    <span class="legend-title">High Society</span>
+                    One premium Speakeasy per mainland Borough, paying a massive <b>$500 per barrel</b>. The four start <b>padlocked</b> by the Police until a Raid throws them open (see <em>The Blue Wall</em>).
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/Fist.svg" alt="Ward"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Wards</span>
+                    Gritty blocks where mob roots run deep. Hold the most at Reckoning to claim the <b>Ward Boss</b> Title. You can also hire muscle on the cheap in any Ward you Control (see <em>Recruit</em>).
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge"><img src="Art/Icons/anchor.svg" alt="Docks"></div>
+                <div class="legend-body">
+                    <span class="legend-title">Docks</span>
+                    Where the rum comes ashore. At a Dock you Control you may <b>Trade</b> Moonshine for Havana Rum (see <em>Trade</em>). Hold the most at Reckoning to claim the <b>Harbormaster</b> Title. All Docks connect across the water as if adjacent, so the waterways are the fastest road across the map.
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <div class="legend-badge">
+                    <svg viewBox="0 0 100 108" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="33" y="11" width="16" height="8" rx="2.5" fill="none" stroke="#d4af37" stroke-width="2.2"/>
+                        <path d="M24 92 l-3.5 10 M58 92 l3.5 10" stroke="#d4af37" stroke-width="2.6" stroke-linecap="round"/>
+                        <rect x="14" y="18" width="54" height="74" rx="10" fill="none" stroke="#d4af37" stroke-width="3"/>
+                        <circle cx="20.5" cy="27" r="1.5" fill="#8a7329"/>
+                        <circle cx="20.5" cy="55" r="1.5" fill="#8a7329"/>
+                        <circle cx="20.5" cy="83" r="1.5" fill="#8a7329"/>
+                        <rect x="65" y="51" width="14" height="6" rx="2" fill="none" stroke="#d4af37" stroke-width="1.6"/>
+                        <rect x="76.5" y="18" width="13" height="76" rx="6.5" fill="none" stroke="#d4af37" stroke-width="2.4"/>
+                        <rect x="79.5" y="80.6" width="7.2" height="9.4" rx="1.6" fill="#e8c85a"/>
+                        <rect x="79.5" y="69.8" width="7.2" height="9.4" rx="1.6" fill="#dcb246"/>
+                        <rect x="79.5" y="59"   width="7.2" height="9.4" rx="1.6" fill="#d49a37"/>
+                        <rect x="79.5" y="48.2" width="7.2" height="9.4" rx="1.6" fill="#cf7f33"/>
+                        <rect x="79.5" y="37.4" width="7.2" height="9.4" rx="1.6" fill="#c8632e"/>
+                        <rect x="79.5" y="26.6" width="7.2" height="9.4" rx="1.6" fill="#c0472a"/>
+                    </svg>
+                </div>
+                <div class="legend-body">
+                    <span class="legend-title">Stills</span>
+                    Every District has a boiler printed on the board, numbered <b>2&ndash;12</b>. The moment you Control it the Still is active: it fires when its number is brewed, and risks <b>Blowback</b> when the leftovers match. Each Borough's <b>Pressure Strip</b> ranks its boilers for Police Raids (see <em>Police Raids</em>).
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container currencies-page">
+        <h3 id="currencies">The Currencies of the Underworld</h3>
+        <div class="cover currencies-hero">
+            <img src="Art/Influence Boss.png" alt="Influence" width="100%">
+        </div>
+        <p>To rule the city you'll need more than bullets. Two resources fuel the hustle, and a third buys power:</p>
+
+        <ul class="sub-section">
+            <li><strong>Cash:</strong> Expands your crew. Spend it to Recruit and Secure turf. Earn it by Unloading, Extorting, and running Odd Jobs when you Lay Low.</li>
+            <li><strong>Liquor Barrels:</strong> Your lifeblood. All hooch is born as Moonshine at your Stills; run it to a Dock and <b>Trade</b> it up to Havana Rum. Both sell for the same cash; only Rum buys back Influence (see <em>Unload</em>).</li>
+        </ul>
+
+        <h3>Influence: Currency of Power</h3>
+        <p>
+            Influence is your political clout, and the throne itself. You start the game with 6 markers and buy more with the <strong>Bribe</strong> Play, one at a time, up to a hard ceiling of <strong>10</strong>. The last four are the crown: hold all ten and you've bought the whole council (see <em>Winning the Game</em>). These markers cycle through your Ledger:
+        </p>
+
+        <ol class="sub-section" style="margin-top: 10px;">
+            <li><strong>The Reserves:</strong> Uncommitted Influence markers stack here. Use these to stake claimed <b>Jobs</b>.</li>
+            <li><strong>Fund (Shadows Phase):</strong> Fill your <b>Ledger</b> slots (up to 5) from your Reserves. Only Ledger markers fund Plays; any beyond 5 stay in Reserves as capacity for staking and Heat.</li>
+            <li><strong>Execute (Operations Phase):</strong> Spend markers from your <b>Ledger</b> slots to make <b>Plays</b>.</li>
+            <li><strong>Resolve (After the Play):</strong> Quiet Plays return spent markers to your Reserves. If the Play generates Heat, the marker is locked onto the communal <b>Heat Track</b> instead.</li>
+        </ol>
+
+        <p class="note" style="margin-top: 15px;">
+            <strong>Kingpin's Tip: Capacity, Not Actions</strong><br><br>
+            Extra Influence does <strong>not</strong> buy more daily actions; your Ledger is capped at 5 slots. Deep Reserves give you the <em>capacity</em> to absorb Heat, survive Police Raids, and stake Jobs without crippling your daily hustle. You can't out-action your rivals; you have to out-think them.
+        </p>
+
+        <div class="currency-board single-column-block">
+            <img src="Art/Operations.png" alt="The Ledger - Player Board">
+        </div>
+    </div>
+
+    <div class="container">
+        <h3 id="logistics">Territory: Lines in the Concrete</h3>
+        <div class="cover">
+            <img src="Art/Control.png" alt="Logistics" height="350px" width="100%">
+        </div>
+        <p>
+            An empire isn't built on bullets alone; it's built on logistics, on moving product and drawing borders your rivals fear to cross. Your muscle is spread thin, so a well-placed Safehouse and a few guards are often enough to keep the peace.
+        </p>
+
+        <h4>1. Control: Boots on the Ground</h4>
+        <p>
+            You can't tax what you don't hold. You Control a District if you have at least <b>one Mobster</b> (Boss or Runner) OR a <b>Safehouse</b> present there.
+        </p>
+        <ul class="sub-section">
+            <li><strong>Instant Possession:</strong> Control shifts the moment your piece enters a District. (Moving through an unoccupied District claims it for that instant.)</li>
+            <li><strong>Abandonment:</strong> <em>A barrel of gin can't hold a street corner.</em> If your last Mobster leaves and no Safehouse remains to anchor the block, you lose Control at once. Any Liquor left behind waits to be stolen.</li>
+            <li><strong>The Golden Rule of Turf:</strong> During the <b>Shadows</b> and <b>Reckoning</b> phases, there can be only one mob in a District. While you hold a District, rivals cannot enter without triggering combat.</li>
+            <li><strong>Contested Ground:</strong> During a firefight, the original Occupier retains Control (and all defensive bonuses) until their last piece falls or retreats.</li>
+        </ul>
+
+        <h4>2. Safe vs. Hostile Turf</h4>
+        <p>
+            Knowing where you can move your hooch is the difference between a payday and a bloodbath.
+        </p>
+        <ul class="sub-section">
+            <li><strong>Safe Districts:</strong> Any District you Control, plus any <b>Defenseless</b> one (no rival <em>Mobsters</em>, no Police Squad). Unattended Liquor and unguarded rival Safehouses don't make turf hostile; walk in, claim them, and take the Safehouse for your own.</li>
+            <li><strong>Hostile Districts:</strong> Any District guarded by <b>rival Mobsters</b>. Stepping onto Hostile turf immediately leaves your Mobsters <b>Pinned</b> (see <em>Combat: Pinned</em>).</li>
+            <li><strong>The Blue Wall:</strong> A District holding a <b>Police Squad</b> is <b>Impassable</b>: no Moving or Attacking in, no storming or bribing the law. Any <b>Speakeasy or Still</b> the Squad sits on is <b>padlocked</b> (shut for everyone, held by no one for Titles) until it moves on. A padlocked Still goes dormant: it brews nothing and <b>ignores Blowbacks</b>. The four Squads are automated, <b>Borough-locked</b> patrols, one per mainland Borough, that move only during a <b>Raid</b> (see <em>Police Raids</em>).</li>
+        </ul>
+
+
+        <h4>3. Connection: Reading the Grid</h4>
+        <p>
+            Knowing the layout is key to flanking enemies and slipping blockades. Districts are <strong>Connected</strong> if:
+        </p>
+        <ul class="sub-section">
+            <li><strong>Land & Bridges:</strong> They share a physical border or are linked by a Bridge.
+                <br><em>(e.g., Williamsburg connects to Red Hook, Brownsville, Corona, and Astoria by land, and to Five Points by Bridge).</em>
+            </li>
+            <li><strong>Waterways (Docks):</strong> All <b>Dock Districts</b> connect to each other across the water as if they were adjacent.
+                <br><em>(e.g., You can Move directly from West Side to Throggs Neck in one Play).</em>
+            </li>
+        </ul>
+    </div>
+    <div class="container goal-page">
+        <h2 id="goal">Your Goal: Earning Respect</h2>
+        <div class="cover">
+            <img src="Art/Respect.png" alt="Respect" height="310px" width="100%">
+        </div>
+        <p>In this city, a reputation is worth more than any bankroll, and it's the one thing a bullet can't take back. <strong>Respect</strong> is that reputation made currency, and you build it two ways: by pulling off <strong>Jobs</strong> too loud to ignore, and by claiming <strong>Titles</strong> that prove you own the streets and the headlines alike.</p>
+
+        <h3>1. Jobs: Forge Your Legend</h3>
+        <p>
+            Deeds and Titles pay you for what you <em>hold</em>; <strong>Jobs</strong> pay you for what you <em>do</em>. Beside the board sits the <strong>Jobs Market</strong>: the word on the street, dealt face-up in a row for every boss to read. New Jobs land beside the deck, at the <b>fresh end</b>, and age toward the <b>stale end</b>; whenever a Job leaves the row, close the gap and deal a fresh card at once. Jobs come in three escalating tiers:
+        </p>
+
+        <ul class="sub-section">
+            <li><strong>Gigs</strong> <em>(Stake 1 / 1 Respect)</em>: Quick street hustles. One sharp Play, little setup.</li>
+            <li><strong>Rackets</strong> <em>(Stake 2 / 3 Respect)</em>: Mid-level capers. One Play, with real turf and muscle behind it.</li>
+            <li><strong>Scores</strong> <em>(Stake 3 / 5 Respect)</em>: Front-page heists. One thunderous Play at the end of a campaign.</li>
+        </ul>
+
+        <h4>Claiming a Job</h4>
+        <p>
+            Claim a Job with the <b>Hustle</b> Play (see <em>Plays</em>): take the card from the Market and stake Influence from your <b>Reserves</b> onto it equal to its <b>Stake</b>. Those markers sit locked until the job resolves; the bigger the promise, the longer your capital sleeps, and the longer rivals get to wreck your setup. There's no deadline: the only clock is your money. Cold feet? Walk away any time on your turn (it's not a Play): discard the card and your markers come home. <em>Nobody signs contracts in this business.</em>
+        </p>
+        <h4>Pulling It Off</h4>
+        <p>
+            No declarations, no paperwork: do the deed with the whole table watching and the Job completes on the spot. Take back your stake and add the card to your <b>Respect pile</b>; completed Jobs never return to the deck. Job verbs are your Plays; to <b>Seize</b> a District is to take Control of it from a rival, by gunfire or by strolling in where they left the door open.
+        </p>
+        <p class="key-rule" style="margin-top: 20px;">
+            <span class="rule-label">The Play Is the Unit</span>
+            A Job is a <b>deed</b>, not a board position. When a Play ends, check it against your claimed Jobs: if the Play did the deed, the Job is done. The deed counts <b>even if it didn't survive the Play</b>. <em>Kill a rival Boss, then lose the firefight: nothing un-kills him. The job pays.</em>
+        </p>
+    </div>
+
+    <div class="container">
+        <h3>2. Titles: Carving Up the City</h3>
+        <div class="cover">
+            <img src="Art/Bridge.png" alt="Handshake" height="340px" width="100%">
+        </div>
+        <p>
+            Titles aren't owned, they're <b>held</b>, and only for as long as you're the biggest name on the block. Power here follows muscle: pull ahead of every rival on the turf that counts and the crown swings your way; slip behind and it swings just as fast to whoever now stands tallest. The city settles its crowns each nightfall (see <em>Stake Your Claim</em>), and any Title still in your grip when the books close is worth <b>2 Respect</b>.
+        </p>
+
+        <h4>Borough Deeds</h4>
+        <p>
+            Seizing a Borough turns muscle into empire. Hold more Districts in a Borough than any single rival to claim its <b>Deed</b>.
+        </p>
+
+        <h4>Ward Boss</h4>
+        <p>The Boroughs make headlines, but the Wards decide who owns the block. Hold more <b>Ward Districts</b> than any single rival to claim the <b>Ward Boss</b> Title.</p>
+
+        <h4>Harbormaster</h4>
+        <p>You can't stop a man's ferry, but you can own the pier. Hold more <b>Dock Districts</b> than any single rival to claim the <b>Harbormaster</b> Title. Every barrel of molasses lands on your docks, so you <b>set Tomorrow's Mash</b>: at the end of each Shadows, instead of rolling the Mash die, <b>name any face you like</b> (see <em>Ferment Tomorrow's Mash</em>). <em>Feed your own Stills, starve the rivals'; the whole city cooks the number you choose.</em></p>
+
+        <h4>Night Mayor</h4>
+        <p>The sun belongs to the law; the night belongs to you. Hold more <b>drinking venues</b> than any single rival to claim the <b>Night Mayor</b> Title. Every <b>Speakeasy</b> counts, and so does every <b>High Society</b> joint: a swanky room is still a speakeasy, and the grandest jewel in the nightlife crown. <em>(The four High Society venues start padlocked by the Police, so they only join the count once a Raid throws them open.)</em></p>
+
+        <h4>Public Enemy No. 1</h4>
+        <p>The streets remember a crew that can pull off any job. The moment you hold <b>more completed sets of Jobs</b> (1 Gig, 1 Racket, and 1 Score) than any single rival, you claim the <b>Public Enemy No. 1</b> Title. <em>A specialist gets by. A legend does it all.</em></p>
+
+        <h3 style="margin-top: 1.8em;">The Commission</h3>
+        <p>
+            Jobs and Titles forge your legend, but they don't buy you a chair at the table. Above the sirens and the smoke sits <strong>The Commission</strong>: the judges, the aldermen, and the money men who quietly decide who gets to call himself King. Every last one of them is for sale, and they all take the same coin: cold, untraceable <strong>cash</strong>. Pay it a bribe at a time with the <strong>Bribe</strong> Play, and each envelope buys you another marker of <strong>Influence</strong>, another man in your pocket, until all <strong>10</strong> are yours and the whole council answers to you (see <em>Winning the Game</em>). <em>Respect makes you feared; a bought Commission makes you untouchable. You need both.</em>
+        </p>
+    </div>
+    <div class="container">
+        <h2 id="setup">Setup: Carving Out Your Corner</h2>
+        <div class="cover">
+            <img src="Art/Logistics.png" alt="Logistics" height="280px" width="100%">
+        </div>
+        <ol class="sub-section">
+            <li>
+                <strong>Prepare the City:</strong><br>
+                Unfold the Game Board and lay out the Cash and Dice. Roll the <b>Mash die</b> and leave it on the board: <b>Day 1's Public Mash</b>, fermenting since before you sat down (see <em>The Brew</em>).
+            </li>
+            <li>
+                <strong>Stack the Whispers:</strong><br>
+                Pull the <b>Gigs</b> from the Jobs deck, shuffle them, and deal <b>Player Count + 1</b> face-up in a row: the <b>Jobs Market</b>. Shuffle the remaining Gigs back into the deck and set it face-down at one end of the row; that end is <b>fresh</b>, the far end <b>stale</b>. <em>Small jobs first: nobody hands a stranger a Score.</em> Everything else, the <b>Titles</b>, the <b>Shylock's Marks</b>, the <b>Rat Card</b>, waits in the Supply until it's earned; keep it within reach but off the table. <em>A crown, a debt, a snitch's brand: nobody starts the night wearing them.</em></li>
+            <li>
+                <strong>Claim Your Crew:</strong><br>
+                Shuffle the <b>Playbooks</b> and deal one to each player. Take your Ledger and your muscle: <b>1 Boss</b>, <b>15 Runners</b>, and <b>1 Safehouse</b>.
+            </li>
+            <li>
+                <strong>Establish Turf:</strong><br>
+                Nobody starts on Staten Island; return its Deed to the box. Shuffle the four remaining <b>Borough Deeds</b> and deal one to each player: your home turf. Garrison its three Districts: <b>1 Safehouse, 1 Boss, and 2 Runners</b> in your Ward, <b>3 Runners</b> at your Dock, and <b>3 Runners</b> in your Speakeasy.
+            </li>
+            <li>
+                <strong>Raise the Blue Wall:</strong><br>
+                Place <b>1 Police Squad</b> on each <b>High Society</b> Speakeasy, one per mainland Borough (4 in all). These <b>$500</b> joints start <b>padlocked and impassable</b>, so the mobs fight over the <b>$300</b> scraps until a <b>Raid</b> throws the premium spots open.
+            </li>
+            <li>
+                <strong>Get Your Cut:</strong><br>
+                A rising kingpin's bankroll: take <b>$1,500</b> cash and <b>6 Influence markers</b>; slot 5 onto your Ledger, drop the last 1 into your Reserves.
+            </li>
+            <li>
+                <strong>Turn Order (Who Strikes First):</strong><br>
+                Take one set of four <b>Turn Tokens</b> as <b>today's set</b> and randomly deal one to each player (#1 upwards) to set the morning's initiative. Keep the other set nearby as <b>tomorrow's set</b>; those decide the next Day's order, claimed one by one as players <b>Lay Low</b>. <em>In this city, the fast eat the dead.</em>
+            </li>
+        </ol>
+    </div>
+
+    <div class="container shadows-page">
+        <h2 id="gameplay">Gameplay: Run the Streets</h2>
+        <div class="cover">
+            <img src="Art/Distillation.png" alt="Run the Streets" height="280px" width="100%">
+        </div>
+        <p>Days unfold in three phases:</p>
+
+        <h3 id="shadows">Phase 1: Shadows</h3>
+        <p>The city wakes to the hiss of steam.</p>
+
+        <h4>1. The Brew</h4>
+        <p>
+            The <b>Mash die</b> already sits on the board, rolled at the end of yesterday's Shadows (Day 1: at Setup). The boss holding <b>Turn Token #1</b> rolls the communal pool: <b>Red dice equal to Player Count + 1</b> <em>(4 players: 5 Red)</em>. So there's always <b>one more Red than there are players</b>; after everyone drafts, exactly one Red is left over.
+        </p>
+        <ol class="sub-section" style="margin-top:5px;">
+            <li><strong>Read the Public Mash:</strong> The <b>Mash die</b> is <b>The Public Mash</b>, the swill the whole city cooks today. It stays put all morning and feeds every number below; no surprises, the table has known it since yesterday.</li>
+            <li><strong>Draft a Red, in Turn Order:</strong> Each boss takes <b>exactly 1 Red die</b>. Your <b>Brew Number</b> is <b>Mash + your Red</b>. <em>Choose carefully: the Red you leave on the table may be the one that burns you (see The Blowback).</em></li>
+            <li><strong>Fire your Stills:</strong> <b>Every active Still you Control</b> matching your Brew Number brews <b>Moonshine</b>, per <em>The Muscle Ratio</em>. Your brew is yours alone; rival Stills stay cold. <em>(If barrels run short across several of your Stills, you choose which get the last ones.)</em></li>
+        </ol>
+        <p>
+            <b>Twist the Valves:</b> If your <b>Boss</b> stands in a District when its Still fires, that Still brews <b>+1 Barrel</b>. <em>The old man cranks the valves wide for one more run, but his hands are on the boiler if it blows (see The Blowback).</em>
+        </p>
+
+        <h4>2. The Blowback</h4>
+        <p>
+            One Red die is left undrafted. Add that <b>leftover Red</b> to the <b>Black</b> for the <b>Blowback Number</b>. Cheap pipes, high pressure, and the boilers blow: the Blowback is communal, so <b>every active, Controlled Still</b> matching it bursts, whoever owns the block.
+        </p>
+        <p style="margin-bottom: 15px;">
+            In each bursting District, tally casualties by <em>The Muscle Ratio</em>. A boiler blast plays no favourites: no Runner can throw himself over an explosion, so if your <b>Boss</b> stands on a bursting Still, <b>he is the first to fall</b> (a firefight is the only place his crew can take the hit for him). The survivors patch the boiler and hold on: they keep their barrels, keep their turf, and the Still runs again tomorrow.
+        </p>
+
+        <p class="note" style="margin-bottom: 15px;"><strong>Kingpin's Tip:</strong> The Mash die has been public since yesterday, so every Red in the pool is a Blowback waiting to happen. Sometimes the smart draft isn't the die that fires your best Still; it's the one you daren't leave behind to burn it down. The first seat brews richest. The last seat is stuck with whatever's left, holding the match.</p>
+
+        <h4>3. Grease the Wheels</h4>
+        <p>
+            Load your <strong>Ledger</strong> from your <strong>Reserves</strong>, filling all <b>5 slots</b> if you can (only Ledger markers pay for Plays today, so you'll almost always want it full). Anything above 5 stays in your Reserves as <em>capacity</em>: fuel to stake Jobs and soak up Police Heat.
+        </p>
+
+        <h4>4. Ferment Tomorrow's Mash</h4>
+        <p>
+            Bootlegging takes time, and cheap mash ferments overnight. Set <b>tomorrow's Public Mash</b> and leave the <b>Mash die</b> on the board: if a rival holds the <b>Harbormaster</b> Title, they own the molasses trade and <b>name any face they like (1&ndash;6)</b>; otherwise, <b>roll the Mash die</b>. Either way, you'll play today's whole Operations Phase knowing tomorrow's number, so seize the right Stills, park the Boss, and Lay Low early for Turn Token #1 while the intel is fresh.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <!-- Phase 2 -->
+        <h3 id="operations">Phase 2: Operations</h3>
+        <p>Players act in <strong>Turn Order</strong>, taking <b>one Play each</b>. After your Play, the turn passes to the next boss; play keeps going around the table until everyone has <b>Laid Low</b> for the Day.</p>
+
+        <div class="action-economy-box turn-proc">
+            <span class="turn-label">On Your Turn: make one Play</span>
+            <ol>
+                <li><strong>Make a Play.</strong> Spend Influence to perform <b>1 Action</b>: a Standard Play or a Power Play (see the tables below).</li>
+                <li><strong>Resolve any combat</strong> the Play triggers, fully, before the Play ends. <em>(A firefight can eat several Influence, but it's still this one turn.)</em></li>
+                <li><strong>Pay the cost.</strong> Return the spent marker(s) from your <b>Ledger</b> to your <b>Reserves</b>, unless the Play drew Heat, in which case <b>1 marker</b> locks onto the <b>Heat Track</b> instead.</li>
+            </ol>
+            <p style="margin:6px 0 0;">Then the turn passes. When it comes round again you take another Play, and so on until you run dry or choose to step off the street.</p>
+
+            <div class="turn-exit">
+                <span class="turn-label">Out of Influence (or stepping off early)? Lay Low</span>
+                <ol type="a">
+                    <li><strong>Odd Jobs:</strong> each unspent marker still in your <b>Ledger</b> pays you <b>$100</b> <em>(Reserve markers don't pay)</em>.</li>
+                    <li>Clear any remaining <b>Ledger</b> markers to your <b>Reserves</b>.</li>
+                    <li>Claim the lowest-numbered token left in <b>tomorrow's set</b> <em>(claim #1 to strike first tomorrow)</em>.</li>
+                </ol>
+            </div>
+        </div>
+
+        <h4>Plays: Working the Angles</h4>
+
+        <table class="action-table">
+            <tr>
+                <th colspan="2">Standard Plays (Cost: 1 Influence)</th>
+            </tr>
+            <tr>
+                <td><strong>Move</strong></td>
+                <td>Send any number of <b>Mobsters and/or Liquor barrels</b> to one Connected District. Barrels can ride with your muscle or travel <b>alone</b>, working your distribution network.<br><br>
+                    <b>Into rival turf:</b> your Mobsters are Pinned and the Occupier gets a Standoff choice first (see <em>Combat</em>); barrels ride in with them, and any left in a rival's District become theirs. <em>Thanks for the donation.</em><br><br>
+                    <b>The Blue Wall:</b> you cannot Move into a District held by a Police Squad.</td>
+            </tr>
+            <tr>
+                <td><strong>Recruit</strong></td>
+                <td>Hire Runners for <b>$300 per Runner</b> in <b>any Ward you Control</b>, or <b>$400</b> in the District holding your <b>Safehouse</b>. <em>The address sets the price; a Safehouse on the front line hires straight into the fight.</em></td>
+            </tr>
+            <tr>
+                <td><strong>Hustle</strong></td>
+                <td>Claim <b>1 Job</b> from the <b>Market</b>: take the card and stake Influence from your <b>Reserves</b> equal to its <b>Stake</b>, then refill the row (see <em>Jobs</em>). <em>If the deck runs dry, shuffle the discards into a new one.</em> Limit: once per Day. <em>One handshake a day; make it count.</em></td>
+            </tr>
+            <tr>
+                <td><strong>Secure</strong></td>
+                <td>Move your operation for <b>$500</b>. Relocate your Safehouse to a District you Control, pulling it off its previous block. <em>You only run one hideout, so Securing new turf means abandoning the old.</em></td>
+            </tr>
+            <tr>
+                <td><strong>Trade</strong></td>
+                <td>
+                    At a <b>Dock District you Control</b>, swap any number of <b>Moonshine</b> barrels sitting in that District for <b>Havana Rum</b>, at a <b>1:1</b> ratio. A quiet dockside exchange, and the only way Rum enters the game. Rum sells for the same cash as Moonshine, but pays a <b>Kickback</b> when Unloaded, recycling spent Influence back onto your board. Trade up, or watch the rich crews lap you.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Beg</strong></td>
+                <td>
+                    <em>When the walls close in, Shylock offers a lifeline made of barbed wire.</em> Take <b>$1,500</b> from the bank and one of his <b>Marks</b>.<br><br>
+                    <b>The Loan:</b> There's no limit on how many Marks you carry, but Shylock keeps only <b>8 in his book</b>. When all 8 are out on the street, no one Begs again until one comes back.<br><br>
+                    <b>Paying the Piper:</b> Clear a debt by paying <b>$3,000</b> to the bank <b>any time</b>, then discard that Mark; each is squared <b>one at a time</b>. <em>Shylock always takes back twice what he gave.</em><br><br>
+                    <b>The Toll:</b> While <b>any</b> Mark of yours is unpaid you <b>cannot be crowned</b> (see <em>A Kingpin Must Have Honor</em>). <em>One Mark or five, the crown waits until every debt is square.</em>
+                </td>
+            </tr>
+        </table>    </div>
+
+    <div class="container one-column">
+        <h3>Power Plays</h3>
+        <div class="cover">
+            <img src="Art/Vendetta.png" alt="Bloodbath" class="tight-cover" height="265px" width="100%">
+        </div>
+        <p>Power Plays cost 2 Influence, but still count as a single Play in the turn cycle.</p>
+        <table class="action-table">
+            <tr>
+                <th colspan="2">Power Plays (Cost: 2 Influence)</th>
+            </tr>
+            <tr>
+                <td><strong>Unload</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+                <td>
+                    <b>The Address Sets the Price:</b> At a Speakeasy you Control, sell <b>Moonshine or Rum</b> for the same cash. The price is the joint, not the bottle: a flat <b>$300 per barrel</b> at most Speakeasies, a massive <b>$500</b> at a <b>High Society</b> joint. <em>Cheap swill in a swanky room still drinks like champagne.</em><br><br>
+
+                    <b>The Kickback:</b> <b>Moonshine</b> pays <b>cash only</b>; <b>Havana Rum</b> pays cash <b>plus 1 Kickback per barrel</b>: for each Rum sold, move <b>1 spent Influence marker</b> from your Reserves into an empty <b>Ledger</b> slot. <em>(Your board caps at 5; Kickbacks beyond that are wasted.)</em><br><br>
+
+                    <b>The Greed Tax:</b> Unloading <b>4+ barrels</b> in one Play generates Heat. If two players' markers paid for it, you choose which goes to the Heat Track. <em>Max safe delivery is 3; move more and the cops come sniffing.</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Bribe</strong></td>
+                <td>
+                    <em>Everyone on the Commission has a price, and you pay it in cash.</em> Pay the bank <b>$2,500</b> and take <b>1 permanent Influence marker</b> for your <b>Reserves</b>. You may Bribe only up to a ceiling of <b>10 total Influence</b>; buy the last four and the council is yours (see <em>Winning the Game</em>). <em>The marker is yours for good, unless you stake it on a deal and break your word (see Cooperation).</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Extort</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+                <td>Shake down the locals. <b>Once per Day</b>, earn a flat <b>$200</b> for each District you Control <b>anywhere on the map</b>. It's brutal, highly profitable, and noisy; this Play <b>always generates Heat</b> <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, however many Districts pay.</td>
+            </tr>
+            <tr>
+                <td><strong>Rat</strong></td>
+                <td>
+                    <em>There's no honor among thieves when the sirens wail.</em> Drop a dime on your rivals: with at least <b>1 marker</b> on the Heat Track, trigger an immediate Police Raid. Every Squad prowls toward the <b>freshest</b> Heat it can reach, so whoever fired the last loud shot bleeds worst (see <em>Police Raids</em>).<br><br>
+                    <b>The Mark of the Snitch:</b> Ratting is the ultimate street sin. Making this Play, you take the <b>Rat Card</b> from the supply (or snatch it from the rival who holds it). A pariah does no business: while you hold the card you <b>cannot Hustle</b> and <b>cannot be crowned</b> (see <em>A Kingpin Must Have Honor</em>). <em>When a Raid boils over on its own, nobody takes the blame; the card stays put.</em><br><br>
+                    <b>The Mark Dies with the Don:</b> If your <b>Boss</b> is killed or arrested, return the Rat Card to the supply. <em>He takes the shame to his grave.</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Rise</strong></td>
+                <td><em>Boss in the morgue? Time to anoint a successor.</em> Available only while your Boss is off the board. Appoint a new Boss ($0) in any District <b>you Control</b>, or any with <b>no rival Mobsters or Safehouses</b> <em>(unattended Liquor and Stills don't count)</em>, and spawn <b>2 free Runners</b> with them. You may also Secure that District for free.
+                </td>
+            </tr>
+
+        </table><br>
+    </div>
+    <div class="container one-column mob-plays">
+        <h3>Mob Signature Plays</h3>
+        <p>Four families, four ways to make a killing. Each runs on an always-on <b>Trait</b>, the thing that makes them <em>them</em>, plus <b>two signature Plays</b> no rival can copy.</p>
+        <h4>Sicilian Syndicate</h4>
+        <p>Old blood, older rules. An insult to the family is a death sentence, and the family is <b>Untouchable</b>: the precinct captains are on the payroll, so the <b>Sweep</b> never thins their ranks. Their Districts may hold <b>any number of Mobsters</b> at Reckoning. <em>Fifteen Runners only stretch so far, so massing a crew in one block leaves your borders thin, but where the Syndicate plants its flag, no one talks them down.</em></p>
+        <table class="action-table">
+            <tr>
+                <td><strong>Hit (Cost: 2)</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+                <td>
+                    <em>The family doesn't fight foot soldiers; it goes for the head.</em> While <b>Pinned</b> in a rival District, initiate a <b>special attack</b>. Both sides roll simultaneously as normal. However, if you score <b>any hits</b>, the <b>rival Boss takes the first hit</b> instead of a Runner. Generates Heat if you kill.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Consigliere (Cost: 1)</strong></td>
+                <td>
+                    One phone call and the trouble disappears. Remove <b>1 Influence marker</b> of your choice
+                    from the
+                    <b>Heat Track</b> and return it to its owner's <b>Reserves</b> (slide the rest down to close the gap).
+                </td>
+            </tr>
+        </table>
+
+        <h4>Hell's Kitchen Irish</h4>
+        <p>They brew it strong and fight dirty, and they always come heavy. That's their <b>Firepower</b>: whenever the Irish <b>Open Fire</b>, they roll <b>1 extra attack die</b> (up to the max of 5). Strictly an invader's tool: it never fires on defence, not even an <b>Ambush</b>. <em>Why buy bullets when a brick works just fine, and why bring one gun when you can bring two?</em></p>
+        <table class="action-table">
+            <tr>
+                <td><strong>Plunder (Cost: 1)</strong></td>
+                <td>
+                    Initiate a special attack: each hit steals <b>1 Liquor barrel</b> of your choice from the
+                    target District instead of killing. Carry them off if you Advance <b>(dropped if you Fall Back)</b>. Occupier hits still kill.
+                    You may also Plunder on an Ambush (Cost: 0). Never generates Heat.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Peddle (Cost: 1)</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+                <td>
+                    <em>Rotgut sells itself in the tenements.</em> Unload as normal, but in <b>any Ward you Control</b> as well as Speakeasies. Only <b>Moonshine</b> may be sold this way, at the flat <b>$300 per barrel</b> street rate (no Kickback, no High Society price). The Greed Tax still bites at 4+ barrels.
+                </td>
+            </tr>
+        </table>
+
+        <h4>East Side Vipers</h4>
+        <p>They move like smoke and strike like snakes. Nothing happens in this city that the Vipers don't overhear first, and those <b>Whispers</b> are their edge: when they <b>Hustle</b>, they may peek at the <b>top card of the Jobs deck</b> and claim it <b>face-down</b> instead of a Market card. Rivals see the Stake, never the job; reveal it the moment it completes. <em>You won't know they're there until the shots come from the shadows.</em></p>
+        <table class="action-table">
+            <tr>
+                <td><strong>Stealth (Cost: 1)</strong></td>
+                <td>Move up to 5 Mobsters (no Liquor) into a Connected rival District without triggering a Standoff
+                    (the Occupier cannot Ambush or Fold). You cannot end your Play in this state. You must immediately
+                    spend another Influence to either
+                    <b>Open Fire</b> on the District, or <b>Advance</b> to a Connected Safe District.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Tunnel (Cost: 1)</strong></td>
+                <td>
+                    <em>The city runs on rails the cops forgot.</em> Move up to <b>5 Mobsters (no Liquor)</b> between the District holding your <b>Safehouse</b> and any other District you Control, in either direction. <em>Like Skiff, this is a Play on your own turn, not an escape hatch: you cannot use it to flee combat or a Police Raid.</em>
+                </td>
+            </tr>
+        </table>
+
+        <h4>Harlem Knights</h4>
+        <p>Dressed to kill, literally. The Knights work the water, and no crew moves liquor like they do, because their <b>Network</b> runs every pier from Havana to Harlem. Whenever the Knights <b>Trade</b> at a Dock, they gain <b>1 extra barrel of Havana Rum</b> for free, on top of the barrels they swap. <em>Friends on every wharf, and a fresh cask waiting at each one.</em></p>
+        <table class="action-table">
+            <tr>
+                <td><strong>Skiff (Cost: 1)</strong></td>
+                <td>Move up to 5 Mobsters from a Coastal District you Control to any other
+                    Coastal District. A <b>Coastal District</b> is any District touching water, so this reaches far
+                    beyond the Docks. Each Mobster may carry <b>1 Liquor barrel</b> aboard (up to 5 barrels in all). If you enter a rival District, the standard Standoff applies (the Occupier may Ambush, Hold Fire, or Fold).
+                    <em>Skiff is a Play on your own turn, not an escape hatch: you cannot use it to flee combat or a Police Raid.</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Torch (Cost: 2)</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+                <td>
+                    Burn down a Safehouse in a rival District. To perform this Play, you must have at least one Runner
+                    Pinned in the target District. Sacrifice one of those Pinned Runners; he strikes the match and goes up with the flames (return him to your supply).
+                    The rival's Safehouse is immediately destroyed (return it to their supply). Any rival Mobsters and
+                    Liquor in the District are unharmed and retain Control. This Play generates Heat.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <h3 id="reckoning">Phase 3: Reckoning</h3>
+        <div class="cover">
+            <img src="Art/Embargo.png" alt="Doing the Paperwork" height="320px" width="100%">
+        </div>
+        <p>Once the guns go quiet, the city settles its accounts. <b>All players resolve this phase simultaneously</b>, evaluating their empires exactly as they stand the moment the Operations Phase ends. Yesterday's holdings count for nothing.</p>
+
+        <h4>1. The Sweep</h4>
+        <p><em>The cops don't mind a hustle, but they hate an army.</em><br>
+            In any District with more than <b>5 Mobsters</b>, remove excess <b>Runners</b> to bring the count down to 5. <em>(The Sicilian Syndicate is <b>Untouchable</b> and ignores the Sweep entirely.)</em></p>
+
+        <h4>2. Yesterday's News</h4>
+        <p>The Market moves on: discard the Job at the <b>stale end</b> of the row, close the gap, and deal a fresh card beside the deck. <em>A job the whole city passed on is tomorrow's fish wrap.</em></p>
+
+        <h4>3. Stake Your Claim</h4>
+        <p>This is where the crowns change hands. For each Title, whoever <b>leads the category</b> takes it or keeps it; if two or more rivals tie for the lead, or no one qualifies, it slips back to the Supply. <em>(Police never count as rivals; turf they hold counts as empty for every Title check.)</em></p>
+        <ul class="sub-section">
+            <li><strong>Borough Deeds:</strong> Held by the player Controlling the most Districts in that Borough.</li>
+            <li><strong>Ward Boss:</strong> Held by the player Controlling the most <b>Ward Districts</b>.</li>
+            <li><strong>Harbormaster:</strong> Held by the player Controlling the most <b>Dock Districts</b>.</li>
+            <li><strong>Night Mayor:</strong> Held by the player Controlling the most <b>drinking venues</b> (Speakeasy and High Society Districts combined).</li>
+            <li><strong>Public Enemy No. 1:</strong> Held by the player with the most completed <b>Sets</b> of Jobs (1 Gig, 1 Racket, 1 Score).</li>
+        </ul>
+
+        <h4>The Next Day...</h4>
+        <p>If any Kingpin holds all <b>10 Influence</b>, <b>15+ Respect</b>, and their <b>honor</b>, the game ends immediately! (see <em>Winning the Game</em>).<br><br>
+        If not, the war continues. The Turn Tokens you claimed tonight become <b>today's set</b>, the other set becomes <b>tomorrow's</b>, and the next Day's Shadows Phase begins in the new Turn Order.</p>
+    </div>
+    <div class="container">
+        <h2 id="win">Winning the Game: The Final Reckoning</h2>
+        <div class="cover">
+            <img src="Art/Kingpin.png" alt="The Throne" height="350px" width="100%">
+        </div>
+
+
+        <p>
+            Every crew is grasping for the same brass ring, and the night one of you closes a fist around it, the war for New York is over. The crown falls to the boss who ends a
+            <strong>Reckoning Phase</strong> holding all <strong>10 Influence</strong>, <strong>15+ Respect</strong>, and their <strong>honor intact</strong>. The books open only at Reckoning; a crown seized at noon can still
+            slip away before nightfall.
+        </p>
+
+        <h3>1. Own the Commission (10 Influence)</h3>
+        <p>
+            Any thug can fire a Tommy gun, but it takes a true operator to buy the whole council. You must <b>own all 10 Influence markers</b>, the ceiling of your power. You start with 6 and buy the last four with the <strong>Bribe</strong> Play at <b>$2,500</b> apiece, <b>$10,000</b> to seal the deal, so the crown stays out of reach until your liquor economy is humming. <b>Where the markers sit on the night doesn't matter</b>, in Reserves, on the Ledger, staked on Jobs, or cooling on the Heat Track; what counts is that all ten are yours. <em>Break your word on a staked deal, though, and that marker is forfeit to the box, one more bribe to pay all over again.</em>
+        </p>
+
+        <h3>2. Earning Respect</h3>
+        <p>
+            Legitimacy means nothing if the streets don't fear you. You need 15 Respect to claim the crown. To calculate your Respect, tally the spoils of your empire:
+        </p>
+        <ul class="sub-section">
+            <li><strong>Borough Turf:</strong> Gain <b>2 Respect</b> for each Borough Deed you hold.</li>
+            <li><strong>Titles:</strong> Gain <b>2 Respect</b> for each of the <b>Ward Boss</b>, <b>Harbormaster</b>, <b>Night Mayor</b>, and <b>Public Enemy No. 1</b> Titles you hold at the end of the game.</li>
+            <li><strong>Criminal Legends:</strong> Gain <b>1, 3, or 5 Respect</b> for each completed Job in your Respect pile. <em>Turf and jobs are the surest roads to 15.</em></li>
+        </ul>
+
+        <h3>3. A Kingpin Must Have Honor</h3>
+        <p>
+            The council crowns no Rat and no debtor: while you hold the <b>Rat Card</b> or an unpaid <b>Shylock's Mark</b>, you cannot win, whatever your Respect. In the <em>Blood Oath</em>, neither can your Alliance. <em>Shed the Mark, square the debt, then take the throne.</em>
+        </p>
+
+        <h3>The Final Standoff</h3>
+        <p>
+            If multiple bosses own all 10 Influence and hold 15+ Respect on the same night, there's no war left to fight;
+            the council simply opens the books and weighs one empire against the other:
+        </p>
+        <ol class="sub-section">
+            <li><strong>Total Respect:</strong> The highest Respect takes the crown.</li>
+            <li><strong>Cold Hard Cash:</strong> If deadlocked, the Kingpin with the fattest bankroll buys the throne
+                (include the loose change printed on your Playbook).</li>
+        </ol>
+        <p>
+            <strong>There are no shared victories in <em>Moonshine Kingdom</em>.</strong> You either rule the city alone, or bleed out in the gutter.
+        </p>
+    </div>
+    <div class="container"><!-- Cooperation -->
+        <h2 id="cooperation">Cooperation: Puppets in the Smoke</h2>
+        <div class="cover">
+            <img src="Art/Puppet.png" alt="Puppeteer" height="300px" width="100%">
+        </div>
+        <p>
+            Trust is fleeting, but even sharp kingpins need rivals. Every favor granted might be a knife in the back.
+        </p>
+
+        <h3>Pulling the Strings (Puppeteering)</h3>
+        <p>
+            At <b>any time</b> during the Operations Phase, you may move Influence markers from your <b>Ledger</b> to a
+            rival's <b>Ledger</b> (up to their 5 marker cap). This is not a Play and does not end your turn.
+        </p>
+        <ul class="sub-section">
+            <li><strong>The Loan:</strong> You lend your name and network. The rival may use these markers as their
+                own, now or later.</li>
+            <li><strong>The Risk:</strong> If the rival spends <b>your</b> marker on a Play that generates
+                Heat, <b>your</b> marker goes to the Heat Track. Otherwise, it returns to your Reserves once used.</li>
+        </ul>
+
+        <h3>A Binding Handshake</h3>
+        <p>
+            A Mobster's word is cheap. When a deal needs teeth, back it with the one thing you're grasping for: your Influence.
+        </p>
+
+        <h4>Making the Deal</h4>
+        <ol class="sub-section">
+            <li><strong>State the Terms & Deadline:</strong> The terms must be clear, and you must agree on a specific deadline (e.g., "before the Day ends," or "until you pay me $1,000").</li>
+            <li><strong>Stake a Marker:</strong> The player making the promise takes <b>1 Influence marker</b> from their Reserves and places it between both players, where it sits locked until the deal resolves. <em>Skin in the game, and everyone can see it.</em></li>
+        </ol>
+        <p class="note" style="text-align: left; padding: 10px 15px;"><em><b>Example:</b> "My marker's on the table. If
+                you let me pass through your Borough unharmed, I promise to give you $1,000 before Day's end."</em></p>
+
+
+        <h4>Honoring & Breaking Deals</h4>
+        <p>Deals resolve the moment their conditions are met or failed.</p>
+        <ul class="sub-section">
+            <li><strong>Deal Honored:</strong> The moment the terms are met, the deal is complete. The staked marker returns to its owner's <b>Reserves</b>.</li>
+            <li><strong>Deal Broken:</strong> If the agreed deadline passes without the terms being met, or if a player violates a standing agreement for <b>any reason</b> (including third-party interference), their word becomes garbage. The staked marker is <b>forfeit to the box</b>, gone for good, dropping the breaker's Influence by one. <em>In this town, a broken promise costs you a piece of your throne.</em></li>
+        </ul>
+
+        <h3>Deals on the Side</h3>
+        <p>
+            You may wheel and deal outside the rules, but only <b>Cash</b> can be physically traded off the board.
+            Hand it over anytime, no Influence required.
+        </p>
+        <p>
+            <b>Barrel Exchanges:</b> Liquor stays on the board. To hand barrels to a rival, <strong>Move</strong> them into that crew's Connected District; the hooch is theirs on arrival. A mutual trade is simply two Moves, one from each crew.
+        </p>
+
+    </div>
+
+    <div class="container combat-page"><!-- Combat Rules Page 1 -->
+        <h2 id="combat">Combat Rules: Blood on the Streets</h2>
+        <div class="cover">
+            <img src="Art/Blockade.png" alt="Combat in the streets" class="tight-cover" height="255px" width="100%">
+        </div>
+        <p>
+            Violence isn't a backup plan; it's the cost of doing business. Smart Kingpins know a drawn gun beats a fired one. When talk
+            fails, step inside and clear the room.
+        </p>
+
+        <h3>1. The Rules of Engagement</h3>
+        <p>
+            Violence runs on two numbers:
+            <strong>The Muscle Ratio</strong> (how many dice you roll) and <strong>Threat</strong> (what number kills). Both tables sit here for quick reference.
+        </p>
+
+        <div class="table-pair">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mobster Count</th>
+                        <th>Dice Rolled</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1-2 Mobsters</td>
+                        <td>1 die</td>
+                    </tr>
+                    <tr>
+                        <td>3-4 Mobsters</td>
+                        <td>2 dice</td>
+                    </tr>
+                    <tr>
+                        <td>5-6 Mobsters</td>
+                        <td>3 dice</td>
+                    </tr>
+                    <tr>
+                        <td>7-8 Mobsters</td>
+                        <td>4 dice</td>
+                    </tr>
+                    <tr>
+                        <td>9+ Mobsters</td>
+                        <td>5 dice</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Threat Level</th>
+                        <th>Kill on Roll</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Level 1 (Base)</td>
+                        <td>5-6</td>
+                    </tr>
+                    <tr>
+                        <td>Level 2</td>
+                        <td>4-6</td>
+                    </tr>
+                    <tr>
+                        <td>Level 3</td>
+                        <td>3-6</td>
+                    </tr>
+                    <tr>
+                        <td>Level 4 (Max) </td>
+                        <td>2-6</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Calculating Threat</h4>
+        <p>
+            Your Base Threat is Level 1 (kill on 5+). Bonuses stack, to a maximum of Level 4:
+        </p>
+        <ul class="sub-section">
+            <li><strong>Boss +1 Threat:</strong> if your Boss is in the fight.</li>
+            <li><strong>Safehouse +2 Threat:</strong> the Occupier defending Open Fire on their own Secured District (not on the Ambush shot).</li>
+            <li><strong>Ambush +1 Threat:</strong> the Occupier's first shot, on the opening Ambush only.</li>
+        </ul>
+
+        <h3>2. The Standoff: Crossing the Line</h3>
+        <p>
+            Every firefight is just <b>two questions, asked in order</b>:
+        </p>
+        <ul class="sub-section">
+            <li><strong>Step 1, the Occupier answers:</strong> Ambush, Hold Fire, or Fold.</li>
+            <li><strong>Step 2, the Invader chooses</strong> (and keeps choosing until the Pin is resolved): Open Fire, Advance, or Fall Back.</li>
+        </ul>
+        <p>
+            When an opponent <strong>Moves</strong> into a District you Control, the game pauses on Step 1. <em>Set each crew along the edge it crossed from, so it stays clear whose Mobsters and barrels are whose.</em> As the Occupier, you
+            must immediately choose one of three responses:
+        </p>
+        <ol class="sub-section">
+            <li><strong>Ambush:</strong>
+                You greet the invaders with lead.
+                <ul class="sub-section" style="margin-top:5px;">
+                    <li><strong>Free Shot:</strong> Only the Occupier rolls dice.</li>
+                    <li><strong>Bonus:</strong> Gain <b>+1 Threat</b>.</li>
+                    <li><strong>Casualties:</strong> Hits remove Invaders (Runners first). No Heat. Invaders are now <strong>Pinned</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>Hold Fire:</strong>
+                You stand your ground but don't shoot. Maybe they're just passing through. The Invaders are now <strong>Pinned</strong>.
+            </li>
+            <li><strong>Fold (Cost: 0):</strong>
+                You surrender the District. You may immediately move your Mobsters to one <strong>Connected Safe
+                    District</strong>.
+                <ul class="sub-section" style="margin-top:5px;">
+                    <li><strong>Panic:</strong> Fleeing Mobsters cannot carry Liquor; any barrels are left behind, and your Safehouse stays put.</li>
+                    <li><strong>The Takeover:</strong> The Invader immediately claims <strong>Control</strong>, captures dropped Liquor, and may <strong>take over</strong> or destroy your Safehouse. The Invaders are <strong>not Pinned</strong>; their Play ends.</li>
+                </ul>
+            </li>
+        </ol>
+
+
+    </div>
+
+    <div class="container one-column"><!-- Combat Rules Page 2 -->
+        <h3>3. Pinned: Fight or Flight (Step 2)</h3>
+        <div class="cover">
+            <img src="Art/Ambush.png" alt="All out War" class="tight-cover" height="215px" width="100%">
+        </div>
+        <p>
+            While Pinned, your Mobsters cannot make normal Plays. As the Invader you must resolve the standoff before your turn moves on: spend Influence to <strong>Open Fire</strong> or
+            <strong>Advance</strong>, or <strong>Fall Back</strong> for free. Keep choosing
+            until the Pin is resolved, or you run dry and must Fall Back. <b>Hit</b>, <b>Torch</b>, and <b>Plunder</b> still work while Pinned (the Irish <b>Firepower</b> Trait boosts <b>Open Fire</b> only).
+        </p>
+        <p class="note">
+            <strong>The Cost of Pride:</strong> A real Kingpin knows an all-out firefight is bad business. Burning 3 or 4 Influence to keep opening fire on one stubborn alley may win it, but it leaves rivals free across the city. Talk is cheap; bullets cost time.
+        </p>
+
+        <table class="action-table">
+            <tr>
+                <td><strong>Open Fire (Cost: 1)</strong></td>
+                <td>
+                    <strong>Fight for the District.</strong> Both sides roll simultaneously.
+                    <ul class="sub-section" style="margin-top:5px; margin-bottom:5px;">
+                        <li><strong>Casualties:</strong> Both sides apply hits (Runners first).
+                            The Occupier loses the Ambush bonus but keeps Safehouse/Boss bonuses.</li>
+                        <li><strong>Heat:</strong> The law doesn't blame a man for defending his own corner, so the <strong>Occupier never draws Heat</strong>. The <strong>Invader</strong> gains Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"> only if <b>their own dice score 1+ kills</b>.</li>
+                        <li><strong>Repeat:</strong> If both sides stand, remain Pinned. Spend another Influence to Open Fire again.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Advance (Cost: 1)</strong></td>
+                <td>
+                    <b>Shoot your way out.</b> Move Pinned Mobsters, with <b>any barrels</b> they hold, to any <b>Safe Connected</b> District,
+                    including across water via Docks. You cannot enter hostile turf. <em>(You fought clear, so the hooch rides out with you.)</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Fall Back (Cost: 0)</strong><br><em>(Invader Only)</em></td>
+                <td>
+                    <b>Cut and run.</b> Retreat to the origin District you entered from. Carried Liquor is left behind for the Occupier.
+                    <br><em>If you have 0 Influence remaining, you must Fall Back.</em>
+                </td>
+            </tr>
+        </table>
+
+        <h3>4. Victory & Consequences</h3>
+        <p>
+            Combat ends when one side is eliminated or the Invader retreats.
+        </p>
+        <p><strong>If the Occupier Holds:</strong> The District remains theirs. Liquor dropped by dead Invaders becomes the Occupier's property.</p>
+        <p><strong>If the Invader Wins:</strong> The moment the last of the Occupier's pieces falls or flees, you claim <strong>Control</strong> of the District.</p>
+        <ul class="sub-section">
+            <li><strong>The Spoils:</strong> Any Liquor in the District is now yours.</li>
+            <li><strong>Safehouses:</strong> A rival Safehouse in the District is destroyed (remove it), unless you
+                <strong>take it over</strong> instead: immediately Secure the District for free by relocating your
+                Safehouse there from wherever it sat before.
+            </li>
+        </ul>
+
+    </div>
+    <div class="container one-column">
+        <div class="reference-section">
+            <h3>Example: Battle for the Docks</h3>
+            <p>
+                <strong>Setup:</strong> The Knights (1 Boss, 3 Runners) move into a Dock District held by the Sicilians (1
+                Boss,
+                2 Runners, Safehouse), aiming to seize the pier and the Trade it controls.
+            </p>
+
+            <h4>1. The Standoff</h4>
+            <p>The Sicilians (Occupier) refuse to Fold, choosing to <strong>Ambush</strong>. They fire first. The Knights do not roll yet.</p>
+
+            <table class="reference-table" style="margin-top: 0.35em;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Faction</th>
+                        <th style="width: 25%;">Strength</th>
+                        <th style="width: 30%;">Threat</th>
+                        <th>Roll & Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sicilians</strong><br>(Occupier)</td>
+                        <td>3 Mobsters<br>(2 Dice)</td>
+                        <td><strong>Level 3</strong> (Hit 3+)<br><em>(Base + Boss + Ambush)</em></td>
+                        <td>Roll: [2, 5]<br><strong>1 Hit</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Result:</strong> Knights lose 1 Runner. The Sicilians generate <strong>no Heat</strong> for this
+                defensive Ambush.
+                Knights are now <strong>Pinned</strong>.</p>
+
+            <h4>2. Open Fire (Round 1)</h4>
+            <p>The Knights choose to fight. Both sides roll simultaneously.</p>
+
+            <table class="reference-table" style="margin-top: 0.35em;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Faction</th>
+                        <th style="width: 25%;">Strength</th>
+                        <th style="width: 30%;">Threat</th>
+                        <th>Roll & Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Knights</strong><br>(Invader)</td>
+                        <td>3 Mobsters<br>(2 Dice)</td>
+                        <td><strong>Level 2</strong> (Hit 4+)<br><em>(Base + Boss)</em></td>
+                        <td>Roll: [4, 6]<br><strong>2 Hits</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sicilians</strong><br>(Occupier)</td>
+                        <td>3 Mobsters<br>(2 Dice)</td>
+                        <td><strong>Level 4</strong> (Hit 2+)<br><em>(Base + Boss + Safehouse)</em></td>
+                        <td>Roll: [1, 5]<br><strong>1 Hit</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>3. The Resolution (After Round 1)</h4>
+            <ul class="sub-section">
+                <li><strong>Casualties:</strong> Sicilians take 2 hits (remove 2 Runners). Knights take 1 hit (remove 1
+                    Runner).</li>
+                <li><strong>Status:</strong> Both sides still have units (Boss + Runner vs Boss). Knights are still
+                    <strong>Pinned</strong>.
+                </li>
+            </ul>
+
+            <h4>4. Open Fire (Round 2)</h4>
+            <p>The Knights spend another Influence to Open Fire.</p>
+
+            <table class="reference-table" style="margin-top: 0.35em;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Faction</th>
+                        <th style="width: 25%;">Strength</th>
+                        <th style="width: 30%;">Threat</th>
+                        <th>Roll & Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Knights</strong><br>(Invader)</td>
+                        <td>2 Mobsters<br>(1 Die)</td>
+                        <td><strong>Level 2</strong> (Hit 4+)<br><em>(Base + Boss)</em></td>
+                        <td>Roll: [5]<br><strong>1 Hit</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sicilians</strong><br>(Occupier)</td>
+                        <td>1 Mobster<br>(1 Die)</td>
+                        <td><strong>Level 4</strong> (Hit 2+)<br><em>(Base + Boss + Safehouse)</em></td>
+                        <td>Roll: [1]<br><strong>0 Hits</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>5. Victory & Takeover</h4>
+            <ul class="sub-section">
+                <li><strong>Casualties:</strong> The Sicilian Boss is eliminated. The Knights lose no one this round.</li>
+                <li><strong>Heat:</strong> The Knights killed enemies, so gain <strong>Heat</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat">.</li>
+                <li><strong>Outcome:</strong> The Knights claim the District and choose to
+                    <strong>take over</strong> the Safehouse, immediately Securing it with their own Safehouse.
+                </li>
+            </ul>
+            <p>With combat resolved, the Play comes to an end. The player with the next Turn Token now takes
+                their turn.</p>
+        </div>
+    </div>
+    <div class="container heat-page">
+        <h2 id="heat">Heat: Playing with Fire</h2>
+        <div class="cover">
+            <img src="Art/Police.png" alt="The Blue Wall" class="tight-cover" height="300px" width="100%">
+        </div>
+        <p>
+            <strong>Heat</strong> measures how hard the law is breathing down your neck. The <strong>Heat
+                Track</strong> is a 5-space powder keg: generate Heat and you place one Influence
+            marker on it. Played right it's a weapon; played wrong, a noose.
+        </p>
+
+        <h3>Drawing Heat</h3>
+        <p>These noisy Plays push the track up one notch (any Play marked with the flame icon <img src="Art/Icons/fire.svg" class="icon" alt="Heat">):</p>
+        <ul class="sub-section">
+            <li><strong>Blood on the Pavement:</strong> If an <b>Invader's dice</b> inflict <b>1+ kills</b> in combat, add 1 marker <img src="Art/Icons/fire.svg" class="icon" alt="Heat"> at the end of the Play. <em>A multi-round firefight draws Heat only once.</em></li>
+            <li><strong>Shakedowns Get Loud:</strong> The <b>Extort</b> Power Play <b>always</b> draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, however many Districts you squeeze.</li>
+            <li><strong>The Greed Tax:</strong> Unloading <b>4+ barrels</b> in a single Play draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">.</li>
+        </ul>
+
+        <h3>Police Raids: The Boiling Point</h3>
+        <p>A Raid triggers two ways: the <b>5th marker</b> lands on the track, or a rival makes the <b>Rat</b> Play. Either way, pause the turn; the city's on lockdown.</p>
+        <p>A Raid puts every Squad on the move. Resolve them <b>one at a time, in the numbered Borough order printed on the board</b>, each finishing before the next stirs. <em>Four precincts kicking doors in, block by block.</em></p>
+
+        <h4>1. The Most Wanted List</h4>
+        <p>Each Squad hunts within reach and chases the freshest gunshot it can hear. <b>Its reach is only the Districts directly Connected to it inside its own Borough.</b> Find the target in two steps:</p>
+        <ol class="sub-section">
+            <li><strong>Pick the mob (Follow the Smoke):</strong> Of the mobs holding those in-reach Districts, target the one whose marker sits <b>furthest right</b> on the Heat Track. If no District in reach carries any Heat, the Squad <b>stays put</b>. <em>Quiet money always walks free.</em></li>
+            <li><strong>Pick the District (The Big Bust):</strong> If that mob holds one in-reach District, that's the target. If it holds several, the Squad kicks in the one with the <b>most Barrels</b> (cops follow the contraband); on a tie, the <b>hottest boiler</b>, ranked highest on its <b>Pressure Strip</b>. <em>The louder the boiler, the harder the door comes off.</em></li>
+        </ol>
+
+        <h4>2. The Scatter</h4>
+        <p>The Squad takes <b>one step</b> onto the chosen District and kicks the doors in:</p>
+        <ul class="sub-section">
+            <li><strong>Condemned:</strong> Any <b>Safehouse</b> there is destroyed and <b>all Liquor</b> seized (both to supply).</li>
+            <li><strong>Run For It:</strong> The crew bolts to a single <b>Connected Safe District</b>, never back into the one the Squad advanced <em>from</em>, and no grabbing barrels on the way.</li>
+            <li><strong>Cornered:</strong> If there's <b>no Connected Safe District</b> to flee to (every exit blocked by rivals, water, the Blue Wall, or the map's edge), the whole crew is <b>arrested</b> and returned to your supply. <em>Leave a back door, or don't leave at all.</em></li>
+        </ul>
+        <p>The Squad now holds the District as an impassable wall, padlocking any <b>Speakeasy or Still</b> beneath it until a later Raid. <em>A crew fleeing one Squad may land in the path of the next; the night is young.</em></p>
+        <p><strong>The Aftermath:</strong> Once every Squad has moved, all Heat markers return to their owners' Reserves and the turn resumes.</p>
+
+    </div>
+    <div class="container syndicate-wars">
+        <h2 id="consolidation">The Blood Oath: 4-Player Team Variant</h2>
+        <div class="cover">
+            <img src="Art/Oath.png" alt="The Blood Oath" height="290px" width="100%">
+        </div>
+        <p>
+            <strong>When the heat boils over, enemies become brothers.</strong> The Feds are kicking down doors and lone wolves get slaughtered. <em>The Blood Oath</em> is the recommended 4-player mode: a cutthroat free-for-all where escalating police pressure eventually forces the city into two permanent 2v2 alliances.
+        </p>
+
+        <h3>Setup: The Ticking Clock</h3>
+        <p>
+            Set up as a standard 4-player match, with one addition: place the <b>Federal Crackdown Tracker</b> near the Heat Track with a token on space 1. Every time a Police Raid triggers, advance the token one space.
+        </p>
+
+
+        <h3>The Sit-Down</h3>
+        <p>
+            The moment the token reaches <b>space 10</b> on the Crackdown Tracker, the underworld snaps.
+            Pause the game. The four independent mobs immediately form two permanent alliances.
+        </p>
+        <ol class="sub-section">
+            <li><strong>Rank the Bosses:</strong> Tally everyone's current Respect (scoring held Titles and completed Jobs). <em>Tiebreaker: Total Cash on hand.</em></li>
+            <li><strong>Forge the Families:</strong> The player in <b>1st Place</b> joins forces with the player in <b>4th Place</b>. The player in <b>2nd Place</b> pairs with the player in <b>3rd Place</b>.
+            </li>
+            <li><strong>Set the Targets:</strong> Each Alliance adds <b>10</b> to its combined Respect: that number is its <b>Target</b>. <em>From here, it's a clean race to earn 10.</em></li>
+        </ol>
+
+        <h3>New Rules of Engagement</h3>
+        <p>One goal, two crews. You still run your own operations.</p>
+        <ul class="sub-section">
+            <li><strong>Separate Ledgers:</strong> You do not share Cash, Influence, or Jobs, and you still take individual turns in Turn Order.</li>
+            <li><strong>Blood is Thicker:</strong> You cannot attack your partner or their property (no <b>Ambush</b>, <b>Open Fire</b>, <b>Hit</b>, <b>Plunder</b>, or <b>Torch</b>). All other rules stand: partner turf is still Hostile (Pinned there, your only outs are <b>Advance</b> or <b>Fall Back</b>), the Golden Rule of Turf means you cannot share a District at Day's end, and Liquor <b>Moved</b> into their District becomes theirs.</li>
+            <li><strong>Puppeteering:</strong> Your strongest weapon. You may freely lend Influence to your partner's Ledger to fund their turn (standard Heat rules apply).</li>
+        </ul>
+
+        <h3>Claiming the Empire</h3>
+        <p>
+            The council only recognizes unified power. To win, an Alliance must reach its <b>Target</b> and have <b>at least one partner owning all 10 Influence</b> (one crew buys the council on behalf of the family). If met during the <b>Reckoning Phase</b>, the game ends immediately: first family to the finish takes the city.
+        </p>
+
+        <h4>The New Kings of New York</h4>
+        <p>
+            If both Alliances hit their Targets at the same Reckoning, the crown goes to the pair <b>furthest over</b> its Target; still deadlocked, the fattest <b>combined bankroll</b> buys the throne.
+        </p>
+        <p class="note">
+            <strong>The Capo di Tutti Capi:</strong> There are no truly shared victories... even in a team. Within the winning Alliance, the player who contributed the most Respect to the final combined total is declared the Boss of Bosses and the true Kingpin of New York. Your partner doesn't get a crown; they just get the privilege of kissing your ring.
+        </p>
+    </div>
+</body>
+
+</html>
