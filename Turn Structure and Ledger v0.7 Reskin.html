@@ -8,211 +8,599 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-  html,body{margin:0}
-  body{background:#100c08;background-image:radial-gradient(circle at 50% -10%,#241a11,#0d0a07 65%);color:#efe3cd;font-family:Barlow,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:#d4af37;text-decoration:none}
-  a:hover{color:#e8cc72}
-  #__printpages{display:none}
-  @media print{
-    @page{size:148mm 210mm;margin:0}
-    html,body{background:#fff;margin:0}
-    #__gallerywrap,#__overlay{display:none !important}
-    #__printpages{display:block}
-    #__printpages>div{box-shadow:none !important}
-  }
+/* ============================================================
+   PALETTE
+   ============================================================ */
+:root{
+  --gold:#c9a437;
+  --gold-bright:#e8cc72;
+  --gold-line:#b9932f;
+  --gold-dim:#a98c4f;
+  --gold-label:#d4af37;
+  --silver:#c9cdd4;
+
+  --ink:#efe3cd;
+  --ink-2:#f2e6cf;
+  --body:#d8caae;
+  --muted:#b8a577;
+
+  --panel-a:#241c14;
+  --panel-b:#19130c;
+  --rule:rgba(185,147,47,.16);
+  --cell:rgba(107,90,46,.3);
+  --cell-strong:rgba(185,147,47,.4);
+
+  --tag-home:#d98a6a;
+  --tag-squad:#8fb0d8;
+
+  /* Canonical gold icon tint — matches .icon in css/moonshine-rules.css */
+  --gold-tint:invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
+}
+
+/* ============================================================
+   PAGE
+   ============================================================ */
+html,body{margin:0}
+body{
+  background:#100c08;
+  background-image:radial-gradient(circle at 50% -10%,#241a11,#0d0a07 65%);
+  color:var(--ink);
+  font-family:Barlow,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--gold-label);text-decoration:none}
+a:hover{color:var(--gold-bright)}
+
+#__overlay{
+  position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.55;
+  background:radial-gradient(circle at 50% 38%,transparent 52%,rgba(0,0,0,.6));
+}
+#__gallerywrap{max-width:1060px;margin:0 auto;padding:34px 20px 70px}
+#__printpages{display:none}
+
+.masthead{text-align:center;margin-bottom:34px}
+.masthead-kicker{font:600 9px Barlow;letter-spacing:5px;color:var(--gold-dim);text-transform:uppercase}
+.masthead-title{font:700 40px Cinzel,serif;color:var(--gold-bright);letter-spacing:2px;margin:6px 0 2px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.masthead-sub{font:600 11px Barlow;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+
+.gallery{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;align-items:flex-start}
+
+/* ============================================================
+   CARD SHELL
+   ============================================================ */
+.card{
+  position:relative;
+  width:470px;
+  background:linear-gradient(var(--panel-a),var(--panel-b));
+  border:2px solid var(--gold-line);
+  border-radius:12px;
+  padding:22px 22px 18px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:var(--gold-line)}
+.card::after{content:"";position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:8px;pointer-events:none}
+
+.card-head{text-align:center;border-bottom:2px solid var(--gold-line);padding-bottom:10px}
+.card-kicker{font:600 8px Barlow;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase}
+.card-title{font:700 27px Cinzel,serif;color:var(--gold-bright);letter-spacing:1px;margin-top:3px}
+
+/* Inline emphasis inside body copy */
+.step-body b,.note b,.final-body b,.raid-note b{color:var(--gold-bright);font-weight:700}
+.step-body i,.note i{font-style:italic}
+b.silver{color:var(--silver)}
+
+/* ============================================================
+   PHASE RAIL
+   ============================================================ */
+.rail{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:8px;margin-top:13px}
+.rail-pill{text-align:center;border:1.5px solid var(--gold);border-radius:8px;padding:7px 4px;background:linear-gradient(#2c2115,#171009)}
+.rail-name{font:700 12px Cinzel,serif;letter-spacing:1px;color:var(--gold-bright)}
+.rail-sub{display:block;font:600 7.5px Barlow;letter-spacing:.6px;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.rail-arrow{font:700 15px Barlow;color:var(--gold);text-align:center}
+
+.note{
+  margin-top:10px;
+  border:1px solid rgba(185,147,47,.3);
+  border-radius:6px;
+  background:rgba(0,0,0,.25);
+  padding:6px 10px;
+  font:400 10px/1.35 Barlow;
+  color:var(--body);
+  text-align:center;
+}
+
+/* ============================================================
+   SECTION HEADS
+   ============================================================ */
+.sec{display:flex;align-items:center;gap:10px;margin:14px 0 4px}
+.sec-name{font:700 16px Cinzel,serif;letter-spacing:1px;color:var(--gold-bright)}
+.sec-kicker{font:italic 500 10px Barlow;color:var(--muted)}
+.sec-rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)}
+
+.roster-head{display:flex;align-items:center;gap:8px;margin:13px 0 5px}
+.roster-head--raids{margin-top:14px}
+.roster-dia{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.roster-label{font:700 11px Cinzel,serif;letter-spacing:2.5px;color:var(--gold-label)}
+
+/* ============================================================
+   STEP ROWS
+   ============================================================ */
+.step{display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid var(--rule)}
+.step--end{border-bottom:0}
+.step-num{
+  flex:0 0 22px;height:22px;border-radius:4px;
+  background:var(--gold);color:#1b150e;
+  display:flex;align-items:center;justify-content:center;
+  font:700 13px Cinzel,serif;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.25);
+}
+.step-dot{flex:0 0 24px;height:24px;display:flex;align-items:center;justify-content:center}
+.step-dot::before{content:"";width:10px;height:10px;background:var(--gold);transform:rotate(45deg)}
+.step-label{flex:0 0 90px;font:700 12px Barlow;color:var(--ink-2);padding-top:3px}
+.step-label--narrow{flex-basis:82px}
+.step-body{flex:1;font:400 11px/1.4 Barlow;color:var(--body);padding-top:2px}
+
+/* Canonical inline icon — mirrors .icon in css/moonshine-rules.css */
+.icon{
+  width:1.25em;height:1.25em;
+  vertical-align:middle;margin:0 2px;
+  filter:var(--gold-tint);
+}
+
+/* ============================================================
+   FINAL RECKONING
+   ============================================================ */
+.final{margin-top:14px;border:1px solid var(--gold-line);border-radius:9px;background:rgba(201,164,55,.06);padding:9px 13px}
+.final-title{text-align:center;font:700 12px Cinzel,serif;letter-spacing:2px;color:var(--gold-bright);margin-bottom:5px}
+.final-body{font:400 10.5px/1.5 Barlow;color:var(--body);text-align:center}
+
+/* ============================================================
+   DISTRICT ROSTER TABLE
+   ============================================================ */
+.roster{border:1px solid #6b5a2e;border-radius:7px;overflow:hidden}
+table.lg{width:100%;border-collapse:collapse}
+
+.lg th{
+  background:#1a140d;color:var(--gold-label);
+  font:700 8.5px Cinzel,serif;letter-spacing:.4px;
+  border-bottom:1px solid #6b5a2e;
+  padding:5px 5px;text-align:center;
+}
+.lg th.th-l{text-align:left;padding:5px 6px}
+.lg th.th-n{padding:5px 3px}
+
+.lg td{padding:3px 6px;border-top:1px solid var(--cell)}
+.lg tr.grp>td{border-top:1.5px solid var(--cell-strong)}
+
+.lg-boro{
+  padding:4px;text-align:center;
+  font:700 13px Cinzel,serif;color:var(--gold-bright);
+  background:rgba(201,164,55,.05);
+  border-top:1.5px solid var(--cell-strong);
+  border-right:1px solid rgba(107,90,46,.45);
+  line-height:1.05;
+}
+.lg-dist{font:600 10px Barlow;color:var(--ink-2)}
+.lg-zone{font:400 9.5px Barlow;text-align:left;white-space:nowrap}
+.lg-still{text-align:center;font:500 10px Barlow;color:#cbb98a}
+.lg-press{text-align:center;font:700 10px Barlow;color:var(--gold-bright)}
+.lg-setup{font:400 9px Barlow}
+
+/* Zone label colours */
+.z-hs{color:var(--gold-bright);font-weight:700}
+.z-ward{color:var(--gold);font-weight:700}
+.z-speak{color:var(--body)}
+.z-dock{color:var(--muted)}
+
+/* Zone icons — black source art, tinted gold by filter */
+.zi{
+  width:10px;height:10px;
+  vertical-align:-1px;margin-right:4px;
+  filter:var(--gold-tint);
+}
+.zi--speak{opacity:.82}
+.zi--dock{opacity:.68}
+
+/* Setup tags */
+.tag{font-weight:700;font-size:9px}
+.tag-home{color:var(--tag-home)}
+.tag-run{color:var(--gold-bright)}
+.tag-squad{color:var(--tag-squad)}
+
+/* ============================================================
+   LEGEND
+   ============================================================ */
+.legend{
+  display:flex;flex-wrap:wrap;gap:5px 13px;justify-content:center;
+  margin-top:7px;
+  font:600 8px Barlow;letter-spacing:.4px;text-transform:uppercase;
+}
+.legend-row{display:flex;flex-wrap:wrap;gap:5px 13px;justify-content:center;width:100%}
+.legend-item{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.legend .zi{margin-right:1px}
+
+.raid-note{text-align:center;font:italic 500 10px/1.35 Barlow;color:var(--muted);margin-bottom:6px}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print{
+  @page{size:148mm 210mm;margin:0}
+  html,body{background:#fff;margin:0}
+  #__gallerywrap,#__overlay{display:none !important}
+  #__printpages{display:block}
+  #__printpages>div{box-shadow:none !important}
+}
 </style>
 </head>
 <body>
-<div id="__overlay" style="position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.55;background:radial-gradient(circle at 50% 38%,transparent 52%,rgba(0,0,0,.6))"></div>
+<div id="__overlay"></div>
 
-<div id="__gallerywrap" style="max-width:1060px;margin:0 auto;padding:34px 20px 70px">
-  <div style="text-align:center;margin-bottom:34px">
-    <div style="font:600 9px Barlow;letter-spacing:5px;color:#a98c4f;text-transform:uppercase">Prohibition · New York · 1926</div>
-    <div style="font:700 40px Cinzel,serif;color:#e8cc72;letter-spacing:2px;margin:6px 0 2px;text-shadow:0 2px 8px rgba(0,0,0,.6)">Moonshine Kingdom</div>
-    <div style="font:600 11px Barlow;letter-spacing:4px;color:#b8a577;text-transform:uppercase">Turn Structure &amp; Town Planning Ledger</div>
+<div id="__gallerywrap">
+  <div class="masthead">
+    <div class="masthead-kicker">Prohibition · New York · 1926</div>
+    <div class="masthead-title">Moonshine Kingdom</div>
+    <div class="masthead-sub">Turn Structure &amp; Town Planning Ledger</div>
   </div>
 
-  <div style="display:flex;flex-wrap:wrap;gap:30px;justify-content:center;align-items:flex-start">
+  <div class="gallery">
 
   <!-- ============ TURN STRUCTURE (FRONT) ============ -->
-  <div data-card style="position:relative;width:470px;background:linear-gradient(#241c14,#19130c);border:2px solid #b9932f;border-radius:12px;padding:22px 22px 18px;display:flex;flex-direction:column;box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.55);overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:6px;background:#b9932f"></div>
-    <div style="position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:8px;pointer-events:none"></div>
-
-    <div style="text-align:center;border-bottom:2px solid #b9932f;padding-bottom:10px">
-      <div style="font:600 8px Barlow;letter-spacing:3px;color:#a98c4f;text-transform:uppercase">The Day Cycle · Sequence of Play</div>
-      <div style="font:700 27px Cinzel,serif;color:#e8cc72;letter-spacing:1px;margin-top:3px">Turn Structure</div>
+  <div data-card class="card">
+    <div class="card-head">
+      <div class="card-kicker">The Day Cycle · Sequence of Play</div>
+      <div class="card-title">Turn Structure</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:8px;margin-top:13px">
-      <div style="text-align:center;border:1.5px solid #c9a437;border-radius:8px;padding:7px 4px;background:linear-gradient(#2c2115,#171009)"><span style="font:700 12px Cinzel,serif;letter-spacing:1px;color:#e8cc72">Shadows</span><span style="display:block;font:600 7.5px Barlow;letter-spacing:.6px;color:#b8a577;text-transform:uppercase;margin-top:2px">Production</span></div>
-      <span style="font:700 15px Barlow;color:#c9a437;text-align:center">&rarr;</span>
-      <div style="text-align:center;border:1.5px solid #c9a437;border-radius:8px;padding:7px 4px;background:linear-gradient(#2c2115,#171009)"><span style="font:700 12px Cinzel,serif;letter-spacing:1px;color:#e8cc72">Operations</span><span style="display:block;font:600 7.5px Barlow;letter-spacing:.6px;color:#b8a577;text-transform:uppercase;margin-top:2px">Action Cycle</span></div>
-      <span style="font:700 15px Barlow;color:#c9a437;text-align:center">&rarr;</span>
-      <div style="text-align:center;border:1.5px solid #c9a437;border-radius:8px;padding:7px 4px;background:linear-gradient(#2c2115,#171009)"><span style="font:700 12px Cinzel,serif;letter-spacing:1px;color:#e8cc72">Reckoning</span><span style="display:block;font:600 7.5px Barlow;letter-spacing:.6px;color:#b8a577;text-transform:uppercase;margin-top:2px">Cleanup</span></div>
+    <div class="rail">
+      <div class="rail-pill"><span class="rail-name">Shadows</span><span class="rail-sub">Production</span></div>
+      <span class="rail-arrow">&rarr;</span>
+      <div class="rail-pill"><span class="rail-name">Operations</span><span class="rail-sub">Action Cycle</span></div>
+      <span class="rail-arrow">&rarr;</span>
+      <div class="rail-pill"><span class="rail-name">Reckoning</span><span class="rail-sub">Cleanup</span></div>
     </div>
 
-    <div style="margin-top:10px;border:1px solid rgba(185,147,47,.3);border-radius:6px;background:rgba(0,0,0,.25);padding:6px 10px;font:400 10px/1.35 Barlow;color:#d8caae;text-align:center"><b style="color:#e9c968">Turn Order</b> runs Token #1 through #4. At Day turnover, swap to <b style="color:#e9c968">tomorrow's set</b>.</div>
+    <div class="note"><b>Turn Order</b> runs Token #1 through #4. At Day turnover, swap to <b>tomorrow's set</b>.</div>
 
     <!-- PHASE 1 -->
-    <div style="display:flex;align-items:center;gap:10px;margin:14px 0 4px">
-      <span style="font:700 16px Cinzel,serif;letter-spacing:1px;color:#e8cc72">Shadows</span>
-      <span style="font:italic 500 10px Barlow;color:#b8a577">Fill barrels and open new deals</span>
-      <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)"></span>
+    <div class="sec">
+      <span class="sec-name">Shadows</span>
+      <span class="sec-kicker">Fill barrels and open new deals</span>
+      <span class="sec-rule"></span>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">1</span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">The Brew</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px"><b style="color:#e9c968">Roll:</b> the <b style="color:#c9cdd4">Mash die</b> (set yesterday) shows the Public Mash; Token #1 rolls <b style="color:#e9c968">Red</b> (Players + 1). <b style="color:#e9c968">Draft:</b> in Turn Order, each boss takes <b style="color:#e9c968">1 Red</b>. <b style="color:#e9c968">Produce:</b> Brew = Mash + your Red; matching Stills brew <b style="color:#e9c968">Moonshine</b> by Muscle Ratio (Boss on the Still: +1).</div>
+    <div class="step">
+      <span class="step-num">1</span>
+      <div class="step-label">The Brew</div>
+      <div class="step-body"><b>Roll:</b> the <b class="silver">Mash die</b> (set yesterday) shows the Public Mash; Token #1 rolls <b>Red</b> (Players + 1). <b>Draft:</b> in Turn Order, each boss takes <b>1 Red</b>. <b>Produce:</b> Brew = Mash + your Red; matching Stills brew <b>Moonshine</b> by Muscle Ratio (Boss on the Still: +1).</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">2</span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">The Blowback</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">Leftover Red + Mash. <b style="color:#e9c968">Every</b> matching Still bursts, taking casualties by Muscle Ratio (Boss first, then Runners). The Still survives and runs tomorrow.</div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div class="step-label">The Blowback</div>
+      <div class="step-body">Leftover Red + Mash. <b>Every</b> matching Still bursts, taking casualties by Muscle Ratio (Boss first, then Runners). The Still survives and runs tomorrow.</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">3</span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Grease Wheels</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px"><b style="color:#e9c968">Stake Contracts:</b> <i>Boss required.</i> Lock Reserve markers = Days to Deadline. <b style="color:#e9c968">Fund Ledger:</b> fill your 5 slots from Reserves (only Ledger markers pay for Plays).</div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <div class="step-label">Grease Wheels</div>
+      <div class="step-body"><b>Stake Contracts:</b> <i>Boss required.</i> Lock Reserve markers = Days to Deadline. <b>Fund Ledger:</b> fill your 5 slots from Reserves (only Ledger markers pay for Plays).</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">4</span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Ferment Mash</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">The <b style="color:#e9c968">Harbormaster</b> names any face (1&ndash;6); if unheld, roll the <b style="color:#c9cdd4">Mash die</b>. It sets <b style="color:#e9c968">tomorrow's Public Mash</b> &mdash; plan today's Plays around it.</div>
+    <div class="step step--end">
+      <span class="step-num">4</span>
+      <div class="step-label">Ferment Mash</div>
+      <div class="step-body">The <b>Harbormaster</b> names any face (1&ndash;6); if unheld, roll the <b class="silver">Mash die</b>. It sets <b>tomorrow's Public Mash</b> &mdash; plan today's Plays around it.</div>
     </div>
 
     <!-- PHASE 2 -->
-    <div style="display:flex;align-items:center;gap:10px;margin:14px 0 4px">
-      <span style="font:700 16px Cinzel,serif;letter-spacing:1px;color:#e8cc72">Operations</span>
-      <span style="font:italic 500 10px Barlow;color:#b8a577">Take Plays in Turn Order until everyone lays low</span>
-      <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)"></span>
+    <div class="sec">
+      <span class="sec-name">Operations</span>
+      <span class="sec-kicker">Take Plays in Turn Order until everyone lays low</span>
+      <span class="sec-rule"></span>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 24px;height:24px;display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:#c9a437;transform:rotate(45deg)"></span></span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Take Play</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">Spend Influence for 1 Play (Standard = 1, Power = 2). Resolve any combat before it ends.</div>
+    <div class="step">
+      <span class="step-dot"></span>
+      <div class="step-label">Take Play</div>
+      <div class="step-body">Spend Influence for 1 Play (Standard = 1, Power = 2). Resolve any combat before it ends.</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 24px;height:24px;display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:#c9a437;transform:rotate(45deg)"></span></span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Resolve</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px"><b style="color:#e9c968">Pay:</b> spent markers return to Reserves; Heat locks 1 on the <b style="color:#e9c968">Heat Track</b>. <b style="color:#e9c968">Unload (Power):</b> sell at your Speakeasy, <b style="color:#e9c968">$300</b>/barrel (<b style="color:#e9c968">$500</b> High Society); only Rum pays a Kickback. <span style="display:inline-block;padding:1px 5px;border-radius:3px;background:#5a1616;color:#f0c674;font:700 8.5px Barlow;letter-spacing:.6px;vertical-align:middle">HEAT</span> 4+ barrels.</div>
+    <div class="step">
+      <span class="step-dot"></span>
+      <div class="step-label">Resolve</div>
+      <div class="step-body"><b>Pay:</b> spent markers return to Reserves; Heat locks 1 on the <b>Heat Track</b>. <b>Unload (Power):</b> sell at your Speakeasy, <b>$300</b>/barrel (<b>$500</b> High Society); only Rum pays a Kickback. <b>4+ barrels</b> draws Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat">.</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px">
-      <span style="flex:0 0 24px;height:24px;display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:#c9a437;transform:rotate(45deg)"></span></span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Lay Low</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px"><b style="color:#e9c968">Odd Jobs:</b> each unspent Ledger marker cashes for <b style="color:#e9c968">$100</b> (Reserves don't pay). Clear your Ledger to Reserves, then claim the lowest token in tomorrow's set (#1 strikes first).</div>
+    <div class="step step--end">
+      <span class="step-dot"></span>
+      <div class="step-label">Lay Low</div>
+      <div class="step-body"><b>Odd Jobs:</b> each unspent Ledger marker cashes for <b>$100</b> (Reserves don't pay). Clear your Ledger to Reserves, then claim the lowest token in tomorrow's set (#1 strikes first).</div>
     </div>
 
     <!-- PHASE 3 -->
-    <div style="display:flex;align-items:center;gap:10px;margin:14px 0 4px">
-      <span style="font:700 16px Cinzel,serif;letter-spacing:1px;color:#e8cc72">Reckoning</span>
-      <span style="font:italic 500 10px Barlow;color:#b8a577">Resolve simultaneously</span>
-      <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)"></span>
+    <div class="sec">
+      <span class="sec-name">Reckoning</span>
+      <span class="sec-kicker">Resolve simultaneously</span>
+      <span class="sec-rule"></span>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">1</span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">The Sweep</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">Remove excess Runners so no District exceeds <b style="color:#e9c968">5 Mobsters</b> (the Sicilians are Untouchable and ignore this).</div>
+    <div class="step">
+      <span class="step-num">1</span>
+      <div class="step-label">The Sweep</div>
+      <div class="step-body">Remove excess Runners so no District exceeds <b>5 Mobsters</b> (the Sicilians are Untouchable and ignore this).</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">2</span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Settle Accounts</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">Return 1 marker per active Contract to Reserves. On its last marker, check the objective: <b style="color:#e9c968">Success</b> &rarr; Respect pile; <b style="color:#e9c968">Fail</b> &rarr; discard.</div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div class="step-label">Settle Accounts</div>
+      <div class="step-body">Return 1 marker per active Contract to Reserves. On its last marker, check the objective: <b>Success</b> &rarr; Respect pile; <b>Fail</b> &rarr; discard.</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">3</span>
-      <div style="flex:0 0 90px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Stake Your Claim</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">Re-count every Title &mdash; <b style="color:#e9c968">Borough Deeds</b>, <b style="color:#e9c968">Ward Boss</b>, <b style="color:#e9c968">Harbormaster</b>, <b style="color:#e9c968">Night Mayor</b> (most venues), <b style="color:#e9c968">Public Enemy No.&nbsp;1</b> (most Contract sets). The sole leader keeps it; a tie or empty returns it to Supply (Police turf counts as empty).</div>
+    <div class="step step--end">
+      <span class="step-num">3</span>
+      <div class="step-label">Stake Your Claim</div>
+      <div class="step-body">Re-count every Title &mdash; <b>Borough Deeds</b>, <b>Ward Boss</b>, <b>Harbormaster</b>, <b>Night Mayor</b> (most venues), <b>Public Enemy No.&nbsp;1</b> (most Contract sets). The sole leader keeps it; a tie or empty returns it to Supply (Police turf counts as empty).</div>
     </div>
 
-    <div style="margin-top:14px;border:1px solid #b9932f;border-radius:9px;background:rgba(201,164,55,.06);padding:9px 13px">
-      <div style="text-align:center;font:700 12px Cinzel,serif;letter-spacing:2px;color:#e8cc72;margin-bottom:5px">FINAL RECKONING</div>
-      <div style="font:400 10.5px/1.5 Barlow;color:#d8caae;text-align:center"><b style="color:#e9c968">10 Influence</b> + <b style="color:#e9c968">15+ Respect</b> + honor (no Rat Card, no unpaid Mark) ends the game. Otherwise swap to tomorrow's set and begin the next Day.</div>
+    <div class="final">
+      <div class="final-title">FINAL RECKONING</div>
+      <div class="final-body"><b>10 Influence</b> + <b>15+ Respect</b> + honor (no Rat Card, no unpaid Mark) ends the game. Otherwise swap to tomorrow's set and begin the next Day.</div>
     </div>
   </div>
 
   <!-- ============ TOWN PLANNING LEDGER (BACK) ============ -->
-  <div data-card style="position:relative;width:470px;background:linear-gradient(#241c14,#19130c);border:2px solid #b9932f;border-radius:12px;padding:22px 22px 18px;display:flex;flex-direction:column;box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.55);overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:6px;background:#b9932f"></div>
-    <div style="position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:8px;pointer-events:none"></div>
-
-    <div style="text-align:center;border-bottom:2px solid #b9932f;padding-bottom:10px">
-      <div style="font:600 8px Barlow;letter-spacing:3px;color:#a98c4f;text-transform:uppercase">Squad Deployment · District Roster</div>
-      <div style="font:700 27px Cinzel,serif;color:#e8cc72;letter-spacing:1px;margin-top:3px">Town Planning Ledger</div>
+  <div data-card class="card">
+    <div class="card-head">
+      <div class="card-kicker">Squad Deployment · District Roster</div>
+      <div class="card-title">Town Planning Ledger</div>
     </div>
 
-    <div style="display:flex;align-items:center;gap:8px;margin:13px 0 5px"><span style="width:8px;height:8px;background:#c9a437;transform:rotate(45deg)"></span><span style="font:700 11px Cinzel,serif;letter-spacing:2.5px;color:#d4af37">DISTRICT ROSTER</span><span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)"></span></div>
+    <div class="roster-head">
+      <span class="roster-dia"></span>
+      <span class="roster-label">DISTRICT ROSTER</span>
+      <span class="sec-rule"></span>
+    </div>
 
-    <div style="border:1px solid #6b5a2e;border-radius:7px;overflow:hidden">
-      <table style="width:100%;border-collapse:collapse">
+    <div class="roster">
+      <table class="lg">
         <thead>
           <tr>
-            <th style="background:#1a140d;color:#d4af37;font:700 8.5px Cinzel,serif;letter-spacing:.4px;border-bottom:1px solid #6b5a2e;padding:5px 5px;text-align:center">Borough</th>
-            <th style="background:#1a140d;color:#d4af37;font:700 8.5px Cinzel,serif;letter-spacing:.4px;border-bottom:1px solid #6b5a2e;padding:5px 6px;text-align:left">District</th>
-            <th style="background:#1a140d;color:#d4af37;font:700 8.5px Cinzel,serif;letter-spacing:.4px;border-bottom:1px solid #6b5a2e;padding:5px 5px;text-align:center">Zone</th>
-            <th style="background:#1a140d;color:#d4af37;font:700 8.5px Cinzel,serif;letter-spacing:.4px;border-bottom:1px solid #6b5a2e;padding:5px 3px;text-align:center">Still</th>
-            <th style="background:#1a140d;color:#d4af37;font:700 8.5px Cinzel,serif;letter-spacing:.4px;border-bottom:1px solid #6b5a2e;padding:5px 3px;text-align:center">Pressure</th>
-            <th style="background:#1a140d;color:#d4af37;font:700 8.5px Cinzel,serif;letter-spacing:.4px;border-bottom:1px solid #6b5a2e;padding:5px 6px;text-align:left">Setup</th>
+            <th>Borough</th>
+            <th class="th-l">District</th>
+            <th class="th-l">Zone</th>
+            <th class="th-n">Still</th>
+            <th class="th-n">Pressure</th>
+            <th class="th-l">Setup</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td rowspan="6" style="padding:4px;text-align:center;font:700 13px Cinzel,serif;color:#e8cc72;background:rgba(201,164,55,.05);border-top:1.5px solid rgba(185,147,47,.4);border-right:1px solid rgba(107,90,46,.45);line-height:1.05">Manhattan</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Five Points</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#c9a437;font-weight:700">Ward</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">10</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">3</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#d98a6a;font-weight:700;font-size:9px">Home Turf</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Sugar Hill</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#e8cc72;font-weight:700">High Society</span> <span style="color:#c9a437">&#9819;</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">7</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">6</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#8fb0d8;font-weight:700;font-size:9px">Police Squad</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">East Harlem</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">12</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">1</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">The Tenderloin</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">8</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">5</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">West Side</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">11</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">2</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">The Bowery</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">9</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">4</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
-          <tr><td rowspan="5" style="padding:4px;text-align:center;font:700 13px Cinzel,serif;color:#e8cc72;background:rgba(201,164,55,.05);border-top:1.5px solid rgba(185,147,47,.4);border-right:1px solid rgba(107,90,46,.45);line-height:1.05">The<br>Bronx</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:600 10px Barlow;color:#f2e6cf">Hunts Point</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:400 9.5px Barlow"><span style="color:#c9a437;font-weight:700">Ward</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:500 10px Barlow;color:#cbb98a">9</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:700 10px Barlow;color:#e8cc72">4</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:400 9px Barlow"><span style="color:#d98a6a;font-weight:700;font-size:9px">Home Turf</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Morris Park</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#e8cc72;font-weight:700">High Society</span> <span style="color:#c9a437">&#9819;</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">7</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">6</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#8fb0d8;font-weight:700;font-size:9px">Police Squad</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Belmont</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">11</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">2</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Fordham</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">8</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">5</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Throggs Neck</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">10</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">3</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td rowspan="6" style="padding:4px;text-align:center;font:700 13px Cinzel,serif;color:#e8cc72;background:rgba(201,164,55,.05);border-top:1.5px solid rgba(185,147,47,.4);border-right:1px solid rgba(107,90,46,.45);line-height:1.05">Queens</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:600 10px Barlow;color:#f2e6cf">Corona</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:400 9.5px Barlow"><span style="color:#c9a437;font-weight:700">Ward</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:500 10px Barlow;color:#cbb98a">4</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:700 10px Barlow;color:#e8cc72">3</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:400 9px Barlow"><span style="color:#d98a6a;font-weight:700;font-size:9px">Home Turf</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Richmond Hill</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#e8cc72;font-weight:700">High Society</span> <span style="color:#c9a437">&#9819;</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">7</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">6</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#8fb0d8;font-weight:700;font-size:9px">Police Squad</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Astoria</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">2</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">1</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Flushing</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">6</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">5</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Whitestone</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">5</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">4</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Jamaica</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">3</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">2</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td rowspan="5" style="padding:4px;text-align:center;font:700 13px Cinzel,serif;color:#e8cc72;background:rgba(201,164,55,.05);border-top:1.5px solid rgba(185,147,47,.4);border-right:1px solid rgba(107,90,46,.45);line-height:1.05">Brooklyn</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:600 10px Barlow;color:#f2e6cf">Brownsville</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:400 9.5px Barlow"><span style="color:#c9a437;font-weight:700">Ward</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:500 10px Barlow;color:#cbb98a">5</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:700 10px Barlow;color:#e8cc72">4</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:400 9px Barlow"><span style="color:#d98a6a;font-weight:700;font-size:9px">Home Turf</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Williamsburg</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#e8cc72;font-weight:700">High Society</span> <span style="color:#c9a437">&#9819;</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">7</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">6</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#8fb0d8;font-weight:700;font-size:9px">Police Squad</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Coney Island</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">3</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">2</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Red Hook</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#d8caae">Speakeasy</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">6</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">5</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Sheepshead Bay</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">4</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">3</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"><span style="color:#e8cc72;font-weight:700;font-size:9px">3 Runners</span></td></tr>
-          <tr><td rowspan="3" style="padding:4px;text-align:center;font:700 13px Cinzel,serif;color:#e8cc72;background:rgba(201,164,55,.05);border-top:1.5px solid rgba(185,147,47,.4);border-right:1px solid rgba(107,90,46,.45);line-height:1.05">Staten<br>Island</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:600 10px Barlow;color:#f2e6cf">Stapleton</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:400 9.5px Barlow"><span style="color:#c9a437;font-weight:700">Ward</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:500 10px Barlow;color:#cbb98a">6</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);text-align:center;font:700 10px Barlow;color:#e8cc72">5</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);border-top:1.5px solid rgba(185,147,47,.4);font:400 9px Barlow"></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Westerleigh</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">2</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">1</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
-          <tr><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:600 10px Barlow;color:#f2e6cf">Tottenville</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:400 9.5px Barlow"><span style="color:#b8a577">Dock</span></td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:500 10px Barlow;color:#cbb98a">4</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);text-align:center;font:700 10px Barlow;color:#e8cc72">3</td><td style="padding:3px 6px;border-top:1px solid rgba(107,90,46,.3);font:400 9px Barlow"></td></tr>
+          <!-- MANHATTAN -->
+          <tr class="grp">
+            <td rowspan="6" class="lg-boro">Manhattan</td>
+            <td class="lg-dist">Five Points</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
+            <td class="lg-still">10</td>
+            <td class="lg-press">3</td>
+            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Sugar Hill</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Crown.svg" alt=""><span class="z-hs">The Cotton Club</span></td>
+            <td class="lg-still">7</td>
+            <td class="lg-press">6</td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">East Harlem</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">The Silver Dollar</span></td>
+            <td class="lg-still">12</td>
+            <td class="lg-press">1</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">The Tenderloin</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">The Haymarket</span></td>
+            <td class="lg-still">8</td>
+            <td class="lg-press">5</td>
+            <td class="lg-setup"></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">West Side</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">11</td>
+            <td class="lg-press">2</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">The Bowery</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">9</td>
+            <td class="lg-press">4</td>
+            <td class="lg-setup"></td>
+          </tr>
+
+          <!-- THE BRONX -->
+          <tr class="grp">
+            <td rowspan="5" class="lg-boro">The<br>Bronx</td>
+            <td class="lg-dist">Hunts Point</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
+            <td class="lg-still">9</td>
+            <td class="lg-press">4</td>
+            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Morris Park</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Crown.svg" alt=""><span class="z-hs">The Jockey Club</span></td>
+            <td class="lg-still">7</td>
+            <td class="lg-press">6</td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Belmont</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">DeLillo's</span></td>
+            <td class="lg-still">11</td>
+            <td class="lg-press">2</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Fordham</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">The Penny Whistle</span></td>
+            <td class="lg-still">8</td>
+            <td class="lg-press">5</td>
+            <td class="lg-setup"></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Throggs Neck</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">10</td>
+            <td class="lg-press">3</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+
+          <!-- QUEENS -->
+          <tr class="grp">
+            <td rowspan="6" class="lg-boro">Queens</td>
+            <td class="lg-dist">Corona</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
+            <td class="lg-still">4</td>
+            <td class="lg-press">3</td>
+            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Richmond Hill</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Crown.svg" alt=""><span class="z-hs">The Triangle</span></td>
+            <td class="lg-still">7</td>
+            <td class="lg-press">6</td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Astoria</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">Bohemian Hall</span></td>
+            <td class="lg-still">2</td>
+            <td class="lg-press">1</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Flushing</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">Paradise Alley</span></td>
+            <td class="lg-still">6</td>
+            <td class="lg-press">5</td>
+            <td class="lg-setup"></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Whitestone</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">5</td>
+            <td class="lg-press">4</td>
+            <td class="lg-setup"></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Jamaica</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">3</td>
+            <td class="lg-press">2</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+
+          <!-- BROOKLYN -->
+          <tr class="grp">
+            <td rowspan="5" class="lg-boro">Brooklyn</td>
+            <td class="lg-dist">Brownsville</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
+            <td class="lg-still">5</td>
+            <td class="lg-press">4</td>
+            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Williamsburg</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Crown.svg" alt=""><span class="z-hs">The Havemeyer</span></td>
+            <td class="lg-still">7</td>
+            <td class="lg-press">6</td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Coney Island</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">Ruby's Joint</span></td>
+            <td class="lg-still">3</td>
+            <td class="lg-press">2</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Red Hook</td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">Sunny's Bar</span></td>
+            <td class="lg-still">6</td>
+            <td class="lg-press">5</td>
+            <td class="lg-setup"></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Sheepshead Bay</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">4</td>
+            <td class="lg-press">3</td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+          </tr>
+
+          <!-- STATEN ISLAND -->
+          <tr class="grp">
+            <td rowspan="3" class="lg-boro">Staten<br>Island</td>
+            <td class="lg-dist">Stapleton</td>
+            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
+            <td class="lg-still">6</td>
+            <td class="lg-press">5</td>
+            <td class="lg-setup"></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Westerleigh</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">2</td>
+            <td class="lg-press">1</td>
+            <td class="lg-setup"></td>
+          </tr>
+          <tr>
+            <td class="lg-dist">Tottenville</td>
+            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
+            <td class="lg-still">4</td>
+            <td class="lg-press">3</td>
+            <td class="lg-setup"></td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <div style="display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin-top:7px;font:600 8px Barlow;letter-spacing:.4px;text-transform:uppercase">
-      <span style="color:#d98a6a">&#9670; Home Turf: Safehouse, Boss &amp; 2 Runners</span>
-      <span style="color:#e8cc72">&#9670; 3 Runners</span>
-      <span style="color:#8fb0d8">&#9670; Police Squad</span>
-      <span style="color:#c9a437">&#9819; High Society Crown</span>
+    <div class="legend">
+      <div class="legend-row">
+        <span class="legend-item"><img class="zi zi--speak" src="Art/Icons/Gin.svg" alt=""><span class="z-speak">Speakeasy $300</span></span>
+        <span class="legend-item"><img class="zi" src="Art/Icons/Crown.svg" alt=""><span class="z-hs">High Society $500</span></span>
+        <span class="legend-item"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></span>
+        <span class="legend-item"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-item tag-home">&#9670; Home Turf: Safehouse, Boss &amp; 2 Runners</span>
+        <span class="legend-item tag-run">&#9670; 3 Runners</span>
+        <span class="legend-item tag-squad">&#9670; Police Squad</span>
+      </div>
     </div>
 
-    <div style="display:flex;align-items:center;gap:8px;margin:14px 0 5px"><span style="width:8px;height:8px;background:#c9a437;transform:rotate(45deg)"></span><span style="font:700 11px Cinzel,serif;letter-spacing:2.5px;color:#d4af37">POLICE RAIDS</span><span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)"></span></div>
-    <div style="text-align:center;font:italic 500 10px/1.35 Barlow;color:#b8a577;margin-bottom:6px"><b style="color:#e9c968">Trigger:</b> Rat Play (1+ Heat), or the 5th Heat. Resolve every Squad one at a time, in Borough order.</div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">1</span>
-      <div style="flex:0 0 82px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Most Wanted</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">A Squad looks only at Districts <b style="color:#e9c968">directly Connected within its Borough</b> and steps toward the rival whose marker sits <b style="color:#e9c968">furthest right</b> on the Heat Track. No marker = ignored; no Heat to chase = it holds its corner.</div>
+    <div class="roster-head roster-head--raids">
+      <span class="roster-dia"></span>
+      <span class="roster-label">POLICE RAIDS</span>
+      <span class="sec-rule"></span>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">2</span>
-      <div style="flex:0 0 82px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">The Big Bust</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">If that rival holds more than one such District, hit the one with the <b style="color:#e9c968">most Barrels</b>; ties break to the <b style="color:#e9c968">hottest boiler</b>, most steam on its Still's Pressure Strip (unique per Borough, so it never ties).</div>
+    <div class="raid-note"><b>Trigger:</b> Rat Play (1+ Heat), or the 5th Heat. Resolve every Squad one at a time, in Borough order.</div>
+
+    <div class="step">
+      <span class="step-num">1</span>
+      <div class="step-label step-label--narrow">Most Wanted</div>
+      <div class="step-body">A Squad looks only at Districts <b>directly Connected within its Borough</b> and steps toward the rival whose marker sits <b>furthest right</b> on the Heat Track. No marker = ignored; no Heat to chase = it holds its corner.</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid rgba(185,147,47,.16)">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">3</span>
-      <div style="flex:0 0 82px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">The Scatter</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">Safehouse destroyed &amp; all Liquor seized. The crew flees to a <b style="color:#e9c968">Connected Safe District</b> (never back toward the Squad); if there's none, the whole crew is <b style="color:#e9c968">arrested</b>. No bribe, no buyout.</div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div class="step-label step-label--narrow">The Big Bust</div>
+      <div class="step-body">If that rival holds more than one such District, hit the one with the <b>most Barrels</b>; ties break to the <b>hottest boiler</b>, most steam on its Still's Pressure Strip (unique per Borough, so it never ties).</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 2px">
-      <span style="flex:0 0 22px;height:22px;border-radius:4px;background:#c9a437;color:#1b150e;display:flex;align-items:center;justify-content:center;font:700 13px Cinzel,serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)">4</span>
-      <div style="flex:0 0 82px;font:700 12px Barlow;color:#f2e6cf;padding-top:3px">Aftermath</div>
-      <div style="flex:1;font:400 11px/1.4 Barlow;color:#d8caae;padding-top:2px">The Squad holds the District (impassable; padlocks any Speakeasy/Still). Once all Squads move, Heat markers return to owners' Reserves.</div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <div class="step-label step-label--narrow">The Scatter</div>
+      <div class="step-body">Safehouse destroyed &amp; all Liquor seized. The crew flees to a <b>Connected Safe District</b> (never back toward the Squad); if there's none, the whole crew is <b>arrested</b>. No bribe, no buyout.</div>
+    </div>
+    <div class="step step--end">
+      <span class="step-num">4</span>
+      <div class="step-label step-label--narrow">Aftermath</div>
+      <div class="step-body">The Squad holds the District (impassable; padlocks any Speakeasy/Still). Once all Squads move, Heat markers return to owners' Reserves.</div>
     </div>
   </div>
 
