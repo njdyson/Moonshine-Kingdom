@@ -245,45 +245,43 @@ a:hover{color:var(--gold-bright)}
     <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
     <div class="trait"><span class="trait-name">Untouchable.</span> <span class="trait-body">The precinct captains are on the payroll, the <b>Sweep</b> never thins your ranks. Your Districts may hold any number of Mobsters at Reckoning.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">TURF CONTROL</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
       <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
     </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">BLACK MARKET</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
       <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
     </div>
-    <div class="play play--end">
-      <div class="cost">1</div>
-      <div class="name">Beg</div>
-      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
-      <div class="name">Hustle</div>
-      <div class="desc">Draw 2 Contracts, then discard to Hand Limit 3. Once per Day.</div>
+      <div class="name">Beg</div>
+      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$2,500</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Rat</div>
+      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</div>
+      <div class="name">Bribe</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -297,15 +295,10 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Secure</div>
       <div class="desc">Relocate your one Safehouse to a District you Control for <b>$500</b> (abandoning its old block).</div>
     </div>
-    <div class="play">
-      <div class="cost">2</div>
-      <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b> &mdash; and 10 is the crown.</div>
-    </div>
     <div class="play play--end">
-      <div class="cost">2</div>
+      <div class="cost">1</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</div>
+      <div class="desc">Boss dead? <b>Promote a Runner</b>, anywhere on the board, to Boss. <i>Wiped out entirely (no Boss, no Runners, no Safehouse)? Start your turn by placing a Boss, 2 Runners and your Safehouse in any Defenseless District, free.</i></div>
     </div>
 
     <div class="sig">
@@ -397,7 +390,7 @@ a:hover{color:var(--gold-bright)}
       <div class="win-title">WINNING THE GAME</div>
       <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
       <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster, Night Mayor (most drinking venues) and Public Enemy No. 1 (most completed Contract sets) Titles.</div>
+      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
       <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
       <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
     </div>
@@ -420,47 +413,45 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
-    <div class="trait"><span class="trait-name">Whispers.</span> <span class="trait-body">Nothing happens in this city you don't overhear first. When you <b>Hustle</b>, draw <b>3 Contracts</b> (not 2) and your <b>Hand Limit is 5</b> (not 3).</span></div>
+    <div class="trait"><span class="trait-name">Whispers.</span> <span class="trait-body">Nothing happens in this city you don't overhear first. When you <b>claim a Job</b>, you may peek at the <b>top card of the Jobs deck</b> and claim it <b>face-down</b> instead of a Market card. Rivals see the Stake, never the job; reveal it the moment it completes.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">TURF CONTROL</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
       <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
     </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">BLACK MARKET</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
       <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
     </div>
-    <div class="play play--end">
-      <div class="cost">1</div>
-      <div class="name">Beg</div>
-      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
-      <div class="name">Hustle</div>
-      <div class="desc">Draw 2 Contracts, then discard to Hand Limit 3. Once per Day.</div>
+      <div class="name">Beg</div>
+      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$2,500</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Rat</div>
+      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</div>
+      <div class="name">Bribe</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -474,15 +465,10 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Secure</div>
       <div class="desc">Relocate your one Safehouse to a District you Control for <b>$500</b> (abandoning its old block).</div>
     </div>
-    <div class="play">
-      <div class="cost">2</div>
-      <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b> &mdash; and 10 is the crown.</div>
-    </div>
     <div class="play play--end">
-      <div class="cost">2</div>
+      <div class="cost">1</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</div>
+      <div class="desc">Boss dead? <b>Promote a Runner</b>, anywhere on the board, to Boss. <i>Wiped out entirely (no Boss, no Runners, no Safehouse)? Start your turn by placing a Boss, 2 Runners and your Safehouse in any Defenseless District, free.</i></div>
     </div>
 
     <div class="sig">
@@ -574,7 +560,7 @@ a:hover{color:var(--gold-bright)}
       <div class="win-title">WINNING THE GAME</div>
       <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
       <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster, Night Mayor (most drinking venues) and Public Enemy No. 1 (most completed Contract sets) Titles.</div>
+      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
       <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
       <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
     </div>
@@ -599,45 +585,43 @@ a:hover{color:var(--gold-bright)}
     <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
     <div class="trait"><span class="trait-name">Network.</span> <span class="trait-body">Friends on every pier from Havana to Harlem. Whenever you <b>Trade</b> at a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span>, gain <b>1 extra barrel</b> of Havana Rum free, on top of the swap.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">TURF CONTROL</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
       <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
     </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">BLACK MARKET</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
       <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
     </div>
-    <div class="play play--end">
-      <div class="cost">1</div>
-      <div class="name">Beg</div>
-      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
-      <div class="name">Hustle</div>
-      <div class="desc">Draw 2 Contracts, then discard to Hand Limit 3. Once per Day.</div>
+      <div class="name">Beg</div>
+      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$2,500</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Rat</div>
+      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</div>
+      <div class="name">Bribe</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -651,15 +635,10 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Secure</div>
       <div class="desc">Relocate your one Safehouse to a District you Control for <b>$500</b> (abandoning its old block).</div>
     </div>
-    <div class="play">
-      <div class="cost">2</div>
-      <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b> &mdash; and 10 is the crown.</div>
-    </div>
     <div class="play play--end">
-      <div class="cost">2</div>
+      <div class="cost">1</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</div>
+      <div class="desc">Boss dead? <b>Promote a Runner</b>, anywhere on the board, to Boss. <i>Wiped out entirely (no Boss, no Runners, no Safehouse)? Start your turn by placing a Boss, 2 Runners and your Safehouse in any Defenseless District, free.</i></div>
     </div>
 
     <div class="sig">
@@ -751,7 +730,7 @@ a:hover{color:var(--gold-bright)}
       <div class="win-title">WINNING THE GAME</div>
       <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
       <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster, Night Mayor (most drinking venues) and Public Enemy No. 1 (most completed Contract sets) Titles.</div>
+      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
       <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
       <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
     </div>
@@ -776,45 +755,43 @@ a:hover{color:var(--gold-bright)}
     <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
     <div class="trait"><span class="trait-name">Firepower.</span> <span class="trait-body">They always come heavy. When you <b>Open Fire</b>, roll <b>1 extra attack die</b> (max 5). Invading only, never on defence, not even an Ambush.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">TURF CONTROL</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
       <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
     </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">BLACK MARKET</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
       <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
     </div>
-    <div class="play play--end">
-      <div class="cost">1</div>
-      <div class="name">Beg</div>
-      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$3,000</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
-      <div class="name">Hustle</div>
-      <div class="desc">Draw 2 Contracts, then discard to Hand Limit 3. Once per Day.</div>
+      <div class="name">Beg</div>
+      <div class="desc">Take <b>$1,500</b> plus a <b>Shylock's Mark</b> (no limit; 8 in supply). Repay <b>$2,500</b> per Mark anytime; while any is unpaid you cannot be crowned.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Rat</div>
+      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card (no Hustle, no crown).</div>
+      <div class="name">Bribe</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -828,15 +805,10 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Secure</div>
       <div class="desc">Relocate your one Safehouse to a District you Control for <b>$500</b> (abandoning its old block).</div>
     </div>
-    <div class="play">
-      <div class="cost">2</div>
-      <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b> &mdash; and 10 is the crown.</div>
-    </div>
     <div class="play play--end">
-      <div class="cost">2</div>
+      <div class="cost">1</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? Place a new Boss in a District you Control or any empty District. Spawn 2 free Runners. May Secure there for free.</div>
+      <div class="desc">Boss dead? <b>Promote a Runner</b>, anywhere on the board, to Boss. <i>Wiped out entirely (no Boss, no Runners, no Safehouse)? Start your turn by placing a Boss, 2 Runners and your Safehouse in any Defenseless District, free.</i></div>
     </div>
 
     <div class="sig">
@@ -928,7 +900,7 @@ a:hover{color:var(--gold-bright)}
       <div class="win-title">WINNING THE GAME</div>
       <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
       <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster, Night Mayor (most drinking venues) and Public Enemy No. 1 (most completed Contract sets) Titles.</div>
+      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
       <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
       <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
     </div>

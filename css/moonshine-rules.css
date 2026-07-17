@@ -1248,6 +1248,14 @@ img {
         height: auto !important;
     }
 
+    /* Shadows is the densest page in the book: the Brew, the Blowback, Grease
+       the Wheels and Ferment all share one sheet, so its cover gets a tighter
+       cap than the other two. NOTE: height:auto above defeats the inline
+       height attribute on these three pages -- max-height is the only lever. */
+    .shadows-page .cover img {
+        max-height: 44mm;
+    }
+
     .components-page h2,
     .goal-page h2,
     .shadows-page h2 {
