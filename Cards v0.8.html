@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moonshine Kingdom — Cards v0.8 (Deeds, Titles &amp; Debts)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Cards v0.8 — the 17 cards that are not Jobs:
+     5 Borough Deeds · 3 Titles · 1 Rat · 8 Shylock's Marks
+   Public Enemy No. 1 is CUT (v0.8): holdings must top out at 14
+   Respect, one short of the 15 you need, so nobody takes the
+   crown without doing at least one Job. Do not re-add it.
+
+   Reskinned onto the Jobs Cards v0.8 frame: same stock, same
+   palette, same double rule, same Cinzel title, same shield
+   badge, same one-line flavour.
+
+   WHERE THIS DECK DIFFERS FROM THE JOBS DECK, AND WHY
+   1. No Stake pips. Nothing here is claimed with Influence, so
+      the tier band carries a kicker instead: what kind of card
+      this is.
+   2. The art well is a CENTRED 46mm PLATE, not a full-bleed 3:2
+      band. The Jobs art is 55/58 native 1536x1024; this deck's
+      art is square (boroughs, Ward, Shylock) or 2:3 portrait
+      (Night Mayor, the Rat). Cropping a square tower scene to
+      3:2 cuts the spire off. The plate crops almost nothing.
+   3. TWO geometries, not one. The Jobs deck freezes its bands
+      because 12 cards fan out in the Market row and any jitter
+      shows. Nothing here ever fans: a Deed never sits beside a
+      Mark in play. So holdings (Deeds + Titles, which DO share
+      a sheet) share one geometry, and debts (Rat + Marks, which
+      share a sheet) share another. Within a type it is frozen.
+        holdings : art 38mm · rules 16mm
+        debts    : art 35mm · rules 19mm
+      Change one band and you must take the millimetres off the
+      other; each geometry is sized to its TALLEST card's rules
+      (Harbormaster among holdings, the Rat among debts), so the
+      art can only grow when that one card's text shrinks.
+   ============================================================ */
+
+/* ============================================================
+   PALETTE — identical to Jobs Cards v0.8
+   ============================================================ */
+:root{
+  --gold:#c9a437;
+  --gold-bright:#e8cc72;
+  --gold-line:#b9932f;
+  --gold-dim:#a98c4f;
+
+  --ink:#efe3cd;
+  --ink-2:#f2e6cf;
+  --body:#d8caae;
+  --muted:#b8a577;
+
+  --panel-a:#241c14;
+  --panel-b:#19130c;
+  --rule:rgba(185,147,47,.28);
+}
+
+/* ============================================================
+   PAGE / GALLERY
+   ============================================================ */
+/* Without this the card is 63mm of CONTENT plus 6mm of padding
+   plus its border = a 69.8 x 94.8mm card that is not poker
+   stock and does not fit its own 63mm print column. Jobs Cards
+   v0.8 has the same hole and needs the same line.
+   Every band budget below assumes border-box: 88mm of card,
+   less .8mm of border and 6mm of padding, leaves 81.2mm to
+   spend, and the bands spend 81.0mm of it. */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:#100c08;
+  background-image:radial-gradient(circle at 50% -10%,#241a11,#0d0a07 65%);
+  color:var(--ink);
+  font-family:Barlow,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+.masthead{text-align:center;padding:34px 20px 6px}
+.masthead-kicker{font:600 9px Barlow;letter-spacing:5px;color:var(--gold-dim);text-transform:uppercase}
+.masthead-title{font:700 40px Cinzel,serif;color:var(--gold-bright);letter-spacing:2px;margin:6px 0 2px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.masthead-sub{font:600 11px Barlow;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+.masthead-note{max-width:660px;margin:14px auto 0;font:400 11px/1.5 Barlow;color:var(--muted);font-style:italic}
+.masthead-note b{color:var(--gold-dim);font-style:normal}
+
+.tier-head{
+  max-width:1100px;margin:38px auto 14px;padding:0 20px;
+  display:flex;align-items:center;gap:10px;
+}
+.tier-head .dia{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.tier-head .lbl{font:700 13px Cinzel,serif;letter-spacing:2.5px;color:var(--gold)}
+.tier-head .meta{font:italic 500 10px Barlow;color:var(--muted)}
+.tier-head .rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)}
+
+.gallery,.backs{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;padding:0 20px 10px}
+
+/* ============================================================
+   CARD — 63 x 88mm poker stock
+   ============================================================ */
+.card{
+  position:relative;
+  width:63mm;height:88mm;
+  background:linear-gradient(var(--panel-a),var(--panel-b));
+  border:1.5px solid var(--gold-line);
+  border-radius:3mm;
+  padding:3.2mm 3mm 2.8mm;
+  display:flex;flex-direction:column;
+  box-shadow:0 8px 22px rgba(0,0,0,.55),inset 0 0 46px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+.card::after{
+  content:"";position:absolute;inset:1.4mm;
+  border:.4mm solid rgba(185,147,47,.3);border-radius:2mm;
+  pointer-events:none;z-index:3;
+}
+
+/* --- kicker band : fixed 5mm. The Jobs deck's Stake pips live
+   here; nothing in this deck costs Influence to claim, so the
+   band names the card type instead. --- */
+.tier{
+  flex:0 0 auto;height:5mm;
+  display:flex;align-items:center;
+  padding-right:12mm;              /* keeps clear of the shield badge */
+  border-bottom:.4mm solid var(--rule);
+}
+.kicker{font:600 5.2pt Barlow;letter-spacing:1.6px;color:var(--gold-dim);text-transform:uppercase}
+
+/* --- title : fixed 7mm. Every name in this deck is ONE line
+   ("Harbormaster", "Shylock's Mark"), so this is 2mm shorter
+   than the Jobs deck's 9mm two-line box. Those 2mm are spent on
+   the rules band below. --- */
+.title{
+  flex:0 0 7mm;
+  margin:1.6mm 0 0;
+  display:flex;align-items:center;justify-content:center;
+  font:700 13pt/1.02 Cinzel,serif;
+  color:var(--gold-bright);
+  letter-spacing:.3px;text-align:center;
+  padding:0 10mm;                  /* symmetric, so it stays centred under the badge */
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
+}
+/* "Shylock's Mark" is the one name too wide for 13pt inside the
+   badge-clearing padding; it wraps to two lines and spills a box
+   built for one. Same lever, same value as the Jobs deck. */
+.title--long{font-size:10.6pt}
+
+/* --- art plate : 46mm wide, centred. Height is set per type. --- */
+.art{
+  width:46mm;align-self:center;
+  margin:1.8mm 0 0;
+  border:.3mm solid rgba(185,147,47,.32);
+  border-radius:1.4mm;
+  background:rgba(0,0,0,.3);
+  overflow:hidden;
+  position:relative;
+}
+.art img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  /* lifts the art off the dark stock in print — same recipe as
+     the Jobs deck and .speakeasy-image in Cards v0.7 */
+  filter:brightness(1.1) contrast(1.08) saturate(1.04);
+}
+/* 2:3 portrait sources (the Rat) crop from the top so the face
+   survives the plate. */
+.art--portrait img{object-position:center 20%}
+.art::after{
+  content:"";position:absolute;inset:0;
+  box-shadow:inset 0 0 6mm rgba(25,19,12,.28);
+  pointer-events:none;
+}
+
+.rules-label{
+  flex:0 0 auto;
+  margin:1.4mm 0 .7mm;
+  text-align:center;
+  font:700 5.4pt Barlow;letter-spacing:2.2px;
+  color:var(--gold-dim);text-transform:uppercase;
+}
+/* The text MUST stay wrapped in a single <span> — see the Jobs
+   deck's note. Flexing .rules directly would make every <b> its
+   own flex item and swallow the spaces between them. */
+.rules{
+  display:flex;align-items:center;justify-content:center;
+  padding:0 .4mm;
+}
+.rules > span{
+  font:500 7.4pt/1.3 Barlow;
+  color:var(--ink-2);
+  text-align:center;
+}
+.rules b{color:var(--gold-bright);font-weight:700}
+/* clause separator — a blank line between "The Claim" and the
+   power it carries, without a <p> and its margins */
+.brk{display:block;height:1.3mm}
+
+/* --- flavour : fixed 5mm, ONE line, nowrap. Anything past ~52
+   characters is CLIPPED, silently. Count before you write. --- */
+.flavour{
+  flex:0 0 5mm;
+  margin-top:auto;
+  margin-bottom:.6mm;
+  padding-top:1.6mm;
+  border-top:.4mm solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font:italic 400 6.4pt Barlow;
+  color:var(--muted);
+  text-align:center;
+  white-space:nowrap;overflow:hidden;
+}
+
+/* --- the two geometries --- */
+.card--holding .art{flex:0 0 38mm}
+.card--holding .rules{flex:0 0 16mm}
+.card--debt .art{flex:0 0 35mm}
+.card--debt .rules{flex:0 0 19mm}
+
+/* --- respect badge. shield2.png, NOT shield2-unified.png: the
+   "unified" plate is a flat black-outlined cartoon and reads as
+   a different deck beside the Jobs deck's shield1/3/5. --- */
+.respect{
+  position:absolute;top:.4mm;right:.4mm;z-index:5;
+  width:12.5mm;height:12.5mm;
+  background-size:contain;background-repeat:no-repeat;background-position:center;
+  filter:drop-shadow(0 .4mm .8mm rgba(0,0,0,.65));
+}
+.respect[data-respect="2"]{background-image:url('Art/shield2.png')}
+/* The broken crown: no Rat and no debtor is ever crowned. */
+.respect[data-respect="none"]{background-image:url('Art/shieldNoCrown.png')}
+
+/* ============================================================
+   CARD BACKS
+   Deeds are SHUFFLED AND DEALT at setup, so all five backs must
+   be identical to the millimetre. The Titles are never shuffled,
+   so each carries its own name.
+   ============================================================ */
+.back{
+  position:relative;
+  width:63mm;height:88mm;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(212,175,55,.10),transparent 58%),
+    linear-gradient(var(--panel-a),var(--panel-b));
+  border:1.5px solid var(--gold-line);
+  border-radius:3mm;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2.6mm;
+  overflow:hidden;
+}
+.back::after{
+  content:"";position:absolute;inset:1.4mm;
+  border:.4mm solid rgba(185,147,47,.3);border-radius:2mm;pointer-events:none;
+}
+.back::before{
+  content:"";position:absolute;inset:3.4mm;
+  border:.25mm solid rgba(185,147,47,.16);border-radius:1.4mm;pointer-events:none;
+}
+.back-dia{width:2.6mm;height:2.6mm;background:var(--gold);transform:rotate(45deg)}
+.back-rule{width:26mm;height:.3mm;background:linear-gradient(90deg,transparent,rgba(201,164,55,.8),transparent)}
+.back-title{
+  font:700 19pt Cinzel,serif;color:var(--gold-bright);
+  letter-spacing:1.5px;text-align:center;line-height:1;
+  text-shadow:0 2px 6px rgba(0,0,0,.6);
+}
+.back-title--sm{font-size:15pt}
+.back-sub{font:600 6pt Barlow;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase}
+.back-foot{
+  position:absolute;bottom:5mm;
+  font:italic 400 6pt Barlow;color:rgba(184,165,119,.65);
+}
+/* holds a duplex cell open on a part-filled sheet */
+.back-blank{width:63mm;height:88mm;display:none}
+
+/* ============================================================
+   PRINT — 4-up on A4, front sheet then its back sheet.
+
+   BACK SHEETS ARE COLUMN-MIRRORED, and this is a fix, not a
+   quirk. Cards v0.7 laid its backs in the same reading order as
+   its fronts, which is correct under NO duplex mode: a long-edge
+   flip mirrors the columns (1234 -> 2143) and a short-edge flip
+   mirrors the rows. It never showed up because the only sheets
+   with four IDENTICAL backs were the ones anybody printed.
+   These sheets are ordered for LONG-EDGE duplex, the usual
+   default. Flipping on the short edge instead will pair the
+   Harbormaster with the Ward Boss's back.
+   ============================================================ */
+@media print{
+  @page{size:A4;margin:10mm}
+  html,body{background:#fff}
+  .masthead,.tier-head{display:none}
+  .gallery,.backs{
+    display:grid;
+    grid-template-columns:repeat(2,63mm);
+    grid-template-rows:repeat(2,88mm);
+    gap:10mm;
+    justify-content:center;align-content:center;
+    /* 277mm is exactly the A4 body inside the 10mm margins, so the
+       sheet centres on the page instead of hugging the top. Do NOT
+       round it up: one millimetre over and the grid spills to a
+       second, empty page. */
+    min-height:277mm;
+    padding:0;
+    page-break-after:always;
+  }
+  .back-blank{display:block}
+  .card,.back{
+    box-shadow:none;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  /* no trailing blank page */
+  body > :last-child{page-break-after:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-kicker">Prohibition &middot; New York &middot; 1926</div>
+  <div class="masthead-title">Deeds, Titles &amp; Debts</div>
+  <div class="masthead-sub">v0.8 &middot; 17 Cards &middot; 5 Deeds &middot; 3 Titles &middot; 1 Rat &middot; 8 Marks</div>
+  <p class="masthead-note">
+    Deeds and Titles pay you for what you <b>hold</b>; the Jobs deck pays you for what you <b>do</b>.
+    Four Deeds and three Titles are all the ground there is: <b>14 Respect</b>, one short of the 15
+    that crowns you. <b>Public Enemy No. 1 is cut</b> &mdash; that missing point is the whole argument.
+    Nobody takes the throne without doing at least one Job.
+  </p>
+</div>
+
+<!-- =============================================================
+     SHEET 1 — the four mainland Deeds. Shuffled and dealt at
+     setup, so these four backs are identical.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">BOROUGH DEEDS</span>
+  <span class="meta">2 Respect each &middot; claimed at Reckoning &middot; sheet 1 of 5</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Borough Deed</span></div>
+    <h2 class="title">Manhattan</h2>
+    <div class="art"><img src="Art/Boroughs/Manhattan.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever Controls the most Districts in <b>Manhattan</b>.</span></div>
+    <div class="flavour">The tower throws a long shadow. Stand in it.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Borough Deed</span></div>
+    <h2 class="title">The Bronx</h2>
+    <div class="art"><img src="Art/Boroughs/Bronx.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever Controls the most Districts in <b>The Bronx</b>.</span></div>
+    <div class="flavour">North of the river the rent&rsquo;s cheap. So are the men.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Borough Deed</span></div>
+    <h2 class="title">Queens</h2>
+    <div class="art"><img src="Art/Boroughs/Queens.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever Controls the most Districts in <b>Queens</b>.</span></div>
+    <div class="flavour">Flat, quiet, and full of places nobody looks.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Borough Deed</span></div>
+    <h2 class="title">Brooklyn</h2>
+    <div class="art"><img src="Art/Boroughs/Brooklyn.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever Controls the most Districts in <b>Brooklyn</b>.</span></div>
+    <div class="flavour">A church, a bar, and one man who owns both.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
+</div>
+
+<!-- =============================================================
+     SHEET 2 — Staten Island's Deed + the three Titles.
+     Backs are MIRRORED for long-edge duplex: fronts read
+     Staten / Ward / Harbor / Night, backs read Ward / Staten /
+     Night / Harbor.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">STATEN ISLAND &amp; THE TITLES</span>
+  <span class="meta">2 Respect each &middot; Public Enemy No. 1 cut in v0.8 &middot; sheet 2 of 5</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Borough Deed</span></div>
+    <h2 class="title">Staten Island</h2>
+    <div class="art"><img src="Art/Boroughs/Staten.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever Controls the most Districts in <b>Staten Island</b>.</span></div>
+    <div class="flavour">The forgotten borough. Nobody looks for you here.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Title</span></div>
+    <h2 class="title">Ward Boss</h2>
+    <div class="art"><img src="Art/Ward.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever Controls the most <b>Ward</b> Districts.</span></div>
+    <div class="flavour">The Boroughs make headlines. The Wards own the block.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Title</span></div>
+    <h2 class="title">Harbormaster</h2>
+    <div class="art"><img src="Art/Bridge.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever Controls the most <b>Dock</b> Districts.<span class="brk"></span><b>Tomorrow&rsquo;s Mash:</b> each Shadows, <b>name any face</b> instead of rolling the Mash die.</span></div>
+    <div class="flavour">Every barrel of molasses lands on your pier.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Title</span></div>
+    <h2 class="title">Night Mayor</h2>
+    <div class="art"><img src="Art/Jimmy.png" alt=""></div>
+    <div class="rules-label">The Claim</div>
+    <div class="rules"><span>Whoever holds the most <b>Speakeasies</b>.</span></div>
+    <div class="flavour">The sun belongs to the law. The night is yours.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Ward<br>Boss</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Night<br>Mayor</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Harbor<br>master</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
+</div>
+
+<!-- =============================================================
+     SHEET 3 — the Rat + three Marks. Backs mirrored: the Rat
+     sits top-left on the front, so its back sits top-RIGHT.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
+  <span class="meta">no crown &middot; the two ways to lose the throne outright &middot; sheet 3 of 5</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Mark of the Snitch</span></div>
+    <h2 class="title">The Rat</h2>
+    <div class="art art--portrait"><img src="Art/rat.png" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span><b>Pariah:</b> while you hold this card you <b>cannot Bribe</b> and <b>cannot be crowned</b>.<span class="brk"></span><b>Redemption:</b> passes to any rival who plays <b>Rat</b>. If your <b>Boss</b> dies or is arrested, return it to the Supply.</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Rat</div><div class="back-rule"></div><div class="back-sub">No Crown</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+</div>
+
+<!-- =============================================================
+     SHEET 4 — four more Marks. All backs identical, so mirroring
+     is moot here.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
+  <span class="meta">4 of 8 &middot; he keeps only eight in his book &middot; sheet 4 of 5</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+</div>
+
+<!-- =============================================================
+     SHEET 5 — the eighth Mark, alone. The blank holds the
+     mirrored duplex cell open: front sits top-LEFT, so the back
+     must sit top-RIGHT.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
+  <span class="meta">8 of 8 &middot; when all eight are out, nobody Begs &middot; sheet 5 of 5</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
+    <div class="rules-label">The Debt</div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
+    <div class="respect" data-respect="none"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back-blank"></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+</div>
+
+</body>
+</html>
