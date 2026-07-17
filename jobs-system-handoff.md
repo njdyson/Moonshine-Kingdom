@@ -2,8 +2,9 @@
 
 Everything needed to resume cold. Written for whoever picks this up next, human or agent.
 
-**Status:** design settled. **Rulebook v0.8 print-verified: 23pp A4, no blanks.** Deck is
-**26 of 32 cards**, and building it out is the next job.
+**Status:** design settled. **Rulebook v0.8 print-verified: 23pp A4, no blanks.**
+**The deck is COMPLETE: 32 of 32 cards at 12 / 12 / 8, print-verified 16pp A4, no blanks.**
+All three overlap clusters are closed and the hard rule is now machine-checked (see §3).
 
 **Live files:** `Rulebook v0.8.html` · `Jobs Cards v0.8.html` (deck) ·
 `Turn Structure and Ledger v0.7 Reskin.html` · `Playbooks v0.7 Reskin.html` ·
@@ -65,25 +66,65 @@ not ones.**
 **Never two 5s on one Play.** A 5 plus small change is fine. Overlap risk scales with the square of
 the stack, which is the real reason the Score pool is small.
 
-**Three clusters are currently BROKEN and must be fixed as the deck is built:**
+**All three clusters are CLOSED (v0.8, deck build).** Max stack in the deck is now **9**, down from
+15 / 13 / 11. **Don't undo the guards below** — each is load-bearing and each is commented in the
+generator.
 
-1. **Queens Speakeasy Boss-kill = 15 Respect.** `Toll Booth Trap` (Boss in Queens) +
-   `The Irish Goodbye` (Boss in a Speakeasy) + `The Butcher's Ledger` (5+ Mobsters in Queens) all
-   fire on one Open Fire. **Agreed direction:** keep Toll Booth as the deck's *only* "kill a Boss";
-   move **Butcher's Ledger to Brooklyn** (Murder, Inc. ran out of Brownsville — historically perfect,
-   and Brooklyn is short on named cards); **re-theme The Irish Goodbye off the Boss-kill entirely.**
-   The contact sheet settles the theme: `Goodbye.png` is a lone figure walking away from
-   **O'Sullivan's Tavern** down a wet street — a man leaving without a word, not a decapitation.
-2. **One Extort = up to 13 Respect.** `Five Families` (5) + `Empire State` (5) + `King of Queens` (3).
-   The Influence ceiling brakes it but not enough: staking all five Extort cards costs 12 and the cap
-   is 10, but Extort only needs 2 in the Ledger, so 8 staked → 13 Respect on a single Play — 87% of
-   the win requirement. **`Five Families` is the free rider** ("a District in all five Boroughs" fires
-   on any big Extort). Either it stops being an Extort card, or Empire State drops to a 3.
-3. **Seize cluster = 11 Respect.** `The Eviction` (3, rival Safehouse) + `The Copper Heist`
-   (3, Pressure 5+ Still) + `Over the Top` (5, defended by 5+ Mobsters) can co-fire on one Seize.
+**The audit is automated. Run it before and after touching any card:**
+`tools/overlap_audit.py` models every Job as a predicate over a real district and enumerates
+every Play (verb × district × magnitude × board state), then asserts the hard rule. It encodes the
+board's physical constraints (Defenseless ⊻ Hostile, the Williamsburg Bridge only lands at its two
+ends, Staten Docks are Pressure 1 and 3, Staten's Deed is boxed). **Hand-analysis is not enough —
+the solver caught two live violations that four rounds of human reading missed.**
 
-**Root cause of 1 and 2: over-broad qualifiers.** "in a Speakeasy" is 12 venues; "all five Boroughs"
-is any big Extort. Name *specific* things.
+How each cluster was closed:
+
+1. **Queens Speakeasy Boss-kill (was 15).** Toll Booth Trap is now the deck's **only** "kill a Boss".
+   `The Butcher's Ledger` moved to **Brooklyn** (Murder, Inc. ran out of Brownsville). `The Irish
+   Goodbye` was re-themed off the Boss-kill to a **3**: *kill 3+ in a Speakeasy and **do not take
+   Control***. That last clause is the guard — it makes the card structurally unable to co-fire with
+   **any** Seize card, and it is exactly what the art shows (he does it and walks out).
+2. **One Extort (was 13). `Five Families` is now the deck's only Extort Job**, so the cluster cannot
+   form — a card can't overlap itself. **The rule Nick set:** an Extort Job earns its place only when
+   it measures something **no Deed or Title already measures**. Five Families measures *spread*
+   (a District in all five Boroughs); nothing else does, and Extort costs 2 Influence and always draws
+   Heat, so it isn't the passive Deed. `Empire State` / `King of Queens` / `Big Squeeze` / `Black Hand`
+   were all "hold N Districts in one Borough" — **that is the Borough Deed, re-paid**, i.e. verbatim
+   the redundancy argument that killed Contracts. **CUT.** (Note the trap: demoting them does *not*
+   help — a cheaper card lowers the stake and lets you fit *more* of them under the cap.)
+3. **Seize cluster (was 11).** The engine was never `Over the Top` — it was **`The Eviction` +
+   `The Copper Heist` riding along on any Seize**. Copper Heist now reads *"and **no Safehouse**"*,
+   which The Eviction *requires*, so the two can **never** ride the same Seize. `Over the Top` also
+   gained **"a Bronx District"**, which makes the **four Open Fire 5s borough-disjoint** — Toll Booth
+   Trap (Q) · Butcher's Ledger (Bk) · Over the Top (Bx) · Bloody Sunday (M). **That disjointness is
+   what makes "never two 5s" structurally impossible rather than merely unobserved, and it is the
+   same set as the bounty set in §6b — one constraint doing two jobs. Don't collapse it.**
+4. **A pre-existing violation the handoff never listed:** `Toll Booth Trap` + `Over the Top` were both
+   5s firing on one Open Fire (storm a Queens district held by 5+ including the Boss = **10**). Only
+   the solver found it. Same for `Butcher's Ledger` in Brooklyn. Closed by the disjointness above.
+
+5. **The Safehouse free rider (a guaranteed 8).** `Bloody Sunday`'s trigger was a strict *subset* of
+   `The Eviction`'s, so completing it by Seize collected **8 every single time** — not a rare
+   coincidence like every other stack, and the same act sold at two prices. **Fixed with the
+   rulebook's own either/or**, no invented guard: *"a rival Safehouse in the District is **destroyed**,
+   **unless you take it over instead**."* Destroy XOR take over. So `The Eviction` = *take it over*,
+   `Bloody Sunday` = *destroy it*, and they can never co-fire. **Bloody Sunday now stacks with
+   NOTHING — a clean 5.**
+   The wording matters: The Eviction is phrased by **board consequence**, not intention —
+   *"relocating yours into it"* — because "take over" is a state of mind players will argue about,
+   whereas *where your Safehouse ends up* is a fact on the table. **Prefer visible, self-checking
+   consequences to intentions.** (The relocation is also a real cost — you abandon your old base —
+   which is what holds the card at 3.)
+
+**Root cause in every case: over-broad qualifiers.** "in a Speakeasy" is 12 venues; "all five
+Boroughs" is any big Extort; "Pressure 5+ Still" is 10 districts. Name *specific* things, and prefer
+a guard that makes two cards **mutually exclusive** (X requires it, Y forbids it) over one that
+merely makes them rarer. **Best of all is a mutual exclusion the RULES already enforce** (destroy vs
+take over) — nothing to remember, nothing to drift.
+
+**Watch for the free rider.** Not all stacks are equal: a *conditional* stack needs a rare board
+coincidence, a *guaranteed* one fires every time because card A's trigger is a subset of card B's.
+Guaranteed stacks are the bug. Five Families (cluster 2) and The Eviction (above) were both this.
 
 ---
 
@@ -95,21 +136,60 @@ is any big Extort. Name *specific* things.
 2. **Respectable:** Respect is *standing*. Would you brag about it?
 
 Test 2 is why **Bribe, Beg and Rat cannot carry Jobs** — a rat cannot gain Respect; the Rat Card
-exists to say you're dishonoured. Usable verbs: **Move, Unload, Trade, Extort, Open Fire, Secure,
-Recruit** (+ **Rise**, which works: coming back from a decapitation is respectable).
+exists to say you're dishonoured. Usable verbs: **Move, Unload, Trade, Extort, Secure, Recruit**
+(+ **Rise**, which works: coming back from a decapitation is respectable).
 
-### Card-writing rules
-- **Event framing forces precision:** an event has an actor, an object and a moment. *"Seize a
-  District which **contains** 5+ Mobsters"* is ambiguous; *"**defended by** 5+ Mobsters"* means the
-  garrison you had to beat.
-- **5s are single-Play with enormous setup, never "do X, N times."** The ladder is how much board
-  must exist before the one Play lands: 1 ≈ none, 3 = a real position, 5 = a campaign.
+### ⚠ "OPEN FIRE" IS NOT A PLAY — a FIREFIGHT is one Play (rulebook tightened, v0.8)
+This list used to include "Open Fire" and it was **wrong**, which put a dead card in the deck.
+Open Fire is a **repeatable round** — one simultaneous volley — inside a Pin. The combat table says so:
+*"**Repeat:** If both sides stand, remain Pinned. Spend another Influence to Open Fire again."*
+It is not on the Playbooks' Plays list.
+
+So *"Kill 5+ Mobsters **with a single Open Fire Play**"* read literally as **five hits from one
+volley**. The **Muscle Ratio caps combat dice at 5** (Mobsters ÷ 2, capped), so that needs 9+ Mobsters
+massed *and* all five dice hitting — at base Threat, **(1/3)⁵ ≈ 0.4%**. `The Butcher's Ledger` was
+uncompletable and `The Pier Six Brawl` was luck-on-a-1-Respect-card. **Nick caught this by reading the
+card literally; the solver could not — it models triggers, not dice. Read your cards out loud.**
+
+**The fix went in the RULEBOOK, not the cards.** The intent was already there but stated only once, by
+accident, inside the Fold branch ("*The Invaders are not Pinned; their Play ends*"). §3 Pinned now
+opens with it outright:
+> **A firefight is one Play.** Moving in starts it, and it is not over until the Pin is resolved —
+> however many rounds of fire that takes. Each round costs its own Influence, but the whole bloody
+> business counts as the **single Play** that walked in the door.
+
+(There is precedent for a Play costing more than 1 Influence: *"Power Plays cost 2 Influence, but
+still count as a single Play in the turn cycle."*)
+
+**So combat Jobs use the deck's OWN unit — "in a single Play"** — and need no second term. "Firefight"
+was tried and dropped: it reads as though it could mean one round, and a second unit alongside "Play"
+re-creates the very ambiguity we were removing. All three kill-count Jobs now say **"in a single
+Play"**: The Pier Six Brawl · The Irish Goodbye · The Butcher's Ledger.
+**Rulebook re-verified after the edit: 23pp, no blanks.**
+
+---|---|---|---|---|
+| Queens | The Toll Booth Trap | kill the **head** | Sicilian Syndicate | **Hit** — the Boss takes the first hit |
+| Manhattan | Bloody Sunday | burn the **base** | Harlem Knights | **Torch** — burn a rival Safehouse |
+| Brooklyn | The Butcher's Ledger | the **body count** | Hell's Kitchen Irish | **Firepower** — +1 die, Open Fire only |
+| Bronx | Over the Top | take the **ground** | East Side Vipers | **Stealth** — no Ambush, and they cannot Fold |
+
+Three consequences: **(1)** four distinct acts, so no two bounties are the same card twice; **(2)** every
+mob has one marquee 5 its trait was made for; **(3)** all four MUST stay outcome-worded or each
+excludes its own mob. **Watch at playtest:** Torch is a real discount (no garrison to beat), which
+reads as a deliberate buff to the Knights — the sim's weakest mob — but it is unpriced.
 - **Difficulty is the master knob**, not the marker cost. Stake = markers × Days held, so harder Jobs
   sit staked longer.
 - **Name specific locations.** A named Job is a **deterrent before anyone claims it** — "Kill a rival
   Boss in Queens" sitting face-up moves four Bosses whether or not it's taken. A secret card could
   never do that. This is an argument *for* the whole open-market pivot.
 - **Theme first** — name + art + flavour, then the objective. Nick's call and it's the right way round.
+- **THE NAMING RULE: a Job's name must carry an EVENT, never a bare board location.** If the name
+  could be printed on the map, it's wrong. This falls straight out of the design thesis (a Job is an
+  event, not a board state) and the v0.7 deck already knew it: *Coney Island **Heist***, *The
+  Dutchman's **Deal***, *Cross-Town **Switch***, *Gentleman Jimmy's **Shindig***. Naming the real
+  target is GOOD (§4 wants the deterrent) — naming a district the card does NOT target is the sin.
+  `Coney Island` pointed at a Speakeasy while asking for a Dock; `Five Points Hustle` named the one
+  Ward it excluded. **A misleading name is usually a symptom of a broken objective — check that first.**
 - **Method:** mine the old decks for name + art (`Contract Cards v0.7.html` has ~40;
   `Archive/` has more), write a fresh event objective, place where the borough quota is short.
   **`Art/Jobs/_contact sheet.png` shows all 58 images — LOOK AT IT, don't guess from filenames**
@@ -156,29 +236,75 @@ uneven by construction.
 
 ---
 
-## 6. Deck state — 26 of 32
+## 6. Deck state — COMPLETE, 32 of 32
 
-**Finished (16):** 5 × 1-Respect, 5 × 3, 6 × 5.
-**Drafts (10):** in the screen-only `.gallery--draft` gallery, excluded from print, awaiting promotion.
-Themes/art/flavour set; objectives written.
+**12 / 12 / 8, print-verified 16pp A4, no blanks.** No drafts remain; the `.gallery--draft` CSS is
+kept (unused) because the draft gallery is a useful tool for the next round of argument.
 
-**To hit 12/12/8 from here:** promoting all 10 drafts gives **5 / 12 / 9**. So the threes are done,
-the fives need **one demoted**, and the ones need **+7**.
+**The deck is generated, not hand-edited.** `tools/gen_deck.py` holds the card table and rebuilds
+the `<body>` from it, which is what guarantees the exactly-4-cards-per-block rule (§7). Edit the table
+and re-run; don't hand-edit the HTML or the blocking will drift.
 
-**Demotion candidates to 1-Respect:** `Fortress Staten` (Secure into empty Staten is one Play with no
-setup — it is not a 3), and one of `Hell's Highway` / `Poison Panic`.
+**Verb spread** (the "Open Fire is over-represented" flag is resolved):
+Move 7 · Open Fire 7 · Unload 6 · Secure 3 · Trade 3 · Recruit 2 · Rise 2 · Extort 1 · Raid 1.
 
-**Flags:**
-- **Open Fire is over-represented** — it's the verb that most needs an army, so combat mobs get more
-  Job options than trade mobs.
-- **32 of 58 images are unused.** Strong 1-Respect candidates read off the contact sheet:
-  *Quiet Drop* (crates onto a boat at night), *Gin Pipeline* (crates through a tunnel), *Cobble Hill*
-  (handshake over a bar), *Dock Domination* (tommy guns on a pier), *Old Guard*, *Switch*, *Jimmy*,
-  *Ghost Town*, *Bathtub Chemistry*, *Full Steam*.
-- `The Insurance Job` uses a **"Raid" trigger** (Have a Raid Condemn your Safehouse's District) —
-  not one of the 7 Play verbs. Watch it.
-- **Named tally after fills: M3 / Bk3 / Bx3 / Q3** (quota ≤4 ✓). The Triangle (Richmond Hill) = Queens
-  High Society; Jockey Club (Morris Park) = Bronx.
+**Live flags:**
+- **`Land-Connected` (on `The Beachhead`) is defined NOWHERE in the rulebook.** The rulebook says
+  Districts are Connected by "Land & Bridges", and separately that all Docks connect across water.
+  **A rulebook wording gap, not a card bug — Nick's call.**
+- `The Insurance Job` uses a **"Raid" trigger** — not one of the 7 Play verbs. Still the only one.
+- **`Bloody Sunday`** is the only card in the deck with **red** in it (all other art is sepia/gold), and
+  the name is a loaded real-world term (Dublin 1920, Derry 1972). Both deliberate-ish; flagged.
+- **20 of 58 images unused.**
+
+## 6b. Board fairness — the starting-position exploit (`tools/fairness_audit.py`)
+
+**Nick's banked principle** (memory: contract-deck-design): *a slight district-TYPE bias is fine,
+BOROUGH bias is not* — it lets a player who starts where the deck pays win off turf they already
+hold, and hands a deck-memoriser an edge a newcomer can't see.
+
+Jobs are events, so this audit adds a measure the old Contract audit never needed: for each
+borough-naming card, is it **friendly** (easier for whoever starts there) or a **bounty** (points
+rivals at them)? **A fair deck nets ~0 per seat.** It started at Manhattan +1 / Brooklyn 0 /
+Bronx −1 / Queens −1, with **nobody paid to attack Manhattan at all** — the best seat in the game.
+
+**THE ORPHAN SPEAKEASY SET — the board was built for this; don't break it.**
+Every mainland borough has **exactly one Speakeasy that is neither garrisoned at setup nor
+police-locked**, and *all four sit at Pressure 5*:
+
+| Borough | Starting Speak | Police-locked (HS) | **Orphan** | Card |
+|---|---|---|---|---|
+| Manhattan | East Harlem | Sugar Hill | **The Haymarket** (Tenderloin) | The Big Squeeze |
+| Bronx | Belmont | Morris Park | **The Penny Whistle** (Fordham) | Hell's Highway |
+| Queens | Astoria | Richmond Hill | **Paradise Alley** (Flushing) | Poison Panic |
+| Brooklyn | Coney Island | Williamsburg | **Sunny's Bar** (Red Hook) | Off the Boat |
+
+These are each borough's **friendly** card, all at 3 Respect. Matched by **one bounty per borough,
+all Open Fire 5s and borough-disjoint** (which is also what guarantees "never two 5s"):
+Bloody Sunday (M) · Over the Top (Bx) · Toll Booth Trap (Q) · Butcher's Ledger (Bk).
+
+**Result: every seat reads a 3 friendly and a 5 bounty.** Weighted spread 4 → **1**; the only
+residual is `The Milk Run` (1 Respect, Manhattan-friendly, since Five Points is Manhattan's home
+turf), leaving Manhattan at −1 vs −2 elsewhere. Left alone: the Williamsburg Bridge is the deck's
+best specific and the bridge is the only crossing the board documents.
+
+**Coverage, all healthy now** (per district of that type): Ward 0.80 · Speakeasy 0.67 ·
+Pressure-5 0.67 · Dock 0.62 · High Society 0.50. Docks were **over**-paid at 0.88 (they are already
+triple-rewarded: Harbormaster + Trade is Dock-only + Jobs); Pressure-5 was **starved at 0.22** and the
+orphan set fixed it for free.
+
+**Named tally (counted from the card file, not guessed): M1 / Bk4 / Bx3 / Q1.** Quota is ≤4 per
+mainland borough, so nothing is over — but the spread is **lopsided**, and this is the deck's main
+open issue:
+- **Brooklyn is AT the cap (4):** The Milk Run (Williamsburg Bridge), Off the Boat (Sunny's Bar),
+  Coney Island, The Butcher's Ledger. **No more Brooklyn names without dropping one.**
+- **Manhattan (1) and Queens (1) are badly under-named** — Manhattan's only mention is the Five Points
+  end of the Williamsburg Bridge, and Queens' is the Toll Booth Trap. Both boroughs are nearly
+  invisible in the deck, which wastes the deterrent effect §4 argues is the point of naming
+  ("a named Job moves four Bosses whether or not it's taken").
+- Staten (3) is exempt — it's nobody's home turf, so naming it is always neutral.
+**If you re-art or re-theme anything, spend it on Manhattan and Queens.** Both have an unused
+High Society venue with a name already in canon (The Cotton Club / The Triangle) and no card yet.
 
 ---
 
@@ -188,7 +314,12 @@ setup — it is not a 3), and one of `Hell's Highway` / `Poison Panic`.
   Changing one number without the other silently crops the art.
 - **Gallery blocks MUST be exactly 4 cards + 4 backs.** Print is a 2×2 grid with
   `page-break-after:always`; a 5th card spills to its own page and the duplex front/back pairing is
-  lost. There is a 1-card block at the end of the 1s — the next ones written go there, up to 4.
+  lost. **`tools/gen_deck.py` now enforces this** — it rebuilds the body from a card table and
+  refuses to emit a tier that isn't a multiple of 4. Use it rather than hand-editing.
+- The 2×2 grid is **horizontally centred but top-aligned** on the sheet (`align-content:center` does
+  nothing on an auto-height grid), leaving the lower third blank. Fronts and backs are top-aligned
+  *identically*, so duplex registration is unaffected — it's cosmetic. Left alone deliberately:
+  changing it risks the front/back alignment for no gameplay gain.
 - **Print art recipe:** `filter: brightness(1.1) contrast(1.08) saturate(1.04)`. Don't darken art.
 - **Icon canon:** `Gin.svg` = Speakeasy, `Crown.svg` = High Society, `Fist.svg` = Ward,
   `anchor.svg` = Dock, `fire.svg` = Heat. Tinted by the canonical filter at
@@ -207,7 +338,8 @@ chrome --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=150
   --print-to-pdf="<ABSOLUTE WINDOWS PATH>" "file:///<url-encoded path>"
 ```
 Chrome **needs an absolute Windows path** for `--print-to-pdf`. Check with pypdfium2.
-**Targets: Jobs deck = 12 A4 pages, no blanks. Rulebook = 23pp, no blanks.**
+**Targets: Jobs deck = 16 A4 pages, no blanks (32 cards ÷ 4 = 8 blocks × 2 sheets). Rulebook = 23pp,
+no blanks.** (The old 12-page target was the 16-card sample; drafts didn't print.)
 For per-container overflow, drive Chrome via CDP (`--remote-debugging-port`, `PUT /json/new`, then
 `Emulation.setEmulatedMedia{media:'print'}`) and measure `body > .container` heights against
 **A4 = 1123px**. Every container must fit on one page or it spills and leaves a blank.
