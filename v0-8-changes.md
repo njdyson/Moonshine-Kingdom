@@ -4,6 +4,11 @@ Companion to `jobs-system-handoff.md` (which covers the Jobs system itself). Thi
 *else* v0.8 changed, with the reasoning, so nobody re-opens a settled argument or "fixes" something
 back to a bug. Every rule below is live in `Rulebook v0.8.html` (print-verified 23pp A4, no blanks).
 
+> **2026-07-18 — the Jobs Market is now STATIC.** The conveyor, *Yesterday's News*, the fresh/stale
+> ends and the per-player deck build are all deleted; setup is "shuffle all 32, deal P+1"; passing at
+> The Offers is now explicit. The argument and the five rejected alternatives live in
+> **`jobs-system-handoff.md` §2b** — not duplicated here, so the two docs can't drift.
+
 ---
 
 ## Renames (all cascaded through rulebook, turn card, playbooks, deck)
@@ -11,10 +16,10 @@ back to a bug. Every rule below is live in `Rulebook v0.8.html` (print-verified 
 | Was | Now | Why |
 |---|---|---|
 | Phase 2: **Operations** | Phase 2: **The Hustle** | "Operations" was the one business-school word in a noir rulebook. Shadows / The Hustle / Reckoning. |
-| **Hustle** (the Job claim) | **The Nod** | It had to move: the phase deserved the word more. A nod is the opposite of paperwork, which is what the Jobs section already argues ("no declarations, no paperwork… nobody signs contracts"). |
+| **Hustle** (the Job claim) | **The Nod**, then **The Offers** | It had to move: the phase deserved the word more. A nod is the opposite of paperwork, which is what the Jobs section already argues ("no declarations, no paperwork… nobody signs contracts"). **Renamed again in a7d41d8 to The Offers** — once walking away became part of the same step, "the Nod" named only one of the things you could do there. *The Offers* names what the city puts in front of you, which is true whichever of the three you pick. |
 | **The Whispers** (card backs, setup) | **The Jobs** / "Stack the Deck" | Collided head-on with the Vipers' **Whispers** trait, which is literally about the Jobs deck. The Vipers keep the word. |
 
-**"The Handshake" was considered for the Nod and REJECTED.** Cooperation already has a section
+**"The Handshake" was considered for this step and REJECTED.** Cooperation already has a section
 headed **"A Binding Handshake"**, and worse, both mechanics stake an Influence marker from Reserves
 and return it on completion — they're mechanically twinned, so sharing a name would make two
 genuinely confusable things sound identical. Cooperation has the better claim. **Don't revive it.**
@@ -27,7 +32,7 @@ genuinely confusable things sound identical. Cooperation has the better claim. *
 - **Rise** keeps its name, loses the giveaway. Was: new Boss + **2 free Runners** + a free Secure, for
   2 Influence — roughly **$1,100 of free goods for the crime of losing your Boss**, which actively
   incentivised Boss death. Now: **promote a Runner** (Cost 1, Standard Play). Boss death is a real
-  setback again, reinforced by **No Boss, no business** (no Nod without a Boss).
+  setback again, reinforced by **No Boss, no business** (no Offers without a Boss).
 - **Wiped Out** (new): no Boss, no Runners **and no Safehouse** → place a Boss, 2 Runners and your
   Safehouse in any **Defenseless** District, free, at the start of your turn. The trigger is narrow
   by design: Control = "one Mobster **or a Safehouse**", so while your Safehouse stands you can always
@@ -40,8 +45,11 @@ genuinely confusable things sound identical. Cooperation has the better claim. *
 - **Shylock's vig**: $3,000 → **$2,500**. $3,000 was 100% interest = rescue-only. $2,000 (33%) would
   make Beg a mandatory opening with 8 Marks on the table. $2,500 (67%) still hurts. **Cost: the
   "takes back twice what he gave" line had to go** — it *was* the 2× rule.
-- **The Nod snakes**: reverse Turn Order. Not a catch-up patch — the point is to stop stacking every
+- **The Offers snake**: reverse Turn Order. Not a catch-up patch — the point is to stop stacking every
   advantage (first Red, first Play, first pick) on Token #1, so both ends of the order are live.
+  **This got sharper on 2026-07-18**: dropping the 1s-only opening Market means the first pick is
+  now a pick between *tiers*, so the last seat's compensation is worth something on Day 1. Under a
+  five-1s opening it was worth nothing on the one Day it mattered most.
   Turn order is set by *play selection*, not wealth: a 3–5 Influence firefight empties you by noon.
 - **Threat bonuses** ride on **the situation, not the Play**: they apply to every attack roll from
   that position — Open Fire, Hit or **Plunder** alike. (Answers "does Plunder get the Ambush +1?" —

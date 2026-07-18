@@ -3,6 +3,9 @@
 Everything needed to resume cold. Written for whoever picks this up next, human or agent.
 
 **Status:** design settled. **Rulebook v0.8 print-verified: 23pp A4, no blanks.**
+**Latest change (2026-07-18): the Market is now STATIC — the conveyor and *Yesterday's News* are
+deleted, setup is "shuffle all 32, deal P+1", and passing at The Offers is explicit. Read §2b before
+touching any of it.**
 **The deck is COMPLETE: 32 of 32 cards at 12 / 12 / 8, print-verified 16pp A4, no blanks.**
 All three overlap clusters are closed and the hard rule is now machine-checked (see §3).
 
@@ -34,30 +37,126 @@ layer *doing*. Everything else is downstream. This is a restoration: the v10 dec
 |---|---|
 | A Job prints | A **Stake** (Influence locked from Reserves at claim, returned on completion) and a **Respect** (1, 3 or 5). That's all. |
 | Tier names | **Gig / Racket / Score are RETIRED** as game terms (v0.8). Cards carry no tier word. Sort by the Respect shield. |
-| Claiming | **The Nod**, a step inside Shadows → Grease the Wheels. One Job per Day, no fee — the stake *is* the cost. |
-| Nod order | **Reverse Turn Order.** Last boss off the street last night picks first. ("First to the mash, last to the handshake.") |
-| No Boss, no business | A crew with no Boss on the board takes no Nod. |
+| Claiming | **The Offers**, a step inside Shadows → Grease the Wheels. One Job per Day, no fee — the stake *is* the cost. |
+| Offers order | **Reverse Turn Order.** Last boss off the street last night picks first. ("First to the mash, last to the handshake.") |
+| The three options | **Take a Job**, **Walk Away**, or **nothing at all** — one of the three, never two. Passing is legal and the rulebook now says so outright. |
+| No Boss, no business | A crew with no Boss on the board skips The Offers entirely. |
 | Holding Jobs | No hand limit. Run as many at once as your Reserves can stake. |
-| Market | Player Count + 1, face-up, a row: **fresh** end by the deck, **stale** end far. |
-| Churn | **Conveyor.** Each Shadows (*Yesterday's News*) the stale-end card is discarded. Whenever a Job leaves for any reason, close the gap and deal at the fresh end **immediately**. |
-| Discard | A real discard pile, reshuffled when the deck runs dry. Completed Jobs leave **permanently** (Respect pile) — the deck is consumable. |
-| Abandoning | Free, any time on your turn, not a Play. Card → discard, markers home. |
+| Market | Player Count + 1, face-up. **Static: no order, no ends, no fresh/stale.** |
+| Churn | **NONE.** The Market moves only when a player moves it — a Job leaves, deal a fresh card into the gap. Nothing ages out. **See §2b before adding any churn back.** |
+| Discard | A real discard pile, reshuffled if the deck runs dry. Only Walk Aways reach it. Completed Jobs leave **permanently** (Respect pile) — the deck is consumable. |
+| Abandoning | **Walk Away**, and it costs your entire Offer for the Day (a7d41d8 closed the free-discard loophole). Card → discard, markers home. |
 | Resolution | **The Play is the unit.** A Job is a deed, not a board position. It counts even if undone before the Play ended. |
 | Deck size | **12 / 12 / 8** (1s / 3s / 5s) = **32 cards printed**. |
-| Setup | **3 ones, 3 threes and 2 fives PER PLAYER** (2p 6/6/4=16, 3p 9/9/6=24, 4p 12/12/8=32). Rest to the box unseen. Seed the market with **1s only**. |
+| Setup | **Set the 5s aside, shuffle the rest, deal Player Count + 1 face-up, then shuffle the 5s back into the deck.** No per-player deck build. The opening Market is **1s and 3s only** — see the Day 1 Reserves crunch below. |
 
-### Why the ratio is 3:3:2 (don't "simplify" this)
-12/12/8 reduces to exactly **3:3:2**, so it scales to whole numbers at every player count and the
-**per-player supply of small Jobs is identical at 2, 3 and 4 players**. That is what keeps the
-escalation arc firing at the same point in the game regardless of table size. Bonus: at 2p you use
-16 of 32 cards, so half the deck differs between games.
+### The 3:3:2 per-player build is GONE — and why it was safe to drop
+The old setup counted **3 ones / 3 threes / 2 fives per player** and boxed the rest, defended here as
+*"don't simplify this."* Read what that ratio was actually protecting: the per-player supply of small
+Jobs being identical at 2, 3 and 4 players, *"what keeps the escalation arc firing at the same point
+in the game regardless of table size."* It existed to make the 1s **run dry on schedule** — a
+mechanism the static Market deliberately softens (see the arc, below). It was defending a feature
+that no longer earns its keep, and it was the fiddliest step in setup.
 
-### The arc (this is a feature, and it replaced a Title)
-Completed Jobs leave permanently; discards reshuffle. So the 1s bleed out one-way and the market
-escalates on its own. **This is why Public Enemy No. 1 was cut** — the deck does its anti-farming
-job structurally. Watch: the arc is **anti-catch-up** (when the 1s are gone, a trailing player has
-no cheap Respect). The 12 threes are the buffer. If playtest strands trailing players, **add threes,
-not ones.**
+Setup is now **shuffle all 32, deal Player Count + 1.** Three consequences:
+
+- **The 1s-only seed is gone — but a 1s-AND-3s seed replaced it, for a different reason.** What made
+  the old seed bad was that it removed *choice*: deal five 1s and picking first is worth nothing, so
+  the reverse-order Offers stop compensating the last seat on the one Day that compensation matters
+  most. A **1s + 3s** opening keeps that choice (two tiers, two stakes) while fixing the affordability
+  problem below. The cost is that the deterrent layer starts dark, but only briefly — the 5s are
+  **8 of the remaining 27**, and at 4p up to four cards are claimed per Offers, so bounties surface
+  within a Day or two of drafting actually starting.
+- **Replayability survives.** The old "at 2p you use 16 of 32, so half the deck differs" argument is
+  replaced by shuffle variance — a random 13-of-32 varies *more* than a random 13-of-a-preboxed-16.
+- **12/12/8 is no longer pinned to 3:3:2.** Divisibility by player count was the only reason for that
+  ratio. Tier counts are now a free tuning knob in `tools/gen_deck.py`, which is what makes patch 2
+  below cheap.
+
+### The Day 1 Reserves crunch (verified from the rulebook — this is WHY the seed is tier-restricted)
+Setup hands you 6 Influence, but the rulebook says **"slot 5 onto your Ledger, drop the last 1 into
+your Reserves."** Stakes are paid from **Reserves**, and The Offers run *before* Fund the Ledger. So on
+**Day 1 every boss has exactly 1 marker in Reserves**, and only a **stake-1 (1-Respect)** Job is
+claimable by anyone, whatever the Market shows. From Day 2 the Reckoning has cleared the Ledger back
+to Reserves, so everyone sits on ~6 at Offers time and a stake-3 is affordable-but-painful — it
+leaves 3 to fund the day.
+
+**So the crunch is exactly one Day long and self-resolving.** The problem is what it collides with: a
+static Market has **no churn to clear an unclaimable card**, so any 5 dealt at setup would squat a
+slot through the entire window in which nobody can possibly stake it. Pulling the 5s out of the
+opening deal costs one setup step and deletes that dead zone.
+
+*(Suspicion worth recording: the original "seed with 1s only" rule may have been protecting exactly
+this. The reason was never written down — only the flavour, "nobody hands a stranger the big work."
+If you ever restore a full-random seed, this is the fact that will bite.)*
+
+### The arc (still a feature, now steeper — this is the thing to watch)
+Completed Jobs leave permanently, so the 1s still bleed out one-way and the market still escalates.
+**This is why Public Enemy No. 1 was cut** — the deck does its anti-farming job structurally.
+
+**Static makes the slope steeper.** Cards leave the Market only by being claimed, and 1s are the
+preferentially-claimed tier, so they cycle out while unclaimed 3s and 5s occupy the slots. Retaining
+12 ones instead of 7 (no 1s-only seed) softens the slope; it does not reverse it. The arc is still
+**anti-catch-up**: when the cheap Respect is gone, a trailing player has no ladder.
+
+**The patch ladder, cheapest first. Do not skip to the bottom.**
+1. **Ship as written and measure** (§8, metric 1).
+2. **If the 1s starve:** raise the 1s count in `tools/gen_deck.py` and reprint. One knob, no new
+   rules, no new table footprint. Possible *only because* the per-player build was dropped.
+3. **Only if 1 and 2 both fail:** the three-row Splendor market (§2b). It works, but it is structural
+   and it costs Day-1 reading and table space.
+
+---
+
+## 2b. Why the Market is STATIC — read before adding churn back
+
+**The conveyor is gone.** Cards no longer age out. The Market changes only when a player changes it:
+take a Job or walk away from one, and a fresh card fills the gap. *Yesterday's News* is deleted from
+Shadows, and "fresh end / stale end" is deleted game-wide.
+
+**The argument, so it isn't re-litigated:**
+
+1. **The ordering was pure upkeep.** Fresh end / stale end / close the gap meant a physical slide
+   every time a card left, on a table already carrying the Heat Track, four Pressure Strips, the
+   Ledger and the mash dice. All that machinery existed only to identify the oldest card.
+2. **Churn was defusing the deck's own best mechanism.** §4's naming rule exists because *"a named Job
+   sitting face-up moves four Bosses whether or not it's taken."* Under the conveyor that threat
+   expired in five Days, so the correct response to a bounty on your head was **wait it out**. Static,
+   the Toll Booth Trap is a standing bounty you have to actually answer. The churn was quietly
+   cancelling the argument that justified the naming rule.
+3. **It converts random denial into social denial.** The card you were quietly building toward used to
+   vanish through nobody's decision — a dice roll on your plan. Now the only thing that takes it is a
+   rival who read you. Same uncertainty, but it's a read instead of a timer, and the tell (claim early
+   and telegraph your intent, or build quiet and risk the snipe) becomes a real decision.
+4. **A static Market self-regulates its own churn.** A Market full of claimable cards empties fast —
+   up to four Takes per Offers at 4p. A Market nobody can act on freezes. So churn rate is
+   automatically proportional to how well the offers fit the board, and **silt is a signal, not a
+   fault**: it means nobody's position matches what's on the street, which is exactly the pivot
+   pressure the design wants. This is why §8's old "does the market silt?" metric is retired.
+
+**Rejected alternatives, each with the reason it died:**
+
+- *Refresh the whole Market on each Police Raid.* **Rejected.** Rat triggers a Raid on demand, so this
+  hands every player a market-nuke aimed at whatever a rival is visibly building toward — and Jobs are
+  public and named precisely to be visible. See §8 for the general form of this test.
+- *A rotating "stale" marker instead of a sliding row.* **Rejected.** The fiddle being removed is
+  **having a per-card timer to track at all**, not the sliding. A token hides the timer worse than a
+  row position displays it, and "which slot do I empty?" is AP, not depth.
+- *Splendor-style three rows — 1s / 3s / 5s, each its own pile, (P−1) wide.* **Genuinely good, and it
+  is patch 3** if the arc bites. It guarantees cheap Respect forever and keeps 5s permanently visible.
+  It died on cost, not merit: 3×3 at 4p is **nine prose triggers face-up** plus three draw piles and
+  three discards — ~15 card positions beside an already-crowded board, and a heavy Day-1 read. Jobs
+  cards are prose, not Splendor's glanceable icons. Don't pay this before the problem is measured.
+- *Stacking the deck 1s → 3s → 5s.* **Arithmetically broken.** Cards now leave only by being claimed
+  (~12–20 a game), so the 5s at deck positions 25–32 are unreachable. That doesn't just cost the 5s,
+  it deletes the entire §6b bounty set and the borough-fairness structure built on it.
+- *Bottom-biasing the 5s in the shuffle.* Same reachability problem in weaker form, **plus it
+  optimises backwards**: escalation wants 5s late, the deterrent thesis wants them **early**, and
+  under a static Market the deterrent argument is much the stronger of the two.
+
+**Knock-on:** Vipers' **Whispers** (peek the deck top, claim it face-down instead of a Market card) is
+mildly **buffed** — under a static Market it is the only route to a card that isn't already public.
+Worth watching alongside §8.5, which already rated it strong.
 
 ---
 
@@ -245,6 +344,16 @@ kept (unused) because the draft gallery is a useful tool for the next round of a
 the `<body>` from it, which is what guarantees the exactly-4-cards-per-block rule (§7). Edit the table
 and re-run; don't hand-edit the HTML or the blocking will drift.
 
+**It is now guarded (2026-07-18), because it rewrites the entire `<body>` and would silently destroy
+any hand polish.** It refuses to write unless the file already matches (a no-op) or you pass
+`--force`. **Run it with no arguments as a free integrity check** — "no change" means the printed deck
+and the card table still agree, which is worth doing before any print run. It was kept rather than
+deleted for two reasons: the 4-per-block rule is what keeps duplex front/back pairing correct, so
+hand-editing the HTML is *more* dangerous than the generator ever was; and the table carries the
+design reasoning for individual cards (the Eviction guard, the period-slang notes) that exists
+nowhere else. `overlap_audit.py` and `fairness_audit.py` parse the built HTML and do **not** import
+it, so they are unaffected either way.
+
 **Verb spread** (the "Open Fire is over-represented" flag is resolved):
 Move 7 · Open Fire 7 · Unload 6 · Secure 3 · Trade 3 · Recruit 2 · Rise 2 · Extort 1 · Raid 1.
 
@@ -350,8 +459,10 @@ setup table that silently split a numbered step in half.
 
 ## 8. Playtest — what to measure
 
-1. **Does the market silt?** Count face-up cards untouched for 3+ Days. More than one → the conveyor
-   isn't churning hard enough.
+1. **The catch-up question, stated so it's falsifiable:** from the moment the last **1** leaves the
+   Market, does a trailing player have any route to Respect that isn't holdings? If no, go to patch 2
+   in §2. *(The old metric — "count face-up cards untouched for 3+ Days" — is **retired**. Under a
+   static Market, silt is a signal rather than a fault: see §2b.4.)*
 2. **Does the leader ever leave a marker in Reserves involuntarily?** At 10 Influence the Ledger caps
    at 5, so 5 markers have no competing use and the stake is free. If the leader never feels it, the
    ceiling/cap coincidence needs a nudge.
@@ -359,11 +470,25 @@ setup table that silently split a numbered step in half.
    Jobs have become the whole endgame and Deeds/Titles are decoration.
 4. **When the 1s run out, is the trailing player stranded?** (See the arc, §2.)
 5. **Vipers' Whispers** (deck-top peek + face-down claim). Nick rates it strong.
-6. **Free abandon** — Nod-once-per-Day means a speculative claim burns your whole Nod, and that may be
-   price enough. Reckoning-only abandon is the ready patch if playtest shows deny-spam.
+6. **Hate-drafting.** a7d41d8 made Take and Walk Away mutually exclusive, so denying one card costs
+   **two** Offers — the Take on Day 1, the Walk Away on Day 2 — with the stake locked in between.
+   Measure whether that price is steep enough. Note it is also now the **only** route to the discard
+   pile, so hate-drafting is the only thing that can exhaust the deck mid-game.
 
 ### The one structural crack to keep an eye on
-**Churn and stake-cost were on the same dial, and the conveyor is what decoupled them.** The Heat
-Track is shared, 5 deep, and fully amnestied on every Raid — so Heat is a **flow, not a stock**.
-Nobody can carry enough to squeeze their own stake capacity. **Heat can be a churn dial or a tax
-dial, never both.** If churn ever gets re-attached to Raids, this breaks again.
+This note used to read *"Heat can be a churn dial or a tax dial, never both,"* and warned against ever
+re-attaching churn to Raids. **Downgraded, because it was stated as a law and isn't one.** Coupling two
+systems to one clock is frequently a virtue — a single escalating clock gives the whole table one
+rhythm to read — and the claim only bites if you ever want to push churn and Raid frequency in
+*opposite* directions, which nobody has wanted yet.
+
+The part with real content is narrower, and it survives. Apply **this** test instead:
+
+> **Rat triggers a Police Raid on demand. So anything you hang on a Raid, any player can fire at will.**
+
+Ask not "is this coupled to Heat?" but "**would Rat weaponise it?**" That is what actually killed the
+raid-refresh proposal (§2b): it would have made Rat a market-nuke pointed at whatever a rival was
+visibly building toward.
+
+Both are moot while churn doesn't exist. They matter again the moment someone proposes a Market
+refresh trigger.

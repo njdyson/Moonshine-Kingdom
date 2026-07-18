@@ -275,7 +275,27 @@ body = f'''<body>
 path = 'Jobs Cards v0.8.html'
 src = open(path, encoding='utf-8').read()
 head = src[:src.index('<body>')]
-open(path, 'w', encoding='utf-8').write(head + body + "\n</html>\n")
+new = head + body + "\n</html>\n"
+
+# SAFETY (added after the deck was declared complete at v0.8).
+# This script rewrites the ENTIRE <body> of the deck file from the table above, so any
+# polish edit made to the HTML by hand is silently destroyed the next time it runs.
+# The deck is finished, so that is now the likely outcome of running it, not the
+# intended one. It therefore refuses to write unless the file already matches (no-op)
+# or you pass --force. Run it with no arguments as an integrity check: "no change"
+# means the printed deck and this card table still agree.
+if new == src:
+    print(f"no change: {path} already matches this card table")
+elif '--force' not in sys.argv:
+    raise SystemExit(
+        f"REFUSING TO WRITE: {path} differs from the card table in this script.\n"
+        "The deck is complete, so this is most likely a hand edit to the HTML that a\n"
+        "write would destroy. Fold the change into the table above instead, then re-run\n"
+        "with --force. Do not run this simply to 'refresh' the file."
+    )
+else:
+    open(path, 'w', encoding='utf-8').write(new)
+    print(f"WROTE {path}")
 
 print(f"ones {len(ONES)}  threes {len(THREES)}  fives {len(FIVES)}  total {total}")
 print(f"print pages: {total // 4 * 2}")
