@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moonshine Kingdom — Cards v0.8 (Deeds, Titles &amp; Debts)</title>
+<title>Moonshine Kingdom: Cards v0.8 (Deeds, Titles &amp; Debts)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   Cards v0.8 — the 17 cards that are not Jobs:
+   Cards v0.8: the 17 cards that are not Jobs:
      5 Borough Deeds · 3 Titles · 1 Rat · 8 Shylock's Marks
    Public Enemy No. 1 is CUT (v0.8): holdings must top out at 14
    Respect, one short of the 15 you need, so nobody takes the
@@ -43,7 +43,7 @@
    ============================================================ */
 
 /* ============================================================
-   PALETTE — identical to Jobs Cards v0.8
+   PALETTE: identical to Jobs Cards v0.8
    ============================================================ */
 :root{
   --gold:#c9a437;
@@ -100,7 +100,7 @@ body{
 .gallery,.backs{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;padding:0 20px 10px}
 
 /* ============================================================
-   CARD — 63 x 88mm poker stock
+   CARD: 63 x 88mm poker stock
    ============================================================ */
 .card{
   position:relative;
@@ -162,7 +162,7 @@ body{
 .art img{
   width:100%;height:100%;
   object-fit:cover;display:block;
-  /* lifts the art off the dark stock in print — same recipe as
+  /* lifts the art off the dark stock in print: same recipe as
      the Jobs deck and .speakeasy-image in Cards v0.7 */
   filter:brightness(1.1) contrast(1.08) saturate(1.04);
 }
@@ -182,7 +182,7 @@ body{
   font:700 5.4pt Barlow;letter-spacing:2.2px;
   color:var(--gold-dim);text-transform:uppercase;
 }
-/* The text MUST stay wrapped in a single <span> — see the Jobs
+/* The text MUST stay wrapped in a single <span>: see the Jobs
    deck's note. Flexing .rules directly would make every <b> its
    own flex item and swallow the spaces between them. */
 .rules{
@@ -195,7 +195,7 @@ body{
   text-align:center;
 }
 .rules b{color:var(--gold-bright);font-weight:700}
-/* clause separator — a blank line between "The Claim" and the
+/* clause separator: a blank line between "The Claim" and the
    power it carries, without a <p> and its margins */
 .brk{display:block;height:1.3mm}
 
@@ -276,7 +276,7 @@ body{
 .back-blank{width:63mm;height:88mm;display:none}
 
 /* ============================================================
-   PRINT — 4-up on A4, front sheet then its back sheet.
+   PRINT: 4-up on A4, front sheet then its back sheet.
 
    BACK SHEETS ARE COLUMN-MIRRORED, and this is a fix, not a
    quirk. Cards v0.7 laid its backs in the same reading order as
@@ -325,13 +325,13 @@ body{
   <p class="masthead-note">
     Deeds and Titles pay you for what you <b>hold</b>; the Jobs deck pays you for what you <b>do</b>.
     Four Deeds and three Titles are all the ground there is: <b>14 Respect</b>, one short of the 15
-    that crowns you. <b>Public Enemy No. 1 is cut</b> &mdash; that missing point is the whole argument.
+    that crowns you. <b>Public Enemy No. 1 is cut</b>: that missing point is the whole argument.
     Nobody takes the throne without doing at least one Job.
   </p>
 </div>
 
 <!-- =============================================================
-     SHEET 1 — the four mainland Deeds. Shuffled and dealt at
+     SHEET 1: the four mainland Deeds. Shuffled and dealt at
      setup, so these four backs are identical.
      ============================================================= -->
 <div class="tier-head">
@@ -385,7 +385,7 @@ body{
 </div>
 
 <!-- =============================================================
-     SHEET 2 — Staten Island's Deed + the three Titles.
+     SHEET 2: Staten Island's Deed + the three Titles.
      Backs are MIRRORED for long-edge duplex: fronts read
      Staten / Ward / Harbor / Night, backs read Ward / Staten /
      Night / Harbor.
@@ -441,7 +441,7 @@ body{
 </div>
 
 <!-- =============================================================
-     SHEET 3 — the Rat + three Marks. Backs mirrored: the Rat
+     SHEET 3: the Rat + three Marks. Backs mirrored: the Rat
      sits top-left on the front, so its back sits top-RIGHT.
      ============================================================= -->
 <div class="tier-head">
@@ -464,7 +464,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -473,7 +473,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -482,7 +482,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -495,7 +495,7 @@ body{
 </div>
 
 <!-- =============================================================
-     SHEET 4 — four more Marks. All backs identical, so mirroring
+     SHEET 4: four more Marks. All backs identical, so mirroring
      is moot here.
      ============================================================= -->
 <div class="tier-head">
@@ -509,7 +509,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -518,7 +518,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -527,7 +527,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -536,7 +536,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -549,7 +549,7 @@ body{
 </div>
 
 <!-- =============================================================
-     SHEET 5 — the eighth Mark, alone. The blank holds the
+     SHEET 5: the eighth Mark, alone. The blank holds the
      mirrored duplex cell open: front sits top-LEFT, so the back
      must sit top-RIGHT.
      ============================================================= -->
@@ -564,7 +564,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
     <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare &mdash; but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>

@@ -25,7 +25,7 @@ ONES = [
      "Pour till the taps run dry and the sirens start up."),
     ("The Empty Casket", "The Empty Casket.png", "Rise",
      "Rise a new <b>Boss</b> in a <b>Ward</b> you Control.",
-     "They buried the wrong man. Ask anyone. Go on &mdash; ask."),
+     "They buried the wrong man. Ask anyone. Go on, ask."),
     ("Fortress Staten", "Fortress Staten.png", "Secure",
      "Secure your Safehouse into a <b>Staten Island</b> District.",
      "Nobody&rsquo;s home turf. Everybody&rsquo;s back door."),
@@ -61,12 +61,12 @@ THREES = [
     # Split from Bloody Sunday along the rulebook's OWN either/or: "a rival Safehouse
     # in the District is destroyed, UNLESS you take it over instead: immediately Secure
     # the District for free by relocating your Safehouse there." Destroy XOR take over,
-    # so the two can never co-fire — the rules supply the guard, we don't invent one.
+    # so the two can never co-fire: the rules supply the guard, we don't invent one.
     # Was "Seize a District holding a rival Safehouse", which Bloody Sunday's trigger
     # was a strict subset of => a GUARANTEED 8, and the same act at two prices.
     # Worded by BOARD CONSEQUENCE, not intention: "relocating yours into it" is a fact
     # you can see on the table, so there is no semantic argument about which card fired.
-    # The relocation is also a real cost — you abandon your old base — which holds it at 3.
+    # The relocation is also a real cost (you abandon your old base) which holds it at 3.
     ("The Eviction", "Crimson Coup.png", "Open Fire",
      "Take over a rival&rsquo;s <b>Safehouse</b>, relocating yours into it.",
      "Nice place. He won&rsquo;t be needing it."),
@@ -81,7 +81,7 @@ THREES = [
     ("The Insurance Job", "Insurance Job.png", "Raid",
      "Have a Police Raid <b>Condemn</b> the District holding <b>your Safehouse</b>.",
      "He struck the match himself. Slept fine after."),
-    # MANHATTAN'S FRIENDLY — the 4th orphan Speakeasy (The Haymarket, in the
+    # MANHATTAN'S FRIENDLY: the 4th orphan Speakeasy (The Haymarket, in the
     # Tenderloin). Name restored from the cut Extort card, and its own art reused:
     # cops coming through the door of a joint mid-sale while men grab bottles and
     # cash. That IS the Greed Tax (Unload 4+ draws Heat) drawn as a picture.
@@ -96,7 +96,7 @@ THREES = [
      "Move <b>6+ Barrels</b> into <b>Fordham</b> in a single Play.",
      "Forty miles of bad road and worse intentions."),
     # QUEENS' FRIENDLY, and free: Queens was the only borough with nothing easy.
-    # Paradise Alley = Flushing, Queens' non-starting Speakeasy — an exact mirror
+    # Paradise Alley = Flushing, Queens' non-starting Speakeasy: an exact mirror
     # of Off the Boat at Sunny's Bar (Red Hook) for Brooklyn. Also lifts Manhattan
     # and Queens off the named-location floor. The ironic name pairing is free.
     ("Poison Panic", "Poison Panic.png", "Unload",
@@ -108,25 +108,25 @@ THREES = [
     # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
     # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
     # Dues" restores an old-deck name and its art (a queue of working men, a fist
-    # of cash) — the mob ran the locals, so taking a Ward's union is how you own
+    # of cash): the mob ran the locals, so taking a Ward's union is how you own
     # the men on that block.
     ("Union Dues", "Union Dues.png", "Recruit",
      "Recruit <b>6+ Runners</b> in a <b>Ward outside your home turf</b>.",
      "They line up at dawn. You decide who works."),
-    # WAS "in a Hostile District" — IMPOSSIBLE, caught by Nick. Rise promotes a
+    # WAS "in a Hostile District": IMPOSSIBLE, caught by Nick. Rise promotes a
     # Runner who is already standing there, but Hostile means a RIVAL Controls it,
     # and you can never end a Play with Mobsters parked in rival turf (Move Pins
     # them into a Standoff; Stealth says outright "you cannot end your Play in this
-    # state"). The only way to have a Runner there is to have already taken it —
+    # state"). The only way to have a Runner there is to have already taken it,
     # and then you Control it, so it isn't Hostile. Note Move INTO Hostile turf is
-    # fine (Hell's Highway) — it's Rise that needs a stable foothold.
+    # fine (Hell's Highway): it's Rise that needs a stable foothold.
     ("Last One Standing", "Last One Standing.png", "Rise",
      "Rise a new <b>Boss</b> in a Borough where a <b>rival holds the Deed</b>.",
      "The last man at the table gets the chair."),
     # Re-themed off the Boss-kill (handoff §3, cluster 1). "Do not take Control"
     # is load-bearing: it makes this structurally unable to co-fire with ANY
     # Seize card (The Eviction / The Copper Heist / Over the Top), and it is
-    # exactly what the art shows — he does the thing and walks out.
+    # exactly what the art shows: he does the thing and walks out.
     ("The Irish Goodbye", "Goodbye.png", "Open Fire",
      "Kill <b>3+ rival Mobsters</b> in a <b>Speakeasy</b> District in one Play, and <b>take no Control</b>.",
      "He left O&rsquo;Sullivan&rsquo;s without saying a word to anyone."),
@@ -137,10 +137,10 @@ FIVES = [
      "Unload <b>8+ Barrels</b> at a single <b>High Society</b> Speakeasy.",
      "The band plays till four. Nobody asks a thing."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
-    # and exists purely to kill Bosses — the old wording locked the boss-killing mob
+    # and exists purely to kill Bosses: the old wording locked the boss-killing mob
     # out of using its boss-killing power on the deck's only boss-kill card. Worded
     # by outcome now, so Open Fire, Hit and Plunder all count (§4: an event has an
-    # actor, an object and a moment — not a button).
+    # actor, an object and a moment: not a button).
     # "your own Boss in the fight" is a SETUP hedge, not a circumstance one: you must
     # march your Boss into Queens and risk him. It also grants +1 Threat, so it's a
     # real trade rather than a tax.
@@ -149,7 +149,7 @@ FIVES = [
      "A toll is a toll. Somebody always pays it."),
     # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
     # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
-    # The Eviction — now REDUNDANT and removed (solver-verified: The Copper Heist's own
+    # The Eviction: now REDUNDANT and removed (solver-verified: The Copper Heist's own
     # "no Safehouse" already makes it and The Eviction mutually exclusive, which is what
     # actually closed cluster 3). Max stack unchanged at 9.
     ("Over the Top", "Old Guard.png", "Open Fire",
@@ -166,7 +166,7 @@ FIVES = [
     ("The Smuggler&rsquo;s Run", "Quiet Drop.png", "Move",
      "Move <b>6+ Rum</b> from a <b>Staten Island Dock</b> to a <b>mainland Dock</b> in one Play.",
      "Nobody watches Staten Island. Every Dock touches it."),
-    # MANHATTAN'S BOUNTY — the 4th and last, so every mainland seat is hunted by
+    # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
     # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
     # and 2 Runners from setup, so this is a campaign against a garrison behind the
     # Safehouse's +2 Threat. Borough-disjoint from Queens/Bronx/Brooklyn, so the
@@ -174,7 +174,7 @@ FIVES = [
     # can never ride it.
     # MANHATTAN'S BOUNTY, and the 4th distinct act in the set: Queens kills the head,
     # Brooklyn the body count, the Bronx takes the ground, Manhattan burns the base.
-    # WAS "Seize Five Points" — a hole: that named no garrison, so if the Manhattan
+    # WAS "Seize Five Points": a hole: that named no garrison, so if the Manhattan
     # player Secured away you could take it off a lone Runner for 5 Respect. This
     # can't go dead either: every crew always has exactly one Safehouse, and
     # Manhattan's starts in Five Points at setup. Combat rules do the work
@@ -184,7 +184,7 @@ FIVES = [
     ("Bloody Sunday", "Bloody Sunday.PNG", "Open Fire",
      "Destroy a <b>rival Safehouse</b> in <b>Manhattan</b>.",
      "By Monday there was nothing left to come home to."),
-    # BROOKLYN'S BOUNTY. Stays in Brooklyn — Murder, Inc. ran out of Brownsville.
+    # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.png", "Open Fire",
      "Kill <b>5+ Mobsters</b> in <b>Brooklyn</b> in a single Play.",
      "Every name in it is crossed out but one."),
@@ -207,7 +207,7 @@ BACK = ('  <div class="back"><div class="back-dia"></div><div class="back-title"
 
 
 def visible_len(t):
-    """Length as rendered — entities collapse to one glyph."""
+    """Length as rendered: entities collapse to one glyph."""
     return len(re.sub(r'&[a-z]+;', 'x', t))
 
 
@@ -258,7 +258,7 @@ body = f'''<body>
   <div class="masthead-sub">v0.8 &middot; Complete Deck &middot; {total} Cards &middot; 12 / 12 / 8</div>
   <p class="masthead-note">
     Every Job is an <b>event</b>, not a board state: a verb, an object, and a moment.
-    The Play is the unit &mdash; at the end of a Play, check whether that Play did the thing.
+    The Play is the unit: at the end of a Play, check whether that Play did the thing.
     Things that happened during the Play count, even if undone before it ended.
   </p>
 </div>
