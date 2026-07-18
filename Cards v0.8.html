@@ -66,7 +66,7 @@
 /* Without this the card is 63mm of CONTENT plus 6mm of padding
    plus its border = a 69.8 x 94.8mm card that is not poker
    stock and does not fit its own 63mm print column. Jobs Cards
-   v0.8 has the same hole and needs the same line.
+   v0.8 had the same hole; it was measured and closed 2026-07-18.
    Every band budget below assumes border-box: 88mm of card,
    less .8mm of border and 6mm of padding, leaves 81.2mm to
    spend, and the bands spend 81.0mm of it. */
@@ -310,7 +310,108 @@ body{
   /* no trailing blank page */
   body > :last-child{page-break-after:auto}
 }
+/* ============================================================
+   TRIM MODE - for hand-cutting a 4-up prototype on A4.
+
+   OFF by default. The control injected below adds .trim to the
+   body tag; nothing above this comment changes unless you ask for
+   it. Judge it in PRINT PREVIEW, not on screen: apart from the
+   square corners it only restyles the printed sheet.
+
+   BUTTED, NOT GAPPED. Edge to edge, the internal cut line is
+   SHARED: a drifting cut takes a sliver of the neighbour's ink
+   instead of leaving a white line, and a sheet needs 6 cuts
+   rather than 8.
+
+   BLEED is a 3mm skirt of card-dark, drawn as the BLOCK's own box
+   (132 x 182 with the cards in its padding well), not per card.
+   A per-card skirt (the old css/cards.css trick) only works when
+   cards are gapped: butt them and each skirt paints 3mm over its
+   neighbour's content. Measured, not guessed - it clipped the
+   rules text off every left-hand card. Only the four OUTER edges
+   need ink to cut into: every internal seam is card against card.
+
+   NO CROP MARKS NEEDED. The card's own 1.5px gold border sits
+   exactly on the trim line. Cut down the middle of the gold and
+   you are on size; overshoot lands in the skirt, not in white.
+
+   SQUARE CORNERS are not a preference here, they are required:
+   butted 3mm radii leave a white notch at every four-corner
+   junction. Only the outer corner is squared - the inset gold
+   frame keeps its radius, since it is design, not a cut edge.
+   ============================================================ */
+body.trim .card,body.trim .back{border-radius:0}
+
+@media print{
+  /* align-content:center and min-height:277mm above do NOT survive into
+     Chrome's paged layout - the block prints top-aligned either way. Pin
+     that down rather than depend on it. */
+  body.trim .gallery,body.trim .backs{
+    gap:0;
+    align-content:start;min-height:0;      /* see note above */
+    margin:0 auto;
+    position:relative;
+    /* THE BLEED, as the element's OWN box: 132 x 182 = the 126 x 176 block
+       plus 3mm all round, with the block sitting in the padding well. It is
+       NOT an outset (inset:-3mm) - that puts the top 3mm above the page
+       content area and Chrome clips it, which silently ate the top bleed.
+       Fixed size also stops the box stretching to fill the sheet. Relies on
+       border-box, which both decks now set. */
+    width:132mm;height:182mm;padding:3mm;
+    background:var(--panel-b);
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  /* The screen drop-shadow has to go. Gapped, it fell into white space;
+     butted, each card casts it over its neighbour's bottom edge and the
+     flavour line goes unreadable. */
+  body.trim .card,body.trim .back{box-shadow:none}
+  /* Keep the skirt as this box's own background, never an outset. A forced
+     page break puts the NEXT block's box on this sheet as a zero-height
+     sliver; an outset skirt paints there as a stray bar at the page foot,
+     a background on a zero-height box paints nothing. */
+  body.trim .card,body.trim .back{position:relative;z-index:1}
+}
+
+/* --- the toggle itself: screen only, never printed --- */
+#trim-toggle{
+  position:fixed;right:14px;bottom:14px;z-index:99;
+  display:flex;align-items:center;gap:8px;
+  padding:9px 13px;border-radius:6px;
+  background:rgba(16,12,8,.94);border:1px solid var(--gold-line);
+  color:var(--ink);font:600 12px/1.25 Barlow,system-ui,sans-serif;
+  cursor:pointer;user-select:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.55);
+}
+#trim-toggle small{display:block;font-weight:400;font-size:10px;color:var(--muted)}
+#trim-toggle input{accent-color:var(--gold);cursor:pointer;margin:0}
+@media print{#trim-toggle{display:none!important}}
 </style>
+<script>
+/* TRIM-MODE TOGGLE.
+   Deliberately in the <head>: tools/gen_deck.py rebuilds the ENTIRE
+   body tag of the Jobs deck from its card table, so a control placed in
+   the body would be destroyed by the next --force run. Everything in
+   the head survives regeneration, so this file and the Jobs deck can
+   carry identical copies. The choice persists in localStorage. */
+(function(){
+  var KEY='mk-trim-mode';
+  function build(){
+    var on=localStorage.getItem(KEY)==='1';
+    document.body.classList.toggle('trim',on);
+    var el=document.createElement('label');
+    el.id='trim-toggle';
+    el.innerHTML='<input type="checkbox"'+(on?' checked':'')+
+      '><span>Trim mode<small>butted &middot; square &middot; 3mm bleed</small></span>';
+    el.querySelector('input').addEventListener('change',function(e){
+      document.body.classList.toggle('trim',e.target.checked);
+      localStorage.setItem(KEY,e.target.checked?'1':'0');
+    });
+    document.body.appendChild(el);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
 </head>
 <body>
 
@@ -321,8 +422,7 @@ body{
   <p class="masthead-note">
     Deeds and Titles pay you for what you <b>hold</b>; the Jobs deck pays you for what you <b>do</b>.
     Four Deeds and three Titles are all the ground there is: <b>14 Respect</b>, one short of the 15
-    that crowns you. <b>Public Enemy No. 1 is cut</b>: that missing point is the whole argument.
-    Nobody takes the throne without doing at least one Job.
+    that crowns you. Nobody takes the throne without doing at least one Job.
   </p>
 </div>
 
@@ -341,7 +441,7 @@ body{
     <h2 class="title">Manhattan</h2>
     <div class="art"><img src="Art/Cards/Manhattan.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever Controls the most Districts in <b>Manhattan</b>.</span></div>
+    <div class="rules"><span>Control the most Districts in <b>Manhattan</b>.</span></div>
     <div class="flavour">The tower throws a long shadow. Stand in it.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -350,7 +450,7 @@ body{
     <h2 class="title">The Bronx</h2>
     <div class="art"><img src="Art/Cards/Bronx.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever Controls the most Districts in <b>The Bronx</b>.</span></div>
+    <div class="rules"><span>Control the most Districts in <b>The Bronx</b>.</span></div>
     <div class="flavour">North of the river the rent&rsquo;s cheap. So are the men.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -359,7 +459,7 @@ body{
     <h2 class="title">Queens</h2>
     <div class="art"><img src="Art/Cards/Queens.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever Controls the most Districts in <b>Queens</b>.</span></div>
+    <div class="rules"><span>Control the most Districts in <b>Queens</b>.</span></div>
     <div class="flavour">Flat, quiet, and full of places nobody looks.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -368,7 +468,7 @@ body{
     <h2 class="title">Brooklyn</h2>
     <div class="art"><img src="Art/Cards/Brooklyn.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever Controls the most Districts in <b>Brooklyn</b>.</span></div>
+    <div class="rules"><span>Control the most Districts in <b>Brooklyn</b>.</span></div>
     <div class="flavour">A church, a bar, and one man who owns both.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -397,7 +497,7 @@ body{
     <h2 class="title">Staten Island</h2>
     <div class="art"><img src="Art/Cards/Staten.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever Controls the most Districts in <b>Staten Island</b>.</span></div>
+    <div class="rules"><span>Control the most Districts in <b>Staten Island</b>.</span></div>
     <div class="flavour">The forgotten borough. Nobody looks for you here.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -406,16 +506,16 @@ body{
     <h2 class="title">Ward Boss</h2>
     <div class="art"><img src="Art/Cards/Ward.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever Controls the most <b>Ward</b> Districts.</span></div>
+    <div class="rules"><span>Control the most <b>Ward</b> Districts.</span></div>
     <div class="flavour">The Boroughs make headlines. The Wards own the block.</div>
     <div class="respect" data-respect="2"></div>
   </div>
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Title</span></div>
     <h2 class="title">Harbormaster</h2>
-    <div class="art"><img src="Art/Cards/Harbourmaster.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Harbormaster.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever Controls the most <b>Dock</b> Districts.<span class="brk"></span><b>Tomorrow&rsquo;s Mash:</b> each Shadows, <b>name any face</b> instead of rolling the Mash die.</span></div>
+    <div class="rules"><span>Control the most <b>Dock</b> Districts.<span class="brk"></span><b>Tomorrow&rsquo;s Mash:</b> each Shadows, <b>name any face</b> instead of rolling the Mash die.</span></div>
     <div class="flavour">Every barrel of molasses lands on your pier.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -424,7 +524,7 @@ body{
     <h2 class="title">Night Mayor</h2>
     <div class="art"><img src="Art/Cards/Night%20Mayor.png" alt=""></div>
     <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Whoever holds the most <b>Speakeasies</b>.</span></div>
+    <div class="rules"><span>Control the most <b>Speakeasies</b>.</span></div>
     <div class="flavour">The sun belongs to the law. The night is yours.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -460,7 +560,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -469,7 +569,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -478,7 +578,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -505,7 +605,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -514,7 +614,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -523,7 +623,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -532,7 +632,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -560,7 +660,7 @@ body{
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark. You may hold multiple Marks.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
