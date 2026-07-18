@@ -23,11 +23,10 @@
    1. No Stake pips. Nothing here is claimed with Influence, so
       the tier band carries a kicker instead: what kind of card
       this is.
-   2. The art well is a CENTRED 46mm PLATE, not a full-bleed 3:2
-      band. The Jobs art is 55/58 native 1536x1024; this deck's
-      art is square (boroughs, Ward, Shylock) or 2:3 portrait
-      (Night Mayor, the Rat). Cropping a square tower scene to
-      3:2 cuts the spire off. The plate crops almost nothing.
+   2. The art well is now a full-bleed band, same recipe as the
+      Jobs deck (all 10 sources reshot landscape 2026-07-18,
+      Art/Cards/*.png). The old centred 46mm plate is retired
+      along with the square/portrait sources it existed for.
    3. TWO geometries, not one. The Jobs deck freezes its bands
       because 12 cards fan out in the Market row and any jitter
       shows. Nothing here ever fans: a Deed never sits beside a
@@ -149,9 +148,9 @@ body{
    built for one. Same lever, same value as the Jobs deck. */
 .title--long{font-size:10.6pt}
 
-/* --- art plate : 46mm wide, centred. Height is set per type. --- */
+/* --- art well : full-bleed band, same recipe as the Jobs deck.
+   Height is set per type below. --- */
 .art{
-  width:46mm;align-self:center;
   margin:1.8mm 0 0;
   border:.3mm solid rgba(185,147,47,.32);
   border-radius:1.4mm;
@@ -166,9 +165,6 @@ body{
      the Jobs deck and .speakeasy-image in Cards v0.7 */
   filter:brightness(1.1) contrast(1.08) saturate(1.04);
 }
-/* 2:3 portrait sources (the Rat) crop from the top so the face
-   survives the plate. */
-.art--portrait img{object-position:center 20%}
 .art::after{
   content:"";position:absolute;inset:0;
   box-shadow:inset 0 0 6mm rgba(25,19,12,.28);
@@ -343,7 +339,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Borough Deed</span></div>
     <h2 class="title">Manhattan</h2>
-    <div class="art"><img src="Art/Boroughs/Manhattan.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Manhattan.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever Controls the most Districts in <b>Manhattan</b>.</span></div>
     <div class="flavour">The tower throws a long shadow. Stand in it.</div>
@@ -352,7 +348,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Borough Deed</span></div>
     <h2 class="title">The Bronx</h2>
-    <div class="art"><img src="Art/Boroughs/Bronx.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Bronx.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever Controls the most Districts in <b>The Bronx</b>.</span></div>
     <div class="flavour">North of the river the rent&rsquo;s cheap. So are the men.</div>
@@ -361,7 +357,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Borough Deed</span></div>
     <h2 class="title">Queens</h2>
-    <div class="art"><img src="Art/Boroughs/Queens.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Queens.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever Controls the most Districts in <b>Queens</b>.</span></div>
     <div class="flavour">Flat, quiet, and full of places nobody looks.</div>
@@ -370,7 +366,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Borough Deed</span></div>
     <h2 class="title">Brooklyn</h2>
-    <div class="art"><img src="Art/Boroughs/Brooklyn.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Brooklyn.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever Controls the most Districts in <b>Brooklyn</b>.</span></div>
     <div class="flavour">A church, a bar, and one man who owns both.</div>
@@ -399,7 +395,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Borough Deed</span></div>
     <h2 class="title">Staten Island</h2>
-    <div class="art"><img src="Art/Boroughs/Staten.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Staten.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever Controls the most Districts in <b>Staten Island</b>.</span></div>
     <div class="flavour">The forgotten borough. Nobody looks for you here.</div>
@@ -408,7 +404,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Title</span></div>
     <h2 class="title">Ward Boss</h2>
-    <div class="art"><img src="Art/Ward.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Ward.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever Controls the most <b>Ward</b> Districts.</span></div>
     <div class="flavour">The Boroughs make headlines. The Wards own the block.</div>
@@ -417,7 +413,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Title</span></div>
     <h2 class="title">Harbormaster</h2>
-    <div class="art"><img src="Art/Bridge.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Harbourmaster.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever Controls the most <b>Dock</b> Districts.<span class="brk"></span><b>Tomorrow&rsquo;s Mash:</b> each Shadows, <b>name any face</b> instead of rolling the Mash die.</span></div>
     <div class="flavour">Every barrel of molasses lands on your pier.</div>
@@ -426,7 +422,7 @@ body{
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Title</span></div>
     <h2 class="title">Night Mayor</h2>
-    <div class="art"><img src="Art/Jimmy.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Night%20Mayor.png" alt=""></div>
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Whoever holds the most <b>Speakeasies</b>.</span></div>
     <div class="flavour">The sun belongs to the law. The night is yours.</div>
@@ -453,36 +449,36 @@ body{
   <div class="card card--debt">
     <div class="tier"><span class="kicker">The Mark of the Snitch</span></div>
     <h2 class="title">The Rat</h2>
-    <div class="art art--portrait"><img src="Art/rat.png" alt=""></div>
+    <div class="art"><img src="Art/Cards/Rat.png" alt=""></div>
     <div class="rules-label">The Shame</div>
-    <div class="rules"><span><b>Pariah:</b> while you hold this card you <b>cannot Bribe</b> and <b>cannot be crowned</b>.<span class="brk"></span><b>Redemption:</b> passes to any rival who plays <b>Rat</b>. If your <b>Boss</b> dies or is arrested, return it to the Supply.</span></div>
+    <div class="rules"><span>While you hold this card you <b>cannot Bribe</b>.<span class="brk"></span>Passes to any rival who plays <b>Rat</b>. If your <b>Boss</b> dies or is arrested, return it to the Supply.</span></div>
     <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
     <div class="respect" data-respect="none"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -507,36 +503,36 @@ body{
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
@@ -562,9 +558,9 @@ body{
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Shylock%20Sqaure.png" alt=""></div>
-    <div class="rules-label">The Debt</div>
-    <div class="rules"><span><b>The Vig:</b> pay <b>$2,500</b> to the bank at any time to discard this Mark.<span class="brk"></span>Carry as many as you dare, but <b>while any is unpaid, you cannot be crowned</b>.</span></div>
+    <div class="art"><img src="Art/Cards/Shylock.png" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Pay <b>$2,500</b> to the bank at any time to discard this Mark.</span></div>
     <div class="flavour">He lends in fifteens and collects in twenty-fives.</div>
     <div class="respect" data-respect="none"></div>
   </div>
