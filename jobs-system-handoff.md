@@ -73,22 +73,26 @@ Setup is now **shuffle all 32, deal Player Count + 1.** Three consequences:
   ratio. Tier counts are now a free tuning knob in `tools/gen_deck.py`, which is what makes patch 2
   below cheap.
 
-### The Day 1 Reserves crunch (verified from the rulebook — this is WHY the seed is tier-restricted)
-Setup hands you 6 Influence, but the rulebook says **"slot 5 onto your Ledger, drop the last 1 into
-your Reserves."** Stakes are paid from **Reserves**, and The Offers run *before* Fund the Ledger. So on
-**Day 1 every boss has exactly 1 marker in Reserves**, and only a **stake-1 (1-Respect)** Job is
-claimable by anyone, whatever the Market shows. From Day 2 the Reckoning has cleared the Ledger back
-to Reserves, so everyone sits on ~6 at Offers time and a stake-3 is affordable-but-painful — it
-leaves 3 to fund the day.
+### What a big stake actually costs — and the Day 1 setup artifact (fixed)
+**A big stake costs actions, not access.** Stakes are paid from **Reserves** and The Offers run
+*before* Fund the Ledger ("stake first, fund second"). Every normal morning the Reckoning has already
+cleared your Ledger back to Reserves, so all 6 markers are in Reserves at Offers time: stake 3 for a
+5-Respect Job and you fund the day with 3 instead of 5. **Half your actions, which is the intended
+price of a headline job.** Nothing is ever unclaimable for want of Reserves.
 
-**So the crunch is exactly one Day long and self-resolving.** The problem is what it collides with: a
-static Market has **no churn to clear an unclaimable card**, so any 5 dealt at setup would squat a
-slot through the entire window in which nobody can possibly stake it. Pulling the 5s out of the
-opening deal costs one setup step and deletes that dead zone.
+**Day 1 used to be an exception, and it was a setup artifact, not a design intent.** Setup read *"slot
+5 onto your Ledger, drop the last 1 into your Reserves"*, which left 1 marker in Reserves at the Day 1
+Offers and capped the first morning's stake at 1 by the literal text. Unlike the **Mash die** — which
+setup genuinely must pre-seed, because *Ferment Tomorrow's Mash* is step 4 of Shadows and so never
+fires before Day 1's brew — the Ledger pre-load duplicated a step that Day 1 already runs. **Fixed
+2026-07-18:** setup hands all 6 markers to **Reserves** and lets Day 1's own Fund the Ledger step do
+its work. Identical end state on a no-stake opening (5 on the Ledger, 1 spare); the difference is that
+Day 1 staking now behaves like every other day, which is what the economy always assumed.
 
-*(Suspicion worth recording: the original "seed with 1s only" rule may have been protecting exactly
-this. The reason was never written down — only the flavour, "nobody hands a stranger the big work."
-If you ever restore a full-random seed, this is the fact that will bite.)*
+**Why the opening Market is still restricted to 1s and 3s.** Not because a 5 is unclaimable — it is
+claimable from Day 1. Because a 5 costs **half your first day's actions** at the exact moment everyone
+is poorest, *and a static Market has no churn to clear it*. A 5 dealt at setup would squat a slot until
+someone is both rich enough and willing, which may be many Days. One setup step removes the dead zone.
 
 ### The arc (still a feature, now steeper — this is the thing to watch)
 Completed Jobs leave permanently, so the 1s still bleed out one-way and the market still escalates.
