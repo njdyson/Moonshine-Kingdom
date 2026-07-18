@@ -274,7 +274,16 @@ body = f'''<body>
 
 path = 'Jobs Cards v0.8.html'
 src = open(path, encoding='utf-8').read()
-head = src[:src.index('<body>')]
+# Anchor on the tag at a LINE START, not the first occurrence anywhere. A plain
+# .index() also matches the string inside a <style> or <script> comment, and the
+# head then gets truncated mid-comment and the rest of the stylesheet silently
+# discarded -- the exact destruction the SAFETY block below exists to prevent.
+# (Live near-miss 2026-07-18: the trim-mode comment in the deck's head said
+# "adds .trim to <body>", and this line matched THAT.)
+m = re.search(r'^<body>', src, re.M)
+if not m:
+    raise SystemExit(f"{path}: no <body> tag at a line start; refusing to guess.")
+head = src[:m.start()]
 new = head + body + "\n</html>\n"
 
 # SAFETY (added after the deck was declared complete at v0.8).
