@@ -7,54 +7,14 @@
    1. GLOBAL VARIABLES & RESET
    ========================================================================== */
 :root {
-    /* --------------------------------------------------------------
-       Palette lifted verbatim from the v0.8 Reskin system so the book
-       sits in the same family as the decks and playbooks. Source of
-       truth: the :root block in "Playbooks v0.7 Reskin.html".
-       -------------------------------------------------------------- */
-    --gold: #c9a437;
-    --gold-bright: #e8cc72;
-    --gold-line: #b9932f;
-    --gold-dim: #a98c4f;
-    --gold-label: #d4af37;
-    --gold-em: #e9c968;
-    --gold-faint: #7a6a3a;
-
-    --ink: #efe3cd;
-    --ink-2: #f2e6cf;
-    --body: #d8caae;
-    --body-2: #cdbfa3;
-    --value: #e4d7bd;
-    --muted: #b8a577;
-    --muted-2: #b79a5e;
-
-    --panel-a: #241c14;
-    --panel-b: #19130c;
-    --panel-line: #6b5a2e;
-    --head-bg: #1a140d;
-
-    --rule: rgba(185, 147, 47, .16);
-    --cell: rgba(107, 90, 46, .3);
-    --cell-strong: rgba(107, 90, 46, .4);
-    --wash: rgba(201, 164, 55, .06);
-
-    /* Canonical gold icon tint: matches .icon across the Reskin files. */
-    --gold-tint: invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
-
-    /* --------------------------------------------------------------
-       Legacy aliases. The book's 1400 lines address these names in
-       dozens of places; mapping them onto the Reskin ramp restyles
-       everything at once without a find-and-replace across the file.
-       -------------------------------------------------------------- */
-    --bg-color: #100c08;
-    --bg-rgb: 16, 12, 8;
-    --text-color: var(--ink);
-    --accent-gold: var(--gold);
-    --accent-dim: var(--gold-faint);
-    --table-header: var(--head-bg);
-
-    --font-body: 'Barlow', sans-serif;
-    --font-display: 'Cinzel', Georgia, serif;
+    --bg-color: #0d0005;      /* Deep warm black */
+    --bg-rgb: 13, 0, 5;       /* RGB form for gradient overlays */
+    --text-color: #f5e9d9;    /* Cream/Off-white */
+    --accent-gold: #d4af37;   /* Metallic Gold */
+    --accent-dim: #8a7329;    /* Darker Gold for borders */
+    --table-header: #1f1216;  /* Slightly lighter background for contrast */
+    --font-body: 'Raleway', sans-serif;
+    --font-display: 'Bebas Neue', 'Impact', sans-serif; /* Narrow Art Deco vibe */
     --front-cover: url("../Art/Front Page 5.png");
 }
 
@@ -68,13 +28,10 @@ html {
 
 body {
     background-color: var(--bg-color);
-    background-image: radial-gradient(circle at 50% -10%, #241a11, #0d0a07 65%);
-    background-attachment: fixed;
     color: var(--text-color);
     font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
     margin: 0;
-    line-height: 1.38;
+    line-height: 1.25;
     font-size: 9.5pt;
     font-weight: 400;
     /* Left-aligned (ragged right): avoids the stretched inter-word gaps that
@@ -97,27 +54,21 @@ ul, ol {
 }
 
 strong {
-    color: var(--gold-em);
+    color: var(--accent-gold);
     font-weight: 700;
 }
 
-/* --------------------------------------------------------------------------
-   Headings.
-
-   The Reskin never uppercases a Cinzel title: display type is set in mixed
-   case, and UPPERCASE is reserved for wide-tracked Barlow micro-labels. That
-   inversion is the loudest part of the house voice, so it is followed here.
-   Sizes are ~30% below the old Bebas values because Cinzel sets far wider at
-   equal point size and would otherwise burst the two-column measure.
-   -------------------------------------------------------------------------- */
+/* Headings - Using the Display Font */
 h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    color: var(--gold-bright);
+    color: var(--accent-gold);
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    line-height: 1.12;
+    line-height: 1.1;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-weight: 700;
+
+    font-weight: 400;
     /* Keep headings attached to the text below, across both page AND column breaks
        (column-count layout would otherwise orphan a heading at a column foot). */
     page-break-after: avoid;
@@ -126,107 +77,72 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-    font-size: 31pt;
+    font-size: 48pt;
     text-align: center;
-    letter-spacing: 2px;
     margin-bottom: 0.2em;
     text-shadow: 0px 4px 10px rgba(0,0,0,0.9);
 }
 
-/* --------------------------------------------------------------------------
-   Section head: diamond + label + hairline fading to nothing. Lifted from
-   .sec in the Playbooks/Turn files. The diamond glyph already existed in this
-   book but was spent on list bullets; here it earns its keep.
-   -------------------------------------------------------------------------- */
 h2 {
-    font-size: 15.5pt;
-    letter-spacing: 1.5px;
-    margin-top: 0.5em;
-    padding-bottom: 6px;
+    font-size: 22pt;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 5px;
+    margin-top: 0.5em; /* More space before new sections */
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid var(--rule);
 }
 
-h2::before {
-    content: '';
-    flex: 0 0 auto;
-    width: 9px;
-    height: 9px;
-    background: var(--gold);
-    transform: rotate(45deg);
-}
-
-/* The trailing rule: solid at the label, gone by the right margin. */
+/* Add a double line effect to H2 */
 h2::after {
     content: '';
-    flex: 1 1 auto;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(185,147,47,.7), transparent);
+    display: block;
+    border-bottom: 1px solid var(--accent-dim);
+    margin-top: 2px;
 }
 
 h3 {
-    font-size: 12.5pt;
-    color: var(--gold-bright);
-    border-left: 3px solid var(--gold-line);
+    font-size: 16pt;
+    color: #fff; /* White headers for sub-sections pop better */
+    border-left: 4px solid var(--accent-gold);
     padding-left: 10px;
 }
 
-/* An h3 used as a page title above a cover image takes the full section-head
-   treatment, so titled art pages match the h2 pages they sit among. */
+/* An h3 used as a page title above a cover image gets the same gold
+   dividing line as an h2, so titled art pages look consistent. */
 h3:has(+ .cover),
 .reference-section > h3:has(+ .cover) {
     border-left: none;
     padding-left: 0;
-    padding-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid var(--rule);
-}
-
-h3:has(+ .cover)::before,
-.reference-section > h3:has(+ .cover)::before {
-    content: '';
-    flex: 0 0 auto;
-    width: 9px;
-    height: 9px;
-    background: var(--gold);
-    transform: rotate(45deg);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 5px;
+    position: relative;
 }
 
 h3:has(+ .cover)::after,
 .reference-section > h3:has(+ .cover)::after {
     content: '';
-    flex: 1 1 auto;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(185,147,47,.7), transparent);
+    display: block;
+    border-bottom: 1px solid var(--accent-dim);
+    margin-top: 2px;
 }
 
-/* h4/h5 are the micro-label tier: Barlow, uppercase, wide tracking. */
 h4 {
-    font-family: var(--font-body);
+    font-family: var(--font-body); /* Keep H4 readable/standard */
     font-weight: 700;
-    font-size: 9.5pt;
+    font-size: 12pt;
     text-transform: uppercase;
-    letter-spacing: 2.2px;
-    color: var(--gold-label);
+    color: var(--accent-gold);
     /* Block (not inline-block): break-after:avoid only applies to block-level
        boxes, so an inline-block h4 would orphan at a column foot. */
     display: block;
-    margin-bottom: 0.35em;
 }
 
 h5 {
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 8.8pt;
+    font-size: 11pt;
     text-transform: uppercase;
-    letter-spacing: 1.6px;
-    color: var(--gold-label);
-    border-left: 3px solid var(--gold-faint);
+    color: var(--accent-gold);
+    border-left: 3px solid var(--accent-dim);
     padding-left: 7px;
     margin-top: 0.35em;
     margin-bottom: 0.25em;
@@ -447,34 +363,18 @@ img {
     print-color-adjust: exact;
 }
 
-/* --------------------------------------------------------------------------
-   Cover heights: two values, not seven.
-
-   460px is the standard plate. At the 674px print measure the art's natural
-   heights are 379px (the 16:9 set) and 449px (the 3:2 set), so 460 is close
-   to true aspect for the 3:2 majority and crops the 16:9 set modestly - the
-   opposite trade to a small plate, and the right way round, since the art is
-   the reason to open the book.
-
-   .cover-sm is a measured constraint, not untidiness. Six pages carry enough
-   rules text that a 460px plate pushes them past the sheet and spills a blank
-   page after; each was checked and has under ~110px of slack. They share one
-   reduced height rather than the per-page 190/215/250/265/290/300px the old
-   book used.
-
-   !important overrides the legacy per-page rules further down.
-   -------------------------------------------------------------------------- */
 .cover img {
     position: relative;
     z-index: 1;
     width: 100%;
-    height: 460px !important;
-    min-height: 0;
+    min-height: 320px;
     object-fit: cover;
 }
 
-.cover img.cover-sm {
-    height: 350px !important;
+/* Covers on content-dense pages: honor the smaller inline height so the page
+   fits on one A4 sheet instead of spilling a sliver onto a blank next page. */
+.cover img.tight-cover {
+    min-height: 0;
 }
 
 /* Heat cover: officers' heads sit in the top of the frame, so a cropped
@@ -660,7 +560,7 @@ img {
 }
 
 .legend-title {
-    font-family: var(--font-display);
+    font-family: 'Bebas Neue', sans-serif;
     color: var(--accent-gold);
     font-size: 13pt;
     letter-spacing: 1px;
@@ -734,7 +634,7 @@ img {
 }
 
 .broker-name {
-    font-family: var(--font-display);
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 13pt;
     letter-spacing: 0.5px;
     color: var(--accent-gold);
@@ -742,7 +642,7 @@ img {
 }
 
 .broker-alias {
-    font-family: var(--font-body);
+    font-family: 'Raleway', sans-serif;
     font-size: 9.5pt;
     font-style: italic;
     letter-spacing: 0;
@@ -753,7 +653,7 @@ img {
 .broker-fee {
     flex: 0 0 auto;
     align-self: center;
-    font-family: var(--font-display);
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 11pt;
     letter-spacing: 0.5px;
     color: var(--accent-gold);
@@ -827,7 +727,7 @@ img {
 
 /* --- Turn Procedure (loop + exit) --- */
 .turn-proc .turn-label {
-    font-family: var(--font-display);
+    font-family: 'Bebas Neue', sans-serif;
     color: var(--accent-gold);
     letter-spacing: 1px;
     font-size: 11pt;
@@ -1238,9 +1138,7 @@ img {
         width: 100%;
         max-width: none;
         margin: 0;
-        /* Safe zone. Trimmed 60px -> 46px to buy back the width the taller
-           350px covers and the airier 1.38 leading cost us in page count. */
-        padding: 46px;
+        padding: 60px; /* Safe zone */
         box-shadow: none;
         background: transparent;
         position: relative;
@@ -1252,36 +1150,7 @@ img {
         /* TWO COLUMN LAYOUT for professional look */
         column-count: 2;
         column-gap: 30px;
-        column-rule: 1px solid var(--rule); /* Line between columns */
-    }
-
-    /* ----------------------------------------------------------------------
-       The page frame. Every card and playbook in the Reskin is a bordered
-       panel with a second hairline set in from the first; this gives the book
-       the same edge.
-
-       Hung off body, not .container: Chrome repeats a position:fixed box on
-       every printed sheet, so one pair of pseudo-elements frames all 23 pages.
-       Putting them on .container would stack 23 identical overlays instead.
-       Fixed also means they add no height, so they cannot re-trigger the
-       sub-pixel page spill the min-height comment above warns about.
-       ---------------------------------------------------------------------- */
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 14px;
-        border: 2px solid var(--gold-line);
-        pointer-events: none;
-        z-index: 40;
-    }
-
-    body::after {
-        content: "";
-        position: fixed;
-        inset: 20px;
-        border: 1px solid rgba(185, 147, 47, .35);
-        pointer-events: none;
-        z-index: 40;
+        column-rule: 1px solid var(--accent-dim); /* Line between columns */
     }
 
     /* Force single-column on complex pages */
@@ -1343,6 +1212,27 @@ img {
         margin-top: 0.5em;
     }
 
+    .police-page p {
+        margin-bottom: 0.6em;
+    }
+
+    .police-page .cover img {
+        max-height: 70mm;
+        height: auto;
+    }
+
+    /* Compress Volstead Act to fit a single page if possible */
+    .volstead .cover img {
+        max-height: 65mm;
+        height: auto;
+    }
+
+    .volstead p,
+    .volstead ul,
+    .volstead ol {
+        margin-bottom: 0.6em;
+    }
+
     /* Tighten a few heavy pages that were drifting over the print boundary */
     .components-page,
     .goal-page,
@@ -1350,18 +1240,21 @@ img {
         padding: 56px;
     }
 
-    /* --------------------------------------------------------------------
-       Removed here: a 68mm/44mm max-height cap on the components, goal and
-       shadows covers, plus per-page caps for .police-page and .volstead
-       (neither class exists in the book any more).
+    .components-page .cover img,
+    .goal-page .cover img,
+    .shadows-page .cover img {
+        width: 100%;
+        max-height: 68mm;
+        height: auto !important;
+    }
 
-       The caps predate the single cover-height system and silently beat it:
-       `height:auto !important` on a more specific selector overrode the
-       460px plate, so those two pages kept a ~257px image while every other
-       page grew. Cover height is now set in one place - .cover img and
-       .cover-sm - and page fit is verified by measuring the rendered PDF
-       rather than by capping individual images.
-       -------------------------------------------------------------------- */
+    /* Shadows is the densest page in the book: the Brew, the Blowback, Grease
+       the Wheels and Ferment all share one sheet, so its cover gets a tighter
+       cap than the other two. NOTE: height:auto above defeats the inline
+       height attribute on these three pages -- max-height is the only lever. */
+    .shadows-page .cover img {
+        max-height: 44mm;
+    }
 
     .components-page h2,
     .goal-page h2,
@@ -1416,35 +1309,6 @@ img {
     .goal-page ol.sub-section > li,
     .shadows-page ol.sub-section > li {
         margin-bottom: 2px;
-    }
-
-    /* ----------------------------------------------------------------------
-       .dense-page - Power Plays and Pinned: Fight or Flight.
-
-       These two carry the most rules text in the book and are the only pages
-       a full 350px cover pushes past the sheet (measured 97.8% and 97.5% full
-       before the cover grew). Rather than give them a smaller plate and break
-       the one-cover-height rule, buy the ~10px and ~45px back from vertical
-       rhythm. Nothing here changes type size, so the page still reads as a
-       peer of its neighbours.
-       ---------------------------------------------------------------------- */
-    .dense-page p {
-        margin-bottom: 0.72em;
-    }
-
-    .dense-page .action-table th,
-    .dense-page .action-table td {
-        padding-top: 4px;
-        padding-bottom: 4px;
-    }
-
-    .dense-page .note {
-        padding: 7px 9px;
-        margin: 0.7em 0;
-    }
-
-    .dense-page .cover img {
-        margin-bottom: 9px;
     }
 
     /* Keep a component sub-list whole, and glued to the lead-in that names it.
