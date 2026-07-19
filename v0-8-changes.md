@@ -5,8 +5,8 @@ Companion to `jobs-system-handoff.md` (which covers the Jobs system itself). Thi
 back to a bug. Every rule below is live in `Rulebook v0.8.html` (print-verified 23pp A4, no blanks).
 
 > **2026-07-18 — the Jobs Market is now STATIC.** The conveyor, *Yesterday's News*, the fresh/stale
-> ends and the per-player deck build are all deleted; setup is "shuffle all 32, deal P+1"; passing at
-> The Offers is now explicit. The argument and the five rejected alternatives live in
+> ends and the per-player deck build are all deleted; **all 32 cards are in play, though the opening
+> Market is still dealt from the 1s and 3s only**; passing at The Offers is now explicit. The argument and the five rejected alternatives live in
 > **`jobs-system-handoff.md` §2b** — not duplicated here, so the two docs can't drift.
 
 ---
