@@ -386,6 +386,113 @@ unpriced Sicilian edge alongside the brewing one above.
 
 ---
 
+## 2026-07-19 (later still) — the rulebook wording pass, and Cooperation's rules holes
+
+Commits `21c0075` (rulebook + art) and `1dedcd0` (playbooks). **Pushed — `origin/main` is current
+again after sitting 3 commits behind.**
+
+### The wording pass: 2,483 → 2,193 words over four sections
+
+Sections done so far: front page, "A Day in the Life", Components, **Key Concepts** (1,247→1,098),
+**Your Goal** (855→748), **Setup** (381→347). Next up is Gameplay / Phase 1: Shadows.
+
+**One pattern accounts for nearly every cut, and it has a reliable tell: a passage restating a rule
+that already has a canonical home announces itself with its own `(see X)` cross-reference.** Three
+examples, each a different flavour:
+- The map legend was stating each Title's criterion for the **third** time (after the Titles section
+  and Stake Your Claim), plus the whole Ward→Recruit discount. Compressed to "Count for the **Ward
+  Boss** Title". **Keep the identifying fact, cut the procedure** — $300 vs $500 a barrel IS what a
+  Speakeasy is, so that stays.
+- *Claiming a Job* re-listed all three of The Offers' options, which Grease the Wheels owns as a
+  numbered procedure. **Hand steps back to the phase that runs them**; the concept section keeps the
+  concept.
+- *The Commission* re-taught Bribe and the 10-Influence ceiling for the third time. Kept who they
+  are and "you need both"; cut the mechanics. That paragraph alone gave up 27 words.
+
+**The counter-rule still holds** (it cost a revert once): a lookup duplicated where the player's hand
+actually needs it is an ergonomic feature, not bloat. The Muscle Ratio table stays on the combat page.
+
+### Setup had a real ambiguity, not just clumsy wording
+
+**"3 Runners at your Dock, and 3 Runners in your Speakeasy" does not resolve for a single seat.**
+Manhattan and Queens each hold **two** Docks, and every mainland Borough holds **two** ordinary
+Speakeasies. The only thing that disambiguates is the **`Setup` column of the District Roster** on the
+Town Planning Ledger, which names them outright (West Side not The Bowery; Jamaica not Whitestone) and
+marks the Police Squads too. Setup now points at it, and Raise the Blue Wall opens "The same column
+marks the law". **Boroughs are NOT uniform — M 6 · Bx 5 · Q 6 · Bk 5 · SI 3 = 25** — so never assume
+one Dock or one Speakeasy per Borough.
+
+**Resequenced to: Crew → Turf → Blue Wall → Job Deck → Cut → Turn Order → Ferment the First Mash**
+("establish the city, then roll out the jobs"). The Mash roll moved from **first to last**, which has
+a structural justification beyond taste: *Ferment Tomorrow's Mash* is the closing step of Shadows, so
+setup rolling it last is the exact mirror, "the night before Day 1" — which is what *The Brew* already
+claims setup is. Also: "Stack the Deck" → **"Stack the Job Deck"**, "the eight 5s" → **"the eight
+5-Respect Jobs"** (a new player has no reason to read a bare "5" as a Respect value), and
+"Unfold the Game Board and lay out the Cash and Dice" cut as self-evident.
+
+### Cooperation: five rules holes, and one of them was live
+
+1. **Puppeteering was unbounded in time.** "At any time during the Hustle" allowed lending to a player
+   who had already Laid Low and banked their turn. Now: **only to a rival who hasn't yet Laid Low.**
+2. **No consent.** The recipient might not want the marker. Now: **they may refuse.**
+3. **"now or later" was simply wrong** — a rival can't spend "now" when it isn't their turn.
+4. **⚠ THE FIX THAT NEARLY BROKE THE FEATURE.** The natural rewrite is "they may use them on their
+   next Play" — and that **silently kills the mid-firefight rescue**, because *a firefight is ONE
+   Play*. A Pinned Invader at 0 Influence (who "must Fall Back") would never reach a "next Play" in
+   time. **Decision: keep the rescue**, worded "on their next Play, **or right now if they're Pinned**
+   and weighing whether to keep firing." The lender still pays real Influence and carries the Heat, so
+   it isn't free intervention.
+5. **⚠ A LOAN WAS A GIFT — the one nobody had spotted.** Lay Low says *"clear any remaining **Ledger**
+   markers to your **Reserves**"*, so an **unspent lent marker became the borrower's permanent
+   property**. Self-limiting in a standard game (nobody gifts win-condition Influence), but **Blood
+   Oath** makes Puppeteering "your strongest weapon… freely lend to your partner" while the win needs
+   "at least one partner holding 10 Influence" — i.e. **lend-and-don't-spend was a legal route to
+   stacking a partner to 10**. Now: unspent markers **return to the lender's Reserves at Lay Low**.
+   **Odd Jobs on borrowed markers stays LEGAL** (Nick's call, and it's right — Puppeteering moves
+   markers *out of* the lender's Ledger and Reserve markers don't pay, so the $100s travel with the
+   marker; it's a transfer, not new money. My "money pump" reading was wrong).
+
+**Binding Handshakes never expired.** The old text asked for "a specific deadline" but offered
+*"until you pay me $1,000"* as an example — a **condition, not a deadline** — so "I promise to take
+Manhattan by the end of the game" could lock a marker permanently with no mechanism to force
+resolution. **Every deal now runs out at the end of the current Day.** Multi-Day arrangements just get
+re-staked each Day, which is better: it costs a fresh commitment. Also deleted **Barrel Exchanges**
+(already implied by Move) and bolded **Reserves** in Stake a Marker. Blood Oath's Puppeteering line now
+says "the standard **lending** rules apply" (was "Heat rules"), so it inherits all of the above.
+
+### The Lowdown now carries Cooperation
+
+The playbook back had ~204px spare since the endgame block moved to the turn card. It closes with a
+**COOPERATION** section written in the card's own grammar — three cost/name/desc rows matching
+STANDOFF and PINNED above it — so it reads as reference rows, not prose: **Puppeteer (0)**,
+**Handshake (1)**, **Cash (0)**, plus an italic closer for the loan caveat. "A **willing** rival who
+hasn't Laid Low" carries the whole consent rule in one word, which is what kept each row to one line.
+Card now 930px of 965, so **35px spare: the Lowdown is no longer the roomy card.**
+
+### Art: one folder, and the crop problem finally has a number
+
+All rulebook art moved to **`Art/Rulebook/`** (`git mv`, clean renames). **Grep every HTML file before
+moving shared art** — `Moonshine Kingdom.png` is also `index.html`'s logo and `Unload 2.png` is used by
+`Contract Cards v0.7.html`. New art: Titles page takes `Speakeasy.png`, Winning the Game takes
+`Crown 2.png`, the map page takes `Kingdom.png`.
+
+**The no-crop height is `702 / aspect`** (the text column is 702px = A4's 794 minus 2×46 padding). The
+covers are two families: **16:9 (1672×941) → 395px** and **3:2 (1536×1024) → 468px**, so **no single
+height can serve both**. At the default 460px the 3:2 art loses a harmless 8px of height, but 16:9 art
+is scaled **up** and **sheared 7% off each side** — which is what chopped `Kingdom.png`'s "HELL'S
+KITCHEN" water tower into "LL'S / CHEN". Added **`.cover img.cover-wide { height:395px }`**, now on all
+eight 16:9 covers. **The old art is all 3:2 and every new commission is 16:9**, so as the last three
+(`Police`, `Influence Boss`, `Vendetta`) are replaced, `height:395` can become the single global rule
+and cropping stops being a concept. Each conversion also hands the page **65px** of slack; the book is
+now 23pp at **20.2 pages of ink**.
+
+**Judge cover art on the CROP, not the source file.** From the full-res files `Crown.png` (a ring
+presented in a box) was the better picture; at 700×460 the ring shrinks to an unreadable smudge and it
+degrades into a generic handshake, while `Crown 2.png` holds its read. Cheap test, no browser needed:
+PIL-crop to 700:460 centred, resize, look.
+
+---
+
 ## Print gotchas learned the hard way (v0.8)
 
 - **Every `body > .container` must fit A4 (1123px)** or it spills and leaves a blank page. Measure via
@@ -393,11 +500,30 @@ unpriced Sicilian edge alongside the brewing one above.
   text-free pages too.
 - `table { page-break-inside: avoid }` means a table too tall for its remaining space jumps a whole
   page. Adding a Rise row to the Plays table cost 3 pages and 3 blanks.
-- **`@media print` sets `.shadows-page / .components-page / .goal-page .cover img { height: auto
-  !important; max-height: 68mm }`** — so the **inline `height` attribute is silently ignored on those
-  three pages**, and `max-height` is the only lever. Elsewhere the attribute works, but only if the
-  img also has `.tight-cover` (otherwise `.cover img { min-height: 320px }` overrides it).
+- ~~**`@media print` sets `.shadows-page / .components-page / .goal-page .cover img`…**~~ **STALE as
+  of the v0.9 reskin.** `.tight-cover`, the per-page `max-height` overrides and the inline `height`
+  attributes are all gone. Cover sizing is now three classes in `css/moonshine-rules.css`:
+  **`.cover img` 460px · `.cover-wide` 395px (16:9, uncropped) · `.cover-sm` 350px (a deliberate
+  space lever, still crops on purpose).** The old lesson survives in general form: **after any global
+  sizing change, grep the print block for surviving per-page overrides of the same property** — two
+  legacy rules once sat later and more specific than the central one, so two pages silently kept a
+  ~257px image while every other page grew, and the page-fill numbers still moved enough to
+  "confirm" a fix that hadn't happened.
 - **Word trims often reflow without collapsing a line.** Measure the last line's width fraction and
   only cut what genuinely removes a line.
 - A full-width table inside a 2-column `.container` **spans the columns and splits the surrounding
   content**, which orphaned half of a numbered setup step. Prefer prose; the ratio *was* the table.
+- **A high page-fill % can mean bad column BALANCE, not too much content — look at the render before
+  cutting words.** `ol.sub-section > li` is `break-inside: avoid`, so **every numbered step is an
+  atomic block**. Merging two Setup steps made one too tall for column 1, which shoved it whole into
+  column 2 and left column 1 half-empty: fill jumped **90.2% → 99.0% (10px slack) on +11 words**.
+  Splitting it back fixed it. Keep steps in a numbered list similar in size so they pack.
+- **On a >95% page, reach for the cover, not the sentences.** Adding the Cooperation rules to the
+  book's tightest page (98.0%, 20px) overflowed it to 24pp + a blank; prose trims were **not** enough
+  and `cover-sm` on `Puppet.png` (−110px) fixed it in one move.
+- **Playbook cards clip SILENTLY** (`.card` is a fixed 925px box with `overflow:hidden`), so measure
+  after any addition. **Summing children's `offsetTop+offsetHeight` does NOT work** — `.card` is
+  `display:flex` and stretches them, so every card reports the same ~959px regardless of real ink.
+  Per card, save `style.height`, set `height:auto; overflow:visible`, read
+  `getBoundingClientRect().height`, restore. Current headroom: **fronts are full** (Vipers **4px**,
+  Knights/Irish 23, Sicilians 39), Lowdown 35.

@@ -48,7 +48,7 @@ layer *doing*. Everything else is downstream. This is a restoration: the v10 dec
 | Abandoning | **Walk Away**, and it costs your entire Offer for the Day (a7d41d8 closed the free-discard loophole). Card → discard, markers home. |
 | Resolution | **The Play is the unit.** A Job is a deed, not a board position. It counts even if undone before the Play ended. |
 | Deck size | **12 / 12 / 8** (1s / 3s / 5s) = **32 cards printed**. |
-| Setup | **Set the 5s aside, shuffle the rest, deal Player Count + 1 face-up, then shuffle the 5s back into the deck.** No per-player deck build. The opening Market is **1s and 3s only** — see the Day 1 Reserves crunch below. |
+| Setup | **Set the 5s aside, shuffle the rest, deal Player Count + 1 face-up, then shuffle the 5s back into the deck.** No per-player deck build. The opening Market is **1s and 3s only** — see the Day 1 Reserves crunch below. In the rulebook this is step 4, **"Stack the Job Deck"**, and it reads "the eight **5-Respect Jobs**", not "the eight 5s" (2026-07-19: a new player has no reason to read a bare "5" as a Respect value). **Beware the lossy shorthand "shuffle all 32, deal P+1"** — that phrase means *no per-player build*, NOT that the 5s go in before the deal; taken literally it deletes the 1s-and-3s opening. |
 
 ### The 3:3:2 per-player build is GONE — and why it was safe to drop
 The old setup counted **3 ones / 3 threes / 2 fives per player** and boxed the rest, defended here as

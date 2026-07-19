@@ -5,6 +5,39 @@
 
 ---
 
+## 🚨 STALENESS WARNING (added 2026-07-19) — the DIAGNOSIS holds, several FACTS don't
+
+**Keep reading this document: the core finding is still correct and still valuable.** Layer 2
+lookahead scoring by `boardValue` delta rewards hoarding, hoarding is worth zero at the win
+condition, so lookahead amplifies the wrong objective. That is independent of any rules change, and
+the fix (score by *card completion*, push economy incentives down into Layer 1) still stands.
+
+**But the tabletop moved v0.63 → v0.9 underneath it, and four specifics below are now wrong.** Do not
+implement them as written:
+
+| This doc says | Now |
+|---|---|
+| "win = Commission Card + 20 Respect" | **10 Influence + 15 Respect + honor intact** (no Rat Card, no unpaid Shylock's Mark) |
+| "contracts" | **Jobs.** A 32-card deck, 12/12/8 by Respect 1/3/5 |
+| "Score 5 > Racket 3 > Gig 1" | **Gig/Racket/Score are retired as game terms.** A Job prints a **Stake** and a **Respect**, nothing else |
+| "contracts IN HAND (not yet staked)" | **There is no hand.** The Market is Player Count + 1, **face-up and shared**. Claiming stakes Influence immediately, at **The Offers** in Shadows |
+| "urgency (closer to deadline = more urgent)" | **⚠ Jobs have NO deadline.** The Market is static and nothing expires |
+| "Payoff(Favor)" generators | Favors retired; **Bribe** buys permanent Influence at $2,500 |
+
+**The urgency term is the one to actually delete, not translate.** With a static Market and no expiry,
+the only clock on a claimed Job is your own locked capital, so "closer to deadline" has no referent.
+The natural replacement for that weight is **stake efficiency**: Respect earned per Influence-day
+locked. And **PREP retargets from "cards in my hand" to "cards face-up in the shared Market"** — which
+is a genuinely different problem, because every rival can see and take the same card, so PREP now has
+a contested element the original design never had to model.
+
+**Before touching the bot, read `jobs-system-handoff.md` and `v0-8-changes.md`** — the two repo docs
+that are the source of truth for current rules. Note also that `mk-online-handoff.md` carries its own
+staleness warning: the app's own ruleset is four generations behind the tabletop, so the bot is being
+tuned against a game that no longer exists.
+
+---
+
 ## TL;DR of the problem
 
 The bot has 3 decision layers: **Layer 1** heuristic-only (fast, hand-tuned candidate scores), **Layer 2** 1-ply lookahead (default gameplay path, what a human faces without MCTS), **Layer 3** MCTS rollouts.

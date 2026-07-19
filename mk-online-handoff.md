@@ -6,6 +6,42 @@
 
 ---
 
+## 🚨 STALENESS WARNING (added 2026-07-19) — do NOT port from the delta list below
+
+**This document is twelve days and four rules generations out of date.** It was written against
+"v6.0" (since renamed **v0.63**) and its "deltas to port" section lists only the raid tiebreaker and
+the still-number layout. **Porting that list would leave the app just as far behind as it is now.**
+
+The tabletop has since gone **v0.63 → v0.7 → v0.8 → v0.9**, and the changes are structural, not
+numeric tweaks. Do not reconstruct them from this file. **The source of truth is two repo docs, both
+written to be read cold:**
+- **`jobs-system-handoff.md`** — the Jobs system and deck spec
+- **`v0-8-changes.md`** — everything else, with the reasoning, in dated sections
+
+The headline shape of what the app is missing, so you can scope the work before reading:
+- **Contracts are gone.** They are now **Jobs**: a 32-card deck (12/12/8 by Respect 1/3/5), a
+  **static** Market of Player Count + 1 face-up, claimed by staking Influence at **The Offers** in
+  Shadows. No churn, no expiry, no per-player deck build. *(This is the single biggest port; the
+  bundle's `contract data` is a different system, not a renamed one.)*
+- **Favors are gone.** **Bribe** buys permanent Influence at $2,500, ceiling 10. Winning is
+  **10 Influence + 15 Respect + honor intact** (no Rat Card, no unpaid Shylock's Mark).
+- **Phases renamed**: Operations → **The Hustle**. **Public Enemy No. 1 Title cut** (3 Titles now:
+  Ward Boss, Harbormaster, Night Mayor).
+- **Recruit is Safehouse-only**, $500/Runner less $100 per Ward Controlled, uncapped.
+- **Harbormaster names the grey Mash die** instead of paying a toll; **Night Mayor** is a new Title.
+- **Wiped Out deleted; Rise absorbed it** and became a **Power Play (cost 2)** that places a Boss in
+  any Safe District, with a free Safehouse if yours is also off the board.
+- **Rat**: no Heat-track gate, and holding the Rat Card blocks Ratting again.
+- **The Sweep caps a District at 5 Mobsters** at Reckoning (Sicilians are Untouchable and exempt).
+- **Cooperation reworked (v0.9)**: Puppeteering only to a rival who hasn't Laid Low, who may refuse;
+  lent markers are spendable immediately *including mid-firefight*, and unspent ones return to the
+  lender at Lay Low. Binding Handshakes expire at the end of the current Day.
+
+**Action item #0 below still stands and is still unanswered** — the source tree for `mk-online/` has
+never been located. Nothing here is portable until it is.
+
+---
+
 ## ⚠️ Read this first — the biggest blocker
 
 **`mk-online/` in this repo contains only a built `dist/` bundle. There is NO source tree.**
