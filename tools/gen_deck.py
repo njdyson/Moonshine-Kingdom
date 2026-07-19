@@ -17,8 +17,19 @@ ONES = [
     ("The Beachhead", "Beachhead.png", "Secure",
      "Secure your Safehouse into a District <b>Land-Connected to a rival Safehouse</b>.",
      "You should meet the neighbours. They&rsquo;d rather not."),
+    # "a Ward" made this a strict SUPERSET of Union Dues (also "Recruit 6+ in a
+    # Ward"), so Union Dues could never fire without paying this too: a guaranteed
+    # free rider, invisible to overlap_audit's output because 1+3 sits under its
+    # 7-Respect display cutoff. Split on the DEED instead (Nick): you physically
+    # hold the Deed card, so it is verifiable at a glance and it moves during play
+    # (unlike "home turf", which is ambiguous once Deeds change hands: where you
+    # started, or where your Deed is now?). Deed / no-Deed is perfectly disjoint.
+    # Hold-the-Deed is the EASY half despite sounding like more prep: setup deals
+    # you a Deed AND puts your Safehouse in that Borough's WARD, so it is free on
+    # day one. Mirrors Union Dues exactly (same verb, same 4+, opposite Deed
+    # state), which also puts Ward turf back to 3 cards / 0.60 in fairness_audit.
     ("Tenement Army", "Tenament Army.png", "Recruit",
-     "Recruit <b>6+ Runners</b> in a <b>Ward</b> in a single Play.",
+     "Recruit <b>6+ Runners</b> in a <b>Ward</b> whose <b>Borough Deed you hold</b>, in a single Play.",
      "Word goes round by supper. By dark, you have a crew."),
     ("Last Call", "Last Call.png", "Unload",
      "Unload <b>4+ Barrels</b> at a single Speakeasy in one Play.",
@@ -78,8 +89,31 @@ THREES = [
     ("The Copper Heist", "Copper Heist.png", "Open Fire",
      "Seize a District with a <b>Pressure 5+ Still</b> and <b>no Safehouse</b>.",
      "The good boilers run hot. So do the men who own them."),
-    ("The Insurance Job", "Insurance Job.png", "Raid",
-     "Have a Police Raid <b>Condemn</b> the District holding <b>your Safehouse</b>.",
+    # WAS "Have a Police Raid Condemn ..." with verb Raid, which had no checkpoint:
+    # a Raid is an INTERRUPT, not a Play, and "The Play Is the Unit" only checks
+    # Jobs when a Play ends. A Raid fires two ways (5th Heat marker, or a Rat), so
+    # a RIVAL could trigger the Condemn and nothing defined whether you scored it
+    # (Nick). Naming Rat makes it a real Play (Rat is a Power Play), so the unit
+    # holds with no rules exception, and it turns the card into pure SETUP: Raid
+    # targeting is automated (hottest mob, then most barrels), so you must engineer
+    # being the target yourself, then drop the dime. The flavour was always this.
+    # PADLOCK, not Condemn (Nick): Safehouse-only Recruit made "Condemn your own
+    # Safehouse" catastrophic: it now locks you out of hiring entirely, so a
+    # 3-Respect card also carrying the Rat Card (no Bribes, no crown) would never
+    # be claimed, and in a STATIC Market an unclaimed card squats a slot forever.
+    # Padlocking your worst boiler is a proportionate price. Nick proposed
+    # Pressure 1; widened to <=2 because P1 is only East Harlem (M), Astoria (Q)
+    # and Westerleigh (ST), and Staten has NO Squad (one per MAINLAND Borough),
+    # so P1 was a 2-district, Manhattan/Queens-only card = borough bias, the one
+    # kind Nick rules out. P2 adds West Side (M), Belmont (Bx), Jamaica (Q) and
+    # Coney Island (Bk): exactly one per mainland Borough. "you Control" is
+    # load-bearing: without it, padlocking a RIVAL's still counts, which is just
+    # ratting on someone else. The tension that makes it good: the Raid's
+    # tie-break takes the boiler ranked HIGHEST on the Pressure Strip, so a low
+    # Pressure district is the Squad's LAST pick. You must trick the cops into
+    # kicking the wrong door. Also gives low-Pressure turf its first payoff.
+    ("The Insurance Job", "Insurance Job.png", "Rat",
+     "<b>Rat</b>, and have the Raid <b>Padlock</b> a <b>Pressure 2 or lower Still</b> you Control.",
      "He struck the match himself. Slept fine after."),
     # MANHATTAN'S FRIENDLY: the 4th orphan Speakeasy (The Haymarket, in the
     # Tenderloin). Name restored from the cut Extort card, and its own art reused:
@@ -110,8 +144,21 @@ THREES = [
     # Dues" restores an old-deck name and its art (a queue of working men, a fist
     # of cash): the mob ran the locals, so taking a Ward's union is how you own
     # the men on that block.
+    # The hard half, and Safehouse-only Recruit is what makes it hard: hiring
+    # happens ONLY at your Safehouse, so this forces you to Secure your Safehouse
+    # out of your own power base and into one specific district, that Borough's
+    # Ward. That is the prep, and it is the friction the Recruit change created.
+    # 6+ here, 4+ on Union Dues: the pair mirrors on the Ward/Deed split and then
+    # separates on a SECOND axis, because they bite at different times. Tenement
+    # Army is EARLY (supply full, cash scarce) so its cost is the burst: 6 in one
+    # Play is $2,400 and 6 of your 7 reserve Runners, which is NOT your natural
+    # opening line: at 4+ it just paid you for what you were doing anyway (Nick).
+    # Union Dues is LATER (cash flows, Runner slots don't), so 4+ there respects
+    # the 15-RUNNER CAP, which is the real constraint mid-game, not money.
+    # "in one Play" added to match the model (and Tenement Army): without it the
+    # Runners could be banked across several days, far easier than its Stake 3.
     ("Union Dues", "Union Dues.png", "Recruit",
-     "Recruit <b>6+ Runners</b> in a <b>Ward outside your home turf</b>.",
+     "Recruit <b>4+ Runners</b> in a <b>Ward</b> whose <b>Borough Deed you don't hold</b>, in one Play.",
      "They line up at dawn. You decide who works."),
     # WAS "in a Hostile District": IMPOSSIBLE, caught by Nick. Rise promotes a
     # Runner who is already standing there, but Hostile means a RIVAL Controls it,

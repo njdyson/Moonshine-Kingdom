@@ -157,6 +157,156 @@ strategy guide rather than maintaining four that drift.
 
 ---
 
+## 2026-07-19 — Recruit, mob colours, and the play-aid pass
+
+### Recruit is Safehouse-only, and Wards set the price
+
+Was "$300 in any Ward you Control, or $400 at your Safehouse". Now: hire **only** into the District
+holding your Safehouse, **$500 per Runner, less $100 for every Ward you Control anywhere on the
+map** — uncapped, so all five Wards make muscle free. There is no floor; a $100 floor was proposed
+and cut as an arbitrary cap on a state that means you have already won.
+
+The trade is **spatial flexibility for price**. Before, three Wards meant cheap muscle in three
+places and no logistics problem at all. Now it means cheap muscle in *one* place plus a ferrying
+bill, which promotes **Secure** from a footnote to a live play and turns the Safehouse into a
+forward operating base. It also pays off the fairness audit's long-standing "Ward drought".
+
+**Starting economics are unchanged** — setup puts your Safehouse in your home Ward, so everyone opens
+at 1 Ward = $400/Runner, exactly the old Safehouse price. That is the tell that the numbers are right.
+
+Three deliberate knock-ons:
+
+1. **No Safehouse now means you cannot Recruit at all.** Stated outright in the rulebook. This is a
+   large buff to **Torch** and to the Police *Condemned* result; Rise's free-Safehouse clause is the
+   only valve. Chosen over a Boss-fallback because burning a rival's HQ *should* cripple them.
+2. **Only five Wards exist** (Five Points/M, Hunts Point/Bx, Corona/Q, Brownsville/Bk, Stapleton/SI —
+   one per borough), so the live band is 1–2 Wards = $400–$300. The $200/$100/free rows are
+   aspirational; **do not tune as if they are reachable.**
+3. **Vipers' Tunnel is now the best logistics tool in the game** — it deletes exactly the ferrying
+   friction this change introduces. Watch it in playtest.
+
+### Mob colours are fixed
+
+**Sicilians RED · Irish GREEN · Vipers BLUE · Knights YELLOW.** Was free choice ("each player claims
+a color"). Fixed wins because the mobs have *persistent board-relevant* powers, so identity is read
+every turn — and Safehouse-only Recruit sharpened that, since "where is their Safehouse and can they
+reach the front" is now a constant read with a wildly different answer for Vipers.
+
+The pairing is **canonical but not binding**: no rule anywhere references a colour, so swapping stays
+free for colourblind players, house rules, or an expansion mob borrowing a base set. The expansion
+worry (new mobs without new pieces) is answered the way Root and Scythe answer it — expansion mobs
+ship their own pieces — and floating colours never solved it anyway, since four piece sets cap you at
+four players regardless.
+
+Red is the **Hit / Blood Oath / `Vendetta.png`** cluster, the strongest colour-to-mechanic link on
+the board. Nick's ideal at production is **Sicilians black** (mafia, and it frees blue entirely);
+the current set is driven by the off-the-shelf trilby meeples he owns. **Blue clashes with the
+Police** — do *not* rename *The Blue Wall*, it is real police slang and one of the book's better
+names; the prototype fix is white buildings for the Squads.
+
+Built as a tinted `.card-bar` plus a dot **and the colour name** in the kicker line. The name is
+load-bearing: yellow-on-gold is the one pairing the bar alone cannot carry.
+
+### The Rat, twice
+
+**The 1+ Heat gate is deleted.** It was a needless exception — the Raid rules already self-enforce it
+("if no District in reach carries any Heat, the Squad stays put"), so a 0-Heat Rat resolves as a Raid
+where nothing moves.
+
+**The Rat can't Rat.** Holding the Rat Card now also blocks the Rat Play. This fixes two things: the
+Mark of the Snitch was a *one-time* toll, so a committed rat could spam Raids for 2 Influence each;
+and it closes the Blood Oath clock-spam that deleting the gate exposed (a 0-Heat Rat still advances
+the Federal Crackdown Tracker, and the 4th-place player wants the Sit-Down early). No single player
+can drive that clock now — they would need a rival to Rat and snatch the card first. **So the
+variant-level patch "a Raid that moves no Squad does not advance the Tracker" is NOT needed.**
+
+Safe because it is not a permanent lockout: a rival snatching the card and "The Mark Dies with the
+Don" both return it. The flavour already justified it — the cell has always read *"Not one of them
+will take your envelope, let alone your call."*
+
+### Jobs deck: one free rider closed, one card repaired
+
+**`Union Dues` was a strict subset of `Tenement Army`** (both "Recruit 6+ in a Ward"), so the two
+co-fired on *every* completion. It never appeared in `overlap_audit.py` output because at 1+3 Respect
+it sits under the tool's 7-Respect display cutoff — **the tool was right and silent; the report hid
+it.** When hunting free riders, read the model lambdas for subset relationships rather than scanning
+printed stacks.
+
+Split on the **Borough Deed**, which is a card you physically hold and therefore verifiable at a
+glance. An intermediate "home Ward" version was wrong: not verifiable, and "home turf" is *ambiguous*
+once Deeds change hands.
+
+| | Stake | Objective |
+|---|---|---|
+| Tenement Army | 1 | Recruit **6+** Runners in a **Ward whose Borough Deed you hold**, in a single Play |
+| Union Dues | 3 | Recruit **4+** Runners in a **Ward whose Borough Deed you don't hold**, in one Play |
+
+They mirror on the Ward/Deed split then separate on a **second axis, because they bite at different
+times**: Tenement Army is early (supply full, cash scarce) so its cost is the burst; Union Dues is
+later (cash flows, Runner slots don't) so 4+ respects the **15-Runner cap**, the real mid-game
+constraint. Tenement Army was briefly 4+ and that was wrong — it paid you for your *default opening
+line*. Jobs pay for what you **do**; never let one rebate what a player was already doing.
+
+Counter-intuitive but settled: **hold-the-Deed is the EASY half.** Setup deals you a Deed *and* puts
+your Safehouse in that Borough, so it is free on day one, and the card cannot tell a built Deed from
+a dealt one.
+
+**`The Insurance Job` → "Rat, and have the Raid Padlock a Pressure 2 or lower Still you Control."**
+The old text had **no checkpoint**: a Raid is an interrupt, not a Play, and *The Play Is the Unit*
+only checks Jobs when a Play ends — so a *rival* could trigger the Condemn and nothing defined
+whether you scored it. Naming Rat makes it a real Play, with no rules exception needed. **"Raid" was
+never a Play a player could make; check every card's verb against the Playbooks' Play list.**
+
+Condemn became **Padlock** because *this same session* broke the old objective: Safehouse-only
+Recruit means losing your Safehouse locks you out of hiring, so a 3-Respect card carrying that *plus*
+the Rat Card is one nobody claims — and in a static Market an unclaimed card squats a slot forever.
+**Watch for that pattern generally: a rules change can silently make an existing card
+uncompletable-in-practice, which post-conveyor is a permanent blockage, not a bad draw.**
+
+Pressure **1** was proposed and widened to **≤2**: P1 is only East Harlem (M), Astoria (Q) and
+Westerleigh (ST), and **Staten has no Squad** ("one per *mainland* Borough"), so P1 was a
+two-district, Manhattan/Queens-only card — borough bias, the one kind ruled out. "You Control" is
+load-bearing, or padlocking a rival's still counts. The tension that makes it good: the Raid
+tie-break takes the boiler ranked *highest* on the Pressure Strip, so a low-Pressure district is the
+Squad's **last** pick — you must trick the cops into kicking the wrong door.
+
+Ward coverage held at **0.60 healthy** only because *both* Recruit cards name a Ward. Borough-only
+versions dropped it to 0.20 STARVED; one card on Ward gives 0.40, still starved. Audits all green:
+drift guard OK, never-two-5s PASS, no co-firing, 12/12/8 across 16 pages, seat spread 1.
+
+### Play aids: endgame single-sourced, and cards are now a fixed box
+
+The playbooks' whole **WINNING THE GAME block is deleted** — it doubled up with the turn card's FINAL
+RECKONING, and the playbook should carry less cognitive load. The **Respect breakdown moved onto the
+turn card** rather than being lost: it was the only statement anywhere on the play aids of *where
+Respect comes from*, and Final Reckoning quotes the 15+ target without it. A tie-break line was added
+alongside it. The Lowdown's kicker is now **"Combat Reference"**, since it holds no endgame content.
+
+The turn card's dense prose bodies now run **one labelled action per line**. The measured lesson:
+**line breaks are expensive.** Restructuring alone took the card 974→1001px (*worse*). It only paid
+off once every sub-line was trimmed to fit a **single** line: 974→844, a +16% print size gain. A
+sub-line that wraps costs two lines and throws the whole benefit away.
+
+**All cards are now a fixed 518 × 969 box** (`.card{width:470px; height:925px}`, content-box) with
+**square corners** for guillotine cutting. This is not cosmetic: the fit script uses
+`min(A5W/w, A5H/h)`, and since every card shares a width, **height always won** — so each card got
+its own zoom and a *shorter* card rendered **wider**. Fronts at 0.806 against backs at 0.980 meant
+duplex sides could not line up. Per-card vertical scaling was silently producing per-card horizontal
+size. Uniform zoom is now **0.7699**. Tallest real content is 917 against a 925 box, so **8px of
+headroom — content past that clips silently** (`overflow:hidden`); re-check `scrollHeight` vs
+`clientHeight` after any addition, and raise the height in *both* card files together.
+
+### Editorial
+
+**Capitalise after a run-in label colon** (`<b>The Loan:</b> **T**here's no limit…`). A bold label is
+a miniature heading, not the first clause of a sentence. Colons inside flowing prose stay lowercase.
+Both conventions are legitimate English, so this is house style — but the textbook "capitalise only
+before a complete sentence" test produces *mixed* results inside one card, which reads as a typo.
+19 fixed across six files, and the three misses each exposed a different hole in the check: the naive
+regex, a label shielded behind an `<i>` tag, and a file left off the list entirely.
+
+---
+
 ## Print gotchas learned the hard way (v0.8)
 
 - **Every `body > .container` must fit A4 (1123px)** or it spills and leaves a blank page. Measure via

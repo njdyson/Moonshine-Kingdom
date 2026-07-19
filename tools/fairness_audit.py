@@ -86,7 +86,7 @@ CARDS = [
     ('Rum Row',               3, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Eviction',          3, 'Open Fire', {'any'},                      {}),
     ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
-    ('The Insurance Job',     3, 'Raid',      {'any'},                      {}),
+    ('The Insurance Job',     3, 'Rat',       {'any'},                      {}),
     # MANHATTAN'S FRIENDLY — orphan Speakeasy #4 (The Haymarket, the Tenderloin).
     ('The Big Squeeze',       3, 'Unload',    {'speakeasy', 'press5'},      {M: 'friendly'}),
     # BRONX'S FRIENDLY — orphan district Fordham (The Penny Whistle).

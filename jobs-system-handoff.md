@@ -359,13 +359,18 @@ nowhere else. `overlap_audit.py` and `fairness_audit.py` parse the built HTML an
 it, so they are unaffected either way.
 
 **Verb spread** (the "Open Fire is over-represented" flag is resolved):
-Move 7 · Open Fire 7 · Unload 6 · Secure 3 · Trade 3 · Recruit 2 · Rise 2 · Extort 1 · Raid 1.
+Move 7 · Open Fire 7 · Unload 6 · Secure 3 · Trade 3 · Recruit 2 · Rise 2 · Extort 1 · Rat 1.
 
 **Live flags:**
 - **`Land-Connected` (on `The Beachhead`) is defined NOWHERE in the rulebook.** The rulebook says
   Districts are Connected by "Land & Bridges", and separately that all Docks connect across water.
   **A rulebook wording gap, not a card bug — Nick's call.**
-- `The Insurance Job` uses a **"Raid" trigger** — not one of the 7 Play verbs. Still the only one.
+- ~~`The Insurance Job` uses a **"Raid" trigger**~~ **RESOLVED 2026-07-19.** "Raid" was never a Play
+  a player could make, so the card had no checkpoint (*The Play Is the Unit* only checks Jobs when a
+  **Play** ends) and a *rival* could trigger the Condemn. It now names the **Rat** Play, which is real,
+  and its objective moved off "Condemn your own Safehouse" (Safehouse-only Recruit made that
+  self-crippling) to **"Padlock a Pressure 2 or lower Still you Control"**. See `v0-8-changes.md`.
+  **General lesson: check every card verb against the Playbooks' actual Play list.**
 - **`Bloody Sunday`** is the only card in the deck with **red** in it (all other art is sepia/gold), and
   the name is a loaded real-world term (Dublin 1920, Derry 1972). Both deliberate-ish; flagged.
 - **20 of 58 images unused.**

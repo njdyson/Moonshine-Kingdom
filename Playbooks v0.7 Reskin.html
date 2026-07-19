@@ -78,17 +78,34 @@ a:hover{color:var(--gold-bright)}
 .card{
   position:relative;
   width:470px;
+  /* FIXED height so every card is an identical box. The print script scales by
+     min(A5W/w, A5H/h); all cards share a width, so HEIGHT always won and each
+     card got its own zoom - a short card rendered WIDER and the two sides of a
+     duplex sheet could not line up. Content-box: 925 + 40 padding + 4 border
+     = 969 offsetHeight. Tallest real content is 917, so this leaves 8px. */
+  height:925px;
   background:linear-gradient(var(--panel-a),var(--panel-b));
   border:2px solid var(--gold-line);
-  border-radius:12px;
+  border-radius:0;            /* sharp: prototype is guillotined, not corner-punched */
   padding:22px 22px 18px;
   display:flex;
   flex-direction:column;
   box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.55);
   overflow:hidden;
 }
-.card-bar{position:absolute;top:0;left:0;right:0;height:6px;background:var(--gold-line)}
-.card-frame{position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:8px;pointer-events:none}
+/* Mob colour = the player's piece colour. One value per mob; swap freely.
+   Nothing in the RULES references a colour, so the pairing is canonical, not binding.
+   Reference cards (no .card--*) fall back to gold. */
+.card--red{--mob:#c0392b}
+.card--green{--mob:#3f8551}
+.card--blue{--mob:#3a6ea5}
+.card--yellow{--mob:#e0a11b}
+.card-bar{position:absolute;top:0;left:0;right:0;height:6px;background:var(--mob,var(--gold-line))}
+/* Sits inside the existing kicker line, so it adds no card height (cards are height-bound at print) */
+.mob-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mob);
+  border:1px solid rgba(0,0,0,.5);box-shadow:0 0 0 1px rgba(232,200,90,.35);
+  vertical-align:middle;margin-right:6px;position:relative;top:-1px}
+.card-frame{position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:0;pointer-events:none}
 
 .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:2px solid var(--gold-line);padding-bottom:10px}
 .card-head--back{align-items:center}
@@ -104,7 +121,7 @@ a:hover{color:var(--gold-bright)}
 .change-val{font:700 21px Cinzel,serif;color:var(--gold-bright);line-height:1.15}
 
 /* Inline emphasis inside body copy */
-.desc b,.trait-body b,.flow-body b,.pin-note b,.win-line b{color:var(--gold-em);font-weight:700}
+.desc b,.trait-body b,.flow-body b,.pin-note b{color:var(--gold-em);font-weight:700}
 
 /* Canonical inline icon: mirrors .icon in css/moonshine-rules.css */
 .icon{
@@ -158,7 +175,14 @@ a:hover{color:var(--gold-bright)}
 .name--sm{padding-top:2px}
 .desc{flex:1;font:400 11px/1.4 Barlow;color:var(--body);padding-top:3px}
 .desc--sm{padding-top:1px}
-.heat-note{margin-top:3px}
+
+/* Recruit ladder: Wards Controlled -> cost per Runner.
+   Single row on purpose: these cards are height-bound at print (the A5 fit
+   script scales by height), so every extra row shrinks ALL copy on the card. */
+.ladder{display:grid;grid-template-columns:repeat(6,1fr);margin-top:4px;border:1px solid var(--panel-line);border-radius:5px;overflow:hidden;background:var(--head-bg)}
+.ladder-c{text-align:center;padding:2px 1px;font:600 9px Barlow;color:var(--muted-2);white-space:nowrap}
+.ladder-c+.ladder-c{border-left:1px solid var(--cell)}
+.ladder-c b{color:var(--gold-bright);font-weight:700}
 
 /* ============================================================
    RESOLUTION TABLES
@@ -195,14 +219,6 @@ a:hover{color:var(--gold-bright)}
 .pin-note{text-align:center;font:italic 500 10px Barlow;color:var(--muted);margin-top:6px}
 
 /* ============================================================
-   WINNING THE GAME
-   ============================================================ */
-.win{margin-top:13px;border:1px solid var(--gold-line);border-radius:9px;background:var(--wash);padding:9px 13px}
-.win-title{text-align:center;font:700 12px Cinzel,serif;letter-spacing:2px;color:var(--gold-bright);margin-bottom:6px}
-.win-line{font:400 11px/1.55 Barlow;color:var(--body)}
-.win-line+.win-line{margin-top:4px}
-
-/* ============================================================
    PRINT
    ============================================================ */
 @media print{
@@ -227,12 +243,12 @@ a:hover{color:var(--gold-bright)}
   <div class="gallery">
 
   <!-- ============ SICILIAN FRONT ============ -->
-  <div data-card class="card">
+  <div data-card class="card card--red">
     <div class="card-bar"></div>
     <div class="card-frame"></div>
     <div class="card-head">
       <div>
-        <div class="kicker">Mob Playbook</div>
+        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Red</div>
         <div class="mob-name">Sicilian Syndicate</div>
         <div class="mob-tag">Old money. Longer memory.</div>
       </div>
@@ -249,12 +265,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
+      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
-      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel, <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -266,7 +282,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
-      <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
+      <div class="desc">Collect <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -276,29 +292,33 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
+      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>no Bribes, no crown, no repeat Rat</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners: <b>$300</b> each in any <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control, <b>$400</b> in your Safehouse District.</div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+        <div class="ladder">
+          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
+        </div>
+      </div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your one Safehouse in any District you Control for <b>$500</b> (abandoning its old block).</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any District you Control for <b>$500</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (one you Control, or any Defenseless one). <i>Safehouse gone too? It goes up in the same District, free.</i></div>
+      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (Controlled or Defenseless). <i>Safehouse gone too? It goes up there, free.</i></div>
     </div>
 
     <div class="sig">
@@ -322,7 +342,7 @@ a:hover{color:var(--gold-bright)}
     <div class="card-frame"></div>
     <div class="card-head card-head--back">
       <div>
-        <div class="kicker">Combat &amp; Endgame Rules</div>
+        <div class="kicker">Combat Reference</div>
         <div class="back-title">The Lowdown</div>
       </div>
       <span class="back-dia"></span>
@@ -381,28 +401,19 @@ a:hover{color:var(--gold-bright)}
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill.<div class="heat-note"><img class="icon" src="Art/Icons/fire.svg" alt="Heat"> The Invader takes Heat if they score one or more kills this fight (once, not per kill).</div></div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-
-    <div class="win">
-      <div class="win-title">WINNING THE GAME</div>
-      <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
-      <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
-      <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
-      <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
-    </div>
   </div>
 
   <!-- ============ VIPERS FRONT ============ -->
-  <div data-card class="card">
+  <div data-card class="card card--blue">
     <div class="card-bar"></div>
     <div class="card-frame"></div>
     <div class="card-head">
       <div>
-        <div class="kicker">Mob Playbook</div>
+        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Blue</div>
         <div class="mob-name">East Side Vipers</div>
         <div class="mob-tag">They hear it before you say it.</div>
       </div>
@@ -419,12 +430,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
+      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
-      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel, <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -436,7 +447,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
-      <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
+      <div class="desc">Collect <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -446,29 +457,33 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
+      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>no Bribes, no crown, no repeat Rat</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners: <b>$300</b> each in any <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control, <b>$400</b> in your Safehouse District.</div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+        <div class="ladder">
+          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
+        </div>
+      </div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your one Safehouse in any District you Control for <b>$500</b> (abandoning its old block).</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any District you Control for <b>$500</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (one you Control, or any Defenseless one). <i>Safehouse gone too? It goes up in the same District, free.</i></div>
+      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (Controlled or Defenseless). <i>Safehouse gone too? It goes up there, free.</i></div>
     </div>
 
     <div class="sig">
@@ -481,7 +496,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play play--end">
         <div class="cost">1</div>
         <div class="name">Tunnel</div>
-        <div class="desc">Move up to 5 Mobsters (no liquor) between your <b>Safehouse</b> District and any District you Control, either way. Cannot flee combat or a Raid.</div>
+        <div class="desc">Move up to 5 Mobsters (no liquor) between your <b>Safehouse</b> and any District you Control, either way. Cannot flee combat or a Raid.</div>
       </div>
     </div>
   </div>
@@ -492,7 +507,7 @@ a:hover{color:var(--gold-bright)}
     <div class="card-frame"></div>
     <div class="card-head card-head--back">
       <div>
-        <div class="kicker">Combat &amp; Endgame Rules</div>
+        <div class="kicker">Combat Reference</div>
         <div class="back-title">The Lowdown</div>
       </div>
       <span class="back-dia"></span>
@@ -551,28 +566,19 @@ a:hover{color:var(--gold-bright)}
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill.<div class="heat-note"><img class="icon" src="Art/Icons/fire.svg" alt="Heat"> The Invader takes Heat if they score one or more kills this fight (once, not per kill).</div></div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-
-    <div class="win">
-      <div class="win-title">WINNING THE GAME</div>
-      <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
-      <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
-      <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
-      <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
-    </div>
   </div>
 
   <!-- ============ KNIGHTS FRONT ============ -->
-  <div data-card class="card">
+  <div data-card class="card card--yellow">
     <div class="card-bar"></div>
     <div class="card-frame"></div>
     <div class="card-head">
       <div>
-        <div class="kicker">Mob Playbook</div>
+        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Yellow</div>
         <div class="mob-name">Harlem Knights</div>
         <div class="mob-tag">Every pier from Havana to Harlem.</div>
       </div>
@@ -589,12 +595,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
+      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
-      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel, <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -606,7 +612,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
-      <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
+      <div class="desc">Collect <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -616,29 +622,33 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
+      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>no Bribes, no crown, no repeat Rat</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners: <b>$300</b> each in any <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control, <b>$400</b> in your Safehouse District.</div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+        <div class="ladder">
+          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
+        </div>
+      </div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your one Safehouse in any District you Control for <b>$500</b> (abandoning its old block).</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any District you Control for <b>$500</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (one you Control, or any Defenseless one). <i>Safehouse gone too? It goes up in the same District, free.</i></div>
+      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (Controlled or Defenseless). <i>Safehouse gone too? It goes up there, free.</i></div>
     </div>
 
     <div class="sig">
@@ -662,7 +672,7 @@ a:hover{color:var(--gold-bright)}
     <div class="card-frame"></div>
     <div class="card-head card-head--back">
       <div>
-        <div class="kicker">Combat &amp; Endgame Rules</div>
+        <div class="kicker">Combat Reference</div>
         <div class="back-title">The Lowdown</div>
       </div>
       <span class="back-dia"></span>
@@ -721,28 +731,19 @@ a:hover{color:var(--gold-bright)}
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill.<div class="heat-note"><img class="icon" src="Art/Icons/fire.svg" alt="Heat"> The Invader takes Heat if they score one or more kills this fight (once, not per kill).</div></div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-
-    <div class="win">
-      <div class="win-title">WINNING THE GAME</div>
-      <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
-      <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
-      <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
-      <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
-    </div>
   </div>
 
   <!-- ============ IRISH FRONT ============ -->
-  <div data-card class="card">
+  <div data-card class="card card--green">
     <div class="card-bar"></div>
     <div class="card-frame"></div>
     <div class="card-head">
       <div>
-        <div class="kicker">Mob Playbook</div>
+        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Green</div>
         <div class="mob-name">Hell's Kitchen Irish</div>
         <div class="mob-tag">They always come heavy.</div>
       </div>
@@ -759,12 +760,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Entering rival turf triggers a <b>Standoff</b>. Never enter Police turf.</div>
+      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
-      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel; <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>/barrel. Only Rum pays a <b>Kickback</b> (1 spent Influence back per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell <b>Moonshine</b> or <b>Rum</b> at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. <b>$300</b>/barrel, <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span> <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -776,7 +777,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort</div>
-      <div class="desc">Collect a flat <b>$200 per District</b> you Control, anywhere on the map. Once per Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always draws Heat.</div>
+      <div class="desc">Collect <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -786,29 +787,33 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">With 1+ markers on the Heat Track, trigger an immediate Police Raid. Take the Rat Card: <b>no Bribes, no crown</b> until you shed it.</div>
+      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>no Bribes, no crown, no repeat Rat</b> until you shed it.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> marker to your Reserves. Hard ceiling of <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners: <b>$300</b> each in any <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control, <b>$400</b> in your Safehouse District.</div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+        <div class="ladder">
+          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
+        </div>
+      </div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your one Safehouse in any District you Control for <b>$500</b> (abandoning its old block).</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any District you Control for <b>$500</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (one you Control, or any Defenseless one). <i>Safehouse gone too? It goes up in the same District, free.</i></div>
+      <div class="desc">Boss dead? <b>Place your Boss in any Safe District</b> (Controlled or Defenseless). <i>Safehouse gone too? It goes up there, free.</i></div>
     </div>
 
     <div class="sig">
@@ -816,7 +821,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play">
         <div class="cost">1</div>
         <div class="name">Plunder</div>
-        <div class="desc"><b>Special Attack:</b> roll Muscle. Each hit steals 1 liquor barrel instead of killing. Carry them off if you Advance (dropped if you Fall Back). Occupier hits still kill. No Heat.</div>
+        <div class="desc"><b>Special Attack:</b> Roll Muscle. Each hit steals 1 liquor barrel instead of killing. Carry them off if you Advance (dropped if you Fall Back). Occupier hits still kill. No Heat.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
@@ -832,7 +837,7 @@ a:hover{color:var(--gold-bright)}
     <div class="card-frame"></div>
     <div class="card-head card-head--back">
       <div>
-        <div class="kicker">Combat &amp; Endgame Rules</div>
+        <div class="kicker">Combat Reference</div>
         <div class="back-title">The Lowdown</div>
       </div>
       <span class="back-dia"></span>
@@ -891,19 +896,10 @@ a:hover{color:var(--gold-bright)}
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill.<div class="heat-note"><img class="icon" src="Art/Icons/fire.svg" alt="Heat"> The Invader takes Heat if they score one or more kills this fight (once, not per kill).</div></div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-
-    <div class="win">
-      <div class="win-title">WINNING THE GAME</div>
-      <div class="win-line">The crown is claimed at <b>Reckoning</b> by the Boss who holds <b>10 Influence</b> and <b>15+ Respect</b>.</div>
-      <div class="win-line"><b>The Commission:</b> Bribe at <b>$2,500</b> a marker until all 10 Influence are yours.</div>
-      <div class="win-line"><b>Respect:</b> 2 apiece for each Borough Deed, and for the Ward Boss, Harbormaster and Night Mayor (most drinking venues) Titles. Plus the Respect printed on every Job you've pulled off.</div>
-      <div class="win-line">Every <b>Shylock's Mark</b> must be repaid first, and a <b>Rat</b> can never be crowned.</div>
-      <div class="win-line">If no Boss qualifies, play runs on to the next Day. If two qualify at once, the most <b>Respect</b> wins, then the most <b>Cash</b> plus <b>Loose Change</b>.</div>
-    </div>
   </div>
 
   </div>

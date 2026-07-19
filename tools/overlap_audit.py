@@ -59,7 +59,9 @@ JOBS = [
     # --- 1 Respect ---
     J('The Milk Run', 1, 'Move', lambda p: p['barrels'] >= 4 and p['williamsburg_bridge']),
     J('The Beachhead', 1, 'Secure', lambda p: p['adj_rival_safehouse']),
-    J('Tenement Army', 1, 'Recruit', lambda p: p['runners'] >= 6 and p['d'].has('ward')),
+    # own_deed / not own_deed: mutually exclusive with Union Dues by construction.
+    J('Tenement Army', 1, 'Recruit',
+      lambda p: p['runners'] >= 6 and p['d'].has('ward') and p['own_deed']),
     J('Last Call', 1, 'Unload', lambda p: p['barrels'] >= 4 and p['d'].has('speakeasy')),
     J('The Empty Casket', 1, 'Rise', lambda p: p['d'].has('ward') and p['control']),
     J('Fortress Staten', 1, 'Secure', lambda p: p['d'].boro == ST),
@@ -81,7 +83,8 @@ JOBS = [
       lambda p: p['seize'] and p['rival_safehouse'] and p['takeover']),
     J('The Copper Heist', 3, 'Open Fire',
       lambda p: p['seize'] and p['d'].press >= 5 and not p['rival_safehouse']),
-    J('The Insurance Job', 3, 'Raid', lambda p: p['condemn_own_safehouse']),
+    J('The Insurance Job', 3, 'Rat',
+      lambda p: p['d'].press <= 2 and p['control']),
     # The Haymarket = The Tenderloin (Manhattan's orphan Speakeasy)
     J('The Big Squeeze', 3, 'Unload', lambda p: p['barrels'] >= 6 and p['d'].name == 'The Tenderloin'),
     J("Hell's Highway", 3, 'Move', lambda p: p['barrels'] >= 6 and p['d'].name == 'Fordham'),
@@ -90,7 +93,7 @@ JOBS = [
       lambda p: p['barrels'] >= 6 and not p['rum'] and p['d'].name == 'Flushing'),
     J('Gin Pipeline', 3, 'Move', lambda p: p['barrels'] >= 6 and not p['rum'] and p['origin_press5']),
     J('Union Dues', 3, 'Recruit',
-      lambda p: p['runners'] >= 6 and p['d'].has('ward') and p['off_home_turf']),
+      lambda p: p['runners'] >= 4 and p['d'].has('ward') and not p['own_deed']),
     J('Last One Standing', 3, 'Rise', lambda p: p['rival_deed'] and p['control']),
     J('The Irish Goodbye', 3, 'Open Fire',
       lambda p: p['kills'] >= 3 and p['d'].has('speakeasy') and not p['seize']),
@@ -121,12 +124,12 @@ VERB_BOOLS = {
              'hostile', 'origin_press5', 'from_staten_dock', 'rum'],
     'Unload': ['rum', 'off_home_turf'],
     'Secure': ['adj_rival_safehouse', 'rum'],
-    'Recruit': ['off_home_turf'],
+    'Recruit': ['own_deed'],
     'Rise': ['control', 'hostile'],
     'Trade': [],
     'Open Fire': ['seize', 'rival_safehouse', 'boss_killed', 'own_boss', 'takeover'],
     'Extort': ['all_five_boroughs'],
-    'Raid': ['condemn_own_safehouse'],
+    'Rat': ['control'],
 }
 ALL_BOOLS = sorted({b for v in VERB_BOOLS.values() for b in v})
 
@@ -198,6 +201,9 @@ for verb, bools in VERB_BOOLS.items():
                             # Staten's Deed is returned to the box at setup, so no
                             # rival can ever hold it.
                             if p['rival_deed'] and d.boro == ST:
+                                continue
+                            # Same reason: you can never hold Staten's Deed either.
+                            if p.get('own_deed') and d.boro == ST:
                                 continue
                             # You cannot Move barrels in from across water and also
                             # over the Williamsburg Bridge in the same Play.

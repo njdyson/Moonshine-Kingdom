@@ -71,9 +71,13 @@ a:hover{color:var(--gold-bright)}
 .card{
   position:relative;
   width:470px;
+  /* Same fixed box as the playbooks (925 + 40 padding + 4 border = 969), so every
+     card in the prototype cuts to one size and duplex sides line up. Tallest
+     content in this file is 907. See the playbook file for the full reasoning. */
+  height:925px;
   background:linear-gradient(var(--panel-a),var(--panel-b));
   border:2px solid var(--gold-line);
-  border-radius:12px;
+  border-radius:0;            /* sharp: prototype is guillotined, not corner-punched */
   padding:22px 22px 18px;
   display:flex;
   flex-direction:column;
@@ -81,7 +85,7 @@ a:hover{color:var(--gold-bright)}
   overflow:hidden;
 }
 .card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:var(--gold-line)}
-.card::after{content:"";position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:8px;pointer-events:none}
+.card::after{content:"";position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:0;pointer-events:none}
 
 .card-head{text-align:center;border-bottom:2px solid var(--gold-line);padding-bottom:10px}
 .card-kicker{font:600 8px Barlow;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase}
@@ -129,6 +133,9 @@ b.silver{color:var(--silver)}
    STEP ROWS
    ============================================================ */
 .step{display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid var(--rule)}
+/* one labelled action per line: the bodies used to run together as prose */
+.sub{display:block}
+.sub+.sub{margin-top:2px}
 .step--end{border-bottom:0}
 .step-num{
   flex:0 0 22px;height:22px;border-radius:4px;
@@ -263,8 +270,6 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="rail-pill"><span class="rail-name">Reckoning</span><span class="rail-sub">Cleanup</span></div>
     </div>
 
-    <div class="note"><b>Turn Order</b> runs Token #1 through #4. At Day turnover, swap to <b>tomorrow's set</b>.</div>
-
     <!-- PHASE 1 -->
     <div class="sec">
       <span class="sec-name">Shadows</span>
@@ -274,22 +279,22 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step">
       <span class="step-num">1</span>
       <div class="step-label">The Brew</div>
-      <div class="step-body"><b>Roll:</b> the <b class="silver">Mash die</b> (set yesterday) shows the Public Mash; Token #1 rolls <b>Red</b> (Players + 1). <b>Draft:</b> in Turn Order, each boss takes <b>1 Red</b>. <b>Produce:</b> Brew = Mash + your Red; matching Stills brew <b>Moonshine</b> by Muscle Ratio (Boss on the Still: +1).</div>
+      <div class="step-body"><span class="sub"><b>Roll:</b> Token #1 rolls <b>Red</b> (Players + 1).</span><span class="sub"><b>Draft:</b> In Turn Order, each boss takes <b>1 Red</b>.</span><span class="sub"><b>Produce:</b> Brew = Mash + Red. Matching Stills brew by Muscle Ratio (Boss +1).</span></div>
     </div>
     <div class="step">
       <span class="step-num">2</span>
       <div class="step-label">The Blowback</div>
-      <div class="step-body">Leftover Red + Mash. <b>Every</b> matching Still bursts, taking casualties by Muscle Ratio (Boss first, then Runners). The Still survives and runs tomorrow.</div>
+      <div class="step-body">Leftover Red + Mash. Matching Stills <b>kill</b> by Muscle Ratio, Boss first.</div>
     </div>
     <div class="step">
       <span class="step-num">3</span>
       <div class="step-label">Grease Wheels</div>
-      <div class="step-body"><b>The Offers:</b> in <i>reverse</i> Turn Order, each boss does <b>one of three</b>: <b>Take a Job</b> (claim 1 from the Market, stake Reserve markers equal to its Stake, deal a fresh card into the gap), <b>Walk Away</b> (discard a claimed Job, markers home), or <b>pass</b>. Never two. <i>Boss required.</i> <b>Fund Ledger:</b> fill your 5 slots from what's left in Reserves (only Ledger markers pay for Plays).</div>
+      <div class="step-body"><span class="sub"><b>The Offers:</b> <i>Reverse</i> Turn Order, Boss required. <b>Choose one:</b></span><span class="sub"><b>Take a Job:</b> Stake Reserves equal to its Stake, refill the gap.</span><span class="sub"><b>Walk Away:</b> Discard a claimed Job, markers home.</span><span class="sub"><b>Pass:</b> Take nothing, keep everything.</span><span class="sub"><b>Fund Ledger:</b> Fill 5 slots from Reserves. Only Ledger markers pay.</span></div>
     </div>
     <div class="step step--end">
       <span class="step-num">4</span>
       <div class="step-label">Ferment Mash</div>
-      <div class="step-body">The <b>Harbormaster</b> names any face (1&ndash;6); if unheld, roll the <b class="silver">Mash die</b>. It sets <b>tomorrow's Public Mash</b>, so plan today's Plays around it.</div>
+      <div class="step-body"><b>Harbormaster</b> names any face (1&ndash;6), else roll. Sets <b>tomorrow's Mash</b>.</div>
     </div>
 
     <!-- PHASE 2 -->
@@ -301,17 +306,17 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step">
       <span class="step-dot"></span>
       <div class="step-label">Take Play</div>
-      <div class="step-body">Spend Influence for 1 Play (Standard = 1, Power = 2). Resolve any combat before it ends.</div>
+      <div class="step-body">Spend Influence for <b>1 Play</b>: Standard 1, Power 2. Resolve combat first.</div>
     </div>
     <div class="step">
       <span class="step-dot"></span>
       <div class="step-label">Resolve</div>
-      <div class="step-body"><b>Pay:</b> spent markers return to Reserves; Heat locks 1 on the <b>Heat Track</b>. <b>Unload (Power):</b> sell at your Speakeasy, <b>$300</b>/barrel (<b>$500</b> High Society); only Rum pays a Kickback. <b>4+ barrels</b> draws Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat">.</div>
+      <div class="step-body">Spent markers return to Reserves. Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> sends 1 to the <b>Heat Track</b>.</div>
     </div>
     <div class="step step--end">
       <span class="step-dot"></span>
       <div class="step-label">Lay Low</div>
-      <div class="step-body"><b>Odd Jobs:</b> each unspent Ledger marker cashes for <b>$100</b> (Reserves don't pay). Clear your Ledger to Reserves, then claim the lowest token in tomorrow's set (#1 strikes first).</div>
+      <div class="step-body"><span class="sub"><b>Odd Jobs:</b> Each unspent <b>Ledger</b> marker cashes for <b>$100</b>.</span><span class="sub">Clear Ledger to Reserves, then take the lowest token for tomorrow.</span></div>
     </div>
 
     <!-- PHASE 3 -->
@@ -323,17 +328,17 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step">
       <span class="step-num">1</span>
       <div class="step-label">The Sweep</div>
-      <div class="step-body">Remove excess Runners so no District exceeds <b>5 Mobsters</b> (the Sicilians are Untouchable and ignore this).</div>
+      <div class="step-body">Trim every District to <b>5 Mobsters</b>. Sicilians ignore this.</div>
     </div>
     <div class="step step--end">
       <span class="step-num">2</span>
       <div class="step-label">Stake Your Claim</div>
-      <div class="step-body">Re-count every Title: <b>Borough Deeds</b>, <b>Ward Boss</b>, <b>Harbormaster</b>, <b>Night Mayor</b> (most venues). The sole leader keeps it; a tie or empty returns it to Supply (Police turf counts as empty).</div>
+      <div class="step-body"><span class="sub">Re-count <b>Borough Deeds</b>, <b>Ward Boss</b>, <b>Harbormaster</b>, <b>Night Mayor</b>.</span><span class="sub">Sole leader keeps it; a tie or empty returns it to Supply.</span></div>
     </div>
 
     <div class="final">
       <div class="final-title">FINAL RECKONING</div>
-      <div class="final-body"><b>10 Influence</b> + <b>15+ Respect</b> + honor (no Rat Card, no unpaid Mark) ends the game. Otherwise swap to tomorrow's set and begin the next Day.</div>
+      <div class="final-body"><span class="sub"><b>10 Influence</b> + <b>15+ Respect</b> + honor (no Rat Card, no unpaid Mark) ends the game.</span><span class="sub"><b>Respect:</b> 2 per <b>Borough Deed</b> and per <b>Title</b>, plus what each Job pays.</span><span class="sub"><b>Tied?</b> The most <b>Respect</b> wins, then the fattest bankroll (<b>Cash</b> plus <b>Loose Change</b>).</span><span class="sub">Otherwise swap to tomorrow's set and begin the next Day.</span></div>
     </div>
   </div>
 
@@ -575,7 +580,7 @@ table.lg{width:100%;border-collapse:collapse}
       <span class="roster-label">POLICE RAIDS</span>
       <span class="sec-rule"></span>
     </div>
-    <div class="raid-note"><b>Trigger:</b> Rat Play (1+ Heat), or the 5th Heat. Resolve every Squad one at a time, in Borough order.</div>
+    <div class="raid-note"><b>Trigger:</b> The <b>Rat</b> Play, or the 5th Heat. Resolve every Squad one at a time, in Borough order.</div>
 
     <div class="step">
       <span class="step-num">1</span>
@@ -585,7 +590,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step">
       <span class="step-num">2</span>
       <div class="step-label step-label--narrow">The Big Bust</div>
-      <div class="step-body">If that rival holds more than one such District, hit the one with the <b>most Barrels</b>; ties break to the <b>hottest boiler</b>, most steam on its Still's Pressure Strip (unique per Borough, so it never ties).</div>
+      <div class="step-body">If that rival holds more than one such District, hit the one with the <b>most Barrels</b>; ties break to the <b>hottest boiler</b>, most steam on its Still's Pressure Strip.</div>
     </div>
     <div class="step">
       <span class="step-num">3</span>
