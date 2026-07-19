@@ -4,8 +4,8 @@ Everything needed to resume cold. Written for whoever picks this up next, human 
 
 **Status:** design settled. **Overlap is judged by BREADTH now — see §3 before touching a card.** **Rulebook v0.8 print-verified: 23pp A4, no blanks.**
 **Latest change (2026-07-18): the Market is now STATIC — the conveyor and *Yesterday's News* are
-deleted, setup is "shuffle all 32, deal P+1", and passing at The Offers is explicit. Read §2b before
-touching any of it.**
+deleted, all 32 cards are in play (no per-player build, though the opening deal still holds the 5s
+back), and passing at The Offers is explicit. Read §2b before touching any of it.**
 **The deck is COMPLETE: 32 of 32 cards at 12 / 12 / 8, print-verified 16pp A4, no blanks.**
 All three overlap clusters are closed and the hard rule is now machine-checked (see §3).
 
@@ -58,7 +58,8 @@ in the game regardless of table size."* It existed to make the 1s **run dry on s
 mechanism the static Market deliberately softens (see the arc, below). It was defending a feature
 that no longer earns its keep, and it was the fiddliest step in setup.
 
-Setup is now **shuffle all 32, deal Player Count + 1.** Three consequences:
+Setup now uses **all 32 cards, with no per-player build** (the 5s are still set aside for the
+opening deal and shuffled back in after). Three consequences:
 
 - **The 1s-only seed is gone — but a 1s-AND-3s seed replaced it, for a different reason.** What made
   the old seed bad was that it removed *choice*: deal five 1s and picking first is worth nothing, so
