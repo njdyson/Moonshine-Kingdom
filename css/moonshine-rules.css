@@ -477,6 +477,15 @@ img {
     height: 350px !important;
 }
 
+/* The cover art comes in two shapes. 3:2 art (1536x1024) very nearly fills the
+   702px text column at the default 460px, losing only 8px off the height. But
+   16:9 art (1672x941) stands just 395px tall at that width, so 460px scales it
+   up and shears 7% off EACH SIDE. Tag 16:9 covers with .cover-wide to print
+   them whole, and the page gains 65px into the bargain. */
+.cover img.cover-wide {
+    height: 395px !important;
+}
+
 /* Heat cover: officers' heads sit in the top of the frame, so a cropped
    (cover-fit) height must anchor near the top or the caps get chopped. */
 .heat-page .cover img {

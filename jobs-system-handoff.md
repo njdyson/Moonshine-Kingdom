@@ -459,7 +459,8 @@ because a cut forces a new card in the same tier (each tier must stay a multiple
   outside the repo, one level up. That is where `Skiff.png` (Night Landing) and `Rum Row.png` came
   from. **Check it before commissioning anything**, and beware duplicates: `ChatGPT Image Jan 14,
   2026, 09_55_54 AM.png` there is byte-identical to `Art/Jobs/Full Steam.png`, and `Unused/Rum Row.png`
-  is a *different* image from `Art/Rum Row.png`, which the rulebook uses on its map page.
+  is a *different* image from the rulebook's own `Rum Row.png` (its map page), which the v0.9 art
+  reorganisation moved under `Art/Rulebook/`. Same filename, different picture — check before reusing.
   **`Art/Jobs/_contact sheet.png` does not cover `Unused/` — regenerate it across both folders.**
   28 of the images now in `Art/Jobs/` are unused, including `Switch.png` and `Rum Runners Regatta.png`,
   both freed by the 2026-07-19 re-art. **`Rum Wars.png` (a full dock firefight — cops, Tommy guns,
