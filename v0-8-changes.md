@@ -462,12 +462,18 @@ says "the standard **lending** rules apply" (was "Heat rules"), so it inherits a
 
 ### The Lowdown now carries Cooperation
 
-The playbook back had ~204px spare since the endgame block moved to the turn card. It closes with a
-**COOPERATION** section written in the card's own grammar — three cost/name/desc rows matching
-STANDOFF and PINNED above it — so it reads as reference rows, not prose: **Puppeteer (0)**,
-**Handshake (1)**, **Cash (0)**, plus an italic closer for the loan caveat. "A **willing** rival who
-hasn't Laid Low" carries the whole consent rule in one word, which is what kept each row to one line.
-Card now 930px of 965, so **35px spare: the Lowdown is no longer the roomy card.**
+The playbook back had ~204px spare since the endgame block moved to the turn card. It now closes with
+a **COOPERATION** panel: **Puppeteer (0)** and **Handshake (1)** as cost/name/desc rows, plus an
+italic closer for the loan caveat. "A **willing** rival who hasn't Laid Low" carries the whole consent
+rule in one word, which is what keeps each row to one line.
+
+**A third row, "Cash", was written and then cut (Nick): handing cash across the table is an informal
+courtesy with no name and no cost, so it isn't a rule the play aid should be teaching.** Cutting it
+paid for the better treatment — the section is wrapped in **`.sig`**, the same bordered/washed panel
+the fronts use for SIGNATURE PLAYS, instead of a bare `.sec` header. That gives the visual break the
+back needed after the dense combat reference, **and it makes the duplex pair rhyme**: both sides now
+end with a boxed panel in the same position on the card. Net effect on height is *positive* — one
+fewer row (−36px) more than pays for the box (+27px). Card sits at **914px of 965, 51px spare.**
 
 ### Art: one folder, and the crop problem finally has a number
 
@@ -526,4 +532,4 @@ PIL-crop to 700:460 centred, resize, look.
   `display:flex` and stretches them, so every card reports the same ~959px regardless of real ink.
   Per card, save `style.height`, set `height:auto; overflow:visible`, read
   `getBoundingClientRect().height`, restore. Current headroom: **fronts are full** (Vipers **4px**,
-  Knights/Irish 23, Sicilians 39), Lowdown 35.
+  Knights/Irish 23, Sicilians 39), Lowdown 51.
