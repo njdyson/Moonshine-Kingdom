@@ -73,16 +73,24 @@ CARDS = [
     ('Last Call',             1, 'Unload',    {'speakeasy'},                {}),
     ('The Empty Casket',      1, 'Rise',      {'ward'},                     {}),
     ('Fortress Staten',       1, 'Secure',    {'any'},                      {ST: 'neutral'}),
+    # HOSTILE half of Jamaica Bay — mirrors Night Landing.
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
     ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {}),
     ("The Angel's Share",     1, 'Unload',    {'speakeasy'},                {}),
-    ('The Riverside Switch',  1, 'Move',      {'dock'},                     {}),
+    # LANDMARK: Jamaica Bay = Sheepshead Bay (Brooklyn's STARTING Dock) and
+    # Jamaica (Queens' STARTING Dock), so both those seats own a target at setup.
+    ('Night Landing',         1, 'Move',      {'dock'},                     {BK: 'friendly', Q: 'friendly'}),
     ("Squatter's Rights",     1, 'Move',      {'any'},                      {}),
-    ('The Grand Tour',        1, 'Unload',    {'speakeasy'},                {}),
+    # LANDMARK: East River = East Harlem (Manhattan's STARTING Speakeasy), Astoria
+    # (Queens' STARTING Speakeasy), Williamsburg (Brooklyn's police-locked High
+    # Society) and Red Hook (Brooklyn's orphan). The BRONX has no East River
+    # Speakeasy — Throggs Neck is on that water but it is a Dock. So this card is
+    # the one seat-asymmetry the landmark introduced; watch section 4.
+    ('The Grand Tour',        1, 'Unload',    {'speakeasy'},                {M: 'friendly', Q: 'friendly', BK: 'friendly'}),
     # Sunny's Bar = Red Hook, Brooklyn's NON-starting Speakeasy (empty at setup) —
     # so Brooklyn must still take it, but it's on their doorstep and their starting
     # Dock (Sheepshead Bay) is where they make the Rum.
-    ('Off the Boat',          3, 'Unload',    {'speakeasy', 'press5'},      {BK: 'friendly'}),
+    ('Cuban Prince',          3, 'Unload',    {'speakeasy', 'press5'},      {BK: 'friendly'}),
     ('Rum Row',               3, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Eviction',          3, 'Open Fire', {'any'},                      {}),
     ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
@@ -91,12 +99,14 @@ CARDS = [
     ('The Big Squeeze',       3, 'Unload',    {'speakeasy', 'press5'},      {M: 'friendly'}),
     # BRONX'S FRIENDLY — orphan district Fordham (The Penny Whistle).
     ("Hell's Highway",        3, 'Move',      {'press5'},                   {BX: 'friendly'}),
-    # Paradise Alley = Flushing -> QUEENS' FRIENDLY (mirrors Off the Boat/Sunny's Bar).
+    # Paradise Alley = Flushing -> QUEENS' FRIENDLY (mirrors Cuban Prince/Sunny's Bar).
     ('Poison Panic',          3, 'Unload',    {'speakeasy', 'press5'},      {Q: 'friendly'}),
     ('Gin Pipeline',          3, 'Move',      {'press5'},                   {}),
     ('Union Dues',            3, 'Recruit',   {'ward'},                     {}),
-    ('Last One Standing',     3, 'Rise',      {'any'},                      {}),
-    ('The Irish Goodbye',     3, 'Open Fire', {'speakeasy'},                {}),
+    # Re-verbed Rise -> Secure 2026-07-19; fills the empty 3-Respect Secure slot.
+    ('Last One Standing',     3, 'Secure',    {'speakeasy'},                {}),
+    # HOSTILE half of the East River — mirrors The Grand Tour.
+    ('The Irish Goodbye',     3, 'Open Fire', {'speakeasy'},                {M: 'hostile', Q: 'hostile', BK: 'hostile'}),
     ('Opening Night',         5, 'Unload',    {'highSociety', 'speakeasy'}, {}),
     ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
     ('Over the Top',          5, 'Open Fire', {'any'},                      {BX: 'hostile'}),

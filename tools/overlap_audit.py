@@ -47,6 +47,15 @@ class D:
 
 DS = [D(r) for r in DISTRICTS]
 
+# --- BOARD LANDMARKS ---------------------------------------------------------
+# Labelled water on the board, used to narrow cards that would otherwise target a
+# whole district TYPE. Nick's rule: an overlap firing in <=2 districts is a
+# feature (you had to draft both cards and engineer the Play); one firing in many
+# is luck. Type classes are broad — "a Speakeasy" is 12 districts, "a Dock" is 8 —
+# so landmarks are how a card gets a small, glanceable, unarguable target set.
+EAST_RIVER = {'East Harlem', 'Astoria', 'Williamsburg', 'Red Hook'}   # 4 Speakeasies
+JAMAICA_BAY = {'Sheepshead Bay', 'Jamaica'}                            # 2 Docks
+
 # A Play: verb, target district, and a bag of booleans/magnitudes.
 # Each Job is (name, respect, verb, predicate(play) -> bool)
 
@@ -61,21 +70,23 @@ JOBS = [
     J('The Beachhead', 1, 'Secure', lambda p: p['adj_rival_safehouse']),
     # own_deed / not own_deed: mutually exclusive with Union Dues by construction.
     J('Tenement Army', 1, 'Recruit',
-      lambda p: p['runners'] >= 6 and p['d'].has('ward') and p['own_deed']),
-    J('Last Call', 1, 'Unload', lambda p: p['barrels'] >= 4 and p['d'].has('speakeasy')),
+      lambda p: p['runners'] >= 5 and p['d'].has('ward') and p['own_deed']),
+    J('Last Call', 1, 'Unload',
+      lambda p: p['barrels'] >= 4 and p['d'].has('speakeasy') and not p['d'].has('highSociety')),
     J('The Empty Casket', 1, 'Rise', lambda p: p['d'].has('ward') and p['control']),
     J('Fortress Staten', 1, 'Secure', lambda p: p['d'].boro == ST),
-    J('The Pier Six Brawl', 1, 'Open Fire', lambda p: p['kills'] >= 2 and p['d'].has('dock')),
+    J('The Pier Six Brawl', 1, 'Open Fire',
+      lambda p: p['kills'] >= 2 and p['d'].has('dock')),
     J("The Dutchman's Deal", 1, 'Trade', lambda p: p['barrels'] >= 3 and p['d'].has('dock')),
     J("The Angel's Share", 1, 'Unload',
       lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].has('speakeasy') and not p['d'].has('highSociety')),
-    J('The Riverside Switch', 1, 'Move',
-      lambda p: p['barrels'] >= 4 and p['across_water'] and p['d'].has('dock')),
+    J('Night Landing', 1, 'Move',
+      lambda p: p['barrels'] >= 4 and p['across_water'] and p['d'].name in JAMAICA_BAY),
     J("Squatter's Rights", 1, 'Move', lambda p: p['defenseless'] and p['rival_deed']),
     J('The Grand Tour', 1, 'Unload',
-      lambda p: p['barrels'] >= 4 and p['d'].has('speakeasy') and p['off_home_turf']),
+      lambda p: p['barrels'] >= 4 and p['d'].name in EAST_RIVER),
     # --- 3 Respect ---
-    J('Off the Boat', 3, 'Unload', lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].name == 'Red Hook'),
+    J('Cuban Prince', 3, 'Unload', lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].name == 'Red Hook'),
     J('Rum Row', 3, 'Trade', lambda p: p['barrels'] >= 4 and p['d'].has('dock') and p['d'].boro == ST),
     # takeover XOR destroy — the rulebook's own either/or, so Eviction and Bloody
     # Sunday are structurally unable to co-fire.
@@ -94,9 +105,10 @@ JOBS = [
     J('Gin Pipeline', 3, 'Move', lambda p: p['barrels'] >= 6 and not p['rum'] and p['origin_press5']),
     J('Union Dues', 3, 'Recruit',
       lambda p: p['runners'] >= 4 and p['d'].has('ward') and not p['own_deed']),
-    J('Last One Standing', 3, 'Rise', lambda p: p['rival_deed'] and p['control']),
+    J('Last One Standing', 3, 'Secure',
+      lambda p: p['d'].has('speakeasy') and not p['d'].has('highSociety') and not p['own_deed']),
     J('The Irish Goodbye', 3, 'Open Fire',
-      lambda p: p['kills'] >= 3 and p['d'].has('speakeasy') and not p['seize']),
+      lambda p: p['kills'] >= 3 and p['d'].name in EAST_RIVER and not p['seize']),
     # --- 5 Respect ---
     J('Opening Night', 5, 'Unload', lambda p: p['barrels'] >= 8 and p['d'].has('highSociety')),
     # Fires on Open Fire OR Hit OR Plunder now. Modelled as Open Fire because that is
@@ -122,10 +134,13 @@ STAKE = {1: 1, 3: 2, 5: 3}
 VERB_BOOLS = {
     'Move': ['williamsburg_bridge', 'across_water', 'defenseless', 'rival_deed',
              'hostile', 'origin_press5', 'from_staten_dock', 'rum'],
-    'Unload': ['rum', 'off_home_turf'],
-    'Secure': ['adj_rival_safehouse', 'rum'],
+    'Unload': ['rum'],   # off_home_turf retired: The Grand Tour now names the East River
+    'Secure': ['adj_rival_safehouse', 'rum', 'own_deed'],
     'Recruit': ['own_deed'],
-    'Rise': ['control', 'hostile'],
+    # rival_deed was MISSING here, so Last One Standing's predicate was permanently
+    # False and the card had never been overlap-checked at all. Any flag a Job's
+    # lambda reads must appear in its verb's list or the Job silently never fires.
+    'Rise': ['control', 'hostile', 'rival_deed'],
     'Trade': [],
     'Open Fire': ['seize', 'rival_safehouse', 'boss_killed', 'own_boss', 'takeover'],
     'Extort': ['all_five_boroughs'],
@@ -165,7 +180,9 @@ for verb, bools in VERB_BOOLS.items():
     jobs_v = [j for j in JOBS if j['verb'] == verb]
     for d in DS:
         for barrels in (0, 3, 4, 6, 8):
-            for runners in (0, 6):
+            # 4 and 5 added: at (0, 6) the search could not tell a 4+ Recruit card
+            # from a 6+ one, so Tenement Army and Union Dues always looked identical.
+            for runners in (0, 4, 5, 6):
                 for kills in (0, 2, 3, 5):
                     for defenders in (0, 5):
                         for combo in itertools.product((False, True), repeat=len(bools)):

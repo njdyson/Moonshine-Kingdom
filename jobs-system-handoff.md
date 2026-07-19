@@ -2,14 +2,14 @@
 
 Everything needed to resume cold. Written for whoever picks this up next, human or agent.
 
-**Status:** design settled. **Rulebook v0.8 print-verified: 23pp A4, no blanks.**
+**Status:** design settled. **Overlap is judged by BREADTH now — see §3 before touching a card.** **Rulebook v0.8 print-verified: 23pp A4, no blanks.**
 **Latest change (2026-07-18): the Market is now STATIC — the conveyor and *Yesterday's News* are
 deleted, setup is "shuffle all 32, deal P+1", and passing at The Offers is explicit. Read §2b before
 touching any of it.**
 **The deck is COMPLETE: 32 of 32 cards at 12 / 12 / 8, print-verified 16pp A4, no blanks.**
 All three overlap clusters are closed and the hard rule is now machine-checked (see §3).
 
-**Live files:** `Rulebook v0.8.html` · `Jobs Cards v0.8.html` (deck) ·
+**Live files:** `Rulebook v0.9.html` (renamed from v0.8 2026-07-19; label only, no rules moved) · `Jobs Cards v0.8.html` (deck, still titled v0.8) ·
 `Turn Structure and Ledger v0.7 Reskin.html` · `Playbooks v0.7 Reskin.html` ·
 `Brew Engine Strategy v0.8.html` + `Brew Simulator v0.8.html`.
 `Rulebook v0.7.html` is the superseded Contract edition — expect it to disagree with everything here.
@@ -166,19 +166,76 @@ Worth watching alongside §8.5, which already rated it strong.
 
 ## 3. The overlap rule — READ BEFORE WRITING A CARD
 
-**Never two 5s on one Play.** A 5 plus small change is fine. Overlap risk scales with the square of
-the stack, which is the real reason the Score pool is small.
+**Never two 5s on one Play.** That one is absolute.
 
-**All three clusters are CLOSED (v0.8, deck build).** Max stack in the deck is now **9**, down from
-15 / 13 / 11. **Don't undo the guards below** — each is load-bearing and each is commented in the
-generator.
+### The test is BREADTH, not whether the stack is guaranteed (Nick, 2026-07-19)
 
-**The audit is automated. Run it before and after touching any card:**
-`tools/overlap_audit.py` models every Job as a predicate over a real district and enumerates
-every Play (verb × district × magnitude × board state), then asserts the hard rule. It encodes the
-board's physical constraints (Defenseless ⊻ Hostile, the Williamsburg Bridge only lands at its two
-ends, Staten Docks are Pressure 1 and 3, Staten's Deed is boxed). **Hand-analysis is not enough —
-the solver caught two live violations that four rounds of human reading missed.**
+This section used to teach that a *guaranteed* overlap (card A's trigger is a subset of card B's) was
+the bug and a *conditional* one was fine. **That is not the rule.** The rule is:
+
+> **How many districts can this set of cards co-fire in?**
+> **≤ 2 districts — feature. Leave it.**  **> 2 districts — flag it.**
+
+Nick's reasoning, verbatim enough to settle it: *"A player spotting them, managing to claim them (one
+turn at a time), staking the respect for both for at least 2 days, and then making the play that
+overlaps both is good strategic play, not broken. What's broken is massive game-winning swings based
+on lucky cards."* An overlap you had to draft over two Days, keep staked, and engineer a specific Play
+for has been **earned**. One that fires in a dozen places **finds you**.
+
+So a guaranteed 2-district stack is fine (`Rum Row` → `The Dutchman's Deal` was "fixed" and then
+deliberately reverted). A conditional 12-district one is not.
+
+**Caveat that matters when you read the numbers:** district count *overstates* breadth for cards keyed
+to a **mobile piece**. `The Eviction` reads as 25 districts because the model lets a rival Safehouse
+sit anywhere — but in play there is exactly one per rival, so it is among the most engineered targets
+in the deck. Judge geographic cards (venues, Stills, Docks) by the count; judge Safehouse/Boss/garrison
+cards by hand.
+
+### Landmarks are the tool for narrowing a card
+
+The root cause of broad overlap is **generic district TYPES**: "a Speakeasy" is 12 districts, "a Dock"
+is 8, "a Pressure 5+ Still" is 9. Any two cards on the same type class where one's magnitude is ≤ the
+other's will nest across that whole class.
+
+The board labels two bodies of water, and they give small, glanceable, unarguable target sets:
+
+| Landmark | Set | Districts |
+|---|---|---|
+| **East River** | East Harlem (M) · Astoria (Q) · Williamsburg (Bk) · Red Hook (Bk) | 4 Speakeasies |
+| **Jamaica Bay** | Sheepshead Bay (Bk) · Jamaica (Q) | 2 Docks |
+
+**Coney Island is on neither** — it is on the ocean and it carries no anchor. Nick's test for any new
+landmark: *it has to be unarguable on the board.* A label printed **in** the water it names passes; a
+county border read off a map edge does not (Westchester / Nassau are period-correct and were
+considered, but the Bronx touches grey on two sides, so "bordering Westchester" is ambiguous).
+**Hell Gate was rejected** — it is a strait *inside* the East River, so naming both invites "is Astoria
+on the River or the Gate?"
+
+**⚠ A landmark's friendly and hostile halves must match on TIER.** Naming a landmark hands every seat
+it touches a free friendly card, so it needs a bounty to balance. Measured: adding Jamaica Bay and the
+East River as friendlies only took the seat spread from 1 to **2** and stranded the Bronx, which is
+landlocked from both. Mirroring `The Grand Tour` (1) with `The Irish Goodbye` (3) fixed the *card
+counts* and broke the *weights* — Queens and Brooklyn fell to −4, because 1 friendly against 3 hostile
+is not a mirror. See the rejected-alternative note on `The Pier Six Brawl` in `tools/gen_deck.py`.
+
+### The audits — run all three before and after touching any card
+
+| Tool | Asserts |
+|---|---|
+| `tools/overlap_audit.py` | never two 5s; enumerates every Play (verb × district × magnitude × board state) |
+| `tools/breadth_audit.py` | **the breadth rule above** — every co-firing set, sorted by how many districts it fires in |
+| `tools/fairness_audit.py` | type coverage, borough coverage, and the Respect-**weighted** seat balance |
+
+`overlap_audit.py` encodes the board's physical constraints (Defenseless ⊻ Hostile, the bridge only
+lands at its two ends, Staten Docks are Pressure 1 and 3, Staten's Deed is boxed). **Hand-analysis is
+not enough — the solver caught two live violations that four rounds of human reading missed.**
+
+**Two holes in that solver were found and fixed on 2026-07-19; the lesson generalises.**
+`rival_deed` was missing from Rise's flag list in `VERB_BOOLS`, so `Last One Standing`'s predicate was
+permanently False and **the card had never been overlap-checked at all** — it reported clean because
+it reported nothing. And the Runner magnitudes only tried 0 and 6, so a 4+ Recruit card and a 6+ one
+were indistinguishable. **Any flag a Job's lambda reads must appear in its verb's list, and the
+magnitude grid must straddle every threshold the deck actually prints.** A silent zero is not a pass.
 
 How each cluster was closed:
 
@@ -238,9 +295,16 @@ Guaranteed stacks are the bug. Five Families (cluster 2) and The Eviction (above
    *"Earn $600 from a single Extort"* fails: that's a Title in disguise wearing a verb.
 2. **Respectable:** Respect is *standing*. Would you brag about it?
 
-Test 2 is why **Bribe, Beg and Rat cannot carry Jobs** — a rat cannot gain Respect; the Rat Card
-exists to say you're dishonoured. Usable verbs: **Move, Unload, Trade, Extort, Secure, Recruit**
-(+ **Rise**, which works: coming back from a decapitation is respectable).
+Test 2 is why **Bribe and Beg cannot carry Jobs** — you cannot gain standing by grovelling. Usable
+verbs: **Move, Unload, Trade, Extort, Secure, Recruit** (+ **Rise**, which works: coming back from a
+decapitation is respectable).
+
+**Rat is the deliberate exception, and it is Nick's call (2026-07-19).** This section used to say Rat
+could never carry a Job, and `The Insurance Job` breaks that. It stays: *"I totally agree on theme,
+but I really like the card and the variety."* The card is kept for what it does to the **draft**, not
+because the theme resolves — a Market of nothing but "Unload X at Y" is a worse game than one with an
+arson-for-the-insurance card in it. Test 2 remains the default; this is a known, argued exception, so
+don't "fix" it and don't treat it as licence for a second one.
 
 ### ⚠ "OPEN FIRE" IS NOT A PLAY — a FIREFIGHT is one Play (rulebook tightened, v0.8)
 This list used to include "Open Fire" and it was **wrong**, which put a dead card in the deck.
@@ -358,13 +422,30 @@ design reasoning for individual cards (the Eviction guard, the period-slang note
 nowhere else. `overlap_audit.py` and `fairness_audit.py` parse the built HTML and do **not** import
 it, so they are unaffected either way.
 
-**Verb spread** (the "Open Fire is over-represented" flag is resolved):
-Move 7 · Open Fire 7 · Unload 6 · Secure 3 · Trade 3 · Recruit 2 · Rise 2 · Extort 1 · Rat 1.
+**Verb spread — recounted from the card table 2026-07-19. The old figures here were wrong on four
+verbs** (they read Move 7 · Open Fire 7 · Unload 6 · Trade 3) **and the "Open Fire is
+over-represented" flag was declared resolved on the strength of them. It is not resolved:**
+
+Open Fire **8** · Unload **7** · Move **6** · Secure **4** · Recruit 2 · Trade 2 · Rise **1** · Rat 1 ·
+Extort 1.
+
+Open Fire is a quarter of the deck and **half the 5s** — that flag is still open.
+
+**The Secure gap is CLOSED (2026-07-19).** Secure had 3 cards and none at 3 Respect, on the verb
+Safehouse-only Recruit had just promoted. `Last One Standing` was **re-verbed from Rise to Secure**,
+which fixed that *and* dropped Rise to one card *and* killed a 4-Respect overlap, without touching the
+12/12/8 tier counts. Secure now runs **1 / 1 / 3 / 5**. **Note the technique — it is the cheap move
+whenever a verb is over- or under-represented: re-verb an existing card rather than cut and replace,
+because a cut forces a new card in the same tier (each tier must stay a multiple of 4).**
 
 **Live flags:**
-- **`Land-Connected` (on `The Beachhead`) is defined NOWHERE in the rulebook.** The rulebook says
-  Districts are Connected by "Land & Bridges", and separately that all Docks connect across water.
-  **A rulebook wording gap, not a card bug — Nick's call.**
+- ~~`Land-Connected` (on `The Beachhead`) is defined nowhere~~ **RESOLVED 2026-07-19.** The card now
+  says **"Connected by Land or Bridge"**, which is the rulebook's own bullet heading. It was a card
+  bug after all, not a rulebook gap: the category already existed and the card had invented a synonym.
+- **`The Milk Run` no longer names the Williamsburg Bridge.** That name is printed on *no component* —
+  not the board, not the Ledger, only in one line of rulebook prose — so it named a place a player
+  could not find. The objective now reads **"between Five Points and Williamsburg"**; the bridge keeps
+  its place in the flavour line. **If the bridge ever gets its name printed on the board, put it back.**
 - ~~`The Insurance Job` uses a **"Raid" trigger**~~ **RESOLVED 2026-07-19.** "Raid" was never a Play
   a player could make, so the card had no checkpoint (*The Play Is the Unit* only checks Jobs when a
   **Play** ends) and a *rival* could trigger the Condemn. It now names the **Rat** Play, which is real,
@@ -373,7 +454,16 @@ Move 7 · Open Fire 7 · Unload 6 · Secure 3 · Trade 3 · Recruit 2 · Rise 2 
   **General lesson: check every card verb against the Playbooks' actual Play list.**
 - **`Bloody Sunday`** is the only card in the deck with **red** in it (all other art is sepia/gold), and
   the name is a loaded real-world term (Dublin 1920, Derry 1972). Both deliberate-ish; flagged.
-- **20 of 58 images unused.**
+- **ART: there is a second, much larger pool nobody had catalogued.** `Art/Jobs/` holds 58 images and
+  the contact sheet covers only those. **`G:\My Drive\Moonshine Kingdom\Unused\` holds ~133 more** —
+  outside the repo, one level up. That is where `Skiff.png` (Night Landing) and `Rum Row.png` came
+  from. **Check it before commissioning anything**, and beware duplicates: `ChatGPT Image Jan 14,
+  2026, 09_55_54 AM.png` there is byte-identical to `Art/Jobs/Full Steam.png`, and `Unused/Rum Row.png`
+  is a *different* image from `Art/Rum Row.png`, which the rulebook uses on its map page.
+  **`Art/Jobs/_contact sheet.png` does not cover `Unused/` — regenerate it across both folders.**
+  28 of the images now in `Art/Jobs/` are unused, including `Switch.png` and `Rum Runners Regatta.png`,
+  both freed by the 2026-07-19 re-art. **`Rum Wars.png` (a full dock firefight — cops, Tommy guns,
+  burning ships) is unused and would suit `The Pier Six Brawl` better than its current art.**
 
 ## 6b. Board fairness — the starting-position exploit (`tools/fairness_audit.py`)
 
@@ -395,7 +485,7 @@ police-locked**, and *all four sit at Pressure 5*:
 | Manhattan | East Harlem | Sugar Hill | **The Haymarket** (Tenderloin) | The Big Squeeze |
 | Bronx | Belmont | Morris Park | **The Penny Whistle** (Fordham) | Hell's Highway |
 | Queens | Astoria | Richmond Hill | **Paradise Alley** (Flushing) | Poison Panic |
-| Brooklyn | Coney Island | Williamsburg | **Sunny's Bar** (Red Hook) | Off the Boat |
+| Brooklyn | Coney Island | Williamsburg | **Sunny's Bar** (Red Hook) | Cuban Prince |
 
 These are each borough's **friendly** card, all at 3 Respect. Matched by **one bounty per borough,
 all Open Fire 5s and borough-disjoint** (which is also what guarantees "never two 5s"):
@@ -411,18 +501,23 @@ Pressure-5 0.67 · Dock 0.62 · High Society 0.50. Docks were **over**-paid at 0
 triple-rewarded: Harbormaster + Trade is Dock-only + Jobs); Pressure-5 was **starved at 0.22** and the
 orphan set fixed it for free.
 
-**Named tally (counted from the card file, not guessed): M1 / Bk4 / Bx3 / Q1.** Quota is ≤4 per
-mainland borough, so nothing is over — but the spread is **lopsided**, and this is the deck's main
-open issue:
-- **Brooklyn is AT the cap (4):** The Milk Run (Williamsburg Bridge), Off the Boat (Sunny's Bar),
-  Coney Island, The Butcher's Ledger. **No more Brooklyn names without dropping one.**
-- **Manhattan (1) and Queens (1) are badly under-named** — Manhattan's only mention is the Five Points
-  end of the Williamsburg Bridge, and Queens' is the Toll Booth Trap. Both boroughs are nearly
-  invisible in the deck, which wastes the deterrent effect §4 argues is the point of naming
-  ("a named Job moves four Bosses whether or not it's taken").
-- Staten (3) is exempt — it's nobody's home turf, so naming it is always neutral.
-**If you re-art or re-theme anything, spend it on Manhattan and Queens.** Both have an unused
-High Society venue with a name already in canon (The Cotton Club / The Triangle) and no card yet.
+**The old tally here read M1 / Bk4 / Bx3 / Q1 and listed a `Coney Island` card, which is not in the
+deck** (it was cut before the deck was completed and the tally was never recounted). Its conclusion —
+*"Manhattan and Queens are badly under-named, spend any re-theme on them"* — was wrong and would have
+sent the next person the wrong way. **Run `tools/fairness_audit.py` §2 for the live count** rather than
+trusting a number written here; as of 2026-07-19 it reads **M4 · Bk4 · Bx3 · Q3 · ST4**, and the
+weighted seat balance is **spread 1**, with Manhattan, Queens and Brooklyn identical at −3 and the
+Bronx at −2.
+
+The quota (≤4 named locations per mainland borough) still stands, and Manhattan and Brooklyn are at
+it. Staten is exempt — nobody's home turf, so naming it is always neutral.
+
+**The Bronx is the seat to watch now, for a different reason than the old note gave.** It is not
+under-named; it is **under-*involved***. It is landlocked from both board landmarks, so it takes no
+East River or Jamaica Bay card, leaving it with exactly one friendly and one bounty while the other
+three seats read three of each. Net weight is fine — it is marginally the *best* seat — but a Bronx
+player simply interacts with fewer cards in the deck. Both Manhattan and Queens still have an unused
+High Society venue already in canon (The Cotton Club / The Triangle) with no card on it.
 
 ---
 

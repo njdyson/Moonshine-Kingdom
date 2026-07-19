@@ -307,6 +307,85 @@ regex, a label shielded behind an `<i>` tag, and a file left off the list entire
 
 ---
 
+## 2026-07-19 (later) — the Jobs deck audit pass
+
+A full read of all 32 cards against the rules as they now stand, driven by the Safehouse-only Recruit
+change. **The headline is a rule change, not a card change:** see `jobs-system-handoff.md` §3, which
+has been rewritten. Overlap is now judged by **breadth** — how many districts a co-firing set can fire
+in, ≤2 being a feature and >2 a flag — and not by whether the stack is guaranteed. The old
+guaranteed-vs-conditional framing led me to "fix" `The Dutchman's Deal`, which fires with `Rum Row` at
+exactly two Staten Docks; that was reverted.
+
+### Cards changed
+
+| Card | Change | Why |
+|---|---|---|
+| **Cuban Prince** | was *Off the Boat* | back on its own art (`Cuban Prince.png`); no "The", so it clears the 16-char `title--long` threshold |
+| **Night Landing** | was *The Riverside Switch*; new art `Skiff.png` | the old art had RIVERSIDE STORAGE painted across a suspension bridge, on a card about a bay that had **no bridge in 1926** (Marine Parkway 1937, Cross Bay 1939) |
+| **Rum Row** | new art `Rum Row.png` | its flavour already described this picture: "Forty ships past the three-mile line, waiting on a lamp" |
+| **Last Call** | + "$300 Speakeasy" | Opening Night is High-Society-only, so the deck's biggest geographic swing (6 Respect across 4 joints) is now structurally impossible |
+| **The Grand Tour** | + "along the East River" | 12 → 4 districts; also retires "outside your home turf" |
+| **The Irish Goodbye** | + "along the East River" | 12 → 4; the hostile mirror of The Grand Tour |
+| **Tenement Army** | 6+ → **5+ Runners** | trims the hidden Sweep tax (below) |
+| **Tenement Army / Union Dues** | both now say **"with your Safehouse in a Ward…"** | Recruit became Safehouse-only *this same session* and the two cards that depend on it hid the dependency |
+| **The Beachhead** | "Land-Connected" → **"Connected by Land or Bridge"** | the term was defined nowhere; the rulebook's own bullet already said it |
+| **The Milk Run** | names **Five Points and Williamsburg** | "Williamsburg Bridge" is printed on no component |
+| **The Butcher's Ledger** | + "**rival** Mobsters" | its two siblings both say it; on a 5, "5+ Mobsters" reads as both sides |
+| **Bloody Sunday** | + "with your own **Mobsters** in the District" | a Police Raid also destroys Safehouses, and the printed card carries no verb, so Rat → Raid → Condemn could argue it |
+
+**Bloody Sunday's guard had one constraint that ruled out the obvious wording:** Torch destroys a
+Safehouse but leaves the rival **in Control**, so any "take the District" clause would lock the
+Knights out of the card their trait was built for. Requiring your own Mobsters present admits Open
+Fire, Hit and Torch, excludes the cops, and reuses The Toll Booth Trap's existing grammar.
+
+### Tenement Army's hidden Sweep tax
+Your home Ward already holds a Boss and 2 Runners, so hiring 6 put **9 Mobsters on one block** and the
+Reckoning Sweep culled 4 of them — an invisible third cost on a **1**-Respect card, on top of $2,400
+and 6 of your 7 reserve Runners. At 5+ the cull is 3 and the bill is $2,000. **It cannot be removed
+entirely** without making the card trivial (the cap is 5 and the Ward starts with 3): disperse with a
+Move before the Reckoning, or pay it. **The Sicilians are Untouchable and pay neither** — one more
+unpriced Sicilian edge alongside the brewing one above.
+
+### Two decisions taken, so they don't get re-opened
+- **`The Insurance Job` keeps the Rat verb**, against §4's own Respectability test. Nick: *"I totally
+  agree on theme, but I really like the card and the variety."* Kept for what it does to the draft — a
+  Market of nothing but "Unload X at Y" is a worse game. Known exception, not a precedent.
+- **Rise is down to one card, and it cost nothing.** Both Rise cards paid you for being decapitated,
+  reopening the incentive the Rise rework closed. Cutting one looked expensive — tiers are fixed at
+  12/12/8 and each must be a multiple of 4, so a cut demands a replacement in the same tier. Nick's
+  answer avoided that entirely: **re-verb `Last One Standing` from Rise to Secure** and the tier count
+  never moves.
+
+  `The Empty Casket` is the keeper, and the reason is thematic: it is **faking your own death and
+  rising from the ashes**, which galvanises the mob — that is what the Respect is paying for. Kept at
+  1 Respect, kept on Rise.
+
+  The re-verb also closed the **empty 3-Respect Secure slot** flagged in the same audit, so Secure went
+  from 3 cards with a hole in the middle to a clean **1 / 1 / 3 / 5**, on the verb Safehouse-only
+  Recruit had just promoted. And it killed the 4-Respect `Last One Standing` + `The Empty Casket`
+  overlap across the four mainland Wards, which was the very overlap the `rival_deed` tool fix had
+  just made visible. **One edit, four problems.**
+
+  `Last One Standing` is now: *"Secure your Safehouse into a **$300 Speakeasy** in a Borough whose
+  **Deed you don't hold**."* The `$300` excludes High Society so `High Roller` can never ride it
+  (without it, High Roller is a strict subset across three Boroughs — an 8-Respect stack). The Deed
+  clause is the difficulty: it forces your Safehouse off home turf, and under Safehouse-only Recruit
+  that moves your entire spawn point into a rival's Borough. Name, art and flavour all survive the
+  change unaltered — a lone man at a bar table reads better as claiming a joint than as a succession.
+
+**Verb spread after the pass:** Open Fire 8 · Unload 7 · Move 6 · **Secure 4** · Recruit 2 · Trade 2 ·
+**Rise 1** · Rat 1 · Extort 1.
+
+### Tooling
+- **`tools/breadth_audit.py` is new** and encodes the breadth rule. Run it alongside the other two.
+- **Two holes in `overlap_audit.py` fixed.** `rival_deed` was missing from Rise's `VERB_BOOLS`, so
+  `Last One Standing` had **never been checked** — it reported clean because it reported nothing.
+  Fixing it immediately surfaced a real 4-Respect overlap with `The Empty Casket` across the four
+  mainland Wards. And the Runner magnitudes only tried 0 and 6, so a 4+ Recruit card and a 6+ one were
+  indistinguishable. **A silent zero is not a pass.**
+
+---
+
 ## Print gotchas learned the hard way (v0.8)
 
 - **Every `body > .container` must fit A4 (1123px)** or it spills and leaves a blank page. Measure via
