@@ -11,10 +11,10 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 # (title, art, verb, objective_html, flavour)
 ONES = [
-    ("The Milk Run", "The Milk Run.png", "Move",
+    ("The Milk Run", "The Milk Run.jpg", "Move",
      "Move <b>4+ Barrels</b> between <b>Five Points</b> and <b>Williamsburg</b> in a single Play.",
      "Every copper watches that bridge. Wave as you go."),
-    ("The Beachhead", "Beachhead.png", "Secure",
+    ("The Beachhead", "Beachhead.jpg", "Secure",
      "Secure your Safehouse into a District <b>Connected by Land or Bridge</b> to a rival <b>Safehouse</b>.",
      "You should meet the neighbours. They&rsquo;d rather not."),
     # "a Ward" made this a strict SUPERSET of Union Dues (also "Recruit 6+ in a
@@ -28,20 +28,20 @@ ONES = [
     # you a Deed AND puts your Safehouse in that Borough's WARD, so it is free on
     # day one. Mirrors Union Dues exactly (same verb, same 4+, opposite Deed
     # state), which also puts Ward turf back to 3 cards / 0.60 in fairness_audit.
-    ("Tenement Army", "Tenament Army.png", "Recruit",
+    ("Tenement Army", "Tenament Army.jpg", "Recruit",
      "Recruit <b>5+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> whose <b>Borough Deed you hold</b>.",
      "Word goes round by supper. By dark, you have a crew."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
     # the deck's biggest purely-geographic swing (6 Respect across the 4 High
     # Society joints). Matches the wording The Angel's Share already uses.
-    ("Last Call", "Last Call.png", "Unload",
+    ("Last Call", "Last Call.jpg", "Unload",
      "Unload <b>4+ Barrels</b> at a single <b>$300 Speakeasy</b> in one Play.",
      "Pour till the taps run dry and the sirens start up."),
-    ("The Empty Casket", "The Empty Casket.png", "Rise",
+    ("The Empty Casket", "The Empty Casket.jpg", "Rise",
      "Rise a new <b>Boss</b> in a <b>Ward</b> you Control.",
      "They buried the wrong man. Ask anyone. Go on, ask."),
-    ("Fortress Staten", "Fortress Staten.png", "Secure",
+    ("Fortress Staten", "Fortress Staten.jpg", "Secure",
      "Secure your Safehouse into a <b>Staten Island</b> District.",
      "Nobody&rsquo;s home turf. Everybody&rsquo;s back door."),
     # "a Pier 6 brawl" was real period slang for an all-out waterfront fight.
@@ -53,7 +53,7 @@ ONES = [
     # nothing in breadth: the 9-Respect Open Fire triples it appears in already sit
     # at 1-2 districts, which is the engineered end. LESSON: a landmark's friendly
     # and hostile halves must match on TIER, not just exist.
-    ("The Pier Six Brawl", "Dock Domination.png", "Open Fire",
+    ("The Pier Six Brawl", "Dock Domination.jpg", "Open Fire",
      "Kill <b>2+ rival Mobsters</b> on a <b>Dock</b> District in a single Play.",
      "The pier belongs to whoever is still standing on it."),
     # Briefly restricted to "a mainland Dock" to stop Rum Row paying this card
@@ -61,10 +61,10 @@ ONES = [
     # and Tottenville (2 districts), and a 2-district overlap you had to draft
     # over two Days and keep staked is good play, not a bug. Breadth is the test,
     # not whether the stack is guaranteed. See the note above ONES.
-    ("The Dutchman's Deal", "Dutchman.png", "Trade",
+    ("The Dutchman's Deal", "Dutchman.jpg", "Trade",
      "Trade <b>3+ Barrels of Moonshine</b> for Rum at a <b>Dock</b> District.",
      "He never gives a name. The windmill on the sack says plenty."),
-    ("The Angel&rsquo;s Share", "The Angels Share.png", "Unload",
+    ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
      "Unload <b>3+ Barrels of Rum</b> at a <b>$300 Speakeasy</b>.",
      "What the angels take, the house bills you for anyway."),
     # RENAMED from "The Riverside Switch" and re-arted (Nick, 2026-07-19). The old
@@ -80,10 +80,10 @@ ONES = [
     # for the deck's other big geographic swing: this card was a strict
     # SUBSET of The Smuggler's Run (Staten -> mainland at 6+ barrels IS "4+ across
     # water into a Dock"), paying 6 Respect across 6 Docks. Now 2.
-    ("Night Landing", "Skiff.png", "Move",
+    ("Night Landing", "Skiff.jpg", "Move",
      "Move <b>4+ Barrels</b> across water into a <b>Dock on Jamaica Bay</b>.",
      "Two boats, one lantern, and nobody the wiser."),
-    ("Squatter&rsquo;s Rights", "Ghost Town.png", "Move",
+    ("Squatter&rsquo;s Rights", "Ghost Town.jpg", "Move",
      "Take Control of a <b>Defenseless District</b> in a Borough where a <b>rival holds the Deed</b>.",
      "They left the lights on. They didn&rsquo;t leave anybody."),
     # LANDMARK (Nick, 2026-07-19): "along the East River" is a labelled feature on
@@ -92,7 +92,7 @@ ONES = [
     # the ocean and is NOT in it. Breadth 12 -> 4. Also retires "outside your home
     # turf", the phrase rejected as ambiguous on Union Dues ("where you started, or
     # where your Deed is now?") but left standing here.
-    ("The Grand Tour", "Cobble Hill.png", "Unload",
+    ("The Grand Tour", "Cobble Hill.jpg", "Unload",
      "Unload <b>4+ Barrels</b> at a Speakeasy <b>along the East River</b>.",
      "Every borough drinks. Not every borough knows your face."),
 ]
@@ -103,7 +103,7 @@ THREES = [
     # points at the Havana end of the run rather than the Red Hook end. No "The":
     # at 12 characters it stays under the 16-char title--long threshold and
     # prints at full size.
-    ("Cuban Prince", "Cuban Prince.png", "Unload",
+    ("Cuban Prince", "Cuban Prince.jpg", "Unload",
      "Unload <b>3+ Barrels of Rum</b> at <b>Sunny&rsquo;s Bar</b>.",
      "Havana to Red Hook, and never once a warehouse."),
     # Re-arted from Rum Runners Regatta.png (Nick found the set in Unused/): a full
@@ -112,7 +112,7 @@ THREES = [
     # and is the better painting, but it is rainier and much lower contrast; at
     # 57x38mm this one reads, and the moon gives the eye somewhere to land.
     # NOT the same file as Art/Rum Row.png, which the rulebook uses on p.188.
-    ("Rum Row", "Rum Row.png", "Trade",
+    ("Rum Row", "Rum Row.jpg", "Trade",
      "Trade <b>4+ Moonshine</b> at a <b>Staten Island Dock</b> in one Play.",
      "Forty ships past the three-mile line, waiting on a lamp."),
     # Split from Bloody Sunday along the rulebook's OWN either/or: "a rival Safehouse
@@ -124,7 +124,7 @@ THREES = [
     # Worded by BOARD CONSEQUENCE, not intention: "relocating yours into it" is a fact
     # you can see on the table, so there is no semantic argument about which card fired.
     # The relocation is also a real cost (you abandon your old base) which holds it at 3.
-    ("The Eviction", "Crimson Coup.png", "Open Fire",
+    ("The Eviction", "Crimson Coup.jpg", "Open Fire",
      "Take over a rival&rsquo;s <b>Safehouse</b>, relocating yours into it.",
      "Nice place. He won&rsquo;t be needing it."),
     # "and no Safehouse" is the guard that closes handoff §3 cluster 3 for good.
@@ -132,7 +132,7 @@ THREES = [
     # can never ride the same Seize. Without it, one Open Fire on Richmond Hill
     # or Williamsburg paid 11 (Toll Booth/Butcher's Ledger + Eviction + Heist).
     # Theme holds: you're robbing a boiler standing on its own, not storming HQ.
-    ("The Copper Heist", "Copper Heist.png", "Open Fire",
+    ("The Copper Heist", "Copper Heist.jpg", "Open Fire",
      "Seize a District with a <b>Pressure 5+ Still</b> and <b>no Safehouse</b>.",
      "The good boilers run hot. So do the men who own them."),
     # WAS "Have a Police Raid Condemn ..." with verb Raid, which had no checkpoint:
@@ -158,31 +158,31 @@ THREES = [
     # tie-break takes the boiler ranked HIGHEST on the Pressure Strip, so a low
     # Pressure district is the Squad's LAST pick. You must trick the cops into
     # kicking the wrong door. Also gives low-Pressure turf its first payoff.
-    ("The Insurance Job", "Insurance Job.png", "Rat",
+    ("The Insurance Job", "Insurance Job.jpg", "Rat",
      "<b>Rat</b>, and have the Raid <b>Padlock</b> a <b>Pressure 2 or lower Still</b> you Control.",
      "He struck the match himself. Slept fine after."),
     # MANHATTAN'S FRIENDLY: the 4th orphan Speakeasy (The Haymarket, in the
     # Tenderloin). Name restored from the cut Extort card, and its own art reused:
     # cops coming through the door of a joint mid-sale while men grab bottles and
     # cash. That IS the Greed Tax (Unload 4+ draws Heat) drawn as a picture.
-    ("The Big Squeeze", "Big Squeeze.png", "Unload",
+    ("The Big Squeeze", "Big Squeeze.jpg", "Unload",
      "Unload <b>6+ Barrels</b> at <b>The Haymarket</b>.",
      "Six barrels in one night. The wagons come for less."),
     # BRONX'S FRIENDLY. Was the Bronx's second BOUNTY, which made it the worst seat;
     # re-objectived (Nick: keep the theme, change the objective) onto the Bronx's
     # orphan district. Fordham Road is a real Bronx thoroughfare, so "Hell's Highway"
     # now fits the objective better than it did.
-    ("Hell&rsquo;s Highway", "Hells Highway.png", "Move",
+    ("Hell&rsquo;s Highway", "Hells Highway.jpg", "Move",
      "Move <b>6+ Barrels</b> into <b>Fordham</b> in a single Play.",
      "Forty miles of bad road and worse intentions."),
     # QUEENS' FRIENDLY, and free: Queens was the only borough with nothing easy.
     # Paradise Alley = Flushing, Queens' non-starting Speakeasy: an exact mirror
     # of Off the Boat at Sunny's Bar (Red Hook) for Brooklyn. Also lifts Manhattan
     # and Queens off the named-location floor. The ironic name pairing is free.
-    ("Poison Panic", "Poison Panic.png", "Unload",
+    ("Poison Panic", "Poison Panic.jpg", "Unload",
      "Unload <b>6+ Barrels of Moonshine</b> at <b>Paradise Alley</b>.",
      "One bad batch and the whole city stops drinking."),
-    ("Gin Pipeline", "Gin Pipeline.png", "Move",
+    ("Gin Pipeline", "Gin Pipeline.jpg", "Move",
      "Move <b>6+ Barrels of Moonshine</b> out of a District with a <b>Pressure 5+ Still</b> in one Play.",
      "It never sees daylight. That is the entire idea."),
     # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
@@ -206,7 +206,7 @@ THREES = [
     # the 15-RUNNER CAP, which is the real constraint mid-game, not money.
     # "in one Play" added to match the model (and Tenement Army): without it the
     # Runners could be banked across several days, far easier than its Stake 3.
-    ("Union Dues", "Union Dues.png", "Recruit",
+    ("Union Dues", "Union Dues.jpg", "Recruit",
      "Recruit <b>4+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> whose <b>Borough Deed you don't hold</b>.",
      "They line up at dawn. You decide who works."),
     # RE-VERBED Rise -> Secure (Nick, 2026-07-19). Two problems solved by one edit,
@@ -227,7 +227,7 @@ THREES = [
     # Safehouse-only Recruit that moves your whole spawn point into a rival's
     # Borough. Deed / no-Deed is glance-verifiable -- you hold the card or you don't
     # -- and it mirrors Union Dues.
-    ("Last One Standing", "Last One Standing.png", "Secure",
+    ("Last One Standing", "Last One Standing.jpg", "Secure",
      "Secure your Safehouse into a <b>$300 Speakeasy</b> in a Borough whose <b>Deed you don&rsquo;t hold</b>.",
      "The last man at the table gets the chair."),
     # Re-themed off the Boss-kill (handoff §3, cluster 1). "Do not take Control"
@@ -240,13 +240,13 @@ THREES = [
     # Grand Tour (Open Fire vs Unload), so the pair can never co-fire. Also drops
     # this from 12 Speakeasies to 4, which takes its stacks with The Toll Booth
     # Trap and The Butcher's Ledger down to 1 and 2 districts.
-    ("The Irish Goodbye", "Goodbye.png", "Open Fire",
+    ("The Irish Goodbye", "Goodbye.jpg", "Open Fire",
      "Kill <b>3+ rival Mobsters</b> in a Speakeasy <b>along the East River</b> in one Play, and <b>take no Control</b>.",
      "He left O&rsquo;Sullivan&rsquo;s without saying a word to anyone."),
 ]
 
 FIVES = [
-    ("Opening Night", "Jimmy.png", "Unload",
+    ("Opening Night", "Jimmy.jpg", "Unload",
      "Unload <b>8+ Barrels</b> at a single <b>High Society</b> Speakeasy.",
      "The band plays till four. Nobody asks a thing."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
@@ -257,7 +257,7 @@ FIVES = [
     # "your own Boss in the fight" is a SETUP hedge, not a circumstance one: you must
     # march your Boss into Queens and risk him. It also grants +1 Threat, so it's a
     # real trade rather than a tax.
-    ("The Toll Booth Trap", "Toll Booth Trap.png", "Open Fire",
+    ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
      "Kill a <b>rival Boss</b> in <b>Queens</b>, with your own <b>Boss</b> in the fight.",
      "A toll is a toll. Somebody always pays it."),
     # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
@@ -265,10 +265,10 @@ FIVES = [
     # The Eviction: now REDUNDANT and removed (solver-verified: The Copper Heist's own
     # "no Safehouse" already makes it and The Eviction mutually exclusive, which is what
     # actually closed cluster 3). Max stack unchanged at 9.
-    ("Over the Top", "Old Guard.png", "Open Fire",
+    ("Over the Top", "Old Guard.jpg", "Open Fire",
      "Seize a <b>Bronx</b> District <b>defended by 5+ Mobsters</b>.",
      "These boys went over the top in France. This is a street."),
-    ("The Five Families", "Accord.png", "Extort",
+    ("The Five Families", "Accord.jpg", "Extort",
      "Collect from a District in <b>all five Boroughs</b> in a single Extort Play.",
      "Not the richest table in town. Just the widest."),
     # Moonshine -> RUM (Nick). A setup hedge: Rum only exists via Trade at a Dock you
@@ -276,7 +276,7 @@ FIVES = [
     # Tottenville 3), so the moonshine must be hauled IN, Traded, then run out.
     # Roughly doubles the setup. Bonus: now mutually exclusive with Gin Pipeline
     # (Moonshine), which it used to be able to co-fire with.
-    ("The Smuggler&rsquo;s Run", "Quiet Drop.png", "Move",
+    ("The Smuggler&rsquo;s Run", "Quiet Drop.jpg", "Move",
      "Move <b>6+ Rum</b> from a <b>Staten Island Dock</b> to a <b>mainland Dock</b> in one Play.",
      "Nobody watches Staten Island. Every Dock touches it."),
     # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
@@ -294,11 +294,11 @@ FIVES = [
     # ("a rival Safehouse in the District is destroyed, unless you take it over").
     # Always co-fires with The Eviction (5+3=8, legal); mutually exclusive with
     # The Copper Heist, which forbids a Safehouse.
-    ("Bloody Sunday", "Bloody Sunday.PNG", "Open Fire",
+    ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
      "Destroy a <b>rival Safehouse</b> in <b>Manhattan</b>, with your own <b>Mobsters</b> in the District.",
      "By Monday there was nothing left to come home to."),
     # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
-    ("The Butcher&rsquo;s Ledger", "Butchers Ledger.png", "Open Fire",
+    ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
      "Kill <b>5+ rival Mobsters</b> in <b>Brooklyn</b> in a single Play.",
      "Every name in it is crossed out but one."),
     # The campaign Secure: the four High Society joints start padlocked and
@@ -306,7 +306,7 @@ FIVES = [
     # + "4+ Barrels of Rum": the Raid gate alone made this a 2-Play card. Rum forces
     # the whole Trade chain on top, and the swanky room only pays $500 for what you
     # shipped in. Setup hedge, not circumstance.
-    ("High Roller", "High Roller.png", "Secure",
+    ("High Roller", "High Roller.jpg", "Secure",
      "Secure your Safehouse into a <b>High Society</b> District holding <b>4+ Rum</b>.",
      "He moved uptown. The neighbours are still adjusting."),
 ]
