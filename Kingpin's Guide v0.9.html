@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moonshine Kingdom — The Kingpin's Guide v0.9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- Shared base styles: the same skin as the Rulebook, so the two print as one set. -->
+    <link rel="stylesheet" href="css/moonshine-rules.css">
+
+    <style>
+        /* ------------------------------------------------------------------
+           Guide-specific extensions. Everything here leans on the palette and
+           type system in moonshine-rules.css; nothing redefines the frame.
+           ------------------------------------------------------------------ */
+        caption {
+            caption-side: top;
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 8.5pt;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding-bottom: 4px;
+        }
+
+        table.stat th, table.stat td { text-align: center; vertical-align: middle; }
+        table.stat th.left, table.stat td.left { text-align: left; }
+
+        .good { color: #6fbf73; font-weight: 700; }
+        .bad  { color: #d9694f; font-weight: 700; }
+        tr.win td   { background: rgba(111, 191, 115, 0.08); }
+        tr.proof td { background: rgba(201, 205, 212, 0.06); }
+
+        .lede {
+            font-size: 10.5pt;
+            color: #f5e9cf;
+            border-left: 3px solid var(--gold-faint);
+            padding-left: 14px;
+            margin: 0.2em 0 1.2em;
+        }
+
+        .formula {
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 11.5pt;
+            color: var(--gold-bright);
+            margin: 0.4em 0 1em;
+        }
+
+        .kingpin {
+            border: 1px solid var(--gold-line);
+            border-left: 5px solid var(--gold-line);
+            background: var(--wash);
+            padding: 10px 14px;
+            margin: 1em 0;
+            border-radius: 4px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .kingpin .tag {
+            display: block;
+            font-family: var(--font-display);
+            letter-spacing: 1px;
+            color: var(--gold-label);
+            font-size: 1.15em;
+            margin-bottom: 4px;
+        }
+        .kingpin p { margin: 0; font-style: italic; color: #fcefd0; }
+
+        .principle {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            border: 1px solid var(--gold-faint);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .principle .num {
+            font-family: var(--font-display);
+            font-size: 20pt;
+            line-height: 0.9;
+            color: var(--gold);
+            min-width: 28px;
+            text-align: center;
+        }
+        .principle h4 { margin: 0 0 3px; }
+        .principle p { margin: 0 0 0.5em; font-size: 9pt; }
+        .principle p:last-child { margin-bottom: 0; }
+
+        .choicebar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 0.4em 0 1em;
+            column-span: all;
+            -webkit-column-span: all;
+        }
+        .choice {
+            flex: 1 1 140px;
+            border: 1px solid var(--gold-faint);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 10px;
+            break-inside: avoid;
+        }
+        .choice h4 { margin: 0 0 3px; }
+        .choice p { margin: 0; font-size: 8.6pt; }
+
+        .guide-toc { list-style: none; margin: 0.4em 0 1em; padding: 0; }
+        .guide-toc li { margin: 0 0 7px; padding-left: 16px; position: relative; }
+        .guide-toc li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0.5em;
+            width: 6px; height: 6px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+        .guide-toc .part {
+            font-family: var(--font-display);
+            color: var(--gold-bright);
+            letter-spacing: 0.5px;
+        }
+
+        .disclaimer {
+            font-size: 7.8pt;
+            color: var(--muted);
+            font-style: italic;
+            border-top: 1px solid var(--rule);
+            padding-top: 8px;
+            margin-top: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="front-page">
+        <img src="Art/Rulebook/Moonshine Kingdom.png" alt="Moonshine Kingdom Title" class="title-image">
+
+        <h1>THE KINGPIN'S GUIDE</h1>
+        <h3 class="subtitle">The Arithmetic, the Angles, and the Applied Treachery.</h3>
+
+        <p class="intro-paragraph">
+            The Rulebook tells you what you may do. This book is about what you <em>should</em> do, and to whom.
+            Inside is the collected arithmetic of the whole racket &mdash; the dawn stills, the Jobs Market, the
+            standoffs, the sirens, and the delicate business of trusting people who are paid to betray you &mdash;
+            measured over a few hundred thousand simulated mornings and written down in the plain talk of the
+            street. Read it before your rivals do, or learn each chapter the way the city prefers to teach:
+            at full price.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h2 id="shape">The Whole Racket</h2>
+        <p class="lede">
+            This is five guides in one, because Moonshine Kingdom is five games in one, played simultaneously, with
+            the same ten markers. A boss who plays them separately is playing four games badly. The point of binding
+            them into one book is the seams: every chapter ends where another begins, and the games are won in the seams.
+        </p>
+
+        <h4>The Day, in One Breath</h4>
+        <p>
+            Each Day runs dawn to midnight. <strong>Shadows:</strong> the city cooks a common mash, the boilers fire or
+            burst, each boss takes his pick of the Jobs Market, and whatever Influence isn't promised elsewhere funds the
+            day's Ledger. <strong>The Hustle:</strong> Plays around the table, one at a time, until every boss has stepped
+            off the street &mdash; and the order they step off decides everything about tomorrow. <strong>Reckoning:</strong>
+            the cops thin the armies, the Deeds and crowns change hands, and the city checks whether anyone just won.
+        </p>
+
+        <h4>The One Line That Runs the City</h4>
+        <p class="formula">Plays today &nbsp;=&nbsp; Influence &nbsp;&minus;&nbsp; staked &nbsp;&minus;&nbsp; Heat, &nbsp;up to the Ledger's 5 slots.</p>
+        <p>
+            Commit that to memory, because every chapter in this book is a fight over one of its three terms.
+            <strong>Influence</strong> is capacity, not actions: the Ledger stops at five slots, so the markers above your
+            fifth are the ones that stake Jobs and soak up Heat for free. <strong>Staked</strong> is every promise you've
+            made to the Market and not yet kept. <strong>Heat</strong> is every noise you've made that the law hasn't
+            forgiven yet &mdash; and the nightly Reckoning does not forgive it; only a Raid does. Raise the first term,
+            time the second, aim the third. That is the entire game, and the rest of this book is the detail.
+        </p>
+
+        <h4>The Three Clocks</h4>
+        <p>
+            Under the day loop, three slower clocks tick. The <strong>cheap Respect drains one way</strong>: completed
+            Jobs leave the deck for good, and the easy tier goes first. The <strong>Influence ladder</strong> climbs one
+            way: from the 6 markers everyone starts with to the 10 that crown a king, at $2,500 a rung. And the
+            <strong>Heat cycle</strong> turns over and over: quiet, loud, sirens, refund, quiet. Every plan in this book
+            is really a claim about which clock matters most right now.
+        </p>
+
+        <h4>What's in the Book</h4>
+        <ul class="guide-toc">
+            <li><span class="part">Part I &middot; The Brew Engine.</span> How the dawn stills really make their money, why seven is armour, and how to pick the Harbormaster's pocket.</li>
+            <li><span class="part">Part II &middot; The Jobs Market.</span> Why the word on the street never changes, what a promise costs by the day, and when to reach for the card.</li>
+            <li><span class="part">Part III &middot; The Standoff.</span> When to shoot, when to fold, and why the drawn gun beats the fired one.</li>
+            <li><span class="part">Part IV &middot; Heat and the Law.</span> How the Raid picks its door &mdash; and how to pick it first. Planting evidence, decoy warehouses, and the fine art of the Rat.</li>
+            <li><span class="part">Part V &middot; The Table.</span> Loans, handshakes, frame-ups and proxy wars: cooperation in a game with no shared victories.</li>
+        </ul>
+
+        <h4>A Note on the Figures</h4>
+        <p>
+            The combat and brewing numbers are Monte Carlo estimates from the game's own simulators, 100,000+ trials
+            per figure, rules-accurate down to each mob's signature Plays. The Jobs and Heat numbers are deterministic
+            &mdash; read straight off the rules and machine-checked against the live card files. What none of them can
+            model is the table: who reads whose barrels, who blinks in the staring contest, and whether the man holding
+            the card you need can be talked out of it. <em>Those decide more games than the arithmetic does.</em> Hence
+            Part V.
+        </p>
+    </div>
+    <div class="container one-column">
+        <h2 id="brew">Part I &middot; The Brew Engine</h2>
+        <div class="cover">
+            <img class="cover-sm" src="Art/Rulebook/Distillation.png" alt="The Dawn Stills" width="100%">
+        </div>
+        <p class="lede">
+            Before the sun clears the tenements, the stills are already breathing. Steam in the pipes, mash in the
+            boilers, and out the back a river of clear liquor that turns into a river of dirty cash. It looks like
+            luck &mdash; a roll of the bones and a prayer. It isn't. Behind the dice sits a small, sharp piece of
+            arithmetic, and the bosses who read it right out-earn the ones who don't without ever rolling a better number.
+        </p>
+
+        <h3>The One Rule That Governs Everything</h3>
+        <p>
+            Every dawn the city cooks a common mash. That's the <strong>Mash die</strong> &mdash; grey as the Moonshine
+            it makes &mdash; sitting in the open for all to see. Then, in Turn Order, each boss drafts <strong>one</strong>
+            Red die from the pool and lays it beside the Mash. The two together are your <strong>Brew Number</strong>,
+            and that single number is the only tune your empire plays today. <em>Every</em> Still you Control whose
+            boiler shows that number roars to life at once; every Still on a different number sits cold, a dead kettle
+            in a dark room.
+        </p>
+        <p>
+            Read that twice, because the whole trade falls out of it: <strong>you only ever hit one number a day.</strong>
+            A boss with a 7-boiler and an 8-boiler never lights both on the same morning &mdash; one cooks, the other
+            waits its turn. But a boss with <em>two</em> 7-boilers fires both together, off the same lucky pair of dice.
+            Matching numbers stack their yield; mismatched numbers take turns and leave you idle. The whole game of the
+            Brew is deciding which numbers to marry your money to.
+        </p>
+        <p>
+            And here's the gift: you see tomorrow coming. The Mash for the next dawn is set the night before, at the
+            close of the Shadows, and it sits face-up on the board through the entire day's business. So half of every
+            Brew Number on tomorrow's table &mdash; and half of every Blowback that could gut your crew &mdash; is public
+            knowledge a full day early. Seizing the Stills that pair with it, walking your Boss out of harm's way, Laying
+            Low early to grab the first draw of the bones: those aren't hunches. They're the sharpest plays on the board,
+            and the intel is already in your hand.
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h3>The Hand on the Dice: The Harbormaster</h3>
+        <p>
+            Here is the wrinkle that separates a kingpin from a gambler. That common mash doesn't fall from heaven. It
+            comes ashore in barrels of molasses, up the piers, over the docks &mdash; and whoever holds the
+            <strong>Harbormaster</strong> Title, the crown for Controlling the most <strong>Dock Districts</strong>, owns
+            that trade. So at the close of each Shadows, the Harbormaster doesn't leave tomorrow's Mash to the roll of a
+            die. He <em>names it.</em> Any face he likes, 1 through 6. Every drop of molasses lands on his wharves, and
+            he decides what the whole town brews at dawn.
+        </p>
+        <p>
+            That turns half of every rival's Brew Number into a <em>political</em> number &mdash; a favour granted or a
+            knife slipped in, depending on whose Stills he means to feed. He will name the face that <strong>lights his
+            own boilers and leaves yours stone cold</strong>, and because the Mash sits in the open all day, the whole
+            table watches the squeeze coming and can do nothing about it after the fact. The only question left worth
+            asking is the one that wins games: <em>what will he pick &mdash; and can he lock me out of my own morning?</em>
+        </p>
+        <h3>The Magic of Seven</h3>
+        <p>
+            The answer to "can they lock me out?" comes down to a single, beautiful quirk of arithmetic. A boiler on
+            number <strong>n</strong> can only fire if the Mash leaves a draftable Red (1&ndash;6) to complete it &mdash;
+            that is, if <strong>n minus the Mash</strong> lands between 1 and 6. Work that through for every boiler
+            number and a clear winner falls out:
+        </p>
+
+        <table class="stat">
+            <caption>How many of the six Mash faces leave a boiler reachable by a draftable Red</caption>
+            <thead>
+                <tr><th class="left">Boiler #</th><th>Mash faces that keep it alive</th><th># of faces</th><th>Can the Harbormaster starve it?</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="left">6</td><td>1&ndash;5</td><td>5 of 6</td><td class="bad">Yes &mdash; names 6</td></tr>
+                <tr class="win"><td class="left"><strong>7</strong></td><td><strong>1&ndash;6 (all)</strong></td><td><strong>6 of 6</strong></td><td class="good">No &mdash; never</td></tr>
+                <tr><td class="left">8</td><td>2&ndash;6</td><td>5 of 6</td><td class="bad">Yes &mdash; names 1</td></tr>
+                <tr><td class="left">9</td><td>3&ndash;6</td><td>4 of 6</td><td class="bad">Yes &mdash; names 1 or 2</td></tr>
+                <tr><td class="left">10</td><td>4&ndash;6</td><td>3 of 6</td><td class="bad">Yes, easily</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            <strong>Seven is the only lockout-proof number on the board.</strong> Whatever face the Harbormaster names,
+            some Red in the pool always completes a 7 &mdash; so a stack of sevens can never be starved dead, only
+            haggled over in the draft. Every other clump can be shut clean off: name the right face and a wall of
+            8-boilers fires <em>nothing at all</em> that morning &mdash; cold iron and idle men. On this board, "just
+            cook sevens" isn't a hunch a made man passes down for luck. It's armour.
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h3>Count the Boilers Before You Plan a Stack</h3>
+        <p>
+            Before you fall in love with a number, count how many of it the city actually owns. This is the census
+            nobody reads, and it quietly decides every build in this chapter:
+        </p>
+
+        <table class="stat">
+            <caption>Every boiler in the city, by number &mdash; and the biggest stack it can ever make</caption>
+            <thead>
+                <tr><th class="left">Boiler #</th><th>How many exist</th><th>Biggest possible clump</th></tr>
+            </thead>
+            <tbody>
+                <tr class="proof"><td class="left"><strong>7</strong> &mdash; Sugar Hill, Morris Park, Richmond Hill, Williamsburg</td><td><strong>4</strong></td><td><strong>Four</strong> &mdash; the only 4-stack on the board</td></tr>
+                <tr><td class="left"><strong>4</strong> &mdash; Corona, Sheepshead Bay, Tottenville</td><td>3</td><td>Three</td></tr>
+                <tr><td class="left"><strong>6</strong> &mdash; Flushing, Red Hook, Stapleton</td><td>3</td><td>Three</td></tr>
+                <tr><td class="left"><strong>2, 3, 5, 8, 9, 10, 11</strong></td><td>2 apiece</td><td>A pair, and no more</td></tr>
+                <tr><td class="left"><strong>12</strong> &mdash; East Harlem</td><td>1</td><td>None. It stands alone.</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Read that table and half the strategy writes itself. <strong>Only seven can be stacked four deep.</strong>
+            Only <strong>4</strong> and <strong>6</strong> reach three. Every other number in the city tops out at
+            <em>a pair</em>, and the 12 at East Harlem is a lone kettle that can never match anything. So when this
+            chapter says "clump," understand what the board is actually offering: a wall of 8s or 9s isn't merely
+            starvable, it's <em>two boilers</em>. The fat matching stack every boss dreams about exists on exactly one
+            number, and it is the one number the docks can't starve. <strong>Seven is simultaneously the only immune
+            number and the only number you can build an empire on.</strong> Every other plan is a pair, or a compromise.
+        </p>
+
+        <p class="note">
+            <strong>The catch, and it's a cruel one.</strong> There are only <strong>four 7-boilers in the whole
+            city</strong> &mdash; and every last one sits under a <strong>High Society</strong> address, one to a
+            mainland Borough, none out on Staten Island. Those are the $500 rooms, and they open the game
+            <em>padlocked by the Police</em> until a Raid kicks the doors in (see <em>Part IV</em>). So a lockout-proof
+            engine of sevens means prising cop-guarded, silk-lined turf out of three or four separate Boroughs at once
+            &mdash; blood for every boiler. And to deny a rival the Mash on top of that, you'd have to wear the
+            Harbormaster's crown yourself: the most Dock Districts, strung out across the water on the far shore.
+            <strong>No single mob can grip a fat wall of sevens and the docks both</strong> &mdash; the crew stretches
+            until it snaps. You choose a lane. Own the sevens, or own the piers. Almost no one owns both.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>The Other Way Out: Spread the Ends</h3>
+        <p>
+            Can't fight your way to the sevens? There's a second road to immunity, and it runs against every instinct
+            that says "clump." Instead of piling onto one number, <strong>bracket a low boiler and a high one.</strong>
+            A pair like <strong>3 and 9</strong> can never be starved together: the face that kills the 3 (a high Mash)
+            is the very face that <em>feeds</em> the 9, and the other way round. There is no single number the
+            Harbormaster can name that darkens both ends at once. Squeeze one, you open the other.
+        </p>
+        <p>
+            It costs you something. A spread only ever lights <em>one</em> end a morning, so it never pours like a fat
+            matching stack in a good week &mdash; but it <strong>always pours something</strong>, every single dawn, no
+            matter whose crown sits on the docks. When a hostile Harbormaster is starving the table, that reliability is
+            worth real money, as the ledgers below show. One thing to mind: the low numbers are scarce on the map, just
+            two 2-boilers and two 3-boilers in the whole city, so you bracket the ends. You don't clump them.
+        </p>
+
+        <h3>Read the Docks: The Crown Can't Starve Itself</h3>
+        <p>
+            For all that dread, the Harbormaster wears a collar of his own making. He cooks Moonshine too &mdash; the
+            same common mash the whole city brews &mdash; and the face he names lights <em>his</em> boilers exactly as
+            it darkens yours. He cannot reach for a number that starves your Stills without first making sure it won't
+            starve his own. <strong>His turf is a leash on the number he can pick,</strong> and a boss who reads that
+            leash can walk right up to the crown and pick his pocket. Two things fall out of that, and both are yours
+            to exploit:
+        </p>
+        <ul class="sub-section">
+            <li><strong>You can predict tomorrow's Mash</strong> by reading the Harbormaster's Stills. A crew cooking
+                high boilers (8s, 9s) will name a mid-to-high face to fire them &mdash; they daren't name a low one,
+                because a low Mash leaves their own high Stills cold. Their turf tells you their hand a full Day early.</li>
+            <li><strong>Mirroring is a hard lock.</strong> Build your Stills on the <em>same numbers the Harbormaster
+                holds.</em> Whatever face he names to fire his own boilers fires yours too &mdash; there is no Mash he
+                can pick that lights his engine and darks a matching one. He can only starve you by starving himself,
+                and a boss who cooks Moonshine won't. Ride the crown's own greed.</li>
+        </ul>
+        <p>
+            This is why the truly spiteful shutout &mdash; the 8-stack starved to $0 in the ledgers below &mdash; only
+            lands on a crew whose numbers <em>don't overlap</em> the Harbormaster's. Match his range and the worst case
+            softens into "we both brew, every morning." The lesson isn't to fear the docks; it's to <em>watch</em> them.
+        </p>
+
+        <h3>The Kill Shot: Mirror, Then Lay Low First</h3>
+        <p>
+            Mirroring gets you a seat at the Harbormaster's table. <strong>Laying Low first takes his chair.</strong>
+            The Harbormaster sets the Mash at the end of Shadows, in the open, <em>before anyone acts.</em> Then, all
+            through the Hustle, tomorrow's Turn Tokens are claimed one by one <strong>in the order players Lay Low</strong>
+            &mdash; step off the board first and you claim Token&nbsp;#1, the first draft of tomorrow's Red pool. He
+            names, you read, and you choose whether to cut your day short for first pick tomorrow.
+        </p>
+        <p>
+            Here's why that's murder against a tight-clumped crown. When the Harbormaster cooks a single number, the
+            face he names to fire it leaves <strong>exactly one firing Red in the whole pool</strong> &mdash; name
+            Mash&nbsp;2 to light your 8s and only a 6 completes them. That scarcity is the trap he laid for the table.
+            But with first draft, <em>you</em> take that one golden Red. He built the shortage; you pocket the only key.
+        </p>
+
+        <table class="stat">
+            <caption>A mirror crew's fire rate by draft position, vs a Harbormaster clumped on one number</caption>
+            <thead>
+                <tr><th class="left">You mirror his stills and&hellip;</th><th>You fire</th><th>He fires</th><th>He's denied</th></tr>
+            </thead>
+            <tbody>
+                <tr class="win"><td class="left"><strong>Lay Low first</strong> &mdash; you draft #1</td><td class="good">60%</td><td>11%</td><td class="good">89%</td></tr>
+                <tr><td class="left">Lay Low last &mdash; you draft behind him</td><td class="bad">11%</td><td>60%</td><td>40%</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Same stills, same Mash &mdash; the draft order alone swings your morning from <strong>11% to 60%</strong>
+            and leaves the crown starving <strong>nearly nine mornings in ten.</strong> And the tighter he clumps to
+            threaten the table, the fewer firing Reds exist, and the more first draft is worth. He cannot wriggle free
+            by spreading, because a spread Harbormaster isn't starving anyone in the first place.
+        </p>
+
+        <p class="note">
+            <strong>The price of the chair, and it went up.</strong> Laying Low ends your Hustle for the Day &mdash;
+            every Play you'd still have made is the fare for Token&nbsp;#1. And The Offers run in <em>reverse</em> Turn
+            Order (see <em>Part II</em>), so Token&nbsp;#1 picks the Jobs Market <em>last</em>: the chair costs today's
+            tempo <em>and</em> tomorrow's pick of the work. Against a crown clumped on one number, 60% against 11% is
+            worth almost any fare; against a spreading one, take the high token &mdash; pick the Jobs, and hold the match.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>Three Principles of the Brew</h3>
+
+        <div class="principle">
+            <div class="num">1</div>
+            <div>
+                <h4>Clump on a number they can't take from you</h4>
+                <p>Boilers that share a number fire as one, so clumping is how you brew big &mdash; but <em>which</em>
+                number you clump on matters as much as how many, and the board decides both. A wall of <strong>sevens is
+                Harbormaster-proof</strong>, and it is also <strong>the only wall on the map</strong>: seven is the one
+                number with four boilers. A "wall" of 8s or 9s is two kettles and a light switch the docks can flip off
+                at dawn. So clump, by all means &mdash; but understand that clumping past a pair means <strong>7</strong>
+                (four), <strong>4</strong> or <strong>6</strong> (three), and nothing else in the city. Cook seven, or
+                make your peace with a rival who can leave your kettles cold whenever it suits him.</p>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="num">2</div>
+            <div>
+                <h4>Spread your crew, don't pile it on</h4>
+                <p>The Muscle Ratio is a staircase, not a ladder, and <strong>the Sweep decides which step you can stand
+                on</strong>. Every Reckoning thins any District above <strong>5 Mobsters</strong> back down to 5, and the
+                Brew comes round the very next dawn, so 5 is all you will ever have on a boiler at first light. Five men
+                brew <strong>3 barrels</strong>. So does a sixth, if you could keep him &mdash; which is the whole point:
+                the staircase pays nothing for the extra body, and the Sweep takes him anyway. <strong>Five men to a
+                Still</strong> is the sweet spot. Truth is, only the <em>odd</em> men earn at all: a growing crew brews
+                1, 1, 2, 2, 3, so the second man and the fourth carry nothing but their own thirst. Crew in odd numbers
+                and you are never paying a wage for a barrel you don't get.</p>
+                <p>That puts a hard roof on the morning: <strong>3 barrels a boiler, 4 with the Boss stood on it</strong>,
+                and no crew in this city can push past it &mdash; save one. The <strong>Sicilians are Untouchable</strong>:
+                the Sweep never thins their ranks, so they alone can wall 9 men onto a boiler, climb to the <strong>cap
+                of 5</strong>, and Twist the Valves to <strong>6</strong>. Everyone else buys breadth, because depth is
+                not for sale &mdash; and that is no hardship. Once a boiler has its five, the next man you hire earns far
+                more opening a <em>second matching boiler</em>, which fires the same morning, off the same pair of dice.
+                Breadth of fire beats depth on one.</p>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="num">3</div>
+            <div>
+                <h4>Fight for the docks, or mirror the man who holds them</h4>
+                <p>The Harbormaster's crown is a hand on every rival's throat &mdash; but it has two soft spots. First,
+                it's <strong>hard to keep:</strong> eight Docks, strung across the water and all connected as if one, so
+                no runaway holds the whole waterfront for long. Take the piers and you take back the dice. Second, if you
+                can't take them, <strong>mirror them, then Lay Low first:</strong> build on the crown's own numbers, beat
+                him to the first draw, and lift the one Red his own Mash left in the pool. Grievance is the only play
+                that never works. The docks answer to force or to imitation &mdash; never to complaint.</p>
+            </div>
+        </div>
+
+        <h3>Park the Boss: Twist the Valves</h3>
+        <p>
+            One lever the tables leave out: any Still that fires with your <strong>Boss</strong> standing on it brews
+            <strong>+1 barrel</strong>. Since your matching boilers all fire off the same Brew Number, park the old man
+            on the stack and pocket a free barrel every morning it lights up. But there's a knife to it: unlike a
+            firefight, a Blowback plays no favourites, and if your number is the one left to burn, the <strong>Boss is
+            the first body on the floor</strong> &mdash; and a crew with no Boss on the board skips <strong>The
+            Offers</strong> the next morning, so your rivals pick over the Market without you while you spend a Play
+            on a Rise.
+        </p>
+        <p>
+            Here is the good news, and it costs you nothing: <strong>your seat doesn't matter, until your number
+            doubles.</strong> Whatever chair you draft from, the Red you take leaves the pool with you. If the face you
+            need showed up <em>once</em> in the roll, you have already carried it off the table, and no leftover can
+            ever burn that boiler. A clump on one number is only ever in danger from <strong>a double</strong>: two 4s
+            on a Mash of 3, you lift one, and a rival cheerfully leaves you the other. Your 7 fires and your 7 burns off
+            the same morning's dice. <em>That</em> is when the chair matters, and only one chair helps: the <strong>last
+            seat</strong> picks from the final two dice, so he alone decides what stays on the table. <em>A Boss brewing
+            is a Boss earning; a Boss brewing on a doubled number, from any chair but the last, is a Boss gambling with
+            his life.</em>
+        </p>
+        <p>
+            The real danger isn't the seat, it's the <em>shape of your build</em>. Count how many of your boiler numbers
+            are <strong>reachable this morning</strong>: each one is another face that can be left behind to gut you
+            &mdash; including boilers you never brewed from. A clump on a single number gives the table exactly
+            <strong>one</strong> face to hurt you with. A <strong>6/7/8</strong> build, on a Mash of 3, is live on Reds
+            3, 4 <em>and</em> 5 at once: three different leftovers, any one of which bursts something of yours. The
+            ledgers say it plainly: a wall of sevens loses its Boss on <strong>7.6%</strong> of mornings; the 6/7/8 on
+            <strong>12.7%</strong> &mdash; near enough double, for the crime of cooking three numbers at once. And the
+            spread? <strong>2.5%.</strong> The ends of a true spread sit <em>six apart</em>, so <strong>they can never
+            both be live in the same morning</strong>. The spread doesn't just dodge the Harbormaster. It's the safest
+            place in the city to stand your Don.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>The Numbers Behind It</h3>
+        <p>
+            Here is the expected <em>net</em> take per Day for builds you can crew off a single ~16-man roster &mdash;
+            barrels at the <strong>$300</strong> Speakeasy rate, less the <strong>$300</strong> it costs to Recruit every
+            Runner a Blowback puts in the ground. The two columns are the two worlds you'll play in: a <strong>Rolled</strong>
+            Mash, when no rival wears the Harbormaster's crown, versus a <strong>Hostile Harbormaster</strong> naming the
+            cruellest face he can against you. Read the Hostile column as the <em>ceiling</em> of the threat: a real
+            Harbormaster is leashed by his own Stills, and mirroring his range is how you climb out from under this
+            column entirely.
+        </p>
+
+        <table class="stat">
+            <caption>Expected net $/Day (Brew Simulator: 4-player contested draft, ~16-man roster, 5 to a boiler under the Sweep, Boss parked with Twist the Valves)</caption>
+            <thead>
+                <tr>
+                    <th class="left">Build</th>
+                    <th>Barrels/Day</th>
+                    <th>Net &mdash; Rolled Mash</th>
+                    <th>Net &mdash; Hostile Harbormaster</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="win"><td class="left">All four <strong>7s</strong> (5/5/5/1)</td><td>5.1</td><td>$1,251</td><td class="good">$1,250</td></tr>
+                <tr class="win"><td class="left">3 matching <strong>7s</strong> (lockout-proof)</td><td>4.6</td><td>$1,137</td><td class="good">$1,141</td></tr>
+                <tr><td class="left">2 matching 7s</td><td>3.2</td><td>$792</td><td>$796</td></tr>
+                <tr><td class="left">1 matching 7</td><td>1.8</td><td>$445</td><td>$446</td></tr>
+                <tr class="proof"><td class="left">Spread 3/3 + 9/9</td><td>2.9</td><td>$724</td><td class="good">$792</td></tr>
+                <tr><td class="left">2 clumped <strong>8s</strong> (a number they can starve)</td><td>2.7</td><td>$661</td><td class="bad">$0</td></tr>
+                <tr><td class="left">2 mismatched 7/8</td><td>2.4</td><td>$469</td><td>$446</td></tr>
+                <tr><td class="left">3 mismatched 6/7/8</td><td>2.8</td><td>$398</td><td>$473</td></tr>
+                <tr class="proof"><td class="left">Spread <strong>3 + 9</strong> (Harbormaster-proof)</td><td>1.5</td><td>$380</td><td class="good">$444</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Four things jump out. First, <strong>breadth wins, all the way up</strong>: every boiler you add earns, and
+            the full four-seven wall tops the sheet at $1,251. Second, the <strong>7-stacks don't flinch</strong>:
+            Rolled or Hostile, the 3&times;7 build banks about $1,140 either way, because no face can starve a seven.
+            That is the immunity, in dollars. Third, and the whole rule in one row: the <strong>8-clump goes to
+            <span style="color:#d9694f">exactly zero</span></strong> under a hostile crown. The Harbormaster names
+            Mash&nbsp;1, the 8s can never be completed by a draftable Red, and a build earning $661 a Day on a quiet
+            table brews <em>nothing at all, every single morning</em>. Fourth, the quiet surprise: the <strong>spread
+            builds go <em>up</em></strong> against a Hostile Harbormaster ($724 to $792, second only to the sevens). A
+            crown naming a low face to starve the clumps is <em>handing the low boiler its number for free</em>. Note
+            which spread, though: <strong>3/3 + 9/9 doubles 3&nbsp;+&nbsp;9</strong> ($792 against $444), because two
+            boilers on each end fire together. Bracketing the ends is the idea; bracketing them <em>in pairs</em> is the
+            build.
+        </p>
+
+        <p class="note">
+            <strong>Why the boom never runs away with the game.</strong> The richest engine is a wide wall of sevens
+            &mdash; but sevens are the rarest, most-fought turf in the city, and holding four means holding ground in
+            four Boroughs at once. The Harbormaster can't touch that engine; rivals with rifles can, and they will.
+            Meanwhile every crew shut out of the sevens has a real answer &mdash; the spread &mdash; that a starving
+            crown only makes <em>stronger.</em> Blood over the boilers, deals struck in the dark, and a waterfront worth
+            going to war for: that's the whole engine, and no one build owns it.
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h4>So What's the Optimal Play?</h4>
+        <table>
+            <caption>Best build by board state</caption>
+            <thead>
+                <tr><th style="width:24%;">The board is&hellip;</th><th style="width:30%;">Go for&hellip;</th><th>Because</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>You (or nobody) hold the docks</strong></td>
+                    <td>Clump as wide as the census allows &mdash; only <strong>7</strong> goes four deep, only <strong>4</strong> and <strong>6</strong> reach three</td>
+                    <td>No hostile crown to starve you, so brew the fattest stack the turf allows &mdash; every extra boiler earns, right to the top of the sheet. On any other number "clump" means a pair, so plan for a pair. If it's you on the docks, feed it every morning.</td>
+                </tr>
+                <tr>
+                    <td><strong>A rival holds the docks</strong></td>
+                    <td><strong>Mirror his numbers</strong>, clump on <strong>7</strong>, or <strong>spread 3/3 + 9/9</strong></td>
+                    <td>Three lockout-proof answers. Mirroring is cheapest &mdash; his own greed feeds you. Seven brews most but wants High Society turf. The double spread is cheap ground, and it <em>gains</em> when he starves the table. Bracket in <em>pairs</em>: a lone 3 and a lone 9 earns barely half of it.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cutthroat</strong> (everyone's on you)</td>
+                    <td>Fewer boilers, but only because of the <em>guns</em> &mdash; never because of the brew</td>
+                    <td>Expansion doesn't pay when every new district invites a Raid, so hold what you can defend on a number they can't dark. Be honest about the trade: since the Sweep caps a boiler at five, you cannot bank a compact build's losses back by crowding men onto it. You brew less. You just brew it somewhere safe.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="kingpin">
+            <span class="tag">Kingpin's Note</span>
+            <p>The greenhorn scatters his Stills to "cover more numbers," lights one boiler a day, and feeds the rest to
+            the Blowback. The old hand cooks one number and gets rich. The made man does one better: he cooks a number
+            the docks can't take from him, or he brackets the ends so no crown can leave him dry. And when a rival's
+            Harbormaster turns greedy? He doesn't grumble &mdash; he cooks the crown's own numbers, Lays Low ahead of
+            him for the first draw, and lifts the one Red the whole city's been starved of. The Harbormaster set the
+            table. The made man eats first.</p>
+        </div>
+    </div>
+    <div class="container one-column">
+        <h2 id="market">Part II &middot; The Jobs Market</h2>
+        <div class="cover">
+            <img class="cover-sm" src="Art/Rulebook/Respect.png" alt="The Jobs Market" width="100%">
+        </div>
+        <p class="lede">
+            Deeds and Titles pay you for what you <em>hold</em>. Jobs pay you for what you <em>do</em>. Five cards lie
+            face-up beside the board, in the open, every one of them a public dare, and none of them ever expires. There
+            is no deadline in this business and no paperwork &mdash; only a stake, sitting on the table where everyone
+            can count it, quietly costing you a Play a day for as long as your nerve holds out. Most bosses treat the
+            Market like a shop. It isn't. It's a queue, a clock, and a confession, all at once, and the arithmetic
+            underneath it decides more games than the dice ever will.
+        </p>
+
+        <h3>The One Rule That Governs Everything</h3>
+        <p>
+            A Job prints two numbers. Its <strong>Respect</strong> is what it pays. Its <strong>Stake</strong> is the
+            Influence you lock out of your Reserves the morning you claim it, and don't get back until you pull it off.
+            That's the whole contract. But read what a locked marker actually is, because the card doesn't tell you:
+            <em>The Offers run before Fund the Ledger.</em> Stake first, fund second. Every marker sitting on a Job is a
+            marker that never reaches your Ledger &mdash; and only Ledger markers buy Plays. So the stake is not a fee.
+            <strong>It is rent, and the rent is paid in Plays, every single Day you hold the card.</strong> Claim a
+            5-Respect Job on Monday and pull it off on Thursday, and you have quietly handed your rivals four short days
+            on the street. Nobody stops you. Nobody has to.
+        </p>
+        <p>
+            The whole system is the one line of arithmetic from the front of this book &mdash; <strong>Plays today =
+            Influence &minus; staked &minus; Heat, up to five slots</strong> &mdash; and note what it <em>doesn't</em>
+            say. There is no gate: <strong>no Job in this deck is ever unclaimable for want of markers.</strong> A big
+            stake costs you actions, not access &mdash; you can always reach for the card, you simply buy it with your
+            day. The trade is smooth, one marker for one Play, all the way down to a one-Play morning. Which makes the
+            fifth slot the only thing resembling a cliff, because past it the trade stops costing anything at all.
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <table class="stat">
+            <caption>What a stake costs you, with a clean Heat Track: Plays = Influence &minus; staked, capped at 5 slots</caption>
+            <thead>
+                <tr><th class="left">Your Influence</th><th>No Job</th><th>Stake 1<br>(a 1)</th><th>Stake 2<br>(a 3)</th><th>Stake 3<br>(a 5)</th><th>Stake 5<br>(a 5 + a 3)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="left"><strong>6</strong> &mdash; where everyone starts</td><td>5 Plays</td><td>5 Plays</td><td class="bad">4 Plays</td><td class="bad">3 Plays</td><td class="bad">1 Play</td></tr>
+                <tr><td class="left"><strong>7</strong> &mdash; one Bribe in</td><td>5</td><td>5</td><td class="good">5</td><td class="bad">4</td><td class="bad">2</td></tr>
+                <tr><td class="left"><strong>8</strong></td><td>5</td><td>5</td><td>5</td><td class="good">5</td><td class="bad">3</td></tr>
+                <tr><td class="left"><strong>9</strong></td><td>5</td><td>5</td><td>5</td><td>5</td><td class="bad">4</td></tr>
+                <tr class="win"><td class="left"><strong>10</strong> &mdash; the whole Commission</td><td>5</td><td>5</td><td>5</td><td>5</td><td class="good">5</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            That table is the chapter in miniature, so read it twice. <strong>The markers above your fifth are the ones
+            that stake Jobs for nothing</strong>, because the Ledger stops at 5 slots and a sixth marker had no other
+            work to do. At <strong>6</strong> Influence you carry a 1-Respect Job for free and a headline Job costs you
+            <em>two Plays a day</em>. At <strong>10</strong> you carry a 5 and a 3 at once and never feel it. The
+            Commission you were buying to win the game turns out to be the engine that runs your Jobs, and nobody tells
+            you that on the card.
+        </p>
+        <h3>Heat Is Billed to the Same Account</h3>
+        <p>
+            Now put the third term back, because that table is a fiction and every real morning has Heat in it. A noisy
+            Play doesn't return its marker to your Reserves &mdash; it locks it onto the communal <strong>Heat Track</strong>,
+            where it sits until a Raid clears the board. It is gone from the same pool the stake comes out of, and it is
+            gone across Days: <em>the Reckoning does not clear Heat.</em> Only the sirens do. So the ladder in that table
+            slides down one rung for every marker cooling on the Track. <strong>Your working capital is Influence minus
+            Heat, and only the first five of it buys Plays.</strong> Two markers hot, and a 6-Influence crew has no free
+            capacity at all: even a 1-Respect card starts costing a Play.
+        </p>
+        <p>
+            Now count the deck: <strong>fourteen of the thirty-two Jobs draw Heat in the act of completing them.</strong>
+            All eight Open Fires, the five big Unloads, the lone Extort. The Market sells you cards that burn the very
+            currency you need to claim the next one, and a crew halfway up the Heat Track has no room left to promise
+            anybody anything. That is not an accident. There are only three answers: keep your Jobs quiet, climb the
+            Influence ladder faster than you climb the Heat Track, or <em>let the Raid come</em> &mdash; because a Raid
+            returns every Heat marker to its owner's Reserves. <em>The cops kick your door in and refund your stake money
+            on the way out</em> (see <em>Part IV</em>).
+        </p>
+
+        <p class="note">
+            <strong>Bribe is a Jobs play.</strong> Everyone reads <em>Bribe</em> as the last chore before the crown
+            &mdash; four payments of $2,500 you make when you're already winning. It's the opposite. The <strong>7th</strong>
+            marker makes a 3-Respect Job free to hold; the <strong>8th</strong> makes a 5 free; and every marker past
+            that is a rung of headroom against the Heat you'll be generating to complete them. Those markers are the
+            cheapest tempo in the game, they were on the road to the throne anyway, and the boss who buys them on Day 4
+            plays a different game from the boss who buys them on Day 12. <strong>The ladder isn't there to make Jobs
+            free. It's there to keep them free once you're loud.</strong>
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h3>One Claim a Day Is a Rate, Not a Limit</h3>
+        <p>
+            Nothing caps how many Jobs you <em>hold</em>. The Offers let you claim one card a morning, and there is no
+            deadline on any of them, so a patient boss simply accumulates: a 1 on Tuesday, a 3 on Thursday, a 5 the
+            following week, all three sitting staked in front of him at once. <strong>The only ceiling is what your
+            Reserves can carry</strong>, and the arithmetic runs on your <em>total</em> staked, not on the newest card.
+            That changes the shape of a plan: a three-card overlap isn't a thing you assemble in an afternoon &mdash;
+            it's three separate mornings, and the first card starts paying rent from the first one. But it also means
+            the cheap tier compounds beautifully: two or three 1-Respect Jobs, all riding Plays your liquor business was
+            making anyway, cost a total Stake of 3 and complete whenever the barrels happen to line up. <em>Hold a small
+            standing portfolio and let the board complete it for you.</em>
+        </p>
+
+        <h3>The Five-Play Ceiling Is a Fiction: The Kickback</h3>
+        <p>
+            One rule breaks the whole funding equation open, and it's easy to file under "money" and forget.
+            <strong>Every barrel of Havana Rum you Unload moves one <em>spent</em> Influence marker from your Reserves
+            back into an empty Ledger slot.</strong> Not next morning &mdash; immediately, mid-Hustle. Moonshine pays
+            cash only; Rum pays cash <em>and gives you your day back</em>. An Unload costs 2 Influence, so the moment
+            you sell more than two Rum you are running a profit in Plays:
+        </p>
+
+        <table class="stat">
+            <caption>What a Rum sale does to your day</caption>
+            <thead>
+                <tr><th class="left">You Unload&hellip;</th><th>Costs</th><th>Kickbacks</th><th>Net Plays</th><th class="left">The catch</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="left">2 Rum</td><td>2</td><td>2</td><td>0</td><td class="left">Free, but it buys you nothing but cash.</td></tr>
+                <tr class="win"><td class="left"><strong>3 Rum</strong></td><td>2</td><td>3</td><td class="good">+1</td><td class="left"><strong>No Heat</strong> &mdash; under the Greed Tax. The clean repeatable sale.</td></tr>
+                <tr><td class="left">4 Rum</td><td>2</td><td>4</td><td class="good">+2</td><td class="left">The Greed Tax bites: one marker locks on the Heat Track.</td></tr>
+                <tr><td class="left">8 Rum <em>(Opening Night)</em></td><td>2</td><td>up to 6</td><td class="good">+4</td><td class="left">Heat, and you can't recycle more markers than you've already spent.</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Two limits keep it honest: you can only pull back markers you have <em>already spent</em> this Day, and you
+            can't overfill five slots. Both mean the Kickback is a <strong>late-day</strong> engine &mdash; it does
+            nothing at dawn and everything at dusk, exactly when your Ledger is running dry and the table is deciding
+            who steps off first. Which is where it turns from an economic rule into a political one.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>The Market Never Moves &mdash; And That's the Whole Design</h3>
+        <p>
+            Nothing on the street ages. No card slides down a row, nothing goes stale, nothing is swept away at dawn.
+            The Market changes only when a <em>player</em> changes it: somebody takes a Job or walks away from one, and
+            a fresh card fills the gap. That single fact rewrites how you're supposed to play.
+        </p>
+        <p>
+            <strong>First: there is no clock but your own money.</strong> Since the card cannot expire, claiming it
+            early buys you exactly one thing &mdash; certainty that a rival won't take it &mdash; and you pay for that
+            certainty in Plays, daily, until you fire. Which produces the doctrine this whole chapter is built on:
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">The Claim-Late Doctrine</span>
+            <p>Every Job in the deck completes in a <em>single Play</em>. So build the position first, in silence, with
+            your Reserves full and your Ledger fat &mdash; and claim the card on the morning you can fire it that same
+            afternoon. One Day of rent, full Respect. A 5 taken and finished on the same Day costs you two Plays. The
+            same 5 claimed three Days early costs you six.</p>
+        </div>
+
+        <table class="stat">
+            <caption>The bill for a 5-Respect Job (Stake 3) by how early you claim it, at 6 Influence</caption>
+            <thead>
+                <tr><th class="left">You claim it&hellip;</th><th>Days staked</th><th>Plays surrendered</th><th class="left">What that buys you</th></tr>
+            </thead>
+            <tbody>
+                <tr class="win"><td class="left"><strong>The morning you can fire it</strong></td><td>1</td><td class="good">2</td><td class="left">Nothing but the Respect. Which is the point.</td></tr>
+                <tr><td class="left">Two Days out</td><td>2</td><td>4</td><td class="left">Insurance against one rival's Offer.</td></tr>
+                <tr><td class="left">Three Days out</td><td>3</td><td class="bad">6</td><td class="left">A whole Day's worth of Plays, spent on a promise.</td></tr>
+                <tr><td class="left">The moment it's dealt</td><td>5+</td><td class="bad">10+</td><td class="left">Two lost Days, and five mornings of rivals reading your plan off the table.</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            <strong>Second: the Market lets you plan in silence, and the tell is your board, not your hand.</strong>
+            Because the card will still be there next week, the correct play against a card you want is often to say
+            nothing and move barrels. But understand what you're hiding and what you're not. The Job is public. The
+            stake is public. Your <em>intention</em> is the only secret you own &mdash; and it leaks through the board,
+            not the Market. Six barrels drifting toward Fordham, a Safehouse creeping into a rival's Ward, your Boss
+            walking into Queens: a boss who reads turf can see a claim coming a full Day before you make it, and take
+            the card out from under you.
+        </p>
+        <p>
+            <strong>Third: a named Job is a standing bounty.</strong> Under a churning market, the correct answer to
+            <em>Kill a rival Boss in Queens</em> sitting face-up would be to wait for it to rot off the end of the row.
+            It doesn't rot. The Toll Booth Trap sits there, unclaimed, until somebody is man enough to take it &mdash;
+            and until then, every Boss on the board simply avoids Queens. That is the deck doing work with cards nobody
+            has even claimed, and it is why the four headline bounties are named by borough. <em>Read the Market as a
+            map of where not to stand.</em>
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>The Reverse Snake</h3>
+        <p>
+            The rule is printed on the Turn Structure card and you'll play it right from your first morning: the Brew
+            drafts in <strong>Turn Order</strong>, first token to last &mdash; then The Offers immediately run in
+            <strong>reverse</strong>, last token to first. What takes longer to sink in is what that reversal <em>does
+            to you</em>. Your Turn Token isn't a rank. It's a package, and the two halves point opposite ways.
+        </p>
+
+        <table class="stat">
+            <caption>What your Turn Token actually buys (4-player: 5 Red dice, 5 cards on the street)</caption>
+            <thead>
+                <tr><th class="left">Token</th><th class="left">The Brew</th><th class="left">The Offers</th><th class="left">The Hustle</th></tr>
+            </thead>
+            <tbody>
+                <tr class="win">
+                    <td class="left"><strong>#1</strong><br><em>first off the street</em></td>
+                    <td class="left"><span class="good">First pick of the Red pool.</span> If your number showed once, you carry it off and it can never blow your boiler.</td>
+                    <td class="left"><span class="bad">Picks last.</span> You take what three rivals left you.</td>
+                    <td class="left"><span class="good">First Play of the Day.</span> First into the empty block, first gun through the door.</td>
+                </tr>
+                <tr class="proof">
+                    <td class="left"><strong>#4</strong><br><em>last off the street</em></td>
+                    <td class="left"><span class="bad">Left holding the match</span> &mdash; but you choose which of the last two dice stays behind as the Blowback.</td>
+                    <td class="left"><span class="good">First pick of the Market.</span> Every card is still on the street.</td>
+                    <td class="left"><span class="bad">Last Play each round.</span> You react; you don't set.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            Now look at how you <em>get</em> a token, because this is where it turns vicious. Tomorrow's tokens are
+            claimed in the order players <strong>Lay Low</strong>, lowest first, and you cannot pass &mdash; on your
+            turn you make a Play or you step off. So the boss who stays on the street longest is the boss with the most
+            Ledger markers left to burn. Which means:
+        </p>
+
+        <table class="stat">
+            <caption>The self-taxing loop &mdash; how a stake becomes a queue position</caption>
+            <thead>
+                <tr><th class="left">Today you&hellip;</th><th class="left">So your Ledger holds&hellip;</th><th class="left">So you Lay Low&hellip;</th><th class="left">So tomorrow you&hellip;</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="left">Stake a 5-Respect Job</td><td class="left">3 markers</td><td class="left"><strong>Early</strong> &mdash; token #1 or #2</td><td class="left"><span class="bad">Pick the Market last</span>, but draft the Red first</td></tr>
+                <tr class="win"><td class="left">Stake nothing</td><td class="left">5 markers</td><td class="left"><strong>Late</strong> &mdash; token #3 or #4</td><td class="left"><span class="good">Pick the Market first</span>, and hold the match</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Read that and the shape of the whole system falls out. <strong>The Jobs Market taxes itself.</strong> Take
+            the big Job today and the machinery quietly walks you to the back of tomorrow's queue; take nothing and it
+            hands you first refusal on everything the city is offering. Nobody wrote a rule that says <em>you may not
+            hoard Jobs.</em> The turn order does it for them, every morning, for free. There are exactly two ways out of
+            the tax: <strong>climb to 10 Influence</strong>, where a stake stops shortening your Ledger at all, or
+            <strong>hold Rum</strong>, where you refill the Ledger mid-day and choose your own closing time. A crew with
+            neither is at the mercy of the loop. A crew with both never queues at all.
+        </p>
+        <p>
+            And it cuts the way a good game should, because <strong>commitment and freedom buy different things</strong>.
+            A crew carrying three staked Jobs, or half its markers cooling on the Heat Track, has a short day: it steps
+            off the street early, takes the low token, and is paid for it in <em>dice</em> &mdash; the best Red in the
+            city and the first Play of tomorrow's Hustle. A crew carrying nothing has a full day, is still working when
+            the others have gone home, and is paid in <em>cards</em> instead. Neither seat is a punishment. They're two
+            different currencies, and you're choosing between them every time you decide whether to make one more Play.
+        </p>
+
+        <p class="note">
+            <strong>The exception, and it's the important one.</strong> The tax is a tax on the <em>Influence-poor</em>,
+            and it vanishes at the top. A kingpin at <strong>10 Influence</strong> stakes a 5 and a 3 and <em>still</em>
+            fills all five Ledger slots &mdash; so he stays on the street as long as anyone, keeps his token, and pays
+            nothing for his Jobs. Below ten, every stake costs you a Play and a place in the queue. At ten, the brake is
+            simply not connected. If you take one number away from this chapter, take that one: <strong>the ladder from
+            6 to 10 Influence is the difference between renting Jobs and being given them.</strong>
+        </p>
+    </div>
+    <div class="container one-column">
+        <h3>The Staring Contest &mdash; and What It's Actually About</h3>
+        <p>
+            Late in the Hustle, with two markers left and nothing urgent to spend them on, you are in a staring contest.
+            Step off now and you take the low token: tomorrow's dice, tomorrow's tempo, and a Market picked over by the
+            time it reaches you. Burn a Play you don't strictly need and you outlast the man beside you for first
+            refusal on the street. But <em>tempo in the abstract</em> is almost never what the contest is about. On most
+            evenings nobody cares and everyone drifts off in whatever order their markers ran out. The contest sharpens
+            on exactly one kind of night: <strong>when a card is face-up that two of you want, and both of you know
+            it.</strong> Then the queue is the whole game, and it is won three ways &mdash; by reading him, by hiding
+            yourself, and by having the Rum to outlast him.
+        </p>
+
+        <h4>Layer one: read what they're building toward</h4>
+        <p>
+            A rival's plan is written in two places, and neither of them is his face. His <strong>staked hand is
+            public</strong> &mdash; every Job he holds is face-up, so you already know what he <em>needs</em>. His
+            <strong>board tells you when he'll be ready for it</strong>: barrels drifting toward one Speakeasy, a
+            Safehouse creeping off his home turf, bodies gathering two blocks from a Dock. Put the two together and you
+            can date his claim to within a Day. Then do the same for the cards he <em>hasn't</em> claimed &mdash; the
+            harder read and the more valuable one, because it lets you deny him something he hasn't paid for yet. A crew
+            that has spent four Days massing Rum in Red Hook is telling you which card it wants off the street, whether
+            or not that card is in its hand.
+        </p>
+
+        <h4>Layer two: don't be readable yourself</h4>
+        <p>
+            Everything above is being done to you. The Claim-Late Doctrine says build first and claim on the morning you
+            fire &mdash; but that only works if the build is quiet, because <strong>the window in which you're
+            vulnerable is precisely the window in which you're visibly ready and don't own the card yet.</strong></p>
+        <ul class="sub-section">
+            <li><strong>Assemble late and assemble fast.</strong> Six barrels arriving in Fordham across four Days is an
+                announcement. Six barrels arriving in one Move, on the morning you claim, is a fait accompli.</li>
+            <li><strong>Don't let the last Play be the obvious one.</strong> If your position only makes sense as a run
+                at one specific card, you have already told them. Stage from somewhere that threatens two things.</li>
+            <li><strong>Weigh claiming early anyway.</strong> Sometimes the tell is unavoidable &mdash; you cannot hide
+                a Safehouse walking across the map. When the build is inherently loud, pay the rent and lock the card,
+                because the alternative is doing the work for someone else.</li>
+            <li><strong>Or be the Vipers.</strong> <em>Whispers</em> claims the deck's top card face-down. Rivals see a
+                Stake and nothing else &mdash; the only way in the game to hold a Job that cannot be read, denied, or
+                pre-empted.</li>
+        </ul>
+
+    </div>
+
+    <div class="container one-column">
+        <h4>Layer three: Rum wins the staring contest</h4>
+        <p>
+            And here is the lever, the one that turns the whole thing from a guessing game into a plan. Everyone else's
+            day ends when their Ledger runs dry. <strong>A crew holding Rum decides when its day ends.</strong> Sell
+            three barrels and you are a Play <em>up</em>, with no Heat; sell four and you're two up. So when a card you
+            both want is sitting on the street, you do not have to hope he blinks &mdash; you Unload, refill your
+            Ledger, and simply outlast him, then take first pick at dawn. That is what makes Rum the quiet backbone of a
+            Jobs game. It pays the same cash as Moonshine, so a crew that never Trades sees no difference on the ledger
+            sheet and cannot understand why it keeps getting to the Market last. And it compounds three ways at once:
+            the Rum ladder Jobs (<em>The Angel's Share</em>, <em>Cuban Prince</em>, <em>High Roller</em>, <em>The
+            Smuggler's Run</em>) pay Respect for the very sales that buy your tempo, the <strong>Knights</strong> get a
+            free barrel on every Trade, and a Rum sale at a High Society joint pays <strong>$500</strong> a barrel on
+            top. <em>Trade up, or spend the game explaining why the good cards keep going to somebody else.</em>
+        </p>
+
+        <h4>When to blink first anyway</h4>
+        <ul class="sub-section">
+            <li><strong>Step off early</strong> when tomorrow's Mash is a number you own, when the pool looks likely to
+                leave a Blowback on your own boiler, or when there is simply nothing on the street you could complete
+                this week. Dice beat cards when the cards don't fit you.</li>
+            <li><strong>Hang on to the end</strong> when a card you can fire tomorrow is face-up, when a rival is
+                visibly one Play from a Job you both want, or when you're the Harbormaster and named tomorrow's Mash
+                yourself &mdash; you already know what the dice will do, so spend the token on the Market instead.</li>
+            <li><strong>Remember Odd Jobs.</strong> Stepping off with markers still in the Ledger pays <strong>$100
+                apiece</strong>. It's the consolation prize for losing the contest, and on a Day you're saving toward a
+                Bribe it's reason enough to blink first &mdash; the Bribe buys you the queue back permanently.</li>
+        </ul>
+
+        <p class="note">
+            <strong>No Boss, no business.</strong> A crew with no Boss on the board <em>skips The Offers entirely</em>
+            &mdash; no claim, no walk away, nothing, until they spend a Play to Rise. So killing a rival's Boss is not
+            merely a Respect card and a &minus;1 to his Threat: <strong>it deletes him from tomorrow's queue.</strong>
+            If you and he are racing for the same card, the cheapest way to win the race is to shoot the man out of it.
+            The Blowback will do it for free if he parks the old man on a doubled number, so watch the pool as closely
+            as you watch the Market.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>What the Deck Actually Asks You For</h3>
+        <p>
+            Thirty-two cards, twelve at 1 Respect, twelve at 3, eight at 5. They sort into four families by what they
+            demand of your board, and the families play nothing alike.
+        </p>
+
+        <table class="stat">
+            <caption>The four families, by verb</caption>
+            <thead>
+                <tr><th class="left">Family</th><th>Cards</th><th class="left">What it needs on the board</th><th class="left">The real cost</th></tr>
+            </thead>
+            <tbody>
+                <tr class="win">
+                    <td class="left"><strong>Logistics</strong><br><em>Move 6 &middot; Unload 7 &middot; Trade 2</em></td>
+                    <td>15</td>
+                    <td class="left">Barrels massed, a route, and a venue you Control. Magnitudes run 3+ to 8+.</td>
+                    <td class="left">Almost nothing &mdash; <strong>these are the Plays your brew engine already makes.</strong> The bill is Heat: anything shifting 4+ barrels draws it.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>Muscle</strong><br><em>Open Fire 8</em></td>
+                    <td>8</td>
+                    <td class="left">Bodies massed, and a rival standing in one named borough. Half the 5s live here.</td>
+                    <td class="left">Brutal. A firefight is <em>one Play but many Influence</em> &mdash; and the stake came out of the same pool.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>Estate</strong><br><em>Secure 4 &middot; Recruit 2</em></td>
+                    <td>6</td>
+                    <td class="left">Your Safehouse relocated, usually off your home turf and into a specific district.</td>
+                    <td class="left">Structural. Recruit is <strong>Safehouse-only</strong>, so moving the house moves your spawn point into a rival's borough.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>The odd three</strong><br><em>Rise 1 &middot; Rat 1 &middot; Extort 1</em></td>
+                    <td>3</td>
+                    <td class="left">A dead Boss; the Rat Card; a District in all five Boroughs.</td>
+                    <td class="left">Each costs something no other card asks: your Don, your honour, or Staten Island.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Logistics: the tier that pays you for playing well</h4>
+        <p>
+            Fifteen of thirty-two cards ask you to move, trade or sell liquor at scale &mdash; and if your Brew engine
+            is working, <em>you were going to do that anyway</em>. <strong>The Angel's Share</strong> (3+ Rum at a $300
+            joint), <strong>Last Call</strong> (4+ barrels), <strong>The Dutchman's Deal</strong> (Trade 3+ at a Dock):
+            these are 1-Respect cards that ride a Play already on your list, for a Stake of 1, which is free at the
+            Influence everyone starts with. There is no cheaper Respect in the game and there never will be &mdash;
+            literally: completed Jobs leave the deck <em>permanently</em>, the 1s are the preferentially-claimed tier,
+            and there are only twelve of them. <strong>The cheap Respect drains out of the game one way.</strong> A boss
+            who sniffs at 1-Respect cards on Day 3 is a boss shopping in a Market of nothing but campaigns on Day 12.
+        </p>
+
+        <h4>Muscle: you don't have to win, you only have to kill</h4>
+        <p>
+            Read the rule that governs every combat Job, because it is more generous than it looks: <em>a Job is a deed,
+            not a board position &mdash; the deed counts even if it didn't survive the Play.</em> Kill the man, then
+            lose the block, and <strong>the Job still pays.</strong> The Pier Six Brawl, The Irish Goodbye, The Butcher's
+            Ledger and The Toll Booth Trap ask for <em>kills</em>, not for ground. A suicide raid that murders two
+            dockhands and gets thrown back into the river is a completed Job. Only the cards that say <b>Seize</b>,
+            <b>take over</b> or <b>destroy</b> need the outcome to stick. What makes them hard is the arithmetic on the
+            other side: a firefight counts as <em>one Play</em> however many rounds it runs, but every round costs its
+            own Influence out of your Ledger &mdash; so the real ceiling on a combat Job is the <strong>Ledger's five
+            slots</strong>. Stake 3 for a headline kill-count Job at 6 Influence and you walk in with <em>three</em>
+            markers &mdash; one to enter, two to shoot &mdash; against a garrison Part III says needs three-to-one and
+            four volleys to break.
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h4>Estate: the cards that move your whole game</h4>
+        <p>
+            Six cards ask you to put your Safehouse somewhere specific, and since <strong>Recruit only happens at your
+            Safehouse</strong>, that is never a cosmetic request. <em>Union Dues</em> and <em>Last One Standing</em>
+            both push the house into a Borough whose Deed you <em>don't</em> hold; <em>The Beachhead</em> puts it next
+            door to a rival's; <em>High Roller</em> and <em>Fortress Staten</em> pick the district outright. Claim one
+            of these and you are agreeing to rebuild your spawn point in somebody else's neighbourhood, which is a
+            campaign, not a Play. Their compensation is that they're the only Respect in the deck that <em>nobody can
+            interrupt.</em> No rival stands between you and your own Safehouse. If the board has turned hostile and the
+            muscle cards are out of reach, the Estate family is where a losing position can still bank points.
+        </p>
+
+        <h4>The odd three, and the trap in each</h4>
+        <ul class="sub-section">
+            <li><strong>The Empty Casket</strong> (Rise a new Boss in a Ward you Control) reads like a consolation prize
+                for a disaster. It isn't &mdash; it's an <em>insurance policy</em>, and the difference is the timing.
+                You <strong>cannot claim it after your Boss dies</strong>: no Boss means you skip The Offers entirely,
+                and by the time you've Risen, the deed is behind you and the card is unclaimable forever. It only ever
+                pays if you were <em>already holding it</em> when the worst happened. At Stake 1 it costs nothing to
+                carry. <strong>Take it on a quiet morning, stake it, and forget it.</strong> Mind that it wants a
+                <b>Ward</b> you Control, so keep one in the family.</li>
+            <li><strong>The Insurance Job</strong> (Rat, and have the Raid padlock a low-Pressure Still you Control)
+                hands you the <strong>Rat Card</strong>, which blocks Bribing <em>and</em> the crown until it leaves you.
+                That makes it strictly an <em>early-game</em> card: 3 Respect while your Influence ladder hasn't started,
+                and a self-inflicted wound afterwards. The engineering it wants is a Part IV masterclass: the Raid hunts
+                the hottest mob, then its most-barrelled district &mdash; so you must be the loudest crew in town and
+                pile barrels on your worst boiler to make the cops kick the right door.</li>
+            <li><strong>The Five Families</strong> (Extort from a District in all five Boroughs, one Play) is the deck's
+                only Extort, and its price is <strong>Staten Island</strong> &mdash; the borough nobody visits. Five
+                Respect for holding a footprint nobody else bothers to build. It always draws Heat.</li>
+        </ul>
+    </div>
+
+    <div class="container one-column">
+        <h3>Reading the Board: The Four Lanes</h3>
+
+        <h4>1. Your borough's free three</h4>
+        <p>
+            This is the single most useful thing on the board, and it is invisible unless somebody points at it. Every
+            mainland Borough has <strong>exactly one Speakeasy that is neither garrisoned at setup nor padlocked by the
+            Police</strong>, and all four sit at Pressure 5. Each one has a 3-Respect card written on it, and it is the
+            easiest 3 you will ever earn <em>in your own back yard</em>:
+        </p>
+
+        <table class="stat">
+            <caption>The orphan Speakeasy set &mdash; one friendly 3 per seat</caption>
+            <thead>
+                <tr><th class="left">Your seat</th><th class="left">The orphan joint</th><th class="left">Its card</th><th class="left">And the 5 that points at you</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="left">Manhattan</td><td class="left">The Haymarket <em>(Tenderloin)</em></td><td class="left">The Big Squeeze &mdash; Unload 6+</td><td class="left">Bloody Sunday <em>(burn your base)</em></td></tr>
+                <tr><td class="left">Bronx</td><td class="left">The Penny Whistle <em>(Fordham)</em></td><td class="left">Hell's Highway &mdash; Move 6+ in</td><td class="left">Over the Top <em>(take your ground)</em></td></tr>
+                <tr><td class="left">Queens</td><td class="left">Paradise Alley <em>(Flushing)</em></td><td class="left">Poison Panic &mdash; Unload 6+ Moonshine</td><td class="left">The Toll Booth Trap <em>(kill your Boss)</em></td></tr>
+                <tr><td class="left">Brooklyn</td><td class="left">Sunny's Bar <em>(Red Hook)</em></td><td class="left">Cuban Prince &mdash; Unload 3+ Rum</td><td class="left">The Butcher's Ledger <em>(your body count)</em></td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Every seat reads one friendly 3 and one hostile 5, and the four bounties are deliberately
+            <strong>borough-disjoint</strong> &mdash; which is exactly why no single Play in the deck can ever fire two
+            5-Respect Jobs. Take your own orphan early. Watch for your own bounty appearing on the street, and when it
+            does, <em>move the thing it's hunting.</em>
+        </p>
+
+        <h4>2. The Staten Island lane &mdash; nine Respect nobody is competing for</h4>
+        <p>
+            Staten Island is nobody's home turf, its Deed is boxed, and its boilers are the worst in the city. So nobody
+            goes there. And yet <strong>three cards worth 9 Respect between them are written on it</strong>, every Dock
+            in the city connects to Staten's two as though they were adjacent, and &mdash; the detail Part IV will make
+            much of &mdash; <strong>no Police Squad ever sets foot there.</strong> <em>Fortress Staten</em> (1) wants
+            your Safehouse on the island; <em>Rum Row</em> (3) wants a Trade of 4+ Moonshine at a Staten Dock;
+            <em>The Smuggler's Run</em> (5) wants 6+ Rum run from a Staten Dock to a mainland one, in one Play. They
+            chain: haul moonshine in, Trade 6+ at Westerleigh or Tottenville &mdash; that's Rum Row done on the spot
+            &mdash; then run the Rum straight back out for The Smuggler's Run. Two Plays, 8 Respect, on turf no rival is
+            watching. The price is honest and it is the reason the lane is empty: <em>you must ship the moonshine there
+            first</em>, because Staten can't brew it. Build this lane behind a Harbormaster crown and it's the quietest
+            empire in the game.
+        </p>
+
+        <h4>3. The High Society lane is locked until somebody starts a fire</h4>
+        <p>
+            Two of the eight headline Jobs &mdash; <strong>Opening Night</strong> (Unload 8+ at a High Society joint)
+            and <strong>High Roller</strong> (Secure into a High Society district holding 4+ Rum) &mdash; target rooms
+            that begin the game <em>padlocked by the Police</em> and impassable. They cannot be attempted at all until a
+            Raid throws one open. Add <em>The Insurance Job</em>, which needs a Raid by definition, and <strong>three
+            cards in this deck are waiting on the sirens.</strong> Which turns Heat into a strategic resource rather
+            than a punishment: if your Respect plan runs through the swanky rooms, you <em>want</em> the track to boil
+            &mdash; and the same Raid that opens the doors refills the stake pool of everyone at the table. The High
+            Society lane is also where the money is ($500 a barrel against $300), and it sits on all four Still-7
+            boilers, so it is contested by the Brew and the Night Mayor race at the same time. It is the richest and the
+            latest lane on the board.
+        </p>
+
+        <h4>4. The East River and Jamaica Bay</h4>
+        <p>
+            Two labelled bodies of water do quiet work in this deck. <strong>The East River</strong> touches four
+            Speakeasies &mdash; East Harlem, Astoria, Williamsburg, Red Hook &mdash; and carries both a friendly card
+            (<em>The Grand Tour</em>, Unload 4+) and a hostile one (<em>The Irish Goodbye</em>, kill 3+ and take no
+            Control). <strong>Jamaica Bay</strong> holds two Docks, Sheepshead Bay and Jamaica, and carries <em>Night
+            Landing</em>. If you sit on either water, more of the deck is written for you than for anyone else &mdash;
+            and the Bronx, landlocked from both, interacts with the fewest cards in the game. A Bronx boss should lean
+            harder on the borough-generic Jobs and his own orphan joint at Fordham than on the water.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>Denial: Taking a Card You Never Intend to Do</h3>
+        <p>
+            You may claim any Job on the street. Nothing says you have to complete it. Take the card a rival has spent
+            four Days building toward and it is simply gone &mdash; not discarded, not recycled, just locked in your
+            hand for as long as you care to pay for it. This is real and it wins games. It is also priced, and you
+            should know the bill before you reach. It costs <strong>your entire Offer, twice</strong> &mdash; Take and
+            Walk Away are <em>one of three, never two</em>, so denying a card burns the morning you take it and a second
+            morning to shed it. It costs <strong>the stake, every Day in between</strong> &mdash; at 6 Influence,
+            sitting on a rival's 5 costs you two Plays a Day for as long as the grudge lasts. It costs <strong>the
+            queue</strong> &mdash; a shorter Ledger walks you off the street early, so tomorrow the rival you just
+            robbed picks before you. And <strong>it doesn't stop the deed</strong>: he can still do the thing, he just
+            doesn't get paid for it. So below ten Influence, hate-drafting is a genuine sacrifice, reserved for the
+            moment it decides the game: a rival on <strong>12 or 13 Respect</strong> reaching for the card that crowns
+            him. Then it is cheap at any price, because there is no tomorrow to save Plays for.
+        </p>
+
+        <p class="note">
+            <strong>The one that isn't a sacrifice.</strong> A kingpin at <strong>10 Influence</strong> has five markers
+            with nothing else to do. He can take the deck's best card, hold it forever, never complete it, and <em>lose
+            nothing at all</em> &mdash; his Ledger still fills, his day is still five Plays long, and his markers still
+            count toward the crown wherever they sit. If the leader is at ten and the Market is thin, expect the good
+            cards to start disappearing into a hand that will never play them. The counter is not to out-bid him; it is
+            to <strong>get to ten yourself</strong>, or to end the game before he's comfortable there.
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h3>Overlaps: Real, Legal, and Mostly Not Worth Chasing</h3>
+        <p>
+            Nothing stops one Play from completing two Jobs, or three. Unload four barrels of Rum at Sunny's Bar in Red
+            Hook and, if you hold all four cards, you collect <em>Cuban Prince</em>, <em>Last Call</em>, <em>The Angel's
+            Share</em> and <em>The Grand Tour</em> at once: <strong>6 Respect for a single sale.</strong> These stacks
+            are deliberate, and every one that survives in the deck is the <em>earned</em> kind &mdash; sets that can
+            only fire in one or two districts, assembled across three separate mornings by someone carrying the full
+            stake the whole way.
+        </p>
+
+        <table class="stat">
+            <caption>The stacks worth knowing (from the deck's own co-firing audit)</caption>
+            <thead>
+                <tr><th class="left">The Play</th><th class="left">Cards</th><th>Respect</th><th>Stake</th><th class="left">Where</th></tr>
+            </thead>
+            <tbody>
+                <tr class="win">
+                    <td class="left"><strong>Unload 4+ Rum at Sunny's Bar</strong></td>
+                    <td class="left">Cuban Prince + Last Call + Angel's Share + Grand Tour</td>
+                    <td class="good">6</td><td>5</td>
+                    <td class="left">Red Hook only</td>
+                </tr>
+                <tr>
+                    <td class="left">Storm a Dock, kill 2+ incl. the Boss, take the house</td>
+                    <td class="left">Toll Booth Trap + Eviction + Pier Six Brawl</td>
+                    <td>9</td><td class="bad">6</td>
+                    <td class="left">Whitestone, Jamaica</td>
+                </tr>
+                <tr>
+                    <td class="left">Storm a Bronx Dock defended 5+, take the house</td>
+                    <td class="left">Over the Top + Eviction + Pier Six Brawl</td>
+                    <td>9</td><td class="bad">6</td>
+                    <td class="left">Throggs Neck only</td>
+                </tr>
+                <tr>
+                    <td class="left">Seize a hot boiler off a 5+ Bronx garrison</td>
+                    <td class="left">Over the Top + The Copper Heist</td>
+                    <td>8</td><td>5</td>
+                    <td class="left">Fordham, Morris Park</td>
+                </tr>
+                <tr class="proof">
+                    <td class="left">Unload 4+ Rum at any $300 joint</td>
+                    <td class="left">Last Call + The Angel's Share</td>
+                    <td>2</td><td class="good">2</td>
+                    <td class="left">5 districts</td>
+                </tr>
+                <tr class="proof">
+                    <td class="left">Trade 4+ Moonshine at a Staten Dock</td>
+                    <td class="left">Rum Row + The Dutchman's Deal</td>
+                    <td>4</td><td class="good">3</td>
+                    <td class="left">Westerleigh, Tottenville</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            The ceiling is genuinely high &mdash; nine Respect from one firefight is more than every Title on the board
+            combined &mdash; but four things compound against building for it: you can't choose your cards, only take
+            what surfaces; three cards is three Offers minimum, with the earliest paying rent the whole time (the
+            Whitestone triple carries a Stake of 6, which at 6 Influence leaves you <em>zero Plays</em> &mdash; it is
+            only playable at 9 or 10); your hand is public and three staked cards all pointing at Queens Docks is an
+            announcement, not a plan; and the big stacks are all Open Fires, the one family where the Play itself eats
+            Ledger markers by the volley. So the correct posture is not to build for overlaps. It's this: <strong>know
+            which cards nest, and pick up the second one when the Market puts it in front of you.</strong> Holding
+            <em>The Angel's Share</em> and seeing <em>Last Call</em> flip face-up is a one-marker, one-morning decision
+            that doubles the pay on a sale you were making regardless. That is the version of this strategy that wins
+            games. The nine-Respect firefight is the version you tell stories about.
+        </p>
+
+        <p class="note">
+            <strong>One crew can build a stack in the dark.</strong> The Vipers' <em>Whispers</em> claims the deck's top
+            card <strong>face-down</strong> &mdash; rivals see the Stake, never the Job, until it completes. In a Market
+            where every other boss telegraphs a stack for three mornings, the Vipers are the only crew who can assemble
+            one without warning anybody, and the only crew whose cards cannot be hate-drafted, because nobody knows what
+            to deny. Under a static Market this is the strongest Jobs power in the game.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>Three Principles of the Offers</h3>
+
+        <div class="principle">
+            <div class="num">1</div>
+            <div>
+                <h4>Set up in silence; claim on the morning you fire</h4>
+                <p>Every Job in the deck completes in a single Play, and nothing on the street ever expires. Those two
+                facts together mean the stake is a <em>rent</em> you should almost always refuse to pay. Build the
+                barrels, walk the Safehouse, mass the bodies &mdash; then take the card at The Offers and finish it that
+                afternoon. One Day of rent instead of five. The only reasons to claim early are denial, or a rival
+                visibly reaching for the same card; and if it's the latter, remember that the tell was never the Market.
+                <strong>It was your board, and he was reading it three Days ago.</strong></p>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="num">2</div>
+            <div>
+                <h4>Climb the Influence ladder before you shop</h4>
+                <p><strong>Plays = Influence &minus; staked &minus; Heat, up to five slots.</strong> Nothing is ever
+                unaffordable &mdash; a stake costs you actions, not access &mdash; but below the fifth slot every marker
+                you promise or scorch is a Play you don't make. The markers <em>above</em> the fifth are the free ones,
+                and they're bought with Bribes you were making anyway: <em>staked markers still count toward your ten,
+                wherever they sit on the night.</em> There is no cheaper tempo in the game. And keep the account honest,
+                because the third term is the one that ruins plans: <strong>Heat comes out of the same pocket, and the
+                Reckoning doesn't clear it.</strong> Run the loud Jobs in bursts, keep quiet ones staked in between, and
+                remember the Raid is a refund.</p>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="num">3</div>
+            <div>
+                <h4>Know which half of the morning you're buying</h4>
+                <p>The Brew drafts forwards and the Market picks backwards, so your Turn Token is a trade, not a rank.
+                <strong>Lay Low first</strong> and you buy tomorrow's dice and tomorrow's tempo, and surrender the pick
+                of the street. <strong>Lay Low last</strong> and you buy the Market, and take the leftover Red with the
+                match in your hand. Neither is better; what's fatal is not choosing. And watch the loop that decides it
+                for you if you don't: a heavy stake shortens your Ledger, a short Ledger walks you off the street early,
+                and an early exit puts you at the <em>back</em> of tomorrow's queue. <em>The Market taxes the man who's
+                already been shopping.</em> Two things buy you out of it: ten Influence, and Rum.</p>
+            </div>
+        </div>
+
+        <h3>The Four Mobs at the Offers</h3>
+        <table>
+            <caption>Where each crew's kit meets the deck</caption>
+            <thead>
+                <tr><th style="width:16%;" class="left">Mob</th><th style="width:34%;" class="left">The edge</th><th class="left">The cards it's for</th></tr>
+            </thead>
+            <tbody>
+                <tr class="win">
+                    <td class="left"><strong>East Side Vipers</strong></td>
+                    <td class="left"><strong>Whispers</strong> &mdash; claim the deck's top card face-down. Rivals see the Stake, never the Job.</td>
+                    <td class="left"><em>All of them.</em> Immune to hate-drafting, invisible while building, and the only crew that can assemble an overlap without announcing it. <strong>Tunnel</strong> also solves the Estate family's spawn-point problem.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>Sicilian Syndicate</strong></td>
+                    <td class="left"><strong>Untouchable</strong> ignores the Sweep, so they alone stack a block past five. <strong>Hit</strong> kills a Boss on demand. <strong>Consigliere</strong> pulls a marker off the Heat Track.</td>
+                    <td class="left">The kill-count 5s &mdash; <em>The Butcher's Ledger</em> is barely a card for anyone else. <em>The Toll Booth Trap</em> is written for Hit. And Consigliere is the only play in the game that <strong>buys back stake capacity</strong>.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>Harlem Knights</strong></td>
+                    <td class="left"><strong>Network</strong> gives a free Rum on every Trade; <strong>Skiff</strong> hauls five barrels coast to coast; <strong>Torch</strong> burns a Safehouse outright.</td>
+                    <td class="left">The Rum ladder and the Staten lane, which Skiff serves better than any Move. <strong>Torch completes <em>Bloody Sunday</em> without beating the garrison</strong>, the biggest single discount in the deck. And the free barrel every Trade is quietly a <em>tempo</em> trait: more Rum means more Kickbacks, which means the Knights choose when their day ends and are the hardest crew in the city to outlast at the Offers.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>Hell's Kitchen Irish</strong></td>
+                    <td class="left"><strong>Firepower</strong> &mdash; a free attack die on every Open Fire volley, invader only. <strong>Peddle</strong> sells Moonshine in your Wards.</td>
+                    <td class="left">Every kill-count card, where a die is worth a whole tier: <em>Pier Six Brawl</em> (2+), <em>The Irish Goodbye</em> (3+), <em>The Butcher's Ledger</em> (5+). Note <strong>Plunder steals instead of killing</strong>, so it earns nothing on a kill-count Job &mdash; but it draws no Heat, which keeps your stake pool clean.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container one-column">
+        <h3>So What's the Optimal Play?</h3>
+        <p>
+            There isn't one build, and the first read is always the same: <em>how much Influence do you have, and what
+            is already on the street?</em>
+        </p>
+
+        <table>
+            <caption>Your Jobs plan by board state</caption>
+            <thead>
+                <tr><th style="width:22%;" class="left">Where you are</th><th style="width:30%;" class="left">Go for&hellip;</th><th class="left">Because</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="left"><strong>Early, 6 Influence</strong></td>
+                    <td class="left">The <strong>1s</strong>, and only the 1s. Take one every morning you can. Bribe toward 8.</td>
+                    <td class="left">Stake 1 is free at 6 on a clean Heat Track, and the Logistics 1s ride Plays your brew engine already makes. The cheap tier is <em>consumable</em> and drains one way, so it will never be this easy again. Meanwhile the 7th and 8th markers are the real purchase.</td>
+                </tr>
+                <tr class="win">
+                    <td class="left"><strong>Mid-game, 8&ndash;10 Influence, board stable</strong></td>
+                    <td class="left">Your <strong>orphan Speakeasy 3</strong>, then one <strong>5</strong> in a lane nobody contests &mdash; Staten, or the Rum ladder.</td>
+                    <td class="left">At 8 a 5-Respect stake is free to carry, which is the moment campaigns become affordable. The orphan joint is in your own back yard and needs no fight; the Staten lane needs no rival at all. Take the uncontested Respect while the table is busy shooting.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>Mid-game, board hostile</strong></td>
+                    <td class="left">The <strong>Estate</strong> family, and <em>The Empty Casket</em> as insurance.</td>
+                    <td class="left">Nobody can stand between you and your own Safehouse, so Secure and Recruit Jobs still bank points when the map has closed. And a losing position is a position where your Boss dies &mdash; hold the Casket <em>before</em> that happens, because you can't claim it afterwards.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>You're ahead &mdash; 12+ Respect</strong></td>
+                    <td class="left">Stop shopping. <strong>Stay on the street late</strong>, hold your stake capacity free, and deny the card that crowns the runner-up.</td>
+                    <td class="left">Holdings top out at <strong>14 Respect</strong> &mdash; four Deeds and three Titles is not fifteen &mdash; so every rival <em>must</em> come through the Market to win. That makes the Market the last chokepoint in the game, and at 10 Influence you can hold it shut for nothing.</td>
+                </tr>
+                <tr>
+                    <td class="left"><strong>You're behind, and the 1s are gone</strong></td>
+                    <td class="left">Take the <strong>early Lay Low</strong> and rebuild the engine; hunt <strong>kill-count</strong> cards, not Seize cards.</td>
+                    <td class="left">Stepping off first buys the best Red in the city and the first Play of the Hustle, which is how a broken economy restarts. And when you do fight, remember the deed pays even when the raid fails: <strong>you don't have to win, you only have to kill.</strong> A losing crew can still bank 5 Respect on a suicide run.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            The through-line: <strong>the Market is not a shop, it's a queue you pay to stand in.</strong> The skill
+            isn't spotting the fattest card &mdash; everyone can see all of them, that's the point. It's knowing exactly
+            which morning to reach, and having climbed the Influence ladder far enough that reaching costs you nothing.
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">Kingpin's Note</span>
+            <p>The greenhorn grabs the biggest card on the street the day he sees it, pays two Plays a morning for a
+            week, tells the whole table what he's building, and watches the target walk out of the borough. The old hand
+            takes the small ones, the ones his liquor business was doing anyway, and quietly banks four Respect while
+            the shooting goes on somewhere else. The made man does one better: he buys the Commission early, because at
+            ten Influence a promise costs him nothing he'd have spent &mdash; so long as he keeps the Track cool &mdash;
+            then he sets up in silence, claims on the morning he fires, and takes the last card off the street on the
+            night the second-place man needed it. <em>Nothing in the Market ever expires. Neither does a grudge.</em></p>
+        </div>
+    </div>
+    <div class="container one-column">
+        <h2 id="standoff">Part III &middot; The Standoff</h2>
+        <div class="cover">
+            <img class="cover-sm" src="Art/Rulebook/Vendetta.png" alt="Blood on the Streets" width="100%">
+        </div>
+        <p class="lede">
+            Guns don't win this war &mdash; <em>Respect</em> does. But the turf that carries your Jobs, your Deeds, and
+            your Speakeasies never comes quietly, and that makes a loaded pistol the down-payment on the crown. Here's
+            the secret the corner boys never learn: most firefights are settled <em>before</em> a single die leaves the
+            hand &mdash; in the long silence of the standoff, in the cold sum of who holds the better ground. Learn that
+            ground, and you'll win wars you never have to fight.
+        </p>
+
+        <h3>Two Numbers Run Every Fight</h3>
+        <p>
+            Everything comes down to <strong>how many dice</strong> you roll and <strong>what kills</strong>.
+            <strong>Dice = the Muscle Ratio</strong> &mdash; the same staircase as brewing: 1&ndash;2 mobsters roll 1
+            die, 3&ndash;4 roll 2, 5&ndash;6 roll 3, 7&ndash;8 roll 4, 9+ roll 5, the cap. More bodies, more lead, with
+            hard diminishing returns. <strong>Threat = the kill number.</strong> Base kills on a 5&ndash;6; each +1
+            Threat widens it, to Level 4's 2+ &mdash; five-sixths of every die. <strong>Threat matters far more than
+            dice</strong>, because it multiplies every die you roll. And Threat is where the defender lives: a dug-in
+            Occupier stacks bonuses an attacker simply cannot match.
+        </p>
+
+        <h3>The Standoff: The Whole Game in Two Questions</h3>
+        <p>
+            When you Move onto turf a rival Controls, the fight pauses. First the <strong>Occupier</strong> answers;
+            then the <strong>Invader</strong> chooses, and keeps choosing until the Pin breaks.
+        </p>
+
+        <h4>The Occupier answers first</h4>
+        <div class="choicebar">
+            <div class="choice"><h4>Ambush</h4><p>A <em>free</em> shot at <strong>+1 Threat</strong> before anyone else fires. No Heat. Then the fight is on.</p></div>
+            <div class="choice"><h4>Hold Fire</h4><p>No shot. The Invader is Pinned but unhurt &mdash; a signal: <em>"maybe you're just passing through."</em></p></div>
+            <div class="choice"><h4>Fold</h4><p>Give up the block, flee your crew to safe turf. Lose the liquor, keep the bodies. Costs nothing.</p></div>
+        </div>
+
+        <h4>Then the Invader chooses &mdash; and pays</h4>
+        <div class="choicebar">
+            <div class="choice"><h4>Open Fire &mdash; 1 Influence</h4><p>Both sides roll at once. If <em>you</em> kill, you take Heat. Still standing? Pay again to fire again.</p></div>
+            <div class="choice"><h4>Advance &mdash; 1 Influence</h4><p>Shoot your way out to safe turf, barrels and all. A fighting retreat, not a rout.</p></div>
+            <div class="choice"><h4>Fall Back &mdash; free</h4><p>Cut and run to where you came from, liquor left behind. Forced on you at 0 Influence.</p></div>
+        </div>
+
+    </div>
+
+    <div class="container one-column">
+        <p class="note">
+            <strong>The asymmetry that defines combat:</strong> the Occupier shoots first and free, adds <strong>+2
+            Threat from a Safehouse</strong>, and <em>never takes Heat</em> for defending his own corner. The Invader
+            pays Influence for every volley and draws Heat the moment he kills. <strong>Defence is the strong position
+            &mdash; by a wide margin.</strong> Attacking is a premium you pay in dice, in Influence, and in police
+            attention.
+        </p>
+
+        <h3>How Steep Is the Premium?</h3>
+        <p>
+            Below: an Invader (with Boss) storms a <em>Secured</em> district &mdash; 3 Runners, a Boss, and a Safehouse
+            &mdash; spending up to 3 Open Fires. Note what a big raid really costs first: the Sweep caps any district at
+            5 mobsters overnight, so a crew of six or more must be massed with an extra Move on the day &mdash; one more
+            Influence the defender never spends.
+        </p>
+
+        <table class="stat">
+            <caption>Invader's odds vs. a Secured 3-Runner + Boss + Safehouse district</caption>
+            <thead>
+                <tr>
+                    <th class="left">Invader Runners</th>
+                    <th>Attack Dice</th>
+                    <th>Invader Takes It</th>
+                    <th>Invader Losses</th>
+                    <th>Gains Heat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="left">3 (even numbers)</td><td>2</td><td class="bad">1%</td><td>3.9</td><td>75%</td></tr>
+                <tr><td class="left">4</td><td>3</td><td class="bad">8%</td><td>4.7</td><td>91%</td></tr>
+                <tr><td class="left">5</td><td>3</td><td>25%</td><td>5.0</td><td>95%</td></tr>
+                <tr class="win"><td class="left">6 (2&times; the garrison)</td><td>4</td><td>48%</td><td>5.0</td><td>99%</td></tr>
+                <tr><td class="left">7</td><td>4</td><td>66%</td><td>4.7</td><td>99%</td></tr>
+                <tr><td class="left">9 (3&times; the garrison)</td><td>5</td><td class="good">89%</td><td>4.2</td><td>100%</td></tr>
+                <tr><td class="left">11</td><td>5</td><td class="good">96%</td><td>4.0</td><td>100%</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Read the shape of it: <strong>even numbers is a slaughter</strong> (1% for the attacker), <strong>you need
+            roughly double the garrison for a coin-flip</strong>, and <strong>triple for a confident take</strong>
+            &mdash; and you'll bleed 4&ndash;5 bodies and near-certain Heat doing it. A few guards genuinely do keep the
+            peace: three Runners behind a Safehouse and Boss turn away a four-man raid nine times in ten.
+        </p>
+        <h3>Three Principles of the Street</h3>
+
+        <div class="principle">
+            <div class="num">1</div>
+            <div>
+                <h4>Never attack into even numbers</h4>
+                <p>The defender's free ambush shot and Safehouse +2 mean a fair fight isn't fair &mdash; it's a 1-in-50
+                for the attacker. If you mean to take a block, bring <strong>at least double the garrison</strong>,
+                ideally into the next dice tier (5&ndash;6 bodies for 3 dice, 9 for the 5-dice cap). Anything less just
+                donates your crew and your Heat to the man you're attacking.</p>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="num">2</div>
+            <div>
+                <h4>The Influence tax caps your persistence</h4>
+                <p>Every Open Fire costs 1 Influence &mdash; a Play you're not spending on money or Jobs. Grinding a
+                stubborn alley from 3 volleys to 5 lifts your odds barely (25% &rarr; 31%) while your losses climb and
+                rivals run free across the city. <strong>Commit hard or not at all:</strong> plan the force to win in
+                2&ndash;3 volleys, and if it's not breaking, Fall Back before you're bled dry. There is no cheap war of
+                attrition here.</p>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="num">3</div>
+            <div>
+                <h4>Fold to save the crew; fight only for turf worth blood</h4>
+                <p>Folding costs zero casualties &mdash; you trade the block and its barrels for a mobile, intact crew
+                that lives to earn tomorrow. Standing to fight a stronger raider bleeds you <em>whether you hold or
+                not</em> (2&ndash;3 casualties average even at a coin-flip). So fold the empty corner without a second
+                thought; dig in only when your hold odds are high, or the block is worth a crown &mdash; a district your
+                staked Jobs name, a Borough Deed, a Ward or Dock that swings a Title, or a Speakeasy your Night Mayor
+                race can't spare.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container one-column">
+        <h3>The Occupier's Playbook</h3>
+        <p>When a rival crosses your line, run the read in this order:</p>
+        <table>
+            <caption>Occupier decision: what to do when they Move in</caption>
+            <thead>
+                <tr><th style="width:30%;" class="left">If&hellip;</th><th style="width:16%;" class="left">Do this</th><th class="left">Why</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="left">The block is empty scrap you don't need</td>
+                    <td class="left"><strong>Fold</strong></td>
+                    <td class="left">Keep every body. Turf is cheap; a trained crew isn't. Let them have the corner and make them defend it next.</td>
+                </tr>
+                <tr class="win">
+                    <td class="left">You want the block <em>and</em> intend to fight</td>
+                    <td class="left"><strong>Ambush</strong></td>
+                    <td class="left">The free +1-Threat shot is pure upside &mdash; it strictly beats Hold Fire on both hold-rate and your own losses. If you're fighting at all, shoot first.</td>
+                </tr>
+                <tr>
+                    <td class="left">You're unsure they mean to fight</td>
+                    <td class="left"><strong>Hold Fire</strong> (a bluff)</td>
+                    <td class="left">Not a combat move &mdash; a political one. It lets a passer-by leave without a war, and hides your strength. Use it to keep the peace, not to win the fight.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="note">
+            <strong>Why the drawn gun beats the fired one.</strong> Because defence is so strong, the <em>threat</em> of
+            your garrison does more work than the shooting ever will. A rival who can read the table knows a Secured
+            block with three guards is a 90% wall &mdash; so he doesn't attack it; he goes around. Your bodies earn
+            their keep standing still. That is the quiet genius of the standoff: the fights you win are mostly the ones
+            nobody starts.
+        </p>
+        <h3>The Four Mobs at War</h3>
+        <p>
+            Everything above is mob-blind &mdash; the cold arithmetic every crew shares. But no two families fight the
+            same. Each bends the maths in exactly one place, and knowing <em>which</em> place is worth more than any
+            table on this page. The yardstick below: an invader with a Boss and 6 Runners storming the biggest garrison
+            the Sweep allows &mdash; Boss, 4 Runners, and a Safehouse &mdash; with 4 Influence to burn.
+        </p>
+
+        <table class="stat">
+            <caption>One assault, four crews (Boss + 6 Runners vs. Boss + 4 Runners + Safehouse, 4 Influence)</caption>
+            <thead>
+                <tr><th class="left">Invader</th><th>Takes the District</th><th>Rival Boss Dies</th><th class="left">The Read</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="left">Baseline (no play)</td><td>9%</td><td>13%</td><td class="left">Defence wins. That's the reference.</td></tr>
+                <tr class="win"><td class="left">Irish &mdash; Firepower</td><td class="good">29%</td><td>41%</td><td class="left">One free die triples the take rate.</td></tr>
+                <tr><td class="left">Sicilians &mdash; Hit</td><td>8%</td><td class="good">94%</td><td class="left">Not there for the turf. There for the man.</td></tr>
+                <tr><td class="left">Vipers &mdash; Stealth (5-man cap)</td><td>7%</td><td>11%</td><td class="left">The cap bites against full garrisons.</td></tr>
+                <tr><td class="left">Knights &mdash; Torch first</td><td class="bad">1%</td><td>1%</td><td class="left">A siege play, not a takeover (below).</td></tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="container one-column">
+        <h4>Hell's Kitchen Irish: the only crew that fights above its weight</h4>
+        <p>
+            <strong>Firepower</strong> is a free attack die on every Open Fire volley &mdash; strictly an invader's
+            tool, it never fires on defence, not even an Ambush &mdash; and it's worth roughly a full dice tier. A
+            concentrated assault of Boss and 6 Runners into a Secured 3-Runner block jumps from <strong>48% to
+            79%</strong>; into a full garrison, it <em>triples</em> the take (9% &rarr; 29%). On their own turf the
+            Irish defend like anybody else. <strong>Plunder</strong> is a different weapon: hit <em>soft</em> stockpiles
+            &mdash; against two unguarded Runners sitting on barrels, one quiet volley lifts ~1.3 barrels for 3
+            Influence, under one body lost, and <em>zero Heat</em>, the only violence in the city the law ignores.
+            Against a Secured stockpile it trades ~3 bodies for a single barrel &mdash; don't. And loot only leaves on
+            an <strong>Advance</strong>; Fall Back drops it.
+        </p>
+
+        <h4>Sicilian Syndicate: the wall and the stiletto</h4>
+        <p>
+            Everyone else's garrison is capped by the Sweep at 5 mobsters. <strong>Untouchable</strong> isn't: a
+            Sicilian Boss + 6 Runners behind a Safehouse holds <strong>80%</strong> against the biggest raid in the game
+            (10 men, 4 Influence); Boss + 8 Runners holds <strong>99%</strong>. Past nine defenders the attacker's
+            five-dice cap simply cannot cut through Threat 4 &mdash; it is a wall, and the only real check on it is that
+            15 Runners stretched over an empire leave every <em>other</em> border thin. <strong>Hit</strong> is the
+            opposite tool: Move in, pay 2, and the rival Boss eats the first hit &mdash; <strong>68&ndash;94% he
+            dies</strong> depending on your crew, even into a full garrison &mdash; then Fall Back. Three Influence, and
+            the rival loses his +1 Threat everywhere on the map, plus 2 more Influence to Rise &mdash; and he skips
+            tomorrow's Offers. You were never there for the turf.
+        </p>
+
+        <h4>East Side Vipers: the scalpel</h4>
+        <p>
+            <strong>Stealth</strong> deletes the Occupier's two best answers &mdash; no Ambush, no Fold &mdash; and it
+            shows against thin turf: a five-man Stealth squad takes a Boss + 2 Runner + Safehouse block <strong>70% of
+            the time versus 24% marching in</strong>, at roughly half the casualties. But the 5-mobster cap means it
+            cannot out-muscle a full garrison (7%, no better than walking). Snipe the thin blocks, the lone Bosses, the
+            half-guarded Stills; never use it as a siege engine.
+        </p>
+
+        <h4>Harlem Knights: buy your wars</h4>
+        <p>
+            No Knight play adds dice or Threat &mdash; in a straight firefight they are the baseline row, everywhere,
+            the only crew that fights bare-handed. What they do own is <em>reach</em>: <strong>Skiff</strong> lands five
+            men from any coast you control onto any other, so an isolated picket anywhere on the water is prey &mdash; a
+            full skiff takes two lone Runners <strong>92%</strong> of the time for barely a body, and even a Boss with
+            two guards falls near a coin-flip. No other crew delivers that fight without marching the map.
+            <strong>Torch</strong> is the other lever and it's a <em>siege</em> tool: 3 Influence, a sacrificed Runner,
+            and Heat to burn the Safehouse, which lifts <em>tomorrow's</em> assault from 7% to 18% and deletes the +2
+            Threat until the rival re-Secures ($500 and a Play). Prep, not takeover &mdash; or pure spite on the way
+            out. The rest of the Knight war is economic: the rum trade fills the bankroll, the bankroll fills Recruit,
+            and Recruit is how you show up with the three-to-one the tables above demand. Outnumber first; fight second.
+        </p>
+
+        <h4>So What's the Optimal Play?</h4>
+        <ul class="sub-section">
+            <li><strong>Defending:</strong> a Safehouse plus 2&ndash;3 Runners and your Boss turns a district into a
+                wall (66&ndash;90% hold vs. a real raid). Secure the turf that carries your win &mdash; the districts
+                your Jobs name, Borough Deeds, the Wards, Docks and Speakeasies that swing your Titles &mdash; and let
+                the scraps go.</li>
+            <li><strong>Attacking:</strong> only with overwhelming force (2&ndash;3&times; the garrison) into turf you
+                genuinely need, and only when you can afford the Influence and the Heat. A raid that stalls is worse
+                than a raid never launched.</li>
+            <li><strong>Above both:</strong> most of your combat value is <em>positional</em> &mdash; garrisons that
+                deter, standoffs that bluff, folds that preserve. Spend bullets rarely and decisively; spend the
+                <em>threat</em> of them constantly.</li>
+        </ul>
+
+        <div class="kingpin">
+            <span class="tag">Kingpin's Note</span>
+            <p>The hothead charges a Secured block with an even crew and wonders why he's burying four men and holding
+            the freshest marker on the Heat Track. The made man garrisons the turf his Jobs need, folds the corners that
+            don't earn, and when he finally does move, he moves with three-to-one and ends it in two volleys. Same dice.
+            One of them dies rich.</p>
+        </div>
+    </div>
+    <div class="container one-column">
+        <h2 id="heat">Part IV &middot; Heat and the Law</h2>
+        <div class="cover">
+            <img class="cover-sm" src="Art/Rulebook/Police.png" alt="The Blue Wall" width="100%">
+        </div>
+        <p class="lede">
+            Every chapter in this book keeps arriving at the same line of arithmetic, and the third term is the one
+            nobody budgets for. The Heat Track is the only bank in the city where all four mobs keep their money in the
+            same drawer &mdash; five spaces, filling one loud Play at a time, until the sirens empty it back into
+            everyone's pockets at once. Most bosses treat it as weather. It isn't. It's a machine with a trigger, a
+            targeting system, and a refund policy &mdash; and a boss who reads them can aim the law the way he aims a
+            gun.
+        </p>
+
+        <h3>What the Law Hears</h3>
+        <p>
+            Only four things in this city put a marker on the Track, and the discounts written into them are the whole
+            strategy:
+        </p>
+
+        <table class="stat">
+            <caption>The loud plays &mdash; and the bulk discount hiding in each</caption>
+            <thead>
+                <tr><th style="width:26%;" class="left">The noise</th><th style="width:30%;" class="left">When it draws Heat</th><th class="left">The discount</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="left"><strong>Killing as the Invader</strong></td><td class="left">Your dice score 1+ kills in a firefight</td><td class="left"><strong>Once per Play</strong>, however many rounds it runs and however many men fall. A multi-volley massacre costs the same marker as a single lucky shot.</td></tr>
+                <tr><td class="left"><strong>Extort</strong></td><td class="left">Always</td><td class="left">One marker, <strong>however many Districts pay</strong>. $200 a District means the shakedown scales and the Heat doesn't. Extort wide or don't bother.</td></tr>
+                <tr><td class="left"><strong>The Greed Tax</strong></td><td class="left">Unload or Peddle 4+ barrels in one Play</td><td class="left">Three barrels is silent, forever. The fourth barrel is what the cops can hear.</td></tr>
+                <tr><td class="left"><strong>Torch</strong></td><td class="left">Always</td><td class="left">None. Arson is arson.</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            And the silences matter more. <strong>Defending is free</strong>: the Occupier never draws Heat, whatever
+            the bodycount &mdash; the law only books the man who started it, so the cheapest violence in the city is the
+            violence somebody else begins on your doorstep. <strong>Plunder is free</strong>: the Irish steal barrels at
+            gunpoint and the law shrugs. Move, Trade, Secure, Recruit, Bribe, and a disciplined three-barrel sale are
+            all silent. A crew that wanted to could play an entire game without one marker reaching the Track &mdash;
+            and fourteen of the thirty-two Jobs make sure it never wants to.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <p>
+            The principle underneath that table: <strong>the law counts Plays, not corpses.</strong> One firefight that
+            kills five men costs one marker; five skirmishes that kill one man each cost five. One Extort squeezing
+            eight districts costs one; and the 8-Rum Opening Night costs exactly what a 4-Rum sale costs. So when you
+            must be loud, be loud <em>in bulk</em> &mdash; batch the noise into the fewest Plays the board allows, and
+            bank the discount every time.
+        </p>
+
+        <h3>What Heat Actually Costs You</h3>
+        <p>
+            A marker on the Track came out of the same ten that fund your Ledger, stake your Jobs, and buy your crown
+            &mdash; and it is not coming back at nightfall. <em>The Reckoning does not clear Heat. Only a Raid does.</em>
+            So every hot marker is a rung off the ladder in Part II, this morning and every morning until the sirens:
+            your working capital is Influence minus Heat, and only the first five of it buys Plays. Two markers cooling
+            and a 6-Influence crew can't carry a 1-Respect Job for free anymore; three, and their whole day is shorter
+            than a kingpin's afternoon.
+        </p>
+        <p>
+            But note the one thing Heat does <em>not</em> cost you, because it changes the endgame: <strong>markers on
+            the Track still count toward your ten.</strong> The win check counts your Influence wherever it sits &mdash;
+            Reserves, Ledger, staked on Jobs, or cooling in a cell. The law taxes your days. It cannot touch your
+            throne. A boss one Bribe from the crown does not need a cool Track; he needs a Reckoning where the count
+            comes up ten, and the Track counts.
+        </p>
+
+        <p class="note">
+            <strong>The Sicilian dial.</strong> <em>Consigliere</em> is the only Play in the game that turns the Track
+            <em>down</em>: one Influence, one phone call, and any marker of the Syndicate's choosing goes home to its
+            owner's Reserves. Read that twice &mdash; <em>any</em> marker, anyone's. Cooling their own name is the
+            obvious use. The other use is the one to fear, and it's in the Raid rules below: the law hunts the
+            <em>freshest</em> marker, so removing the man in front of you from the queue re-aims the coming Raid at
+            whoever stood behind him. The Syndicate doesn't just quiet the city. It decides who the city is loud
+            <em>about</em>.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>How the Raid Picks Its Door</h3>
+        <p>
+            The fifth marker lands, or somebody Rats, and the city locks down. What happens next is completely
+            deterministic &mdash; no dice, no discretion &mdash; and that is the single most important fact about it,
+            because anything deterministic can be engineered. Each of the four Squads, in the numbered Borough order on
+            the board, does this: it looks at the Districts <strong>directly connected to it, inside its own
+            Borough</strong> &mdash; that is its whole world. Among the mobs holding those districts, it hunts the one
+            whose marker sits <strong>furthest right on the Heat Track</strong>; if none of them has a marker on the
+            Track at all, it stays put. Then it picks the door: that mob's in-reach district with the <strong>most
+            barrels</strong> (tie: the hottest boiler on the Borough's Pressure Strip), takes one step in, destroys any
+            Safehouse, seizes every barrel, and scatters the crew. Then it squats there, an impassable wall, until the
+            next Raid moves it on. When all four Squads have moved, <strong>every Heat marker on the Track goes home.</strong>
+        </p>
+        <p>
+            Three levers fall out of that paragraph, and they are the difference between a boss the law happens to and
+            a boss who uses it.
+        </p>
+
+        <h4>Lever one: the law hunts the freshest name, not the worst one</h4>
+        <p>
+            The Squad doesn't count your markers. It reads the Track right to left and takes the first name it
+            recognises &mdash; <strong>the most recent noise wins</strong>, however much older noise sits behind it.
+            Three markers deep but quiet since Tuesday? The law walks past you to the crew that shouted this morning.
+            One marker, placed last? You're the headline. So the discipline isn't "stay quiet" &mdash; nobody holding
+            loud Jobs can afford that. It's <strong>be loud early in the cycle</strong>, then let your rivals shout
+            over you. Every marker anyone else adds after yours is armour, and the boss who does his shooting the
+            morning after a Raid, with the Track empty and four clean names behind him, has bought the longest quiet
+            spell in the game &mdash; the whole table must out-shout him before the law comes knocking.
+        </p>
+
+        <h4>Lever two: reach is geography, and geography is yours to choose</h4>
+        <p>
+            A Squad's reach is <em>one step, inside its own Borough</em>. It cannot cross a Borough line, it cannot jump
+            the water, and it cannot hunt what it cannot touch. Hold no district connected to a Squad and you are
+            untouchable at any temperature &mdash; the hottest crew in the city, walking free, because the law can't
+            reach the block you actually stand on. Read the board with that eye and the safe rooms light up: every
+            district more than one step from a Squad, every district across a Borough line from one &mdash; and
+            <strong>the whole of Staten Island, where no Squad is ever posted.</strong> The Staten lane from Part II
+            isn't just uncontested by rivals; it is the one place in the game the law cannot follow you, which is worth
+            remembering when your plan says "be the loudest crew in town." One caution: Squads resolve in Borough order,
+            and a crew scattering from the first can land in the path of the second. When the Track sits at four, check
+            your exits against <em>every</em> precinct, not just the nearest.
+        </p>
+
+        <h4>Lever three: plant the evidence &mdash; the decoy warehouse</h4>
+        <p>
+            You often can't stop the knock. You can almost always <strong>choose the door</strong>, because the Squad
+            kicks in your most-barrelled district in its reach, and where your barrels sit is entirely up to you. So
+            when your name is going to be freshest &mdash; and a boss running loud Jobs always knows when that is
+            &mdash; you build the bust before the law does: pick the in-reach district you can best afford to lose, and
+            make it the fattest target on the map. Pile the barrels you were about to sell anyway. Keep the Safehouse
+            <em>off</em> it &mdash; the house is $500, a Play, and your only Recruit anchor, and the Raid burns it for
+            free. Keep the Boss off it. Then let them come: the cops seize the plant, padlock a corner you'd already
+            written off, and march straight past the empire. The fee is the barrels &mdash; so plant cheap Moonshine,
+            not Rum &mdash; and the prize is everything else. Two refinements for the connoisseur: a padlocked Still
+            <em>ignores Blowbacks</em>, so parking the law on your own worst boiler turns a liability into a wall; and
+            the Squad has to step <em>off</em> something to step onto your plant &mdash; early in the game that's a
+            <strong>High Society door swinging open</strong>, and Part II already told you who's waiting outside it.
+        </p>
+
+        <p class="note">
+            <strong>Leave a back door, or don't leave at all.</strong> A raided crew flees to one Connected Safe
+            District &mdash; and if there isn't one, because every exit is rival turf, water, the Blue Wall or the map's
+            edge, <strong>the whole crew is arrested and boxed.</strong> That rule cuts twice. Defensively: never let a
+            barrel pile and a dead-end share an address in Raid season. Offensively: the exits of a rival's likely bust
+            are a thing <em>you</em> can quietly close &mdash; a Runner on this corner, a picket on that one, and the
+            Raid you both saw coming stops being a fine and becomes a massacre. The law does the shooting. You just
+            locked the doors.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>When You Want the Fire</h3>
+        <p>
+            Everything above treats the Raid as a threat. Half the time it's the payoff. Count what the sirens actually
+            deliver: <strong>every Heat marker at the table goes home</strong> &mdash; the deepest refund flows to
+            whoever banked the most noise, and a crew with three markers cooling gets three rungs of its ladder back in
+            one breath. <strong>The doors open</strong> &mdash; each Squad that moves un-padlocks what it was sitting
+            on, and the game starts with all four $500 rooms and all four 7-boilers under police boots; there is no
+            High Society lane, no Opening Night, no wall of sevens, until somebody makes the city boil.
+            <strong>And the board rearranges</strong> &mdash; safehouses burn, barrels vanish, garrisons scatter into
+            each other's path. A Raid is the single most violent Play in the game, and nobody pays Influence for it.
+        </p>
+        <p>
+            So the real question about the fifth marker is never <em>whether</em> it lands. It's <strong>who chooses the
+            moment</strong> &mdash; because the boss who places it fires every consequence above with the board arranged
+            his way: his decoy fat, his exits open, his rivals' barrels massed for tomorrow's sales, their crews standing
+            in reach. The catch is printed in Lever One: the trigger marker is by definition <em>the freshest name on
+            the Track</em>, so the trigger man is the target &mdash; unless his turf is out of reach, or his decoy is
+            already built, or the marker isn't his at all (see <em>Part V</em> for how to arrange that). At four
+            markers, the whole Hustle changes character: every loud Play at the table is a finger on the trigger, and
+            the boss with a clean position and a reason to want sirens should be racing to pull it first.
+        </p>
+
+        <h3>The Rat: A Raid on Demand</h3>
+        <p>
+            And then there's the clean trigger. The <strong>Rat</strong> Play fires an immediate Raid at any Track
+            height, and &mdash; here is its teeth &mdash; <em>it places no marker</em>. The Track stays exactly as the
+            last loud Play left it, which means the law hunts <strong>whoever fired the last loud shot</strong>, not
+            you. A rival storms a district, kills three men, masses his barrels for the morning sale &mdash; and you
+            drop a dime that same afternoon: his marker is freshest, his crew is in reach, his stockpile is the fattest
+            door on the block. That is not a defensive rule. That is a precision air strike, purchasable for 2
+            Influence, and the only question is whether you can afford the price tag that comes with it.
+        </p>
+        <p>
+            Because the price is the <strong>Rat Card</strong>: no Bribing, no crown, no second call, until it leaves
+            you &mdash; and it leaves only when your Boss dies or a rival Rats it off you. That makes the Rat a
+            strictly <em>early</em> weapon: while your Influence ladder hasn't started, the Card costs you almost
+            nothing, and <em>The Insurance Job</em> will even pay you 3 Respect for making the call &mdash; provided
+            you've engineered the bust to land on a low-Pressure Still you Control, which is Lever Three run in
+            reverse: be the loudest name in town, and stack the barrels on the boiler you want padlocked. Late game,
+            the arithmetic flips entirely: a boss at 9 Influence who Rats has locked himself out of the throne and
+            handed the table a hostage. And mind the hot potato &mdash; a rival who Rats later doesn't just trigger a
+            Raid, he <em>takes the Card off you</em>, which is the one favour no one at the table means kindly.
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">Kingpin's Note</span>
+            <p>The greenhorn thinks Heat is a punishment and plays scared of his own gun. The old hand budgets it: he
+            batches his noise, shouts early in the cycle, and keeps a borough line between his boilers and the blue
+            wall. The made man aims it. He stacks his plant on a corner he never loved, walks the cops off the velvet
+            room, collects his refund with the doors standing open &mdash; and when a rival makes the mistake of being
+            loud and rich on the same afternoon, he finds a telephone. The law is a hammer lying in the middle of the
+            table, and every fifth loud Play, somebody gets to pick it up. Make sure it's you.</p>
+        </div>
+    </div>
+    <div class="container one-column">
+        <h2 id="table">Part V &middot; The Table</h2>
+        <div class="cover">
+            <img class="cover-sm" src="Art/Rulebook/Puppet.png" alt="Puppets in the Smoke" width="100%">
+        </div>
+        <p class="lede">
+            Everything else in this book you can calculate. This chapter you have to <em>play</em>. The rules hand you
+            three instruments &mdash; a loan, a handshake, and an off-book cash trade &mdash; and one warning printed in
+            iron: <strong>there are no shared victories.</strong> Every deal in this game runs out at dusk, every
+            partner is a rival on a schedule, and yet the tables in the other four chapters keep saying the same thing:
+            the man who plays alone pays full price for everything. Here is how to buy cheaper.
+        </p>
+
+        <h3>Why Deal at All?</h3>
+        <p>
+            Because tempo is zero-sum, and a deal moves it. When two crews trade something each values less for
+            something each values more &mdash; your spare Mash face for his walk-away at the Offers, your $1,000 for
+            safe passage through Brooklyn &mdash; the tempo they save comes out of the two crews <em>not</em> at the
+            table. <strong>Every fair deal is a conspiracy against the men not in it.</strong> That is the whole theory
+            of cooperation in this game, and it's why the strongest tables are never quiet: a boss who won't deal isn't
+            being careful, he's paying retail in a city that runs on wholesale.
+        </p>
+        <p>
+            And because <strong>the leader problem cannot be solved alone.</strong> Respect is fully public &mdash;
+            completed Jobs, Deeds and Titles all sit face-up &mdash; and holdings top out at 14, so every crew must come
+            through the Jobs Market to win. When one boss reaches 12, the counterplay is written in Part II: deny the
+            crowning card. But below ten Influence a hate-draft costs the drafter two mornings and days of rent, which
+            no single rival can afford to pay twice &mdash; so the containment has to be <em>shared</em>. A cartel of
+            denial, each rival burning one Offer in rotation, splits a crippling bill into three affordable ones. The
+            same logic runs everywhere: the table can leave the leader's number in the pool for the Blowback, the
+            Harbormaster can name the face that starves him, and the man with the freshest marker on the Heat Track can
+            be handed to the law by a single phone call. None of it needs a treaty. It needs three bosses reading the
+            same board and each doing the cheap piece. <em>Do it early &mdash; at ten Influence the leader's denial
+            costs him nothing and yours still costs you everything.</em>
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h3>What Actually Trades</h3>
+        <ul class="sub-section">
+            <li><strong>Cash</strong> &mdash; the only thing that changes hands freely, off the board, any time. The
+                grease in every deal below.</li>
+            <li><strong>Liquor</strong> &mdash; by Move: barrels left in a rival's District become theirs. The rulebook
+                calls it a donation; it is also the sanctioned way to <em>pay in product</em> &mdash; a barrel of Rum is
+                $300&ndash;$500 and a Kickback, which makes it the richest coin at the table.</li>
+            <li><strong>The Mash</strong> &mdash; the Harbormaster names tomorrow's number for the whole city, and a
+                face that fires an ally's boilers as well as his own costs him <em>nothing</em>. The cheapest favour in
+                the game, and the easiest to collect on later.</li>
+            <li><strong>The Market</strong> &mdash; a walk-away that frees a card, a claim that denies one, a morning's
+                pick conceded. Priced in mornings, the scarcest currency there is.</li>
+            <li><strong>The queue</strong> &mdash; stepping off early or hanging on late to hand an ally the token he
+                needs. Free to give whenever your own evening didn't matter.</li>
+            <li><strong>Influence itself</strong> &mdash; by loan, never by gift. Which deserves its own section,
+                because the loan is the sharpest knife in the drawer.</li>
+        </ul>
+        <h3>Puppeteering: The Loan with a Fuse</h3>
+        <p>
+            At any time during the Hustle &mdash; not as a Play, not even on your turn &mdash; you may slide Influence
+            from your Ledger to any boss still on the street. He may refuse. Accepted markers sit in his Ledger and he
+            spends them <strong>as his own</strong>: you choose who gets the money, and that is the last thing you
+            choose. Then the settlement rule, and read it like a contract, because it is one: a quiet Play returns your
+            marker the moment it's spent; a loud one locks <em>your</em> marker on the Heat Track &mdash; and when two
+            mobs' markers fund one Play, <strong>the boss making the Play picks whose marker takes the fall, even
+            between two lenders.</strong> Four plays live inside that rule:
+        </p>
+        <ul class="sub-section">
+            <li><strong>Heat laundering.</strong> The spender points the finger, so the spender's own markers can stay
+                clean forever &mdash; ask for one marker "to cover the Unload," pay the Greed Tax with the lender's
+                name, and walk away silent. Remember Part IV: the Track targets by <em>freshness</em>, and the marker on
+                the Track belongs to its <em>owner</em>. A boss who goes loud on borrowed money has just made his
+                banker the most wanted man in the city. <em>Accepting a loan costs nothing. Giving one is signing a
+                liability.</em></li>
+            <li><strong>The poisoned gift.</strong> Run the same play from the other chair: lending to a crew with loud
+                work left in its day is volunteering for the Track &mdash; so lend to quiet men, late in their day, when
+                you can see what's left in front of them. And when a rival offers <em>you</em> markers unprompted, ask
+                what he knows about tonight's sirens that you don't.</li>
+            <li><strong>The proxy war.</strong> The loan works mid-firefight &mdash; a Pinned invader out of markers
+                must Fall Back, and yours can keep him shooting. When two crews you don't like are locked in an alley,
+                the cheapest Play on the board is a marker slipped to whichever one is losing. Whoever wins, the block
+                comes out bleeding, and you never fired a shot. Price it honestly: if your marker funds the killing
+                volley, expect the finger.</li>
+            <li><strong>The mercy loan.</strong> Unspent loans pay the borrower <strong>Odd Jobs</strong> &mdash; $100 a
+                marker when he steps off &mdash; then come home to your Reserves. Lend three markers to a broke ally at
+                the end of his day and you've handed him $300 without opening your wallet; it cost you the same $300
+                your own Lay Low would have paid. A legal bribe, denominated in your idle afternoon &mdash; and it keeps
+                a man <em>on the street</em> who'd otherwise have stepped off, which on the right evening is the whole
+                staring contest bought for a smile.</li>
+        </ul>
+        <p class="note">
+            <strong>The uncommitted Ledger is a diplomatic instrument.</strong> Because the loan works at any moment,
+            three unspent markers in front of you change every negotiation at the table before a single one moves: the
+            invader deciding whether to fire again doesn't know whose side your markers are on; neither does the man he's
+            firing at. Sit on your tempo late in the day and you are, briefly, the bank &mdash; and the bank sets terms.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3>The Handshake: Collateral and Sabotage</h3>
+        <p>
+            When a deal needs teeth, the promiser stakes one Influence marker where the table can see it. Terms must be
+            clear, and every deal dies at the end of the current Day. Kept: the marker goes home. Broken &mdash;
+            <em>for any reason, including somebody else's interference</em> &mdash; and the marker is <strong>forfeit to
+            the box.</strong> Not the Track, not the Reserves. Gone, a permanent rung off the ladder, $2,500 and a Play
+            to buy back. Three consequences follow, and only the first one is friendly:
+        </p>
+        <ul class="sub-section">
+            <li><strong>Promise only what you alone control.</strong> "I will not cross the river today" cannot be
+                sabotaged &mdash; the only person who can break it is you. "You'll cross my Borough unharmed" is a
+                promise about the whole table's behaviour, and any third crew can make a liar of you with one Move.
+                Word your deals as your own actions, never as outcomes, and read every deal you're offered the same
+                way: <em>who besides him can break this?</em></li>
+            <li><strong>A rival's handshake is a target.</strong> The forfeit falls on the promiser <em>however</em> the
+                terms fail &mdash; so the moment two rivals stake a deal, sabotaging it joins your list of available
+                Plays. Block the passage, shoot the man he promised to protect, rob the courier carrying the payment.
+                One Move of yours, and a rival pays the box a marker he meant to wear as a crown.</li>
+            <li><strong>Collateral appreciates.</strong> The staked marker still counts toward your ten, so mid-game a
+                handshake is nearly free to offer &mdash; honest reputation, bought on margin. But at the endgame the
+                same marker is mortal: a boss at 10 Influence who breaks a deal &mdash; or has one broken <em>for</em>
+                him &mdash; un-crowns himself on the spot. If you must promise on the night you mean to win, promise
+                small, promise early, and promise nothing a rival can touch.</li>
+        </ul>
+
+        <h3>The Blood Oath: Politics with a Deadline</h3>
+        <p>
+            The team variant turns everything above up to a boil, because the Federal Crackdown Tracker puts a
+            <em>date</em> on the politics: every Raid advances it, and at space 10 the table freezes, ranks by Respect,
+            and marries <strong>1st to 4th, 2nd to 3rd</strong> &mdash; permanently. Play toward that moment, not just
+            through it:
+        </p>
+        <ul class="sub-section">
+            <li><strong>Your rank at the Sit-Down is a position, and you can play it.</strong> First place buys the
+                weakest partner in the game; second place buys the balanced marriage. With the token on 8 or 9, a
+                claim-late boss can sandbag a completed-Job-in-waiting for a morning &mdash; or sprint one home &mdash;
+                to choose which wedding he attends. The Targets scale (combined Respect +10), so the race resets
+                either way; what doesn't reset is <em>whose engine you're chained to</em>, and whose home borough
+                borders yours.</li>
+            <li><strong>The clock itself is playable.</strong> Raids advance it, and Part IV taught you to fire Raids
+                on demand. A bottom-of-the-table boss who Rats is not just calling the law &mdash; he's dragging the
+                wedding forward while he's still cheap enough to marry the leader. A leader enjoying the solo game
+                keeps the city cool for exactly the same reason.</li>
+            <li><strong>Watch the honor you're marrying.</strong> No Rat and no debtor can be crowned &mdash; <em>and in
+                the Blood Oath, neither can their Alliance.</em> That fourth-place crew with the Rat Card and two of
+                Shylock's Marks isn't a bargain partner; he's a padlock on your throne until he's clean. The Sit-Down
+                doesn't launder anybody.</li>
+            <li><strong>After the oath, the loan comes off the leash</strong> &mdash; puppeteering your partner is the
+                engine of the whole variant: the rich crew funds the one with the cheap Respect in front of it, Kickbacks
+                and all. But the finger rule still applies <em>inside the family</em> &mdash; your partner's loud Play
+                on your marker is your name on the Track &mdash; and so does the fine print of turf: his District is
+                still Hostile ground, and his barrels are still his. Blood is thicker than water. It is not thicker
+                than the rules.</li>
+            <li><strong>And the family has one throne.</strong> The Capo di Tutti Capi is whoever <em>contributed</em>
+                the most Respect to the winning total. The variant's last joke is that the race never ends: help your
+                partner exactly enough to win, and not one Job more.</li>
+        </ul>
+
+        <div class="kingpin">
+            <span class="tag">Kingpin's Note</span>
+            <p>In this business a favour is a loan, a loan is a leash, and a handshake is a knife you hand a stranger
+            handle-first. The greenhorn keeps his word out of decency and wonders why it keeps costing him. The old hand
+            keeps it because the marker's watching. The made man writes terms only he can break, lends only to quiet men,
+            points the finger like he's passing the salt &mdash; and when two rivals shake hands across the table, he
+            starts pricing what it would cost to make one of them a liar. <em>There are no shared victories in this
+            city. There are only bills, and better company to split them with.</em></p>
+        </div>
+    </div>
+
+    <div class="container one-column">
+        <h2 id="coda">The Whole Day at Once</h2>
+        <p class="lede">
+            Five chapters, one machine. Watch a single Day through all five lenses and the seams show: at dawn you
+            choose a number, and the docks choose whether you meant it. In the morning you reach for a card, or
+            pointedly don't, and four people read the difference. All day you spend tempo &mdash; on turf, on volleys,
+            on one more hour in the staring contest &mdash; while the law bills the noise to the only account you've
+            got. And at nightfall the queue you fell into prices tomorrow: dice for the committed, cards for the free.
+        </p>
+
+        <h4>Three Questions Before Every Play</h4>
+        <p>
+            <strong>Which clock does this advance?</strong> The cheap Respect draining out of the deck, the ladder from
+            six to ten, or the slow boil of the Track &mdash; a Play that advances none of them is a Play a rival would
+            pay you to make. <strong>What does it tell the table?</strong> Your Jobs, your Respect, your stake, your
+            barrels and your Heat are all public; your intention is the only secret you own, and most Plays spend a
+            little of it. <strong>And who hears it?</strong> Every noise has a bill, and the bill has a name on it
+            &mdash; make sure it's the right name, even if it isn't yours.
+        </p>
+
+        <h4>Where to Go Deeper</h4>
+        <p>
+            The numbers in this book are reproducible. Run your own mornings in the
+            <a href="Brew%20Simulator%20v0.9.html">Brew Simulator</a> and your own matchups in the
+            <a href="Combat%20Simulator%20v0.9.html">Combat Simulator</a> &mdash; both are rules-accurate down to the
+            mob kits. Read the deck itself in <a href="Jobs%20Cards%20v0.9.html">The Jobs Deck</a> and the law itself in
+            the <a href="Rulebook%20v0.9.html">Rulebook</a>, particularly <em>Heat: Playing with Fire</em> and
+            <em>Cooperation: Puppets in the Smoke</em>. The single-subject guides this book was forged from &mdash;
+            <a href="Brew%20Engine%20Strategy%20v0.9.html">The Brew Engine</a>,
+            <a href="Jobs%20Strategy%20v0.9.html">The Jobs Market</a> and
+            <a href="Combat%20Strategy%20v0.7.html">The Standoff</a> &mdash; carry the full worked tables where this
+            volume condenses.
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">The Last Word</span>
+            <p>New York doesn't crown the boss with the best dice, the best cards, or the best guns &mdash; it crowns
+            the one who understood, earlier than the other three, that they were all the same currency. Spend it like
+            you know what it's worth.</p>
+        </div>
+
+        <p class="disclaimer">
+            Brewing and combat figures are Monte Carlo estimates (100,000+ trials) from the Brew and Combat Simulators,
+            over the full v0.9 rules: Muscle-Ratio dice capped at 5; Threat from Boss +1, Safehouse +2, Ambush +1;
+            occupier free ambush; simultaneous Open Fire with the invader paying per volley and taking Heat on a kill;
+            Muscle-Ratio production with communal Blowback and a four-player contested draft, barrels at the $300
+            Speakeasy rate and losses at the $300 Ward Recruit cost. Jobs and Heat figures are deterministic reads off
+            the rules and the live card table, machine-verified by the deck's own audit tools (Ledger fill = Influence
+            &minus; staked &minus; Heat, capped at 5, before Kickbacks; the co-firing stacks from
+            <code>tools/overlap_audit.py</code>; the deck's hard rule that no Play fires two 5-Respect Jobs). All
+            figures model each system in isolation: board position, table politics, and who's holding a grudge still
+            decide whether any of it was wise. &#9830; Moonshine Kingdom v0.9 &mdash; The Kingpin's Guide &#9830;
+        </p>
+    </div>
+</body>
+
+</html>
