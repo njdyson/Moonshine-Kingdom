@@ -31,12 +31,18 @@ genuinely confusable things sound identical. Cooperation has the better claim. *
 
 - **Rise** keeps its name, loses the giveaway. Was: new Boss + **2 free Runners** + a free Secure, for
   2 Influence — roughly **$1,100 of free goods for the crime of losing your Boss**, which actively
-  incentivised Boss death. Now: **promote a Runner** (Cost 1, Standard Play). Boss death is a real
-  setback again, reinforced by **No Boss, no business** (no Offers without a Boss).
-- **Wiped Out** (new): no Boss, no Runners **and no Safehouse** → place a Boss, 2 Runners and your
-  Safehouse in any **Defenseless** District, free, at the start of your turn. The trigger is narrow
-  by design: Control = "one Mobster **or a Safehouse**", so while your Safehouse stands you can always
-  dig out (Beg → Recruit at $400 → Rise). It is not a catch-up lever, it's an anti-elimination backstop.
+  incentivised Boss death. Boss death is a real setback again, reinforced by **No Boss, no business**
+  (no Offers without a Boss).
+
+  > **CORRECTION (2026-07-20).** This entry used to end "Now: **promote a Runner** (Cost 1, Standard
+  > Play)", and the next bullet introduced a separate **Wiped Out** Play. **Neither survived.** Rise
+  > landed as a **Power Play (Cost 2)**, available only while your Boss is off the board: **place your
+  > Boss in any Safe District**, and if your **Safehouse** is off the board too it goes up in the same
+  > District, **free**. That free-Safehouse clause is Wiped Out, absorbed; there is no separate Play.
+  > The rulebook and the playbook cards have been right all along and this doc was the stale one; it
+  > also contradicted itself, since the *No Safehouse means no Recruit* knock-on below already leans
+  > on "Rise's free-Safehouse clause". Verified against `Rulebook v0.9.html` (Power Plays table),
+  > `Playbooks v0.7 Reskin.html` (Rise, cost 2) and `mk-online-handoff.md`.
 - **The Rat**: "cannot Hustle" → **"cannot Bribe"**. The old clause was "cannot be crowned" stated
   twice, and it locked you out of a whole subsystem. The two clauses now cover opposite halves of the
   game: early, no Bribes stalls your whole trajectory (you start at 6, need 10); late, at 10 Influence
