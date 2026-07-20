@@ -2,89 +2,134 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Moonshine Kingdom The Ledger v0.63</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <title>Moonshine Kingdom The Ledger v0.8</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- RESET --- */
+        /* --------------------------------------------------------------
+           Palette lifted from the Reskin system so the board sits in the
+           same family as the rulebook, decks and playbooks. Source of
+           truth: the :root block in "Playbooks v0.7 Reskin.html".
+           -------------------------------------------------------------- */
+        :root {
+            --gold: #c9a437;
+            --gold-line: #b9932f;
+            --gold-label: #d4af37;
+            --gold-faint: #7a6a3a;
+            --muted: #b8a577;
+            --panel-a: #241c14;
+            --panel-b: #19130c;
+            --bg: #100c08;
+
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Barlow', sans-serif;
+        }
+
         *, *::before, *::after {
-            box-sizing: border-box; 
-            -webkit-print-color-adjust: exact; 
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: #211c1c;
-            color: #fff;
-            font-family: 'Raleway', sans-serif;
+            background-color: var(--bg);
+            color: var(--muted);
+            font-family: var(--font-body);
             display: flex;
             justify-content: center;
         }
 
-        /* --- A4 PAGE CONTAINER --- */
+        /* --- A4 LANDSCAPE, TWO BOARDS PER SHEET --- */
         .page-container {
             width: 297mm;
             height: 210mm;
-            background-color: #211c1c;
+            background-color: var(--bg);
             padding: 10mm;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15mm; 
+            gap: 15mm;
         }
 
-        /* --- THE BOARD --- */
+        /* --- THE BOARD ---
+           Geometry unchanged from v0.63 (260 x 75mm). The rulebook uses a
+           render of this strip as its player-board plate, so changing the
+           proportions would change that image too. */
         .dashboard-strip {
-            /* WIDENED to 260mm to fit the Reserves */
-            width: 260mm; 
+            width: 260mm;
             height: 75mm;
-            
-            background-color: #211c1c;
-            background-image: linear-gradient(135deg, #2b2525, #1a1616);
-            border: 4px double #d4af37;
-            
+
+            background-color: var(--panel-b);
+            background-image: linear-gradient(135deg, var(--panel-a), var(--panel-b));
+            border: 4px double var(--gold-line);
+
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            
-            outline: 1px dashed #555;
+
+            outline: 1px dashed #3a3228;
             outline-offset: 1mm;
         }
 
-        /* --- TYPOGRAPHY --- */
+        /* --- TYPOGRAPHY ---
+           The Reskin's cardinal rule: a Cinzel title is NEVER uppercased.
+           Display type is mixed case, and UPPERCASE is reserved for
+           wide-tracked Barlow micro-labels. v0.63 shouted this title. */
         .main-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            color: #d4af37;
-            text-transform: uppercase;
-            margin: 0 0 1mm 0;
-            letter-spacing: 4px;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.8);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.55rem;
+            color: var(--gold);
+            margin: 0;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* The book's section-head diamond, shrunk to a mark on either side. */
+        .main-title::before,
+        .main-title::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex: 0 0 auto;
         }
 
         .top-instruction {
-            font-size: 0.75rem;
-            color: #e6dac3; 
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 3mm;
+            font-family: var(--font-body);
+            font-size: 0.6rem;
             font-weight: 600;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-            padding-bottom: 1mm;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 3.2px;
+            margin-top: 1.5mm;
+            margin-bottom: 4mm;
+            padding-bottom: 1.5mm;
+            border-bottom: 1px solid rgba(185, 147, 47, .22);
         }
 
         .bottom-instruction {
-            margin-top: 3mm;
-            font-size: 0.65rem;
-            color: #a09585;
+            margin-top: 4mm;
+            font-family: var(--font-body);
+            font-size: 0.62rem;
+            color: var(--muted);
             font-style: italic;
-            letter-spacing: 1px;
+            letter-spacing: 0.4px;
             display: flex;
             gap: 10mm;
+        }
+
+        .bottom-instruction b {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--gold-label);
         }
 
         /* --- SOCKET CONTAINER --- */
@@ -93,15 +138,16 @@
             align-items: center;
             justify-content: center;
             gap: 4mm;
-            
-            background-color: #141111;
-            padding: 3mm 8mm; /* Slightly wider padding */
+
+            background-color: rgba(0, 0, 0, .35);
+            /* 6mm, not 8mm: at 8 the pill ran past the board's right edge and
+               the last Ledger socket was clipped by the frame. */
+            padding: 3mm 6mm;
             border-radius: 100px;
-            border: 1px solid #3a3232;
+            border: 1px solid rgba(107, 90, 46, .4);
             box-shadow: inset 0 0 15px #000;
         }
 
-        /* --- CLUSTERS --- */
         .cluster {
             display: flex;
             flex-direction: column;
@@ -110,10 +156,11 @@
         }
 
         .label {
-            font-size: 0.55rem;
-            color: #d4af37;
+            font-family: var(--font-body);
+            font-size: 0.5rem;
+            color: var(--gold-label);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2.2px;
             font-weight: 700;
             line-height: 1;
         }
@@ -122,65 +169,66 @@
         .divider {
             width: 1px;
             height: 35mm;
-            background: linear-gradient(to bottom, transparent 0%, #8a6f1f 20%, #8a6f1f 80%, transparent 100%);
+            background: linear-gradient(to bottom, transparent 0%, var(--gold-faint) 20%, var(--gold-faint) 80%, transparent 100%);
             margin: 0 2mm;
         }
-        
+
         .arrow-divider {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #554444;
+            color: var(--gold-faint);
             font-size: 16px;
             margin: 0 2mm;
         }
 
         /* --- SOCKETS --- */
+        /* 23mm, not 26mm. Seven sockets plus dividers at 26 overflowed the
+           260mm board; 23 leaves the row comfortably inside the frame and
+           still takes an Influence marker. */
         .socket {
-            width: 26mm;
-            height: 26mm;
+            width: 23mm;
+            height: 23mm;
             border-radius: 50%;
             position: relative;
         }
 
-        /* 1. The Stash Socket (Solid, darker) */
         .stash-socket {
-            border: 2px solid #5e4d1f; 
-            background: radial-gradient(circle at 50% 50%, #1a1616 0%, #000000 100%);
-            box-shadow: inset 2px 2px 8px rgba(0,0,0,1);
-        }
-        
-        /* Stash Icon/Text inside socket */
-        .stash-socket::after {
-            content: "RESERVES";
-            font-family: 'Raleway', sans-serif;
-            font-size: 8px;
-            color: #443a3a;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            letter-spacing: 1px;
+            border: 2px solid var(--gold-faint);
+            background: radial-gradient(circle at 50% 50%, var(--panel-a) 0%, #000 100%);
+            box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 1);
         }
 
-        /* 2. Turn Socket (Simple dashed) */
+        .stash-socket::after {
+            content: "RESERVES";
+            font-family: var(--font-body);
+            font-size: 7.5px;
+            font-weight: 600;
+            color: #52472f;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            letter-spacing: 1.4px;
+        }
+
         .turn-socket {
-            border: 1px dashed #777;
+            border: 1px dashed #6d6250;
             background: transparent;
         }
 
-        /* 3. Action Sockets (Gold dashed, glowing) */
         .action-socket {
-            border: 2px dashed #b59226; 
-            background: radial-gradient(circle at 50% 50%, #2a2222 0%, #080606 80%);
-            box-shadow: inset 1px 1px 5px rgba(0,0,0,0.9);
+            border: 2px dashed var(--gold-line);
+            background: radial-gradient(circle at 50% 50%, var(--panel-a) 0%, #070504 80%);
+            box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.9);
         }
 
         /* Decoration Corners */
         .corner {
             position: absolute;
-            width: 5mm; height: 5mm;
-            border-color: #d4af37;
+            width: 5mm;
+            height: 5mm;
+            border-color: var(--gold-line);
             border-style: solid;
             opacity: 0.5;
         }
@@ -195,8 +243,8 @@
             margin: 0;
         }
         @media print {
-            body { 
-                background-color: #211c1c;
+            body {
+                background-color: var(--bg);
                 display: block;
             }
         }
@@ -215,8 +263,8 @@
             <div class="top-instruction">Your Back-Room Desk</div>
 
             <div class="socket-row">
-                
-                <!-- Turn Section -->
+
+                <!-- Turn Token -->
                 <div class="cluster">
                     <div class="label">Turn</div>
                     <div class="socket turn-socket"></div>
@@ -224,16 +272,15 @@
 
                 <div class="divider"></div>
 
-                <!-- Reserves Section -->
+                <!-- Reserves -->
                 <div class="cluster">
                     <div class="label">Reserves</div>
                     <div class="socket stash-socket"></div>
                 </div>
 
-                <!-- Flow Indicator -->
-                <div class="arrow-divider">➤</div>
+                <div class="arrow-divider">&#10148;</div>
 
-                <!-- Operations Section -->
+                <!-- Ledger -->
                 <div class="cluster">
                     <div class="label">Ledger (Max 5)</div>
                     <div style="display:flex; gap:4mm;">
@@ -248,9 +295,9 @@
             </div>
 
             <div class="bottom-instruction">
-                <span>Shadows: Reserves &rarr; Ledger</span>
-                <span>•</span>
-                <span>Operations: Ledger &rarr; Reserves / Heat</span>
+                <span><b>Shadows:</b> Reserves &rarr; Ledger</span>
+                <span>&bull;</span>
+                <span><b>The Hustle:</b> Ledger &rarr; Reserves / Heat</span>
             </div>
         </div>
 
@@ -263,8 +310,8 @@
             <div class="top-instruction">Your Back-Room Desk</div>
 
             <div class="socket-row">
-                
-                <!-- Turn Section -->
+
+                <!-- Turn Token -->
                 <div class="cluster">
                     <div class="label">Turn</div>
                     <div class="socket turn-socket"></div>
@@ -272,16 +319,15 @@
 
                 <div class="divider"></div>
 
-                <!-- Reserves Section -->
+                <!-- Reserves -->
                 <div class="cluster">
                     <div class="label">Reserves</div>
                     <div class="socket stash-socket"></div>
                 </div>
 
-                <!-- Flow Indicator -->
-                <div class="arrow-divider">➤</div>
+                <div class="arrow-divider">&#10148;</div>
 
-                <!-- Operations Section -->
+                <!-- Ledger -->
                 <div class="cluster">
                     <div class="label">Ledger (Max 5)</div>
                     <div style="display:flex; gap:4mm;">
@@ -296,9 +342,9 @@
             </div>
 
             <div class="bottom-instruction">
-                <span>Shadows: Reserves &rarr; Ledger</span>
-                <span>•</span>
-                <span>Operations: Ledger &rarr; Reserves / Heat</span>
+                <span><b>Shadows:</b> Reserves &rarr; Ledger</span>
+                <span>&bull;</span>
+                <span><b>The Hustle:</b> Ledger &rarr; Reserves / Heat</span>
             </div>
         </div>
 
