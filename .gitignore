@@ -11,3 +11,6 @@ mk-online/*
 # a copy in mk-online/public/ exists for local dev only — don't ship in dist.
 mk-online/dist/Board (Large).png
 __pycache__/
+
+# one-shot mapping written by tools/optimise_art.py --apply
+tools/.art-rename-map.json
