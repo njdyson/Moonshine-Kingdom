@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Moonshine Kingdom The Ledger v0.8</title>
+    <title>Moonshine Kingdom The Ledger v0.8 (Poker Chips)</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
     <style>
         /* --------------------------------------------------------------
@@ -45,21 +45,20 @@
             width: 297mm;
             height: 210mm;
             background-color: var(--bg);
-            padding: 10mm;
+            padding: 6mm;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15mm;
+            gap: 8mm;
         }
 
         /* --- THE BOARD ---
-           Geometry unchanged from v0.63 (260 x 75mm). The rulebook uses a
-           render of this strip as its player-board plate, so changing the
-           proportions would change that image too. */
+           275 x 85mm, up from the prototype 260 x 75. Two per sheet still
+           fits: 2 x 85 + 8mm gap = 178mm inside 198mm of usable height. */
         .dashboard-strip {
-            width: 260mm;
-            height: 75mm;
+            width: 275mm;
+            height: 85mm;
 
             background-color: var(--panel-b);
             background-image: linear-gradient(135deg, var(--panel-a), var(--panel-b));
@@ -137,12 +136,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4mm;
+            gap: 2mm;
 
             background-color: rgba(0, 0, 0, .35);
             /* 6mm, not 8mm: at 8 the pill ran past the board's right edge and
                the last Ledger socket was clipped by the frame. */
-            padding: 3mm 6mm;
+            padding: 3mm 4mm;
             border-radius: 100px;
             border: 1px solid rgba(107, 90, 46, .4);
             box-shadow: inset 0 0 15px #000;
@@ -176,16 +175,16 @@
         }
 
         /* --- SOCKETS --- */
-        /* 26mm: the prototype markers are 25mm, plus ~1mm so the socket ring
-           stays visible around a seated chip. If the markers change size, this
-           is the one number to change.
+        /* 39mm: a standard casino poker chip. This is the ONLY difference of
+           substance from the prototype build ("The Ledger v0.8.html", 26mm),
+           along with the board dimensions and row spacing it forces.
 
-           The poker-chip build is a SEPARATE file ("The Ledger v0.8 (Poker
-           Chips).html") at 39mm, because chip-sized sockets need a wider,
-           taller board. Do not try to serve both from this one. */
+           Why six positions and not seven: at chip size the row is ~254mm, so
+           it fills the board and nothing can sit beside it. The Turn token is
+           deliberately NOT on this board; it lives beside it on the table. */
         .socket {
-            width: 26mm;
-            height: 26mm;
+            width: 39mm;
+            height: 39mm;
             border-radius: 50%;
             position: relative;
         }
@@ -268,7 +267,7 @@
                 <!-- Ledger -->
                 <div class="cluster">
                     <div class="label">Ledger (Max 5)</div>
-                    <div style="display:flex; gap:4mm;">
+                    <div style="display:flex; gap:2mm;">
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>
@@ -307,7 +306,7 @@
                 <!-- Ledger -->
                 <div class="cluster">
                     <div class="label">Ledger (Max 5)</div>
-                    <div style="display:flex; gap:4mm;">
+                    <div style="display:flex; gap:2mm;">
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>

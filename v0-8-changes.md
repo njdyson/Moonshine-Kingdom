@@ -539,3 +539,62 @@ PIL-crop to 700:460 centred, resize, look.
   Per card, save `style.height`, set `height:auto; overflow:visible`, read
   `getBoundingClientRect().height`, restore. Current headroom: **fronts are full** (Vipers **4px**,
   Knights/Irish 23, Sicilians 39), Lowdown 51.
+
+---
+
+## The Ledger player board: two builds, and what is still open (2026-07-20)
+
+**There are now TWO board files and they are not interchangeable.**
+
+| File | Socket | Board | Sheet | Use |
+|---|---|---|---|---|
+| `The Ledger v0.8.html` | **26mm** | 260 x 75mm | 2 per A4 landscape | **Current prototype.** Markers are 25mm; the socket is 26 so the ring stays visible around a seated chip. |
+| `The Ledger v0.8 (Poker Chips).html` | **39mm** | 275 x 85mm | 2 per A4 landscape | Future build for real casino chips. |
+
+The poker file was **generated from** the prototype, so they are structurally identical; only the
+socket size, board dimensions and row spacing differ. Keep it that way. If the board design changes,
+change the prototype and regenerate rather than hand-editing both.
+
+**The rulebook's plate is rendered from the PROTOTYPE file.** `Art/Rulebook/Ledger.png` (3685x1063,
+3.47:1). Recipe: print the file to PDF headless, render page 1 at `scale=5`, crop the first board
+strip (`x = (W - 260mm)/2`, `y = ((210 - (2*75 + 15))/2)mm`), save over the PNG. `Art/Rulebook/Operations.png`
+is retired to `Art/Unused/`; nothing references it.
+
+**THE TURN TOKEN IS DELIBERATELY NOT ON THE BOARD (Nick, 2026-07-20).** It used to sit in the socket
+row. It is not part of the Reserves -> Ledger -> Heat cycle at all: it is a claimed number, not a
+spent resource, so it lives beside the board on the table. Its socket and the `.divider` rule are
+deleted from both files. **Do not put it back**; it is also what makes a single row of chip-sized
+sockets fit at all.
+
+**Why the sizes are what they are, so nobody re-derives it.** A single row of SEVEN positions caps
+out at **28.9mm** at normal spacing and **34.1mm** even with the board stretched to the sheet's full
+usable width and every gap tightened. Seven 39mm chips need **311mm**, which is 14mm wider than the
+whole A4 sheet. Dropping the Turn token to six positions is what buys chip size. **Two separate
+overflow bugs were found by rendering after the arithmetic said it fitted** (the socket row ran past
+the frame and clipped the last socket; a corner-positioned Turn slot overlapped it). Render, do not
+trust the sums.
+
+**Square Turn tokens: Nick's idea, and worth doing.** Shape encodes a *category* difference rather
+than an identity one, which colour cannot, and it survives dim light and colourblindness. Not yet
+decided or built.
+
+### Open, not started
+
+1. **Custom poker chips as the Influence marker.** Agreed direction: weight and the clack are most
+   of what "premium" means at a table, and chips are thematically exact for a Prohibition game.
+   Costs to weigh: ~16 markers x 4 mobs is a real BOM line, plus box weight and shipping.
+2. **Inline the board into the rulebook instead of shipping a PNG.** Argument for: the old
+   `Operations.png` disagreed with its own source file for months precisely because an image cannot
+   be grepped or diffed. Inlining kills that class of drift, is vector, and removes a re-render step.
+   Costs: the board's class names (`.socket`, `.label`, `.cluster`, `.corner`) collide with the
+   rulebook's 1400-line stylesheet so they need scoping, the board is sized in mm and the rulebook
+   column is 702px so it needs a `transform: scale()`, and the markup would then exist in two files.
+   A `tools/` script generating the rulebook block from the ledger file removes that last objection
+   at the cost of a build step the project does not currently have.
+3. **The Reserves socket is labelled twice**, once above and once inside. Pre-existing; may be
+   deliberate so players know where spent markers go. Nick's call.
+4. **~300 words of lower-confidence wording cuts** the audit surfaced and I held back, all voice
+   calls on signature lines: the italic stings on Recruit and Secure, the *Capo di Tutti Capi* trim,
+   and the Blue Wall restatement inside Move.
+5. **`v0-8-changes.md` carries 77 em dashes.** The style rule's gate list covers player-facing files
+   only, so internal docs were never swept. Decide whether the rule extends here.
