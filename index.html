@@ -1,459 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom v0.7: Game Overview</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ── Variables matching moonshine-rules.css ── */
-    :root {
-      --bg-color: #0d0005;
-      --bg-rgb: 13, 0, 5;
-      --surface: #130207;
-      --text-color: #f5e9d9;
-      --accent-gold: #d4af37;
-      --accent-dim: #8a7329;
-      --table-header: #1f1216;
-      --font-body: 'Raleway', sans-serif;
-      --font-display: 'Bebas Neue', 'Impact', sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moonshine Kingdom v0.9 — Asset Index</title>
+<meta name="description" content="Index of every Moonshine Kingdom v0.9 component, reference sheet and balance tool.">
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
-    html { background-color: var(--bg-color); }
+<style>
+/* ──────────────────────────────────────────────────────────────
+   Moonshine Kingdom — asset index.
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: var(--font-body);
-      line-height: 1.5;
-      font-size: 11pt;
-    }
+   Deliberately holds NO rules content. Every description that used
+   to live here duplicated text inside the files it linked to, and
+   duplicated text drifts: the old page still called the rulebook
+   v0.8 months after v0.9 shipped. This page is a way in, nothing
+   more. Names, art, links.
 
-    /* ── Hero / Cover ── */
-    .hero {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 24px 50px;
-      min-height: 340px;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url("Art/Front Page 5.png");
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.5) contrast(1.1);
-      z-index: 0;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background:
-        linear-gradient(to bottom, rgba(var(--bg-rgb), 0.3) 0%, rgba(var(--bg-rgb), 0) 30%, rgba(var(--bg-rgb), 0) 60%, rgba(var(--bg-rgb), 1) 100%),
-        linear-gradient(to right, rgba(var(--bg-rgb), 0.6) 0%, rgba(var(--bg-rgb), 0) 30%, rgba(var(--bg-rgb), 0) 70%, rgba(var(--bg-rgb), 0.6) 100%);
-    }
-    .hero > * { position: relative; z-index: 2; }
+   Type and palette are lifted from css/moonshine-rules.css so the
+   portal sits in the same family as the book and the decks.
+   ────────────────────────────────────────────────────────────── */
 
-    .hero .title-image {
-      max-width: min(480px, 80vw);
-      height: auto;
-      margin-bottom: 12px;
-      filter: brightness(1.12) contrast(1.08);
-    }
+:root{
+  --gold:        #c9a437;
+  --gold-bright: #e8cc72;
+  --gold-line:   #b9932f;
+  --gold-dim:    #a98c4f;
+  --gold-faint:  #7a6a3a;
 
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
-      letter-spacing: 0.06em;
-      color: #fff;
-      text-shadow: 0 0 20px rgba(0,0,0,1);
-      text-transform: uppercase;
-      line-height: 1;
-      font-weight: 400;
-    }
-    .hero .subtitle {
-      font-family: var(--font-body);
-      font-size: 12pt;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent-gold);
-      text-shadow: 2px 2px 0px #000;
-      margin-top: 8px;
-    }
-    .hero .version-badge {
-      display: inline-block;
-      margin-top: 18px;
-      font-size: 0.82rem;
-      color: var(--text-color);
-      border: 1px solid var(--accent-dim);
-      border-radius: 4px;
-      padding: 5px 16px;
-      letter-spacing: 0.04em;
-      background: rgba(var(--bg-rgb), 0.7);
-    }
-    .hero .play-online {
-      display: inline-block;
-      margin-top: 22px;
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      letter-spacing: 0.08em;
-      color: #0d0005;
-      background: var(--accent-gold);
-      border: 2px solid var(--accent-gold);
-      border-radius: 4px;
-      padding: 12px 32px;
-      text-transform: uppercase;
-      text-decoration: none;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.4) inset;
-      transition: transform 0.15s, background 0.15s, color 0.15s;
-    }
-    .hero .play-online:hover {
-      background: #e8c65a;
-      border-color: #e8c65a;
-      color: #0d0005;
-      text-decoration: none;
-      transform: translateY(-1px);
-    }
+  --ink:   #efe3cd;
+  --body:  #d8caae;
+  --muted: #b8a577;
 
-    /* ── Page Container ── */
-    .page {
-      width: 210mm;
-      max-width: calc(100% - 40px);
-      margin: 40px auto;
-      padding: 50px 60px;
-      background-color: var(--surface);
-      box-shadow: 0 0 50px rgba(0,0,0,0.8);
-      border: 1px solid #333;
-    }
+  --bg:      #100c08;
+  --bg-rgb:  16, 12, 8;
+  --panel-a: #241c14;
+  --panel-b: #19130c;
+  --panel-line: #6b5a2e;
 
-    /* ── Typography (mirroring rulebook) ── */
-    p { margin: 0 0 1em 0; }
+  --font-display:'Cinzel', Georgia, serif;
+  --font-body:   'Barlow', sans-serif;
 
-    strong { color: var(--accent-gold); font-weight: 700; }
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
 
-    h2 {
-      font-family: var(--font-display);
-      font-size: 22pt;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 400;
-      line-height: 1.1;
-      border-bottom: 2px solid var(--accent-gold);
-      padding-bottom: 5px;
-      margin-top: 1.8em;
-      margin-bottom: 0.5em;
-      position: relative;
-    }
-    h2:first-child { margin-top: 0; }
-    h2::after {
-      content: '';
-      display: block;
-      border-bottom: 1px solid var(--accent-dim);
-      margin-top: 2px;
-    }
+*{ margin:0; padding:0; box-sizing:border-box }
 
-    h3 {
-      font-family: var(--font-display);
-      font-size: 16pt;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 400;
-      line-height: 1.1;
-      border-left: 4px solid var(--accent-gold);
-      padding-left: 10px;
-      margin-top: 1.4em;
-      margin-bottom: 0.5em;
-    }
+html{ background:var(--bg); scroll-behavior:smooth; -webkit-text-size-adjust:100% }
 
-    a { color: var(--accent-gold); text-decoration: none; }
-    a:hover { text-decoration: underline; color: #e8c65a; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:300;
+  line-height:1.5;
+  overflow-x:hidden;
+}
 
-    /* ── Specs Row ── */
-    .specs {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin: 18px 0 6px;
-    }
-    .spec {
-      border: 1px solid var(--accent-dim);
-      border-radius: 4px;
-      padding: 10px 18px;
-      flex: 1 1 120px;
-      min-width: 120px;
-      background: rgba(255,255,255,0.02);
-    }
-    .spec dt {
-      font-family: var(--font-display);
-      font-size: 9pt;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent-gold);
-      margin-bottom: 2px;
-    }
-    .spec dd { font-weight: 700; font-size: 1.05rem; }
+/* Grain + vignette. Fixed so it sits over everything and never scrolls,
+   which is what stops the flat JPEGs reading as flat JPEGs. */
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:9;
+  pointer-events:none;
+  opacity:.32;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>");
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:8;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 50% 40%, transparent 42%, rgba(0,0,0,.55) 100%);
+}
 
-    /* ── Board Image ── */
-    .board-section {
-      text-align: center;
-      margin-top: 1.8em;
-    }
-    .board-img {
-      max-width: 100%;
-      border: 1px solid var(--accent-dim);
-      border-radius: 4px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-      filter: brightness(1.12) contrast(1.08);
-    }
-    .board-caption {
-      margin-top: 8px;
-      font-size: 0.88rem;
-      color: #b0a38a;
-      font-style: italic;
-    }
+a{ color:inherit; text-decoration:none }
+img{ display:block; max-width:100% }
 
-    /* ── File List ── */
-    .file-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1em 0;
-    }
-    .file-list > li {
-      border: 1px solid var(--accent-dim);
-      padding: 12px 14px;
-      margin-bottom: 10px;
-      background: rgba(255,255,255,0.02);
-      transition: background 0.15s;
-    }
-    .file-list > li:hover {
-      background: rgba(212,175,55,0.06);
-    }
-    .file-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .file-row a.file-link {
-      font-weight: 700;
-      font-size: 0.98rem;
-    }
-    .file-row .spacer { flex: 1; }
-    .file-desc {
-      margin-top: 4px;
-      color: var(--text-color);
-      font-size: 0.92rem;
-      opacity: 0.9;
-    }
+/* ══════════════ NAV ══════════════ */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:20px;
+  padding:14px clamp(16px, 4vw, 44px);
+  background:rgba(var(--bg-rgb), 0);
+  border-bottom:1px solid transparent;
+  transition:background .45s var(--ease), border-color .45s var(--ease), backdrop-filter .45s;
+}
+.nav.stuck{
+  background:rgba(var(--bg-rgb), .88);
+  backdrop-filter:blur(9px) saturate(1.2);
+  border-bottom-color:rgba(185,147,47,.22);
+}
+.nav .mark{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:.13em;
+  color:var(--gold-bright);
+  white-space:nowrap;
+  opacity:0;
+  transform:translateY(-6px);
+  transition:opacity .45s var(--ease), transform .45s var(--ease);
+}
+.nav.stuck .mark{ opacity:1; transform:none }
 
-    /* ── Note box (matching rulebook .note) ── */
-    .note {
-      background-color: rgba(212, 175, 55, 0.1);
-      border: 1px solid var(--accent-gold);
-      padding: 14px 16px;
-      font-style: italic;
-      color: #fcefd0;
-      margin: 1em 0;
-      border-radius: 4px;
-    }
+.nav ul{ display:flex; gap:clamp(10px,2.2vw,26px); list-style:none; flex-wrap:wrap; justify-content:flex-end }
+.nav a{
+  position:relative;
+  font-size:10.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:5px 0;
+  transition:color .3s var(--ease);
+  white-space:nowrap;
+}
+.nav a::after{
+  content:""; position:absolute; left:0; right:0; bottom:0;
+  height:1px; background:var(--gold);
+  transform:scaleX(0); transform-origin:right;
+  transition:transform .38s var(--ease);
+}
+.nav a:hover, .nav a.active{ color:var(--gold-bright) }
+.nav a:hover::after, .nav a.active::after{ transform:scaleX(1); transform-origin:left }
 
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 28px 20px;
-      color: var(--accent-dim);
-      font-size: 0.82rem;
-      letter-spacing: 0.5px;
-    }
+/* ══════════════ HERO ══════════════ */
+.hero{
+  position:relative;
+  min-height:min(94vh, 780px);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  padding:130px 22px 90px;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute; inset:-8% 0 0;
+  background:url("Art/Index/hero.jpg") center 38%/cover no-repeat;
+  filter:brightness(.62) contrast(1.06) saturate(.98);
+  transform:scale(1.06);
+  will-change:transform;
+  z-index:0;
+}
+.hero::after{
+  content:""; position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(to bottom, rgba(var(--bg-rgb),.6) 0%, rgba(var(--bg-rgb),.04) 36%, rgba(var(--bg-rgb),.42) 76%, var(--bg) 100%),
+    linear-gradient(to right, rgba(var(--bg-rgb),.62) 0%, rgba(var(--bg-rgb),0) 32%, rgba(var(--bg-rgb),0) 68%, rgba(var(--bg-rgb),.62) 100%);
+}
+/* .scroll-cue is excluded by name: this selector is (0,2,0) and would
+   otherwise beat .scroll-cue's own position:absolute and strand it. */
+.hero > *:not(.hero-bg):not(.scroll-cue){ position:relative; z-index:2 }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .page {
-        width: auto;
-        max-width: calc(100% - 24px);
-        padding: 32px;
-      }
-      .specs { gap: 8px; }
-      .file-row { gap: 8px; }
-      .file-row .spacer { display: none; }
-      .pdf-btn { margin-left: auto; }
-    }
-  </style>
+.hero .eyebrow{
+  font-size:10.5px; letter-spacing:.42em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:22px;
+  text-shadow:0 2px 10px #000;
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(2.5rem, 7.4vw, 5.4rem);
+  line-height:.98;
+  letter-spacing:.02em;
+  color:#fff;
+  text-shadow:0 4px 34px rgba(0,0,0,.95), 0 0 90px rgba(201,164,55,.2);
+}
+.hero h1 .kingdom{
+  display:block;
+  color:var(--gold-bright);
+  font-size:.82em;
+  letter-spacing:.06em;
+}
+.hero .tagline{
+  margin-top:20px;
+  font-size:clamp(11px,1.5vw,13px);
+  letter-spacing:.3em; text-transform:uppercase;
+  color:var(--body);
+  text-shadow:0 2px 12px #000;
+}
+
+/* diamond + hairline flourish, same motif as the book's section heads */
+.flourish{
+  display:flex; align-items:center; justify-content:center;
+  gap:14px; margin:30px auto 0; width:min(330px, 74vw);
+}
+.flourish i{
+  flex:1; height:1px;
+  background:linear-gradient(to right, transparent, var(--gold-line));
+}
+.flourish i:last-child{ background:linear-gradient(to left, transparent, var(--gold-line)) }
+.flourish span{
+  width:7px; height:7px; transform:rotate(45deg);
+  background:var(--gold); box-shadow:0 0 12px rgba(201,164,55,.6);
+}
+
+.hero .badge{
+  margin-top:26px;
+  display:inline-block;
+  font-size:10.5px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--gold-bright);
+  border:1px solid rgba(185,147,47,.5);
+  background:rgba(var(--bg-rgb),.6);
+  padding:7px 20px;
+  backdrop-filter:blur(3px);
+}
+
+.cta{
+  margin-top:34px;
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:14px; letter-spacing:.16em; text-transform:uppercase;
+  color:#120d07;
+  background:linear-gradient(180deg, var(--gold-bright), var(--gold));
+  padding:15px 38px;
+  border:1px solid var(--gold-bright);
+  box-shadow:0 10px 34px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), filter .3s var(--ease);
+}
+.cta:hover{
+  transform:translateY(-3px);
+  filter:brightness(1.07);
+  box-shadow:0 16px 44px rgba(0,0,0,.7), 0 0 34px rgba(201,164,55,.34), inset 0 1px 0 rgba(255,255,255,.4);
+}
+.cta svg{ width:15px; height:15px; fill:currentColor; transition:transform .3s var(--ease) }
+.cta:hover svg{ transform:translateX(4px) }
+
+.scroll-cue{
+  position:absolute; bottom:26px; left:50%; z-index:2;
+  transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:9px;
+  font-size:9px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--gold-faint);
+}
+.scroll-cue i{
+  width:1px; height:38px;
+  background:linear-gradient(to bottom, var(--gold-line), transparent);
+  animation:cue 2.4s var(--ease) infinite;
+  transform-origin:top;
+}
+@keyframes cue{
+  0%,100%{ transform:scaleY(.35); opacity:.35 }
+  50%    { transform:scaleY(1);   opacity:1 }
+}
+
+/* ══════════════ SECTIONS ══════════════ */
+main{ position:relative; z-index:2 }
+
+.section{
+  max-width:1220px;
+  margin:0 auto;
+  padding:clamp(56px, 8vw, 96px) clamp(16px, 4vw, 44px) 0;
+}
+.section:last-of-type{ padding-bottom:40px }
+
+.sec-head{
+  display:flex; align-items:center; gap:15px;
+  margin-bottom:clamp(24px, 3.6vw, 40px);
+}
+.sec-head span{
+  width:7px; height:7px; transform:rotate(45deg);
+  background:var(--gold); flex:none;
+  box-shadow:0 0 10px rgba(201,164,55,.55);
+}
+.sec-head h2{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(15px, 2.1vw, 19px);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold-bright);
+  white-space:nowrap;
+}
+.sec-head i{
+  flex:1; height:1px;
+  background:linear-gradient(to right, rgba(185,147,47,.75), transparent);
+}
+
+/* ══════════════ GRID ══════════════ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(272px, 1fr));
+  gap:clamp(14px, 1.8vw, 24px);
+}
+
+.tile{
+  position:relative;
+  display:block;
+  border:1px solid rgba(107,90,46,.5);
+  background:var(--panel-b);
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+}
+.tile:hover{
+  transform:translateY(-6px);
+  border-color:var(--gold);
+  box-shadow:0 18px 44px rgba(0,0,0,.6), 0 0 0 1px rgba(201,164,55,.25);
+}
+
+/* The rulebook is the flagship and looked stranded as a lone 1-of-4 track.
+   Half-width, wider crop, larger title. */
+.tile.feature{ grid-column:span 2 }
+.tile.feature .shot{ aspect-ratio:21/9 }
+.tile.feature h3{ font-size:22px }
+
+.tile .shot{ position:relative; aspect-ratio:16/9; overflow:hidden; background:#0b0805 }
+.tile .shot img{
+  width:100%; height:100%; object-fit:cover;
+  filter:brightness(.88) saturate(.97);
+  transform:scale(1.01);
+  transition:transform .85s var(--ease), filter .55s var(--ease);
+}
+.tile:hover .shot img{ transform:scale(1.09); filter:brightness(1) saturate(1.04) }
+
+/* keeps the caption legible over whatever the art is doing */
+.tile .shot::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(9,6,4,.94) 6%, rgba(9,6,4,.34) 46%, rgba(9,6,4,.08) 100%);
+  transition:opacity .55s var(--ease);
+}
+.tile:hover .shot::after{ opacity:.82 }
+
+.tile .cap{
+  position:absolute; left:0; right:0; bottom:0; z-index:2;
+  display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+  padding:15px 16px 14px;
+}
+.tile h3{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:15.5px;
+  line-height:1.22;
+  letter-spacing:.035em;
+  color:var(--ink);
+  text-shadow:0 2px 12px rgba(0,0,0,.9);
+  transition:color .35s var(--ease);
+}
+.tile:hover h3{ color:var(--gold-bright) }
+.tile .ver{
+  flex:none;
+  font-family:var(--font-body);
+  font-size:9.5px; font-weight:500;
+  letter-spacing:.13em;
+  color:var(--muted);
+  border:1px solid rgba(185,147,47,.42);
+  background:rgba(var(--bg-rgb),.72);
+  padding:3px 7px;
+  transition:color .35s var(--ease), border-color .35s var(--ease);
+}
+.tile:hover .ver{ color:var(--gold-bright); border-color:var(--gold) }
+
+/* the one asset still on an older revision — flagged, not hidden */
+.tile .ver.behind{
+  color:#d99a5b;
+  border-color:rgba(217,154,91,.5);
+}
+
+/* gold sweep on hover */
+.tile::before{
+  content:""; position:absolute; inset:0; z-index:3;
+  pointer-events:none;
+  background:linear-gradient(115deg, transparent 38%, rgba(232,204,114,.13) 50%, transparent 62%);
+  transform:translateX(-100%);
+  transition:transform .85s var(--ease);
+}
+.tile:hover::before{ transform:translateX(100%) }
+
+/* ══════════════ FOOTER ══════════════ */
+footer{
+  position:relative; z-index:2;
+  margin-top:clamp(56px, 8vw, 92px);
+  padding:38px 22px 46px;
+  text-align:center;
+  border-top:1px solid rgba(185,147,47,.18);
+}
+footer .mark{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:12.5px; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--gold);
+}
+footer p{
+  margin-top:9px;
+  font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold-faint);
+}
+
+/* ══════════════ REVEAL ══════════════ */
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .78s var(--ease), transform .78s var(--ease);
+  transition-delay:var(--d, 0ms);
+}
+.reveal.in{ opacity:1; transform:none }
+
+.hero .eyebrow,.hero h1,.hero .tagline,.hero .flourish,.hero .badge,.hero .cta{
+  animation:rise .95s var(--ease) both;
+}
+.hero .eyebrow{ animation-delay:.10s }
+.hero h1       { animation-delay:.22s }
+.hero .tagline { animation-delay:.40s }
+.hero .flourish{ animation-delay:.52s }
+.hero .badge   { animation-delay:.62s }
+.hero .cta     { animation-delay:.72s }
+@keyframes rise{
+  from{ opacity:0; transform:translateY(26px) }
+  to  { opacity:1; transform:none }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto }
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .reveal{ opacity:1; transform:none }
+  .hero-bg{ transform:none }
+}
+
+@media (max-width:620px){
+  .nav ul{ gap:12px }
+  .nav .mark{ display:none }
+  .grid{ grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)) }
+  /* Once the grid is a single track, span 2 would manufacture an implicit
+     second column and push the page sideways. */
+  .tile.feature{ grid-column:auto }
+  .tile.feature .shot{ aspect-ratio:16/9 }
+  .tile.feature h3{ font-size:17px }
+}
+</style>
 </head>
+
 <body>
 
-  <!-- ══════════ Hero ══════════ -->
-  <header class="hero">
-    <img src="Art/Rulebook/Moonshine Kingdom.png" alt="Moonshine Kingdom" class="title-image">
-    <h1>Game Overview</h1>
-    <p class="subtitle">A Game of Bootlegging, Backstabbing, and Gang Warfare.</p>
-    <a class="play-online" href="mk-online/dist/index.html">▶ Play Online</a>
-  </header>
+<nav class="nav" id="nav">
+  <div class="mark">Moonshine Kingdom</div>
+  <ul>
+    <li><a href="#rulebook">Rulebook</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#tokens">Tokens</a></li>
+    <li><a href="#tools">Guides &amp; Tools</a></li>
+  </ul>
+</nav>
 
-  <!-- ══════════ Main Content ══════════ -->
-  <div class="page">
+<header class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="eyebrow">New York City &middot; 1926</div>
+  <h1>Moonshine<span class="kingdom">Kingdom</span></h1>
+  <div class="tagline">Bootlegging &middot; Backstabbing &middot; Gang Warfare</div>
+  <div class="flourish"><i></i><span></span><i></i></div>
+  <div class="badge">Asset Index &middot; v0.9</div>
+  <a class="cta" href="mk-online/dist/index.html">
+    Play Online
+    <svg viewBox="0 0 24 24"><path d="M8 5l8 7-8 7z"/></svg>
+  </a>
+  <div class="scroll-cue"><span>Assets</span><i></i></div>
+</header>
 
-    <!-- ── Introduction ── -->
-    <h2>About the Game</h2>
-    <p>
-      In the gaslit streets of <strong>1920s New York City</strong>, Prohibition has sparked a lawless gold rush. Four deadly mobs battle to rule the city's illicit liquor trade through bootlegging, backroom deals, and cold-blooded combat. Players are rival kingpins vying for control of 25 districts across all five boroughs: brewing moonshine, running speakeasies, completing dangerous contracts, and muscling out the competition.
-    </p>
-    <p>
-      <strong>Moonshine Kingdom</strong> is a deeply thematic strategy board game blending area control, resource management, and asymmetric faction powers into a tense, replayable experience. Each Day in your criminal empire runs from the quiet hum of your stills at dawn, through the dangerous hustle of daylight operations, to the bloody reckoning that comes after dark.
-    </p>
+<main>
 
-    <div class="specs">
-      <dl class="spec"><dt>Players</dt><dd>2 &ndash; 4</dd></dl>
-      <dl class="spec"><dt>Play Time</dt><dd>90 &ndash; 120 min</dd></dl>
-      <dl class="spec"><dt>Age</dt><dd>14+</dd></dl>
-      <dl class="spec"><dt>Version</dt><dd>0.8</dd></dl>
-    </div>
-
-    <div class="note">
-      New to the game? Start with the <a href="Rulebook%20v0.9.html">Rulebook</a> for the full gameplay loop, then browse the cards and components below to get familiar before you sit down at the table.
-    </div>
-
-    <!-- ── Board ── -->
-    <div class="board-section">
-      <h2>The Board</h2>
-      <a href="Art/Board%20(Large).png" target="_blank">
-        <img src="Art/Board%20(Large).png" alt="Moonshine Kingdom game board" class="board-img">
+  <section class="section" id="rulebook">
+    <div class="sec-head"><span></span><h2>Rulebook</h2><i></i></div>
+    <div class="grid">
+      <a class="tile feature" href="Rulebook%20v0.9.html">
+        <div class="shot"><img src="Art/Index/rulebook.jpg" alt="" width="800" height="450"></div>
+        <div class="cap"><h3>Rulebook</h3><div class="ver">v0.9</div></div>
       </a>
-      <p class="board-caption">25 districts across Manhattan, The Bronx, Queens, Brooklyn, and Staten Island. Click to view full size.</p>
     </div>
+  </section>
 
-    <!-- ── Rulebook ── -->
-    <h2>Rulebook</h2>
-    <ul class="file-list">
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Rulebook%20v0.9.html">Rulebook v0.8</a>
-        </div>
-        <div class="file-desc">Complete rulebook: setup, turn structure, all mechanics, and endgame scoring.</div>
-      </li>
-    </ul>
+  <section class="section" id="components">
+    <div class="sec-head"><span></span><h2>Player Components</h2><i></i></div>
+    <div class="grid">
+      <a class="tile" href="Playbooks%20v0.9.html">
+        <div class="shot"><img src="Art/Index/playbooks.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Mob Playbooks</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="The%20Ledger%20v0.9.html">
+        <div class="shot"><img src="Art/Index/ledger.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>The Ledger</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="The%20Ledger%20v0.9%20(Poker%20Chips).html">
+        <div class="shot"><img src="Art/Index/ledger-chips.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>The Ledger &mdash; Poker Chips</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="Turn%20Structure%20and%20Ledger%20v0.9.html">
+        <div class="shot"><img src="Art/Index/turn-structure.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Turn Structure &amp; Town Planning</h3><div class="ver">v0.9</div></div>
+      </a>
+    </div>
+  </section>
 
-    <!-- ── Player Components ── -->
-    <h2>Player Components</h2>
-    <h3>Faction Playbooks</h3>
-    <ul class="file-list">
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Playbooks%20v0.7%20Reskin.html">Mob Playbooks</a>
-        </div>
-        <div class="file-desc">Asymmetric faction sheets for all four mobs: each mob's Trait plus its two signature Plays.</div>
-      </li>
-    </ul>
+  <section class="section" id="cards">
+    <div class="sec-head"><span></span><h2>Cards</h2><i></i></div>
+    <div class="grid">
+      <a class="tile" href="Jobs%20Cards%20v0.9.html">
+        <div class="shot"><img src="Art/Index/jobs-cards.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Jobs Deck</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="Cards%20v0.9.html">
+        <div class="shot"><img src="Art/Index/cards.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Deeds, Titles &amp; Debts</h3><div class="ver">v0.9</div></div>
+      </a>
+    </div>
+  </section>
 
-    <h3>Player Boards &amp; Reference</h3>
-    <ul class="file-list">
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="The%20Ledger%20v0.8.html">The Ledger v0.8</a>
-        </div>
-        <div class="file-desc">Personal command board for tracking runners, influence, and actions each Day.</div>
-      </li>
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Turn%20Structure%20and%20Ledger%20v0.7%20Reskin.html">Turn Structure &amp; Ledger</a>
-        </div>
-        <div class="file-desc">Visual reference card: the Shadows &rarr; Hustle &rarr; Reckoning sequence, plus the Town Planning Ledger of all 25 Districts.</div>
-      </li>
-    </ul>
+  <section class="section" id="tokens">
+    <div class="sec-head"><span></span><h2>Tokens &amp; Trackers</h2><i></i></div>
+    <div class="grid">
+      <a class="tile" href="Still%20Tokens%20v0.9.html">
+        <div class="shot"><img src="Art/Index/still-tokens.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Still Tokens</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="Federal%20Crackdown%20Tracker%20v0.9.html">
+        <div class="shot"><img src="Art/Index/federal.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Federal Crackdown Tracker</h3><div class="ver">v0.9</div></div>
+      </a>
+    </div>
+  </section>
 
-    <!-- ── Cards ── -->
-    <h2>Cards</h2>
+  <section class="section" id="tools">
+    <div class="sec-head"><span></span><h2>Guides &amp; Balance Tools</h2><i></i></div>
+    <div class="grid">
+      <a class="tile" href="Jobs%20Strategy%20v0.9.html">
+        <div class="shot"><img src="Art/Index/jobs-strategy.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>The Jobs Market</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="Brew%20Engine%20Strategy%20v0.9.html">
+        <div class="shot"><img src="Art/Index/brew-strategy.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>The Brew Engine</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="Brew%20Simulator%20v0.9.html">
+        <div class="shot"><img src="Art/Index/brew-sim.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Brew Simulator</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="Combat%20Strategy%20v0.7.html">
+        <div class="shot"><img src="Art/Index/combat-strategy.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>The Standoff</h3><div class="ver behind" title="Behind the v0.9 pass">v0.7</div></div>
+      </a>
+      <a class="tile" href="Combat%20Simulator%20v0.9.html">
+        <div class="shot"><img src="Art/Index/combat-sim.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Combat Simulator</h3><div class="ver">v0.9</div></div>
+      </a>
+      <a class="tile" href="mk-online/dist/index.html">
+        <div class="shot"><img src="Art/Index/online.jpg" alt="" loading="lazy" width="800" height="450"></div>
+        <div class="cap"><h3>Play Online</h3><div class="ver">App</div></div>
+      </a>
+    </div>
+  </section>
 
-    <h3>Jobs Cards</h3>
-    <ul class="file-list">
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Jobs%20Cards%20v0.8.html">Jobs Cards v0.8</a>
-        </div>
-        <div class="file-desc">The Jobs Market deck: public, action-triggered objectives drafted face-up, paying Respect the moment you pull them off.</div>
-      </li>
-    </ul>
+</main>
 
-    <h3>Titles, Deeds &amp; Debt Cards</h3>
-    <ul class="file-list">
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Cards%20v0.8.html">Cards v0.8</a>
-        </div>
-        <div class="file-desc">The full non-Jobs card deck in one file, reskinned to match the Jobs deck: the five Borough Deeds, the Ward Boss, Harbormaster and Night Mayor Titles, plus the Shylock's Mark loans and the Rat's street-shame penalty.</div>
-      </li>
-    </ul>
+<footer>
+  <div class="mark">Moonshine Kingdom</div>
+  <p>v0.9 &middot; 2&ndash;4 Players &middot; 90&ndash;120 Minutes</p>
+</footer>
 
-    <!-- ── Tokens & Boards ── -->
-    <h2>Tokens &amp; Boards</h2>
-    <ul class="file-list">
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Still%20Tokens%20v0.63.html">Still Tokens v0.63</a>
-        </div>
-        <div class="file-desc">25 numbered Still tokens (2&ndash;12), one per District, to lay over the board and tweak the brew balance without a reprint.</div>
-      </li>
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Federal%20Crackdown%20Tracker%20v0.63.html">Federal Crackdown Tracker v0.63</a>
-        </div>
-        <div class="file-desc">10-space pressure tracker used in The Blood Oath (2v2) variant.</div>
-      </li>
-    </ul>
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    <!-- ── Simulators ── -->
-    <h2>Balance Tools</h2>
-    <p>Interactive simulators for exploring the game's core dice mechanics.</p>
-    <ul class="file-list">
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Combat%20Simulator%20v0.7.html">Combat Simulator v0.7</a>
-        </div>
-        <div class="file-desc">Combat resolution simulator: model attack and defense dice outcomes, with every mob kit (Firepower, Hit, Stealth, Torch, Plunder).</div>
-      </li>
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Combat%20Strategy%20v0.7.html">The Standoff: Kingpin's Guide to Combat</a>
-        </div>
-        <div class="file-desc">Strategy note on the standoff: why defence dominates, the force premium to take Secured turf, when to Ambush, and when to Fold &mdash; plus how each mob's kit bends the math, with simulated win rates behind it.</div>
-      </li>
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Brew%20Simulator%20v0.8.html">Brew Simulator v0.8</a>
-        </div>
-        <div class="file-desc">Configurable Morning Brew / Blowback simulator: build your Stills, set the Mash die (rolled or a hostile Harbormaster), toggle Twist the Valves and Boss exposure, set the economy, and read net $/Day per build.</div>
-      </li>
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Brew%20Engine%20Strategy%20v0.8.html">The Brew Engine: Kingpin's Guide</a>
-        </div>
-        <div class="file-desc">Strategy note on the dawn brew: why clumping lockout-proof boilers, bracketing the ends, and reading the Harbormaster's Mash out-earns a scattered still line &mdash; with the net-$ math behind it.</div>
-      </li>
-      <li>
-        <div class="file-row">
-          <a class="file-link" href="Contract%20Card%20Review.html">Contract Card Review</a>
-        </div>
-        <div class="file-desc">Playtest-tuning sheet rating every contract for difficulty, theme, and novelty (52 live + 5 benched). Filter, sort, and jot per-card verdicts that save in your browser.</div>
-      </li>
-    </ul>
+  /* ── nav background once we're off the hero ── */
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    nav.classList.toggle('stuck', window.scrollY > 60);
+    if (!reduced && heroBg){
+      /* cheap parallax: the hero art drifts at ~28% of scroll speed */
+      var y = Math.min(window.scrollY, 900);
+      heroBg.style.transform = 'scale(1.06) translateY(' + (y * 0.28) + 'px)';
+    }
+  }
+  var heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 
-  </div>
+  /* ── staggered scroll reveal ── */
+  var tiles = [].slice.call(document.querySelectorAll('.tile, .sec-head'));
+  if (reduced || !('IntersectionObserver' in window)){
+    tiles.forEach(function(t){ t.classList.add('in'); });
+  } else {
+    tiles.forEach(function(t){ t.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        /* stagger within a row-ish group, capped so late tiles aren't slow */
+        var sibs = [].slice.call(e.target.parentNode.children);
+        var i = Math.min(sibs.indexOf(e.target), 5);
+        e.target.style.setProperty('--d', (i * 75) + 'ms');
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.12});
+    tiles.forEach(function(t){ io.observe(t); });
+  }
 
-  <footer>
-    &#9830; Moonshine Kingdom v0.7 &#9830;
-  </footer>
+  /* ── active section in the nav ── */
+  var links = [].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if ('IntersectionObserver' in window){
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var i = sections.indexOf(e.target);
+        links.forEach(function(l, j){ l.classList.toggle('active', i === j); });
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    sections.forEach(function(s){ if (s) so.observe(s); });
+  }
+})();
+</script>
 
 </body>
 </html>
