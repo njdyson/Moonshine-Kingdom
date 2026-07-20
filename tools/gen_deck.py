@@ -385,7 +385,7 @@ body = f'''<body>
 
 </body>'''
 
-path = 'Jobs Cards v0.8.html'
+path = 'Jobs Cards v0.9.html'
 src = open(path, encoding='utf-8').read()
 # Anchor on the tag at a LINE START, not the first occurrence anywhere. A plain
 # .index() also matches the string inside a <style> or <script> comment, and the

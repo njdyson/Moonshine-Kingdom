@@ -155,7 +155,7 @@ ALL_BOOLS = sorted({b for v in VERB_BOOLS.values() for b in v})
 # renamed and re-objectived out from under it). Fail loudly instead.
 def _check_drift():
     import re, html, os
-    path = os.path.join(os.path.dirname(__file__), '..', 'Jobs Cards v0.8.html')
+    path = os.path.join(os.path.dirname(__file__), '..', 'Jobs Cards v0.9.html')
     src = open(path, encoding='utf-8').read()
     body = src[src.index('<body>'):]
     pairs = re.findall(
