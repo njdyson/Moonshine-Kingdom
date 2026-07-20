@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Moonshine Kingdom: Still Tokens v0.9</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ──────────────────────────────────────────────────────────────
+   Still Tokens v0.9 — PROTOTYPE ONLY.
+
+   On the finished board every District has its Still number printed
+   on it. These punch-out tokens exist so a prototype board without
+   that printing can still be played, and so the brew balance can be
+   retuned without a reprint.
+
+   Art: Art/Still Tokens/PNG/still-NN.png (one per number, 2-12).
+   The PNGs are used rather than the SVGs deliberately — the SVG
+   carries the numeral as LIVE TEXT in 'Bebas Neue', and an external
+   SVG loaded through <img> cannot pull a webfont, so it would
+   silently fall back to Impact. The PNGs are 1000x1080, which is
+   ~1300dpi at this token size.
+
+   SINGLE-SIDED ON PURPOSE. The pre-v0.9 file printed a second sheet
+   of "broken still" backs with a red X. Nothing in the rules ever
+   turns a Still over: it is active the moment you Control it, a
+   Police Squad padlocks it from above, and after a Blowback "the
+   survivors patch the boiler... and the Still runs again tomorrow."
+   There is no face-down state, so there is no back.
+
+   Numbers verified against the District Roster on the Town Planning
+   Ledger (Turn Structure and Ledger v0.9.html): 25 Districts, and
+   Pressure = 6 - |Still - 7| holds for every row.
+
+   THE GAUGE UP THE RIGHT-HAND SIDE OF EACH TOKEN IS NOT DECORATION.
+   It is the Pressure reading, drawn as lit segments off a six-step
+   red-to-gold ramp: 7 runs the full six, 2 and 12 run one. Verified
+   against all eleven PNGs. Don't "tidy" it to a uniform bar, and if
+   the Still numbering is ever rebalanced the art has to be redrawn
+   with it. (Counting fill colours in the SVG source will tell you
+   they are all identical — every file defines the whole ramp in its
+   palette and only lights part of it. Count lit segments, not
+   declared colours.)
+   ────────────────────────────────────────────────────────────── */
+
+:root{
+  /* Palette lifted from css/moonshine-rules.css so the tokens sit in
+     the same family as the book, decks and playbooks. */
+  --gold:        #c9a437;
+  --gold-bright: #e8cc72;
+  --gold-line:   #b9932f;
+  --gold-faint:  #7a6a3a;
+  --ink:         #efe3cd;
+  --body:        #d8caae;
+  --muted:       #b8a577;
+  --panel-a:     #241c14;
+  --panel-b:     #130207;
+  --bg:          #100c08;
+
+  --font-display:'Cinzel', Georgia, serif;
+  --font-body:   'Barlow', sans-serif;
+
+  /* Token footprint. 0.75in is inherited from the previous build and
+     is sized to sit inside a District space — raise it only if you
+     have checked it still fits the board. */
+  --sq:  0.75in;
+  --gap: 14px;
+}
+
+@page{ size:A4; margin:12mm }
+
+*{ box-sizing:border-box }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+}
+
+/* ───── Screen-only briefing. Never prints. ───── */
+.brief{
+  max-width:760px;
+  margin:0 auto;
+  padding:44px 28px 8px;
+  text-align:center;
+}
+.brief h1{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:26px;
+  letter-spacing:.06em;
+  color:var(--gold-bright);
+  margin:0 0 6px;
+}
+.brief .kicker{
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:18px;
+}
+.brief p{
+  font-size:13.5px;
+  line-height:1.65;
+  color:var(--body);
+  margin:0 0 10px;
+}
+.brief .tally{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  margin:20px 0 4px;
+}
+.brief .tally span{
+  font-size:11.5px;
+  letter-spacing:.04em;
+  color:var(--muted);
+  border:1px solid rgba(185,147,47,.28);
+  background:rgba(201,164,55,.05);
+  padding:3px 9px;
+}
+.brief .rule{
+  height:1px;
+  margin:26px auto 0;
+  max-width:340px;
+  background:linear-gradient(to right, transparent, var(--gold-line), transparent);
+}
+
+/* ───── Token sheet ───── */
+.sheet{
+  display:flex;
+  justify-content:center;
+  padding:34px 0 60px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(5, var(--sq));
+  gap:var(--gap);
+  width:max-content;
+}
+
+/* Square corners so the sheet can be guillotined rather than punched,
+   matching the cards and playbooks. */
+.token{
+  width:var(--sq);
+  height:var(--sq);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 42% 32%, var(--panel-a), var(--panel-b) 72%);
+  /* Hairline cut guide only. The artwork already carries its own gold
+     outline, so a heavy gold border here reads as a double frame. */
+  border:1px solid var(--gold-faint);
+  overflow:hidden;
+}
+
+.token img{
+  width:78%;
+  height:78%;
+  object-fit:contain;
+  display:block;
+}
+
+@media print{
+  body{ background:#fff }
+  .brief{ display:none }
+  .sheet{ padding:0 }
+  .token{
+    width:var(--sq) !important;
+    height:var(--sq) !important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+}
+</style>
+</head>
+
+<body>
+
+  <div class="brief">
+    <h1>Still Tokens</h1>
+    <div class="kicker">Prototype Component &middot; v0.9</div>
+    <p>
+      Twenty-five tokens, one per District. On the finished board these numbers are
+      printed straight onto the map — this sheet exists so a plain prototype board can
+      be played, and so the brew balance can be retuned without a reprint.
+    </p>
+    <p>
+      Tokens are interchangeable by number: any <strong>7</strong> will do for any
+      District that wants a 7. Lay them out from the District Roster on the Town
+      Planning Ledger. Single-sided — a Still is never turned face down.
+    </p>
+    <div class="tally">
+      <span>2 &times;2</span><span>3 &times;2</span><span>4 &times;3</span>
+      <span>5 &times;2</span><span>6 &times;3</span><span>7 &times;4</span>
+      <span>8 &times;2</span><span>9 &times;2</span><span>10 &times;2</span>
+      <span>11 &times;2</span><span>12 &times;1</span>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <!-- 25 tokens, ascending. Distribution matches the District Roster:
+       each mainland Borough holds exactly one 7 (its High Society boiler,
+       the peak of the 2d6 curve); Staten Island runs cool with none. -->
+  <div class="sheet">
+    <div class="grid">
+      <div class="token"><img src="Art/Still Tokens/PNG/still-02.png" alt="Still 2"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-02.png" alt="Still 2"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-03.png" alt="Still 3"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-03.png" alt="Still 3"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-04.png" alt="Still 4"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-04.png" alt="Still 4"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-04.png" alt="Still 4"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-05.png" alt="Still 5"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-05.png" alt="Still 5"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-06.png" alt="Still 6"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-06.png" alt="Still 6"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-06.png" alt="Still 6"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-07.png" alt="Still 7"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-07.png" alt="Still 7"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-07.png" alt="Still 7"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-07.png" alt="Still 7"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-08.png" alt="Still 8"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-08.png" alt="Still 8"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-09.png" alt="Still 9"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-09.png" alt="Still 9"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-10.png" alt="Still 10"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-10.png" alt="Still 10"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-11.png" alt="Still 11"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-11.png" alt="Still 11"></div>
+      <div class="token"><img src="Art/Still Tokens/PNG/still-12.png" alt="Still 12"></div>
+    </div>
+  </div>
+
+</body>
+</html>
