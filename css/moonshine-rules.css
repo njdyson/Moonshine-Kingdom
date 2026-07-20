@@ -205,6 +205,20 @@ h3:has(+ .cover)::after,
     background: linear-gradient(90deg, rgba(185,147,47,.7), transparent);
 }
 
+/* A heading directly above a cover drops its underline. Everywhere else the
+   border separates the heading from body text and earns its place, but over a
+   cover the art already does that job. It only became visible when the covers
+   started fading in from transparent: instead of underlining the heading it was
+   left hanging in dark space a few px above the art, reading as a stray print
+   line. Padding stays, so only the line goes and the spacing is unchanged.
+   The heading's own ::after hairline (the gradient beside the label) is the
+   intended rule and is untouched. */
+h2:has(+ .cover),
+h3:has(+ .cover),
+.reference-section > h3:has(+ .cover) {
+    border-bottom: none;
+}
+
 /* h4/h5 are the micro-label tier: Barlow, uppercase, wide tracking. */
 h4 {
     font-family: var(--font-body);
@@ -346,7 +360,7 @@ tr:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.03);
 }
 
-/* Compact table variant — used for the Enlistment Cost Table */
+/* Compact table variant (used for the Enlistment Cost Table) */
 .compact-table th,
 .compact-table td {
     padding: 4px 6px;
@@ -434,17 +448,38 @@ img {
     margin: 15px auto;
 }
 
-/* Cover images sit up against the heading above them; keep only the gap below. */
+/* Cover images sit up against the heading above them, and carry no margin of
+   their own: .cover owns the gap below. */
 .cover img {
-    margin-top: 0;
+    margin: 0 auto;
 }
 
+/* No background colour here on purpose. The cover fades to TRANSPARENT (see the
+   masks below), so whatever the page is actually painted with shows through.
+   Painting a colour behind it would reintroduce the very frame the mask exists
+   to remove.
+
+   .cover carries the HORIZONTAL half of the edge fade and .cover img the
+   VERTICAL half: one gradient each, on two different elements. See the note on
+   .cover img for why they are not combined into one composited mask. */
 .cover {
     position: relative;
     overflow: hidden;
-    background-color: var(--bg-color);
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    margin-bottom: 15px;
+    /* 15%, not 20%: at the 702px measure a 20% band is 140px a side, nearly
+       twice the vertical fade's 79px, and it read as the art being cropped
+       rather than blended. 15% is 105px, closer to parity with the vertical
+       and still enough to kill the edge. */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%);
+}
+
+/* One gap under every cover. The spacing lives on .cover, not on the image,
+   and the next element's own top margin is zeroed - otherwise the gap is the
+   SUM of the two and varies with whatever follows (an h3 after Unload made it
+   23px where every other page had 15px). */
+.cover + * {
+    margin-top: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -456,11 +491,18 @@ img {
    opposite trade to a small plate, and the right way round, since the art is
    the reason to open the book.
 
-   .cover-sm is a measured constraint, not untidiness. Six pages carry enough
-   rules text that a 460px plate pushes them past the sheet and spills a blank
-   page after; each was checked and has under ~110px of slack. They share one
+   .cover-sm is a measured constraint, not untidiness. Five pages carry enough
+   rules text that a full plate pushes them past the sheet and spills a blank
+   page after; each was checked and has under ~55px of slack. They share one
    reduced height rather than the per-page 190/215/250/265/290/300px the old
    book used.
+
+   It is a fixed height, so it crops the two shapes unequally: 11% off a 16:9
+   cover but 25% off a 3:2 one. Four of the five are 3:2 (Unload, Influence
+   Boss, Vendetta, Police) and take the heavier crop. That is a cost of the
+   art being two shapes, not a bug to fix here - the pages have 18-51px of
+   slack and a true-aspect plate needs 118px. Reshoot those four at 16:9 and
+   they can all move to .cover-wide.
 
    !important overrides the legacy per-page rules further down.
    -------------------------------------------------------------------------- */
@@ -471,6 +513,33 @@ img {
     height: 460px !important;
     min-height: 0;
     object-fit: cover;
+
+    /* --------------------------------------------------------------------
+       The edge fade is a MASK, not a coloured overlay on top.
+
+       It used to be a .cover::after painting rgba(--bg-rgb) gradients inward.
+       That only looks seamless where the page really is --bg-color (#100c08),
+       and NOWHERE in this book is: print shows the body's radial vignette
+       (#241a11 at the top of the sheet, #0d0a07 lower down) and screen showed
+       a flat #130207 card. Three different colours, so the fade always landed
+       on the wrong one and read as a dark frame around the art.
+
+       Fading to ALPHA instead means there is no fade colour to get wrong: the
+       real background shows through, whatever it happens to be.
+
+       DO NOT RECOMBINE THESE INTO ONE MASK. The obvious way to fade all four
+       edges is two gradients on one element with mask-composite:intersect.
+       That works on screen and SILENTLY FAILS in print: Chrome's PDF export
+       ignores mask-composite, so the layers union instead of intersecting and
+       every cover prints with a hard vertical line down each side (the top and
+       bottom still fade, which is what makes it easy to miss). Splitting the
+       two gradients across .cover and .cover img means each element carries a
+       single-layer mask and nothing needs compositing. Verified by rendering
+       five variants to PDF and reading the edge profile; see the note in
+       [[rulebook-print-workflow]].
+       -------------------------------------------------------------------- */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
 }
 
 .cover img.cover-sm {
@@ -481,9 +550,16 @@ img {
    702px text column at the default 460px, losing only 8px off the height. But
    16:9 art (1672x941) stands just 395px tall at that width, so 460px scales it
    up and shears 7% off EACH SIDE. Tag 16:9 covers with .cover-wide to print
-   them whole, and the page gains 65px into the bargain. */
+   them whole, and the page gains 65px into the bargain.
+
+   Stated as an aspect-ratio, not the 395px it used to be. The text column is
+   702px on one-column pages but 682px on two-column ones, so a fixed height
+   was only ever true at 702: Components and Respect were being scaled up 11px
+   and sheared ~3% a side. aspect-ratio is right at any measure, and hands
+   those two pages 11px of slack back. */
 .cover img.cover-wide {
-    height: 395px !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
 }
 
 /* Heat cover: officers' heads sit in the top of the frame, so a cropped
@@ -492,22 +568,6 @@ img {
     object-position: center 22%;
 }
 
-.cover::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-    background:
-        linear-gradient(to right, rgba(var(--bg-rgb), 0.98) 0%, rgba(var(--bg-rgb), 0) 20%, rgba(var(--bg-rgb), 0) 80%, rgba(var(--bg-rgb), 0.98) 100%),
-        linear-gradient(to bottom, rgba(var(--bg-rgb), 0.92) 0%, rgba(var(--bg-rgb), 0) 20%, rgba(var(--bg-rgb), 0) 80%, rgba(var(--bg-rgb), 0.92) 100%);
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-}
-
-.cover.no-fade::after {
-    display: none;
-}
 
 .single-column-block {
     column-span: all;
@@ -1083,15 +1143,69 @@ img {
         overflow-x: auto; /* Horizontal scroll if viewport narrower than 210mm */
     }
 
+    /* ----------------------------------------------------------------------
+       SCREEN IS A PREVIEW OF PRINT, so it must match print, not look nice on
+       its own terms. Three things used to differ and all three are fixed here:
+
+       1. padding was 60px against print's 46px. That is a 674px text column
+          on screen vs 702px in print, so line breaks, widows and page fill
+          were all measured against a layout the PDF never used.
+       2. background was a flat #130207 "card". Print has a transparent
+          container over the body's radial vignette, which Chrome repeats per
+          sheet, so every printed page is warm at the top and near-black
+          lower down. Screen now paints that same vignette per container.
+       3. no gold frame at all (it lives in the print block, hung off fixed
+          body pseudo-elements). Drawn per container below.
+       ---------------------------------------------------------------------- */
     .container,
     .front-page {
         width: 210mm;
         min-height: 297mm;
         margin: 40px auto;
-        padding: 60px;
-        background-color: #130207; /* Slightly lighter than body for card effect */
+        padding: 46px;
+        background-color: var(--bg-color);
         box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        border: 1px solid #333;
+        border: none;
+        position: relative;
+    }
+
+    /* Not on .front-page: it carries its own cover art (--front-cover). */
+    .container {
+        background-image: radial-gradient(circle at 50% -10%, #241a11, #0d0a07 65%);
+    }
+
+    /* The print block's frame is position:fixed so Chrome stamps it on every
+       sheet. Fixed on screen would pin one frame to the viewport instead, so
+       screen draws it per page, absolutely positioned inside the container. */
+    .container::before {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 2px solid var(--gold-line);
+        pointer-events: none;
+        z-index: 40;
+    }
+
+    .container::after {
+        content: "";
+        position: absolute;
+        inset: 20px;
+        border: 1px solid rgba(185, 147, 47, .35);
+        pointer-events: none;
+        z-index: 40;
+    }
+
+    /* The front page gets the outer line only. Its ::before is already spoken
+       for by the cover art (--front-cover, ~line 1024) and claiming it here
+       would silently replace the artwork with a border. ::after is free, so
+       preview shows the 2px frame but not the faint inner rule. */
+    .front-page::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 2px solid var(--gold-line);
+        pointer-events: none;
+        z-index: 40;
     }
 
     .container {
@@ -1352,12 +1466,14 @@ img {
         margin-top: 0.5em;
     }
 
-    /* Tighten a few heavy pages that were drifting over the print boundary */
-    .components-page,
-    .goal-page,
-    .shadows-page {
-        padding: 56px;
-    }
+    /* These three used to sit at 56px, a leftover from when the global safe
+       zone was 60px and only the rest of the book was trimmed to 46. It was
+       never doing what its old comment claimed ("tighten pages drifting over
+       the boundary"): extra padding is LESS vertical room and a narrower
+       column, so it pushed them the wrong way, and it left the book with two
+       different text measures (682px here, 702px everywhere else). All three
+       now have room to spare, so they join the rest at 46px and the book has
+       one measure. */
 
     /* --------------------------------------------------------------------
        Removed here: a 68mm/44mm max-height cap on the components, goal and
@@ -1452,9 +1568,11 @@ img {
         margin: 0.7em 0;
     }
 
-    .dense-page .cover img {
-        margin-bottom: 9px;
-    }
+    /* The 9px cover gap these two pages used to carry is GONE: it was the last
+       thing making the under-cover spacing vary (9px here, 15px everywhere
+       else). Both pages had the slack to pay the 6px back once the art all
+       became 16:9. If one ever spills again, take it from the rhythm rules
+       above, not from the cover gap. */
 
     /* Keep a component sub-list whole, and glued to the lead-in that names it.
        Without this, column-count strands a trailing bullet at the head of the
