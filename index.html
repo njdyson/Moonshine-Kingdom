@@ -209,6 +209,8 @@ img{ display:block; max-width:100% }
   backdrop-filter:blur(3px);
 }
 
+/* Currently unused: the Play Online CTA is commented out in the hero (see the
+   note there). Kept so restoring it is a one-line uncomment - don't prune. */
 .cta{
   margin-top:34px;
   display:inline-flex; align-items:center; gap:12px;
@@ -290,7 +292,12 @@ main{ position:relative; z-index:2 }
 
 .tile{
   position:relative;
-  display:block;
+  /* Flex column, not block: grid items stretch to the tallest tile in their
+     row, and with a fixed aspect-ratio .shot that surplus showed as a bare
+     strip of tile background under the art (visible next to the wider
+     feature tile). Letting .shot grow means the image covers it instead. */
+  display:flex;
+  flex-direction:column;
   border:1px solid rgba(107,90,46,.5);
   background:var(--panel-b);
   overflow:hidden;
@@ -309,7 +316,17 @@ main{ position:relative; z-index:2 }
 .tile.feature .shot{ aspect-ratio:21/9 }
 .tile.feature h3{ font-size:22px }
 
-.tile .shot{ position:relative; aspect-ratio:16/9; overflow:hidden; background:#0b0805 }
+/* aspect-ratio sets the natural size; flex-grow lets it take any extra height
+   the grid row hands the tile. .cap is absolutely positioned, so the tile's
+   height comes from .shot alone. */
+.tile .shot{
+  position:relative;
+  aspect-ratio:16/9;
+  flex:1 1 auto;
+  min-height:0;
+  overflow:hidden;
+  background:#0b0805;
+}
 .tile .shot img{
   width:100%; height:100%; object-fit:cover;
   filter:brightness(.88) saturate(.97);
@@ -456,10 +473,17 @@ footer p{
   <div class="tagline">Bootlegging &middot; Backstabbing &middot; Gang Warfare</div>
   <div class="flourish"><i></i><span></span><i></i></div>
   <div class="badge">Asset Index &middot; v0.9</div>
+
+  <!-- Play Online CTA parked 2026-07-20. The mk-online app is well behind the
+       current rules and needs real work to catch up, so it shouldn't be the
+       front-and-centre call to action. The tile in Balance Tools still links
+       it. Uncomment to restore - the .cta styles are intentionally kept.
   <a class="cta" href="mk-online/dist/index.html">
     Play Online
     <svg viewBox="0 0 24 24"><path d="M8 5l8 7-8 7z"/></svg>
   </a>
+  -->
+
   <div class="scroll-cue"><span>Assets</span><i></i></div>
 </header>
 
