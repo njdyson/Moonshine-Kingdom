@@ -292,8 +292,13 @@ ul.sub-section > li {
 }
 
 ul.sub-section > li::before {
-    content: "♦"; /* Diamond bullet suits the theme */
+    /* \2666 is the diamond; \FE0E is the text-presentation variation selector.
+       Without it iOS Safari renders the suit character as a RED emoji and
+       ignores `color` — VS15 forces the plain text glyph so the gold applies.
+       (Chrome/print already used the text glyph, which is why the PDF was fine.) */
+    content: "\2666\FE0E"; /* Diamond bullet suits the theme */
     color: var(--accent-gold);
+    font-variant-emoji: text; /* belt-and-suspenders for engines that honour it */
     position: absolute;
     left: 0;
     top: 0;
