@@ -4,32 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moonshine Kingdom - Combat Monte Carlo Simulator v0.7</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #151210;
-      --panel: #231a16;
-      --panel-2: #2b211b;
-      --line: #5e4a2d;
-      --gold: #d4af37;
-      --text: #f2e7cc;
-      --muted: #b9ab88;
-      --inv: #7db3ff;
-      --occ: #f08b8b;
-      --ok: #3aa862;
-      --warn: #e08f44;
+      /* v0.9 palette + type, lifted from css/moonshine-rules.css so the sim
+         matches the Rulebook and the Kingpin's Guide. Invader/Occupier keep
+         their blue/salmon coding so the two sides stay legible. */
+      --gold: #c9a437; --gold-bright: #e8cc72; --gold-line: #b9932f;
+      --gold-label: #d4af37; --gold-faint: #7a6a3a;
+      --ink: #efe3cd; --body: #d8caae; --muted: #b8a577;
+      --panel-a: #241c14; --panel-b: #19130c; --panel-line: #6b5a2e; --head-bg: #1a140d;
+      --rule: rgba(185,147,47,.16); --cell: rgba(107,90,46,.3); --wash: rgba(201,164,55,.06);
+      --input-bg: #100a06;
+      --inv: #86b8e8; --occ: #e08f7a; --ok: #6fbf73; --warn: #d99a4f;
+      --font-display: 'Cinzel', Georgia, serif; --font-body: 'Barlow', sans-serif;
+      /* legacy aliases so existing var() references restyle automatically */
+      --bg: #100c08; --panel: var(--panel-a); --panel-2: var(--panel-b);
+      --line: var(--panel-line); --text: var(--ink);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 20% 0%, #30211b 0%, transparent 40%),
-        radial-gradient(circle at 100% 100%, #2a1a15 0%, transparent 35%),
-        var(--bg);
+      font-family: var(--font-body);
+      color: var(--body);
+      background: radial-gradient(circle at 50% -6%, #241a11, #0d0a07 60%) fixed, var(--bg);
       min-height: 100vh;
+      -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
     }
 
     .app {
@@ -40,19 +44,26 @@
 
     h1, h2, h3 {
       margin: 0 0 10px;
-      color: var(--gold);
-      letter-spacing: 0.03em;
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--gold-bright);
+      letter-spacing: 0.06em;
     }
 
     h1 {
-      font-size: 1.1rem;
-      margin-bottom: 12px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.5);
     }
 
     h2 {
-      font-size: 1rem;
-      margin-bottom: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
       text-transform: uppercase;
+      color: var(--gold-label);
+      border-bottom: 1px solid var(--rule);
     }
 
     .layout {
@@ -63,16 +74,17 @@
     }
 
     .panel {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      padding: 12px;
+      border: 1px solid var(--panel-line);
+      border-radius: 6px;
+      background: linear-gradient(180deg, var(--panel-a), var(--panel-b));
+      padding: 14px 16px;
+      box-shadow: 0 8px 26px rgba(0,0,0,.45);
     }
 
     .section {
-      border-top: 1px solid #453629;
-      padding-top: 10px;
-      margin-top: 10px;
+      border-top: 1px solid var(--rule);
+      padding-top: 12px;
+      margin-top: 12px;
     }
 
     .section:first-of-type {
@@ -102,25 +114,30 @@
     input[type="number"],
     select {
       width: 100%;
-      border: 1px solid #614d36;
-      border-radius: 7px;
-      background: #1c1511;
-      color: var(--text);
-      padding: 6px 8px;
+      border: 1px solid var(--gold-faint);
+      border-radius: 6px;
+      background: var(--input-bg);
+      color: var(--ink);
+      padding: 7px 9px;
+      font-family: inherit;
       font-size: 0.92rem;
     }
+
+    input:focus, select:focus, button:focus-visible { outline: none; border-color: var(--gold); }
 
     .check-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid #4b392a;
-      border-radius: 7px;
-      background: #1d1612;
-      padding: 7px 8px;
+      border: 1px solid var(--gold-faint);
+      border-radius: 6px;
+      background: var(--input-bg);
+      padding: 7px 9px;
       margin-bottom: 8px;
       font-size: 0.88rem;
     }
+
+    .check-row input { accent-color: var(--gold); }
 
     .check-row span {
       white-space: nowrap;
@@ -138,10 +155,10 @@
     }
 
     .option-col {
-      border: 1px solid #4b392a;
-      border-radius: 8px;
-      background: #1a1410;
-      padding: 8px;
+      border: 1px solid var(--panel-line);
+      border-radius: 6px;
+      background: var(--head-bg);
+      padding: 9px;
       min-width: 0;
     }
 
@@ -174,17 +191,17 @@
 
     .mobster-total {
       margin-top: 8px;
-      border-top: 1px dashed #3f3125;
+      border-top: 1px dashed var(--rule);
       padding-top: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 0.84rem;
-      color: #d7c39b;
+      color: var(--muted);
     }
 
     .mobster-total strong {
-      color: var(--gold);
+      color: var(--gold-bright);
       font-variant-numeric: tabular-nums;
     }
 
@@ -196,11 +213,12 @@
     }
 
     button {
-      border: 1px solid #7c653f;
-      background: linear-gradient(180deg, #473623, #35281a);
-      color: var(--text);
-      border-radius: 7px;
-      padding: 8px 10px;
+      border: 1px solid var(--gold-faint);
+      background: var(--wash);
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-family: inherit;
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
@@ -208,18 +226,23 @@
 
     button:hover {
       filter: brightness(1.08);
+      border-color: var(--gold);
     }
 
     .run-btn {
-      border-color: #7fb67f;
-      background: linear-gradient(180deg, #355037, #283d2a);
+      border-color: var(--gold-line);
+      background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+      color: #1a1208;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     .status-box {
-      border: 1px solid #6a5538;
-      border-radius: 8px;
-      background: #1e1612;
-      padding: 9px;
+      border: 1px solid var(--gold-faint);
+      border-radius: 6px;
+      background: var(--head-bg);
+      padding: 10px 11px;
       margin-bottom: 10px;
       font-size: 0.9rem;
     }
@@ -232,24 +255,26 @@
     }
 
     .summary-card {
-      border: 1px solid #5d4a34;
-      border-radius: 8px;
-      background: #1f1713;
-      padding: 8px;
+      border: 1px solid var(--panel-line);
+      border-radius: 6px;
+      background: var(--wash);
+      padding: 9px 10px;
     }
 
     .summary-title {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       margin-bottom: 3px;
-      color: #d9c8a5;
-      font-weight: 700;
+      color: var(--muted);
+      font-weight: 600;
     }
 
     .summary-value {
-      font-size: 1.1rem;
-      font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold-bright);
       margin-bottom: 2px;
     }
 
@@ -264,10 +289,11 @@
     .warn { color: var(--warn); }
 
     .table-wrap {
-      border: 1px solid #584730;
-      border-radius: 8px;
-      background: #1a130f;
-      overflow: hidden;
+      border: 1px solid var(--panel-line);
+      border-radius: 6px;
+      background: var(--head-bg);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       margin-bottom: 10px;
     }
 
@@ -278,17 +304,19 @@
     }
 
     th, td {
-      border-bottom: 1px dashed #3d2f23;
-      padding: 7px 8px;
+      border-bottom: 1px solid var(--cell);
+      padding: 8px 10px;
       text-align: left;
     }
 
     th {
-      color: #dec79d;
-      font-size: 0.76rem;
+      font-family: var(--font-display);
+      color: var(--gold-label);
+      font-weight: 600;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      background: #1f1813;
+      letter-spacing: 0.06em;
+      background: var(--head-bg);
     }
 
     tr:last-child td {
@@ -298,6 +326,35 @@
     .muted {
       color: var(--muted);
     }
+
+    /* Collapsible explainer: open on desktop, closed on mobile (set by script). */
+    .acc {
+      margin-top: 8px;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      background: rgba(0,0,0,.16);
+    }
+    .acc > summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px 11px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold-label);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .acc > summary::-webkit-details-marker { display: none; }
+    .acc > summary::before { content: '\25B8'; color: var(--gold); font-size: 0.75rem; transition: transform .15s ease; }
+    .acc[open] > summary::before { transform: rotate(90deg); }
+    .acc > summary:hover { color: var(--gold-bright); }
+    .acc[open] > summary { border-bottom: 1px solid var(--rule); }
+    .acc .acc-body { padding: 10px 11px; font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 
     @media (max-width: 980px) {
       .layout {
@@ -311,6 +368,13 @@
       .summary-grid {
         grid-template-columns: 1fr;
       }
+    }
+
+    @media (max-width: 560px) {
+      .app { padding: 12px; }
+      h1 { font-size: 1.25rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .btn-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -394,14 +458,17 @@
               <input id="maxRounds" type="number" min="1" max="10" step="1" value="3">
             </div>
           </div>
-          <div class="muted" style="font-size:0.8rem; margin-top:2px;">
+          <details class="acc" open>
+            <summary>How each trial resolves</summary>
+            <div class="acc-body">
             Each trial: opening Ambush (unless Stealth), then the Pinned invader spends Influence per volley until it runs out:
             <strong>Open Fire costs 1</strong>, <strong>Hit costs 2</strong>, <strong>Torch costs 2</strong> plus a sacrificed Runner.
             At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, liquor lost).
             A <strong>Plunder</strong> raid always keeps 1 Influence back to <strong>Advance</strong> out with the loot
             (Fall Back would drop it). Firepower is the free Irish Trait &mdash; it boosts the invader's Open Fire volleys only,
             never an Ambush or any defence.
-          </div>
+            </div>
+          </details>
         </div>
 
         <div class="btn-row">
@@ -879,6 +946,14 @@
 
     bind();
     resetAll();
+
+    // Explainer accordions: open on desktop, collapsed on mobile.
+    (function(){
+      var mq = window.matchMedia('(max-width: 560px)');
+      function sync(){ document.querySelectorAll('details.acc').forEach(function(d){ d.open = !mq.matches; }); }
+      sync();
+      mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
+    })();
   </script>
 </body>
 </html>
