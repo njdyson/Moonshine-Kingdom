@@ -1099,47 +1099,108 @@ img {
     box-shadow: 0 0 30px #000;
 }
 
-/* TOC Styling */
+/* --------------------------------------------------------------------------
+   Table of Contents.
+
+   Restyled for the v0.9 reskin (the old block predated it): Cinzel Part rows,
+   Barlow entries, the token palette (--gold-bright / --gold-line / --body /
+   --muted) and framed-panel feel. The class names are UNCHANGED so the print
+   pagination hook (.toc-container, further down) still forces the TOC onto its
+   own sheet. Page numbers are intentionally omitted this pass — .toc-page is
+   kept as an empty span so numbers can be slotted in later without re-templating.
+   -------------------------------------------------------------------------- */
 .toc-list {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+/* Two-column flow for a long contents list (the Kingpin's Guide). Each Part
+   block is kept whole so a Part heading never splits from its subsections. */
+.toc-list.toc-columns {
+    column-count: 2;
+    column-gap: 34px;
+}
+.toc-list.toc-columns > li {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
 }
 
 .toc-list a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--body);
     display: flex;
-    align-items: baseline;
-    gap: 8px;
-    padding: 4px 0;
+    /* flex-end, not baseline: when an entry wraps to a second line the dotted
+       leader and page column must ride the LAST line, not hover beside the
+       first. */
+    align-items: flex-end;
+    gap: 9px;
+    padding: 3px 0;
 }
 
 .toc-text {
     flex: 0 1 auto;
+    line-height: 1.25;
 }
 
 .toc-dots {
     flex: 1 1 auto;
-    border-bottom: 1px dotted var(--accent-dim);
-    opacity: 0.5;
-    transform: translateY(-2px);
+    border-bottom: 1px dotted var(--gold-faint);
+    transform: translateY(-4px);
+    min-width: 1.5em;
 }
 
 .toc-page {
     flex: 0 0 auto;
     min-width: 2ch;
     text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
 }
 
+/* Part rows: Cinzel display type, gold-bright, a little breathing room above
+   each so the Parts read as the spine of the list. */
+.toc-list > li {
+    margin-top: 13px;
+    break-inside: avoid;
+}
+.toc-list > li:first-child {
+    margin-top: 0;
+}
 .toc-list > li > a {
-    font-weight: bold;
-    color: var(--accent-gold);
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--gold-bright);
     font-size: 12pt;
-    margin-top: 10px;
+    letter-spacing: 0.4px;
+    padding-bottom: 4px;
+}
+.toc-list > li > a .toc-dots {
+    border-bottom-color: var(--gold-line);
+    opacity: 0.55;
 }
 
+/* Sub rows: Barlow, indented under their Part, quieter colour. The nested list
+   carries its own class so the Part selectors above never reach it. */
+.toc-sublist {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 2px;
+}
 .toc-list .sub-item {
-    padding-left: 20px;
+    padding-left: 17px;
+}
+.toc-list .sub-item a {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 10pt;
+    color: var(--body-2);
+}
+.toc-list .sub-item .toc-text {
+    letter-spacing: 0.2px;
+}
+.toc-list a:hover .toc-text {
+    color: var(--gold-bright);
 }
 
 /* ==========================================================================
@@ -1631,7 +1692,8 @@ img {
     }
 
     .toc-container {
-        column-count: 1; /* TOC looks better single column */
+        column-count: 1; /* the CONTAINER is single-column; a long .toc-list
+                            opts into two columns of its own via .toc-columns */
         page-break-after: always;
         break-after: page;
     }
@@ -1648,15 +1710,12 @@ img {
         break-after: auto;
     }
 
-    /* Slightly tighten TOC to keep it within one page */
+    /* Print keeps the base TOC sizes (10pt entries / 12pt Cinzel Parts); the
+       two-column .toc-columns list gives a ~40-entry contents page room to
+       breathe on one sheet without shrinking the type. Tighten line spacing
+       only, so leaders and rows sit compactly. */
     .toc-list a {
-        font-size: 9.5pt;
-        padding: 2px 0;
-        line-height: 1.1;
-    }
-
-    .toc-list > li > a {
-        font-size: 10pt;
+        line-height: 1.15;
     }
 
     /* Ensure text is dark enough for print definition (White on Black spreads) */
