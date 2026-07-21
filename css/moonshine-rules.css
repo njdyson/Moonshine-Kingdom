@@ -441,6 +441,42 @@ tr:nth-child(even) {
     font-style: italic;
 }
 
+/* Muscle Ratio call-out: sit the explainer text beside the table so the grid
+   reads as a compact reference rather than a full-width band. Gold-bordered to
+   match the .note call-outs elsewhere in the book. */
+.muscle-ratio-callout {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background-color: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--accent-gold);
+    padding: 12px 14px;
+    margin: 0.6em 0 1em;
+    border-radius: 4px;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.muscle-ratio-callout .muscle-ratio-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.muscle-ratio-callout .muscle-ratio-text p {
+    margin: 0 0 0.5em;
+}
+
+.muscle-ratio-callout .muscle-ratio-text p:last-child {
+    margin-bottom: 0;
+}
+
+.muscle-ratio-callout .muscle-ratio-table {
+    flex: 0 0 46%;
+    width: auto;
+    margin: 0;
+}
+
 /* Specific fix for the Action Table column widths */
 .action-table th:first-child,
 .action-table td:first-child {
@@ -892,6 +928,17 @@ img {
    below the A4 preview width (~794px), so a browser preview still shows the
    true print layout. */
 @media screen and (max-width: 600px) {
+    .muscle-ratio-callout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .muscle-ratio-callout .muscle-ratio-table {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
     .broker-card {
         flex-direction: column;
         align-items: flex-start;
