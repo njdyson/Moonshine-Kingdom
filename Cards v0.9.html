@@ -97,6 +97,10 @@ body{
 .tier-head .rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)}
 
 .gallery,.backs{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;padding:0 20px 10px}
+/* Backs are hidden on screen (the deck reads as fronts only); the
+   @media print rule below re-shows them as the duplex grid. Matches
+   the Jobs deck. */
+.backs{display:none}
 
 /* ============================================================
    CARD: 63 x 88mm poker stock
