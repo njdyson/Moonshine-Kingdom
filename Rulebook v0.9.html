@@ -14,6 +14,7 @@
 
     <!-- Link to the shared base css styles-->
     <link rel="stylesheet" href="css/moonshine-rules.css">
+    <link rel="stylesheet" href="css/ledger-board.css">
 
     <script>
     /* PRINT-READY TOGGLE. A desktop-only control that swaps the light screen
@@ -390,8 +391,47 @@
             Extra Influence buys no extra actions: the Ledger stops at 5 slots. What deep Reserves buy is <em>capacity</em>, to soak up Heat and stake Jobs without gutting your day at the table. You can't out-action your rivals. You have to out-think them.
         </p>
 
+        <!-- The Ledger, rendered live from the shared plate stylesheet
+             (css/ledger-board.css) rather than a baked image, so it always
+             matches the printed poker-chip component. -->
         <div class="currency-board single-column-block">
-            <img class="" src="Art/Rulebook/opt/Ledger.webp" alt="The Ledger - Player Board" loading="lazy">
+            <div class="ledger-plate" role="img" aria-label="The Ledger player board: a Reserves socket feeding five Ledger sockets (max 5)">
+                <div class="ledger-plate-inner">
+                    <div class="dashboard-strip">
+                        <div class="corner tl"></div><div class="corner tr"></div>
+                        <div class="corner bl"></div><div class="corner br"></div>
+
+                        <div class="main-title">The Ledger</div>
+                        <div class="top-instruction">Your Back-Room Desk</div>
+
+                        <div class="socket-row">
+                            <div class="cluster">
+                                <div class="label">Reserves</div>
+                                <div class="socket stash-socket"></div>
+                            </div>
+
+                            <div class="arrow-divider">&#10148;</div>
+
+                            <div class="cluster">
+                                <div class="label">Ledger (Max 5)</div>
+                                <div class="socket-group">
+                                    <div class="socket action-socket"></div>
+                                    <div class="socket action-socket"></div>
+                                    <div class="socket action-socket"></div>
+                                    <div class="socket action-socket"></div>
+                                    <div class="socket action-socket"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-instruction">
+                            <span><b>Shadows:</b> Reserves &rarr; Ledger</span>
+                            <span>&bull;</span>
+                            <span><b>The Hustle:</b> Ledger &rarr; Reserves / Heat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

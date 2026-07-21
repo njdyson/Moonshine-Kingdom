@@ -2,25 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Moonshine Kingdom The Ledger v0.8</title>
+    <title>Moonshine Kingdom The Ledger v0.9</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <!-- The board itself lives in the shared plate stylesheet; this file only
+         carries the print-sheet chrome (A4 landscape, two boards per page).
+         The board markup wears the .tokens modifier for the 26 mm prototype
+         marker build; the poker-chip build ("The Ledger v0.9 (Poker Chips)")
+         is the default and the source of truth. -->
+    <link rel="stylesheet" href="css/ledger-board.css">
     <style>
-        /* --------------------------------------------------------------
-           Palette lifted from the Reskin system so the board sits in the
-           same family as the rulebook, decks and playbooks. Source of
-           truth: the :root block in "Playbooks v0.7 Reskin.html".
-           -------------------------------------------------------------- */
+        /* Page-chrome palette (the board defines its own, scoped internally). */
         :root {
-            --gold: #c9a437;
-            --gold-line: #b9932f;
-            --gold-label: #d4af37;
-            --gold-faint: #7a6a3a;
-            --muted: #b8a577;
-            --panel-a: #241c14;
-            --panel-b: #19130c;
             --bg: #100c08;
-
-            --font-display: 'Cinzel', serif;
+            --muted: #b8a577;
             --font-body: 'Barlow', sans-serif;
         }
 
@@ -45,190 +39,13 @@
             width: 297mm;
             height: 210mm;
             background-color: var(--bg);
-            padding: 10mm;
+            padding: 6mm;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15mm;
+            gap: 8mm;
         }
-
-        /* --- THE BOARD ---
-           Geometry unchanged from v0.63 (260 x 75mm). The rulebook uses a
-           render of this strip as its player-board plate, so changing the
-           proportions would change that image too. */
-        .dashboard-strip {
-            width: 260mm;
-            height: 75mm;
-
-            background-color: var(--panel-b);
-            background-image: linear-gradient(135deg, var(--panel-a), var(--panel-b));
-            border: 4px double var(--gold-line);
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-
-            outline: 1px dashed #3a3228;
-            outline-offset: 1mm;
-        }
-
-        /* --- TYPOGRAPHY ---
-           The Reskin's cardinal rule: a Cinzel title is NEVER uppercased.
-           Display type is mixed case, and UPPERCASE is reserved for
-           wide-tracked Barlow micro-labels. v0.63 shouted this title. */
-        .main-title {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.55rem;
-            color: var(--gold);
-            margin: 0;
-            letter-spacing: 1.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* The book's section-head diamond, shrunk to a mark on either side. */
-        .main-title::before,
-        .main-title::after {
-            content: '';
-            width: 7px;
-            height: 7px;
-            background: var(--gold);
-            transform: rotate(45deg);
-            flex: 0 0 auto;
-        }
-
-        .top-instruction {
-            font-family: var(--font-body);
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 3.2px;
-            margin-top: 1.5mm;
-            margin-bottom: 4mm;
-            padding-bottom: 1.5mm;
-            border-bottom: 1px solid rgba(185, 147, 47, .22);
-        }
-
-        .bottom-instruction {
-            margin-top: 4mm;
-            font-family: var(--font-body);
-            font-size: 0.62rem;
-            color: var(--muted);
-            font-style: italic;
-            letter-spacing: 0.4px;
-            display: flex;
-            gap: 10mm;
-        }
-
-        .bottom-instruction b {
-            font-style: normal;
-            font-weight: 600;
-            color: var(--gold-label);
-        }
-
-        /* --- SOCKET CONTAINER --- */
-        .socket-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4mm;
-
-            background-color: rgba(0, 0, 0, .35);
-            /* 6mm, not 8mm: at 8 the pill ran past the board's right edge and
-               the last Ledger socket was clipped by the frame. */
-            padding: 3mm 6mm;
-            border-radius: 100px;
-            border: 1px solid rgba(107, 90, 46, .4);
-            box-shadow: inset 0 0 15px #000;
-        }
-
-        .cluster {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2mm;
-        }
-
-        .label {
-            font-family: var(--font-body);
-            font-size: 0.5rem;
-            color: var(--gold-label);
-            text-transform: uppercase;
-            letter-spacing: 2.2px;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-
-        .arrow-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-faint);
-            font-size: 16px;
-            margin: 0 2mm;
-        }
-
-        /* --- SOCKETS --- */
-        /* 26mm: the prototype markers are 25mm, plus ~1mm so the socket ring
-           stays visible around a seated chip. If the markers change size, this
-           is the one number to change.
-
-           The poker-chip build is a SEPARATE file ("The Ledger v0.8 (Poker
-           Chips).html") at 39mm, because chip-sized sockets need a wider,
-           taller board. Do not try to serve both from this one. */
-        .socket {
-            width: 26mm;
-            height: 26mm;
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .stash-socket {
-            border: 2px solid var(--gold-faint);
-            background: radial-gradient(circle at 50% 50%, var(--panel-a) 0%, #000 100%);
-            box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 1);
-        }
-
-        .stash-socket::after {
-            content: "RESERVES";
-            font-family: var(--font-body);
-            font-size: 7.5px;
-            font-weight: 600;
-            color: #52472f;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            letter-spacing: 1.4px;
-        }
-
-
-        .action-socket {
-            border: 2px dashed var(--gold-line);
-            background: radial-gradient(circle at 50% 50%, var(--panel-a) 0%, #070504 80%);
-            box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.9);
-        }
-
-        /* Decoration Corners */
-        .corner {
-            position: absolute;
-            width: 5mm;
-            height: 5mm;
-            border-color: var(--gold-line);
-            border-style: solid;
-            opacity: 0.5;
-        }
-        .tl { top: 3mm; left: 3mm; border-width: 1px 0 0 1px; }
-        .tr { top: 3mm; right: 3mm; border-width: 1px 1px 0 0; }
-        .bl { bottom: 3mm; left: 3mm; border-width: 0 0 1px 1px; }
-        .br { bottom: 3mm; right: 3mm; border-width: 0 1px 1px 0; }
 
         /* --- PRINT SETTINGS --- */
         @page {
@@ -248,7 +65,7 @@
     <div class="page-container">
 
         <!-- BOARD 1 -->
-        <div class="dashboard-strip">
+        <div class="dashboard-strip tokens">
             <div class="corner tl"></div><div class="corner tr"></div>
             <div class="corner bl"></div><div class="corner br"></div>
 
@@ -268,7 +85,7 @@
                 <!-- Ledger -->
                 <div class="cluster">
                     <div class="label">Ledger (Max 5)</div>
-                    <div style="display:flex; gap:4mm;">
+                    <div class="socket-group">
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>
@@ -287,7 +104,7 @@
         </div>
 
         <!-- BOARD 2 -->
-        <div class="dashboard-strip">
+        <div class="dashboard-strip tokens">
             <div class="corner tl"></div><div class="corner tr"></div>
             <div class="corner bl"></div><div class="corner br"></div>
 
@@ -307,7 +124,7 @@
                 <!-- Ledger -->
                 <div class="cluster">
                     <div class="label">Ledger (Max 5)</div>
-                    <div style="display:flex; gap:4mm;">
+                    <div class="socket-group">
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>
                         <div class="socket action-socket"></div>
