@@ -13,17 +13,16 @@
    Turn Tokens v0.9 — 36 mm square, double-sided.
 
    Eight tokens: two sets of four, numbered 1-4. The rules run the
-   sets by ROLE, not by any mark: "one set runs today; the other
-   decides tomorrow," and at each Reckoning the set you drafted
-   becomes today's. So the tokens carry NO symbol to decode — just
-   the number, on two sets made unmistakable three ways at once:
+   sets by ROLE, not by any mark ("one set runs today; the other
+   decides tomorrow"), so the tokens carry no symbol to decode — just
+   the number, on a clean engraved tile.
 
-     - metal:   warm gold   vs  cool silver   (the deco vibe)
-     - pattern: sunburst    vs  vertical fluting
-     - frame:   rounded     vs  squared
-
-   Any one of those tells the sets apart; together they can't be
-   confused, in dim light or by a colour-blind player.
+   The two sets are a matched pair told apart by colour first, then
+   two quiet tells that survive even in grey / poor light:
+     - metal:  warm gold           vs  cool silver
+     - frame:  rounded corners      vs  squared corners
+     - corner: round dots           vs  diamonds
+   Curves for gold, angles for silver.
 
    ── DOUBLE-SIDED BY FOLD-OVER ──
    Each token prints as a 36 x 72 mm strip: the same face above the
@@ -44,9 +43,9 @@
   --gold-line:   #b9932f;
   --gold-faint:  #7a6a3a;
 
-  /* Silver companion metal for the second set — cool enough to read
-     as clearly "not gold" across the table, still warm-neutral so it
-     keeps the prohibition art-deco vibe rather than going clinical. */
+  /* Silver companion metal — cool enough to read as clearly "not gold"
+     across the table, still warm-neutral so it keeps the prohibition
+     art-deco vibe rather than going clinical. */
   --silver:        #c3c8d0;
   --silver-bright: #eef1f5;
   --silver-line:   #969ca6;
@@ -170,88 +169,87 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  /* Hairline is the cut guide; the engraved metal frame sits inside. */
+  background:radial-gradient(circle at 42% 32%, var(--panel-a), var(--panel-b) 74%);
+  /* Hairline is the cut guide; the engraved double frame sits inside. */
   border:1px solid rgba(0,0,0,.6);
   overflow:hidden;
   color:var(--metal);
 }
 
-/* Engraved outer frame inside the cut line. Radius set per set. */
+/* The two engraved border lines. Corner radius is a per-set tell. */
 .face::before{
   content:"";
   position:absolute;
   inset:2.2mm;
   border:1.4px solid var(--metal-line);
   border-radius:var(--frame-r);
-  z-index:2;
 }
-
-/* Central medallion: a darker plate that lifts the numeral clear of the
-   full-strength pattern behind it. Its SHAPE is a distinguishing cue too —
-   a round sun-disc for gold, a squared plaque for silver. */
 .face::after{
   content:"";
   position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%);
-  width:var(--medallion-w);
-  height:var(--medallion-w);
-  background:radial-gradient(circle at 50% 40%, #241a11 0%, #0b0603 84%);
-  border:1px solid var(--metal-faint);
-  border-radius:var(--medallion-r);
-  box-shadow:inset 0 0 2.5mm rgba(0,0,0,.65);
-  z-index:1;
+  inset:3.4mm;
+  border:.6px solid var(--metal-faint);
+  border-radius:calc(var(--frame-r) * .62);
 }
 
-/* ── Set A: warm gold, sunburst field, rounded frame, round sun-disc ── */
+/* ── Set A: warm gold, rounded frame ── */
 .set-gold{
   --metal:var(--gold);
   --metal-line:var(--gold-line);
   --metal-faint:var(--gold-faint);
   --frame-r:3mm;
-  --medallion-w:19mm;
-  --medallion-r:50%;
 }
-.face.set-gold{
-  background:
-    repeating-conic-gradient(from 0deg at 50% 50%,
-      rgba(233,201,104,.62) 0deg 2.6deg, transparent 2.6deg 11deg),
-    radial-gradient(circle at 50% 42%, #1d150d, #0b0604 88%);
-}
-
-/* ── Set B: cool silver, vertical fluting, squared frame, squared plaque ── */
+/* ── Set B: cool silver, squared frame ── */
 .set-silver{
   --metal:var(--silver);
   --metal-line:var(--silver-line);
   --metal-faint:var(--silver-faint);
-  --frame-r:.4mm;
-  --medallion-w:20mm;
-  --medallion-r:1.4mm;
-}
-.face.set-silver{
-  background:
-    repeating-linear-gradient(90deg,
-      rgba(212,217,225,.52) 0 1.2px, transparent 1.2px 4.2px),
-    radial-gradient(circle at 50% 42%, #1a150f, #0b0604 88%);
+  --frame-r:.5mm;
 }
 
-/* The big turn numeral, riding on the medallion. */
+/* Corner tells: round dots for gold, diamonds for silver. */
+.mark{
+  position:absolute;
+  width:1.5mm;
+  height:1.5mm;
+  background:var(--metal);
+  z-index:2;
+}
+.mark.tl{ top:5.6mm;  left:5.6mm }
+.mark.tr{ top:5.6mm;  right:5.6mm }
+.mark.bl{ bottom:5.6mm; left:5.6mm }
+.mark.br{ bottom:5.6mm; right:5.6mm }
+.set-gold   .mark{ border-radius:50%; }
+.set-silver .mark{ width:1.35mm; height:1.35mm; transform:rotate(45deg); }
+
+/* The big turn numeral. */
 .num{
   font-family:var(--font-display);
   font-weight:700;
-  font-size:14mm;
+  font-size:19mm;
   line-height:.9;
   color:var(--metal);
-  text-shadow:0 .3mm .5mm rgba(0,0,0,.6);
-  position:relative;
-  z-index:3;
+  text-shadow:0 .35mm .5mm rgba(0,0,0,.5);
+  z-index:2;
+}
+
+/* Wide-tracked Barlow micro-label under the numeral. */
+.tag{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:2.5mm;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--metal-faint);
+  margin-top:1.4mm;
+  z-index:2;
 }
 
 @media print{
   body{ background:#fff }
   .brief{ display:none }
   .sheet{ padding:0 }
-  .face, .num, .corner, .tag,
+  .face, .num, .tag, .mark,
   .face::before, .face::after{
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
@@ -271,9 +269,8 @@ body{
       the set you draft tonight becomes today's at the next Reckoning.
     </p>
     <p>
-      No symbols to decode. The two sets are told apart three ways at once &mdash; <b>warm gold
-      vs cool silver</b>, <b>sunburst vs fluting</b>, and a <b>rounded vs squared</b> frame &mdash;
-      so they can't be mistaken for one another at a glance.
+      A matched pair, told apart by <b>warm gold vs cool silver</b> and two quiet tells &mdash;
+      <b>rounded frame &amp; dots</b> for gold, <b>squared frame &amp; diamonds</b> for silver.
     </p>
     <div class="steps">
       <span>1 &nbsp;Print at 100% (actual size)</span>
@@ -287,62 +284,94 @@ body{
   <div class="sheet">
     <div class="grid">
 
-      <!-- ── Gold set (sunburst), numbered 1-4 ── -->
+      <!-- ── Gold set (rounded, dots), numbered 1-4 ── -->
       <div class="strip">
         <div class="face set-gold back">
-<div class="num">1</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
         <div class="face set-gold front">
-<div class="num">1</div>        </div>
-      </div>
-
-      <div class="strip">
-        <div class="face set-gold back">
-<div class="num">2</div>        </div>
-        <div class="face set-gold front">
-<div class="num">2</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
       </div>
 
       <div class="strip">
         <div class="face set-gold back">
-<div class="num">3</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
         <div class="face set-gold front">
-<div class="num">3</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
       </div>
 
       <div class="strip">
         <div class="face set-gold back">
-<div class="num">4</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
         <div class="face set-gold front">
-<div class="num">4</div>        </div>
-      </div>
-
-      <!-- ── Silver set (fluting), numbered 1-4 ── -->
-      <div class="strip">
-        <div class="face set-silver back">
-<div class="num">1</div>        </div>
-        <div class="face set-silver front">
-<div class="num">1</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
       </div>
 
       <div class="strip">
+        <div class="face set-gold back">
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
+        <div class="face set-gold front">
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <!-- ── Silver set (squared, diamonds), numbered 1-4 ── -->
+      <div class="strip">
         <div class="face set-silver back">
-<div class="num">2</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
         <div class="face set-silver front">
-<div class="num">2</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
       </div>
 
       <div class="strip">
         <div class="face set-silver back">
-<div class="num">3</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
         <div class="face set-silver front">
-<div class="num">3</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
       </div>
 
       <div class="strip">
         <div class="face set-silver back">
-<div class="num">4</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
         <div class="face set-silver front">
-<div class="num">4</div>        </div>
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="face set-silver back">
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
+        <div class="face set-silver front">
+          <div class="mark tl"></div><div class="mark tr"></div><div class="mark bl"></div><div class="mark br"></div>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
       </div>
 
     </div>
