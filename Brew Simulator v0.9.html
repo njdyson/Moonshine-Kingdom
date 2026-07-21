@@ -75,6 +75,20 @@
     .presets .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; }
     .note { font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
     .note b { color: var(--body); }
+    /* Collapsible explainer: open on desktop, closed on mobile (set by script). */
+    .acc { margin-top: 12px; border: 1px solid var(--rule); border-radius: 6px; background: rgba(0,0,0,.16); }
+    .acc > summary {
+      list-style: none; cursor: pointer; user-select: none;
+      padding: 9px 13px; font-family: var(--font-body); font-weight: 600;
+      font-size: 11px; letter-spacing: .8px; text-transform: uppercase;
+      color: var(--gold-label); display: flex; align-items: center; gap: 8px;
+    }
+    .acc > summary::-webkit-details-marker { display: none; }
+    .acc > summary::before { content: '\25B8'; color: var(--gold); font-size: 12px; transition: transform .15s ease; }
+    .acc[open] > summary::before { transform: rotate(90deg); }
+    .acc > summary:hover { color: var(--gold-bright); }
+    .acc[open] > summary { border-bottom: 1px solid var(--rule); }
+    .acc .note { margin: 0; padding: 11px 13px; }
     .row-actions { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
     .kpi { border: 1px solid var(--panel-line); border-radius: 6px; padding: 13px 15px; background: var(--wash); }
@@ -115,8 +129,11 @@
     </div>
     <div class="row-actions">
       <button class="ghost mini" id="addStill">+ Add Still</button>
-      <span class="note" style="margin:0;">Mobsters = the total crew at that Still (count the Boss if you park him there); this sets the Muscle Ratio (1&rarr;1, 3&rarr;2, 5&rarr;3, 7&rarr;4, 9+&rarr;5 barrels &amp; casualties) &mdash; only the <b>odd</b> men earn. <b>The Sweep caps a District at 5</b> every Reckoning and the Brew is the next dawn, so 5 is the legal maximum here for everyone but the <b>Sicilians</b>, who are Untouchable and alone can climb past it. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. The Boss's Still brews +1 with Twist the Valves on.</span>
     </div>
+    <details class="acc" open>
+      <summary>How Mobsters &amp; the clump work</summary>
+      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there); this sets the Muscle Ratio (1&rarr;1, 3&rarr;2, 5&rarr;3, 7&rarr;4, 9+&rarr;5 barrels &amp; casualties) &mdash; only the <b>odd</b> men earn. <b>The Sweep caps a District at 5</b> every Reckoning and the Brew is the next dawn, so 5 is the legal maximum here for everyone but the <b>Sicilians</b>, who are Untouchable and alone can climb past it. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. The Boss's Still brews +1 with Twist the Valves on.</p>
+    </details>
     <div class="presets">
       <span class="lbl">Presets:</span>
       <button class="ghost mini" data-preset="1">1 matching</button>
@@ -162,7 +179,9 @@
     <div class="row-actions">
       <button class="run" id="run">Roll the Mornings</button>
     </div>
-    <p class="note">
+    <details class="acc" open>
+      <summary>What these settings mean</summary>
+      <p class="note">
       One focal crew (your build) drafts against <em>players</em> rivals for 1 Mash die (the Public Mash) + (players+1) Red dice, in random seat order.
       <b>The Mash die</b> is the headline lever. <b>Rolled</b> is the classic random face &mdash; the world when no rival holds the
       <b>Harbormaster</b> Title, or when you hold it yourself. <b>Hostile Harbormaster</b> is the worst case: a rival names the face that
@@ -177,7 +196,8 @@
       crew with no Boss skips <b>The Offers</b> that morning, so your rivals pick over the Market without you. Treat $800 as a
       floor and raise it to taste &mdash; at a Boss-loss rate near 8%/Day it shifts the bottom line by only tens of dollars, but it makes
       <b>Twist the Valves</b> look better than it is.
-    </p>
+      </p>
+    </details>
   </div>
 
   <!-- RESULTS -->
@@ -190,7 +210,10 @@
   <!-- COMPARISON -->
   <div class="panel">
     <h2>Compare the Standard Builds</h2>
-    <p class="note" style="margin-top:0;">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler to stay Harbormaster-proof. Flip the <b>Mash die</b> to <b>Hostile Harbormaster</b> and re-run to watch the one-number stacks collapse while the spreads hold. Use it to refresh the Brew Engine guide's table for the current economy, the Harbormaster, Twist the Valves, and Blowback rules.</p>
+    <details class="acc" open>
+      <summary>About this comparison</summary>
+      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler to stay Harbormaster-proof. Flip the <b>Mash die</b> to <b>Hostile Harbormaster</b> and re-run to watch the one-number stacks collapse while the spreads hold. Use it to refresh the Brew Engine guide's table for the current economy, the Harbormaster, Twist the Valves, and Blowback rules.</p>
+    </details>
     <div class="row-actions"><button class="ghost" id="runCompare">Run Comparison</button></div>
     <div id="compareOut" style="margin-top:12px;"></div>
   </div>
@@ -461,6 +484,14 @@ document.getElementById('runCompare').addEventListener('click', () => {
 
 // ---- Boot ----
 loadBuild(PRESETS['3'], 0);
+
+// ---- Explainer accordions: open on desktop, collapsed on mobile ----
+(function(){
+  var mq = window.matchMedia('(max-width: 600px)');
+  function sync(){ document.querySelectorAll('details.acc').forEach(function(d){ d.open = !mq.matches; }); }
+  sync();
+  mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
+})();
 </script>
 </body>
 </html>
