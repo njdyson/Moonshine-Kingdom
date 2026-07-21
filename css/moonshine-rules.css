@@ -461,22 +461,11 @@ img {
     margin: 0 auto;
 }
 
-/* --------------------------------------------------------------------------
-   Screen / print image swap.
-
-   The cover art is high-resolution PNG for print, which is far too heavy to
-   ship to a browser (~2-3 MB each). Each cover is authored twice: a light
-   WebP tagged .screen-only and the full PNG tagged .print-only. Only the copy
-   matching the medium is displayed, and browsers do NOT fetch a display:none
-   image on screen, so the page loads light while the printed booklet keeps
-   the full-resolution art. Pair with loading="lazy" on the img.
-
-   !important is deliberate: `.cover img` (0,1,1) outweighs a bare `.print-only`
-   (0,1,0), so without it neither copy would be hidden inside a .cover — both
-   would load on screen and both would render (doubling cover height) in print.
-   -------------------------------------------------------------------------- */
-@media screen { .print-only  { display: none !important; } }
-@media print  { .screen-only { display: none !important; } }
+/* Covers ship as a single WebP (Art/Rulebook/opt/) used for both screen and
+   print: ~200-500 KB each at q90 instead of the 2-3 MB source PNG, visually
+   lossless at the printed size, and — unlike a screen/print <img> swap — it
+   downloads exactly once, on every browser. WebP keeps the title logo's alpha,
+   which a flattened copy loses. The full-resolution PNGs stay in the repo. */
 
 /* No background colour here on purpose. The cover fades to TRANSPARENT (see the
    masks below), so whatever the page is actually painted with shows through.
