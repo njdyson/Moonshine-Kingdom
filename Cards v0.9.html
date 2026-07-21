@@ -385,6 +385,8 @@ body.trim .card,body.trim .back{border-radius:0}
 #trim-toggle small{display:block;font-weight:400;font-size:10px;color:var(--muted)}
 #trim-toggle input{accent-color:var(--gold);cursor:pointer;margin:0}
 @media print{#trim-toggle{display:none!important}}
+/* Trim mode is a print-prototype aid; useless on a phone, so hide it there. */
+@media screen and (max-width:700px){#trim-toggle{display:none!important}}
 </style>
 <script>
 /* TRIM-MODE TOGGLE.
