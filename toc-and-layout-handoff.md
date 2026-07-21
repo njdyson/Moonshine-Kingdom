@@ -50,11 +50,9 @@ into nothing (join the two `.container` bodies under a single `.container`). The
 
 ## 3. Task 1 — the TOC page
 
-**Good news: the CSS already exists and is unused.** `moonshine-rules.css` defines the whole pattern:
-- `.toc-container` (its own page, `break-after: page` in print — lines **1633-1637**)
-- `.toc-list`, `.toc-list a`, `.toc-text`, `.toc-dots` (dotted leader), `.toc-page`, `.toc-list .sub-item` (indented child) — lines **1102-1143**, with print size tweaks at **1651-1659**.
+**The CSS scaffolding exists but is OLD — restyle it, don't reuse as-is.** `moonshine-rules.css` defines the pattern (`.toc-container` line **1633-1637**; `.toc-list`, `.toc-list a`, `.toc-text`, `.toc-dots` dotted leader, `.toc-page`, `.toc-list .sub-item` at **1102-1143**; print tweaks **1651-1659**). It predates the v0.9 reskin, so **bring it up to the current look** the sims/guides now use: Cinzel for the TOC heading/part rows, Barlow for entries, the token palette (`--gold-bright`, `--gold-label`, `--rule`, `--wash`), and the framed panel feel. Keep the class names (so it stays print-paginated) but modernize the type, colour, and spacing. No HTML file consumes these yet — you're the first, so you own the restyle.
 
-No HTML file uses these yet — you're the first consumer. Markup shape:
+Markup shape:
 
 ```html
 <div class="container one-column toc-container">
@@ -80,13 +78,11 @@ No HTML file uses these yet — you're the first consumer. Markup shape:
 
 Place it **right after `<div class="front-page">…</div>` and before the first content container**, so it prints as page 2. Anchor links (`href="#id"`) are what makes it clickable in HTML — that part is free.
 
-### The one real gotcha: printed page numbers
-`.toc-page` exists for page numbers, but **browsers cannot auto-generate the target page number of an anchor in native print** (`target-counter(attr(href), page)` is CSS Paged Media — Prince/paged.js only, not Chrome "Save as PDF"). This project prints via the browser. So choose one:
-- **(Recommended) Omit page numbers** — titles + dotted leaders only. Looks like a TOC, stays maintenance-free, still clickable. Leave `.toc-page` empty or drop it.
-- **Hand-number** as a final step once pagination is frozen (fragile — any edit shifts numbers).
-- Introduce **paged.js** only if the user explicitly wants real numbers (heavier; out of scope unless asked).
-
-Confirm the preference with the user if unsure; default to omitting numbers.
+### Page numbers — user decision: OMIT FOR NOW, keep the door open
+The user wants page numbers **in the printed booklet eventually**, but hit exactly the known problem last time: **browsers can't reliably auto-generate an anchor's target page number in native print** (`target-counter(attr(href), page)` is CSS Paged Media — paged.js/Prince only, not Chrome "Save as PDF"), and hand-numbered pages drift out of sync every time the layout changes. So for **this pass**:
+- **Ship without page numbers.** Titles + dotted leaders, fully clickable in HTML — that's the priority ("definitely in HTML").
+- **Keep the `.toc-page` span in the markup** (empty), so numbers can be slotted in later without re-templating.
+- **Document the real path for the printed booklet:** the only robust way to get consistent print page numbers is a paged-media renderer — **paged.js** (client-side, browser-friendly) generating the numbers via `target-counter`. That's a deliberate future add for the print run, not this task. Don't hand-number.
 
 ---
 
@@ -106,7 +102,7 @@ Confirm the preference with the user if unsure; default to omitting numbers.
 - **"The One Rule That Governs Everything" appears twice** (Part I line ~233 and Part II line ~625). Give them distinct ids (`#brew-one-rule`, `#market-one-rule`) and consider distinct visible titles so the TOC isn't ambiguous.
 - **"So What's the Optimal Play?"** recurs as an `<h4>` in several Parts — same disambiguation if you list them.
 - Use lowercase-hyphen slugs (`id="magic-of-seven"`). Keep them descriptive and stable; they may become shared URLs.
-- The existing **"What's in the Book"** list (`.guide-toc`, ~line 202) is prose flavor, not a nav TOC. Keep it, or fold it into the new TOC — user's call; don't silently delete it.
+- The existing **"What's in the Book"** list (`.guide-toc`, ~line 202) stays, but **reword it as an introduction** (user's call): turn the five-Part bullet list into short intro prose that sets up the book, and let the **new TOC page own navigation**. Don't just delete it — repurpose the content as a lead-in.
 
 The Rulebook already has ids on most `<h2>`/`<h3>` (`#overview #components #concepts #mob #muscle-ratio #map #currencies #logistics #goal #setup #gameplay #shadows #hustle #reckoning #win #cooperation #combat #heat #consolidation`). Add ids only to the few h3s still missing them, then build its TOC from the existing ones.
 
