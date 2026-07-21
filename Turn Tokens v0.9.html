@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Moonshine Kingdom: Turn Tokens v0.9</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ──────────────────────────────────────────────────────────────
+   Turn Tokens v0.9 — 36 mm square, double-sided.
+
+   Nine tokens, printer-agnostic. The rules run two interleaved sets
+   of turn order: "Two sets numbered 1-4. One set runs today; the
+   other decides tomorrow." At the end of each Reckoning you flip the
+   Set Indicator, and the sets swap roles.
+
+     - 1x Set Indicator: Sun (brass) on one face, Moon (silver) on
+       the other. Whichever face is up names TODAY's active set.
+     - 4x Sun set, numbered 1-4 (brass). Same on both faces.
+     - 4x Moon set, numbered 1-4 (silver). Same on both faces.
+
+   The two sets are drawn in two different metals so a glance across
+   the table tells you which order is live: warm brass-gold vs cool
+   silver, each carrying its own celestial mark.
+
+   ── DOUBLE-SIDED BY FOLD-OVER ──
+   Every token prints as a 36 x 72 mm strip: the back face sits above
+   the fold line, rotated 180, and the front below it. Cut the strip,
+   fold along the dashed centre line, glue the halves back to back and
+   you have a rigid double-sided 36 mm token — no duplex alignment,
+   no registration guesswork. The 180 rotation on the upper half is
+   what makes the glued back read upright; do not "correct" it.
+
+   Print at 100% / actual size (no "fit to page") or the 36 mm gauge
+   in the footer will lie.
+   ────────────────────────────────────────────────────────────── */
+
+:root{
+  /* Palette lifted from css/moonshine-rules.css so the tokens sit in
+     the same family as the book, decks and playbooks. */
+  --gold:        #c9a437;
+  --gold-bright: #e8cc72;
+  --gold-line:   #b9932f;
+  --gold-faint:  #7a6a3a;
+
+  /* Silver companion metal for the second set. Cool enough to read as
+     clearly "not gold" across the table, still warm-neutral so it does
+     not fight the noir palette. */
+  --silver:        #c3c8d0;
+  --silver-bright: #eef1f5;
+  --silver-line:   #969ca6;
+  --silver-faint:  #6b7079;
+
+  --ink:      #efe3cd;
+  --body:     #d8caae;
+  --muted:    #b8a577;
+  --panel-a:  #241c14;
+  --panel-b:  #130c07;
+  --bg:       #100c08;
+
+  --font-display:'Cinzel', Georgia, serif;
+  --font-body:   'Barlow', sans-serif;
+
+  --sq:   36mm;   /* token footprint */
+  --gap:  9mm;    /* space between strips on the sheet */
+}
+
+@page{ size:A4; margin:11mm }
+
+*{ box-sizing:border-box }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+}
+
+/* ───── Screen-only briefing. Never prints. ───── */
+.brief{
+  max-width:780px;
+  margin:0 auto;
+  padding:44px 28px 8px;
+  text-align:center;
+}
+.brief h1{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:26px;
+  letter-spacing:.06em;
+  color:var(--gold-bright);
+  margin:0 0 6px;
+}
+.brief .kicker{
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:18px;
+}
+.brief p{
+  font-size:13.5px;
+  line-height:1.65;
+  color:var(--body);
+  margin:0 auto 10px;
+  max-width:640px;
+}
+.brief b{ color:var(--ink); font-weight:600 }
+.brief .steps{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:20px 0 4px;
+}
+.brief .steps span{
+  font-size:11.5px;
+  letter-spacing:.04em;
+  color:var(--muted);
+  border:1px solid rgba(185,147,47,.28);
+  background:rgba(201,164,55,.05);
+  padding:4px 11px;
+}
+.brief .rule{
+  height:1px;
+  margin:26px auto 0;
+  max-width:340px;
+  background:linear-gradient(to right, transparent, var(--gold-line), transparent);
+}
+
+/* ───── Token sheet ───── */
+.sheet{
+  display:flex;
+  justify-content:center;
+  padding:34px 0 60px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4, var(--sq));
+  gap:var(--gap);
+  width:max-content;
+}
+
+/* ── Fold-over strip: back (above, rotated) + front (below) ── */
+.strip{
+  width:var(--sq);
+  height:calc(var(--sq) * 2);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+/* Dashed fold line across the seam. */
+.strip::after{
+  content:"";
+  position:absolute;
+  left:-2mm; right:-2mm;
+  top:var(--sq);
+  border-top:1px dashed rgba(184,165,119,.5);
+  pointer-events:none;
+}
+.strip .face.back{ transform:rotate(180deg); }
+
+/* ── The token face ── */
+.face{
+  width:var(--sq);
+  height:var(--sq);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at 42% 32%, var(--panel-a), var(--panel-b) 74%);
+  /* Hairline is the cut guide; the engraved metal frame sits inside. */
+  border:1px solid rgba(0,0,0,.6);
+  overflow:hidden;
+  color:var(--metal);
+}
+
+/* Per-set metal. Everything below paints in var(--metal)/lines/faint. */
+.set-sun{
+  --metal:var(--gold);
+  --metal-bright:var(--gold-bright);
+  --metal-line:var(--gold-line);
+  --metal-faint:var(--gold-faint);
+}
+.set-moon{
+  --metal:var(--silver);
+  --metal-bright:var(--silver-bright);
+  --metal-line:var(--silver-line);
+  --metal-faint:var(--silver-faint);
+}
+
+/* Engraved double frame inside the cut line. */
+.face::before{
+  content:"";
+  position:absolute;
+  inset:2.2mm;
+  border:1.4px solid var(--metal-line);
+  border-radius:1.5mm;
+}
+.face::after{
+  content:"";
+  position:absolute;
+  inset:3.4mm;
+  border:.6px solid var(--metal-faint);
+  border-radius:1mm;
+}
+
+/* Corner ticks, echoing the Ledger board's frame marks. */
+.corner{
+  position:absolute;
+  width:3mm; height:3mm;
+  border-color:var(--metal);
+  border-style:solid;
+  opacity:.85;
+  z-index:2;
+}
+.corner.tl{ top:4.4mm; left:4.4mm; border-width:1.2px 0 0 1.2px }
+.corner.tr{ top:4.4mm; right:4.4mm; border-width:1.2px 1.2px 0 0 }
+.corner.bl{ bottom:4.4mm; left:4.4mm; border-width:0 0 1.2px 1.2px }
+.corner.br{ bottom:4.4mm; right:4.4mm; border-width:0 1.2px 1.2px 0 }
+
+/* Celestial mark. */
+.glyph{
+  width:7mm; height:7mm;
+  display:block;
+  color:var(--metal);
+  z-index:2;
+}
+
+/* The big turn numeral. */
+.num{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:19mm;
+  line-height:.9;
+  color:var(--metal);
+  text-shadow:0 .4mm .8mm rgba(0,0,0,.55);
+  z-index:2;
+}
+.numbered .glyph{ margin-bottom:1mm }
+.numbered .num{ margin-bottom:.5mm }
+
+/* Wide-tracked Barlow micro-label under the numeral. */
+.tag{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:2.5mm;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--metal-faint);
+  z-index:2;
+}
+
+/* ── Indicator face: big mark, no number ── */
+.indicator .glyph{ width:15mm; height:15mm; margin:1mm 0 1.5mm }
+.indicator .name{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:4.6mm;
+  letter-spacing:.04em;
+  color:var(--metal);
+  z-index:2;
+}
+.indicator .hint{
+  font-family:var(--font-body);
+  font-weight:500;
+  font-size:2.3mm;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--metal-faint);
+  margin-top:1.2mm;
+  z-index:2;
+}
+
+@media print{
+  body{ background:#fff }
+  .brief{ display:none }
+  .sheet{ padding:0 }
+  .face, .num, .glyph, .corner, .tag, .name, .hint,
+  .face::before, .face::after{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+}
+</style>
+</head>
+
+<body>
+
+  <!-- Reusable celestial marks. Painted with currentColor = the set metal. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="sun" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="15" fill="currentColor"/>
+        <g fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round">
+          <line x1="72" y1="50"   x2="86" y2="50"/>
+          <line x1="65.6" y1="65.6" x2="75.5" y2="75.5"/>
+          <line x1="50" y1="72"   x2="50" y2="86"/>
+          <line x1="34.4" y1="65.6" x2="24.5" y2="75.5"/>
+          <line x1="28" y1="50"   x2="14" y2="50"/>
+          <line x1="34.4" y1="34.4" x2="24.5" y2="24.5"/>
+          <line x1="50" y1="28"   x2="50" y2="14"/>
+          <line x1="65.6" y1="34.4" x2="75.5" y2="24.5"/>
+        </g>
+      </symbol>
+      <symbol id="moon" viewBox="0 0 100 100">
+        <path d="M63 14 A38 38 0 1 0 63 86 A30 30 0 1 1 63 14 Z" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="brief">
+    <h1>Turn Tokens</h1>
+    <div class="kicker">Prototype Component &middot; v0.9 &middot; 36&nbsp;mm square</div>
+    <p>
+      Nine double-sided tokens for turn order. The rules run two interleaved sets &mdash;
+      <b>one runs today; the other decides tomorrow</b>. The two sets wear two metals so
+      you always know which order is live: the warm <b>Sun</b> set (brass) and the cool
+      <b>Moon</b> set (silver).
+    </p>
+    <p>
+      The lone <b>Set Indicator</b> carries the Sun on one face and the Moon on the other.
+      Whichever face is up names today's active set; <b>flip it at the end of each
+      Reckoning</b> and the sets change hands.
+    </p>
+    <div class="steps">
+      <span>1 &nbsp;Print at 100% (actual size)</span>
+      <span>2 &nbsp;Cut each 36&times;72&nbsp;mm strip</span>
+      <span>3 &nbsp;Fold on the dashed line</span>
+      <span>4 &nbsp;Glue the halves back to back</span>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="sheet">
+    <div class="grid">
+
+      <!-- ── Set Indicator: Sun front / Moon back ── -->
+      <div class="strip">
+        <div class="face indicator set-moon back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="name">Moon</div>
+          <div class="hint">Today&rsquo;s Order</div>
+        </div>
+        <div class="face indicator set-sun front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="name">Sun</div>
+          <div class="hint">Today&rsquo;s Order</div>
+        </div>
+      </div>
+
+      <!-- ── Sun set, numbered 1-4 (same both faces) ── -->
+      <div class="strip">
+        <div class="face numbered set-sun back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-sun front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="face numbered set-sun back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-sun front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="face numbered set-sun back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-sun front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="face numbered set-sun back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-sun front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#sun"/></svg>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <!-- ── Moon set, numbered 1-4 (same both faces) ── -->
+      <div class="strip">
+        <div class="face numbered set-moon back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-moon front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">1</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="face numbered set-moon back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-moon front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">2</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="face numbered set-moon back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-moon front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">3</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="face numbered set-moon back">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
+        <div class="face numbered set-moon front">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <svg class="glyph"><use href="#moon"/></svg>
+          <div class="num">4</div><div class="tag">Turn</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
