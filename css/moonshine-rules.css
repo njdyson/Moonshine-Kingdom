@@ -446,11 +446,11 @@ tr:nth-child(even) {
    match the .note call-outs elsewhere in the book. */
 .muscle-ratio-callout {
     display: flex;
-    gap: 16px;
-    align-items: center;
+    gap: 20px;
+    align-items: stretch;
     background-color: rgba(212, 175, 55, 0.1);
     border: 1px solid var(--accent-gold);
-    padding: 12px 14px;
+    padding: 14px 16px;
     margin: 0.6em 0 1em;
     border-radius: 4px;
     break-inside: avoid;
@@ -461,20 +461,34 @@ tr:nth-child(even) {
 .muscle-ratio-callout .muscle-ratio-text {
     flex: 1 1 auto;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.6em;
 }
 
 .muscle-ratio-callout .muscle-ratio-text p {
-    margin: 0 0 0.5em;
+    margin: 0;
 }
 
-.muscle-ratio-callout .muscle-ratio-text p:last-child {
-    margin-bottom: 0;
+/* The rule itself, promoted to a display-font "formula" so the text side
+   carries as much visual weight as the grid and the box reads as one unit. */
+.muscle-ratio-callout .muscle-ratio-formula {
+    font-family: var(--font-display);
+    font-size: 1.6em;
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent-gold);
 }
 
 .muscle-ratio-callout .muscle-ratio-table {
-    flex: 0 0 46%;
+    flex: 0 0 47%;
     width: auto;
     margin: 0;
+    align-self: center;
 }
 
 /* Specific fix for the Action Table column widths */
