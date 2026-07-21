@@ -445,9 +445,6 @@ tr:nth-child(even) {
    reads as a compact reference rather than a full-width band. Gold-bordered to
    match the .note call-outs elsewhere in the book. */
 .muscle-ratio-callout {
-    display: flex;
-    gap: 20px;
-    align-items: stretch;
     background-color: rgba(212, 175, 55, 0.1);
     border: 1px solid var(--accent-gold);
     padding: 14px 16px;
@@ -458,37 +455,37 @@ tr:nth-child(even) {
     page-break-inside: avoid;
 }
 
+/* Title lives inside the box, so drop the section-heading left bar and the
+   default top margin it would carry as a standalone h3. */
+.muscle-ratio-callout .muscle-ratio-heading {
+    border-left: none;
+    padding-left: 0;
+    margin: 0 0 0.5em;
+}
+
+.muscle-ratio-callout .muscle-ratio-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
 .muscle-ratio-callout .muscle-ratio-text {
     flex: 1 1 auto;
     min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.6em;
 }
 
 .muscle-ratio-callout .muscle-ratio-text p {
-    margin: 0;
+    margin: 0 0 0.6em;
 }
 
-/* The rule itself, promoted to a display-font "formula" so the text side
-   carries as much visual weight as the grid and the box reads as one unit. */
-.muscle-ratio-callout .muscle-ratio-formula {
-    font-family: var(--font-display);
-    font-size: 1.6em;
-    line-height: 1.15;
-    letter-spacing: 0.5px;
-    color: var(--accent-gold);
-    text-transform: uppercase;
-    padding-left: 12px;
-    border-left: 3px solid var(--accent-gold);
+.muscle-ratio-callout .muscle-ratio-text p:last-child {
+    margin-bottom: 0;
 }
 
 .muscle-ratio-callout .muscle-ratio-table {
     flex: 0 0 47%;
     width: auto;
     margin: 0;
-    align-self: center;
 }
 
 /* Specific fix for the Action Table column widths */
@@ -942,7 +939,7 @@ img {
    below the A4 preview width (~794px), so a browser preview still shows the
    true print layout. */
 @media screen and (max-width: 600px) {
-    .muscle-ratio-callout {
+    .muscle-ratio-callout .muscle-ratio-row {
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
