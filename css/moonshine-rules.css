@@ -64,6 +64,13 @@
 
 html {
     background-color: var(--bg-color);
+    /* Stop iOS/Safari from inflating our fixed-px type on "non-responsive"
+       pages. Without this, mobile bumps the body text up and the fixed-height
+       print boxes (A5 cards, A4 columns) overflow their frames and clip.
+       The mobile viewport-width trick below is what actually scales the page;
+       text must not be re-sized on top of it. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {

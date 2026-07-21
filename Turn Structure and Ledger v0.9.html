@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Mobile renders one full A5 card per row, scaled to fit (pinch to zoom).
+     520 clears the 470px card + gutter so each card shows whole, exactly as it
+     prints, instead of overflowing the phone width and clipping. -->
+<meta name="viewport" content="width=520">
 <title>Moonshine Kingdom: Turn Structure & Ledger</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +44,7 @@
    PAGE
    ============================================================ */
 html,body{margin:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
   background:#100c08;
   background-image:radial-gradient(circle at 50% -10%,#241a11,#0d0a07 65%);

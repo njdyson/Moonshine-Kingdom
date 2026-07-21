@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Mobile renders the true A4 page scaled to fit (pinch to zoom), instead
+         of reflowing. 920 clears the container's 794px box and the 900px
+         reflow breakpoint, so phones show the exact print layout. -->
+    <meta name="viewport" content="width=920">
     <title>Moonshine Kingdom: The Kingpin's Guide v0.9</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
