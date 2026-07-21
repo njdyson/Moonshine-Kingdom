@@ -15,6 +15,41 @@
     <!-- Link to the shared base css styles-->
     <link rel="stylesheet" href="css/moonshine-rules.css">
 
+    <script>
+    /* PRINT-READY TOGGLE. A desktop-only control that swaps the light screen
+       WebP covers (Art/Rulebook/opt/*.webp) for the full-resolution source
+       PNGs, so a browser "Save as PDF" exports the covers losslessly. Off by
+       default (fast browsing); the choice persists in localStorage. Placed in
+       the <head> so it survives even if the <body> is regenerated. Never shown
+       in print or on phones (see #mk-print-toggle in css/moonshine-rules.css). */
+    (function () {
+      var KEY = 'mk-print-ready', imgs = [];
+      function setHi(on) {
+        imgs.forEach(function (i) { if (on) i.loading = 'eager'; i.src = on ? i.dataset.png : i.dataset.webp; });
+      }
+      function build() {
+        imgs = [].slice.call(document.querySelectorAll('img[src*="Art/Rulebook/opt/"]'));
+        imgs.forEach(function (i) {
+          var w = i.getAttribute('src');
+          i.dataset.webp = w;
+          i.dataset.png = w.replace('/opt/', '/').replace(/\.webp$/, '.png');
+        });
+        var on = localStorage.getItem(KEY) === '1';
+        if (on) setHi(true);
+        var el = document.createElement('label');
+        el.id = 'mk-print-toggle';
+        el.innerHTML = '<input type="checkbox"' + (on ? ' checked' : '') +
+          '><span>Print-ready art<small>full-res covers for PDF export</small></span>';
+        el.querySelector('input').addEventListener('change', function (e) {
+          setHi(e.target.checked);
+          localStorage.setItem(KEY, e.target.checked ? '1' : '0');
+        });
+        document.body.appendChild(el);
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+      else build();
+    })();
+    </script>
 </head>
 
 <body>

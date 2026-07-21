@@ -465,7 +465,34 @@ img {
    print: ~200-500 KB each at q90 instead of the 2-3 MB source PNG, visually
    lossless at the printed size, and — unlike a screen/print <img> swap — it
    downloads exactly once, on every browser. WebP keeps the title logo's alpha,
-   which a flattened copy loses. The full-resolution PNGs stay in the repo. */
+   which a flattened copy loses. The full-resolution PNGs stay in the repo, and
+   the Print-ready toggle below swaps them back in for a lossless PDF export. */
+
+/* --------------------------------------------------------------------------
+   Print-ready toggle.
+
+   A desktop-only control (injected from the <head>, like the decks' Trim
+   toggle) that swaps every light WebP cover for its full-resolution source
+   PNG, so a browser "Save as PDF" exports the covers losslessly. Off by
+   default so normal browsing stays light; the choice persists in localStorage.
+   Never printed, and hidden on phones (where nobody exports a print PDF).
+   -------------------------------------------------------------------------- */
+#mk-print-toggle {
+    position: fixed; right: 14px; bottom: 14px; z-index: 99;
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 13px; border-radius: 6px;
+    background: rgba(16, 12, 8, .94); border: 1px solid var(--gold-line);
+    color: var(--ink); font: 600 12px/1.25 'Barlow', system-ui, sans-serif;
+    cursor: pointer; user-select: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .55);
+}
+#mk-print-toggle small { display: block; font-weight: 400; font-size: 10px; color: var(--muted); }
+#mk-print-toggle input { accent-color: var(--gold); cursor: pointer; margin: 0; }
+@media print { #mk-print-toggle { display: none !important; } }
+/* Hide on phones/tablets. A width query is useless here — the guides pin the
+   layout viewport at 920px (width=920 meta) — so key off the pointer instead:
+   a coarse pointer / no-hover is a touch device, i.e. not a desktop. */
+@media (hover: none), (pointer: coarse) { #mk-print-toggle { display: none !important; } }
 
 /* No background colour here on purpose. The cover fades to TRANSPARENT (see the
    masks below), so whatever the page is actually painted with shows through.
