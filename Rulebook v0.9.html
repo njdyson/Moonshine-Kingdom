@@ -208,7 +208,7 @@
 
         <p><strong>The Town Planning Ledger (1):</strong> City Hall's own paperwork: the District roster you carve the map up from at setup. Its reverse holds a quick reference for the Day's phases.</p>
 
-        <p><strong>Liquor Barrels:</strong> The lifeblood of your operation, in two flavors: <b>Moonshine (Grey)</b> and <b>Havana Rum (Brown)</b>. <em>Cheap swill and the good stuff; nothing in between.</em></p>
+        <p><strong>Liquor Barrels (x30 Moonshine, x15 Havana Rum):</strong> The lifeblood of your operation, in two flavors: <b>Moonshine (Grey, x30)</b> and <b>Havana Rum (Brown, x15)</b>. Both pools are <b>fixed</b> and <b>do not scale with player count</b>: the grey runs deep, but Rum is scarce and contested. Barrels cycle back to the bank when sold or Traded away; if a supply is empty, those barrels simply are not there to be had. <em>Cheap swill and the good stuff; nothing in between.</em></p>
 
         <p><strong>The Dice (11):</strong> 5 White, 5 Red, and 1 grey <b>Mash die</b>. White and Red settle grudges and fire the boilers; the lone Mash die does one job only, and the whole table watches it.</p>
 
@@ -315,7 +315,7 @@
                 <div class="legend-badge"><img src="Art/Icons/Crown.svg" alt="High Society"></div>
                 <div class="legend-body">
                     <span class="legend-title">High Society</span>
-                    One premium Speakeasy per mainland Borough, paying a massive <b>$500</b> a barrel. All four start <b>padlocked</b> by the Police until a Raid throws them open.
+                    One premium Speakeasy per mainland Borough, taking <b>Havana Rum only</b> and paying a massive <b>$500</b> a barrel. All four start <b>padlocked</b> by the Police until a Raid throws them open.
                 </div>
             </div>
 
@@ -371,7 +371,7 @@
 
         <ul class="sub-section">
             <li><strong>Cash:</strong> Expands your crew. Spend it to Recruit and Secure turf. Earn it by Unloading, Extorting, and running Odd Jobs when you Lay Low.</li>
-            <li><strong>Liquor Barrels:</strong> Your lifeblood. Every drop is born as Moonshine at your Stills; run it to a Dock and <b>Trade</b> it up to Havana Rum. Both sell for the same cash, but only Rum buys Influence back.</li>
+            <li><strong>Liquor Barrels:</strong> Your lifeblood. Every drop is born as Moonshine at your Stills; run it to a Dock and <b>Trade</b> it up to Havana Rum. Moonshine dumps cheap at any Standard Speakeasy; Rum sells dearer, buys Influence back, and is the only bottle the High Society rooms will pour.</li>
         </ul>
 
         <h3>Influence: Currency of Power</h3>
@@ -587,7 +587,7 @@
         <ol class="sub-section" style="margin-top:5px;">
             <li><strong>Read the Public Mash:</strong> The grey <b>Mash die</b> shows the <b>Public Mash</b>: the cheap molasses swill off the docks that every crew in the city is cooking today. It stays put all morning and feeds every number below.</li>
             <li><strong>Draft a Red, in Turn Order:</strong> Each boss takes <b>exactly 1 Red die</b>, their own yeast in the city's sugar. Your <b>Brew Number</b> is <b>Mash + your Red</b>.</li>
-            <li><strong>Fire your Stills:</strong> <b>Every active Still you Control</b> matching your Brew Number brews <b>Moonshine</b>, per <em>The Muscle Ratio</em>. Your brew is yours alone; rival Stills stay cold. <em>(If barrels run short across several of your Stills, you choose which get the last ones.)</em></li>
+            <li><strong>Fire your Stills:</strong> <b>Every active Still you Control</b> matching your Brew Number brews <b>Moonshine</b>, per <em>The Muscle Ratio</em>. Your brew is yours alone; rival Stills stay cold. <em>(<b>Dry Brew:</b> if the grey supply runs dry mid-brew, take only the barrels that remain, splitting the last of them across your firing Stills as you choose. Any yield past the final barrel in the bank is lost.)</em></li>
         </ol>
         <p>
             <b>Twist the Valves:</b> If your <b>Boss</b> stands in a District when its Still fires, that Still brews <b>+1 Barrel</b>. <em>The old man cranks the valves wide for one more run, with his hands on the boiler if it blows.</em>
@@ -739,7 +739,7 @@
             <tr>
                 <td><strong>Trade</strong></td>
                 <td>
-                    At a <b>Dock District you Control</b>, swap any number of <b>Moonshine</b> barrels sitting in that District for <b>Havana Rum</b>, at a <b>1:1</b> ratio. A quiet dockside exchange, and the only way Rum enters the game. Rum sells for the same cash as Moonshine, but pays a <b>Kickback</b> when Unloaded. Trade up, or watch the rich crews lap you.
+                    At a <b>Dock District you Control</b>, swap any number of <b>Moonshine</b> barrels sitting in that District for <b>Havana Rum</b>, at a <b>1:1</b> ratio. A quiet dockside exchange, and the only way Rum enters the game. <em>(<b>Dry Dock:</b> Rum is a fixed 15-barrel pool. You can only Trade up to as many barrels as remain in the Brown supply; when the Rum bank is empty, the docks stay dry until sold Rum cycles back.)</em> Rum is the good stuff: it pays a <b>Kickback</b> when Unloaded, and it is the only bottle the <b>High Society</b> rooms will pour. Trade up, or watch the rich crews lap you.
                 </td>
             </tr>
             <tr>
@@ -766,9 +766,9 @@
             <tr>
                 <td><strong>Unload</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
                 <td>
-                    <b>The Address Sets the Price:</b> At a Speakeasy you Control, sell <b>Moonshine or Rum</b> for the same cash. The price is the joint, not the bottle: a flat <b>$300 per barrel</b> at most Speakeasies, a massive <b>$500</b> at a <b>High Society</b> joint. <em>Cheap swill in a swanky room still drinks like champagne.</em><br><br>
+                    <b>The Address Sets the Price:</b> At a Speakeasy you Control, sell your liquor for cash. A <b>Standard Speakeasy</b> takes <b>Moonshine or Havana Rum</b> at a flat <b>$300 per barrel</b>. A <b>High Society</b> joint takes <b>Havana Rum only</b>, no swill past the velvet rope, but pays a massive <b>$500 per barrel</b>. <em>The rich drink Rum, and they can tell the difference.</em><br><br>
 
-                    <b>The Kickback:</b> <b>Moonshine</b> pays <b>cash only</b>; <b>Havana Rum</b> pays cash <b>plus 1 Kickback per barrel</b>: for each Rum sold, move <b>1 spent Influence marker</b> from your Reserves into an empty <b>Ledger</b> slot.<br><br>
+                    <b>The Kickback:</b> <b>Moonshine</b> pays <b>cash only</b>; <b>Havana Rum</b> pays cash <b>plus 1 Kickback per barrel</b>: for each Rum sold, move <b>1 spent Influence marker</b> from your Reserves into an empty <b>Ledger</b> slot. Since the <b>High Society</b> rooms deal in Rum alone, every premium sale pays a Kickback on top of its $500.<br><br>
 
                     <b>The Greed Tax:</b> Unloading <b>4+ barrels</b> in one Play generates Heat. If two mobs' markers paid for it, you choose which goes to the Heat Track. <em>Move more than three and the cops come sniffing.</em>
                 </td>
@@ -860,7 +860,7 @@
         </table>
 
         <h4>Harlem Knights</h4>
-        <p>Dressed to kill, literally. The Knights work the water, and no crew moves liquor like they do, because their <b>Network</b> runs every pier from Havana to Harlem. Whenever the Knights <b>Trade</b> at a Dock, they gain <b>1 extra barrel of Havana Rum</b> for free, on top of the barrels they swap. <em>Friends on every wharf, and a fresh cask waiting at each one.</em></p>
+        <p>Dressed to kill, literally. The Knights work the water, and no crew moves liquor like they do, because their <b>Network</b> runs every pier from Havana to Harlem. Whenever the Knights <b>Trade</b> at a Dock, they gain <b>1 extra barrel of Havana Rum</b> for free, on top of the barrels they swap, so long as a Rum barrel is left in the supply to take. <em>Friends on every wharf, and a fresh cask waiting at each one, until the last cask is gone.</em></p>
         <table class="action-table">
             <tr>
                 <td><strong>Skiff (Cost: 1)</strong></td>
