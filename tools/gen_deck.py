@@ -38,8 +38,13 @@ ONES = [
     ("Last Call", "Last Call.jpg", "Unload",
      "Unload <b>4+ Barrels</b> at a single <b>$300 Speakeasy</b> in one Play.",
      "Pour till the taps run dry and the sirens start up."),
+    # "After your Boss is killed" is LOAD-BEARING, and doubly so from v0.9, where
+    # Rise keeps its flexible form (place your Boss in any Safe District, whether
+    # he is on the board or not). Without the death clause a living Boss simply
+    # relocates into a Ward you already Control and the card pays for nothing.
+    # Folded back from a hand edit to the HTML, 2026-07-24.
     ("The Empty Casket", "The Empty Casket.jpg", "Rise",
-     "Rise a new <b>Boss</b> in a <b>Ward</b> you Control.",
+     "After your <b>Boss</b> is killed, Rise his successor in a <b>Ward</b> you Control.",
      "They buried the wrong man. Ask anyone. Go on, ask."),
     ("Fortress Staten", "Fortress Staten.jpg", "Secure",
      "Secure your Safehouse into a <b>Staten Island</b> District.",
@@ -145,8 +150,11 @@ THREES = [
     # being the target yourself, then drop the dime. The flavour was always this.
     # PADLOCK, not Condemn (Nick): Safehouse-only Recruit made "Condemn your own
     # Safehouse" catastrophic: it now locks you out of hiring entirely, so a
-    # 3-Respect card also carrying the Rat Card (no Bribes, no crown) would never
+    # 3-Respect card also carrying the Rat Card (no Jobs, no crown) would never
     # be claimed, and in a STATIC Market an unclaimed card squats a slot forever.
+    # NB the Rat penalty moved from "no Bribes" to "no Jobs" (v0.9): this card is
+    # still claimable, since you hold it BEFORE you Rat, but ratting for it now
+    # freezes you out of the Market until you buy the brand off.
     # Padlocking your worst boiler is a proportionate price. Nick proposed
     # Pressure 1; widened to <=2 because P1 is only East Harlem (M), Astoria (Q)
     # and Westerleigh (ST), and Staten has NO Squad (one per MAINLAND Borough),
@@ -246,8 +254,11 @@ THREES = [
 ]
 
 FIVES = [
+    # "of Rum" is redundant with the rules (High Society pours nothing else) but
+    # says the quiet part out loud on the card: 8 barrels means the whole Trade
+    # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.
     ("Opening Night", "Jimmy.jpg", "Unload",
-     "Unload <b>8+ Barrels</b> at a single <b>High Society</b> Speakeasy.",
+     "Unload <b>8+ Barrels of Rum</b> at a single <b>High Society</b> Speakeasy.",
      "The band plays till four. Nobody asks a thing."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
     # and exists purely to kill Bosses: the old wording locked the boss-killing mob
@@ -314,7 +325,10 @@ FIVES = [
 PIPS = {1: 1, 3: 2, 5: 3}
 CLS = {1: "gig", 3: "racket", 5: "score"}
 
-BACK = ('  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Jobs</div>'
+# Back reads "Job", singular and unbroken: it is the back of ONE card, and the
+# two-line "The/Jobs" set the title band taller than the Rat and Marks backs in
+# Cards v0.9. Folded back from a hand edit, 2026-07-24.
+BACK = ('  <div class="back"><div class="back-dia"></div><div class="back-title">Job</div>'
         '<div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div>'
         '<div class="back-foot">New York &middot; 1926</div></div>')
 
