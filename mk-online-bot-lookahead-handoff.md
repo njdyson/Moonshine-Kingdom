@@ -17,7 +17,7 @@ implement them as written:
 
 | This doc says | Now |
 |---|---|
-| "win = Commission Card + 20 Respect" | **10 Influence + 15 Respect + honor intact** (no Rat Card, no unpaid Shylock's Mark) |
+| "win = Commission Card + 20 Respect" | **10 Influence + 15 Respect + honor intact** (no unpaid Shylock's Mark). *Updated 2026-07-27: honor no longer covers the Rat Card. A rat may be crowned; he carries **&minus;3 Respect** instead, so he needs 18 gross. See `mk-online-rules-sync.md` §1.* |
 | "contracts" | **Jobs.** A 32-card deck, 12/12/8 by Respect 1/3/5 |
 | "Score 5 > Racket 3 > Gig 1" | **Gig/Racket/Score are retired as game terms.** A Job prints a **Stake** and a **Respect**, nothing else |
 | "contracts IN HAND (not yet staked)" | **There is no hand.** The Market is Player Count + 1, **face-up and shared**. Claiming stakes Influence immediately, at **The Offers** in Shadows |

@@ -48,6 +48,11 @@ genuinely confusable things sound identical. Cooperation has the better claim. *
   game: early, no Bribes stalls your whole trajectory (you start at 6, need 10); late, at 10 Influence
   it costs nothing and only "no crown" bites. Framed as one idea: *the Commission wants nothing to do
   with a rat.*
+
+  > **CORRECTION (2026-07-27) — this bullet is two generations stale.** "Cannot Bribe" became
+  > "cannot take Jobs" on 2026-07-24, and on 2026-07-27 **every gate on the Rat was replaced by a
+  > flat −3 Respect**. Do not restore any of them. The full reasoning is the last section of this
+  > file, *the Rat is a price, not a gate*; the online port is `mk-online-rules-sync.md` §1.
 - **Shylock's vig**: $3,000 → **$2,500**. $3,000 was 100% interest = rescue-only. $2,000 (33%) would
   make Beg a mandatory opening with 8 Marks on the table. $2,500 (67%) still hurts. **Cost: the
   "takes back twice what he gave" line had to go** — it *was* the 2× rule.
@@ -598,3 +603,108 @@ decided or built.
    and the Blue Wall restatement inside Move.
 5. **`v0-8-changes.md` carries 77 em dashes.** The style rule's gate list covers player-facing files
    only, so internal docs were never swept. Decide whether the rule extends here.
+
+---
+
+## 2026-07-27 — the Rat is a price, not a gate
+
+Three tunings of this card failed for one reason, and it took a fourth to see it: **every penalty on
+the Rat was binary.** "Cannot Hustle", then "cannot Bribe", then "cannot take Jobs", plus "cannot be
+crowned" running underneath all three. A switch is the wrong instrument for a *weapon*, because a
+switch means the tool is unavailable at exactly the moment its purpose exists. The Rat is a Raid on
+demand aimed at whoever fired the last loud shot; the boss who most wants that is the boss closing on
+the leader, and he was the one who could never afford to call it. The card sat in the box.
+
+### The diagnosis that actually mattered
+
+The honor gate was **not** the culprit, which is why removing it alone would not have worked. "Cannot
+be crowned" is free to a boss who was not going to be crowned — and a boss in contention *should not*
+want sirens. That part was working.
+
+**The Jobs blackout was the bug.** Holdings top out at 14 Respect, so every crew must come through the
+Market to reach 15 (see *Why Public Enemy No. 1 had to die*). Shutting the Market therefore hurts the
+trailing player most — the exact seat the Rat exists to serve. The blackout switched the Play off for
+the only player with a reason to make the call. That is why it read as unusable "especially late".
+
+### What landed
+
+- **No Jobs blackout.** The Market deals to a rat like anyone else.
+- **No crown gate on the Rat.** Removed from *A Kingpin Must Have Honor*.
+- **−3 Respect while you hold the card**, tallied at the Reckoning as a fourth line in *Earning
+  Respect*, alongside Turf, Titles and Legends.
+- **No absolution.** The marker-for-forgiveness exit is deleted. The card leaves you **only** when a
+  rival Rats and takes it off you.
+- **"Cannot Rat again" stays.** Load-bearing: without it a non-contender turns 2 Influence into an
+  unlimited Raid button, since a flat penalty makes the second call free.
+- Rat still costs **2 Influence** and still fires a Raid with **no marker on the Track**.
+
+### Why −3, and why it needed no clock
+
+−3 against a 15 threshold is a Borough Deed and a half, or one 3-Respect Job — meaningful, payable,
+never disqualifying. The elegant part is free: **Respect is only tallied at the Reckoning**, so the
+brand costs literally nothing until the night somebody could be crowned. The "cheap early, brutal
+late" curve that three previous versions tried to write explicitly now falls straight out of the
+existing scoring step. No track, no counter, no escalation clause.
+
+The penalty also always lands on the player who **chose** it — the card cannot be thrown at you, only
+taken by you — so −3 is a price tag, never a feel-bad.
+
+Deleting absolution killed the nastiest corner in the old rules as a bonus: absolution could not take
+you below 5 Influence, so a broke crew was branded permanently. The player who most needed the exit
+was the one who could not buy it.
+
+### Shylock was deliberately NOT changed. Don't "finish the job."
+
+The obvious symmetry — make Marks −2 Respect each and delete *A Kingpin Must Have Honor* outright —
+was considered and **rejected**. The honor gate is a *conditional* cost: free while you are losing,
+disqualifying when you are about to win. That is exactly right for a lifeline loan and exactly wrong
+for a weapon. Convert it to a flat −2 and the only player who ever Begs, the one who is behind, gets
+shoved further behind by the game's own catch-up valve. It also would not have simplified anything:
+three Marks at −2 is −6 carried on a public scoreboard all game.
+
+So the rule survives, halved: **the council crowns no debtor.** One clause, one card type, easier to
+teach than the two-headed version. The theme improves rather than degrades — a rat is a rumour and
+the street prices a rumour; a Mark is a signature, and no commission hands the crown to a man another
+man owns. Each cost now lands in the currency it belongs to.
+
+### Knock-ons, all of which fall out for free
+
+- **The Insurance Job** (Rat + steer the bust onto a Pressure-2 Still you Control) pays **3** Respect,
+  which now exactly cancels the −3. Left at 3 on purpose: a Job whose whole payoff is laundering your
+  own brand is thematically perfect and still costs a Stake, a Play and the engineering. Watch it in
+  play — if it becomes an auto-take, it is a 1, not a 3.
+- **The hate-draft veto returns.** Ratting used to spend your ability to deny the crowning card at
+  the Market. It no longer does, so "call a Raid on the leader" and "deny him the Market" are
+  compatible in the same week. This is a real power increase to the trailing seats, riding along with
+  the intended one.
+- **Blood Oath**: the −3 flows into the Alliance's *combined* Respect, and the Sit-Down ranks on
+  current Respect — so the card in your hand at Crackdown 10 can drop you a place and change **who
+  you marry**. Nothing to write; it falls out of *Earning Respect* being referenced by both.
+- **Respect floors at zero: NOT added, and don't add it.** It can never matter. Every player compared
+  in the Final Standoff has already cleared 15, so a negative total is never in the comparison, and
+  Volstead does not track Respect at all.
+
+### The one place the old gate survives: Volstead
+
+The Volstead Act returns all Job Cards to the box and **does not track Respect**, so −3 is a no-op
+there and the Rat would be a completely free Raid — on a variant whose whole tension is the Crackdown
+clock, and where "the richest **honest** Kingpin" is one of the two roads out. Honor is load-bearing
+in that variant in a way it is not in the main game.
+
+So Volstead keeps the crown-bar on the Rat Card, as an explicit override in its own honor clause. It
+costs nothing to teach (that document already overrides the Rulebook wholesale) and the theme is
+free: 1920, the bench still means it, a rumour still sinks you.
+
+### Deck geometry, measured
+
+Losing the blackout and the absolution clause cut the Rat's rules text from **14.9mm to 11.5mm** —
+which is, to the pixel, the Harbormaster's height, and the holdings geometry already houses that in a
+16mm band. So the **debts geometry moved 35/19 → 38/16** and the Rat's art gained 3mm. The deck's two
+geometries now coincide; they are still two knobs, and rewriting either tall card parts them again.
+Measured in headless Chromium at 96dpi: all eight cards land on 88.0mm with zero overflow.
+
+The Rat's badge is now `Art/shield-3.png` (a real −3 shield, recovered from the archived Debts deck)
+in place of the broken crown, which stays on Shylock's Marks where it is still true. **Open art job:**
+that plate is the older 1024px glossy generation with a soft glow, not a sibling of the flat 256px
+`shield1/3/5`, so it reads a shade hot next to the broken crowns on the same print sheet. Semantically
+correct today; wants a reshoot in the flat style.

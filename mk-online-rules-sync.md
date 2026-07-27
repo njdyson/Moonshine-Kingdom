@@ -11,25 +11,36 @@ close the gap.
 
 ---
 
-## 1. The Rat Card (2026-07-24)
+## 1. The Rat Card (2026-07-27, supersedes the 2026-07-24 entry)
 
-The Rat's penalty and its exit condition both changed. The old rule tied the
-brand to the Boss; the new rule severs that link entirely.
+> **This section was rewritten, not appended to.** The 2026-07-24 spec (penalty
+> moves to Jobs, exit becomes cash-for-a-marker) was never implemented — every
+> box below it is still unticked — so it has been replaced outright rather than
+> layered. Do **not** go looking for a two-step migration. The build still has
+> the *original* behaviour (Rise clears the card, Bribe blocked), and the table
+> below carries it straight to where v0.9 now sits.
+
+The Rat's penalty is now a **price in Respect**, and the card has **no
+self-service exit at all**.
 
 ### What changed, and why
 
-The card used to clear only when you spent a **Rise**. That made the penalty a
-*price* rather than a *duration*, and any price is payable at a moment of your
-choosing, so the rat simply picked a cheap one. Worse, Rise doubles as a Boss
-relocation you often wanted anyway, so laundering the brand frequently cost
-nothing at all.
+Two rounds of tuning failed for the same reason: the penalty was a *gate*, not a
+*number*. "Cannot Bribe", then "cannot take Jobs", then "cannot be crowned" are
+all binary, and a binary cost on a *tool* means the tool is missing at exactly
+the moment its purpose exists. Late game, the boss who most wanted a Raid was the
+one who could least afford to call one, so the Play sat unused.
 
-The penalty also used to be **"cannot Bribe"**, which shared an account with the
-shed cost and produced a hard lock: a boss at 5 Influence holding the card could
-not shed (floor) and could not Bribe (card), leaving no self-service exit and
-handing rivals a kingmaking veto.
+The Jobs blackout was the sharper of the two failures. The honor gate only ever
+bit a boss in contention — and a boss in contention should not want sirens
+anyway. The blackout bit the *trailing* player, who needs the Market more than
+anyone, which shut the Rat off for precisely the seat it was designed for.
 
-So: the penalty moved to **Jobs**, and the exit became **cash-for-a-marker**.
+So: the blackout is gone, the honor gate is gone, and the brand now costs a flat
+**−3 Respect**, tallied like any other line at the Reckoning. Because scoring
+only happens at the Reckoning, the card is *free* until the night someone could
+be crowned — the early-cheap/late-expensive curve now falls out of the scoring
+step with no clock, track or escalation clause to implement.
 
 ### Required changes
 
@@ -37,37 +48,46 @@ So: the penalty moved to **Jobs**, and the exit became **cash-for-a-marker**.
 |---|-----------|-----|
 | 1.1 | Bribe is blocked while `ratCard === player`. Log: *"Bribe failed: the Commission won't take a Rat's envelope. Rise a new Boss first."* | **Remove the block entirely.** A rat may Bribe freely. |
 | 1.2 | Rise clears the card. Log: *"P{n} Rises a new Boss — the Rat Card returns to the supply."* | **Remove.** Rise no longer touches the Rat Card in any way. |
-| 1.3 | — | **New:** while holding the card, the player **cannot Take a Job** at The Offers. They may still **Walk Away** from a Job they already hold, and this must stay available — it is the only release valve for staked Influence. |
-| 1.4 | — | **New action, "buy absolution":** return **1 Influence marker from Reserves** to the supply and discard the Rat Card. Available at any time, not a Play, and it costs no Influence to *use* beyond the marker it destroys. Requires a marker actually sitting in Reserves. |
-| 1.5 | — | **New:** an Influence **floor of 5**. Absolution is illegal if it would take the player below 5 total. See §2. |
-| 1.6 | Rat is blocked while already holding the card. Log: *"Rat failed: you already hold the Rat Card (cannot Rat again until you Rise)."* | **Keep the block, change the message** — Rise is no longer the exit. |
-| 1.7 | Log on taking the card: *"Cannot Bribe, Rat, or be crowned until you Rise."* | Reword: cannot take Jobs, cannot Rat, cannot be crowned. |
-| 1.8 | Seat-tab tooltip: *"Holds the Rat Card: cannot Bribe, Rat, or be crowned until they Rise a new Boss"* | Same reword. |
+| 1.3 | — | **New:** Respect scoring subtracts **3** while `ratCard === player`. It is a scoring-time modifier, not a stored value — never mutate a Respect total on pickup, or the card passing will double-count. |
+| 1.4 | Victory honor check is `ratCard !== player && shylockMarks === 0`. | **Drop the first term.** Honor is now `shylockMarks === 0` alone. A Rat may be crowned; he just needs 18 gross to show 15. |
+| 1.5 | — | **No absolution action.** There is deliberately no self-service exit; do not add one. The card leaves a player *only* when a rival Rats. |
+| 1.6 | Rat is blocked while already holding the card. Log: *"Rat failed: you already hold the Rat Card (cannot Rat again until you Rise)."* | **Keep the block** — it is what stops a non-contender turning 2 Influence into an unlimited Raid button. Change the message: Rise is not the exit, and neither is anything else you control. |
+| 1.7 | Log on taking the card: *"Cannot Bribe, Rat, or be crowned until you Rise."* | Reword: **−3 Respect** at the Reckoning and no second Rat, until a rival takes it off you. |
+| 1.8 | Seat-tab tooltip: *"Holds the Rat Card: cannot Bribe, Rat, or be crowned until they Rise a new Boss"* | Same reword. The tooltip should show the −3 explicitly; it is now the whole card. |
+| 1.9 | — | **Blood Oath, if implemented:** the −3 lands in the Alliance's *combined* Respect, and the Sit-Down ranks on current Respect — so the card in a player's hand at Crackdown 10 can change which pairs form. Both fall out of scoring correctly if 1.3 is a scoring-time modifier; both break if it is stored. |
+| 1.10 | — | **Volstead, if implemented:** Volstead does not track Respect, so −3 is a no-op there and the Rat would be free. That variant **keeps the crown-bar** for the Rat Card. It is the one place the old gate survives. |
 
 ### Unchanged
 
 - The **hot potato** stands. `ratCard` remains a single holder; a rival who Rats
-  still snatches it. That is now the *free* exit, and waiting for it is a
-  deliberate gamble against needing the Market sooner.
-- The **honor check** on victory (`ratCard !== player && shylockMarks === 0`) is
-  correct as written and needs no edit.
+  still snatches it. It is now the *only* exit, which is the whole gamble.
 - The Rat Play still costs 2 Influence and still triggers a Raid.
+- Shylock is untouched: **Marks still bar the crown**, still clear at $2,000 on a
+  Beg. The honor gate was kept for debt on purpose — it is a conditional cost
+  (free while you're losing, disqualifying when you're about to win), which is
+  exactly right for a lifeline loan and exactly wrong for a weapon.
 
 ### Bot AI
 
 The rat heuristic scores a bonus of `-4` when the bot does not already hold the
-card. That number was tuned against "no Bribes until you Rise" and no longer
-describes the cost. It needs re-tuning against the new shape, which is roughly:
+card. That number was tuned against "no Bribes until you Rise" and describes
+nothing that still exists. The new cost is unusually easy to evaluate, because it
+is a number in the same unit as the win condition:
 
-- **Cheap early** — a bot with a thin Respect pile and no Job it urgently wants
-  loses almost nothing, so ratting should be *more* attractive than it is now.
-- **Expensive late** — the cost is a frozen Respect engine plus, if it cannot
-  wait for a rival, a rung off the Influence ladder and $2,500 to climb back.
-  Ratting at 8–10 Influence should be strongly discouraged.
-
-The bot also needs to understand absolution as an option, and to weigh "wait for
-a rival to Rat" against "pay the marker now" — the interesting decision the rule
-creates. A bot that always pays immediately will misplay it badly.
+- **The cost is 3 Respect, discounted by the odds of being rid of it.** A bot far
+  from 15 should treat it as near-zero and Rat freely — this is the seat the Play
+  is for. A bot at 12+ should price it at the full 3 and almost never call.
+- **It no longer blocks anything.** The bot must not carry over "can't take Jobs"
+  or "can't win" pruning; a rat bids at The Offers normally and remains a victory
+  candidate throughout. This is the most likely place for a stale branch to
+  survive the edit.
+- **The hate-draft interaction reverses.** Ratting used to spend the bot's veto
+  over the Market. It no longer does, so "deny the crowning card" and "call a
+  Raid on the leader" are now compatible in the same turn and should be able to
+  score together.
+- **Waiting is no longer a decision.** There is nothing to pay and nothing to
+  time; the bot holds the card until somebody takes it. Delete the
+  pay-now-vs-wait weighing rather than re-tuning it.
 
 ---
 
@@ -83,8 +103,12 @@ plus 1 spare, so at least one Play is always available.
 
 - The **tabletop** game reaches 4 via broken Binding Handshakes, which
   mk-online does not implement, so today the online build cannot hit the freeze.
-- Adding absolution (§1.4) **introduces the path**, which is why the floor must
-  land in the same change, not after it.
+- The 2026-07-24 spec made this urgent, because absolution destroyed a marker and
+  so **introduced the path** to 4. That rule is gone (§1.5), and with it the
+  urgency: nothing in the current build can drive a player below 5. The floor is
+  now a **safety rail against a bug, not a live rule**, and can land whenever.
+  Worth keeping on the list — the moment Handshakes ship, it is load-bearing
+  again.
 - Volstead's 3-space Heat Track needs a floor of only 3, so a single floor of 5
   covers both modes with room to spare. No variant-specific clause.
 
@@ -123,11 +147,14 @@ the Job card backs read "Job" rather than "The Jobs".
 
 ## Checklist
 
-- [ ] Influence floor of 5 enforced globally (§2)
 - [ ] Remove Bribe block for Rat holder (1.1)
 - [ ] Remove Rise → clears Rat Card (1.2)
-- [ ] Block Take a Job for Rat holder; keep Walk Away (1.3)
-- [ ] Add "buy absolution" action, Reserves-only, floor-aware (1.4, 1.5)
-- [ ] Reword Rat-repeat block, take-card log, seat-tab tooltip (1.6–1.8)
-- [ ] Re-tune bot rat heuristic; teach it absolution and the waiting game
+- [ ] Subtract 3 Respect at scoring time while holding the card — modifier, never stored (1.3)
+- [ ] Honor check drops the `ratCard` term; Marks alone bar the crown (1.4)
+- [ ] Do **not** add an absolution action; a rival Ratting is the only exit (1.5)
+- [ ] Keep the Rat-repeat block; reword it, the take-card log and the seat tooltip (1.6–1.8)
+- [ ] Blood Oath: −3 flows into combined Respect and into Sit-Down ranking (1.9)
+- [ ] Volstead: Rat Card keeps the crown-bar there, since Respect isn't tracked (1.10)
+- [ ] Re-tune bot rat heuristic; strip the can't-Job / can't-win pruning and the pay-vs-wait logic
+- [ ] Influence floor of 5 (§2) — no longer urgent, but keep it queued
 - [ ] Gate The Empty Casket on an actual Boss death, if implemented (§4)

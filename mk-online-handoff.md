@@ -24,14 +24,17 @@ The headline shape of what the app is missing, so you can scope the work before 
   Shadows. No churn, no expiry, no per-player deck build. *(This is the single biggest port; the
   bundle's `contract data` is a different system, not a renamed one.)*
 - **Favors are gone.** **Bribe** buys permanent Influence at $2,500, ceiling 10. Winning is
-  **10 Influence + 15 Respect + honor intact** (no Rat Card, no unpaid Shylock's Mark).
+  **10 Influence + 15 Respect + honor intact** (no unpaid Shylock's Mark; the Rat Card left the honor
+  test on 2026-07-27 and bills &minus;3 Respect instead).
 - **Phases renamed**: Operations → **The Hustle**. **Public Enemy No. 1 Title cut** (3 Titles now:
   Ward Boss, Harbormaster, Night Mayor).
 - **Recruit is Safehouse-only**, $500/Runner less $100 per Ward Controlled, uncapped.
 - **Harbormaster names the grey Mash die** instead of paying a toll; **Night Mayor** is a new Title.
 - **Wiped Out deleted; Rise absorbed it** and became a **Power Play (cost 2)** that places a Boss in
   any Safe District, with a free Safehouse if yours is also off the board.
-- **Rat**: no Heat-track gate, and holding the Rat Card blocks Ratting again.
+- **Rat**: no Heat-track gate, and holding the Rat Card blocks Ratting again. *(2026-07-27: the card
+  now costs **&minus;3 Respect** and nothing else. No Jobs blackout, no crown bar, no absolution; it
+  leaves you only when a rival Rats. Port spec in `mk-online-rules-sync.md` §1.)*
 - **The Sweep caps a District at 5 Mobsters** at Reckoning (Sicilians are Untouchable and exempt).
 - **Cooperation reworked (v0.9)**: Puppeteering only to a rival who hasn't Laid Low, who may refuse;
   lent markers are spendable immediately *including mid-firefight*, and unspent ones return to the

@@ -34,11 +34,19 @@
       a sheet) share one geometry, and debts (Rat + Marks, which
       share a sheet) share another. Within a type it is frozen.
         holdings : art 38mm · rules 16mm
-        debts    : art 35mm · rules 19mm
+        debts    : art 38mm · rules 16mm
       Change one band and you must take the millimetres off the
       other; each geometry is sized to its TALLEST card's rules
       (Harbormaster among holdings, the Rat among debts), so the
       art can only grow when that one card's text shrinks.
+      The two happen to COINCIDE at v0.9: losing the Jobs
+      blackout and the absolution clause cut the Rat's rules from
+      14.9mm of text to 11.5mm, exactly the Harbormaster's
+      height, so debts moved 35/19 -> 38/16 to match. They are
+      still two knobs, not one: shrink the Harbormaster or
+      rewrite the Rat and they part company again. Measured in
+      headless Chromium at 96dpi; every card still lands on
+      88.0mm with no overflow.
    ============================================================ */
 
 /* ============================================================
@@ -217,8 +225,8 @@ body{
 /* --- the two geometries --- */
 .card--holding .art{flex:0 0 38mm}
 .card--holding .rules{flex:0 0 16mm}
-.card--debt .art{flex:0 0 35mm}
-.card--debt .rules{flex:0 0 19mm}
+.card--debt .art{flex:0 0 38mm}
+.card--debt .rules{flex:0 0 16mm}
 
 /* --- respect badge. shield2.png, NOT shield2-unified.png: the
    "unified" plate is a flat black-outlined cartoon and reads as
@@ -230,8 +238,17 @@ body{
   filter:drop-shadow(0 .4mm .8mm rgba(0,0,0,.65));
 }
 .respect[data-respect="2"]{background-image:url('Art/shield2.png')}
-/* The broken crown: no Rat and no debtor is ever crowned. */
+/* The broken crown: no debtor is ever crowned. Marks only. */
 .respect[data-respect="none"]{background-image:url('Art/shieldNoCrown.png')}
+/* The Rat is priced, not barred, so it carries a number like the Jobs
+   deck does. shield-3.png is the archived Debts-deck plate, recovered
+   rather than redrawn: 1024px, glossier, with a soft glow, so beside
+   the flat broken crown on this same sheet it reads a shade hotter.
+   Its SCALE is already right and needs no background-size fix — the
+   opaque shield fills .662 x .849 of its canvas against shield3.png's
+   .664 x .844, so a reshoot in the flat 256px style is a straight
+   swap. Correct semantically today; cosmetic debt only. */
+.respect[data-respect="-3"]{background-image:url('Art/shield-3.png')}
 
 /* ============================================================
    CARD BACKS
@@ -548,7 +565,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
-  <span class="meta">no crown &middot; the two ways to lose the throne outright &middot; sheet 3 of 4</span>
+  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 3 of 4</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -557,9 +574,9 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">The Rat</h2>
     <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
     <div class="rules-label">The Shame</div>
-    <div class="rules"><span>While you hold this card you <b>cannot take Jobs or Rat</b>.<span class="brk"></span>Passes to any rival who <b>Rats</b>, or return <b>1 Reserve Influence marker</b> to the Supply to be rid of it.</span></div>
+    <div class="rules"><span>While you hold this card you are <b>&minus;3 Respect</b> and <b>cannot Rat</b>.<span class="brk"></span>No absolution: it leaves you only when a rival <b>Rats</b>.</span></div>
     <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="none"></div>
+    <div class="respect" data-respect="-3"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
@@ -591,7 +608,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="backs">
   <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Rat</div><div class="back-rule"></div><div class="back-sub">No Crown</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Rat</div><div class="back-rule"></div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1926</div></div>
   <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
   <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
 </div>
