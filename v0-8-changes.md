@@ -708,3 +708,87 @@ in place of the broken crown, which stays on Shylock's Marks where it is still t
 that plate is the older 1024px glossy generation with a soft glow, not a sibling of the flat 256px
 `shield1/3/5`, so it reads a shade hot next to the broken crowns on the same print sheet. Semantically
 correct today; wants a reshoot in the flat style.
+
+---
+
+## 2026-07-29 — Twist the Valves is retired; **Split the Batch** replaces it
+
+> **This supersedes every "Twist the Valves" reference above**, including the *"3 barrels, 4 with the
+> Boss"* ceiling, the Sicilians' *"6 with Twist"*, and the `$800 Boss-loss` calibration flag. The Boss
+> no longer adds a barrel to anything. Those passages are left as written because this file is a
+> record of what v0.8 decided, not a live spec.
+
+### The rule
+
+> **Split the Batch:** If the Still in your **Boss's** District fires, you may also fire **one other
+> active Still you Control** in a District **Connected by Land or Bridge**, whatever its number.
+
+Blowback is untouched: the Boss still falls first, still only in his own District. The reward widened;
+the risk did not move a point.
+
+### Why the +1 had to go
+
+It was decoration. Measured on the same engine as the economy table, the bonus was worth **+$102/Day**
+on a 7-stack and **+$14/Day** on the 6/7/8 mismatch — the build that most wanted it — because a 12.8%
+Boss-loss rate ate the whole reward. Nobody was making a decision; they were remembering a rider.
+
+Three replacements were weighed. **Drop the Boss rule entirely** (he becomes a body, Blowback takes
+him last) still costs a clause, and a Boss who cannot die at the boiler strands *The Empty Casket*,
+prices *Rise* wrong and turns the game's best dramatic beat into a token you park and forget.
+**Keep only the liability** (falls first, no bonus) reads as a decision but isn't one: tomorrow's Mash
+is public tonight, so "keep him outside `Mash+1 … Mash+6`" is a solved puzzle that costs a Play to
+execute and pays nothing. The relay was the only one of the three that *added* a decision.
+
+### What it actually fixes
+
+The board's problem was never the Boss; it was that a clump on one number crushed everything else.
+Under the relay a spread build lights a second boiler with men it already owns and previously could
+never use. Net $/Day, 4-player contested draft, ~16-man roster, cap 5, rolled Mash:
+
+| Build | +1 (old) | Split the Batch |
+|---|---|---|
+| four 7s (the wall) | $1,252 | **$1,117** |
+| 3 mismatched 6/7/8, Connected | $488 | **$765** |
+| Sugar Hill spread 7/12/11/8, Connected | $477 | **$751** |
+| Bronx block 8/11/9/10, Connected | $400 | **$631** |
+| 2 clumped 8s (not adjacent) | $660 | $543 |
+| spread 3+9 (Docks only, no land link) | $379 | $332 |
+
+**The wall-to-spread gap falls from 2.6× to 1.5×**, and the Boss-loss rate is unchanged in every row.
+
+### Four things that fell out of the sim, and are load-bearing
+
+1. **The four 7s are one to a Borough and no two of them touch.** A wall of sevens cannot relay a
+   single barrel. The board was already drawn to punish this exploit; nothing needed adding.
+2. **The hostile-Harbormaster $0 survives.** The 8-clump still brews *nothing* under a hostile crown,
+   because the relay needs the Boss's own Still to fire first and the lockout stops that. (The earlier
+   "fires on ±1" proposal cost that clean zero — $0 → $199. This one doesn't.) The fully-Connected
+   Bronx block zeroes too: connection is not armour, range is.
+3. **Dropping the +1 does not drive the Boss into hiding.** Even with no relay available, the wall
+   keeps him on the boiler (+$91/Day): his *body* is worth a barrel on a 5-man Still ~46% of mornings,
+   which already beats a 7.7% Blowback. The Muscle Ratio was doing the +1's job all along.
+4. **Drafting his number disarms the die that kills him** — the Red that fires the Boss's Still is the
+   same Red that bursts it if left in the pool. That also forced a model change: the simulator's focal
+   drafter now takes the die that *brews most* rather than the first that fires, because the dice
+   stopped being interchangeable. This is why Boss-loss on the 6/7/8 now reads ~7% where the old
+   figure said 12.7% — that number modelled an indifferent drafter.
+
+### Restricted to Land or Bridge, deliberately
+
+The game's general **Connected** includes the Docks waterway (all 8 Docks link to each other), which
+would take the Boss's average reach from **3.0** to **4.6** distinct still numbers and make the map's
+three dead-end corners — Jamaica, Westerleigh, Tottenville — its best Boss hubs. Measured cost of
+allowing it: **+$139/Day** to a dedicated all-Docks build, so this is a clarity and geography call,
+not a balance rescue. The phrasing already exists on the Jobs card *The Beachhead*.
+
+### Files touched
+
+`Rulebook v0.9.html` (rule + the worked example, where Sugar Hill now relays to West Side's 11 on a
+morning nothing could reach an 11), `Turn Structure and Ledger v0.9.html`, `Kingpin's Guide v0.9.html`
+(*Park the Boss* rewritten, economy table regenerated, two new Connected rows),
+`Brew Simulator v0.9.html` (new **Connected to Boss?** column per Still, two new presets, relay in the
+engine, value-maximising draft), `mk-online-rules-sync.md` §5.
+
+**Unplaytested.** The figures are Monte Carlo (300–400k days/cell, ±1%) on the brew economy only —
+Respect isn't modelled, and the relay rewards holding *adjacent* districts, which is also more Deeds
+and Titles. The real effect on win rate is probably larger than the dollars.

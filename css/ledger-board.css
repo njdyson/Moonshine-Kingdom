@@ -252,6 +252,28 @@
     width: calc(275mm * var(--ledger-scale));
     height: calc(85mm * var(--ledger-scale));
     position: relative;
+    /* LOAD-BEARING: THIS IS WHAT KEEPS THE WHOLE BOOK PRINTING AT 100%.
+       .dashboard-strip below is authored at its true 275mm (1039px) and shrunk
+       with transform: scale(). A transform is a PAINT operation and never
+       changes layout size, so the strip still claimed 1039px of layout width;
+       being absolutely positioned it pushed the document's content box out to
+       ~1124px on a 794px A4 page, and Chrome shrank the ENTIRE book to fit:
+       794/1124 = 70%, anchored top-left, white down the right and bottom.
+
+       `contain: size layout` is what fixes it. overflow:hidden and overflow:clip
+       do NOT (measured 71.0% against a 69.5% baseline, i.e. barely moved),
+       because clipping an ancestor does not stop an absolutely positioned
+       descendant contributing to the page's content box.
+
+       Size containment is safe here ONLY because this box declares its own
+       width and height above. Do not remove them, and do not "simplify" this to
+       an overflow rule. Verified 2026-07-29: worst-page content width went
+       69.5% -> 99.5% and the board still renders complete.
+
+       Measuring this is a trap: the page background is near-black, so a
+       dark-pixel test reports the background and always reads 100% healthy.
+       Measure BRIGHT content, cropping ~6% to clear the gold page frame. */
+    contain: size layout;
 }
 
 .ledger-plate .dashboard-strip {

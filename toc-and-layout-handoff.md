@@ -92,7 +92,7 @@ The user wants page numbers **in the printed booklet eventually**, but hit exact
 
 **Every `<h3>` subsection lacks an id** — add a stable slug to each so the TOC (and future deep links) can target it. The h3 list (with current line numbers — will drift as you edit; match on text):
 
-- Part I: The One Rule That Governs Everything · The Hand on the Dice: The Harbormaster · The Magic of Seven · Count the Boilers Before You Plan a Stack · The Other Way Out: Spread the Ends · Read the Docks · The Kill Shot: Mirror, Then Lay Low First · Three Principles of the Brew · Park the Boss: Twist the Valves · The Numbers Behind It
+- Part I: The One Rule That Governs Everything · The Hand on the Dice: The Harbormaster · The Magic of Seven · Count the Boilers Before You Plan a Stack · The Other Way Out: Spread the Ends · Read the Docks · The Kill Shot: Mirror, Then Lay Low First · Three Principles of the Brew · Park the Boss: Split the Batch · The Numbers Behind It
 - Part II: The One Rule That Governs Everything · Heat Is Billed to the Same Account · One Claim a Day Is a Rate, Not a Limit · The Five-Play Ceiling Is a Fiction: The Kickback · The Market Never Moves · The Reverse Snake · The Staring Contest · What the Deck Actually Asks You For · Reading the Board: The Four Lanes · Denial · Overlaps · Three Principles of the Offers · The Four Mobs at the Offers
 - Part III: Two Numbers Run Every Fight · The Standoff: The Whole Game in Two Questions · How Steep Is the Premium? · Three Principles of the Street · The Occupier's Playbook · The Four Mobs at War
 - Part IV: What the Law Hears · What Heat Actually Costs You · How the Raid Picks Its Door · When You Want the Fire · The Rat: A Raid on Demand

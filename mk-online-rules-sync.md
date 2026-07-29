@@ -145,8 +145,55 @@ the Job card backs read "Job" rather than "The Jobs".
 
 ---
 
+## 5. Twist the Valves → Split the Batch (2026-07-29)
+
+The Boss's brew bonus is **gone**, replaced by a relay. The build implements the
+old rule (`+1 barrel on the Boss's Still`); the tabletop files no longer have it.
+
+### The rule now
+
+> **Split the Batch:** If the Still in your **Boss's** District fires, you may
+> also fire **one other active Still you Control** in a District **Connected by
+> Land or Bridge**, whatever its number.
+
+Blowback is untouched — the Boss still falls first on an exact match with the
+Blowback Number, and only in his own District. The relayed Still takes no extra
+risk; it is exposed on its own number exactly as before.
+
+### Why, in one line
+
+The +1 was worth ~$102/Day on a 7-stack and **$14/Day** on the mismatched build
+that most wanted it, so it was decoration. The relay pays the crew standing on
+the far boiler, which is money a spread build already owns and could never
+light. It cuts the gap between the dominant four-7 wall and a connected mid
+build from **2.6× to 1.5×** without touching the Boss-loss rate.
+
+### Required changes
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 5.1 | Brew adds +1 barrel when `bossDistrict === district`. | **Remove.** The Boss contributes his *body* to the Muscle Ratio and nothing more. |
+| 5.2 | — | **New:** after resolving the brew, if the Boss's District's Still fired, the player may fire **one** other Still they Control, in a District Connected to the Boss's **by Land or Bridge**, that is **active** (not padlocked by a Police Squad) and **did not already fire**. It yields by the Muscle Ratio as normal. |
+| 5.3 | — | **Connection here is NOT the game's general `Connected`.** The Docks waterway must be **excluded** — land borders and Bridges only. `LAND_LINKS` is already the right edge list; do not fall through to the dock-to-dock closure used by Move. Getting this wrong makes the three worst-connected corners (Jamaica, Westerleigh, Tottenville) the best Boss hubs on the map. |
+| 5.4 | — | **UI:** the relay is a *choice* when two or more candidates qualify. Prompt only then; auto-resolve the single-candidate case, and skip silently when there are none. Log: *"The old man walks the batch to {district} — Still {n} fires for {b} barrels."* |
+| 5.5 | Bot brew heuristic drafts the first Red that fires any Still. | **Re-tune.** Dice are no longer interchangeable: the Red that fires the Boss's Still is worth a second boiler, and taking it also removes the die that would burst it. Score each draftable Red by *total* barrels including the relay. |
+| 5.6 | — | **Dry Brew** interacts: the relayed Still's yield is part of the same morning's take, so it is subject to the same "split the last barrels as you choose" rule if the grey supply runs out. |
+
+### Not changing
+
+The Sicilians' **Untouchable** is untouched (it exempts them from the Sweep, not
+the Blowback). **Rise** is untouched, though it is now a stronger Play: it
+teleports the Boss to any Safe District, which is how a player re-points the
+relay at a new junction.
+
+---
+
 ## Checklist
 
+- [ ] Remove the Boss's +1 brew barrel (5.1)
+- [ ] Implement the relay, land/bridge adjacency only — **not** the dock waterway (5.2, 5.3)
+- [ ] Prompt for the relay target only when 2+ candidates qualify (5.4)
+- [ ] Re-tune the bot's Red draft to score total barrels incl. the relay (5.5)
 - [ ] Remove Bribe block for Rat holder (1.1)
 - [ ] Remove Rise → clears Rat Card (1.2)
 - [ ] Subtract 3 Respect at scoring time while holding the card — modifier, never stored (1.3)

@@ -122,7 +122,7 @@
     <div class="tbl-wrap">
     <table id="buildTbl">
       <thead>
-        <tr><th>Still</th><th>Boiler #</th><th>Mobsters</th><th>Barrels if it fires</th><th>Boss here?</th><th></th></tr>
+        <tr><th>Still</th><th>Boiler #</th><th>Mobsters</th><th>Barrels if it fires</th><th>Boss here?</th><th>Connected to Boss?</th><th></th></tr>
       </thead>
       <tbody id="buildBody"></tbody>
     </table>
@@ -132,7 +132,7 @@
     </div>
     <details class="acc" open>
       <summary>How Mobsters &amp; the clump work</summary>
-      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there); this sets the Muscle Ratio (1&rarr;1, 3&rarr;2, 5&rarr;3, 7&rarr;4, 9+&rarr;5 barrels &amp; casualties) &mdash; only the <b>odd</b> men earn. <b>The Sweep caps a District at 5</b> every Reckoning and the Brew is the next dawn, so 5 is the legal maximum here for everyone but the <b>Sicilians</b>, who are Untouchable and alone can climb past it. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. The Boss's Still brews +1 with Twist the Valves on.</p>
+      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there); this sets the Muscle Ratio (1&rarr;1, 3&rarr;2, 5&rarr;3, 7&rarr;4, 9+&rarr;5 barrels &amp; casualties) &mdash; only the <b>odd</b> men earn. <b>The Sweep caps a District at 5</b> every Reckoning and the Brew is the next dawn, so 5 is the legal maximum here for everyone but the <b>Sicilians</b>, who are Untouchable and alone can climb past it. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers &mdash; the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never relay.</p>
     </details>
     <div class="presets">
       <span class="lbl">Presets:</span>
@@ -145,6 +145,8 @@
       <button class="ghost mini" data-preset="c8">2 clumped 8s (starvable)</button>
       <button class="ghost mini" data-preset="s39">spread 3+9 (Harbormaster-proof)</button>
       <button class="ghost mini" data-preset="s3939">spread 3/3+9/9</button>
+      <button class="ghost mini" data-preset="spine">Sugar Hill spread 7/12/11/8 (Connected)</button>
+      <button class="ghost mini" data-preset="bronx">Bronx block 8/11/9/10 (Connected)</button>
     </div>
   </div>
 
@@ -164,8 +166,8 @@
           <option value="0">Naive (random)</option>
           <option value="1" selected>Contested (last drafter leaves your number behind)</option>
         </select></div>
-      <div class="fld"><label>Twist the Valves (+1 on Boss's Still)</label>
-        <select id="crack"><option value="1" selected>On (current rule)</option><option value="0">Off (mechanic dropped)</option></select></div>
+      <div class="fld"><label>Split the Batch (Boss's Still relays to a Connected Still)</label>
+        <select id="split"><option value="1" selected>On (current rule)</option><option value="0">Off (mechanic dropped)</option></select></div>
       <div class="fld"><label>Boss in a Blowback</label>
         <select id="exposed">
           <option value="1" selected>In the firing line (Boss first)</option>
@@ -191,11 +193,11 @@
       last drafter's leave-behind: it takes a safe die and leaves a Still-bursting Red as the leftover Blowback &mdash; the exact threat you
       draft the low token to dodge. Barrel value defaults to <b>$300</b> (the flat Speakeasy sale; a High Society joint pays $500).
       <b>Losing the Boss changed shape in v0.8, and this default has not been re-tuned.</b> <b>Rise</b> no longer promotes a Runner, so a dead Boss
-      is <em>body-neutral</em> again: you place a fresh Boss in any Safe District, and if your Safehouse is off the board it goes up with him for free.
+      is <em>body-neutral</em> again: you place a fresh Boss in any Safe District.
       The cost is pure tempo, and the tempo got dearer. Rise is now a <b>2-Influence</b> Play, so a funeral eats two of your five Ledger markers, and a
       crew with no Boss skips <b>The Offers</b> that morning, so your rivals pick over the Market without you. Treat $800 as a
-      floor and raise it to taste &mdash; at a Boss-loss rate near 8%/Day it shifts the bottom line by only tens of dollars, but it makes
-      <b>Twist the Valves</b> look better than it is.
+      floor and raise it to taste &mdash; at a Boss-loss rate near 8%/Day it shifts the bottom line by only tens of dollars, but it is
+      the whole price of <b>Split the Batch</b>, so it decides whether parking the old man pays at all.
       </p>
     </details>
   </div>
@@ -212,7 +214,7 @@
     <h2>Compare the Standard Builds</h2>
     <details class="acc" open>
       <summary>About this comparison</summary>
-      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler to stay Harbormaster-proof. Flip the <b>Mash die</b> to <b>Hostile Harbormaster</b> and re-run to watch the one-number stacks collapse while the spreads hold. Use it to refresh the Brew Engine guide's table for the current economy, the Harbormaster, Twist the Valves, and Blowback rules.</p>
+      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler to stay Harbormaster-proof. Flip the <b>Mash die</b> to <b>Hostile Harbormaster</b> and re-run to watch the one-number stacks collapse while the spreads hold. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something &mdash; note that the Bronx block is fully Connected and <em>still</em> zeroes under a hostile crown, because the relay needs the Boss's own Still to fire first. Use it to refresh the Kingpin's Guide table for the current economy, the Harbormaster, Split the Batch, and Blowback rules.</p>
     </details>
     <div class="row-actions"><button class="ghost" id="runCompare">Run Comparison</button></div>
     <div id="compareOut" style="margin-top:12px;"></div>
@@ -231,7 +233,7 @@ const d6 = () => 1 + Math.floor(Math.random() * 6);
 
 // ---- Build table UI ----
 const body = document.getElementById('buildBody');
-function stillRow(num, mob, boss) {
+function stillRow(num, mob, boss, conn) {
   const tr = document.createElement('tr');
   tr.innerHTML =
     `<td class="idx"></td>` +
@@ -239,6 +241,7 @@ function stillRow(num, mob, boss) {
     `<td><input type="number" class="mob" min="1" max="15" value="${mob}"></td>` +
     `<td class="yield">${ratio(mob)}</td>` +
     `<td><input type="radio" name="bossStill" class="bossradio"></td>` +
+    `<td><input type="checkbox" class="conn"${conn ? ' checked' : ''}></td>` +
     `<td><button class="ghost mini rm">&times;</button></td>`;
   tr.querySelector('.mob').addEventListener('input', e => {
     tr.querySelector('.yield').textContent = ratio(Math.max(1, +e.target.value || 1));
@@ -253,18 +256,22 @@ function reindex() {
 }
 function loadBuild(rows, bossIdx) {
   body.innerHTML = '';
-  rows.forEach((r, i) => stillRow(r.num, r.mob, i === bossIdx));
+  rows.forEach((r, i) => stillRow(r.num, r.mob, i === bossIdx, r.conn));
 }
 function readBuild() {
   const rows = [];
   let bossStill = -1;
   [...body.children].forEach((tr, i) => {
-    rows.push({ num: +tr.querySelector('.num').value, mob: Math.max(1, +tr.querySelector('.mob').value || 1) });
+    rows.push({
+      num: +tr.querySelector('.num').value,
+      mob: Math.max(1, +tr.querySelector('.mob').value || 1),
+      conn: tr.querySelector('.conn').checked,
+    });
     if (tr.querySelector('.bossradio').checked) bossStill = i;
   });
   return { rows, bossStill };
 }
-document.getElementById('addStill').addEventListener('click', () => stillRow(7, 6, false));
+document.getElementById('addStill').addEventListener('click', () => stillRow(7, 6, false, false));
 
 // Presets share a ~16-mobster roster (15 Runners + Boss) across the Stills.
 //
@@ -283,6 +290,14 @@ document.getElementById('addStill').addEventListener('click', () => stillRow(7, 
 //  2. THE BOILER CENSUS. The map has: 7 x4 | 4,6 x3 | 2,3,5,8,9,10,11 x2 | 12 x1.
 //     So a 4-stack exists ONLY on 7, and only 4, 6 and 7 reach a 3-stack.
 //     Everything else caps at a pair. Do not invent builds the board can't hold.
+//
+//  A THIRD LIMIT ARRIVED WITH SPLIT THE BATCH, and it is pure geography: `conn`
+//  marks a Still whose District is Connected to the BOSS'S District by Land or
+//  Bridge, so the relay can reach it. It is set from the actual map below, and
+//  the map is unkind to clumps -- the four 7s are one to a Borough and NO TWO OF
+//  THEM TOUCH, so no 7-stack relays anything. Same for the two 8s (Tenderloin in
+//  Manhattan, Fordham in the Bronx) and both 3+9 spreads (Jamaica/Coney Island
+//  against Bowery/Hunts Point). Only a build bought down one street can relay.
 const PRESETS = {
   // 1-3 sevens: crewed 5 apiece, the legal maximum per boiler.
   '1':   [{num:7,mob:5}],
@@ -292,8 +307,10 @@ const PRESETS = {
   // so the fourth boiler takes the leftover man: 5/5/5/1 = 10 barrels, which
   // still beats 5/5/5 = 9. Odd numbers, remember: the lone man earns a barrel.
   '4':   [{num:7,mob:5},{num:7,mob:5},{num:7,mob:5},{num:7,mob:1}],
-  'm678':[{num:6,mob:5},{num:7,mob:5},{num:8,mob:5}],
-  'm78': [{num:7,mob:5},{num:8,mob:5}],
+  // Boss on the 7 (Morris Park), which borders Fordham's 8 -- so the 8 relays.
+  // The 6 (Flushing / Red Hook / Stapleton) touches neither, hence conn stays off.
+  'm678':[{num:7,mob:5},{num:8,mob:5,conn:true},{num:6,mob:5}],
+  'm78': [{num:7,mob:5},{num:8,mob:5,conn:true}],
   // A clump on a STARVABLE number: great on a rolled Mash, but a Hostile
   // Harbormaster names Mash 1 and it fires nothing -- net $0. The lockout, live.
   // Only TWO 8-boilers exist (The Tenderloin, Fordham), so this is a pair, not
@@ -303,6 +320,15 @@ const PRESETS = {
   // lock out both. Only one end ever fires in a morning.
   's39': [{num:3,mob:5},{num:9,mob:5}],
   's3939':[{num:3,mob:5},{num:3,mob:5},{num:9,mob:5},{num:9,mob:5}],
+  // One street in Manhattan: Sugar Hill (7) with East Harlem (12) and West Side
+  // (11) both across the avenue. The 12 is the rarest boiler on the board and
+  // dead weight anywhere else; here it fires whenever the 7 does. The Tenderloin
+  // 8 is in the build but does NOT border Sugar Hill, so it cannot be relayed.
+  'spine':[{num:7,mob:5},{num:12,mob:5,conn:true},{num:11,mob:5,conn:true},{num:8,mob:1}],
+  // Fordham (8) with Belmont (11), Hunts Point (9) and Throggs Neck (10) all
+  // touching it. Fully Connected -- and still zeroed by a hostile Mash of 1,
+  // because every number is high. Connection is not armour; range is.
+  'bronx':[{num:8,mob:5},{num:11,mob:5,conn:true},{num:9,mob:5,conn:true},{num:10,mob:1,conn:true}],
 };
 document.querySelectorAll('[data-preset]').forEach(b =>
   b.addEventListener('click', () => loadBuild(PRESETS[b.dataset.preset], 0)));
@@ -334,28 +360,54 @@ function hostileMash(boilers) {
   return best;
 }
 
+// What a given Brew Number is worth to this build, INCLUDING Split the Batch:
+// if the Boss's own Still is among those firing, one Connected Still that is NOT
+// already firing joins in, and we take the fattest one available.
+function brewYield(rows, bossStill, opts, brewNum) {
+  let barrels = 0, bossFired = false, relayed = false;
+  const fired = [];
+  rows.forEach((s, i) => {
+    const hit = s.num === brewNum;
+    fired[i] = hit;
+    if (hit) { barrels += ratio(s.mob); if (i === bossStill) bossFired = true; }
+  });
+  if (opts.split && bossFired) {
+    let best = 0;
+    rows.forEach((s, i) => {
+      if (i !== bossStill && s.conn && !fired[i]) best = Math.max(best, ratio(s.mob));
+    });
+    if (best > 0) { barrels += best; relayed = true; }
+  }
+  return { barrels, relayed, fired: barrels > 0 };
+}
+
 function simulate(rows, bossStill, opts, N) {
   const boilers = rows.map(s => s.num);
   const fixedMash = opts.mash === 'hostile' ? hostileMash(boilers) : null;
-  let sumB = 0, sumNet = 0, fireDays = 0, blowDays = 0, bossLostDays = 0;
+  let sumB = 0, sumNet = 0, fireDays = 0, blowDays = 0, bossLostDays = 0, relayDays = 0;
 
   for (let t = 0; t < N; t++) {
     const W = fixedMash !== null ? fixedMash : d6();
     const pool = Array.from({ length: opts.players + 1 }, d6);
     const focalSeat = Math.floor(Math.random() * opts.players);
-    // Reds (1..6) that make one of our Stills fire this morning:
-    const firing = new Set();
-    boilers.forEach(b => { const r = b - W; if (r >= 1 && r <= 6) firing.add(r); });
     const blowsUs = r => boilers.includes(W + r); // if this Red is LEFT behind, does it burst one of ours?
 
     let focalPick = null;
     for (let seat = 0; seat < opts.players; seat++) {
       const isLast = seat === opts.players - 1;
       if (seat === focalSeat) {
-        let i = pool.findIndex(r => firing.has(r));           // grab a firing die
-        if (i < 0) i = pool.findIndex(r => blowsUs(r));        // else pull the die that would burn us
-        if (i < 0) i = 0;
-        focalPick = pool[i]; pool.splice(i, 1);
+        // Take the die that BREWS MOST, not merely the first that fires: with
+        // Split the Batch live the dice are no longer interchangeable, because
+        // only the Boss's number pays for two boilers. Ties break toward pulling
+        // a die that would otherwise be left behind to burst one of our Stills --
+        // which is why drafting the Boss's number also disarms it.
+        let bi = 0, best = -1, bestBurn = -1;
+        for (let k = 0; k < pool.length; k++) {
+          const y = brewYield(rows, bossStill, opts, W + pool[k]).barrels;
+          const burn = blowsUs(pool[k]) ? 1 : 0;
+          if (y > best || (y === best && burn > bestBurn)) { best = y; bestBurn = burn; bi = k; }
+        }
+        focalPick = pool[bi]; pool.splice(bi, 1);
       } else if (opts.contested && isLast) {
         // adversarial last drafter: take a safe die, leaving a Still-bursting die behind as the Blowback
         let i = pool.findIndex(r => !blowsUs(r));
@@ -369,17 +421,10 @@ function simulate(rows, bossStill, opts, N) {
     const brewNum = W + focalPick;
     const blowNum = W + leftover;
 
-    // Brew
-    let barrels = 0, fired = false;
-    rows.forEach((s, i) => {
-      if (s.num === brewNum) {
-        fired = true;
-        let y = ratio(s.mob);
-        if (opts.crack && i === bossStill) y += 1;
-        barrels += y;
-      }
-    });
+    // Brew (Split the Batch is folded into brewYield)
+    const { barrels, relayed, fired } = brewYield(rows, bossStill, opts, brewNum);
     if (fired) fireDays++;
+    if (relayed) relayDays++;
     let net = barrels * opts.barrel;
 
     // Blowback
@@ -400,6 +445,7 @@ function simulate(rows, bossStill, opts, N) {
   return {
     barrels: sumB / N, net: sumNet / N,
     pFire: fireDays / N, pBlow: blowDays / N, pBossLost: bossLostDays / N,
+    pRelay: relayDays / N,
   };
 }
 
@@ -408,7 +454,7 @@ function readOpts() {
     players: +document.getElementById('players').value,
     mash: document.getElementById('mashmode').value,
     contested: document.getElementById('contested').value === '1',
-    crack: document.getElementById('crack').value === '1',
+    split: document.getElementById('split').value === '1',
     exposed: document.getElementById('exposed').value === '1',
     barrel: +document.getElementById('barrel').value || 0,
     recruit: +document.getElementById('recruit').value || 0,
@@ -434,11 +480,14 @@ document.getElementById('run').addEventListener('click', () => {
     kpi('Brew fires', (100 * r.pFire).toFixed(0) + '%', 'small') +
     kpi('A Still blows', (100 * r.pBlow).toFixed(0) + '%', 'small') +
     kpi('Boss lost / Day', (100 * r.pBossLost).toFixed(1) + '%', 'small') +
-    kpi('Twist the Valves &Delta;', (delta >= 0 ? '+$' : '-$') + Math.abs(delta).toFixed(0), 'small');
+    kpi('The relay pays', (100 * r.pRelay).toFixed(0) + '%', 'small') +
+    kpi('Split the Batch &Delta;', (delta >= 0 ? '+$' : '-$') + Math.abs(delta).toFixed(0), 'small');
 
   let msg;
   if (bossStill < 0) {
-    msg = `No Boss parked, so Twist the Valves is idle. Park the Boss on a Still (and keep Twist the Valves on) to see what he's worth.`;
+    msg = `No Boss parked, so Split the Batch is idle. Park the Boss on a Still to see what he's worth.`;
+  } else if (opts.split && !rows.some((s, i) => i !== bossStill && s.conn)) {
+    msg = `The Boss is parked, but <b>nothing in this build is Connected to him</b>, so Split the Batch never fires and he is standing in the blast for nothing &mdash; <span class="bad">costing $${Math.abs(delta).toFixed(0)}/Day</span>. Tick <b>Connected to Boss?</b> on a Still he could walk to, or move him.`;
   } else {
     const worth = delta >= 0
       ? `<span class="good">worth +$${delta.toFixed(0)}/Day</span>`
@@ -464,19 +513,21 @@ document.getElementById('runCompare').addEventListener('click', () => {
     ['2 clumped 8s (starvable)', PRESETS['c8']],
     ['spread 3+9 (proof)', PRESETS['s39']],
     ['spread 3/3+9/9', PRESETS['s3939']],
+    ['Sugar Hill spread 7/12/11/8', PRESETS['spine']],
+    ['Bronx block 8/11/9/10', PRESETS['bronx']],
   ];
   const results = builds.map(([name, rows]) => {
-    const r = simulate(rows, opts.crack ? 0 : -1, opts, N); // Boss on Still 1 when Twist the Valves is live
+    const r = simulate(rows, opts.split ? 0 : -1, opts, N); // Boss on Still 1 when Split the Batch is live
     return { name, ...r };
   });
   const nets = results.map(r => r.net);
   const hi = Math.max(...nets), lo = Math.min(...nets);
-  let html = '<table><tr><th>Build</th><th>Barrels/Day</th><th>Net $/Day</th><th>Brew fires</th><th>Boss lost/Day</th></tr>';
+  let html = '<table><tr><th>Build</th><th>Barrels/Day</th><th>Net $/Day</th><th>Brew fires</th><th>Relay pays</th><th>Boss lost/Day</th></tr>';
   results.forEach(r => {
     const cls = r.net === hi ? 'best' : r.net === lo ? 'worst' : '';
     html += `<tr><td class="name">${r.name}</td><td>${r.barrels.toFixed(2)}</td>` +
       `<td class="${cls}">$${r.net.toFixed(0)}</td><td>${(100*r.pFire).toFixed(0)}%</td>` +
-      `<td>${(100*r.pBossLost).toFixed(1)}%</td></tr>`;
+      `<td>${(100*r.pRelay).toFixed(0)}%</td><td>${(100*r.pBossLost).toFixed(1)}%</td></tr>`;
   });
   html += '</table>';
   document.getElementById('compareOut').innerHTML = html;
