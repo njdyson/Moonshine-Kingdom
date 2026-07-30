@@ -949,3 +949,42 @@ by boat is legal; fleeing the law by boat is not. Do not "consistency-fix" these
 Cascaded to `Turn Structure and Ledger v0.9.html` (Raid step) and `Kingpin's Guide v0.9.html`
 (Part IV's back-door note, plus the Conspiracies "corner him, then call" play). The Guide's note
 gains the corollary: a pier with one land exit is a cell with a view.
+
+### Combat Heat: the "1+ kills" rule STAYS (2026-07-30)
+
+Considered replacing *Heat if the Invader's dice score 1+ kills* with *Heat if the Invader Opens
+Fire*, because the current rule fires almost every time and costs a per-round check. The numbers back
+that up — P(1+ kills) per volley for an invader:
+
+| dice | Threat 1 | Threat 2 | Threat 3 |
+|---|---|---|---|
+| 2 | 55.6% | 75.0% | 88.9% |
+| 3 | 70.4% | 87.5% | 96.3% |
+| 5 | 86.8% | 96.9% | 99.6% |
+
+Across a 3-volley fight at 3 dice / base Threat, Heat lands **97.4%** of the time.
+
+**REJECTED, and Nick's question is why: if it's the gunshots that make the noise, why doesn't an
+Ambush draw Heat?** It doesn't — *"The Occupier never draws Heat"*, and Ambush costs 0 and carries
++1 Threat. So the defender shoots first, for free, and the law never hears it.
+
+That proves the rule is **not** modelling noise. It models **who the law blames**: the Occupier is
+the aggrieved party on their own block; the Invader is the stranger who came in and left bodies.
+Read that way *"1+ kills"* is the point, not a clumsy proxy — **no bodies, no case.** A whiffed
+volley walks free because nothing happened worth reporting. "Open Fire draws Heat" would be cleaner
+to execute but would break that fiction and tax the one outcome with nothing to report. The ~97%
+rate is a **feature**: attacking should nearly always cost Heat, because attacking nearly always
+leaves bodies.
+
+> **SHELVED FOR v0.10 — "whoever starts the shooting takes the Heat" (Nick's third path).** A better
+> model of blame than what we have, and it has a genuinely elegant emergent consequence: paying to
+> Ambush means a defender with nothing in Reserves **cannot** Ambush and must absorb the first
+> volley, which finally makes *Hold Fire* a real choice rather than a fallback. **Not built, on
+> Nick's own read that it throws up too many edge cases.** Reasons to be careful if it is revisited:
+> (1) **Ambush and Fold both cost 0 by design**, so an Occupier is never helpless — charging for
+> defence lets a player lose turf without rolling a die; (2) it gives **Reserves a fourth job**
+> (stake money, tomorrow's refill, Heat cushion, and now defence money), adding a hoarding incentive
+> that works against *capacity, not actions*; (3) the open questions are real — does the Ambush cost
+> return, does Heat land if the Ambush kills nobody, what about a defender whose last marker is
+> staked on a Job. Deserves a clean playtest, not a patch: the Heat page is at **100% of its column**
+> and cannot fit the extra explanation.
