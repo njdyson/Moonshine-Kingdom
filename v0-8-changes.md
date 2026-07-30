@@ -864,6 +864,8 @@ table's *"If you have 0 Influence remaining, you must Fall Back"* exists for.
 Fix was presentational, not mechanical: Stealth now lists **Open Fire or Advance** as the choices,
 with the free Fall Back named as what's left when you can't pay. Same in `Playbooks v0.9.html`.
 
+> **RESOLVED same day — see the follow-up note below.** Original finding kept for the method.
+>
 > **PRE-EXISTING BUG FOUND, NOT FIXED — `Playbooks v0.9.html`.** Three of the four front cards
 > measure over their fixed 965px box: **Vipers +38px**, Sicilians +3, Irish +4 (`scrollHeight` vs
 > `clientHeight`; card indices 2/4/6). The render confirms it on the Vipers: **Tunnel's last line is
@@ -875,3 +877,19 @@ with the free Fall Back named as what's left when you can't pay. Same in `Playbo
 > removed, or `.card{height:925px}` raised in **both** `Playbooks v0.9.html` and
 > `Turn Structure and Ledger v0.9.html` together (they must stay equal or duplex sides won't line
 > up). Measure with scroll-vs-client and confirm with a render; the fill scan can't see it.
+
+**FIXED, and by the rules edit rather than a layout fix (2026-07-30).** Nick, on the Stealth card
+text: *"it's a prompt not the full rule, and the rest is implied."* Correct — "the Occupier can only
+**Hold Fire**" already implies no Ambush and no Fold, and the Pinned resolution is generic combat,
+not Stealth-specific. Cutting the card entry back to two sentences removed **two rendered lines**
+from `.sig` (162.3 → 131.6px) and took the Vipers card from **+38px to +7px**.
+
+**The render is clean:** Tunnel's last line is whole and the gold frame closes. The residual +7
+(Sicilians +3, Irish +4) is the known false-positive band — `scrollHeight` over-reports on a
+`display:flex` card, which is exactly why the memory says settle it with a render. All four fronts
+verified visually. **No change to `.card{height:925px}` was needed**, so Playbooks and
+Turn Structure stay in sync for duplex printing.
+
+Lesson worth keeping: the fix came from asking *what does this card actually need to say* rather than
+from trimming words to buy pixels. The word-trimming attempt moved the height by literally 0px; the
+scope cut moved it by 31.
