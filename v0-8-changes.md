@@ -1063,3 +1063,49 @@ mob-balance work in the Kingpin's Guide.
 2. A or C? (B is out.) If C, decide whether the Stealth probe stays free.
 3. Free Open Fire: separate question, bigger blast radius. Needs a termination rule and a sim re-run.
 4. The Heat page is at **100% of its column** — any new wording must be a trade, not an addition.
+
+### Update (2026-07-30, same session): free Open Fire, and the shape of the "first to fire" rule
+
+**Free Open Fire: my "needs a termination rule" claim was overstated — Nick is right.** The Invader
+can always **Fall Back** (free), so a fight still ends; free volleys mean *more dice thrown*, not an
+unbreakable loop. The annihilation figures above still describe what happens when both sides *choose*
+to keep firing, so it remains a real balance change, but it does not strictly require a new
+termination mechanic. **Nick leans against it anyway** — it trades the game's *cold-war* feel for
+something closer to Risk. Not ruled out; parked.
+
+**Nick leans to "whoever fires first takes the Heat" over the simpler "invader Opens Fire = Heat",**
+preferring its theme and strategy. He costed it at three rules; it is really **two**, and one of
+them is a *repeal*:
+
+1. ~~"You may leave markers in Reserves for defence"~~ — **this is not an addition, it is a REPEAL.**
+   *Fund the Ledger* currently reads *"Move whatever's left in your Reserves into the Ledger, up to
+   its 5 slots"* — funding is **mandatory**. Note the cost: that clause exists to stop hoarding, and
+   it is the same rule the redundant "never hold any back" sentence was trimmed from earlier today.
+   Making funding optional reopens the hoarding question.
+2. ~~"An Occupier can't Ambush if the stash is empty"~~ — **not a separate rule.** It is just what
+   happens when a player with no markers meets rule 3. Only needs the cost to be payable from
+   Reserves.
+3. **Whoever fires first pays 1 and takes the Heat (never both).**
+
+**The "sitting duck" analysis is sound, and self-corrects as players grow.** Reserves after Shadows
+= total − 5 − staked:
+
+| total | staked 0 | 1 | 2 | 3 |
+|---|---|---|---|---|
+| **6** | 1 | **duck** | **duck** | **duck** |
+| **7** | 2 | 1 | **duck** | **duck** |
+| **8** | 3 | 2 | 1 | **duck** |
+| **10** | 5 | 4 | 3 | 2 |
+
+**But it is sharply tied to Jobs:** a Day-1 crew at 6 Influence that stakes a single Job is a duck
+all morning, so the rule taxes early staking hardest — which is the opposite of what the Jobs system
+wants. **And one correction to Nick's read:** he expected Reserves to refill "1+ play into their
+turn (markers refunded)", but only **quiet** plays refund — a noisy one locks the marker to the Heat
+Track. A crew that opens with Extort, Torch or a firefight **stays a duck for its whole turn**.
+(Emergent and rather good: the loud crew is the exposed crew.)
+
+**The strongest argument for it, and it is Nick's:** an empty stash is *public information*, so a
+sitting duck becomes a desirable target, and **Hold Fire finally has a reason to exist**. It turns
+Influence from a private resource into a readable tell. That is worth a playtest.
+
+**Two honest costs to weigh first:** it reopens hoarding (see 1), and it punishes early Job-staking.
