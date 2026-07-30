@@ -893,3 +893,34 @@ Turn Structure stay in sync for duplex printing.
 Lesson worth keeping: the fix came from asking *what does this card actually need to say* rather than
 from trimming words to buy pixels. The word-trimming attempt moved the height by literally 0px; the
 scope cut moved it by 31.
+
+### Clarity sweep + "relay" retired as vocabulary (2026-07-30)
+
+**Two live rules errors found by reading the book front-to-back:**
+
+1. **The Boss "brews an extra barrel" — FALSE, and had been for a while.** The Key Concepts legend
+   still promised the Boss's old +1 brew bonus, which was **retired and replaced by Split the Batch**
+   (`mk-online-rules-sync.md` §5 says outright: *"The Boss's brew bonus is gone, replaced by a relay…
+   the tabletop files no longer have it"* — except this one line still did). It also contradicted the
+   Muscle Ratio directly, which counts the Boss as just another Mobster. He now correctly reads: *when
+   the Still on his block fires, a second Still runs with it.*
+2. **"Reserves soak up Heat" — FALSE, and already listed as a fixed bug in this very file** (see
+   *Bugs fixed*, v0.8: *"Heat takes the spent Ledger marker; Reserves never soak anything"*). It was
+   fixed in one place and survived in **two more** in the Rulebook plus **one** in the Guide. All
+   three now say what Reserves actually do: stake Jobs, and refill the five that the Heat Track keeps.
+   *Lesson: fixing a phrase is not the same as grepping for it.*
+
+**"Relay" is retired in favour of "the Split" (Nick).** It was invented vocabulary that appears in no
+rule, so a reader had nothing to map it onto — the rule is called **Split the Batch**. Reworded, not
+find-and-replaced, so the verb reads naturally each time ("he Splits near half of all mornings", "a
+wall of sevens cannot Split a barrel"). Covers `Kingpin's Guide v0.9.html` (9 uses) and the
+**user-facing** strings in `Brew Simulator v0.9.html` (the checkbox label, the KPI tile, a table
+header, two prose lines). **The simulator's internal JS identifiers — `relayed`, `relayDays`,
+`pRelay` — were deliberately left alone**: invisible to readers, and renaming them risks the engine
+for no gain. Verified no JS errors via CDP after the edits.
+
+**Also:** `Brew Simulator v0.9.html` had `<title>…v0.8</title>` — the same stale-version bug fixed in
+`gen_deck.py` earlier today. Worth a periodic grep for `v0\.8` in v0.9 filenames.
+
+**Checked and found correct, so not changed:** setup's *"stake first, fund second"* (The Offers really
+does precede Fund the Ledger, so Day 1 is consistent).

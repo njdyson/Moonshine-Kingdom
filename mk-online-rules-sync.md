@@ -217,3 +217,6 @@ relay at a new junction.
 - [ ] **Split the Batch relays over LAND only** (2026-07-30). If the port ever used a generic
       "connected" check, Docks would wrongly relay across water. `Land Connected` = shared border
       or Bridge; `Water Connected` = Dock-to-Dock; plain `Connected` = either.
+- [ ] **Remove the Boss's +1 brew barrel** (5.1) — reconfirmed 2026-07-30: the Rulebook's Key
+      Concepts legend still described the old bonus and has now been corrected, so the tabletop
+      files are finally free of it. The build is still the only place it survives.

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moonshine Kingdom Brew Simulator v0.8</title>
+  <title>Moonshine Kingdom Brew Simulator v0.9</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -132,7 +132,7 @@
     </div>
     <details class="acc" open>
       <summary>How Mobsters &amp; the clump work</summary>
-      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there); this sets the Muscle Ratio (1&rarr;1, 3&rarr;2, 5&rarr;3, 7&rarr;4, 9+&rarr;5 barrels &amp; casualties) &mdash; only the <b>odd</b> men earn. <b>The Sweep caps a District at 5</b> every Reckoning and the Brew is the next dawn, so 5 is the legal maximum here for everyone but the <b>Sicilians</b>, who are Untouchable and alone can climb past it. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers &mdash; the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never relay.</p>
+      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there); this sets the Muscle Ratio (1&rarr;1, 3&rarr;2, 5&rarr;3, 7&rarr;4, 9+&rarr;5 barrels &amp; casualties) &mdash; only the <b>odd</b> men earn. <b>The Sweep caps a District at 5</b> every Reckoning and the Brew is the next dawn, so 5 is the legal maximum here for everyone but the <b>Sicilians</b>, who are Untouchable and alone can climb past it. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers &mdash; the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never Split.</p>
     </details>
     <div class="presets">
       <span class="lbl">Presets:</span>
@@ -166,7 +166,7 @@
           <option value="0">Naive (random)</option>
           <option value="1" selected>Contested (last drafter leaves your number behind)</option>
         </select></div>
-      <div class="fld"><label>Split the Batch (Boss's Still relays to a Connected Still)</label>
+      <div class="fld"><label>Split the Batch (Boss's Still Splits into a Land Connected Still)</label>
         <select id="split"><option value="1" selected>On (current rule)</option><option value="0">Off (mechanic dropped)</option></select></div>
       <div class="fld"><label>Boss in a Blowback</label>
         <select id="exposed">
@@ -214,7 +214,7 @@
     <h2>Compare the Standard Builds</h2>
     <details class="acc" open>
       <summary>About this comparison</summary>
-      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler to stay Harbormaster-proof. Flip the <b>Mash die</b> to <b>Hostile Harbormaster</b> and re-run to watch the one-number stacks collapse while the spreads hold. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something &mdash; note that the Bronx block is fully Connected and <em>still</em> zeroes under a hostile crown, because the relay needs the Boss's own Still to fire first. Use it to refresh the Kingpin's Guide table for the current economy, the Harbormaster, Split the Batch, and Blowback rules.</p>
+      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler to stay Harbormaster-proof. Flip the <b>Mash die</b> to <b>Hostile Harbormaster</b> and re-run to watch the one-number stacks collapse while the spreads hold. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something &mdash; note that the Bronx block is fully Connected and <em>still</em> zeroes under a hostile crown, because the Split needs the Boss's own Still to fire first. Use it to refresh the Kingpin's Guide table for the current economy, the Harbormaster, Split the Batch, and Blowback rules.</p>
     </details>
     <div class="row-actions"><button class="ghost" id="runCompare">Run Comparison</button></div>
     <div id="compareOut" style="margin-top:12px;"></div>
@@ -480,7 +480,7 @@ document.getElementById('run').addEventListener('click', () => {
     kpi('Brew fires', (100 * r.pFire).toFixed(0) + '%', 'small') +
     kpi('A Still blows', (100 * r.pBlow).toFixed(0) + '%', 'small') +
     kpi('Boss lost / Day', (100 * r.pBossLost).toFixed(1) + '%', 'small') +
-    kpi('The relay pays', (100 * r.pRelay).toFixed(0) + '%', 'small') +
+    kpi('The Split pays', (100 * r.pRelay).toFixed(0) + '%', 'small') +
     kpi('Split the Batch &Delta;', (delta >= 0 ? '+$' : '-$') + Math.abs(delta).toFixed(0), 'small');
 
   let msg;
@@ -522,7 +522,7 @@ document.getElementById('runCompare').addEventListener('click', () => {
   });
   const nets = results.map(r => r.net);
   const hi = Math.max(...nets), lo = Math.min(...nets);
-  let html = '<table><tr><th>Build</th><th>Barrels/Day</th><th>Net $/Day</th><th>Brew fires</th><th>Relay pays</th><th>Boss lost/Day</th></tr>';
+  let html = '<table><tr><th>Build</th><th>Barrels/Day</th><th>Net $/Day</th><th>Brew fires</th><th>Split pays</th><th>Boss lost/Day</th></tr>';
   results.forEach(r => {
     const cls = r.net === hi ? 'best' : r.net === lo ? 'worst' : '';
     html += `<tr><td class="name">${r.name}</td><td>${r.barrels.toFixed(2)}</td>` +
