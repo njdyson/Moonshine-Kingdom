@@ -988,3 +988,78 @@ leaves bodies.
 > return, does Heat land if the Ambush kills nobody, what about a defender whose last marker is
 > staked on a Job. Deserves a clean playtest, not a patch: the Heat page is at **100% of its column**
 > and cannot fit the extra explanation.
+
+---
+
+## OPEN FOR DISCUSSION — combat Heat and the cost of Open Fire (2026-07-30)
+
+**Nothing below is built. Nick wants to think about it. Do not implement any of this without him.**
+This supersedes the "1+ kills STAYS" note above: that note's defence of the rule does not survive
+the kill-attribution bug in §2.
+
+### 1. My "a broke Occupier could not defend" objection was WRONG
+
+I argued against charging Influence to Ambush on the grounds that it lets a player lose turf without
+rolling a die. **False, and Nick caught it.** *Open Fire* has **both sides roll simultaneously**, and
+the cost falls on the Invader — the Occupier returns fire for free either way. Charging for Ambush
+would remove only the **first strike**, not the defence. The remaining objections (Reserves gaining a
+fourth job; the edge cases) still stand but are weaker.
+
+### 2. THE REAL BUG: "1+ kills" does not track bodies, it tracks whose dice made them
+
+Heat lands on the Invader *only if their own dice score*. So a volley where the **Occupier** kills and
+the Invader whiffs leaves corpses on the board and **draws no Heat at all**. Frequency of "bodies but
+no Heat", one volley, Invader at T1:
+
+| matchup | P(inv kills) | P(occ kills) | **bodies, NO heat** |
+|---|---|---|---|
+| 2v2, occ T2 | 55.6% | 75.0% | **33.3%** |
+| 3v3, occ T2 | 70.4% | 87.5% | **25.9%** |
+| 2v4 vs Safehouse | 55.6% | 98.8% | **43.9%** |
+| 5v3, occ T2 | 86.8% | 87.5% | **11.5%** |
+
+A quarter to nearly half of volleys. The invader's own dead make no noise.
+
+### 3. The three candidate rules are nearly indistinguishable in play
+
+P(Heat) across a 3-volley fight, 3 dice, inv T1 / occ T2:
+
+| rule | P(Heat) | verdict |
+|---|---|---|
+| **A. Invader's dice kill** (current) | 97.4% | buggy per §2 |
+| **B. Any bodies** | 100% | **dominated** — fiddly AND double-punishes the whiff (Nick) |
+| **C. Invader Opens Fire** | 100% | cleanest to adjudicate; no dice inspection |
+
+They are the same rule with different bookkeeping. **B is dominated and should not be chosen.**
+Nick leans to **C** ("whoever opens fire takes the Heat"). Known cost of C: the Viper Stealth probe
+and the one-volley-then-Fall-Back play stop being free. Under C the Ambush asymmetry is answered
+consistently — the *Invader's* gunfire is what gets reported — rather than by a dice check that
+misfires a third of the time.
+
+### 4. Nick's further idea: make Open Fire FREE (Cost 0)
+
+Appeal: a combat Play would cost only 1–2 Influence total (the Move in, plus an Advance), so a failed
+attack can no longer drain a whole day.
+
+**But it removes the only thing that ENDS a firefight.** Today the fight terminates because the
+Invader runs dry — the rulebook says so (*"until the Pin is resolved, or you run dry and must Fall
+Back"*), *The Cost of Pride* is built on it, and `Combat Simulator v0.9.html` states its whole model
+as *"the Pinned invader spends Influence per volley until it runs out."* Free volleys mean both sides
+grind until one is annihilated. 20k trials, 6 Mobsters a side:
+
+| | invader takes turf | invader wiped | avg volleys |
+|---|---|---|---|
+| costed (~3 volleys) | 1.5% | 16.6% | 2.99 |
+| **free, fight to the death** | **18.4%** | **81.6%** | **5.06** |
+
+Attacking gets **12× more likely to succeed** and **5× more likely to annihilate you**, and the
+board's body count rises sharply. That may be a *good* game — it makes assaults decisive instead of
+attritional — but it is a **major balance change, not a cost tweak**, and it would need a cap
+(volley limit, or Fall Back forced after N rounds) plus a full re-run of the combat sim and the
+mob-balance work in the Kingpin's Guide.
+
+### What to settle, when this is picked up
+1. Fix §2 regardless — the current rule is defensible only if the misfire is intended, and it is not.
+2. A or C? (B is out.) If C, decide whether the Stealth probe stays free.
+3. Free Open Fire: separate question, bigger blast radius. Needs a termination rule and a sim re-run.
+4. The Heat page is at **100% of its column** — any new wording must be a trade, not an addition.
