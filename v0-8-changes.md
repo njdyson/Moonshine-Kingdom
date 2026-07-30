@@ -792,3 +792,86 @@ engine, value-maximising draft), `mk-online-rules-sync.md` §5.
 **Unplaytested.** The figures are Monte Carlo (300–400k days/cell, ±1%) on the brew economy only —
 Respect isn't modelled, and the relay rewards holding *adjacent* districts, which is also more Deeds
 and Titles. The real effect on win rate is probably larger than the dollars.
+
+---
+
+## 2026-07-30 — Clarity pass: Control, Connection, the Brew, Blood Oath
+
+**Control (Territory).** *Instant Possession* said Control shifted "the moment your piece enters …
+even if you are gone again by nightfall", which is the opposite of the intent. Now **Walk In, Walk
+Out**: Control is settled at the END of each Play. *Abandonment* → **Barrels Hold Nothing** (leads
+with the rule, not the flavour). The Golden Rule of Turf no longer claims rivals "cannot enter your
+turf without starting a firefight" — they can (Hold Fire, and the Viper Stealth explicitly relies on
+it); the real rule is that you may not END a Play beside them.
+
+**Connection is now two named terms.** `Land Connected` (border or Bridge) and `Water Connected`
+(Dock-to-Dock). Plain **Connected** stays the umbrella term a Move follows, so every existing card
+and rule using it is still correct. *Land Connected* was previously undefined vocabulary used by
+Split the Batch and The Beachhead — v0.8 had "fixed" this by expanding the card to "Connected by Land
+or Bridge" (see the 2026-07-18 table); that is now reverted to the short term, which is defined.
+
+**The Brew: draft and brew are ONE step, per seat.** Previously steps 2 and 3, which read as two
+passes round the table — and the worked example reinforced it by resolving all four drafts before
+any brewing. Now: in Turn Order each boss drafts **and immediately brews before the next boss
+drafts**. This matters because the grey supply is **finite, shared, and first come, first served** —
+new key-rule box, which also absorbs the old *Dry Brew* aside and adds the missing ruling that
+**when several of your Stills fire, you choose which to stock first**. The example's table gained a
+`Brews` column so each boss's dice and barrels sit on one row.
+
+**Blood Oath target: combined Respect +10 → a flat 30.** The +10 required tracking a derived number
+that is unrecoverable from the board if you forget to write it down; 30 is always countable from
+what's in front of you. The 1st+4th / 2nd+3rd pairing was already doing the balancing work — across
+six modelled Respect spreads the two alliances start within 1–3 of each other, so "+10 each" mostly
+re-solved a solved problem. **Deliberate consequence:** a head start now survives the Sit-Down
+(under +10 the race always reset to 10/10). Nick's call, and the Guide's advice inverts with it —
+rank buys you a partner, Respect on your books buys you a head start.
+
+> **OPEN, deliberately deferred (Nick, 2026-07-30):** if the Crackdown hits space 10 late, two
+> alliances can already be at ~25 combined and the race after the Sit-Down is very short. Unknowable
+> without playtest — it varies wildly by table style. **Called a feature for now.** If it needs
+> fixing, the two candidates are: an escalator (leader within 5 of victory → Target shifts to 35 or
+> 40), or letting the players **bid** the Target at the Sit-Down. Do not "fix" this blind.
+
+**The Rat card** dropped "you are −3 Respect and" from its rules text — the card already carries a
+−3 badge (`data-respect="-3"`), so it said it twice. The rulebook still teaches both, which is right.
+
+### Files touched
+`Rulebook v0.9.html`, `Cards v0.9.html`, `Turn Structure and Ledger v0.9.html` (Draft & Brew merged;
+also corrected Split the Batch from "1 Connected" to "1 **Land** Connected" — a live rules error, it
+would have let a water-connected Dock relay), `Federal Crackdown Tracker v0.9.html` (both sizes),
+`Kingpin's Guide v0.9.html`, `tools/gen_deck.py` + `Jobs Cards v0.9.html`.
+
+**Verified:** Rulebook 24pp / Guide 35pp, no blank pages, fill-scan diffed against a HEAD baseline —
+only the edited pages moved. Turn card measured `scrollHeight == clientHeight` (965) and rendered;
+no clipping. Deck audits (`overlap_audit`, `fairness_audit`) unchanged: max stack 9, weighted spread 1.
+
+### Two bugs found in `tools/gen_deck.py` while regenerating
+1. **Masthead hard-coded `v0.8`** on a file named `Jobs Cards v0.9.html` — the card count beside it
+   was computed but the version was not. Now derived from the filename.
+2. **`path` was a bare relative filename**, resolved against the shell's cwd, not the repo. Verified:
+   threw `FileNotFoundError` from anywhere but the root, and in any other directory holding a
+   same-named file it would have rewritten the WRONG file. Now anchored via `__file__`.
+
+### Stealth: Fall Back is a fallback, not a third option (2026-07-30)
+
+Nick: *"does Fall Back need to be an option here, as there is literally no reason for it until you've
+first opened fire?"* Correct as a tactic — moving in and silently back out wastes the Play. **But it
+cannot be cut.** Stealth costs 1; a Viper who spends their last Influence on it is Pinned with **0**,
+and Open Fire (1) and Advance (1) are both unaffordable. Without a free Fall Back the player cannot
+satisfy "you cannot end your Play Pinned" and the rules deadlock. This is exactly what the combat
+table's *"If you have 0 Influence remaining, you must Fall Back"* exists for.
+
+Fix was presentational, not mechanical: Stealth now lists **Open Fire or Advance** as the choices,
+with the free Fall Back named as what's left when you can't pay. Same in `Playbooks v0.9.html`.
+
+> **PRE-EXISTING BUG FOUND, NOT FIXED — `Playbooks v0.9.html`.** Three of the four front cards
+> measure over their fixed 965px box: **Vipers +38px**, Sicilians +3, Irish +4 (`scrollHeight` vs
+> `clientHeight`; card indices 2/4/6). The render confirms it on the Vipers: **Tunnel's last line is
+> cut through mid-text and the gold frame doesn't close.** Verified **identical at HEAD** — this
+> predates today's work and my edits moved it 0px.
+> **Do not try to fix it by trimming words.** I cut ~10 words from the trait and Stealth and the
+> block heights (trait 77.8, sig 162.3) did not change by a single pixel — the text reflows without
+> losing a line, the trap `rulebook-print-workflow` already records. It needs a whole rendered LINE
+> removed, or `.card{height:925px}` raised in **both** `Playbooks v0.9.html` and
+> `Turn Structure and Ledger v0.9.html` together (they must stay equal or duplex sides won't line
+> up). Measure with scroll-vs-client and confirm with a render; the fill scan can't see it.

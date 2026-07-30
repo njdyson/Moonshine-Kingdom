@@ -449,9 +449,9 @@
             You can't tax what you don't hold. You <b>Control</b> a District if you have a <b>Mobster</b> (Boss or Runner) or a <b>Safehouse</b> standing on it.
         </p>
         <ul class="sub-section">
-            <li><strong>Instant Possession:</strong> Control shifts the moment your piece enters, not at the end of the Play. Step onto an empty block and it is yours from that instant, even if you are gone again by nightfall.</li>
-            <li><strong>Abandonment:</strong> <em>A barrel of gin can't hold a street corner.</em> Lose your last Mobster with no Safehouse to anchor the block, and Control goes with them. Any Liquor left behind waits to be stolen.</li>
-            <li><strong>The Golden Rule of Turf:</strong> Come <b>Shadows</b> and <b>Reckoning</b>, only one mob stands in a District. Rivals cannot enter your turf without starting a firefight.</li>
+            <li><strong>Walk In, Walk Out:</strong> Control is settled at the <b>end of each Play</b>. Walk onto an empty block and it is yours; walk off it on a later Play and it isn't. <em>You hold a corner by standing on it, not by having once stood on it.</em></li>
+            <li><strong>Barrels Hold Nothing:</strong> Only Mobsters and Safehouses give Control. Lose the last of them and Control goes too, however much Liquor you left stacked there, and that Liquor now waits to be stolen. <em>A barrel of gin can't hold a street corner.</em></li>
+            <li><strong>The Golden Rule of Turf:</strong> Come <b>Shadows</b> and <b>Reckoning</b>, only one mob stands in a District. You may enter a rival's turf, but never <em>end a Play</em> beside them: by then you must have taken the District or left it.</li>
             <li><strong>Contested Ground:</strong> During a firefight, the original Occupier retains Control (and all defensive bonuses) until their last piece falls or retreats.</li>
         </ul>
 
@@ -462,21 +462,17 @@
         <ul class="sub-section">
             <li><strong>Safe Districts:</strong> Any District you Control, plus any <b>Defenseless</b> block: <b>no rival Mobsters</b>, <b>no Police Squad</b>, and <b>no rival Safehouse</b>. Loose Liquor alone never makes a block unsafe.</li>
             <li><strong>Hostile Districts:</strong> Any District guarded by <b>rival Mobsters</b>. Stepping onto Hostile turf immediately leaves your Mobsters <b>Pinned</b> (see <em>Combat: Pinned</em>).</li>
-            <li><strong>The Blue Wall:</strong> A District holding a <b>Police Squad</b> is <b>Impassable</b>: you cannot Move in, attack in, storm it or buy it off. Any <b>Speakeasy or Still</b> beneath the Squad is <b>padlocked</b>: shut to everyone, held by nobody for Titles, and a padlocked Still brews nothing and <b>ignores Blowbacks</b>. The four Squads are automated and <b>Borough-locked</b>, one to a mainland Borough, and move only during a <b>Raid</b> (see <em>Police Raids</em>).</li>
+            <li><strong>The Blue Wall:</strong> A District holding a <b>Police Squad</b> is <b>Impassable</b> — no Moving in, no attacking in, no storming it and no buying it off. Any <b>Speakeasy or Still</b> under the Squad is <b>padlocked</b>: shut to everyone, counting for nobody's Title, and a padlocked Still brews nothing and <b>ignores Blowbacks</b>. The four Squads run themselves, one locked to each mainland Borough, and move only during a <b>Raid</b> (see <em>Police Raids</em>).</li>
         </ul>
 
 
         <h4>3. Connection: Reading the Grid</h4>
         <p>
-            Flanking a rival and slipping a blockade both start with the layout. Districts are <strong>Connected</strong> if:
+            Flanking a rival and slipping a blockade both start with the layout. Two Districts are <strong>Connected</strong> if they are joined by land or by water, and a Move follows either:
         </p>
         <ul class="sub-section">
-            <li><strong>Land & Bridges:</strong> They share a border, or a Bridge links them.
-                <br><em>(e.g., Williamsburg connects to Red Hook, Brownsville, Corona, and Astoria by land, and to Five Points by Bridge).</em>
-            </li>
-            <li><strong>Waterways (Docks):</strong> All <b>Dock Districts</b> connect to each other across the water as if they were adjacent.
-                <br><em>(e.g., You can Move directly from West Side to Throggs Neck in one Play).</em>
-            </li>
+            <li><strong>Land Connected:</strong> They share a border, or a <b>Bridge</b> links them. Where a rule or a Job card says <b>Land Connected</b>, the water doesn't count. <em>(e.g., Williamsburg is Land Connected to Red Hook, Brownsville, Corona, and Astoria by border, and to Five Points by Bridge.)</em></li>
+            <li><strong>Water Connected:</strong> Both are <b>Dock Districts</b>. Every Dock reaches every other Dock across the water, however far apart on the map. <em>(e.g., You can Move directly from West Side to Throggs Neck in one Play.)</em></li>
         </ul>
     </div>
     <div class="container goal-page">
@@ -582,15 +578,18 @@
 
         <h4>1. The Brew</h4>
         <p>
-            The <b>Mash die</b> already sits on the board, rolled at the end of yesterday's Shadows (Day 1: at Setup). The boss holding <b>Turn Token #1</b> rolls the communal pool: <b>Red dice equal to Player Count + 1</b> <em>(4 players: 5 Red)</em>.
+            The <b>Mash die</b> already sits on the board, rolled at the end of yesterday's Shadows. The boss holding <b>Turn Token #1</b> rolls the communal pool: <b>Red dice equal to Player Count + 1</b> <em>(4 players: 5 Red)</em>.
         </p>
         <ol class="sub-section" style="margin-top:5px;">
             <li><strong>Read the Public Mash:</strong> The grey <b>Mash die</b> shows the <b>Public Mash</b>: the cheap molasses swill off the docks that every crew in the city is cooking today. It stays put all morning and feeds every number below.</li>
-            <li><strong>Draft a Red, in Turn Order:</strong> Each boss takes <b>exactly 1 Red die</b>, their own yeast in the city's sugar. Your <b>Brew Number</b> is <b>Mash + your Red</b>.</li>
-            <li><strong>Fire your Stills:</strong> <b>Every active Still you Control</b> matching your Brew Number brews <b>Moonshine</b>, per <em>The Muscle Ratio</em>. Your brew is yours alone; rival Stills stay cold. <em>(<b>Dry Brew:</b> If the grey supply runs dry mid-brew, take only the barrels that remain, splitting the last of them across your firing Stills as you choose. Any yield past the final barrel in the bank is lost.)</em></li>
+            <li><strong>Draft and Brew, one boss at a time:</strong> In <b>Turn Order</b>, each boss takes <b>exactly 1 Red die</b> &mdash; his own yeast in the city's sugar &mdash; and <b>immediately brews</b> before the next boss drafts. Your <b>Brew Number</b> is <b>Mash + your Red</b>, and <b>every active Still you Control</b> showing that number pours <b>Moonshine</b>, per <em>The Muscle Ratio</em>. Your brew is yours alone; rival Stills stay cold.</li>
         </ol>
+        <p class="key-rule" style="margin-top: 12px;">
+            <span class="rule-label">First Come, First Served</span>
+            The grey supply is <b>finite and shared</b>, and each boss empties it as his turn comes. Take your barrels as you brew: if the bank runs dry, the last seats get whatever is left and the rest is <b>lost</b>. When several of your Stills fire at once, <b>you choose which to stock first</b>, so name the order before you count. <em>The bank pays the early riser. The man who sleeps in gets the dregs.</em>
+        </p>
         <p>
-            <b>Split the Batch:</b> If the Still in your <b>Boss's</b> District fires, you may also fire <b>one other active Still you Control</b> in a District <b>Connected by Land or Bridge</b>, whatever its number. <em>He won't waste a good run on one pot: half the mash goes over the wall to the next block, and a cold boiler earns its keep.</em>
+            <b>Split the Batch:</b> If the Still in your <b>Boss's</b> District fires, you may also fire <b>one other active Still you Control</b> in a <b>Land Connected</b> District, whatever its number. <em>He won't waste a good run on one pot: half the mash goes over the wall to the next block, and a cold boiler earns its keep.</em>
         </p>
 
         <h4>2. The Blowback</h4>
@@ -629,14 +628,16 @@
             <h4>1. Read the Public Mash</h4>
             <p>The Mash is <b>3</b>. Every number this morning starts there. <em>Each boss already knows which Red he needs; the only question is whether he gets it.</em></p>
 
-            <h4>2. Draft a Red, in Turn Order</h4>
+            <h4>2. Draft and Brew, one boss at a time</h4>
+            <p style="margin-bottom: 0.35em;">Each boss drafts, brews and takes his barrels before the next man touches a die. <em>Shown as a table for space; at the table it happens one seat at a time.</em></p>
             <table class="reference-table" style="margin-top: 0.35em;">
                 <thead>
                     <tr>
                         <th style="width: 19%;">Boss</th>
                         <th style="width: 27%;">Their Still</th>
-                        <th style="width: 16%;">Takes</th>
-                        <th>Brew Number</th>
+                        <th style="width: 13%;">Takes</th>
+                        <th style="width: 20%;">Brew Number</th>
+                        <th>Brews</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -645,24 +646,28 @@
                         <td>Sugar Hill<br><em>The Cotton Club, Still 7</em></td>
                         <td><strong>4</strong></td>
                         <td>3 + 4 = <strong>7</strong>. Fires.</td>
+                        <td>Boss + 3 Runners = <b>2 Barrels</b>, then <b>Split the Batch</b> carries the run to <b>West Side</b> (Still <b>11</b>, 3 Runners) for <b>2 more</b>: <b>4 Barrels</b>.</td>
                     </tr>
                     <tr>
                         <td><strong>Irish</strong><br>(#2)</td>
                         <td>The Bowery<br><em>Dock, Still 9</em></td>
                         <td><strong>6</strong></td>
                         <td>3 + 6 = <strong>9</strong>. Fires.</td>
+                        <td>4 Runners = <b>2 Barrels</b>.</td>
                     </tr>
                     <tr>
                         <td><strong>Knights</strong><br>(#3)</td>
                         <td>Fordham<br><em>The Penny Whistle, Still 8</em></td>
                         <td><strong>5</strong></td>
                         <td>3 + 5 = <strong>8</strong>. Fires.</td>
+                        <td>5 Runners = <b>3 Barrels</b>.</td>
                     </tr>
                     <tr>
                         <td><strong>Vipers</strong><br>(#4)</td>
                         <td>Sheepshead Bay<br><em>Dock, Still 4</em></td>
                         <td><strong>1</strong></td>
                         <td>3 + 1 = <strong>4</strong>. Fires.</td>
+                        <td>3 Runners = <b>2 Barrels</b> &mdash; if the bank still holds them.</td>
                     </tr>
                 </tbody>
             </table>
@@ -670,14 +675,11 @@
                 <strong>The last seat's choice:</strong> The Vipers were left the <b>1</b> and the second <b>4</b>. The 4 would have brewed them nothing (they own no Still 7) <em>and</em> left the 1 behind, blowing their own Sheepshead Bay. So they took the 1, fired their own Still, and walked away leaving a <b>4</b> on the table. <em>They knew exactly what it was worth to the man in the first seat.</em>
             </p>
 
-            <h4>3. Fire your Stills</h4>
-            <p>Each boss brews at his own Still by <em>The Muscle Ratio</em>, and nobody else's Still stirs:</p>
-            <ul class="sub-section">
-                <li><strong>Sicilians:</strong> Boss + 3 Runners = 4 Mobsters = <b>2 Barrels</b>. Their <b>Boss</b> is standing in Sugar Hill, so <b>Split the Batch</b> carries the run down to <b>West Side</b> (Still <b>11</b>, 3 Runners), which fires for <b>2 more</b>: <b>4 Barrels</b>, the richest brew of the morning. <em>Nothing could reach an 11 today: a Mash of 3 tops out at 9.</em></li>
-                <li><strong>Irish:</strong> 4 Runners = <b>2 Barrels</b>. <strong>Knights:</strong> 5 Runners = <b>3 Barrels</b>. <strong>Vipers:</strong> 3 Runners = <b>2 Barrels</b>.</li>
-            </ul>
+            <p>
+                The Sicilians brewed the richest run of the morning, <b>4 Barrels</b>, and took them out of the bank before the Irish had touched a die. <em>Nothing could reach an 11 today: a Mash of 3 tops out at 9.</em> Had the grey supply been thin, the Vipers in the last seat would have been the ones counting dregs.
+            </p>
 
-            <h4>4. The Blowback</h4>
+            <h4>3. The Blowback</h4>
             <p>
                 One Red went undrafted: the <b>4</b>. Add it to the Mash: <b>3 + 4 = 7</b>. Every active, Controlled Still numbered <b>7</b> bursts, whoever owns the block, and the Cotton Club is lit.
             </p>
@@ -846,11 +848,11 @@
         <table class="action-table">
             <tr>
                 <td><strong>Stealth (Cost: 1)</strong></td>
-                <td>A Move by another road: send up to 5 Mobsters (no Liquor) into a Connected rival District. The
-                    Standoff runs as normal and you are <b>Pinned</b>, but you come in too quiet to answer:
-                    <b>the Occupier can only Hold Fire</b>, never Ambush, never Fold. You cannot end your Play
-                    Pinned, so resolve it before the turn passes: <b>Open Fire</b> (1), <b>Advance</b> to a Connected
-                    Safe District (1), or <b>Fall Back</b> the way you came (free).
+                <td>A Move by another road: send up to 5 Mobsters (no Liquor) into a Connected rival District. You are
+                    <b>Pinned</b>, but you come in too quiet to answer: <b>the Occupier can only Hold Fire</b>, never
+                    Ambush, never Fold. You cannot end your Play Pinned, so resolve it: <b>Open Fire</b> (1) or
+                    <b>Advance</b> to a Connected Safe District (1). <em>Slip in on your last Influence and you can
+                    afford neither, leaving only a free <b>Fall Back</b>: creep in on a full Ledger.</em>
                 </td>
             </tr>
             <tr>
@@ -921,9 +923,9 @@
             slip away before nightfall.
         </p>
 
-        <h3>1. Own the Commission (10 Influence)</h3>
+        <h3>1. Buy the Commission (10 Influence, your max.)</h3>
         <p>
-            Any thug can fire a Tommy gun, but it takes a true operator to buy the whole council. You start with <b>6</b>; the last four come from the <strong>Bribe</strong> Play at <b>$2,500</b> apiece. They count <b>wherever they sit</b>: banked, staked, or cooling on the Heat Track. What counts is that you hold all ten. <em>Break your word on a staked deal and that marker is forfeit to the supply: one more bribe to pay all over again.</em>
+            Any thug can fire a Tommy gun, but it takes a true operator to buy the whole council. You start with <b>6</b>; the last four come from the <strong>Bribe</strong> Play at <b>$2,500</b> apiece. They count <b>wherever they sit</b>: banked, staked, or cooling on the Heat Track. What counts is that all ten markers are <b>yours</b>. <em>Break your word on a staked deal and that marker is forfeit to the supply: one more bribe to pay all over again.</em>
         </p>
 
         <h3>2. Earning Respect</h3>
@@ -1369,7 +1371,7 @@
             <li><strong>Rank the Bosses:</strong> Tally everyone's current Respect (see <em>Earning Respect</em>). <em>Tiebreaker: Total Cash on hand.</em></li>
             <li><strong>Forge the Families:</strong> The player in <b>1st Place</b> joins forces with the player in <b>4th Place</b>. The player in <b>2nd Place</b> pairs with the player in <b>3rd Place</b>.
             </li>
-            <li><strong>Set the Targets:</strong> Each Alliance adds <b>10</b> to its combined Respect: that number is its <b>Target</b>. <em>From here, it's a clean race to earn 10.</em></li>
+            <li><strong>The Target is 30:</strong> Both Alliances race for the same number: <b>30 combined Respect</b>, two winners' worth. <em>Nothing to write down; just add your halves together and see who's closer.</em></li>
         </ol>
 
         <h3>New Rules of Engagement</h3>
@@ -1382,12 +1384,12 @@
 
         <h3>Claiming the Empire</h3>
         <p>
-            The council only recognizes unified power. To win, an Alliance must reach its <b>Target</b> and have <b>at least one partner holding 10 Influence</b> (one crew buys the council on behalf of the family). If met during the <b>Reckoning Phase</b>, the game ends immediately: first family to the finish takes the city.
+            The council only recognizes unified power. To win, an Alliance must hold <b>30 combined Respect</b> and have <b>at least one partner holding 10 Influence</b> (one crew buys the council on behalf of the family). If met during the <b>Reckoning Phase</b>, the game ends immediately: first family to the finish takes the city.
         </p>
 
         <h4>The New Kings of New York</h4>
         <p>
-            If both Alliances hit their Targets at the same Reckoning, the crown goes to the pair <b>furthest over</b> its Target; still deadlocked, the fattest <b>combined bankroll</b> buys the throne.
+            If both Alliances clear <b>30</b> at the same Reckoning, the crown goes to the pair with the <b>higher combined Respect</b>; still deadlocked, the fattest <b>combined bankroll</b> buys the throne.
         </p>
         <p class="note">
             <strong>The Capo di Tutti Capi:</strong> There are no truly shared victories... even in a team. Within the winning Alliance, the player who contributed the most Respect to the final combined total is declared the Boss of Bosses and the true Kingpin of New York. Your partner doesn't get a crown; they just get the privilege of kissing your ring.

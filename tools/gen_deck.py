@@ -4,6 +4,7 @@
 Guarantees the load-bearing build rule: gallery blocks are EXACTLY 4 cards + 4
 backs, or the duplex front/back pairing breaks in print.
 """
+import os
 import re
 import sys
 
@@ -15,7 +16,7 @@ ONES = [
      "Move <b>4+ Barrels</b> between <b>Five Points</b> and <b>Williamsburg</b> in a single Play.",
      "Every copper watches that bridge. Wave as you go."),
     ("The Beachhead", "Beachhead.jpg", "Secure",
-     "Secure your Safehouse into a District <b>Connected by Land or Bridge</b> to a rival <b>Safehouse</b>.",
+     "Secure your Safehouse into a District <b>Land Connected</b> to a rival <b>Safehouse</b>.",
      "You should meet the neighbours. They&rsquo;d rather not."),
     # "a Ward" made this a strict SUPERSET of Union Dues (also "Recruit 6+ in a
     # Ward"), so Union Dues could never fire without paying this too: a guaranteed
@@ -377,12 +378,22 @@ def blocks(cards, respect):
 
 total = len(ONES) + len(THREES) + len(FIVES)
 
+# Resolve against the REPO ROOT (this script's parent), not the shell's cwd. A bare
+# relative path made the integrity check depend on where you launched from: it threw
+# FileNotFoundError from anywhere but the root, and would have rewritten a same-named
+# file in any other directory that had one.
+DECK = 'Jobs Cards v0.9.html'
+path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), DECK)
+# Version comes off the filename so the masthead can't drift from it again (it was
+# still printing "v0.8" on the v0.9 sheet).
+VERSION = re.search(r'v\d+(?:\.\d+)*', DECK).group(0)
+
 body = f'''<body>
 
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1926</div>
   <div class="masthead-title">The Jobs Deck</div>
-  <div class="masthead-sub">v0.8 &middot; Complete Deck &middot; {total} Cards &middot; 12 / 12 / 8</div>
+  <div class="masthead-sub">{VERSION} &middot; Complete Deck &middot; {total} Cards &middot; 12 / 12 / 8</div>
   <p class="masthead-note">
     Every Job is an <b>event</b>, not a board state: a verb, an object, and a moment.
     The Play is the unit: at the end of a Play, check whether that Play did the thing.
@@ -399,7 +410,6 @@ body = f'''<body>
 
 </body>'''
 
-path = 'Jobs Cards v0.9.html'
 src = open(path, encoding='utf-8').read()
 # Anchor on the tag at a LINE START, not the first occurrence anywhere. A plain
 # .index() also matches the string inside a <style> or <script> comment, and the

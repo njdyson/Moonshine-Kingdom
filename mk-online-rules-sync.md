@@ -205,3 +205,15 @@ relay at a new junction.
 - [ ] Re-tune bot rat heuristic; strip the can't-Job / can't-win pruning and the pay-vs-wait logic
 - [ ] Influence floor of 5 (§2) — no longer urgent, but keep it queued
 - [ ] Gate The Empty Casket on an actual Boss death, if implemented (§4)
+- [ ] **Blood Oath Target is a flat 30** (2026-07-30), not combined Respect +10. Removes the stored
+      per-alliance target entirely: compare `combinedRespect >= 30`. Tiebreak is now simply the
+      higher combined Respect (was "furthest over its own Target"). Note the −3 Rat modifier (1.9)
+      still flows into that combined total.
+- [ ] **Brew is per-seat, not two passes** (2026-07-30): each boss drafts a Red AND resolves his
+      brew before the next boss drafts. The barrel supply is finite and consumed in seat order, so
+      a late seat can be shorted — the order of resolution is now load-bearing, not cosmetic. When
+      one player fires several Stills, that player chooses the stocking order (this is the same
+      choice as the existing Dry Brew split rule, §5.6).
+- [ ] **Split the Batch relays over LAND only** (2026-07-30). If the port ever used a generic
+      "connected" check, Docks would wrongly relay across water. `Land Connected` = shared border
+      or Bridge; `Water Connected` = Dock-to-Dock; plain `Connected` = either.
