@@ -924,3 +924,28 @@ for no gain. Verified no JS errors via CDP after the edits.
 
 **Checked and found correct, so not changed:** setup's *"stake first, fund second"* (The Offers really
 does precede Fund the Ledger, so Day 1 is consistent).
+
+### The Scatter is LAND ONLY (2026-07-30)
+
+Surfaced by the Land/Water split: *Run For It* said the raided crew flees to a **Connected** Safe
+District, which now formally includes **Water Connected** (Dock-to-Dock, anywhere on the map), while
+*Cornered* in the very next line still listed **water** as a thing that blocks an exit. Both readings
+could not be right.
+
+**Settled as land-only** (Nick). Thematically the police are already through the door, so there is no
+time to put out to sea; mechanically it makes Raids meaningfully harsher, which the game wants, and
+it closes a hole where **every Dock District had a guaranteed escape hatch** — the Docks all connect
+to each other, so a raided pier could essentially never be Cornered.
+
+**The decisive argument is consistency, not balance.** Both water/rail movement Plays already say so
+in as many words: **Skiff** and **Tunnel** each read *"not an escape hatch: you cannot use it to flee
+combat or a Police Raid."* A generic "Connected" here would have handed every Dock, for free, the
+exact thing the Knights' signature Play is explicitly denied.
+
+**Combat retreat is deliberately NOT changed and must stay that way.** *Advance* says *"including
+across water via Docks"* in as many words, and *Fold* is likewise unrestricted. Fleeing a rival mob
+by boat is legal; fleeing the law by boat is not. Do not "consistency-fix" these to match the Raid.
+
+Cascaded to `Turn Structure and Ledger v0.9.html` (Raid step) and `Kingpin's Guide v0.9.html`
+(Part IV's back-door note, plus the Conspiracies "corner him, then call" play). The Guide's note
+gains the corollary: a pier with one land exit is a cell with a view.
