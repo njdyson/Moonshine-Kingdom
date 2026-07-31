@@ -1143,10 +1143,45 @@ heavy AP decision — it slows the game every single morning, for every player, 
 invisible to new players (you cannot see why you'd hold markers back until you've been ducked once).
 The firefight is occasional; the funding choice is constant. That asymmetry is the current blocker.
 
-**Shape worth weighing when this is picked up: charge the first shot in Heat only, not Influence.**
-"Whoever fires first takes the Heat (never both)" with no marker cost needs **no change to Fund the
-Ledger at all** — the AP reservation dissolves, the blame fiction and Hold Fire's new life survive,
-and the §2 bug still dies. What is lost is exactly the sitting-duck economy (the readable
-empty-stash tell, and the Ambush staying gated by wealth) — i.e. the strongest argument *for* the
-Influence cost. The two halves of rule 3 are separable, and the Heat half carries most of the value
-at a fraction of the rules cost.
+~~**Shape worth weighing when this is picked up: charge the first shot in Heat only, not
+Influence.**~~ **WRONG FRAMING, Nick caught it:** Heat is never "cost-free" — a Heat marker IS one
+of your Influence markers locked to the Track, so the only real question is which pool it leaves
+from. Splitting "Heat" from "cost" was incoherent.
+
+### Nick's coupling (2026-07-31, same discussion): the Ambush marker IS the Heat marker
+
+**"Ambush: Cost 1 from the Ledger, and the spent marker locks to the Heat Track."** Not a new
+mechanic — it is exactly the noisy-play pattern Extort and Torch already use (spend the marker, the
+law keeps it). Ambush becomes "Cost 1, always Heat" in the Plays table and "whoever fires first
+takes the Heat" falls out of existing machinery with one line of rules text. Nick: "not actually a
+terrible idea." **Still open, nothing built.**
+
+What it solves, all at once:
+- **The AP blocker dies at the root.** Fund the Ledger is untouched — funding stays mandatory, no
+  morning hold-back decision ever exists. The Ambush is paid from the Ledger, which every active
+  crew has by construction.
+- **The sitting duck becomes a thematic state, not an economy accident.** You cannot ambush only if
+  your Ledger is spent out or you have **Laid Low** — and a crew that has laid low *shouldn't* be
+  able to spring an ambush; they've stood down. The invisible Day-1-staker duck is replaced by a
+  state players enter visibly and on purpose.
+- **The tell survives in better form:** the Ledger is public, so "can they afford the first shot?"
+  is countable by the whole table without Reserves entering it.
+- **It prices exactly what the `153b77a` rework buffed:** the Level 4 Safehouse ambush now costs a
+  marker and books you — premeditated and avoidable, and Hold Fire stops being dominated for the
+  first time.
+- **The §2 bug still dies:** blame assigned once per fight to whoever struck the match, no dice
+  inspection.
+
+Two consequences to weigh, both arguably features:
+1. **A late-day attack window opens.** Laid-low crews lose their first strike, so hitting someone
+   after they've gone home gets meaningfully better — attack timing joins the lay-low race alongside
+   the Turn Token (same direction as the Reverse Snake: outlasting pays). Makes early laying-low
+   more punishing than today; playtest eye needed.
+2. **Every combat number printed in the Guide assumes the ambush always fires.** A broke or
+   Heat-wary Occupier sometimes won't, so adopting this means the sim re-run with the
+   fire/don't-fire decision modelled, not a constant.
+
+Open details if picked up: refund timing for the *invader's* first volley under "never both" (does
+the occupier ambushing make the invader's volleys Heat-free for the whole Play — presumably yes,
+Heat is once per Play already); and whether an occupier's off-turn Ledger spend needs any wording
+(it is the first off-turn spend in the game, mechanically fine, just novel).
