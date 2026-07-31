@@ -993,6 +993,10 @@ leaves bodies.
 
 ## OPEN FOR DISCUSSION — combat Heat and the cost of Open Fire (2026-07-30)
 
+> **RESOLVED & BUILT 2026-07-31 — see "BUILT: Ambush costs 1 + Heat" at the end of this file.**
+> The discussion below is kept for the reasoning; the shipped rule and the pool decision (Reserves,
+> not the Ledger) live in that final section.
+
 **Nothing below is built. Nick wants to think about it. Do not implement any of this without him.**
 This supersedes the "1+ kills STAYS" note above: that note's defence of the rule does not survive
 the kill-attribution bug in §2.
@@ -1185,3 +1189,82 @@ Open details if picked up: refund timing for the *invader's* first volley under 
 the occupier ambushing make the invader's volleys Heat-free for the whole Play — presumably yes,
 Heat is once per Play already); and whether an occupier's off-turn Ledger spend needs any wording
 (it is the first off-turn spend in the game, mechanically fine, just novel).
+
+---
+
+## BUILT (2026-07-31): Ambush costs 1 + Heat, Open Fire always draws Heat
+
+**Shipped into the live rules. Supersedes every "open / nothing built" note above.** Nick's landing
+point in discussion: *"ambush costing 1 influence, and producing heat. And open fire also creating
+heat (always, but never more than 1)."* The two halves are one marker each — a loud Play's cost
+marker locks onto the Track instead of refunding, exactly the Extort/Torch pattern.
+
+**The rule as shipped:**
+- **Ambush — Cost 1, draws Heat.** Only the Occupier rolls, at +1 Threat, first. The spent marker
+  locks to the Heat Track. **Paid from Reserves — an empty stash can't Ambush** (the sitting duck).
+- **Open Fire — draws Heat whether or not it kills**, once per firefight, however many volleys.
+  This is the "never more than 1" cap — it was already how combat Heat worked (once per Play), so no
+  per-volley bookkeeping is added. Replaces the old *"Invader gains Heat only if their dice score 1+
+  kills,"* which retires the §2 kill-attribution bug.
+- **Sicilian *Hit*** resolves "like an ordinary Open Fire," so it now draws Heat on firing, not on
+  the kill (Rulebook + Playbooks).
+- **Deleted:** *"The Occupier never draws Heat."* Both shooters now heat, so a contested block puts
+  **two** markers on the Track.
+
+**Pool decision — Reserves, not the Ledger (this reverses the "Nick's coupling" note above).** The
+coupling note paid the Ambush from the Ledger and made the duck = *Ledger spent out or Laid Low*,
+explicitly to *remove* the Day-1-staker duck. In this session Nick reversed that: the staking duck
+is a **feature** — *"makes staking a job in the first day or two a worse play, but that's ok; stake
+straight away and you're a bit more vulnerable, a calculated risk."* That dynamic only exists if the
+cost comes from Reserves (Reserves = total − 5 − staked, natural overflow), so the ship uses
+Reserves. **Note this keeps mandatory Fund the Ledger untouched and adds no morning hold-back AP
+decision** — Reserves here is forced overflow beyond the 5 Ledger slots, not a hold-back *choice*,
+so the "biggest reservation" blocker does not apply.
+
+**Reframed for the Guide as a *leverage tax*, not a Day-1 tax.** The duck threshold `total − staked
+≤ 5` recurs at every stage: staking a 5-Respect job late needs total > 10 to keep a marker spare,
+just as a 6-Influence Day-1 crew is a duck the moment it stakes one. Overreach for the big score and
+you can't defend it.
+
+**Plunder-on-Ambush is the one exception, left untouched.** The Irish rob at the crossing instead of
+shooting; Plunder is the deliberate "no Heat, ever" trait, so a Plunder-Ambush stays **free and
+silent**. Flagged in the Rulebook as the exception to the Ambush's new price. (Open if Nick disagrees:
+should the Irish face the duck too? Left as-is to avoid a silent Irish rebalance.)
+
+### Figures (Combat Simulator model, ported to Python and validated against the printed Guide table)
+
+- **The take-rate tables are unchanged.** A funded strong defender still Ambushes, so Invader
+  "Takes It" and "Losses" don't move — only the Heat column changes. The Guide's numeric spine
+  survives; this is a Heat-column + prose rewrite, not a renumber.
+- **Heat on the block = 2** in every contested row (defender's Ambush + invader's fire). On the
+  5-space track that is a Raid after ~2–3 fights: violence now visibly summons the feds, and a quiet
+  table still draws zero combat Heat.
+- **Ambush vs Hold Fire is decisive where it matters, negligible where it doesn't.** Secured
+  defender, swing the Ambush buys over holding fire: +45 (vs 3-runner raid), +56 (4), +33 (5), +7
+  (6), ~0 at 7+ (you lose anyway, but still bleed ~2). So for a funded defender who means to hold,
+  Ambush is auto-correct; the real trilemma lives at weak-defender-close-fights and *can-I-afford-it*.
+- **The sitting-duck swing is the headline: +31 points.** Secured block vs a 6-runner+Boss raid — a
+  funded defender holds at 49%, a broke one (can't Ambush) at 20% held / 80% taken. Catching a rival
+  tapped-out turns a coin-flip block into a near-certain take. This is the mechanical engine behind
+  "strike late / kickback them broke first."
+
+### Watch-items for first playtest (not blockers)
+1. **Snowball cadence.** duck → raided → poorer → still a duck. Circuit-breaker exists: a Raid
+   refunds every Heat marker to Reserves, and 2 Heat/fight makes Raids arrive faster, so the feds
+   un-duck the board — *and* a serial aggressor spends down + heats up into a duck himself. Watch
+   whether the refund reset outruns the spiral.
+2. **Mob-balance sim re-run.** Every Guide combat number assumed the ambush always fires. It's now a
+   *decision*, so the balance pass wants the defender's fire/hold choice inside the model.
+
+### Files changed
+`Rulebook v0.9.html` (Ambush block, Open Fire Heat, worked example, Blood-on-the-Pavement →
+"Guns Draw Heat", Sicilian Hit, Plunder-on-Ambush) · `Kingpin's Guide v0.9.html` (choice bars,
+asymmetry note, odds-table Heat column → "Heat on the Block" = 2, Principles 1 & 3, Occupier's
+Playbook table incl. new sitting-duck row, Part IV "What the Law Hears" + "Defending is free"
+rewrite, methodology disclaimer) · `Playbooks v0.9.html` (Sicilian Hit) · `Combat Simulator
+v0.9.html` (Heat model: invader heat on fire + occupier ambush heat, "Heat on the Block" readout,
+explainer, kit notes).
+
+**Not updated: the `mk-online` bundle.** Its rules are compiled into the minified `dist` JS and the
+source lives outside this repo — the online game will be out of sync on combat Heat until that source
+is rebuilt. Tracked in `mk-online-handoff.md`.

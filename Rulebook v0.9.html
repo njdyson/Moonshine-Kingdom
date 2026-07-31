@@ -810,7 +810,7 @@
             <tr>
                 <td><strong>Hit (Cost: 2)</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
                 <td>
-                    <em>The family doesn't fight foot soldiers; it goes for the head.</em> While <b>Pinned</b> in a rival District, initiate a <b>special attack</b>. Both sides roll simultaneously as normal. However, if you score <b>any hits</b>, the <b>rival Boss takes the first hit</b> instead of a Runner. With no rival Boss in the District there is no head to go for, and a Hit lands like an ordinary <b>Open Fire</b>. Generates Heat if you kill.
+                    <em>The family doesn't fight foot soldiers; it goes for the head.</em> While <b>Pinned</b> in a rival District, initiate a <b>special attack</b>. Both sides roll simultaneously as normal. However, if you score <b>any hits</b>, the <b>rival Boss takes the first hit</b> instead of a Runner. With no rival Boss in the District there is no head to go for, and a Hit lands like an ordinary <b>Open Fire</b>. Like any volley, it draws Heat.
                 </td>
             </tr>
             <tr>
@@ -831,7 +831,7 @@
                 <td>
                     Initiate a special attack (<b>roll Muscle</b> as for Open Fire): each hit steals <b>1 Liquor barrel</b> of your choice from the
                     target District instead of killing. Carry them off if you Advance <b>(dropped if you Fall Back)</b>. Occupier hits still kill.
-                    You may also Plunder on an <b>Ambush</b> (Cost: 0), robbing invaders as they cross the line: those barrels are simply yours, and they stay where they are.
+                    You may also Plunder <em>instead of</em> a gun <b>Ambush</b>, robbing invaders as they cross the line &mdash; still <b>free and silent</b>, the one exception to the Ambush's new price: those barrels are simply yours, and they stay where they are.
                     Never generates Heat.
                 </td>
             </tr>
@@ -1109,12 +1109,12 @@
             When an opponent <strong>Moves</strong> into a District you Control, the game pauses on Step 1. <em>Set each crew along the edge it crossed from, so it stays clear whose Mobsters and barrels are whose.</em>
         </p>
         <ol class="sub-section">
-            <li><strong>Ambush:</strong>
-                You greet the invaders with lead.
+            <li><strong>Ambush (Cost: 1):</strong>
+                You greet the invaders with lead. <em>Paid from your Reserves &mdash; an empty stash can't Ambush.</em>
                 <ul class="sub-section" style="margin-top:5px;">
-                    <li><strong>Free Shot:</strong> Only the Occupier rolls dice.</li>
-                    <li><strong>Bonus:</strong> Gain <b>+1 Threat</b>.</li>
-                    <li><strong>Casualties:</strong> Hits remove Invaders (Runners first). No Heat. Invaders are now <strong>Pinned</strong>.</li>
+                    <li><strong>First Shot:</strong> Only the Occupier rolls dice, at <b>+1 Threat</b>.</li>
+                    <li><strong>Draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">:</strong> the opening volley is the loudest thing on the block; your spent marker locks onto the Track.</li>
+                    <li><strong>Casualties:</strong> Hits remove Invaders (Runners first). Invaders are now <strong>Pinned</strong>.</li>
                 </ul>
             </li>
             <li><strong>Hold Fire:</strong>
@@ -1159,7 +1159,7 @@
                     <ul class="sub-section" style="margin-top:5px; margin-bottom:5px;">
                         <li><strong>Casualties:</strong> Both sides apply hits (Runners first).
                             The Occupier loses the Ambush bonus but keeps Safehouse/Boss bonuses.</li>
-                        <li><strong>Heat:</strong> The <strong>Occupier never draws Heat</strong>. The <strong>Invader</strong> gains Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat"> only if <b>their own dice score 1+ kills</b>.</li>
+                        <li><strong>Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">:</strong> Every <strong>Open Fire</strong> draws Heat, whether or not it kills &mdash; <em>once per firefight</em>, however many volleys.</li>
                         <li><strong>Repeat:</strong> If both sides stand, remain Pinned. Spend another Influence to Open Fire again.</li>
                     </ul>
                 </td>
@@ -1205,7 +1205,7 @@
             </p>
 
             <h4>1. The Standoff</h4>
-            <p>The Sicilians (Occupier) refuse to Fold, choosing to <strong>Ambush</strong>. They fire first. The Knights do not roll yet.</p>
+            <p>The Sicilians (Occupier) refuse to Fold, choosing to <strong>Ambush</strong> &mdash; paying <strong>1 Influence</strong> from Reserves. They fire first; the Knights do not roll yet.</p>
 
             <table class="reference-table" style="margin-top: 0.35em;">
                 <thead>
@@ -1225,8 +1225,8 @@
                     </tr>
                 </tbody>
             </table>
-            <p><strong>Result:</strong> Knights lose 1 Runner. The Sicilians generate <strong>no Heat</strong> for this
-                defensive Ambush.
+            <p><strong>Result:</strong> Knights lose 1 Runner. The Ambush is loud: the Sicilians' spent marker locks onto
+                the Heat Track <img src="Art/Icons/fire.svg" class="icon" alt="Heat">.
                 Knights are now <strong>Pinned</strong>.</p>
 
             <h4>2. Open Fire (Round 1)</h4>
@@ -1297,7 +1297,7 @@
             <h4>5. Victory & Takeover</h4>
             <ul class="sub-section">
                 <li><strong>Casualties:</strong> The Sicilian Boss is eliminated. The Knights lose no one this round.</li>
-                <li><strong>Heat:</strong> The Knights killed enemies, so gain <strong>Heat</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat">.</li>
+                <li><strong>Heat:</strong> The Knights drew <strong>Heat</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"> the moment they Opened Fire (Round 1). With the Sicilian Ambush, the block cost <strong>two</strong> markers &mdash; one per shooter.</li>
                 <li><strong>Outcome:</strong> The Knights claim the District and choose to
                     <strong>take over</strong> the Safehouse, immediately Securing it with their own Safehouse.
                 </li>
@@ -1320,7 +1320,7 @@
         <h3 id="drawing-heat">Drawing Heat</h3>
         <p>These noisy Plays push the track up one notch (any Play marked with the flame icon <img src="Art/Icons/fire.svg" class="icon" alt="Heat">):</p>
         <ul class="sub-section">
-            <li><strong>Blood on the Pavement:</strong> If an <b>Invader's dice</b> inflict <b>1+ kills</b> in combat, add 1 marker <img src="Art/Icons/fire.svg" class="icon" alt="Heat"> at the end of the Play. <em>A multi-round firefight draws Heat only once.</em></li>
+            <li><strong>Guns Draw Heat:</strong> An <b>Ambush</b> or an <b>Open Fire</b> each add 1 marker <img src="Art/Icons/fire.svg" class="icon" alt="Heat"> at the end of the Play &mdash; <em>once per firefight</em>, however many volleys. Both sides can heat: the defender's Ambush and the invader's fire.</li>
             <li><strong>Shakedowns Get Loud:</strong> <b>Extort</b> and <b>Torch</b> <b>always</b> draw Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, however many Districts you squeeze or barns you light.</li>
             <li><strong>The Greed Tax:</strong> Shifting <b>4+ barrels</b> in a single Play, by <b>Unload</b> or <b>Peddle</b>, draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">.</li>
         </ul>

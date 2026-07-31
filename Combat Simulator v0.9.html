@@ -467,6 +467,9 @@
             A <strong>Plunder</strong> raid always keeps 1 Influence back to <strong>Advance</strong> out with the loot
             (Fall Back would drop it). Firepower is the free Irish Trait &mdash; it boosts the invader's Open Fire volleys only,
             never an Ambush or any defence.
+            <strong>Heat:</strong> both shooters draw it &mdash; the occupier's Ambush (1 marker) and the invader's Open Fire
+            (1 marker, once per firefight, kill or not) &mdash; so a contested block lands <strong>2</strong> on the Track.
+            The model assumes a funded occupier who always Ambushes; a broke defender who can't afford it forfeits the shot.
             </div>
           </details>
         </div>
@@ -540,7 +543,7 @@
                 <td id="avgStolen" class="ok">-</td>
               </tr>
               <tr>
-                <td>Invader Would Gain Heat</td>
+                <td>Heat on the Block</td>
                 <td id="attackerHeatRate" class="ok">-</td>
               </tr>
               <tr>
@@ -598,7 +601,7 @@
       none: "Standard assault: Move in, eat the Ambush, then trade Open Fire volleys at 1 Influence each.",
       irish: "Firepower Trait: +1 attack die (max 5) on every Open Fire volley. Free. Invading only — never on an Ambush or when defending.",
       plunder: "Each of your hits steals 1 barrel instead of killing; the Occupier's hits still kill. No Heat, ever. Keeps 1 Influence back to Advance out with the loot.",
-      sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat if you kill.",
+      sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat when you fire.",
       stealth: "No Standoff: the Occupier gets no Ambush shot (and cannot Fold). Crew capped at 5 mobsters, no liquor carried.",
       torch: "Spends 1 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +1 Threat) before the volleys start. Always Heat."
     };
@@ -721,13 +724,15 @@
       let spent = 0;
       let rounds = 0;
       let ambushKills = 0;
-      let heat = false;
+      let heat = false;       // invader draws Heat (fires at all)
+      let occHeat = false;    // occupier draws Heat (Ambush fires) — costs 1 from Reserves
       let stolen = 0;
 
       if (inv.kit !== "stealth" && alive(inv) && alive(occ)) {
         const threat = clamp(1 + occ.bosses + 1 + (occ.safehouse ? 1 : 0), 1, 4);
         const dice = diceFromMobsters(mobsterCount(occ));
         ambushKills = applyCasualties(inv, rollHits(dice, threat), false);
+        occHeat = true;       // the Ambush costs 1 Influence and locks a marker on the Track
       }
 
       if (inv.kit === "torch" && occ.safehouse && alive(inv) &&
@@ -763,7 +768,7 @@
           occ.barrels -= grab;
         } else {
           const kills = applyCasualties(occ, invHits, useHit);
-          if (kills > 0) heat = true;
+          heat = true;   // firing draws Heat, kill or not (once per firefight)
         }
         applyCasualties(inv, occHits, false);
       }
@@ -788,6 +793,7 @@
         occupierLosses: occupierStart - mobsterCount(occ),
         ambushCasualties: ambushKills,
         heat,
+        heatMarkers: (heat ? 1 : 0) + (occHeat ? 1 : 0),   // total markers this fight puts on the Track
         bossKilled: occBossStart - occ.bosses > 0,
         stolen
       };
@@ -862,6 +868,7 @@
         ambushCasTrials: 0,
         bossKillTrials: 0,
         heatTrials: 0,
+        heatMarkers: 0,
         stolen: 0,
         spent: 0
       };
@@ -880,6 +887,7 @@
         if (result.ambushCasualties > 0) totals.ambushCasTrials += 1;
         if (result.bossKilled) totals.bossKillTrials += 1;
         if (result.heat) totals.heatTrials += 1;
+        totals.heatMarkers += result.heatMarkers;
         totals.stolen += result.stolen;
         totals.spent += result.spent;
       }
@@ -902,7 +910,7 @@
       els.ambushCasTrials.textContent = formatPct(totals.ambushCasTrials, config.trials) + " (" + totals.ambushCasTrials.toLocaleString() + " trials)";
       els.bossKillRate.textContent = formatPct(totals.bossKillTrials, config.trials) + " (" + totals.bossKillTrials.toLocaleString() + " trials)";
       els.avgStolen.textContent = formatNum(totals.stolen / config.trials, 2) + " barrels";
-      els.attackerHeatRate.textContent = formatPct(totals.heatTrials, config.trials) + " (" + totals.heatTrials.toLocaleString() + " trials)";
+      els.attackerHeatRate.textContent = formatNum(totals.heatMarkers / config.trials, 2) + " markers/fight (invader draws Heat " + formatPct(totals.heatTrials, config.trials) + ")";
       els.totalActionsUsed.textContent = formatNum(totals.spent / config.trials, 2) + " / trial";
 
       const kitLabel = els.invKit.options[els.invKit.selectedIndex].text;
