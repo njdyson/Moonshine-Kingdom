@@ -1109,3 +1109,44 @@ sitting duck becomes a desirable target, and **Hold Fire finally has a reason to
 Influence from a private resource into a readable tell. That is worth a playtest.
 
 **Two honest costs to weigh first:** it reopens hoarding (see 1), and it punishes early Job-staking.
+
+### Update (2026-07-31): the Safehouse/Ambush rework reframes this — still open, nothing built
+
+The same-day combat rework (Safehouse +1 Threat **stacking on the Ambush shot**, so Boss + Safehouse
++ Ambush = Level 4; Torch cost 1 — commit `153b77a`) changes the weight of the arguments above,
+mostly **toward** "first shot draws Heat":
+
+1. **The free lunch grew.** The opening shot is now the deadliest single event in combat — a free,
+   Heat-free Level 4 volley from a defended Safehouse. The imbalance the first-shot rule exists to
+   tax is larger than when it was proposed.
+2. **Both changes rescue Hold Fire, from opposite sides.** The rework gave it diplomatic value (wave
+   the "passer-by" through; his promise to keep walking can be broken, and betrayal dodges the
+   ambush). The first-shot rule gives it economic value (keep the marker, stay off the Track).
+   Together it becomes a real three-sided choice; today Ambush still strictly dominates it whenever
+   the Occupier means to fight.
+3. **The blame fiction flipped.** "The Occupier never draws Heat" read naturally while defence was
+   passive resistance. Now the defining defensive act is a premeditated Level-4 massacre from
+   prepared positions — "the law only books the stranger" is harder to sustain when the loudest
+   thing on the block was the defender's opening volley.
+4. **The §2 bug got louder.** The worst "bodies, no Heat" row was already the Safehouse ambush
+   (43.9%); a Level 4 ambush kills more per shot, all permanently Heat-free.
+
+**And two costs amplified:** the sitting duck now forfeits a Level 4 shot, not a Level 3 one, so the
+funded/broke defender gap widens and the early-Job-staking tax steepens. And every number printed in
+the Guide's combat chapter assumes the ambush always fires — if it costs Influence + Heat, some
+defenders Hold Fire instead, so adopting this rule means a sim re-run with the defender's
+fire/don't-fire *decision* inside the model, not a constant.
+
+**Nick's biggest reservation (2026-07-31), and it is about rule 1, not rule 3:** repealing mandatory
+*Fund the Ledger* reopens the **choose-how-many-markers-to-hold-back** decision, which he reads as a
+heavy AP decision — it slows the game every single morning, for every player, and its stakes are
+invisible to new players (you cannot see why you'd hold markers back until you've been ducked once).
+The firefight is occasional; the funding choice is constant. That asymmetry is the current blocker.
+
+**Shape worth weighing when this is picked up: charge the first shot in Heat only, not Influence.**
+"Whoever fires first takes the Heat (never both)" with no marker cost needs **no change to Fund the
+Ledger at all** — the AP reservation dissolves, the blame fiction and Hold Fire's new life survive,
+and the §2 bug still dies. What is lost is exactly the sitting-duck economy (the readable
+empty-stash tell, and the Ambush staying gated by wealth) — i.e. the strongest argument *for* the
+Influence cost. The two halves of rule 3 are separable, and the Heat half carries most of the value
+at a fraction of the rules cost.
