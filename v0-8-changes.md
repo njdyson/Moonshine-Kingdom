@@ -1219,6 +1219,17 @@ marker locks onto the Track instead of refunding, exactly the Extort/Torch patte
   assumes the taker's marker is freshest, e.g. the Rat "hunts whoever fired the last loud shot").
   Deferring both markers to end-of-Play also settles Nick's other point: a Raid can't trigger
   mid-Standoff and interrupt a pinned firefight.
+- **Track overflow (2026-07-31 follow-up, Nick).** A firefight lays two markers, so on a Track
+  already at 4 it needs two spaces with one left. Rule: place both in firing order, *then* check the
+  Boiling Point (not the instant the first marker lands). This matters for targeting, not just
+  bookkeeping: if the trigger fired on the first marker, the defender's Ambush would be furthest
+  right and the Raid would chase *the defender*. Placing both first keeps the invader's Open Fire
+  freshest, so the aggressor is chased as intended. A firefight is the only Play that can push the
+  Track past its fifth space; the spill just fires the Raid the moment the fight ends, and the Raid's
+  refund returns both spent markers to Reserves anyway. Emergent bonus: attacking into a near-boiling
+  Track calls the feds onto yourself, a natural brake on aggression. (Codified in the Police Raids
+  trigger; left as R1 over a "cap at 5, drop a marker" alternative because the Ambush marker is spent
+  and must land somewhere, and capping would silently undercount combat Heat.)
 - **Open Fire Heat is the Invader's only** (clarity fix): in Open Fire only the Invader pays per
   volley, so only the Invader draws Heat; the Occupier's return fire is free, and the Occupier's Heat
   comes solely from the Ambush. Wording tightened across Rulebook + Guide. (Em-dashes introduced in
