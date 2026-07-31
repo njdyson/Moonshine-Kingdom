@@ -1211,6 +1211,18 @@ marker locks onto the Track instead of refunding, exactly the Extort/Torch patte
   the kill (Rulebook + Playbooks).
 - **Deleted:** *"The Occupier never draws Heat."* Both shooters now heat, so a contested block puts
   **two** markers on the Track.
+- **Marker order (2026-07-31 follow-up, Nick).** Since a firefight now lays *two* markers, order
+  matters: the Raid's "Follow the Smoke" step targets the mob whose marker sits **furthest right**.
+  The two markers go down at the end of the firefight in **firing order (Ambush first, Open Fire
+  last)**, so the invader's marker is furthest right and the law chases *him*, not the defender. This
+  is not a new dynamic; it makes rules-correct the Guide's existing Rat/decoy strategy (which already
+  assumes the taker's marker is freshest, e.g. the Rat "hunts whoever fired the last loud shot").
+  Deferring both markers to end-of-Play also settles Nick's other point: a Raid can't trigger
+  mid-Standoff and interrupt a pinned firefight.
+- **Open Fire Heat is the Invader's only** (clarity fix): in Open Fire only the Invader pays per
+  volley, so only the Invader draws Heat; the Occupier's return fire is free, and the Occupier's Heat
+  comes solely from the Ambush. Wording tightened across Rulebook + Guide. (Em-dashes introduced in
+  the combat rewrite were also stripped at Nick's request.)
 
 **Pool decision — the Ledger (confirmed by Nick: "the cost is spent and the marker goes from ledger
 to heat track").** This is the "Nick's coupling" mechanic above, shipped as written: pay 1 from the
