@@ -413,7 +413,7 @@
                   <option value="plunder">Irish &mdash; Plunder raid (steal barrels)</option>
                   <option value="sicilian">Sicilian &mdash; Hit (Boss-snipe, cost 2)</option>
                   <option value="stealth">Vipers &mdash; Stealth (no Ambush, max 5)</option>
-                  <option value="torch">Knights &mdash; Torch first (cost 2 + 1 Runner)</option>
+                  <option value="torch">Knights &mdash; Torch first (cost 1 + 1 Runner)</option>
                 </select>
               </div>
               <div id="invKitNote" class="kit-note"></div>
@@ -462,7 +462,7 @@
             <summary>How each trial resolves</summary>
             <div class="acc-body">
             Each trial: opening Ambush (unless Stealth), then the Pinned invader spends Influence per volley until it runs out:
-            <strong>Open Fire costs 1</strong>, <strong>Hit costs 2</strong>, <strong>Torch costs 2</strong> plus a sacrificed Runner.
+            <strong>Open Fire costs 1</strong>, <strong>Hit costs 2</strong>, <strong>Torch costs 1</strong> plus a sacrificed Runner.
             At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, liquor lost).
             A <strong>Plunder</strong> raid always keeps 1 Influence back to <strong>Advance</strong> out with the loot
             (Fall Back would drop it). Firepower is the free Irish Trait &mdash; it boosts the invader's Open Fire volleys only,
@@ -600,7 +600,7 @@
       plunder: "Each of your hits steals 1 barrel instead of killing; the Occupier's hits still kill. No Heat, ever. Keeps 1 Influence back to Advance out with the loot.",
       sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat if you kill.",
       stealth: "No Standoff: the Occupier gets no Ambush shot (and cannot Fold). Crew capped at 5 mobsters, no liquor carried.",
-      torch: "Spends 2 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +2 Threat) before the volleys start. Always Heat."
+      torch: "Spends 1 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +1 Threat) before the volleys start. Always Heat."
     };
 
     function clamp(n, min, max) {
@@ -725,16 +725,16 @@
       let stolen = 0;
 
       if (inv.kit !== "stealth" && alive(inv) && alive(occ)) {
-        const threat = clamp(1 + occ.bosses + 1, 1, 4);
+        const threat = clamp(1 + occ.bosses + 1 + (occ.safehouse ? 1 : 0), 1, 4);
         const dice = diceFromMobsters(mobsterCount(occ));
         ambushKills = applyCasualties(inv, rollHits(dice, threat), false);
       }
 
       if (inv.kit === "torch" && occ.safehouse && alive(inv) &&
-          inv.runners >= 1 && config.influence - spent >= 2) {
+          inv.runners >= 1 && config.influence - spent >= 1) {
         inv.runners -= 1;
         occ.safehouse = false;
-        spent += 2;
+        spent += 1;
         heat = true;
       }
 
@@ -752,7 +752,7 @@
         const invDice = invaderAttackDice(inv);
         const invThreat = clamp(1 + inv.bosses, 1, 4);
         const occDice = diceFromMobsters(mobsterCount(occ));
-        const occThreat = clamp(1 + occ.bosses + (occ.safehouse ? 2 : 0), 1, 4);
+        const occThreat = clamp(1 + occ.bosses + (occ.safehouse ? 1 : 0), 1, 4);
 
         const invHits = rollHits(invDice, invThreat);
         const occHits = rollHits(occDice, occThreat);

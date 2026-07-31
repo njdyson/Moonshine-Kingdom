@@ -294,7 +294,7 @@ FIVES = [
     # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
     # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
     # and 2 Runners from setup, so this is a campaign against a garrison behind the
-    # Safehouse's +2 Threat. Borough-disjoint from Queens/Bronx/Brooklyn, so the
+    # Safehouse's +1 Threat. Borough-disjoint from Queens/Bronx/Brooklyn, so the
     # "never two 5s" guarantee holds. Still 10 = Pressure 3, so The Copper Heist
     # can never ride it.
     # MANHATTAN'S BOUNTY, and the 4th distinct act in the set: Queens kills the head,
