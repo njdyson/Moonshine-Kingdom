@@ -1294,3 +1294,49 @@ explainer, kit notes).
 **Not updated: the `mk-online` bundle.** Its rules are compiled into the minified `dist` JS and the
 source lives outside this repo — the online game will be out of sync on combat Heat until that source
 is rebuilt. Tracked in `mk-online-handoff.md`.
+
+---
+
+## REVISED (2026-07-31): one marker, "first to fire" — the two-marker rule is dead
+
+**Supersedes the two-marker / firing-order / overflow rules above.** Nick killed them, correctly:
+a firefight lays *two* markers, and on a Track already at 4 that needs a sixth slot the board
+physically does not have. "It briefly becomes a 6-space track" is an un-teachable exception, and no
+amount of "the Raid clears it anyway" hand-waving fixes that a player is asked to place a marker
+where there is no space. The root cause was **two markers per firefight**; the fix is to go back to
+**one**.
+
+**The rule now — First Shot Draws Heat.** A firefight adds exactly **one** Heat marker, and it
+belongs to **whoever fired first**: the Occupier if they **Ambush**, otherwise the Invader on his
+first **Open Fire**. One marker, however many volleys; its owner is the one the Raid chases. A
+firefight is now an ordinary single-marker loud Play, so it can never overflow and needs no
+exception. (Ambush still costs 1 from the Ledger; that spent marker *is* the Heat marker when you
+ambush. Spent-out or Laid-Low still can't Ambush.)
+
+Nick picked this ("first to fire") over the two alternatives: **#1 ambush costs but draws no Heat**
+(keeps ambush strong and the invader as the blamed party, but a loud gun-ambush the law can't hear
+is un-thematic and low-tension), and **#3 first to *kill*** (reintroduces the whiff problem — a
+blank-rolling Ambush draws nothing — and forces adjudicating kills inside a simultaneous volley).
+"First to fire" is unambiguous and needs no kill-tracking.
+
+**What it changes, and it's a real shift in feel:**
+- **Ambush now draws the Heat onto the ambusher** and makes them the raid target. This is the
+  "devalues ambush" cost Nick named, and it's the point: Hold Fire finally competes, because holding
+  fire shoves the Heat onto the invader when *he* shoots first.
+- **Raiding an ambushing defender is heat-free for the invader** — the defender fired first and took
+  the marker. The Guide's odds table now shows "Invader Heat: none" against a Secured (ambushing)
+  block. Attacking an ambush costs you dice and bodies, not the law's attention.
+- **The Guide's Rat/decoy strategy was reworked** from "the law hunts whoever fired the *last* loud
+  shot / the invader who took turf" to "**whoever fired first**." The bait play is now explicit:
+  **Hold Fire** (don't Ambush) so the invader shoots first, takes the Heat, and can be Ratted;
+  ambushing would put the freshest marker on *you*. Reinforced in "the liquor defense" and the Rat
+  section.
+- **Figures unchanged.** Take-rate, losses and the +31 spent-out swing are combat-outcome numbers,
+  untouched by the Heat rule; only markers-per-fight drops from 2 to 1. Simulator remodelled to
+  one marker to the first shooter.
+
+**Deleted:** the "Guns Draw Heat / both sides / firing order / Ambush first, Open Fire last" placement
+rule and the Police-Raids overflow note. Files touched: Rulebook (Ambush, Open Fire, First-Shot rule,
+worked example, Hit), Kingpin's Guide (choice bars, asymmetry note, odds table, Principles 1 & 3,
+Playbook rows, Part IV table + prose, Rat, liquor-defense, methodology), Playbooks (Hit), Combat
+Simulator. mk-online bundle still out of sync (compiled source outside the repo).
