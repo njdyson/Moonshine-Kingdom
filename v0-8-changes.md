@@ -1200,8 +1200,9 @@ heat (always, but never more than 1)."* The two halves are one marker each — a
 marker locks onto the Track instead of refunding, exactly the Extort/Torch pattern.
 
 **The rule as shipped:**
-- **Ambush — Cost 1, draws Heat.** Only the Occupier rolls, at +1 Threat, first. The spent marker
-  locks to the Heat Track. **Paid from Reserves — an empty stash can't Ambush** (the sitting duck).
+- **Ambush — Cost 1, draws Heat.** Only the Occupier rolls, at +1 Threat, first. **Paid from the
+  Ledger — the spent marker moves Ledger → Heat Track.** A crew that is **spent out or has Laid Low**
+  can't Ambush (the sitting duck).
 - **Open Fire — draws Heat whether or not it kills**, once per firefight, however many volleys.
   This is the "never more than 1" cap — it was already how combat Heat worked (once per Play), so no
   per-volley bookkeeping is added. Replaces the old *"Invader gains Heat only if their dice score 1+
@@ -1211,20 +1212,20 @@ marker locks onto the Track instead of refunding, exactly the Extort/Torch patte
 - **Deleted:** *"The Occupier never draws Heat."* Both shooters now heat, so a contested block puts
   **two** markers on the Track.
 
-**Pool decision — Reserves, not the Ledger (this reverses the "Nick's coupling" note above).** The
-coupling note paid the Ambush from the Ledger and made the duck = *Ledger spent out or Laid Low*,
-explicitly to *remove* the Day-1-staker duck. In this session Nick reversed that: the staking duck
-is a **feature** — *"makes staking a job in the first day or two a worse play, but that's ok; stake
-straight away and you're a bit more vulnerable, a calculated risk."* That dynamic only exists if the
-cost comes from Reserves (Reserves = total − 5 − staked, natural overflow), so the ship uses
-Reserves. **Note this keeps mandatory Fund the Ledger untouched and adds no morning hold-back AP
-decision** — Reserves here is forced overflow beyond the 5 Ledger slots, not a hold-back *choice*,
-so the "biggest reservation" blocker does not apply.
+**Pool decision — the Ledger (confirmed by Nick: "the cost is spent and the marker goes from ledger
+to heat track").** This is the "Nick's coupling" mechanic above, shipped as written: pay 1 from the
+Ledger, that marker locks to the Track. **Fund the Ledger is untouched, funding stays mandatory, and
+no morning hold-back AP decision exists** — the Ambush is paid from the Ledger every active crew has
+by construction. The duck is a **spent-out or Laid-Low** crew, not an over-staked one; a broke
+Day-1-staker is not automatically defenceless. (An earlier draft of this entry mis-shipped the cost
+from *Reserves* and framed it as a staking "leverage tax" — corrected same day.)
 
-**Reframed for the Guide as a *leverage tax*, not a Day-1 tax.** The duck threshold `total − staked
-≤ 5` recurs at every stage: staking a 5-Respect job late needs total > 10 to keep a marker spare,
-just as a 6-Influence Day-1 crew is a duck the moment it stakes one. Overreach for the big score and
-you can't defend it.
+**The strategic layer is a late-day / lay-low timing window, not a staking tax.** A crew that has
+spent its Ledger or gone home for the day can't spring the Level-4 first shot, so **striking a rival
+after he's acted gets meaningfully better** — attack timing joins the lay-low / Turn-Token race
+(same direction as the Reverse Snake: outlasting pays). Laying low early is now more exposed. There
+is a softer, emergent staking effect too — a crew busy working staked Jobs spends its Ledger down and
+is caught spent-out more often — but it's a consequence of *activity*, not a hard wealth threshold.
 
 **Plunder-on-Ambush is the one exception, left untouched.** The Irish rob at the crossing instead of
 shooting; Plunder is the deliberate "no Heat, ever" trait, so a Plunder-Ambush stays **free and
@@ -1244,15 +1245,17 @@ should the Irish face the duck too? Left as-is to avoid a silent Irish rebalance
   (6), ~0 at 7+ (you lose anyway, but still bleed ~2). So for a funded defender who means to hold,
   Ambush is auto-correct; the real trilemma lives at weak-defender-close-fights and *can-I-afford-it*.
 - **The sitting-duck swing is the headline: +31 points.** Secured block vs a 6-runner+Boss raid — a
-  funded defender holds at 49%, a broke one (can't Ambush) at 20% held / 80% taken. Catching a rival
-  tapped-out turns a coin-flip block into a near-certain take. This is the mechanical engine behind
-  "strike late / kickback them broke first."
+  defender with a Ledger marker in hand holds at 49%, a spent-out one (can't Ambush) at 20% held /
+  80% taken. Catching a rival after he's spent his Ledger or laid low turns a coin-flip block into a
+  near-certain take. This is the mechanical engine behind the late-day attack window.
 
 ### Watch-items for first playtest (not blockers)
-1. **Snowball cadence.** duck → raided → poorer → still a duck. Circuit-breaker exists: a Raid
-   refunds every Heat marker to Reserves, and 2 Heat/fight makes Raids arrive faster, so the feds
-   un-duck the board — *and* a serial aggressor spends down + heats up into a duck himself. Watch
-   whether the refund reset outruns the spiral.
+1. **Turn-order / lay-low timing.** Because duck-status is a Ledger state, it is **transient** — it
+   resets when the Ledger refills next morning — so there is no "poorer → permanently a duck"
+   spiral to fear (a real worry under the discarded Reserves model, now moot). The thing to watch
+   instead is whether going *last* becomes too strong: the crew that acts after everyone has spent
+   out / laid low can raid ducks cheaply. Same direction as the existing lay-low race; watch that it
+   doesn't tip into "nobody wants to act first."
 2. **Mob-balance sim re-run.** Every Guide combat number assumed the ambush always fires. It's now a
    *decision*, so the balance pass wants the defender's fire/hold choice inside the model.
 

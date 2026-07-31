@@ -469,7 +469,7 @@
             never an Ambush or any defence.
             <strong>Heat:</strong> both shooters draw it &mdash; the occupier's Ambush (1 marker) and the invader's Open Fire
             (1 marker, once per firefight, kill or not) &mdash; so a contested block lands <strong>2</strong> on the Track.
-            The model assumes a funded occupier who always Ambushes; a broke defender who can't afford it forfeits the shot.
+            The model assumes an occupier with a Ledger marker in hand who always Ambushes; a spent-out or laid-low defender forfeits the shot.
             </div>
           </details>
         </div>
@@ -725,14 +725,14 @@
       let rounds = 0;
       let ambushKills = 0;
       let heat = false;       // invader draws Heat (fires at all)
-      let occHeat = false;    // occupier draws Heat (Ambush fires) — costs 1 from Reserves
+      let occHeat = false;    // occupier draws Heat (Ambush fires) — costs 1 from the Ledger
       let stolen = 0;
 
       if (inv.kit !== "stealth" && alive(inv) && alive(occ)) {
         const threat = clamp(1 + occ.bosses + 1 + (occ.safehouse ? 1 : 0), 1, 4);
         const dice = diceFromMobsters(mobsterCount(occ));
         ambushKills = applyCasualties(inv, rollHits(dice, threat), false);
-        occHeat = true;       // the Ambush costs 1 Influence and locks a marker on the Track
+        occHeat = true;       // the Ambush spends 1 Ledger marker, which locks on the Track
       }
 
       if (inv.kit === "torch" && occ.safehouse && alive(inv) &&

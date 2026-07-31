@@ -1518,7 +1518,7 @@
 
         <h4>The Occupier answers first, then the Invader pays</h4>
         <div class="choicebar">
-            <div class="choice"><h4>Ambush &ndash; 1 Influence</h4><p>A first shot at <strong>+1 Threat</strong> before anyone else fires &mdash; <strong>Level 4</strong> behind a Boss and Safehouse. Costs a marker and draws Heat; an empty stash can't fire it.</p></div>
+            <div class="choice"><h4>Ambush &ndash; 1 Influence</h4><p>A first shot at <strong>+1 Threat</strong> before anyone else fires &mdash; <strong>Level 4</strong> behind a Boss and Safehouse. A Ledger marker that draws Heat; spent out or laid low, you can't fire it.</p></div>
             <div class="choice"><h4>Hold Fire</h4><p>No shot. The Invader is Pinned but unhurt, a signal: <em>"maybe you're just passing through."</em></p></div>
             <div class="choice"><h4>Fold</h4><p>Give up the block, flee your crew to safe turf. Lose the liquor, keep the bodies. Costs nothing.</p></div>
         </div>
@@ -1583,11 +1583,11 @@
             <div>
                 <h4>Never attack into even numbers</h4>
                 <p>The defender's ambush shot and Safehouse +1 mean a fair fight isn't fair: it's a 1-in-70
-                for the attacker &mdash; <em>as long as he can afford to fire it</em>. If you mean to take a block on even
+                for the attacker &mdash; <em>as long as he can still fire it</em>. If you mean to take a block on even
                 numbers, either bring <strong>at least double the garrison</strong> (ideally into the next dice tier:
-                5&ndash;6 bodies for 3 dice, 9 for the 5-dice cap), <strong>or strike when his Reserves are empty</strong>
-                and the Ambush never comes (see the Playbook). Anything less, against a funded defender, just donates your
-                crew and your Heat to the man you're attacking.</p>
+                5&ndash;6 bodies for 3 dice, 9 for the 5-dice cap), <strong>or strike after he's spent his Ledger or laid
+                low</strong> and the Ambush never comes (see the Playbook). Anything less, against a defender with a marker
+                in hand, just donates your crew and your Heat to the man you're attacking.</p>
             </div>
         </div>
 
@@ -1639,9 +1639,9 @@
                     <td class="left">Worth its marker and its Heat: the +1-Threat first shot swings a contested hold <strong>30&ndash;50 points</strong> and bleeds the raider even when the block falls. If you can afford it and mean to win, shoot first.</td>
                 </tr>
                 <tr>
-                    <td class="left">Your Reserves are empty &mdash; you're a <em>sitting duck</em></td>
+                    <td class="left">Your Ledger is spent out, or you've Laid Low &mdash; a <em>sitting duck</em></td>
                     <td class="left"><strong>Hold Fire</strong> or <strong>Fold</strong></td>
-                    <td class="left">You can't buy the Ambush, so eat the first volley and trade fire in the open-fire rounds, or Fold and save the crew. Being caught broke on a block you meant to hold hands the raider ~30 points: keep a marker back on turf worth blood.</td>
+                    <td class="left">No marker means no Ambush, so eat the first volley and trade fire in the open-fire rounds, or Fold and save the crew. Being caught spent-out on a block you meant to hold hands the raider ~30 points: don't burn your last Ledger marker before turf worth blood is safe.</td>
                 </tr>
                 <tr>
                     <td class="left">You're unsure they mean to fight</td>
@@ -2353,7 +2353,7 @@
         <p class="disclaimer">
             Brewing and combat figures are Monte Carlo estimates (100,000+ trials) from the Brew and Combat Simulators,
             over the full v0.9 rules: Muscle-Ratio dice capped at 5; Threat from Boss +1, Safehouse +1, Ambush +1;
-            occupier Ambush at Cost 1 drawing Heat (skipped when Reserves are empty); simultaneous Open Fire with the invader paying per volley, both shooters taking Heat once per firefight;
+            occupier Ambush at Cost 1 drawing Heat (skipped when the Ledger is spent out or the crew has Laid Low); simultaneous Open Fire with the invader paying per volley, both shooters taking Heat once per firefight;
             Muscle-Ratio production with communal Blowback and a four-player contested draft, barrels at the $300
             Speakeasy rate and losses at the $300 Ward Recruit cost. Jobs and Heat figures are deterministic reads off
             the rules and the live card table, machine-verified by the deck's own audit tools (Ledger fill = Influence
