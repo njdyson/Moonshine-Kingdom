@@ -1477,3 +1477,33 @@ marker left in your Ledger"), Rulebook exit box step (a), Turn Structure board. 
 catch the Turn Structure board lagging the reframe: its "Take Play" step now reads "Standard 1,
 Power 2, Lay Low 0", and the Lay Low step is labelled "(0)" with "The free Play that ends your
 Day, made on your turn" leading the body.
+
+## 2026-08-01 — Plays vs Calls: combat's inner decisions finally have a name
+
+Nick's semantic loose end: is an Ambush a "Play", or part of a larger combat Play? The structure
+was always there (the Move is the Play; the fight resolves inside it; nothing in it counts as a
+second Play even though it costs separately) but it was never *defined*, and Lay-Low-as-a-Play
+made the gap lawyer-exploitable: "no more Plays until tomorrow" could be read as "a Laid-Low crew
+can't fight back."
+
+**The fix is a definition, not a rule change: combat decisions are Calls.** New note in the
+Rulebook Standoff section ("One Play, many Calls"): the Move that crossed the line is the fight's
+only Play; everything inside it, both crews' choices alike (Ambush, Hold Fire, Fold, Open Fire,
+Advance, Fall Back, signature tricks), is a **Call**. A Call can cost Influence from the Ledger
+and settles like any Play cost (Reserves, or the Heat Track), but a Call is never a Play: *it
+spends your money, not your turn.* Explains in one stroke why a firefight of any length is one
+Play, and why defence is always available.
+
+**The rules-lawyer question answered in text:** yes, you participate in combat after Laying Low —
+answering the Standoff and returning fire are Calls inside the *raider's* Play, not Plays of your
+own. Added to the Rulebook Lay Low note ("Off the streets is not off the board"), the Standoff
+note, and the Guide Duck Window ("past lending, never past fighting"). A Laid-Low crew's Ambush
+stays stood down (that's its duck status), and return fire still costs nothing.
+
+**Bonus catch:** the Playbook pin-note said the Invader "repeats this choice *each turn*" — combat
+never spans turns; it resolves inside the one Play. Now "keeps choosing until the fight resolves,
+all inside the one Play that moved in" (×4 cards).
+
+Files: Rulebook (Standoff note, Pinned intro, Lay Low note), Playbooks (4× pin-note), Kingpin's
+Guide (Duck Window). "Call" is the proposed term — one word, fits the house voice ("the Occupier
+answers", "run the read", "make the call"); trivial to rename if Nick prefers another.
