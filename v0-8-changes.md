@@ -1517,3 +1517,25 @@ forbids Plays"). The loan-block closes that route at the source — the marker c
 So the Laid-Low duck is sealed twice over: its own Ambush is stood down by rule, and it cannot be
 armed by a friend. Free Calls (answering the Standoff, returning fire) remain untouched, which is
 the intended shape: a crew that's gone home can defend itself but cannot spring anything.
+
+## 2026-08-01 — Wording pass: Lay Low joins the Plays table, the Calls note goes on a diet
+
+Nick's read on the two entries above: concept right, prose wrong — both notes over-explain a
+simple idea until it sounds complicated ("a Play, not a reflex" answers a question no fresh
+reader would ever ask). The framework already teaches it; the terms in the right places do the
+work.
+
+- **Lay Low is now a table entry, not a special box.** The Rulebook turn-exit box is dissolved;
+  Lay Low sits at the bottom of the Plays table under its own header ("The Free Play (Cost: 0)")
+  with the same a/b/c steps and one short boundary note ("Broke is not Laid Low: ..."). Sitting
+  in the list with Move/Recruit/Trade does the teaching the old note argued for: a normal Play,
+  the only free one, and the only option left at 0 Influence. Cut as derivable: the
+  broke-both-sides token-order consequence and the return-fire-is-free aside (Combat owns both).
+- **"One Play, many Calls" halved.** Same definition, half the words: the Move is the only Play,
+  everything inside it is a Call, a Call may cost money but never your turn, and defending is a
+  Call so it is always available. Dropped the Reserves/Heat-Track settling detail — the Ambush
+  and Open Fire entries each state their own Heat handling in place.
+
+No mechanical changes; every ruling above survives, just shorter. Files: Rulebook only (turn box,
+Plays table, Standoff note). Playbooks, Guide, and Turn Structure board were already terse —
+untouched.
