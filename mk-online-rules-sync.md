@@ -188,6 +188,63 @@ relay at a new junction.
 
 ---
 
+## 6. Combat rework + Lay Low as a Play (2026-07-31 / 2026-08-01)
+
+> The whole combat-Heat economy changed shape across two days of rulings. The build predates all
+> of it. Source of truth: `v0-8-changes.md` sections "BUILT (2026-07-31): Ambush costs 1 + Heat"
+> onward, including every 2026-08-01 entry. The Combat Simulator in this repo
+> (`Combat Simulator v0.9.html`, the heat model around the trial loop) is a working reference
+> implementation of the Heat logic. Nothing below changes take-rate maths; it changes costs, Heat,
+> and turn structure.
+
+### 6.1 Threat bonuses
+
+| # | Likely current behaviour | Now |
+|---|--------------------------|-----|
+| 6.1.1 | Safehouse gives the Occupier **+2** Threat, excluded from the Ambush shot | **+1**, and it **stacks on the Ambush**. The full stack is Base 1 + Boss +1 + Safehouse +1 + Ambush +1 = Level 4 (kill 2+), cap Level 4. |
+| 6.1.2 | Torch cost 2 (if it predates 153b77a) | **Cost 1.** Sacrifice a Pinned Runner, destroy the Safehouse (removing its +1), always Heat. |
+
+### 6.2 Ambush costs 1, and the marker IS the fight's Heat
+
+| # | Likely current behaviour | Now |
+|---|--------------------------|-----|
+| 6.2.1 | Ambush is free and always available | **Cost 1, paid from the Ledger.** If the Occupier's Ledger is empty **or they have Laid Low**, Ambush is not offered — the *sitting duck*. Check at the moment of the Standoff, not a stored flag: a loan arriving at the Standoff can re-arm a spent-out (not Laid-Low) defender, see 6.5. |
+| 6.2.2 | Spent markers return to Reserves | The Ambush marker moves **Ledger → Heat Track** directly. It is not a cost *plus* a Heat marker; the spent marker is the fight's Heat marker, and it carries its **owner's** identity for raid targeting (matters when a lender funded it). |
+| 6.2.3 | — | **Irish Plunder-in-place-of-Ambush: cost 1 from the Ledger too** (same duck check), but **no Heat** — nobody fired — and it does **not** claim the fight's first shot; if the invader then Opens Fire, *he* takes the fight's marker (6.3). |
+
+### 6.3 Heat: first shot only, one marker per firefight
+
+| # | Likely current behaviour | Now |
+|---|--------------------------|-----|
+| 6.3.1 | Invader gains Heat only if his dice score 1+ kills; "the Occupier never draws Heat" | **Both deleted.** A firefight adds **exactly one** Heat marker, to **whoever fired first**: the Occupier if they Ambushed, otherwise the Invader on his **first** Open Fire. Kill or whiff is irrelevant. Track a per-fight "first shot fired" flag; later volleys by either side add nothing. |
+| 6.3.2 | Hit draws Heat on kills (or per use) | **Hit follows the same rule**: Heat only if it is the fight's first shot. |
+| 6.3.3 | — | Consequences to keep intentional: raiding an *ambushing* defender is **heat-free** for the invader; Hold Fire then return fire is heat-free for the defender (the invader's opening volley takes the marker). Plunder never draws Heat in any role. |
+
+### 6.4 Lay Low is an explicit Play (Cost 0)
+
+| # | Likely current behaviour | Now |
+|---|--------------------------|-----|
+| 6.4.1 | Players at 0 Influence are auto-passed / auto-laid-low (verify) | **Never automatic.** Lay Low is a **Play, Cost 0**, the only free one, chosen **on your turn**. A 0-Influence player keeps their seat until their turn comes; Lay Low is then their only legal Play, but it still happens in seat order. This is load-bearing: it decides the order tomorrow's Turn Tokens are claimed when several crews go broke the same round, and it keeps a spent-out crew loanable until they step off. |
+| 6.4.2 | (unchanged mechanics, listed for the port) | On Lay Low: Odd Jobs $100 per unspent **Ledger** marker, Ledger clears to Reserves, claim the **lowest** token left in tomorrow's set. After: no Plays and **cannot receive Puppeteer loans** until tomorrow. |
+| 6.4.3 | — | **Laid Low still defends.** Raided, they answer the Standoff (Hold Fire or Fold only — no Ambush, and no Plunder-Ambush) and return fire in volleys as normal (free). Combat decisions are **Calls**, not Plays, in any surfaced rules copy — "no more Plays" must never block defence. |
+
+### 6.5 Puppeteering at the Standoff
+
+| # | Likely current behaviour | Now |
+|---|--------------------------|-----|
+| 6.5.1 | Loans spendable on next Play, or mid-Pin | Also spendable **at the Standoff, to pay the Ambush** (or Irish Plunder-Ambush). Lending remains blocked to anyone who has **Laid Low** — that block is what stops "ambush by loan" after stepping off; do not relax it. |
+| 6.5.2 | Heat from a loan-funded Play locks the lender's marker | Same rule, now explicitly including the Ambush: a lender's marker that pays an Ambush **is** the fight's Heat marker and locks with the **lender's** identity — the law chases the banker. Where two mobs' markers fund one Play, the spender picks whose marker takes the fall (existing rule, unchanged). |
+
+### 6.6 Bots
+
+The value model changed even where legality didn't: Ambush now costs a marker plus Heat-ownership,
+so small garrisons (1 die) should strongly prefer Fold; duck status makes lay-low timing a combat
+decision; and a Rum Kickback re-arm (+3 Plays at dusk) raiding already-laid-low rivals is the new
+strongest aggressive line. Minimum bar: bots must not crash into the new Ambush gate or the
+explicit Lay Low Play. See `mk-online-bot-lookahead-handoff.md` before touching evaluation, and
+the Kingpin's Guide "Duck Window" section for the human-readable strategy the bots should at least
+not embarrass themselves against.
+
 ## Checklist
 
 - [ ] Remove the Boss's +1 brew barrel (5.1)
@@ -224,3 +281,16 @@ relay at a new junction.
       sea lanes do NOT count, so a Dock with no free land exit is Cornered and the crew is arrested.
       **Combat retreat is unchanged** — Advance/Fold may still cross water via Docks. If the port
       shares one "connected" helper between Raid-flee and combat-retreat, it needs to branch here.
+- [ ] **Safehouse +1 Threat, stacking with Ambush** (6.1.1); Torch cost 1 (6.1.2)
+- [ ] **Ambush: Cost 1 from Ledger, blocked when spent out or Laid Low** (6.2.1); the spent marker
+      goes Ledger → Heat Track and keeps its owner (6.2.2); Irish Plunder-Ambush costs 1, silent,
+      doesn't claim the first shot (6.2.3)
+- [ ] **One Heat marker per firefight, to whoever fired first** — delete heat-on-kills and
+      "Occupier never draws Heat" (6.3.1); Hit follows the same first-shot rule (6.3.2)
+- [ ] **Lay Low is an explicit Cost-0 Play on your turn, never an auto-pass at 0 Influence**
+      (6.4.1); after it: no Plays, no incoming loans (6.4.2); Laid Low still answers the Standoff
+      and returns fire — Calls, not Plays (6.4.3)
+- [ ] **Loans spendable at the Standoff to fund an Ambush; lender's marker becomes the fight's
+      Heat** (6.5); lending to Laid-Low players stays blocked
+- [ ] **Bots: respect the Ambush gate and explicit Lay Low; re-tune fold/ambush and lay-low
+      timing** (6.6)
