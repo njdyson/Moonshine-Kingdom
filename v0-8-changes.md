@@ -1638,3 +1638,11 @@ physical motion, so they're now one step ("clear each unspent marker... collecti
 and "only your Ambush is stood down" is gone — doubly redundant, since Laying Low empties the
 Ledger (nothing left to pay the Ambush's 1) and the Combat section states it explicitly anyway.
 Playbook cards already read as the merged flow; untouched.
+
+### Addendum (2026-08-01): "no passing" restored to the turn box
+
+Nick's catch: "Every turn demands a Play" died with the old turn-exit note, leaving mandatory
+Plays only implied by the procedure's imperative. That silence had teeth — a free pass would let
+a crew stall out the Lay-Low race and cherry-pick tomorrow's token (paid stalling stays legal and
+stays priced at a marker per lap). Fixed for three words where the exploit would happen: turn box
+step 1 now reads "Make a Play — no passing."
