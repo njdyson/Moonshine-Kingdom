@@ -1468,3 +1468,12 @@ reads "even mid-fight: another volley, or the Ambush itself."
 
 Files: Playbooks (4× CLOSING TIME section, 4× Puppeteer note), Rulebook (turn box ×3 spots,
 Cooperation ×2), Kingpin's Guide (Duck Window, proxy-war bullet), this changelog.
+
+### Addendum (2026-08-01): Odd Jobs confirmed on every Lay-Low surface; Turn Structure board synced
+
+Nick flagged that the Lay-Low-as-a-Play text must include cashing unspent markers (Odd Jobs).
+Audit: already present on all three surfaces — Playbook CLOSING TIME card ("Collect $100 per
+marker left in your Ledger"), Rulebook exit box step (a), Turn Structure board. The audit did
+catch the Turn Structure board lagging the reframe: its "Take Play" step now reads "Standard 1,
+Power 2, Lay Low 0", and the Lay Low step is labelled "(0)" with "The free Play that ends your
+Day, made on your turn" leading the body.
