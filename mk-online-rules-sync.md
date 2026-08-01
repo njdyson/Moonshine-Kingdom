@@ -190,7 +190,12 @@ relay at a new junction.
 
 ## 6. Combat rework + Lay Low as a Play (2026-07-31 / 2026-08-01)
 
-> The whole combat-Heat economy changed shape across two days of rulings. The build predates all
+> **BUILT 2026-08-01.** Ported into `mk-online` and deployed; the tables below are kept as the
+> record of what changed. The one clause with nothing to port is 6.5 (Puppeteer loans) — the online
+> build has never implemented Cooperation, so there are no loans to widen; see the checklist entry
+> for what a future loan port still owes.
+>
+> The whole combat-Heat economy changed shape across two days of rulings. The build predated all
 > of it. Source of truth: `v0-8-changes.md` sections "BUILT (2026-07-31): Ambush costs 1 + Heat"
 > onward, including every 2026-08-01 entry. The Combat Simulator in this repo
 > (`Combat Simulator v0.9.html`, the heat model around the trial loop) is a working reference
@@ -247,50 +252,75 @@ not embarrass themselves against.
 
 ## Checklist
 
-- [ ] Remove the Boss's +1 brew barrel (5.1)
-- [ ] Implement the relay, land/bridge adjacency only — **not** the dock waterway (5.2, 5.3)
-- [ ] Prompt for the relay target only when 2+ candidates qualify (5.4)
-- [ ] Re-tune the bot's Red draft to score total barrels incl. the relay (5.5)
-- [ ] Remove Bribe block for Rat holder (1.1)
-- [ ] Remove Rise → clears Rat Card (1.2)
-- [ ] Subtract 3 Respect at scoring time while holding the card — modifier, never stored (1.3)
-- [ ] Honor check drops the `ratCard` term; Marks alone bar the crown (1.4)
-- [ ] Do **not** add an absolution action; a rival Ratting is the only exit (1.5)
-- [ ] Keep the Rat-repeat block; reword it, the take-card log and the seat tooltip (1.6–1.8)
+> **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
+> had in fact already landed — the boxes below were simply never ticked, which
+> made the file read as a much bigger backlog than it was. Verified in source and
+> ticked. **Two real gaps survive** and are called out inline: the Scatter still
+> flees dock-to-dock, and the Blood Oath / Volstead variants don't exist in the
+> online build at all (so their clauses have nothing to attach to yet).
+
+- [x] Remove the Boss's +1 brew barrel (5.1)
+- [x] Implement the relay, land/bridge adjacency only — **not** the dock waterway (5.2, 5.3)
+- [x] Prompt for the relay target only when 2+ candidates qualify (5.4)
+- [x] Re-tune the bot's Red draft to score total barrels incl. the relay (5.5)
+- [x] Remove Bribe block for Rat holder (1.1)
+- [x] Remove Rise → clears Rat Card (1.2)
+- [x] Subtract 3 Respect at scoring time while holding the card — modifier, never stored (1.3)
+- [x] Honor check drops the `ratCard` term; Marks alone bar the crown (1.4)
+- [x] Do **not** add an absolution action; a rival Ratting is the only exit (1.5)
+- [x] Keep the Rat-repeat block; reword it, the take-card log and the seat tooltip (1.6–1.8)
+      — the last two stale "cannot Bribe" strings (seat tooltip, Rat play card) were cleared
+      2026-08-01.
 - [ ] Blood Oath: −3 flows into combined Respect and into Sit-Down ranking (1.9)
+      — **n/a until the variant exists.** mk-online implements no Alliance mode.
 - [ ] Volstead: Rat Card keeps the crown-bar there, since Respect isn't tracked (1.10)
-- [ ] Re-tune bot rat heuristic; strip the can't-Job / can't-win pruning and the pay-vs-wait logic
-- [ ] Influence floor of 5 (§2) — no longer urgent, but keep it queued
-- [ ] Gate The Empty Casket on an actual Boss death, if implemented (§4)
+      — **n/a until the variant exists.**
+- [x] Re-tune bot rat heuristic; strip the can't-Job / can't-win pruning and the pay-vs-wait logic
+- [x] Influence floor of 5 (§2) — `INFLUENCE_FLOOR` in data.ts, applied at the Reckoning
+- [x] Gate The Empty Casket on an actual Boss death, if implemented (§4) — `riseBossWasDown`
 - [ ] **Blood Oath Target is a flat 30** (2026-07-30), not combined Respect +10. Removes the stored
       per-alliance target entirely: compare `combinedRespect >= 30`. Tiebreak is now simply the
       higher combined Respect (was "furthest over its own Target"). Note the −3 Rat modifier (1.9)
-      still flows into that combined total.
-- [ ] **Brew is per-seat, not two passes** (2026-07-30): each boss drafts a Red AND resolves his
+      still flows into that combined total. — **n/a until the variant exists.**
+- [x] **Brew is per-seat, not two passes** (2026-07-30): each boss drafts a Red AND resolves his
       brew before the next boss drafts. The barrel supply is finite and consumed in seat order, so
       a late seat can be shorted — the order of resolution is now load-bearing, not cosmetic. When
       one player fires several Stills, that player chooses the stocking order (this is the same
       choice as the existing Dry Brew split rule, §5.6).
-- [ ] **Split the Batch relays over LAND only** (2026-07-30). If the port ever used a generic
+- [x] **Split the Batch relays over LAND only** (2026-07-30). If the port ever used a generic
       "connected" check, Docks would wrongly relay across water. `Land Connected` = shared border
       or Bridge; `Water Connected` = Dock-to-Dock; plain `Connected` = either.
-- [ ] **Remove the Boss's +1 brew barrel** (5.1) — reconfirmed 2026-07-30: the Rulebook's Key
+- [x] **Remove the Boss's +1 brew barrel** (5.1) — reconfirmed 2026-07-30: the Rulebook's Key
       Concepts legend still described the old bonus and has now been corrected, so the tabletop
       files are finally free of it. The build is still the only place it survives.
 - [ ] **The Scatter is Land Connected only** (2026-07-30). A raided crew flees on foot; Dock-to-Dock
       sea lanes do NOT count, so a Dock with no free land exit is Cornered and the crew is arrested.
       **Combat retreat is unchanged** — Advance/Fold may still cross water via Docks. If the port
       shares one "connected" helper between Raid-flee and combat-retreat, it needs to branch here.
-- [ ] **Safehouse +1 Threat, stacking with Ambush** (6.1.1); Torch cost 1 (6.1.2)
-- [ ] **Ambush: Cost 1 from Ledger, blocked when spent out or Laid Low** (6.2.1); the spent marker
+      — **STILL OPEN, and the one live divergence left outside the variants.** The helpers are
+      already separate, so the branch is not needed: `safeFleeDistrict` in `src/game/raid.ts` is
+      raid-only, and it is the single place that appends the dock-to-dock neighbours. Dropping
+      that loop ports the rule; combat's Advance/Fold path is untouched by it.
+- [x] **Safehouse +1 Threat, stacking with Ambush** (6.1.1); Torch cost 1 (6.1.2)
+- [x] **Ambush: Cost 1 from Ledger, blocked when spent out or Laid Low** (6.2.1); the spent marker
       goes Ledger → Heat Track and keeps its owner (6.2.2); Irish Plunder-Ambush costs 1, silent,
       doesn't claim the first shot (6.2.3)
-- [ ] **One Heat marker per firefight, to whoever fired first** — delete heat-on-kills and
+- [x] **One Heat marker per firefight, to whoever fired first** — delete heat-on-kills and
       "Occupier never draws Heat" (6.3.1); Hit follows the same first-shot rule (6.3.2)
-- [ ] **Lay Low is an explicit Cost-0 Play on your turn, never an auto-pass at 0 Influence**
+- [x] **Lay Low is an explicit Cost-0 Play on your turn, never an auto-pass at 0 Influence**
       (6.4.1); after it: no Plays, no incoming loans (6.4.2); Laid Low still answers the Standoff
       and returns fire — Calls, not Plays (6.4.3)
-- [ ] **Loans spendable at the Standoff to fund an Ambush; lender's marker becomes the fight's
-      Heat** (6.5); lending to Laid-Low players stays blocked
-- [ ] **Bots: respect the Ambush gate and explicit Lay Low; re-tune fold/ambush and lay-low
-      timing** (6.6)
+- [~] **Loans spendable at the Standoff to fund an Ambush; lender's marker becomes the fight's
+      Heat** (6.5); lending to Laid-Low players stays blocked — *nothing to port: mk-online has
+      never implemented Puppeteering/Cooperation, so there are no loans to widen or block. The
+      half that matters when they land is already in place: the Ambush's duck check reads the
+      Ledger live at the Standoff (`canAmbush`), so a marker arriving from anywhere re-arms a
+      spent-out defender with no further change, and a Laid-Low crew is barred by its own flag
+      regardless of where the marker came from. What a loan port must add is the lender-owned
+      Heat marker (the existing `heat.push({ owner })` already carries identity, so pass the
+      lender) and the lending block against Laid-Low players.*
+- [x] **Bots: respect the Ambush gate and explicit Lay Low; re-tune fold/ambush and lay-low
+      timing** (6.6) — bots never propose a blocked Ambush (which the engine would reject, looping
+      them), fold sooner as a duck, hold fire on small garrisons now the shot costs a marker plus
+      Heat-ownership, rob the crossing as the Irish, price a duck target into attack candidates,
+      and discount the lay-low race by how many markers rivals still hold.

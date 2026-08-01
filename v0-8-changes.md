@@ -1517,3 +1517,54 @@ forbids Plays"). The loan-block closes that route at the source — the marker c
 So the Laid-Low duck is sealed twice over: its own Ambush is stood down by rule, and it cannot be
 armed by a friend. Free Calls (answering the Standoff, returning fire) remain untouched, which is
 the intended shape: a crew that's gone home can defend itself but cannot spring anything.
+
+---
+
+## 2026-08-01 — mk-online catches up: the combat rework and Lay Low are BUILT
+
+The online build has been "out of sync on combat Heat" in every entry above since the 07-31
+rework. It no longer is. `mk-online-rules-sync.md` §6 is ported and deployed; the audit that came
+with it also found §§1–5 had **already** landed and simply never had their boxes ticked, so that
+file now reads as the short backlog it actually is rather than a five-section one.
+
+**What changed in the engine** (source: `njdyson/mk-online`, branch
+`claude/mk-online-combat-lay-low-cpjjt6`):
+
+- **Ambush costs 1 from the Ledger, and the spent marker IS the fight's Heat marker** — it moves
+  Ledger → Heat Track carrying its owner, rather than returning to Reserves. Blocked outright for a
+  crew that is spent out or has Laid Low. The duck check reads the Ledger *live at the Standoff*
+  rather than off a stored flag, which is the shape a Puppeteer loan will need when Cooperation
+  ships.
+- **One Heat marker per firefight, to whoever fired first.** Heat-on-kills and "the Occupier never
+  draws Heat" are gone from the code as well as the paper. Hit follows the same rule; a Plunder
+  fires nothing, so it neither draws Heat nor claims the first shot.
+- **The Irish Plunder-Ambush is now implemented at all** — it wasn't before; the online Plunder was
+  invader-only. Same Cost 1, same duck gate, silent, and its hits rob the invaders' carried load,
+  which stays put as the Occupier's.
+- **Lay Low is an explicit Cost-0 Play.** The build used to step a crew off automatically the
+  moment its Ledger emptied, and to skip anyone who funded nothing straight past the Operations
+  phase — both of which deleted the last lap of the Day, and with it the token race and the tail of
+  the Duck Window. Every crew now takes its seat and chooses. A Laid-Low crew still answers the
+  Standoff and returns fire; only its Ambush stands down.
+- **Two bugs fell out.** Torch was refunding its spent marker *and* adding a Heat marker, minting
+  Influence out of nothing; and the combat readout still drew the Safehouse at +2, two revisions
+  after `153b77a` made it +1.
+- **Timing:** the fight's marker lands the instant the shot is fired (so the Raid chases the right
+  mob) but the Boiling Point is checked only once the fight is off the board. A Raid can no longer
+  fire mid-Standoff and scatter a crew out of a live firefight.
+- **Bots** respect the new gate rather than looping on a rejected Ambush, fold sooner as ducks, hold
+  fire on small garrisons now the shot costs a marker plus Heat-ownership, and price a duck target
+  into their attack candidates — the Duck Window read from the Guide, in the seat that has to play
+  against it.
+
+**Not ported, and why:** §6.5 (loans at the Standoff) has nothing to attach to — mk-online has never
+implemented Puppeteering. The checklist entry now spells out what a future loan port owes: the
+lender-owned Heat marker, and the lending block against Laid-Low crews.
+
+**One live divergence left**, and it predates all of this: the online **Scatter still lets a raided
+crew flee dock-to-dock**, against the 2026-07-30 land-only ruling. It is a single loop in
+`src/game/raid.ts`; the combat-retreat path is already a separate helper, so no branching is needed.
+Left open rather than folded into an unrelated commit.
+
+Files: `mk-online-rules-sync.md` (§6 marked built, checklist audited and ticked),
+`mk-online/dist/` (rebuilt bundle).
