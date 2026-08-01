@@ -1670,3 +1670,22 @@ where possible:
   offset.
 
 Not taken, noted for later: the reviewer's Influence-flow diagram and FAQ-appendix suggestions.
+
+### Addendum (2026-08-01): markers are open information; multi-stake teeth run out deal by deal
+
+Nick weighed banning Handshakes at the floor of 5 (his instinct) against the standing
+theatre ruling. Decision: keep the theatre, make the count auditable. Two reasons the ban loses:
+it cuts the poorest crew out of credible diplomacy when it needs it most, and it doesn't close
+the case anyway — a boss can stake above the floor and sink to it with the deal still live, so
+the toothless-at-the-floor rule must exist regardless.
+
+The multi-stake edge resolved itself in the reading: stakes are physical markers but forfeits
+stop at the floor, so real collateral is (total − 5) spread across every promise made. Break
+several deals at the floor and the existing Deal-Broken sentence applies per deal in any order —
+same outcome, and since forfeits go to the supply (no rival is owed anything), which deal ate the
+marker never matters. No tiebreaker text needed.
+
+Added: Rulebook Influence intro — "Markers are open information: anyone may count anyone's,
+anytime" (turns the floor bluff into a punishable one, not hidden info; also hardens the Guide's
+existing count-the-duck's-friends and Kickback-capacity reads). Guide Handshake bullet — teeth
+run out deal by deal; count his promises as well as his rungs.
