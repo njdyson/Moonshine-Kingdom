@@ -1646,3 +1646,27 @@ Plays only implied by the procedure's imperative. That silence had teeth — a f
 a crew stall out the Lay-Low race and cherry-pick tomorrow's token (paid stalling stays legal and
 stays priced at a marker per lap). Fixed for three words where the exploit would happen: turn box
 step 1 now reads "Make a Play — no passing."
+
+## 2026-08-01 — External clarity review triaged: three real gaps closed, two claims already covered
+
+Nick ran an LLM clarity review over the Rulebook. Verdict on its five findings, fixed word-neutral
+where possible:
+
+- **REJECTED — "Move into rival turf: unclear if combat resolves within the Play."** Already
+  stated three ways: turn box step 2 ("Resolve any combat the Play triggers, fully, before the
+  Play ends"), the Pinned intro ("A firefight is one Play"), and the Golden Rule of Turf. The
+  reviewer missed step 2. No change.
+- **REJECTED — "halve it, round up" framing.** The lookup table sits beside the sentence and the
+  proposed rewording is the same operation in more words. No change.
+- **FIXED — Kickback edge cases.** Unload now says in place: no marker resting in Reserves, or no
+  empty Ledger slot, and that Kickback is lost. (The Guide already ruled this — "the Ledger's 5
+  slots cap the Kickback" — the Rulebook just never said it.)
+- **FIXED — Handshake forfeit at the floor of 5.** Deal Broken now says the breaker at the floor
+  takes the marker home instead: the stake never had teeth. Again the Guide had already ruled it
+  ("a crew already at five... its handshake is theatre"); the Rulebook's "(never below 5)" left
+  the marker's fate unstated.
+- **FIXED — Split the Batch yield.** The second Still now explicitly pours by its own District's
+  Muscle Ratio (the example always showed this; the rule text now says it). Flavor trimmed to
+  offset.
+
+Not taken, noted for later: the reviewer's Influence-flow diagram and FAQ-appendix suggestions.
