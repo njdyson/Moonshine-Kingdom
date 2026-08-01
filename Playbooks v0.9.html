@@ -86,7 +86,7 @@ a:hover{color:var(--gold-bright)}
      min(A5W/w, A5H/h); all cards share a width, so HEIGHT always won and each
      card got its own zoom - a short card rendered WIDER and the two sides of a
      duplex sheet could not line up. Content-box: 925 + 40 padding + 4 border
-     = 969 offsetHeight. Tallest real content is 917, so this leaves 8px. */
+     = 969 offsetHeight. Tallest real content is 918, so this leaves 7px. */
   height:925px;
   background:linear-gradient(var(--panel-a),var(--panel-b));
   border:2px solid var(--gold-line);
@@ -139,7 +139,7 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    SECTION HEADS
    ============================================================ */
-.sec{display:flex;align-items:center;gap:8px;margin:13px 0 3px}
+.sec{display:flex;align-items:center;gap:8px;margin:11px 0 3px}
 .sec--trait{margin-bottom:4px}
 .sec--res{margin-bottom:5px}
 .sec--flow{margin:12px 0 5px}
@@ -161,7 +161,7 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    PLAY ROWS
    ============================================================ */
-.play{display:flex;gap:11px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid var(--rule)}
+.play{display:flex;gap:11px;align-items:flex-start;padding:5px 2px;border-bottom:1px solid var(--rule)}
 .act{display:flex;gap:11px;align-items:flex-start;padding:5px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
 
@@ -269,17 +269,22 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: walk in, take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost cost--free">0</div>
+      <div class="name">Lay Low</div>
+      <div class="desc">End your Day, the one free Play: collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and take the lowest Turn Token left in <b>tomorrow's set</b>. No Plays, no Puppeteer loans, until tomorrow.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
@@ -291,17 +296,17 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark at a time. <b>Loan:</b> Take <b>$1,500</b> + a <b>Mark</b> (no limit; 7 in supply). <b>Square Up:</b> Pay <b>$2,000</b>, clear one Mark. While any Mark is unpaid you cannot be crowned.</div>
+      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, and <b>no repeat Rat</b>. No absolution: it only leaves you when a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -322,14 +327,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless). If one's already on the board, he simply relocates (not a death).</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
-      <div class="cost cost--free">0</div>
-      <div class="name">Lay Low</div>
-      <div class="desc">The one free Play: step off the streets for the Day. Collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and swap your Turn Token for the lowest left in <b>tomorrow's set</b>. No more Plays, and no Puppeteer loans, until tomorrow.</div>
+      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless), or relocate him there if he's already out (not a death).</div>
     </div>
 
     <div class="sig">
@@ -442,23 +440,28 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
-    <div class="trait"><span class="trait-name">Whispers.</span> <span class="trait-body">Nothing happens in this city you don't overhear first. When you <b>claim a Job</b>, you may peek at the <b>top card of the Jobs deck</b> and claim it <b>face-down</b> instead of a Market card. Rivals see the Stake, never the job; reveal it the moment it completes.</span></div>
+    <div class="trait"><span class="trait-name">Whispers.</span> <span class="trait-body">When you <b>claim a Job</b>, you may peek at the <b>top of the Jobs deck</b> and claim it <b>face-down</b> instead of a Market card. Rivals see the Stake, never the job, until it completes.</span></div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: walk in, take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost cost--free">0</div>
+      <div class="name">Lay Low</div>
+      <div class="desc">End your Day, the one free Play: collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and take the lowest Turn Token left in <b>tomorrow's set</b>. No Plays, no Puppeteer loans, until tomorrow.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
@@ -470,17 +473,17 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark at a time. <b>Loan:</b> Take <b>$1,500</b> + a <b>Mark</b> (no limit; 7 in supply). <b>Square Up:</b> Pay <b>$2,000</b>, clear one Mark. While any Mark is unpaid you cannot be crowned.</div>
+      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, and <b>no repeat Rat</b>. No absolution: it only leaves you when a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -501,14 +504,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless). If one's already on the board, he simply relocates (not a death).</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
-      <div class="cost cost--free">0</div>
-      <div class="name">Lay Low</div>
-      <div class="desc">The one free Play: step off the streets for the Day. Collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and swap your Turn Token for the lowest left in <b>tomorrow's set</b>. No more Plays, and no Puppeteer loans, until tomorrow.</div>
+      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless), or relocate him there if he's already out (not a death).</div>
     </div>
 
     <div class="sig">
@@ -627,17 +623,22 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: walk in, take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost cost--free">0</div>
+      <div class="name">Lay Low</div>
+      <div class="desc">End your Day, the one free Play: collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and take the lowest Turn Token left in <b>tomorrow's set</b>. No Plays, no Puppeteer loans, until tomorrow.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
@@ -649,17 +650,17 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark at a time. <b>Loan:</b> Take <b>$1,500</b> + a <b>Mark</b> (no limit; 7 in supply). <b>Square Up:</b> Pay <b>$2,000</b>, clear one Mark. While any Mark is unpaid you cannot be crowned.</div>
+      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, and <b>no repeat Rat</b>. No absolution: it only leaves you when a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -680,14 +681,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless). If one's already on the board, he simply relocates (not a death).</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
-      <div class="cost cost--free">0</div>
-      <div class="name">Lay Low</div>
-      <div class="desc">The one free Play: step off the streets for the Day. Collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and swap your Turn Token for the lowest left in <b>tomorrow's set</b>. No more Plays, and no Puppeteer loans, until tomorrow.</div>
+      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless), or relocate him there if he's already out (not a death).</div>
     </div>
 
     <div class="sig">
@@ -806,17 +800,22 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any number of Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: walk in, take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels to a connected District (Barrels may travel alone). Rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload</div>
       <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost cost--free">0</div>
+      <div class="name">Lay Low</div>
+      <div class="desc">End your Day, the one free Play: collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and take the lowest Turn Token left in <b>tomorrow's set</b>. No Plays, no Puppeteer loans, until tomorrow.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
@@ -828,17 +827,17 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark at a time. <b>Loan:</b> Take <b>$1,500</b> + a <b>Mark</b> (no limit; 7 in supply). <b>Square Up:</b> Pay <b>$2,000</b>, clear one Mark. While any Mark is unpaid you cannot be crowned.</div>
+      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid. Take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, and <b>no repeat Rat</b>. No absolution: it only leaves you when a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b> at the Reckoning, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy the city, one envelope at a time. Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
+      <div class="desc">Pay <b>$2,500</b> for <b>1 permanent Influence</b> to your Reserves. Ceiling <b>10</b>, and 10 is the crown.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
@@ -859,14 +858,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Rise</div>
-      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless). If one's already on the board, he simply relocates (not a death).</div>
-    </div>
-
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
-    <div class="play play--end">
-      <div class="cost cost--free">0</div>
-      <div class="name">Lay Low</div>
-      <div class="desc">The one free Play: step off the streets for the Day. Collect <b>$100</b> per marker left in your Ledger (Odd Jobs), clear them to Reserves, and swap your Turn Token for the lowest left in <b>tomorrow's set</b>. No more Plays, and no Puppeteer loans, until tomorrow.</div>
+      <div class="desc"><b>Place your Boss in any Safe District</b> (Controlled or Defenseless), or relocate him there if he's already out (not a death).</div>
     </div>
 
     <div class="sig">
@@ -874,7 +866,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play">
         <div class="cost">1</div>
         <div class="name">Plunder</div>
-        <div class="desc"><b>Special Attack:</b> Roll Muscle. Each hit steals 1 liquor barrel instead of killing. Carry them off if you Advance (dropped if you Fall Back). Occupier hits still kill. No Heat. May replace your Ambush at the crossing: same cost, still silent.</div>
+        <div class="desc"><b>Special Attack:</b> Roll Muscle; each hit steals 1 barrel instead of killing (Occupier hits still kill). Carried off on Advance, dropped on Fall Back. No Heat. May replace your Ambush: same cost, still silent.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>

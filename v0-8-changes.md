@@ -1539,3 +1539,23 @@ work.
 No mechanical changes; every ruling above survives, just shorter. Files: Rulebook only (turn box,
 Plays table, Standoff note). Playbooks, Guide, and Turn Structure board were already terse —
 untouched.
+
+### Addendum (2026-08-01): Playbooks back under height — CLOSING TIME folded into LOGISTICS
+
+Adding Lay Low had pushed every card front past the 925px print budget (fronts measured 84–100px
+over; the CSS comment's "tallest real content is 917" predated the section). Recovered in three
+moves, verified by headless-browser measurement of every card:
+
+- **CLOSING TIME is gone; Lay Low is the last LOGISTICS entry** (Nick's call). Slightly loose
+  thematically, but it is the shut-up-shop-for-the-night step of running the operation, and it
+  balances the sections 4/4/3. Its desc also tightened ("No Plays, no Puppeteer loans, until
+  tomorrow" kept — the loan-block is load-bearing). Saved a section header + row (~42px).
+- **Shared desc trims ×4 cards:** Move, Beg, Rat, Bribe, Rise each lost their flabbiest clause
+  (e.g. Bribe's "Buy the city, one envelope at a time", Rat's "No absolution"); Vipers' Whispers
+  trait and Irish Plunder lost a line each. No rules content dropped.
+- **Spacing: .play padding 6→5px, .sec top margin 13→11px.** Invisible per row, ~32px per card
+  across 13 rows + 3 headers.
+
+All four fronts now measure 918/925px (7px slack — the design previously ran at 8px); backs 867px.
+CSS height comment updated to match. Print PDFs need regenerating (Build PDFs.cmd is
+Windows-side).
