@@ -1610,3 +1610,23 @@ moves, verified by headless-browser measurement of every card:
 All four fronts now measure 918/925px (7px slack — the design previously ran at 8px); backs 867px.
 CSS height comment updated to match. Print PDFs need regenerating (Build PDFs.cmd is
 Windows-side).
+
+### Addendum (2026-08-01): mobile clipping fixed — the card box flexes on screen, print geometry is now a constant
+
+Nick's phone screenshot: the live Playbooks clipped the card bottoms (Consigliere gone) on iOS.
+Cause: mobile font metrics wrap ~4 lines more than desktop Chromium, overrunning the fixed
+925px + overflow:hidden box. Reproduced under iPhone emulation (fronts hit 970–1000px).
+
+Fix decouples the two jobs the fixed height was doing:
+- **Screen: `.card` is now `min-height:925px`** — a platform that wraps wider grows the card
+  instead of clipping it. Desktop still fits inside 925, so nothing changes there.
+- **Print: the pagination script no longer measures the live card.** It zooms every clone by the
+  same constant box (474×969) and re-pins clones to `height:925px`, so all pages share one zoom
+  regardless of what the screen did — duplex alignment is now guaranteed by construction, not by
+  every platform happening to fit.
+
+Does the mobile overflow translate to print? **No** — the PDFs are built with desktop Chrome
+(tools/build_pdfs.ps1), whose metrics fit at 918/925; and with the constant-zoom change, even a
+platform that overran on screen would print at the correct shared scale (clipping that card's
+bottom rather than desyncing the sheet). Verified: desktop and iPhone emulation both show all
+content inside the card border, and all 8 print clones carry the identical zoom/height.

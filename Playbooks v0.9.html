@@ -82,12 +82,14 @@ a:hover{color:var(--gold-bright)}
 .card{
   position:relative;
   width:470px;
-  /* FIXED height so every card is an identical box. The print script scales by
-     min(A5W/w, A5H/h); all cards share a width, so HEIGHT always won and each
-     card got its own zoom - a short card rendered WIDER and the two sides of a
-     duplex sheet could not line up. Content-box: 925 + 40 padding + 4 border
-     = 969 offsetHeight. Tallest real content is 918, so this leaves 7px. */
-  height:925px;
+  /* MIN height: on screen the card may grow if a platform's font metrics wrap
+     wider (iOS wraps ~4 lines more than desktop Chromium and used to clip at
+     the old fixed height). Print is unaffected: the print script no longer
+     measures the live card - it zooms every clone by the same constant box
+     (474 x 969: content 925 + 40 padding + 4 border) and re-pins the clone to
+     height:925px, so duplex sides always line up. Tallest desktop content is
+     918, so print keeps 7px slack. */
+  min-height:925px;
   background:linear-gradient(var(--panel-a),var(--panel-b));
   border:2px solid var(--gold-line);
   border-radius:0;            /* sharp: prototype is guillotined, not corner-punched */
@@ -960,15 +962,17 @@ a:hover{color:var(--gold-bright)}
 <script>
 (function(){
   var MM=96/25.4, A5W=148*MM, A5H=210*MM, FIT=0.94;
+  /* Fixed print box (see .card comment): every clone gets the SAME zoom, so a
+     card that grew on screen (mobile wraps) cannot desync a duplex sheet. */
+  var CARD_W=474, CARD_H=969, ZOOM=Math.min(A5W/CARD_W,A5H/CARD_H)*FIT;
   function build(){
     var old=document.getElementById('__printpages'); if(old) old.remove();
     var pages=document.createElement('div'); pages.id='__printpages';
     document.querySelectorAll('[data-card]').forEach(function(card){
-      var w=card.offsetWidth,h=card.offsetHeight; if(!w||!h) return;
-      var zoom=Math.min(A5W/w,A5H/h)*FIT;
       var page=document.createElement('div');
       page.style.cssText='width:'+A5W+'px;height:'+A5H+'px;overflow:hidden;box-sizing:border-box;page-break-after:always;break-after:page;background:#19130c;display:flex;justify-content:center;align-items:center';
-      var clone=card.cloneNode(true); clone.style.margin='0'; clone.style.zoom=zoom;
+      var clone=card.cloneNode(true); clone.style.margin='0'; clone.style.zoom=ZOOM;
+      clone.style.height='925px'; clone.style.minHeight='0';
       page.appendChild(clone); pages.appendChild(page);
     });
     document.body.appendChild(pages);
