@@ -1437,3 +1437,34 @@ the race; not worth it.
 are spendable "on their next Play, or right now if they're Pinned" — a defender at the Standoff is
 neither. Strict RAW says no ambush-by-loan; if table play wants the drama of a rival bankrolling
 your defence mid-raid, that line needs widening. Flagged, undecided.
+
+## 2026-08-01 — Lay Low is a Play (Cost 0), and a loan can fire the Ambush
+
+Two rulings from Nick, finishing the spent-out/Laid-Low thread:
+
+**1. Lay Low is now an explicit Play, the only one that costs 0.** The teaching problem was *when*
+you lay low; the fix is structural, not another note: every turn demands a Play, Lay Low is the one
+free Play, therefore it necessarily happens *on your turn* — the ambiguity can't arise. Added to all
+four Playbook cards as a new CLOSING TIME section (Cost 0: Odd Jobs $100/marker, clear Ledger to
+Reserves, swap your Turn Token for the lowest in tomorrow's set, then no Plays and no Puppeteer
+loans until tomorrow — Nick's wording, plus the Odd Jobs step his draft omitted). Rulebook turn box
+reframed to match: "Make a Play... or make the one Play that costs nothing", exit box retitled
+"Lay Low (Cost: 0): the Play that ends your Day", and yesterday's "a turn, not a reflex" note is now
+"a Play, not a reflex".
+
+**2. The Puppeteer-Ambush watch-item is resolved: YES, a loan can fund an Ambush.** Nick's call,
+for consistency and teaching — lent markers "spend as their own" shouldn't carry a hidden combat
+exception. Rulebook Cooperation now lists the Standoff alongside the Pin as a spend-now moment, and
+the Risk line names the Ambush explicitly, because the consequence has teeth: the Ambush marker IS
+the fight's Heat marker, so a lender who bankrolls a defence locks **their own** marker to the
+Track and becomes the name the law reads. Guide updated in two places: the proxy-war bullet prices
+the new play ("bankrolling a defence buys the law's attention at the door"), and the Duck Window
+now warns raiders to **count the duck's friends' Ledgers too** — a spent-out crew with a willing
+partner on the street has teeth on credit; only Laid Low is past lending.
+
+Strategic net: the duck window narrows politically (a duck with allies isn't fully a duck), but the
+lender pays in Heat-ownership, which keeps the mercy priced. The Playbook Puppeteer card note now
+reads "even mid-fight: another volley, or the Ambush itself."
+
+Files: Playbooks (4× CLOSING TIME section, 4× Puppeteer note), Rulebook (turn box ×3 spots,
+Cooperation ×2), Kingpin's Guide (Duck Window, proxy-war bullet), this changelog.
