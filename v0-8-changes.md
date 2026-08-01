@@ -1255,6 +1255,10 @@ shooting; Plunder is the deliberate "no Heat, ever" trait, so a Plunder-Ambush s
 silent**. Flagged in the Rulebook as the exception to the Ambush's new price. (Open if Nick disagrees:
 should the Irish face the duck too? Left as-is to avoid a silent Irish rebalance.)
 
+> **RESOLVED 2026-08-01: Nick ruled it — cost yes, Heat no.** A Plunder-Ambush now costs 1 from the
+> Ledger like any Ambush (the Irish face the duck), but stays silent: they aren't *firing* first, so
+> the Heat exception stands. See the entry at the end of this file.
+
 ### Figures (Combat Simulator model, ported to Python and validated against the printed Guide table)
 
 - **The take-rate tables are unchanged.** A funded strong defender still Ambushes, so Invader
@@ -1379,3 +1383,23 @@ watch-items in the BUILT entry:
 Files: Playbooks (4 card backs), Rulebook (1 line), Kingpin's Guide (Ambush row, duck row
 cross-ref, Duck Window section, Part IV line). Combat Simulator checked — already correct.
 mk-online bundle still out of sync (compiled source outside the repo).
+
+## 2026-08-01 — Plunder-on-Ambush: cost yes, Heat no (Nick's ruling)
+
+The BUILT entry left Plunder-on-Ambush **free and silent** as the one exception to the Ambush's
+price, with an open question flagged: should the Irish face the duck too? Nick ruled: **the cost
+exception goes, the Heat exception stays.**
+
+- **Cost 1 from the Ledger, like any Ambush.** A spent-out or Laid-Low Irish crew can't rob the
+  crossing any more than anyone else can shoot it — the duck is universal now, no silent Irish
+  privilege at the Standoff.
+- **Still no Heat.** Plunder's "never generates Heat" identity is untouched, and the reasoning is
+  thematic and mechanical at once: nobody *fired*. Which produces a real wrinkle worth the text it
+  costs: a Plunder-Ambush does **not** claim the fight's first shot, so the one Heat marker is
+  still on the table — it lands on the Invader the moment he Opens Fire. The Irish are the only
+  crew that can hurt an invader at the crossing *and* leave him holding the Heat if he presses on.
+
+Files: Rulebook (Plunder cell: cost + the first-shot-still-open clause), Playbooks (Irish card:
+"May replace your Ambush at the crossing: same cost, still silent"), Kingpin's Guide (Part IV
+"Plunder is free" → "Plunder is silent, Ambush included"). Resolution note added under the BUILT
+entry's plunder paragraph. Combat Simulator unaffected (it models invader-side Plunder only).
