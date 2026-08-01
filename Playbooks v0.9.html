@@ -330,7 +330,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play">
         <div class="cost">2</div>
         <div class="name">Hit</div>
-        <div class="desc">While Pinned in a rival District, launch a special attack: if you score any hits, the rival <b>Boss</b> takes the first hit. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Draws Heat like any Open Fire, only as the first shot.</div>
+        <div class="desc">While Pinned in a rival District, launch a special attack: if you score any hits, the rival <b>Boss</b> takes the first hit. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Heat as per Open Fire: only if it's the fight's first shot.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
@@ -379,7 +379,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
-      <div class="bonus-cell"><div class="bonus-num">+2</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -400,12 +400,12 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
@@ -551,7 +551,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
-      <div class="bonus-cell"><div class="bonus-num">+2</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -572,12 +572,12 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
@@ -723,7 +723,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
-      <div class="bonus-cell"><div class="bonus-num">+2</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -744,12 +744,12 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
@@ -895,7 +895,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
-      <div class="bonus-cell"><div class="bonus-num">+2</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -916,12 +916,12 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush</div><div class="desc desc--sm">+1 Threat on the first roll. Pins the Invader. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District. Abandon Safehouse and Liquor.</div></div>
 
     <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Invader takes Heat for any kills this fight (once, not per kill).</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire</div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and repeats this choice each turn until it resolves, there is no fresh Standoff, so the Occupier cannot Ambush again.</div>

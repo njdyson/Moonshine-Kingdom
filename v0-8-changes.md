@@ -1340,3 +1340,42 @@ rule and the Police-Raids overflow note. Files touched: Rulebook (Ambush, Open F
 worked example, Hit), Kingpin's Guide (choice bars, asymmetry note, odds table, Principles 1 & 3,
 Playbook rows, Part IV table + prose, Rat, liquor-defense, methodology), Playbooks (Hit), Combat
 Simulator. mk-online bundle still out of sync (compiled source outside the repo).
+
+## 2026-08-01 — Ambush-rework sync audit: Playbook cards caught two rules behind
+
+A review pass over the Ambush/Heat rework found the **Playbooks combat quick-reference cards**
+(all four card backs) were never updated by either combat commit — they still showed the rules
+from two revisions ago:
+
+- **Ambush: Cost 0, no Heat** → now **Cost 1** with the fire icon, "Firing first, the fight's
+  Heat is yours. Spent out or Laid Low? No Ambush."
+- **Safehouse (Occ.): +2** → **+1** (the `153b77a` stacking rework never reached the cards).
+- **Open Fire: "Invader takes Heat for any kills this fight (once, not per kill)"** — the
+  kill-attribution rule deleted in `f76bef2` → now the first-shot rule: "Only the fight's first
+  shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed."
+- Sicilian **Hit** heat note tightened to "Heat as per Open Fire: only if it's the fight's
+  first shot."
+
+**Past-language sweep** (rules text must read as law, not as a diff): Rulebook Plunder-on-Ambush
+"the Ambush's *new* price" → "the Ambush's price"; Guide Part IV "Guns are never silent *now*"
+→ "Guns are never silent". (Guide lines like "Rise no longer rebuilds the house" are deliberate
+design-history voice in strategy prose and were left.)
+
+**Guide: the duck analysis is now written down, both sides of it.** New Occupier's-Playbook
+subsection **"The Duck Window: Timing the Lay Low"** capturing Nick's read, which matches the
+watch-items in the BUILT entry:
+
+1. **Small-crew Fold dominance:** one die's Ambush averages under a kill whatever the bonuses, a
+   fat bill at 1 marker + the fight's Heat — the Ambush row now says the 30–50-point swing rides
+   on real muscle, and a 1–2-body crew should Fold unless the block is a crown.
+2. **The window is timing arithmetic, not a panic:** a raid needs Move + a marker per volley, and
+   a duck still returns fire with Safehouse/Boss intact — a rival on one marker can't touch a
+   defended block, two buy one volley. Laying low a Play or two early behind garrisons risks
+   almost nothing; laying low at noon on full rival Ledgers is what the ~30-point discount prices.
+3. **The real predator is the Rum re-arm:** Kickbacks hand +3 Plays at dusk after rivals are laid
+   low (and a laid-low crew can't even be Puppeteered a marker); he wears Greed-Tax + first-shot
+   Heat but raids ducks with markers nobody budgeted for. "Count his barrels, not his markers."
+
+Files: Playbooks (4 card backs), Rulebook (1 line), Kingpin's Guide (Ambush row, duck row
+cross-ref, Duck Window section, Part IV line). Combat Simulator checked — already correct.
+mk-online bundle still out of sync (compiled source outside the repo).
