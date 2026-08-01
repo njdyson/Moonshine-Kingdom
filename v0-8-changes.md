@@ -1568,3 +1568,45 @@ Left open rather than folded into an unrelated commit.
 
 Files: `mk-online-rules-sync.md` (§6 marked built, checklist audited and ticked),
 `mk-online/dist/` (rebuilt bundle).
+
+## 2026-08-01 — Wording pass: Lay Low joins the Plays table, the Calls note goes on a diet
+
+Nick's read on the two entries above: concept right, prose wrong — both notes over-explain a
+simple idea until it sounds complicated ("a Play, not a reflex" answers a question no fresh
+reader would ever ask). The framework already teaches it; the terms in the right places do the
+work.
+
+- **Lay Low is now a table entry, not a special box.** The Rulebook turn-exit box is dissolved;
+  Lay Low sits at the bottom of the Plays table under its own header ("The Free Play (Cost: 0)")
+  with the same a/b/c steps and one short boundary note ("Broke is not Laid Low: ..."). Sitting
+  in the list with Move/Recruit/Trade does the teaching the old note argued for: a normal Play,
+  the only free one, and the only option left at 0 Influence. Cut as derivable: the
+  broke-both-sides token-order consequence and the return-fire-is-free aside (Combat owns both).
+- **"One Play, many Calls" halved.** Same definition, half the words: the Move is the only Play,
+  everything inside it is a Call, a Call may cost money but never your turn, and defending is a
+  Call so it is always available. Dropped the Reserves/Heat-Track settling detail — the Ambush
+  and Open Fire entries each state their own Heat handling in place.
+
+No mechanical changes; every ruling above survives, just shorter. Files: Rulebook only (turn box,
+Plays table, Standoff note). Playbooks, Guide, and Turn Structure board were already terse —
+untouched.
+
+### Addendum (2026-08-01): Playbooks back under height — CLOSING TIME folded into LOGISTICS
+
+Adding Lay Low had pushed every card front past the 925px print budget (fronts measured 84–100px
+over; the CSS comment's "tallest real content is 917" predated the section). Recovered in three
+moves, verified by headless-browser measurement of every card:
+
+- **CLOSING TIME is gone; Lay Low is the last LOGISTICS entry** (Nick's call). Slightly loose
+  thematically, but it is the shut-up-shop-for-the-night step of running the operation, and it
+  balances the sections 4/4/3. Its desc also tightened ("No Plays, no Puppeteer loans, until
+  tomorrow" kept — the loan-block is load-bearing). Saved a section header + row (~42px).
+- **Shared desc trims ×4 cards:** Move, Beg, Rat, Bribe, Rise each lost their flabbiest clause
+  (e.g. Bribe's "Buy the city, one envelope at a time", Rat's "No absolution"); Vipers' Whispers
+  trait and Irish Plunder lost a line each. No rules content dropped.
+- **Spacing: .play padding 6→5px, .sec top margin 13→11px.** Invisible per row, ~32px per card
+  across 13 rows + 3 headers.
+
+All four fronts now measure 918/925px (7px slack — the design previously ran at 8px); backs 867px.
+CSS height comment updated to match. Print PDFs need regenerating (Build PDFs.cmd is
+Windows-side).
