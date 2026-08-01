@@ -1630,3 +1630,11 @@ Does the mobile overflow translate to print? **No** — the PDFs are built with 
 platform that overran on screen would print at the correct shared scale (clipping that card's
 bottom rather than desyncing the sheet). Verified: desktop and iPhone emulation both show all
 content inside the card border, and all 8 print clones carry the identical zoom/height.
+
+### Addendum (2026-08-01): Lay Low down to two steps, Ambush caveat dropped
+
+Nick's trim of the Rulebook table entry: collecting Odd Jobs and clearing the Ledger are one
+physical motion, so they're now one step ("clear each unspent marker... collecting $100 apiece"),
+and "only your Ambush is stood down" is gone — doubly redundant, since Laying Low empties the
+Ledger (nothing left to pay the Ambush's 1) and the Combat section states it explicitly anyway.
+Playbook cards already read as the merged flow; untouched.
