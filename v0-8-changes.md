@@ -1689,3 +1689,10 @@ Added: Rulebook Influence intro — "Markers are open information: anyone may co
 anytime" (turns the floor bluff into a punishable one, not hidden info; also hardens the Guide's
 existing count-the-duck's-friends and Kickback-capacity reads). Guide Handshake bullet — teeth
 run out deal by deal; count his promises as well as his rungs.
+
+### Addendum (2026-08-01): open information recast as a physical rule
+
+Nick's framing: markers were always open by construction — every legal zone (Ledger board with
+Reserves, Heat Track, Job stakes, deal stakes) is on the table, so the real rule is that markers
+never leave those zones. The Rulebook clause now says so: "they only ever sit in plain view...
+never palmed, never pocketed, and anyone may count anyone's, anytime."
