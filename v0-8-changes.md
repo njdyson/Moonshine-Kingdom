@@ -1507,3 +1507,13 @@ all inside the one Play that moved in" (×4 cards).
 Files: Rulebook (Standoff note, Pinned intro, Lay Low note), Playbooks (4× pin-note), Kingpin's
 Guide (Duck Window). "Call" is the proposed term — one word, fits the house voice ("the Occupier
 answers", "run the read", "make the call"); trivial to rename if Nick prefers another.
+
+### Addendum (2026-08-01): "Call" confirmed, and the loan-block is load-bearing
+
+Nick confirmed the term **Call**. He also spotted why the Lay Low Play's "no Puppeteer loans until
+tomorrow" clause matters more than it looks: with Calls defined as not-Plays, a lawyer could argue
+a Laid-Low crew may still Ambush on a *borrowed* marker ("the Ambush is a Call, and Lay Low only
+forbids Plays"). The loan-block closes that route at the source — the marker can never arrive.
+So the Laid-Low duck is sealed twice over: its own Ambush is stood down by rule, and it cannot be
+armed by a friend. Free Calls (answering the Standoff, returning fire) remain untouched, which is
+the intended shape: a crew that's gone home can defend itself but cannot spring anything.
