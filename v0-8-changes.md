@@ -1403,3 +1403,37 @@ Files: Rulebook (Plunder cell: cost + the first-shot-still-open clause), Playboo
 "May replace your Ambush at the crossing: same cost, still silent"), Kingpin's Guide (Part IV
 "Plunder is free" → "Plunder is silent, Ambush included"). Resolution note added under the BUILT
 entry's plunder paragraph. Combat Simulator unaffected (it models invader-side Plunder only).
+
+## 2026-08-01 — Spent out vs Laid Low: the timing is now load-bearing, so it's now written down
+
+Nick's edge case: an Ambush fired on your **last** Ledger marker. Does the defender Lay Low on the
+spot, mid-firefight (thematically odd, and a race if the invader also runs dry)?
+
+**Resolution: the existing rules already handle it — nothing changed mechanically.** A firefight
+resolves entirely inside the invader's Play; Lay Low is a *turn*, taken when the rotation reaches
+you and you have no Play left to make, never a reflex triggered at 0 Influence. The broke defender
+fights the battle out (return fire is free), then steps off when their seat comes up. If both crews
+leave a fight broke, tomorrow's tokens fall in today's turn order — deterministic, no mid-fight
+token claims.
+
+**Why it needs text now when it never did before:** pre-rework, "0 Influence" and "Laid Low" were
+indistinguishable states — neither could do anything, so *when* you formally stepped off never
+mattered inside a round. The Ambush cost (and the Puppeteer boundary) split them: a spent-out crew
+still takes its turn and can still accept a loan; a Laid-Low crew is off the street past even that.
+The designer himself misread it, which is the test for a teaching gap. Added:
+
+- **Rulebook**, Lay Low turn-exit box: "Laying Low is a turn, not a reflex" note (empty Ledger
+  fights on; step off on your turn; broke-both-sides → tokens in turn order).
+- **Guide**, Duck Window: the two-duck-states distinction folded into the timing paragraph.
+
+**Accepted timing consequence, on the record:** a full 5-marker Ledger day runs ~6 rotations, and
+the last lap is just players taking a turn to step off. That lap is not dead air by design: it is
+where the token race resolves (Lay Low order = tomorrow's initiative), where Odd Jobs pay out, and
+it is the tail of the Duck Window — the gap between a crew's last Play and its Lay Low is exactly
+when it can be raided as a duck. Shortening it (e.g. auto-lay-low at 0) would delete the window and
+the race; not worth it.
+
+**Watch-item (RAW ambiguity, nothing built):** can a Puppeteer loan fund an *Ambush*? Lent markers
+are spendable "on their next Play, or right now if they're Pinned" — a defender at the Standoff is
+neither. Strict RAW says no ambush-by-loan; if table play wants the drama of a rival bankrolling
+your defence mid-raid, that line needs widening. Flagged, undecided.
