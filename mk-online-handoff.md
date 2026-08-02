@@ -39,7 +39,7 @@ The headline shape of what the app is missing, so you can scope the work before 
 - **Cooperation reworked (v0.9)**: Puppeteering only to a rival who hasn't Laid Low, who may refuse;
   lent markers are spendable immediately *including mid-firefight*, and unspent ones return to the
   lender at Lay Low. Binding Handshakes expire at the end of the current Day. *(2026-08-02:
-  superseded — **Puppeteering is cut entirely**, and a broken Handshake now costs a **Handshake
+  superseded — **Puppeteering is cut entirely**, and a broken Handshake now costs a **Liar
   card** (&minus;1 Respect at scoring, permanent, stacking) instead of a staked marker. Port spec in
   `mk-online-rules-sync.md` §7.)*
 

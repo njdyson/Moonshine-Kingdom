@@ -1714,9 +1714,9 @@ deletion** — the whole thread (loans fund the Ambush, count the duck's friends
 lawyer-loop seal) is dead letters, and the "spent out is not Laid Low" duck rule stands on its own:
 nothing re-arms a dry defender mid-fight now but his own Kickbacks.
 
-**2. The Handshake stakes nothing; breaking one takes a Handshake card.** A deal is sealed with an
+**2. The Handshake stakes nothing; breaking one takes a Liar card.** A deal is sealed with an
 actual handshake — no marker, no Play, no cost. Broken (any reason, third-party sabotage included),
-the breaker takes a **Handshake card** from the supply: **−1 Respect when the books open,
+the breaker takes a **Liar card** from the supply: **−1 Respect when the books open,
 permanent, stacking, no removal path** (8 in the box). Why this beats the staked marker:
 - **The floor-of-5 rule dies with the stake.** Both 2026-08-01 addenda above (theatre at the floor,
   multi-stake teeth running out deal by deal) were patches on the same wound — collateral that
@@ -1736,8 +1736,15 @@ deleted, Handshake rewritten, components + setup + Reckoning tally + Lay Low + B
 item about its bulk — Handshake act rewritten ×4 at Cost 0, Lay Low desc ×4), Kingpin's Guide
 (Part V lede down to two instruments, Puppeteering chapter deleted, Handshake strategy rewritten
 around the card, loan-based conspiracy bullets recast as cash bounties, Blood Oath engine recast
-as cash + Rum Kickbacks, Duck Window de-looped, Kingpin's Note), Cards deck (8 Handshakes on the
+as cash + Rum Kickbacks, Duck Window de-looped, Kingpin's Note), Cards deck (8 Liar cards on the
 debts geometry, sheets 5–6, shield-1 plate; masthead corrected to the 7 Marks actually printed),
 `mk-online-rules-sync.md` §7 (port spec: nothing to port for the cut, scoring-time −1 if deals
 ever ship), handoff docs annotated. Chromium-measured: all 24 cards land on 88.0mm, no overflow;
-the Handshake's 11.5mm rules text is the new tallest among debts.
+the Liar's 11.5mm rules text is the new tallest among debts.
+
+**Naming (same day):** the card is **the Liar**, not "the Handshake card" — the card is the corpse
+of a handshake, and naming the punishment after the ceremony read inverted. "Traitor" was weighed
+and rejected: it poaches the Rat's lane (street betrayal already has a card) and in the Blood Oath
+it wrongly suggests partner-betrayal rather than welching on a deal. The Guide already priced
+"making one of them a liar"; now the phrase is literal — sabotage a rival's deal and you *make him
+a Liar*, card and all. The deal mechanic keeps the name **A Binding Handshake**.
