@@ -5,6 +5,12 @@ handoff time).** This doc exists so a fresh session can pick up the thread witho
 The full reasoning lives in `v0-8-changes.md` (all 2026-08-01 sections plus the 2026-07-31 BUILT
 entries they finish); this is the map, not the territory.
 
+> **2026-08-02 — Puppeteering has since been CUT.** Points 5 and 7 below (loans fund the Ambush;
+> the Lay-Low loan block is load-bearing) described real rules for one day and are now dead
+> letters: there are no loans of any kind, and Handshakes now pay in Respect via Handshake cards.
+> Reasoning in `v0-8-changes.md` (2026-08-02 addendum) and the port spec in
+> `mk-online-rules-sync.md` §7. Everything else in this doc stands.
+
 ---
 
 ## What this session shipped, in dependency order

@@ -38,7 +38,10 @@ The headline shape of what the app is missing, so you can scope the work before 
 - **The Sweep caps a District at 5 Mobsters** at Reckoning (Sicilians are Untouchable and exempt).
 - **Cooperation reworked (v0.9)**: Puppeteering only to a rival who hasn't Laid Low, who may refuse;
   lent markers are spendable immediately *including mid-firefight*, and unspent ones return to the
-  lender at Lay Low. Binding Handshakes expire at the end of the current Day.
+  lender at Lay Low. Binding Handshakes expire at the end of the current Day. *(2026-08-02:
+  superseded — **Puppeteering is cut entirely**, and a broken Handshake now costs a **Handshake
+  card** (&minus;1 Respect at scoring, permanent, stacking) instead of a staked marker. Port spec in
+  `mk-online-rules-sync.md` §7.)*
 
 **Action item #0 below still stands and is still unanswered** — the source tree for `mk-online/` has
 never been located. Nothing here is portable until it is.

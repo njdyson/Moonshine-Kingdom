@@ -3,17 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moonshine Kingdom: Cards v0.8 (Deeds, Titles &amp; Debts)</title>
+<title>Moonshine Kingdom: Cards v0.9 (Deeds, Titles &amp; Debts)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   Cards v0.8: the 17 cards that are not Jobs:
-     5 Borough Deeds · 3 Titles · 1 Rat · 8 Shylock's Marks
+   Cards v0.9: the 24 cards that are not Jobs:
+     5 Borough Deeds · 3 Titles · 1 Rat · 7 Shylock's Marks
+     · 8 Handshakes
+   (Earlier revisions of this header claimed 8 Marks; the deck
+   has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8): holdings must top out at 14
    Respect, one short of the 15 you need, so nobody takes the
    crown without doing at least one Job. Do not re-add it.
+   Handshakes added in v0.9 when the broken-deal forfeit moved
+   off the Influence ladder and onto Respect: break a deal, take
+   a card, −1 Respect forever. They share the debts geometry.
 
    Reskinned onto the Jobs Cards v0.8 frame: same stock, same
    palette, same double rule, same Cinzel title, same shield
@@ -37,8 +43,10 @@
         debts    : art 38mm · rules 16mm
       Change one band and you must take the millimetres off the
       other; each geometry is sized to its TALLEST card's rules
-      (Harbormaster among holdings, the Rat among debts), so the
-      art can only grow when that one card's text shrinks.
+      (Harbormaster among holdings; among debts it was the Rat
+      until v0.9, when the Handshake arrived at 11.5mm of text
+      and took the crown), so the art can only grow when that
+      one card's text shrinks.
       The two happen to COINCIDE at v0.9: losing the Jobs
       blackout and the absolution clause cut the Rat's rules from
       14.9mm of text to 11.5mm, exactly the Harbormaster's
@@ -249,6 +257,10 @@ body{
    .664 x .844, so a reshoot in the flat 256px style is a straight
    swap. Correct semantically today; cosmetic debt only. */
 .respect[data-respect="-3"]{background-image:url('Art/shield-3.png')}
+/* The Handshake is the Rat's little brother: a price, not a bar.
+   shield-1.png is the same archived 1024px Debts-deck plate family
+   as shield-3.png above; same scale, same glow, same caveat. */
+.respect[data-respect="-1"]{background-image:url('Art/shield-1.png')}
 
 /* ============================================================
    CARD BACKS
@@ -441,7 +453,7 @@ body.trim .card,body.trim .back{border-radius:0}
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1926</div>
   <div class="masthead-title">Deeds, Titles &amp; Debts</div>
-  <div class="masthead-sub">v0.8 &middot; 17 Cards &middot; 5 Deeds &middot; 3 Titles &middot; 1 Rat &middot; 8 Marks</div>
+  <div class="masthead-sub">v0.9 &middot; 24 Cards &middot; 5 Deeds &middot; 3 Titles &middot; 1 Rat &middot; 7 Marks &middot; 8 Handshakes</div>
   <p class="masthead-note">
     Deeds and Titles pay you for what you <b>hold</b>; the Jobs deck pays you for what you <b>do</b>.
     Four Deeds and three Titles are all the ground there is: <b>14 Respect</b>, one short of the 15
@@ -455,7 +467,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">BOROUGH DEEDS</span>
-  <span class="meta">2 Respect each &middot; claimed at Reckoning &middot; sheet 1 of 4</span>
+  <span class="meta">2 Respect each &middot; claimed at Reckoning &middot; sheet 1 of 6</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -511,7 +523,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">STATEN ISLAND &amp; THE TITLES</span>
-  <span class="meta">2 Respect each &middot; Public Enemy No. 1 cut in v0.8 &middot; sheet 2 of 4</span>
+  <span class="meta">2 Respect each &middot; Public Enemy No. 1 cut in v0.8 &middot; sheet 2 of 6</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -565,7 +577,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
-  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 3 of 4</span>
+  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 3 of 6</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -619,7 +631,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
-  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 4 of 4</span>
+  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 4 of 6</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -665,6 +677,116 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
   <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
   <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1926</div></div>
+</div>
+
+<!-- =============================================================
+     SHEETS 5-6: the eight Handshakes, added v0.9 when the
+     broken-deal forfeit moved off the Influence ladder and onto
+     Respect. Taken from the supply the moment a deal breaks;
+     never discarded. All eight fronts and backs are identical,
+     so duplex mirroring is moot on both sheets. Art is the
+     Rulebook's Oath plate (the only handshake in the building);
+     shield-1.png is the archived Debts-deck plate, same family
+     and same cosmetic-debt caveat as the Rat's shield-3.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE HANDSHAKES</span>
+  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 5 of 6</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+</div>
+
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE HANDSHAKES</span>
+  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 6 of 6</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Broken Word</span></div>
+    <h2 class="title">Handshake</h2>
+    <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
+    <div class="rules-label">The Memory</div>
+    <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
+    <div class="flavour">Every deal dies at dusk. A broken one doesn&rsquo;t.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">The<br>Handshake</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
 </div>
 
 </body>

@@ -1696,3 +1696,48 @@ Nick's framing: markers were always open by construction — every legal zone (L
 Reserves, Heat Track, Job stakes, deal stakes) is on the table, so the real rule is that markers
 never leave those zones. The Rulebook clause now says so: "they only ever sit in plain view...
 never palmed, never pocketed, and anyone may count anyone's, anytime."
+
+### Addendum (2026-08-02): Puppeteering CUT; the Handshake pays in Respect
+
+Two changes from Nick, one thesis: **relieve the strain on the central currency so Influence's
+identity comes clean** — your markers fund your Plays, stake your Jobs and buy your crown, and
+nothing else at the table can touch them.
+
+**1. Puppeteering is cut from the game.** It was the single biggest source of edge cases (the
+finger rule, two-lender Plays, the loan-at-the-Standoff, the unspent-loan return at Lay Low, the
+Laid-Low lending block that 2026-08-01 point 7 called load-bearing — all gone with it), and, cool
+as it was, it over-armed kingmakers: transferable tempo let a crew out of the running decide a
+firefight, or the crown, with somebody else's afternoon. The proxy-war tricks it powered have
+cash-shaped cousins (bounties pay only on results and cost the payer real money), so the politics
+survive; the free ammunition doesn't. This **resolves the 2026-08-01 Puppeteer-Ambush ruling by
+deletion** — the whole thread (loans fund the Ambush, count the duck's friends' Ledgers, the
+lawyer-loop seal) is dead letters, and the "spent out is not Laid Low" duck rule stands on its own:
+nothing re-arms a dry defender mid-fight now but his own Kickbacks.
+
+**2. The Handshake stakes nothing; breaking one takes a Handshake card.** A deal is sealed with an
+actual handshake — no marker, no Play, no cost. Broken (any reason, third-party sabotage included),
+the breaker takes a **Handshake card** from the supply: **−1 Respect when the books open,
+permanent, stacking, no removal path** (8 in the box). Why this beats the staked marker:
+- **The floor-of-5 rule dies with the stake.** Both 2026-08-01 addenda above (theatre at the floor,
+  multi-stake teeth running out deal by deal) were patches on the same wound — collateral that
+  could run out. A card can't run out of teeth: the poorest crew's word now costs exactly what the
+  richest crew's does. With no forfeit, **the Influence floor itself is gone from the rulebook**;
+  no rule destroys a marker any more.
+- **It prices a broken word in the win condition's own unit**, the same shape the Rat's −3 landed
+  on (2026-07-27): free-ish for a crew far from 15, mortal at 14, and no table argument about
+  what's owed — the supply deals the card, nobody adjudicates.
+- **Deals are a shade more fragile, deliberately.** −1 Respect is a lighter tooth than a forfeited
+  marker mid-game, so more deals get made and a few more get broken; but the card never washes
+  off, which is the thematically correct half: a broken handshake costs your *reputation*.
+
+Cascaded: Rulebook (Cooperation chapter retitled *Deals in the Smoke*, Puppeteering section
+deleted, Handshake rewritten, components + setup + Reckoning tally + Lay Low + Blood Oath's
+"strongest weapon" bullet, TOC), Playbooks (Puppeteer act row deleted ×4 — closing the open
+item about its bulk — Handshake act rewritten ×4 at Cost 0, Lay Low desc ×4), Kingpin's Guide
+(Part V lede down to two instruments, Puppeteering chapter deleted, Handshake strategy rewritten
+around the card, loan-based conspiracy bullets recast as cash bounties, Blood Oath engine recast
+as cash + Rum Kickbacks, Duck Window de-looped, Kingpin's Note), Cards deck (8 Handshakes on the
+debts geometry, sheets 5–6, shield-1 plate; masthead corrected to the 7 Marks actually printed),
+`mk-online-rules-sync.md` §7 (port spec: nothing to port for the cut, scoring-time −1 if deals
+ever ship), handoff docs annotated. Chromium-measured: all 24 cards land on 88.0mm, no overflow;
+the Handshake's 11.5mm rules text is the new tallest among debts.

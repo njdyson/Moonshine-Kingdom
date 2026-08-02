@@ -96,7 +96,7 @@ The user wants page numbers **in the printed booklet eventually**, but hit exact
 - Part II: The One Rule That Governs Everything · Heat Is Billed to the Same Account · One Claim a Day Is a Rate, Not a Limit · The Five-Play Ceiling Is a Fiction: The Kickback · The Market Never Moves · The Reverse Snake · The Staring Contest · What the Deck Actually Asks You For · Reading the Board: The Four Lanes · Denial · Overlaps · Three Principles of the Offers · The Four Mobs at the Offers
 - Part III: Two Numbers Run Every Fight · The Standoff: The Whole Game in Two Questions · How Steep Is the Premium? · Three Principles of the Street · The Occupier's Playbook · The Four Mobs at War
 - Part IV: What the Law Hears · What Heat Actually Costs You · How the Raid Picks Its Door · When You Want the Fire · The Rat: A Raid on Demand
-- Part V: Why Deal at All? · What Actually Trades · Puppeteering: The Loan with a Fuse · The Handshake · The Off-Book Sale · Conspiracies · The Frame-Up · Specialist Services · The Blood Oath
+- Part V: Why Deal at All? · What Actually Trades · The Handshake · The Off-Book Sale · Conspiracies · The Frame-Up · Specialist Services · The Blood Oath *(Puppeteering cut 2026-08-02)*
 
 **Watch out:**
 - **"The One Rule That Governs Everything" appears twice** (Part I line ~233 and Part II line ~625). Give them distinct ids (`#brew-one-rule`, `#market-one-rule`) and consider distinct visible titles so the TOC isn't ambiguous.

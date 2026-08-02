@@ -109,6 +109,11 @@ plus 1 spare, so at least one Play is always available.
   now a **safety rail against a bug, not a live rule**, and can land whenever.
   Worth keeping on the list — the moment Handshakes ship, it is load-bearing
   again.
+- **2026-08-02: it never becomes load-bearing.** The Handshake no longer touches
+  Influence at all — a broken deal now costs a **Handshake card** (§7), and no
+  rule in either game destroys a marker any more. The tabletop game dropped its
+  own floor-of-5 clause the same day. The rail is pure belt-and-braces against
+  bugs; keep it or skip it, no rule ever reaches it.
 - Volstead's 3-space Heat Track needs a floor of only 3, so a single floor of 5
   covers both modes with room to spare. No variant-specific clause.
 
@@ -235,6 +240,10 @@ relay at a new junction.
 
 ### 6.5 Puppeteering at the Standoff
 
+> **DEAD 2026-08-02.** Puppeteering is cut from the game entirely (§7). Nothing in
+> this table will ever need porting; it is kept as the record of a rule that
+> existed for two days of rulings and never reached the build.
+
 | # | Likely current behaviour | Now |
 |---|--------------------------|-----|
 | 6.5.1 | Loans spendable on next Play, or mid-Pin | Also spendable **at the Standoff, to pay the Ambush** (or Irish Plunder-Ambush). Lending remains blocked to anyone who has **Laid Low** — that block is what stops "ambush by loan" after stepping off; do not relax it. |
@@ -249,6 +258,54 @@ strongest aggressive line. Minimum bar: bots must not crash into the new Ambush 
 explicit Lay Low Play. See `mk-online-bot-lookahead-handoff.md` before touching evaluation, and
 the Kingpin's Guide "Duck Window" section for the human-readable strategy the bots should at least
 not embarrass themselves against.
+
+## 7. Puppeteering cut; the Handshake pays in Respect (2026-08-02)
+
+Two changes with one purpose: **Influence never crosses the table.** The
+currency's identity is now clean — your markers fund your Plays, stake your
+Jobs and buy your crown, and nothing else at the table can touch them.
+
+### What changed, and why
+
+- **Puppeteering is deleted.** It was the game's single biggest source of edge
+  cases — the finger rule, two-lender Plays, the loan-at-the-Standoff, the
+  unspent-loan return, the Laid-Low lending block — and it over-armed
+  kingmakers: transferable tempo let a crew out of the running decide a
+  firefight, or the crown, with somebody else's afternoon. Every proxy-war
+  trick it powered has a cash-shaped cousin (bounties, off-book payments), and
+  those pay only on results.
+- **The Handshake stakes nothing.** A deal is now sealed with an actual
+  handshake — no marker, no Play, no cost. Breaking it (for **any** reason,
+  third-party sabotage included) takes a **Handshake card** from the supply:
+  **−1 Respect when the books open, permanent, and they stack.** Supply is 8.
+  This kills the floor-of-5 fiddle outright (a boss at the floor used to stake
+  a marker he could not lose, making his word free), and it prices a broken
+  word in the same unit as the win condition, exactly the shape the Rat's −3
+  landed on in §1. Deals are deliberately a shade more fragile: −1 Respect is
+  a lighter tooth than a forfeited marker, and that is the point — the word
+  should bind contenders hardest and cost cowards their reputation, not their
+  engine.
+
+### Required changes
+
+Mostly good news: the build never implemented Cooperation, so the Puppeteering
+cut **cancels port debt rather than creating it**.
+
+| # | Where it bites | Now |
+|---|----------------|-----|
+| 7.1 | 6.2.1's "a loan arriving at the Standoff can re-arm a spent-out defender" | Dead letter. Keep the live-at-the-Standoff duck check (`canAmbush` reading the Ledger is still correct — Kickbacks exist); there is simply no longer any path that re-arms a spent-out defender mid-fight. |
+| 7.2 | 6.4.2's "cannot receive Puppeteer loans until tomorrow" | Dead letter. Lay Low's aftermath is just "no more Plays until tomorrow". |
+| 7.3 | 6.5, the whole section | Cancelled. Nothing to port, ever. |
+| 7.4 | §2's Influence floor of 5 | Never becomes load-bearing (note added there). |
+| 7.5 | — | **If deals ever ship online:** a `handshakeCards[player]` count; Respect scoring subtracts **1 per card at scoring time** (same never-store rule as the Rat's §1.3, and it matters here too — the cards stack). Supply of 8. **No removal path**; do not add one. |
+| 7.6 | — | **Blood Oath, if implemented:** the −1s land in the Alliance's combined Respect — free if 7.5 is a scoring-time modifier. **Volstead, if implemented:** no Respect track, so a broken deal has no tooth there; that is an open design question, not something to invent in the port. |
+
+### Bots
+
+Nothing to unlearn (no bot ever lent a marker) and one cheap heuristic if deals
+ship: a Handshake card is −1 Respect in the win-condition's own unit, so price
+breaking a deal exactly like §1's Rat maths at one third strength — near-zero
+far from 15, mortal at 14.
 
 ## Checklist
 
@@ -324,3 +381,8 @@ not embarrass themselves against.
       them), fold sooner as a duck, hold fire on small garrisons now the shot costs a marker plus
       Heat-ownership, rob the crossing as the Irish, price a duck target into attack candidates,
       and discount the lay-low race by how many markers rivals still hold.
+- [x] **Puppeteering cut (§7)** — nothing to port: Cooperation never existed in the build. The
+      loan caveats woven through §6 (the 6.2.1 re-arm path, the 6.4.2 loan block, all of 6.5)
+      are dead letters; do not implement them when porting anything else.
+- [ ] **If deals ship online: Handshake cards (§7.5)** — per-player count, −1 Respect each at
+      scoring time (never stored), supply of 8, no removal path.
