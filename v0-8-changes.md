@@ -1804,3 +1804,22 @@ prints "Welsher" at 19pt where "Borough" (same 7 characters) already sets clean.
 
 History above is left in the Liar's name on purpose; the deal mechanic is still **A Binding
 Handshake**.
+
+### Addendum (2026-08-02): open information cut; the Currencies page fits again
+
+Nick: the Currencies page overran and the Kingpin's Tip note was printing over the live Ledger
+plate. Measured in headless Chrome before touching it, and the overlap was real but small: the
+note's bottom edge sat **14px past the top of the board**, which is positioned `bottom:60px`
+inside a `padding-bottom:315px` reserve, so the page had no room left to give.
+
+Cut: the **open information** clause, on his read that it is implied anyway. Fair. Every legal
+zone is a board on the table, so "markers never leave them" was describing the components rather
+than adding a rule, and the two motives that justified writing it down (the floor bluff, counting
+the duck's friends' Ledgers) both died with the floor and with Puppeteering. The Guide's
+count-the-Ledgers read still works: nothing was ever hiding those markers.
+
+The intro now ends: *"**Nothing destroys a marker.** What you start with and what you Bribe for
+stays yours all game: markers travel, and they always come home."* Re-measured after the cut: the
+note clears the board by **51px**, page height is exactly 297mm, no A4 overflow. Only the screen
+layout was ever at risk here; under `max-width:900px` and in print the board is `position:static`,
+so it could never collide there.
