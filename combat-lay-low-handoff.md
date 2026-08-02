@@ -7,7 +7,7 @@ entries they finish); this is the map, not the territory.
 
 > **2026-08-02 — Puppeteering has since been CUT.** Points 5 and 7 below (loans fund the Ambush;
 > the Lay-Low loan block is load-bearing) described real rules for one day and are now dead
-> letters: there are no loans of any kind, and Handshakes now pay in Respect via Liar cards.
+> letters: there are no loans of any kind, and Handshakes now pay in Respect via Welsher cards.
 > Reasoning in `v0-8-changes.md` (2026-08-02 addendum) and the port spec in
 > `mk-online-rules-sync.md` §7. Everything else in this doc stands.
 

@@ -1748,3 +1748,59 @@ and rejected: it poaches the Rat's lane (street betrayal already has a card) and
 it wrongly suggests partner-betrayal rather than welching on a deal. The Guide already priced
 "making one of them a liar"; now the phrase is literal — sabotage a rival's deal and you *make him
 a Liar*, card and all. The deal mechanic keeps the name **A Binding Handshake**.
+
+### Addendum (2026-08-02): the Influence floor is actually gone; open information trimmed
+
+The Liar-card entry above declared the floor of 5 dead, but the Rulebook's Influence intro was
+missed in that cascade and still read "A handful of Plays can cost you markers outright, but your
+total **never falls below 5**." Both halves were false as written: no Play costs a marker any more,
+so there is nothing for a floor to catch. Nick called it. The clause is now cut, and with it the
+"the council will take your crown, but it won't take your desk" flourish — with markers
+unlosable, the council can't take the crown either, so the line had stopped meaning anything.
+
+Replaced by the positive statement the rules now actually make: **nothing destroys a marker.** What
+you start with and what you Bribe for stays yours all game; markers lock, cycle, and always come
+home. That is the clean identity the Puppeteering cut was reaching for — Influence funds your
+Plays, stakes your Jobs, buys your crown, and nothing at the table can take it off you.
+
+**Open information kept, one zone shorter.** It was added (2026-08-01) mainly to make a floor bluff
+punishable, and that motive died with the floor; the "count the duck's friends' Ledgers" motive
+died with Puppeteering. It survives on the third leg, which is still load-bearing: the Guide's
+*count the Ledgers still in play before you step out* read, and the spent-out duck test generally,
+both require rivals' markers to be countable. The zone list drops "or a deal" (a Handshake stakes
+nothing now) and reads: Ledger board (Reserves included), Heat Track, or staked on a Job.
+
+Swept for consistency: no other file states a floor or any marker-destroying effect; the Guide and
+Playbooks Handshake text is already the Liar version; `mk-online-rules-sync.md` §2 already recorded
+"the tabletop game dropped its own floor-of-5 clause the same day" — as of this edit that sentence
+is true. `INFLUENCE_FLOOR` in the online build stays as a belt-and-braces clamp against bugs, not a
+rule. Cosmetic leftover, deliberately unchanged: the *Deals in the Smoke* chapter still opens on
+`Art/Rulebook/opt/Puppet.webp`.
+
+### Addendum (2026-08-02): the Liar is renamed the Welsher
+
+Nick's call, and the right one on the language: **Welsher names the offence, Liar named a
+personality.** The card fires whenever a promise goes unmet "for any reason, third-party
+interference included", so a boss can be handed one without ever having lied, but he has
+unambiguously welshed. It also sits in the Rat's register (an underworld character noun, period
+slang) where "Liar" read as flat plain English beside it.
+
+**On the connotation, deliberately accepted.** The verb is marked offensive and ethnic in origin
+by the major dictionaries; the etymology is disputed. This is a private hobby game for a known
+table with no publishing ambition, no offence is intended by the naming, and the call is that
+intent carries. Flagged here rather than buried: **if this ever moves toward publication, revisit
+the Welsher and Shylock together** (Shylock's Marks are the more exposed of the two, being a named
+Jewish moneylender rather than a contested etymology). Chiseler and Four-Flusher were the clean
+period alternatives weighed and set aside.
+
+Cascaded by rename across every live file: Rulebook (components, setup Supply, Reckoning tally,
+Deal Broken, Blood Oath Family Bank), Kingpin's Guide (Part V handshake strategy, the "make a
+welsher of him" reads at 2099 and 2310), Playbooks (Handshake act x4), Cards deck (fronts, backs,
+tier heads, masthead, geometry comments), `mk-online-rules-sync.md` (§2, §7.5's `welsherCards`,
+bot note, checklist), both handoff docs. Rules text is byte-identical apart from the noun, so the
+Chromium-measured 88.0mm and the 11.5mm debts geometry are untouched. Card titles carry no risk
+either: the front title is a fixed 7mm band already printing "Staten Island" at 13pt, and the back
+prints "Welsher" at 19pt where "Borough" (same 7 characters) already sets clean.
+
+History above is left in the Liar's name on purpose; the deal mechanic is still **A Binding
+Handshake**.

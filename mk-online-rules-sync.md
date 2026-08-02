@@ -110,7 +110,7 @@ plus 1 spare, so at least one Play is always available.
   Worth keeping on the list — the moment Handshakes ship, it is load-bearing
   again.
 - **2026-08-02: it never becomes load-bearing.** The Handshake no longer touches
-  Influence at all — a broken deal now costs a **Liar card** (§7), and no
+  Influence at all — a broken deal now costs a **Welsher card** (§7), and no
   rule in either game destroys a marker any more. The tabletop game dropped its
   own floor-of-5 clause the same day. The rail is pure belt-and-braces against
   bugs; keep it or skip it, no rule ever reaches it.
@@ -276,7 +276,7 @@ Jobs and buy your crown, and nothing else at the table can touch them.
   those pay only on results.
 - **The Handshake stakes nothing.** A deal is now sealed with an actual
   handshake — no marker, no Play, no cost. Breaking it (for **any** reason,
-  third-party sabotage included) takes a **Liar card** from the supply:
+  third-party sabotage included) takes a **Welsher card** from the supply:
   **−1 Respect when the books open, permanent, and they stack.** Supply is 8.
   This kills the floor-of-5 fiddle outright (a boss at the floor used to stake
   a marker he could not lose, making his word free), and it prices a broken
@@ -297,13 +297,13 @@ cut **cancels port debt rather than creating it**.
 | 7.2 | 6.4.2's "cannot receive Puppeteer loans until tomorrow" | Dead letter. Lay Low's aftermath is just "no more Plays until tomorrow". |
 | 7.3 | 6.5, the whole section | Cancelled. Nothing to port, ever. |
 | 7.4 | §2's Influence floor of 5 | Never becomes load-bearing (note added there). |
-| 7.5 | — | **If deals ever ship online:** a `liarCards[player]` count; Respect scoring subtracts **1 per card at scoring time** (same never-store rule as the Rat's §1.3, and it matters here too — the cards stack). Supply of 8. **No removal path**; do not add one. |
+| 7.5 | — | **If deals ever ship online:** a `welsherCards[player]` count; Respect scoring subtracts **1 per card at scoring time** (same never-store rule as the Rat's §1.3, and it matters here too — the cards stack). Supply of 8. **No removal path**; do not add one. |
 | 7.6 | — | **Blood Oath, if implemented:** the −1s land in the Alliance's combined Respect — free if 7.5 is a scoring-time modifier. **Volstead, if implemented:** no Respect track, so a broken deal has no tooth there; that is an open design question, not something to invent in the port. |
 
 ### Bots
 
 Nothing to unlearn (no bot ever lent a marker) and one cheap heuristic if deals
-ship: a Liar card is −1 Respect in the win-condition's own unit, so price
+ship: a Welsher card is −1 Respect in the win-condition's own unit, so price
 breaking a deal exactly like §1's Rat maths at one third strength — near-zero
 far from 15, mortal at 14.
 
@@ -384,5 +384,5 @@ far from 15, mortal at 14.
 - [x] **Puppeteering cut (§7)** — nothing to port: Cooperation never existed in the build. The
       loan caveats woven through §6 (the 6.2.1 re-arm path, the 6.4.2 loan block, all of 6.5)
       are dead letters; do not implement them when porting anything else.
-- [ ] **If deals ship online: Liar cards (§7.5)** — per-player count, −1 Respect each at
+- [ ] **If deals ship online: Welsher cards (§7.5)** — per-player count, −1 Respect each at
       scoring time (never stored), supply of 8, no removal path.

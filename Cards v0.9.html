@@ -11,15 +11,15 @@
 /* ============================================================
    Cards v0.9: the 24 cards that are not Jobs:
      5 Borough Deeds · 3 Titles · 1 Rat · 7 Shylock's Marks
-     · 8 Liars
+     · 8 Welshers
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8): holdings must top out at 14
    Respect, one short of the 15 you need, so nobody takes the
    crown without doing at least one Job. Do not re-add it.
-   Liar cards added in v0.9 when the broken-deal forfeit moved
+   Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
-   the Liar, −1 Respect forever. They share the debts geometry.
+   the Welsher, −1 Respect forever. They share the debts geometry.
 
    Reskinned onto the Jobs Cards v0.8 frame: same stock, same
    palette, same double rule, same Cinzel title, same shield
@@ -44,7 +44,7 @@
       Change one band and you must take the millimetres off the
       other; each geometry is sized to its TALLEST card's rules
       (Harbormaster among holdings; among debts it was the Rat
-      until v0.9, when the Liar arrived at 11.5mm of text
+      until v0.9, when the Welsher arrived at 11.5mm of text
       and took the crown), so the art can only grow when that
       one card's text shrinks.
       The two happen to COINCIDE at v0.9: losing the Jobs
@@ -257,7 +257,7 @@ body{
    .664 x .844, so a reshoot in the flat 256px style is a straight
    swap. Correct semantically today; cosmetic debt only. */
 .respect[data-respect="-3"]{background-image:url('Art/shield-3.png')}
-/* The Liar is the Rat's little brother: a price, not a bar.
+/* The Welsher is the Rat's little brother: a price, not a bar.
    shield-1.png is the same archived 1024px Debts-deck plate family
    as shield-3.png above; same scale, same glow, same caveat. */
 .respect[data-respect="-1"]{background-image:url('Art/shield-1.png')}
@@ -453,7 +453,7 @@ body.trim .card,body.trim .back{border-radius:0}
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1926</div>
   <div class="masthead-title">Deeds, Titles &amp; Debts</div>
-  <div class="masthead-sub">v0.9 &middot; 24 Cards &middot; 5 Deeds &middot; 3 Titles &middot; 1 Rat &middot; 7 Marks &middot; 8 Liars</div>
+  <div class="masthead-sub">v0.9 &middot; 24 Cards &middot; 5 Deeds &middot; 3 Titles &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
   <p class="masthead-note">
     Deeds and Titles pay you for what you <b>hold</b>; the Jobs deck pays you for what you <b>do</b>.
     Four Deeds and three Titles are all the ground there is: <b>14 Respect</b>, one short of the 15
@@ -680,7 +680,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEETS 5-6: the eight Liars, added v0.9 when the
+     SHEETS 5-6: the eight Welshers, added v0.9 when the
      broken-deal forfeit moved off the Influence ladder and onto
      Respect. Taken from the supply the moment a deal breaks;
      never discarded. All eight fronts and backs are identical,
@@ -690,14 +690,14 @@ body.trim .card,body.trim .back{border-radius:0}
      and same cosmetic-debt caveat as the Rat's shield-3.
      ============================================================= -->
 <div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE LIARS</span>
+  <span class="dia"></span><span class="lbl">THE WELSHERS</span>
   <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 5 of 6</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -706,7 +706,7 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -715,7 +715,7 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -724,7 +724,7 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -733,21 +733,21 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
 </div>
 
 <div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE LIARS</span>
+  <span class="dia"></span><span class="lbl">THE WELSHERS</span>
   <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 6 of 6</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -756,7 +756,7 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -765,7 +765,7 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -774,7 +774,7 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">The Liar</h2>
+    <h2 class="title">The Welsher</h2>
     <div class="art"><img src="Art/Rulebook/opt/Oath.webp" alt=""></div>
     <div class="rules-label">The Memory</div>
     <div class="rules"><span>Taken the moment you <b>break a deal</b>, however it dies.<span class="brk"></span>No absolution: it never leaves you, and they stack.</span></div>
@@ -783,10 +783,10 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Liar</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1926</div></div>
 </div>
 
 </body>
