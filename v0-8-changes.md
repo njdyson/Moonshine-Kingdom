@@ -1823,3 +1823,55 @@ stays yours all game: markers travel, and they always come home."* Re-measured a
 note clears the board by **51px**, page height is exactly 297mm, no A4 overflow. Only the screen
 layout was ever at risk here; under `max-width:900px` and in print the board is `position:static`,
 so it could never collide there.
+
+### Addendum (2026-08-02): the noun "Call" is retired; the Influence economy states its own rule
+
+Nick: "Call" was confusing more than it explained, and several statements ought to read "Plays and
+Calls". Audited before touching anything. The term was defined once and used **three times in the
+whole library** (Rulebook Standoff note, Rulebook Pinned paragraph, one Guide clause), and appeared
+on **no component a player holds during a fight**: the Playbooks print Ambush, Hold Fire, Fold,
+Open Fire, Advance and Fall Back as act rows with the same cost chips as Plays and never name the
+category; the Turn Structure board says only "Make 1 Play... Resolve combat first."
+
+**The economy lines were the real bug.** Three sentences described the Influence cycle as if Plays
+were the only thing markers buy ("Only Ledger markers pay for Plays", "Spend Ledger markers to make
+Plays", "A quiet Play returns its marker"), while a firefight spends from the Ledger and locks a
+marker to the Heat Track exactly the same way. Now: *"Only Ledger markers pay"*, *"Spend Ledger
+markers on the Play your turn buys, and on every shot a firefight asks of you, whoever started
+it"*, *"A quiet spend returns its marker."*
+
+**Considered and rejected: renaming Calls to "combat Plays"** (Nick's opening proposal). It would
+have collided with **The Play Is the Unit**, the named key rule behind Job scoring: eleven Job
+cards read "in one Play" or "in a single Play", three of them kill Jobs (*Kill 5+ rival Mobsters in
+Brooklyn in a single Play*) that are only achievable because a whole firefight, however many
+volleys, counts as one Play. Promote in-fight choices to Plays and "in a single Play" turns
+ambiguous on printed cards, in the one place a misread costs a 5-Respect Job. **"Gun Play"** was
+weighed as the subtype name and dropped (it sits wrong on Hold Fire and Fold, and Nick disliked
+it); **Scrap / Scuffle / War** were weighed as replacement nouns and dropped as redundant with
+*firefight*, which the text already uses everywhere. Verdict: no noun at all. Every site says it
+better in plain language, which is what a term used three times was always failing to earn.
+
+**Two genuine errors found and fixed on the way:**
+
+1. **The Pinned paragraph contradicted itself.** "While Pinned, your Mobsters cannot make normal
+   Plays, only Calls" was followed immediately by "Hit, Torch, and Plunder still work while
+   Pinned", and all three are printed in the Plays tables with costs. The cause was structural:
+   **Hit, Torch and Plunder require a Pin** (Hit says "While Pinned in a rival District"; Torch
+   needs "at least one Runner Pinned in the target District"; Plunder is a special attack inside
+   the fight), so they were simultaneously Plays and Calls. Nick's ruling: they are Calls in the
+   old sense, and **a Pin freezes everything until it resolves**, which the paragraph now states:
+   *"A Pin stops the city where it stands: it is fought out then and there, and no Play is made
+   anywhere, by anyone, until it resolves."*
+2. **"You can always fight back" overstated it**, one clause after "A Call may cost Influence".
+   Now: *"Your free answers are always open to you; the paid ones need a marker in your Ledger"*,
+   so spent out you can neither Ambush nor Open Fire.
+
+Cascaded: Rulebook (Standoff note retitled *A Firefight Is One Play*, Pinned paragraph, Influence
+cycle, Signature-tricks lede, Plunder and Torch openings de-"Play"-ed), Guide (the one clause),
+`mk-online-rules-sync.md` §6.4.3 and its checklist (engine rule unchanged, only the copy), combat
+handoff annotated. Print-measured in Chrome before and after: every page is at or under its
+previous height, the Signature page back to its exact prior 6.8mm.
+
+**Noted, not fixed:** five Rulebook pages and three Guide pages already run over A4 in print media
+(worst: Guide *The Occupier's Playbook* at +37.5mm, Rulebook *Phase 2: The Hustle* at +16.2mm).
+Pre-existing, unrelated to this pass, and worth a trim session of its own.

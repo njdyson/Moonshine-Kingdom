@@ -10,6 +10,12 @@ entries they finish); this is the map, not the territory.
 > letters: there are no loans of any kind, and Handshakes now pay in Respect via Welsher cards.
 > Reasoning in `v0-8-changes.md` (2026-08-02 addendum) and the port spec in
 > `mk-online-rules-sync.md` §7. Everything else in this doc stands.
+>
+> **2026-08-02 — the noun "Call" is RETIRED.** Point 6 below named the in-fight decisions
+> **Calls**; the rules they describe are unchanged, but the term is gone from the books and the
+> same facts are now stated in plain language (a firefight is one Play; what happens inside it
+> costs Influence, never a turn). Point 7's lawyer-loop died with Puppeteering. Reasoning in
+> `v0-8-changes.md` (2026-08-02 terminology addendum).
 
 ---
 

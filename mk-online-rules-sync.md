@@ -236,7 +236,7 @@ relay at a new junction.
 |---|--------------------------|-----|
 | 6.4.1 | Players at 0 Influence are auto-passed / auto-laid-low (verify) | **Never automatic.** Lay Low is a **Play, Cost 0**, the only free one, chosen **on your turn**. A 0-Influence player keeps their seat until their turn comes; Lay Low is then their only legal Play, but it still happens in seat order. This is load-bearing: it decides the order tomorrow's Turn Tokens are claimed when several crews go broke the same round, and it keeps a spent-out crew loanable until they step off. |
 | 6.4.2 | (unchanged mechanics, listed for the port) | On Lay Low: Odd Jobs $100 per unspent **Ledger** marker, Ledger clears to Reserves, claim the **lowest** token left in tomorrow's set. After: no Plays and **cannot receive Puppeteer loans** until tomorrow. |
-| 6.4.3 | — | **Laid Low still defends.** Raided, they answer the Standoff (Hold Fire or Fold only — no Ambush, and no Plunder-Ambush) and return fire in volleys as normal (free). Combat decisions are **Calls**, not Plays, in any surfaced rules copy — "no more Plays" must never block defence. |
+| 6.4.3 | — | **Laid Low still defends.** Raided, they answer the Standoff (Hold Fire or Fold only — no Ambush, and no Plunder-Ambush) and return fire in volleys as normal (free). Nothing fought inside a firefight is a Play in any surfaced rules copy — "no more Plays" must never block defence. (Terminology, 2026-08-02: the noun **Call** is retired; the engine rule is unchanged, only how the copy says it.) |
 
 ### 6.5 Puppeteering at the Standoff
 
@@ -366,7 +366,7 @@ far from 15, mortal at 14.
       "Occupier never draws Heat" (6.3.1); Hit follows the same first-shot rule (6.3.2)
 - [x] **Lay Low is an explicit Cost-0 Play on your turn, never an auto-pass at 0 Influence**
       (6.4.1); after it: no Plays, no incoming loans (6.4.2); Laid Low still answers the Standoff
-      and returns fire — Calls, not Plays (6.4.3)
+      and returns fire — fought inside the raider's Play, never Plays of its own (6.4.3)
 - [~] **Loans spendable at the Standoff to fund an Ambush; lender's marker becomes the fight's
       Heat** (6.5); lending to Laid-Low players stays blocked — *nothing to port: mk-online has
       never implemented Puppeteering/Cooperation, so there are no loans to widen or block. The

@@ -381,9 +381,9 @@
 
         <ol class="sub-section" style="margin-top: 10px;">
             <li><strong>The Reserves:</strong> Where uncommitted markers stack, and where you stake <b>Jobs</b> from.</li>
-            <li><strong>Fund (Shadows):</strong> Fill your <b>Ledger</b>'s 5 slots from the Reserves. Only Ledger markers pay for Plays; the rest wait in Reserves to stake Jobs and refill you tomorrow.</li>
-            <li><strong>Execute (The Hustle):</strong> Spend Ledger markers to make <b>Plays</b>.</li>
-            <li><strong>Resolve:</strong> A quiet Play returns its marker to your Reserves. A noisy one locks it onto the communal <b>Heat Track</b> instead.</li>
+            <li><strong>Fund (Shadows):</strong> Fill your <b>Ledger</b>'s 5 slots from the Reserves. Only Ledger markers pay; the rest wait in Reserves to stake Jobs and refill you tomorrow.</li>
+            <li><strong>Execute (The Hustle):</strong> Spend Ledger markers on the <b>Play</b> your turn buys, and on every shot a firefight asks of you, whoever started it.</li>
+            <li><strong>Resolve:</strong> A quiet spend returns its marker to your Reserves. A noisy one locks it onto the communal <b>Heat Track</b> instead.</li>
         </ol>
 
         <p class="note" style="margin-top: 15px;">
@@ -808,7 +808,7 @@
     </div>
     <div class="container one-column mob-plays">
         <h3 id="mob-plays">Mob Signature Plays</h3>
-        <p>Four families, four ways to make a killing. Each runs on an always-on <b>Trait</b>, the thing that makes them <em>them</em>, plus <b>two signature Plays</b> no rival can copy.</p>
+        <p>Four families, four ways to make a killing. Each runs on an always-on <b>Trait</b>, the thing that makes them <em>them</em>, plus <b>two signature tricks</b> no rival can copy: some are <b>Plays</b> for your turn, the rest are made <em>inside</em> a firefight, costing Influence but never a turn.</p>
         <h4>Sicilian Syndicate</h4>
         <p>Old blood, older rules. An insult to the family is a death sentence, and the family is <b>Untouchable</b>: the precinct captains are on the payroll, so their Districts may hold <b>any number of Mobsters</b> at Reckoning: the <b>Sweep</b> never touches them. <em>Where the Syndicate plants its flag, no one talks them down.</em></p>
         <table class="action-table">
@@ -834,7 +834,7 @@
             <tr>
                 <td><strong>Plunder (Cost: 1)</strong></td>
                 <td>
-                    Initiate a special attack (<b>roll Muscle</b> as for Open Fire): each hit steals <b>1 Liquor barrel</b> of your choice from the
+                    While <b>Pinned</b>, initiate a special attack (<b>roll Muscle</b> as for Open Fire): each hit steals <b>1 Liquor barrel</b> of your choice from the
                     target District instead of killing. Carry them off if you Advance <b>(dropped if you Fall Back)</b>. Occupier hits still kill.
                     You may also Plunder <em>instead of</em> a gun <b>Ambush</b>, robbing invaders as they cross the line, at the Ambush's same <b>Cost: 1</b> from your Ledger (spent out or Laid Low, there's no robbery either): those barrels are simply yours, and they stay where they are.
                     Never generates Heat: nobody fired, so a Plunder-Ambush leaves the fight's first shot, and its one Heat marker, to whoever shoots next.
@@ -882,10 +882,10 @@
             <tr>
                 <td><strong>Torch (Cost: 1)</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
                 <td>
-                    Burn down a Safehouse in a rival District. To perform this Play, you must have at least one Runner
-                    Pinned in the target District. Sacrifice one of those Pinned Runners; he strikes the match and goes up with the flames (return him to your supply).
+                    Burn down a Safehouse in a rival District. To strike the match you must have at least one Runner
+                    <b>Pinned</b> in the target District. Sacrifice one of those Pinned Runners; he strikes the match and goes up with the flames (return him to your supply).
                     The rival's Safehouse is immediately destroyed (return it to their supply). Any rival Mobsters and
-                    Liquor in the District are unharmed and retain Control. This Play generates Heat.
+                    Liquor in the District are unharmed and retain Control. Torching always generates Heat.
                 </td>
             </tr>
         </table>
@@ -1099,7 +1099,7 @@
             <li><strong>Step 2, the Invader chooses</strong> (and keeps choosing until the Pin is resolved): Open Fire, Advance, or Fall Back.</li>
         </ul>
         <p class="note">
-            <strong>One Play, many Calls.</strong> The <b>Move</b> that started the fight is its only <b>Play</b>. Every choice made inside it, by either crew (<b>Ambush</b>, <b>Hold Fire</b>, <b>Fold</b>, <b>Open Fire</b>, <b>Advance</b>, <b>Fall Back</b>, and the signature tricks), is a <b>Call</b>. A Call may cost Influence, paid like any Play cost, but it never costs your turn, so a whole firefight counts as just one Play. And because defending is a Call, not a Play, <b>you can always fight back</b>, even spent out or Laid Low <em>(though Laid Low, your Ambush is stood down)</em>.
+            <strong>A Firefight Is One Play.</strong> The <b>Move</b> that started it is the <b>Play</b>. Everything after it (<b>Ambush</b>, <b>Hold Fire</b>, <b>Fold</b>, <b>Open Fire</b>, <b>Advance</b>, <b>Fall Back</b>, and the signature tricks) happens <em>inside</em> that Play: each choice costs Influence from the Ledger of whoever makes it, but none of them costs a turn, so a fight of any length is still the single Play that walked in the door. That is why the crew holding the block always answers, even one that went home hours ago. <b>Your free answers are always open to you; the paid ones need a marker in your Ledger</b>, so spent out you can neither Ambush nor Open Fire <em>(and Laid Low, your Ambush is stood down whatever you hold)</em>.
         </p>
         <p>
             When an opponent <strong>Moves</strong> into a District you Control, the game pauses on Step 1. <em>Set each crew along the edge it crossed from, so it stays clear whose Mobsters and barrels are whose.</em>
@@ -1139,9 +1139,9 @@
             <strong>single Play</strong> that walked in the door.
         </p>
         <p>
-            While Pinned, your Mobsters cannot make normal Plays, only <b>Calls</b>: spend Influence to <strong>Open Fire</strong> or
-            <strong>Advance</strong>, or <strong>Fall Back</strong> for free. Keep making Calls
-            until the Pin is resolved, or you run dry and must Fall Back. <b>Hit</b>, <b>Torch</b>, and <b>Plunder</b> still work while Pinned (the Irish <b>Firepower</b> Trait boosts <b>Open Fire</b> only).
+            A <b>Pin</b> stops the city where it stands: it is fought out then and there, and <b>no Play is made anywhere, by anyone</b>, until it resolves. While Pinned you do nothing else: spend Influence to <strong>Open Fire</strong> or
+            <strong>Advance</strong>, or <strong>Fall Back</strong> for free, and keep choosing
+            until the Pin is resolved, or you run dry and must Fall Back. <b>Hit</b>, <b>Torch</b> and <b>Plunder</b> are open to you here too, if your Ledger can pay for them (the Irish <b>Firepower</b> Trait boosts <b>Open Fire</b> only). None of it costs a turn.
         </p>
         <p class="note">
             <strong>The Cost of Pride:</strong> A real Kingpin knows an all-out firefight is bad business. Burning 3 or 4 Influence to keep opening fire on one stubborn alley may win it, but it leaves rivals free across the city. Talk is cheap; bullets cost time.
