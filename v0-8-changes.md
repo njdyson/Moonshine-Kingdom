@@ -1875,3 +1875,40 @@ previous height, the Signature page back to its exact prior 6.8mm.
 **Noted, not fixed:** five Rulebook pages and three Guide pages already run over A4 in print media
 (worst: Guide *The Occupier's Playbook* at +37.5mm, Rulebook *Phase 2: The Hustle* at +16.2mm).
 Pre-existing, unrelated to this pass, and worth a trim session of its own.
+
+### Addendum (2026-08-02): eight phantom sheets trimmed out of the two books
+
+The terminology pass turned up eight pages already running over A4 in print media, unrelated to
+that work. Verified before trimming, because DOM maths is not proof: the Rulebook rendered **29
+sheets for 24 pages** and the Guide **38 for 35**, one wasted sheet per overflowing container,
+each carrying a few lines and a full gold frame. After this pass they render **24 and 35**, exactly
+one sheet per page.
+
+Method: headless Chrome over CDP with `Emulation.setEmulatedMedia({media:'print'})`, measuring
+every `.container` against 297mm, then re-rendering the actual PDFs to confirm the sheet count.
+Screen-media numbers are not the same and mislead here (the Pinned page reads 9.6mm over on screen
+and fits in print). One trap worth recording: a killed measurement run can leave its Chrome alive
+holding the debug port, and the next run silently attaches to the **stale** instance and reports
+the old numbers. Kill by `remote-debugging-port` before trusting a repeated figure.
+
+**Rule text was not touched.** What went was flourish and self-repetition:
+
+- **Rulebook, The Hustle** (+16.2mm): five flourishes, and Trade's "Rum is the good stuff" pitch,
+  which Unload and the Currencies page both already make in full.
+- **Rulebook, Power Plays / Signature tricks / Heat / Blood Oath** (+1.5 to +6.8mm): faction
+  flourishes, and three real duplications: Tunnel and Skiff carried the *same sentence* about not
+  being an escape hatch, Torch struck the match twice in two sentences, and the Blood Oath's Family
+  Bank restated the partner-Liquor rule from the bullet directly above it.
+- **Guide, Part III** (+14.5mm): the h4 "The Occupier answers first, then the Invader pays" was
+  restating the sentence immediately above it; the closing note lost its Hold-Fire half, which the
+  next page teaches again.
+- **Guide, Part IV** (+8.6mm): the prose under the Heat table restated the table's own first-shot
+  row, then its three discount rows.
+- **Guide, The Occupier's Playbook** (+37.5mm, the worst): trimmed, then finished by *moving* the
+  "Why the drawn gun beats the fired one" note to **How Steep Is the Premium?**, which had 31.5mm
+  of slack and is the page about defence being strong. Better home, nothing lost. Worth knowing for
+  next time: neighbouring pages carry real slack (that one 31.5mm, "So What's the Optimal Play?"
+  61.9mm), so re-homing a self-contained block beats cutting it.
+
+Playbooks and the Cards deck were measured too and were already clean. The shipping PDFs in
+`V0.9 PDFs/` are untracked and were **not** rebuilt; `Build PDFs.cmd` when you want them.
