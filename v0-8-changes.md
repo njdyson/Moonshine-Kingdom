@@ -2075,3 +2075,17 @@ means exactly one thing.
 
 Rendered both faces through the headless build to confirm the rename and width; the Turn Structure
 side still correctly says "Ledger" where it means the Influence marker track.
+
+### Addendum (2026-08-03): fronts still clipped on mobile — the fix was vertical, not width
+
+The 520px build still overflowed when printed from mobile. Diagnosis via the headless harness:
+widening is nearly exhausted — from 520→610px the worst front only gains ~9px of slack, because
+front height is **row-count-bound** (14 plays + 5 sections), not wrap-bound. The 38px of desktop-
+Chromium slack was simply eaten by iOS/Safari, which wraps a few lines more (the .card comment's
+long-standing warning).
+
+Real fix — tighten the fixed vertical rhythm: **`.play`/`.act` padding 5 → 3px** and **`.sec`
+margin 9 → 7px top**. Worst front went 887 → **821px content (104px slack)** — a deliberate buffer
+to absorb the mobile wrap difference. Also bumped width **520 → 560px** (fuller A5, as requested,
+and free while height binds the zoom) and `CARD_W`/viewport to match (564 / 614). Rendered to
+confirm the tighter rows still read cleanly and both signature plays clear the box.

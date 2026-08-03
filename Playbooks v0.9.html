@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <!-- Mobile renders one full A5 card per row, scaled to fit (pinch to zoom).
-     574 clears the 520px card + gutter so each card shows whole, exactly as it
+     614 clears the 560px card + gutter so each card shows whole, exactly as it
      prints, instead of overflowing the phone width and clipping. -->
-<meta name="viewport" content="width=574">
+<meta name="viewport" content="width=614">
 <title>Moonshine Kingdom: Mob Playbooks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,16 +81,18 @@ a:hover{color:var(--gold-bright)}
    ============================================================ */
 .card{
   position:relative;
-  width:520px;
+  width:560px;
   /* MIN height: on screen the card may grow if a platform's font metrics wrap
      wider (iOS wraps ~4 lines more than desktop Chromium and used to clip at
      the old fixed height). Print is unaffected: the print script no longer
      measures the live card - it zooms every clone by the same constant box
-     (524 x 969: content 925 + 40 padding + 4 border) and re-pins the clone to
+     (564 x 969: content 925 + 40 padding + 4 border) and re-pins the clone to
      height:925px, so duplex sides always line up. Height is the binding
-     dimension for the A5 zoom (A5H/CARD_H < A5W/CARD_W), so the extra width is
-     free: it fills more of the sheet and wraps fewer lines, which is what keeps
-     the front's five sections inside the 925 box. */
+     dimension for the A5 zoom (A5H/CARD_H < A5W/CARD_W) up to card width ~679,
+     so the width is free. But the front's height is row-count-bound, not
+     wrap-bound, so width past ~520 barely helps: the real slack under the 925
+     box comes from tight row padding (3px) and section margins (7px). That
+     buffer is deliberate - iOS/Safari wraps a few lines more than Chromium. */
   min-height:925px;
   background:linear-gradient(var(--panel-a),var(--panel-b));
   border:2px solid var(--gold-line);
@@ -143,7 +145,7 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    SECTION HEADS
    ============================================================ */
-.sec{display:flex;align-items:center;gap:8px;margin:9px 0 3px}
+.sec{display:flex;align-items:center;gap:8px;margin:7px 0 3px}
 .sec--trait{margin-bottom:4px}
 .sec--res{margin-bottom:5px}
 .sec--flow{margin:12px 0 5px}
@@ -165,8 +167,8 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    PLAY ROWS
    ============================================================ */
-.play{display:flex;gap:11px;align-items:flex-start;padding:5px 2px;border-bottom:1px solid var(--rule)}
-.act{display:flex;gap:11px;align-items:flex-start;padding:5px 2px;border-bottom:1px solid var(--rule)}
+.play{display:flex;gap:11px;align-items:flex-start;padding:3px 2px;border-bottom:1px solid var(--rule)}
+.act{display:flex;gap:11px;align-items:flex-start;padding:3px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
 
 .cost{
@@ -990,7 +992,7 @@ a:hover{color:var(--gold-bright)}
   var MM=96/25.4, A5W=148*MM, A5H=210*MM, FIT=0.94;
   /* Fixed print box (see .card comment): every clone gets the SAME zoom, so a
      card that grew on screen (mobile wraps) cannot desync a duplex sheet. */
-  var CARD_W=524, CARD_H=969, ZOOM=Math.min(A5W/CARD_W,A5H/CARD_H)*FIT;
+  var CARD_W=564, CARD_H=969, ZOOM=Math.min(A5W/CARD_W,A5H/CARD_H)*FIT;
   function build(){
     var old=document.getElementById('__printpages'); if(old) old.remove();
     var pages=document.createElement('div'); pages.id='__printpages';
