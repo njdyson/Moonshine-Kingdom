@@ -195,6 +195,14 @@ table.lg{width:100%;border-collapse:collapse}
   border-right:1px solid rgba(107,90,46,.45);
   line-height:1.05;
 }
+/* The board numbers the Boroughs and Raids resolve in that order, so the
+   roster carries the same numeral rather than leaving it implied by row order. */
+.boro-num{
+  display:block;margin:0 auto 3px;
+  width:15px;height:15px;border-radius:3px;
+  background:var(--gold);color:#1b150e;
+  font:700 10px Cinzel,serif;line-height:15px;
+}
 .lg-dist{font:600 10px Barlow;color:var(--ink-2)}
 .lg-zone{font:400 9.5px Barlow;text-align:left;white-space:nowrap}
 .lg-still{text-align:center;font:500 10px Barlow;color:#cbb98a}
@@ -284,7 +292,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step">
       <span class="step-num">1</span>
       <div class="step-label">The Brew</div>
-      <div class="step-body"><span class="sub"><b>Roll:</b> Token #1 rolls <b>Red</b> (Players + 1).</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews <i>before the next drafts</i>. Brew = Mash + Red; matching Stills brew by Muscle Ratio. The Boss's Still also fires <b>1 Land Connected</b> Still.</span><span class="sub"><b>Supply is first come, first served:</b> take barrels as you brew; you pick which Still stocks first.</span></div>
+      <div class="step-body"><span class="sub"><b>Roll:</b> Token #1 rolls <b>Red</b> (Players + 1).</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews <i>before the next drafts</i>. Brew = Mash + Red; matching Stills brew by Muscle Ratio. The Boss's Still also fires <b>1 Land Connected</b> Still.</span><span class="sub"><b>Barrels are first come, first served:</b> take yours as you brew, in whatever order you like.</span></div>
     </div>
     <div class="step">
       <span class="step-num">2</span>
@@ -294,7 +302,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step">
       <span class="step-num">3</span>
       <div class="step-label">Grease Wheels</div>
-      <div class="step-body"><span class="sub"><b>The Offers:</b> <i>Reverse</i> Turn Order, Boss required. <b>Choose one:</b></span><span class="sub"><b>Take a Job:</b> Stake Reserves equal to its Stake, refill the gap.</span><span class="sub"><b>Walk Away:</b> Discard a claimed Job, markers home.</span><span class="sub"><b>Pass:</b> Take nothing, keep everything.</span><span class="sub"><b>Fund Ledger:</b> Fill 5 slots from Reserves. Only Ledger markers pay.</span></div>
+      <div class="step-body"><span class="sub"><b>The Offers:</b> <i>Reverse</i> Turn Order, Boss required. <b>Choose one:</b></span><span class="sub"><b>Take a Job:</b> Stake Reserves equal to its Stake, refill the gap.</span><span class="sub"><b>Walk Away:</b> Discard a claimed Job, markers home.</span><span class="sub"><b>Pass:</b> Take nothing, keep everything.</span><span class="sub"><b>Then everyone funds the Ledger:</b> fill 5 slots from Reserves. Only Ledger markers pay.</span></div>
     </div>
     <div class="step step--end">
       <span class="step-num">4</span>
@@ -343,7 +351,7 @@ table.lg{width:100%;border-collapse:collapse}
 
     <div class="final">
       <div class="final-title">FINAL RECKONING</div>
-      <div class="final-body"><span class="sub"><b>10 Influence</b> + <b>15+ Respect</b> + honor (no Rat Card, no unpaid Mark) ends the game.</span><span class="sub"><b>Respect:</b> 2 per <b>Borough Deed</b> and per <b>Title</b>, plus what each Job pays.</span><span class="sub"><b>Tied?</b> The most <b>Respect</b> wins, then the fattest bankroll (<b>Cash</b> plus <b>Loose Change</b>).</span><span class="sub">Otherwise swap to tomorrow's set and begin the next Day.</span></div>
+      <div class="final-body"><span class="sub"><b>10 Influence</b> + <b>15+ Respect</b> + honor (no unpaid <b>Mark</b>) ends the game.</span><span class="sub"><b>Respect:</b> 2 per <b>Borough Deed</b> and per <b>Title</b>, plus what each Job pays.</span><span class="sub"><b>Tied?</b> The most <b>Respect</b> wins, then the fattest bankroll (<b>Cash</b> plus <b>Loose Change</b>).</span><span class="sub">Otherwise swap to tomorrow's set and begin the next Day.</span></div>
     </div>
   </div>
 
@@ -375,7 +383,7 @@ table.lg{width:100%;border-collapse:collapse}
         <tbody>
           <!-- MANHATTAN -->
           <tr class="grp">
-            <td rowspan="6" class="lg-boro">Manhattan</td>
+            <td rowspan="6" class="lg-boro"><span class="boro-num">1</span>Manhattan</td>
             <td class="lg-dist">Five Points</td>
             <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
             <td class="lg-still">10</td>
@@ -420,7 +428,7 @@ table.lg{width:100%;border-collapse:collapse}
 
           <!-- THE BRONX -->
           <tr class="grp">
-            <td rowspan="5" class="lg-boro">The<br>Bronx</td>
+            <td rowspan="5" class="lg-boro"><span class="boro-num">2</span>The<br>Bronx</td>
             <td class="lg-dist">Hunts Point</td>
             <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
             <td class="lg-still">9</td>
@@ -458,7 +466,7 @@ table.lg{width:100%;border-collapse:collapse}
 
           <!-- QUEENS -->
           <tr class="grp">
-            <td rowspan="6" class="lg-boro">Queens</td>
+            <td rowspan="6" class="lg-boro"><span class="boro-num">3</span>Queens</td>
             <td class="lg-dist">Corona</td>
             <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
             <td class="lg-still">4</td>
@@ -503,7 +511,7 @@ table.lg{width:100%;border-collapse:collapse}
 
           <!-- BROOKLYN -->
           <tr class="grp">
-            <td rowspan="5" class="lg-boro">Brooklyn</td>
+            <td rowspan="5" class="lg-boro"><span class="boro-num">4</span>Brooklyn</td>
             <td class="lg-dist">Brownsville</td>
             <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
             <td class="lg-still">5</td>
@@ -541,7 +549,7 @@ table.lg{width:100%;border-collapse:collapse}
 
           <!-- STATEN ISLAND -->
           <tr class="grp">
-            <td rowspan="3" class="lg-boro">Staten<br>Island</td>
+            <td rowspan="3" class="lg-boro"><span class="boro-num">5</span>Staten<br>Island</td>
             <td class="lg-dist">Stapleton</td>
             <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
             <td class="lg-still">6</td>
@@ -585,7 +593,7 @@ table.lg{width:100%;border-collapse:collapse}
       <span class="roster-label">POLICE RAIDS</span>
       <span class="sec-rule"></span>
     </div>
-    <div class="raid-note"><b>Trigger:</b> The <b>Rat</b> Play, or the 5th Heat. Resolve every Squad one at a time, in Borough order.</div>
+    <div class="raid-note"><b>Trigger:</b> The <b>Rat</b> Play, or the 5th Heat. Resolve every Squad one at a time, in <b>numbered Borough order</b> above.</div>
 
     <div class="step">
       <span class="step-num">1</span>
