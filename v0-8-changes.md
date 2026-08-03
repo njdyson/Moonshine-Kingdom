@@ -2294,3 +2294,22 @@ recomposed around that:
 Verified by print-rendering the book headlessly (the same engine `Build PDFs.cmd` uses): still
 exactly 24 sheets, no blanks, and the two combat pages measure 92.6% / 92.5% full — inside the
 book's 78–99% range (they were 78% / 111%-overflowing after the naive move, hence the rebalance).
+
+---
+
+## 2026-08-03 — Combat headings renumbered; the Welsher art replaces the Puppet
+
+**Combat section numbers now name the two choices.** "Rules of Engagement" drops its "1." (it's
+the chapter's ground rules, not a step), so the two choice sections are labelled **1. The Standoff**
+and **2. Pinned** — matching the Step 1/Step 2 language in *The Shape of a Fight* — and Victory
+renumbers 4 → 3. The "(Step 1)/(Step 2)" heading tags added earlier today are dropped as redundant
+now that the numbers carry that meaning. Anchors and TOC unchanged; still 24 sheets, no blanks.
+
+**Deals in the Smoke gets the Welsher art.** New plate `Art/Rulebook/Welsher.png` (full-res) +
+`Art/Rulebook/opt/Welsher.webp` (optimized), cropped from Nick's 3:2 original to the book's
+16:9 / 1672×941 cover standard — the crop window keeps both the "A deal is a deal… until it's not"
+poster and the torn contract's "Signed" line. It replaces `Puppet.webp` on the Rulebook's
+Cooperation page **and** the Kingpin's Guide's Part V cover: the puppet-strings art illustrated
+*Puppeteering*, cut from the game 2026-08-02, while the torn "OUR WORD" contract is exactly the
+Handshake → Welsher forfeit the v0.9 rules actually teach. The Puppet files stay in `Art/Rulebook/`
+unreferenced, alongside the other retired plates.
