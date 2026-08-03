@@ -2338,3 +2338,18 @@ resized, ~147 KB). No markup changed — the card already pointed at `Art/Cards/
 1.55:1 cover-cropped art well keeps hat, eyes, whiskers and the lit tunnel behind; print-verified
 on the debts sheet beside Shylock's Mark, geometry untouched. The old anthropomorphic barfly rat
 survives in git history.
+
+---
+
+## 2026-08-03 — Debts/holdings deck: hotter print lift on the art well
+
+`Cards v0.9.html`'s `.art img` filter goes from the shared 1.10 brightness / 1.08 contrast recipe
+to **1.20 / 1.05** (saturation unchanged). Measured cause: this deck's plates are the darkest in
+the building — Shylock 17, Welsher 18, Night Mayor 18, the new Rat 20 mean luminance, against a
+floor of 22 across the whole Jobs deck — and dark-stock printing crushes them further. Brightness
+buys the shadows back; easing contrast from 1.08 to 1.05 keeps the lift from re-burying them
+(contrast pivots at the midpoint, so on plates this dark it pushes shadows down). Chosen from an
+A/B/C render at 1.10/1.08 vs 1.18/1.05 vs 1.26/1.02: the last one hazed Manhattan's highlights, so
+the shipped value sits between. **The Jobs deck keeps its 1.10/1.08 recipe** — its plates don't
+need the help; the two decks' comments now say the divergence is deliberate. If a physical proof
+still comes back murky, the next knob is this same line, not the source files.

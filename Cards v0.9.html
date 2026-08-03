@@ -181,9 +181,14 @@ body{
 .art img{
   width:100%;height:100%;
   object-fit:cover;display:block;
-  /* lifts the art off the dark stock in print: same recipe as
-     the Jobs deck and .speakeasy-image in Cards v0.7 */
-  filter:brightness(1.1) contrast(1.08) saturate(1.04);
+  /* lifts the art off the dark stock in print. Runs HOTTER than
+     the Jobs deck's 1.1/1.08 on purpose (2026-08-03): this
+     deck's plates are the darkest in the building (Shylock 17,
+     Welsher 18, Night Mayor 18, Rat 20 mean luminance vs the
+     Jobs deck's 22 floor), and dark print crushes them further.
+     Brightness buys the shadows back; the eased contrast keeps
+     the lift from re-burying them. */
+  filter:brightness(1.2) contrast(1.05) saturate(1.04);
 }
 .art::after{
   content:"";position:absolute;inset:0;
