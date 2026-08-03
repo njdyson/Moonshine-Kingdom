@@ -496,6 +496,18 @@ tr:nth-child(even) {
     color: var(--accent-gold);
 }
 
+/* Marks a Signature trick that is made INSIDE a firefight you're already
+   Pinned in, rather than being a Play that costs your turn. The distinction
+   is stated in the section lede, but readers meet the cards one at a time,
+   so each one carries its own flag. */
+.in-fight {
+    display: block;
+    font: italic 400 0.78em var(--font-body);
+    letter-spacing: .3px;
+    color: var(--accent-dim);
+    margin-top: 1px;
+}
+
 /* Images & Artwork */
 img {
     filter: brightness(1.12) contrast(1.08);
