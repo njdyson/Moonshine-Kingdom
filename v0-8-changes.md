@@ -2053,3 +2053,25 @@ width is free — it fills more of the A5 and wraps fewer lines), plus a hair of
 print script and the mobile viewport bumped to match (474 → 524; 520 → 574). All four fronts now
 fit with comfortable slack; backs (never tight) only gained room. Verified by rendering every print
 page through the headless_shell build, not by eye.
+
+## 2026-08-03 — "Town Planning Ledger" renamed to "Town Planner"; file renamed to match
+
+The district-roster component was called the **Town Planning Ledger**, which collided with the
+**Influence Ledger** (the 5-slot marker track) — two unrelated "Ledgers" in one game. The district
+component is now simply the **Town Planner** (City Hall's paperwork, day-phases on its reverse — the
+Rulebook already framed it as one component). The Influence Ledger keeps its name, so "Ledger" now
+means exactly one thing.
+
+- **Card + file:** `Turn Structure and Ledger v0.9.html` → **`Town Planner v0.9.html`** (git rename).
+  Card title "Town Planning Ledger" → "Town Planner"; `<title>` and masthead updated; masthead now
+  "Town Planner & Turn Structure".
+- **Widened 470 → 520px** to match the playbooks (this file auto-zooms per card, so no clip risk —
+  measured 51–81px of slack at 520). Mobile viewport 520 → 574.
+- **Live references updated:** Rulebook (components list + Setup), The Volstead Act (setup garrison),
+  Still Tokens (verification comment + filename), index.html tile (link + label). Verified no live
+  file still says "Town Planning Ledger" or links the old filename.
+- **Left as historical record:** Archive/*, dated `v0-8-changes.md` entries, and the mk-online/jobs
+  handoffs (which reference older v6.0/v0.7 filenames).
+
+Rendered both faces through the headless build to confirm the rename and width; the Turn Structure
+side still correctly says "Ledger" where it means the Influence marker track.

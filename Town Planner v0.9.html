@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <!-- Mobile renders one full A5 card per row, scaled to fit (pinch to zoom).
-     520 clears the 470px card + gutter so each card shows whole, exactly as it
+     574 clears the 520px card + gutter so each card shows whole, exactly as it
      prints, instead of overflowing the phone width and clipping. -->
-<meta name="viewport" content="width=520">
-<title>Moonshine Kingdom: Turn Structure & Ledger</title>
+<meta name="viewport" content="width=574">
+<title>Moonshine Kingdom: Town Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -74,10 +74,11 @@ a:hover{color:var(--gold-bright)}
    ============================================================ */
 .card{
   position:relative;
-  width:470px;
-  /* Same fixed box as the playbooks (925 + 40 padding + 4 border = 969), so every
-     card in the prototype cuts to one size and duplex sides line up. Tallest
-     content in this file is 907. See the playbook file for the full reasoning. */
+  width:520px;
+  /* Same fixed box as the playbooks (520 wide; 925 + 40 padding + 4 border = 969),
+     so every card in the prototype cuts to one size and duplex sides line up. The
+     wider box (was 470) wraps fewer lines, so content clears the 925 height with
+     room to spare. See the playbook file for the full reasoning. */
   height:925px;
   background:linear-gradient(var(--panel-a),var(--panel-b));
   border:2px solid var(--gold-line);
@@ -254,7 +255,7 @@ table.lg{width:100%;border-collapse:collapse}
   <div class="masthead">
     <div class="masthead-kicker">Prohibition · New York · 1926</div>
     <div class="masthead-title">Moonshine Kingdom</div>
-    <div class="masthead-sub">Turn Structure &amp; Town Planning Ledger</div>
+    <div class="masthead-sub">Town Planner &amp; Turn Structure</div>
   </div>
 
   <div class="gallery">
@@ -350,7 +351,7 @@ table.lg{width:100%;border-collapse:collapse}
   <div data-card class="card">
     <div class="card-head">
       <div class="card-kicker">Squad Deployment · District Roster</div>
-      <div class="card-title">Town Planning Ledger</div>
+      <div class="card-title">Town Planner</div>
     </div>
 
     <div class="roster-head">
