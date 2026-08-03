@@ -2089,3 +2089,51 @@ margin 9 → 7px top**. Worst front went 887 → **821px content (104px slack)**
 to absorb the mobile wrap difference. Also bumped width **520 → 560px** (fuller A5, as requested,
 and free while height binds the zoom) and `CARD_W`/viewport to match (564 / 614). Rendered to
 confirm the tighter rows still read cleanly and both signature plays clear the box.
+
+### Addendum (2026-08-03): the Welsher supply hole — NOT BUILT, candidate recorded
+
+**The question (Nick):** eight Welshers are printed. If they run out, what happens? Nobody wants
+"scribble it on paper", and no rule at all leaves a hole a rules-lawyer can find.
+
+**Why nothing shipped:** the deck is self-limiting in practice. Eight is ~2 per player; each is
+**−1 Respect forever** against a 15-Respect target (two Welshers = a whole Borough Deed); and
+Handshakes are **voluntary and expire the same Day**, so emptying the pile requires the table to
+keep offering binding deals to someone who has publicly proven they break them. The Blood Oath makes
+it harder still — the Alliance shares the penalty. Nick's call: **say nothing, log it for an online
+FAQ.** Current state is correct and unchanged.
+
+**The thing to avoid, and it is the reason a stopgap is worse than silence:** if the supply is ever
+exhausted, the *ninth* broken deal is **free**. Any "run out → use a proxy token" wording quietly
+prints the admission that betrayal is punished only until enough people betray. A supply *limit* is
+safe; a supply *stopgap* inverts the rule.
+
+**THE CANDIDATE, if it ever bites — one travelling card, symmetrical with the Rat (Nick's idea,
+refined over three passes):**
+
+- **One Welsher card**, not eight. Held by whoever most recently broke their word; **passed to the
+  next player who breaks theirs.** Cannot run out — one card never does.
+- **−3 Respect**, matching the Rat. Both are permanent brands, both irreversible on your own
+  schedule, both about the street's memory.
+- **You may still deal — just not bindingly.** A marked player keeps talking, promising and trading;
+  what they lose is *enforcement*. This is the load-bearing part: it is a reputation, not a
+  mechanical exile from Cooperation. Nick's read, and it's the right one: a rival taking a marked
+  man's bare word and getting burned — with no card to show for it — is a better story than any
+  rule, and the game themes itself.
+- **Absolution mirrors the Rat exactly:** it leaves you only when someone else breaks their word, on
+  their schedule and not yours.
+
+**Open questions if it is ever built:**
+1. **Balance is unplaytested.** −3 with a hard cap of one is a much bigger single swing than −1
+   stacking. The Rat at least buys you a Raid; the Welsher buys nothing.
+2. **Does one-card-passed make the first betrayal correct?** With max one holder at a time, there
+   may be an optimal moment to take the brand cheaply and pass it on later. Worth a sim/playtest
+   read before committing.
+3. **Cost of the change:** deletes the stacking rule from 8 card faces (`They stack, and every one
+   costs you again`) plus the Rulebook's *Deal Broken* and *Broken Words* entries; count 8 → 1;
+   `Cards v0.9.html` sheets 5–6 collapse; Blood Oath's shared-penalty clause needs a rewrite.
+
+**Superseded alternatives, recorded so they are not re-proposed:** (a) hard cap "all 8 out → no new
+Handshakes" — works, but strands the rule at an arbitrary component count; (b) "marked = no more
+deals at all, cut to 4" — structurally airtight but a permanent lockout from a whole subsystem,
+possibly from Day 2, and it makes banking one perfectly-timed betrayal optimal; (c) proxy tokens —
+see the free-ninth-betrayal trap above.
