@@ -16,6 +16,12 @@ entries they finish); this is the map, not the territory.
 > same facts are now stated in plain language (a firefight is one Play; what happens inside it
 > costs Influence, never a turn). Point 7's lawyer-loop died with Puppeteering. Reasoning in
 > `v0-8-changes.md` (2026-08-02 terminology addendum).
+>
+> **2026-08-03 — Plunder-on-Ambush is CUT.** Point 3 below (the Irish robbing invaders *instead
+> of* a gun Ambush) is a dead letter: it traded the defender's only first strike for loot that
+> stays in the district and reverts to the invader if the district fell, so it's removed.
+> **Offensive Plunder** — the Pinned invader stealing barrels — is unchanged. Reasoning in
+> `v0-8-changes.md` (2026-08-03) and the port note in `mk-online-rules-sync.md` §6.2.3.
 
 ---
 

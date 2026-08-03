@@ -1988,3 +1988,39 @@ playbook-only (the Rulebook stays the authority and is untouched):
   Rulebook) and reads "Visit Shylock" rather than "See".
 - **Handshake wording.** "terms clear, dead by Day's end" → "resolved by Day's end" ("dead" read
   wrong for a deal that simply expires).
+
+## 2026-08-03 — Plunder-on-Ambush is cut (offensive Plunder stays)
+
+**Reverses the 2026-08-01 "Plunder-on-Ambush: cost yes, Heat no" ruling.** The Irish had two
+Plunders: the **offensive** one (a Pinned invader rolls Muscle and steals barrels instead of
+killing, carrying them off on Advance) and a **defensive** variant — Plunder *instead of* a gun
+Ambush, robbing invaders "as they cross the line." The defensive variant is removed. Offensive
+Plunder is untouched.
+
+**Why (Nick's catch).** Plunder-on-Ambush is self-defeating:
+
+- The gun Ambush is the defender's **only first strike**. Trading it for a barrel-grab means no
+  opening damage, so you're **more likely to lose the district**.
+- The loot **stays where it is**. Lose the district (now likelier) and the invader retakes it *and*
+  the barrels — you weakened your defence to hand the loot straight back.
+- It only robs barrels the invader **chose to carry into an assault**; a careful invader brings
+  none, so it usually steals nothing.
+- Even winning, it's partly redundant: repel an invader and Move's rule already gives you the
+  barrels they abandon in your District — and you'd usually rather have the kills.
+
+Offensive Plunder already delivers the Irish "rob the stockpile" fantasy (Guide: soft stockpiles,
+~1.3 barrels a volley, zero Heat), so cutting the defensive case leaves the faction identity intact
+and tightens the Ambush decision to Ambush / Hold Fire / Fold.
+
+**Where it landed.**
+- **Rulebook** — dropped the two-sentence Plunder-in-place-of-Ambush paragraph; the "never draws
+  Heat / doesn't claim the first shot" line now speaks for Plunder generally.
+- **Playbook (Irish)** — removed "May replace your Ambush: same cost, still silent." from Plunder
+  (also buys back a line).
+- **Kingpin's Guide** — "steal barrels at gunpoint, *Ambush included*" → "at gunpoint"; the nearby
+  "on their own turf the Irish defend like anybody else" now reads true.
+- **Combat Simulator** — no change: its Plunder mode is the offensive invader raid; the occupier
+  only ever gun-Ambushes, so the defensive variant was never modelled.
+- **mk-online-rules-sync.md** — §6.2.3 marked CUT; §6.3.3 and §6.4.3 tidied of the defensive
+  wording; checklist updated.
+- **combat-lay-low-handoff.md** — note added atop point 3 so a fresh session doesn't rebuild it.
