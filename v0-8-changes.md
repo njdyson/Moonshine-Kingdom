@@ -2163,3 +2163,64 @@ Handshakes" — works, but strands the rule at an arbitrary component count; (b)
 deals at all, cut to 4" — structurally airtight but a permanent lockout from a whole subsystem,
 possibly from Day 2, and it makes banking one perfectly-timed betrayal optimal; (c) proxy tokens —
 see the free-ninth-betrayal trap above.
+
+---
+
+## 2026-08-03 — Signature play rework: **Tunnel** hauls barrels, **Skiff** flees a fight
+
+Two signature plays retooled so the two "teleport" crews stop overlapping, and so the water rules
+read the same everywhere. Live in `Rulebook v0.9.html`, `Playbooks v0.9.html`, and (strategy
+reference) `Kingpin's Guide v0.9.html`. Digital port (`mk-online/`) deliberately **not** synced yet —
+tracked in `mk-online-rules-sync.md` when it is.
+
+**East Side Vipers — Tunnel: was 5 Mobsters, now 5 Liquor Barrels.** Old Tunnel moved up to 5
+Mobsters (no Liquor) between the Safehouse and a Controlled District. It now moves up to **5 Liquor
+Barrels (no Mobsters)** over the same route. Three reasons:
+- **Kills the troop-movement overlap with the Knights' Skiff.** Both plays were "move up to 5
+  Mobsters by a private road," which made the two crews feel same-y. Now they mirror instead of
+  duplicate: **Tunnel = cargo, no crew (by land); Skiff = crew, no cargo (by sea).**
+- **Gives the Vipers a dedicated smuggling pipeline** — product to a controlled Speakeasy/Dock without
+  a cap fight. *"The city runs on rails the cops forgot"* reads better hauling crates than men.
+- **The old caveat — *"never a way out of a Pin, and never the Scatter's step"* — is deleted as
+  redundant.** A barrels-only play can't flee anything; only Mobsters flee a Pin or Scatter. Nothing
+  left to prohibit.
+
+**Cap stays at 5.** Standard Move and Trade move unlimited barrels, so 5 isn't a universal barrel
+law — but it *is* the signature-play convention (Stealth 5, old Skiff 5), and matching that keeps the
+plays symmetrical. **No barrel cap was considered and rejected:** an uncapped 1-Influence evacuation
+would be near-perfect Raid insurance (the Squad hits the most-barrels district; boats are dead ends),
+partly defeating the tension the Raid rules exist to create.
+
+The clause *"target must remain Controlled (barrels alone don't grant Control)"* was drafted and then
+cut as redundant: the route is already *"any District you Control,"* and since Tunnel moves no
+Mobsters it can't change anyone's Control anyway.
+
+**Harlem Knights — Skiff: now crew-only, and a way out of a fight.** Three changes:
+- **No Liquor, ever.** Skiff was 5 Mobsters each carrying 1 barrel. It's now **5 Mobsters, no
+  Liquor** — pure mobility/aggression, and the fiddly one-barrel-each bookkeeping is gone. The
+  Knights keep their liquor identity through the **Network** trait (free Rum at Docks); Skiff was
+  never the point of it.
+- **May be used to Fold or Advance** out of a fight to any **Coastal Safe District** (it was
+  forbidden — *"never a way out of a Pin"*). Because all water is one body, Skiff already makes every
+  coast behave like a Dock, and the standard maneuvers already let you Fold/Advance across water *via
+  Docks* — so forbidding the boat from doing the same was a clunky exception. The reach (any coast,
+  not just a Connected hop) is a real buff, but Fold and Advance are both **retreats**, so it's
+  retreat-mobility, not a combat edge; with barrels gone the scary "extract loot and teleport" line
+  is closed.
+- **The 5-cap bites in combat too, and the overflow is lethal.** Fold and Advance are normally
+  uncapped (you pull the whole crew); Skiff only carries 5. **Any Mobsters who can't board are left
+  behind and killed** (returned to supply). Stated explicitly because it's non-obvious — especially
+  on Advance. Rare in practice (a 6+ stack rarely wants to flee), but it needed a written ruling.
+  A player who'd rather save everyone can still take the *normal* Fold/Advance to a Connected safe
+  district; Skiff is an extra option, and the cap is the price of the long reach.
+
+**Unified water rule, the actual prize:** water saves you from mobsters, not from cops. **Water
+escapes are allowed in Combat** (Docks *or* Skiff) and **forbidden in a Raid** (Docks are dead ends;
+Skiff is *"never the Scatter's step"*). One mnemonic, no per-play exceptions.
+
+**Kingpin's Guide:** corrected *"Skiff hauls five barrels coast to coast"* → *"runs five Mobsters."*
+**Two strategy lines still need Nick's pass, left untouched on purpose:** *"Tunnel also solves the
+Estate family's spawn-point problem"* (spawn-point is a Mobster-placement problem; barrels-only
+Tunnel no longer addresses it) and *"the Staten lane, which Skiff serves better than any Move"* (if
+that lane is about hauling Rum, crew-only Skiff no longer serves it). Both are Jobs-strategy calls,
+not mechanical fixes.
