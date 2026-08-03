@@ -2122,7 +2122,33 @@ refined over three passes):**
 - **Absolution mirrors the Rat exactly:** it leaves you only when someone else breaks their word, on
   their schedule and not yours.
 
-**Open questions if it is ever built:**
+**2026-08-03, same day: the candidate is now judged UNLIKELY TO BE BUILT. Nick found the flaw.**
+Multiple deals can be live at once and can resolve **simultaneously** at end of Day, so a single
+travelling card has no owner. Turn order would have to break the tie — and that *works*, but it
+prints a **free betrayal for whoever sits earliest**, available only to players tracking every
+outstanding deal at the table. It rewards bookkeeping over nerve, and it quietly makes Turn Order —
+built as a **tempo** resource, earned by Laying Low early — into a morality resource as well.
+
+**The root cause, and the reason no tiebreaker rescues it: the Rat is a Play; welshing is a state
+change.** Ratting is deliberate, single, and taken on your turn, so "most recent" is unambiguous by
+construction. Broken deals resolve **passively** (Day ends, promise unmet), can be caused by **third
+parties** (the *Deal Broken* rule says "for any reason, including third-party interference"), and
+several can fire at the same instant. A travelling brand needs a well-ordered event sequence; welshing
+does not produce one.
+
+**Two further losses that argue for keeping eight:**
+- **Eight cards let two players be liars at once.** In a 4p game of shifting alliances, "both of them
+  burned me" is a common, real board state. One card can only ever say "he burned someone most
+  recently."
+- **A travelling card LAUNDERS the earlier betrayal** — the first welsher is washed clean by the next
+  person's sin. That is backwards for a rule whose flavour is *"a broken word follows you to the
+  grave."* Cumulative guilt is the honest model, which is what stacking already is.
+
+**Verdict: eight stacking cards is the correct shape.** Simultaneity is a non-issue there — everyone
+who broke a word takes a card, no ordering, no adjudication. Keep the entry below for the reasoning,
+not as a roadmap.
+
+**Open questions if it were ever built anyway:**
 1. **Balance is unplaytested.** −3 with a hard cap of one is a much bigger single swing than −1
    stacking. The Rat at least buys you a Raid; the Welsher buys nothing.
 2. **Does one-card-passed make the first betrayal correct?** With max one holder at a time, there
