@@ -1962,3 +1962,24 @@ requirement.
   bot tempo-hold heuristic) plus three checklist items; §6.4.2 reworded off "Odd Jobs".
 
 Shipping PDFs not rebuilt (`Build PDFs.cmd` when wanted).
+
+### Addendum (2026-08-03): playbook layout pass on the Collect change
+
+Nick reviewed the cards on mobile — Collect fits — and called a round of tidying, all
+playbook-only (the Rulebook stays the authority and is untouched):
+
+- **New CLOSING TIME section.** Collect + Lay Low were stretching the term "LOGISTICS"; they now
+  sit in their own section (Move/Unload/Trade stay under LOGISTICS).
+- **Collect trimmed to a prompt.** The card is a prompt sheet, not a strategy guide — the desc is
+  now just "Cash 1 Influence marker for $100." (the em dash and the bide-for-a-token sentence are
+  gone; that reasoning lives in the Rulebook and Guide).
+- **Inline icons removed from the front; the flame moves to the title.** The Speakeasy/Crown/Dock/
+  Ward glyphs scattered through the play text read as clutter and are gone (plain words remain). The
+  Heat flame now rides in the play's title column instead of mid-sentence — on Unload, Extort, and
+  the three heat signature plays (Hit, Torch, Peddle). Combat-back fire icons (Ambush, Open Fire)
+  were left for now, pending Nick's call.
+- **Line-savers.** Extort loses "Always Heat" (the title flame says it); Unload loses "Standard"
+  and both "only"s; Beg loses "Any unpaid Mark bars the crown" (on the card elsewhere and in the
+  Rulebook) and reads "Visit Shylock" rather than "See".
+- **Handshake wording.** "terms clear, dead by Day's end" → "resolved by Day's end" ("dead" read
+  wrong for a deal that simply expires).

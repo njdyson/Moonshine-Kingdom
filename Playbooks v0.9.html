@@ -275,18 +275,20 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Unload</div>
-      <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Collect</div>
-      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>. A quiet turn, no board change &mdash; bide on the street and hold your place for a later Turn Token.</div>
+      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost cost--free">0</div>
@@ -297,13 +299,13 @@ a:hover{color:var(--gold-bright)}
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Extort</div>
-      <div class="desc">Take <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
+      <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Take <b>$200 per District</b> you Control, once a Day.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
+      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -320,7 +322,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
         <div class="ladder">
           <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
         </div>
@@ -341,8 +343,8 @@ a:hover{color:var(--gold-bright)}
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">SIGNATURE PLAYS</span><span class="sec-rule"></span></div>
       <div class="play">
         <div class="cost">2</div>
-        <div class="name">Hit</div>
-        <div class="desc">While Pinned in a rival District, launch a special attack: if you score any hits, the rival <b>Boss</b> takes the first hit. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Heat as per Open Fire: only if it's the fight's first shot.</div>
+        <div class="name">Hit <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+        <div class="desc">While Pinned in a rival District, launch a special attack: if you score any hits, the rival <b>Boss</b> takes the first hit. Heat as per Open Fire: only if it's the fight's first shot.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
@@ -424,7 +426,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="sig">
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, dead by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
+      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, third-party sabotage included: promise only what you alone control.</div>
     </div>
   </div>
@@ -456,18 +458,20 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Unload</div>
-      <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Collect</div>
-      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>. A quiet turn, no board change &mdash; bide on the street and hold your place for a later Turn Token.</div>
+      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost cost--free">0</div>
@@ -478,13 +482,13 @@ a:hover{color:var(--gold-bright)}
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Extort</div>
-      <div class="desc">Take <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
+      <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Take <b>$200 per District</b> you Control, once a Day.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
+      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -501,7 +505,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
         <div class="ladder">
           <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
         </div>
@@ -605,7 +609,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="sig">
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, dead by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
+      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, third-party sabotage included: promise only what you alone control.</div>
     </div>
   </div>
@@ -627,7 +631,7 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
-    <div class="trait"><span class="trait-name">Network.</span> <span class="trait-body">Friends on every pier from Havana to Harlem. Whenever you <b>Trade</b> at a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span>, gain <b>1 extra barrel</b> of Havana Rum free, on top of the swap, if one's left in the supply.</span></div>
+    <div class="trait"><span class="trait-name">Network.</span> <span class="trait-body">Friends on every pier from Havana to Harlem. Whenever you <b>Trade</b> at a Dock, gain <b>1 extra barrel</b> of Havana Rum free, on top of the swap, if one's left in the supply.</span></div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
     <div class="play">
@@ -637,18 +641,20 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Unload</div>
-      <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Collect</div>
-      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>. A quiet turn, no board change &mdash; bide on the street and hold your place for a later Turn Token.</div>
+      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost cost--free">0</div>
@@ -659,13 +665,13 @@ a:hover{color:var(--gold-bright)}
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Extort</div>
-      <div class="desc">Take <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
+      <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Take <b>$200 per District</b> you Control, once a Day.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
+      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -682,7 +688,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
         <div class="ladder">
           <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
         </div>
@@ -708,8 +714,8 @@ a:hover{color:var(--gold-bright)}
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
-        <div class="name">Torch</div>
-        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse. Rival Mobsters and liquor are unharmed. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+        <div class="name">Torch <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse. Rival Mobsters and liquor are unharmed.</div>
       </div>
     </div>
   </div>
@@ -786,7 +792,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="sig">
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, dead by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
+      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, third-party sabotage included: promise only what you alone control.</div>
     </div>
   </div>
@@ -818,18 +824,20 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Unload</div>
-      <div class="desc">Sell liquor at a <span class="nb"><img class="icon" src="Art/Icons/Gin.svg" alt="Speakeasy">Speakeasy</span> you Control. Standard: <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. <span class="nb"><img class="icon" src="Art/Icons/Crown.svg" alt="High Society">High&nbsp;Society</span>: <b>Rum only</b>, <b>$500</b>. Only Rum pays a <b>Kickback</b> (1 spent Influence per barrel). <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> 4+ barrels: Greed Tax.</div>
+      <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
-    <div class="play">
+    <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a <span class="nb"><img class="icon" src="Art/Icons/anchor.svg" alt="Dock">Dock</span> you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
+
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">CLOSING TIME</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Collect</div>
-      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>. A quiet turn, no board change &mdash; bide on the street and hold your place for a later Turn Token.</div>
+      <div class="desc">Cash <b>1 Influence</b> marker for <b>$100</b>.</div>
     </div>
     <div class="play play--end">
       <div class="cost cost--free">0</div>
@@ -840,13 +848,13 @@ a:hover{color:var(--gold-bright)}
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Extort</div>
-      <div class="desc">Take <b>$200 per District</b> you Control, once a Day. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Always Heat.</div>
+      <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+      <div class="desc">Take <b>$200 per District</b> you Control, once a Day.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">See Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Any unpaid Mark bars the crown.</div>
+      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -863,7 +871,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control anywhere on the map:
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
         <div class="ladder">
           <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
         </div>
@@ -889,8 +897,8 @@ a:hover{color:var(--gold-bright)}
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
-        <div class="name">Peddle</div>
-        <div class="desc">Unload <b>Moonshine</b> in any <span class="nb"><img class="icon" src="Art/Icons/Fist.svg" alt="Ward">Ward</span> you Control at <b>$300</b>/barrel (no Kickback, no High Society price). Greed Tax still bites at 4+. <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+        <div class="name">Peddle <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+        <div class="desc">Unload <b>Moonshine</b> in any Ward you Control at <b>$300</b>/barrel (no Kickback, no High Society price). Greed Tax still bites at 4+.</div>
       </div>
     </div>
   </div>
@@ -967,7 +975,7 @@ a:hover{color:var(--gold-bright)}
 
     <div class="sig">
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, dead by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
+      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Day's end</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect when the books open, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, third-party sabotage included: promise only what you alone control.</div>
     </div>
   </div>
