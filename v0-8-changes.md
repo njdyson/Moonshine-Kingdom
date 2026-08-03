@@ -2024,3 +2024,15 @@ and tightens the Ambush decision to Ambush / Hold Fire / Fold.
 - **mk-online-rules-sync.md** — §6.2.3 marked CUT; §6.3.3 and §6.4.3 tidied of the defensive
   wording; checklist updated.
 - **combat-lay-low-handoff.md** — note added atop point 3 so a fresh session doesn't rebuild it.
+
+### Addendum (2026-08-03): combat-back flames to titles, Ambush one-way clarified, two more trims
+
+- **Combat-back Heat flames moved to the title column** (Ambush, Open Fire), matching the front pass —
+  no inline glyphs mid-sentence.
+- **Ambush wording clarified.** The old "+1 Threat on the first roll" read like a normal two-way
+  volley with a bonus. It isn't: the Rulebook is explicit that "only the Occupier rolls dice."
+  The card now leads with **"Only you roll, at +1 Threat: the Invader can't fire back"** — a clarity
+  fix, no rules change. The Open Fire line's "both sides kill" now reads as a deliberate contrast.
+- **Two overhang trims:** the Handshake pin-note drops "third-party" and "only" ("…the deal dies,
+  sabotage included: promise what you alone control"); Whispers drops "Jobs" and tightens "a Market
+  card" → "the Market", losing no meaning.
