@@ -2036,3 +2036,20 @@ and tightens the Ambush decision to Ambush / Hold Fire / Fold.
 - **Two overhang trims:** the Handshake pin-note drops "third-party" and "only" ("…the deal dies,
   sabotage included: promise what you alone control"); Whispers drops "Jobs" and tightens "a Market
   card" → "the Market", losing no meaning.
+
+### Addendum (2026-08-03): playbook fronts overflowed in print — widened to fix
+
+The ACCOUNTING header + Collect row pushed the front past the fixed 925px print box, clipping the
+second signature play. Measured with a headless render at the exact print-clone geometry:
+
+| Front | at 470px (old) | at 520px (new) |
+|-------|---------------|----------------|
+| Sicilian / Harlem / Irish | **+31px over** | 34–38px slack |
+| Vipers | **+16px over** | 34px slack |
+
+Fix, in order of leverage: **card widened 470 → 520px** (print zoom is height-bound, so the extra
+width is free — it fills more of the A5 and wraps fewer lines), plus a hair off line spacing
+(`.desc` 1.4 → 1.35) and section margins (`.sec` 11 → 9px top, `.sig` 12 → 9px). `CARD_W` in the
+print script and the mobile viewport bumped to match (474 → 524; 520 → 574). All four fronts now
+fit with comfortable slack; backs (never tight) only gained room. Verified by rendering every print
+page through the headless_shell build, not by eye.
