@@ -1973,7 +1973,8 @@ playbook-only (the Rulebook stays the authority and is untouched):
   are now grouped under **ACCOUNTING** (dry on purpose — a mob keeping its books): **Extort** (moved
   out of DIPLOMACY), **Collect**, **Lay Low**. That also tightens DIPLOMACY into the plays about
   outside powers — Beg (Shylock), Rat (the cops), Bribe (the Commission). Move/Unload/Trade stay
-  under LOGISTICS.
+  under LOGISTICS. ACCOUNTING sits last of the standard sections, after EMPIRE BUILDING (you build,
+  then settle the books), so Lay Low — the day-ender — is the final play before the signature tricks.
 - **Collect trimmed to a prompt.** The card is a prompt sheet, not a strategy guide — the desc is
   now just "Cash 1 Influence marker for $100." (the em dash and the bide-for-a-token sentence are
   gone; that reasoning lives in the Rulebook and Guide).
