@@ -1014,6 +1014,9 @@
 
     <div class="container combat-page"><!-- Combat Rules Page 1 -->
         <h2 id="combat">Combat Rules: Blood on the Streets</h2>
+        <div class="cover">
+            <img class="cover-sm" src="Art/Rulebook/opt/Ambush.webp" alt="All out War" width="100%" loading="lazy">
+        </div>
         <p>
             Violence isn't a backup plan; it's the cost of doing business. Smart Kingpins know a drawn gun beats a fired one. When talk
             fails, step inside and clear the room.
@@ -1098,7 +1101,7 @@
             These bonuses ride on the <b>situation, not the Play</b>, applying to <b>every</b> attack roll you make from that position: <b>Open Fire</b>, <b>Hit</b> or <b>Plunder</b> alike.
         </p>
 
-        <h3 id="combat-standoff">2. The Standoff: Crossing the Line</h3>
+        <h4>The Shape of a Fight</h4>
         <p>
             Every firefight is just <b>two questions, asked in order</b>:
         </p>
@@ -1109,43 +1112,46 @@
         <p class="note">
             <strong>A Firefight Is One Play.</strong> The <b>Move</b> that started it is the <b>Play</b>. Everything after it (<b>Ambush</b>, <b>Hold Fire</b>, <b>Fold</b>, <b>Open Fire</b>, <b>Advance</b>, <b>Fall Back</b>, and the signature tricks) happens <em>inside</em> that Play: each choice costs Influence from the Ledger of whoever makes it, but none of them costs a turn, so a fight of any length is still the single Play that walked in the door. That is why the crew holding the block always answers, even one that went home hours ago. <b>Your free answers are always open to you; the paid ones need a marker in your Ledger</b>, so spent out you can neither Ambush nor Open Fire <em>(and Laid Low, your Ambush is stood down whatever you hold)</em>.
         </p>
-        <p>
-            When an opponent <strong>Moves</strong> into a District you Control, the game pauses on Step 1. <em>Set each crew along the edge it crossed from, so it stays clear whose Mobsters and barrels are whose.</em>
-        </p>
-        <ol class="sub-section">
-            <li><strong>Ambush (Cost: 1):</strong>
-                You greet the invaders with lead. <em>Paid from your Ledger. Spent out or Laid Low, you can't Ambush.</em>
-                <ul class="sub-section" style="margin-top:5px;">
-                    <li><strong>First Shot:</strong> Only the Occupier rolls dice, at <b>+1 Threat</b>.</li>
-                    <li><strong>Draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">:</strong> firing first, you take the fight's one Heat marker; your spent marker locks onto the Track.</li>
-                    <li><strong>Casualties:</strong> Hits remove Invaders (Runners first). Invaders are now <strong>Pinned</strong>.</li>
-                </ul>
-            </li>
-            <li><strong>Hold Fire:</strong>
-                You stand your ground but don't shoot. Maybe they're just passing through. The Invaders are now <strong>Pinned</strong>.
-            </li>
-            <li><strong>Fold (Cost: 0):</strong>
-                You surrender the District. You may immediately move your Mobsters to one <strong>Connected Safe
-                    District</strong>, across water via Docks if you like.
-                <ul class="sub-section" style="margin-top:5px;">
-                    <li><strong>Panic:</strong> Fleeing Mobsters cannot carry Liquor; any barrels are left behind, and your Safehouse stays put.</li>
-                    <li><strong>The Takeover:</strong> The Invader immediately claims <strong>Control</strong>, captures dropped Liquor, and may <strong>take over</strong> or destroy your Safehouse. The Invaders are <strong>not Pinned</strong>; their Play ends.</li>
-                </ul>
-            </li>
-        </ol>
-
 
     </div>
 
     <div class="container one-column dense-page"><!-- Combat Rules Page 2 -->
-        <h3 id="pinned">3. Pinned: Fight or Flight (Step 2)</h3>
-        <div class="cover">
-            <img class="cover-sm" src="Art/Rulebook/opt/Ambush.webp" alt="All out War" width="100%" loading="lazy">
-        </div>
+        <h3 id="combat-standoff">2. The Standoff: Crossing the Line (Step 1)</h3>
         <p>
-            <strong>A firefight is one Play.</strong> Moving in starts it, however many rounds of fire that takes. Each round costs its own Influence, but the whole bloody business counts as the
-            <strong>single Play</strong> that walked in the door.
+            When an opponent <strong>Moves</strong> into a District you Control, the game pauses on Step 1. <em>Set each crew along the edge it crossed from, so it stays clear whose Mobsters and barrels are whose.</em>
         </p>
+
+        <table class="action-table">
+            <tr>
+                <td><strong>Ambush (Cost: 1)</strong></td>
+                <td>
+                    <strong>Greet the invaders with lead.</strong> <em>Paid from your Ledger: spent out or Laid Low, you can't Ambush.</em>
+                    <ul class="sub-section" style="margin-top:5px; margin-bottom:5px;">
+                        <li><strong>First Shot:</strong> Only the Occupier rolls dice, at <b>+1 Threat</b>.</li>
+                        <li><strong>Draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">:</strong> firing first, you take the fight's one Heat marker; your spent marker locks onto the Track.</li>
+                        <li><strong>Casualties:</strong> Hits remove Invaders (Runners first). Invaders are now <strong>Pinned</strong>.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Hold Fire (Cost: 0)</strong></td>
+                <td>
+                    <b>Stand your ground</b> but don't shoot. Maybe they're just passing through. The Invaders are now <strong>Pinned</strong>.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Fold (Cost: 0)</strong></td>
+                <td>
+                    <b>Surrender the District.</b> You may immediately move your Mobsters to one <strong>Connected Safe District</strong>, across water via Docks if you like.
+                    <ul class="sub-section" style="margin-top:5px; margin-bottom:5px;">
+                        <li><strong>Panic:</strong> Fleeing Mobsters cannot carry Liquor; any barrels are left behind, and your Safehouse stays put.</li>
+                        <li><strong>The Takeover:</strong> The Invader immediately claims <strong>Control</strong>, captures dropped Liquor, and may <strong>take over</strong> or destroy your Safehouse. The Invaders are <strong>not Pinned</strong>; their Play ends.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+        <h3 id="pinned">3. Pinned: Fight or Flight (Step 2)</h3>
         <p>
             A <b>Pin</b> stops the city where it stands: it is fought out then and there, and <b>no Play is made anywhere, by anyone</b>, until it resolves. While Pinned you do nothing else: spend Influence to <strong>Open Fire</strong> or
             <strong>Advance</strong>, or <strong>Fall Back</strong> for free, and keep choosing

@@ -2267,3 +2267,30 @@ Dock** is a legal terminus — a land tunnel to an island, and a quiet second cl
 lane (ship the moonshine in without boats). If unwanted, the fix is a "no water crossing" or
 "mainland only" clause on Tunnel; if the rails the cops forgot run that deep, it's worth a future
 guide line. Held back pending a ruling.
+
+---
+
+## 2026-08-03 — Rulebook: both combat choice sets are now tables, art moves to the chapter head
+
+The Standoff's Occupier choices (Ambush / Hold Fire / Fold) were a numbered list while the Invader's
+Pinned choices (Open Fire / Advance / Fall Back) were an `action-table`, even though they are the
+same kind of decision — three options, a cost, consequences. The Playbooks already present both as
+table rows, and that format wins: the gold cost column makes free-vs-paid scannable at the moment
+the page is actually consulted. Both are `action-table`s now, and the two combat pages are
+recomposed around that:
+
+- **Page 1** (`combat-page`, two-column): the Ambush plate moves up under the chapter h2 (the
+  existing `h2:has(+ .cover)` pattern), then Rules of Engagement, plus a new closing h4 — **The
+  Shape of a Fight** — holding the two-questions overview and the *A Firefight Is One Play* note,
+  both moved off page 2 to balance the sheets.
+- **Page 2** (`one-column dense-page`): a pure reference — §2 The Standoff (Step 1) with the
+  Occupier table, §3 Pinned (Step 2) with the Invader table, §4 Victory & Consequences. The
+  duplicate short "a firefight is one Play" paragraph that used to reopen page 2 is deleted; the
+  full note now lives one page earlier and the pages are no longer separated.
+- **Hold Fire gains an explicit "(Cost: 0)"** for parallelism with its table-mates; the section
+  headings gain "(Step 1)"/"(Step 2)" tags. Anchors (`#combat-standoff`, `#pinned`, `#victory`)
+  and TOC entries unchanged.
+
+Verified by print-rendering the book headlessly (the same engine `Build PDFs.cmd` uses): still
+exactly 24 sheets, no blanks, and the two combat pages measure 92.6% / 92.5% full — inside the
+book's 78–99% range (they were 78% / 111%-overflowing after the naive move, hence the rebalance).
