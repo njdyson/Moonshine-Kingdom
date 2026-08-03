@@ -145,7 +145,7 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    SECTION HEADS
    ============================================================ */
-.sec{display:flex;align-items:center;gap:8px;margin:7px 0 3px}
+.sec{display:flex;align-items:center;gap:8px;margin:8px 0 4px}
 .sec--trait{margin-bottom:4px}
 .sec--res{margin-bottom:5px}
 .sec--flow{margin:12px 0 5px}
@@ -158,17 +158,19 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    TRAIT + SIGNATURE PANELS
    ============================================================ */
-.trait{border:1px solid var(--panel-line);border-radius:9px;background:var(--wash);padding:8px 13px}
+.trait{border:1px solid var(--panel-line);border-radius:9px;background:var(--wash);padding:9px 13px}
 .trait-name{font:700 12px Barlow;color:var(--ink-2)}
-.trait-body{font:400 11px/1.45 Barlow;color:var(--body)}
+.trait-body{font:400 11px/1.5 Barlow;color:var(--body)}
 
 .sig{margin-top:9px;border:1px solid var(--panel-line);border-radius:9px;background:var(--wash);padding:5px 12px 8px}
 
 /* ============================================================
    PLAY ROWS
    ============================================================ */
-.play{display:flex;gap:11px;align-items:flex-start;padding:3px 2px;border-bottom:1px solid var(--rule)}
-.act{display:flex;gap:11px;align-items:flex-start;padding:3px 2px;border-bottom:1px solid var(--rule)}
+/* Fronts are row-count-bound: ~14 rows, so every 1px here costs ~14px of card.
+   4px is the ceiling that still clears the 925 print box on the busiest mob. */
+.play{display:flex;gap:11px;align-items:flex-start;padding:4px 2px;border-bottom:1px solid var(--rule)}
+.act{display:flex;gap:11px;align-items:flex-start;padding:5px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
 
 .cost{
@@ -183,7 +185,10 @@ a:hover{color:var(--gold-bright)}
 
 .name{flex:0 0 74px;font:700 12px Barlow;color:var(--ink-2);padding-top:4px}
 .name--sm{padding-top:2px}
-.desc{flex:1;font:400 11px/1.35 Barlow;color:var(--body);padding-top:3px}
+/* Size stays 11px: the fronts are wrap-bound and iOS/Safari wraps looser than
+   Chromium, so a bump here re-wraps rows and eats the print buffer. The extra
+   air comes from leading + row padding instead. */
+.desc{flex:1;font:400 11px/1.4 Barlow;color:var(--body);padding-top:3px}
 .desc--sm{padding-top:1px}
 
 /* Recruit ladder: Wards Controlled -> cost per Runner.
@@ -200,9 +205,9 @@ a:hover{color:var(--gold-bright)}
 .res{display:flex;gap:10px}
 .res-tbl{flex:1;border:1px solid var(--panel-line);border-radius:7px;overflow:hidden}
 .res-grid{display:grid;grid-template-columns:1fr 1fr}
-.res-h{background:var(--head-bg);color:var(--gold-label);font:700 10px Cinzel,serif;text-align:center;padding:5px;border-bottom:1px solid var(--panel-line)}
-.res-k{text-align:center;padding:4px;font:500 11px Barlow;color:var(--value);border-top:1px solid var(--cell)}
-.res-v{text-align:center;padding:4px;font:700 11px Barlow;color:var(--gold-bright);border-top:1px solid var(--cell);border-left:1px solid var(--cell-strong)}
+.res-h{background:var(--head-bg);color:var(--gold-label);font:700 10.5px Cinzel,serif;text-align:center;padding:6px 5px;border-bottom:1px solid var(--panel-line)}
+.res-k{text-align:center;padding:5px 4px;font:500 11.5px Barlow;color:var(--value);border-top:1px solid var(--cell)}
+.res-v{text-align:center;padding:5px 4px;font:700 11.5px Barlow;color:var(--gold-bright);border-top:1px solid var(--cell);border-left:1px solid var(--cell-strong)}
 /* first data row sits flush under the header rule */
 .res-grid>:nth-child(3),.res-grid>:nth-child(4){border-top:0}
 
@@ -210,23 +215,23 @@ a:hover{color:var(--gold-bright)}
    COMBAT BONUS CHIPS
    ============================================================ */
 .bonus{display:flex;gap:8px;margin:11px 0 2px}
-.bonus-cell{flex:1;text-align:center;border:1px solid var(--flow-line);border-radius:7px;background:rgba(0,0,0,.25);padding:6px 3px}
-.bonus-num{font:700 13px Cinzel,serif;color:var(--gold-bright)}
-.bonus-lbl{font:500 9px Barlow;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.bonus-cell{flex:1;text-align:center;border:1px solid var(--flow-line);border-radius:7px;background:rgba(0,0,0,.25);padding:8px 3px}
+.bonus-num{font:700 14px Cinzel,serif;color:var(--gold-bright)}
+.bonus-lbl{font:500 9.5px Barlow;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 
 /* ============================================================
    COMBAT SEQUENCE
    ============================================================ */
 .flow{display:flex;gap:7px}
-.flow-cell{flex:1;border:1px solid var(--flow-line);border-radius:7px;background:var(--flow-bg);padding:7px 8px}
-.flow-head{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.flow-cell{flex:1;border:1px solid var(--flow-line);border-radius:7px;background:var(--flow-bg);padding:9px 9px}
+.flow-head{display:flex;align-items:center;gap:6px;margin-bottom:4px}
 .flow-num{width:18px;height:18px;background:var(--gold);color:#1b150e;font:700 10px Cinzel,serif;display:flex;align-items:center;justify-content:center;border-radius:3px}
-.flow-name{font:700 11px Barlow;color:var(--ink-2)}
-.flow-body{font:400 10px/1.35 Barlow;color:var(--body-2)}
+.flow-name{font:700 11.5px Barlow;color:var(--ink-2)}
+.flow-body{font:400 10.5px/1.4 Barlow;color:var(--body-2)}
 
-.phase{background:var(--head-bg);border:1px solid var(--panel-line);border-radius:5px;padding:4px 8px;margin:11px 0 2px;font:700 10px Cinzel,serif;letter-spacing:1.5px;color:var(--gold-label);text-align:center}
-.phase--pinned{margin-top:9px}
-.pin-note{text-align:center;font:italic 500 10px Barlow;color:var(--muted);margin-top:6px}
+.phase{background:var(--head-bg);border:1px solid var(--panel-line);border-radius:5px;padding:5px 8px;margin:12px 0 3px;font:700 10.5px Cinzel,serif;letter-spacing:1.5px;color:var(--gold-label);text-align:center}
+.phase--pinned{margin-top:10px}
+.pin-note{text-align:center;font:italic 500 10.5px Barlow;color:var(--muted);margin-top:7px}
 
 /* ============================================================
    PRINT
