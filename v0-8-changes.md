@@ -2327,3 +2327,14 @@ borrowed Rulebook Oath plate the sheet comment had flagged as a stand-in ("the o
 the building" — now the only *broken* handshake in the building). The 4:3 crop keeps the "A deal
 is a deal… until it's not" poster, the torn "OUR WORD" contract, and the whiskey bottle inside the
 card's 1.55:1 cover-cropped art well; print-verified on sheets 5–6, card geometry untouched.
+
+---
+
+## 2026-08-03 — New Rat card art
+
+`Art/Cards/Rat.jpg` replaced in place with Nick's new plate: the rat in the fedora crawling the
+sewer tunnel, in the deck's 898×674 landscape recipe (source was already 4:3; centre-cropped and
+resized, ~147 KB). No markup changed — the card already pointed at `Art/Cards/Rat.jpg`. The
+1.55:1 cover-cropped art well keeps hat, eyes, whiskers and the lit tunnel behind; print-verified
+on the debts sheet beside Shylock's Mark, geometry untouched. The old anthropomorphic barfly rat
+survives in git history.
