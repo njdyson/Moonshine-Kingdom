@@ -2313,3 +2313,17 @@ Cooperation page **and** the Kingpin's Guide's Part V cover: the puppet-strings 
 *Puppeteering*, cut from the game 2026-08-02, while the torn "OUR WORD" contract is exactly the
 Handshake → Welsher forfeit the v0.9 rules actually teach. The Puppet files stay in `Art/Rulebook/`
 unreferenced, alongside the other retired plates.
+
+---
+
+## 2026-08-03 — Correction: the Welsher art is card art
+
+The entry above placed the torn-contract plate on the Rulebook's Cooperation page; Nick's intent
+was the **Welsher card**. Reverted the Rulebook and Kingpin's Guide covers to `Puppet.webp` (both
+books look exactly as they did before), removed the misplaced `Art/Rulebook/Welsher.*` plates, and
+cut the art to the Debts deck's recipe instead: `Art/Cards/Welsher.jpg`, 898×674 landscape JPEG
+like its sheet-mates. All eight Welsher cards in `Cards v0.9.html` now carry it, retiring the
+borrowed Rulebook Oath plate the sheet comment had flagged as a stand-in ("the only handshake in
+the building" — now the only *broken* handshake in the building). The 4:3 crop keeps the "A deal
+is a deal… until it's not" poster, the torn "OUR WORD" contract, and the whiskey bottle inside the
+card's 1.55:1 cover-cropped art well; print-verified on sheets 5–6, card geometry untouched.
