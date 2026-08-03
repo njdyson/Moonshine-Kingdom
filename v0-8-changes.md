@@ -2224,3 +2224,46 @@ Estate family's spawn-point problem"* (spawn-point is a Mobster-placement proble
 Tunnel no longer addresses it) and *"the Staten lane, which Skiff serves better than any Move"* (if
 that lane is about hauling Rum, crew-only Skiff no longer serves it). Both are Jobs-strategy calls,
 not mechanical fixes.
+
+---
+
+## 2026-08-03 — Kingpin's Guide: the strategy pass for the Tunnel/Skiff rework
+
+The two flagged lines from the entry above are resolved, plus five more places where the guide's
+advice still described the old plays. `Kingpin's Guide v0.9.html` only; no rules changed, and the
+digital port is still untouched.
+
+- **Vipers at the Offers** (Four Mobs table): *"Tunnel also solves the Estate family's spawn-point
+  problem"* deleted — spawn-point is a Mobster problem and barrels-only Tunnel no longer touches it.
+  No replacement Estate claim, because no true one exists; the cell now points Tunnel at the
+  **Logistics tier**: the stockpile builds at the Safehouse and surfaces in whichever Controlled
+  district the Job wants, extending the Whispers theme — rivals see the stake, never the Job, and
+  now never the shipment.
+- **Knights at the Offers**: *"the Staten lane, which Skiff serves better than any Move"* — the lane
+  stays theirs, but the claim now rests on **Network** (every Dock connects to Staten as if
+  adjacent; the free Rum per island Trade is the surplus The Smuggler's Run's 6+ demands), not the
+  boat. Skiff is re-aimed at the **Muscle tier**, with *The Irish Goodbye* (kill 3+, take no
+  Control) called out: a Skiff Advance out of the fight satisfies it to the letter. Edge column
+  gains "even out of a fight."
+- **Four Mobs at War, Knights**: the escape clause written up — return-ticket raiding to any
+  harbour on the map; the two prices (5 seats, no barrels, overflow killed — so a 6+ garrison
+  should usually take the ordinary land Fold instead); never the Scatter's step.
+- **Four Mobs at War, Vipers**: one addition — Tunnel as **spoils denial**: when a rival masses on
+  the border, evacuate the threatened block's barrels home before the storm. Spoils are half the
+  wage of an invasion.
+- **Raid, lever three (decoy warehouse)**: the Vipers stage the plant at any distance — Tunnel
+  drops five barrels on the chosen door in one Play.
+- **Raid, the back-door note**: the pier-is-a-cell trap now names the Knights — Skiff fights, it
+  never Scatters — landing the unified water mnemonic ("water saves you from mobsters, not from
+  cops") in the Raid chapter where it belongs.
+- **Specialist Services**: *"Skiff runs five barrels clean across the water … a freight line, the
+  Staten lane on demand"* replaced. The rentable monopoly is now a **navy, not a freight line**: a
+  five-man landing on whichever beach the buyer needs frightened, sold like the Torch as a weapon
+  aimed at a third crew.
+
+**Designer note, deliberately NOT written into the guide:** as worded, Tunnel's route is "between
+your Safehouse and any District you Control" with no geography clause, so a Controlled **Staten
+Dock** is a legal terminus — a land tunnel to an island, and a quiet second claim on the Staten
+lane (ship the moonshine in without boats). If unwanted, the fix is a "no water crossing" or
+"mainland only" clause on Tunnel; if the rails the cops forgot run that deep, it's worth a future
+guide line. Held back pending a ruling.
