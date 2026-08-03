@@ -1968,8 +1968,12 @@ Shipping PDFs not rebuilt (`Build PDFs.cmd` when wanted).
 Nick reviewed the cards on mobile — Collect fits — and called a round of tidying, all
 playbook-only (the Rulebook stays the authority and is untouched):
 
-- **New CLOSING TIME section.** Collect + Lay Low were stretching the term "LOGISTICS"; they now
-  sit in their own section (Move/Unload/Trade stay under LOGISTICS).
+- **New ACCOUNTING section.** Collect + Lay Low were stretching the term "LOGISTICS", and "Closing
+  Time" was wrong for Collect (which deliberately keeps you *on* the street). The three income plays
+  are now grouped under **ACCOUNTING** (dry on purpose — a mob keeping its books): **Extort** (moved
+  out of DIPLOMACY), **Collect**, **Lay Low**. That also tightens DIPLOMACY into the plays about
+  outside powers — Beg (Shylock), Rat (the cops), Bribe (the Commission). Move/Unload/Trade stay
+  under LOGISTICS.
 - **Collect trimmed to a prompt.** The card is a prompt sheet, not a strategy guide — the desc is
   now just "Cash 1 Influence marker for $100." (the em dash and the bide-for-a-token sentence are
   gone; that reasoning lives in the Rulebook and Guide).
