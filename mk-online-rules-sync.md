@@ -235,7 +235,7 @@ relay at a new junction.
 | # | Likely current behaviour | Now |
 |---|--------------------------|-----|
 | 6.4.1 | Players at 0 Influence are auto-passed / auto-laid-low (verify) | **Never automatic.** Lay Low is a **Play, Cost 0**, the only free one, chosen **on your turn**. A 0-Influence player keeps their seat until their turn comes; Lay Low is then their only legal Play, but it still happens in seat order. This is load-bearing: it decides the order tomorrow's Turn Tokens are claimed when several crews go broke the same round, and it keeps a spent-out crew loanable until they step off. |
-| 6.4.2 | (unchanged mechanics, listed for the port) | On Lay Low: Odd Jobs $100 per unspent **Ledger** marker, Ledger clears to Reserves, claim the **lowest** token left in tomorrow's set. After: no Plays and **cannot receive Puppeteer loans** until tomorrow. |
+| 6.4.2 | (unchanged mechanics, listed for the port) | On Lay Low: **collect $100 per unspent Ledger marker** (the Collect rate, §8 — the term "Odd Jobs" is retired), Ledger clears to Reserves, claim the **lowest** token left in tomorrow's set. After: no Plays and **cannot receive Puppeteer loans** until tomorrow. |
 | 6.4.3 | — | **Laid Low still defends.** Raided, they answer the Standoff (Hold Fire or Fold only — no Ambush, and no Plunder-Ambush) and return fire in volleys as normal (free). Nothing fought inside a firefight is a Play in any surfaced rules copy — "no more Plays" must never block defence. (Terminology, 2026-08-02: the noun **Call** is retired; the engine rule is unchanged, only how the copy says it.) |
 
 ### 6.5 Puppeteering at the Standoff
@@ -306,6 +306,48 @@ Nothing to unlearn (no bot ever lent a marker) and one cheap heuristic if deals
 ship: a Welsher card is −1 Respect in the win-condition's own unit, so price
 breaking a deal exactly like §1's Rat maths at one third strength — near-zero
 far from 15, mortal at 14.
+
+## 8. Collect: a new Standard Play (2026-08-03)
+
+*Odd Jobs* — the "$100 per unspent marker" clause that only ever fired inside Lay
+Low — is promoted to a Standard Play in its own right, **Collect**, and the term
+"Odd Jobs" is retired. One economic constant now governs both: **1 Influence
+marker = $100 cash**, whether you cash markers one at a time (Collect) or the
+whole Ledger at once (Lay Low).
+
+### What changed, and why
+
+- **Collect (Standard Play, Cost 1 Influence).** Spend one marker — it returns to
+  Reserves like any Standard-Play cost — and take **$100** from the bank. **No
+  Heat, no board change, no combat**; it *is* the turn's Play. Legal only with at
+  least one Influence in the Ledger (it costs one); at 0 Influence the only Play
+  left is still Lay Low.
+- **Why it exists.** A crew that wanted to stay on the street late (to outlast
+  rivals and claim a *higher* Turn Token — first pick at The Offers tomorrow) had
+  no legitimate do-nothing move; it had to make disruptive "filler" plays
+  (shuffling a Runner between friendly districts) purely to burn a turn. Collect
+  is that filler made honest: a real Play that touches no board state.
+- **Money stays neutral.** Because Collect pays the same $100/marker as Lay Low's
+  cash-out, total cash is identical whether a crew dumps its Ledger early or drips
+  it out over several turns. Cash therefore never distorts the step-off decision —
+  the only thing traded is **Turn-Token position** (low token = first Brew draft;
+  high token = first pick at The Offers).
+- **Lay Low is unchanged mechanically** — its per-marker payout is the Collect
+  rate stated once and reused; only the copy changed (the "Odd Jobs" label is
+  gone, the number is not).
+
+### Required changes
+
+| # | Where it bites | Now |
+|---|----------------|-----|
+| 8.1 | Standard Play list / action enum | Add **Collect**, Cost 1. Effect: move one marker Ledger → Reserves (standard cost path, **never** the Heat Track — Collect draws no Heat) and credit the player **$100**. It consumes the turn's Play like any other. |
+| 8.2 | Legality gate | Collect is available iff the player has **≥1 Influence in the Ledger**. It is a normal priced Play, so the existing "can you afford a Cost-1 Play" check already covers it; just make sure it is offered whenever affordable and never at 0. |
+| 8.3 | Lay Low payout label | Wherever the cash-out is surfaced (log line, tooltip, end-of-day summary), retire the string **"Odd Jobs"**; the mechanic (\$100 × unspent Ledger markers, then clear to Reserves) is unchanged. |
+| 8.4 | Bots | Collect is the **tempo-hold** move: take it only to stay on the street for a *later* Turn Token when no value Play is available — never for the cash (it is money-neutral, so Collecting purely for coin is strictly dominated by Laying Low and freeing the seat). Rank it below every value Play and above Lay Low **only** when the bot wants a higher token (a live Job it can reach at The Offers, a rival it wants to out-sit); otherwise prefer Lay Low. |
+
+### Bots
+
+One heuristic: `wantsLateToken = (a reachable Offers Job the bot values) || (out-sitting a rival for draft/market order)`. If a value Play exists, play it. Else if `wantsLateToken && ledger >= 1`, **Collect**. Else **Lay Low**. Guard against a Collect loop that never steps off — cap it by the same "nothing left worth doing" test that already triggers Lay Low, plus the token motive above.
 
 ## Checklist
 
@@ -386,3 +428,10 @@ far from 15, mortal at 14.
       are dead letters; do not implement them when porting anything else.
 - [ ] **If deals ship online: Welsher cards (§7.5)** — per-player count, −1 Respect each at
       scoring time (never stored), supply of 8, no removal path.
+- [ ] **Collect: new Standard Play, Cost 1 (§8)** — add to the action enum; effect is marker
+      Ledger → Reserves (never Heat) plus **+$100**; offered whenever a Cost-1 Play is affordable,
+      never at 0 Influence.
+- [ ] **Retire the "Odd Jobs" label on the Lay Low cash-out (§8.3)** — the mechanic ($100 ×
+      unspent markers, clear to Reserves) is unchanged; only the surfaced string changes.
+- [ ] **Bots: Collect as the tempo-hold move (§8.4)** — take it only to hold the street for a
+      higher Turn Token when no value Play exists; never for the (neutral) cash; guard the loop.

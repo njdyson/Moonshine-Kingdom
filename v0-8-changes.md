@@ -1912,3 +1912,53 @@ the old numbers. Kill by `remote-debugging-port` before trusting a repeated figu
 
 Playbooks and the Cards deck were measured too and were already clean. The shipping PDFs in
 `V0.9 PDFs/` are untracked and were **not** rebuilt; `Build PDFs.cmd` when you want them.
+
+## 2026-08-03 — Odd Jobs is promoted to a Standard Play: **Collect**
+
+The "$100 per unspent marker" clause that had only ever lived *inside* Lay Low (called
+**Odd Jobs**; see the 2026-08-01 addendum that confirmed it on every Lay-Low surface) is now a
+Standard Play in its own right, **Collect** (Cost 1 Influence). Cash one marker for **$100** and
+end your turn — no Heat, no board change, nothing moves but the money. The noun "Odd Jobs" is
+retired, the same way "Call" was: one vocabulary, stated in plain language. Lay Low's cash-out is
+unchanged in every number; it now simply *collects* each unspent marker at the rate the Collect
+Play names.
+
+**Why.** A crew that wanted to stay on the street late — to outlast rivals and claim a *higher*
+Turn Token, i.e. first pick at The Offers tomorrow — had no honest do-nothing move. It had to make
+disruptive filler plays (shuffling a Runner back and forth between friendly districts) purely to
+burn a turn without changing anything. Collect makes that filler legitimate: a real, priced,
+non-disruptive Play.
+
+**The design turns on one constant: 1 Influence marker = $100, however you cash it.** Collect pays
+the same rate as Lay Low's dump, so total cash is identical whether you drip your Ledger out a
+marker at a time or empty it all at once. That is the point — with cash held neutral, the step-off
+decision is *purely* about Turn-Token position:
+
+- **Lay Low early** → the low token → first Brew draft and first Move tomorrow.
+- **Collect your way to the back of the day** → the high token → first pick at The Offers.
+
+Same money; only the timing changes. (The old "Odd Jobs floor" argument for the Rum premium in the
+Guide survives intact — a Kickback marker you never spend is still worth $100 — it is just now
+phrased around Collect and reframed as the $100 floor.)
+
+**Money neutrality checked.** 3 markers via Lay Low = $300 + an early token; 3 markers via three
+Collects then a marker-empty Lay Low = $300 + a late token. Cash equal on both lines; that was the
+requirement.
+
+**Where it landed.**
+- **Rulebook** — new Collect row in the Standard Plays table; Lay Low bullet reworded to "collecting
+  $100 apiece — the rate the Collect Play pays, cashed all at once"; the Cash resource bullet now
+  reads "…Extorting, and Collecting spare Influence for coin."
+- **Playbooks (all four cards)** — Collect added to LOGISTICS just above Lay Low; Lay Low tightened
+  and now names Collect; Extort's verb changed from "Collect" to "Take" to reserve the word for the
+  Play. Move and Rise trimmed to buy back the vertical space the new row costs. **Overflow still
+  needs Nick's eyeball** per the usual convention — the cards were already tight, and the Rulebook is
+  the authority, so card text can compress further on request.
+- **Turn Structure board** — Lay Low step reworded (Odd Jobs → "the Collect rate, all at once").
+- **Kingpin's Guide** — three "Odd Jobs" references retired (the Rum-premium floor, the Rum-sale
+  floor note, and the "When to blink first" list); the blink-first list gains the money-neutral /
+  token-timing framing above and names Collect as the way to hang on without disturbing the board.
+- **mk-online-rules-sync.md** — new §8 (Collect as a Standard Play, the "Odd Jobs" label retired,
+  bot tempo-hold heuristic) plus three checklist items; §6.4.2 reworded off "Odd Jobs".
+
+Shipping PDFs not rebuilt (`Build PDFs.cmd` when wanted).
