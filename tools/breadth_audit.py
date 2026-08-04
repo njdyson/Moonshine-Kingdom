@@ -59,6 +59,16 @@ for verb, bools in VERB_BOOLS.items():
                             if p['from_staten_dock'] and d.boro == ST: continue
                             if p['seize'] and defenders == 0 and kills == 0: continue
                             if p['defenseless'] and p['hostile']: continue
+                            # ⚠ THESE MUST MIRROR overlap_audit.py's LOOP BY HAND.
+                            # This file re-execs only the DATA prefix of that script and
+                            # then re-implements the enumeration, so a constraint added
+                            # there does NOT arrive here. Live miss (2026-08-04): the
+                            # counterplay pass added three rules there and this audit
+                            # went on reporting a 4-district flag the other tool had
+                            # already closed. If you touch one loop, touch both.
+                            if p['control'] and (p['hostile'] or p['defenseless']): continue
+                            if p['rival_safehouse'] and p['control']: continue
+                            if p['seize'] and p['control']: continue
                             if p['williamsburg_bridge'] and d.name not in ('Williamsburg', 'Five Points'): continue
                             if p['from_staten_dock'] and p['origin_press5']: continue
                             if p['rival_deed'] and d.boro == ST: continue
@@ -104,3 +114,33 @@ print('=' * 92)
 for n, ds in sorted(solo.items(), key=lambda kv: -len(kv[1])):
     if len(ds) >= 8:
         print(f'  {len(ds):2} districts  {n} ({respect[n]})')
+
+# --- LIVENESS ---------------------------------------------------------------
+# Added 2026-08-04 after a rewritten card shipped that COULD NOT FIRE. The
+# counterplay pass gave The Empty Casket "Rise in a Ward a rival Controls",
+# which is impossible two ways over: Control transfers the instant you win the
+# fight (so it is false at its own checkpoint), and Rise only ever places the
+# Boss in a SAFE District. Nick caught it by reading the card; every audit
+# passed it, because the model encoded the same impossibility and a predicate
+# that is never true simply never appears in any co-firing set.
+#
+# THIS IS THE HANDOFF'S "silent zero is not a pass" RULE, GENERALISED: the
+# overlap and breadth audits only ever report cards that DO fire, so a dead card
+# is invisible to both by construction. The enumeration above already visits
+# every legal board state, so liveness is free: a card that never landed in
+# `solo` cannot fire anywhere on the board.
+#
+# NOTE this checks the MODEL, not the card text -- it catches a predicate that
+# is unsatisfiable, not one that is satisfiable here but barred by the Play's
+# own rules. Always also read the objective against the Playbook entry for its
+# verb (that is what "Place your Boss in any Safe District" would have told you).
+print()
+print('=' * 92)
+print('LIVENESS — can each card fire at all? (a dead card is invisible to the audits)')
+print('=' * 92)
+dead = [j['name'] for j in JOBS if not solo.get(j['name'])]
+if dead:
+    for n in dead:
+        print(f'  !! DEAD — never fires anywhere on the board: {n} ({respect[n]})')
+    raise SystemExit(f'\n{len(dead)} unfirable card(s). Fix before printing.')
+print(f'  PASS — all {len(JOBS)} cards can fire in at least one district.')

@@ -69,17 +69,35 @@ JOBS = [
     J('The Milk Run', 1, 'Move', lambda p: p['barrels'] >= 4 and p['williamsburg_bridge']),
     J('The Beachhead', 1, 'Secure', lambda p: p['adj_rival_safehouse']),
     # own_deed / not own_deed: mutually exclusive with Union Dues by construction.
+    # COUNTERPLAY PASS: 5+ -> 4+ (the Sweep is the new cost, not the headcount).
     J('Tenement Army', 1, 'Recruit',
-      lambda p: p['runners'] >= 5 and p['d'].has('ward') and p['own_deed']),
+      lambda p: p['runners'] >= 4 and p['d'].has('ward') and p['own_deed']),
+    # COUNTERPLAY PASS: was any non-HS Speakeasy (8 venues, BLOCK 0). Now one named
+    # venue, which also makes it disjoint from The Angel's Share (East Harlem).
     J('Last Call', 1, 'Unload',
-      lambda p: p['barrels'] >= 4 and p['d'].has('speakeasy') and not p['d'].has('highSociety')),
-    J('The Empty Casket', 1, 'Rise', lambda p: p['d'].has('ward') and p['control']),
-    J('Fortress Staten', 1, 'Secure', lambda p: p['d'].boro == ST),
+      lambda p: p['barrels'] >= 4 and p['d'].name == 'Coney Island'),
+    # COUNTERPLAY PASS: was "after your Boss is killed, in a Ward you Control" (dead
+    # until a rival acted). The first rewrite ("a Ward a rival Controls") was IMPOSSIBLE
+    # -- Rise places the Boss in a SAFE District, and Control transfers the instant you
+    # win the fight, so the trigger could never be true at its own checkpoint. This
+    # model encoded the same impossibility and every audit still reported PASS.
+    # Now: a Defenseless block (which IS Safe) in a Borough whose Deed you don't hold.
+    J('The Empty Casket', 1, 'Rise',
+      lambda p: p['defenseless'] and p['rival_deed']),
+    # COUNTERPLAY PASS: + 4 barrels, which must be hauled to Staten across water.
+    J('Fortress Staten', 1, 'Secure', lambda p: p['d'].boro == ST and p['barrels'] >= 4),
+    # COUNTERPLAY PASS: re-objectived off the kill count (dice) onto a Seize. Note this
+    # now shares the Seize space, so it is re-checked against Eviction/Copper Heist.
     J('The Pier Six Brawl', 1, 'Open Fire',
-      lambda p: p['kills'] >= 2 and p['d'].has('dock')),
-    J("The Dutchman's Deal", 1, 'Trade', lambda p: p['barrels'] >= 3 and p['d'].has('dock')),
+      lambda p: p['seize'] and p['d'].has('dock') and p['hostile']
+      and not p['rival_safehouse']),
+    # COUNTERPLAY PASS: was any Dock (8). Now the two Manhattan Docks.
+    J("The Dutchman's Deal", 1, 'Trade',
+      lambda p: p['barrels'] >= 3 and p['d'].has('dock') and p['d'].boro == M),
+    # COUNTERPLAY PASS: was any non-HS Speakeasy (8), and co-fired with Last Call across
+    # 5 districts. Now one named venue, disjoint from Last Call by construction.
     J("The Angel's Share", 1, 'Unload',
-      lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].has('speakeasy') and not p['d'].has('highSociety')),
+      lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].name == 'East Harlem'),
     J('Night Landing', 1, 'Move',
       lambda p: p['barrels'] >= 4 and p['across_water'] and p['d'].name in JAMAICA_BAY),
     J("Squatter's Rights", 1, 'Move', lambda p: p['defenseless'] and p['rival_deed']),
@@ -87,6 +105,10 @@ JOBS = [
       lambda p: p['barrels'] >= 4 and p['d'].name in EAST_RIVER),
     # --- 3 Respect ---
     J('Cuban Prince', 3, 'Unload', lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].name == 'Red Hook'),
+    # NOTE (counterplay pass): Rum Row left unchanged. It scored engagement 2, but its
+    # unblockability is a deliberate board fact (Staten is nobody's turf) and the card
+    # is the ONLY reason anyone visits Westerleigh/Tottenville. Fixing it would need a
+    # rival to hold a Staten Dock, which the board does not encourage. Left as filler.
     J('Rum Row', 3, 'Trade', lambda p: p['barrels'] >= 4 and p['d'].has('dock') and p['d'].boro == ST),
     # takeover XOR destroy — the rulebook's own either/or, so Eviction and Bloody
     # Sunday are structurally unable to co-fire.
@@ -102,13 +124,17 @@ JOBS = [
     # Paradise Alley = Flushing (Queens' orphan Speakeasy)
     J('Poison Panic', 3, 'Unload',
       lambda p: p['barrels'] >= 6 and not p['rum'] and p['d'].name == 'Flushing'),
-    J('Gin Pipeline', 3, 'Move', lambda p: p['barrels'] >= 6 and not p['rum'] and p['origin_press5']),
+    # COUNTERPLAY PASS: destination named (a Ward), so the haul has a deniable end.
+    J('Gin Pipeline', 3, 'Move',
+      lambda p: p['barrels'] >= 6 and not p['rum'] and p['origin_press5']
+      and p['d'].has('ward') and p['control']),
     J('Union Dues', 3, 'Recruit',
       lambda p: p['runners'] >= 4 and p['d'].has('ward') and not p['own_deed']),
     J('Last One Standing', 3, 'Secure',
       lambda p: p['d'].has('speakeasy') and not p['d'].has('highSociety') and not p['own_deed']),
+    # COUNTERPLAY PASS: 3+ -> 2+ kills. Dice variance was the wrong kind of hard.
     J('The Irish Goodbye', 3, 'Open Fire',
-      lambda p: p['kills'] >= 3 and p['d'].name in EAST_RIVER and not p['seize']),
+      lambda p: p['kills'] >= 2 and p['d'].name in EAST_RIVER and not p['seize']),
     # --- 5 Respect ---
     J('Opening Night', 5, 'Unload', lambda p: p['barrels'] >= 8 and p['d'].has('highSociety')),
     # Fires on Open Fire OR Hit OR Plunder now. Modelled as Open Fire because that is
@@ -119,30 +145,52 @@ JOBS = [
     J('Over the Top', 5, 'Open Fire',
       lambda p: p['seize'] and p['d'].boro == BX and p['defenders'] >= 5),
     J('The Five Families', 5, 'Extort', lambda p: p['all_five_boroughs']),
+    # COUNTERPLAY PASS (Nick's rewrite): deliver AND seize in one Play. 'seize' is what
+    # closes the barrels-alone hole -- taking Control needs Mobsters, which forces the
+    # Standoff. NB this puts the card in the SEIZE space, so it is now checked against
+    # The Eviction / The Copper Heist / Over the Top / The Pier Six Brawl.
     J("The Smuggler's Run", 5, 'Move',
-      lambda p: p['barrels'] >= 6 and p['rum'] and p['from_staten_dock']
-      and p['d'].has('dock') and p['d'].boro != ST),
+      lambda p: p['barrels'] >= 4 and p['rum'] and p['from_staten_dock']
+      and p['d'].has('dock') and p['seize']),
     J('Bloody Sunday', 5, 'Open Fire',
       lambda p: p['seize'] and p['rival_safehouse'] and not p['takeover'] and p['d'].boro == M),
     J("The Butcher's Ledger", 5, 'Open Fire', lambda p: p['kills'] >= 5 and p['d'].boro == BK),
-    J('High Roller', 5, 'Secure', lambda p: p['d'].has('highSociety') and p['rum'] and p['barrels'] >= 4),
+    # COUNTERPLAY PASS: "a rival Controls" was ILLEGAL here (Secure targets SAFE turf
+    # only -- same trap as The Empty Casket). Counterplay now comes from the adjacency:
+    # you move in next door to a specific rival's one Safehouse, which they can relocate.
+    J('High Roller', 5, 'Secure',
+      lambda p: p['d'].has('highSociety') and p['rum'] and p['barrels'] >= 4
+      and p['adj_rival_safehouse']),
 ]
 
 STAKE = {1: 1, 3: 2, 5: 3}
 
 # Only the flags each verb's Jobs actually read — keeps the search tractable.
 VERB_BOOLS = {
+    # COUNTERPLAY PASS: 'control' added for Gin Pipeline's "into a Ward you Control";
+    # 'seize' for The Smuggler's Run, which now takes the Dock it delivers to. A Move
+    # CAN seize -- the rulebook's Move entry covers walking into rival turf and the
+    # undefended-HQ takeover -- so this is a real Play, not a modelling convenience.
     'Move': ['williamsburg_bridge', 'across_water', 'defenseless', 'rival_deed',
-             'hostile', 'origin_press5', 'from_staten_dock', 'rum'],
+             'hostile', 'origin_press5', 'from_staten_dock', 'rum', 'control', 'seize'],
     'Unload': ['rum'],   # off_home_turf retired: The Grand Tour now names the East River
-    'Secure': ['adj_rival_safehouse', 'rum', 'own_deed'],
+    # COUNTERPLAY PASS: 'hostile' added for High Roller (Secure into a rival-held High
+    # Society district). Without it that predicate would be permanently False and the
+    # card would silently never be overlap-checked -- see the Rise note below.
+    'Secure': ['adj_rival_safehouse', 'rum', 'own_deed', 'hostile'],
     'Recruit': ['own_deed'],
     # rival_deed was MISSING here, so Last One Standing's predicate was permanently
     # False and the card had never been overlap-checked at all. Any flag a Job's
     # lambda reads must appear in its verb's list or the Job silently never fires.
-    'Rise': ['control', 'hostile', 'rival_deed'],
+    # COUNTERPLAY PASS: 'defenseless' added for The Empty Casket's rewrite. Omitting it
+    # pinned the flag False and made the card unfirable -- the SECOND time this exact
+    # bug has bitten this one verb (rival_deed was missing here in 2026-07-19). The new
+    # LIVENESS check in breadth_audit.py caught it; the overlap audit reported PASS.
+    'Rise': ['control', 'hostile', 'rival_deed', 'defenseless'],
     'Trade': [],
-    'Open Fire': ['seize', 'rival_safehouse', 'boss_killed', 'own_boss', 'takeover'],
+    # COUNTERPLAY PASS: 'hostile' added for The Pier Six Brawl, which is now a Seize.
+    'Open Fire': ['seize', 'rival_safehouse', 'boss_killed', 'own_boss', 'takeover',
+                  'hostile'],
     'Extort': ['all_five_boroughs'],
     'Rat': ['control'],
 }
@@ -207,6 +255,17 @@ for verb, bools in VERB_BOOLS.items():
                             # Defenseless (no rival Mobsters) and Hostile (rival-held)
                             # are contradictory.
                             if p['defenseless'] and p['hostile']:
+                                continue
+                            # COUNTERPLAY PASS additions. A district you Control cannot
+                            # simultaneously be rival-held or an unclaimed Defenseless
+                            # one, and a rival Safehouse implies the district is theirs.
+                            if p['control'] and (p['hostile'] or p['defenseless']):
+                                continue
+                            if p['rival_safehouse'] and p['control']:
+                                continue
+                            # You Seize a district FROM someone: a Seize target is
+                            # hostile by definition, never one you already Control.
+                            if p['seize'] and p['control']:
                                 continue
                             # The Williamsburg Bridge lands only at its two ends.
                             if p['williamsburg_bridge'] and d.name not in ('Williamsburg', 'Five Points'):

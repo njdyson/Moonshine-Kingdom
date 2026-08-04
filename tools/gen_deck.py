@@ -29,26 +29,75 @@ ONES = [
     # you a Deed AND puts your Safehouse in that Borough's WARD, so it is free on
     # day one. Mirrors Union Dues exactly (same verb, same 4+, opposite Deed
     # state), which also puts Ward turf back to 3 cards / 0.60 in fairness_audit.
+    # COUNTERPLAY PASS (2026-08-04). Scored engagement 0 -- with Last Call, the purest
+    # solitaire in the deck: it happens at YOUR Safehouse, in YOUR Ward, on a Deed you
+    # already hold, so no rival can see it coming or reach it. Setup hands it to you on
+    # Day 1 for free.
+    # Keeping the Deed split (it is what makes this and Union Dues perfectly disjoint --
+    # see the note below) but adding the Sweep as the real cost: 5 Runners plus a Boss
+    # plus 2 starting Runners is 8 Mobsters on one block, and the Reckoning Sweep caps
+    # a district at 5. So you must hire them AND disperse them before the Reckoning, or
+    # pay to have them culled. That is a visible, priceable commitment rather than a
+    # private button -- rivals can read the crowd and time their move on it.
+    # Magnitude drops 5+ -> 4+ because "hold them at Day's end" is the new difficulty
+    # and stacking both would overshoot; Union Dues (4+, no Deed) stays the harder half
+    # on POSITION, which is the axis that separated them all along.
     ("Tenement Army", "Tenament Army.jpg", "Recruit",
-     "Recruit <b>5+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> whose <b>Borough Deed you hold</b>.",
+     "Recruit <b>4+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> whose <b>Borough Deed you hold</b>.",
      "Word goes round by supper. By dark, you have a crew."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
     # the deck's biggest purely-geographic swing (6 Respect across the 4 High
     # Society joints). Matches the wording The Angel's Share already uses.
+    # COUNTERPLAY PASS (2026-08-04). Was "a single $300 Speakeasy" = 8 venues, which
+    # scored BLOCK 0: deny one and seven remain, so no rival ever spends a Play on it.
+    # This was the deck's most inert card. Naming ONE venue is the counterplay knob --
+    # compare Cuban Prince (1 venue, BLOCK 2) against this exact objective at 8 venues.
+    # Coney Island is Brooklyn's STARTING Speakeasy, so it is garrisoned from setup and
+    # someone always cares about it; "last call" on the boardwalk is the flavour already.
     ("Last Call", "Last Call.jpg", "Unload",
-     "Unload <b>4+ Barrels</b> at a single <b>$300 Speakeasy</b> in one Play.",
+     "Unload <b>4+ Barrels</b> at <b>Coney Island</b> in one Play.",
      "Pour till the taps run dry and the sirens start up."),
     # "After your Boss is killed" is LOAD-BEARING, and doubly so from v0.9, where
     # Rise keeps its flexible form (place your Boss in any Safe District, whether
     # he is on the board or not). Without the death clause a living Boss simply
     # relocates into a Ward you already Control and the card pays for nothing.
     # Folded back from a hand edit to the HTML, 2026-07-24.
+    # COUNTERPLAY PASS (2026-08-04). Scored diff 6 / engagement 0 -- the worst trade in
+    # the deck. RIVAL 3 and WINDOW 3: it is not merely hard, it is DEAD until a rival
+    # chooses to kill your Boss, which you cannot cause and they can simply decline to do.
+    #
+    # ⚠ THE FIRST REWRITE WAS AN IMPOSSIBLE CARD (Nick caught it, 2026-08-04). It read
+    # "Rise your Boss in a Ward a rival Controls", which fails TWICE over:
+    #   1. TIMING. Taking the district is its own Play; Control transfers the moment you
+    #      win. So at the instant of the Rise the Ward is YOURS, and the objective can
+    #      never be true at its own checkpoint. You cannot fight and Rise in one Play.
+    #   2. THE PLAY'S OWN TEXT. Rise is "Place your Boss in any SAFE District", and the
+    #      rulebook defines Safe as "any District you Control, plus any Defenseless
+    #      block". Rival-held turf is Hostile by definition, so Rise can never target it.
+    # LESSON, and it is the handoff's own §6 lesson arriving from a new direction: check
+    # a rewritten objective against the PLAY'S TEXT, not just the deck's audits. The
+    # overlap model encoded the same impossibility (ward AND hostile), so every audit
+    # passed a dead card. A silent zero is not a pass.
+    #
+    # THE FIX, which stays inside Rise's real rules: a Defenseless block IS Safe, so
+    # Rising into an unclaimed district in a rival's BOROUGH is legal, contestable (they
+    # can garrison or claim it before you get there) and provocative (a Boss appearing on
+    # their turf is the deterrent this deck is built on). "A Borough whose Deed you don't
+    # hold" is the same glance-verifiable test Union Dues and Last One Standing use --
+    # you hold the card or you don't -- rather than a Control state that changes mid-Play.
     ("The Empty Casket", "The Empty Casket.jpg", "Rise",
-     "After your <b>Boss</b> is killed, Rise his successor in a <b>Ward</b> you Control.",
+     "Rise your <b>Boss</b> into a <b>Defenseless District</b> in a Borough whose <b>Deed you don&rsquo;t hold</b>.",
      "They buried the wrong man. Ask anyone. Go on, ask."),
+    # COUNTERPLAY PASS (2026-08-04). Scored diff 1 -- the easiest card in the deck by a
+    # clear margin, and BLOCK 0: nobody goes to Staten, so nobody can stop you going.
+    # "+ 4 Barrels" is the cheapest possible fix and it uses the board's own geography:
+    # Staten grows almost nothing (Westerleigh is Pressure 1, Tottenville 3), so the
+    # barrels must be HAULED in across water, which is visible and interceptable. That
+    # is the same logic The Smuggler's Run is built on, at a 1-Respect scale.
+    # Keeps the theme exactly: you are not just moving in, you are moving in stocked.
     ("Fortress Staten", "Fortress Staten.jpg", "Secure",
-     "Secure your Safehouse into a <b>Staten Island</b> District.",
+     "Secure your Safehouse into a <b>Staten Island</b> District holding <b>4+ Barrels</b>.",
      "Nobody&rsquo;s home turf. Everybody&rsquo;s back door."),
     # "a Pier 6 brawl" was real period slang for an all-out waterfront fight.
     # TRIED AND REVERTED: pinning this to Jamaica Bay as the hostile mirror of
@@ -59,19 +108,52 @@ ONES = [
     # nothing in breadth: the 9-Respect Open Fire triples it appears in already sit
     # at 1-2 districts, which is the engineered end. LESSON: a landmark's friendly
     # and hostile halves must match on TIER, not just exist.
+    # COUNTERPLAY PASS (2026-08-04). SOLITAIRE FAILURE: diff 8 (the hardest 1 in the
+    # deck, harder than five of the 3s) with engagement 1. The difficulty was DICE plus
+    # RIVAL 2 -- the two axes you cannot play around -- and it paid 1 Respect for them.
+    # Re-objectived off the kill count onto SEIZING the pier. Three things this fixes:
+    #   1. No dice. Seizing a Dock is a decision, not a roll.
+    #   2. It is blockable: a garrisoned Dock is a real defensive commitment, and the
+    #      card tells rivals in advance which kind of district to hold.
+    #   3. It keeps the deck's Open Fire count moving in the right direction on VARIANCE
+    #      without cutting an Open Fire card (the verb is still over-represented, but
+    #      only two kill-count Jobs now remain: The Irish Goodbye and Butcher's Ledger).
+    # "Hostile" (rival-held) is the guard that stops this being a free grab of empty
+    # dock: you must take it off somebody. The flavour line already says exactly this.
+    # "and no Safehouse" is the GUARD, and it is not optional: the first draft of this
+    # rewrite ("Seize a Dock held by a rival") re-opened handoff §3 cluster 3 -- it
+    # co-fired with The Eviction across all 8 Docks, the widest flag in the deck. The
+    # Eviction REQUIRES a rival Safehouse; this FORBIDS one, so the two are now
+    # structurally unable to ride the same Seize. Same guard, same wording, same reason
+    # as The Copper Heist -- which is also what keeps this disjoint from Bloody Sunday.
+    # Theme is unharmed: a brawl over a working pier, not an assault on somebody's HQ.
     ("The Pier Six Brawl", "Dock Domination.jpg", "Open Fire",
-     "Kill <b>2+ rival Mobsters</b> on a <b>Dock</b> District in a single Play.",
+     "Seize a <b>Dock</b> District held by a rival, with <b>no Safehouse</b>.",
      "The pier belongs to whoever is still standing on it."),
     # Briefly restricted to "a mainland Dock" to stop Rum Row paying this card
     # too, then REVERTED (Nick, 2026-07-19): that stack fires only at Westerleigh
     # and Tottenville (2 districts), and a 2-district overlap you had to draft
     # over two Days and keep staked is good play, not a bug. Breadth is the test,
     # not whether the stack is guaranteed. See the note above ONES.
+    # COUNTERPLAY PASS (2026-08-04). Was "a Dock" = 8 districts, BLOCK 1. Named to the
+    # two MANHATTAN Docks: the Dutchman (Schultz) was a Manhattan operator, so the theme
+    # improves rather than survives. Two districts is the deck's engineered-overlap
+    # width (handoff §3), it is Manhattan's own turf so somebody always contests it, and
+    # it pairs the card with The Bowery/West Side, which no other Job names.
     ("The Dutchman's Deal", "Dutchman.jpg", "Trade",
-     "Trade <b>3+ Barrels of Moonshine</b> for Rum at a <b>Dock</b> District.",
+     "Trade <b>3+ Barrels of Moonshine</b> for Rum at a <b>Manhattan Dock</b>.",
      "He never gives a name. The windmill on the sack says plenty."),
+    # COUNTERPLAY PASS (2026-08-04). Was "a $300 Speakeasy" = 8 venues, BLOCK 1, and it
+    # was ALSO the deck's widest flagged overlap: Last Call + Angel's Share co-fired
+    # across FIVE districts (breadth_audit). Naming one venue each fixes the engagement
+    # AND the overlap in a single edit -- the two cards now name different venues, so
+    # they can never co-fire at all.
+    # East Harlem is Manhattan's starting Speakeasy (garrisoned from setup, Still 12 =
+    # Pressure 1, so it brews nothing and the Rum must be shipped in) and it is on the
+    # East River, which The Grand Tour already names -- reusing a landmark venue rather
+    # than spending a new named location against Manhattan's 4-per-borough quota.
     ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
-     "Unload <b>3+ Barrels of Rum</b> at a <b>$300 Speakeasy</b>.",
+     "Unload <b>3+ Barrels of Rum</b> at <b>East Harlem</b>.",
      "What the angels take, the house bills you for anyway."),
     # RENAMED from "The Riverside Switch" and re-arted (Nick, 2026-07-19). The old
     # art (Switch.png) has RIVERSIDE STORAGE painted across a moonlit suspension
@@ -191,8 +273,19 @@ THREES = [
     ("Poison Panic", "Poison Panic.jpg", "Unload",
      "Unload <b>6+ Barrels of Moonshine</b> at <b>Paradise Alley</b>.",
      "One bad batch and the whole city stops drinking."),
+    # COUNTERPLAY PASS (2026-08-04). Engagement 1 -- near-solitaire: your own Still, your
+    # own barrels, and ANY direction out, so there was nothing for a rival to deny.
+    # Naming the destination is what creates the counterplay. A Ward is the right target:
+    # every mainland Borough has exactly one (so it stays self-balancing, handoff §5),
+    # Wards are where Recruiting happens so they are always garrisoned and always
+    # contested, and it turns a private haul into a delivery someone can sit on.
+    # The pipeline theme is unchanged and arguably better -- a pipeline needs two ends.
+    # "you Control" is the guard: a bare "into a Ward" co-fired with Squatter's Rights
+    # across 4 districts (a Move into an empty Ward is also a Take Control of a
+    # Defenseless District). Controlled XOR Defenseless, so the two are now disjoint --
+    # and a pipeline delivering into turf you hold is the more sensible reading anyway.
     ("Gin Pipeline", "Gin Pipeline.jpg", "Move",
-     "Move <b>6+ Barrels of Moonshine</b> out of a District with a <b>Pressure 5+ Still</b> in one Play.",
+     "Move <b>6+ Barrels of Moonshine</b> from a District with a <b>Pressure 5+ Still</b> into a <b>Ward you Control</b>.",
      "It never sees daylight. That is the entire idea."),
     # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
     # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
@@ -249,8 +342,18 @@ THREES = [
     # Grand Tour (Open Fire vs Unload), so the pair can never co-fire. Also drops
     # this from 12 Speakeasies to 4, which takes its stacks with The Toll Booth
     # Trap and The Butcher's Ledger down to 1 and 2 districts.
+    # COUNTERPLAY PASS (2026-08-04). SOLITAIRE FAILURE: diff 10 -- the hardest 3 in the
+    # deck and harder than THREE of the 5s -- for engagement 3. DICE 3 was the culprit:
+    # 3 kills in one Play is the deck's second-worst variance, and variance is the wrong
+    # kind of hard (you can play perfectly and fail).
+    # 3+ -> 2+ kills. That is the whole edit. It keeps every structural job this card
+    # does -- the East River landmark, the "take no Control" guard that makes it unable
+    # to co-fire with any Seize card, the hostile half of the landmark that balances
+    # The Grand Tour -- while pulling the dice requirement down to the Muscle Ratio's
+    # comfortable range. It also inherits the 2-kill threshold The Pier Six Brawl just
+    # vacated, so the deck keeps a low-variance combat step between 2 and Butcher's 5.
     ("The Irish Goodbye", "Goodbye.jpg", "Open Fire",
-     "Kill <b>3+ rival Mobsters</b> in a Speakeasy <b>along the East River</b> in one Play, and <b>take no Control</b>.",
+     "Kill <b>2+ rival Mobsters</b> in a Speakeasy <b>along the East River</b> in one Play, and <b>take no Control</b>.",
      "He left O&rsquo;Sullivan&rsquo;s without saying a word to anyone."),
 ]
 
@@ -288,8 +391,43 @@ FIVES = [
     # Tottenville 3), so the moonshine must be hauled IN, Traded, then run out.
     # Roughly doubles the setup. Bonus: now mutually exclusive with Gin Pipeline
     # (Moonshine), which it used to be able to co-fire with.
+    # COUNTERPLAY PASS (2026-08-04). SOLITAIRE FAILURE at 5 Respect: diff 8, engagement 2
+    # -- the lowest-difficulty 5 once counterplay is scored, and unblockable BY DESIGN
+    # ("nobody watches Staten Island" is the card's own flavour line). A long private
+    # haul is not a headline job.
+    # ⚠ "to a Dock a rival Controls" WAS TRIED AND IS IMPOSSIBLE -- the THIRD card this
+    # pass to die on its own Play's rules, and the subtlest. A Move into rival turf can
+    # never END with your barrels sitting in their District:
+    #   FOLD      -> "The Invader immediately claims Control" -- no longer rival-held.
+    #   AMBUSH    -> win and you take Control; lose and "any [barrels] left in a rival's
+    #                District become theirs" -- they are no longer YOUR barrels.
+    #   HOLD FIRE -> "You cannot end your Play Pinned"; you Open Fire (as above) or
+    #                Advance to a Connected SAFE District, carrying the cargo back out.
+    # No branch satisfies the objective at the checkpoint. LESSON: for a card that
+    # delivers goods, "into rival turf" is never a legal destination -- combat resolution
+    # always changes either who holds the District or who owns the barrels.
+    #
+    # THE FIX IS NICK'S (2026-08-04): deliver AND take the District in the same Play.
+    # "Move 4+ Rum into a rival-Controlled Dock, and take Control of the District."
+    # Why this is better than the three alternatives I drafted:
+    #   - It closes the barrels-alone hole by construction. Nick's correction: barrels
+    #     CAN travel alone ("Your MOBSTERS are Pinned" -- send none, nothing to Pin), so
+    #     the plain rival-turf version was legal but a GIFT: the delivery always lands,
+    #     the Job pays via "it stays done even if the deed didn't survive the Play", and
+    #     the rival just pockets 6 Rum without a decision. Requiring Control forces
+    #     Mobsters into the District, which forces the Standoff. The rival now CHOOSES.
+    #   - It is opportunistic, which is the play pattern the deck wants: you watch for
+    #     the moment their Dock is thinly garrisoned and hit it. High risk, self-timed.
+    #   - Taking Control means the barrels are yours at the checkpoint, so the "any left
+    #     in a rival's District become theirs" clause never bites. No rules friction.
+    # 6+ -> 4+ because the card now buys a firefight as well as a haul.
+    # NOT Staten-specific, and Nick flagged exactly this ("or elsewhere if SI is
+    # overrepresented"): setup RETURNS STATEN'S DEED TO THE BOX and nobody starts there,
+    # so "a rival-Controlled Staten Dock" would depend on a rival having first bothered
+    # to go take one -- rare, and it would make the card dead for long stretches. Any
+    # Dock keeps it live; the origin clause already guarantees the Staten leg.
     ("The Smuggler&rsquo;s Run", "Quiet Drop.jpg", "Move",
-     "Move <b>6+ Rum</b> from a <b>Staten Island Dock</b> to a <b>mainland Dock</b> in one Play.",
+     "Move <b>4+ Rum</b> from a <b>Staten Island Dock</b> into a <b>Dock a rival Controls</b>, and take <b>Control</b> of it.",
      "Nobody watches Staten Island. Every Dock touches it."),
     # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
     # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
@@ -318,8 +456,33 @@ FIVES = [
     # + "4+ Barrels of Rum": the Raid gate alone made this a 2-Play card. Rum forces
     # the whole Trade chain on top, and the swanky room only pays $500 for what you
     # shipped in. Setup hedge, not circumstance.
+    # COUNTERPLAY PASS (2026-08-04). SOLITAIRE FAILURE at 5 Respect: diff 11, engagement
+    # 3. Nick's rule -- "all of the bigger jobs should involve counterplay; 5-Respect
+    # solitaire isn't hard, they should be lower level." Every point of its difficulty
+    # was private cost (Raid gate + Rum chain + relocation); no rival could do a thing
+    # about any of it.
+    # ⚠ "a rival Controls" WAS TRIED AND IS ILLEGAL -- the same impossibility that killed
+    # the first Empty Casket rewrite (Nick, 2026-08-04). Secure reads "Place your one
+    # Safehouse in any SAFE District", and Safe = "any District you Control, plus any
+    # Defenseless block". Rival-held turf is Hostile, so Secure can never target it. Any
+    # Job whose objective contradicts its own Play's text is a dead card, and NO audit
+    # here will tell you -- read the Playbook entry for the verb. (Move is the exception
+    # that misleads: it explicitly permits rival turf via the Standoff, which is why
+    # The Smuggler's Run CAN say "a Dock a rival Controls" and this cannot.)
+    #
+    # "took from a rival" was drafted and REJECTED before it shipped: it is a claim about
+    # HISTORY, not a fact on the table, and §3's rule is to prefer visible, self-checking
+    # consequences to intentions (the same reason The Eviction says "relocating yours
+    # into it" rather than "take over"). Two Days later nobody can prove who held it.
+    #
+    # THE FIX THAT IS BOTH LEGAL AND GLANCE-VERIFIABLE: keep Secure on turf you hold, and
+    # put the counterplay in the RIVAL SAFEHOUSE clause. Every crew has exactly one
+    # Safehouse, so "Land Connected to a rival Safehouse" means you are moving in next
+    # door to a specific named player -- they can see it, and they can relocate to break
+    # it (a real cost, which is the point). It reuses The Beachhead's own wording, so the
+    # deck already teaches this phrase, and it keeps the Raid gate and the Rum chain.
     ("High Roller", "High Roller.jpg", "Secure",
-     "Secure your Safehouse into a <b>High Society</b> District holding <b>4+ Rum</b>.",
+     "Secure your Safehouse into a <b>High Society</b> District holding <b>4+ Rum</b>, <b>Land Connected</b> to a rival <b>Safehouse</b>.",
      "He moved uptown. The neighbours are still adjusting."),
 ]
 
