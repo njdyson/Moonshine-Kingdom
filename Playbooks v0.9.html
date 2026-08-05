@@ -191,14 +191,6 @@ a:hover{color:var(--gold-bright)}
 .desc{flex:1;font:400 11px/1.4 Barlow;color:var(--body);padding-top:3px}
 .desc--sm{padding-top:1px}
 
-/* Recruit ladder: Wards Controlled -> cost per Runner.
-   Single row on purpose: these cards are height-bound at print (the A5 fit
-   script scales by height), so every extra row shrinks ALL copy on the card. */
-.ladder{display:grid;grid-template-columns:repeat(6,1fr);margin-top:4px;border:1px solid var(--panel-line);border-radius:5px;overflow:hidden;background:var(--head-bg)}
-.ladder-c{text-align:center;padding:2px 1px;font:600 9px Barlow;color:var(--muted-2);white-space:nowrap}
-.ladder-c+.ladder-c{border-left:1px solid var(--cell)}
-.ladder-c b{color:var(--gold-bright);font-weight:700}
-
 /* ============================================================
    RESOLUTION TABLES
    ============================================================ */
@@ -285,7 +277,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. The&nbsp;Hotspot: <b>Rum</b> only, <b>$500</b> + a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -314,11 +306,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
-        <div class="ladder">
-          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
-        </div>
-      </div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District: <b>$300</b> each to the bank. A rival <b>Ward Boss</b> collects a <b>$100 Union Fee</b> per Runner on top ($400 a head); the Ward Boss's own hires stay at $300.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -468,7 +456,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. The&nbsp;Hotspot: <b>Rum</b> only, <b>$500</b> + a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -497,11 +485,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
-        <div class="ladder">
-          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
-        </div>
-      </div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District: <b>$300</b> each to the bank. A rival <b>Ward Boss</b> collects a <b>$100 Union Fee</b> per Runner on top ($400 a head); the Ward Boss's own hires stay at $300.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -651,7 +635,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. The&nbsp;Hotspot: <b>Rum</b> only, <b>$500</b> + a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -680,11 +664,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
-        <div class="ladder">
-          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
-        </div>
-      </div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District: <b>$300</b> each to the bank. A rival <b>Ward Boss</b> collects a <b>$100 Union Fee</b> per Runner on top ($400 a head); the Ward Boss's own hires stay at $300.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -834,7 +814,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. High&nbsp;Society: <b>Rum</b>, <b>$500</b>. Rum pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell liquor at a Speakeasy you Control. <b>Moonshine</b> or <b>Rum</b>, <b>$300</b>/barrel. The&nbsp;Hotspot: <b>Rum</b> only, <b>$500</b> + a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -863,11 +843,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
-      <div class="desc">Hire Runners into your <b>Safehouse</b> District. <b>$500</b> each, less <b>$100</b> per Ward you Control anywhere on the map:
-        <div class="ladder">
-          <div class="ladder-c">0<b>&nbsp;$500</b></div><div class="ladder-c">1<b>&nbsp;$400</b></div><div class="ladder-c">2<b>&nbsp;$300</b></div><div class="ladder-c">3<b>&nbsp;$200</b></div><div class="ladder-c">4<b>&nbsp;$100</b></div><div class="ladder-c">5<b>&nbsp;Free</b></div>
-        </div>
-      </div>
+      <div class="desc">Hire Runners into your <b>Safehouse</b> District: <b>$300</b> each to the bank. A rival <b>Ward Boss</b> collects a <b>$100 Union Fee</b> per Runner on top ($400 a head); the Ward Boss's own hires stay at $300.</div>
     </div>
     <div class="play">
       <div class="cost">1</div>
@@ -907,7 +883,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play play--end">
         <div class="cost">1</div>
         <div class="name">Peddle <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-        <div class="desc">Unload <b>Moonshine</b> in any Ward you Control at <b>$300</b>/barrel (no Kickback). Greed Tax still bites at 4+.</div>
+        <div class="desc">Unload <b>Moonshine</b> in any Ward you Control at <b>$300</b>/barrel (no Kickback, no Hotspot price). Greed Tax still bites at 4+.</div>
       </div>
     </div>
   </div>
