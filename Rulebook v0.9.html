@@ -7,7 +7,7 @@
          of reflowing. 920 clears the container's 794px box and the 900px
          reflow breakpoint, so phones show the exact print layout. -->
     <meta name="viewport" content="width=920">
-    <title>Moonshine Kingdom Rulebook v0.9 (Reskin): The Bootlegger's Cut</title>
+    <title>Moonshine Kingdom Rulebook v0.9.5 (Reskin): The Bootlegger's Cut</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -188,7 +188,7 @@
         </div>
         <p>Your whole damn operation in miniature. Every piece earns, bleeds, or burns.</p>
 
-        <p><strong>The City Map (Game Board):</strong> A soot-stained blueprint of 1920s New York, carved into 25 <b>Districts</b> across 5 <b>Boroughs</b>: a boiler on every block, and a shared <b>Heat Track</b> measuring how badly the city wants you gone.</p>
+        <p><strong>The City Map (Game Board):</strong> A soot-stained blueprint of 1920s New York, carved into 25 <b>Districts</b> across 5 <b>Boroughs</b>, including <b>12 standard Speakeasies (🥃 Tumbler Glass)</b>: a boiler on every block, and a shared <b>Heat Track</b> measuring how badly the city wants you gone.</p>
 
         <p><strong>The Ledger (x4):</strong> Your back-room desk. A slotted player board where the day's Influence sits, gets spent, and comes back. Every move you make starts here.</p>
 
@@ -215,6 +215,8 @@
         <p><strong>The Bankroll (Cash):</strong> Dirty, untraceable bills in denominations of $100, $500, and $1,000. The kind that never sees a bank.</p>
 
         <p><strong>Police Squads (4 Blue Pieces):</strong> The blue wall that wants to see you swing. Four patrols prowling the mainland, drawn to noise.</p>
+
+        <p><strong>Hotspot Tokens (4 🍸 Martini Glass):</strong> One per mainland Borough. Place one on a Speakeasy to mark it as <b>The Hotspot</b>, where Havana Rum commands the city's richest price.</p>
 
         <p><strong>Federal Crackdown Tracker (1) <em>(4-Player Team Variant only)</em>:</strong> A 10-space pressure clock. Leave it in the box for a standard game.</p>
 
@@ -304,26 +306,24 @@
         <div class="legend">
 
             <div class="legend-row">
-                <div class="legend-badge"><img src="Art/Icons/Gin.svg" alt="Speakeasy"></div>
-                <div class="legend-body">
-                    <span class="legend-title">Speakeasies</span>
-                    The only blocks where you can <b>Unload</b> Liquor for cash, a flat <b>$300</b> a barrel. Count for the <b>Night Mayor</b> Title. <em>The booze doesn't set the price; the address does.</em>
+                <div class="legend-badge" aria-label="Tumbler Glass">🥃</div>
+                <div class="legend-body"><span class="legend-title">Speakeasies (🥃)</span>
+                    All <b>12 Speakeasy Districts</b> are standard venues. At one you Control, <b>Unload Moonshine or Havana Rum for $300 per barrel</b>. Every unpadlocked Speakeasy counts for the <b>Night Mayor</b> Title.
                 </div>
             </div>
-
             <div class="legend-row">
-                <div class="legend-badge"><img src="Art/Icons/Crown.svg" alt="High Society"></div>
-                <div class="legend-body">
-                    <span class="legend-title">High Society</span>
-                    One premium Speakeasy per mainland Borough, taking <b>Havana Rum only</b> and paying a massive <b>$500</b> a barrel. All four start <b>padlocked</b> by the Police until a Raid throws them open.
+                <div class="legend-badge" aria-label="Martini Glass">🍸</div>
+                <div class="legend-body"><span class="legend-title">The Hotspot (🍸)</span>
+                    A Speakeasy holding a <b>Hotspot Token</b> becomes <b>The Hotspot</b>. It takes <b>Havana Rum only</b>, pays <b>$500 per barrel</b>, and grants <b>1 Influence Kickback per barrel</b>. There is one token in each mainland Borough.
                 </div>
+            </div>
             </div>
 
             <div class="legend-row">
                 <div class="legend-badge"><img src="Art/Icons/Fist.svg" alt="Ward"></div>
                 <div class="legend-body">
                     <span class="legend-title">Wards</span>
-                    Gritty blocks where mob roots run deep, and your street network: every Ward you Control knocks <b>$100</b> off <b>Recruiting</b>, wherever your Safehouse sits. Count for the <b>Ward Boss</b> Title.
+                    Gritty blocks where mob roots run deep. They count for the <b>Ward Boss</b> Title; while a rival holds that crown, every Runner you Recruit owes them a <b>$100 Union Fee</b>.
                 </div>
             </div>
 
@@ -371,7 +371,7 @@
 
         <ul class="sub-section">
             <li><strong>Cash:</strong> Expands your crew. Spend it to Recruit and Secure turf. Earn it by Unloading, Extorting, and Collecting spare Influence for coin.</li>
-            <li><strong>Liquor Barrels:</strong> Your lifeblood. Every drop is born as Moonshine at your Stills; run it to a Dock and <b>Trade</b> it up to Havana Rum. Moonshine dumps cheap at any Standard Speakeasy; Rum sells dearer, buys Influence back, and is the only bottle the High Society rooms will pour.</li>
+            <li><strong>Liquor Barrels:</strong> Your lifeblood. Every drop is born as Moonshine at your Stills; run it to a Dock and <b>Trade</b> it up to Havana Rum. A Standard Speakeasy buys either liquor for $300; The Hotspot takes Rum alone for $500 and pays an Influence Kickback.</li>
         </ul>
 
         <h3>Influence: Currency of Power</h3>
@@ -523,13 +523,13 @@
         </p>
 
         <h4>Ward Boss</h4>
-        <p>The Boroughs make headlines, but the Wards decide who owns the block. Hold more <b>Ward Districts</b> than any single rival to claim the <b>Ward Boss</b> Title.</p>
+        <p>The Boroughs make headlines, but the Wards decide who owns the block. Hold more <b>Ward Districts</b> than any single rival to claim the <b>Ward Boss</b> Title. When a rival Recruits, they pay you a <b>$100 Union Fee per Runner</b>; you pay only the standard <b>$300 per Runner</b> to the bank for your own recruits.</p>
 
         <h4>Harbormaster</h4>
-        <p>You can't stop a man's ferry, but you can own the pier. Hold more <b>Dock Districts</b> than any single rival to claim the <b>Harbormaster</b> Title. Every barrel of molasses lands on your docks, so you <b>set Tomorrow's Mash</b>: you <b>name the Mash die's face</b> instead of rolling it (see <em>Ferment Tomorrow's Mash</em>). <em>Feed your own Stills, starve the rivals'; the whole city cooks the number you choose.</em></p>
+        <p>You can't stop a man's ferry, but you can own the pier. Hold more <b>Dock Districts</b> than any single rival to claim the <b>Harbormaster</b> Title. Every barrel of molasses lands on your docks, so you <b>set Tomorrow's Mash</b>: you <b>name the Mash die's face</b> instead of rolling it (see <em>The Morning Fix</em>). <em>Feed your own Stills, starve the rivals'; the whole city cooks the number you choose.</em></p>
 
         <h4>Night Mayor</h4>
-        <p>The sun belongs to the law; the night belongs to you. Hold more <b>Speakeasies</b> than any single rival to claim the <b>Night Mayor</b> Title. <b>High Society</b> joints count too, once a Raid has thrown them open. <em>A swanky room is still a speakeasy.</em></p>
+        <p>The sun belongs to the law; the night belongs to you. Hold more <b>Speakeasies</b> than any single rival to claim the <b>Night Mayor</b> Title. During <b>The Morning Fix</b>, you may move <b>one Hotspot Token (🍸)</b> to any other Speakeasy in the same Borough. <em>Tonight's hottest room is wherever you say it is.</em></p>
 
         <h3 id="goal-commission" style="margin-top: 1.8em;">The Commission</h3>
         <p>
@@ -552,7 +552,7 @@
             </li>
             <li>
                 <strong>Raise the Blue Wall:</strong><br>
-                The same column marks the law: <b>1 Police Squad</b> on each <b>High Society</b> Speakeasy, one per mainland Borough (4 in all). They start <b>padlocked and impassable</b>. <em>Till a Raid throws the premium joints open, the mobs fight over scraps.</em>
+                The same column marks the law. In each mainland Borough, place <b>1 Hotspot Token (🍸)</b> on the default starting Speakeasy shown by the Town Planner, then place <b>1 Police Squad</b> directly over it (4 of each in all). Those Speakeasies and their Hotspot Tokens start <b>padlocked and impassable</b> until the Squads move during a Raid.
             </li>
             <li>
                 <strong>Stack the Job Deck:</strong><br>
@@ -616,17 +616,20 @@
         <p>You may <b>hold as many Jobs at once</b> as your Reserves can stake. <b>No Boss, no business:</b> A crew with no Boss skips this step entirely.</p>
         <p><strong>Fund the Ledger:</strong> Move whatever's left in your <b>Reserves</b> into the <b>Ledger</b>, up to its <b>5 slots</b>. Staked markers stay locked on their Jobs. <em>Stake first, fund second.</em></p>
 
-        <h4>4. Ferment Tomorrow's Mash</h4>
-        <p>
-            Bootlegging takes time, and cheap mash ferments overnight. Set <b>tomorrow's Public Mash</b> and leave the <b>Mash die</b> on the board: whoever holds the <b>Harbormaster</b> Title owns the molasses trade and <b>names any face they like (1&ndash;6)</b>; if nobody holds it, <b>roll the die</b>. Either way, you'll play the whole day knowing tomorrow's number, so seize the right Stills, park the Boss, and Lay Low early for Turn Token #1 while the intel is fresh.
-        </p>
+        <h4>4. The Morning Fix</h4>
+        <p>Before the day's business begins, the city's supply and demand are fixed for tomorrow:</p>
+        <ol class="sub-section">
+            <li><strong>Supply &mdash; Harbormaster:</strong> Set <b>tomorrow's Public Mash</b> and leave the <b>Mash die</b> on the board. If a player holds the <b>Harbormaster</b> Title, they <b>name any face they like (1&ndash;6)</b>; if the Title is vacant, <b>roll the die</b>.</li>
+            <li><strong>Demand &mdash; Night Mayor:</strong> If a player holds the <b>Night Mayor</b> Title, they may move <b>one Hotspot Token (🍸)</b> to any other Speakeasy <b>within the same Borough</b>. If the Title is vacant, all Hotspot Tokens stay put.</li>
+        </ol>
+        <p>You'll play the whole day knowing tomorrow's Mash and where the city pays top dollar, so seize the right Stills, run the Rum, and Lay Low early while the intel is fresh.</p>
     </div>
 
     <div class="container one-column">
         <div class="reference-section">
             <h3>Example: The Morning Brew</h3>
             <p>
-                <strong>Setup:</strong> Day 6, and a Raid has long since thrown the High Society joints open. Yesterday's <b>Mash die</b> shows <b>3</b>. Turn Order is Sicilians #1, Irish #2, Knights #3, Vipers #4, so the Sicilians roll <b>5 Red</b> for the pool: <b>1, 4, 4, 5, 6</b>. Four bosses, five dice: one Red will be left holding the match.
+                <strong>Setup:</strong> Day 6, and a Raid has long since opened the Speakeasies that began under the Police Squads. Yesterday's <b>Mash die</b> shows <b>3</b>. Turn Order is Sicilians #1, Irish #2, Knights #3, Vipers #4, so the Sicilians roll <b>5 Red</b> for the pool: <b>1, 4, 4, 5, 6</b>. Four bosses, five dice: one Red will be left holding the match.
             </p>
 
             <h4>1. Read the Public Mash</h4>
@@ -724,7 +727,7 @@
             </tr>
             <tr>
                 <td><strong>Recruit</strong></td>
-                <td>Hire Runners into the District holding your <b>Safehouse</b>. <b>$500 per Runner</b>, less <b>$100 for every Ward you Control</b> anywhere on the map, so holding all five Wards drops the price to <b>$0 a head</b>. With no Safehouse on the board you cannot Recruit at all, at any price.</td>
+                <td>Hire Runners into the District holding your <b>Safehouse</b>. Pay the bank a fixed <b>$300 per Runner</b>. If a rival holds the <b>Ward Boss Title</b>, also pay that player a <b>$100 Union Fee per Runner</b> ($400 total per Runner). The Ward Boss pays only the standard $300 bank fee when Recruiting for themselves. With no Safehouse on the board you cannot Recruit at all, at any price.</td>
             </tr>
             <tr>
                 <td><strong>Secure</strong></td>
@@ -782,10 +785,8 @@
             <tr>
                 <td><strong>Unload</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
                 <td>
-                    <b>The Address Sets the Price:</b> At a Speakeasy you Control, sell any number of your barrels <b>sitting in that District</b> for cash. The liquor has to be at the bar to be sold across it. A <b>Standard Speakeasy</b> takes <b>Moonshine or Havana Rum</b> at a flat <b>$300 per barrel</b>. A <b>High Society</b> joint takes <b>Havana Rum only</b>, but pays a massive <b>$500 per barrel</b>. <em>The rich drink Rum, and they can tell the difference.</em><br><br>
-
-                    <b>The Kickback:</b> <b>Moonshine</b> pays <b>cash only</b>; <b>Havana Rum</b> pays cash <b>plus 1 Kickback per barrel</b>: for each Rum sold, move <b>1 Influence marker</b> from your Reserves into an empty <b>Ledger</b> slot <em>(no marker resting, or no empty slot? That Kickback is lost)</em>. High Society pours Rum alone, so every premium sale pays one on top of its $500. A Kickback refilling a slot you already emptied is the one thing in the game that buys you a <b>sixth Play</b> &mdash; sell on your last markers and the Rum puts you straight back on the street.<br><br>
-
+                    <b>The Address Sets the Price:</b> At a Speakeasy you Control, sell any number of your barrels <b>sitting in that District</b> for cash. The liquor has to be at the bar to be sold across it. A <b>Standard Speakeasy (🥃)</b> takes <b>Moonshine or Havana Rum</b> at a flat <b>$300 per barrel</b>. A Speakeasy holding a <b>Hotspot Token (🍸)</b> is <b>The Hotspot</b>: it takes <b>Havana Rum only</b> and pays <b>$500 per barrel</b>. <em>The rich follow the room, and the room follows the token.</em><br><br>
+                    <b>The Hotspot Kickback:</b> For each Havana Rum barrel sold at The Hotspot, move <b>1 Influence marker</b> from your Reserves into an empty <b>Ledger</b> slot <em>(no marker resting, or no empty slot? That Kickback is lost)</em>. Standard Speakeasy sales pay cash only. A Kickback refilling a slot you already emptied is the one thing in the game that buys you a <b>sixth Play</b> &mdash; sell on your last markers and the Rum puts you straight back on the street.<br><br>
                     <b>The Greed Tax:</b> Unloading <b>4+ barrels</b> in one Play generates Heat. If two mobs' markers paid for it, you choose which goes to the Heat Track. <em>Move more than three and the cops come sniffing.</em>
                 </td>
             </tr>
@@ -851,7 +852,7 @@
             <tr>
                 <td><strong>Peddle (Cost: 1)</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
                 <td>
-                    <em>Rotgut sells itself in the tenements.</em> Unload as normal, but in <b>any Ward you Control</b> as well as Speakeasies. Only <b>Moonshine</b> may be sold this way, at the flat <b>$300 per barrel</b> street rate (no Kickback, no High Society price). The Greed Tax still bites at 4+ barrels.
+                    <em>Rotgut sells itself in the tenements.</em> Unload as normal, but in <b>any Ward you Control</b> as well as Speakeasies. Only <b>Moonshine</b> may be sold this way, at the flat <b>$300 per barrel</b> street rate (no Kickback, no Hotspot price). The Greed Tax still bites at 4+ barrels.
                 </td>
             </tr>
         </table>
@@ -916,7 +917,7 @@
             <li><strong>Borough Deeds:</strong> Most Districts in that Borough.</li>
             <li><strong>Ward Boss:</strong> Most <b>Ward Districts</b>.</li>
             <li><strong>Harbormaster:</strong> Most <b>Dock Districts</b>.</li>
-            <li><strong>Night Mayor:</strong> Most <b>Speakeasies</b> (a High Society joint counts).</li>
+            <li><strong>Night Mayor:</strong> Most <b>Speakeasies</b> (The Hotspot counts as the Speakeasy beneath its token).</li>
         </ul>
 
         <h4>The Next Day...</h4>
