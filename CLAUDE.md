@@ -71,6 +71,13 @@ crew can garrison five Deeds and three Titles at once on 15 Runners. Do not rest
 `v0-8-changes.md` still argues the old arithmetic at length. It is a dated record of why
 Public Enemy was cut, not a statement of the current numbers.
 
+## Open design threads
+
+`deed-sweep-handoff.md` holds a live, undecided proposal: drop the Sicilians' **Untouchable**
+trait and let the **Sweep** skip Boroughs whose Deed you hold. It is not implemented and must
+not be implemented without Nick asking. Read it before touching the Sweep, the Sicilian
+Playbook, or Borough Deeds, and update it if the thinking moves.
+
 ## What not to edit
 
 - `Archive/` is frozen history. Never edit it, and never let it skew a repo-wide count.
