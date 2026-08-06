@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Tumbler / rocks glass. Original art for Moonshine Kingdom, drawn to match the flat black silhouette style of Gin.svg. -->
+<svg version="1.1" id="Tumbler" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 491.035 491.035" style="enable-background:new 0 0 491.035 491.035;" xml:space="preserve">
+<path id="tumbler-glass" style="fill:#000100;" d="M62,90l26.5,328c1.8,22,3.8,22,23.5,22h267c19.7,0,21.7,0,23.5-22L429,90h-26
+	l-22.5,279c-1.1,14-2.2,14-15.5,14H126c-13.3,0-14.4,0-15.5-14L88,90H62z"/>
+<path id="tumbler-liquor" style="fill:#000100;" d="M107,243c43-17,88,13,138,1c50-12,95,14,139-3l-9.5,116c-1.1,14-2.4,14-15.5,14
+	H132c-13.1,0-14.4,0-15.5-14L107,243z"/>
+</svg>
