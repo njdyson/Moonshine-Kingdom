@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The Ledger board — shared "plate"
+   The Ledger board: shared "plate"
    --------------------------------------------------------------------------
    Single source of truth for the Ledger player-board's look. Used by:
      - the printable component sheets ("The Ledger v0.9 (Poker Chips).html"
@@ -234,7 +234,7 @@
 .dashboard-strip .br { bottom: 3mm; right: 3mm; border-width: 0 1px 1px 0; }
 
 /* ==========================================================================
-   Rulebook embed — the board rendered live, scaled down to the text column.
+   Rulebook embed: the board rendered live, scaled down to the text column.
    The plate is authored at its true mm size, then scaled by --ledger-scale;
    the wrapper reserves the scaled footprint so surrounding copy flows cleanly.
    ========================================================================== */

@@ -408,12 +408,12 @@
               <div class="field">
                 <label class="label" for="invKit">Mob Kit</label>
                 <select id="invKit">
-                  <option value="none">Baseline &mdash; Open Fire</option>
-                  <option value="irish">Irish &mdash; Firepower (+1 attack die)</option>
-                  <option value="plunder">Irish &mdash; Plunder raid (steal barrels)</option>
-                  <option value="sicilian">Sicilian &mdash; Hit (Boss-snipe, cost 2)</option>
-                  <option value="stealth">Vipers &mdash; Stealth (no Ambush, max 5)</option>
-                  <option value="torch">Knights &mdash; Torch first (cost 1 + 1 Runner)</option>
+                  <option value="none">Baseline: Open Fire</option>
+                  <option value="irish">Irish: Firepower (+1 attack die)</option>
+                  <option value="plunder">Irish: Plunder raid (steal barrels)</option>
+                  <option value="sicilian">Sicilian: Hit (Boss-snipe, cost 2)</option>
+                  <option value="stealth">Vipers: Stealth (no Ambush, max 5)</option>
+                  <option value="torch">Knights: Torch first (cost 1 + 1 Runner)</option>
                 </select>
               </div>
               <div id="invKitNote" class="kit-note"></div>
@@ -437,7 +437,7 @@
                 <label class="label" for="occBarrels">Occupier Barrels (Plunder target)</label>
                 <input id="occBarrels" type="number" min="0" max="12" step="1" value="3">
               </div>
-              <div class="kit-note">Only Sicilian garrisons (Untouchable) survive the Sweep above 5 mobsters &mdash; just raise the Runner count to model one.</div>
+              <div class="kit-note">Only Sicilian garrisons (Untouchable) survive the Sweep above 5 mobsters: just raise the Runner count to model one.</div>
               <div class="mobster-total">
                 <span>Total Mobsters</span>
                 <strong id="occMobsterTotal">0</strong>
@@ -465,7 +465,7 @@
             <strong>Open Fire costs 1</strong>, <strong>Hit costs 2</strong>, <strong>Torch costs 1</strong> plus a sacrificed Runner.
             At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, liquor lost).
             A <strong>Plunder</strong> raid always keeps 1 Influence back to <strong>Advance</strong> out with the loot
-            (Fall Back would drop it). Firepower is the free Irish Trait &mdash; it boosts the invader's Open Fire volleys only,
+            (Fall Back would drop it). Firepower is the free Irish Trait: it boosts the invader's Open Fire volleys only,
             never an Ambush or any defence.
             <strong>Heat:</strong> only the first shot counts. A firefight adds <strong>one</strong> marker, to whoever
             fired first: here the occupier's Ambush, so the invader who storms in draws none. (If Stealth denies the
@@ -600,7 +600,7 @@
 
     const KIT_NOTES = {
       none: "Standard assault: Move in, eat the Ambush, then trade Open Fire volleys at 1 Influence each.",
-      irish: "Firepower Trait: +1 attack die (max 5) on every Open Fire volley. Free. Invading only — never on an Ambush or when defending.",
+      irish: "Firepower Trait: +1 attack die (max 5) on every Open Fire volley. Free. Invading only, never on an Ambush or when defending.",
       plunder: "Each of your hits steals 1 barrel instead of killing; the Occupier's hits still kill. No Heat, ever. Keeps 1 Influence back to Advance out with the loot.",
       sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat only if you shoot first.",
       stealth: "No Standoff: the Occupier gets no Ambush shot (and cannot Fold). Crew capped at 5 mobsters, no liquor carried.",
@@ -726,7 +726,7 @@
       let rounds = 0;
       let ambushKills = 0;
       let heat = false;       // invader draws Heat (fires at all)
-      let occHeat = false;    // occupier draws Heat (Ambush fires) — costs 1 from the Ledger
+      let occHeat = false;    // occupier draws Heat (Ambush fires), costs 1 from the Ledger
       let stolen = 0;
 
       if (inv.kit !== "stealth" && alive(inv) && alive(occ)) {
@@ -918,11 +918,11 @@
       let status = "<strong>Complete.</strong> Ran " + config.trials.toLocaleString() + " trials (" +
         kitLabel + ", " + config.influence + " Influence remaining).";
       if (config.stealthTrimmed) {
-        status += " <span class=\"warn\">Stealth caps the crew at 5 mobsters &mdash; invader trimmed to " +
+        status += " <span class=\"warn\">Stealth caps the crew at 5 mobsters: invader trimmed to " +
           (config.invader.runners + config.invader.bosses) + ".</span>";
       }
       if (config.invader.kit === "torch" && !config.occupier.safehouse) {
-        status += " <span class=\"warn\">No Safehouse to Torch &mdash; kit had no effect.</span>";
+        status += " <span class=\"warn\">No Safehouse to Torch: kit had no effect.</span>";
       }
       els.statusLine.innerHTML = status;
     }

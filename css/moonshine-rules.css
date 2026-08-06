@@ -294,7 +294,7 @@ ul.sub-section > li {
 ul.sub-section > li::before {
     /* \2666 is the diamond; \FE0E is the text-presentation variation selector.
        Without it iOS Safari renders the suit character as a RED emoji and
-       ignores `color` — VS15 forces the plain text glyph so the gold applies.
+       ignores `color`; VS15 forces the plain text glyph so the gold applies.
        (Chrome/print already used the text glyph, which is why the PDF was fine.) */
     content: "\2666\FE0E"; /* Diamond bullet suits the theme */
     color: var(--accent-gold);
@@ -527,7 +527,7 @@ img {
 
 /* Covers ship as a single WebP (Art/Rulebook/opt/) used for both screen and
    print: ~200-500 KB each at q90 instead of the 2-3 MB source PNG, visually
-   lossless at the printed size, and — unlike a screen/print <img> swap — it
+   lossless at the printed size, and, unlike a screen/print <img> swap, it
    downloads exactly once, on every browser. WebP keeps the title logo's alpha,
    which a flattened copy loses. The full-resolution PNGs stay in the repo, and
    the Print-ready toggle below swaps them back in for a lossless PDF export. */
@@ -553,8 +553,8 @@ img {
 #mk-print-toggle small { display: block; font-weight: 400; font-size: 10px; color: var(--muted); }
 #mk-print-toggle input { accent-color: var(--gold); cursor: pointer; margin: 0; }
 @media print { #mk-print-toggle { display: none !important; } }
-/* Hide on phones/tablets. A width query is useless here — the guides pin the
-   layout viewport at 920px (width=920 meta) — so key off the pointer instead:
+/* Hide on phones/tablets. A width query is useless here, because the guides pin the
+   layout viewport at 920px (width=920 meta), so key off the pointer instead:
    a coarse pointer / no-hover is a touch device, i.e. not a desktop. */
 @media (hover: none), (pointer: coarse) { #mk-print-toggle { display: none !important; } }
 
@@ -1214,7 +1214,7 @@ img {
    Barlow entries, the token palette (--gold-bright / --gold-line / --body /
    --muted) and framed-panel feel. The class names are UNCHANGED so the print
    pagination hook (.toc-container, further down) still forces the TOC onto its
-   own sheet. Page numbers are intentionally omitted this pass — .toc-page is
+   own sheet. Page numbers are intentionally omitted this pass; .toc-page is
    kept as an empty span so numbers can be slotted in later without re-templating.
    -------------------------------------------------------------------------- */
 .toc-list {
