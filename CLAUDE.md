@@ -56,6 +56,21 @@ only when a rule is genuinely easy to miss *and* costly to get wrong.
 
 `Turn Order (Who Strikes First)`, `Supply (Harbormaster)`, `Demand (Night Mayor)`.
 
+## The Respect ceiling is 16, not 14
+
+Deeds and Titles are worth 2 Respect each. Five Borough Deeds, Staten's included since it
+sits in the **Supply** from night 1 rather than going back to the box, plus three Titles,
+is **16**. The crown needs 15.
+
+The old **14** came from a revision that boxed Staten's Deed, and with it the claim that
+holdings land "one short of the 15" so nobody takes the crown without doing at least one
+Job. That guarantee is gone, and what replaces it is practical rather than arithmetic: no
+crew can garrison five Deeds and three Titles at once on 15 Runners. Do not restate the
+14, and do not re-add Public Enemy No. 1 to close the gap.
+
+`v0-8-changes.md` still argues the old arithmetic at length. It is a dated record of why
+Public Enemy was cut, not a statement of the current numbers.
+
 ## What not to edit
 
 - `Archive/` is frozen history. Never edit it, and never let it skew a repo-wide count.
