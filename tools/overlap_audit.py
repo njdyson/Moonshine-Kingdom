@@ -96,15 +96,26 @@ JOBS = [
       lambda p: p['barrels'] >= 3 and p['d'].has('dock') and p['d'].boro == M),
     # COUNTERPLAY PASS: was any non-HS Speakeasy (8), and co-fired with Last Call across
     # 5 districts. Now one named venue, disjoint from Last Call by construction.
+    # SPLIT MARKET PASS: Rum now pours only under a Hotspot token, and East Harlem
+    # is a standard bar, so the old "of Rum" objective was unfirable there. Re-cut
+    # as the Moonshine job the venue can actually pay.
     J("The Angel's Share", 1, 'Unload',
-      lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].name == 'East Harlem'),
+      lambda p: p['barrels'] >= 3 and not p['rum'] and p['d'].name == 'East Harlem'),
     J('Night Landing', 1, 'Move',
       lambda p: p['barrels'] >= 4 and p['across_water'] and p['d'].name in JAMAICA_BAY),
     J("Squatter's Rights", 1, 'Move', lambda p: p['defenseless'] and p['rival_deed']),
     J('The Grand Tour', 1, 'Unload',
       lambda p: p['barrels'] >= 4 and p['d'].name in EAST_RIVER),
     # --- 3 Respect ---
-    J('Cuban Prince', 3, 'Unload', lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].name == 'Red Hook'),
+    # SPLIT MARKET PASS: same problem as The Angel's Share, opposite fix. Retargeting
+    # the SALE to Brooklyn's Hotspot was tried and rejected twice over: it took the
+    # seat's friendly 3 off its orphan joint, and it printed Cuban Prince + Opening
+    # Night + The Grand Tour at Williamsburg for 9, a new deck maximum. Moving the
+    # objective instead of the address keeps Red Hook, keeps the Rum, and puts the card
+    # on the step the split market actually made hard: landing the brown stuff at all.
+    # Verb moves Unload -> Move, which is also what takes it out of the Unload stacks.
+    J('Cuban Prince', 3, 'Move',
+      lambda p: p['barrels'] >= 3 and p['rum'] and p['d'].name == 'Red Hook'),
     # NOTE (counterplay pass): Rum Row left unchanged. It scored engagement 2, but its
     # unblockability is a deliberate board fact (Staten is nobody's turf) and the card
     # is the ONLY reason anyone visits Westerleigh/Tottenville. Fixing it would need a
@@ -239,6 +250,13 @@ for verb, bools in VERB_BOOLS.items():
                             p.update(d=d, barrels=barrels, runners=runners,
                                      kills=kills, defenders=defenders)
                             # --- physical consistency of the board state ---
+                            # SPLIT MARKET PASS: an Unload sells one liquor, and which
+                            # one is decided by the address, not the seller. A Hotspot
+                            # buys Rum and nothing else; every other bar buys Moonshine
+                            # and nothing else. Enumerating the impossible half of that
+                            # invented co-fires no player could ever make.
+                            if verb == 'Unload' and p['rum'] != d.has('highSociety'):
+                                continue
                             if p['seize'] and p['defenseless']:
                                 continue
                             if p['boss_killed'] and kills < 1:

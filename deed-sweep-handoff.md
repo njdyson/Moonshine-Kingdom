@@ -4,7 +4,15 @@
 without Nick saying so.** The Sweep and the Sicilians' Untouchable trait both still read as
 they always have. This file exists so the reasoning survives the session it happened in.
 
-Last worked: 2026-08-06.
+Last worked: 2026-08-09.
+
+> **2026-08-09, the split market landed and moved two things under this proposal.**
+> Speakeasies now buy Moonshine only at $300 and Hotspots buy Rum only at $500 plus the
+> Kickback, the **Hotspot Deed tiebreaker was dropped outright** (a tied Borough now
+> sends its Deed to the Supply, full stop), and the Night Mayor may not walk a token onto
+> a police-padlocked Speakeasy. Two paragraphs below referred to the tiebreaker and have
+> been rewritten rather than deleted, because what they were guarding against still
+> exists. See "What the split market changed" at the foot of this file.
 
 ## The proposal
 
@@ -12,8 +20,12 @@ Drop the Sicilian **Untouchable** trait, replacing it with something to be decid
 instead make the **Sweep skip any Borough whose Deed you hold**.
 
 The goal is a true home turf distinction, and to make Borough Deeds matter continuously
-rather than only as 2 Respect at the final count. It also couples into the Hotspot Deed
-tiebreaker and, through it, the Night Mayor.
+rather than only as 2 Respect at the final count. The old wording called out its coupling
+to the Hotspot Deed tiebreaker and, through it, to the Night Mayor. That tiebreaker is
+gone as of 2026-08-09, so the coupling has to be re-argued rather than assumed: Deeds and
+Hotspots no longer touch each other at all, and this proposal is now the *only* thing on
+the table that would make a Deed pay during play rather than at the final count. That
+arguably strengthens the case for it, since nothing else fills the gap.
 
 ## Where it stands
 
@@ -45,8 +57,11 @@ Open:
     sharpest exactly where Squads start, on the Hotspot Speakeasies and the 7 boilers.
   - **Old Blood.** Rise costs 1 instead of 2. Duller, very hard to break, and a neat
     counterweight to their own Hit.
-  - Avoid a tribute or tax trait, which echoes Ward Boss's Union Fee, and avoid "wins ties",
-    which collides with the Hotspot Deed tiebreaker.
+  - Avoid a tribute or tax trait, which echoes Ward Boss's Union Fee. "Wins ties" used to
+    be barred because it collided with the Hotspot Deed tiebreaker; that tiebreaker is gone,
+    so the collision is gone with it, but the trait is still a poor fit. A Deed that ties now
+    goes to the Supply by design, and a seat that quietly un-does that is a rules exception
+    dressed as a trait.
 
 ## What the modelling says
 
@@ -96,6 +111,14 @@ nightfall even when it succeeded, because the attacker does not hold that Deed y
 turf would wall off the map. Running Claim first means winning the Borough transfers the
 Deed and the army survives. If the rule ships, the swap ships with it.
 
+**On the Payroll got considerably sharper, and may now be too sharp.** The candidate reads
+"a Police Squad never padlocks your Speakeasy or Still". Under the split market a padlocked
+Hotspot is not a room paying $300 instead of $500, it is *the Borough's entire Rum market,
+shut*. All four Hotspots start under Squads, so the trait would hand the Sicilians the only
+open Rum room in the city from Day 1, before any Raid, and hand it back every time a Squad
+lands on a token later. That is no longer a flavour perk; it is a monopoly on half the
+economy. If this proposal ships, price On the Payroll again from scratch or drop it.
+
 **Staten Island changed under this proposal.** When the Deed/Sweep idea was first discussed,
 Staten's Deed was boxed at setup, so Staten would have been the one Borough nobody could
 ever fortify. Its Deed now sits in the Supply, so whoever takes the island can hold its Deed
@@ -104,3 +127,18 @@ rich scattering of Respect across the Jobs deck. Under an uncapped rule it becom
 place on the map where an unsweepable garrison can sit with no Squad ever arriving to break
 it up. That may well be a feature, since it gives the empty island a reason to be fought
 over, but it was not part of the picture when the proposal was first weighed.
+
+## What the split market changed (2026-08-09)
+
+Recorded here because this file is where the Deed reasoning lives, and three of its
+premises moved on the same day.
+
+- **The tiebreaker is gone, so Deeds and Hotspots are now fully decoupled.** A Borough
+  counted to a tie sends its Deed to the Supply, like every other Title. The Hotspot no
+  longer reaches into the Deed race at all.
+- **The Hotspot did not get weaker for losing it.** It is now the only room in its Borough
+  that buys Rum, which is a far larger prize than settling an occasional tie. The token
+  moved from a rules corner into the middle of the economy.
+- **Deeds got quieter, not louder.** Losing the tiebreaker removed the one thing a Deed
+  did during play. Everything this proposal was written to fix is therefore still unfixed,
+  and slightly more visible than it was.

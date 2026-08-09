@@ -349,6 +349,48 @@ whole Ledger at once (Lay Low).
 
 One heuristic: `wantsLateToken = (a reachable Offers Job the bot values) || (out-sitting a rival for draft/market order)`. If a value Play exists, play it. Else if `wantsLateToken && ledger >= 1`, **Collect**. Else **Lay Low**. Guard against a Collect loop that never steps off — cap it by the same "nothing left worth doing" test that already triggers Lay Low, plus the token motive above.
 
+## 9. The split liquor market (2026-08-09)
+
+The biggest economic change since v0.9 shipped, and the one most likely to break a naive
+port, because it turns one market with a price modifier into **two markets that do not
+overlap**.
+
+### What changed
+
+| | Before | Now |
+| --- | --- | --- |
+| Standard Speakeasy | Moonshine **or** Rum, $300 | **Moonshine only**, $300. Rum cannot be sold there at any price. |
+| Hotspot | Moonshine **or** Rum at $300, Rum at $500 | **Rum only**, $500 **plus the Kickback**. Moonshine cannot be sold there. |
+| Rum Kickback | 1 marker per Rum barrel, **at any venue** | 1 marker per Rum barrel, and Rum only pours at a Hotspot, so the Kickback is now Hotspot-only |
+| Rum supply | 15 barrels | **20 barrels** |
+| Tied Borough Deed | Broken by whoever Controls the Borough's Hotspot | **No tiebreak.** A tie sends the Deed to the Supply, like every other Title |
+| Night Mayor's move | Any other Speakeasy in the Borough | Any other Speakeasy in the Borough **that is not padlocked by a Police Squad** |
+
+### Why it matters for the build more than it looks
+
+- **Rum can be unsellable.** All four Hotspots start under Police Squads, so until the
+  first Raid there is no Rum market anywhere on the board. Any bot or UI that treats a
+  Rum barrel as "worth $300 minimum" is now wrong, and a Trade made before a Hotspot is
+  open produces cargo with no exit.
+- **The Kickback is now positional.** The +3-Plays engine is gated behind holding an open
+  Hotspot, which makes Hotspot districts the most contested turf in the game and makes
+  Night Mayor materially stronger than any other crown.
+- **The Deed tiebreak is deleted, not moved.** Do not reimplement it anywhere.
+
+### What has to change online
+
+| # | Area | Change |
+| --- | --- | --- |
+| 9.1 | Sale pricing | Split the venue check: `isHotspot ? (rum only, $500 + Kickback) : (moonshine only, $300)`. A sale of the wrong liquor at a venue is **illegal**, not merely cheaper. Reject it in the action validator rather than pricing it at $0. |
+| 9.2 | Kickback | Unchanged in effect (1 spent marker, Reserves → an empty Ledger slot, lost if no marker rests or no slot is empty). It simply cannot fire anywhere except a Hotspot now, which falls out of 9.1 for free if the sale is gated there. |
+| 9.3 | Rum supply | Pool 15 → **20**. The Harlem Knights' **Network** free cask still checks the pool before granting. |
+| 9.4 | Borough Deeds | Remove the Hotspot tiebreak from Deed resolution entirely; a tie returns the Deed to the Supply, matching the generic Title path. |
+| 9.5 | Night Mayor | The Morning Fix move must reject any destination Speakeasy holding a Police Squad. The token's own Speakeasy being padlocked already blocks the move (a padlocked token cannot be picked up), so both ends need the check. |
+| 9.6 | Peddle (Irish) | Unchanged in text but now strictly Moonshine-and-Wards-and-standard-bars: Peddle can never target a Hotspot. |
+| 9.7 | Jobs deck | Two cards were re-cut because their objectives became unfirable. **The Angel's Share** is now `Unload 3+ Barrels of Moonshine at East Harlem`. **Cuban Prince** is now a **Move** card: `Move 3+ Barrels of Rum into Sunny's Bar`. If the build carries card text or objective predicates, both need updating, and Cuban Prince changes verb. |
+| 9.8 | Bots | Rum valuation must become conditional on reachable Hotspot access, not a flat premium. A bot holding Rum with no open Hotspot it Controls should treat those barrels as **near-worthless and at Raid risk**, and should weight taking or trading for a Hotspot accordingly. Bots should also not Trade at a Dock while no Hotspot is open. |
+| 9.9 | UI | The Speakeasy/Hotspot tooltips and any price legend need the one-liquor-per-room wording. A "sells for $300" label on a Hotspot is now actively misleading. |
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -435,3 +477,8 @@ One heuristic: `wantsLateToken = (a reachable Offers Job the bot values) || (out
       unspent markers, clear to Reserves) is unchanged; only the surfaced string changes.
 - [ ] **Bots: Collect as the tempo-hold move (§8.4)** — take it only to hold the street for a
       higher Turn Token when no value Play exists; never for the (neutral) cash; guard the loop.
+- [ ] **Split liquor market (§9)** — standard bars buy Moonshine only at \$300, Hotspots buy
+      Rum only at \$500 plus the Kickback, and the wrong liquor at a venue is an illegal
+      action rather than a cheap one. Rum pool 15 → 20. Deed tiebreak deleted. Night Mayor
+      cannot move a token onto a padlocked Speakeasy. Two Jobs re-cut (9.7), and bot Rum
+      valuation has to become access-conditional (9.8).

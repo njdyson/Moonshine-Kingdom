@@ -153,7 +153,7 @@ ONES = [
     # East River, which The Grand Tour already names -- reusing a landmark venue rather
     # than spending a new named location against Manhattan's 4-per-borough quota.
     ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
-     "Unload <b>3+ Barrels of Rum</b> at <b>East Harlem</b>.",
+     "Unload <b>3+ Barrels of Moonshine</b> at <b>East Harlem</b>.",
      "What the angels take, the house bills you for anyway."),
     # RENAMED from "The Riverside Switch" and re-arted (Nick, 2026-07-19). The old
     # art (Switch.png) has RIVERSIDE STORAGE painted across a moonlit suspension
@@ -191,8 +191,17 @@ THREES = [
     # points at the Havana end of the run rather than the Red Hook end. No "The":
     # at 12 characters it stays under the 16-char title--long threshold and
     # prints at full size.
-    ("Cuban Prince", "Cuban Prince.jpg", "Unload",
-     "Unload <b>3+ Barrels of Rum</b> at <b>Sunny&rsquo;s Bar</b>.",
+    # SPLIT MARKET PASS (2026-08-09). Rum now pours under a Hotspot token and nowhere
+    # else, so "Unload Rum at Sunny's Bar" was unfirable: Red Hook is a standard bar.
+    # Retargeting the SALE to Brooklyn's Hotspot cost two things -- it took Brooklyn's
+    # friendly 3 off its orphan joint (breaking the one-per-seat set the Guide teaches)
+    # and it printed a 9-Respect triple with Opening Night + The Grand Tour, a new deck
+    # maximum. Moving the OBJECTIVE instead of the address fixes both: the card keeps
+    # Red Hook, keeps the Rum, and lands on the step the new economy actually made
+    # hard, which is getting the brown stuff to an address at all. The flavour line was
+    # always about the run rather than the sale, so it now reads literally.
+    ("Cuban Prince", "Cuban Prince.jpg", "Move",
+     "Move <b>3+ Barrels of Rum</b> into <b>Sunny&rsquo;s Bar</b>.",
      "Havana to Red Hook, and never once a warehouse."),
     # Re-arted from Rum Runners Regatta.png (Nick found the set in Unused/): a full
     # moon, the mother steamer lit up, six small boats waiting off a dark shore. The

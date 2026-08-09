@@ -71,6 +71,33 @@ crew can garrison five Deeds and three Titles at once on 15 Runners. Do not rest
 `v0-8-changes.md` still argues the old arithmetic at length. It is a dated record of why
 Public Enemy was cut, not a statement of the current numbers.
 
+## One liquor to a room
+
+Since 2026-08-09 the two liquors do not share an address:
+
+- a **standard Speakeasy** buys **Moonshine only**, at **$300** a barrel
+- a **Hotspot** buys **Havana Rum only**, at **$500** a barrel plus the Influence **Kickback**
+
+Selling the wrong liquor at a venue is illegal, not merely unprofitable, and because Rum
+pours nowhere but a Hotspot, the **Kickback is Hotspot-only** too. The Rum pool is **20**
+barrels, not 15.
+
+The wording that will keep creeping back is the old "every Speakeasy buys either liquor for
+$300, The Hotspot pays $500 for Rum", along with "the Kickback rides the barrel, not the
+address" and any claim that a snubbed warehouse "still sells at $300". All of those are now
+false. The Playbooks and the Town Planner carry the most compressed restatements of it, so
+they drift first.
+
+Two knock-ons that are easy to miss:
+
+- **All four Hotspots start padlocked under Police Squads**, so a fresh game has no Rum
+  market at all until the first Raid opens a door. This is deliberate. Do not "fix" it.
+- The **Night Mayor** may not move a Hotspot Token onto a padlocked Speakeasy. Without that
+  clause the crown could shut a Borough's entire Rum market for the day.
+
+**Borough Deed ties are no longer broken by the Hotspot.** A tie sends the Deed to the
+Supply, exactly like every other Title. Do not re-add the tiebreak.
+
 ## Open design threads
 
 `deed-sweep-handoff.md` holds a live, undecided proposal: drop the Sicilians' **Untouchable**
