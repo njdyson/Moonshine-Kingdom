@@ -477,7 +477,7 @@ overlap**.
       unspent markers, clear to Reserves) is unchanged; only the surfaced string changes.
 - [ ] **Bots: Collect as the tempo-hold move (§8.4)** — take it only to hold the street for a
       higher Turn Token when no value Play exists; never for the (neutral) cash; guard the loop.
-- [ ] **Split liquor market (§9)** — standard bars buy Moonshine only at \$300, Hotspots buy
+- [ ] **Split liquor market (§9)**: standard bars buy Moonshine only at \$300, Hotspots buy
       Rum only at \$500 plus the Kickback, and the wrong liquor at a venue is an illegal
       action rather than a cheap one. Rum pool 15 → 20. Deed tiebreak deleted. Night Mayor
       cannot move a token onto a padlocked Speakeasy. Two Jobs re-cut (9.7), and bot Rum
