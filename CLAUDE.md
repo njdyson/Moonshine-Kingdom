@@ -71,29 +71,37 @@ crew can garrison five Deeds and three Titles at once on 15 Runners. Do not rest
 `v0-8-changes.md` still argues the old arithmetic at length. It is a dated record of why
 Public Enemy was cut, not a statement of the current numbers.
 
-## One liquor to a room
+## The address sets the price, the barrel sets the Kickback
 
-Since 2026-08-09 the two liquors do not share an address:
+Since 2026-08-22 the two axes are orthogonal, and keeping them apart is the whole point:
 
-- a **standard Speakeasy** buys **Moonshine only**, at **$300** a barrel
-- a **Hotspot** buys **Havana Rum only**, at **$500** a barrel plus the Influence **Kickback**
+- **every Speakeasy** buys **either liquor** at **$300** a barrel
+- a **Hotspot** pays **$500** a barrel for **whatever you pour**, Moonshine included
+- **Havana Rum** pays its Influence **Kickback at any address**, Wards included
 
-Selling the wrong liquor at a venue is illegal, not merely unprofitable, and because Rum
-pours nowhere but a Hotspot, the **Kickback is Hotspot-only** too. The Rum pool is **20**
-barrels, not 15.
+The exclusivity rule this replaced ("one liquor to a room", Rum sellable only at a Hotspot)
+was deleted because it let the Night Mayor **strand** goods a rival had already paid three
+Plays for. Nothing else in the game bricks a paid-for asset, and that is what made the Title
+feel like keep-away. Now a snub costs the victim **$200 a barrel** and never the Play, so the
+crown sets a premium instead of holding a hostage.
 
-The wording that will keep creeping back is the old "every Speakeasy buys either liquor for
-$300, The Hotspot pays $500 for Rum", along with "the Kickback rides the barrel, not the
-address" and any claim that a snubbed warehouse "still sells at $300". All of those are now
-false. The Playbooks and the Town Planner carry the most compressed restatements of it, so
-they drift first.
+The wording that will creep back is the old "a standard bar takes Moonshine only", "The
+Hotspot takes Rum only", "the Kickback rides the address, not the barrel", "the city drinks
+grey", and any claim that Rum has "nowhere else to go". All of those are now false. The
+Playbooks and the Town Planner carry the most compressed restatements, so they drift first,
+and the Kingpin's Guide builds whole strategy passages on top of the rule, so grep it for
+*argument*, not just for numbers.
+
+The Rum pool is **20** barrels, not 15, and Trade at a Dock (1:1 from Moonshine) is still the
+only way Rum enters the game.
 
 Two knock-ons that are easy to miss:
 
-- **All four Hotspots start padlocked under Police Squads**, so a fresh game has no Rum
-  market at all until the first Raid opens a door. This is deliberate. Do not "fix" it.
-- The **Night Mayor** may not move a Hotspot Token onto a padlocked Speakeasy. Without that
-  clause the crown could shut a Borough's entire Rum market for the day.
+- **All four Hotspots start padlocked under Police Squads**, so a fresh game has **no $500
+  room** anywhere until the first Raid opens a door. Rum still sells and still pays its
+  Kickback from night one. This is deliberate. Do not "fix" it.
+- The **Night Mayor** may not move a Hotspot Token onto a padlocked Speakeasy. The clause is
+  now about keeping the premium on the board rather than preventing a market shutdown.
 
 **Borough Deed ties are no longer broken by the Hotspot.** A tie sends the Deed to the
 Supply, exactly like every other Title. Do not re-add the tiebreak.
