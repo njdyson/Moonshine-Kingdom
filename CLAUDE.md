@@ -136,3 +136,45 @@ A rules change is never one file. The player-facing set is:
 After changing a rule, grep the whole set for the old wording. The Town Planner and the
 Playbooks carry compressed restatements of rules that the Rulebook states in full, and
 those restatements drift silently.
+
+## When a rule is cut, don't argue with its ghost
+
+This has happened after nearly every rule deletion the game has had, and unlike the em
+dashes it has no baseline to check against: a grep will never catch it, because every
+sentence it produces is *true*. The pass is not done when the old wording is
+gone. It is done when the new prose reads correctly to someone **who never knew the old
+rule**.
+
+The tell is a sentence that defends the rule instead of stating it: a reassurance, a
+"still", a "never", a "nobody can". Each one is answering an objection the current rules no
+longer raise, so a new reader is being argued with about a question they never asked. That
+reads as anxiety rather than instruction, and it compounds, because each ghost looks locally
+sensible and only the pile-up feels wrong.
+
+Real examples, all written *after* the market was unified and all cut on 2026-08-23:
+
+| The ghost | What it was defending against |
+| --- | --- |
+| "the barrels are never dead" | the old rule, where Rum could be stranded |
+| "still sells, just for less" | the same |
+| "Rum still sells and still pays its Kickback from night one" | the same |
+| "nobody can take it off you" | the Night Mayor's deleted power to strand goods |
+| "either liquor at any bar", "any liquor $300" | the deleted one-liquor-to-a-room rule |
+
+The fix is always the same: **state the rule in the positive and stop.** "Speakeasy: any
+liquor $300" is a map legend arguing with a dead rule; "Speakeasy: $300/barrel" is a map
+legend. If a contrast genuinely earns its place, give it **one home**, in the section whose
+argument actually needs it, and let every other mention be a passing clause. Four full
+restatements of the same idea is drift, not emphasis.
+
+Two habits that catch it:
+
+- Read the changed passage **cold**, as a first-time player. Any sentence that only makes
+  sense if you remember the previous version is a ghost, however true it is.
+- Keep one unit for a recurring number. The snub cost had been alternating between "$200 a
+  barrel" and "$600" across five passages; both were right, and together they made the
+  reader do arithmetic to check the pages agreed.
+
+A deletion also tends to leave prose **re-explaining a table it sits next to**, since the
+argument that justified the old rule collapses once the rule is gone. If a paragraph walks
+the same ladder as the table above it, cut the walk and keep the argument.
