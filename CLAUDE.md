@@ -80,10 +80,13 @@ Since 2026-08-22 the two axes are orthogonal, and keeping them apart is the whol
 - **Havana Rum** pays its Influence **Kickback at any address**, Wards included
 
 The one liquor-type restriction left in the game is the Irish **Peddle**, which sells
-**Moonshine only**. Peddle costs 1 Play where Unload costs 2, and that discount is the whole
-card. Let it carry Rum and it pays the Kickback in a Ward you already Control, which routes
-the tempo engine around Speakeasies entirely. Do not "restore consistency" by opening Peddle
-to either liquor.
+**Moonshine only**, and **only in Wards you Control**: Speakeasy sales, The Hotspot's $500
+included, belong to Unload. Peddle costs 1 Play where Unload costs 2, and that discount is
+the whole card. Let it carry Rum and it pays the Kickback in a Ward you already Control,
+which routes the tempo engine around Speakeasies entirely; let it reach Speakeasies and it
+makes Unload a dead Play for Irish Moonshine. Do not "restore consistency" by opening Peddle
+to either liquor or to more addresses. (The Rulebook carried a drifted "as well as
+Speakeasies" until 2026-08-23; `mk-online-rules-sync.md` §9.6 holds the ruling.)
 
 The exclusivity rule this replaced ("one liquor to a room", Rum sellable only at a Hotspot)
 was deleted because it let the Night Mayor **strand** goods a rival had already paid three
@@ -106,8 +109,9 @@ Two knock-ons that are easy to miss:
 - **All four Hotspots start padlocked under Police Squads**, so a fresh game has **no $500
   room** anywhere until the first Raid opens a door. Rum still sells and still pays its
   Kickback from night one. This is deliberate. Do not "fix" it.
-- The **Night Mayor** may not move a Hotspot Token onto a padlocked Speakeasy. The clause is
-  now about keeping the premium on the board rather than preventing a market shutdown.
+- The **Night Mayor** moves a Hotspot Token **between unpadlocked Speakeasies**: a padlocked
+  token cannot be picked up, and a padlocked room cannot receive one. The clause is now about
+  keeping the premium on the board rather than preventing a market shutdown.
 
 **Borough Deed ties are no longer broken by the Hotspot.** A tie sends the Deed to the
 Supply, exactly like every other Title. Do not re-add the tiebreak.
