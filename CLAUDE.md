@@ -79,6 +79,12 @@ Since 2026-08-22 the two axes are orthogonal, and keeping them apart is the whol
 - a **Hotspot** pays **$500** a barrel for **whatever you pour**, Moonshine included
 - **Havana Rum** pays its Influence **Kickback at any address**, Wards included
 
+The one liquor-type restriction left in the game is the Irish **Peddle**, which sells
+**Moonshine only**. Peddle costs 1 Play where Unload costs 2, and that discount is the whole
+card. Let it carry Rum and it pays the Kickback in a Ward you already Control, which routes
+the tempo engine around Speakeasies entirely. Do not "restore consistency" by opening Peddle
+to either liquor.
+
 The exclusivity rule this replaced ("one liquor to a room", Rum sellable only at a Hotspot)
 was deleted because it let the Night Mayor **strand** goods a rival had already paid three
 Plays for. Nothing else in the game bricks a paid-for asset, and that is what made the Title
