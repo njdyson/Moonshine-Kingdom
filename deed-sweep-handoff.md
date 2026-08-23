@@ -14,6 +14,15 @@ Last worked: 2026-08-09.
 > been rewritten rather than deleted, because what they were guarding against still
 > exists. See "What the split market changed" at the foot of this file.
 
+> **2026-08-23: the split market is gone again.** The liquor market was unified on
+> 2026-08-22: every Speakeasy buys either liquor at $300, The Hotspot pays $500 for
+> whatever you pour, and Rum's Kickback pays at any address. Of the 8-09 premises above,
+> two still stand: the Deed tiebreaker stays dead, and the Night Mayor cannot touch a
+> padlocked room (now explicit at both ends of the move, per `mk-online-rules-sync.md`
+> §9.5). The market description does not. See "What the unified market changed" at the
+> foot of this file; the "On the Payroll" pricing warning below carries its own dated
+> correction where it stands.
+
 ## The proposal
 
 Drop the Sicilian **Untouchable** trait, replacing it with something to be decided, and
@@ -119,6 +128,12 @@ open Rum room in the city from Day 1, before any Raid, and hand it back every ti
 lands on a token later. That is no longer a flavour perk; it is a monopoly on half the
 economy. If this proposal ships, price On the Payroll again from scratch or drop it.
 
+*(2026-08-23: the unified market repriced this a second time. A padlocked Hotspot now
+withholds a $200-a-barrel premium rather than shutting a Borough's Rum market, so On the
+Payroll sits back near the weight it had when first proposed. It still opens a Borough's
+only $500 room from Day 1, a real edge but not a monopoly; if the proposal ships, price
+it against that.)*
+
 **Staten Island changed under this proposal.** When the Deed/Sweep idea was first discussed,
 Staten's Deed was boxed at setup, so Staten would have been the one Borough nobody could
 ever fortify. Its Deed now sits in the Supply, so whoever takes the island can hold its Deed
@@ -142,3 +157,17 @@ premises moved on the same day.
 - **Deeds got quieter, not louder.** Losing the tiebreaker removed the one thing a Deed
   did during play. Everything this proposal was written to fix is therefore still unfixed,
   and slightly more visible than it was.
+
+## What the unified market changed (2026-08-23)
+
+The split market lasted a fortnight; 2026-08-22 unified it (the address sets the price,
+the barrel sets the Kickback). For this file's argument:
+
+- **The Hotspot is a $200-a-barrel premium room, not a Rum monopoly.** The bullet above
+  calling it "the only room in its Borough that buys Rum" is a dated record of the
+  fortnight it was true.
+- **On the Payroll is repriced downward again**; the correction sits with the paragraph
+  that priced it up.
+- **Deeds are exactly as quiet as before.** The unification moved prices, not Deeds, so
+  this proposal remains the only candidate on the table that would make a Deed pay
+  during play.
