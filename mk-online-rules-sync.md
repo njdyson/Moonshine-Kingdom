@@ -349,7 +349,12 @@ whole Ledger at once (Lay Low).
 
 One heuristic: `wantsLateToken = (a reachable Offers Job the bot values) || (out-sitting a rival for draft/market order)`. If a value Play exists, play it. Else if `wantsLateToken && ledger >= 1`, **Collect**. Else **Lay Low**. Guard against a Collect loop that never steps off — cap it by the same "nothing left worth doing" test that already triggers Lay Low, plus the token motive above.
 
-## 9. The liquor market (2026-08-22, supersedes the 2026-08-09 split-market entry)
+## 9. The liquor market (2026-08-22, superseded by §10)
+
+> **Superseded on 2026-09-01.** §10 reverses the two axes: the barrel now sets the
+> price and the address sets the Kickback. Build §10, not this section. What still
+> stands from here is the 20-barrel Rum pool, the deleted Deed tiebreak, the padlock
+> check on the Night Mayor's placement, and Peddle staying Moonshine-only in Wards.
 
 > **This section was rewritten, not appended to.** The 2026-08-09 spec described a
 > *split* market (Moonshine only at standard bars, Rum only at the Hotspot, wrong
@@ -403,6 +408,48 @@ The rule now has two orthogonal axes, and keeping them apart is the whole point:
 | 9.7 | Jobs deck | The two cards re-cut on 2026-08-09 stand as re-cut: **The Angel's Share** is `Unload 3+ Barrels of Moonshine at East Harlem`, **Cuban Prince** is a **Move** card, `Move 3+ Barrels of Rum into Sunny's Bar`. Neither is unfirable under the unified market, so neither needs reverting. |
 | 9.8 | Bots | Rum's premium is the **Kickback**, not the price, and it is unconditional. Value a Rum barrel at the venue rate plus a Play, and value Hotspot access as a flat +$200 a barrel on anything sold there. Drop any access-conditional Rum valuation: a bot with Rum and no Hotspot is not stranded. |
 | 9.9 | UI | Speakeasy and Hotspot tooltips read "$300 a barrel" and "$500 a barrel", with no liquor qualifier. The Rum tooltip carries the Kickback, and it carries it at every address. |
+
+## 10. The liquor market, reversed (2026-09-01, supersedes §9)
+
+The two axes are still orthogonal, and they have swapped jobs: the **barrel sets the
+price**, the **address sets the Kickback**.
+
+### What changed
+
+| | Before (§9) | Now |
+| --- | --- | --- |
+| Sale price | `isHotspot ? $500 : $300`, either liquor | **Moonshine $300, Rum $500**, at any Speakeasy you Control. The venue is not a price input |
+| Kickback | 1 marker per **Rum** barrel, at any address | 1 marker per barrel of **either** liquor, **only at The Hotspot**. Same limits: a marker in Reserves and an empty Ledger slot, else lost |
+| Greed Tax | 4+ barrels in one Play | Unchanged |
+| Hotspot Tokens at setup | One per mainland Borough, under the starting Squads | **All four start in the Supply.** Nothing is on the board until a Night Mayor places one |
+| Night Mayor, Morning Fix | Move one token within its Borough | **Place** one token from the Supply on an unpadlocked Speakeasy in a Borough holding none, **or move** one token to another unpadlocked Speakeasy in its own Borough. One or the other, never both |
+| Token cap | One per mainland Borough | Unchanged, and Staten Island has no Speakeasy so it never holds one |
+| Title changes hands or falls vacant | Tokens stay put | Unchanged: tokens stay on the board |
+| Raid | Token unaffected | A Squad kicking in a District holding a token **returns it to the Supply** (Condemned, beside the Safehouse and the seized Liquor) |
+
+### Why it matters for the build more than it looks
+
+- **Tempo moved from the cargo to the room.** A crew with Rum and no Hotspot is rich and
+  slow; a crew with a Hotspot and cheap Moonshine buys its day back. Any bot that still
+  scores Rum as a Play is scoring the old rules.
+- **The board opens empty.** Day 1 has no Kickback anywhere, and the first token cannot
+  land until a Night Mayor is crowned at a Reckoning. A bot must not assume a Hotspot
+  exists.
+- **Trade is now a flat cash upgrade**, $200 a barrel at every address, with no venue
+  condition attached. That makes the Dock valuation static and much simpler than §9.8's.
+
+### What has to change online
+
+| # | Area | Change |
+| --- | --- | --- |
+| 10.1 | Sale pricing | Price on the **barrel alone**: Moonshine $300, Rum $500, at any Speakeasy the seller Controls. Drop every `isHotspot` branch from the price path. |
+| 10.2 | Kickback | Fire it **once per barrel Unloaded at a Hotspot**, whichever liquor, with the existing Reserves-and-empty-slot guard. Remove the liquor-type gate; add the venue gate. Peddle still fires no Kickback. |
+| 10.3 | Setup | Do not place Hotspot Tokens. Squads still start on the Town Planner's default Speakeasies. |
+| 10.4 | Night Mayor | The Morning Fix offers two mutually exclusive actions, place or move, and both reject a padlocked destination. Place is legal only into a Borough with no token on it; move is legal only within the token's own Borough. |
+| 10.5 | Raids | The Scatter returns any Hotspot Token on the kicked District to the Supply, alongside the Safehouse destruction and Liquor seizure. |
+| 10.6 | Bots | Value a barrel at its own price, and value **Hotspot access as a Play per barrel**, worth most when the Ledger is nearly spent and near zero when it is full. Drop §9.8's flat +$200-a-barrel venue premium. |
+| 10.7 | UI | Speakeasy tooltips read "Moonshine $300, Rum $500". The Hotspot tooltip carries the Kickback, not a price. |
+| 10.8 | Jobs deck | The two Hotspot cards still fire, but only after a Night Mayor has placed a token, so any solver that assumes a Day 1 Hotspot needs the assumption removed. |
 
 ## Checklist
 
