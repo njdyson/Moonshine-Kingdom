@@ -71,47 +71,56 @@ crew can garrison five Deeds and three Titles at once on 15 Runners. Do not rest
 `v0-8-changes.md` still argues the old arithmetic at length. It is a dated record of why
 Public Enemy was cut, not a statement of the current numbers.
 
-## The address sets the price, the barrel sets the Kickback
+## The barrel sets the price, the address sets the Kickback
 
-Since 2026-08-22 the two axes are orthogonal, and keeping them apart is the whole point:
+Since 2026-09-01 the two axes are orthogonal, and keeping them apart is the whole point:
 
-- **every Speakeasy** buys **either liquor** at **$300** a barrel
-- a **Hotspot** pays **$500** a barrel for **whatever you pour**, Moonshine included
-- **Havana Rum** pays its Influence **Kickback at any address**, Wards included
+- **Moonshine** sells for **$300** a barrel and **Havana Rum** for **$500**, at **any
+  Speakeasy you Control**
+- a barrel Unloaded at **The Hotspot** pays an Influence **Kickback**, whichever liquor it
+  holds. The usual limits apply: a marker in Reserves and an empty Ledger slot, else the
+  Kickback is lost
+- the Greed Tax is unchanged, at 4+ barrels in one Play, wherever you sell
+
+This is the reverse of the 2026-08-22 arrangement, where the address set the price and Rum
+carried the Kickback. Cash now rides the cask and tempo rides the room, so the **Dock** is
+the crown that pays and the **Night Mayor** is the crown that hands out Plays.
 
 The one liquor-type restriction left in the game is the Irish **Peddle**, which sells
-**Moonshine only**, and **only in Wards you Control**: Speakeasy sales, The Hotspot's $500
-included, belong to Unload. Peddle costs 1 Play where Unload costs 2, and that discount is
-the whole card. Let it carry Rum and it pays the Kickback in a Ward you already Control,
-which routes the tempo engine around Speakeasies entirely; let it reach Speakeasies and it
-makes Unload a dead Play for Irish Moonshine. Do not "restore consistency" by opening Peddle
-to either liquor or to more addresses. (The Rulebook carried a drifted "as well as
-Speakeasies" until 2026-08-23; `mk-online-rules-sync.md` §9.6 holds the ruling.)
+**Moonshine only**, and **only in Wards you Control**: Speakeasy sales, The Hotspot's
+Kickback included, belong to Unload. Peddle costs 1 Play where Unload costs 2, and that
+discount is the whole card. Let it reach Speakeasies and it makes Unload a dead Play for
+Irish Moonshine. Do not "restore consistency" by opening Peddle to either liquor or to more
+addresses. (The Rulebook carried a drifted "as well as Speakeasies" until 2026-08-23;
+`mk-online-rules-sync.md` §9.6 holds the ruling.)
 
-The exclusivity rule this replaced ("one liquor to a room", Rum sellable only at a Hotspot)
-was deleted because it let the Night Mayor **strand** goods a rival had already paid three
-Plays for. Nothing else in the game bricks a paid-for asset, and that is what made the Title
-feel like keep-away. Now a snub costs the victim **$200 a barrel** and never the Play, so the
-crown sets a premium instead of holding a hostage.
+The exclusivity rule two revisions back ("one liquor to a room", Rum sellable only at a
+Hotspot) was deleted because it let the Night Mayor **strand** goods a rival had already paid
+three Plays for. Nothing else in the game bricks a paid-for asset. A snub now costs the
+victim tempo and never the sale: the cash is identical at every bar he Controls.
 
-The wording that will creep back is the old "a standard bar takes Moonshine only", "The
-Hotspot takes Rum only", "the Kickback rides the address, not the barrel", "the city drinks
-grey", and any claim that Rum has "nowhere else to go". All of those are now false. The
-Playbooks and the Town Planner carry the most compressed restatements, so they drift first,
-and the Kingpin's Guide builds whole strategy passages on top of the rule, so grep it for
-*argument*, not just for numbers.
+The wording that will creep back is "the address sets the price", "The Hotspot pays $500",
+"a standard Speakeasy pays $300", "the Kickback rides the barrel", "Rum pays its Kickback at
+any address", and any claim that the premium is worth **$200 a barrel**. All of those are now
+false. The Playbooks and the Town Planner carry the most compressed restatements, so they
+drift first, and the Kingpin's Guide builds whole strategy passages on top of the rule, so
+grep it for *argument*, not just for numbers.
 
 The Rum pool is **20** barrels, not 15, and Trade at a Dock (1:1 from Moonshine) is still the
-only way Rum enters the game.
+only way Rum enters the game. Trade is now worth a flat **$200 a barrel**, at every address.
 
-Two knock-ons that are easy to miss:
+Three knock-ons that are easy to miss:
 
-- **All four Hotspots start padlocked under Police Squads**, so a fresh game has **no $500
-  room** anywhere until the first Raid opens a door. Rum still sells and still pays its
-  Kickback from night one. This is deliberate. Do not "fix" it.
-- The **Night Mayor** moves a Hotspot Token **between unpadlocked Speakeasies**: a padlocked
-  token cannot be picked up, and a padlocked room cannot receive one. The clause is now about
-  keeping the premium on the board rather than preventing a market shutdown.
+- **The four Hotspot Tokens start in the Supply**, not on the board, so a fresh game has no
+  Kickback anywhere until a **Night Mayor** is crowned and places the first one. This is
+  deliberate. Do not "fix" it by seeding the board at setup.
+- Each Morning Fix the Night Mayor does **one** thing, never both: **place** a token from the
+  Supply on an unpadlocked Speakeasy in a Borough that holds none, or **move** a token
+  already down to another unpadlocked Speakeasy **in its own Borough**. Cap is **one token
+  per mainland Borough**; Staten Island has no Speakeasy, so it never holds one. Tokens stay
+  on the board when the Night Mayor changes or the Title falls vacant.
+- A **Raid** that kicks in a District holding a token returns that token to the **Supply**
+  (it sits on the Scatter's Condemned line, beside the Safehouse and the seized Liquor).
 
 **Borough Deed ties are no longer broken by the Hotspot.** A tie sends the Deed to the
 Supply, exactly like every other Title. Do not re-add the tiebreak.
