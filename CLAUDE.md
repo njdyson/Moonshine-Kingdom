@@ -132,6 +132,12 @@ trait and let the **Sweep** skip Boroughs whose Deed you hold. It is not impleme
 not be implemented without Nick asking. Read it before touching the Sweep, the Sicilian
 Playbook, or Borough Deeds, and update it if the thinking moves.
 
+`rules-streamline-handoff.md` holds a second, larger open direction (2026-09-07): cut Borough
+Deeds, zero Title Respect, make Respect Jobs-only at a 10-point crown, escalate the Bribe cost,
+and make the Sweep the Sicilians' call. Nick is sleeping on it. It is not implemented and must
+not be implemented without Nick asking; read it before touching the win condition, Titles, the
+Bribe Play, or the Reckoning.
+
 ## What not to edit
 
 - `Archive/` is frozen history. Never edit it, and never let it skew a repo-wide count.

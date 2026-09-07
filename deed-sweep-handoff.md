@@ -23,6 +23,11 @@ Last worked: 2026-08-09.
 > foot of this file; the "On the Payroll" pricing warning below carries its own dated
 > correction where it stands.
 
+> **2026-09-07: a larger direction may resolve this file by deletion.** Nick is weighing a
+> streamline that cuts Borough Deeds outright and zeroes Title Respect; see
+> `rules-streamline-handoff.md`. If it ships there are no Deeds for the Sweep to skip, and the
+> Sweep itself is in question. Nothing here has changed yet.
+
 ## The proposal
 
 Drop the Sicilian **Untouchable** trait, replacing it with something to be decided, and
