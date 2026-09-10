@@ -67,8 +67,8 @@ Welsher, and the win is **10 Influence, 10 Respect, honor intact**. The Blood Oa
 
 The Deeds went for the reason Public Enemy No. 1 went in v0.8: they paid a second time for
 turf that Jobs already require you to hold. Do not re-add either, and do not give a Title a
-Respect value. Home turf at setup is now picked (clockwise from a random boss, an empty
-mainland Borough each), not dealt.
+Respect value. Home turf at setup is now picked in reverse Turn Order (Turn Tokens are dealt
+first, then the highest token picks an empty mainland Borough first), not dealt.
 
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
 never a flat price. The 7th and 8th are the tempo markers, the 10th is the crown purchase,
@@ -142,8 +142,8 @@ tied Title goes to the Supply. Do not re-add a tiebreak of any kind.
 
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the parts of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
-Ear), a **2-player** North vs South mode, and **Borough drafting** in reverse Turn Order.
-None of those is implemented and none should be without Nick asking. The universal Sweep and
+Ear) and a **2-player** North vs South mode.
+Neither is implemented and neither should be without Nick asking. The universal Sweep and
 the Sicilians' **Untouchable** trait still read as they always have. Read the file before
 touching the Sweep, the Sicilian Playbook, or the player-count setup.
 

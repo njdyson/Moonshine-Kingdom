@@ -6,9 +6,9 @@ Respect, Respect is Jobs only at a 10-point crown, the Rat is 2 Respect, the Blo
 ($2,000 / $3,000 / $4,000 / $5,000). Every player-facing component reads that way.
 
 **Still open, and not to be implemented without Nick asking:** the Sweep (The Commissioner's
-Ear), the 2-player North vs South mode, and Borough drafting in reverse Turn Order. Setup
-today picks home turf clockwise from a random boss, which is the smallest change that worked
-without Deeds to deal; it is not the draft.
+Ear) and the 2-player North vs South mode. Borough drafting shipped too: Turn Tokens are
+dealt before turf is established, and home Boroughs are picked in reverse Turn Order, the
+same order The Offers already use.
 
 The rest of this file is the record of the discussion as it stood before the decision, kept
 so the reasoning survives. Where it says "if it ships", it shipped, except for the Sweep.
