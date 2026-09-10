@@ -3,27 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moonshine Kingdom: Cards v0.9 (Deeds, Titles &amp; Debts)</title>
+<title>Moonshine Kingdom: Cards v0.9 (Titles &amp; Debts)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   Cards v0.9: the 24 cards that are not Jobs:
-     5 Borough Deeds · 3 Titles · 1 Rat · 7 Shylock's Marks
-     · 8 Welshers
+   Cards v0.9: the 19 cards that are not Jobs:
+     3 Titles · 1 Rat · 7 Shylock's Marks · 8 Welshers
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8) and stays cut: it paid a
    second time for work the Jobs deck already pays for. Do not
-   re-add it.
-   Holdings total 16 Respect (5 Deeds + 3 Titles at 2 apiece).
-   That clears the 15 that crowns you, but only for a boss
-   holding every Deed and every Title on the same night, which
-   15 Runners cannot garrison. The Market is the practical road
-   to the crown, not an arithmetic certainty. (Staten's Deed
-   sits in the Supply from night 1; older revisions boxed it,
-   which is where the retired 14 Respect ceiling came from.)
+   re-add it. The five Borough Deeds are CUT (v0.9.7) for the
+   same reason, and the Titles pay no Respect: Respect is Jobs
+   only, at a 10-point crown. Do not re-add either.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
    the Welsher, −1 Respect forever. They share the debts geometry.
@@ -42,10 +36,9 @@
       along with the square/portrait sources it existed for.
    3. TWO geometries, not one. The Jobs deck freezes its bands
       because 12 cards fan out in the Market row and any jitter
-      shows. Nothing here ever fans: a Deed never sits beside a
-      Mark in play. So holdings (Deeds + Titles, which DO share
-      a sheet) share one geometry, and debts (Rat + Marks, which
-      share a sheet) share another. Within a type it is frozen.
+      shows. Nothing here ever fans: a Title never sits beside a
+      Mark in play. So holdings (the Titles) keep one geometry,
+      and debts (Rat + Marks, which share a sheet) keep another. Within a type it is frozen.
         holdings : art 38mm · rules 16mm
         debts    : art 38mm · rules 16mm
       Change one band and you must take the millimetres off the
@@ -124,6 +117,9 @@ body{
    @media print rule below re-shows them as the duplex grid. Matches
    the Jobs deck. */
 .backs{display:none}
+/* The Titles sheet has three cards: the fourth cell is a blank that
+   holds its grid position on both faces and prints nothing. */
+.card--blank,.back--blank{visibility:hidden;border:0;background:none;box-shadow:none}
 
 /* ============================================================
    CARD: 63 x 88mm poker stock
@@ -248,27 +244,24 @@ body{
 .card--debt .art{flex:0 0 38mm}
 .card--debt .rules{flex:0 0 16mm}
 
-/* --- respect badge. shield2.png, NOT shield2-unified.png: the
-   "unified" plate is a flat black-outlined cartoon and reads as
-   a different deck beside the Jobs deck's shield1/3/5. --- */
+/* --- respect badge. Only the debts carry one now: the Titles pay
+   in power, not Respect, so a Title card has no shield at all. --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
   background-size:contain;background-repeat:no-repeat;background-position:center;
   filter:drop-shadow(0 .4mm .8mm rgba(0,0,0,.65));
 }
-.respect[data-respect="2"]{background-image:url('Art/shield2.png')}
 /* The broken crown: no debtor is ever crowned. Marks only. */
 .respect[data-respect="none"]{background-image:url('Art/shieldNoCrown.png')}
 /* The Rat is priced, not barred, so it carries a number like the Jobs
-   deck does. shield-3.png is the archived Debts-deck plate, recovered
-   rather than redrawn: 1024px, glossier, with a soft glow, so beside
-   the flat broken crown on this same sheet it reads a shade hotter.
-   Its SCALE is already right and needs no background-size fix: the
-   opaque shield fills .662 x .849 of its canvas against shield3.png's
-   .664 x .844, so a reshoot in the flat 256px style is a straight
-   swap. Correct semantically today; cosmetic debt only. */
-.respect[data-respect="-3"]{background-image:url('Art/shield-3.png')}
+   deck does. shield-2.png (v0.9.7, when the brand dropped from 3 to 2)
+   is drawn to the archived Debts-deck plate's geometry: 1024px, the
+   same red, the same cream numeral, a soft glow, so beside the flat
+   broken crown on this same sheet it reads a shade hotter. shield-3.png
+   stays in Art/ as the reference plate. A reshoot in the flat 256px
+   style is a straight swap. Cosmetic debt only. */
+.respect[data-respect="-2"]{background-image:url('Art/shield-2.png')}
 /* The Welsher is the Rat's little brother: a price, not a bar.
    shield-1.png is the same archived 1024px Debts-deck plate family
    as shield-3.png above; same scale, same glow, same caveat. */
@@ -276,9 +269,9 @@ body{
 
 /* ============================================================
    CARD BACKS
-   Deeds are SHUFFLED AND DEALT at setup, so all five backs must
-   be identical to the millimetre. The Titles are never shuffled,
-   so each carries its own name.
+   Nothing in this deck is shuffled or dealt, so every back
+   carries its own name. (The Borough Deeds, which were, left
+   the box in v0.9.7.)
    ============================================================ */
 .back{
   position:relative;
@@ -464,90 +457,28 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1926</div>
-  <div class="masthead-title">Deeds, Titles &amp; Debts</div>
-  <div class="masthead-sub">v0.9 &middot; 24 Cards &middot; 5 Deeds &middot; 3 Titles &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
+  <div class="masthead-title">Titles &amp; Debts</div>
+  <div class="masthead-sub">v0.9 &middot; 19 Cards &middot; 3 Titles &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
   <p class="masthead-note">
-    Deeds and Titles pay you for what you <b>hold</b>; the Jobs deck pays you for what you <b>do</b>.
-    Five Deeds and three Titles are all the ground there is, <b>16 Respect</b> in all, and no crew
-    alive can garrison every last acre of it. The throne runs through the Jobs deck.
+    Titles pay you for what you <b>hold</b>, in power; the Jobs deck pays you for what you <b>do</b>,
+    in Respect. The throne runs through the Jobs deck.
   </p>
 </div>
 
 <!-- =============================================================
-     SHEET 1: the four mainland Deeds. Shuffled and dealt at
-     setup, so these four backs are identical.
+     SHEET 1: the three Titles. Three cards on a four-card sheet;
+     the fourth slot is a hidden blank so the duplex grid keeps
+     its positions. Backs are MIRRORED for long-edge duplex:
+     fronts read Ward / Harbor / Night / blank, backs read
+     Harbor / Ward / blank / Night.
+     Titles carry no Respect badge: a crown pays in power only.
      ============================================================= -->
 <div class="tier-head">
-  <span class="dia"></span><span class="lbl">BOROUGH DEEDS</span>
-  <span class="meta">2 Respect each &middot; claimed at Reckoning &middot; sheet 1 of 6</span>
+  <span class="dia"></span><span class="lbl">THE TITLES</span>
+  <span class="meta">no Respect, only power &middot; claimed at Reckoning &middot; sheet 1 of 5</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Borough Deed</span></div>
-    <h2 class="title">Manhattan</h2>
-    <div class="art"><img src="Art/Cards/Manhattan.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most Districts in <b>Manhattan</b>.<span class="brk"></span><b>Tied?</b> Nobody takes it; the Deed returns to the Supply.</span></div>
-    <div class="flavour">The tower throws a long shadow. Stand in it.</div>
-    <div class="respect" data-respect="2"></div>
-  </div>
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Borough Deed</span></div>
-    <h2 class="title">The Bronx</h2>
-    <div class="art"><img src="Art/Cards/Bronx.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most Districts in <b>The Bronx</b>.<span class="brk"></span><b>Tied?</b> Nobody takes it; the Deed returns to the Supply.</span></div>
-    <div class="flavour">North of the river the rent&rsquo;s cheap. So are the men.</div>
-    <div class="respect" data-respect="2"></div>
-  </div>
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Borough Deed</span></div>
-    <h2 class="title">Queens</h2>
-    <div class="art"><img src="Art/Cards/Queens.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most Districts in <b>Queens</b>.<span class="brk"></span><b>Tied?</b> Nobody takes it; the Deed returns to the Supply.</span></div>
-    <div class="flavour">Flat, quiet, and full of places nobody looks.</div>
-    <div class="respect" data-respect="2"></div>
-  </div>
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Borough Deed</span></div>
-    <h2 class="title">Brooklyn</h2>
-    <div class="art"><img src="Art/Cards/Brooklyn.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most Districts in <b>Brooklyn</b>.<span class="brk"></span><b>Tied?</b> Nobody takes it; the Deed returns to the Supply.</span></div>
-    <div class="flavour">A church, a bar, and one man who owns both.</div>
-    <div class="respect" data-respect="2"></div>
-  </div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 2: Staten Island's Deed + the three Titles.
-     Backs are MIRRORED for long-edge duplex: fronts read
-     Staten / Ward / Harbor / Night, backs read Ward / Staten /
-     Night / Harbor.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">STATEN ISLAND &amp; THE TITLES</span>
-  <span class="meta">2 Respect each &middot; Public Enemy No. 1 cut in v0.8 &middot; sheet 2 of 6</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Borough Deed</span></div>
-    <h2 class="title">Staten Island</h2>
-    <div class="art"><img src="Art/Cards/Staten.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most Districts in <b>Staten Island</b>.</span></div>
-    <div class="flavour">The forgotten borough. Nobody looks for you here.</div>
-    <div class="respect" data-respect="2"></div>
-  </div>
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Title</span></div>
     <h2 class="title">Ward Boss</h2>
@@ -555,7 +486,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Control the most <b>Ward</b> Districts.<span class="brk"></span><b>Union Fee:</b> Rivals pay <b>you $100 per Runner</b> they Recruit.</span></div>
     <div class="flavour">The Boroughs make headlines. The Wards own the block.</div>
-    <div class="respect" data-respect="2"></div>
   </div>
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Title</span></div>
@@ -564,7 +494,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Control the most <b>Dock</b> Districts.<span class="brk"></span><b>Tomorrow&rsquo;s Mash:</b> Each Morning Fix, <b>name any face</b> instead of rolling the Mash die.</span></div>
     <div class="flavour">Every barrel of molasses lands on your pier.</div>
-    <div class="respect" data-respect="2"></div>
   </div>
   <div class="card card--holding">
     <div class="tier"><span class="kicker">Title</span></div>
@@ -573,23 +502,23 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="rules-label">The Claim</div>
     <div class="rules"><span>Control the most <b>Speakeasies</b>.<span class="brk"></span><b>The Hotspot:</b> Each Morning Fix, either <b>place</b> a Hotspot Token from the Supply on an unpadlocked Speakeasy in a Borough with no token, or <b>move</b> one token to another unpadlocked Speakeasy in its Borough.</span></div>
     <div class="flavour">The sun belongs to the law. The night is yours.</div>
-    <div class="respect" data-respect="2"></div>
   </div>
+  <div class="card card--blank" aria-hidden="true"></div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Ward<br>Boss</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Borough<br>Deed</div><div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Night<br>Mayor</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
   <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Harbor<br>master</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Ward<br>Boss</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
+  <div class="back back--blank" aria-hidden="true"></div>
+  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Night<br>Mayor</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
 </div>
 
 <!-- =============================================================
-     SHEET 3: the Rat + three Marks. Backs mirrored: the Rat
+     SHEET 2: the Rat + three Marks. Backs mirrored: the Rat
      sits top-left on the front, so its back sits top-RIGHT.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
-  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 3 of 6</span>
+  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 2 of 5</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -600,7 +529,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="rules-label">The Shame</div>
     <div class="rules"><span>While you hold this card you <b>cannot Rat</b>.<span class="brk"></span>No absolution: it leaves you only when a rival <b>Rats</b>.</span></div>
     <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-3"></div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
@@ -638,12 +567,12 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEET 4: four more Marks. All backs identical, so mirroring
+     SHEET 3: four more Marks. All backs identical, so mirroring
      is moot here.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
-  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 4 of 6</span>
+  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 3 of 5</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -701,11 +630,11 @@ body.trim .card,body.trim .back{border-radius:0}
      cropped to the deck's 898x674 landscape recipe); it retired
      the borrowed Rulebook Oath plate 2026-08-03.
      shield-1.png is the archived Debts-deck plate, same family
-     and same cosmetic-debt caveat as the Rat's shield-3.
+     and same cosmetic-debt caveat as the Rat's shield-2.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 5 of 6</span>
+  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 4 of 5</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -755,7 +684,7 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 6 of 6</span>
+  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 5 of 5</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">

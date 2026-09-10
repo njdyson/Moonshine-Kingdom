@@ -1,5 +1,11 @@
 # The Jobs System — Handoff (v0.8, 2026-07-17)
 
+> **2026-09-10 (v0.9.7): Borough Deeds are cut and Titles pay no Respect.** The crown is 10
+> Respect from Jobs alone. The five Deed-keyed cards (Tenement Army, The Empty Casket,
+> Squatter's Rights, Union Dues, Last One Standing) now name the District count in the Borough
+> directly. Everything below that says "Deed" is a dated record; the §8 catch-up question is
+> now the live one, since Jobs are the only Respect route. See `rules-streamline-handoff.md`.
+
 Everything needed to resume cold. Written for whoever picks this up next, human or agent.
 
 **Status:** design settled. **Overlap is judged by BREADTH now — see §3 before touching a card.** **Rulebook v0.8 print-verified: 23pp A4, no blanks.**

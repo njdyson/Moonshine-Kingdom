@@ -1,5 +1,11 @@
 # mk-online: rules sync backlog
 
+> **2026-09-10 (v0.9.7): the win condition changed.** Borough Deeds are cut, Titles pay no
+> Respect, Respect is Jobs only at a 10-point crown (Rat 2, Welsher 1, Blood Oath 20), and
+> Bribe costs $2,000 / $3,000 / $4,000 / $5,000 for the 7th to 10th markers. `mk-online` does
+> not implement any of this yet; every Deed row below is a dated record.
+
+
 Rules changes landed in the tabletop files that **mk-online does not yet
 implement**. The web build in `mk-online/dist` is a compiled bundle; the source
 lives elsewhere, so this is written against observable behaviour and log strings
