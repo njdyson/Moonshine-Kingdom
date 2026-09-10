@@ -62,7 +62,10 @@ Since v0.9.7 (2026-09-10) there are **no Borough Deeds** in the game and **Title
 Respect**. The three Titles (Ward Boss, Harbormaster, Night Mayor) keep their powers and
 are still claimed at Stake Your Claim; they are worth nothing at the count. Respect is the
 pile of completed Job cards in front of you, less **2** for the Rat Card and **1** per
-Welsher, and the win is **10 Influence, 10 Respect, honor intact**. The Blood Oath target is
+Welsher, and the win is **10 Influence, 10 Respect, Solvent** (no unpaid Shylock's Mark). The third
+condition was called "honor" until 2026-09-10; it was renamed because honor read as if broken
+deals and the Rat bore on it, and they do not (both are Respect bills). Keep "honor" for the
+Volstead Act, where it genuinely covers both the Rat and debt. The Blood Oath target is
 **20** combined.
 
 The Deeds went for the reason Public Enemy No. 1 went in v0.8: they paid a second time for
