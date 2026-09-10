@@ -56,20 +56,33 @@ only when a rule is genuinely easy to miss *and* costly to get wrong.
 
 `Turn Order (Who Strikes First)`, `Supply (Harbormaster)`, `Demand (Night Mayor)`.
 
-## The Respect ceiling is 16, not 14
+## Respect is Jobs only, and the crown needs 10
 
-Deeds and Titles are worth 2 Respect each. Five Borough Deeds, Staten's included since it
-sits in the **Supply** from night 1 rather than going back to the box, plus three Titles,
-is **16**. The crown needs 15.
+Since v0.9.7 (2026-09-10) there are **no Borough Deeds** in the game and **Titles pay no
+Respect**. The three Titles (Ward Boss, Harbormaster, Night Mayor) keep their powers and
+are still claimed at Stake Your Claim; they are worth nothing at the count. Respect is the
+pile of completed Job cards in front of you, less **2** for the Rat Card and **1** per
+Welsher, and the win is **10 Influence, 10 Respect, honor intact**. The Blood Oath target is
+**20** combined.
 
-The old **14** came from a revision that boxed Staten's Deed, and with it the claim that
-holdings land "one short of the 15" so nobody takes the crown without doing at least one
-Job. That guarantee is gone, and what replaces it is practical rather than arithmetic: no
-crew can garrison five Deeds and three Titles at once on 15 Runners. Do not restate the
-14, and do not re-add Public Enemy No. 1 to close the gap.
+The Deeds went for the reason Public Enemy No. 1 went in v0.8: they paid a second time for
+turf that Jobs already require you to hold. Do not re-add either, and do not give a Title a
+Respect value. Home turf at setup is now picked (clockwise from a random boss, an empty
+mainland Borough each), not dealt.
 
-`v0-8-changes.md` still argues the old arithmetic at length. It is a dated record of why
-Public Enemy was cut, not a statement of the current numbers.
+The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
+never a flat price. The 7th and 8th are the tempo markers, the 10th is the crown purchase,
+and the rising price is what keeps a leader exposed now that nothing on the board can take
+Respect off him. It is printed in the Rulebook's Bribe Play and Influence section, the
+Playbooks' Bribe entry, and the Kingpin's Guide's Bribe and Three Clocks passages. The
+Ledger boards stack Reserves, so the price is not printed there.
+
+Five Jobs that named the Deed now name the count directly ("a Borough where you Control the
+most Districts", "where a rival Controls more Districts than you"). Any wording that brings
+back "15 Respect", "2 Respect per Title", "16", "14", a Deed, or "$2,500" is a regression.
+
+`v0-8-changes.md` still argues the old 14/15 arithmetic at length. It is a dated record of
+why Public Enemy was cut, not a statement of the current numbers.
 
 ## The barrel sets the price, the address sets the Kickback
 
@@ -122,21 +135,21 @@ Three knock-ons that are easy to miss:
 - A **Raid** that kicks in a District holding a token returns that token to the **Supply**
   (it sits on the Scatter's Condemned line, beside the Safehouse and the seized Liquor).
 
-**Borough Deed ties are no longer broken by the Hotspot.** A tie sends the Deed to the
-Supply, exactly like every other Title. Do not re-add the tiebreak.
+**The Hotspot breaks no ties.** It once broke Borough Deed ties; the Deeds are gone, and a
+tied Title goes to the Supply. Do not re-add a tiebreak of any kind.
 
 ## Open design threads
 
-`deed-sweep-handoff.md` holds a live, undecided proposal: drop the Sicilians' **Untouchable**
-trait and let the **Sweep** skip Boroughs whose Deed you hold. It is not implemented and must
-not be implemented without Nick asking. Read it before touching the Sweep, the Sicilian
-Playbook, or Borough Deeds, and update it if the thinking moves.
+`rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
+and the parts of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
+Ear), a **2-player** North vs South mode, and **Borough drafting** in reverse Turn Order.
+None of those is implemented and none should be without Nick asking. The universal Sweep and
+the Sicilians' **Untouchable** trait still read as they always have. Read the file before
+touching the Sweep, the Sicilian Playbook, or the player-count setup.
 
-`rules-streamline-handoff.md` holds a second, larger open direction (2026-09-07): cut Borough
-Deeds, zero Title Respect, make Respect Jobs-only at a 10-point crown, escalate the Bribe cost,
-and make the Sweep the Sicilians' call. Nick is sleeping on it. It is not implemented and must
-not be implemented without Nick asking; read it before touching the win condition, Titles, the
-Bribe Play, or the Reckoning.
+The older `deed-sweep-handoff.md` proposal (let the Sweep skip Boroughs whose Deed you hold)
+was closed by the Deeds' removal and the file deleted; its combat modelling survives in
+`tools/sim_deed_sweep.js`, which still runs and is the tool to reach for on any Sweep change.
 
 ## What not to edit
 

@@ -1,10 +1,19 @@
-# The rules streamline: an open direction
+# The rules streamline: shipped core, open remainder
 
-**Status: undecided. Nothing here is implemented, and nothing here should be implemented
-without Nick saying so.** Every component still reads as it did at v0.9.6. This file exists
-so the reasoning survives the session it happened in. Nick is sleeping on it.
+**Status: the core shipped in v0.9.7 (2026-09-10).** Borough Deeds are cut, Titles pay no
+Respect, Respect is Jobs only at a 10-point crown, the Rat is 2 Respect, the Blood Oath is
+20 combined, Titles still move at Stake Your Claim, and the Bribe ladder escalates
+($2,000 / $3,000 / $4,000 / $5,000). Every player-facing component reads that way.
 
-Last worked: 2026-09-07.
+**Still open, and not to be implemented without Nick asking:** the Sweep (The Commissioner's
+Ear), the 2-player North vs South mode, and Borough drafting in reverse Turn Order. Setup
+today picks home turf clockwise from a random boss, which is the smallest change that worked
+without Deeds to deal; it is not the draft.
+
+The rest of this file is the record of the discussion as it stood before the decision, kept
+so the reasoning survives. Where it says "if it ships", it shipped, except for the Sweep.
+
+Last worked: 2026-09-10.
 
 ## The direction, as it stood at the end of the session
 
@@ -141,9 +150,9 @@ stack harder than they do, and a table where the Sicilians are behind, or a 2-pl
 without them, has no Sweep at all. Run `node tools/sim_deed_sweep.js` on "no cap" before
 committing.
 
-If the direction ships, `deed-sweep-handoff.md` is resolved by deletion: its proposal was the
-only thing that made a Deed pay during play, and there are no Deeds. Close it out rather than
-leave it "undecided".
+`deed-sweep-handoff.md` was resolved by deletion on 2026-09-10: its proposal was the only
+thing that made a Deed pay during play, and there are no Deeds. Its modelling tool,
+`tools/sim_deed_sweep.js`, stays.
 
 ## The end of the Day
 
