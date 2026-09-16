@@ -62,7 +62,7 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 
 - The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, make the Sunset win check, then flip Turn Tokens if no one won.
 - Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
-- The player Controlling the most Docks sets tomorrow's Mash; tied lead rolls the Mash die.
+- The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
 - The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel Unloaded pays a Kickback.
 - There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
