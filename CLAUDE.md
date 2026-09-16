@@ -56,6 +56,17 @@ only when a rule is genuinely easy to miss *and* costly to get wrong.
 
 `Turn Order (Who Strikes First)`, `Supply (Harbormaster)`, `Demand (Night Mayor)`.
 
+## v0.9.8 streamlined rules
+
+This supersedes the older Titles, Hotspot, and Sweep notes below until they are fully retired.
+
+- The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, make the Sunset win check, then flip Turn Tokens if no one won.
+- Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
+- The player Controlling the most Docks sets tomorrow's Mash; tied lead rolls the Mash die.
+- The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel Unloaded pays a Kickback.
+- There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
+- Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
+
 ## Respect is Jobs only, and the crown needs 10
 
 Since v0.9.7 (2026-09-10) there are **no Borough Deeds** in the game and **Titles pay no

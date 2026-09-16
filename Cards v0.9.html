@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moonshine Kingdom: Cards v0.9 (Titles &amp; Debts)</title>
+<title>Moonshine Kingdom: Cards v0.9 (Debts &amp; Dishonor)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -43,16 +43,15 @@
         debts    : art 38mm · rules 16mm
       Change one band and you must take the millimetres off the
       other; each geometry is sized to its TALLEST card's rules
-      (Harbormaster among holdings; among debts it was the Rat
+      (among debts it was the Rat
       until v0.9, when the Welsher arrived at 11.5mm of text
       and took the crown), so the art can only grow when that
       one card's text shrinks.
       The two happen to COINCIDE at v0.9: losing the Jobs
       blackout and the absolution clause cut the Rat's rules from
-      14.9mm of text to 11.5mm, exactly the Harbormaster's
+      14.9mm of text to 11.5mm, which matches the retired holdings card's
       height, so debts moved 35/19 -> 38/16 to match. They are
-      still two knobs, not one: shrink the Harbormaster or
-      rewrite the Rat and they part company again. Measured in
+      still two knobs, not one. Measured in
       headless Chromium at 96dpi; every card still lands on
       88.0mm with no overflow.
    ============================================================ */
@@ -153,7 +152,7 @@ body{
 .kicker{font:600 5.2pt Barlow;letter-spacing:1.6px;color:var(--gold-dim);text-transform:uppercase}
 
 /* --- title : fixed 7mm. Every name in this deck is ONE line
-   ("Harbormaster", "Shylock's Mark"), so this is 2mm shorter
+   ("Shylock's Mark"), so this is 2mm shorter
    than the Jobs deck's 9mm two-line box. Those 2mm are spent on
    the rules band below. --- */
 .title{
@@ -187,7 +186,7 @@ body{
   /* lifts the art off the dark stock in print. Runs HOTTER than
      the Jobs deck's 1.1/1.08 on purpose (2026-08-03): this
      deck's plates are the darkest in the building (Shylock 17,
-     Welsher 18, Night Mayor 18, Rat 20 mean luminance vs the
+     Welsher 18, Rat 20 mean luminance vs the
      Jobs deck's 22 floor), and dark print crushes them further.
      Brightness buys the shadows back; the eased contrast keeps
      the lift from re-burying them. */
@@ -320,7 +319,7 @@ body{
    with four IDENTICAL backs were the ones anybody printed.
    These sheets are ordered for LONG-EDGE duplex, the usual
    default. Flipping on the short edge instead will pair the
-   Harbormaster with the Ward Boss's back.
+   mismatched card backs.
    ============================================================ */
 @media print{
   @page{size:A4;margin:10mm}
@@ -457,68 +456,21 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1926</div>
-  <div class="masthead-title">Titles &amp; Debts</div>
-  <div class="masthead-sub">v0.9 &middot; 19 Cards &middot; 3 Titles &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
+  <div class="masthead-title">Debts &amp; Dishonor</div>
+  <div class="masthead-sub">v0.9 &middot; 16 Cards &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
   <p class="masthead-note">
-    Titles pay you for what you <b>hold</b>, in power; the Jobs deck pays you for what you <b>do</b>,
-    in Respect. The throne runs through the Jobs deck.
+    The Jobs deck pays you for what you <b>do</b>, in Respect. These cards are the prices paid when
+    the work turns ugly.
   </p>
 </div>
 
 <!-- =============================================================
-     SHEET 1: the three Titles. Three cards on a four-card sheet;
-     the fourth slot is a hidden blank so the duplex grid keeps
-     its positions. Backs are MIRRORED for long-edge duplex:
-     fronts read Ward / Harbor / Night / blank, backs read
-     Harbor / Ward / blank / Night.
-     Titles carry no Respect badge: a crown pays in power only.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE TITLES</span>
-  <span class="meta">no Respect, only power &middot; claimed at Reckoning &middot; sheet 1 of 5</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Title</span></div>
-    <h2 class="title">Ward Boss</h2>
-    <div class="art"><img src="Art/Cards/Ward.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most <b>Ward</b> Districts.<span class="brk"></span><b>Union Fee:</b> Rivals pay <b>you $100 per Runner</b> they Recruit.</span></div>
-    <div class="flavour">The Boroughs make headlines. The Wards own the block.</div>
-  </div>
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Title</span></div>
-    <h2 class="title">Harbormaster</h2>
-    <div class="art"><img src="Art/Cards/Harbormaster.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most <b>Dock</b> Districts.<span class="brk"></span><b>Tomorrow&rsquo;s Mash:</b> Each Morning Fix, <b>name any face</b> instead of rolling the Mash die.</span></div>
-    <div class="flavour">Every barrel of molasses lands on your pier.</div>
-  </div>
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Title</span></div>
-    <h2 class="title">Night Mayor</h2>
-    <div class="art"><img src="Art/Cards/Night%20Mayor.jpg" alt=""></div>
-    <div class="rules-label">The Claim</div>
-    <div class="rules"><span>Control the most <b>Speakeasies</b>.<span class="brk"></span><b>The Hotspot:</b> Each Morning Fix, <b>place</b> a Hotspot Token in a Borough that has none, or <b>move</b> one within its Borough.</span></div>
-    <div class="flavour">The sun belongs to the law. The night is yours.</div>
-  </div>
-  <div class="card card--blank" aria-hidden="true"></div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Harbor<br>master</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Ward<br>Boss</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
-  <div class="back back--blank" aria-hidden="true"></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Night<br>Mayor</div><div class="back-rule"></div><div class="back-sub">Title</div><div class="back-foot">New York &middot; 1926</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 2: the Rat + three Marks. Backs mirrored: the Rat
+     SHEET 1: the Rat + three Marks. Backs mirrored: the Rat
      sits top-left on the front, so its back sits top-RIGHT.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
-  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 2 of 5</span>
+  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 1 of 4</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -567,12 +519,12 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEET 3: four more Marks. All backs identical, so mirroring
+     SHEET 2: four more Marks. All backs identical, so mirroring
      is moot here.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
-  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 3 of 5</span>
+  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 2 of 4</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -634,7 +586,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 4 of 5</span>
+  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 3 of 4</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -684,7 +636,7 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 5 of 5</span>
+  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 4 of 4</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">

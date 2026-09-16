@@ -166,7 +166,7 @@ b.silver{color:var(--silver)}
 }
 
 /* ============================================================
-   FINAL RECKONING
+   SUNSET WIN CHECK
    ============================================================ */
 .final{margin-top:14px;border:1px solid var(--gold-line);border-radius:9px;background:rgba(201,164,55,.06);padding:9px 13px}
 .final-title{text-align:center;font:700 12px Cinzel,serif;letter-spacing:2px;color:var(--gold-bright);margin-bottom:5px}
@@ -282,8 +282,6 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="rail-pill"><span class="rail-name">Shadows</span><span class="rail-sub">Production</span></div>
       <span class="rail-arrow">&rarr;</span>
       <div class="rail-pill"><span class="rail-name">The Hustle</span><span class="rail-sub">Action Cycle</span></div>
-      <span class="rail-arrow">&rarr;</span>
-      <div class="rail-pill"><span class="rail-name">Reckoning</span><span class="rail-sub">Cleanup</span></div>
     </div>
 
     <!-- PHASE 1 -->
@@ -300,7 +298,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step">
       <span class="step-num">2</span>
       <div class="step-label">The Blowback</div>
-      <div class="step-body">Leftover Red + Mash. Matching Stills <b>kill</b> by Muscle Ratio, Boss first.</div>
+      <div class="step-body">Leftover Red + Mash. Matching Stills <b>kill</b> by Muscle Ratio, Runners first.</div>
     </div>
     <div class="step">
       <span class="step-num">3</span>
@@ -310,7 +308,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="step step--end">
       <span class="step-num">4</span>
       <div class="step-label">Morning Fix</div>
-      <div class="step-body"><span class="sub"><b>Supply:</b> <b>Harbormaster</b> names any face (1&ndash;6), else roll. Sets <b>tomorrow's Mash</b>.</span><span class="sub"><b>Demand:</b> <b>Night Mayor</b> may <b>place</b> a Hotspot Token <img class="icon" src="Art/Icons/Gin.svg" alt="Hotspot"> from the Supply in a Borough with none, or <b>move</b> one within its Borough. Unpadlocked Speakeasies only.</span></div>
+      <div class="step-body"><span class="sub"><b>Set tomorrow's Mash:</b> The player with the most <b>Docks</b> names any face (1&ndash;6).</span><span class="sub">If tied for the lead, <b>roll</b> the Mash die.</span></div>
     </div>
 
     <!-- PHASE 2 -->
@@ -335,26 +333,9 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="step-body"><span class="sub">The free Play that ends your Day, made on your turn.</span><span class="sub">Each unspent <b>Ledger</b> marker cashes for <b>$100</b>, the <b>Collect</b> rate, all at once.</span><span class="sub">Clear Ledger to Reserves, then take the lowest token for tomorrow.</span></div>
     </div>
 
-    <!-- PHASE 3 -->
-    <div class="sec">
-      <span class="sec-name">Reckoning</span>
-      <span class="sec-kicker">Resolve simultaneously</span>
-      <span class="sec-rule"></span>
-    </div>
-    <div class="step">
-      <span class="step-num">1</span>
-      <div class="step-label">The Sweep</div>
-      <div class="step-body">Trim every District to <b>5 Mobsters</b>. Sicilians ignore this.</div>
-    </div>
-    <div class="step step--end">
-      <span class="step-num">2</span>
-      <div class="step-label">Stake Your Claim</div>
-      <div class="step-body"><span class="sub">Re-count <b>Ward Boss</b>, <b>Harbormaster</b>, <b>Night Mayor</b>.</span><span class="sub">Sole leader keeps it; a tie or empty returns it to Supply.</span></div>
-    </div>
-
     <div class="final">
-      <div class="final-title">FINAL RECKONING</div>
-      <div class="final-body"><span class="sub"><b>10 Influence</b> + <b>10+ Respect</b> + <b>Solvent</b> (no unpaid <b>Mark</b>) ends the game.</span><span class="sub"><b>Respect:</b> what your completed <b>Jobs</b> pay, less <b>2</b> for the <b>Rat</b> and <b>1</b> per <b>Welsher</b>.</span><span class="sub"><b>Tied?</b> The most <b>Respect</b> wins, then the fattest bankroll (<b>Cash</b> plus <b>Loose Change</b>).</span><span class="sub">Otherwise swap to tomorrow's set and begin the next Day.</span></div>
+      <div class="final-title">SUNSET WIN CHECK</div>
+      <div class="final-body"><span class="sub">When the final player Lays Low: <b>10 Influence</b> + <b>10+ Respect</b> + <b>Solvent</b> (no unpaid <b>Mark</b>) ends the game.</span><span class="sub"><b>Respect:</b> completed <b>Jobs</b>, less <b>2</b> for the <b>Rat</b> and <b>1</b> per <b>Welsher</b>.</span><span class="sub"><b>Tied?</b> The most <b>Respect</b> wins, then the fattest bankroll (<b>Cash</b> plus <b>Loose Change</b>).</span><span class="sub">Otherwise flip today's Turn Tokens and begin the next Day.</span></div>
     </div>
   </div>
 
@@ -395,7 +376,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Sugar Hill</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">The Cotton Club</span></td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Cotton Club (High Society)</span></td>
             <td class="lg-still">7</td>
             <td class="lg-press">6</td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -440,7 +421,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Morris Park</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">The Jockey Club</span></td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Jockey Club (High Society)</span></td>
             <td class="lg-still">7</td>
             <td class="lg-press">6</td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -478,7 +459,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Richmond Hill</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">The Triangle</span></td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Triangle (High Society)</span></td>
             <td class="lg-still">7</td>
             <td class="lg-press">6</td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -523,7 +504,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Williamsburg</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">The Havemeyer</span></td>
+            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Havemeyer (High Society)</span></td>
             <td class="lg-still">7</td>
             <td class="lg-press">6</td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -580,7 +561,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="legend">
       <div class="legend-row">
         <span class="legend-item"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">Speakeasy: Moonshine $300, Rum $500</span></span>
-        <span class="legend-item"><span class="z-hs"><img class="zi" src="Art/Icons/Gin.svg" alt="Hotspot"> Hotspot: 1 Kickback/barrel</span></span>
+        <span class="legend-item"><span class="z-hs"><img class="zi" src="Art/Icons/Crown.svg" alt="High Society"> High Society: 1 Kickback/barrel</span></span>
         <span class="legend-item"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></span>
         <span class="legend-item"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></span>
       </div>
