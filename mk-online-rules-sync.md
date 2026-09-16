@@ -1,5 +1,11 @@
 # mk-online: rules sync backlog
 
+> **2026-09-16 (v0.9.9): the tabletop target changed again.** The core win condition is now
+> **20 Respect and Solvent status**; reaching **10 Influence** claims a
+> **Commission Seat worth 10 Respect**; Shylock's Marks bar victory until cleared; and the
+> Blood Oath target is **40 combined Respect** with both partners Solvent. `mk-online` still
+> does not implement the tabletop v0.9 rules.
+
 > **2026-09-10 (v0.9.7): the win condition changed.** Borough Deeds are cut, Titles pay no
 > Respect, Respect is Jobs only at a 10-point crown (Rat 2, Welsher 1, Blood Oath 20), and
 > Bribe costs $2,000 / $3,000 / $4,000 / $5,000 for the 7th to 10th markers. `mk-online` does

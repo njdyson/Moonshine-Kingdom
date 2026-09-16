@@ -1,19 +1,20 @@
 # The rules streamline: shipped core, open remainder
 
-**Status: the core shipped in v0.9.7 (2026-09-10).** Borough Deeds are cut, Titles pay no
-Respect, Respect is Jobs only at a 10-point crown, the Rat is 2 Respect, the Blood Oath is
-20 combined, Titles still move at Stake Your Claim, and the Bribe ladder escalates
-($2,000 / $3,000 / $4,000 / $5,000). Every player-facing component reads that way.
+**Status: the core is current in v0.9.9 (2026-09-16).** Borough Deeds, Titles, Hotspots, and
+Sweep are cut. A Kingpin wins with **20 Respect and Solvency**. Completed
+Jobs provide 1, 3, or 5; reaching 10 Influence immediately claims a 10-Respect Commission Seat;
+the Rat costs 2 and each Welsher costs 1. A Kingpin must also be Solvent: an unpaid Shylock's
+Mark bars victory. The Blood Oath is **40 combined Respect**, and both partners must be Solvent.
+The Bribe ladder escalates ($2,000 / $3,000 / $4,000 / $5,000).
 
-**Still open, and not to be implemented without Nick asking:** the Sweep (The Commissioner's
-Ear) and the 2-player North vs South mode. Borough drafting shipped too: Turn Tokens are
+The 2-player North vs South mode remains open. Borough drafting shipped too: Turn Tokens are
 dealt before turf is established, and home Boroughs are picked in reverse Turn Order, the
 same order The Offers already use.
 
 The rest of this file is the record of the discussion as it stood before the decision, kept
 so the reasoning survives. Where it says "if it ships", it shipped, except for the Sweep.
 
-Last worked: 2026-09-10.
+Last worked: 2026-09-16.
 
 ## The direction, as it stood at the end of the session
 

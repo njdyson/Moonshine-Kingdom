@@ -67,36 +67,20 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
 
-## Respect is Jobs only, and the crown needs 10
+## The crown needs 20 Respect and Solvency
 
-Since v0.9.7 (2026-09-10) there are **no Borough Deeds** in the game and **Titles pay no
-Respect**. The three Titles (Ward Boss, Harbormaster, Night Mayor) keep their powers and
-are still claimed at Stake Your Claim; they are worth nothing at the count. Respect is the
-pile of completed Job cards in front of you, less **2** for the Rat Card and **1** per
-Welsher, and the win is **10 Influence, 10 Respect, Solvent** (no unpaid Shylock's Mark). The third
-condition was called "honor" until 2026-09-10; it was renamed because honor read as if broken
-deals and the Rat bore on it, and they do not (both are Respect bills). Keep "honor" for the
-Volstead Act, where it genuinely covers both the Rat and debt. The Blood Oath target is
-**20** combined.
-
-The Deeds went for the reason Public Enemy No. 1 went in v0.8: they paid a second time for
-turf that Jobs already require you to hold. Do not re-add either, and do not give a Title a
-Respect value. Home turf at setup is now picked in reverse Turn Order (Turn Tokens are dealt
-first, then the highest token picks an empty mainland Borough first), not dealt.
+There are no Borough Deeds, Titles, or other board-scoring cards. Respect is completed Jobs,
+plus a **10-Respect Commission Seat** claimed the instant a player reaches **10 Influence**,
+less **2** for the Rat Card and **1** per Welsher. A Kingpin wins at Sunset with **20 Respect**
+and **Solvent** status. An unpaid Shylock's Mark does not change Respect, but it bars victory
+until it is cleared. The Volstead Act remains an intentional exception: it does not track Respect
+and has its own honor rule.
 
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
-never a flat price. The 7th and 8th are the tempo markers, the 10th is the crown purchase,
-and the rising price is what keeps a leader exposed now that nothing on the board can take
-Respect off him. It is printed in the Rulebook's Bribe Play and Influence section, the
-Playbooks' Bribe entry, and the Kingpin's Guide's Bribe and Three Clocks passages. The
-Ledger boards stack Reserves, so the price is not printed there.
-
-Five Jobs that named the Deed now name the count directly ("a Borough where you Control the
-most Districts", "where a rival Controls more Districts than you"). Any wording that brings
-back "15 Respect", "2 Respect per Title", "16", "14", a Deed, or "$2,500" is a regression.
-
-`v0-8-changes.md` still argues the old 14/15 arithmetic at length. It is a dated record of
-why Public Enemy was cut, not a statement of the current numbers.
+never a flat price. The 7th and 8th are tempo markers; the 10th claims the Commission Seat.
+In the Blood Oath, each Alliance races to **40 combined Respect** and both partners must be
+Solvent. The Rulebook, Town Planner,
+Playbooks, Cards sheet, Federal Crackdown Tracker, and Kingpin's Guide must agree on these values.
 
 ## The barrel sets the price, the address sets the Kickback
 
