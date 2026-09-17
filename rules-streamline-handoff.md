@@ -7,14 +7,20 @@ the Rat costs 2 and each Welsher costs 1. A Kingpin must also be Solvent: an unp
 Mark bars victory. The Blood Oath is **40 combined Respect**, and both partners must be Solvent.
 The Bribe ladder escalates ($2,000 / $3,000 / $4,000 / $5,000).
 
-The 2-player North vs South mode remains open. Borough drafting shipped too: Turn Tokens are
-dealt before turf is established, and home Boroughs are picked in reverse Turn Order, the
-same order The Offers already use.
+The Sweep shipped as a plain cut: there is no universal Sweep and no Commissioner's Ear. The
+"Still open" list below and the Sweep section that follows it are the record of that decision,
+not a live question, with one exception worth carrying forward: the fortress warning. With no
+Sweep anywhere, a 7-man garrison is legal in every District. That is a playtest question now,
+not a design one. Run `node tools/sim_deed_sweep.js` on "no cap" before changing anything.
+
+The 2-player North vs South mode remains the one genuinely open thread. Borough drafting
+shipped too: Turn Tokens are dealt before turf is established, and home Boroughs are picked in
+reverse Turn Order, the same order The Offers already use.
 
 The rest of this file is the record of the discussion as it stood before the decision, kept
 so the reasoning survives. Where it says "if it ships", it shipped, except for the Sweep.
 
-Last worked: 2026-09-16.
+Last worked: 2026-09-17.
 
 ## The direction, as it stood at the end of the session
 
