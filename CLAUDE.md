@@ -128,11 +128,11 @@ setup. Two threads are live:
   tool to reach for. The Commissioner's Ear (a Sicilian-called Sweep) was the alternative and
   was not implemented. Playtest before adding anything back.
 - **A 2-player mode.** `The Volstead Act` is already a 2-player variant with no Jobs and no
-  Respect, shipped as a component and marked unplaytested. A North vs South split with a
-  four-Ward objective is proposed in `two-player-handoff.md`, along with stacked Heat markers.
-  Read both before touching either: the open question is whether the new mode folds into
-  Volstead or ships beside it, and two competing 2-player modes in one box is worse than either
-  alone.
+  Respect, shipped as a component and marked unplaytested. `two-player-handoff.md` proposes a
+  North vs South split on top of it, where two rules are settled: **hold all four Wards at a
+  Sunset to win**, and **every Heat costs two stacked markers** on the Heat Track. Read both
+  before touching either. The open question is whether the new mode folds into Volstead or ships
+  beside it, and two competing 2-player modes in one box is worse than either alone.
 
 One more to watch at the table rather than in the files: the Bribe path pays twice. It pays 10
 Respect, and because **Plays = Influence minus staked minus Heat, capped at the Ledger's 5

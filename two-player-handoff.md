@@ -12,6 +12,9 @@ no Jobs Market. What is left is brewing, selling, moving muscle and holding grou
 economic and positional core of the game with the politics stripped out. The target feel is
 chess: one objective, perfect information, and every strong move creating a weakness.
 
+Two rules are settled. **Hold all four Wards at a Sunset and you win.** **Every Heat costs two
+stacked markers** on the Heat Track. Everything else in this file is proposal or open question.
+
 ## Reconcile with The Volstead Act first
 
 **A 2-player variant already ships in this repo**, and the first draft of this file did not
@@ -148,51 +151,50 @@ mutually Water Connected, the Dock network is the road to every Ward on the boar
 war is not a war away from the Docks. It is the same war at a different range, and it gives the
 Docks a second reason to matter beyond the Mash.
 
-## The influence sink, and why the stake belongs on the Ward
+## The influence sink is stacked Heat, and nothing else
 
 Cutting Jobs removes the game's only real Influence sink. Plays cycle their markers back the same
-Day, and Heat only locks a marker until the next Raid, so a player at 10 Influence can absorb four
-Heat markers and still run six Plays, which is where both players start. Being loud becomes close
-to free, and at two players the Scatter is survivable because Cornered almost never triggers with
-only one rival's pieces blocking exits.
+Day, so with Jobs gone the Heat Track is the only thing that takes a marker out of circulation.
 
-**The fix is to put the stake on the objective.** To count a Ward toward victory you must stake
-Influence markers on it, locked while you claim it, exactly as a Job stake locks markers today.
-The Rulebook already has the language for this: "The Stake Is Rent, Paid in Plays."
+**Stacked Heat carries that load alone**, and the win condition carries no cost of its own: hold
+the four Wards at a Sunset and you have won. (A stake locking Influence on each claimed Ward was
+considered and cut for complexity. Recorded so it is not reopened without a reason.) The simple
+shape gives the Bribe ladder a legible job in this mode: since **Plays are capped at the Ledger's 5 slots**, the markers above your fifth exist
+only to absorb Heat, and at two markers a Heat that means **Bribing past the fifth marker buys
+exactly two loud Plays a Day**. Nothing else. That is the cleanest statement the Bribe ladder has
+ever had.
 
-That single rule does four jobs at once:
+### The hole this leaves: the last-Play dash
 
-- It restores the sink that Jobs provided, in the same currency and with the same feel.
-- It means the player closest to winning has the fewest Plays available to defend the win. The
-  winning attack overextends you, which is the tension the mode is for.
-- It puts Ward stakes and Heat markers in competition for the same pool, so a loud player cannot
-  also be a claiming player.
-- It gives the win condition a cost, so holding four Wards for one Sunset is a real feat rather
-  than a matter of walking in.
+Control needs only one piece. "You Control a District if you have a Mobster or a Safehouse
+standing on it," settled at the end of each Play. And the Day ends when the last player Lays Low,
+so a player holding Plays in reserve gets unanswered moves after their rival has stepped off the
+street.
 
-The stake size is the mode's biggest tuning dial:
+Put together: a player who banks Plays can spend their last few walking lone Runners onto the
+remaining Wards and hit the Sunset check before the other player can respond. The Kingpin's Guide
+already names this loop in the 4-player game, calling the boss who stays on the street longest
+the boss with the most Ledger markers left to burn. With the Wards as the only win condition, that
+loop decides the game.
 
-| Stake per Ward | Markers locked at 4 Wards | Plays left at 6 Influence | at 10 Influence |
-| --- | --- | --- | --- |
-| 1 | 4 | 2 | 6 |
-| 2 | 8 | not reachable | 2 |
-
-At 2 per Ward the objective cannot be completed without Bribing first, which ties the turf win to
-the economy hard. At 1 per Ward it is reachable on a lean build but crippling to hold. **Start at
-1 and test.**
+Stacked Heat pushes against it, since a loud player has fewer Plays to bank, so the dash requires
+having been quiet. That may be enough. If it is not, the one-line fix that costs no bookkeeping is
+to require the four Wards at **two consecutive Sunsets**: the board already shows whether you held
+them yesterday, and the rival gets a full Day to break the position. It turns a touch into a
+consolidation, which is the more chess-like reading of the same objective.
 
 ## Heat: stacked markers
 
-The proposal on the table is that each Heat costs **two stacked markers** on the Heat Track, so
-the 5-space track absorbs 10 markers and the Raid still triggers on the fifth Heat. The frequency
-of Raids is unchanged; the tempo cost of being loud doubles.
+**Settled: each Heat costs two stacked markers** on the Heat Track. The 5-space track absorbs 10
+markers and the Raid still triggers on the fifth Heat, so the frequency of Raids is unchanged and
+the tempo cost of being loud doubles.
 
 The arithmetic that matters is the Ledger's cap. The Kingpin's Guide states it as **Plays =
 Influence minus staked minus Heat, capped at 5 slots**, and calls the fifth slot the only cliff:
 markers above your fifth absorb Heat for free. So the real question is not how many markers the
 track holds, it is how much slack a player has above their fifth slot.
 
-Plays available, by Heat events taken, with no Ward stakes:
+Plays available, by Heat events taken:
 
 | Influence | Slack above slot 5 | Today | 1 Heat | 2 Heat | 3 Heat | 4 Heat |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -217,10 +219,9 @@ Two things to weigh against it:
   them, but it makes an on-demand Raid trigger more valuable, which is a second argument for
   keeping the Rat.
 
-It combines well with the Ward stake. At 10 Influence holding all four Wards at 1 marker each,
-the player has one free loud Play and then falls off a cliff: 5 Plays at no Heat, 4 at one Heat,
-2 at two. The player sitting on the win condition cannot afford to make noise, which is the
-tension the mode is for.
+What it does not do is take the maxed player's slack away entirely. At 10 Influence two Heats
+still cost nothing, so a third of the fuse burns free. That is the price of keeping the rule to
+one line, and it is a large improvement on the current rule, where the whole fuse burns free.
 
 **The alternative worth testing against it**, if the regressive behaviour shows up at the table:
 leave Heat at one marker and have **each marker on the track lower your Ledger cap by one** for
@@ -314,10 +315,12 @@ it is the only thing that punishes overreach in cash.
 
 1. **Volstead or a new variant.** Fold this into The Volstead Act or ship it beside it. Decide
    this before anything is drafted into a component.
-2. **Stacked Heat, and whether it is needed alongside the Ward stake.** They are two answers to
-   the same problem, and together they may over-lock. Test the Ward stake alone first, then add
-   stacking.
-3. **The Ward stake size.** 1 or 2. Much else rests on this.
+2. **The last-Play dash.** Control costs one piece and the Day ends when the last player Lays
+   Low, so banked Plays can win the game unanswered. Does stacked Heat suppress it enough, or
+   does the win need the four Wards at two consecutive Sunsets?
+3. **Whether stacked Heat is a 2-player rule or a core rule.** At two players it replaces the
+   Jobs sink, which is a clear job. In the 4-player game Job stakes already lock markers, so
+   doubling Heat on top may over-tighten. The arithmetic above is the place to start.
 4. **The police asymmetry.** Both South Wards are 1 Raid from a Squad and Five Points is 3. Does
    that make the South unplayable, or does it make the South Wards the crux the whole game turns
    on?
