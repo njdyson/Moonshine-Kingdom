@@ -1,7 +1,22 @@
 # The 2-player mode: North vs South
 
-**Status: proposal, not implemented.** Nothing in the player-facing set has changed. This file
-records the shape the mode is taking and the map data behind it, so the reasoning survives.
+**Status: parked, 2026-09-17.** Nothing in the player-facing set has changed, and nothing here
+should be built without Nick asking.
+
+The reason it is parked and not closed: Moonshine Kingdom is designed to be played at three or
+four, which is how it will actually be played. A 2-player mode is a publishing consideration, and
+publishing is not being pursued, certainly not before the game has been played and enjoyed at a
+full table. So the mode is an option worth keeping available, not a gap worth filling. The cost of
+pursuing it now is not the design work, it is the steady pull a parallel mode exerts on the core
+rules, paid against a benefit that may never be collected.
+
+The file stays because the expensive part is done. The map analysis below (the still-number split,
+the three land crossings, the Ward distance matrix, each Ward's Dock gateway, the police raid
+counts) is measured from the district graph and does not go stale. If a 2-player mode is ever
+wanted, start from The Volstead Act, which already ships, and read this for the map.
+
+Two findings from this work were promoted to the 3-4 player game instead, and live in `CLAUDE.md`:
+stacked Heat markers, and the fact that a Ward has no job left.
 
 Last worked: 2026-09-17.
 

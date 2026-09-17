@@ -127,19 +127,23 @@ setup. Two threads are live:
   Muscle Ratio economics assume 5 to a boiler. `tools/sim_deed_sweep.js` models it and is the
   tool to reach for. The Commissioner's Ear (a Sicilian-called Sweep) was the alternative and
   was not implemented. Playtest before adding anything back.
-- **A 2-player mode.** `The Volstead Act` is already a 2-player variant with no Jobs and no
-  Respect, shipped as a component and marked unplaytested. `two-player-handoff.md` proposes a
-  North vs South split on top of it, where two rules are settled: **hold all four Wards at a
-  Sunset to win**, and **every Heat costs two stacked markers** on the Heat Track. Read both
-  before touching either. The open question is whether the new mode folds into Volstead or ships
-  beside it, and two competing 2-player modes in one box is worse than either alone.
+- **Heat is free above the fifth marker.** **Plays = Influence minus staked minus Heat, capped at
+  the Ledger's 5 slots**, and the Kingpin's Guide calls the fifth slot the only cliff. So a player
+  at 10 Influence can absorb every marker the Heat Track holds and still make a full five Plays:
+  the 9th and 10th markers buy Respect and immunity to both of the game's brakes at once. The
+  candidate fix is **two stacked markers per Heat**, which keeps the fuse at five Heats and
+  doubles what being loud costs. Weigh it at three and four players, where Job stakes already
+  compete for the same markers. The number to watch at the table is what fraction of games end
+  with a Commission Seat claimed.
+- **A Ward has no job.** The Rulebook names Wards four times: where you set up, and where the
+  Irish Peddle. For the other three mobs a Ward is a plain District with a Still, yet the map
+  blurb promises "every one is a crossroads worth holding", which is the cut Ward Boss Title
+  still talking. Either give a Ward something to do or stop promising that it does.
 
-One more to watch at the table rather than in the files: the Bribe path pays twice. It pays 10
-Respect, and because **Plays = Influence minus staked minus Heat, capped at the Ledger's 5
-slots**, the markers above your fifth stake Jobs and absorb Heat for free. The Kingpin's Guide
-calls the fifth slot the only cliff. So the 9th and 10th markers buy Respect and immunity to the
-game's two brakes at the same time. The number that answers it is what fraction of games end
-with a Commission Seat claimed.
+**Parked: a 2-player mode.** The game is designed and will be played at three or four. `The
+Volstead Act` ships as a 2-player variant and is unplaytested; `two-player-handoff.md` records a
+North vs South proposal, why it was parked rather than closed, and map analysis that does not go
+stale. Do not build on either without Nick asking.
 
 ## What not to edit
 
