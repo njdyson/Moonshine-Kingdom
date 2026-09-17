@@ -127,14 +127,16 @@ setup. Two threads are live:
   Muscle Ratio economics assume 5 to a boiler. `tools/sim_deed_sweep.js` models it and is the
   tool to reach for. The Commissioner's Ear (a Sicilian-called Sweep) was the alternative and
   was not implemented. Playtest before adding anything back.
-- **Heat is free above the fifth marker.** **Plays = Influence minus staked minus Heat, capped at
-  the Ledger's 5 slots**, and the Kingpin's Guide calls the fifth slot the only cliff. So a player
-  at 10 Influence can absorb every marker the Heat Track holds and still make a full five Plays:
-  the 9th and 10th markers buy Respect and immunity to both of the game's brakes at once. The
-  candidate fix is **two stacked markers per Heat**, which keeps the fuse at five Heats and
-  doubles what being loud costs. Weigh it at three and four players, where Job stakes already
-  compete for the same markers. The number to watch at the table is what fraction of games end
-  with a Commission Seat claimed.
+- **Stakes and Heat share one pool of slack.** **Plays = Influence minus staked minus Heat,
+  capped at the Ledger's 5 slots**, so a player's slack is **Influence minus 5**, and Job stakes
+  and Heat markers eat it together. At 6 Influence the slack is 1 and everything bites at once.
+  At 10 it is 5: a player holding no stake absorbs every marker the Heat Track holds and still
+  makes a full five Plays, while the same player holding a 5-Respect Job (3 markers) has 2 left
+  and feels the third Heat. So Heat is free at the top of the ladder only for a crew between
+  Jobs, which is exactly the crew that has banked its Respect and is waiting on a Sunset. The
+  candidate fix is **two stacked markers per Heat**, keeping the fuse at five Heats and doubling
+  what noise costs. The number to watch at the table is what fraction of games end with a
+  Commission Seat claimed.
 - **A Ward has no job.** The Rulebook names Wards four times: where you set up, and where the
   Irish Peddle. For the other three mobs a Ward is a plain District with a Still, yet the map
   blurb promises "every one is a crossroads worth holding", which is the cut Ward Boss Title
