@@ -127,12 +127,19 @@ setup. Two threads are live:
   Muscle Ratio economics assume 5 to a boiler. `tools/sim_deed_sweep.js` models it and is the
   tool to reach for. The Commissioner's Ear (a Sicilian-called Sweep) was the alternative and
   was not implemented. Playtest before adding anything back.
-- **A 2-player mode.** North vs South, Staten Island closed. Not designed, not implemented.
-  The Rulebook today has only the "short table" Turn Token note.
+- **A 2-player mode.** `The Volstead Act` is already a 2-player variant with no Jobs and no
+  Respect, shipped as a component and marked unplaytested. A North vs South split with a
+  four-Ward objective is proposed in `two-player-handoff.md`, along with stacked Heat markers.
+  Read both before touching either: the open question is whether the new mode folds into
+  Volstead or ships beside it, and two competing 2-player modes in one box is worse than either
+  alone.
 
-One more to watch at the table rather than in the files: the Bribe path pays twice, 10 Respect
-and a jump from 6 Plays a Day to 10, while Job stakes lock markers and cost Plays. The number
-that answers it is what fraction of games end with a Commission Seat claimed.
+One more to watch at the table rather than in the files: the Bribe path pays twice. It pays 10
+Respect, and because **Plays = Influence minus staked minus Heat, capped at the Ledger's 5
+slots**, the markers above your fifth stake Jobs and absorb Heat for free. The Kingpin's Guide
+calls the fifth slot the only cliff. So the 9th and 10th markers buy Respect and immunity to the
+game's two brakes at the same time. The number that answers it is what fraction of games end
+with a Commission Seat claimed.
 
 ## What not to edit
 

@@ -12,6 +12,40 @@ no Jobs Market. What is left is brewing, selling, moving muscle and holding grou
 economic and positional core of the game with the politics stripped out. The target feel is
 chess: one objective, perfect information, and every strong move creating a weakness.
 
+## Reconcile with The Volstead Act first
+
+**A 2-player variant already ships in this repo**, and the first draft of this file did not
+account for it. `The Volstead Act v0.9.html` is a 2-player prequel that already does most of the
+scaffolding proposed here:
+
+| | The Volstead Act | This proposal |
+| --- | --- | --- |
+| Players | 2 | 2 |
+| Jobs and Respect | cut, The Offers skipped | cut, The Offers skipped |
+| Map | standard setup, one home Borough each, empty half is the point | North vs South, two Boroughs each, Staten closed |
+| The Mash | most Docks sets it, tied lead rolls | same, which is now the core rule |
+| Clock | Federal Crackdown Tracker, ends at space 10 | same |
+| Heat | 3-space fuse, Greed Tax at 3+, Extort unavailable | open, see below |
+| The Rat | kept; the Card bars the crown outright in place of 2 Respect | proposed cut |
+| Win | all 10 Influence with honor, or richest honest Kingpin at the Count | all four Wards at a Sunset |
+
+So the Crackdown clock, the no-Jobs no-Respect frame and the Dock-sets-the-Mash rule are not new
+ideas here, they are Volstead's, and it also solves a problem this file left open: with no Respect
+to dock, Volstead makes the Rat Card **bar the crown outright**, exactly as an unpaid Mark does.
+That is a better answer than cutting the Rat, and it argues for keeping the Rat Play, which also
+preserves an on-demand Raid trigger for opening the High Society Venues.
+
+Volstead is marked unplaytested and was deliberately pulled from the core book. Two genuinely new
+things remain in this proposal: the **North vs South split**, which Volstead does not have, and
+the **Ward objective**, which is a real improvement on Volstead's "richest honest Kingpin", since
+a bankroll count is the weakest possible ending for a positional game.
+
+**The decision to make before any of this is drafted into a component:** is the North/South mode a
+second edition of The Volstead Act, or a separate variant sitting beside it? Two competing
+2-player modes in one box is worse than either alone. The recommendation is to fold this into
+Volstead and keep its era framing, its honor rule and its Rat ruling, and replace its map handling
+and its win conditions.
+
 ## The halves
 
 **North: Manhattan and The Bronx. South: Queens and Brooklyn. Staten Island is closed** and is
@@ -147,6 +181,59 @@ At 2 per Ward the objective cannot be completed without Bribing first, which tie
 the economy hard. At 1 per Ward it is reachable on a lean build but crippling to hold. **Start at
 1 and test.**
 
+## Heat: stacked markers
+
+The proposal on the table is that each Heat costs **two stacked markers** on the Heat Track, so
+the 5-space track absorbs 10 markers and the Raid still triggers on the fifth Heat. The frequency
+of Raids is unchanged; the tempo cost of being loud doubles.
+
+The arithmetic that matters is the Ledger's cap. The Kingpin's Guide states it as **Plays =
+Influence minus staked minus Heat, capped at 5 slots**, and calls the fifth slot the only cliff:
+markers above your fifth absorb Heat for free. So the real question is not how many markers the
+track holds, it is how much slack a player has above their fifth slot.
+
+Plays available, by Heat events taken, with no Ward stakes:
+
+| Influence | Slack above slot 5 | Today | 1 Heat | 2 Heat | 3 Heat | 4 Heat |
+| --- | --- | --- | --- | --- | --- | --- |
+| 6, one marker at 1 each | 1 | 5 | 5 | 4 | 3 | 2 |
+| 10, one marker at 1 each | 5 | 5 | 5 | 5 | 5 | 5 |
+| 6, two markers at 2 each | 1 | 5 | 4 | 2 | 0 | n/a |
+| 10, two markers at 2 each | 5 | 5 | 5 | 5 | 4 | 2 |
+
+The third row down is the finding. **Under the current rule a player at 10 Influence never feels
+Heat at all**, because four locked markers still leave six free against a five-slot cap. The
+doubling is the change that makes Heat bite a maxed player, from their third loud Play onward. It
+is aimed exactly at the problem.
+
+Two things to weigh against it:
+
+- **It is regressive.** A flat cost against a variable pool bites the poorer player twice as
+  hard: the first Heat costs a 6-marker player a fifth of their Day and a 10-marker player
+  nothing. That is an existing property of the Heat rule, and doubling doubles it. It runs
+  against using Heat as a brake on a leader, since the leader is usually the loud one.
+- **Nobody under 10 Influence can fill the track alone.** Three Heats is six markers, which is a
+  6-marker player's entire pool. The track is shared, so two players still reach ten between
+  them, but it makes an on-demand Raid trigger more valuable, which is a second argument for
+  keeping the Rat.
+
+It combines well with the Ward stake. At 10 Influence holding all four Wards at 1 marker each,
+the player has one free loud Play and then falls off a cliff: 5 Plays at no Heat, 4 at one Heat,
+2 at two. The player sitting on the win condition cannot afford to make noise, which is the
+tension the mode is for.
+
+**The alternative worth testing against it**, if the regressive behaviour shows up at the table:
+leave Heat at one marker and have **each marker on the track lower your Ledger cap by one** for
+the Day. Cap 5 minus Heat bites every player identically regardless of bankroll, which targets
+the stated problem more precisely, at the cost of changing what the Heat Track means rather than
+just how much it costs.
+
+Note the existing idiom. The Volstead Act already retunes Heat by **shortening the fuse** to
+three spaces, which changes Raid frequency and leaves the cost per Heat alone. Stacking is the
+orthogonal dial: same frequency, double cost. Both are available and they compose, though
+Volstead's 3-space fuse plus stacking means six markers to a Raid, which for a player at 6
+Influence blows the fuse at the exact moment they run dry.
+
 ## Heat gets its teeth back from the objective, not from a rules change
 
 No 2-player exception to the Heat track is needed. Once the Wards are the win condition, a Raid
@@ -181,26 +268,31 @@ makes the police a shared obstacle on a shared objective rather than a one-sided
 
 A single objective needs a timer, or two careful players stalemate.
 
-Use the **Federal Crackdown Tracker**, which already exists and already advances one space per
-Police Raid for the Blood Oath. In this mode, when the token reaches space 10 the game ends at
-that Sunset. The player holding the most Wards wins; then the most Districts; then the fattest
-bankroll.
+**The Volstead Act already does this**, and its wording can be lifted whole: place the Federal
+Crackdown Tracker by the Heat Track on space 1, and every Police Raid advances it one space. When
+the token reaches space 10 the game ends at that Sunset. The only change needed is what the Count
+measures: the player holding the most Wards wins, then the most Districts, then the fattest
+bankroll, in place of Volstead's richest honest Kingpin.
 
-This is the second half of the answer on Heat. Every Raid you cause shortens the game. A player
-ahead on Wards can burn the clock by being loud, and a player behind has to stay quiet and build.
-Heat stops being a local tax and becomes a strategic lever, with no new component and no change
-to how Heat works.
+This is the second half of the answer on Heat, and Volstead already states the argument: the
+briber keeps the streets quiet and stalls the count, the profiteer sells hard and drags the Feds a
+step closer. A player ahead on Wards can burn the clock by being loud, and a player behind has to
+stay quiet and build. Heat stops being a local tax and becomes a strategic lever, with no new
+component.
 
 ## What else leaves the box at two players
 
 - **Jobs**, the Jobs Market, and **The Offers**. Shadows becomes three steps: The Brew, The
   Blowback, The Harbormaster.
-- **The Rat Play and the Rat Card.** Its cost is 2 Respect, which no longer exists, and it is a
-  political card in a mode with no politics. Removing it leaves the Heat Track as the only Raid
-  trigger, which makes the timing of every Raid a deterministic consequence of how loudly the
-  players have been working. That also fixes when the High Society Venues open.
 - **Welsher cards and the binding handshake.** No third party to deal against.
 - **Commission Seats** and the Blood Oath.
+
+**The Rat Play stays**, reversing this file's first draft. It was proposed for cutting because its
+2 Respect cost no longer exists, but The Volstead Act already solves that: the Card **bars the
+crown outright**, exactly as an unpaid Shylock's Mark does, and it leaves you only when a rival
+Rats and takes it off you. Keeping it also keeps an on-demand Raid trigger, which matters for
+opening the High Society Venues and for advancing the clock, and it matters more under stacked
+Heat, where no player below 10 Influence can fill the track alone.
 
 Shylock and Solvency stay. Debt is the economic pressure valve, and with the Commission Seat gone
 it is the only thing that punishes overreach in cash.
@@ -220,20 +312,26 @@ it is the only thing that punishes overreach in cash.
 
 ## Open questions, in the order they should be tested
 
-1. **The Ward stake size.** 1 or 2. Everything else rests on this.
-2. **The police asymmetry.** Both South Wards are 1 Raid from a Squad and Five Points is 3. Does
+1. **Volstead or a new variant.** Fold this into The Volstead Act or ship it beside it. Decide
+   this before anything is drafted into a component.
+2. **Stacked Heat, and whether it is needed alongside the Ward stake.** They are two answers to
+   the same problem, and together they may over-lock. Test the Ward stake alone first, then add
+   stacking.
+3. **The Ward stake size.** 1 or 2. Much else rests on this.
+4. **The police asymmetry.** Both South Wards are 1 Raid from a Squad and Five Points is 3. Does
    that make the South unplayable, or does it make the South Wards the crux the whole game turns
    on?
-3. **Does a Squad-held Ward count for nobody?** Proposed yes, untested.
-4. **The clock length.** Space 10 is inherited from the Blood Oath and has no 2-player reasoning
+5. **Does a Squad-held Ward count for nobody?** Proposed yes, untested.
+6. **The clock length.** Space 10 is inherited from the Blood Oath and has no 2-player reasoning
    behind it yet.
-5. **Hunts Point.** It is 3 moves from every other Ward. Is it a fortress that decides the mode,
+7. **Hunts Point.** It is 3 moves from every other Ward. Is it a fortress that decides the mode,
    or a square nobody can ever take, which would make the win condition dead?
-6. **Whether the economy runs too hot.** Extort pays $200 per District Controlled, and a player
+8. **Whether the economy runs too hot.** Extort pays $200 per District Controlled, and a player
    holding their whole half collects $2,200 from one Play. The Kingpin's Guide's $650 to $1,100 a
    Day was estimated at four players with Job stakes locking markers. Neither assumption holds
-   here.
-7. **The fortress.** The open Sweep question from `rules-streamline-handoff.md` applies here
+   here. Note that The Volstead Act makes **Extort unavailable** for exactly this reason, and
+   tightens the Greed Tax to 3+ barrels. Both are worth inheriting.
+9. **The fortress.** The open Sweep question from `rules-streamline-handoff.md` applies here
    too, and harder: with 15 Runners and only 11 Districts to defend, a 7-man garrison on each
    Ward is affordable in a way it is not at four players. `tools/sim_deed_sweep.js` is the tool.
 
