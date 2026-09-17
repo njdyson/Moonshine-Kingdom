@@ -140,7 +140,19 @@ setup. Two threads are live:
 - **A Ward has no job.** The Rulebook names Wards four times: where you set up, and where the
   Irish Peddle. For the other three mobs a Ward is a plain District with a Still, yet the map
   blurb promises "every one is a crossroads worth holding", which is the cut Ward Boss Title
-  still talking. Either give a Ward something to do or stop promising that it does.
+  still talking. `ward-handoff.md` proposes the fix: **Rise places your Boss in any Safe Ward**,
+  which makes a Ward the Boss's seat and anchors Split the Batch to a Ward's Still. Read it before
+  reopening this. It records why Recruit-based and discount-based versions were cut, why the
+  wording must be *Safe* and not *Controlled*, and the two knock-ons: The Empty Casket narrows,
+  and the Boss gets garrisoned harder, which couples this to the fortress question above.
+
+**Undecided: the version number.** The set is in three states (v0.9.7 in the Rulebook and Guide
+titles and `index.html`, v0.9.8 in the Guide footer, v0.9.9 in the handoffs and a Cards comment).
+The shipped state is **v0.9.9** and the set should be made to agree. Note that 0.9.9 is not one
+step from 1.0: the next version is 0.9.10, so the 0.9 line has unlimited runway. What is actually
+missing is a definition of 1.0. A candidate: the first version played end to end, at a full table,
+to a win, with no rules arbitration needed mid-game. Nothing has been playtested yet, so by that
+measure 1.0 is not close.
 
 **Parked: a 2-player mode.** The game is designed and will be played at three or four. `The
 Volstead Act` ships as a 2-player variant and is unplaytested; `two-player-handoff.md` records a
