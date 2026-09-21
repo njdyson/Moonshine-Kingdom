@@ -87,7 +87,7 @@ ONES = [
     # hold" is the same glance-verifiable test Union Dues and Last One Standing use --
     # you hold the card or you don't -- rather than a Control state that changes mid-Play.
     ("The Empty Casket", "The Empty Casket.jpg", "Rise",
-     "Rise your <b>Boss</b> into a <b>Defenseless District</b> in a Borough whose <b>Deed you don&rsquo;t hold</b>.",
+     "Rise your <b>Boss</b> into a <b>Defenseless Ward</b> in a Borough where <b>you Control no other District</b>.",
      "They buried the wrong man. Ask anyone. Go on, ask."),
     # COUNTERPLAY PASS (2026-08-04). Scored diff 1 -- the easiest card in the deck by a
     # clear margin, and BLOCK 0: nobody goes to Staten, so nobody can stop you going.

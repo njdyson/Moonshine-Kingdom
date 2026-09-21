@@ -131,15 +131,10 @@ plus 1 spare, so at least one Play is always available.
 
 ---
 
-## 3. Rise
+## 3. Rise (superseded by §11)
 
-Confirmed **unchanged** in v0.9 — it keeps its flexible form: place your Boss in
-any Safe District, relocating him if he was already on the board and anointing a
-successor if he was not.
-
-The only edit is the removal of its Rat-clearing side effect (§1.2). Flavour text
-in the tabletop files was rewritten to cover both duties rather than only
-succession; mk-online has no equivalent prose to update.
+Held its flexible form through v0.9 and lost only its Rat-clearing side effect
+(§1.2). **The destination narrowed on 2026-09-21: see §11.1.**
 
 ---
 
@@ -463,6 +458,32 @@ price**, the **address sets the Kickback**.
 | 10.7 | UI | Speakeasy tooltips read "Moonshine $300, Rum $500". The Hotspot tooltip carries the Kickback, not a price. |
 | 10.8 | Jobs deck | The two Hotspot cards still fire, but only after a Night Mayor has placed a token, so any solver that assumes a Day 1 Hotspot needs the assumption removed. |
 
+## 11. The Boss (2026-09-21)
+
+Four changes that land together. They only balance as a set: the Boss gets
+harder to re-seat, cheaper to lose on the day, and load-bearing at the finish.
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 11.1 | Rise places the Boss in any **Safe District**. | **Any Safe Ward.** Five legal destinations on the map (Five Points, Hunts Point, Corona, Brownsville, Stapleton), filtered by the existing Safe test. Nothing else about the Play changes: still cost 2, still ignores adjacency, still relocates a living Boss. |
+| 11.2 | A crew with no Boss skips The Offers entirely. | **Remove.** The Offers step no longer tests for a Boss; a Bossless crew claims, walks away and passes like anyone else. |
+| 11.3 | Victory tests Respect and Solvency. | **Add a third term: a Boss on the board.** Checked at the Sunset test alongside the other two, never stored. A Bossless player is not crowned, whatever his Respect. |
+| 11.4 | Blood Oath: partners cannot attack each other. | **Remove the protection.** Partner turf is Hostile as before, and every attack Play is legal against a partner. |
+| 11.5 | Blood Oath: Jobs count deeds against any other player. | **A partner is not a rival.** `rival_*` predicates must exclude the partner, so Job progress only comes off the opposing Alliance. |
+| 11.6 | Blood Oath victory tests 40 combined and both Solvent. | **Add: the Alliance needs at least one Boss on the board.** If both partners have one, the Alliance wins and the Capo is the higher contributor. **If only one does, he wins alone**, on the combined total. |
+| 11.7 | Bots: decapitation is priced by the Offers lockout. | **Re-price.** Killing a Boss no longer denies a Job claim; it costs the victim his relay, his +1 Threat, a body in the Muscle Ratio, and the walk home from a Ward. Against a rival at or near 20 Respect it denies the crown outright, which is the highest-value attack in the game and should be scored as such. |
+
+### Notes for whoever ports this
+
+- 11.1 needs a Ward flag on the district data if one is not already there. The
+  Town Planner's Zone column is the reference: exactly one Ward per Borough.
+- 11.3 and 11.6 are the same test in two places. Write it once.
+- 11.4 and 11.5 have nothing to attach to yet: the Blood Oath does not exist in
+  the online build. Ported whenever the variant is.
+- The Empty Casket now reads "Rise your **Boss** into a **Defenseless Ward** in
+  a Borough where **you Control no other District**". It still gates on an
+  actual Boss death (§4), and its target set is now the Wards.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -554,3 +575,10 @@ price**, the **address sets the Kickback**.
       No liquor-type check on a sale. Rum pool 15 → 20. Deed tiebreak deleted. Night Mayor
       cannot move a token onto a padlocked Speakeasy. **Peddle is Moonshine only** (9.6),
       and bot Rum valuation is unconditional, not access-gated (9.8).
+- [ ] **Rise is Ward-only** (11.1): five legal destinations, existing Safe test
+- [ ] **The Offers no longer test for a Boss** (11.2)
+- [ ] **A Boss on the board is a victory term** (11.3), checked, never stored
+- [ ] **Blood Oath: partners may attack each other** (11.4), variant not built yet
+- [ ] **Blood Oath: a partner is not a rival for Jobs** (11.5), variant not built yet
+- [ ] **Blood Oath: one Boss crowns the Alliance, a lone Boss crowns the man** (11.6)
+- [ ] **Bots: re-price decapitation, and price it highest against a rival near 20** (11.7)
