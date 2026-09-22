@@ -63,7 +63,7 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, make the Sunset win check, then flip Turn Tokens if no one won.
 - Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
 - The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
-- The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel Unloaded pays a Kickback.
+- The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
 - There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
 
@@ -82,59 +82,55 @@ In the Blood Oath, each Alliance races to **40 combined Respect** and both partn
 Solvent. The Rulebook, Town Planner,
 Playbooks, Cards sheet, Federal Crackdown Tracker, and Kingpin's Guide must agree on these values.
 
-## The barrel sets the price, the address sets the Kickback
+## High Society buys Rum only; elsewhere the barrel sets the price
 
-Since 2026-09-01 the two axes are orthogonal, and keeping them apart is the whole point:
+Since 2026-09-22:
 
-- **Moonshine** sells for **$300** a barrel and **Havana Rum** for **$500**, at **any
-  Speakeasy you Control**
-- a barrel Unloaded at **The Hotspot** pays an Influence **Kickback**, whichever liquor it
-  holds. The usual limits apply: a marker in Reserves and an empty Ledger slot, else the
-  Kickback is lost
+- **Moonshine** sells for **$300** a barrel and **Havana Rum** for **$500**, at **any of
+  the eight ordinary Speakeasies you Control**
+- the **four High Society Venues buy Havana Rum and nothing else**, at $500, and every
+  barrel Unloaded there pays an Influence **Kickback**. The usual limits apply: a marker in
+  Reserves and an empty Ledger slot, else the Kickback is lost. ("The High Society joints
+  don't buy swill.")
 - the Greed Tax is unchanged, at 4+ barrels in one Play, wherever you sell
 
-This is the reverse of the 2026-08-22 arrangement, where the address set the price and Rum
-carried the Kickback. Cash now rides the cask and tempo rides the room, so the **Dock** is
-the crown that pays and the **Night Mayor** is the crown that hands out Plays.
+Why: the four High Society Venues sit on the four #7 Stills, which the Harbormaster can never
+lock out. When any barrel paid a Kickback, two 7-Mobster stacks could brew, Unload in place
+and net +4 Plays and $2,400 on a firing day, from a position rivals struggle to crack. Tying
+the Kickback to Rum makes the tempo engine a supply chain (Still, Dock, room): a daily run
+loses Plays, a batched run of about ten nets roughly +3, and the stockpile is a Raid target.
+Peak cash is unchanged, since the Rum run always existed. Barring swill from those rooms
+came next (same day): it states the room's job in one line instead of two clauses, empties
+the stack's till in place, and gives the **ordinary Speakeasy next door** a reason to be
+held and taken. Every High Society room has one adjacent (Sugar Hill to East Harlem, Morris
+Park to Fordham, Richmond Hill to Flushing, Williamsburg to Red Hook or Astoria), so the
+Moonshine is never stranded: it walks one block, or Trades up at the Dock. Numbers and reasoning are in
+`kickback-blowback-handoff.md`; `tools/sim_kickback_ledger.js` reproduces them.
 
-The one liquor-type restriction left in the game is the Irish **Peddle**, which sells
-**Moonshine only**, and **only in Wards you Control**: Speakeasy sales, The Hotspot's
-Kickback included, belong to Unload. Peddle costs 1 Play where Unload costs 2, and that
-discount is the whole card. Let it reach Speakeasies and it makes Unload a dead Play for
-Irish Moonshine. Do not "restore consistency" by opening Peddle to either liquor or to more
-addresses. (The Rulebook carried a drifted "as well as Speakeasies" until 2026-08-23;
-`mk-online-rules-sync.md` §9.6 holds the ruling.)
+Do not "restore" the old any-barrel Kickback, do not open it to Wards or to other
+Speakeasies, and do not let Moonshine back across a High Society bar. The wording that will
+creep back is "any Speakeasy you Control buys Moonshine", "every barrel Unloaded there pays
+a Kickback", "either kind", "whatever is in them", and "tempo belongs to the room". The
+Playbooks and the Town Planner carry the most compressed restatements, so they drift first,
+and the Kingpin's Guide builds strategy passages on the Kickback, so grep it for *argument*,
+not just for numbers.
 
-The exclusivity rule two revisions back ("one liquor to a room", Rum sellable only at a
-Hotspot) was deleted because it let the Night Mayor **strand** goods a rival had already paid
-three Plays for. Nothing else in the game bricks a paid-for asset. A snub now costs the
-victim tempo and never the sale: the cash is identical at every bar he Controls.
+The one other liquor-type restriction is the Irish **Peddle**, which sells **Moonshine
+only**, and **only in Wards you Control**: Speakeasy sales belong to Unload. Peddle costs 1
+Play where Unload costs 2, and that discount is the whole card. Let it reach Speakeasies and it
+makes Unload a dead Play for Irish Moonshine. Do not "restore consistency" by opening Peddle to
+either liquor or to more addresses. (`mk-online-rules-sync.md` §9.6 holds the ruling.)
 
-The wording that will creep back is "the address sets the price", "The Hotspot pays $500",
-"a standard Speakeasy pays $300", "the Kickback rides the barrel", "Rum pays its Kickback at
-any address", and any claim that the premium is worth **$200 a barrel**. All of those are now
-false. The Playbooks and the Town Planner carry the most compressed restatements, so they
-drift first, and the Kingpin's Guide builds whole strategy passages on top of the rule, so
-grep it for *argument*, not just for numbers.
+The Rum pool is **20** barrels, and Trade at a Dock (1:1 from Moonshine) is the only way Rum
+enters the game. Trade is worth **$200 a barrel** in cash, plus the Kickback if the Rum is
+poured at High Society. The Knights' free Rum on every Trade makes them the natural Kickback
+crew; watch that in playtest.
 
-The Rum pool is **20** barrels, not 15, and Trade at a Dock (1:1 from Moonshine) is still the
-only way Rum enters the game. Trade is now worth a flat **$200 a barrel**, at every address.
-
-Three knock-ons that are easy to miss:
-
-- **The four Hotspot Tokens start in the Supply**, not on the board, so a fresh game has no
-  Kickback anywhere until a **Night Mayor** is crowned and places the first one. This is
-  deliberate. Do not "fix" it by seeding the board at setup.
-- Each Morning Fix the Night Mayor does **one** thing, never both: **place** a token from the
-  Supply on an unpadlocked Speakeasy in a Borough that holds none, or **move** a token
-  already down to another unpadlocked Speakeasy **in its own Borough**. Cap is **one token
-  per mainland Borough**; Staten Island has no Speakeasy, so it never holds one. Tokens stay
-  on the board when the Night Mayor changes or the Title falls vacant.
-- A **Raid** that kicks in a District holding a token returns that token to the **Supply**
-  (it sits on the Scatter's Condemned line, beside the Safehouse and the seized Liquor).
-
-**The Hotspot breaks no ties.** It once broke Borough Deed ties; the Deeds are gone, and a
-tied Title goes to the Supply. Do not re-add a tiebreak of any kind.
+History, so nobody rebuilds it: 2026-08-22 had the address set the price and Rum carry the
+Kickback at any address; 2026-09-01 reversed that to "any barrel, only at The Hotspot"; v0.9.8
+deleted the Hotspot tokens and Titles and fixed the Kickback to the four High Society Venues.
+The rule that let the Night Mayor **strand** goods (one liquor to a room) stays dead: nothing
+in the game bricks a paid-for asset.
 
 ## Open design threads
 
@@ -148,6 +144,11 @@ touching the Sweep, the Sicilian Playbook, or the player-count setup.
 The older `deed-sweep-handoff.md` proposal (let the Sweep skip Boroughs whose Deed you hold)
 was closed by the Deeds' removal and the file deleted; its combat modelling survives in
 `tools/sim_deed_sweep.js`, which still runs and is the tool to reach for on any Sweep change.
+
+`kickback-blowback-handoff.md` (2026-09-22) holds the Rum-only Kickback (shipped the same
+day) and one still-open proposal: a Blowback shield for the Still that brewed. The shield is
+not implemented and should not be without Nick asking; read the file before touching the
+Blowback.
 
 ## What not to edit
 

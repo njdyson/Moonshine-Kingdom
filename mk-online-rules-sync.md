@@ -489,6 +489,22 @@ harder to re-seat, cheaper to lose on the day, and load-bearing at the finish.
   build that ports 11.1 and 11.3 but not 11.7 has a Boss who is only worth
   killing on the last Day.
 
+## 12. The Kickback needs Rum (2026-09-22, amends §10)
+
+The Hotspot tokens are gone (v0.9.8); the Kickback lives on the four fixed High Society
+Venues, the #7 mainland Speakeasies. It now also needs the right cask.
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 12.1 | Kickback fires once per barrel Unloaded at a High Society Venue, either liquor. | **Rum only.** Fire it once per **Rum** barrel Unloaded at a High Society Venue you Control, with the existing Reserves-and-empty-slot guard. Moonshine sold there pays $300 and fires nothing. Peddle still fires no Kickback. |
+| 12.2 | Any Speakeasy buys either liquor. | **High Society Venues buy Rum only.** Reject a Moonshine Unload at one of the four (the barrels stay in the District, the Play is illegal if it sells nothing). The eight ordinary Speakeasies are unchanged: Moonshine $300, Rum $500. |
+| 12.3 | Bots value a High Society room as a Play per barrel poured. | **Re-price.** Value a Rum barrel at $500 plus a Play when it can reach a High Society Venue the bot Controls; Moonshine there is $300 and nothing more. A Dock plus a room is now one engine: score them together, and weigh the Move, Trade, Move chain against the Kickbacks it buys (a daily run of four loses a Play; a batch of ten nets about +3). |
+| 12.4 | UI | The High Society tooltip reads "Rum only, $500, 1 Kickback per barrel". |
+| 12.5 | Bots: Moonshine brewed at a #7 sells where it stands. | **Re-route it.** Moonshine at a High Society District has to Move to an adjacent ordinary Speakeasy (Sugar Hill to East Harlem, Morris Park to Fordham, Richmond Hill to Flushing, Williamsburg to Red Hook or Astoria) or to a Dock. Holding that neighbouring bar is now worth scoring. |
+
+Why: two 7-Mobster stacks on High Society could Unload Moonshine in place for +4 Plays and
+$2,400 a firing day. 12.2 empties the till in place as well as the Ledger refill. See `kickback-blowback-handoff.md`.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
