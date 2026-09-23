@@ -37,12 +37,12 @@ Checked against the Rulebook on 2026-09-23.
   takes the card off them. So during Last Call the others have exactly two routes: **out-score**
   the leader (Jobs, a late Nod) or **disqualify** them on the night it ends.
 - **Disqualification is short-lived.** Rise is one Play (Boss into any Safe Ward), unless the table
-  holds every Ward he could use, which the Almanac now teaches (lesson 22). Square Up is
+  holds every Ward he could use, which the Almanac now teaches (lesson 23). Square Up is
   $2,000 and one Play per Mark (Beg is "one deal per visit"). A boss who has Laid Low still
   defends their turf, so a Boss killed after its owner Lays Low stays dead until tomorrow.
 - **A tiebreak already exists.** The Final Standoff: most Respect, then the fattest bankroll,
   including the loose change printed on the Playbook.
-- **The Almanac already teaches the late hit.** Lesson 34: post the bounty late, when the leader
+- **The Almanac already teaches the late hit.** Lesson 35: post the bounty late, when the leader
   has Laid Low or is too spent to Rise before the books open. Under Last Call that stops being a
   one-night trick and becomes the endgame.
 
@@ -175,7 +175,7 @@ The "first to 20 wins" wording will try to survive as reassurances, so read the 
   Empire, and the component list if dice or a card are added.
 - **Town Planner** quick reference and the **Federal Crackdown Tracker** strip (its "race for 40"
   line).
-- **The Almanac**: lessons 14, 22, 32, 33 and 34 are built on crossing 20 as the finish. Rewrite
+- **The Almanac**: lessons 14, 23, 33, 34 and 35 are built on crossing 20 as the finish. Rewrite
   the argument, not just the numbers.
 - **Cards**, if the timer is a card or a deck.
 - **`CLAUDE.md`** ("The crown needs 20 Respect and Solvency") and **`mk-online-rules-sync.md`**.

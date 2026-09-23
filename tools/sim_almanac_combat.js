@@ -42,14 +42,23 @@ for (const [ir, ib, or] of [[3, 0, 2], [5, 0, 2], [3, 1, 2], [4, 1, 3], [3, 0, 3
   console.log(`  ${who(ir, ib).padEnd(10)} vs ${or} Runners  ${a.take.padStart(6)} / ${d.take.padStart(6)}  loses ${a.lost} -> ${d.lost}`);
 }
 
-console.log("\nLesson 19. Holding with Runners alone against Boss + 4: can Ambush / spent out");
+console.log("\nLesson 19. Bide your time: five markers, Boss + 4, each Collect a volley fewer");
+for (const [label, occ] of [["Boss + 2 + Safehouse", [2, 1, 1]], ["Boss + 3 + Safehouse", [3, 1, 1]],
+                            ["3 Runners", [3, 0]], ["4 Runners", [4, 0]], ["5 Runners", [5, 0]]]) {
+  const now = fight([4, 1], occ, 4);
+  const waits = [3, 2, 1].map((v) => fight([4, 1], occ, v, "stealth"));
+  console.log(`  ${label.padEnd(21)} strike now ${now.take.padStart(6)} (loses ${now.lost})` +
+              waits.map((w, i) => ` | ${i + 1} Collect${i ? "s" : " "} ${w.take.padStart(6)} (${w.lost})`).join(""));
+}
+
+console.log("\nLesson 20. Holding with Runners alone against Boss + 4: can Ambush / spent out");
 for (const n of [1, 2, 3, 4, 5, 6]) {
   const a = fight([4, 1], [n, 0], 3), d = fight([4, 1], [n, 0], 3, "stealth");
   console.log(`  ${String(n).padStart(2)} Runners  taken ${a.take.padStart(6)} / ${d.take.padStart(6)}`);
 }
 for (const r of [6, 8]) console.log(`  5 Runners vs Boss + ${r}  taken ${fight([r, 1], [5, 0], 3).take}`);
 
-console.log("\nLesson 21. Killing a Boss with Boss + 4: can Ambush / spent out / Sicilian Hit");
+console.log("\nLesson 22. Killing a Boss with Boss + 4: can Ambush / spent out / Sicilian Hit");
 for (const [k, s, label] of [[0, 0, "alone"], [1, 0, "+ 1"], [2, 0, "+ 2"], [3, 0, "+ 3"],
                              [2, 1, "+ 2 + Safehouse"], [4, 1, "+ 4 + Safehouse"]]) {
   const a = fight([4, 1], [k, 1, s], 3), d = fight([4, 1], [k, 1, s], 3, "stealth");
@@ -57,7 +66,7 @@ for (const [k, s, label] of [[0, 0, "alone"], [1, 0, "+ 1"], [2, 0, "+ 2"], [3, 
   console.log(`  Boss ${label.padEnd(16)} ${a.boss.padStart(6)} / ${d.boss.padStart(6)} / ${h.boss.padStart(6)}`);
 }
 
-console.log("\nLesson 24. The families");
+console.log("\nLesson 25. The families");
 console.log(`  Irish Boss + 4 into Boss + 3 + Safehouse: ${fight([4, 1], [3, 1, 1], 3, "irish").take}` +
             ` (plain ${fight([4, 1], [3, 1, 1], 3).take})`);
 console.log(`  Vipers Stealth, Boss + 4 into Boss + 2 + Safehouse: ${fight([4, 1], [2, 1, 1], 3, "stealth").take}` +
