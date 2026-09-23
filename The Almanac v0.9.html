@@ -7,7 +7,7 @@
          of reflowing. 920 clears the container's 794px box and the 900px
          reflow breakpoint, so phones show the exact print layout. -->
     <meta name="viewport" content="width=920">
-    <title>Moonshine Kingdom: The Old Man's Advice v0.9.8</title>
+    <title>Moonshine Kingdom: The Almanac v0.9.8</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -17,8 +17,9 @@
 
     <style>
         /* ------------------------------------------------------------------
-           The strategy primer: the Kingpin's Guide's best ideas, told by an
-           old-timer to a rookie. The classes below are the Guide's own
+           The strategy primer: the Kingpin's Guide's best ideas, told by
+           Arnold Rothstein to a young Charlie Lucania (later Lucky Luciano)
+           in 1926. The classes below are the Guide's own
            (caption, table.stat, .lede, .formula, .kingpin), so the two books
            print as one set. Nothing here redefines the frame.
            ------------------------------------------------------------------ */
@@ -83,6 +84,14 @@
         }
         .kingpin p { margin: 0; font-style: italic; color: #fcefd0; }
 
+        .postscript {
+            font-size: 8.5pt;
+            font-style: italic;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 1.4em;
+        }
+
         .disclaimer {
             font-size: 7.8pt;
             color: var(--muted);
@@ -133,21 +142,22 @@
     <div class="front-page">
         <img class="title-image" src="Art/Rulebook/opt/Moonshine Kingdom.webp" alt="Moonshine Kingdom Title">
 
-        <h1>THE OLD MAN'S ADVICE</h1>
-        <h3 class="subtitle">Thirty-Three Things Nobody Else Will Tell You.</h3>
+        <h1>THE ALMANAC</h1>
+        <h3 class="subtitle">Odds, Angles and Advice for the Year 1926.</h3>
 
         <p class="intro-paragraph">
-            He's been out of the racket longer than you've been in it, and he still gets the corner booth without
-            asking. Nobody at the bar can tell you which family he ran with. Everybody can tell you he's the only one
-            of his crowd still breathing. Buy him a drink, kid, and keep your mouth shut. He's only going to say
-            this once.
+            Every night the same slim man in the same good suit takes the same back table on Broadway and does
+            business until dawn. They call him The Brain. Arnold Rothstein bankrolled some of the first rum boats, is
+            said to have fixed a World Series, and gave half the young guns in this city their start. Tonight he's
+            talking to one of them: a hard kid off the Lower East Side called Charlie Lucania, whom the papers will one
+            day call Lucky Luciano. Pull up a chair.
         </p>
     </div>
 
     <div class="container one-column toc-container">
         <h2>Contents</h2>
         <ul class="toc-list toc-columns">
-            <li><a href="#sit-down"><span class="toc-text">Sit Down, Kid</span><span class="toc-dots"></span><span class="toc-page"></span></a>
+            <li><a href="#sit-down"><span class="toc-text">Sit Down, Charlie</span><span class="toc-dots"></span><span class="toc-page"></span></a>
                 <ul class="toc-sublist">
                     <li class="sub-item"><a href="#count-your-plays"><span class="toc-text">1. Count your Plays before you count your money</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
                     <li class="sub-item"><a href="#token-is-a-trade"><span class="toc-text">2. Your token's a trade, not a rank</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
@@ -205,20 +215,20 @@
                 </ul>
             </li>
             <li><a href="#before-you-go"><span class="toc-text">Before You Go</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
-            <li><a href="#arithmetic"><span class="toc-text">The Old Man's Arithmetic</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+            <li><a href="#arithmetic"><span class="toc-text">The Figures</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
         </ul>
     </div>
 
-    <!-- ============================ SIT DOWN, KID ============================ -->
+    <!-- ========================== SIT DOWN, CHARLIE ========================== -->
     <div class="container one-column">
-        <h2 id="sit-down">Sit Down, Kid</h2>
+        <h2 id="sit-down">Sit Down, Charlie</h2>
         <div class="cover">
-            <img class="cover-wide" src="Art/Rulebook/opt/Speakeasy.webp" alt="A booth at the back of the bar" width="100%" loading="lazy">
+            <img class="cover-wide" src="Art/Rulebook/opt/Speakeasy.webp" alt="A back table on Broadway" width="100%" loading="lazy">
         </div>
         <p class="lede">
-            You read the Rulebook. Good. Now forget half of it, because the rules only tell you what you're allowed to
-            do. I'm going to tell you what works. I paid full price for every word of this, so you're getting it at a
-            discount. Don't make me regret it.
+            Sit down, Charlie. Eat something. You've learned the rules, which puts you level with every sucker in this
+            city. The rules tell you what you're allowed to do; I'm going to tell you what pays. I've made my living on
+            the difference.
         </p>
 
         <h3 class="lesson" id="count-your-plays"><span class="no">1.</span>Count your Plays before you count your money.</h3>
@@ -233,7 +243,7 @@
 
         <h3 class="lesson" id="token-is-a-trade"><span class="no">2.</span>Your token's a trade, not a rank.</h3>
         <p>
-            Rookies think Turn Token #1 is the best seat. It's <em>a</em> seat. The low token drafts first at the Brew
+            Suckers think Turn Token #1 is the best seat. It's <em>a</em> seat. The low token drafts first at the Brew
             and moves first in the Hustle. The high token picks first at the Offers, and at the Brew it picks from the
             last two dice, so it decides what gets left on the table to blow. Dice or cards: you're choosing between
             them every time you decide whether to make one more Play or Lay Low.
@@ -252,13 +262,13 @@
             <img class="cover-wide" src="Art/Rulebook/opt/Distillation.webp" alt="The Stills" width="100%" loading="lazy">
         </div>
         <p class="lede">
-            Everybody at this table cooks from the same pot, and the rookies think the dice decide who eats. The dice
-            decide less than you'd think.
+            Every sucker in this city thinks the dice decide who eats. I've spent my whole life around dice, Charlie.
+            They decide a lot less than people think.
         </p>
 
         <h3 class="lesson" id="cook-sevens"><span class="no">3.</span>Cook sevens.</h3>
         <p>
-            If I could tattoo one thing on your arm, it's this. The Harbormaster names tomorrow's Mash, and a mean one
+            If you remember one thing I tell you tonight, make it this. The Harbormaster names tomorrow's Mash, and a mean one
             can leave your boilers stone cold: let him name a 1, and no Red die in the world makes an 8. But a 7?
             Whatever face he names, 1 through 6, some Red makes seven. Nobody can starve a 7.
         </p>
@@ -341,7 +351,7 @@
 
         <h3 class="lesson" id="shows-twice"><span class="no">8.</span>Your seat only matters when your number shows twice.</h3>
         <p>
-            Rookies sweat the Blowback every morning. Don't. The Red you take leaves the pool with you, so if the face
+            Amateurs sweat the Blowback every morning. Don't. The Red you take leaves the pool with you, so if the face
             you need showed up once, nothing left on the table can burn that boiler. The danger is a double: two of
             your face, you take one, and some sweetheart leaves the other lying there as the Blowback. That's the
             morning to worry, and the morning the last seat matters, because he picks from the final two dice and
@@ -364,7 +374,7 @@
             <img class="cover-wide" src="Art/Rulebook/opt/Embargo.webp" alt="Counting the take" width="100%" loading="lazy">
         </div>
         <p class="lede">
-            The Jobs Market is where Respect is for sale. Rookies treat it like a shop. It's a queue, and you pay rent
+            The Jobs Market is where Respect is for sale. Suckers treat it like a shop. It's a queue, and you pay rent
             to stand in it.
         </p>
 
@@ -382,7 +392,7 @@
 
         <h3 class="lesson" id="bribe-early"><span class="no">10.</span>Bribe early; it's a Jobs play.</h3>
         <p>
-            Rookies think Bribes are for the end, when you're buying the Commission Seat. Wrong. Your 7th marker makes
+            Most men think Bribes are for the end, when you're buying the Commission Seat. Take it from a man who's bought a few judges: wrong. Your 7th marker makes
             a 3-Respect Job free to hold, and your 8th makes a 5 free. They're the cheapest rungs on the ladder, $2,000
             and $3,000, and they do the most work. The 9th and 10th are headroom for the noise you'll make, and the
             10th seats you on the Commission besides. Keep the old man on the board while you climb: he makes every
@@ -481,8 +491,8 @@
             <img class="cover-wide" src="Art/Rulebook/opt/Ambush.webp" alt="The Gun" width="100%" loading="lazy">
         </div>
         <p class="lede">
-            Guns don't win this town; Respect does. But turf never comes quietly, so you'd better know which fights
-            pay.
+            Every fight is a bet, Charlie, and most men place it without looking at the odds. Guns don't win this town;
+            Respect does. But turf never comes quietly, so learn which fights pay.
         </p>
 
         <h3 class="lesson" id="even-numbers"><span class="no">17.</span>Never walk into even numbers, and never grind.</h3>
@@ -543,7 +553,7 @@
 
         <h3 class="lesson" id="fold-check-raise"><span class="no">20.</span>Fold, check or raise.</h3>
         <p>
-            When a man walks onto your block you've got three answers, same as poker. <b>Fold</b> if the corner's
+            When a man walks onto your block you've got three answers, same as poker, and I know poker. <b>Fold</b> if the corner's
             scrap: you keep every man, and men are harder to replace than turf. <b>Hold Fire</b> is the check. He has
             to shoot first to find out what you've got, he pays for every volley, and he takes the Heat for opening,
             while you shoot back for free. <b>Ambush</b> is the raise, and raises are for made hands. With two dice or
@@ -602,8 +612,8 @@
             <img class="cover-wide" src="Art/Rulebook/opt/Police.webp" alt="The Law" width="100%" loading="lazy">
         </div>
         <p class="lede">
-            Rookies treat the cops like weather. They're a machine: a trigger, a way of picking a door, and a refund.
-            Learn to read it and you can aim it.
+            Most men treat the cops like weather. I've paid enough of them to know better: the law is a machine, with a
+            trigger, a way of picking a door, and a refund. Learn to read it and you can aim it.
         </p>
 
         <h3 class="lesson" id="plays-not-corpses"><span class="no">23.</span>The law counts Plays, not corpses.</h3>
@@ -692,7 +702,7 @@
         </div>
         <p class="lede">
             Everything else I told you, you can count. This part you have to play. There are no shared victories in this
-            city, kid. There are only bills, and better company to split them with.
+            city, Charlie. There are only bills, and better company to split them with.
         </p>
 
         <h3 class="lesson" id="promise-what-you-control"><span class="no">29.</span>Promise only what you alone control.</h3>
@@ -755,17 +765,22 @@
             bill with a name on it. Make sure it's the right name, even when it isn't yours.
         </p>
         <p class="lede">
-            New York doesn't crown the boss with the best dice, the best cards or the best guns, kid. It crowns the one
-            who worked out first that they were all the same money. Now finish your drink. You've got a city to steal.
+            New York doesn't crown the man with the best dice, the best cards or the best guns, Charlie. It crowns the
+            one who works out first that they were all the same money. Now go home and get some sleep. You've got a
+            city to take, and I've got a card game to get to.
+        </p>
+        <p class="postscript">
+            Arnold Rothstein was shot at the Park Central Hotel two years later, over a poker debt.
+            Charlie Lucania went on to found a Commission of his own.
         </p>
     </div>
 
-    <!-- ======================= THE OLD MAN'S ARITHMETIC ======================= -->
+    <!-- ============================= THE FIGURES ============================= -->
     <div class="container one-column">
-        <h2 id="arithmetic">The Old Man's Arithmetic</h2>
+        <h2 id="arithmetic">The Figures</h2>
         <p>
-            The figures behind the advice, for the kind of kid who checks. Everything on this page is straight
-            arithmetic off the rules and the board. The combat odds sit beside the lessons they back, in Chapter III.
+            The numbers behind the advice, for the kind of man who checks. Be that kind of man, Charlie. Everything on
+            this page is straight arithmetic off the rules and the board. The combat odds sit beside the lessons they back, in Chapter III.
         </p>
 
         <table class="stat">
@@ -809,7 +824,7 @@
             Combat odds in Chapter III come from the Combat Simulator's own model, 200,000 fights a line, with the
             defender Ambushing whenever he can and "spent out" meaning he can't. Every figure prices one system on its own: who reads whose barrels,
             who blinks late in the Hustle, and who's holding a grudge still decide whether any of it was wise.
-            &diams; Moonshine Kingdom v0.9.8 &middot; The Old Man's Advice &diams;
+            &diams; Moonshine Kingdom v0.9.8 &middot; The Almanac &diams;
         </p>
     </div>
 </body>

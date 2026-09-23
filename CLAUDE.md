@@ -160,7 +160,7 @@ Blowback.
 
 A rules change is never one file. The player-facing set is:
 
-`Rulebook`, `Kingpin's Guide`, `The Old Man's Advice`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
+`Rulebook`, `Kingpin's Guide`, `The Almanac`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
 `The Volstead Act`, `Still Tokens`, `Turn Tokens`, `The Ledger` (both), `Brew Simulator`,
 `Combat Simulator`, `Federal Crackdown Tracker`, `index.html`.
 
