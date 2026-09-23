@@ -1,5 +1,10 @@
 # mk-online: rules sync backlog
 
+> **2026-09-23: the Commission Seat is renamed The Nod.** Same rule: claim it the instant
+> you reach 10 Influence, worth 10 Respect. Winning is now framed as earning a seat on the
+> Commission, so a card called a Seat read as the win. Rename the card, its log lines and
+> tooltips; nothing else changes.
+
 > **2026-09-16 (v0.9.9): the tabletop target changed again.** The core win condition is now
 > **20 Respect and Solvent status**; reaching **10 Influence** claims a
 > **Commission Seat worth 10 Respect**; Shylock's Marks bar victory until cleared; and the

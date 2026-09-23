@@ -58,20 +58,22 @@ only when a rule is genuinely easy to miss *and* costly to get wrong.
 
 ## Setting: New York, 1929
 
-Since 2026-09-23 the game is set in **1929**, after Arnold Rothstein's murder (shot at the
-Park Central Hotel on 4 November 1928, died on Election Day, 6 November). The story is the
-war for what he left behind. Rules are unchanged; only the fiction moved:
+Since 2026-09-23 the game is set in **1929**, after Arnold Rothstein's murder. The story is
+the war for what he left behind. Rules are unchanged; only the fiction moved:
 
-- **The Commission** is the bosses' council the winner founds (the real one was founded in
-  New York in 1931 by Luciano). Winning at Sunset (20 Respect, Solvent, Boss on the board)
-  means calling the families to the table and founding it. It is no longer the judges and
-  aldermen.
+- **The Commission** is the table where the families settle their business. Winning at
+  Sunset (20 Respect, Solvent, Boss on the board) means **earning a seat on it**. The
+  winner does not found it or head it: an earlier draft said so and read too strong.
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
-  A **Commission Seat** is the chair no family can deny a boss whose Influence reaches 10.
-- **The Almanac** is the prequel and the player-facing strategy book: Rothstein's advice to
-  a young Charlie Lucania at Lindy's on the night he was shot. The **Kingpin's Guide** is
-  off the site (no index tile). It stays in the repo as the long-form design reference and
-  may lag the rules.
+  Reaching 10 Influence claims **the Nod** (the city vouching for you, 10 Respect). The card
+  was called the Commission Seat until 2026-09-23; it was renamed because a card called a
+  Seat read as the win. Don't bring the old name back.
+- **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
+  Rothstein once, on the front page, and stops. **The Almanac** is the prequel and the
+  player-facing strategy book: Rothstein's advice to a young Charlie Lucania at Lindy's on
+  4 November 1928, the night he was shot. It carries the scene, not the history.
+- The **Kingpin's Guide** is off the site (no index tile). It stays in the repo as the
+  long-form design reference and may lag the rules (it still says Commission Seat).
 
 ## v0.9.8 streamlined rules
 
@@ -87,14 +89,14 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 ## The crown needs 20 Respect and Solvency
 
 There are no Borough Deeds, Titles, or other board-scoring cards. Respect is completed Jobs,
-plus a **10-Respect Commission Seat** claimed the instant a player reaches **10 Influence**,
+plus **the Nod** (10 Respect), claimed the instant a player reaches **10 Influence**,
 less **2** for the Rat Card and **1** per Welsher. A Kingpin wins at Sunset with **20 Respect**
 and **Solvent** status. An unpaid Shylock's Mark does not change Respect, but it bars victory
 until it is cleared. The Volstead Act remains an intentional exception: it does not track Respect
 and has its own honor rule.
 
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
-never a flat price. The 7th and 8th are tempo markers; the 10th claims the Commission Seat.
+never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod.
 In the Blood Oath, each Alliance races to **40 combined Respect** and both partners must be
 Solvent. The Rulebook, Town Planner,
 Playbooks, Cards sheet, Federal Crackdown Tracker, and The Almanac must agree on these values.
