@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Mobile renders the true A4 page scaled to fit (pinch to zoom), instead
+         of reflowing. 920 clears the container's 794px box and the 900px
+         reflow breakpoint, so phones show the exact print layout. -->
+    <meta name="viewport" content="width=920">
+    <title>Moonshine Kingdom: The Almanac v0.9.8</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- Shared base styles: the same skin as the Rulebook and the Kingpin's Guide. -->
+    <link rel="stylesheet" href="css/moonshine-rules.css">
+
+    <style>
+        /* ------------------------------------------------------------------
+           The strategy primer: the Kingpin's Guide's best ideas, told by
+           Arnold Rothstein to a young Charlie Lucania (later Lucky Luciano)
+           in 1926. The classes below are the Guide's own
+           (caption, table.stat, .lede, .formula, .kingpin), so the two books
+           print as one set. Nothing here redefines the frame.
+           ------------------------------------------------------------------ */
+        caption {
+            caption-side: top;
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 8.5pt;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding-bottom: 4px;
+        }
+
+        table.stat th, table.stat td { text-align: center; vertical-align: middle; }
+        table.stat th.left, table.stat td.left { text-align: left; }
+
+        .good { color: #6fbf73; font-weight: 700; }
+        .bad  { color: #d9694f; font-weight: 700; }
+
+        .lede {
+            font-size: 10.5pt;
+            font-style: italic;
+            color: #f5e9cf;
+            border-left: 3px solid var(--gold-faint);
+            padding-left: 14px;
+            margin: 0.2em 0 1.2em;
+        }
+
+        .formula {
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 11.5pt;
+            color: var(--gold-bright);
+            margin: 0.4em 0 1em;
+        }
+
+        /* One lesson = one numbered h3. The number sits in the margin rule. */
+        h3.lesson .no {
+            font-family: var(--font-display);
+            color: var(--gold);
+            margin-right: 6px;
+        }
+
+        .kingpin {
+            border: 1px solid var(--gold-line);
+            border-left: 5px solid var(--gold-line);
+            background: var(--wash);
+            padding: 10px 14px;
+            margin: 1em 0;
+            border-radius: 4px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .kingpin .tag {
+            display: block;
+            font-family: var(--font-display);
+            letter-spacing: 1px;
+            color: var(--gold-label);
+            font-size: 1.15em;
+            margin-bottom: 4px;
+        }
+        .kingpin p { margin: 0; font-style: italic; color: #fcefd0; }
+
+        .postscript {
+            font-size: 8.5pt;
+            font-style: italic;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 1.4em;
+        }
+
+        .disclaimer {
+            font-size: 7.8pt;
+            color: var(--muted);
+            font-style: italic;
+            border-top: 1px solid var(--rule);
+            padding-top: 8px;
+            margin-top: 1.5em;
+        }
+    </style>
+    <script>
+    /* PRINT-READY TOGGLE. A desktop-only control that swaps the light screen
+       WebP covers (Art/Rulebook/opt/*.webp) for the full-resolution source
+       PNGs, so a browser "Save as PDF" exports the covers losslessly. Off by
+       default (fast browsing); the choice persists in localStorage. Placed in
+       the <head> so it survives even if the <body> is regenerated. Never shown
+       in print or on phones (see #mk-print-toggle in css/moonshine-rules.css). */
+    (function () {
+      var KEY = 'mk-print-ready', imgs = [];
+      function setHi(on) {
+        imgs.forEach(function (i) { if (on) i.loading = 'eager'; i.src = on ? i.dataset.png : i.dataset.webp; });
+      }
+      function build() {
+        imgs = [].slice.call(document.querySelectorAll('img[src*="Art/Rulebook/opt/"]'));
+        imgs.forEach(function (i) {
+          var w = i.getAttribute('src');
+          i.dataset.webp = w;
+          i.dataset.png = w.replace('/opt/', '/').replace(/\.webp$/, '.png');
+        });
+        var on = localStorage.getItem(KEY) === '1';
+        if (on) setHi(true);
+        var el = document.createElement('label');
+        el.id = 'mk-print-toggle';
+        el.innerHTML = '<input type="checkbox"' + (on ? ' checked' : '') +
+          '><span>Print-ready art<small>full-res covers for PDF export</small></span>';
+        el.querySelector('input').addEventListener('change', function (e) {
+          setHi(e.target.checked);
+          localStorage.setItem(KEY, e.target.checked ? '1' : '0');
+        });
+        document.body.appendChild(el);
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+      else build();
+    })();
+    </script>
+</head>
+
+<body>
+    <div class="front-page">
+        <img class="title-image" src="Art/Rulebook/opt/Moonshine Kingdom.webp" alt="Moonshine Kingdom Title">
+
+        <h1>THE ALMANAC</h1>
+        <h3 class="subtitle">Odds, Angles and Advice for the Year 1926.</h3>
+
+        <p class="intro-paragraph">
+            Every night the same slim man in the same good suit takes the same back table on Broadway and does
+            business until dawn. They call him The Brain. Arnold Rothstein bankrolled some of the first rum boats, is
+            said to have fixed a World Series, and gave half the young guns in this city their start. Tonight he's
+            talking to one of them: a hard kid off the Lower East Side called Charlie Lucania, whom the papers will one
+            day call Lucky Luciano. Pull up a chair.
+        </p>
+    </div>
+
+    <div class="container one-column toc-container">
+        <h2>Contents</h2>
+        <ul class="toc-list toc-columns">
+            <li><a href="#sit-down"><span class="toc-text">Sit Down, Charlie</span><span class="toc-dots"></span><span class="toc-page"></span></a>
+                <ul class="toc-sublist">
+                    <li class="sub-item"><a href="#count-your-plays"><span class="toc-text">1. Count your Plays before you count your money</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#token-is-a-trade"><span class="toc-text">2. Your token's a trade, not a rank</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                </ul>
+            </li>
+            <li><a href="#stills"><span class="toc-text">I &middot; The Stills</span><span class="toc-dots"></span><span class="toc-page"></span></a>
+                <ul class="toc-sublist">
+                    <li class="sub-item"><a href="#cook-sevens"><span class="toc-text">3. Cook sevens</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#bracket-the-ends"><span class="toc-text">4. Can't get sevens? Bracket the ends</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#read-the-harbormaster"><span class="toc-text">5. Read the Harbormaster's boilers</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#lay-low-ahead"><span class="toc-text">6. Then Lay Low ahead of him</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#park-the-boss"><span class="toc-text">7. Park the Boss beside a cold boiler</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#shows-twice"><span class="toc-text">8. Your seat only matters when your number shows twice</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                </ul>
+            </li>
+            <li><a href="#offers"><span class="toc-text">II &middot; The Offers</span><span class="toc-dots"></span><span class="toc-page"></span></a>
+                <ul class="toc-sublist">
+                    <li class="sub-item"><a href="#stake-is-rent"><span class="toc-text">9. The stake is rent</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#bribe-early"><span class="toc-text">10. Bribe early; it's a Jobs play</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#eat-the-ones"><span class="toc-text">11. Eat the 1s while they last</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#board-talks"><span class="toc-text">12. Your board talks; your cards don't</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#free-three"><span class="toc-text">13. Every seat has a free 3 in its back yard</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#staten-island"><span class="toc-text">14. Staten Island: nine Respect and no cops</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#deny-to-stop-a-crown"><span class="toc-text">15. Only deny a card that would crown somebody</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#pour-late"><span class="toc-text">16. Pour Rum late, and in batches</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                </ul>
+            </li>
+            <li><a href="#gun"><span class="toc-text">III &middot; The Gun</span><span class="toc-dots"></span><span class="toc-page"></span></a>
+                <ul class="toc-sublist">
+                    <li class="sub-item"><a href="#even-numbers"><span class="toc-text">17. Never walk into even numbers, and never grind</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#pickets"><span class="toc-text">18. The fight you'll win is against a picket</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#empty-ledger"><span class="toc-text">19. Hit him when his Ledger's empty</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#fold-check-raise"><span class="toc-text">20. Fold, check or raise</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#armies-dont-march"><span class="toc-text">21. Armies that don't march</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#family-edge"><span class="toc-text">22. Know your family's edge</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                </ul>
+            </li>
+            <li><a href="#law"><span class="toc-text">IV &middot; The Law</span><span class="toc-dots"></span><span class="toc-page"></span></a>
+                <ul class="toc-sublist">
+                    <li class="sub-item"><a href="#plays-not-corpses"><span class="toc-text">23. The law counts Plays, not corpses</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#freshest-name"><span class="toc-text">24. The law chases the freshest name</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#one-block"><span class="toc-text">25. A cop can only reach one block</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#build-the-bust"><span class="toc-text">26. Build the bust yourself</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#fifth-marker"><span class="toc-text">27. At four Heat, let him fire the fifth</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#want-the-sirens"><span class="toc-text">28. Sometimes you want the sirens</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                </ul>
+            </li>
+            <li><a href="#table"><span class="toc-text">V &middot; The Table</span><span class="toc-dots"></span><span class="toc-page"></span></a>
+                <ul class="toc-sublist">
+                    <li class="sub-item"><a href="#promise-what-you-control"><span class="toc-text">29. Promise only what you alone control</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#handshake-target"><span class="toc-text">30. A rival's handshake is a target</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#distance-from-twenty"><span class="toc-text">31. Count his distance from 20</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#table-works-together"><span class="toc-text">32. When a man nears 20, the table works together</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#blood-oath"><span class="toc-text">33. In the Blood Oath, the wedding is a move</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                </ul>
+            </li>
+            <li><a href="#before-you-go"><span class="toc-text">Before You Go</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+            <li><a href="#arithmetic"><span class="toc-text">The Figures</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+        </ul>
+    </div>
+
+    <!-- ========================== SIT DOWN, CHARLIE ========================== -->
+    <div class="container one-column">
+        <h2 id="sit-down">Sit Down, Charlie</h2>
+        <div class="cover">
+            <img class="cover-wide" src="Art/Rulebook/opt/Speakeasy.webp" alt="A back table on Broadway" width="100%" loading="lazy">
+        </div>
+        <p class="lede">
+            Sit down, Charlie. Eat something. You've learned the rules, which puts you level with every sucker in this
+            city. The rules tell you what you're allowed to do; I'm going to tell you what pays. I've made my living on
+            the difference.
+        </p>
+
+        <h3 class="lesson" id="count-your-plays"><span class="no">1.</span>Count your Plays before you count your money.</h3>
+        <p class="formula">Plays today &nbsp;=&nbsp; Influence &nbsp;&minus;&nbsp; staked &nbsp;&minus;&nbsp; Heat, &nbsp;up to five.</p>
+        <p>
+            That's the whole racket in one line. Every marker you own is doing one of three things: sitting on a Job,
+            cooling on the Heat Track, or working in your Ledger. Only the working ones buy you anything today, and the
+            Ledger stops at five. So the markers above your fifth don't buy extra Plays. What they buy is room: room to
+            stake a Job, room to make some noise, and still wake up with five in the drawer. Every lesson after this
+            one is a fight over one of those three terms.
+        </p>
+
+        <h3 class="lesson" id="token-is-a-trade"><span class="no">2.</span>Your token's a trade, not a rank.</h3>
+        <p>
+            Suckers think Turn Token #1 is the best seat. It's <em>a</em> seat. The low token drafts first at the Brew
+            and moves first in the Hustle. The high token picks first at the Offers, and at the Brew it picks from the
+            last two dice, so it decides what gets left on the table to blow. Dice or cards: you're choosing between
+            them every time you decide whether to make one more Play or Lay Low.
+        </p>
+        <p>
+            So late in the day, holding a marker or two and nothing to spend them on, remember what you're bidding for.
+            It isn't money. A marker pays you $100 whether you <b>Collect</b> with it or cash it when you Lay Low, so
+            the cash is a wash. It's position. Collect is how you hold your seat without showing anybody a thing.
+        </p>
+    </div>
+
+    <!-- ============================ I. THE STILLS ============================ -->
+    <div class="container one-column">
+        <h2 id="stills">I &middot; The Stills</h2>
+        <div class="cover">
+            <img class="cover-wide" src="Art/Rulebook/opt/Distillation.webp" alt="The Stills" width="100%" loading="lazy">
+        </div>
+        <p class="lede">
+            Every sucker in this city thinks the dice decide who eats. I've spent my whole life around dice, Charlie.
+            They decide a lot less than people think.
+        </p>
+
+        <h3 class="lesson" id="cook-sevens"><span class="no">3.</span>Cook sevens.</h3>
+        <p>
+            If you remember one thing I tell you tonight, make it this. The Harbormaster names tomorrow's Mash, and a mean one
+            can leave your boilers stone cold: let him name a 1, and no Red die in the world makes an 8. But a 7?
+            Whatever face he names, 1 through 6, some Red makes seven. Nobody can starve a 7.
+        </p>
+        <p>
+            And sevens are the only number worth stacking. Count the boilers: four 7s in the city, three 4s, three
+            6s, a pair of everything else, and one lonely 12 up in East Harlem. A wall of 8s is two kettles and a light
+            switch. The catch is that the cops start the game sitting on all four 7s, one to a Borough, and each one
+            opens when a Raid moves its Squad along. Be standing next door when yours does. And crew each Still with
+            five men and stop there: the sixth brews nothing the fifth didn't.
+        </p>
+
+        <h3 class="lesson" id="bracket-the-ends"><span class="no">4.</span>Can't get sevens? Bracket the ends.</h3>
+        <p>
+            Hold one low boiler and one high one, like a 3 and a 9. The face that starves the 3 is the face that feeds
+            the 9, and the other way round. He can squeeze one or the other, never both. You'll never pour like a fat
+            stack, but you'll pour something every morning, and when a hostile Harbormaster is starving the table,
+            something is a fortune.
+        </p>
+        <p>
+            The best bracket in town is Whitestone's 5 and Throggs Neck's 10. A bridge joins them, so a Boss on one can
+            Split the Batch into the other, and both are Docks, so they count toward the Harbormaster besides.
+        </p>
+
+        <h3 class="lesson" id="read-the-harbormaster"><span class="no">5.</span>Read the Harbormaster's boilers.</h3>
+        <p>
+            The man who names the Mash cooks from the same pot you do. If his Stills are 8s and 9s, he'll name a
+            middling face or a high one, because a low one leaves his own boilers cold. His turf tells you tomorrow's
+            number a full day early.
+        </p>
+        <p>
+            Better yet, build on his numbers. Whatever face lights his boilers lights yours. He can only starve you by
+            starving himself, and a man who brews won't.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <table class="stat">
+            <caption>Which Mash faces keep a boiler alive (lessons 3 to 5)</caption>
+            <thead><tr><th>Boiler</th><th>Mash faces that can fire it</th><th>Faces</th><th class="left">Can the Harbormaster starve it?</th></tr></thead>
+            <tbody>
+                <tr><td>2</td><td>1</td><td>1 of 6</td><td class="left">Yes: any face but 1</td></tr>
+                <tr><td>3</td><td>1&ndash;2</td><td>2 of 6</td><td class="left">Yes: 3 or higher</td></tr>
+                <tr><td>4</td><td>1&ndash;3</td><td>3 of 6</td><td class="left">Yes: 4 or higher</td></tr>
+                <tr><td>5</td><td>1&ndash;4</td><td>4 of 6</td><td class="left">Yes: 5 or 6</td></tr>
+                <tr><td>6</td><td>1&ndash;5</td><td>5 of 6</td><td class="left">Yes: 6</td></tr>
+                <tr><td><strong>7</strong></td><td><strong>1&ndash;6</strong></td><td><strong>6 of 6</strong></td><td class="left"><span class="good">Never</span></td></tr>
+                <tr><td>8</td><td>2&ndash;6</td><td>5 of 6</td><td class="left">Yes: 1</td></tr>
+                <tr><td>9</td><td>3&ndash;6</td><td>4 of 6</td><td class="left">Yes: 1 or 2</td></tr>
+                <tr><td>10</td><td>4&ndash;6</td><td>3 of 6</td><td class="left">Yes: 3 or lower</td></tr>
+                <tr><td>11</td><td>5&ndash;6</td><td>2 of 6</td><td class="left">Yes: 4 or lower</td></tr>
+                <tr><td>12</td><td>6</td><td>1 of 6</td><td class="left">Yes: any face but 6</td></tr>
+            </tbody>
+        </table>
+
+
+        <h3 class="lesson" id="lay-low-ahead"><span class="no">6.</span>Then Lay Low ahead of him.</h3>
+        <p>
+            When he clumps on one number, the Mash he names leaves exactly one face on the dice that fires it. So mirror
+            his Stills, then Lay Low before he does, so you draft ahead of him tomorrow. Pick first and you fire
+            whenever that face shows anywhere in the pool: about three mornings in five. Pick behind him and it has to
+            show twice: one morning in five, at best. He built the shortage. You walk off with the only key.
+        </p>
+        <p>
+            It isn't free. An early Lay Low leaves Plays on the table and sends you late to the Offers. Against a man
+            clumped on one number, pay it.
+        </p>
+
+        <h3 class="lesson" id="park-the-boss"><span class="no">7.</span>Park the Boss beside a cold boiler.</h3>
+        <p>
+            Your Boss is worth a second Still every morning his own one fires: <b>Split the Batch</b> lets you fire one
+            more Still you Control next door, whatever its number. So stand him on a boiler that fires often, beside a
+            fat one that doesn't. Sugar Hill's 7 sits across the avenue from East Harlem's 12, the loneliest boiler in
+            town. Hold both, and that 12 fires every time the 7 does. No two 7s touch, mind, so a wall of sevens never
+            Splits a barrel.
+        </p>
+        <p>
+            Just remember his number is his payday and his funeral: the Blowback comes off the same dice. He walks one
+            block a Play like anybody else, so move him the night before, not the morning of.
+        </p>
+
+        <h3 class="lesson" id="shows-twice"><span class="no">8.</span>Your seat only matters when your number shows twice.</h3>
+        <p>
+            Amateurs sweat the Blowback every morning. Don't. The Red you take leaves the pool with you, so if the face
+            you need showed up once, nothing left on the table can burn that boiler. The danger is a double: two of
+            your face, you take one, and some sweetheart leaves the other lying there as the Blowback. That's the
+            morning to worry, and the morning the last seat matters, because he picks from the final two dice and
+            decides which one stays.
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">What I've Seen</span>
+            <p>The greenhorn spreads his Stills across four Boroughs to cover more numbers, lights one boiler a day and
+            feeds the rest to the Blowback. The old hand cooks one number and gets rich. The made man cooks down
+            <em>one street</em>, where his Boss can walk a batch from door to door; and when a greedy Harbormaster
+            tries to starve him, he cooks the man's own numbers and gets up earlier.</p>
+        </div>
+    </div>
+
+    <!-- ============================ II. THE OFFERS ============================ -->
+    <div class="container one-column">
+        <h2 id="offers">II &middot; The Offers</h2>
+        <div class="cover">
+            <img class="cover-wide" src="Art/Rulebook/opt/Embargo.webp" alt="Counting the take" width="100%" loading="lazy">
+        </div>
+        <p class="lede">
+            The Jobs Market is where Respect is for sale. Suckers treat it like a shop. It's a queue, and you pay rent
+            to stand in it.
+        </p>
+
+        <h3 class="lesson" id="stake-is-rent"><span class="no">9.</span>The stake is rent. Claim the morning you can finish it.</h3>
+        <p>
+            A Job you've claimed sits on your markers until you pull it off, and the Offers come before you fund your
+            Ledger. So a marker on a card is a marker that isn't working, every day you hold it. At 6 Influence, a
+            5-Respect Job costs you two Plays a day. Claim it three days early and you've paid six Plays for a promise.
+        </p>
+        <p>
+            Nothing on the street expires, and every Job in the deck is done in a single Play. So build the position
+            first, quietly, then claim the card on the morning you can do the deed that afternoon. One day of rent,
+            full Respect. Claim early only to deny somebody, or when you can see a rival reaching for the same card.
+        </p>
+
+        <h3 class="lesson" id="bribe-early"><span class="no">10.</span>Bribe early; it's a Jobs play.</h3>
+        <p>
+            Most men think Bribes are for the end, when you're buying the Commission Seat. Take it from a man who's bought a few judges: wrong. Your 7th marker makes
+            a 3-Respect Job free to hold, and your 8th makes a 5 free. They're the cheapest rungs on the ladder, $2,000
+            and $3,000, and they do the most work. The 9th and 10th are headroom for the noise you'll make, and the
+            10th seats you on the Commission besides. Keep the old man on the board while you climb: he makes every
+            drop in person.
+        </p>
+
+        <h3 class="lesson" id="eat-the-ones"><span class="no">11.</span>Eat the 1s while they last.</h3>
+        <p>
+            There are twelve 1-Respect Jobs in the deck, and half of them ask for what your liquor business does
+            anyway: haul some barrels, sell some barrels, make a Trade. A Stake of 1 costs nothing at 6 Influence. Every
+            one that gets done leaves the deck for good, and the cheap ones go first. The man who sniffs at 1s on Day 3
+            is shopping in a market full of wars on Day 12.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3 class="lesson" id="board-talks"><span class="no">12.</span>Your board talks; your cards don't.</h3>
+        <p>
+            Your Jobs are face-up and so is your stake. The one secret you've got is what you mean to do next, and it
+            leaks through the board: barrels drifting toward one Speakeasy, a Safehouse creeping out of your Borough,
+            men gathering two blocks from a Dock. A rival who reads turf sees your claim coming a day early and takes
+            the card first. So assemble late and fast. Six barrels arriving in one Move on the morning you claim is a
+            done deal; six arriving over four days is an announcement.
+        </p>
+        <p>
+            And a claim can lie for you. Take a card that points at Manhattan and watch the Manhattan boss thicken his
+            garrison while your real business happens somewhere else. You pay rent on the feint, but you're buying
+            three men looking the wrong way.
+        </p>
+
+        <h3 class="lesson" id="free-three"><span class="no">13.</span>Every seat has a free 3 in its back yard.</h3>
+        <p>
+            Each home Borough has one Speakeasy that nobody garrisons at setup and the cops don't padlock, and the deck
+            has a 3-Respect Job written for every one of them. Take yours early, before somebody garrisons it to spite
+            you.
+        </p>
+        <table class="stat">
+            <caption>The unguarded joint in every home Borough</caption>
+            <thead><tr><th class="left">Your Borough</th><th class="left">The joint</th><th class="left">The 3-Respect Job</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Manhattan</td><td class="left">The Haymarket (Tenderloin)</td><td class="left">The Big Squeeze: Unload 6+ Barrels there</td></tr>
+                <tr><td class="left">The Bronx</td><td class="left">The Penny Whistle (Fordham)</td><td class="left">Hell's Highway: Move 6+ Barrels in</td></tr>
+                <tr><td class="left">Queens</td><td class="left">Paradise Alley (Flushing)</td><td class="left">Poison Panic: Unload 6+ Moonshine there</td></tr>
+                <tr><td class="left">Brooklyn</td><td class="left">Sunny's Bar (Red Hook)</td><td class="left">Cuban Prince: Move 3+ Rum in</td></tr>
+            </tbody>
+        </table>
+        <p>
+            Every seat has a 5 with its name on it too: a bounty that hunts your Borough, whether it's your Boss, your
+            Safehouse or your men. When yours turns up on the street, move whatever it's hunting.
+        </p>
+
+        <h3 class="lesson" id="staten-island"><span class="no">14.</span>Staten Island: nine Respect and no cops.</h3>
+        <p>
+            Staten Island is nobody's home turf, so nobody goes there. But the deck has a Job out there at every tier:
+            <em>Fortress Staten</em> (1), <em>Rum Row</em> (3) and <em>The Smuggler's Run</em> (5). That's nine
+            Respect nobody's racing you for. Every Dock in the city reaches Staten's two piers, and no Police Squad ever
+            sets foot on the island. The price is distance: it's a long way from home, and nobody will help you hold it.
+        </p>
+
+        <h3 class="lesson" id="deny-to-stop-a-crown"><span class="no">15.</span>Only deny a card that would crown somebody.</h3>
+        <p>
+            You can take any card on the street, including one you never mean to do, just to keep it out of a rival's
+            hands. It works, and it's dear: the morning you take it, a second morning to walk away from it, and rent
+            every day in between. Save it for the card that would put a rival over 20. Then it's cheap at any price,
+            because there's no tomorrow left to save for.
+        </p>
+
+        <h3 class="lesson" id="pour-late"><span class="no">16.</span>Pour Rum at High Society late, and in batches.</h3>
+        <p>
+            Here's the one way to get more than five Plays in a day. Every barrel of Havana Rum you Unload at a High
+            Society Venue you Control moves a marker from your Reserves back into an empty Ledger slot. Three barrels
+            pay for the Unload and buy you a Play, and three is too few for the Greed Tax to hear. Five is the ceiling.
+        </p>
+        <p>
+            There are two ways to waste it. Pour early, with your Ledger full, and there's no empty slot for the
+            Kickback to land in, so pour on your last markers. And don't make the run every day: Moonshine to the Dock,
+            Trade, Rum to the room costs Plays before it pays any back. A daily run of four barrels <em>loses</em> you
+            Plays. Stockpile ten, make the trip once, pour it in two Unloads, and you net about three, for two Heat
+            markers. Just remember a stockpile is exactly what the cops come looking for.
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">What I've Seen</span>
+            <p>The greenhorn grabs the biggest card on the street the day he sees it, pays two Plays a morning for a
+            week, tells the whole table what he's building, and watches the target walk out of the Borough. The old
+            hand takes the small ones his liquor was doing anyway. The made man climbs to ten Influence, where a
+            promise costs him nothing, claims on the morning he fires, and takes the last card off the street on the
+            night the second-place man needed it.</p>
+        </div>
+    </div>
+
+    <!-- ============================ III. THE GUN ============================ -->
+    <div class="container one-column">
+        <h2 id="gun">III &middot; The Gun</h2>
+        <div class="cover">
+            <img class="cover-wide" src="Art/Rulebook/opt/Ambush.webp" alt="The Gun" width="100%" loading="lazy">
+        </div>
+        <p class="lede">
+            Every fight is a bet, Charlie, and most men place it without looking at the odds. Guns don't win this town;
+            Respect does. But turf never comes quietly, so learn which fights pay.
+        </p>
+
+        <h3 class="lesson" id="even-numbers"><span class="no">17.</span>Never walk into even numbers, and never grind.</h3>
+        <p>
+            Defense is strong in this city. Take a block held by a Boss, three Runners and a Safehouse. Bring your own
+            Boss and three men, even numbers, and you take it about one try in seventy. Bring double and it's a coin
+            flip. Bring triple and it's yours nearly nine times in ten, and you'll still bury four or five men getting
+            in the door.
+        </p>
+        <p>
+            Every volley costs a marker, too. Plan to win in two or three. If the door isn't breaking, Fall Back. A
+            fourth volley buys you about eight points of odds and costs a Play you could have spent anywhere else.
+        </p>
+
+        <table class="stat">
+            <caption>Storming a fortress: Boss and 3 Runners behind a Safehouse, up to 3 volleys </caption>
+            <thead><tr><th class="left">You bring</th><th>You take it</th><th>Men you lose</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Boss + 3 Runners (even numbers)</td><td class="bad">1.5%</td><td>3.9</td></tr>
+                <tr><td class="left">Boss + 4</td><td>8%</td><td>4.5</td></tr>
+                <tr><td class="left">Boss + 5</td><td>23%</td><td>4.8</td></tr>
+                <tr><td class="left">Boss + 6 (double)</td><td>49%</td><td>4.6</td></tr>
+                <tr><td class="left">Boss + 9 (triple)</td><td class="good">88%</td><td>4.1</td></tr>
+            </tbody>
+        </table>
+
+
+        <h3 class="lesson" id="pickets"><span class="no">18.</span>The fight you'll win is the Boss and a few men against a picket.</h3>
+        <p>
+            The fortress is the exception: nobody has the men to build more than one. Every other block your rival
+            holds is watched by one man, two, three, or nobody, and that's where fights are won. Your Boss and three
+            Runners into a two-man picket takes it 84% of the time, for about one body. Three men with the Boss beat five
+            without him, because his Threat sharpens every die you roll. Don't leave the old man at home when it counts.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3 class="lesson" id="empty-ledger"><span class="no">19.</span>Hit him when his Ledger's empty.</h3>
+        <p>
+            A man with no marker in his Ledger can't Ambush, and neither can a man who's Laid Low. Catch a picket then
+            and you take it more often, and you bury a third to a half fewer men doing it. The price is that you fire
+            first, so the Heat is yours. Watch the Ledgers around the table: when a man's spent out behind a block worth
+            owning, that's your afternoon.
+        </p>
+
+        <table class="stat">
+            <caption>Raiding a picket, no Boss or Safehouse defending, up to 3 volleys </caption>
+            <thead><tr><th class="left">You bring</th><th class="left">Against</th><th>He can Ambush</th><th>He's spent out</th><th>Men you lose</th></tr></thead>
+            <tbody>
+                <tr><td class="left">3 Runners</td><td class="left">2 Runners</td><td>37%</td><td>54%</td><td>1.4 &rarr; 0.9</td></tr>
+                <tr><td class="left">5 Runners</td><td class="left">2 Runners</td><td>72%</td><td>81%</td><td>1.3 &rarr; 0.7</td></tr>
+                <tr><td class="left">Boss + 3</td><td class="left">2 Runners</td><td class="good">84%</td><td class="good">88%</td><td>1.2 &rarr; 0.7</td></tr>
+                <tr><td class="left">Boss + 4</td><td class="left">3 Runners</td><td>60%</td><td>82%</td><td>2.3 &rarr; 1.2</td></tr>
+                <tr><td class="left">3 Runners</td><td class="left">3 Runners</td><td class="bad">6%</td><td class="bad">18%</td><td>2.3 &rarr; 1.5</td></tr>
+            </tbody>
+        </table>
+
+
+        <h3 class="lesson" id="fold-check-raise"><span class="no">20.</span>Fold, check or raise.</h3>
+        <p>
+            When a man walks onto your block you've got three answers, same as poker, and I know poker. <b>Fold</b> if the corner's
+            scrap: you keep every man, and men are harder to replace than turf. <b>Hold Fire</b> is the check. He has
+            to shoot first to find out what you've got, he pays for every volley, and he takes the Heat for opening,
+            while you shoot back for free. <b>Ambush</b> is the raise, and raises are for made hands. With two dice or
+            more it swings a fight. With one die it kills half a man on average and puts your marker on the Track.
+            Weak hands check or fold. Strong hands raise.
+        </p>
+
+        <h3 class="lesson" id="armies-dont-march"><span class="no">21.</span>Armies that don't march.</h3>
+        <p>
+            Fifteen Runners can't be everywhere, but your Safehouse can go anywhere Safe, and it's the only place you
+            Recruit. So don't march an army to the border. Secure the Safehouse one step from the target, $500 and a
+            Play, then Recruit right there at $300 a man. The garrison next door wakes up to five strangers who never
+            crossed a street. Do it late in the day: between the Secure and the Recruit that house stands empty, and
+            any rival next door with a marker left can walk in and take it.
+        </p>
+
+        <h3 class="lesson" id="family-edge"><span class="no">22.</span>Know your family's edge.</h3>
+        <p>
+            <b>The Irish</b> bring an extra die to every Open Fire, worth about a whole tier of men: a Boss and four
+            Runners storming a Boss, three Runners and a Safehouse goes from about 8% to about 33%. It never fires on
+            defense, so the Irish win by going through doors. Peddle sells swill in your own Wards for half the
+            Influence an Unload costs.
+        </p>
+        <p>
+            <b>The Sicilians</b> don't take the turf; they take the man. A Hit into a rival's full garrison kills his
+            Boss about two times in three, and a Bossless rival can't Bribe, can't Split the Batch and can't be crowned
+            until he Rises. Untouchable keeps the cops off your Safehouse block, and Consigliere takes a marker off the
+            Heat Track. Anybody's marker, which re-aims the next Raid.
+        </p>
+        <p>
+            <b>The Vipers</b> take away the Ambush and the Fold. Against a thin block that's everything: five men on a
+            Stealth take a Boss, two Runners and a Safehouse three times in four, where the front door takes it one time
+            in four. Never lay siege with it. Tunnel empties the till before the fight, and Whispers lets you hold a Job
+            nobody can read.
+        </p>
+        <p>
+            <b>The Knights</b> don't add dice; they add reach. Skiff lands five men on any coast from any coast you
+            Control, and after a Fold or an Advance it takes them off again at no extra cost. Anybody who misses the
+            boat is lost, and no boat outruns the cops. Network puts a free Rum on every Trade, and Torch burns a
+            Safehouse outright for 1 Influence and a Runner.
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">What I've Seen</span>
+            <p>The hothead charges a fortress with even numbers and buries four men. The corner boy learns that lesson
+            too well, swears off the gun, and watches his turf walk away a picket at a time. The made man garrisons what
+            his Jobs need, folds the corners that don't earn, and spends his afternoons counting Ledgers. When a two-man
+            picket is left minding something worth owning at dusk, he takes it with five men in two volleys.</p>
+        </div>
+    </div>
+
+    <!-- ============================ IV. THE LAW ============================ -->
+    <div class="container one-column">
+        <h2 id="law">IV &middot; The Law</h2>
+        <div class="cover">
+            <img class="cover-wide" src="Art/Rulebook/opt/Police.webp" alt="The Law" width="100%" loading="lazy">
+        </div>
+        <p class="lede">
+            Most men treat the cops like weather. I've paid enough of them to know better: the law is a machine, with a
+            trigger, a way of picking a door, and a refund. Learn to read it and you can aim it.
+        </p>
+
+        <h3 class="lesson" id="plays-not-corpses"><span class="no">23.</span>The law counts Plays, not corpses.</h3>
+        <p>
+            Only four things put a marker on the Heat Track: the first shot of a firefight, Extort, Torch, and selling
+            four or more barrels in one Play. One firefight is one marker however many men fall. Extort is one marker
+            whether three blocks pay or eleven. Three barrels at a time is silent forever. So when you have to be loud,
+            be loud in bulk. And the quiet answers cost nothing: Hold Fire and Fold never draw Heat.
+        </p>
+
+        <h3 class="lesson" id="freshest-name"><span class="no">24.</span>The law chases the freshest name.</h3>
+        <p>
+            When the sirens come, each Squad goes after the mob whose marker sits furthest right on the Track: the most
+            recent noise, not the most noise. Three markers deep but quiet since Tuesday? They'll walk right past you to
+            the fellow who shouted this morning. So be loud early in the cycle, right after a Raid, and let the others
+            shout over you. Every marker that lands after yours is armor.
+        </p>
+
+        <h3 class="lesson" id="one-block"><span class="no">25.</span>A cop can only reach one block, and never across a Borough line.</h3>
+        <p>
+            A Squad only looks at the Districts right beside it, inside its own Borough. That's its whole world. Hold
+            nothing next to a Squad and you can be the loudest crew in town and never see a badge. Staten Island has no
+            Squad at all. One warning: Squads move one at a time in Borough order, so a crew scattering from the first
+            can land in the path of the second. When the Track sits at four, check your exits against every precinct.
+        </p>
+
+    </div>
+
+    <div class="container one-column">
+        <h3 class="lesson" id="build-the-bust"><span class="no">26.</span>Build the bust yourself.</h3>
+        <p>
+            You can't always stop the knock, but you can pick the door. The Squad kicks in whichever of your blocks in
+            its reach holds the most barrels. So when you know your name will be freshest, make the fattest target a
+            corner you can afford to lose. Pile cheap Moonshine there, keep your Safehouse and your Boss somewhere else,
+            and let them come. They take the swill, padlock a corner you'd written off, and walk straight past the
+            empire.
+        </p>
+        <p>
+            Now turn it around. A raided crew runs on foot to a Safe block next door, and if there isn't one, the whole
+            crew is arrested. A Dock with one land exit is a cell with a view. Put a man across a rival's only way out
+            before the sirens, and the Raid you both saw coming stops being a fine and becomes a clean sweep.
+        </p>
+
+        <h3 class="lesson" id="fifth-marker"><span class="no">27.</span>At four Heat, let him fire the fifth.</h3>
+        <p>
+            When the Track sits at four, every loud Play is a finger on the trigger. So if a man walks onto your block,
+            Hold Fire. If he wants it, he has to shoot first, and his first shot is the fifth marker with his name on it.
+            Heat lands when his Play ends, so he gets to finish the fight, and then the sirens come for the freshest
+            name on the Track: his.
+        </p>
+        <p>
+            Now leave a stack of barrels on that block, inside a Squad's reach. He knows before he pulls the trigger
+            that whatever he wins, he'll be standing on the fattest door in the precinct when the cops arrive. That's a
+            garrison that never fires a shot. The other side of the coin: at four, never fire first into a quiet block
+            yourself. The man who checked to you may be holding the door open between you and the sirens.
+        </p>
+
+        <h3 class="lesson" id="want-the-sirens"><span class="no">28.</span>Sometimes you want the sirens.</h3>
+        <p>
+            A Raid isn't only trouble. When it's over, every Heat marker at the table goes home, and whoever had the
+            most cooling gets the most back. Every Squad that moves unlocks the block it was standing on, and early in
+            the game that's a High Society room and its 7. So at four markers, the man with a clean position and a
+            reason to want sirens should be racing to pull the trigger.
+        </p>
+        <p>
+            Can't wait? Drop a dime. The <b>Rat</b> starts a Raid right now, at any height, and puts no marker on the
+            Track, so the law hunts whoever made the last noise, not you. You take the Rat Card: &minus;2 Respect, but
+            only when the books open. Far from 20, that's nearly free, and <em>The Insurance Job</em> pays 3 Respect
+            for a Rat that padlocks one of your own weak Stills. One Sunset from the crown, it's most of a Job.
+        </p>
+
+        <div class="kingpin">
+            <span class="tag">What I've Seen</span>
+            <p>The greenhorn thinks Heat is a punishment and plays scared of his own gun. The old hand budgets it: he
+            batches his noise, shouts early in the cycle, and keeps a Borough line between his boilers and the blue
+            wall. The made man aims it. He builds his bust on a corner he never loved, collects his refund with the
+            doors standing open, and when a rival is loud and rich on the same afternoon, he finds a telephone.</p>
+        </div>
+    </div>
+
+    <!-- ============================ V. THE TABLE ============================ -->
+    <div class="container one-column">
+        <h2 id="table">V &middot; The Table</h2>
+        <div class="cover">
+            <img class="cover-wide" src="Art/Rulebook/opt/Crown.webp" alt="The Table" width="100%" loading="lazy">
+        </div>
+        <p class="lede">
+            Everything else I told you, you can count. This part you have to play. There are no shared victories in this
+            city, Charlie. There are only bills, and better company to split them with.
+        </p>
+
+        <h3 class="lesson" id="promise-what-you-control"><span class="no">29.</span>Promise only what you alone control.</h3>
+        <p>
+            A broken Handshake costs you a point of Respect forever, and it counts however it breaks, even if somebody
+            else broke it for you. So word every deal as something you do, never as something that happens. "I won't
+            cross the river today" can't be sabotaged. "You'll cross my Borough unharmed" can be ruined by any third crew
+            with one Move, and you're the one wearing the Welsher card.
+        </p>
+
+        <h3 class="lesson" id="handshake-target"><span class="no">30.</span>A rival's handshake is a target.</h3>
+        <p>
+            Same rule, other end. The moment two rivals shake, breaking their deal is one of <em>your</em> Plays. Block
+            the road he promised was clear; shoot the man he promised to protect. One Move from you, and a rival is a
+            point short for good.
+        </p>
+
+        <h3 class="lesson" id="distance-from-twenty"><span class="no">31.</span>Count a man's distance from 20 before you count on his word.</h3>
+        <p>
+            Respect is public, so the price of a promise is on the table for anyone to read. A man one point from the
+            crown will die before he breaks his word. A man ten points back, or already wearing the Rat's &minus;2, is
+            selling paper the street has already discounted. And count the Welsher cards in his pile: a serial breaker's
+            word isn't collateral, it's confetti.
+        </p>
+    </div>
+
+    <div class="container one-column">
+        <h3 class="lesson" id="table-works-together"><span class="no">32.</span>When a man nears 20, the table works together.</h3>
+        <p>
+            Nobody stops a runaway alone: bullets and denial cost too much for one crew to pay twice. So split the bill,
+            each of you doing the cheap piece.
+        </p>
+        <ul class="sub-section">
+            <li><strong>Leave his number in the pool.</strong> When the face that fires his Boss's boiler shows up
+                twice, he can only take one. If nobody takes the other, it's the Blowback, and it bursts the boiler he
+                parked the old man on.</li>
+            <li><strong>Rent the last seat.</strong> The highest token picks the Market first. Pay that man to take the
+                card the leader needs.</li>
+            <li><strong>Put out a hit.</strong> No boss takes the city with his Boss in the supply. Post a cash bounty
+                on the leader's Boss, and post it late in the day, when he's Laid Low or too spent to pay for a Rise
+                before the books open.</li>
+        </ul>
+
+        <h3 class="lesson" id="blood-oath"><span class="no">33.</span>In the Blood Oath, the wedding is a move.</h3>
+        <p>
+            In the team game every Raid moves the Federal Crackdown Tracker, and at space 10 the table freezes, ranks by
+            Respect, and marries 1st to 4th and 2nd to 3rd, for good. Play toward that moment. Your rank picks your
+            partner, and you can move it: a man at the bottom who Rats drags the wedding forward while he's still cheap
+            enough to marry the leader. And look hard at the debts you're marrying. No Alliance is crowned while either
+            partner holds a Mark, so his Mark is your padlock until he's clean. At $2,000 a Mark, and with cash free to
+            cross the table, that's a bill you can pay for him.
+        </p>
+
+        <h2 id="before-you-go">Before You Go</h2>
+        <p>
+            Three questions, before every Play. <b>Which clock does it move?</b> The cheap Respect draining out of the
+            deck, the climb from six Influence to ten, or the slow boil of the Heat Track. <b>What does it tell the
+            table?</b> Your Jobs, your stake, your barrels and your Heat are all out in the open; what you mean to do
+            next is the only secret you own, and most Plays spend a little of it. <b>Who hears it?</b> Every noise has a
+            bill with a name on it. Make sure it's the right name, even when it isn't yours.
+        </p>
+        <p class="lede">
+            New York doesn't crown the man with the best dice, the best cards or the best guns, Charlie. It crowns the
+            one who works out first that they were all the same money. Now go home and get some sleep. You've got a
+            city to take, and I've got a card game to get to.
+        </p>
+        <p class="postscript">
+            Arnold Rothstein was shot at the Park Central Hotel two years later, over a poker debt.
+            Charlie Lucania went on to found a Commission of his own.
+        </p>
+    </div>
+
+    <!-- ============================= THE FIGURES ============================= -->
+    <div class="container one-column">
+        <h2 id="arithmetic">The Figures</h2>
+        <p>
+            The numbers behind the advice, for the kind of man who checks. Be that kind of man, Charlie. Everything on
+            this page is straight arithmetic off the rules and the board. The combat odds sit beside the lessons they back, in Chapter III.
+        </p>
+
+        <table class="stat">
+            <caption>Every boiler in the city, by number (lessons 3, 4 and 7)</caption>
+            <thead><tr><th>Boiler</th><th>How many</th><th class="left">Where</th></tr></thead>
+            <tbody>
+                <tr><td><strong>7</strong></td><td><strong>4</strong></td><td class="left">Sugar Hill, Morris Park, Richmond Hill, Williamsburg (no two touch)</td></tr>
+                <tr><td>4</td><td>3</td><td class="left">Corona, Sheepshead Bay, Tottenville</td></tr>
+                <tr><td>6</td><td>3</td><td class="left">Flushing, Red Hook, Stapleton</td></tr>
+                <tr><td>2, 3, 5, 8, 9, 10, 11</td><td>2 each</td><td class="left">A pair, and no more</td></tr>
+                <tr><td>12</td><td>1</td><td class="left">East Harlem, alone</td></tr>
+            </tbody>
+        </table>
+
+        <table class="stat">
+            <caption>Plays a day, with a clean Heat Track (lessons 1, 9 and 10)</caption>
+            <thead><tr><th class="left">Your Influence</th><th>No Job</th><th>Stake 1 (a 1)</th><th>Stake 2 (a 3)</th><th>Stake 3 (a 5)</th><th>Stake 5 (a 5 and a 3)</th></tr></thead>
+            <tbody>
+                <tr><td class="left">6, where everyone starts</td><td>5</td><td>5</td><td>4</td><td>3</td><td>1</td></tr>
+                <tr><td class="left">7</td><td>5</td><td>5</td><td>5</td><td>4</td><td>2</td></tr>
+                <tr><td class="left">8</td><td>5</td><td>5</td><td>5</td><td>5</td><td>3</td></tr>
+                <tr><td class="left">9</td><td>5</td><td>5</td><td>5</td><td>5</td><td>4</td></tr>
+                <tr><td class="left">10, the Commission</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td></tr>
+            </tbody>
+        </table>
+        <p>Every marker cooling on the Heat Track slides you down one row.</p>
+
+        <table class="stat">
+            <caption>Pouring Rum at a High Society Venue, with empty Ledger slots to fill (lesson 16)</caption>
+            <thead><tr><th class="left">You Unload</th><th>Costs</th><th>Kickbacks</th><th>Net Plays</th><th class="left">The catch</th></tr></thead>
+            <tbody>
+                <tr><td class="left">2 Rum</td><td>2</td><td>2</td><td>0</td><td class="left">The sale pays for itself.</td></tr>
+                <tr><td class="left">3 Rum</td><td>2</td><td>3</td><td class="good">+1</td><td class="left">No Heat. The clean shipment.</td></tr>
+                <tr><td class="left">4 Rum</td><td>2</td><td>4</td><td class="good">+2</td><td class="left">The Greed Tax draws one Heat.</td></tr>
+                <tr><td class="left">5 Rum</td><td>2</td><td>5</td><td class="good">+3</td><td class="left">The ceiling: five slots to fill.</td></tr>
+                <tr><td class="left">6 or more</td><td>2</td><td>5</td><td class="good">+3</td><td class="left">More cash, no more Plays.</td></tr>
+            </tbody>
+        </table>
+
+        <p class="disclaimer">
+            Combat odds in Chapter III come from the Combat Simulator's own model, 200,000 fights a line, with the
+            defender Ambushing whenever he can and "spent out" meaning he can't. Every figure prices one system on its own: who reads whose barrels,
+            who blinks late in the Hustle, and who's holding a grudge still decide whether any of it was wise.
+            &diams; Moonshine Kingdom v0.9.8 &middot; The Almanac &diams;
+        </p>
+    </div>
+</body>
+
+</html>

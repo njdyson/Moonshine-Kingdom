@@ -505,6 +505,21 @@ Venues, the #7 mainland Speakeasies. It now also needs the right cask.
 Why: two 7-Mobster stacks on High Society could Unload Moonshine in place for +4 Plays and
 $2,400 a firing day. 12.2 empties the till in place as well as the Ledger refill. See `kickback-blowback-handoff.md`.
 
+## 13. Five rulings on gaps in the wording (2026-09-23)
+
+A Rulebook writing sweep turned up five places where the text did not settle the rule.
+Nick ruled on each; the Rulebook (and, for 13.1 and 13.2, the Playbooks) now say so. None
+of these is a change of intent, but the online build's behaviour on each has not been
+checked, so treat every row as "verify, then port if it differs".
+
+| # | Question | Ruling |
+|---|----------|--------|
+| 13.1 | Can one Move gather pieces from several Districts? | **No.** A Move goes from a single District to a single Connected District. |
+| 13.2 | Can the Occupier Fold with no Connected Safe District to flee to? | **No.** With nowhere safe to go, Fold is not offered. The Knights' Skiff exit (a Coastal Safe District) counts as somewhere to go. |
+| 13.3 | Does the Knights' Skiff cost its 1 Influence when used to leave a fight on a Fold or Advance? | **No, as written:** it only changes the destination of the Fold or Advance. **Open thread:** Nick is considering banning the Skiff as an escape entirely, since it is an active Play. Do not build on the escape until that is settled. |
+| 13.4 | Sicilian Untouchable: when the Safehouse District would be the Raid target, what does the Squad take instead? | **It bypasses that District as if it were out of reach.** The Sicilians' next District in reach if they have one (by Barrels, then Pressure), otherwise the next marker on the Heat Track; with nothing left to chase, the Squad stays put. |
+| 13.5 | When a firefight's first shot is the fifth Heat marker, does the Raid interrupt the fight? | **No.** A firefight is one Play, and Heat lands as the Play ends, so the fight resolves first and the Raid follows. The winner is standing on the block (and holding its barrels) when the Squads move. |
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
