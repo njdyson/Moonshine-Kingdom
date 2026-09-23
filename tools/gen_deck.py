@@ -42,8 +42,11 @@ ONES = [
     # Magnitude drops 5+ -> 4+ because "hold them at Day's end" is the new difficulty
     # and stacking both would overshoot; Union Dues (4+, no Deed) stays the harder half
     # on POSITION, which is the axis that separated them all along.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
     ("Tenement Army", "Tenament Army.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> whose <b>Borough Deed you hold</b>.",
+     "Recruit <b>4+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> in a Borough where <b>you Control the most Districts</b>.",
      "Word goes round by supper. By dark, you have a crew."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
@@ -171,8 +174,11 @@ ONES = [
     ("Night Landing", "Skiff.jpg", "Move",
      "Move <b>4+ Barrels</b> across water into a <b>Dock on Jamaica Bay</b>.",
      "Two boats, one lantern, and nobody the wiser."),
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
     ("Squatter&rsquo;s Rights", "Ghost Town.jpg", "Move",
-     "Take Control of a <b>Defenseless District</b> in a Borough where a <b>rival holds the Deed</b>.",
+     "Take Control of a <b>Defenseless District</b> in a Borough where a <b>rival Controls 2+ Districts</b>.",
      "They left the lights on. They didn&rsquo;t leave anybody."),
     # LANDMARK (Nick, 2026-07-19): "along the East River" is a labelled feature on
     # the board, so the set is readable at a glance and cannot be argued: East
@@ -317,8 +323,11 @@ THREES = [
     # the 15-RUNNER CAP, which is the real constraint mid-game, not money.
     # "in one Play" added to match the model (and Tenement Army): without it the
     # Runners could be banked across several days, far easier than its Stake 3.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
     ("Union Dues", "Union Dues.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> whose <b>Borough Deed you don't hold</b>.",
+     "Recruit <b>4+ Runners</b> in one Play, with your <b>Safehouse</b> in a <b>Ward</b> in a Borough where a <b>rival Controls more Districts than you</b>.",
      "They line up at dawn. You decide who works."),
     # RE-VERBED Rise -> Secure (Nick, 2026-07-19). Two problems solved by one edit,
     # with no change to the 12/12/8 tier counts:
@@ -338,8 +347,11 @@ THREES = [
     # Safehouse-only Recruit that moves your whole spawn point into a rival's
     # Borough. Deed / no-Deed is glance-verifiable -- you hold the card or you don't
     # -- and it mirrors Union Dues.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
     ("Last One Standing", "Last One Standing.jpg", "Secure",
-     "Secure your Safehouse into a <b>$300 Speakeasy</b> in a Borough whose <b>Deed you don&rsquo;t hold</b>.",
+     "Secure your Safehouse into a <b>High Society Venue</b> in a Borough where <b>you do not Control the most Districts</b>.",
      "The last man at the table gets the chair."),
     # Re-themed off the Boss-kill (handoff §3, cluster 1). "Do not take Control"
     # is load-bearing: it makes this structurally unable to co-fire with ANY
@@ -370,8 +382,11 @@ FIVES = [
     # "of Rum" is redundant with the rules (High Society pours nothing else) but
     # says the quiet part out loud on the card: 8 barrels means the whole Trade
     # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
     ("Opening Night", "Jimmy.jpg", "Unload",
-     "Unload <b>8+ Barrels of Rum</b> at a single <b>High Society</b> Speakeasy.",
+     "Unload <b>8+ Barrels of Rum</b> at a single <b>High Society Venue</b>.",
      "The band plays till four. Nobody asks a thing."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
     # and exists purely to kill Bosses: the old wording locked the boss-killing mob
@@ -392,8 +407,11 @@ FIVES = [
     ("Over the Top", "Old Guard.jpg", "Open Fire",
      "Seize a <b>Bronx</b> District <b>defended by 5+ Mobsters</b>.",
      "These boys went over the top in France. This is a street."),
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
     ("The Five Families", "Accord.jpg", "Extort",
-     "Collect from a District in <b>all five Boroughs</b> in a single Extort Play.",
+     "Extort with a District you Control in <b>all five Boroughs</b>, in one Play.",
      "Not the richest table in town. Just the widest."),
     # Moonshine -> RUM (Nick). A setup hedge: Rum only exists via Trade at a Dock you
     # Control, and Staten's own boilers are hopeless (Westerleigh Pressure 1,
@@ -490,8 +508,11 @@ FIVES = [
     # door to a specific named player -- they can see it, and they can relocate to break
     # it (a real cost, which is the point). It reuses The Beachhead's own wording, so the
     # deck already teaches this phrase, and it keeps the Raid gate and the Rum chain.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
     ("High Roller", "High Roller.jpg", "Secure",
-     "Secure your Safehouse into a <b>High Society</b> District holding <b>4+ Rum</b>, <b>Land Connected</b> to a rival <b>Safehouse</b>.",
+     "Secure your Safehouse into a <b>High Society Venue</b> holding <b>4+ Rum</b>, <b>Land Connected</b> to a rival <b>Safehouse</b>.",
      "He moved uptown. The neighbours are still adjusting."),
 ]
 
