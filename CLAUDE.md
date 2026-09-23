@@ -154,15 +154,26 @@ in the game bricks a paid-for asset.
 ## Open design threads
 
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
-and the parts of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
-Ear) and a **2-player** North vs South mode.
-Neither is implemented and neither should be without Nick asking. The universal Sweep and
+and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
+Ear). It is not implemented and should not be without Nick asking. The universal Sweep and
 the Sicilians' **Untouchable** trait still read as they always have. Read the file before
 touching the Sweep, the Sicilian Playbook, or the player-count setup.
 
 The older `deed-sweep-handoff.md` proposal (let the Sweep skip Boroughs whose Deed you hold)
 was closed by the Deeds' removal and the file deleted; its combat modelling survives in
 `tools/sim_deed_sweep.js`, which still runs and is the tool to reach for on any Sweep change.
+
+**The game is 3 to 4 players** since 2026-09-23. The 2-player North vs South mode is
+shelved, not pending: two players have The Volstead Act. Two questions are open, and both
+belong to playtest rather than invention:
+
+- **Three-player kingmaking.** Respect is public and the win is a threshold, so at three the
+  trailing boss can see who is about to cross 20 and decide the game by stopping one rival
+  and not the other. The Blood Oath answers this at four; three has no answer yet. Do not add
+  one without Nick asking, and bring numbers from a real table.
+- **Game length.** The box used to say 90 to 120 minutes. Nobody has timed the current
+  rules, so the figure was cut from the Rulebook and the site. Put one back only from a timed
+  playtest.
 
 `kickback-blowback-handoff.md` (2026-09-22) holds the Rum-only Kickback (shipped the same
 day) and one still-open proposal: a Blowback shield for the Still that brewed. The shield is

@@ -7,7 +7,8 @@ the Rat costs 2 and each Welsher costs 1. A Kingpin must also be Solvent: an unp
 Mark bars victory. The Blood Oath is **40 combined Respect**, and both partners must be Solvent.
 The Bribe ladder escalates ($2,000 / $3,000 / $4,000 / $5,000).
 
-The 2-player North vs South mode remains open. Borough drafting shipped too: Turn Tokens are
+The 2-player North vs South mode is shelved (2026-09-23): the game is 3 to 4 players, and
+two players have The Volstead Act. Borough drafting shipped too: Turn Tokens are
 dealt before turf is established, and home Boroughs are picked in reverse Turn Order, the
 same order The Offers already use.
 
