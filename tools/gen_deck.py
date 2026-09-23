@@ -158,7 +158,7 @@ ONES = [
     # RENAMED from "The Riverside Switch" and re-arted (Nick, 2026-07-19). The old
     # art (Switch.png) has RIVERSIDE STORAGE painted across a moonlit suspension
     # bridge, which fought the objective twice over: Jamaica Bay is a bay, and in
-    # 1926 it had no major bridge at all (Marine Parkway is 1937, Cross Bay 1939).
+    # 1929 it had no major bridge at all (Marine Parkway is 1937, Cross Bay 1939).
     # Skiff.png is two men running a LIQUOR crate across black water in the rain,
     # harbour lights behind: the flavour line drawn as a picture. At 13 characters
     # the new name also clears the 16-char title--long threshold.
@@ -503,7 +503,7 @@ CLS = {1: "gig", 3: "racket", 5: "score"}
 # Cards v0.9. Folded back from a hand edit, 2026-07-24.
 BACK = ('  <div class="back"><div class="back-dia"></div><div class="back-title">Job</div>'
         '<div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div>'
-        '<div class="back-foot">New York &middot; 1926</div></div>')
+        '<div class="back-foot">New York &middot; 1929</div></div>')
 
 
 def visible_len(t):
@@ -563,7 +563,7 @@ VERSION = re.search(r'v\d+(?:\.\d+)*', DECK).group(0)
 body = f'''<body>
 
 <div class="masthead">
-  <div class="masthead-kicker">Prohibition &middot; New York &middot; 1926</div>
+  <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
   <div class="masthead-title">The Jobs Deck</div>
   <div class="masthead-sub">{VERSION} &middot; Complete Deck &middot; {total} Cards &middot; 12 / 12 / 8</div>
   <p class="masthead-note">
