@@ -169,8 +169,10 @@ belong to playtest rather than invention:
 
 - **Three-player kingmaking.** Respect is public and the win is a threshold, so at three the
   trailing boss can see who is about to cross 20 and decide the game by stopping one rival
-  and not the other. The Blood Oath answers this at four; three has no answer yet. Do not add
-  one without Nick asking, and bring numbers from a real table.
+  and not the other. The Blood Oath answers this at four; three has no answer yet. The leading
+  candidate is **Last Call**, a variable ending that Nick would make the main mode at 3 to 4
+  players: `last-call-handoff.md` (2026-09-23) holds the shape and its loose ends. It is being
+  thought through, not implemented. Do not write it into any component without Nick asking.
 - **Game length.** The box used to say 90 to 120 minutes. Nobody has timed the current
   rules, so the figure was cut from the Rulebook and the site. Put one back only from a timed
   playtest.
