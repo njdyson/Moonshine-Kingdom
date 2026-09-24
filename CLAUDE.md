@@ -62,7 +62,7 @@ Since 2026-09-23 the game is set in **1929**, after Arnold Rothstein's murder. T
 the war for what he left behind. Rules are unchanged; only the fiction moved:
 
 - **The Commission** is the table where the families settle their business. Winning at
-  Sunset (20 Respect, Solvent, Boss on the board) means **earning a seat on it**. The
+  Sunset (20 Respect, and a Solvent Boss in a High Society Venue) means **earning a seat on it**. The
   winner does not found it or head it: an earlier draft said so and read too strong.
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
   Reaching 10 Influence claims **the Nod** (the city vouching for you, 10 Respect). The card
@@ -86,20 +86,45 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
 
-## The crown needs 20 Respect and Solvency
+## The crown needs 20 Respect and a Solvent Boss in High Society
 
 There are no Borough Deeds, Titles, or other board-scoring cards. Respect is completed Jobs,
 plus **the Nod** (10 Respect), claimed the instant a player reaches **10 Influence**,
 less **2** for the Rat Card and **1** per Welsher. A Kingpin wins at Sunset with **20 Respect**
-and **Solvent** status. An unpaid Shylock's Mark does not change Respect, but it bars victory
-until it is cleared. The Volstead Act remains an intentional exception: it does not track Respect
+and a **Solvent Boss in a High Society Venue**. An unpaid Shylock's Mark does not change Respect,
+but it bars victory until it is cleared. The Volstead Act remains an intentional exception: it does not track Respect
 and has its own honor rule.
 
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
 never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod.
-In the Blood Oath, each Alliance races to **40 combined Respect** and both partners must be
-Solvent. The Rulebook, Town Planner,
+In the Blood Oath, each Alliance races to **40 combined Respect**, both partners must be
+Solvent, and at least one Boss must be in a High Society Venue; if only one is, he is crowned
+alone, and if both are, the higher contributor is. The Rulebook, Town Planner,
 Playbooks, Cards sheet, Federal Crackdown Tracker, and The Almanac must agree on these values.
+
+**Where the crown is won** (since 2026-09-24; it was "Boss on the board"). The Boss must be
+standing in one of the four High Society Venues when the books open, and a fallen Boss still
+**Rises only in a Safe Ward**. The gap between the two is the point: it gives the endgame a
+third act, where the leader's Boss is the table's target and a kill costs him a Rise plus a
+walk. Rivals get two kinds of denial, both visible and paid for: kill the Boss and hold the
+Wards (five on the board), or sit in the room he needs. A full Ward lockout is a feature, not
+a hole: Recruit, Unload and Jobs still run, and it lasts only while rivals keep a Runner on
+every Ward.
+
+Rejected on the way, so nobody rebuilds them:
+
+- **Rise at the Safehouse** (mirroring Recruit). Players Secure their most valuable District,
+  which will be the High Society room, so a killed Boss would respawn on the winning square.
+  Any "Boss in a place" win needs Rise somewhere the value isn't.
+- **Crown in a Ward** (start in a Ward, end in a Ward). Rise lands in a Ward, so a kill hands
+  the leader the win. A "Risen Boss lies on his side for a Day" patch fixed it and was cut as
+  too fiddly.
+- **Last Call**, the variable ending (`last-call-handoff.md`): extra time only gives the table
+  longer to bash the leader.
+
+Watch in playtest: the room doubles as the leader's fortress (Boss, Safehouse, Ambush, and the
+Recruit point on one square). The counter already in the rules is the Raid: the Big Bust goes
+for the most barrels, and a Rum stockpile there is Raid bait.
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
@@ -169,10 +194,9 @@ belong to playtest rather than invention:
 
 - **Three-player kingmaking.** Respect is public and the win is a threshold, so at three the
   trailing boss can see who is about to cross 20 and decide the game by stopping one rival
-  and not the other. The Blood Oath answers this at four; three has no answer yet. The leading
-  candidate is **Last Call**, a variable ending that Nick would make the main mode at 3 to 4
-  players: `last-call-handoff.md` (2026-09-23) holds the shape and its loose ends. It is being
-  thought through, not implemented. Do not write it into any component without Nick asking.
+  and not the other. The Blood Oath answers this at four. At three, the High Society crown
+  (2026-09-24, above) is the current answer: the block is visible, has to be held, and there
+  are four rooms to cover. Whether that is enough is a playtest question. Last Call was rejected.
 - **Game length.** The box used to say 90 to 120 minutes. Nobody has timed the current
   rules, so the figure was cut from the Rulebook and the site. Put one back only from a timed
   playtest.
