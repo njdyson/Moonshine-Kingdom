@@ -1,7 +1,9 @@
 # Last Call: a variable ending (proposal, not implemented)
 
-**Status: open, 2026-09-23.** Nothing here is in any component. Nick wants to think it through
-before any rules text is written. Do not implement it without Nick asking.
+**Status: rejected, 2026-09-24.** Extra time only gives the table longer to bash the leader.
+The three-player answer went instead to the High Society crown (the Boss must be in a High
+Society Venue at Sunset; see `CLAUDE.md`). Kept for the reasoning; nothing here is in any
+component. The "today's win test" below is the old one (Boss on the board).
 
 ## The idea
 
