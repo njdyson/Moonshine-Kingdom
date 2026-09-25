@@ -61,53 +61,68 @@ only when a rule is genuinely easy to miss *and* costly to get wrong.
 Since 2026-09-23 the game is set in **1929**, after Arnold Rothstein's murder. The story is
 the war for what he left behind. Rules are unchanged; only the fiction moved:
 
-- **The Commission** is the table where the families settle their business. Winning at
-  Sunset (20 Respect, and a Solvent Boss in a High Society Venue) means **earning a seat on it**. The
+- **The Commission** is the table where the families settle their business. Winning (the
+  Nod's Play, **Take the Crown**) means **earning a seat on it**. The
   winner does not found it or head it: an earlier draft said so and read too strong.
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
-  Reaching 10 Influence claims **the Nod** (the city vouching for you, 10 Respect). The card
+  Reaching 10 Influence claims **the Nod** (the city vouching for you). The card
   was called the Commission Seat until 2026-09-23; it was renamed because a card called a
-  Seat read as the win. Don't bring the old name back.
+  Seat read as the win. Don't bring the old name back. Since 2026-09-25 it pays no Respect:
+  it carries the Play that wins, so "the Nod" (permission from above) now fits it exactly.
 - **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
   Rothstein once, in the scene that opens A Day in the Life, and stops; the front page is a hook,
   not a history. **The Almanac** is the prequel and the
   player-facing strategy book: Rothstein's advice to a young Charlie Lucania at Lindy's on
   4 November 1928, the night he was shot. It carries the scene, not the history.
 - The **Kingpin's Guide** is off the site (no index tile). It stays in the repo as the
-  long-form design reference and may lag the rules (it still says Commission Seat).
+  long-form design reference and may lag the rules (it still says Commission Seat, and still
+  crowns at Sunset on 20 Respect).
 
 ## v0.9.8 streamlined rules
 
 This supersedes the older Titles, Hotspot, and Sweep notes below until they are fully retired.
 
-- The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, make the Sunset win check, then flip Turn Tokens if no one won.
+- The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, unmet promises take their Welsher, then flip Turn Tokens. Nobody wins at Sunset: the game is won mid-Day, by Take the Crown.
 - Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
 - The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
 - The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
 - There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
 
-## The crown needs 20 Respect and a Solvent Boss in High Society
+## The crown is a Play: Take the Crown, and only the Nod carries it
 
-There are no Borough Deeds, Titles, or other board-scoring cards. Respect is completed Jobs,
-plus **the Nod** (10 Respect), claimed the instant a player reaches **10 Influence**,
-less **2** for the Rat Card and **1** per Welsher. A Kingpin wins at Sunset with **20 Respect**
-and a **Solvent Boss in a High Society Venue**. An unpaid Shylock's Mark does not change Respect,
-but it bars victory until it is cleared. The Volstead Act remains an intentional exception: it does not track Respect
-and has its own honor rule.
+Since 2026-09-25. There are no Borough Deeds, Titles, or other board-scoring cards. Respect is
+completed Jobs, less **2** for the Rat Card and **1** per Welsher. **The Nod**, claimed the
+instant a player reaches **10 Influence**, pays no Respect: it carries the game's one ending
+Play, **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn with your
+**Boss in a High Society Venue**, no unpaid **Shylock's Mark** and **10+ Respect**, and you win
+on the spot. An unpaid Mark does not change Respect, but it bars the Crown until it is cleared.
+
+The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
+That free final betrayal is Nick's call, on purpose ("cleaner and more brutal"); do not patch
+it by having the Crown open the books. Promises still come due when the final player Lays Low
+(the Welsher lands before anything else at Sunset), and one broken by an act lands its Welsher
+at once, so only a promise not yet due goes free. One boss acts at a time, so there is no
+tiebreak: the Final Standoff is gone, and with it the Loose Change the Playbooks printed.
 
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
-never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod.
-In the Blood Oath, each Alliance races to **40 combined Respect**, both partners must be
-Solvent, and at least one Boss must be in a High Society Venue; if only one is, he is crowned
-alone, and if both are, the higher contributor is. The Rulebook, Town Planner,
-Playbooks, Cards sheet, Federal Crackdown Tracker, and The Almanac must agree on these values.
+never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod, so every winner
+has climbed all four rungs ($14,000).
+In the Blood Oath, an Alliance needs **20 combined Respect** with both partners Solvent, and a
+partner **holding the Nod** Takes the Crown with his own Boss in a High Society Venue; whoever
+crowns is the Capo. The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown
+Tracker, and The Almanac must agree on these values.
+
+Why it works: the Crown is its own Play, made from a room the Boss already stands in, so the
+Play that completes a boss's conditions can never also crown him. The table always sees it
+one turn out, without a special rule. The Nod is public, so is Respect, and the Crown's two
+markers mean a boss who spends out qualifying waits for tomorrow.
 
 **Where the crown is won** (since 2026-09-24; it was "Boss on the board"). The Boss must be
-standing in one of the four High Society Venues when the books open, and a fallen Boss still
+standing in one of the four High Society Venues when he Takes the Crown, and a fallen Boss still
 **Rises only in a Safe Ward**. The gap between the two is the point: it gives the endgame a
-third act, where the leader's Boss is the table's target and a kill costs him a Rise plus a
-walk. Rivals get two kinds of denial, both visible and paid for: kill the Boss and hold the
+third act, where the leader's Boss is the table's target and a kill costs him a Rise, a walk
+and the Crown: five markers at least, a whole Ledger. Rivals get two kinds of denial, both visible and paid for: kill the Boss and hold the
 Wards (five on the board), or sit in the room he needs. A full Ward lockout is a feature, not
 a hole: Recruit, Unload and Jobs still run, and it lasts only while rivals keep a Runner on
 every Ward.
@@ -122,10 +137,21 @@ Rejected on the way, so nobody rebuilds them:
   too fiddly.
 - **Last Call**, the variable ending (`last-call-handoff.md`): extra time only gives the table
   longer to bash the leader.
+- **The Coronation** (sudden death, 2026-09-25): win at the end of any Play of yours that meets
+  the test. No warning at all: walking into the room won on arrival, and a face-down Vipers Job
+  could win from nowhere. Take the Crown keeps its good parts (own turn only, no tiebreak).
+- **The Nod still worth 10, plus a Crown Play at 20.** The 10 is dead weight once every winner
+  must hold the Nod: it only moves the bar.
 
-Watch in playtest: the room doubles as the leader's fortress (Boss, Safehouse, Ambush, and the
-Recruit point on one square). The counter already in the rules is the Raid: the Big Bust goes
-for the most barrels, and a Rum stockpile there is Raid bait.
+Watch in playtest:
+
+- The room doubles as the leader's fortress (Boss, Safehouse, Ambush, and the Recruit point on
+  one square). The counter already in the rules is the Raid: the Big Bust goes for the most
+  barrels, and a Rum stockpile there is Raid bait.
+- **The last boss up.** Rivals who have Laid Low get no turns and can't Ambush, so a boss with
+  three markers left after them can walk in and crown back to back.
+- Against a bar of 10, the Rat's **2** and each Welsher's **1** weigh twice what they did.
+- The Bribe ladder is now compulsory: whether $14,000 lengthens games is untimed.
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
@@ -190,14 +216,16 @@ was closed by the Deeds' removal and the file deleted; its combat modelling surv
 `tools/sim_deed_sweep.js`, which still runs and is the tool to reach for on any Sweep change.
 
 **The game is 3 to 4 players** since 2026-09-23. The 2-player North vs South mode is
-shelved, not pending: two players have The Volstead Act. Two questions are open, and both
+shelved, not pending, and so is **The Volstead Act** (2026-09-25). It still breaks ties on the
+Loose Change the Playbooks no longer print, so it needs a new tiebreak if it returns. Two questions are open, and both
 belong to playtest rather than invention:
 
 - **Three-player kingmaking.** Respect is public and the win is a threshold, so at three the
-  trailing boss can see who is about to cross 20 and decide the game by stopping one rival
-  and not the other. The Blood Oath answers this at four. At three, the High Society crown
-  (2026-09-24, above) is the current answer: the block is visible, has to be held, and there
-  are four rooms to cover. Whether that is enough is a playtest question. Last Call was rejected.
+  trailing boss can see who is about to crown and decide the game by stopping one rival
+  and not the other. The Blood Oath answers this at four. At three, the current answer is the
+  crown itself (above): it needs the Nod, a room that has to be held (four to cover), and a
+  Play of its own, so the table always gets a turn's warning. Whether that is enough is a
+  playtest question. Last Call and the Coronation were rejected.
 - **Game length.** The box used to say 90 to 120 minutes. Nobody has timed the current
   rules, so the figure was cut from the Rulebook and the site. Put one back only from a timed
   playtest.
@@ -218,7 +246,7 @@ Blowback.
 A rules change is never one file. The player-facing set is:
 
 `Rulebook`, `The Almanac`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
-`The Volstead Act`, `Still Tokens`, `Turn Tokens`, `The Ledger` (both), `Brew Simulator`,
+`The Volstead Act` (shelved), `Still Tokens`, `Turn Tokens`, `The Ledger` (both), `Brew Simulator`,
 `Combat Simulator`, `Federal Crackdown Tracker`, `index.html`.
 
 After changing a rule, grep the whole set for the old wording. The Town Planner and the

@@ -1,5 +1,9 @@
 # mk-online: rules sync backlog
 
+> **2026-09-25: the win is a Play.** The Nod pays no Respect; it carries **Take the Crown**,
+> a Power Play that wins on the spot with the Boss in a High Society Venue, no Mark and 10+
+> Respect. There is no Sunset victory test and no tiebreak. See §16.
+
 > **2026-09-23: the Commission Seat is renamed The Nod.** Same rule: claim it the instant
 > you reach 10 Influence, worth 10 Respect. Winning is now framed as earning a seat on the
 > Commission, so a card called a Seat read as the win. Rename the card, its log lines and
@@ -525,6 +529,40 @@ checked, so treat every row as "verify, then port if it differs".
 | 13.4 | Sicilian Untouchable: when the Safehouse District would be the Raid target, what does the Squad take instead? | **It bypasses that District as if it were out of reach.** The Sicilians' next District in reach if they have one (by Barrels, then Pressure), otherwise the next marker on the Heat Track; with nothing left to chase, the Squad stays put. |
 | 13.5 | When a firefight's first shot is the fifth Heat marker, does the Raid interrupt the fight? | **No.** A firefight is one Play, and Heat lands as the Play ends, so the fight resolves first and the Raid follows. The winner is standing on the block (and holding its barrels) when the Squads move. |
 
+## 14. Jobs complete only on your own Play (2026-09-25)
+
+*The Play Is the Unit* never said whose Play. Raised by the Coronation proposal (an on-turn
+win, not adopted), which needed Respect to move only on the active player's Play. The Rulebook
+and the Jobs deck masthead now say it.
+
+| # | Question | Ruling |
+|---|----------|--------|
+| 14.1 | Whose Jobs are checked when a Play ends? | **The active player's only.** Check that player's claimed Jobs against the Play, including the fight it started and any Raid it set off (The Insurance Job depends on that). Never check the Occupier's. |
+| 14.2 | Does a kill by the Occupier (Ambush, or return fire on an Open Fire) count toward his Jobs? | **No.** The Toll Booth Trap, the Butcher's Ledger and the Irish Goodbye pay only the Invader. The Goodbye's "take no Control" is always true for a defender, so a build that checks both sides pays it for shooting back. |
+| 14.3 | Does a Fold, or a Raid Scatter set off by a rival's Play, count? | **No.** Squatter's Rights pays only when the District is taken on your own Play. A Scatter from a Raid your own Play set off does count. |
+
+## 15. The Welsher lands before the books open (2026-09-25)
+
+A promise unmet "when the Day ends" earns a Welsher, and the books open "the moment the final
+player Lays Low"; nothing said which came first. Nick's ruling: **the Welsher first.** A boss
+on exactly 20 with an unmet promise is not crowned that Sunset. The Rulebook's Sunset Win
+Check and the Town Planner now say so. Only matters online if deals ship (§7.5): at Sunset,
+resolve expired Handshakes into Welsher cards before anything else. (Since §16 there is no
+victory test at Sunset; the ruling still orders the Welshers first.)
+
+## 16. Take the Crown (2026-09-25, supersedes 11.3 and 11.6)
+
+The game is won by a Play, not tested at Sunset. The Commission still seats one man; he now
+has to ask for the seat on his own turn.
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 16.1 | The Nod is worth 10 Respect. | **Worth nothing.** Respect is completed Jobs, less 2 for the Rat Card and 1 per Welsher, computed at use, never stored. The Nod is a flag claimed at 10 Influence that unlocks 16.2. |
+| 16.2 | Victory is tested at Sunset: 20 Respect, Solvent, Boss in a High Society Venue. | **A new Power Play, Take the Crown** (cost 2, draws no Heat). Offered only to a player holding the Nod whose Boss stands in a High Society Venue (Sugar Hill, Morris Park, Williamsburg, Richmond Hill), with no Mark and Respect of 10 or more. Making it ends the game at once and the maker wins. Nothing else resolves: open Handshakes simply die, with no Welshers. |
+| 16.3 | Sunset runs the victory test, and the Final Standoff breaks ties (Respect, then cash plus Loose Change). | **Delete both.** Sunset resolves expired Handshakes into Welshers (§15) and flips the Turn Tokens. No tiebreak exists, since one player acts at a time. Retire Loose Change from any UI. |
+| 16.4 | Blood Oath: 40 combined; one Boss in a room crowns the Alliance; the higher contributor is Capo. | **20 combined Respect, both partners Solvent. The partner who crowns must hold the Nod and have his own Boss in a High Society Venue, and he is the Capo.** |
+| 16.5 | Bots value the Nod as 10 Respect. | **Value it as the win key**: every winner climbs the whole Bribe ladder. Take the Crown the moment it is legal. Against a rival with the Nod and 10+ Respect whose Boss is in, or one Move from, a room, the Boss kill (11.8) and sitting in the room are the highest-value Plays. Discount to zero any Handshake payment due at Sunset from a player who can crown before then. |
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -624,3 +662,9 @@ checked, so treat every row as "verify, then port if it differs".
 - [ ] **Blood Oath: one Boss crowns the Alliance, a lone Boss crowns the man** (11.6)
 - [ ] **Bribe requires a Boss on the board** (11.7)
 - [ ] **Bots: re-price decapitation, and price it highest against a rival near 20** (11.8)
+- [ ] **Jobs are checked for the active player only**, fight and self-set-off Raid included (§14)
+- [ ] **If deals ship online: expired Handshakes become Welshers first thing at Sunset** (§15)
+- [ ] **Take the Crown replaces the Sunset victory test** (16.1 to 16.3): the Nod pays no Respect,
+      Respect ≥ 10, Final Standoff and Loose Change deleted
+- [ ] **Blood Oath: 20 combined, the crowning partner holds the Nod and is Capo** (16.4), variant not built yet
+- [ ] **Bots: the Nod is the win key; never trust a Sunset payment from a player who can crown** (16.5)

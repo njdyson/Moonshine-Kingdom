@@ -581,6 +581,12 @@ path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
 # still printing "v0.8" on the v0.9 sheet).
 VERSION = re.search(r'v\d+(?:\.\d+)*', DECK).group(0)
 
+# "your own Plays" (2026-09-25): the unit never said whose Play. Four cards could
+# pay on defence: The Toll Booth Trap and The Butcher's Ledger by Ambush or return
+# fire, The Irish Goodbye the same way (a defender never takes Control, so its
+# "take no Control" is always true), and Squatter's Rights by a Fold or a Raid
+# Scatter into a Defenseless District. The same gap Nick closed on The Insurance
+# Job by naming the Rat. A Raid your own Play sets off is still part of that Play.
 body = f'''<body>
 
 <div class="masthead">
@@ -589,7 +595,7 @@ body = f'''<body>
   <div class="masthead-sub">{VERSION} &middot; Complete Deck &middot; {total} Cards &middot; 12 / 12 / 8</div>
   <p class="masthead-note">
     Every Job is an <b>event</b>, not a board state: a verb, an object, and a moment.
-    The Play is the unit: at the end of a Play, check whether that Play did the thing.
+    The Play is the unit: at the end of each of your own Plays, check whether that Play did the thing.
     Things that happened during the Play count, even if undone before it ended.
   </p>
 </div>
