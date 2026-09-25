@@ -537,6 +537,14 @@ and the Jobs deck masthead now say it.
 | 14.2 | Does a kill by the Occupier (Ambush, or return fire on an Open Fire) count toward his Jobs? | **No.** The Toll Booth Trap, the Butcher's Ledger and the Irish Goodbye pay only the Invader. The Goodbye's "take no Control" is always true for a defender, so a build that checks both sides pays it for shooting back. |
 | 14.3 | Does a Fold, or a Raid Scatter set off by a rival's Play, count? | **No.** Squatter's Rights pays only when the District is taken on your own Play. A Scatter from a Raid your own Play set off does count. |
 
+## 15. The Welsher lands before the books open (2026-09-25)
+
+A promise unmet "when the Day ends" earns a Welsher, and the books open "the moment the final
+player Lays Low"; nothing said which came first. Nick's ruling: **the Welsher first.** A boss
+on exactly 20 with an unmet promise is not crowned that Sunset. The Rulebook's Sunset Win
+Check and the Town Planner now say so. Only matters online if deals ship (§7.5): at Sunset,
+resolve expired Handshakes into Welsher cards, then run the victory test.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -637,3 +645,4 @@ and the Jobs deck masthead now say it.
 - [ ] **Bribe requires a Boss on the board** (11.7)
 - [ ] **Bots: re-price decapitation, and price it highest against a rival near 20** (11.8)
 - [ ] **Jobs are checked for the active player only**, fight and self-set-off Raid included (§14)
+- [ ] **If deals ship online: expired Handshakes become Welshers before the Sunset victory test** (§15)
