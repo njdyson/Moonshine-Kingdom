@@ -525,6 +525,18 @@ checked, so treat every row as "verify, then port if it differs".
 | 13.4 | Sicilian Untouchable: when the Safehouse District would be the Raid target, what does the Squad take instead? | **It bypasses that District as if it were out of reach.** The Sicilians' next District in reach if they have one (by Barrels, then Pressure), otherwise the next marker on the Heat Track; with nothing left to chase, the Squad stays put. |
 | 13.5 | When a firefight's first shot is the fifth Heat marker, does the Raid interrupt the fight? | **No.** A firefight is one Play, and Heat lands as the Play ends, so the fight resolves first and the Raid follows. The winner is standing on the block (and holding its barrels) when the Squads move. |
 
+## 14. Jobs complete only on your own Play (2026-09-25)
+
+*The Play Is the Unit* never said whose Play. Raised by the Coronation proposal (an on-turn
+win, not adopted), which needed Respect to move only on the active player's Play. The Rulebook
+and the Jobs deck masthead now say it.
+
+| # | Question | Ruling |
+|---|----------|--------|
+| 14.1 | Whose Jobs are checked when a Play ends? | **The active player's only.** Check that player's claimed Jobs against the Play, including the fight it started and any Raid it set off (The Insurance Job depends on that). Never check the Occupier's. |
+| 14.2 | Does a kill by the Occupier (Ambush, or return fire on an Open Fire) count toward his Jobs? | **No.** The Toll Booth Trap, the Butcher's Ledger and the Irish Goodbye pay only the Invader. The Goodbye's "take no Control" is always true for a defender, so a build that checks both sides pays it for shooting back. |
+| 14.3 | Does a Fold, or a Raid Scatter set off by a rival's Play, count? | **No.** Squatter's Rights pays only when the District is taken on your own Play. A Scatter from a Raid your own Play set off does count. |
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -624,3 +636,4 @@ checked, so treat every row as "verify, then port if it differs".
 - [ ] **Blood Oath: one Boss crowns the Alliance, a lone Boss crowns the man** (11.6)
 - [ ] **Bribe requires a Boss on the board** (11.7)
 - [ ] **Bots: re-price decapitation, and price it highest against a rival near 20** (11.8)
+- [ ] **Jobs are checked for the active player only**, fight and self-set-off Raid included (§14)
