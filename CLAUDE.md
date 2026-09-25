@@ -97,6 +97,10 @@ instant a player reaches **10 Influence**, pays no Respect: it carries the game'
 Play, **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn with your
 **Boss in a High Society Venue**, no unpaid **Shylock's Mark** and **10+ Respect**, and you win
 on the spot. An unpaid Mark does not change Respect, but it bars the Crown until it is cleared.
+It is a special, one-time Play that the Nod unlocks, so it lives on the Winning the Game page
+(a heading and a three-item list; a Plays-style table there split the page and was cut) and on
+the Nod card. Keep it out of the standard Power Plays table
+and off the Playbooks' Play lists: listed beside Bribe and Rise, it read as an ordinary Play.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
 That free final betrayal is Nick's call, on purpose ("cleaner and more brutal"); do not patch
