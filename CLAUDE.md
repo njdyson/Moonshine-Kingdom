@@ -69,7 +69,8 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   was called the Commission Seat until 2026-09-23; it was renamed because a card called a
   Seat read as the win. Don't bring the old name back.
 - **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
-  Rothstein once, on the front page, and stops. **The Almanac** is the prequel and the
+  Rothstein once, in the scene that opens A Day in the Life, and stops; the front page is a hook,
+  not a history. **The Almanac** is the prequel and the
   player-facing strategy book: Rothstein's advice to a young Charlie Lucania at Lindy's on
   4 November 1928, the night he was shot. It carries the scene, not the history.
 - The **Kingpin's Guide** is off the site (no index tile). It stays in the repo as the

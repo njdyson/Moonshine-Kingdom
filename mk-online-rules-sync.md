@@ -71,7 +71,7 @@ step with no clock, track or escalation clause to implement.
 | 1.6 | Rat is blocked while already holding the card. Log: *"Rat failed: you already hold the Rat Card (cannot Rat again until you Rise)."* | **Keep the block** — it is what stops a non-contender turning 2 Influence into an unlimited Raid button. Change the message: Rise is not the exit, and neither is anything else you control. |
 | 1.7 | Log on taking the card: *"Cannot Bribe, Rat, or be crowned until you Rise."* | Reword: **−3 Respect** at the Reckoning and no second Rat, until a rival takes it off you. |
 | 1.8 | Seat-tab tooltip: *"Holds the Rat Card: cannot Bribe, Rat, or be crowned until they Rise a new Boss"* | Same reword. The tooltip should show the −3 explicitly; it is now the whole card. |
-| 1.9 | — | **Blood Oath, if implemented:** the −3 lands in the Alliance's *combined* Respect, and the Sit-Down ranks on current Respect — so the card in a player's hand at Crackdown 10 can change which pairs form. Both fall out of scoring correctly if 1.3 is a scoring-time modifier; both break if it is stored. |
+| 1.9 | — | **Blood Oath, if implemented:** the −3 lands in the Alliance's *combined* Respect, and the Truce ranks on current Respect — so the card in a player's hand at Crackdown 10 can change which pairs form. Both fall out of scoring correctly if 1.3 is a scoring-time modifier; both break if it is stored. |
 | 1.10 | — | **Volstead, if implemented:** Volstead does not track Respect, so −3 is a no-op there and the Rat would be free. That variant **keeps the crown-bar** for the Rat Card. It is the one place the old gate survives. |
 
 ### Unchanged
@@ -546,7 +546,7 @@ checked, so treat every row as "verify, then port if it differs".
 - [x] Keep the Rat-repeat block; reword it, the take-card log and the seat tooltip (1.6–1.8)
       — the last two stale "cannot Bribe" strings (seat tooltip, Rat play card) were cleared
       2026-08-01.
-- [ ] Blood Oath: −3 flows into combined Respect and into Sit-Down ranking (1.9)
+- [ ] Blood Oath: −3 flows into combined Respect and into Truce ranking (1.9)
       — **n/a until the variant exists.** mk-online implements no Alliance mode.
 - [ ] Volstead: Rat Card keeps the crown-bar there, since Respect isn't tracked (1.10)
       — **n/a until the variant exists.**
