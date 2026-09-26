@@ -61,14 +61,36 @@ only when a rule is genuinely easy to miss *and* costly to get wrong.
 Since 2026-09-23 the game is set in **1929**, after Arnold Rothstein's murder. The story is
 the war for what he left behind. Rules are unchanged; only the fiction moved:
 
-- **The Commission** is the table where the families settle their business. Winning (the
-  Nod's Play, **Take the Crown**) means **earning a seat on it**. The
-  winner does not found it or head it: an earlier draft said so and read too strong.
+- **The Crown is the prize; the Commission is the judge** (since 2026-09-26). You fight over
+  **the Crown** (the Play, the board's crown icons, the cards' crown shields all say so). **The
+  Commission** is the table where the families settle their business: they set the terms the
+  Crown's conditions answer, and the High Society Venues are where they drink with the
+  judges, so that is where it is taken. They *accept* the new man; he does not found or head
+  the Commission (an earlier draft said so and read too strong, so no "Boss of Bosses"), and
+  at the climax they "rise to their feet". **Never call the prize a seat or a chair**: "seat"
+  already means a turn-order position ("the first seat brews richest", "Hold your seat",
+  and throughout The Almanac), and "the chair" is the family's, which Rise refills. A brief
+  2026-09-26 draft called it "a seat; on the street, the Crown"; two names for one prize read
+  as muddle. "The crown of this town has lain in the gutter since November" nods to Rothstein
+  without naming him.
+- **The endgame reads in one order everywhere**: the crown, then what the families want (a
+  name, which is Respect; the city, which is the Nod; a man nobody owns, which is no Mark),
+  then the walk into a High Society Venue and the Play. The Rulebook's Goal page is "The Crown
+  of New York", with Jobs and **The Nod: Buy the City** as its two sections; it was "Earning
+  Respect" with the Nod filed under it, a layout left over from the card paying 10 Respect.
+  The Nod's one-line why: "The families bring the guns. The new man brings the city."
+- **Sunset** is a moment, not a phase: the instant the final player Lays Low. It keeps its
+  name because other rules point at it (the Handshake deadline, the Welsher, the Turn Tokens,
+  and a promise "due at Sunset" dying when the Crown is taken). Deals run out "at Sunset",
+  never "at the end of the Day" or "by Day's end": one name for one moment.
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
   Reaching 10 Influence claims **the Nod** (the city vouching for you). The card
   was called the Commission Seat until 2026-09-23; it was renamed because a card called a
   Seat read as the win. Don't bring the old name back. Since 2026-09-25 it pays no Respect:
   it carries the Play that wins, so "the Nod" (permission from above) now fits it exactly.
+  "The Nomination" was weighed on 2026-09-26 and not taken: it promises a nominator and a
+  vote still to come, and nobody votes; you claim the Nod yourself at 10. Don't call the Nod
+  "untouchable" either: that is the Sicilians' keyword.
 - **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
   Rothstein once, in the scene that opens A Day in the Life, and stops; the front page is a hook,
   not a history. **The Almanac** is the prequel and the
@@ -112,8 +134,9 @@ tiebreak: the Final Standoff is gone, and with it the Loose Change the Playbooks
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
 never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod, so every winner
 has climbed all four rungs ($14,000).
-In the Blood Oath, an Alliance needs **20 combined Respect** with both partners Solvent, and a
-partner **holding the Nod** Takes the Crown with his own Boss in a High Society Venue; whoever
+In the Blood Oath, an Alliance needs **20 combined Respect** with neither partner holding a
+Mark (the design docs call this "Solvent"; the Rulebook never defined it, so it isn't
+player-facing), and a partner **holding the Nod** Takes the Crown with his own Boss in a High Society Venue; whoever
 crowns is the Capo. The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown
 Tracker, and The Almanac must agree on these values.
 
