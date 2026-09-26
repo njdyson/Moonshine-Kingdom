@@ -291,8 +291,7 @@ None of these change a rule. They're what the stress test turned up about the wa
    rivals are still up. (Nick's ruling, 2026-09-26: an Unload's own two markers are spent before
    its Kickbacks land, so two markers and five Rum take the Ledger to zero and refill it to five.
    The Rulebook's turn box lists "Pay the cost" after the Play resolves, which a literal reader
-   could take the other way; a clause in the Kickback text would settle it if that ever comes up
-   at a table.)
+   could take the other way, so the Unload entry now says it outright.)
 4. **Moving through a rival block.** A crew can Move into a block and Advance out in one Play for
    two markers if the Occupier Holds Fire: two blocks in one turn. It's rules-consistent (Hold
    Fire lets a passer-by through, as the Guide says) and it makes the Ambush the only answer
