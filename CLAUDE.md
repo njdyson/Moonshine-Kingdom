@@ -63,12 +63,25 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
 
 - **The Commission** is the table where the families settle their business. Winning (the
   Nod's Play, **Take the Crown**) means **earning a seat on it**. The
-  winner does not found it or head it: an earlier draft said so and read too strong.
+  winner does not found it or head it: an earlier draft said so and read too strong (so no
+  "Boss of Bosses"). The seat and the Crown are one prize with two names, and the Rulebook
+  says so where it first names them: "Around the table they call it a seat; on the street,
+  the Crown." The seat "has stood empty since November" nods to Rothstein without naming him.
+- **The endgame reads in one order everywhere** (since 2026-09-26): the empty seat, then what
+  the families want (a name, which is Respect; the city, which is the Nod; a man nobody owns,
+  which is no Mark), then the walk into a High Society Venue and the Play. The Rulebook's Goal
+  page is "A Seat at the Commission", with Jobs and **The Nod: Buy the City** as its two
+  sections; it was "Earning Respect" with the Nod filed under it, a layout left over from the
+  card paying 10 Respect. The Nod's one-line why: "The families bring the guns. The new man
+  brings the city."
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
   Reaching 10 Influence claims **the Nod** (the city vouching for you). The card
   was called the Commission Seat until 2026-09-23; it was renamed because a card called a
   Seat read as the win. Don't bring the old name back. Since 2026-09-25 it pays no Respect:
   it carries the Play that wins, so "the Nod" (permission from above) now fits it exactly.
+  "The Nomination" was weighed on 2026-09-26 and not taken: it promises a nominator and a
+  vote still to come, and nobody votes; you claim the Nod yourself at 10. Don't call the Nod
+  "untouchable" either: that is the Sicilians' keyword.
 - **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
   Rothstein once, in the scene that opens A Day in the Life, and stops; the front page is a hook,
   not a history. **The Almanac** is the prequel and the
@@ -112,8 +125,9 @@ tiebreak: the Final Standoff is gone, and with it the Loose Change the Playbooks
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
 never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod, so every winner
 has climbed all four rungs ($14,000).
-In the Blood Oath, an Alliance needs **20 combined Respect** with both partners Solvent, and a
-partner **holding the Nod** Takes the Crown with his own Boss in a High Society Venue; whoever
+In the Blood Oath, an Alliance needs **20 combined Respect** with neither partner holding a
+Mark (the design docs call this "Solvent"; the Rulebook never defined it, so it isn't
+player-facing), and a partner **holding the Nod** Takes the Crown with his own Boss in a High Society Venue; whoever
 crowns is the Capo. The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown
 Tracker, and The Almanac must agree on these values.
 
