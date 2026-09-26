@@ -61,19 +61,28 @@ only when a rule is genuinely easy to miss *and* costly to get wrong.
 Since 2026-09-23 the game is set in **1929**, after Arnold Rothstein's murder. The story is
 the war for what he left behind. Rules are unchanged; only the fiction moved:
 
-- **The Commission** is the table where the families settle their business. Winning (the
-  Nod's Play, **Take the Crown**) means **earning a seat on it**. The
-  winner does not found it or head it: an earlier draft said so and read too strong (so no
-  "Boss of Bosses"). The seat and the Crown are one prize with two names, and the Rulebook
-  says so where it first names them: "Around the table they call it a seat; on the street,
-  the Crown." The seat "has stood empty since November" nods to Rothstein without naming him.
-- **The endgame reads in one order everywhere** (since 2026-09-26): the empty seat, then what
-  the families want (a name, which is Respect; the city, which is the Nod; a man nobody owns,
-  which is no Mark), then the walk into a High Society Venue and the Play. The Rulebook's Goal
-  page is "A Seat at the Commission", with Jobs and **The Nod: Buy the City** as its two
-  sections; it was "Earning Respect" with the Nod filed under it, a layout left over from the
-  card paying 10 Respect. The Nod's one-line why: "The families bring the guns. The new man
-  brings the city."
+- **The Crown is the prize; the Commission is the judge** (since 2026-09-26). You fight over
+  **the Crown** (the Play, the board's crown icons, the cards' crown shields all say so). **The
+  Commission** is the table where the families settle their business: they set the terms the
+  Crown's conditions answer, and the High Society Venues are where they drink with the
+  judges, so that is where it is taken. They *accept* the new man; he does not found or head
+  the Commission (an earlier draft said so and read too strong, so no "Boss of Bosses"), and
+  at the climax they "rise to their feet". **Never call the prize a seat or a chair**: "seat"
+  already means a turn-order position ("the first seat brews richest", "Hold your seat",
+  and throughout The Almanac), and "the chair" is the family's, which Rise refills. A brief
+  2026-09-26 draft called it "a seat; on the street, the Crown"; two names for one prize read
+  as muddle. "The crown of this town has lain in the gutter since November" nods to Rothstein
+  without naming him.
+- **The endgame reads in one order everywhere**: the crown, then what the families want (a
+  name, which is Respect; the city, which is the Nod; a man nobody owns, which is no Mark),
+  then the walk into a High Society Venue and the Play. The Rulebook's Goal page is "The Crown
+  of New York", with Jobs and **The Nod: Buy the City** as its two sections; it was "Earning
+  Respect" with the Nod filed under it, a layout left over from the card paying 10 Respect.
+  The Nod's one-line why: "The families bring the guns. The new man brings the city."
+- **Sunset** is a moment, not a phase: the instant the final player Lays Low. It keeps its
+  name because other rules point at it (the Handshake deadline, the Welsher, the Turn Tokens,
+  and a promise "due at Sunset" dying when the Crown is taken). Deals run out "at Sunset",
+  never "at the end of the Day" or "by Day's end": one name for one moment.
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
   Reaching 10 Influence claims **the Nod** (the city vouching for you). The card
   was called the Commission Seat until 2026-09-23; it was renamed because a card called a
