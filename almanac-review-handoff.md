@@ -242,9 +242,13 @@ Two departures from the proposal, both for the page and the reading order:
 - **Lesson 28 says "while you're still a Bribe short"** instead of "at nine Influence", to put the
   why in the sentence: the Nod is what rallies the table, so the walk goes first.
 
-Page check: every page of the Almanac prints on one A4 sheet (16 pages, fullest 97%; the old
-book was 14). The Rulebook's Currencies page went from 97% to 99% with the cash line.
-Measured with Playwright's Chromium in print media, the same engine `tools/build_pdfs.ps1` uses.
+Page check: every page of the Almanac prints on one A4 sheet (16 pages, none over 97%; the old
+book was 14). Measured with Playwright's Chromium in print media, the engine behind
+`tools/build_pdfs.ps1`, with the Google Fonts served from a local copy: the sandbox's Chromium
+can't reach them, and the first measurements, on fallback fonts, overstated some pages. With
+the real fonts the Rulebook had two pages spilling onto a second sheet (A Day in the Life and
+Heat), both fixed the same day by trimming flavour, 106 words in all; every Rulebook page now
+has at least 1.5% to spare, bar the front page, which is sized to the sheet.
 
 ---
 
@@ -291,8 +295,7 @@ None of these change a rule. They're what the stress test turned up about the wa
    rivals are still up. (Nick's ruling, 2026-09-26: an Unload's own two markers are spent before
    its Kickbacks land, so two markers and five Rum take the Ledger to zero and refill it to five.
    The Rulebook's turn box lists "Pay the cost" after the Play resolves, which a literal reader
-   could take the other way; a clause in the Kickback text would settle it if that ever comes up
-   at a table.)
+   could take the other way, so the Unload entry now says it outright.)
 4. **Moving through a rival block.** A crew can Move into a block and Advance out in one Play for
    two markers if the Occupier Holds Fire: two blocks in one turn. It's rules-consistent (Hold
    Fire lets a passer-by through, as the Guide says) and it makes the Ambush the only answer

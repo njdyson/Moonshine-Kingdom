@@ -221,8 +221,9 @@ and The Almanac builds strategy passages on the Kickback, so grep it for *argume
 not just for numbers.
 
 An Unload's own two markers are spent before its Kickbacks land (Nick, 2026-09-26): two markers
-left and five Rum poured takes the Ledger to zero, then refills it to five. The Almanac's Rum
-table ("5 Rum, net +3") and `tools/sim_kickback_ledger.js` both assume it.
+left and five Rum poured takes the Ledger to zero, then refills it to five. The Rulebook's Unload
+entry says so in as many words (the turn box lists "Pay the cost" last, which read the other way
+without it); the Almanac's Rum table ("5 Rum, net +3") and `tools/sim_kickback_ledger.js` assume it.
 
 The one other liquor-type restriction is the Irish **Peddle**, which sells **Moonshine
 only**, and **only in Wards you Control**: Speakeasy sales belong to Unload. Peddle costs 1
