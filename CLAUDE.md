@@ -111,6 +111,13 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
 
+## Everything is on the table
+
+Since 2026-09-26 cash is open information: it sits on the table in front of you and anyone may
+ask for a count (the Rulebook's Cash entry). Everything else already was: Jobs and their
+stakes, Respect, the Nod, barrels, Heat and Ledgers. The one hidden thing in the game is a
+Vipers Job held face-down by Whispers.
+
 ## The crown is a Play: Take the Crown, and only the Nod carries it
 
 Since 2026-09-25. There are no Borough Deeds, Titles, or other board-scoring cards. Respect is
@@ -213,6 +220,10 @@ Playbooks and the Town Planner carry the most compressed restatements, so they d
 and The Almanac builds strategy passages on the Kickback, so grep it for *argument*,
 not just for numbers.
 
+An Unload's own two markers are spent before its Kickbacks land (Nick, 2026-09-26): two markers
+left and five Rum poured takes the Ledger to zero, then refills it to five. The Almanac's Rum
+table ("5 Rum, net +3") and `tools/sim_kickback_ledger.js` both assume it.
+
 The one other liquor-type restriction is the Irish **Peddle**, which sells **Moonshine
 only**, and **only in Wards you Control**: Speakeasy sales belong to Unload. Peddle costs 1
 Play where Unload costs 2, and that discount is the whole card. Let it reach Speakeasies and it
@@ -256,6 +267,12 @@ belong to playtest rather than invention:
 - **Game length.** The box used to say 90 to 120 minutes. Nobody has timed the current
   rules, so the figure was cut from the Rulebook and the site. Put one back only from a timed
   playtest.
+
+`almanac-review-handoff.md` (2026-09-26) holds the combat stress test behind The Almanac's Gun
+and endgame lessons (pickets, the sitting duck, folding on barrels, the walk to the room);
+`tools/sim_almanac_combat.js` reproduces every figure. Its last section lists endgame
+observations for playtest: only a Sicilian Hit reliably stops a Boss dug into a room, and the
+last man up can chain a pour, a Bribe and the Crown with nobody left to answer.
 
 `kickback-blowback-handoff.md` (2026-09-22) holds the Rum-only Kickback (shipped the same
 day) and one still-open proposal: a Blowback shield for the Still that brewed. The shield is

@@ -1,7 +1,10 @@
-# The Almanac: combat stress test and revision proposal
+# The Almanac: combat stress test and revision
 
-Status (2026-09-26): **proposal only. The Almanac itself is unchanged.** Everything below is
-draft text and findings for Nick to accept, cut or redirect. Every combat figure reproduces with
+Status (2026-09-26): **applied.** Nick accepted the whole proposal the same day and is reading
+the result one lesson at a time; The Almanac is now the text of record, so the draft prose that
+used to sit in this file has been removed. What remains is the evidence (section 1), the map
+of what changed (section 2), and the design observations it turned up (section 4). Every combat
+figure reproduces with
 
 ```
 node tools/sim_almanac_combat.js          # about a minute
@@ -17,7 +20,7 @@ folding look better.
 
 ## The short version
 
-- **Cut three lessons and fold three pairs together** (33 to 30): the free 3 in your back yard,
+- **Cut three lessons and folded three pairs together** (33 to 30): the free 3 in your back yard,
   Staten Island, and "Eat the 1s" go; the cop's reach, the rival's handshake and the 1s survive
   as a line or a paragraph inside their neighbours.
 - **The Gun grows by one lesson and gets sharper numbers.** A two-man picket falls to your Boss
@@ -39,6 +42,7 @@ folding look better.
 
 ## 1. What the stress test found
 
+Lesson numbers in this section are the old 33-lesson book's; section 2 maps them to the new.
 All fights: no Boss or Safehouse defending unless stated, up to 3 volleys. "Live" means the
 Occupier Ambushes; "duck" means he can't (spent out, Laid Low) or won't (Holds Fire).
 
@@ -198,257 +202,62 @@ four. Two gaps, both fixed in the drafts below:
 
 ---
 
-## 2. Proposed shape: 33 lessons to 30
+## 2. What changed in The Almanac
 
-| Now | Lesson | Proposal | New |
-| --- | --- | --- | --- |
-| 1, 2 | Count your Plays; Your token's a trade | keep | 1, 2 |
-| 3 to 8 | The Stills | keep (optional: trim lesson 4's Whitestone paragraph to a clause) | 3 to 8 |
-| 9 | The stake is rent | keep, **absorbs 11** as a closing paragraph | 9 |
-| 10 | Bribe early | keep, one clause pointing at the new 28 | 10 |
-| 11 | Eat the 1s | **merged into 9** | |
-| 12 | Your board talks | keep, **absorbs 13's** "a 5 with your name on it" line | 11 |
-| 13 | A free 3 in its back yard | **cut** (board lookup, not a lesson; the Guide's Four Lanes keeps it) | |
-| 14 | Staten Island | **cut** (same) | |
-| 15 | Only deny a card that would crown somebody | keep, fix "holding the Nod" (see 3.9) | 12 |
-| 16 | Pour Rum late, and in batches | keep | 13 |
-| 17 | Never walk into even numbers | keep, **add the Boss-dies column** | 14 |
-| 18 | The fight you'll win is against a picket | **rewrite**: A picket is a toll, not a wall | 15 |
-| 19 | Hit him when his Ledger's empty | moves after 20 | |
-| 20 | Fold, check or raise | light edit (the numbers for one die vs two) | 16 |
-| 19 | (rewrite) | **Shoot the sitting duck** | 17 |
-| new | | **Fold what you'd lose anyway** | 18 |
-| 21 | Armies that don't march | keep | 19 |
-| 22 | Know your family's edge | keep, one line on the Hit as the crown-stopper | 20 |
-| 23, 24 | The law counts Plays; freshest name | keep | 21, 22 |
-| 25 | A cop can only reach one block | **merged into 26** as its opening | |
-| 26 | Build the bust yourself | keep, absorbs 25 | 23 |
-| 27, 28 | Four Heat; Sometimes you want the sirens | keep | 24, 25 |
-| 29 | Promise only what you alone control | keep, **absorbs 30** as a second paragraph | 26 |
-| 30 | A rival's handshake is a target | **merged into 29** | |
-| 31 | Count his distance from the crown | keep | 27 |
-| new | | **Walk in first; buy the Nod last** (the leader's side) | 28 |
-| 32 | When a man holds the Nod, his Boss is the target | **rewrite**: Watch his Boss, not his Nod (the table's side) | 29 |
-| 33 | The Blood Oath | keep | 30 |
-
-Chapter counts: Sit Down 2, Stills 6, Offers 5 (was 8), Gun 7 (was 6), Law 5 (was 6), Table 5.
-
----
-
-## 3. Draft text
-
-Written to drop into the HTML as it stands. **Bold** marks a named idea on first use.
-
-### 3.1 Lesson 14. Never walk into even numbers, and never grind. (edit)
-
-Second paragraph and table become:
-
-> Every volley costs a marker, too. Plan to win in two or three. If the door isn't breaking,
-> Fall Back. A fourth volley buys you about eight points of odds, costs a Play you could have
-> spent anywhere else, and kills your own Boss one time in six more. Bring the old man to a
-> fortress short-handed and he's usually one of the men you bury.
-
-| You bring | You take it | Men you lose | Your Boss dies |
-| --- | --- | --- | --- |
-| Boss + 3 Runners (even numbers) | 1.5% | 3.9 | 91% |
-| Boss + 4 | 8% | 4.5 | 68% |
-| Boss + 5 | 23% | 4.8 | 36% |
-| Boss + 6 (double) | 49% | 4.6 | 8% |
-| Boss + 9 (triple) | 88% | 4.1 | 0% |
-
-### 3.2 Lesson 15. A picket is a toll, not a wall. (replaces 18)
-
-> The fortress is the exception: nobody has the men to build more than one. Every other block
-> your rival holds is watched by one man, two, three, or nobody, and a **picket** of two won't
-> stop anybody who brought five. What it does is send the bill. An empty corner costs you one
-> Move. Two men cost you the Move, two or three volleys and, if he checks, the Heat.
->
-> So pay **the toll** once, and bring enough to be sure. Against two men, your Boss and three
-> take it better than eight times in ten. A third man is a second die, and a second die is an
-> Ambush worth firing, so against three you want the Boss and five. And count to five: five
-> bodies roll three dice, where the sixth only stands in front of them.
->
-> Take the old man, but never short-handed. Your men die before he does, so with one Runner more
-> than the picket has men, he's dead about one time in twenty. Walk him in with one Runner
-> against two, and it's nearly one in two.
-
-Table (replaces lesson 19's; its right-hand column is where the next-but-one lesson points):
-
-| You bring | Against | He can Ambush | He's spent out | Men you lose |
-| --- | --- | --- | --- | --- |
-| 5 Runners | 2 Runners | 72% | 81% | 1.3 to 0.7 |
-| Boss + 3 | 2 Runners | 84% | 88% | 1.2 to 0.7 |
-| Boss + 4 | 2 Runners | 92% | 96% | 1.1 to 0.5 |
-| 8 Runners | 3 Runners | 72% | 80% | 2.2 to 1.2 |
-| Boss + 4 | 3 Runners | 60% | 82% | 2.3 to 1.2 |
-| Boss + 5 | 3 Runners | 78% | 88% | 2.2 to 1.1 |
-
-(In the HTML the loss column keeps its `&rarr;` arrows.)
-
-### 3.3 Lesson 16. Fold, check or raise. (light edit)
-
-Replace the two sentences starting "With two dice or more" with:
-
-> Three men roll two dice, and their Ambush swings a fight twenty points. Two men roll one, and
-> theirs kills half a man and moves a Boss-led raid four points, for your marker on the Track.
-
-### 3.4 Lesson 17. Shoot the sitting duck. (replaces 19)
-
-> A man with no marker in his Ledger can't Ambush, and neither can a man who's Laid Low. On the
-> street he's a **sitting duck**, and since every Ledger sits on the table, everybody knows it.
-> Catch a picket that way and you take it more often, and you bury about half the men doing it.
-> The price is that you fire first, so the Heat is yours.
->
-> The duck that matters has three men. Two men are a duck all day, spent or not, because no
-> sensible man fires one die. Three men with a marker will raise, and it costs you: your Boss and
-> four take them six times in ten through the Ambush, eight in ten when the Ledger's dry, and you
-> bury one man instead of two. So when three men are left minding something worth owning at dusk
-> and the Ledger behind them is empty, that's your afternoon.
-
-### 3.5 Lesson 18. Fold what you'd lose anyway. (new)
-
-> Men hate to fold a block with barrels on it. It feels like handing him the money. But look at
-> what happens when you stand and lose: he takes the block, and the barrels, and your men
-> besides. The pile goes either way. All that standing buys is your chance to hold, so price it
-> like a bet. Take the men you'll bury, at $300 a head to hire again, and divide by your chance
-> to hold. A pile worth less than that, you fold.
->
-> You'll fold more than you think. Two men facing a Boss and three hold one time in eight and
-> bury two doing it: stand only for $4,700, sixteen barrels of swill. Three men with a marker to
-> raise hold nearly two times in five against a Boss and four, and six barrels make that stand
-> worth it.
->
-> Two things beat the arithmetic. At four Heat, check and let him have the pile: he fires the
-> fifth marker and he's standing on your barrels when the sirens come. And read his Jobs before
-> you answer. A Fold hands him a Seize as surely as losing does, so a block his Job names is
-> worth more than its barrels. But a man on a Kill Job is paid in your dead, not your turf, and
-> a Fold pays him nothing.
-
-| You hold | He brings | You hold it (Hold Fire / Ambush) | Men you lose | Stand only for a pile over |
-| --- | --- | --- | --- | --- |
-| 2 Runners | 3 Runners | 45% / 61% | 1.4 / 1.2 | $900 / $600 |
-| 2 Runners | 5 Runners | 20% / 28% | 1.8 / 1.7 | $2,700 / $1,800 |
-| 2 Runners | Boss + 3 | 12% / 16% | 1.9 / 1.8 | $4,700 / $3,500 |
-| 3 Runners | 5 Runners | 51% / 69% | 2.2 / 1.8 | $1,300 / $800 |
-| 3 Runners | Boss + 4 | 18% / 39% | 2.8 / 2.4 | $4,600 / $1,800 |
-
-### 3.6 Lesson 20. Know your family's edge. (one line)
-
-In the Sicilian paragraph, after "kills his Boss about two times in three":
-
-> ...and it's the one gun at this table that reaches a Boss dug into a High Society room.
-
-### 3.7 Lesson 28. Walk in first; buy the Nod last. (new, the leader's side)
-
-> I told you to Bribe early. All but the last one. Every man at this table can count to ten, and
-> the day you hold the Nod, three bosses stop fighting each other and start hunting your Boss.
-> He's never cheaper than on **the walk**: with a man or two around him in the open, a Boss and
-> six that reach him finish him eight times in ten. So turn the order round. Walk him into the
-> room at nine Influence, dig him in, and buy the tenth judge last. Then the Nod and the crown
-> are two Plays on one afternoon, and the table gets one turn to answer.
->
-> - **Give the walk a reason.** At eight Influence a 5 costs you no Plays to hold, and every
->   Borough has one that marches an army in: a Boss to kill in Queens, a Safehouse to burn in
->   Manhattan, a five-man block in the Bronx, five bodies in Brooklyn. Let them guard what the
->   card is hunting while the old man turns into the room. If the Job comes off too, so much the
->   better.
-> - **Dig him in.** Four men and your Safehouse around him, and a marker kept back for the
->   Ambush, and a Boss and six get to him one time in fourteen. A Sicilian Hit gets to him four
->   times in five, so know where the Sicilians are.
-> - **Come in clean and quiet.** Square Up with Shylock the week before: a Mark on the last day
->   costs a Play, $2,000 and your secret. Keep your name off the Heat Track, because a Squad
->   never comes for a man with no marker there, whoever drops the dime. And promise nothing a
->   third man can break: at ten Respect, one Welsher drops you to nine.
-> - **Be the last man up.** Once the others have Laid Low they get no more turns, and the Nod
->   and the crown are only four markers.
-
-### 3.8 Lesson 29. Watch his Boss, not his Nod. (replaces 32)
-
-> The crown goes to a man, not a number: he takes it with his Boss standing in a High Society
-> room, and the taking is a Play of its own, so you always see it one turn out. One turn is
-> rarely enough. A man who knows his business buys the Nod last, with the old man already dug
-> in, and a Boss behind four men and a Safehouse shrugs off a Boss and six thirteen times in
-> fourteen. Only a Sicilian Hit gets through as a rule. So don't wait for the Nod. Watch the man at nine Influence, with clean books
-> and ten Respect, whose Boss is on the move toward a room, and kill him on the walk. The whole
-> table has one target, and nobody hits it alone. Split the bill, each of you doing the cheap
-> piece.
->
-> - **Put out a hit.** Post a cash bounty on his Boss. A dead Boss Rises in a Ward and walks
->   back, and the Rise, the walk and the crown cost him five markers at least, a whole Ledger,
->   with your turns between each. Then shut the Wards: he Rises only in a Safe one, and a Runner
->   of yours in each Ward he doesn't hold is a door he can't come home through.
-> - **Stand in his road.** Sit in the room nearest him and he has to walk to the next. If he
->   crosses your block, don't check: Hold Fire and he pays one more marker and Advances straight
->   through. Ambush him. Alone, he dies half the time to two men and three times in four to
->   three.
-> - **Count his Rum, not his markers.** Rum under the bar of his own room is a second Ledger at
->   dusk. Take the room or bust the stockpile before the rest of you go home, because the last
->   man up crowns without a word from anybody.
-> - **Rat him out of the room.** If his name is freshest on the Track and the room is his
->   fattest door in a Squad's reach, one phone call scatters him out and padlocks it behind him.
->   A Sicilian with his Safehouse in the room is the one man it can't touch.
-> - **Leave his number in the pool.** A Blowback on his room won't kill a Boss with a man beside
->   him, but it takes his guards, Runners first. A Boss and four wake up as a Boss and one, and
->   your Boss and four finish that nearly nine times in ten before dinner.
-
-Table:
-
-| His Boss has | Boss + 6 open fire | A Sicilian Hit (Boss + 6) |
+| Was | Now | Change |
 | --- | --- | --- |
-| Nobody | 100% | 99% |
-| One Runner | 98% | 95% |
-| Two Runners | 83% | 89% |
-| Four Runners | 18% | 84% |
-| Four Runners and a Safehouse | 7% | 80% |
+| 1 to 8 | 1 to 8 | unchanged |
+| 9, 11 | 9 | "Eat the 1s" folded in as a closing paragraph, now Heat-aware: a Stake of 1 is free at 6 Influence only on a clean Heat Track (Nick's catch; the old lesson 11 said "costs nothing at 6 Influence" flat) |
+| 10 | 10 | ends by saving the last Bribe for the day the Boss is in the room (lesson 28) |
+| 12, 13 | 11 | the "5 with your name on it" line kept, "seat" dropped (CLAUDE.md reserves it for turn order); the free-3 table cut |
+| 14 | | Staten Island cut (the Guide's Four Lanes keeps both lookups) |
+| 15 | 12 | "a man holding the Nod" became "the Nod in hand or one Bribe away" |
+| 16 | 13 | unchanged |
+| 17 | 14 | fortress table gains "Your Boss dies"; the fourth volley's cost to your Boss added |
+| 18 | 15 | rewritten: **A picket is a toll, not a wall**, with the picket table (moved here from 19, rows for three-man pickets added) |
+| 19 | 16 | rewritten: **Shoot the sitting duck** (the duck that matters has three men) |
+| 21 | 17 | Armies that don't march, moved up |
+| 20 | 18 | Fold, check or raise: the one-die vs two-dice numbers |
+| new | 19 | **Fold what you'd lose anyway**, with the fold table |
+| 22 | 20 | the Hit named as the one gun that reaches a Boss dug into a room |
+| 23, 24 | 21, 22 | unchanged |
+| 25, 26 | 23 | the cop's reach opens Build the bust; the Borough-order warning closes it |
+| 27, 28 | 24, 25 | unchanged |
+| 29, 30 | 26 | the rival's handshake appended as "Same rule, other end" |
+| 31 | 27 | unchanged |
+| new | 28 | **Walk in first; buy the Nod last** (the leader's side) |
+| 32 | 29 | rewritten: **Watch his Boss, not his Nod**, with the one-turn table |
+| 33 | 30 | unchanged; Chapter V gains its "What I've Seen" |
 
-Caption: "One turn to stop the crown: his Boss dies, one rival's Play of up to 3 volleys, he
-Ambushes".
+Also: "Before You Go" lists your cash among what's in the open; the Offers "What I've Seen" no
+longer has the made man climbing to ten (he stops a Bribe short now); the Figures' closing note
+names the sitting duck and the $300 dead man; the Rum table's cross-reference moved to lesson 13.
 
-### 3.9 Smaller edits
+Two departures from the proposal, both for the page and the reading order:
 
-- **Lesson 9 (the stake is rent)**, new closing paragraph from 11: "The one rent you never feel is
-  a 1. A Stake of 1 costs nothing at six Influence, and half the 1s in the deck ask for what your
-  liquor does anyway: haul some barrels, sell some, make a Trade. Eat them early. The cheap ones
-  leave the deck first, and the man who sniffs at 1s on Day 3 is shopping in a market full of wars
-  on Day 12."
-- **Lesson 10 (Bribe early)**, end of the paragraph: "...so buy the cheap ones while they still
-  work for you, and save the last for the day your Boss is already standing in the room (lesson
-  28)."
-- **Lesson 11 (your board talks)**, new closing sentence from 13: "And read the street the same
-  way. Every Borough has a 5 with its name on it, a bounty on its Boss, its Safehouse or its men.
-  When yours turns up, move whatever it's hunting." (Drops "seat", which CLAUDE.md reserves for
-  turn order.)
-- **Lesson 12 (only deny a card that would crown somebody)**: "the card that would carry a man
-  holding the Nod to 10" leaves a hole once lesson 28 teaches buying the Nod last. Suggest "the
-  card that would carry a man to 10 with the Nod in hand or one Bribe away".
-- **Lesson 23 (build the bust)**, new opening from 25: "A Squad only looks at the Districts right
-  beside it, inside its own Borough, and Staten Island has none. Hold nothing next to a Squad and
-  you can be the loudest crew in town and never see a badge." Keep 25's Borough-order warning as
-  the lesson's last line.
-- **Lesson 26 (promise only what you alone control)**: 30's paragraph appended as-is, opening
-  "Same rule, other end."
-- **Chapter V "What I've Seen"** (it's the only chapter without one): "The greenhorn buys the Nod,
-  then goes looking for a room, and the whole table meets him on the way. The old hand walks the
-  old man in first and buys the Nod with him already at the bar. The made man has a war Job on his
-  books to explain the walk, and buys the Nod after the rest have gone home."
-- **Cross-references**: the Figures' "lesson 16" (the Rum table) becomes lesson 13. "Lessons 3 to
-  5", "3, 4 and 7" and "1, 9 and 10" are unchanged.
-- **The Figures' closing note**: add that a dead man is priced at $300 in lesson 18, that
-  "spent out" is the sitting duck, and that lesson 29's odds use the same model with the Hit
-  where it says so.
+- **The Gun runs attack, then defence**: fortress, picket, duck, armies, then fold/check/raise and
+  fold-what-you'd-lose. The proposal's order overfilled the chapter's third page (101% in a
+  headless Chromium render). Lessons that now come before "Fold, check or raise" say "Holds Fire"
+  and "Ambush" rather than "checks" and "raises".
+- **Lesson 28 says "while you're still a Bribe short"** instead of "at nine Influence", to put the
+  why in the sentence: the Nod is what rallies the table, so the walk goes first.
+
+Page check: every page of the Almanac prints on one A4 sheet (16 pages, fullest 97%; the old
+book was 14). The Rulebook's Currencies page went from 97% to 99% with the cash line.
+Measured with Playwright's Chromium in print media, the same engine `tools/build_pdfs.ps1` uses.
 
 ---
 
-## 4. The vocabulary
+## 3. The vocabulary
 
-Five named ideas, bolded on first use, each doing work a sentence would otherwise have to do
+Five named ideas, bolded on first use in the Almanac, each doing work a sentence would otherwise have to do
 twice. All fit Rothstein's gambler's voice.
 
 | Term | Means | First use |
 | --- | --- | --- |
 | picket | a block held by one to three Runners, no Boss or Safehouse | 15 (already used, now defined) |
 | the toll | what a picket charges a raid: the Move, two or three volleys, maybe the Heat | 15 |
-| sitting duck | a crew that can't Ambush: Ledger spent or Laid Low | 17 (the Guide already uses it) |
+| sitting duck | a crew that can't Ambush: Ledger spent or Laid Low | 16 (the Guide already uses it) |
 | the walk | the Boss's trip to a High Society room, the only time he's cheap to kill | 28 |
 | the last man up | the boss still holding markers after the rest have Laid Low | 28 |
 
@@ -459,7 +268,7 @@ matters more than the even man who shields one).
 
 ---
 
-## 5. For Nick: design observations, not Almanac edits
+## 4. For Nick: design observations, not Almanac edits
 
 None of these change a rule. They're what the stress test turned up about the watch items in
 `CLAUDE.md`.
@@ -479,27 +288,16 @@ None of these change a rule. They're what the stress test turned up about the wa
    Tax), can chain Unload (5 Respect, $4,000, Kickbacks refill the Ledger), Bribe and Take the
    Crown with nobody able to answer. With Whispers, the Vipers can hold that Job face-down. This is
    the "win from nowhere" the Coronation was rejected for; the Crown Play closes it only while
-   rivals are still up.
-   This uses the repo's Ledger model (`sim_kickback_ledger.js`, the Almanac's Rum table): the
-   Unload's two markers leave the Ledger before its Kickbacks land. The Guide says so ("moves one
-   spent marker"), but the Rulebook's turn box lists "Pay the cost" after the Play resolves, and a
-   literal reader could take it the other way: then a pour can never leave more than three
-   markers, the Almanac's "5 Rum, net +3" becomes +1, and this chain needs Bribe first, from four
-   markers and $5,000 in hand. Worth one clarifying clause in the Rulebook's Kickback text.
+   rivals are still up. (Nick's ruling, 2026-09-26: an Unload's own two markers are spent before
+   its Kickbacks land, so two markers and five Rum take the Ledger to zero and refill it to five.
+   The Rulebook's turn box lists "Pay the cost" after the Play resolves, which a literal reader
+   could take the other way; a clause in the Kickback text would settle it if that ever comes up
+   at a table.)
 4. **Moving through a rival block.** A crew can Move into a block and Advance out in one Play for
    two markers if the Occupier Holds Fire: two blocks in one turn. It's rules-consistent (Hold
    Fire lets a passer-by through, as the Guide says) and it makes the Ambush the only answer
    that taxes a walking Boss. Not a problem, but nothing player-facing says it.
-5. **Is cash open or hidden?** I couldn't find a rule either way. It matters here: if cash is
-   hidden, $5,000 for the last rung is the one thing the table can't count, and "buy the Nod
-   last" gets sharper.
-
----
-
-## 6. If this goes ahead
-
-- [ ] Nick picks: all, some, or none of section 2's cuts and merges.
-- [ ] Apply the drafts to `The Almanac v0.9.html`; renumber lessons, the contents list and the
-      anchors (keep existing `id`s where the lesson survives, so old links still land).
-- [ ] `python3 tools/check_style.py` (em dashes) and a read-through cold, per the ghost rule.
-- [ ] No other component carries these lessons; the Kingpin's Guide may lag and is off the site.
+5. **Cash is open** (Nick, 2026-09-26). It sits on the table and anyone may ask for a count; the
+   Rulebook's Cash entry now says so. So "buy the Nod last" is about attention, not secrecy: the
+   table can see a man a Bribe short with $5,000 in front of him, but there's no Nod on the table
+   yet to rally them.
