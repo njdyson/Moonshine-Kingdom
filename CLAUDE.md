@@ -280,6 +280,11 @@ day) and one still-open proposal: a Blowback shield for the Still that brewed. T
 not implemented and should not be without Nick asking; read the file before touching the
 Blowback.
 
+`job-pot-handoff.md` (2026-09-27) parks Nick's idea of putting cash on every Job that sits
+unclaimed in the Market, paid to whoever completes it. It is a remedy to try if the Market
+stagnates in playtest, or a playtest alternative, and it comes paired with a steeper Bribe
+ladder (top rungs only). It is not implemented and should not be without Nick asking.
+
 ## What not to edit
 
 - `Archive/` is frozen history. Never edit it, and never let it skew a repo-wide count.

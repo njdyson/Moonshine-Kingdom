@@ -165,6 +165,10 @@ Shadows, and "fresh end / stale end" is deleted game-wide.
   optimises backwards**: escalation wants 5s late, the deterrent thesis wants them **early**, and
   under a static Market the deterrent argument is much the stronger of the two.
 
+**Parked, not rejected (2026-09-27):** cash on every Job still in the Market each morning, paid to
+whoever completes it. It speeds flow without churn (a card still leaves only when a boss takes it)
+and needs a steeper Bribe ladder to go with it. See `job-pot-handoff.md`.
+
 **Knock-on:** Vipers' **Whispers** (peek the deck top, claim it face-down instead of a Market card) is
 mildly **buffed** — under a static Market it is the only route to a card that isn't already public.
 Worth watching alongside §8.5, which already rated it strong.
