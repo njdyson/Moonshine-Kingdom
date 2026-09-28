@@ -5,7 +5,7 @@ Status (2026-09-28): **in progress, not merged.** The work lives on branch
 Affinity export (`Art/Board (Large).png`) is untouched and is still what mk-online serves.
 
 ```
-node tools/build_board.js           # SVG + 2160px preview JPEG, a few seconds
+node tools/build_board.js           # print and screen SVGs + a 2160px JPEG of each, seconds
 node tools/build_board.js --print   # also the 7200px print PNG (24in at 300dpi), git-ignored
 node tools/trace_board.js           # only if the Affinity board changes; rewrites the geometry
 ```
@@ -24,7 +24,10 @@ so the SVG renders the same anywhere; the build itself needs the network.
 - `tools/build_board.js`: the roster (zone, Still, venue, Setup mark per District, copied from
   the Town Planner), palette, type, label placement, key and panels. Everything on the board is
   generated from here; nothing is hand-placed in the SVG.
-- `Art/Board/Board v0.9.svg` and `Board v0.9 (preview).jpg`: the outputs, committed.
+- The outputs, all committed: `Board v0.9.svg` (the print master, full leather) with
+  `Board v0.9 (print preview).jpg`, and `Board v0.9 (screen).svg` with `Board v0.9 (screen).jpg`
+  (the same board with a flat texture, for the website and mk-online). The two builds differ
+  only in the `LEATHER` preset.
 
 ## Physical spec
 
@@ -40,10 +43,12 @@ so the SVG renders the same anywhere; the build itself needs the network.
 
 ## Decisions, so nobody undoes them
 
-- **Labels sit at the edge, not the centre.** Centred would look nicer, but pieces would hide
-  the Still. The placer puts each cluster where it leaves the largest open circle for pieces,
-  keeps it clear of neighbouring clusters across a border (an early version put Belmont's 11
-  beside Fordham's 8), and prefers the stacked layout. Nick agreed.
+- **Labels are centred in each District** (Nick, 2026-09-28: cleaner, accepting that pieces will
+  sit round them). Each cluster goes where it is furthest from every border, and along a strip
+  the spot nearest the District's middle; all use the stacked layout. The earlier placer is
+  still there behind `LABEL_PLACEMENT = 'edge'`: it pushes each cluster aside to leave the
+  largest open circle for pieces and keeps it clear of its neighbours' across a border. Worth
+  comparing once pieces are on a printed board.
 - **Stills are the Still Token art itself** (`Art/Still Tokens/SVG`), so board and tokens agree.
 - **Muted Borough tones.** Mob colours aren't set and the Squads are blue, so the land stays
   quiet. Brooklyn moved from red to bronze to part it from Manhattan.
@@ -59,13 +64,17 @@ so the SVG renders the same anywhere; the build itself needs the network.
   and setting both flat gives the Ledger's plain look.
 - **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
 - **Title is NEW YORK 1929 with a drawn north line.** No logo, no compass (Nick's call).
-- **Leather, generated, not an image.** The `leather` filter builds a pebble grain from three
-  crease patterns multiplied (one alone draws worm-like squiggles at print scale), over soft
-  wrinkles, with a sheen and uneven dye; saddle stitching runs round the board edge, both sides
-  of the Heat corner, and inside each panel. It prints crisp at any size and needs no licence.
-  If it ever needs to be more photographic, a CC0 scan (ambientCG, Poly Haven) could be tiled
-  in instead; not tried yet. Judge the grain at print scale, not in the preview: the downscaled
-  JPEG makes it look busier than it prints.
+- **Leather, generated, not an image.** `leatherFilter()` builds a pebble grain from crease
+  patterns multiplied (one alone draws worm-like squiggles at print scale), over soft wrinkles,
+  with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm); the panels (Heat
+  corner, key, Mash) are a **finer, flatter skin**, stitched on like patches. Saddle stitching
+  runs round the board edge and inside each panel. The **screen** build drops the pebbles and
+  keeps only soft wrinkles and dye, because at screen size the grain turns to noise (Nick asked
+  for it). Presets live in `LEATHER`. It prints crisp at any size and needs no licence; a CC0
+  scan (ambientCG, Poly Haven) could be tiled in if it ever needs to be photographic. Judge the
+  print grain at print scale, not in the downscaled preview. Every leather filter ends by
+  masking to `SourceAlpha`: the lighting is opaque across the whole region, and without the mask
+  the panel filter painted grey over the entire map.
 - Water and land labels are placed by visual centre, midway between the shores and at their
   angle, so they stay centred if the type changes. New Jersey is unlabelled (Nick cut it);
   Westchester and Nassau keep theirs.

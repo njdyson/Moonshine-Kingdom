@@ -2,8 +2,12 @@
 // Builds the game board as a vector SVG from Art/Board/board-geometry.json and
 // the District Roster below, then renders it through Playwright's Chromium.
 //
-//   node tools/build_board.js           SVG + 2160px preview JPEG
+//   node tools/build_board.js           print and screen SVGs, 2160px previews of each
 //   node tools/build_board.js --print   also a 7200px PNG (24in at 300dpi, not committed)
+//
+// Two builds share everything but the texture: the print board carries the full
+// pebbled leather, which reads at 24in; the screen board keeps only soft wrinkles
+// and dye, because at screen size the grain turns to noise.
 //
 // The board prints 24 inches square: 1080 units across, so 1 unit is 0.564 mm.
 // Anything a physical piece must fit (the Heat Track's poker chips, the Mash
@@ -14,16 +18,20 @@
 // Stills are the Still Token art itself (Art/Still Tokens/SVG), so the printed
 // board and the prototype tokens can never disagree.
 //
-// Each District's label cluster is placed automatically where it leaves the
-// widest open ground for pieces, so the Still stays readable mid-game. Pin one
-// by hand with `place: ['h' | 'v', x, y]` if the choice ever looks wrong.
+// Each District's label cluster is placed automatically (LABEL_PLACEMENT below):
+// centred in the District, or pushed to an edge to leave open ground for pieces.
+// Pin one by hand with `place: ['h' | 'v', x, y]` if the choice ever looks wrong.
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const DIR = path.join(ROOT, 'Art', 'Board');
-const SVG_OUT = path.join(DIR, 'Board v0.9.svg');
+const OUT = {
+  printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
+  screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
+  printPng: path.join(DIR, 'Board v0.9 (print).png'),
+};
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_MM = 609.6, MM = 1080 / BOARD_MM; // 24in square
 
@@ -317,7 +325,47 @@ function place(d, others) {
   if (!best) throw new Error('No room for the label in ' + d.id);
   return best;
 }
+// 'centre': each cluster sits in the middle of its District, as far from every
+// border as it can get (Nick's choice, 2026-09-28: cleaner, though pieces will sit
+// round it). 'edge': pushed aside to leave the widest open ground for pieces.
+const LABEL_PLACEMENT = 'centre';
+function centroid(p) {
+  let a = 0, cx = 0, cy = 0;
+  p.forEach(([x0, y0], i) => {
+    const [x1, y1] = p[(i + 1) % p.length], k = x0 * y1 - x1 * y0;
+    a += k; cx += (x0 + x1) * k; cy += (y0 + y1) * k;
+  });
+  return [cx / (3 * a), cy / (3 * a)];
+}
+function placeCentre(d) {
+  if (d.place) {
+    const [layout, x, y] = d.place;
+    return { x, y, c: cluster(d, layout), open: null };
+  }
+  const p = geo.regions[d.id], [gx, gy] = centroid(p);
+  const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
+  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  // Stacked everywhere, so centred labels all read alike; side by side only if
+  // the stack cannot fit.
+  let best = null;
+  for (const layout of ['v', 'h']) {
+    if (best) break;
+    const c = cluster(d, layout);
+    for (let y = y0; y <= y1 - c.h; y += 2) for (let x = x0; x <= x1 - c.w; x += 2) {
+      const r = [x, y, c.w, c.h];
+      if (!rectInside([x - 5, y - 5, c.w + 10, c.h + 10], p)) continue;
+      const corners = [[x, y], [x + c.w, y], [x + c.w, y + c.h], [x, y + c.h]];
+      const clear = Math.min(...p.map(v => rectDist(v, r)), ...corners.map(q => edgeDist(q, p)));
+      // widest spot wins; along a strip, the one nearest the District's centre
+      const score = clear - 0.05 * Math.hypot(x + c.w / 2 - gx, y + c.h / 2 - gy);
+      if (!best || score > best.score) best = { score, x, y, c, open: clear };
+    }
+  }
+  if (!best) throw new Error('No room for the label in ' + d.id);
+  return best;
+}
 function placeAll() {
+  if (LABEL_PLACEMENT === 'centre') return Object.fromEntries(DISTRICTS.map(d => [d.id, placeCentre(d)]));
   const box = ({ x, y, c }) => [x - MARGIN, y - MARGIN, c.w + 2 * MARGIN, c.h + 2 * MARGIN];
   let placed = Object.fromEntries(DISTRICTS.map(d => [d.id, place(d, [])]));
   for (let pass = 0; pass < 3; pass++) {
@@ -466,7 +514,8 @@ const HEAT_NUM = ['#9c8650', '#a37b4b', '#a86f46', '#aa6241', '#ad533b'];
 const HEAT_TINT = [0, 0.03, 0.05, 0.07, 0.1];
 function heatTrack() {
   const { d, gap, padX, trayW, trayH, tx, ty, edge: [ex, ey] } = HEAT;
-  const bg = `<path d="M0 0 H${f(ex)} V${f(ey)} H0 Z" fill="url(#panel)"/>`;
+  const a = (FRAME_OUT + FRAME_IN) / 2;
+  const bg = `<path d="M0 0 H${f(ex)} V${f(ey)} H0 Z" fill="url(#panel)"/>` + stitch(`M${a} ${a} H${f(ex - 3.4)} V${f(ey - 3.4)} H${a} Z`);
   let s = text('HEAT', tx + trayW / 2, FRAME_IN + 12, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true });
   s += `<rect x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}" fill="#000" fill-opacity=".35" stroke="#6b5a2e" stroke-opacity=".4" stroke-width="1"/>`;
   for (let i = 0; i < 5; i++) {
@@ -522,12 +571,11 @@ function sidePanels() {
   return { bg: heat.bg + k.bg + m.bg, fg: heat.fg + k.fg + m.fg };
 }
 
-// Seams round the board, between the gilt edge and the hairline, on both sides
-// of the Heat corner's edge.
+// The seam round the board, between the gilt edge and the hairline, stepping in
+// round the Heat corner (whose own seam is stitched with its ground).
 function seams() {
   const W = 1080, a = (FRAME_OUT + FRAME_IN) / 2, [ex, ey] = HEAT.edge.map(v => f(v));
-  return stitch(`M${ex + 3.4} ${a} H${W - a} V${W - a} H${a} V${ey + 3.4} H${ex + 3.4} Z`)
-    + stitch(`M${a} ${a} H${ex - 3.4} V${ey - 3.4} H${a} Z`);
+  return stitch(`M${ex + 3.4} ${a} H${W - a} V${W - a} H${a} V${ey + 3.4} H${ex + 3.4} Z`);
 }
 
 function title() {
@@ -569,7 +617,7 @@ function frame() {
 }
 
 // ---------------------------------------------------------------- defs
-function defs(fontCss) {
+function defs(fontCss, mode) {
   let s = `<style>${fontCss}</style>`;
   for (const [k, b] of Object.entries(BOROUGHS))
     s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${b.fill[0]}"/><stop offset="1" stop-color="${b.fill[1]}"/></radialGradient>`;
@@ -581,33 +629,58 @@ function defs(fontCss) {
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
-  // Leather, all procedural so it prints crisp at any size. The pebble grain is
-  // three single-octave crease patterns multiplied, so their crossings close off
-  // irregular cells about 2 to 3 mm across at 24in (one pattern alone draws
-  // worm-like squiggles); blurred to round the pebbles, over soft wrinkles. It is
-  // lit for shading, soft-light blended onto the art, given a sheen on the raised
-  // grain, then mottled like uneven dye.
-  const grey = (slope, icpt) => ['R', 'G', 'B'].map(ch => `<feFunc${ch} type="linear" slope="${slope}" intercept="${icpt}"/>`).join('');
+  s += leatherFilter('leather', LEATHER[mode].board) + leatherFilter('leatherFine', LEATHER[mode].fine);
+  return `<defs>${s}</defs>`;
+}
+
+// ---------------------------------------------------------------- leather
+// All procedural, so it prints crisp at any size. The pebble grain is single-octave
+// crease patterns multiplied, so their crossings close off irregular cells (one
+// pattern alone draws worm-like squiggles at print scale); blurred to round the
+// pebbles, over soft wrinkles. It is lit for shading, soft-light blended onto the
+// art, given a sheen on the raised grain, then mottled like uneven dye.
+// board: the hide, pebbles 2 to 3 mm across at 24in. fine: the panels, a finer,
+// flatter skin stitched on like a patch. The screen presets drop the pebbles.
+const LEATHER = {
+  print: {
+    board: { creases: [[0.1, 4], [0.13, 17], [0.17, 29]], blur: 0.45, pebble: 0.6, wrinkle: [0.016, 0.6], relief: 1.7, depth: 0.6, sheen: 0.15, dye: 0.3 },
+    fine: { creases: [[0.3, 5], [0.38, 18], [0.48, 30]], blur: 0.22, pebble: 0.7, wrinkle: [0.03, 0.2], relief: 0.9, depth: 0.4, sheen: 0.08, dye: 0.12 },
+  },
+  screen: {
+    board: { creases: [], wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
+    fine: { creases: [], wrinkle: [0.03, 1], relief: 0.8, depth: 0.2, sheen: 0, dye: 0.08 },
+  },
+};
+function leatherFilter(id, o) {
+  const grey = slope => ['R', 'G', 'B'].map(ch => `<feFunc${ch} type="linear" slope="${slope}" intercept="${f(0.5 - 0.743 * slope, 3)}"/>`).join('');
   const light = '<feDistantLight azimuth="225" elevation="48"/>';
   const crease = (freq, seed, name) => `<feTurbulence type="turbulence" baseFrequency="${freq}" numOctaves="1" seed="${seed}" result="${name}t"/>`
     + `<feColorMatrix in="${name}t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1.6 0 0 0 1.05" result="${name}"/>`;
-  s += `<filter id="leather" x="0" y="0" width="1080" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">`
-    + crease(0.1, 4, 'c1') + crease(0.13, 17, 'c2') + crease(0.17, 29, 'c3')
-    + `<feComposite in="c1" in2="c2" operator="arithmetic" k1="1" result="c12"/>`
-    + `<feComposite in="c12" in2="c3" operator="arithmetic" k1="1" result="cells"/>`
-    + `<feGaussianBlur in="cells" stdDeviation=".45" result="pebbles"/>`
-    + `<feTurbulence type="fractalNoise" baseFrequency=".016" numOctaves="3" seed="9" result="wr"/>`
-    + `<feColorMatrix in="wr" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" result="wrinkles"/>`
-    + `<feComposite in="pebbles" in2="wrinkles" operator="arithmetic" k2=".6" k3=".6" result="height"/>`
-    + `<feDiffuseLighting in="height" surfaceScale="1.7" diffuseConstant="1" lighting-color="#fff" result="lit">${light}</feDiffuseLighting>`
-    + `<feComponentTransfer in="lit" result="shade">${grey(0.6, 0.054)}</feComponentTransfer>`
-    + `<feBlend in="shade" in2="SourceGraphic" mode="soft-light" result="grained"/>`
-    + `<feSpecularLighting in="height" surfaceScale="1.7" specularConstant=".55" specularExponent="16" lighting-color="#f1dfb8" result="spec">${light}</feSpecularLighting>`
-    + `<feComposite in="grained" in2="spec" operator="arithmetic" k2="1" k3=".15" result="sheen"/>`
-    + `<feTurbulence type="fractalNoise" baseFrequency=".006" numOctaves="2" seed="21" result="mot"/>`
-    + `<feColorMatrix in="mot" type="matrix" values=".3 0 0 0 .78  .3 0 0 0 .78  .3 0 0 0 .78  0 0 0 0 1" result="dye"/>`
-    + `<feBlend in="dye" in2="sheen" mode="multiply"/></filter>`;
-  return `<defs>${s}</defs>`;
+  let s = `<filter id="${id}" x="0" y="0" width="1080" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">`
+    + `<feTurbulence type="fractalNoise" baseFrequency="${o.wrinkle[0]}" numOctaves="3" seed="9" result="wr"/>`
+    + `<feColorMatrix in="wr" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  ${o.wrinkle[1]} 0 0 0 0" result="wrinkles"/>`;
+  let height = 'wrinkles';
+  if (o.creases.length) {
+    o.creases.forEach(([freq, seed], i) => { s += crease(freq, seed, `c${i}`); });
+    let cells = 'c0';
+    for (let i = 1; i < o.creases.length; i++) { s += `<feComposite in="${cells}" in2="c${i}" operator="arithmetic" k1="1" result="m${i}"/>`; cells = `m${i}`; }
+    s += `<feGaussianBlur in="${cells}" stdDeviation="${o.blur}" result="pebbles"/>`
+      + `<feComposite in="pebbles" in2="wrinkles" operator="arithmetic" k2="${o.pebble}" k3="1" result="height"/>`;
+    height = 'height';
+  }
+  s += `<feDiffuseLighting in="${height}" surfaceScale="${o.relief}" diffuseConstant="1" lighting-color="#fff" result="lit">${light}</feDiffuseLighting>`
+    + `<feComponentTransfer in="lit" result="shade">${grey(o.depth)}</feComponentTransfer>`
+    + `<feBlend in="shade" in2="SourceGraphic" mode="soft-light" result="sheen"/>`;
+  if (o.sheen) {
+    s += `<feSpecularLighting in="${height}" surfaceScale="${o.relief}" specularConstant=".55" specularExponent="16" lighting-color="#f1dfb8" result="spec">${light}</feSpecularLighting>`
+      + `<feComposite in="sheen" in2="spec" operator="arithmetic" k2="1" k3="${o.sheen}" result="sheen2"/>`;
+  }
+  const top = 1 - o.dye * 0.73;
+  return s + `<feTurbulence type="fractalNoise" baseFrequency=".006" numOctaves="2" seed="21" result="mot"/>`
+    + `<feColorMatrix in="mot" type="matrix" values="${o.dye} 0 0 0 ${f(top, 3)}  ${o.dye} 0 0 0 ${f(top, 3)}  ${o.dye} 0 0 0 ${f(top, 3)}  0 0 0 0 1" result="dye"/>`
+    + `<feBlend in="dye" in2="${o.sheen ? 'sheen2' : 'sheen'}" mode="multiply" result="hide"/>`
+    // the lighting is opaque across the whole region, so keep only what lies on the art
+    + `<feComposite in="hide" in2="SourceAlpha" operator="in"/></filter>`;
 }
 
 // ---------------------------------------------------------------- assemble
@@ -625,12 +698,7 @@ function allText() {
   return items;
 }
 
-function buildSvg(fontCss) {
-  const placed = placeAll();
-  for (const d of DISTRICTS) {
-    const { x, y, c, open } = placed[d.id];
-    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  open ground r=${open === null ? 'pinned' : f(open, 0)}`);
-  }
+function buildSvg(fontCss, mode, placed) {
   const art = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining()
     + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
     + districtFills(placed) + borders() + bridges();
@@ -638,8 +706,9 @@ function buildSvg(fontCss) {
   const side = sidePanels();
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">`
     + `<title>Moonshine Kingdom: the City Map</title>`
-    + defs(fontCss)
-    + `<g id="map" filter="url(#leather)">${art}${side.bg}${seams()}</g>`
+    + defs(fontCss, mode)
+    + `<g id="map" filter="url(#leather)">${art}${seams()}</g>`
+    + `<g id="panel-grounds" filter="url(#leatherFine)">${side.bg}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
     + `<g id="panels">${side.fg}${title()}${northArrow()}</g>`
     + `<g id="frame">${frame()}</g>`
@@ -688,8 +757,8 @@ async function measure(browser, fontCss, items) {
   return new Map(items.map((i, k) => [wkey(i, i.text), widths[k]]));
 }
 
-async function render(browser, svg, outputs) {
-  for (const [file, scale] of outputs) {
+async function render(browser, outputs) {
+  for (const [file, scale, svg] of outputs) {
     const page = await browser.newPage({ viewport: { width: 1080, height: 1080 }, deviceScaleFactor: scale });
     await page.setContent(`<!doctype html><html><body style="margin:0;background:#000">${svg}</body></html>`);
     await page.evaluate(async () => { await document.fonts.ready; });
@@ -705,11 +774,18 @@ async function render(browser, svg, outputs) {
   const browser = await chromium.launch(process.env.HTTPS_PROXY ? { proxy: { server: process.env.HTTPS_PROXY } } : {});
   const fontCss = await embeddedFonts(browser);
   WIDTHS = await measure(browser, fontCss, allText());
-  const svg = buildSvg(fontCss);
-  fs.writeFileSync(SVG_OUT, svg);
-  console.log('wrote', path.relative(ROOT, SVG_OUT));
-  const outputs = [[path.join(DIR, 'Board v0.9 (preview).jpg'), 2]];
-  if (process.argv.includes('--print')) outputs.push([path.join(DIR, 'Board v0.9 (print).png'), 7200 / 1080]);
-  await render(browser, svg, outputs);
+  const placed = placeAll();
+  for (const d of DISTRICTS) {
+    const { x, y, c, open } = placed[d.id];
+    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  ${LABEL_PLACEMENT === 'centre' ? 'clearance' : 'open ground'} ${open === null ? 'pinned' : f(open, 0)}`);
+  }
+  const print = buildSvg(fontCss, 'print', placed), screen = buildSvg(fontCss, 'screen', placed);
+  for (const [file, svg] of [[OUT.printSvg, print], [OUT.screenSvg, screen]]) {
+    fs.writeFileSync(file, svg);
+    console.log('wrote', path.relative(ROOT, file));
+  }
+  const outputs = [[OUT.screenJpg, 2, screen], [OUT.printJpg, 2, print]];
+  if (process.argv.includes('--print')) outputs.push([OUT.printPng, 7200 / 1080, print]);
+  await render(browser, outputs);
   await browser.close();
 })();
