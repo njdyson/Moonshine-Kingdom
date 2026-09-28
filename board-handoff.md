@@ -33,7 +33,9 @@ so the SVG renders the same anywhere; the build itself needs the network.
 - **Heat Track sockets are the Ledger's**: 39 mm casino chips, 2 mm apart, in a tray padded
   6 mm (`css/ledger-board.css`, the poker-chip build). If the Ledger's socket changes,
   `heatTrack()` changes with it. Five sockets need 381 units, a little more than the New Jersey
-  strip, so the Heat panel runs out over the head of the Hudson, clear of all land.
+  strip, so the Heat Track sits in a **corner cut out of the map**: the board's gold edge steps
+  in around it and the hairline follows (`frame()`), so the New Jersey coast meets its edge
+  instead of running under a floating panel (Nick, 2026-09-28).
 - **Mash square**: 24 mm.
 
 ## Decisions, so nobody undoes them
@@ -51,11 +53,15 @@ so the SVG renders the same anywhere; the build itself needs the network.
   2 Runners), 3 Runners, and a Squad shield. Nick's brief: a crown room must not read as always
   policed. The key's Setup row says "Where the pieces start".
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest
-  right on the Heat Track"; wrapping it into two rows would break that.
+  right on the Heat Track"; wrapping it into two rows would break that. The sockets copy the
+  Ledger's (dark wells, a faint gold ring); only the numerals warm from gold towards rust, with
+  RAID on the 5th. Nick asked for subtle escalation or none: `HEAT_NUM` and `HEAT_TINT` hold it,
+  and setting both flat gives the Ledger's plain look.
 - **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
 - **Title is NEW YORK 1929 with a drawn north line.** No logo, no compass (Nick's call).
 - Water and land labels are placed by visual centre, midway between the shores and at their
-  angle, so they stay centred if the type changes.
+  angle, so they stay centred if the type changes. New Jersey is unlabelled (Nick cut it);
+  Westchester and Nassau keep theirs.
 
 ## Open
 

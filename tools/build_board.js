@@ -87,7 +87,7 @@ const BORO_LABELS = {
   MN: [247, 378, -52.5], BX: [1049.5, 280, -90], QN: [890, 1037, -6.6], BK: [525, 1030, 8.6], SI: [150, 1050, 0],
 };
 const WATER_LABELS = [['EAST RIVER', 580, 472, -43.6], ['JAMAICA BAY', 732, 921, 0]];
-const LAND_LABELS = [['NEW JERSEY', 77, 565, -75], ['WESTCHESTER', 800, 32, 0], ['NASSAU', 1049, 700, 90]];
+const LAND_LABELS = [['WESTCHESTER', 800, 32, 0], ['NASSAU', 1049, 700, 90]];
 
 // ---------------------------------------------------------------- type
 const TYPE = {
@@ -446,22 +446,31 @@ function panel(x, y, w, h) {
 // Heat Track: five poker-chip sockets, the Ledger's own size (39 mm sockets 2 mm
 // apart in a tray padded 6 mm), numbered left to right so a Raid's "furthest
 // right on the Heat Track" reads straight off it. The 5th Heat sets off a Raid.
-const HEAT_COLS = ['#c08a22', '#c46d27', '#c75228', '#cb3b26', '#d42a24'];
-function heatTrack() {
-  const d = 39 * MM, gap = 2 * MM, padX = 6 * MM, padY = 4 * MM;
+// It sits in a corner cut out of the map: the frame steps in around it (see
+// frame()), so no coastline runs under it. Sockets look like the Ledger's; only
+// the numerals warm from gold towards rust as the Heat climbs.
+const FRAME_OUT = 7, FRAME_IN = 13;
+const HEAT = (() => {
+  const d = 39 * MM, gap = 2 * MM, padX = 6 * MM, padY = 4 * MM, m = 7;
   const trayW = 5 * d + 4 * gap + 2 * padX, trayH = d + 2 * padY;
-  const x = 20, y = 20, w = trayW + 12, h = trayH + 32;
-  const tx = x + 6, ty = y + 25;
-  let s = panel(x, y, w, h) + text('HEAT', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true });
-  s += `<rect x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}" fill="#000" fill-opacity=".4" stroke="#6b5a2e" stroke-opacity=".6" stroke-width="1"/>`;
+  const tx = FRAME_IN + m, ty = FRAME_IN + 24;
+  const inner = [tx + trayW + m, ty + trayH + m]; // the corner's inner hairline
+  return { d, gap, padX, trayW, trayH, tx, ty, edge: [inner[0] + 6, inner[1] + 6] };
+})();
+const HEAT_NUM = ['#9c8650', '#a37b4b', '#a86f46', '#aa6241', '#ad533b'];
+const HEAT_TINT = [0, 0.03, 0.05, 0.07, 0.1];
+function heatTrack() {
+  const { d, gap, padX, trayW, trayH, tx, ty, edge: [ex, ey] } = HEAT;
+  let s = `<path d="M0 0 H${f(ex)} V${f(ey)} H0 Z" fill="url(#panel)"/>`;
+  s += text('HEAT', tx + trayW / 2, FRAME_IN + 12, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true });
+  s += `<rect x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}" fill="#000" fill-opacity=".35" stroke="#6b5a2e" stroke-opacity=".4" stroke-width="1"/>`;
   for (let i = 0; i < 5; i++) {
     const cx = tx + padX + d / 2 + i * (d + gap), cy = ty + trayH / 2, raid = i === 4;
     s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2)}" fill="url(#socket)"/>`
-      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2)}" fill="${HEAT_COLS[i]}" fill-opacity=".14"/>`
-      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2 - 1.2)}" fill="none" stroke="${HEAT_COLS[i]}" stroke-width="${raid ? 3 : 2.2}"/>`
-      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2 - 5)}" fill="none" stroke="${HEAT_COLS[i]}" stroke-opacity=".3" stroke-width=".8"/>`
-      + text(String(i + 1), cx, cy - (raid ? 5 : 0), { family: 'Cinzel', weight: 700, size: 30, spacing: 0 }, { fill: HEAT_COLS[i], anchor: 'middle', middle: true, opacity: 0.8 });
-    if (raid) s += text('RAID', cx + 1, cy + 20, TYPE.small, { fill: HEAT_COLS[i], anchor: 'middle', middle: true });
+      + (HEAT_TINT[i] ? `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2)}" fill="#b0503a" fill-opacity="${HEAT_TINT[i]}"/>` : '')
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2 - 1)}" fill="none" stroke="${raid ? '#8a4a36' : '#7a6a3a'}" stroke-width="2"/>`
+      + text(String(i + 1), cx, cy - (raid ? 5 : 0), { family: 'Cinzel', weight: 700, size: 28, spacing: 0 }, { fill: HEAT_NUM[i], anchor: 'middle', middle: true });
+    if (raid) s += text('RAID', cx + 1, cy + 19, TYPE.small, { fill: '#b8674d', anchor: 'middle', middle: true });
   }
   return s;
 }
@@ -502,8 +511,8 @@ function key(x, y) {
 }
 
 function sidePanels() {
-  const k = key(20, 147);
-  return heatTrack() + k.svg + mash(20 + k.w + 10, 147);
+  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y);
+  return heatTrack() + k.svg + mash(HEAT.tx + k.w + 10, y);
 }
 
 function title() {
@@ -529,12 +538,18 @@ function northArrow() {
 }
 
 function frame() {
-  const o = 7, i = 13, W = 1080, st = 10; // st: the Deco step at each corner
+  // The gold edge, stepping in around the Heat corner; the hairline inside it
+  // follows, with a Deco step at each corner.
+  const o = FRAME_OUT, i = FRAME_IN, W = 1080, st = 10, [ex, ey] = HEAT.edge.map(v => f(v));
+  const hair = d => `<path d="${d}" fill="none" stroke="${C.goldLine}" stroke-opacity=".8" stroke-width="1"/>`;
+  const diamond = (x, y, r) => `<rect x="${f(x - r)}" y="${f(y - r)}" width="${2 * r}" height="${2 * r}" transform="rotate(45 ${f(x)} ${f(y)})" fill="${C.goldBright}"/>`;
   let s = `<path d="M0 0H${W}V${W}H0Z M${o} ${o}V${W - o}H${W - o}V${o}Z" fill="#0b0907" fill-rule="evenodd"/>`;
   s += `<rect x="${o}" y="${o}" width="${W - 2 * o}" height="${W - 2 * o}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
-  s += `<path d="M${i + st} ${i} H${W - i - st} V${i + st} H${W - i} V${W - i - st} H${W - i - st} V${W - i} H${i + st} V${W - i - st} H${i} V${i + st} H${i + st} Z" fill="none" stroke="${C.goldLine}" stroke-opacity=".8" stroke-width="1"/>`;
-  for (const [x, y] of [[o, o], [W - o, o], [o, W - o], [W - o, W - o]])
-    s += `<rect x="${x - 3.5}" y="${y - 3.5}" width="7" height="7" transform="rotate(45 ${x} ${y})" fill="${C.goldBright}"/>`;
+  s += `<path d="M${ex} ${o} V${ey} H${o}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
+  s += hair(`M${ex + 6} ${i} H${W - i - st} V${i + st} H${W - i} V${W - i - st} H${W - i - st} V${W - i} H${i + st} V${W - i - st} H${i} V${ey + 6} H${ex + 6} Z`);
+  s += hair(`M${i + st} ${i} H${ex - 6} V${ey - 6} H${i} V${i + st} H${i + st} Z`);
+  for (const [x, y] of [[o, o], [W - o, o], [o, W - o], [W - o, W - o]]) s += diamond(x, y, 3.5);
+  s += diamond(ex, ey, 3.5);
   return s;
 }
 
