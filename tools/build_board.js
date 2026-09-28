@@ -3,7 +3,11 @@
 // the District Roster below, then renders it through Playwright's Chromium.
 //
 //   node tools/build_board.js           SVG + 2160px preview JPEG
-//   node tools/build_board.js --print   also a 5400px PNG (18in at 300dpi, not committed)
+//   node tools/build_board.js --print   also a 7200px PNG (24in at 300dpi, not committed)
+//
+// The board prints 24 inches square: 1080 units across, so 1 unit is 0.564 mm.
+// Anything a physical piece must fit (the Heat Track's poker chips, the Mash
+// die) is sized in millimetres through MM.
 //
 // The roster must match the Town Planner's District Roster: zone, Still number,
 // venue and Setup mark for every District, Borough numbers in Raid order.
@@ -21,6 +25,7 @@ const ROOT = path.resolve(__dirname, '..');
 const DIR = path.join(ROOT, 'Art', 'Board');
 const SVG_OUT = path.join(DIR, 'Board v0.9.svg');
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
+const BOARD_MM = 609.6, MM = 1080 / BOARD_MM; // 24in square
 
 // ---------------------------------------------------------------- palette
 // Muted land so every mob colour, and the blue Squads, stand out on it.
@@ -91,8 +96,8 @@ const TYPE = {
   boro: { family: 'Cinzel', weight: 700, size: 19, spacing: 3.6 },
   water: { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 3.4, italic: true },
   land: { family: 'Barlow Condensed', weight: 600, size: 9.5, spacing: 5 },
-  keyHead: { family: 'Barlow Condensed', weight: 700, size: 12, spacing: 0.9 },
-  keyText: { family: 'Barlow', weight: 500, size: 9.6, spacing: 0.1 },
+  keyHead: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.8 },
+  keyText: { family: 'Barlow', weight: 500, size: 7.6, spacing: 0.1 },
   panelHead: { family: 'Cinzel', weight: 700, size: 11.5, spacing: 3.2 },
   small: { family: 'Barlow Condensed', weight: 700, size: 8, spacing: 1.3 },
   titleCity: { family: 'Cinzel', weight: 700, size: 26, spacing: 4.5 },
@@ -438,54 +443,72 @@ function panel(x, y, w, h) {
     + `<path d="${outline(4)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".35" stroke-width=".8"/>`;
 }
 
-function heatAndMash() {
-  // Heat Track 1-5 (the 5th sets off a Raid) and a square for the Mash die.
-  const x = 24, y = 24, w = 336, h = 88;
-  let s = panel(x, y, w, h);
-  s += text('HEAT', x + 128, y + 19, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle' });
-  const cols = ['#8a6a17', '#8f4f1b', '#93391c', '#962b1d', '#a01f1f'];
-  s += `<path d="M${x + 32} ${y + 51} H${x + 224}" stroke="${C.goldDim}" stroke-width="1.2" stroke-dasharray="2 3"/>`;
+// Heat Track: five poker-chip sockets, the Ledger's own size (39 mm sockets 2 mm
+// apart in a tray padded 6 mm), numbered left to right so a Raid's "furthest
+// right on the Heat Track" reads straight off it. The 5th Heat sets off a Raid.
+const HEAT_COLS = ['#c08a22', '#c46d27', '#c75228', '#cb3b26', '#d42a24'];
+function heatTrack() {
+  const d = 39 * MM, gap = 2 * MM, padX = 6 * MM, padY = 4 * MM;
+  const trayW = 5 * d + 4 * gap + 2 * padX, trayH = d + 2 * padY;
+  const x = 20, y = 20, w = trayW + 12, h = trayH + 32;
+  const tx = x + 6, ty = y + 25;
+  let s = panel(x, y, w, h) + text('HEAT', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true });
+  s += `<rect x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}" fill="#000" fill-opacity=".4" stroke="#6b5a2e" stroke-opacity=".6" stroke-width="1"/>`;
   for (let i = 0; i < 5; i++) {
-    const cx = x + 32 + i * 48, cy = y + 51;
-    s += `<circle cx="${cx}" cy="${cy}" r="20.5" fill="${cols[i]}" stroke="${C.gold}" stroke-width="1.8"/>`
-      + `<circle cx="${cx}" cy="${cy}" r="16.5" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1"/>`
-      + `<text x="${cx}" y="${cy + 7}" font-family="Cinzel" font-weight="700" font-size="20" text-anchor="middle" fill="#1c130b">${i + 1}</text>`;
+    const cx = tx + padX + d / 2 + i * (d + gap), cy = ty + trayH / 2, raid = i === 4;
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2)}" fill="url(#socket)"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2)}" fill="${HEAT_COLS[i]}" fill-opacity=".14"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2 - 1.2)}" fill="none" stroke="${HEAT_COLS[i]}" stroke-width="${raid ? 3 : 2.2}"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2 - 5)}" fill="none" stroke="${HEAT_COLS[i]}" stroke-opacity=".3" stroke-width=".8"/>`
+      + text(String(i + 1), cx, cy - (raid ? 5 : 0), { family: 'Cinzel', weight: 700, size: 30, spacing: 0 }, { fill: HEAT_COLS[i], anchor: 'middle', middle: true, opacity: 0.8 });
+    if (raid) s += text('RAID', cx + 1, cy + 20, TYPE.small, { fill: HEAT_COLS[i], anchor: 'middle', middle: true });
   }
-  s += text('RAID', x + 224, y + 82, TYPE.small, { fill: '#e8735a', anchor: 'middle' });
-  s += `<line x1="${x + 262}" y1="${y + 12}" x2="${x + 262}" y2="${y + h - 12}" stroke="${C.goldLine}" stroke-opacity=".45"/>`;
-  s += text('MASH', x + 299, y + 19, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle' });
-  s += `<rect x="${x + 278}" y="${y + 30}" width="42" height="42" rx="7" fill="#100b07" stroke="${C.gold}" stroke-width="1.8" stroke-dasharray="4 3"/>`;
   return s;
 }
 
-function key() {
-  // The marks as they appear on the map; prices worded as the Town Planner's legend.
-  const x = 24, y = 122, w = 276, h = 142;
+// The Mash die's square, 24 mm so any usual die sits inside it.
+function mash(x, y) {
+  const side = 24 * MM, w = side + 28, h = side + 32;
+  return panel(x, y, w, h)
+    + text('MASH', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true })
+    + `<rect x="${f(x + 14)}" y="${f(y + 24)}" width="${f(side)}" height="${f(side)}" rx="6" fill="#100b07" stroke="${C.gold}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
+}
+
+// The marks as they appear on the map; prices worded as the Town Planner's legend.
+const KEY_ROWS = [
+  ['speak', 'Speakeasy', 'Moonshine $300, Rum $500'],
+  ['hs', 'High Society', 'Rum only, 1 Kickback each'],
+  ['ward', 'Ward', ''],
+  ['dock', 'Dock', 'Water Connected to every Dock'],
+  ['bridge', 'Bridge', 'Land Connected'],
+  ['still', 'Still', 'Pressure: the lit cells'],
+  ['setup', 'Setup', 'Where the pieces start'],
+];
+function key(x, y) {
+  const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
+  const subX = 28 + headW + 9, subW = Math.max(...KEY_ROWS.map(([, , t]) => (t ? width(TYPE.keyText, t) : 0)));
+  const w = subX + subW + 11, h = 13 + 6 * 14 + 4 + 13;
   let s = panel(x, y, w, h);
-  const rows = [
-    ['speak', 'Speakeasy', 'Moonshine $300, Rum $500'],
-    ['hs', 'High Society', 'Rum only, 1 Kickback each'],
-    ['ward', 'Ward', ''],
-    ['dock', 'Dock', 'Water Connected to every Dock'],
-    ['bridge', 'Bridge', 'Land Connected'],
-    ['still', 'Still', 'Pressure: the lit cells'],
-    ['setup', 'Setup', 'Where the pieces start'],
-  ];
-  rows.forEach(([k, t, sub], i) => {
-    const cy = y + 16 + i * 17.4 + (i > 0 ? 5 : 0), ix = x + 21; // headroom for the crown
-    if (k === 'bridge') s += bridgeGlyph([ix - 10, cy], [ix + 10, cy], 2, 0.6);
-    else if (k === 'still') s += still(7, ix - 7, cy - 8.5, 17);
+  KEY_ROWS.forEach(([k, t, sub], i) => {
+    const cy = y + 13 + i * 14 + (i > 0 ? 4 : 0), ix = x + 15; // headroom for the crown
+    if (k === 'bridge') s += bridgeGlyph([ix - 7, cy], [ix + 7, cy], 1.5, 0.45);
+    else if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
     else if (k === 'setup') s += tray(['runner'], ix - trayWidth(['runner']) / 2, cy);
-    else s += roundel(k, ix, cy, 7);
-    s += text(upper(t), x + 40, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
-    if (sub) s += text(sub, x + 124, cy, TYPE.keyText, { fill: C.body, middle: true });
+    else s += roundel(k, ix, cy, 5.6);
+    s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
+    if (sub) s += text(sub, x + subX, cy, TYPE.keyText, { fill: C.body, middle: true });
   });
-  return s;
+  return { svg: s, w, h };
+}
+
+function sidePanels() {
+  const k = key(20, 147);
+  return heatTrack() + k.svg + mash(20 + k.w + 10, 147);
 }
 
 function title() {
   // The map's title block: the city and the year, between Deco rules.
-  const cx = 116, cy = 318;
+  const cx = 116, cy = 305;
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
   const rule = (y, gap) => `<path d="M${f(cx - cityW / 2)} ${y} H${f(cx - gap)} M${f(cx + gap)} ${y} H${f(cx + cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
@@ -498,7 +521,7 @@ function title() {
 
 function northArrow() {
   // A drawn north line: hairline, arrowhead and N, nothing more.
-  const x = 116, top = 372, foot = 428;
+  const x = 116, top = 362, foot = 414;
   return `<path d="M${x} ${foot} V${top + 9}" stroke="${C.goldDim}" stroke-width="1.1"/>`
     + `<path d="M${x} ${top} L${x + 4.2} ${top + 12} L${x} ${top + 9} L${x - 4.2} ${top + 12} Z" fill="${C.goldDim}"/>`
     + `<path d="M${x - 3.5} ${foot} H${x + 3.5}" stroke="${C.goldDim}" stroke-width="1.1"/>`
@@ -522,6 +545,7 @@ function defs(fontCss) {
     s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${b.fill[0]}"/><stop offset="1" stop-color="${b.fill[1]}"/></radialGradient>`;
   s += `<radialGradient id="glow"><stop offset="0" stop-color="${C.goldBright}" stop-opacity=".16"/><stop offset="1" stop-color="${C.goldBright}" stop-opacity="0"/></radialGradient>`;
   s += `<radialGradient id="moon" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbf4dc"/><stop offset=".7" stop-color="#ddd3b2"/><stop offset="1" stop-color="#a99c78"/></radialGradient>`;
+  s += `<radialGradient id="socket"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="#000"/></radialGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
@@ -545,6 +569,7 @@ function allText() {
     if (d.venue) add(TYPE.venue, d.venue);
   }
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
+  for (const [, t, sub] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); if (sub) add(TYPE.keyText, sub); }
   add(TYPE.titleCity, 'NEW YORK');
   add(TYPE.titleYear, '1929');
   return items;
@@ -565,7 +590,7 @@ function buildSvg(fontCss) {
     + defs(fontCss)
     + `<g id="map" filter="url(#grain)">${art}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
-    + `<g id="panels">${heatAndMash()}${key()}${title()}${northArrow()}</g>`
+    + `<g id="panels">${sidePanels()}${title()}${northArrow()}</g>`
     + `<g id="frame">${frame()}</g>`
     + `</svg>\n`;
 }
@@ -633,7 +658,7 @@ async function render(browser, svg, outputs) {
   fs.writeFileSync(SVG_OUT, svg);
   console.log('wrote', path.relative(ROOT, SVG_OUT));
   const outputs = [[path.join(DIR, 'Board v0.9 (preview).jpg'), 2]];
-  if (process.argv.includes('--print')) outputs.push([path.join(DIR, 'Board v0.9 (print).png'), 5]);
+  if (process.argv.includes('--print')) outputs.push([path.join(DIR, 'Board v0.9 (print).png'), 7200 / 1080]);
   await render(browser, svg, outputs);
   await browser.close();
 })();

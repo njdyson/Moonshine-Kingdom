@@ -280,6 +280,14 @@ day) and one still-open proposal: a Blowback shield for the Still that brewed. T
 not implemented and should not be without Nick asking; read the file before touching the
 Blowback.
 
+## The board
+
+Since 2026-09-28 the board is being rebuilt as generated vector art: `tools/build_board.js`
+draws it from `Art/Board/board-geometry.json` (the traced map) and a roster copied from the
+Town Planner. Read `board-handoff.md` before touching it: it holds the build commands, the
+24-inch print spec (Heat Track sockets are the Ledger's 39 mm chips), and the decisions Nick
+has made so far. Work continues on branch `claude/board-image-design-509xha` until merged.
+
 ## What not to edit
 
 - `Archive/` is frozen history. Never edit it, and never let it skew a repo-wide count.
@@ -292,7 +300,8 @@ A rules change is never one file. The player-facing set is:
 
 `Rulebook`, `The Almanac`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
 `The Volstead Act` (shelved), `Still Tokens`, `Turn Tokens`, `The Ledger` (both), `Brew Simulator`,
-`Combat Simulator`, `Federal Crackdown Tracker`, `index.html`.
+`Combat Simulator`, `Federal Crackdown Tracker`, `index.html`, and the board
+(`tools/build_board.js`: its roster, key and setup marks).
 
 After changing a rule, grep the whole set for the old wording. The Town Planner and the
 Playbooks carry compressed restatements of rules that the Rulebook states in full, and
