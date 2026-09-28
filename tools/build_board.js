@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 // Builds the game board as a vector SVG from Art/Board/board-geometry.json and
-// the District Roster below, then renders PNGs through Playwright's Chromium.
+// the District Roster below, then renders it through Playwright's Chromium.
 //
 //   node tools/build_board.js           SVG + 2160px preview JPEG
 //   node tools/build_board.js --print   also a 5400px PNG (18in at 300dpi, not committed)
 //
-// The roster must match the Town Planner (District Roster table): zone, Still
-// number and venue name for every District, Borough numbers in Raid order.
-// Pressure is not stored: it is 6 - |Still - 7|, as on the Still Tokens.
+// The roster must match the Town Planner's District Roster: zone, Still number,
+// venue and Setup mark for every District, Borough numbers in Raid order.
+// Stills are the Still Token art itself (Art/Still Tokens/SVG), so the printed
+// board and the prototype tokens can never disagree.
+//
+// Each District's label cluster is placed automatically where it leaves the
+// widest open ground for pieces, so the Still stays readable mid-game. Pin one
+// by hand with `place: ['h' | 'v', x, y]` if the choice ever looks wrong.
 
 const fs = require('fs');
 const path = require('path');
@@ -18,144 +23,344 @@ const SVG_OUT = path.join(DIR, 'Board v0.9.svg');
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 
 // ---------------------------------------------------------------- palette
+// Muted land so every mob colour, and the blue Squads, stand out on it.
 const C = {
-  gold: '#c9a437', goldBright: '#e8cc72', goldLine: '#b9932f', goldDim: '#a98c4f',
-  ink: '#efe3cd', body: '#d8caae', muted: '#b8a577', cream: '#f5e9d9',
-  water: '#111720', waterLine: '#b9932f', offboard: '#35312d', shadow: '#0a0604',
-  panelA: '#241c14', panelB: '#19130c', boiler: '#130207', strip: '#0d0005', rivet: '#8a7329',
+  gold: '#c9a437', goldBright: '#e8cc72', goldLine: '#b9932f', goldDim: '#a98c4f', goldDeep: '#7a6224',
+  ink: '#efe3cd', body: '#d8caae', muted: '#b8a577',
+  sea: ['#15202b', '#0c131b'], offboard: '#26231f', shadow: '#0a0705',
+  panelA: '#231b13', panelB: '#16110b', squad: '#6f95cf',
 };
-// Pressure ramp, bottom cell first: identical to the Still Tokens.
-const RAMP = ['#e8c85a', '#dcb246', '#d49a37', '#cf7f33', '#c8632e', '#c0472a'];
-
-// Borough fills keep the hues of the Affinity board: [centre, edge].
 const BOROUGHS = {
-  MN: { n: 1, name: 'Manhattan', fill: ['#62191c', '#3b0d10'] },
-  BX: { n: 2, name: 'The Bronx', fill: ['#16391b', '#081f0b'] },
-  QN: { n: 3, name: 'Queens', fill: ['#33283f', '#1c1623'] },
-  BK: { n: 4, name: 'Brooklyn', fill: ['#55212f', '#34121b'] },
-  SI: { n: 5, name: 'Staten Island', fill: ['#2d2522', '#191312'] },
+  MN: { n: 1, name: 'Manhattan', fill: ['#5a3336', '#3e2224'] },
+  BX: { n: 2, name: 'The Bronx', fill: ['#34493b', '#223127'] },
+  QN: { n: 3, name: 'Queens', fill: ['#3f3a57', '#2a263b'] },
+  BK: { n: 4, name: 'Brooklyn', fill: ['#5a4630', '#3d2f1f'] },
+  SI: { n: 5, name: 'Staten Island', fill: ['#3b3935', '#282623'] },
 };
 
 // ---------------------------------------------------------------- roster
-// at: centre of the District name, placed where the Affinity board had it.
+// setup: the Town Planner's Setup column. lines: a hand break for long names.
 const DISTRICTS = [
-  { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, at: [340, 478] },
-  { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', at: [486, 186] },
-  { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 12, venue: 'The Silver Dollar', at: [602, 294] },
-  { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket', at: [396, 376] },
-  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 11, at: [440, 286] },
-  { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 9, at: [262, 590] },
-  { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, at: [720, 215] },
-  { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', at: [964, 104] },
-  { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'speak', still: 11, venue: 'DeLillo’s', at: [622, 86] },
-  { id: 'fordham', name: 'Fordham', boro: 'BX', zone: 'speak', still: 8, venue: 'The Penny Whistle', at: [806, 90] },
-  { id: 'throggs_neck', name: 'Throggs Neck', boro: 'BX', zone: 'dock', still: 10, at: [922, 240] },
-  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'ward', still: 4, at: [770, 590] },
-  { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', at: [912, 704] },
-  { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 2, venue: 'Bohemian Hall', at: [730, 440] },
-  { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'speak', still: 6, venue: 'Paradise Alley', at: [938, 546] },
-  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, at: [918, 400] },
-  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3, at: [936, 874] },
-  { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, at: [690, 756] },
-  { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', at: [578, 600] },
-  { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint', at: [364, 866] },
-  { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar', at: [470, 704] },
-  { id: 'sheepshead_bay', name: 'Sheepshead Bay', boro: 'BK', zone: 'dock', still: 4, at: [530, 872] },
-  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'ward', still: 6, at: [152, 852] },
-  { id: 'westerleigh', name: 'Westerleigh', boro: 'SI', zone: 'dock', still: 2, at: [152, 748] },
-  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 4, at: [150, 958] },
+  { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
+  { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
+  { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 12, venue: 'The Silver Dollar', setup: 'runners' },
+  { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket' },
+  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 11, setup: 'runners' },
+  { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 9 },
+  { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, setup: 'home' },
+  { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', setup: 'squad' },
+  { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'speak', still: 11, venue: 'DeLillo’s', setup: 'runners' },
+  { id: 'fordham', name: 'Fordham', boro: 'BX', zone: 'speak', still: 8, venue: 'The Penny Whistle' },
+  { id: 'throggs_neck', name: 'Throggs Neck', boro: 'BX', zone: 'dock', still: 10, setup: 'runners' },
+  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
+  { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', setup: 'squad' },
+  { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 2, venue: 'Bohemian Hall', setup: 'runners' },
+  { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'speak', still: 6, venue: 'Paradise Alley' },
+  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5 },
+  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3, setup: 'runners' },
+  { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
+  { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
+  { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint', setup: 'runners' },
+  { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar' },
+  { id: 'sheepshead_bay', name: 'Sheepshead Bay', boro: 'BK', zone: 'dock', still: 4, setup: 'runners', lines: ['Sheepshead', 'Bay'] },
+  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'ward', still: 6 },
+  { id: 'westerleigh', name: 'Westerleigh', boro: 'SI', zone: 'dock', still: 2 },
+  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 4 },
 ];
+const SETUP = {
+  home: { text: 'HOME TURF', icon: 'safehouse' },
+  runners: { text: '3 RUNNERS', icon: 'runner' },
+  squad: { text: 'POLICE SQUAD', icon: 'squad' },
+};
 const OFFBOARD = ['nj', 'north', 'east'];
 
-// Borough labels sit in the water, as on the Affinity board: [x, y, rotation].
+// Labels in the water or on off-board land: [text, x, y, rotation].
 const BORO_LABELS = {
-  MN: [246, 380, -54.2], BX: [1049, 262, -90], QN: [890, 1041, -6.6],
-  BK: [525, 1031, 8.6], SI: [150, 1057, 0],
+  MN: [246, 381, -54.2], BX: [1049, 262, -90], QN: [890, 1041, -6.6], BK: [525, 1031, 8.6], SI: [150, 1057, 0],
 };
-const WATER_LABELS = [
-  ['East River', 566, 476, -50.5, 11], ['Jamaica Bay', 732, 924, 0, 12.5],
-];
+const WATER_LABELS = [['EAST RIVER', 567, 475, -50.5], ['JAMAICA BAY', 732, 925, 0]];
+const LAND_LABELS = [['NEW JERSEY', 62, 640, -74.9], ['WESTCHESTER', 800, 37, 0], ['NASSAU', 1051, 700, 90]];
 
-// ---------------------------------------------------------------- icons
-// Pulled from Art/Icons so the board stays in step with the other components.
+// ---------------------------------------------------------------- type
+const TYPE = {
+  name: { family: 'Barlow Condensed', weight: 700, size: 14.5, spacing: 1.1 },
+  venue: { family: 'Barlow', weight: 500, size: 9, spacing: 0.2, italic: true },
+  setup: { family: 'Barlow Condensed', weight: 700, size: 8.4, spacing: 1.3 },
+  boro: { family: 'Cinzel', weight: 700, size: 19, spacing: 3.6 },
+  water: { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 3.4, italic: true },
+  land: { family: 'Barlow Condensed', weight: 600, size: 9.5, spacing: 5 },
+  keyHead: { family: 'Barlow Condensed', weight: 700, size: 12, spacing: 0.9 },
+  keyText: { family: 'Barlow', weight: 500, size: 9.6, spacing: 0.1 },
+  panelHead: { family: 'Cinzel', weight: 700, size: 11.5, spacing: 3.2 },
+};
+const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,500;0,600;0,700;1,500&family=Barlow+Condensed:ital,wght@0,600;0,700;1,600&family=Bebas+Neue&family=Cinzel:wght@700&display=block';
+
+// ---------------------------------------------------------------- helpers
+const f = (v, dp = 2) => +(+v).toFixed(dp);
+const poly = p => `M${p.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')} Z`;
+const pts = p => p.map(([x, y]) => `${f(x)},${f(y)}`).join(' ');
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const byId = Object.fromEntries(DISTRICTS.map(d => [d.id, d]));
+const upper = s => s.toUpperCase();
+
+let WIDTHS = new Map();
+const wkey = (spec, t) => `${spec.family}|${spec.weight}|${spec.size}|${spec.spacing}|${spec.italic ? 1 : 0}|${t}`;
+const width = (spec, t) => {
+  const w = WIDTHS.get(wkey(spec, t));
+  if (w === undefined) throw new Error('Unmeasured text: ' + t);
+  return w;
+};
+
+function text(str, x, y, spec, { fill = C.ink, anchor = 'start', halo = 0, rotate = 0, opacity = 1 } = {}) {
+  const attrs = `x="${f(x)}" y="${f(y)}" font-family="${spec.family}" font-weight="${spec.weight}" font-size="${spec.size}" letter-spacing="${spec.spacing}" text-anchor="${anchor}"${spec.italic ? ' font-style="italic"' : ''}${rotate ? ` transform="rotate(${rotate} ${f(x)} ${f(y)})"` : ''}${opacity < 1 ? ` opacity="${opacity}"` : ''}`;
+  const t = esc(str);
+  return (halo ? `<text ${attrs} fill="none" stroke="${C.shadow}" stroke-opacity=".8" stroke-width="${halo}" stroke-linejoin="round">${t}</text>` : '')
+    + `<text ${attrs} fill="${fill}">${t}</text>`;
+}
+
+// ---------------------------------------------------------------- art
+// Icons come from Art/Icons with their own colours stripped, so one fill tints them.
 function loadIcon(file) {
   const src = fs.readFileSync(path.join(ROOT, 'Art', 'Icons', file), 'utf8');
   const vb = src.match(/viewBox="([^"]+)"/)[1].split(/[\s,]+/).map(Number);
-  const ds = [...src.matchAll(/\sd="([^"]+)"/g)].map(m => m[1].replace(/\s+/g, ' '));
-  return { vb, ds };
+  const inner = src.replace(/<\?xml[^>]*>/g, '').replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>[\s\S]*$/, '')
+    .replace(/\s(fill|stroke|style|id)="[^"]*"/g, '').replace(/\s+/g, ' ').trim();
+  return { vb, inner };
 }
 const ICONS = {
-  speak: loadIcon('Tumbler.svg'), ward: loadIcon('Fist.svg'),
-  dock: loadIcon('anchor.svg'), crown: loadIcon('Crown.svg'),
+  speak: loadIcon('Tumbler.svg'), ward: loadIcon('Fist.svg'), dock: loadIcon('anchor.svg'),
+  crown: loadIcon('Crown.svg'), runner: loadIcon('Runner.svg'), safehouse: loadIcon('Safehouse.svg'),
 };
-// Crown.svg is a stroke icon; the rest are filled silhouettes.
-function icon(kind, cx, cy, size, color) {
-  const { vb, ds } = ICONS[kind];
+function icon(kind, cx, cy, size, color, strokeWidth) {
+  if (kind === 'squad') { // a police shield in the Squads' blue
+    const s = size / 10;
+    return `<path transform="translate(${f(cx - 5 * s)} ${f(cy - 5.5 * s)}) scale(${f(s, 4)})" d="M5 0 L10 1.6 V5.2 C10 8.2 7.6 10.2 5 11 C2.4 10.2 0 8.2 0 5.2 V1.6 Z" fill="${C.squad}" stroke="${C.shadow}" stroke-width=".6"/>`;
+  }
+  const { vb } = ICONS[kind];
+  const inner = strokeWidth ? ICONS[kind].inner.replace(/stroke-width="[^"]*"/g, `stroke-width="${strokeWidth}"`) : ICONS[kind].inner;
   const s = size / Math.max(vb[2], vb[3]);
   const tx = cx - (vb[0] + vb[2] / 2) * s, ty = cy - (vb[1] + vb[3] / 2) * s;
   const paint = kind === 'crown'
-    ? `fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`
+    ? `fill="none" stroke="${color}" stroke-linecap="round" stroke-linejoin="round"`
     : `fill="${color}"`;
-  return `<g transform="translate(${f(tx)} ${f(ty)}) scale(${f(s, 4)})" ${paint}>${ds.map(d => `<path d="${d}"/>`).join('')}</g>`;
+  return `<g transform="translate(${f(tx)} ${f(ty)}) scale(${f(s, 4)})" ${paint}>${inner}</g>`;
 }
 
-// ---------------------------------------------------------------- helpers
-const f = (v, dp = 2) => +v.toFixed(dp);
-const pts = p => p.map(([x, y]) => `${f(x)},${f(y)}`).join(' ');
-const poly = p => `M${p.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')} Z`;
-const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-const byId = Object.fromEntries(DISTRICTS.map(d => [d.id, d]));
-
-// Legible type on a textured ground: a dark keyline under the fill.
-function label(text, x, y, { size, family = 'Cinzel', weight = 700, fill = C.goldBright, spacing = 0.8, anchor = 'middle', italic = false, halo = 2.6, rotate = 0 }) {
-  const common = `x="${f(x)}" y="${f(y)}" font-family="${family}" font-weight="${weight}" font-size="${size}" letter-spacing="${spacing}" text-anchor="${anchor}"${italic ? ' font-style="italic"' : ''}${rotate ? ` transform="rotate(${rotate} ${f(x)} ${f(y)})"` : ''}`;
-  const t = esc(text);
-  return (halo ? `<text ${common} fill="none" stroke="${C.shadow}" stroke-opacity=".85" stroke-width="${halo}" stroke-linejoin="round">${t}</text>` : '')
-    + `<text ${common} fill="${fill}">${t}</text>`;
+// The Still Token art, trimmed to its drawn bounds (x 12.5-90.7, y 9.9-103.3).
+const TOKEN_BOX = [12.5, 9.9, 78.2, 93.4];
+const TOKENS = {};
+for (let n = 2; n <= 12; n++) {
+  const src = fs.readFileSync(path.join(ROOT, 'Art', 'Still Tokens', 'SVG', `still-${String(n).padStart(2, '0')}.svg`), 'utf8');
+  TOKENS[n] = src.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>[\s\S]*$/, '').replace('<defs></defs>', '').replace(/\n\s*/g, '');
 }
+function still(n, x, y, h) {
+  const s = h / TOKEN_BOX[3];
+  return `<g transform="translate(${f(x - TOKEN_BOX[0] * s)} ${f(y - TOKEN_BOX[1] * s)}) scale(${f(s, 4)})">${TOKENS[n]}</g>`;
+}
+const TOKEN_H = 42, TOKEN_W = TOKEN_H * TOKEN_BOX[2] / TOKEN_BOX[3];
 
-// A Still as printed on the board: boiler with its number, Pressure strip beside.
-// Drawn from the Still Token art at board scale. Box is 33 x 35; (x, y) = top left.
-function still(n, x, y) {
-  const p = 6 - Math.abs(n - 7);
-  let s = `<g transform="translate(${f(x)} ${f(y)})">`;
-  s += `<rect x="7" y="0" width="8" height="4.5" rx="1.3" fill="${C.boiler}" stroke="${C.gold}" stroke-width="1"/>`;
-  s += `<path d="M4.5 30.5 l-1.6 4 M17.5 30.5 l1.6 4" stroke="${C.gold}" stroke-width="1.3" stroke-linecap="round"/>`;
-  s += `<rect x="0.5" y="3.5" width="21.5" height="27.5" rx="4.2" fill="${C.boiler}" stroke="${C.gold}" stroke-width="1.4"/>`;
-  s += [8, 17.2, 26.4].map(cy => `<circle cx="3.4" cy="${cy}" r=".75" fill="${C.rivet}"/>`).join('');
-  s += `<text x="12.4" y="${n > 9 ? 25.2 : 25.8}" font-family="Bebas Neue" font-size="${n > 9 ? 19 : 21}" text-anchor="middle" fill="${C.cream}">${n}</text>`;
-  s += `<rect x="21" y="15.5" width="5" height="3.2" rx="1" fill="${C.boiler}" stroke="${C.gold}" stroke-width=".8"/>`;
-  s += `<rect x="25.2" y="3.5" width="7.3" height="28" rx="3.6" fill="${C.strip}" stroke="${C.gold}" stroke-width="1.1"/>`;
-  for (let i = 0; i < 6; i++) {
-    const cy = 27.6 - i * 3.95, lit = i < p;
-    s += `<rect x="26.85" y="${f(cy - 1.6)}" width="4" height="3.2" rx=".8" fill="${RAMP[i]}" fill-opacity="${lit ? 1 : 0.11}" stroke="${RAMP[i]}" stroke-opacity="${lit ? 1 : 0.26}" stroke-width=".4"/>`;
+// Zone roundel: the same mark on the map and in the key. A High Society Venue is
+// a Speakeasy with a crown on it, as the Rulebook's component list describes.
+function roundel(zone, cx, cy, r) {
+  if (zone === 'hs') {
+    const ky = cy - r - r * 0.3, ks = r * 1.3;
+    return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
+      + icon('speak', cx, cy + r * 0.04, r * 1.2, '#2a1d0c')
+      + icon('crown', cx, ky, ks, C.shadow, 5.5) + icon('crown', cx, ky, ks, C.goldBright);
   }
-  return s + '</g>';
+  return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="#140e09" fill-opacity=".85" stroke="${C.gold}" stroke-width="1.2"/>`
+    + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
 }
 
-// ---------------------------------------------------------------- layers
-const regionBoro = id => (byId[id] ? byId[id].boro : null);
+// ---------------------------------------------------------------- label clusters
+// Two arrangements, h (Still left of the text) and v (Still over the text); the
+// placer tries both. Returns the size and a draw(x, y) for the chosen spot.
+const R = 9; // roundel radius
+function cluster(d, layout) {
+  const names = (d.lines || [d.name]).map(upper);
+  const nameW = Math.max(...names.map(n => width(TYPE.name, n)));
+  const venueW = d.venue ? width(TYPE.venue, d.venue) : 0;
+  const setupW = d.setup ? 12 + width(TYPE.setup, SETUP[d.setup].text) : 0;
+  const nameFill = d.zone === 'hs' ? C.goldBright : C.ink;
+  const lines = []; // [kind, text, baseline]
+  if (layout === 'h') {
+    const x0 = TOKEN_W + 7, pad = d.zone === 'hs' ? 8 : 0;
+    let y = 14.5 + pad;
+    names.forEach(n => { lines.push(['name', n, y]); y += 14.5; });
+    y -= 1.5;
+    if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
+    if (d.setup) lines.push(['setup', SETUP[d.setup].text, y]);
+    const w = x0 + Math.max(2 * R + 5 + nameW, venueW, setupW);
+    const h = Math.max(TOKEN_H, lines[lines.length - 1][2] + 3);
+    return {
+      w, h, layout,
+      roundelAt: (x, y) => [x + x0 + R, y + 9.5 + pad],
+      draw(x, y) {
+        let s = still(d.still, x, y, TOKEN_H) + roundel(d.zone, x + x0 + R, y + 9.5 + pad, R);
+        for (const [kind, t, b] of lines) {
+          if (kind === 'name') s += text(t, x + x0 + 2 * R + 5, y + b, TYPE.name, { fill: nameFill, halo: 2.6 });
+          if (kind === 'venue') s += text(t, x + x0, y + b, TYPE.venue, { fill: C.body, halo: 2.2 });
+          if (kind === 'setup') s += setupMark(d.setup, x + x0, y + b);
+        }
+        return s;
+      },
+    };
+  }
+  // v: roundel and Still side by side, text centred below
+  const rowW = 2 * R + 6 + TOKEN_W;
+  let y = TOKEN_H + 15.5;
+  names.forEach(n => { lines.push(['name', n, y]); y += 14.5; });
+  y -= 1.5;
+  if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
+  if (d.setup) lines.push(['setup', SETUP[d.setup].text, y]);
+  const w = Math.max(rowW, nameW, venueW, setupW);
+  const h = lines[lines.length - 1][2] + 3;
+  return {
+    w, h, layout,
+    roundelAt: (x, yy) => [x + (w - rowW) / 2 + R, yy + TOKEN_H / 2],
+    draw(x, yy) {
+      const rx = x + (w - rowW) / 2;
+      let s = roundel(d.zone, rx + R, yy + TOKEN_H / 2, R) + still(d.still, rx + 2 * R + 6, yy, TOKEN_H);
+      for (const [kind, t, b] of lines) {
+        if (kind === 'name') s += text(t, x + w / 2, yy + b, TYPE.name, { fill: nameFill, anchor: 'middle', halo: 2.6 });
+        if (kind === 'venue') s += text(t, x + w / 2, yy + b, TYPE.venue, { fill: C.body, anchor: 'middle', halo: 2.2 });
+        if (kind === 'setup') s += setupMark(d.setup, x + w / 2 - setupW / 2, yy + b);
+      }
+      return s;
+    },
+  };
+}
+function setupMark(kind, x, y) {
+  const { text: t, icon: ic } = SETUP[kind];
+  return icon(ic, x + 4.5, y - 3, ic === 'squad' ? 8.5 : 10, C.muted)
+    + text(t, x + 12, y, TYPE.setup, { fill: C.muted, halo: 2 });
+}
+
+// ---------------------------------------------------------------- placement
+const inside = ([x, y], p) => {
+  let c = false;
+  for (let i = 0, j = p.length - 1; i < p.length; j = i++) {
+    const [xi, yi] = p[i], [xj, yj] = p[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c;
+  }
+  return c;
+};
+const segDist = ([px, py], [ax, ay], [bx, by]) => {
+  const dx = bx - ax, dy = by - ay, L = dx * dx + dy * dy;
+  const t = L ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / L)) : 0;
+  return Math.hypot(px - ax - t * dx, py - ay - t * dy);
+};
+const edgeDist = (q, p) => Math.min(...p.map((a, i) => segDist(q, a, p[(i + 1) % p.length])));
+const rectDist = ([x, y], [rx, ry, rw, rh]) => Math.hypot(Math.max(rx - x, 0, x - rx - rw), Math.max(ry - y, 0, y - ry - rh));
+const cross = (a, b, c) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+const segsCross = (a, b, c, d) => cross(a, b, c) * cross(a, b, d) < 0 && cross(c, d, a) * cross(c, d, b) < 0;
+function rectInside([x, y, w, h], p) {
+  const cs = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+  if (!cs.every(c => inside(c, p))) return false;
+  for (let i = 0; i < p.length; i++) {
+    const a = p[i], b = p[(i + 1) % p.length];
+    if (a[0] > x && a[0] < x + w && a[1] > y && a[1] < y + h) return false;
+    for (let k = 0; k < 4; k++) if (segsCross(a, b, cs[k], cs[(k + 1) % 4])) return false;
+  }
+  return true;
+}
+
+// Largest open circle left in the District once the cluster (plus margin) sits
+// at a spot: the ground the pieces get. Clusters also keep clear of their
+// neighbours' across a border, so no Still reads as belonging next door.
+const rectGap = (a, b) => Math.hypot(Math.max(0, a[0] - b[0] - b[2], b[0] - a[0] - a[2]), Math.max(0, a[1] - b[1] - b[3], b[1] - a[1] - a[3]));
+const MARGIN = 7;
+function place(d, others) {
+  if (d.place) {
+    const [layout, x, y] = d.place;
+    return { x, y, c: cluster(d, layout), open: null };
+  }
+  const p = geo.regions[d.id], M = MARGIN;
+  const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
+  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  const bridgeEnds = geo.bridges.flatMap(b => b.join.map((id, i) => [id, i ? b.b : b.a]))
+    .filter(([id]) => id === d.id).map(([, q]) => q);
+  const samples = [];
+  for (let y = y0; y <= y1; y += 4) for (let x = x0; x <= x1; x += 4)
+    if (inside([x, y], p)) samples.push([x, y, edgeDist([x, y], p)]);
+  let best = null;
+  for (const layout of ['h', 'v']) {
+    const c = cluster(d, layout);
+    for (let y = y0; y <= y1 - c.h; y += 3) for (let x = x0; x <= x1 - c.w; x += 3) {
+      const r = [x - M, y - M, c.w + 2 * M, c.h + 2 * M];
+      if (!rectInside(r, p)) continue;
+      if (bridgeEnds.some(o => rectDist(o, r) < 16)) continue;
+      let open = 0;
+      for (const [sx, sy, de] of samples) open = Math.max(open, Math.min(de, rectDist([sx, sy], r)));
+      let score = open - 0.04 * (y - y0) - (layout === 'h' ? 4 : 0);
+      for (const o of others) score -= Math.max(0, 60 - rectGap(r, o)) * 0.45;
+      if (!best || score > best.score) best = { score, x, y, c, open };
+    }
+  }
+  if (!best) throw new Error('No room for the label in ' + d.id);
+  return best;
+}
+function placeAll() {
+  const box = ({ x, y, c }) => [x - MARGIN, y - MARGIN, c.w + 2 * MARGIN, c.h + 2 * MARGIN];
+  let placed = Object.fromEntries(DISTRICTS.map(d => [d.id, place(d, [])]));
+  for (let pass = 0; pass < 3; pass++) {
+    for (const d of DISTRICTS) {
+      const others = DISTRICTS.filter(o => o.id !== d.id).map(o => box(placed[o.id]));
+      placed[d.id] = place(d, others);
+    }
+  }
+  return placed;
+}
+
+// ---------------------------------------------------------------- map layers
+function inset(p, dist) {
+  // Offset a simple polygon inward by dist (miter joins); short edges dropped first.
+  const q = p.filter((a, i) => Math.hypot(a[0] - p[(i + 1) % p.length][0], a[1] - p[(i + 1) % p.length][1]) > 6);
+  const area = q.reduce((s, a, i) => s + a[0] * q[(i + 1) % q.length][1] - q[(i + 1) % q.length][0] * a[1], 0);
+  const sgn = area > 0 ? 1 : -1;
+  const lines = q.map((a, i) => {
+    const b = q[(i + 1) % q.length], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy);
+    const nx = -dy / L * sgn, ny = dx / L * sgn;
+    return [[a[0] + nx * dist, a[1] + ny * dist], [b[0] + nx * dist, b[1] + ny * dist]];
+  });
+  return lines.map((l, i) => {
+    const [[x1, y1], [x2, y2]] = lines[(i - 1 + lines.length) % lines.length], [[x3, y3], [x4, y4]] = l;
+    const den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+    if (Math.abs(den) < 1e-9) return l[0];
+    const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
+    return [x1 + t * (x2 - x1), y1 + t * (y2 - y1)];
+  });
+}
 
 function waterLining() {
-  // Engraved coast rings: alternate gold and water strokes, widest first, under the land.
+  // Engraved coast rings: alternate gold and sea strokes, widest first, under the land.
   const land = [...DISTRICTS.map(d => geo.regions[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
-  const rings = [[23, C.waterLine, 0.07], [19.5, C.water, 1], [14, C.waterLine, 0.11], [11, C.water, 1], [6.5, C.waterLine, 0.18], [4, C.water, 1]];
+  const bg = C.sea[1];
+  const rings = [[22, C.goldLine, 0.06], [18.5, bg, 1], [13.5, C.goldLine, 0.09], [10.5, bg, 1], [6.5, C.goldLine, 0.15], [4, bg, 1]];
   return rings.map(([w, col, op]) =>
-    `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(p => `<path d="${poly(p)}"/>`).join('')}</g>`).join('');
+    `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
 }
 
-function offboard() {
-  return OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('');
-}
-
-function districts() {
+function districtFills(placed) {
   let s = '';
   for (const d of DISTRICTS) {
     const p = geo.regions[d.id];
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#fill-${d.boro})"/>`;
-    // inner shade: a blurred dark stroke clipped to the District itself
-    s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".55" stroke-width="16" filter="url(#soft)"/></g>`;
+    if (d.zone === 'hs') {
+      // High Society: a gold sunburst from the crown, and a keyline inside the border.
+      const [cx, cy] = placed[d.id].c.roundelAt(placed[d.id].x, placed[d.id].y);
+      let rays = '';
+      for (let a = 0; a < 360; a += 7.5) {
+        const t = a * Math.PI / 180;
+        rays += `M${f(cx)} ${f(cy)} L${f(cx + Math.cos(t) * 320)} ${f(cy + Math.sin(t) * 320)} `;
+      }
+      s += `<g clip-path="url(#clip-${d.id})"><path d="${rays}" stroke="${C.goldBright}" stroke-opacity=".1" stroke-width="2.2"/>`
+        + `<circle cx="${f(cx)}" cy="${f(cy)}" r="120" fill="url(#glow)"/></g>`;
+      s += `<path d="${poly(inset(p, 5.5))}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="1.1"/>`;
+    }
+    s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/></g>`;
   }
   return s;
 }
@@ -163,109 +368,86 @@ function districts() {
 function borders() {
   // Coasts heaviest, then Borough lines over land, then District lines.
   const coast = [], boro = [], inner = [], off = [];
+  const boroOf = id => (byId[id] ? byId[id].boro : null);
   for (const c of geo.chains) {
-    const [a, b] = c.sides, ba = regionBoro(a), bb = regionBoro(b);
+    const [a, b] = c.sides, ba = boroOf(a), bb = boroOf(b);
     if (ba && bb) (ba === bb ? inner : boro).push(c.pts);
     else if (ba || bb) coast.push(c.pts);
     else if ([a, b].includes('water')) off.push(c.pts);
   }
-  const line = (list, w, col, op = 1) => `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round">${list.map(p => `<polyline points="${pts(p)}"/>`).join('')}</g>`;
-  return line(off, 1.6, C.goldDim, 0.55)
-    + line(inner, 1.4, C.goldLine, 0.9)
-    + line(boro, 2.8, C.gold)
-    + line(coast, 3.4, C.gold)
-    + line(coast, 0.8, '#f3dc95', 0.55);
+  const line = (list, w, col, op = 1) => `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round">${list.map(q => `<polyline points="${pts(q)}"/>`).join('')}</g>`;
+  return line(off, 1.4, C.goldDim, 0.5)
+    + line(inner, 1.2, C.goldLine, 0.85)
+    + line(boro, 2.6, C.gold)
+    + line(coast, 3.2, C.gold)
+    + line(coast, 0.7, '#f3dc95', 0.5);
 }
 
 function bridges() {
-  // Deck with planking and an abutment on each shore; runs 4 units onto the land.
+  // Seen from above: a railed deck with its two towers, running onto both shores.
   return geo.bridges.map(({ a, b }) => {
-    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L;
-    const A = [a[0] - ux * 4, a[1] - uy * 4], B = [b[0] + ux * 4, b[1] + uy * 4];
-    const nx = -uy, ny = ux, h = 8;
-    const cap = ([x, y]) => `M${f(x + nx * h)} ${f(y + ny * h)} L${f(x - nx * h)} ${f(y - ny * h)}`;
+    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
+    const A = [a[0] - ux * 5, a[1] - uy * 5], B = [b[0] + ux * 5, b[1] + uy * 5];
     const seg = `M${f(A[0])} ${f(A[1])} L${f(B[0])} ${f(B[1])}`;
+    const at = t => [A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t];
+    const corner = (x, y, sn, su) => `${f(x + nx * 7.5 * sn + ux * 2 * su)} ${f(y + ny * 7.5 * sn + uy * 2 * su)}`;
+    const tower = ([x, y]) => `<path d="M${corner(x, y, 1, -1)} L${corner(x, y, 1, 1)} L${corner(x, y, -1, 1)} L${corner(x, y, -1, -1)} Z" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width=".8"/>`;
     return `<g stroke-linecap="butt">`
-      + `<path d="${seg}" stroke="${C.shadow}" stroke-opacity=".7" stroke-width="14"/>`
-      + `<path d="${seg}" stroke="${C.gold}" stroke-width="11"/>`
-      + `<path d="${seg}" stroke="#2b1c0f" stroke-width="8"/>`
-      + `<path d="${seg}" stroke="${C.goldDim}" stroke-width="8" stroke-dasharray="1.3 2.4" stroke-opacity=".75"/>`
-      + `<path d="${cap([a[0] + ux * 1.5, a[1] + uy * 1.5])} ${cap([b[0] - ux * 1.5, b[1] - uy * 1.5])}" stroke="${C.goldBright}" stroke-width="2.2" stroke-linecap="round"/>`
-      + `</g>`;
+      + `<path d="${seg}" stroke="${C.shadow}" stroke-opacity=".75" stroke-width="12"/>`
+      + `<path d="${seg}" stroke="${C.gold}" stroke-width="9"/>`
+      + `<path d="${seg}" stroke="#20160d" stroke-width="6"/>`
+      + `<path d="${seg}" stroke="${C.goldDim}" stroke-width="6" stroke-dasharray="1 2.2" stroke-opacity=".6"/>`
+      + tower(at(0.3)) + tower(at(0.7)) + `</g>`;
   }).join('');
 }
 
-function districtLabels() {
-  let s = '';
-  for (const d of DISTRICTS) {
-    const [x, y] = d.at;
-    const hs = d.zone === 'hs';
-    if (hs) s += icon('crown', x, y - 17, 15, C.goldBright);
-    s += label(d.name.toUpperCase(), x, y + 4.5, { size: 12.2, spacing: 0.7, fill: hs ? C.goldBright : '#e3cf98' });
-    let rowTop = y + 11;
-    if (d.venue) {
-      s += label(d.venue, x, y + 16.5, { size: 8.8, family: 'Barlow', weight: 500, italic: true, spacing: 0.2, fill: C.body, halo: 2 });
-      rowTop = y + 21;
-    }
-    // zone icon and Still side by side, centred under the name
-    const iconSize = d.zone === 'ward' ? 23 : 22, gap = 7, w = iconSize + gap + 33;
-    const x0 = x - w / 2, cy = rowTop + 17;
-    const kind = hs ? 'speak' : d.zone;
-    s += icon(kind, x0 + iconSize / 2, cy, iconSize + 2.4, C.shadow);
-    s += icon(kind, x0 + iconSize / 2, cy, iconSize, hs ? C.goldBright : C.gold);
-    s += still(d.still, x0 + iconSize + gap, rowTop);
-  }
-  return s;
-}
-
-function boroughLabels() {
+function mapLabels() {
   let s = '';
   for (const [k, [x, y, r]] of Object.entries(BORO_LABELS)) {
-    const b = BOROUGHS[k], text = b.name.toUpperCase();
-    const size = 19, spacing = 3.4;
-    const width = text.length * (size * 0.74 + spacing); // Cinzel caps, near enough to centre
-    const total = 22 + 8 + width, left = -total / 2;
-    s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`;
-    s += `<rect x="${f(left)}" y="-17" width="22" height="22" rx="4" fill="${C.gold}" stroke="${C.shadow}" stroke-width="1.2"/>`;
-    s += `<text x="${f(left + 11)}" y="0.5" font-family="Cinzel" font-weight="700" font-size="16" text-anchor="middle" fill="#1b150e">${b.n}</text>`;
-    s += label(text, left + 30, 0, { size, spacing, anchor: 'start', fill: C.gold, halo: 3 });
-    s += `</g>`;
+    const b = BOROUGHS[k], t = upper(b.name);
+    const total = 22 + 9 + width(TYPE.boro, t), left = -total / 2;
+    s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`
+      + `<rect x="${f(left)}" y="-17" width="22" height="22" rx="3" fill="${C.gold}" stroke="${C.shadow}" stroke-width="1.2"/>`
+      + `<text x="${f(left + 11)}" y="0.5" font-family="Cinzel" font-weight="700" font-size="16" text-anchor="middle" fill="#1b150e">${b.n}</text>`
+      + text(t, left + 31, 0, TYPE.boro, { fill: C.gold, halo: 3 }) + `</g>`;
   }
-  for (const [t, x, y, r, size] of WATER_LABELS)
-    s += label(t, x, y, { size, family: 'Barlow', weight: 500, italic: true, spacing: 1.2, fill: C.goldDim, halo: 0, rotate: r });
+  for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85 });
+  for (const [t, x, y, r] of LAND_LABELS) s += text(t, x, y, TYPE.land, { fill: '#8d826c', anchor: 'middle', rotate: r, opacity: 0.8 });
   return s;
 }
 
 // ---------------------------------------------------------------- side panels
-function panel(x, y, w, h, title) {
-  return `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5" fill="url(#panel)" stroke="${C.goldLine}" stroke-width="1.8"/>`
-    + `<rect x="${x + 4}" y="${y + 4}" width="${w - 8}" height="${h - 8}" rx="3" fill="none" stroke="${C.goldLine}" stroke-opacity=".35" stroke-width=".8"/>`
-    + (title ? label(title, x + w / 2, y + 19, { size: 12, spacing: 3, fill: C.goldBright, halo: 0 }) : '') + `</g>`;
+function panel(x, y, w, h) {
+  const c = 7; // Deco chamfer
+  const outline = i => `M${x + c + i} ${y + i} H${x + w - c - i} L${x + w - i} ${y + c + i} V${y + h - c - i} L${x + w - c - i} ${y + h - i} H${x + c + i} L${x + i} ${y + h - c - i} V${y + c + i} Z`;
+  return `<path d="${outline(0)}" fill="url(#panel)" stroke="${C.goldLine}" stroke-width="1.8"/>`
+    + `<path d="${outline(4)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".35" stroke-width=".8"/>`;
 }
 
 function heatAndMash() {
-  // Heat Track 1-5 (the 5th sets off a Raid) with a square for the Mash die.
-  const x = 24, y = 24, w = 336, h = 86;
-  let s = panel(x, y, w, h, '');
-  s += label('HEAT', x + 128, y + 18, { size: 11.5, spacing: 3, fill: C.goldBright, halo: 0 });
-  const cols = ['#8a6a17', '#8f4f1b', '#93391c', '#962b1d', '#9d1f1f'];
+  // Heat Track 1-5 (the 5th sets off a Raid) and a square for the Mash die.
+  const x = 24, y = 24, w = 336, h = 88;
+  let s = panel(x, y, w, h);
+  s += text('HEAT', x + 128, y + 19, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle' });
+  const cols = ['#8a6a17', '#8f4f1b', '#93391c', '#962b1d', '#a01f1f'];
+  s += `<path d="M${x + 32} ${y + 51} H${x + 224}" stroke="${C.goldDim}" stroke-width="1.2" stroke-dasharray="2 3"/>`;
   for (let i = 0; i < 5; i++) {
-    const cx = x + 32 + i * 48, cy = y + 50;
-    s += `<circle cx="${cx}" cy="${cy}" r="20.5" fill="${cols[i]}" stroke="${C.gold}" stroke-width="1.8"/>`;
-    s += `<circle cx="${cx}" cy="${cy}" r="16.5" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1"/>`;
-    s += `<text x="${cx}" y="${cy + 7}" font-family="Cinzel" font-weight="700" font-size="20" text-anchor="middle" fill="#1c130b">${i + 1}</text>`;
+    const cx = x + 32 + i * 48, cy = y + 51;
+    s += `<circle cx="${cx}" cy="${cy}" r="20.5" fill="${cols[i]}" stroke="${C.gold}" stroke-width="1.8"/>`
+      + `<circle cx="${cx}" cy="${cy}" r="16.5" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1"/>`
+      + `<text x="${cx}" y="${cy + 7}" font-family="Cinzel" font-weight="700" font-size="20" text-anchor="middle" fill="#1c130b">${i + 1}</text>`;
   }
-  s += label('RAID', x + 32 + 4 * 48, y + 80, { size: 7.5, family: 'Barlow', weight: 700, spacing: 1.6, fill: C.goldBright, halo: 0 });
-  s += `<line x1="${x + 263}" y1="${y + 12}" x2="${x + 263}" y2="${y + h - 12}" stroke="${C.goldLine}" stroke-opacity=".45"/>`;
-  s += label('MASH', x + 299, y + 18, { size: 11.5, spacing: 3, fill: C.goldBright, halo: 0 });
-  s += `<rect x="${x + 278}" y="${y + 29}" width="42" height="42" rx="7" fill="#120d08" stroke="${C.gold}" stroke-width="1.8" stroke-dasharray="4 3"/>`;
+  s += text('RAID', x + 224, y + 82, { ...TYPE.setup, size: 8 }, { fill: '#e8735a', anchor: 'middle' });
+  s += `<line x1="${x + 262}" y1="${y + 12}" x2="${x + 262}" y2="${y + h - 12}" stroke="${C.goldLine}" stroke-opacity=".45"/>`;
+  s += text('MASH', x + 299, y + 19, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle' });
+  s += `<rect x="${x + 278}" y="${y + 30}" width="42" height="42" rx="7" fill="#100b07" stroke="${C.gold}" stroke-width="1.8" stroke-dasharray="4 3"/>`;
   return s;
 }
 
 function key() {
-  // Symbols and prices, worded as the Town Planner's legend.
-  const x = 24, y = 120, w = 290, h = 124;
-  let s = panel(x, y, w, h, '');
+  // The marks as they appear on the map; prices worded as the Town Planner's legend.
+  const x = 24, y = 122, w = 280, h = 136;
+  let s = panel(x, y, w, h);
   const rows = [
     ['speak', 'Speakeasy', 'Moonshine $300, Rum $500'],
     ['hs', 'High Society', 'Rum only, 1 Kickback each'],
@@ -275,59 +457,58 @@ function key() {
     ['still', 'Still', 'Pressure: the lit cells'],
   ];
   rows.forEach(([k, t, sub], i) => {
-    const cy = y + 16 + i * 18.4, ix = x + 20;
-    if (k === 'hs') {
-      s += icon('crown', ix - 6, cy - 1, 11, C.goldBright) + icon('speak', ix + 6, cy, 13, C.goldBright);
-    } else if (k === 'bridge') {
-      s += `<path d="M${ix - 11} ${cy} H${ix + 11}" stroke="${C.gold}" stroke-width="8"/><path d="M${ix - 11} ${cy} H${ix + 11}" stroke="#2b1c0f" stroke-width="5.5"/><path d="M${ix - 11} ${cy} H${ix + 11}" stroke="${C.goldDim}" stroke-width="5.5" stroke-dasharray="1.2 2.2"/>`;
+    const cy = y + 17 + i * 19.2 + (i > 0 ? 5 : 0), ix = x + 21; // headroom for the crown
+    if (k === 'bridge') {
+      s += `<path d="M${ix - 11} ${cy} H${ix + 11}" stroke="${C.gold}" stroke-width="8"/><path d="M${ix - 11} ${cy} H${ix + 11}" stroke="#20160d" stroke-width="5"/>`
+        + `<rect x="${ix - 5.5}" y="${cy - 6}" width="3" height="12" fill="${C.goldBright}"/><rect x="${ix + 2.5}" y="${cy - 6}" width="3" height="12" fill="${C.goldBright}"/>`;
     } else if (k === 'still') {
-      s += `<g transform="translate(${ix - 8.5} ${cy - 9}) scale(.52)">${still(7, 0, 0)}</g>`;
-    } else s += icon(k, ix, cy, 15, C.gold);
-    s += label(t, x + 40, cy + 4, { size: 10.5, family: 'Barlow', weight: 700, spacing: 0.3, fill: C.ink, anchor: 'start', halo: 0 });
-    if (sub) s += label(sub, x + 122, cy + 4, { size: 10, family: 'Barlow', weight: 500, spacing: 0.1, fill: C.body, anchor: 'start', halo: 0 });
+      s += still(7, ix - 7, cy - 8.5, 17);
+    } else s += roundel(k, ix, cy, 7.5);
+    s += text(upper(t), x + 40, cy + 4, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink });
+    if (sub) s += text(sub, x + 128, cy + 3.6, TYPE.keyText, { fill: C.body });
   });
   return s;
 }
 
 function title() {
-  // Typeset lockup; the painted logo can be dropped in over it later.
-  const cx = 108, cy = 332;
-  let s = `<g>`;
-  for (let i = 0; i < 13; i++) {
-    const a = (-160 + i * (140 / 12)) * Math.PI / 180, long = i % 2 === 0;
-    const r0 = 25, r1 = long ? 45 : 36;
-    s += `<line x1="${f(cx + Math.cos(a) * r0)}" y1="${f(cy - 16 + Math.sin(a) * r0)}" x2="${f(cx + Math.cos(a) * r1)}" y2="${f(cy - 16 + Math.sin(a) * r1)}" stroke="${C.gold}" stroke-width="${long ? 2.2 : 1.3}" stroke-linecap="round"/>`;
+  const cx = 108, cy = 322;
+  let s = '';
+  for (let i = 0; i <= 16; i++) { // Deco sunburst behind the moon
+    const a = (-180 + i * (180 / 16)) * Math.PI / 180, long = i % 2 === 0;
+    const r0 = 23, r1 = long ? 50 : 38;
+    s += `<line x1="${f(cx + Math.cos(a) * r0)}" y1="${f(cy + Math.sin(a) * r0)}" x2="${f(cx + Math.cos(a) * r1)}" y2="${f(cy + Math.sin(a) * r1)}" stroke="${long ? C.gold : C.goldDim}" stroke-width="${long ? 2 : 1.2}" stroke-linecap="round"/>`;
   }
-  s += `<circle cx="${cx}" cy="${cy - 16}" r="19" fill="url(#moon)" stroke="${C.goldBright}" stroke-width="1.2"/>`;
-  s += label('MOONSHINE', cx, cy + 26, { size: 25, spacing: 1.2, fill: C.goldBright, halo: 3.4 });
-  s += label('KINGDOM', cx, cy + 52, { size: 22, spacing: 4.2, fill: C.goldBright, halo: 3.4 });
-  s += `<path d="M${cx - 64} ${cy + 63} H${cx + 64}" stroke="${C.gold}" stroke-width="1"/>`;
-  s += label('NEW YORK · 1929', cx, cy + 77, { size: 9, family: 'Barlow', weight: 600, spacing: 3.4, fill: C.muted, halo: 2 });
-  return s + '</g>';
+  s += `<path d="M${cx - 60} ${cy} H${cx + 60}" stroke="${C.gold}" stroke-width="1.2"/>`;
+  s += `<circle cx="${cx}" cy="${cy - 1}" r="19" fill="url(#moon)" stroke="${C.goldBright}" stroke-width="1.2"/>`;
+  s += [[-6, -7, 3.2], [5, 2, 2.4], [-2, 7, 1.8], [7, -8, 1.5]].map(([dx, dy, r]) => `<circle cx="${cx + dx}" cy="${cy - 1 + dy}" r="${r}" fill="#b9ad8a" fill-opacity=".45"/>`).join('');
+  s += text('MOONSHINE', cx, cy + 45, { family: 'Cinzel', weight: 700, size: 25, spacing: 1.2 }, { fill: C.goldBright, anchor: 'middle', halo: 3.4 });
+  s += `<path d="M${cx - 66} ${cy + 57} H${cx - 44} M${cx + 44} ${cy + 57} H${cx + 66}" stroke="${C.gold}" stroke-width="1.2"/>`;
+  s += text('KINGDOM', cx, cy + 62, { family: 'Cinzel', weight: 700, size: 14, spacing: 5 }, { fill: C.goldBright, anchor: 'middle', halo: 3 });
+  s += text('NEW YORK · 1929', cx, cy + 80, { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 4.2 }, { fill: C.muted, anchor: 'middle', halo: 2 });
+  return s;
 }
 
 function compass() {
-  const cx = 72, cy = 508, r = 27;
-  let s = `<g opacity=".9"><circle cx="${cx}" cy="${cy}" r="${r - 7}" fill="none" stroke="${C.goldDim}" stroke-width="1"/>`;
+  const cx = 72, cy = 512, r = 26;
+  let s = `<circle cx="${cx}" cy="${cy}" r="${r - 8}" fill="none" stroke="${C.goldDim}" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="${r + 3}" fill="none" stroke="${C.goldDim}" stroke-opacity=".5" stroke-width=".8"/>`;
   for (let i = 0; i < 8; i++) {
-    const a = i * Math.PI / 4 - Math.PI / 2, main = i % 2 === 0, L = main ? r : r * 0.6, wv = main ? 5 : 3.5;
+    const a = i * Math.PI / 4 - Math.PI / 2, main = i % 2 === 0, L = main ? r : r * 0.58, wv = main ? 4.8 : 3.4;
     const tip = [cx + Math.cos(a) * L, cy + Math.sin(a) * L];
     const l = [cx + Math.cos(a - Math.PI / 2) * wv, cy + Math.sin(a - Math.PI / 2) * wv];
     const rr = [cx + Math.cos(a + Math.PI / 2) * wv, cy + Math.sin(a + Math.PI / 2) * wv];
-    s += `<path d="M${f(tip[0])} ${f(tip[1])} L${f(l[0])} ${f(l[1])} L${cx} ${cy} Z" fill="${main ? C.gold : C.goldDim}"/>`;
-    s += `<path d="M${f(tip[0])} ${f(tip[1])} L${f(rr[0])} ${f(rr[1])} L${cx} ${cy} Z" fill="${main ? '#7a6224' : '#5e4c20'}"/>`;
+    s += `<path d="M${f(tip[0])} ${f(tip[1])} L${f(l[0])} ${f(l[1])} L${cx} ${cy} Z" fill="${main ? C.gold : C.goldDim}"/>`
+      + `<path d="M${f(tip[0])} ${f(tip[1])} L${f(rr[0])} ${f(rr[1])} L${cx} ${cy} Z" fill="${main ? C.goldDeep : '#5e4c20'}"/>`;
   }
-  s += label('N', cx, cy - r - 4, { size: 10, fill: C.gold, halo: 2 });
-  return s + '</g>';
+  return s + text('N', cx, cy - r - 6, { family: 'Cinzel', weight: 700, size: 10, spacing: 0 }, { fill: C.gold, anchor: 'middle', halo: 2 });
 }
 
 function frame() {
-  const o = 7, i = 13, W = 1080;
+  const o = 7, i = 13, W = 1080, st = 10; // st: the Deco step at each corner
   let s = `<path d="M0 0H${W}V${W}H0Z M${o} ${o}V${W - o}H${W - o}V${o}Z" fill="#0b0907" fill-rule="evenodd"/>`;
   s += `<rect x="${o}" y="${o}" width="${W - 2 * o}" height="${W - 2 * o}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
-  s += `<rect x="${i}" y="${i}" width="${W - 2 * i}" height="${W - 2 * i}" fill="none" stroke="${C.goldLine}" stroke-opacity=".7" stroke-width="1"/>`;
-  for (const [x, y] of [[i, i], [W - i, i], [i, W - i], [W - i, W - i]])
-    s += `<path d="M${x} ${y - 5} L${x + 5} ${y} L${x} ${y + 5} L${x - 5} ${y} Z" fill="${C.goldBright}"/>`;
+  s += `<path d="M${i + st} ${i} H${W - i - st} V${i + st} H${W - i} V${W - i - st} H${W - i - st} V${W - i} H${i + st} V${W - i - st} H${i} V${i + st} H${i + st} Z" fill="none" stroke="${C.goldLine}" stroke-opacity=".8" stroke-width="1"/>`;
+  for (const [x, y] of [[o, o], [W - o, o], [o, W - o], [W - o, W - o]])
+    s += `<rect x="${x - 3.5}" y="${y - 3.5}" width="7" height="7" transform="rotate(45 ${x} ${y})" fill="${C.goldBright}"/>`;
   return s;
 }
 
@@ -335,38 +516,57 @@ function frame() {
 function defs(fontCss) {
   let s = `<style>${fontCss}</style>`;
   for (const [k, b] of Object.entries(BOROUGHS))
-    s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".75"><stop offset="0" stop-color="${b.fill[0]}"/><stop offset="1" stop-color="${b.fill[1]}"/></radialGradient>`;
-  s += `<radialGradient id="moon" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbf4dc"/><stop offset=".7" stop-color="#d9cfae"/><stop offset="1" stop-color="#a99c78"/></radialGradient>`;
+    s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${b.fill[0]}"/><stop offset="1" stop-color="${b.fill[1]}"/></radialGradient>`;
+  s += `<radialGradient id="glow"><stop offset="0" stop-color="${C.goldBright}" stop-opacity=".16"/><stop offset="1" stop-color="${C.goldBright}" stop-opacity="0"/></radialGradient>`;
+  s += `<radialGradient id="moon" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbf4dc"/><stop offset=".7" stop-color="#ddd3b2"/><stop offset="1" stop-color="#a99c78"/></radialGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
-  s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="#16202c"/><stop offset="1" stop-color="${C.water}"/></radialGradient>`;
-  s += `<pattern id="offboard" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="7" stroke="#000" stroke-opacity=".16" stroke-width="2"/></pattern>`;
+  s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
+  s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
-  // Crumpled-paper grain, soft-light blended into whatever it is applied to.
+  // Paper grain, soft-light blended onto the map; neutral grey sits at 0.5.
   s += `<filter id="grain" x="0" y="0" width="1080" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">`
     + `<feTurbulence type="fractalNoise" baseFrequency=".032" numOctaves="4" seed="11" result="noise"/>`
     + `<feDiffuseLighting in="noise" surfaceScale="2.2" lighting-color="#fff" result="lit"><feDistantLight azimuth="235" elevation="50"/></feDiffuseLighting>`
-    + `<feComponentTransfer in="lit" result="grey"><feFuncR type="linear" slope=".75" intercept="-.075"/><feFuncG type="linear" slope=".9" intercept="-.19"/><feFuncB type="linear" slope=".9" intercept="-.19"/></feComponentTransfer>`
+    + `<feComponentTransfer in="lit" result="grey"><feFuncR type="linear" slope=".55" intercept=".08"/><feFuncG type="linear" slope=".55" intercept=".08"/><feFuncB type="linear" slope=".55" intercept=".08"/></feComponentTransfer>`
     + `<feBlend in="grey" in2="SourceGraphic" mode="soft-light"/></filter>`;
   return `<defs>${s}</defs>`;
 }
 
 // ---------------------------------------------------------------- assemble
+function allText() {
+  const items = [];
+  const add = (spec, t) => items.push({ ...spec, text: t });
+  for (const d of DISTRICTS) {
+    (d.lines || [d.name]).forEach(n => add(TYPE.name, upper(n)));
+    if (d.venue) add(TYPE.venue, d.venue);
+    if (d.setup) add(TYPE.setup, SETUP[d.setup].text);
+  }
+  for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
+  return items;
+}
+
 function buildSvg(fontCss) {
-  const art = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining() + offboard() + districts() + borders() + bridges();
+  const placed = placeAll();
+  for (const d of DISTRICTS) {
+    const { x, y, c, open } = placed[d.id];
+    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  open ground r=${open === null ? 'pinned' : f(open, 0)}`);
+  }
+  const art = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining()
+    + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
+    + districtFills(placed) + borders() + bridges();
+  const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">`
     + `<title>Moonshine Kingdom: the City Map</title>`
     + defs(fontCss)
     + `<g id="map" filter="url(#grain)">${art}</g>`
-    + `<g id="labels">${boroughLabels()}${districtLabels()}</g>`
+    + `<g id="labels">${mapLabels()}${labels}</g>`
     + `<g id="panels">${heatAndMash()}${key()}${title()}${compass()}</g>`
     + `<g id="frame">${frame()}</g>`
     + `</svg>\n`;
 }
 
-const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,500;0,600;0,700;1,500&family=Bebas+Neue&family=Cinzel:wght@700&display=block';
-
 // Latin subset only, inlined as data URIs so the SVG renders the same in any
-// browser, offline included. All three families are OFL.
+// browser, offline included. All four families are OFL.
 async function embeddedFonts(browser) {
   const ctx = await browser.newContext();
   const get = async (url) => {
@@ -375,8 +575,8 @@ async function embeddedFonts(browser) {
     return res;
   };
   const out = [];
-  const text = await (await get(FONTS)).text();
-  for (const block of text.match(/\/\* latin \*\/\s*@font-face\s*\{[^}]*\}/g) || []) {
+  const css = await (await get(FONTS)).text();
+  for (const block of css.match(/\/\* latin \*\/\s*@font-face\s*\{[^}]*\}/g) || []) {
     const src = block.match(/url\(([^)]+)\)/)[1];
     const b64 = (await (await get(src)).body()).toString('base64');
     out.push(block.replace(/\/\* latin \*\/\s*/, '').replace(src, 'data:font/woff2;base64,' + b64));
@@ -384,6 +584,27 @@ async function embeddedFonts(browser) {
   await ctx.close();
   if (!out.length) throw new Error('No fonts came back from Google Fonts');
   return out.join('\n');
+}
+
+// Real advance widths from the browser, so clusters and labels are sized exactly.
+async function measure(browser, fontCss, items) {
+  const page = await browser.newPage();
+  await page.setContent(`<!doctype html><html><head><style>${fontCss}</style></head><body><svg id="m" width="10" height="10"></svg></body></html>`);
+  const widths = await page.evaluate(async (list) => {
+    await Promise.all(list.map(i => document.fonts.load(`${i.italic ? 'italic ' : ''}${i.weight} ${i.size}px "${i.family}"`)));
+    const svg = document.getElementById('m');
+    return list.map(i => {
+      const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('font-family', i.family); t.setAttribute('font-weight', i.weight);
+      t.setAttribute('font-size', i.size); t.setAttribute('letter-spacing', i.spacing);
+      if (i.italic) t.setAttribute('font-style', 'italic');
+      t.textContent = i.text; svg.appendChild(t);
+      const w = t.getComputedTextLength(); t.remove();
+      return w;
+    });
+  }, items);
+  await page.close();
+  return new Map(items.map((i, k) => [wkey(i, i.text), widths[k]]));
 }
 
 async function render(browser, svg, outputs) {
@@ -401,7 +622,9 @@ async function render(browser, svg, outputs) {
   const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
   // Chromium ignores HTTPS_PROXY, so pass it on where one is set (cloud sandboxes).
   const browser = await chromium.launch(process.env.HTTPS_PROXY ? { proxy: { server: process.env.HTTPS_PROXY } } : {});
-  const svg = buildSvg(await embeddedFonts(browser));
+  const fontCss = await embeddedFonts(browser);
+  WIDTHS = await measure(browser, fontCss, allText());
+  const svg = buildSvg(fontCss);
   fs.writeFileSync(SVG_OUT, svg);
   console.log('wrote', path.relative(ROOT, SVG_OUT));
   const outputs = [[path.join(DIR, 'Board v0.9 (preview).jpg'), 2]];
