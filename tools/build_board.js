@@ -436,11 +436,16 @@ function mapLabels() {
 }
 
 // ---------------------------------------------------------------- side panels
+// Saddle stitching: the leather's seams. About 2.8 mm stitches at 24in.
+const stitch = d => `<path d="${d}" fill="none" stroke="#000" stroke-opacity=".45" stroke-width="1.3" stroke-dasharray="5 3" stroke-linecap="round" transform="translate(.5 .7)"/>`
+  + `<path d="${d}" fill="none" stroke="#d9c69c" stroke-opacity=".6" stroke-width="1.1" stroke-dasharray="5 3" stroke-linecap="round"/>`;
+
+// A panel's leather ground: gilt edge, stitched inside it. Its contents are drawn
+// separately, above the texture, so the type stays crisp.
 function panel(x, y, w, h) {
   const c = 7; // Deco chamfer
   const outline = i => `M${x + c + i} ${y + i} H${x + w - c - i} L${x + w - i} ${y + c + i} V${y + h - c - i} L${x + w - c - i} ${y + h - i} H${x + c + i} L${x + i} ${y + h - c - i} V${y + c + i} Z`;
-  return `<path d="${outline(0)}" fill="url(#panel)" stroke="${C.goldLine}" stroke-width="1.8"/>`
-    + `<path d="${outline(4)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".35" stroke-width=".8"/>`;
+  return `<path d="${outline(0)}" fill="url(#panel)" stroke="${C.goldLine}" stroke-width="1.8"/>` + stitch(outline(4.5));
 }
 
 // Heat Track: five poker-chip sockets, the Ledger's own size (39 mm sockets 2 mm
@@ -461,8 +466,8 @@ const HEAT_NUM = ['#9c8650', '#a37b4b', '#a86f46', '#aa6241', '#ad533b'];
 const HEAT_TINT = [0, 0.03, 0.05, 0.07, 0.1];
 function heatTrack() {
   const { d, gap, padX, trayW, trayH, tx, ty, edge: [ex, ey] } = HEAT;
-  let s = `<path d="M0 0 H${f(ex)} V${f(ey)} H0 Z" fill="url(#panel)"/>`;
-  s += text('HEAT', tx + trayW / 2, FRAME_IN + 12, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true });
+  const bg = `<path d="M0 0 H${f(ex)} V${f(ey)} H0 Z" fill="url(#panel)"/>`;
+  let s = text('HEAT', tx + trayW / 2, FRAME_IN + 12, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true });
   s += `<rect x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}" fill="#000" fill-opacity=".35" stroke="#6b5a2e" stroke-opacity=".4" stroke-width="1"/>`;
   for (let i = 0; i < 5; i++) {
     const cx = tx + padX + d / 2 + i * (d + gap), cy = ty + trayH / 2, raid = i === 4;
@@ -472,15 +477,17 @@ function heatTrack() {
       + text(String(i + 1), cx, cy - (raid ? 5 : 0), { family: 'Cinzel', weight: 700, size: 28, spacing: 0 }, { fill: HEAT_NUM[i], anchor: 'middle', middle: true });
     if (raid) s += text('RAID', cx + 1, cy + 19, TYPE.small, { fill: '#b8674d', anchor: 'middle', middle: true });
   }
-  return s;
+  return { bg, fg: s };
 }
 
 // The Mash die's square, 24 mm so any usual die sits inside it.
 function mash(x, y) {
   const side = 24 * MM, w = side + 28, h = side + 32;
-  return panel(x, y, w, h)
-    + text('MASH', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true })
-    + `<rect x="${f(x + 14)}" y="${f(y + 24)}" width="${f(side)}" height="${f(side)}" rx="6" fill="#100b07" stroke="${C.gold}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
+  return {
+    bg: panel(x, y, w, h),
+    fg: text('MASH', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true })
+      + `<rect x="${f(x + 14)}" y="${f(y + 24)}" width="${f(side)}" height="${f(side)}" rx="6" fill="#100b07" stroke="${C.gold}" stroke-width="1.6" stroke-dasharray="4 3"/>`,
+  };
 }
 
 // The marks as they appear on the map; prices worded as the Town Planner's legend.
@@ -497,7 +504,7 @@ function key(x, y) {
   const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const subX = 28 + headW + 9, subW = Math.max(...KEY_ROWS.map(([, , t]) => (t ? width(TYPE.keyText, t) : 0)));
   const w = subX + subW + 11, h = 13 + 6 * 14 + 4 + 13;
-  let s = panel(x, y, w, h);
+  let s = '';
   KEY_ROWS.forEach(([k, t, sub], i) => {
     const cy = y + 13 + i * 14 + (i > 0 ? 4 : 0), ix = x + 15; // headroom for the crown
     if (k === 'bridge') s += bridgeGlyph([ix - 7, cy], [ix + 7, cy], 1.5, 0.45);
@@ -507,12 +514,20 @@ function key(x, y) {
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     if (sub) s += text(sub, x + subX, cy, TYPE.keyText, { fill: C.body, middle: true });
   });
-  return { svg: s, w, h };
+  return { bg: panel(x, y, w, h), fg: s, w, h };
 }
 
 function sidePanels() {
-  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y);
-  return heatTrack() + k.svg + mash(HEAT.tx + k.w + 10, y);
+  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y), heat = heatTrack(), m = mash(HEAT.tx + k.w + 10, y);
+  return { bg: heat.bg + k.bg + m.bg, fg: heat.fg + k.fg + m.fg };
+}
+
+// Seams round the board, between the gilt edge and the hairline, on both sides
+// of the Heat corner's edge.
+function seams() {
+  const W = 1080, a = (FRAME_OUT + FRAME_IN) / 2, [ex, ey] = HEAT.edge.map(v => f(v));
+  return stitch(`M${ex + 3.4} ${a} H${W - a} V${W - a} H${a} V${ey + 3.4} H${ex + 3.4} Z`)
+    + stitch(`M${a} ${a} H${ex - 3.4} V${ey - 3.4} H${a} Z`);
 }
 
 function title() {
@@ -566,12 +581,32 @@ function defs(fontCss) {
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
-  // Paper grain, soft-light blended onto the map; neutral grey sits at 0.5.
-  s += `<filter id="grain" x="0" y="0" width="1080" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">`
-    + `<feTurbulence type="fractalNoise" baseFrequency=".032" numOctaves="4" seed="11" result="noise"/>`
-    + `<feDiffuseLighting in="noise" surfaceScale="2.2" lighting-color="#fff" result="lit"><feDistantLight azimuth="235" elevation="50"/></feDiffuseLighting>`
-    + `<feComponentTransfer in="lit" result="grey"><feFuncR type="linear" slope=".55" intercept=".08"/><feFuncG type="linear" slope=".55" intercept=".08"/><feFuncB type="linear" slope=".55" intercept=".08"/></feComponentTransfer>`
-    + `<feBlend in="grey" in2="SourceGraphic" mode="soft-light"/></filter>`;
+  // Leather, all procedural so it prints crisp at any size. The pebble grain is
+  // three single-octave crease patterns multiplied, so their crossings close off
+  // irregular cells about 2 to 3 mm across at 24in (one pattern alone draws
+  // worm-like squiggles); blurred to round the pebbles, over soft wrinkles. It is
+  // lit for shading, soft-light blended onto the art, given a sheen on the raised
+  // grain, then mottled like uneven dye.
+  const grey = (slope, icpt) => ['R', 'G', 'B'].map(ch => `<feFunc${ch} type="linear" slope="${slope}" intercept="${icpt}"/>`).join('');
+  const light = '<feDistantLight azimuth="225" elevation="48"/>';
+  const crease = (freq, seed, name) => `<feTurbulence type="turbulence" baseFrequency="${freq}" numOctaves="1" seed="${seed}" result="${name}t"/>`
+    + `<feColorMatrix in="${name}t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1.6 0 0 0 1.05" result="${name}"/>`;
+  s += `<filter id="leather" x="0" y="0" width="1080" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">`
+    + crease(0.1, 4, 'c1') + crease(0.13, 17, 'c2') + crease(0.17, 29, 'c3')
+    + `<feComposite in="c1" in2="c2" operator="arithmetic" k1="1" result="c12"/>`
+    + `<feComposite in="c12" in2="c3" operator="arithmetic" k1="1" result="cells"/>`
+    + `<feGaussianBlur in="cells" stdDeviation=".45" result="pebbles"/>`
+    + `<feTurbulence type="fractalNoise" baseFrequency=".016" numOctaves="3" seed="9" result="wr"/>`
+    + `<feColorMatrix in="wr" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" result="wrinkles"/>`
+    + `<feComposite in="pebbles" in2="wrinkles" operator="arithmetic" k2=".6" k3=".6" result="height"/>`
+    + `<feDiffuseLighting in="height" surfaceScale="1.7" diffuseConstant="1" lighting-color="#fff" result="lit">${light}</feDiffuseLighting>`
+    + `<feComponentTransfer in="lit" result="shade">${grey(0.6, 0.054)}</feComponentTransfer>`
+    + `<feBlend in="shade" in2="SourceGraphic" mode="soft-light" result="grained"/>`
+    + `<feSpecularLighting in="height" surfaceScale="1.7" specularConstant=".55" specularExponent="16" lighting-color="#f1dfb8" result="spec">${light}</feSpecularLighting>`
+    + `<feComposite in="grained" in2="spec" operator="arithmetic" k2="1" k3=".15" result="sheen"/>`
+    + `<feTurbulence type="fractalNoise" baseFrequency=".006" numOctaves="2" seed="21" result="mot"/>`
+    + `<feColorMatrix in="mot" type="matrix" values=".3 0 0 0 .78  .3 0 0 0 .78  .3 0 0 0 .78  0 0 0 0 1" result="dye"/>`
+    + `<feBlend in="dye" in2="sheen" mode="multiply"/></filter>`;
   return `<defs>${s}</defs>`;
 }
 
@@ -600,12 +635,13 @@ function buildSvg(fontCss) {
     + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
     + districtFills(placed) + borders() + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
+  const side = sidePanels();
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">`
     + `<title>Moonshine Kingdom: the City Map</title>`
     + defs(fontCss)
-    + `<g id="map" filter="url(#grain)">${art}</g>`
+    + `<g id="map" filter="url(#leather)">${art}${side.bg}${seams()}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
-    + `<g id="panels">${sidePanels()}${title()}${northArrow()}</g>`
+    + `<g id="panels">${side.fg}${title()}${northArrow()}</g>`
     + `<g id="frame">${frame()}</g>`
     + `</svg>\n`;
 }

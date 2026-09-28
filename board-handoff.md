@@ -59,6 +59,13 @@ so the SVG renders the same anywhere; the build itself needs the network.
   and setting both flat gives the Ledger's plain look.
 - **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
 - **Title is NEW YORK 1929 with a drawn north line.** No logo, no compass (Nick's call).
+- **Leather, generated, not an image.** The `leather` filter builds a pebble grain from three
+  crease patterns multiplied (one alone draws worm-like squiggles at print scale), over soft
+  wrinkles, with a sheen and uneven dye; saddle stitching runs round the board edge, both sides
+  of the Heat corner, and inside each panel. It prints crisp at any size and needs no licence.
+  If it ever needs to be more photographic, a CC0 scan (ambientCG, Poly Haven) could be tiled
+  in instead; not tried yet. Judge the grain at print scale, not in the preview: the downscaled
+  JPEG makes it look busier than it prints.
 - Water and land labels are placed by visual centre, midway between the shores and at their
   angle, so they stay centred if the type changes. New Jersey is unlabelled (Nick cut it);
   Westchester and Nassau keep theirs.
