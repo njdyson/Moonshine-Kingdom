@@ -59,6 +59,12 @@ so the SVG renders the same anywhere; the build itself needs the network.
   a dashed tray, no words (Home Turf: Safehouse, Boss, 2 Runners; 3 Runners; a Squad shield,
   kept quiet so a crown room never read as always policed), plus the key's Setup row. The
   roster keeps each District's Town Planner mark either way.
+- **Each District type is tooled** (`TOOLING`): a faint pattern pressed into the leather,
+  dark groove and a catch of light. Docks get harbour waves, Wards running-bond brick,
+  Speakeasies Deco fish scales; High Society keeps its sunburst instead. The Borough colour is
+  untouched, since Raids and Squads work by Borough, so the pattern is only a second cue for
+  type. Groove depth is set per build in `LEATHER` (lighter in print, where it is seen up close;
+  at print scale the first, denser brick read as a wall).
 - **Zone roundels are 28 units across** (`R = 14`, about 16 mm at 24in), big enough to read
   a District's type at a glance beside its Still.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest

@@ -418,6 +418,7 @@ function districtFills(placed) {
     const p = geo.regions[d.id];
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#fill-${d.boro})"/>`;
+    if (TOOLING[d.zone]) s += `<path d="${poly(p)}" fill="url(#tool-${d.zone})"/>`;
     if (d.zone === 'hs') {
       // High Society: a gold sunburst from the crown, and a keyline inside the border.
       const [cx, cy] = placed[d.id].c.roundelAt(placed[d.id].x, placed[d.id].y);
@@ -633,11 +634,30 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="socket"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="#000"/></radialGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
+  for (const [zone, t] of Object.entries(TOOLING)) s += tooling(zone, t, LEATHER[mode].tooling);
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   s += leatherFilter('leather', LEATHER[mode].board) + leatherFilter('leatherFine', LEATHER[mode].fine);
   return `<defs>${s}</defs>`;
+}
+
+// ---------------------------------------------------------------- tooling
+// Each District type carries a faint pattern pressed into the leather, like blind
+// tooling: a dark groove with a catch of light below it. The Borough colour stays
+// untouched (Raids and Squads work by Borough); the pattern is a second, quieter
+// cue for the type. High Society needs none: it has its sunburst.
+// [tile width, tile height, groove path]; units, so about 10 mm tiles at 24in.
+const TOOLING = {
+  dock: [18, 9, 'M0 4.5 C3 2 6 2 9 4.5 S15 7 18 4.5'], // harbour waves
+  ward: [24, 12, 'M0 .5 H24 M0 6.5 H24 M6 .5 V6.5 M18 6.5 V12.5'], // running-bond brick
+  speak: [16, 8, 'M0 8 A8 8 0 0 1 16 8 M-8 0 A8 8 0 0 1 8 0 M8 0 A8 8 0 0 1 24 0'], // Deco fish scales
+};
+// depth: groove opacity, set per build in LEATHER (lighter in print, which is seen up close).
+function tooling(zone, [w, h, d], depth) {
+  return `<pattern id="tool-${zone}" width="${w}" height="${h}" patternUnits="userSpaceOnUse">`
+    + `<path d="${d}" fill="none" stroke="#f3dc95" stroke-opacity="${f(depth * 0.3, 3)}" stroke-width=".7" transform="translate(.5 .7)"/>`
+    + `<path d="${d}" fill="none" stroke="#000" stroke-opacity="${depth}" stroke-width=".9"/></pattern>`;
 }
 
 // ---------------------------------------------------------------- leather
@@ -650,10 +670,12 @@ function defs(fontCss, mode) {
 // flatter skin stitched on like a patch. The screen presets drop the pebbles.
 const LEATHER = {
   print: {
+    tooling: 0.17,
     board: { creases: [[0.1, 4], [0.13, 17], [0.17, 29]], blur: 0.45, pebble: 0.6, wrinkle: [0.016, 0.6], relief: 1.7, depth: 0.6, sheen: 0.15, dye: 0.3 },
     fine: { creases: [[0.3, 5], [0.38, 18], [0.48, 30]], blur: 0.22, pebble: 0.7, wrinkle: [0.03, 0.2], relief: 0.9, depth: 0.4, sheen: 0.08, dye: 0.12 },
   },
   screen: {
+    tooling: 0.26,
     board: { creases: [], wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
     fine: { creases: [], wrinkle: [0.03, 1], relief: 0.8, depth: 0.2, sheen: 0, dye: 0.08 },
   },
