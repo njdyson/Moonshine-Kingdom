@@ -6,7 +6,8 @@ Affinity export (`Art/Board (Large).png`) is untouched and is still what mk-onli
 
 ```
 node tools/build_board.js           # print and screen SVGs + a 2160px JPEG of each, seconds
-node tools/build_board.js --print   # also the 7200px print PNG (24in at 300dpi), git-ignored
+node tools/build_board.js --print   # also, git-ignored: the 24in print PDF (300dpi), its 7200px PNG,
+                                    # and a 4320px screen JPEG; about a minute
 node tools/trace_board.js           # only if the Affinity board changes; rewrites the geometry
 ```
 
@@ -63,11 +64,13 @@ keeps them on a re-trace.
 - **There is no bridge between Throggs Neck and Whitestone**, on the Affinity board or in 1929
   (the Bronx-Whitestone Bridge opened in 1939). The Almanac's bracket passage ("A bridge joins
   them, so a Boss on one can Split the Batch into the other") and the Kingpin's Guide ("stares
-  across a bridge") both assume one. They are only Water Connected, and Split the Batch needs
-  Land. Raised with Nick 2026-09-28; not yet fixed.
-- **The Milk Run** dropped "Williamsburg Bridge" from its objective only because no component
-  printed the name (`jobs-system-handoff.md`, which says to put it back once the board does).
-  Worth doing when this board is adopted.
+  across a bridge") both assumed one. They are only Water Connected, and Split the Batch needs
+  Land. **The Almanac is fixed** (2026-09-28): the only land-touching bracket on the board is
+  Red Hook's 6 and The Bowery's 9, across the Brooklyn Bridge, and the lesson now names it. The
+  Kingpin's Guide still has the old claim and its $740 figure; it lags the rules by design.
+- **The Milk Run** names the Williamsburg Bridge again ("across the Williamsburg Bridge"). It
+  had dropped the name only because no component printed it. The Almanac now names the Brooklyn
+  Bridge too. Both rely on this board, so they should merge with it.
 - Hell Gate as a *water* landmark was rejected for Jobs (it is a strait inside the East River);
   the Hell Gate *Bridge* is a crossing, which is unambiguous.
 
@@ -131,9 +134,9 @@ keeps them on a re-trace.
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.
-- **Rulebook wording.** The Big Bust tiebreak says "ranked highest on its Borough's printed
-  Pressure Strip". Nothing printed is a strip per Borough: each Still carries its own, and the
-  Town Planner says "its Still's Pressure Strip". Probably a one-phrase fix; not made.
+- ~~**Rulebook wording.**~~ Fixed 2026-09-28: the Big Bust tiebreak reads "ranked highest on its
+  Still's Pressure Strip", matching the Town Planner. (The Kingpin's Guide still says "the
+  Borough's Pressure Strip"; it lags by design.)
 - **mk-online.** The geometry is ready for it; the mk-online source is its own repo
   (`njdyson/mk-online`), not this one.
 - **Affinity round-trip.** The SVG opens in Affinity, but the texture and soft shadows are SVG

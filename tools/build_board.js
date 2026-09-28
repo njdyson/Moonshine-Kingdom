@@ -3,7 +3,9 @@
 // the District Roster below, then renders it through Playwright's Chromium.
 //
 //   node tools/build_board.js           print and screen SVGs, 2160px previews of each
-//   node tools/build_board.js --print   also a 7200px PNG (24in at 300dpi, not committed)
+//   node tools/build_board.js --print   also the files to open or send without an SVG
+//                                       editor (not committed): a 24in PDF at 300dpi, the
+//                                       7200px PNG it is made from, and a 4320px screen JPEG
 //
 // Two builds share everything but the texture: the print board carries the full
 // pebbled leather, which reads at 24in; the screen board keeps only soft wrinkles
@@ -23,6 +25,7 @@
 // Pin one by hand with `place: ['h' | 'v', x, y]` if the choice ever looks wrong.
 
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -30,10 +33,12 @@ const DIR = path.join(ROOT, 'Art', 'Board');
 const OUT = {
   printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
-  printPng: path.join(DIR, 'Board v0.9 (print).png'),
+  printPng: path.join(DIR, 'Board v0.9 (print).png'), printPdf: path.join(DIR, 'Board v0.9 (print).pdf'),
+  screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
 };
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
-const BOARD_MM = 609.6, MM = 1080 / BOARD_MM; // 24in square
+const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
+const BOARD_PX = BOARD_IN * 300; // print render: 300dpi
 
 // ---------------------------------------------------------------- palette
 // Muted land so every mob colour, and the blue Squads, stand out on it.
@@ -841,14 +846,31 @@ async function measure(browser, fontCss, items) {
 }
 
 async function render(browser, outputs) {
-  for (const [file, scale, svg] of outputs) {
+  for (const [file, scale, svg, quality = 90] of outputs) {
     const page = await browser.newPage({ viewport: { width: 1080, height: 1080 }, deviceScaleFactor: scale });
     await page.setContent(`<!doctype html><html><body style="margin:0;background:#000">${svg}</body></html>`);
     await page.evaluate(async () => { await document.fonts.ready; });
-    await page.screenshot({ path: file, clip: { x: 0, y: 0, width: 1080, height: 1080 }, ...(file.endsWith('.jpg') ? { quality: 90 } : {}) });
+    // the 300dpi render outlasts the default 30s screenshot timeout, so give it no limit
+    await page.screenshot({ path: file, clip: { x: 0, y: 0, width: 1080, height: 1080 }, timeout: 0, ...(file.endsWith('.jpg') ? { quality } : {}) });
     await page.close();
-    console.log('wrote', path.relative(ROOT, file));
+    if (!file.startsWith(os.tmpdir())) console.log('wrote', path.relative(ROOT, file));
   }
+}
+
+// The print PDF: one 24in page holding the 300dpi render as a JPEG. Printing the SVG
+// straight to PDF would rasterise its filters at the browser's own, lower resolution.
+async function printPdf(browser, svg) {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'board-'));
+  const jpg = path.join(tmp, 'board.jpg'), html = path.join(tmp, 'board.html');
+  await render(browser, [[jpg, BOARD_PX / 1080, svg, 92]]);
+  fs.writeFileSync(html, `<!doctype html><html><head><style>@page{size:${BOARD_IN}in ${BOARD_IN}in;margin:0}html,body{margin:0}img{display:block;width:${BOARD_IN}in;height:${BOARD_IN}in}</style></head><body><img src="board.jpg"></body></html>`);
+  const page = await browser.newPage();
+  await page.goto('file://' + html);
+  await page.evaluate(() => document.images[0].decode());
+  await page.pdf({ path: OUT.printPdf, width: `${BOARD_IN}in`, height: `${BOARD_IN}in`, printBackground: true, pageRanges: '1' });
+  await page.close();
+  fs.rmSync(tmp, { recursive: true, force: true });
+  console.log('wrote', path.relative(ROOT, OUT.printPdf));
 }
 
 (async () => {
@@ -868,7 +890,9 @@ async function render(browser, outputs) {
     console.log('wrote', path.relative(ROOT, file));
   }
   const outputs = [[OUT.screenJpg, 2, screen], [OUT.printJpg, 2, print]];
-  if (process.argv.includes('--print')) outputs.push([OUT.printPng, 7200 / 1080, print]);
+  const full = process.argv.includes('--print');
+  if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
+  if (full) await printPdf(browser, print);
   await browser.close();
 })();

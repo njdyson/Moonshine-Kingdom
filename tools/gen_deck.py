@@ -13,7 +13,7 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 # (title, art, verb, objective_html, flavour)
 ONES = [
     ("The Milk Run", "The Milk Run.jpg", "Move",
-     "Move <b>4+ Barrels</b> between <b>Five Points</b> and <b>Williamsburg</b> in a single Play.",
+     "Move <b>4+ Barrels</b> across the <b>Williamsburg Bridge</b> in a single Play.",
      "Every copper watches that bridge. Wave as you go."),
     ("The Beachhead", "Beachhead.jpg", "Secure",
      "Secure your Safehouse into a District <b>Land Connected</b> to a rival <b>Safehouse</b>.",

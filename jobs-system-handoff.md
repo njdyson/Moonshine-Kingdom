@@ -400,8 +400,11 @@ Every mainland borough has **1 Ward, 1 High Society, 2 Speakeasies, 2 Pressure-5
   borough for barrels** — and nobody goes there. Westerleigh is Still 2 / Pressure 1, so you must
   *haul* moonshine there before smuggling it out. That's what *The Smuggler's Run* is built on.
 - **Staten Island is nobody's Home Turf**, so naming it is always neutral. Its Deed is boxed at setup.
-- **Bridges are unnamed on the board.** Nick is researching real names. The only documented crossing is
-  Williamsburg ↔ Five Points (the Williamsburg Bridge), which *The Milk Run* uses.
+- **Bridges are named on the board** (since 2026-09-28, period accurate to 1929): Hell Gate
+  (Hunts Point and Astoria), Queensboro (East Harlem and Astoria), Williamsburg (Five Points and
+  Williamsburg) and Brooklyn (The Bowery and Red Hook). All four are printed in the water beside
+  their crossings, so a Job may name any of them. *The Milk Run* names the Williamsburg Bridge.
+  See `board-handoff.md`.
 
 ### The spread rule
 Generic Ward / High Society / Speakeasy / Pressure-Still targets are self-balancing — use freely.
@@ -449,10 +452,10 @@ because a cut forces a new card in the same tier (each tier must stay a multiple
 - ~~`Land-Connected` (on `The Beachhead`) is defined nowhere~~ **RESOLVED 2026-07-19.** The card now
   says **"Connected by Land or Bridge"**, which is the rulebook's own bullet heading. It was a card
   bug after all, not a rulebook gap: the category already existed and the card had invented a synonym.
-- **`The Milk Run` no longer names the Williamsburg Bridge.** That name is printed on *no component* —
-  not the board, not the Ledger, only in one line of rulebook prose — so it named a place a player
-  could not find. The objective now reads **"between Five Points and Williamsburg"**; the bridge keeps
-  its place in the flavour line. **If the bridge ever gets its name printed on the board, put it back.**
+- **`The Milk Run` names the Williamsburg Bridge again** (2026-09-28). It had been cut to
+  "between Five Points and Williamsburg" while the name was printed on no component; the new board
+  prints it, so the objective reads **"across the Williamsburg Bridge"**. Same move either way: the
+  bridge is the only thing joining the two.
 - ~~`The Insurance Job` uses a **"Raid" trigger**~~ **RESOLVED 2026-07-19.** "Raid" was never a Play
   a player could make, so the card had no checkpoint (*The Play Is the Unit* only checks Jobs when a
   **Play** ends) and a *rival* could trigger the Condemn. It now names the **Rat** Play, which is real,
