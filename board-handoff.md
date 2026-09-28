@@ -41,6 +41,36 @@ so the SVG renders the same anywhere; the build itself needs the network.
   instead of running under a floating panel (Nick, 2026-09-28).
 - **Mash square**: 24 mm.
 
+## Bridges (period accurate, named for Jobs)
+
+Nick wants the crossings named so Jobs can refer to them, and accurate to 1929 even if that
+moves a connection. They live in `board-geometry.json` with their opening year, and the tracer
+keeps them on a re-trace.
+
+| Bridge | Joins | Opened |
+| --- | --- | --- |
+| Hell Gate Bridge | Hunts Point and Astoria | 1917 (railway) |
+| Queensboro Bridge | East Harlem and Astoria | 1909 |
+| Williamsburg Bridge | Five Points and Williamsburg | 1903 |
+| Brooklyn Bridge | The Bowery and Red Hook | 1883 |
+
+- **The Queensboro was moved.** The Affinity board had this crossing from upper East Harlem, which
+  is the Triborough's line (opened 1936). The 1929 crossing runs from East 59th Street to Long
+  Island City, so it now leaves East Harlem's southern shore for Astoria's. It still joins the
+  same two Districts: **no connection changed.**
+- The Manhattan Bridge (1909) also lands by the Bowery; Brooklyn Bridge was preferred as the
+  better-known name. Either is accurate.
+- **There is no bridge between Throggs Neck and Whitestone**, on the Affinity board or in 1929
+  (the Bronx-Whitestone Bridge opened in 1939). The Almanac's bracket passage ("A bridge joins
+  them, so a Boss on one can Split the Batch into the other") and the Kingpin's Guide ("stares
+  across a bridge") both assume one. They are only Water Connected, and Split the Batch needs
+  Land. Raised with Nick 2026-09-28; not yet fixed.
+- **The Milk Run** dropped "Williamsburg Bridge" from its objective only because no component
+  printed the name (`jobs-system-handoff.md`, which says to put it back once the board does).
+  Worth doing when this board is adopted.
+- Hell Gate as a *water* landmark was rejected for Jobs (it is a strait inside the East River);
+  the Hell Gate *Bridge* is a crossing, which is unambiguous.
+
 ## Decisions, so nobody undoes them
 
 - **Labels are centred in each District** (Nick, 2026-09-28: cleaner, accepting that pieces will
@@ -66,6 +96,10 @@ so the SVG renders the same anywhere; the build itself needs the network.
   not a blue: blue turned Manhattan's red Docks plum, a step towards Queens. Tried first and
   rejected (Nick, 2026-09-28): a tooled pattern per type (waves, brick, fish scales); he
   prefers the Districts flat.
+- **Finishing touches:** piers off each Dock's most open stretch of shore, in the Dock's own
+  colour (placed automatically, clear of land, bridges and labels); Art Deco quarter fans in the
+  frame's corner steps and at the Heat corner's turn; a soft drop shadow under every Still and
+  zone roundel, so they sit on the board like pieces.
 - **Zone roundels are 28 units across** (`R = 14`, about 16 mm at 24in), big enough to read
   a District's type at a glance beside its Still.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest

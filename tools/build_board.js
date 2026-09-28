@@ -103,9 +103,15 @@ const OFFBOARD = ['nj', 'north', 'east'];
 // Labels in the water or on off-board land, by visual centre: [x, y, rotation].
 // Centres sit midway between the shores (or shore and frame), angles follow them.
 const BORO_LABELS = {
-  MN: [247, 378, -52.5], BX: [1049.5, 280, -90], QN: [890, 1037, -6.6], BK: [525, 1030, 8.6], SI: [150, 1050, 0],
+  MN: [247, 378, -52.5], BX: [1049.5, 280, -90], QN: [890, 1037, -6.6], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
 };
-const WATER_LABELS = [['EAST RIVER', 580, 472, -43.6], ['JAMAICA BAY', 732, 921, 0]];
+const WATER_LABELS = [['EAST RIVER', 405, 637, -6], ['JAMAICA BAY', 732, 921, 0]];
+// Bridge names (from board-geometry.json) sit in the water beside each bridge,
+// along the river, so Jobs can name a crossing: [x, y, rotation] by name.
+const BRIDGE_LABELS = {
+  'Hell Gate Bridge': [775, 331.5, -8], 'Queensboro Bridge': [625.5, 428.2, -43.6],
+  'Williamsburg Bridge': [538.2, 505, -44.2], 'Brooklyn Bridge': [318.4, 712.8, -60.6],
+};
 const LAND_LABELS = [['WESTCHESTER', 800, 32, 0], ['NASSAU', 1049, 700, 90]];
 
 // ---------------------------------------------------------------- type
@@ -115,6 +121,7 @@ const TYPE = {
   boro: { family: 'Cinzel', weight: 700, size: 19, spacing: 3.6 },
   water: { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 3.4, italic: true },
   land: { family: 'Barlow Condensed', weight: 600, size: 9.5, spacing: 5 },
+  bridge: { family: 'Barlow Condensed', weight: 600, size: 8, spacing: 0.8, italic: true },
   keyHead: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.8 },
   keyText: { family: 'Barlow', weight: 500, size: 7.6, spacing: 0.1 },
   panelHead: { family: 'Cinzel', weight: 700, size: 11.5, spacing: 3.2 },
@@ -231,7 +238,7 @@ function cluster(d, layout) {
       w, h, layout,
       roundelAt: (x, yy) => [x + x0 + R, yy + rcy],
       draw(x, yy) {
-        let s = still(d.still, x, yy, TOKEN_H) + roundel(d.zone, x + x0 + R, yy + rcy, R);
+        let s = `<g filter="url(#lift)">${still(d.still, x, yy, TOKEN_H) + roundel(d.zone, x + x0 + R, yy + rcy, R)}</g>`;
         for (const [kind, t, b] of lines) {
           if (kind === 'name') s += text(t, x + x0 + 2 * R + 5, yy + b, TYPE.name, { fill: nameFill, halo: 2.6 });
           if (kind === 'venue') s += text(t, x + x0, yy + b, TYPE.venue, { fill: C.body, halo: 2.2 });
@@ -255,7 +262,7 @@ function cluster(d, layout) {
     roundelAt: (x, yy) => [x + (w - rowW) / 2 + R, yy + top + TOKEN_H / 2],
     draw(x, yy) {
       const rx = x + (w - rowW) / 2;
-      let s = roundel(d.zone, rx + R, yy + top + TOKEN_H / 2, R) + still(d.still, rx + 2 * R + 6, yy + top, TOKEN_H);
+      let s = `<g filter="url(#lift)">${roundel(d.zone, rx + R, yy + top + TOKEN_H / 2, R) + still(d.still, rx + 2 * R + 6, yy + top, TOKEN_H)}</g>`;
       for (const [kind, t, b] of lines) {
         if (kind === 'name') s += text(t, x + w / 2, yy + b, TYPE.name, { fill: nameFill, anchor: 'middle', halo: 2.6 });
         if (kind === 'venue') s += text(t, x + w / 2, yy + b, TYPE.venue, { fill: C.body, anchor: 'middle', halo: 2.2 });
@@ -457,6 +464,75 @@ function bridgeGlyph(a, b, ext = 6, k = 1) { // k scales the width, for the key
   for (const d of [len * 0.3, len * 0.7]) s += `<path d="${quad(d - 1.7 * k, d + 1.7 * k, HW + 3.6 * k, HW + 3.6 * k)}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width=".7"/>`;
   return `<g>${s}</g>`;
 }
+// Piers: short wharves off each Dock's most open stretch of shore, in the Dock's
+// own colour so they read as its land. Placed automatically: each must run into
+// open water, clear of other land, bridges and the water labels.
+const PIER = { len: 12, half: 2.3, gap: 15, count: 3 };
+function orientedBox(cx, cy, deg, hl, hh) {
+  const t = deg * Math.PI / 180, ux = Math.cos(t), uy = Math.sin(t);
+  return [[-hl, -hh], [hl, -hh], [hl, hh], [-hl, hh]].map(([a, b]) => [cx + ux * a - uy * b, cy + uy * a + ux * b]);
+}
+function pierObstacles() {
+  const obs = [];
+  for (const [k, [x, y, r]] of Object.entries(BORO_LABELS))
+    obs.push(orientedBox(x, y, r, (31 + width(TYPE.boro, upper(BOROUGHS[k].name))) / 2 + 4, 15));
+  for (const [t, x, y, r] of WATER_LABELS) obs.push(orientedBox(x, y, r, width(TYPE.water, t) / 2 + 4, 9));
+  for (const { name } of geo.bridges) { const [x, y, r] = BRIDGE_LABELS[name]; obs.push(orientedBox(x, y, r, width(TYPE.bridge, name) / 2 + 4, 8)); }
+  for (const { a, b } of geo.bridges) {
+    const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    obs.push(orientedBox((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI, L / 2 + 14, 16));
+  }
+  return obs;
+}
+function placePiers() {
+  const land = [...DISTRICTS.map(d => geo.regions[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
+  const obs = pierObstacles(), out = [];
+  const free = q => !land.some(p => inside(q, p)) && !obs.some(o => inside(q, o))
+    && q[0] > FRAME_IN + 4 && q[0] < 1080 - FRAME_IN - 4 && q[1] > FRAME_IN + 4 && q[1] < 1080 - FRAME_IN - 4;
+  for (const d of DISTRICTS.filter(dd => dd.zone === 'dock')) {
+    const poly0 = geo.regions[d.id];
+    let best = null;
+    for (const c of geo.chains.filter(ch => ch.sides.includes(d.id) && ch.sides.includes('water'))) {
+      for (let i = 0; i < c.pts.length - 1; i++) {
+        const [p0, p1] = [c.pts[i], c.pts[i + 1]], L = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
+        if (L < 24) continue;
+        const ux = (p1[0] - p0[0]) / L, uy = (p1[1] - p0[1]) / L;
+        let nx = -uy, ny = ux;
+        const mid = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
+        if (inside([mid[0] + nx * 2, mid[1] + ny * 2], poly0)) { nx = -nx; ny = -ny; } // point out to sea
+        let run = [];
+        const flush = () => { if (!best || run.length > best.run.length) best = { run: run.slice(), u: [ux, uy], n: [nx, ny] }; run = []; };
+        for (let t = 9; t <= L - 9; t += 3) {
+          const q = [p0[0] + ux * t, p0[1] + uy * t];
+          const probe = [];
+          for (let s2 = 2; s2 <= PIER.len + 6; s2 += 2) for (const w of [-PIER.half - 1, 0, PIER.half + 1]) probe.push([q[0] + nx * s2 + ux * w, q[1] + ny * s2 + uy * w]);
+          if (probe.every(free)) run.push(q); else flush();
+        }
+        flush();
+      }
+    }
+    if (!best || !best.run.length) continue;
+    const span = (best.run.length - 1) * 3, n = Math.min(PIER.count, Math.floor(span / PIER.gap) + 1);
+    const midIdx = (best.run.length - 1) / 2, [ux, uy] = best.u;
+    const c0 = best.run[Math.floor(midIdx)];
+    for (let k = 0; k < n; k++) {
+      const off = (k - (n - 1) / 2) * PIER.gap;
+      out.push({ d, q: [c0[0] + ux * off, c0[1] + uy * off], u: best.u, n: best.n });
+    }
+  }
+  return out;
+}
+function piers() {
+  return placePiers().map(({ d, q, u, n }) => {
+    const b = BOROUGHS[d.boro], col = TONE[d.zone] ? mix(b.fill[0], TINT[TONE[d.zone]], TINT_AMOUNT) : b.fill[0];
+    const P = (along, across) => `${f(q[0] + n[0] * along + u[0] * across)} ${f(q[1] + n[1] * along + u[1] * across)}`;
+    const body = `M${P(-2.5, -PIER.half)} L${P(PIER.len, -PIER.half)} L${P(PIER.len, PIER.half)} L${P(-2.5, PIER.half)} Z`;
+    return `<path d="${body}" fill="#000" fill-opacity=".45" transform="translate(1 1.6)" filter="url(#blur2)"/>`
+      + `<path d="${body}" fill="${col}"/>`
+      + `<path d="M${P(0.5, -PIER.half)} L${P(PIER.len, -PIER.half)} L${P(PIER.len, PIER.half)} L${P(0.5, PIER.half)}" fill="none" stroke="${C.gold}" stroke-width="1.1" stroke-linejoin="round"/>`;
+  }).join('');
+}
+
 function bridges() {
   return geo.bridges.map(({ a, b }) => bridgeGlyph(a, b)).join('');
 }
@@ -473,6 +549,10 @@ function mapLabels() {
   }
   for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85, middle: true });
   for (const [t, x, y, r] of LAND_LABELS) s += text(t, x, y, TYPE.land, { fill: '#8d826c', anchor: 'middle', rotate: r, opacity: 0.8, middle: true });
+  for (const { name } of geo.bridges) {
+    const [x, y, r] = BRIDGE_LABELS[name];
+    s += text(name, x, y, TYPE.bridge, { fill: C.muted, anchor: 'middle', rotate: r, halo: 2.2, middle: true });
+  }
   return s;
 }
 
@@ -585,6 +665,15 @@ function title() {
   return s;
 }
 
+// A quarter sunburst: rays and two arcs from (x, y), spanning a0 to a0 + 90 degrees.
+function fan(x, y, a0, r) {
+  const pt = (deg, rr) => { const t = deg * Math.PI / 180; return `${f(x + Math.cos(t) * rr)} ${f(y + Math.sin(t) * rr)}`; };
+  let d = '';
+  for (let k = 1; k <= 5; k++) d += `M${pt(a0 + k * 15, r * 0.3)} L${pt(a0 + k * 15, k % 2 ? r : r * 0.72)} `;
+  const arc = rr => `M${pt(a0, rr)} A${rr} ${rr} 0 0 1 ${pt(a0 + 90, rr)} `;
+  return `<path d="${d}${arc(r * 0.3)}${arc(r * 1.08)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".75" stroke-width=".9" stroke-linecap="round"/>`;
+}
+
 function frame() {
   // The gold edge, stepping in around the Heat corner; the hairline inside it
   // follows, with a Deco step at each corner.
@@ -598,6 +687,8 @@ function frame() {
   s += hair(`M${i + st} ${i} H${ex - 6} V${ey - 6} H${i} V${i + st} H${i + st} Z`);
   for (const [x, y] of [[o, o], [W - o, o], [o, W - o], [W - o, W - o]]) s += diamond(x, y, 3.5);
   s += diamond(ex, ey, 3.5);
+  // Deco fans in the hairline's corner steps, opening onto the map
+  s += fan(W - i - st, i + st, 90, 18) + fan(W - i - st, W - i - st, 180, 18) + fan(i + st, W - i - st, 270, 18) + fan(ex + 6, ey + 6, 0, 11);
   return s;
 }
 
@@ -617,6 +708,8 @@ function defs(fontCss, mode) {
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
+  // lift: the Stills and zone roundels cast a soft shadow, like pieces on the board
+  s += `<filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx=".8" dy="1.5" stdDeviation="1.3" flood-color="#000" flood-opacity=".6"/></filter>`;
   s += leatherFilter('leather', LEATHER[mode].board) + leatherFilter('leatherFine', LEATHER[mode].fine);
   return `<defs>${s}</defs>`;
 }
@@ -680,6 +773,8 @@ function allText() {
     if (d.venue) add(TYPE.venue, d.venue);
   }
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
+  for (const [t] of WATER_LABELS) add(TYPE.water, t);
+  for (const { name } of geo.bridges) add(TYPE.bridge, name);
   for (const [, t, sub] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); if (sub) add(TYPE.keyText, sub); }
   add(TYPE.titleCity, 'NEW YORK');
   add(TYPE.titleYear, '1929');
@@ -689,7 +784,7 @@ function allText() {
 function buildSvg(fontCss, mode, placed) {
   const art = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining()
     + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
-    + districtFills(placed) + borders() + bridges();
+    + districtFills(placed) + borders() + piers() + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
   const side = sidePanels();
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">`

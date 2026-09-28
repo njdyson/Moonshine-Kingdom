@@ -1,4 +1,4 @@
-{"note":"Board geometry traced from Art/Board (Large).png by tools/trace_board.js (1080 x 1080 units, same frame as the original). Every land border is one shared chain, so neighbouring Districts cannot drift apart. Edit here, then run tools/build_board.js.","size":[1080,1080],"regions":{
+{"note":"Board geometry traced from Art/Board (Large).png by tools/trace_board.js (1080 x 1080 units, same frame as the original). Every land border is one shared chain, so neighbouring Districts cannot drift apart. Edit here, then run tools/build_board.js. Bridges are named and kept by hand since 2026-09-28: the Queensboro was moved south from the Affinity position (a Triborough, opened 1936) to its 1929 line, East 59th Street to Long Island City, still joining East Harlem and Astoria.","size":[1080,1080],"regions":{
 "sugar_hill":[[464,108],[606,191],[535,279],[371,248]],
 "west_side":[[371,248],[535,279],[536,284],[526,351],[523,357],[290,360]],
 "east_harlem":[[606,191],[535,279],[536,284],[526,351],[523,357],[523,371],[509,453],[533,477],[694,328]],
@@ -103,7 +103,7 @@
 {"sides":["water","tottenville"],"pts":[[30,910],[57,1032],[209,1033],[248,993],[272,932]]},
 {"sides":["east","water"],"pts":[[1080,988],[1032,991]]}],
 "bridges":[
-{"join":["hunts_point","astoria"],"a":[724.7,321.2],"b":[731.4,368.8]},
-{"join":["east_harlem","astoria"],"a":[611.6,403.4],"b":[646.7,443.8]},
-{"join":["five_points","williamsburg"],"a":[491.9,520.4],"b":[521.5,550.9]},
-{"join":["bowery","red_hook"],"a":[320.3,663.3],"b":[359.9,685.7]}]}
+{"join":["hunts_point","astoria"],"a":[724.7,321.2],"b":[731.4,368.8],"name":"Hell Gate Bridge","opened":1917},
+{"join":["east_harlem","astoria"],"a":[574.5,438.6],"b":[612.7,478.6],"name":"Queensboro Bridge","opened":1909},
+{"join":["five_points","williamsburg"],"a":[491.9,520.4],"b":[521.5,550.9],"name":"Williamsburg Bridge","opened":1903},
+{"join":["bowery","red_hook"],"a":[320.3,663.3],"b":[359.9,685.7],"name":"Brooklyn Bridge","opened":1883}]}
