@@ -1,8 +1,8 @@
 # The board: vector rebuild
 
-Status (2026-09-28): **in progress, not merged.** The work lives on branch
-`claude/board-image-design-509xha`. Nick is iterating on the look one round at a time. The
-Affinity export (`Art/Board (Large).png`) is untouched and is still what mk-online serves.
+Status (2026-09-28): **merged to `main`**, still being refined one round at a time. The
+Affinity export (`Art/Board (Large).png`) is untouched and is still what mk-online serves, so
+the online game shows the old board until it is switched over.
 
 ```
 node tools/build_board.js           # print and screen SVGs + a 2160px JPEG of each, seconds

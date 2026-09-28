@@ -286,7 +286,8 @@ Since 2026-09-28 the board is being rebuilt as generated vector art: `tools/buil
 draws it from `Art/Board/board-geometry.json` (the traced map) and a roster copied from the
 Town Planner. Read `board-handoff.md` before touching it: it holds the build commands, the
 24-inch print spec (Heat Track sockets are the Ledger's 39 mm chips), and the decisions Nick
-has made so far. Work continues on branch `claude/board-image-design-509xha` until merged.
+has made so far. It was merged to `main` on 2026-09-28; the Affinity PNG (`Art/Board (Large).png`)
+is still what mk-online serves.
 
 ## What not to edit
 
