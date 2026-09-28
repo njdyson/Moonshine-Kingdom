@@ -54,9 +54,13 @@ so the SVG renders the same anywhere; the build itself needs the network.
   quiet. Brooklyn moved from red to bronze to part it from Manhattan.
 - **High Society Venues:** the martini (`Art/Icons/Gin.svg`) under a crown, plus a gold
   sunburst and inner keyline. Speakeasies keep the tumbler, one colour for all.
-- **Setup marks are ghosted pieces in a dashed tray, no words**: Home Turf (Safehouse, Boss,
-  2 Runners), 3 Runners, and a Squad shield. Nick's brief: a crown room must not read as always
-  policed. The key's Setup row says "Where the pieces start".
+- **No setup marks on the board** (Nick, 2026-09-28): he wants to playtest other setups
+  without the print committing to one. `SHOW_SETUP = true` brings them back: ghosted pieces in
+  a dashed tray, no words (Home Turf: Safehouse, Boss, 2 Runners; 3 Runners; a Squad shield,
+  kept quiet so a crown room never read as always policed), plus the key's Setup row. The
+  roster keeps each District's Town Planner mark either way.
+- **Zone roundels are 28 units across** (`R = 14`, about 16 mm at 24in), big enough to read
+  a District's type at a glance beside its Still.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest
   right on the Heat Track"; wrapping it into two rows would break that. The sockets copy the
   Ledger's (dark wells, a faint gold ring); only the numerals warm from gold towards rust, with

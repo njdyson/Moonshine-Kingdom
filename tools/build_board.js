@@ -87,6 +87,10 @@ const SETUP = {
   runners: ['runner', 'runner', 'runner'],
   squad: ['squad'],
 };
+// Off since 2026-09-28: Nick wants to playtest other setups without the printed
+// board committing to one. The roster keeps the Town Planner's marks; true draws
+// them again, with the key's Setup row.
+const SHOW_SETUP = false;
 const OFFBOARD = ['nj', 'north', 'east'];
 
 // Labels in the water or on off-board land, by visual centre: [x, y, rotation].
@@ -197,56 +201,58 @@ function roundel(zone, cx, cy, r) {
 // ---------------------------------------------------------------- label clusters
 // Two arrangements, h (Still left of the text) and v (Still over the text); the
 // placer tries both. Returns the size and a draw(x, y) for the chosen spot.
-const R = 9; // roundel radius
+const R = 14; // roundel radius: 28 units, about 16 mm at 24in
 function cluster(d, layout) {
   const names = (d.lines || [d.name]).map(upper);
   const nameW = Math.max(...names.map(n => width(TYPE.name, n)));
   const venueW = d.venue ? width(TYPE.venue, d.venue) : 0;
-  const setupW = d.setup ? trayWidth(SETUP[d.setup]) : 0;
-  const nameFill = d.zone === 'hs' ? C.goldBright : C.ink;
+  const setup = SHOW_SETUP && d.setup ? SETUP[d.setup] : null;
+  const setupW = setup ? trayWidth(setup) : 0;
+  const hs = d.zone === 'hs', nameFill = hs ? C.goldBright : C.ink;
   const lines = []; // [kind, text, baseline]
   if (layout === 'h') {
-    const x0 = TOKEN_W + 7, pad = d.zone === 'hs' ? 8 : 0;
-    let y = 14.5 + pad;
-    names.forEach(n => { lines.push(['name', n, y]); y += 14.5; });
+    // Still on the left; roundel inline with the name, the crown room above it
+    const x0 = TOKEN_W + 7, rcy = R + (hs ? 1.2 * R : 0);
+    let y = rcy + 5.1;
+    names.forEach((n, i) => { lines.push(['name', n, y]); y += 14.5; });
     y -= 1.5;
     if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
-    if (d.setup) lines.push(['setup', '', y + 1.5]);
+    if (setup) lines.push(['setup', '', y + 1.5]);
     const w = x0 + Math.max(2 * R + 5 + nameW, venueW, setupW);
     const h = Math.max(TOKEN_H, lines[lines.length - 1][2] + 3);
     return {
       w, h, layout,
-      roundelAt: (x, y) => [x + x0 + R, y + 9.5 + pad],
-      draw(x, y) {
-        let s = still(d.still, x, y, TOKEN_H) + roundel(d.zone, x + x0 + R, y + 9.5 + pad, R);
+      roundelAt: (x, yy) => [x + x0 + R, yy + rcy],
+      draw(x, yy) {
+        let s = still(d.still, x, yy, TOKEN_H) + roundel(d.zone, x + x0 + R, yy + rcy, R);
         for (const [kind, t, b] of lines) {
-          if (kind === 'name') s += text(t, x + x0 + 2 * R + 5, y + b, TYPE.name, { fill: nameFill, halo: 2.6 });
-          if (kind === 'venue') s += text(t, x + x0, y + b, TYPE.venue, { fill: C.body, halo: 2.2 });
-          if (kind === 'setup') s += tray(SETUP[d.setup], x + x0, y + b - 3);
+          if (kind === 'name') s += text(t, x + x0 + 2 * R + 5, yy + b, TYPE.name, { fill: nameFill, halo: 2.6 });
+          if (kind === 'venue') s += text(t, x + x0, yy + b, TYPE.venue, { fill: C.body, halo: 2.2 });
+          if (kind === 'setup') s += tray(setup, x + x0, yy + b - 3);
         }
         return s;
       },
     };
   }
-  // v: roundel and Still side by side, text centred below
-  const rowW = 2 * R + 6 + TOKEN_W;
-  let y = TOKEN_H + 15.5;
+  // v: roundel and Still side by side, text centred below; a crown needs headroom
+  const rowW = 2 * R + 6 + TOKEN_W, top = hs ? 7 : 0;
+  let y = top + TOKEN_H + 15.5;
   names.forEach(n => { lines.push(['name', n, y]); y += 14.5; });
   y -= 1.5;
   if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
-  if (d.setup) lines.push(['setup', '', y + 1.5]);
+  if (setup) lines.push(['setup', '', y + 1.5]);
   const w = Math.max(rowW, nameW, venueW, setupW);
   const h = lines[lines.length - 1][2] + 3;
   return {
     w, h, layout,
-    roundelAt: (x, yy) => [x + (w - rowW) / 2 + R, yy + TOKEN_H / 2],
+    roundelAt: (x, yy) => [x + (w - rowW) / 2 + R, yy + top + TOKEN_H / 2],
     draw(x, yy) {
       const rx = x + (w - rowW) / 2;
-      let s = roundel(d.zone, rx + R, yy + TOKEN_H / 2, R) + still(d.still, rx + 2 * R + 6, yy, TOKEN_H);
+      let s = roundel(d.zone, rx + R, yy + top + TOKEN_H / 2, R) + still(d.still, rx + 2 * R + 6, yy + top, TOKEN_H);
       for (const [kind, t, b] of lines) {
         if (kind === 'name') s += text(t, x + w / 2, yy + b, TYPE.name, { fill: nameFill, anchor: 'middle', halo: 2.6 });
         if (kind === 'venue') s += text(t, x + w / 2, yy + b, TYPE.venue, { fill: C.body, anchor: 'middle', halo: 2.2 });
-        if (kind === 'setup') s += tray(SETUP[d.setup], x + w / 2 - setupW / 2, yy + b - 3);
+        if (kind === 'setup') s += tray(setup, x + w / 2 - setupW / 2, yy + b - 3);
       }
       return s;
     },
@@ -550,11 +556,12 @@ const KEY_ROWS = [
   ['setup', 'Setup', 'Where the pieces start'],
 ];
 function key(x, y) {
-  const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
-  const subX = 28 + headW + 9, subW = Math.max(...KEY_ROWS.map(([, , t]) => (t ? width(TYPE.keyText, t) : 0)));
-  const w = subX + subW + 11, h = 13 + 6 * 14 + 4 + 13;
+  const rows = KEY_ROWS.filter(([k]) => k !== 'setup' || SHOW_SETUP);
+  const headW = Math.max(...rows.map(([, t]) => width(TYPE.keyHead, upper(t))));
+  const subX = 28 + headW + 9, subW = Math.max(...rows.map(([, , t]) => (t ? width(TYPE.keyText, t) : 0)));
+  const w = subX + subW + 11, h = 13 + (rows.length - 1) * 14 + 4 + 13;
   let s = '';
-  KEY_ROWS.forEach(([k, t, sub], i) => {
+  rows.forEach(([k, t, sub], i) => {
     const cy = y + 13 + i * 14 + (i > 0 ? 4 : 0), ix = x + 15; // headroom for the crown
     if (k === 'bridge') s += bridgeGlyph([ix - 7, cy], [ix + 7, cy], 1.5, 0.45);
     else if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
