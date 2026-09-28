@@ -28,7 +28,7 @@ const C = {
   gold: '#c9a437', goldBright: '#e8cc72', goldLine: '#b9932f', goldDim: '#a98c4f', goldDeep: '#7a6224',
   ink: '#efe3cd', body: '#d8caae', muted: '#b8a577',
   sea: ['#15202b', '#0c131b'], offboard: '#26231f', shadow: '#0a0705',
-  panelA: '#231b13', panelB: '#16110b', squad: '#6f95cf',
+  panelA: '#231b13', panelB: '#16110b',
 };
 const BOROUGHS = {
   MN: { n: 1, name: 'Manhattan', fill: ['#5a3336', '#3e2224'] },
@@ -67,31 +67,36 @@ const DISTRICTS = [
   { id: 'westerleigh', name: 'Westerleigh', boro: 'SI', zone: 'dock', still: 2 },
   { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 4 },
 ];
+// Setup marks: the starting pieces, ghosted in a dashed tray, from the Town
+// Planner's Setup column. Pieces only; the words live in the Town Planner.
 const SETUP = {
-  home: { text: 'HOME TURF', icon: 'safehouse' },
-  runners: { text: '3 RUNNERS', icon: 'runner' },
-  squad: { text: 'POLICE SQUAD', icon: 'squad' },
+  home: ['safehouse', 'boss', 'runner', 'runner'], // Home Turf: Safehouse, Boss and 2 Runners
+  runners: ['runner', 'runner', 'runner'],
+  squad: ['squad'],
 };
 const OFFBOARD = ['nj', 'north', 'east'];
 
-// Labels in the water or on off-board land: [text, x, y, rotation].
+// Labels in the water or on off-board land, by visual centre: [x, y, rotation].
+// Centres sit midway between the shores (or shore and frame), angles follow them.
 const BORO_LABELS = {
-  MN: [246, 381, -54.2], BX: [1049, 262, -90], QN: [890, 1041, -6.6], BK: [525, 1031, 8.6], SI: [150, 1057, 0],
+  MN: [247, 378, -52.5], BX: [1049.5, 280, -90], QN: [890, 1037, -6.6], BK: [525, 1030, 8.6], SI: [150, 1050, 0],
 };
-const WATER_LABELS = [['EAST RIVER', 567, 475, -50.5], ['JAMAICA BAY', 732, 925, 0]];
-const LAND_LABELS = [['NEW JERSEY', 62, 640, -74.9], ['WESTCHESTER', 800, 37, 0], ['NASSAU', 1051, 700, 90]];
+const WATER_LABELS = [['EAST RIVER', 580, 472, -43.6], ['JAMAICA BAY', 732, 921, 0]];
+const LAND_LABELS = [['NEW JERSEY', 77, 565, -75], ['WESTCHESTER', 800, 32, 0], ['NASSAU', 1049, 700, 90]];
 
 // ---------------------------------------------------------------- type
 const TYPE = {
   name: { family: 'Barlow Condensed', weight: 700, size: 14.5, spacing: 1.1 },
   venue: { family: 'Barlow', weight: 500, size: 9, spacing: 0.2, italic: true },
-  setup: { family: 'Barlow Condensed', weight: 700, size: 8.4, spacing: 1.3 },
   boro: { family: 'Cinzel', weight: 700, size: 19, spacing: 3.6 },
   water: { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 3.4, italic: true },
   land: { family: 'Barlow Condensed', weight: 600, size: 9.5, spacing: 5 },
   keyHead: { family: 'Barlow Condensed', weight: 700, size: 12, spacing: 0.9 },
   keyText: { family: 'Barlow', weight: 500, size: 9.6, spacing: 0.1 },
   panelHead: { family: 'Cinzel', weight: 700, size: 11.5, spacing: 3.2 },
+  small: { family: 'Barlow Condensed', weight: 700, size: 8, spacing: 1.3 },
+  titleCity: { family: 'Cinzel', weight: 700, size: 26, spacing: 4.5 },
+  titleYear: { family: 'Cinzel', weight: 700, size: 15, spacing: 8 },
 };
 const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,500;0,600;0,700;1,500&family=Barlow+Condensed:ital,wght@0,600;0,700;1,600&family=Bebas+Neue&family=Cinzel:wght@700&display=block';
 
@@ -111,8 +116,10 @@ const width = (spec, t) => {
   return w;
 };
 
-function text(str, x, y, spec, { fill = C.ink, anchor = 'start', halo = 0, rotate = 0, opacity = 1 } = {}) {
-  const attrs = `x="${f(x)}" y="${f(y)}" font-family="${spec.family}" font-weight="${spec.weight}" font-size="${spec.size}" letter-spacing="${spec.spacing}" text-anchor="${anchor}"${spec.italic ? ' font-style="italic"' : ''}${rotate ? ` transform="rotate(${rotate} ${f(x)} ${f(y)})"` : ''}${opacity < 1 ? ` opacity="${opacity}"` : ''}`;
+// middle: (x, y) is the visual centre of the capitals, and any rotation turns about it.
+function text(str, x, y, spec, { fill = C.ink, anchor = 'start', halo = 0, rotate = 0, opacity = 1, middle = false } = {}) {
+  const by = middle ? y + spec.size * 0.35 : y;
+  const attrs = `x="${f(x)}" y="${f(by)}" font-family="${spec.family}" font-weight="${spec.weight}" font-size="${spec.size}" letter-spacing="${spec.spacing}" text-anchor="${anchor}"${spec.italic ? ' font-style="italic"' : ''}${rotate ? ` transform="rotate(${rotate} ${f(x)} ${f(y)})"` : ''}${opacity < 1 ? ` opacity="${opacity}"` : ''}`;
   const t = esc(str);
   return (halo ? `<text ${attrs} fill="none" stroke="${C.shadow}" stroke-opacity=".8" stroke-width="${halo}" stroke-linejoin="round">${t}</text>` : '')
     + `<text ${attrs} fill="${fill}">${t}</text>`;
@@ -131,11 +138,12 @@ function loadIcon(file) {
 const ICONS = {
   speak: loadIcon('Tumbler.svg'), ward: loadIcon('Fist.svg'), dock: loadIcon('anchor.svg'),
   crown: loadIcon('Crown.svg'), runner: loadIcon('Runner.svg'), safehouse: loadIcon('Safehouse.svg'),
+  martini: loadIcon('Gin.svg'), boss: loadIcon('Boss.svg'),
 };
 function icon(kind, cx, cy, size, color, strokeWidth) {
-  if (kind === 'squad') { // a police shield in the Squads' blue
-    const s = size / 10;
-    return `<path transform="translate(${f(cx - 5 * s)} ${f(cy - 5.5 * s)}) scale(${f(s, 4)})" d="M5 0 L10 1.6 V5.2 C10 8.2 7.6 10.2 5 11 C2.4 10.2 0 8.2 0 5.2 V1.6 Z" fill="${C.squad}" stroke="${C.shadow}" stroke-width=".6"/>`;
+  if (kind === 'squad') { // a police shield
+    const s = size / 11;
+    return `<path transform="translate(${f(cx - 5 * s)} ${f(cy - 5.5 * s)}) scale(${f(s, 4)})" d="M5 0 L10 1.6 V5.2 C10 8.2 7.6 10.2 5 11 C2.4 10.2 0 8.2 0 5.2 V1.6 Z" fill="${color}"/>`;
   }
   const { vb } = ICONS[kind];
   const inner = strokeWidth ? ICONS[kind].inner.replace(/stroke-width="[^"]*"/g, `stroke-width="${strokeWidth}"`) : ICONS[kind].inner;
@@ -161,12 +169,12 @@ function still(n, x, y, h) {
 const TOKEN_H = 42, TOKEN_W = TOKEN_H * TOKEN_BOX[2] / TOKEN_BOX[3];
 
 // Zone roundel: the same mark on the map and in the key. A High Society Venue is
-// a Speakeasy with a crown on it, as the Rulebook's component list describes.
+// a Speakeasy with a crown on it; its glass is the martini, not the tumbler.
 function roundel(zone, cx, cy, r) {
   if (zone === 'hs') {
     const ky = cy - r - r * 0.3, ks = r * 1.3;
     return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
-      + icon('speak', cx, cy + r * 0.04, r * 1.2, '#2a1d0c')
+      + icon('martini', cx, cy + r * 0.06, r * 1.08, '#2a1d0c')
       + icon('crown', cx, ky, ks, C.shadow, 5.5) + icon('crown', cx, ky, ks, C.goldBright);
   }
   return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="#140e09" fill-opacity=".85" stroke="${C.gold}" stroke-width="1.2"/>`
@@ -181,7 +189,7 @@ function cluster(d, layout) {
   const names = (d.lines || [d.name]).map(upper);
   const nameW = Math.max(...names.map(n => width(TYPE.name, n)));
   const venueW = d.venue ? width(TYPE.venue, d.venue) : 0;
-  const setupW = d.setup ? 12 + width(TYPE.setup, SETUP[d.setup].text) : 0;
+  const setupW = d.setup ? trayWidth(SETUP[d.setup]) : 0;
   const nameFill = d.zone === 'hs' ? C.goldBright : C.ink;
   const lines = []; // [kind, text, baseline]
   if (layout === 'h') {
@@ -190,7 +198,7 @@ function cluster(d, layout) {
     names.forEach(n => { lines.push(['name', n, y]); y += 14.5; });
     y -= 1.5;
     if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
-    if (d.setup) lines.push(['setup', SETUP[d.setup].text, y]);
+    if (d.setup) lines.push(['setup', '', y + 1.5]);
     const w = x0 + Math.max(2 * R + 5 + nameW, venueW, setupW);
     const h = Math.max(TOKEN_H, lines[lines.length - 1][2] + 3);
     return {
@@ -201,7 +209,7 @@ function cluster(d, layout) {
         for (const [kind, t, b] of lines) {
           if (kind === 'name') s += text(t, x + x0 + 2 * R + 5, y + b, TYPE.name, { fill: nameFill, halo: 2.6 });
           if (kind === 'venue') s += text(t, x + x0, y + b, TYPE.venue, { fill: C.body, halo: 2.2 });
-          if (kind === 'setup') s += setupMark(d.setup, x + x0, y + b);
+          if (kind === 'setup') s += tray(SETUP[d.setup], x + x0, y + b - 3);
         }
         return s;
       },
@@ -213,7 +221,7 @@ function cluster(d, layout) {
   names.forEach(n => { lines.push(['name', n, y]); y += 14.5; });
   y -= 1.5;
   if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
-  if (d.setup) lines.push(['setup', SETUP[d.setup].text, y]);
+  if (d.setup) lines.push(['setup', '', y + 1.5]);
   const w = Math.max(rowW, nameW, venueW, setupW);
   const h = lines[lines.length - 1][2] + 3;
   return {
@@ -225,16 +233,19 @@ function cluster(d, layout) {
       for (const [kind, t, b] of lines) {
         if (kind === 'name') s += text(t, x + w / 2, yy + b, TYPE.name, { fill: nameFill, anchor: 'middle', halo: 2.6 });
         if (kind === 'venue') s += text(t, x + w / 2, yy + b, TYPE.venue, { fill: C.body, anchor: 'middle', halo: 2.2 });
-        if (kind === 'setup') s += setupMark(d.setup, x + w / 2 - setupW / 2, yy + b);
+        if (kind === 'setup') s += tray(SETUP[d.setup], x + w / 2 - setupW / 2, yy + b - 3);
       }
       return s;
     },
   };
 }
-function setupMark(kind, x, y) {
-  const { text: t, icon: ic } = SETUP[kind];
-  return icon(ic, x + 4.5, y - 3, ic === 'squad' ? 8.5 : 10, C.muted)
-    + text(t, x + 12, y, TYPE.setup, { fill: C.muted, halo: 2 });
+// A dashed tray of ghosted pieces; (x, cy) is its left edge and vertical centre.
+const GHOST = 8.5, GHOST_GAP = 1.4, TRAY_PAD = 4, TRAY_H = 12;
+const trayWidth = icons => 2 * TRAY_PAD + icons.length * GHOST + (icons.length - 1) * GHOST_GAP;
+function tray(icons, x, cy) {
+  let s = `<rect x="${f(x)}" y="${f(cy - TRAY_H / 2)}" width="${f(trayWidth(icons))}" height="${TRAY_H}" rx="${TRAY_H / 2}" fill="#000" fill-opacity=".2" stroke="${C.muted}" stroke-opacity=".6" stroke-width=".8" stroke-dasharray="2 1.5"/>`;
+  icons.forEach((ic, i) => { s += icon(ic, x + TRAY_PAD + GHOST / 2 + i * (GHOST + GHOST_GAP), cy, GHOST, C.muted); });
+  return `<g opacity=".7">${s}</g>`;
 }
 
 // ---------------------------------------------------------------- placement
@@ -383,22 +394,25 @@ function borders() {
     + line(coast, 0.7, '#f3dc95', 0.5);
 }
 
+// Plan view of a suspension bridge: railed deck, cables along both sides over two
+// towers, splayed abutments on each shore, and a shadow on the water.
+function bridgeGlyph(a, b, ext = 6, k = 1) { // k scales the width, for the key
+  const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
+  const len = L + 2 * ext, A = [a[0] - ux * ext, a[1] - uy * ext], HW = 3.4 * k;
+  const P = (d, w) => `${f(A[0] + ux * d + nx * w)} ${f(A[1] + uy * d + ny * w)}`; // d along, w across
+  const quad = (d0, d1, w0, w1) => `M${P(d0, -w0)} L${P(d1, -w1)} L${P(d1, w1)} L${P(d0, w0)} Z`;
+  const line = (d0, d1, w) => `M${P(d0, w)} L${P(d1, w)}`;
+  let s = k < 1 ? '' : `<path d="${quad(4, len - 4, HW + 3, HW + 3)}" transform="translate(1.4 2.4)" fill="#000" fill-opacity=".5" filter="url(#blur2)"/>`;
+  s += `<path d="${quad(0, 8 * k, HW + 3.4 * k, HW)} ${quad(len - 8 * k, len, HW, HW + 3.4 * k)}" fill="${C.goldDeep}" stroke="${C.gold}" stroke-width=".8"/>`;
+  s += `<path d="${quad(5, len - 5, HW, HW)}" fill="#1c140c"/>`;
+  s += `<path d="${line(5, len - 5, 0)}" stroke="${C.goldDim}" stroke-opacity=".3" stroke-width="${2 * HW - 1.6}" stroke-dasharray=".8 1.7"/>`;
+  s += `<path d="${line(1.5, len - 1.5, HW)} ${line(1.5, len - 1.5, -HW)}" stroke="${C.gold}" stroke-width="1.1"/>`;
+  s += `<path d="${line(3, len - 3, HW + 2 * k)} ${line(3, len - 3, -(HW + 2 * k))}" stroke="${C.goldBright}" stroke-opacity=".85" stroke-width=".6"/>`;
+  for (const d of [len * 0.3, len * 0.7]) s += `<path d="${quad(d - 1.7 * k, d + 1.7 * k, HW + 3.6 * k, HW + 3.6 * k)}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width=".7"/>`;
+  return `<g>${s}</g>`;
+}
 function bridges() {
-  // Seen from above: a railed deck with its two towers, running onto both shores.
-  return geo.bridges.map(({ a, b }) => {
-    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
-    const A = [a[0] - ux * 5, a[1] - uy * 5], B = [b[0] + ux * 5, b[1] + uy * 5];
-    const seg = `M${f(A[0])} ${f(A[1])} L${f(B[0])} ${f(B[1])}`;
-    const at = t => [A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t];
-    const corner = (x, y, sn, su) => `${f(x + nx * 7.5 * sn + ux * 2 * su)} ${f(y + ny * 7.5 * sn + uy * 2 * su)}`;
-    const tower = ([x, y]) => `<path d="M${corner(x, y, 1, -1)} L${corner(x, y, 1, 1)} L${corner(x, y, -1, 1)} L${corner(x, y, -1, -1)} Z" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width=".8"/>`;
-    return `<g stroke-linecap="butt">`
-      + `<path d="${seg}" stroke="${C.shadow}" stroke-opacity=".75" stroke-width="12"/>`
-      + `<path d="${seg}" stroke="${C.gold}" stroke-width="9"/>`
-      + `<path d="${seg}" stroke="#20160d" stroke-width="6"/>`
-      + `<path d="${seg}" stroke="${C.goldDim}" stroke-width="6" stroke-dasharray="1 2.2" stroke-opacity=".6"/>`
-      + tower(at(0.3)) + tower(at(0.7)) + `</g>`;
-  }).join('');
+  return geo.bridges.map(({ a, b }) => bridgeGlyph(a, b)).join('');
 }
 
 function mapLabels() {
@@ -407,12 +421,12 @@ function mapLabels() {
     const b = BOROUGHS[k], t = upper(b.name);
     const total = 22 + 9 + width(TYPE.boro, t), left = -total / 2;
     s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`
-      + `<rect x="${f(left)}" y="-17" width="22" height="22" rx="3" fill="${C.gold}" stroke="${C.shadow}" stroke-width="1.2"/>`
-      + `<text x="${f(left + 11)}" y="0.5" font-family="Cinzel" font-weight="700" font-size="16" text-anchor="middle" fill="#1b150e">${b.n}</text>`
-      + text(t, left + 31, 0, TYPE.boro, { fill: C.gold, halo: 3 }) + `</g>`;
+      + `<rect x="${f(left)}" y="-11" width="22" height="22" rx="3" fill="${C.gold}" stroke="${C.shadow}" stroke-width="1.2"/>`
+      + text(String(b.n), left + 11, 0, { family: 'Cinzel', weight: 700, size: 16, spacing: 0 }, { fill: '#1b150e', anchor: 'middle', middle: true })
+      + text(t, left + 31, 0, TYPE.boro, { fill: C.gold, halo: 3, middle: true }) + `</g>`;
   }
-  for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85 });
-  for (const [t, x, y, r] of LAND_LABELS) s += text(t, x, y, TYPE.land, { fill: '#8d826c', anchor: 'middle', rotate: r, opacity: 0.8 });
+  for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85, middle: true });
+  for (const [t, x, y, r] of LAND_LABELS) s += text(t, x, y, TYPE.land, { fill: '#8d826c', anchor: 'middle', rotate: r, opacity: 0.8, middle: true });
   return s;
 }
 
@@ -437,7 +451,7 @@ function heatAndMash() {
       + `<circle cx="${cx}" cy="${cy}" r="16.5" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1"/>`
       + `<text x="${cx}" y="${cy + 7}" font-family="Cinzel" font-weight="700" font-size="20" text-anchor="middle" fill="#1c130b">${i + 1}</text>`;
   }
-  s += text('RAID', x + 224, y + 82, { ...TYPE.setup, size: 8 }, { fill: '#e8735a', anchor: 'middle' });
+  s += text('RAID', x + 224, y + 82, TYPE.small, { fill: '#e8735a', anchor: 'middle' });
   s += `<line x1="${x + 262}" y1="${y + 12}" x2="${x + 262}" y2="${y + h - 12}" stroke="${C.goldLine}" stroke-opacity=".45"/>`;
   s += text('MASH', x + 299, y + 19, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle' });
   s += `<rect x="${x + 278}" y="${y + 30}" width="42" height="42" rx="7" fill="#100b07" stroke="${C.gold}" stroke-width="1.8" stroke-dasharray="4 3"/>`;
@@ -446,7 +460,7 @@ function heatAndMash() {
 
 function key() {
   // The marks as they appear on the map; prices worded as the Town Planner's legend.
-  const x = 24, y = 122, w = 280, h = 136;
+  const x = 24, y = 122, w = 276, h = 142;
   let s = panel(x, y, w, h);
   const rows = [
     ['speak', 'Speakeasy', 'Moonshine $300, Rum $500'],
@@ -455,51 +469,40 @@ function key() {
     ['dock', 'Dock', 'Water Connected to every Dock'],
     ['bridge', 'Bridge', 'Land Connected'],
     ['still', 'Still', 'Pressure: the lit cells'],
+    ['setup', 'Setup', 'Where the pieces start'],
   ];
   rows.forEach(([k, t, sub], i) => {
-    const cy = y + 17 + i * 19.2 + (i > 0 ? 5 : 0), ix = x + 21; // headroom for the crown
-    if (k === 'bridge') {
-      s += `<path d="M${ix - 11} ${cy} H${ix + 11}" stroke="${C.gold}" stroke-width="8"/><path d="M${ix - 11} ${cy} H${ix + 11}" stroke="#20160d" stroke-width="5"/>`
-        + `<rect x="${ix - 5.5}" y="${cy - 6}" width="3" height="12" fill="${C.goldBright}"/><rect x="${ix + 2.5}" y="${cy - 6}" width="3" height="12" fill="${C.goldBright}"/>`;
-    } else if (k === 'still') {
-      s += still(7, ix - 7, cy - 8.5, 17);
-    } else s += roundel(k, ix, cy, 7.5);
-    s += text(upper(t), x + 40, cy + 4, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink });
-    if (sub) s += text(sub, x + 128, cy + 3.6, TYPE.keyText, { fill: C.body });
+    const cy = y + 16 + i * 17.4 + (i > 0 ? 5 : 0), ix = x + 21; // headroom for the crown
+    if (k === 'bridge') s += bridgeGlyph([ix - 10, cy], [ix + 10, cy], 2, 0.6);
+    else if (k === 'still') s += still(7, ix - 7, cy - 8.5, 17);
+    else if (k === 'setup') s += tray(['runner'], ix - trayWidth(['runner']) / 2, cy);
+    else s += roundel(k, ix, cy, 7);
+    s += text(upper(t), x + 40, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
+    if (sub) s += text(sub, x + 124, cy, TYPE.keyText, { fill: C.body, middle: true });
   });
   return s;
 }
 
 function title() {
-  const cx = 108, cy = 322;
-  let s = '';
-  for (let i = 0; i <= 16; i++) { // Deco sunburst behind the moon
-    const a = (-180 + i * (180 / 16)) * Math.PI / 180, long = i % 2 === 0;
-    const r0 = 23, r1 = long ? 50 : 38;
-    s += `<line x1="${f(cx + Math.cos(a) * r0)}" y1="${f(cy + Math.sin(a) * r0)}" x2="${f(cx + Math.cos(a) * r1)}" y2="${f(cy + Math.sin(a) * r1)}" stroke="${long ? C.gold : C.goldDim}" stroke-width="${long ? 2 : 1.2}" stroke-linecap="round"/>`;
-  }
-  s += `<path d="M${cx - 60} ${cy} H${cx + 60}" stroke="${C.gold}" stroke-width="1.2"/>`;
-  s += `<circle cx="${cx}" cy="${cy - 1}" r="19" fill="url(#moon)" stroke="${C.goldBright}" stroke-width="1.2"/>`;
-  s += [[-6, -7, 3.2], [5, 2, 2.4], [-2, 7, 1.8], [7, -8, 1.5]].map(([dx, dy, r]) => `<circle cx="${cx + dx}" cy="${cy - 1 + dy}" r="${r}" fill="#b9ad8a" fill-opacity=".45"/>`).join('');
-  s += text('MOONSHINE', cx, cy + 45, { family: 'Cinzel', weight: 700, size: 25, spacing: 1.2 }, { fill: C.goldBright, anchor: 'middle', halo: 3.4 });
-  s += `<path d="M${cx - 66} ${cy + 57} H${cx - 44} M${cx + 44} ${cy + 57} H${cx + 66}" stroke="${C.gold}" stroke-width="1.2"/>`;
-  s += text('KINGDOM', cx, cy + 62, { family: 'Cinzel', weight: 700, size: 14, spacing: 5 }, { fill: C.goldBright, anchor: 'middle', halo: 3 });
-  s += text('NEW YORK · 1929', cx, cy + 80, { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 4.2 }, { fill: C.muted, anchor: 'middle', halo: 2 });
+  // The map's title block: the city and the year, between Deco rules.
+  const cx = 116, cy = 318;
+  const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
+  const rule = (y, gap) => `<path d="M${f(cx - cityW / 2)} ${y} H${f(cx - gap)} M${f(cx + gap)} ${y} H${f(cx + cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
+  const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
+  let s = rule(cy - 27, 9) + diamond(cx, cy - 27, 3.6);
+  s += text('NEW YORK', cx + 2.2, cy - 5, TYPE.titleCity, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true });
+  s += rule(cy + 20, yearW / 2 + 10);
+  s += text('1929', cx + 4, cy + 20, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
   return s;
 }
 
-function compass() {
-  const cx = 72, cy = 512, r = 26;
-  let s = `<circle cx="${cx}" cy="${cy}" r="${r - 8}" fill="none" stroke="${C.goldDim}" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="${r + 3}" fill="none" stroke="${C.goldDim}" stroke-opacity=".5" stroke-width=".8"/>`;
-  for (let i = 0; i < 8; i++) {
-    const a = i * Math.PI / 4 - Math.PI / 2, main = i % 2 === 0, L = main ? r : r * 0.58, wv = main ? 4.8 : 3.4;
-    const tip = [cx + Math.cos(a) * L, cy + Math.sin(a) * L];
-    const l = [cx + Math.cos(a - Math.PI / 2) * wv, cy + Math.sin(a - Math.PI / 2) * wv];
-    const rr = [cx + Math.cos(a + Math.PI / 2) * wv, cy + Math.sin(a + Math.PI / 2) * wv];
-    s += `<path d="M${f(tip[0])} ${f(tip[1])} L${f(l[0])} ${f(l[1])} L${cx} ${cy} Z" fill="${main ? C.gold : C.goldDim}"/>`
-      + `<path d="M${f(tip[0])} ${f(tip[1])} L${f(rr[0])} ${f(rr[1])} L${cx} ${cy} Z" fill="${main ? C.goldDeep : '#5e4c20'}"/>`;
-  }
-  return s + text('N', cx, cy - r - 6, { family: 'Cinzel', weight: 700, size: 10, spacing: 0 }, { fill: C.gold, anchor: 'middle', halo: 2 });
+function northArrow() {
+  // A drawn north line: hairline, arrowhead and N, nothing more.
+  const x = 116, top = 372, foot = 428;
+  return `<path d="M${x} ${foot} V${top + 9}" stroke="${C.goldDim}" stroke-width="1.1"/>`
+    + `<path d="M${x} ${top} L${x + 4.2} ${top + 12} L${x} ${top + 9} L${x - 4.2} ${top + 12} Z" fill="${C.goldDim}"/>`
+    + `<path d="M${x - 3.5} ${foot} H${x + 3.5}" stroke="${C.goldDim}" stroke-width="1.1"/>`
+    + text('N', x, top - 9, { family: 'Cinzel', weight: 700, size: 11, spacing: 0 }, { fill: C.goldDim, anchor: 'middle', middle: true });
 }
 
 function frame() {
@@ -523,6 +526,7 @@ function defs(fontCss) {
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
+  s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   // Paper grain, soft-light blended onto the map; neutral grey sits at 0.5.
   s += `<filter id="grain" x="0" y="0" width="1080" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">`
     + `<feTurbulence type="fractalNoise" baseFrequency=".032" numOctaves="4" seed="11" result="noise"/>`
@@ -539,9 +543,10 @@ function allText() {
   for (const d of DISTRICTS) {
     (d.lines || [d.name]).forEach(n => add(TYPE.name, upper(n)));
     if (d.venue) add(TYPE.venue, d.venue);
-    if (d.setup) add(TYPE.setup, SETUP[d.setup].text);
   }
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
+  add(TYPE.titleCity, 'NEW YORK');
+  add(TYPE.titleYear, '1929');
   return items;
 }
 
@@ -560,7 +565,7 @@ function buildSvg(fontCss) {
     + defs(fontCss)
     + `<g id="map" filter="url(#grain)">${art}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
-    + `<g id="panels">${heatAndMash()}${key()}${title()}${compass()}</g>`
+    + `<g id="panels">${heatAndMash()}${key()}${title()}${northArrow()}</g>`
     + `<g id="frame">${frame()}</g>`
     + `</svg>\n`;
 }
