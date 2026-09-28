@@ -53,18 +53,19 @@ so the SVG renders the same anywhere; the build itself needs the network.
 - **Muted Borough tones.** Mob colours aren't set and the Squads are blue, so the land stays
   quiet. Brooklyn moved from red to bronze to part it from Manhattan.
 - **High Society Venues:** the martini (`Art/Icons/Gin.svg`) under a crown, plus a gold
-  sunburst and inner keyline. Speakeasies keep the tumbler, one colour for all.
+  sunburst from the crown. The inner gold keyline they once had is gone (Nick). Speakeasies
+  keep the tumbler, one colour for all.
 - **No setup marks on the board** (Nick, 2026-09-28): he wants to playtest other setups
   without the print committing to one. `SHOW_SETUP = true` brings them back: ghosted pieces in
   a dashed tray, no words (Home Turf: Safehouse, Boss, 2 Runners; 3 Runners; a Squad shield,
   kept quiet so a crown room never read as always policed), plus the key's Setup row. The
   roster keeps each District's Town Planner mark either way.
-- **Each District type is tooled** (`TOOLING`): a faint pattern pressed into the leather,
-  dark groove and a catch of light. Docks get harbour waves, Wards running-bond brick,
-  Speakeasies Deco fish scales; High Society keeps its sunburst instead. The Borough colour is
-  untouched, since Raids and Squads work by Borough, so the pattern is only a second cue for
-  type. Groove depth is set per build in `LEATHER` (lighter in print, where it is seen up close;
-  at print scale the first, denser brick read as a wall).
+- **Each District type shifts its Borough's colour a touch** (`TONE`, `TINT`): Speakeasies
+  and High Society warmer, Docks cooler, Wards the Borough's own colour. The Borough must still
+  read first (Raids and Squads work by Borough), so the shift is 13%, and "cool" is a slate,
+  not a blue: blue turned Manhattan's red Docks plum, a step towards Queens. Tried first and
+  rejected (Nick, 2026-09-28): a tooled pattern per type (waves, brick, fish scales); he
+  prefers the Districts flat.
 - **Zone roundels are 28 units across** (`R = 14`, about 16 mm at 24in), big enough to read
   a District's type at a glance beside its Still.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest

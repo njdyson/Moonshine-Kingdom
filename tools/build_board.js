@@ -50,6 +50,13 @@ const BOROUGHS = {
   BK: { n: 4, name: 'Brooklyn', fill: ['#5a4630', '#3d2f1f'] },
   SI: { n: 5, name: 'Staten Island', fill: ['#3b3935', '#282623'] },
 };
+// District types shift their Borough's colour a touch, so the Borough still reads
+// first (Raids and Squads work by Borough): Speakeasies and High Society warmer,
+// like lamplight; Docks cooler, like the water; Wards the Borough's own colour.
+const TONE = { speak: 'warm', hs: 'warm', dock: 'cool' };
+const TINT = { warm: '#7a4e22', cool: '#2c5058' }, TINT_AMOUNT = 0.13; // slate, not blue: blue turns red to plum
+const mix = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
+const fillId = d => `fill-${d.boro}${TONE[d.zone] ? '-' + TONE[d.zone] : ''}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column. lines: a hand break for long names.
@@ -384,25 +391,6 @@ function placeAll() {
 }
 
 // ---------------------------------------------------------------- map layers
-function inset(p, dist) {
-  // Offset a simple polygon inward by dist (miter joins); short edges dropped first.
-  const q = p.filter((a, i) => Math.hypot(a[0] - p[(i + 1) % p.length][0], a[1] - p[(i + 1) % p.length][1]) > 6);
-  const area = q.reduce((s, a, i) => s + a[0] * q[(i + 1) % q.length][1] - q[(i + 1) % q.length][0] * a[1], 0);
-  const sgn = area > 0 ? 1 : -1;
-  const lines = q.map((a, i) => {
-    const b = q[(i + 1) % q.length], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy);
-    const nx = -dy / L * sgn, ny = dx / L * sgn;
-    return [[a[0] + nx * dist, a[1] + ny * dist], [b[0] + nx * dist, b[1] + ny * dist]];
-  });
-  return lines.map((l, i) => {
-    const [[x1, y1], [x2, y2]] = lines[(i - 1 + lines.length) % lines.length], [[x3, y3], [x4, y4]] = l;
-    const den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-    if (Math.abs(den) < 1e-9) return l[0];
-    const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
-    return [x1 + t * (x2 - x1), y1 + t * (y2 - y1)];
-  });
-}
-
 function waterLining() {
   // Engraved coast rings: alternate gold and sea strokes, widest first, under the land.
   const land = [...DISTRICTS.map(d => geo.regions[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
@@ -417,10 +405,9 @@ function districtFills(placed) {
   for (const d of DISTRICTS) {
     const p = geo.regions[d.id];
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
-    s += `<path d="${poly(p)}" fill="url(#fill-${d.boro})"/>`;
-    if (TOOLING[d.zone]) s += `<path d="${poly(p)}" fill="url(#tool-${d.zone})"/>`;
+    s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     if (d.zone === 'hs') {
-      // High Society: a gold sunburst from the crown, and a keyline inside the border.
+      // High Society: a gold sunburst from the crown.
       const [cx, cy] = placed[d.id].c.roundelAt(placed[d.id].x, placed[d.id].y);
       let rays = '';
       for (let a = 0; a < 360; a += 7.5) {
@@ -429,7 +416,6 @@ function districtFills(placed) {
       }
       s += `<g clip-path="url(#clip-${d.id})"><path d="${rays}" stroke="${C.goldBright}" stroke-opacity=".1" stroke-width="2.2"/>`
         + `<circle cx="${f(cx)}" cy="${f(cy)}" r="120" fill="url(#glow)"/></g>`;
-      s += `<path d="${poly(inset(p, 5.5))}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="1.1"/>`;
     }
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/></g>`;
   }
@@ -628,36 +614,20 @@ function frame() {
 function defs(fontCss, mode) {
   let s = `<style>${fontCss}</style>`;
   for (const [k, b] of Object.entries(BOROUGHS))
-    s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${b.fill[0]}"/><stop offset="1" stop-color="${b.fill[1]}"/></radialGradient>`;
+    for (const tone of ['', 'warm', 'cool']) {
+      const [c0, c1] = b.fill.map(c => (tone ? mix(c, TINT[tone], TINT_AMOUNT) : c));
+      s += `<radialGradient id="fill-${k}${tone ? '-' + tone : ''}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${c0}"/><stop offset="1" stop-color="${c1}"/></radialGradient>`;
+    }
   s += `<radialGradient id="glow"><stop offset="0" stop-color="${C.goldBright}" stop-opacity=".16"/><stop offset="1" stop-color="${C.goldBright}" stop-opacity="0"/></radialGradient>`;
   s += `<radialGradient id="moon" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbf4dc"/><stop offset=".7" stop-color="#ddd3b2"/><stop offset="1" stop-color="#a99c78"/></radialGradient>`;
   s += `<radialGradient id="socket"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="#000"/></radialGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
-  for (const [zone, t] of Object.entries(TOOLING)) s += tooling(zone, t, LEATHER[mode].tooling);
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   s += leatherFilter('leather', LEATHER[mode].board) + leatherFilter('leatherFine', LEATHER[mode].fine);
   return `<defs>${s}</defs>`;
-}
-
-// ---------------------------------------------------------------- tooling
-// Each District type carries a faint pattern pressed into the leather, like blind
-// tooling: a dark groove with a catch of light below it. The Borough colour stays
-// untouched (Raids and Squads work by Borough); the pattern is a second, quieter
-// cue for the type. High Society needs none: it has its sunburst.
-// [tile width, tile height, groove path]; units, so about 10 mm tiles at 24in.
-const TOOLING = {
-  dock: [18, 9, 'M0 4.5 C3 2 6 2 9 4.5 S15 7 18 4.5'], // harbour waves
-  ward: [24, 12, 'M0 .5 H24 M0 6.5 H24 M6 .5 V6.5 M18 6.5 V12.5'], // running-bond brick
-  speak: [16, 8, 'M0 8 A8 8 0 0 1 16 8 M-8 0 A8 8 0 0 1 8 0 M8 0 A8 8 0 0 1 24 0'], // Deco fish scales
-};
-// depth: groove opacity, set per build in LEATHER (lighter in print, which is seen up close).
-function tooling(zone, [w, h, d], depth) {
-  return `<pattern id="tool-${zone}" width="${w}" height="${h}" patternUnits="userSpaceOnUse">`
-    + `<path d="${d}" fill="none" stroke="#f3dc95" stroke-opacity="${f(depth * 0.3, 3)}" stroke-width=".7" transform="translate(.5 .7)"/>`
-    + `<path d="${d}" fill="none" stroke="#000" stroke-opacity="${depth}" stroke-width=".9"/></pattern>`;
 }
 
 // ---------------------------------------------------------------- leather
@@ -670,12 +640,10 @@ function tooling(zone, [w, h, d], depth) {
 // flatter skin stitched on like a patch. The screen presets drop the pebbles.
 const LEATHER = {
   print: {
-    tooling: 0.17,
     board: { creases: [[0.1, 4], [0.13, 17], [0.17, 29]], blur: 0.45, pebble: 0.6, wrinkle: [0.016, 0.6], relief: 1.7, depth: 0.6, sheen: 0.15, dye: 0.3 },
     fine: { creases: [[0.3, 5], [0.38, 18], [0.48, 30]], blur: 0.22, pebble: 0.7, wrinkle: [0.03, 0.2], relief: 0.9, depth: 0.4, sheen: 0.08, dye: 0.12 },
   },
   screen: {
-    tooling: 0.26,
     board: { creases: [], wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
     fine: { creases: [], wrinkle: [0.03, 1], relief: 0.8, depth: 0.2, sheen: 0, dye: 0.08 },
   },
