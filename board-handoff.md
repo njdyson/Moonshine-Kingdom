@@ -74,12 +74,14 @@ so the SVG renders the same anywhere; the build itself needs the network.
   RAID on the 5th. Nick asked for subtle escalation or none: `HEAT_NUM` and `HEAT_TINT` hold it,
   and setting both flat gives the Ledger's plain look.
 - **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
-- **Title is NEW YORK 1929 with a drawn north line.** No logo, no compass (Nick's call).
+- **Title is NEW YORK 1929, nothing more.** No logo, no compass, and since 2026-09-28 no north
+  line either (Nick found it too prominent).
 - **Leather, generated, not an image.** `leatherFilter()` builds a pebble grain from crease
   patterns multiplied (one alone draws worm-like squiggles at print scale), over soft wrinkles,
-  with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm); the panels (Heat
-  corner, key, Mash) are a **finer, flatter skin**, stitched on like patches. Saddle stitching
-  runs round the board edge and inside each panel. The **screen** build drops the pebbles and
+  with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm); the Heat corner is a
+  **finer, flatter skin**, stitched in. The key and Mash panels are flat (a gilt edge and a
+  hairline, no stitching or leather: Nick, 2026-09-28). Saddle stitching runs round the board
+  edge and inside the Heat corner. The **screen** build drops the pebbles and
   keeps only soft wrinkles and dye, because at screen size the grain turns to noise (Nick asked
   for it). Presets live in `LEATHER`. It prints crisp at any size and needs no licence; a CC0
   scan (ambientCG, Poly Haven) could be tiled in if it ever needs to be photographic. Judge the

@@ -481,12 +481,13 @@ function mapLabels() {
 const stitch = d => `<path d="${d}" fill="none" stroke="#000" stroke-opacity=".45" stroke-width="1.3" stroke-dasharray="5 3" stroke-linecap="round" transform="translate(.5 .7)"/>`
   + `<path d="${d}" fill="none" stroke="#d9c69c" stroke-opacity=".6" stroke-width="1.1" stroke-dasharray="5 3" stroke-linecap="round"/>`;
 
-// A panel's leather ground: gilt edge, stitched inside it. Its contents are drawn
-// separately, above the texture, so the type stays crisp.
+// The key and Mash panels: flat, a gilt edge with a hairline inside it (Nick
+// preferred them without stitching or leather).
 function panel(x, y, w, h) {
   const c = 7; // Deco chamfer
   const outline = i => `M${x + c + i} ${y + i} H${x + w - c - i} L${x + w - i} ${y + c + i} V${y + h - c - i} L${x + w - c - i} ${y + h - i} H${x + c + i} L${x + i} ${y + h - c - i} V${y + c + i} Z`;
-  return `<path d="${outline(0)}" fill="url(#panel)" stroke="${C.goldLine}" stroke-width="1.8"/>` + stitch(outline(4.5));
+  return `<path d="${outline(0)}" fill="url(#panel)" stroke="${C.goldLine}" stroke-width="1.8"/>`
+    + `<path d="${outline(4)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".35" stroke-width=".8"/>`;
 }
 
 // Heat Track: five poker-chip sockets, the Ledger's own size (39 mm sockets 2 mm
@@ -526,8 +527,7 @@ function heatTrack() {
 function mash(x, y) {
   const side = 24 * MM, w = side + 28, h = side + 32;
   return {
-    bg: panel(x, y, w, h),
-    fg: text('MASH', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true })
+    fg: panel(x, y, w, h) + text('MASH', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true })
       + `<rect x="${f(x + 14)}" y="${f(y + 24)}" width="${f(side)}" height="${f(side)}" rx="6" fill="#100b07" stroke="${C.gold}" stroke-width="1.6" stroke-dasharray="4 3"/>`,
   };
 }
@@ -547,7 +547,7 @@ function key(x, y) {
   const headW = Math.max(...rows.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const subX = 28 + headW + 9, subW = Math.max(...rows.map(([, , t]) => (t ? width(TYPE.keyText, t) : 0)));
   const w = subX + subW + 11, h = 13 + (rows.length - 1) * 14 + 4 + 13;
-  let s = '';
+  let s = panel(x, y, w, h);
   rows.forEach(([k, t, sub], i) => {
     const cy = y + 13 + i * 14 + (i > 0 ? 4 : 0), ix = x + 15; // headroom for the crown
     if (k === 'bridge') s += bridgeGlyph([ix - 7, cy], [ix + 7, cy], 1.5, 0.45);
@@ -557,12 +557,12 @@ function key(x, y) {
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     if (sub) s += text(sub, x + subX, cy, TYPE.keyText, { fill: C.body, middle: true });
   });
-  return { bg: panel(x, y, w, h), fg: s, w, h };
+  return { fg: s, w, h };
 }
 
 function sidePanels() {
   const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y), heat = heatTrack(), m = mash(HEAT.tx + k.w + 10, y);
-  return { bg: heat.bg + k.bg + m.bg, fg: heat.fg + k.fg + m.fg };
+  return { bg: heat.bg, fg: heat.fg + k.fg + m.fg };
 }
 
 // The seam round the board, between the gilt edge and the hairline, stepping in
@@ -583,15 +583,6 @@ function title() {
   s += rule(cy + 20, yearW / 2 + 10);
   s += text('1929', cx + 4, cy + 20, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
   return s;
-}
-
-function northArrow() {
-  // A drawn north line: hairline, arrowhead and N, nothing more.
-  const x = 116, top = 362, foot = 414;
-  return `<path d="M${x} ${foot} V${top + 9}" stroke="${C.goldDim}" stroke-width="1.1"/>`
-    + `<path d="M${x} ${top} L${x + 4.2} ${top + 12} L${x} ${top + 9} L${x - 4.2} ${top + 12} Z" fill="${C.goldDim}"/>`
-    + `<path d="M${x - 3.5} ${foot} H${x + 3.5}" stroke="${C.goldDim}" stroke-width="1.1"/>`
-    + text('N', x, top - 9, { family: 'Cinzel', weight: 700, size: 11, spacing: 0 }, { fill: C.goldDim, anchor: 'middle', middle: true });
 }
 
 function frame() {
@@ -636,8 +627,8 @@ function defs(fontCss, mode) {
 // pattern alone draws worm-like squiggles at print scale); blurred to round the
 // pebbles, over soft wrinkles. It is lit for shading, soft-light blended onto the
 // art, given a sheen on the raised grain, then mottled like uneven dye.
-// board: the hide, pebbles 2 to 3 mm across at 24in. fine: the panels, a finer,
-// flatter skin stitched on like a patch. The screen presets drop the pebbles.
+// board: the hide, pebbles 2 to 3 mm across at 24in. fine: the Heat corner, a
+// finer, flatter skin stitched in. The screen presets drop the pebbles.
 const LEATHER = {
   print: {
     board: { creases: [[0.1, 4], [0.13, 17], [0.17, 29]], blur: 0.45, pebble: 0.6, wrinkle: [0.016, 0.6], relief: 1.7, depth: 0.6, sheen: 0.15, dye: 0.3 },
@@ -707,7 +698,7 @@ function buildSvg(fontCss, mode, placed) {
     + `<g id="map" filter="url(#leather)">${art}${seams()}</g>`
     + `<g id="panel-grounds" filter="url(#leatherFine)">${side.bg}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
-    + `<g id="panels">${side.fg}${title()}${northArrow()}</g>`
+    + `<g id="panels">${side.fg}${title()}</g>`
     + `<g id="frame">${frame()}</g>`
     + `</svg>\n`;
 }
