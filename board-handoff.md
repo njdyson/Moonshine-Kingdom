@@ -29,6 +29,9 @@ so the SVG renders the same anywhere; the build itself needs the network.
   `Board v0.9 (print preview).jpg`, and `Board v0.9 (screen).svg` with `Board v0.9 (screen).jpg`
   (the same board with a flat texture, for the website and mk-online). The two builds differ
   only in the `LEATHER` preset.
+- `Art/Index/board.jpg`: the index page's tile ("The City Map", first under Components), an
+  800 x 450 crop of the screen board (`TILE_CROP`), rebuilt with the board. The tile opens
+  `Board v0.9 (screen).jpg`.
 
 ## Physical spec
 

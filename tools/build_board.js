@@ -2,7 +2,8 @@
 // Builds the game board as a vector SVG from Art/Board/board-geometry.json and
 // the District Roster below, then renders it through Playwright's Chromium.
 //
-//   node tools/build_board.js           print and screen SVGs, 2160px previews of each
+//   node tools/build_board.js           print and screen SVGs, 2160px previews of each, and
+//                                       the index page's tile (Art/Index/board.jpg)
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor (not committed): a 24in PDF at 300dpi, the
 //                                       7200px PNG it is made from, and a 4320px screen JPEG
@@ -35,7 +36,11 @@ const OUT = {
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
   printPng: path.join(DIR, 'Board v0.9 (print).png'), printPdf: path.join(DIR, 'Board v0.9 (print).pdf'),
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
+  indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
 };
+// The index tile: 800 x 450 like its neighbours, cropped on the East River's bridges
+// and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
+const TILE_CROP = [304, 374, 672]; // 672 x 378 scales to exactly 800 x 450
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const BOARD_PX = BOARD_IN * 300; // print render: 300dpi
@@ -857,6 +862,16 @@ async function render(browser, outputs) {
   }
 }
 
+async function indexTile(browser, svg) {
+  const [x, y, w] = TILE_CROP;
+  const page = await browser.newPage({ viewport: { width: 1080, height: 1080 }, deviceScaleFactor: 800 / w });
+  await page.setContent(`<!doctype html><html><body style="margin:0;background:#000">${svg}</body></html>`);
+  await page.evaluate(async () => { await document.fonts.ready; });
+  await page.screenshot({ path: OUT.indexTile, clip: { x, y, width: w, height: w * 9 / 16 }, quality: 85, timeout: 0 });
+  await page.close();
+  console.log('wrote', path.relative(ROOT, OUT.indexTile));
+}
+
 // The print PDF: one 24in page holding the 300dpi render as a JPEG. Printing the SVG
 // straight to PDF would rasterise its filters at the browser's own, lower resolution.
 async function printPdf(browser, svg) {
@@ -893,6 +908,7 @@ async function printPdf(browser, svg) {
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
+  await indexTile(browser, screen);
   if (full) await printPdf(browser, print);
   await browser.close();
 })();
