@@ -61,6 +61,10 @@ const TILE_CROP = [304, 374, 672]; // 672 x 378 scales to exactly 800 x 450
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const BOARD_PX = BOARD_IN * 300; // print render: 300dpi
+// Bleed: the print master, its PNG and its PDF carry the frame's black this far past the
+// trim on every side, for the printer's cut (6 units, 3.4 mm; a printer's own template
+// wins). 0 to 1080 stays the 24in trim; the screen build and the previews stop at it.
+const BLEED = 6;
 
 // ---------------------------------------------------------------- palette
 // Muted land so every mob colour, and the blue Squads, stand out on it.
@@ -704,7 +708,7 @@ const FRAME_OUT = 7, FRAME_IN = 13;
 const HEAT = (() => {
   const d = 39 * MM, gap = 2 * MM, padX = 6 * MM, padY = 4 * MM, m = 7;
   const trayW = 5 * d + 4 * gap + 2 * padX, trayH = d + 2 * padY;
-  const tx = FRAME_IN + m, ty = FRAME_IN + 10; // the title rides on the frame (heatPlate), not above the tray
+  const tx = FRAME_IN + m, ty = FRAME_IN + 11; // the title rides on the frame (heatPlate), not above the tray
   const inner = [tx + trayW + m, ty + trayH + m]; // the corner's inner hairline
   return { d, gap, padX, trayW, trayH, tx, ty, edge: [inner[0] + 6, inner[1] + 6] };
 })();
@@ -761,7 +765,8 @@ function heatTrack() {
 // The Heat Track's name on a gilt plate set into the board's top edge, letters cut in:
 // a Deco cartouche breaking the border. Drawn over the frame.
 function heatPlate(mid) {
-  const w = width(TYPE.panelHead, 'HEAT') + 30, h = 14, x = mid - w / 2, y = (FRAME_OUT + FRAME_IN) / 2 - h / 2, c = 4;
+  // it hangs from the gold edge's centre line, so nothing but the black band lies nearer the cut
+  const w = width(TYPE.panelHead, 'HEAT') + 30, h = 12.5, x = mid - w / 2, y = FRAME_OUT, c = 4;
   const outline = i => `M${f(x + c + i)} ${f(y + i)} H${f(x + w - c - i)} L${f(x + w - i)} ${f(y + c + i)} V${f(y + h - c - i)} L${f(x + w - c - i)} ${f(y + h - i)} H${f(x + c + i)} L${f(x + i)} ${f(y + h - c - i)} V${f(y + c + i)} Z`;
   const ty = y + h / 2, spec = { ...TYPE.panelHead, size: 10.5 };
   return `<path d="${outline(0)}" fill="#000" fill-opacity=".55" transform="translate(.8 1.4)" filter="url(#blur2)"/>`
@@ -976,10 +981,11 @@ function buildSvg(fontCss, mode, placed) {
     + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
     + districtFills(placed) + borders() + piers() + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
-  const side = sidePanels();
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">`
+  const side = sidePanels(), b = mode === 'print' ? BLEED : 0, S = 1080 + 2 * b;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-b} ${-b} ${S} ${S}" width="${S}" height="${S}">`
     + `<title>Moonshine Kingdom: the City Map</title>`
     + defs(fontCss, mode)
+    + (b ? `<rect x="${-b}" y="${-b}" width="${S}" height="${S}" fill="#0b0907"/>` : '')
     + `<g id="map" filter="url(#leather)">${art}${seams()}</g>`
     + `<g id="panel-grounds" filter="url(#leatherFine)">${side.bg}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
@@ -1030,13 +1036,16 @@ async function measure(browser, fontCss, items) {
   return new Map(items.map((i, k) => [wkey(i, i.text), widths[k]]));
 }
 
+// Each output: [file, scale, svg, quality, trim]. trim cuts a print SVG's bleed off,
+// for the preview; otherwise the whole SVG is rendered, bleed and all.
 async function render(browser, outputs) {
-  for (const [file, scale, svg, quality = 90] of outputs) {
-    const page = await browser.newPage({ viewport: { width: 1080, height: 1080 }, deviceScaleFactor: scale });
+  for (const [file, scale, svg, quality = 90, trim = false] of outputs) {
+    const size = +svg.match(/<svg[^>]* width="([\d.]+)"/)[1], b = trim ? (size - 1080) / 2 : 0;
+    const page = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: scale });
     await page.setContent(`<!doctype html><html><body style="margin:0;background:#000">${svg}</body></html>`);
     await page.evaluate(async () => { await document.fonts.ready; });
     // the 300dpi render outlasts the default 30s screenshot timeout, so give it no limit
-    await page.screenshot({ path: file, clip: { x: 0, y: 0, width: 1080, height: 1080 }, timeout: 0, ...(file.endsWith('.jpg') ? { quality } : {}) });
+    await page.screenshot({ path: file, clip: { x: b, y: b, width: size - 2 * b, height: size - 2 * b }, timeout: 0, ...(file.endsWith('.jpg') ? { quality } : {}) });
     await page.close();
     if (!file.startsWith(os.tmpdir())) console.log('wrote', path.relative(ROOT, file));
   }
@@ -1058,11 +1067,12 @@ async function printPdf(browser, svg) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'board-'));
   const jpg = path.join(tmp, 'board.jpg'), html = path.join(tmp, 'board.html');
   await render(browser, [[jpg, BOARD_PX / 1080, svg, 92]]);
-  fs.writeFileSync(html, `<!doctype html><html><head><style>@page{size:${BOARD_IN}in ${BOARD_IN}in;margin:0}html,body{margin:0}img{display:block;width:${BOARD_IN}in;height:${BOARD_IN}in}</style></head><body><img src="board.jpg"></body></html>`);
+  const inch = BOARD_IN * (1080 + 2 * BLEED) / 1080; // the page includes the bleed
+  fs.writeFileSync(html, `<!doctype html><html><head><style>@page{size:${inch}in ${inch}in;margin:0}html,body{margin:0}img{display:block;width:${inch}in;height:${inch}in}</style></head><body><img src="board.jpg"></body></html>`);
   const page = await browser.newPage();
   await page.goto('file://' + html);
   await page.evaluate(() => document.images[0].decode());
-  await page.pdf({ path: OUT.printPdf, width: `${BOARD_IN}in`, height: `${BOARD_IN}in`, printBackground: true, pageRanges: '1' });
+  await page.pdf({ path: OUT.printPdf, width: `${inch}in`, height: `${inch}in`, printBackground: true, pageRanges: '1' });
   await page.close();
   fs.rmSync(tmp, { recursive: true, force: true });
   console.log('wrote', path.relative(ROOT, OUT.printPdf));
@@ -1085,7 +1095,7 @@ async function printPdf(browser, svg) {
     fs.writeFileSync(file, svg);
     console.log('wrote', path.relative(ROOT, file));
   }
-  const outputs = [[OUT.screenJpg, 2, screen], [OUT.printJpg, 2, print]];
+  const outputs = [[OUT.screenJpg, 2, screen], [OUT.printJpg, 2, print, 90, true]];
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);

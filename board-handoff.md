@@ -122,6 +122,14 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
 
 - The board prints **24 inches square**: 1080 units across, so 1 unit is 0.564 mm. Physical
   sizes go through the `MM` constant.
+- **Bleed** (since 2026-09-29): the print master SVG, its 300dpi PNG and the PDF carry the
+  frame's black **6 units (3.4 mm) past the trim** on every side (`BLEED`): the PNG is 7280 px
+  and the PDF page 616.6 mm square, for a 609.6 mm board. Coordinates are unchanged (0 to 1080
+  is the trim); the screen build and both previews stop at the trim. 3 mm is the usual minimum
+  for flat printing; a wrapped board (a printed sheet folded over greyboard) needs a wrap
+  margin set by the manufacturer's own template, which wins over this. **Safe margin:**
+  nothing but the black band sits outside the gold edge's centre line, 7 units (3.9 mm) in.
+  If a manufacturer wants more, the frame (`FRAME_OUT`, `FRAME_IN`) moves in, not the art.
 - **Heat Track sockets are the Ledger's**: 39 mm casino chips, 2 mm apart, in a tray padded
   6 mm (`css/ledger-board.css`, the poker-chip build). If the Ledger's socket changes,
   `heatTrack()` changes with it. Five sockets need 381 units, a little more than the New Jersey
@@ -201,10 +209,11 @@ keeps them on a re-trace.
   gold bezel round each socket, a lacquer floor with a fine guilloché sunburst and a track
   ring like a watch dial, a shadow under the bezel's upper edge so the floor reads as
   recessed, numerals engraved in graded gold over a drop shadow, diamonds in the spandrels
-  between sockets, and a routed tray with a gilt lip. **HEAT is cut into a gilt plate set in
-  the board's top border** (`heatPlate()`), a Deco cartouche drawn over the frame, not a line
-  above the tray: that band went, and the Heat corner is 14 units shorter, pulling its corner
-  back from Manhattan's tip (Nick: it sat too close). Escalation
+  between sockets, and a routed tray with a gilt lip. **HEAT is cut into a gilt plate hanging
+  from the board's gold edge** (`heatPlate()`), a Deco cartouche drawn over the frame, not a
+  line above the tray: that band went, and the Heat corner is 13 units shorter, pulling its
+  corner back from Manhattan's tip (Nick: it sat too close). The plate starts at the gold
+  edge's centre line, inside the safe margin (see Bleed). Escalation
   stays subtle, as Nick asked: the floors warm a touch towards rust (`HEAT_TINT`), and only the
   5th, the Raid, changes metal, to rose-copper on an oxblood floor (`GILT`, `COPPER`).
 - **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
