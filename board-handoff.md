@@ -201,7 +201,10 @@ keeps them on a re-trace.
   gold bezel round each socket, a lacquer floor with a fine guilloché sunburst and a track
   ring like a watch dial, a shadow under the bezel's upper edge so the floor reads as
   recessed, numerals engraved in graded gold over a drop shadow, diamonds in the spandrels
-  between sockets, a routed tray with a gilt lip, and HEAT between Deco rules. Escalation
+  between sockets, and a routed tray with a gilt lip. **HEAT is cut into a gilt plate set in
+  the board's top border** (`heatPlate()`), a Deco cartouche drawn over the frame, not a line
+  above the tray: that band went, and the Heat corner is 14 units shorter, pulling its corner
+  back from Manhattan's tip (Nick: it sat too close). Escalation
   stays subtle, as Nick asked: the floors warm a touch towards rust (`HEAT_TINT`), and only the
   5th, the Raid, changes metal, to rose-copper on an oxblood floor (`GILT`, `COPPER`).
 - **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
@@ -210,8 +213,13 @@ keeps them on a re-trace.
 - **Leather, generated, not an image.** `leatherFilter()` builds a pebble grain from crease
   patterns multiplied (one alone draws worm-like squiggles at print scale), over soft wrinkles,
   with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm); the Heat corner is a
-  **finer, flatter skin**, stitched in. The key and Mash panels are flat (a gilt edge and a
-  hairline, no stitching or leather: Nick, 2026-09-28). Saddle stitching runs round the board
+  **finer, flatter skin**, stitched in. The key and Mash panels carry no stitching or leather
+  (Nick, 2026-09-28); since 2026-09-29 they are **lacquered plaques** to match the Heat Track:
+  a polished gilt edge with a dark seat inside it, a hairline, a small diamond on each Deco
+  chamfer, and a soft shadow lifting them off the hide. The Mash square is a recessed socket
+  in the Heat Track's lacquer and gilt, with MASH engraved above it, centred in a panel as
+  tall as the key. **The key's rows share one pitch** (16.5 units): the High Society crown
+  used to add a gap under the first row. Saddle stitching runs round the board
   edge and inside the Heat corner. The **screen** build drops the pebbles and
   keeps only soft wrinkles and dye, because at screen size the grain turns to noise (Nick asked
   for it). Presets live in `LEATHER`. It prints crisp at any size and needs no licence; a CC0

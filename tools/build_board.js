@@ -676,14 +676,23 @@ function mapLabels() {
 const stitch = d => `<path d="${d}" fill="none" stroke="#000" stroke-opacity=".45" stroke-width="1.3" stroke-dasharray="5 3" stroke-linecap="round" transform="translate(.5 .7)"/>`
   + `<path d="${d}" fill="none" stroke="#d9c69c" stroke-opacity=".6" stroke-width="1.1" stroke-dasharray="5 3" stroke-linecap="round"/>`;
 
-// The key and Mash panels: flat, a gilt edge with a hairline inside it (Nick
-// preferred them without stitching or leather).
+// The key and Mash panels: lacquered plaques to match the Heat Track (no stitching or
+// leather, as Nick preferred): a polished gilt edge with a dark seat inside it, a
+// hairline, a jewel on each Deco chamfer, and a soft shadow lifting them off the hide.
 function panel(x, y, w, h) {
   const c = 7; // Deco chamfer
-  const outline = i => `M${x + c + i} ${y + i} H${x + w - c - i} L${x + w - i} ${y + c + i} V${y + h - c - i} L${x + w - c - i} ${y + h - i} H${x + c + i} L${x + i} ${y + h - c - i} V${y + c + i} Z`;
-  return `<path d="${outline(0)}" fill="url(#panel)" stroke="${C.goldLine}" stroke-width="1.8"/>`
-    + `<path d="${outline(4)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".35" stroke-width=".8"/>`;
+  const outline = i => `M${f(x + c + i)} ${f(y + i)} H${f(x + w - c - i)} L${f(x + w - i)} ${f(y + c + i)} V${f(y + h - c - i)} L${f(x + w - c - i)} ${f(y + h - i)} H${f(x + c + i)} L${f(x + i)} ${f(y + h - c - i)} V${f(y + c + i)} Z`;
+  const jewels = [[x + c / 2, y + c / 2], [x + w - c / 2, y + c / 2], [x + w - c / 2, y + h - c / 2], [x + c / 2, y + h - c / 2]];
+  return `<path d="${outline(0)}" fill="#000" fill-opacity=".55" transform="translate(1.6 2.6)" filter="url(#blur2)"/>`
+    + `<path d="${outline(0)}" fill="url(#lacquer)"/>`
+    + `<path d="${outline(1.1)}" fill="none" stroke="url(#bezelGilt)" stroke-width="2.2"/>`
+    + `<path d="${outline(2.5)}" fill="none" stroke="#000" stroke-opacity=".6" stroke-width=".6"/>`
+    + `<path d="${outline(4.6)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".4" stroke-width=".7"/>`
+    + jewels.map(q => diamondAt(q, 1.7, C.goldBright)).join('');
 }
+// Engraved gilt lettering: the metal over a drop shadow.
+const gilt = (t, x, y, spec) => text(t, x + 0.6, y + 0.9, spec, { fill: '#000', anchor: 'middle', opacity: 0.7, middle: true })
+  + text(t, x, y, spec, { fill: 'url(#giltText)', anchor: 'middle', middle: true });
 
 // Heat Track: five poker-chip sockets, the Ledger's own size (39 mm sockets 2 mm
 // apart in a tray padded 6 mm), numbered left to right so a Raid's "furthest
@@ -695,7 +704,7 @@ const FRAME_OUT = 7, FRAME_IN = 13;
 const HEAT = (() => {
   const d = 39 * MM, gap = 2 * MM, padX = 6 * MM, padY = 4 * MM, m = 7;
   const trayW = 5 * d + 4 * gap + 2 * padX, trayH = d + 2 * padY;
-  const tx = FRAME_IN + m, ty = FRAME_IN + 24;
+  const tx = FRAME_IN + m, ty = FRAME_IN + 10; // the title rides on the frame (heatPlate), not above the tray
   const inner = [tx + trayW + m, ty + trayH + m]; // the corner's inner hairline
   return { d, gap, padX, trayW, trayH, tx, ty, edge: [inner[0] + 6, inner[1] + 6] };
 })();
@@ -708,14 +717,7 @@ function heatTrack() {
   const { d, gap, padX, trayW, trayH, tx, ty, edge: [ex, ey] } = HEAT;
   const a = (FRAME_OUT + FRAME_IN) / 2, R = d / 2, cy = ty + trayH / 2, mid = tx + trayW / 2;
   const bg = `<path d="M0 0 H${f(ex)} V${f(ey)} H0 Z" fill="url(#panel)"/>` + stitch(`M${a} ${a} H${f(ex - 3.4)} V${f(ey - 3.4)} H${a} Z`);
-  // The title between Deco rules, each ending in a diamond by the word.
-  const ty0 = FRAME_IN + 12, half = width(TYPE.panelHead, 'HEAT') / 2 + 12;
-  const diamond = (x, y, r, fill) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${fill}"/>`;
-  let s = `<path d="M${f(tx + 26)} ${ty0} H${f(mid - half)} M${f(mid + half)} ${ty0} H${f(tx + trayW - 26)}" stroke="${C.goldLine}" stroke-opacity=".8" stroke-width=".9"/>`
-    + diamond(mid - half, ty0, 2.6, C.goldBright) + diamond(mid + half, ty0, 2.6, C.goldBright)
-    + diamond(tx + 26, ty0, 1.6, C.goldLine) + diamond(tx + trayW - 26, ty0, 1.6, C.goldLine)
-    + text('HEAT', mid + 0.6, ty0 + 0.9, TYPE.panelHead, { fill: '#000', anchor: 'middle', opacity: 0.7, middle: true })
-    + text('HEAT', mid, ty0, TYPE.panelHead, { fill: 'url(#giltText)', anchor: 'middle', middle: true });
+  let s = '';
   // The tray: a routed channel, shadowed under its top lip, a gilt lip catching the light below.
   const pill = `x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}"`;
   s += `<clipPath id="heat-tray"><rect ${pill}/></clipPath>`
@@ -751,18 +753,37 @@ function heatTrack() {
     // diamonds in the spandrels between sockets, above and below
     if (i < 4) {
       const mx = cx + R + gap / 2;
-      s += diamond(mx, ty + 9.5, 2.3, C.goldLine) + diamond(mx, ty + trayH - 9.5, 2.3, C.goldLine);
+      s += diamondAt([mx, ty + 9.5], 2.3, C.goldLine) + diamondAt([mx, ty + trayH - 9.5], 2.3, C.goldLine);
     }
   }
-  return { bg, fg: s };
+  return { bg, fg: s, top: heatPlate(mid) };
+}
+// The Heat Track's name on a gilt plate set into the board's top edge, letters cut in:
+// a Deco cartouche breaking the border. Drawn over the frame.
+function heatPlate(mid) {
+  const w = width(TYPE.panelHead, 'HEAT') + 30, h = 14, x = mid - w / 2, y = (FRAME_OUT + FRAME_IN) / 2 - h / 2, c = 4;
+  const outline = i => `M${f(x + c + i)} ${f(y + i)} H${f(x + w - c - i)} L${f(x + w - i)} ${f(y + c + i)} V${f(y + h - c - i)} L${f(x + w - c - i)} ${f(y + h - i)} H${f(x + c + i)} L${f(x + i)} ${f(y + h - c - i)} V${f(y + c + i)} Z`;
+  const ty = y + h / 2, spec = { ...TYPE.panelHead, size: 10.5 };
+  return `<path d="${outline(0)}" fill="#000" fill-opacity=".55" transform="translate(.8 1.4)" filter="url(#blur2)"/>`
+    + `<path d="${outline(0)}" fill="url(#bezelGilt)" stroke="#2a1d0c" stroke-width=".8"/>`
+    + `<path d="${outline(2)}" fill="none" stroke="#2a1d0c" stroke-opacity=".45" stroke-width=".5"/>`
+    + diamondAt([x - 5, y + h / 2], 2.2, C.goldBright) + diamondAt([x + w + 5, y + h / 2], 2.2, C.goldBright)
+    + text('HEAT', mid + 1.6, ty + 0.6, spec, { fill: GILT[0], anchor: 'middle', opacity: 0.55, middle: true })
+    + text('HEAT', mid + 1.6, ty, spec, { fill: '#241807', anchor: 'middle', middle: true });
 }
 
-// The Mash die's square, 24 mm so any usual die sits inside it.
-function mash(x, y) {
-  const side = 24 * MM, w = side + 28, h = side + 32;
+// The Mash die's square, 24 mm so any usual die sits inside it: a recessed socket in
+// the Heat Track's lacquer and gilt, the name engraved above it, the pair centred in a
+// panel as tall as the key beside it.
+function mash(x, y, h) {
+  const side = 24 * MM, w = side + 28, group = 12 + 10 + side, top = y + (h - group) / 2;
+  const sx = x + 14, sy = top + 22, sq = i => `x="${f(sx + i)}" y="${f(sy + i)}" width="${f(side - 2 * i)}" height="${f(side - 2 * i)}" rx="${f(6 - i / 2)}"`;
   return {
-    fg: panel(x, y, w, h) + text('MASH', x + w / 2, y + 14, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true })
-      + `<rect x="${f(x + 14)}" y="${f(y + 24)}" width="${f(side)}" height="${f(side)}" rx="6" fill="#100b07" stroke="${C.gold}" stroke-width="1.6" stroke-dasharray="4 3"/>`,
+    fg: panel(x, y, w, h) + gilt('MASH', x + w / 2, top + 6, TYPE.panelHead)
+      + `<rect ${sq(0)} fill="url(#heatFloor)"/><rect ${sq(0)} fill="url(#heatRecess)"/>`
+      + `<rect ${sq(1.7)} fill="none" stroke="url(#bezelGilt)" stroke-width="3.4"/>`
+      + `<rect ${sq(3.6)} fill="none" stroke="#000" stroke-opacity=".7" stroke-width=".6"/>`
+      + `<rect ${sq(0)} fill="none" stroke="${GILT[0]}" stroke-opacity=".35" stroke-width=".5"/>`,
   };
 }
 
@@ -780,14 +801,15 @@ function key(x, y) {
   const rows = KEY_ROWS.filter(([k]) => k !== 'setup' || SHOW_SETUP);
   const headW = Math.max(...rows.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const subX = 28 + headW + 9, subW = Math.max(...rows.map(([, , t]) => (t ? width(TYPE.keyText, t) : 0)));
-  const w = subX + subW + 11, h = 13 + (rows.length - 1) * 14 + 4 + 13;
+  // One pitch for every row, roomy enough that the High Society crown clears the row above.
+  const PITCH = 16.5, w = subX + subW + 11, h = 14 + (rows.length - 1) * PITCH + 13;
   let s = panel(x, y, w, h);
   rows.forEach(([k, t, sub], i) => {
-    const cy = y + 13 + i * 14 + (i > 0 ? 4 : 0), ix = x + 15; // headroom for the crown
+    const cy = y + 14 + i * PITCH, ix = x + 15;
     if (k === 'bridge') s += bridgeGlyph([ix - 7, cy], [ix + 7, cy], 1.5, 0.45);
     else if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
     else if (k === 'setup') s += tray(['runner'], ix - trayWidth(['runner']) / 2, cy);
-    else s += roundel(k, ix, cy, 5.6);
+    else s += roundel(k, ix, cy, 5.4);
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     if (sub) s += text(sub, x + subX, cy, TYPE.keyText, { fill: C.body, middle: true });
   });
@@ -795,8 +817,8 @@ function key(x, y) {
 }
 
 function sidePanels() {
-  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y), heat = heatTrack(), m = mash(HEAT.tx + k.w + 10, y);
-  return { bg: heat.bg, fg: heat.fg + k.fg + m.fg };
+  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y), heat = heatTrack(), m = mash(HEAT.tx + k.w + 10, y, k.h);
+  return { bg: heat.bg, fg: heat.fg + k.fg + m.fg, top: heat.top };
 }
 
 // The seam round the board, between the gilt edge and the hairline, stepping in
@@ -865,6 +887,7 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="heatFloor" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#2b1e13"/><stop offset=".75" stop-color="#140d08"/><stop offset="1" stop-color="#050302"/></radialGradient>`;
   s += `<radialGradient id="heatFloorRaid" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#4d1a14"/><stop offset=".75" stop-color="#2a0c09"/><stop offset="1" stop-color="#0d0403"/></radialGradient>`;
   s += `<linearGradient id="heatRecess" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset=".85" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#f3dc95" stop-opacity=".06"/></linearGradient>`;
+  s += `<linearGradient id="lacquer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#261b11"/><stop offset="1" stop-color="#0e0906"/></linearGradient>`;
   s += `<linearGradient id="heatTray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050302"/><stop offset="1" stop-color="#1c140c"/></linearGradient>`;
   s += `<linearGradient id="heatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${GILT[2]}"/><stop offset=".5" stop-color="${GILT[1]}"/><stop offset="1" stop-color="${GILT[0]}"/></linearGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
@@ -941,6 +964,8 @@ function allText() {
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
   for (const [, t, sub] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); if (sub) add(TYPE.keyText, sub); }
   add(TYPE.panelHead, 'HEAT');
+  add({ ...TYPE.panelHead, size: 10.5 }, 'HEAT');
+  add(TYPE.panelHead, 'MASH');
   add(TYPE.titleCity, 'NEW YORK');
   add(TYPE.titleYear, '1929');
   return items;
@@ -959,7 +984,7 @@ function buildSvg(fontCss, mode, placed) {
     + `<g id="panel-grounds" filter="url(#leatherFine)">${side.bg}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
     + `<g id="panels">${side.fg}${title()}</g>`
-    + `<g id="frame">${frame()}</g>`
+    + `<g id="frame">${frame()}${side.top}</g>`
     + `</svg>\n`;
 }
 
