@@ -102,7 +102,7 @@ function draft(S) {
   // points outright, where a shape gains corners it didn't have.
   const MOVE = {
     // New Jersey and Westchester
-    '382,165': atX(NJ, 382), '142,476': atY(NJ, 476),
+    '382,165': atX(NJ, 382), '142,476': atY(NJ, 548), // parallel past the Manhattan label
     '464,108': meet(MN_WEST, through([464, 108], [606, 191])), // Manhattan's tip, on Sugar Hill / Belmont
     '544,0': [533, 0], '533,51': [533, W], '1056,0': [BRONX_EAST, 0], '1050,53': [BRONX_EAST, W],
     // Manhattan: level borders meeting one straight coast
