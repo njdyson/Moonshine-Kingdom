@@ -56,7 +56,20 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   frame, so the Harlem River keeps its mouth. The space landed where it could reach: the Bronx
   and eastern Queens. The re-tune (below) passed the Bronx's share down to Hunts Point and
   Throggs Neck; Manhattan, Brooklyn and Staten Island are walled off by water, so their
-  figures barely move.
+  figures barely move. Staten Island keeps its shore all round (Nick: it should read as an
+  island); running it to the frame too was tried and cut the same day.
+- **Evened out, and tidied** (Nick, 2026-09-29: even the Districts out with the new room, and
+  make them look nice too, cutting or reshaping where it helps). Three borders now follow the
+  map's own lines, which reads as drawn rather than traced: Sheepshead Bay / Brownsville runs
+  straight on down from Red Hook / Brownsville to the bay (`BK_COL`), so Brooklyn is three
+  columns under Red Hook; Richmond Hill / Jamaica is level like Queens' other rows; and Corona /
+  Flushing runs parallel to Williamsburg / Corona, so Corona has parallel sides. Jamaica Bay is
+  90 units wider (`bayEast`), which trims Jamaica, the one outlier; Coney Island gives Sheepshead
+  Bay the width its sign needs (`coneyEast`). The re-tune scored evenness (the spread of room
+  sizes) as well as the smallest rooms, and kept each crown room at 55 or more where it could:
+  outside Jamaica, rooms with signs now run 42 to 77 (they ran 42 to 83, with Jamaica at 138,
+  now 110). Williamsburg's south point stays at 724: every tuner run wanted it higher, for Red
+  Hook's hangers, at the crown room's cost.
 - **Throggs Neck's tip is cut** 24 units back along both shores (`TN_CUT`; Nick: the point was
   harsh), in both variants.
 - **Labels.** The Bronx's label is centred on its east shore, between the frame and Throggs
@@ -85,13 +98,14 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   | Drafted, balanced | 42 (Tenderloin) | 47, 47, 57, 64 |
   | Drafted, re-tuned for signs | 40 (Fordham, Hunts Point) | 47, 44, 54, 64 |
   | Drafted, flush to the frame | 41 (Tenderloin) | 47, 50, 54, 77 |
+  | Drafted, evened out | 41 (Tenderloin) | 47, 53, 54, 57 |
 
   The last row is the current `SETTINGS`, measured the same way (centred labels). They are
   tuned for the hanging signs (below), so with the signs on the figures are 42 (Tenderloin,
-  West Side) and 46, 53, 58, 83. If the centred labels win instead, re-tune for them.
+  West Side) and 46, 55, 58, 61. If the centred labels win instead, re-tune for them.
 
-  The big ones stay big because nothing small borders them: Jamaica (140), Flushing (81),
-  Sheepshead Bay (77). Change a setting by hand and the room report says what it cost.
+  The big ones stay big because nothing small borders them: Jamaica (111), Flushing (77),
+  Brownsville (74). Change a setting by hand and the room report says what it cost.
 - **Chamfers** (`Drafted/Chamfered`) bevel coast corners sharper than 110 degrees that aren't
   junctions. The drafting already made most corners 45-degree cuts (Throggs Neck's tip among
   them), so only three qualify (the Bowery's south-west corner, the Rockaway spit,
@@ -102,8 +116,10 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
 - **Checks** before writing: no crossings, no run under 3 units, no District area off by more
   than 20% (bar those that took in Westchester or Nassau), no short border shrinking below 80%,
   no water under 20 wide between Districts that don't meet (the narrowest is 22, the Kill van
-  Kull under New Jersey), and no bridge landing within 20 units of a border on its shore (the
-  skeleton's closest is 22, the Queensboro in Astoria).
+  Kull under New Jersey), and every bridge square across its 49-wide river (within 4 units:
+  a one-unit move of the Bowery's foot once turned the Brooklyn Bridge to 84) and landing at
+  least 20 units from a border on its shore (the skeleton's closest is 22, the Queensboro in
+  Astoria).
 - The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point) is unchanged; splitting it
   would add a border.
 - `Art/Board/Drafted/Before and after.jpg` puts the two screen boards side by side.

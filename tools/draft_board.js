@@ -63,28 +63,25 @@ const deg = a => (a * Math.PI) / 180;
 // first, get what the roomy ones can spare. Since the signs, they also keep the
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
-  bronxCols: [687, 862], // Belmont | Fordham | Morris Park
-  bronxRow: 176, // Fordham / Throggs Neck, level
+  bronxCols: [687, 860], // Belmont | Fordham | Morris Park
+  bronxRow: 180, // Fordham / Throggs Neck, level
   hpTop: 148, // where Belmont / Fordham meets Hunts Point
-  morrisEast: 181, // where Morris Park / Throggs Neck meets the east shore
+  morrisEast: 186, // where Morris Park / Throggs Neck meets the east shore
   hellGate: 9, // the Hell Gate and Sound reaches' angle, degrees: a chevron
   manhattanWest: 7, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
   manhattan: [275, 377, 469, 553], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
   eastHarlem: 1, // East Harlem's west side, shifted east
   astoriaCorona: 539, // level
   queensCol: 834.5, // Astoria and Corona | Whitestone and Flushing, upright
-  queensRows: [480, 650.5, 774], // Whitestone | Flushing | Richmond Hill | Jamaica
-  rhLevel: false, // Richmond Hill / Jamaica level all the way, like Queens' other rows
-  coronaSlant: false, // Corona / Flushing parallel to Williamsburg / Corona
-  bvUpright: false, // Sheepshead Bay / Brownsville upright, on down from Red Hook / Brownsville
+  queensRows: [480, 651.5, 773], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
   williamsburgSouth: 724, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 784, // Red Hook's level south side
-  coneyEast: 444, // Coney Island / Sheepshead Bay, upright
+  coneyEast: 435, // Coney Island / Sheepshead Bay, upright
   boweryBottom: 668, stapletonTop: 690, // the Kill van Kull between them
-  staten: [808, 916], // level borders: Westerleigh | Stapleton | Tottenville
-  bayEast: 0, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
+  staten: [806, 914], // level borders: Westerleigh | Stapleton | Tottenville
+  bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   astoriaTop: 752, // where Astoria meets Whitestone on the Hell Gate shore (x)
-  ehBulge: 31, ehKnee: 0.71, // East Harlem / Hunts Point bent into Hunts Point by this much, this far down it
+  ehBulge: 27, ehKnee: 0.72, // East Harlem / Hunts Point bent into Hunts Point by this much, this far down it
   hpEast: 24, // Hunts Point / Throggs Neck's shore end, moved east (the Hell Gate turns there)
 };
 
@@ -145,17 +142,16 @@ function draft(S) {
     '1033,386': QN_NORTH, '1080,392': [1080, QN_NORTH[1]],
     '597,494': foot(ER_QN, WB), '637,548': AC,
     '838,496': [qc, q1], '831,548': [qc, S.astoriaCorona], '1031,479': [EAST_EDGE, q1],
-    '892,650': S.coronaSlant ? [qc + ((707 - AC[0]) / (644 - AC[1])) * (q2 - S.astoriaCorona), q2] : [892, q2], '1031,651': [EAST_EDGE, q2],
-    '794,782': [793.5, q3], '895,783': [895, q3], '1031,832': S.rhLevel ? [EAST_EDGE, q3] : atX(through([895, q3], [1031.5, q3 + 50]), EAST_EDGE),
+    '892,650': [qc + ((707 - AC[0]) / (644 - AC[1])) * (q2 - S.astoriaCorona), q2], '1031,651': [EAST_EDGE, q2], // Corona / Flushing parallel to Williamsburg / Corona
+    '794,782': [793.5, q3], '895,783': [895, q3], '1031,832': [EAST_EDGE, q3],
     '1032,991': [EAST_EDGE, SOUTH_SHORE], '1080,988': [1080, SOUTH_SHORE],
     // Brooklyn: the East River's reaches, Red Hook's level south side, upright borders
     '447,651': atY(ER_QN, RED_HOOK_BANK), '425,681': atY(ER_RH, RED_HOOK_BANK), '283,797': atY(ER_RH, S.redHookSouth),
     '602,704': [BK_COL, S.williamsburgSouth], '589,792': [BK_COL, S.redHookSouth],
-    ...(S.bvUpright ? { '639,894': [BK_COL, 853 + 680 - BK_COL] } : {}), // on the bay's 45-degree corner
+    '639,894': [BK_COL, 853 + 680 - BK_COL], // Sheepshead Bay / Brownsville on down to the bay's 45-degree corner
     '451,787': [S.coneyEast, S.redHookSouth], '437,983': [S.coneyEast, 983], '299,989': [NARROWS[1], 989],
-    // Jamaica Bay: a 45-degree octagon (its east side is in REPLACE)
+    // Jamaica Bay: a 45-degree octagon (its Sheepshead Bay and Jamaica sides are in REPLACE)
     '709,848': [680, 853], '793,857': [793.5, 853],
-    '598,934': [600, 933], '593,974': [600, 975], '622,989': [622, 997], '621,1011': [622, 1011],
     // Staten Island: an octagon (see REPLACE), level borders
     '37,816': [36, s1], '261,837': [NARROWS[0], s1], '30,910': [36, s2], '272,932': [NARROWS[0], s2],
   };
@@ -169,7 +165,7 @@ function draft(S) {
     'water|belmont': [[533, W], [533, HARLEM], meet(MN_WEST, through([464, 108], [606, 191]))],
     'throggs_neck|water': [[BRONX_EAST, S.morrisEast], ...TIP_CUT, BEND],
     ...(S.ehBulge ? { 'east_harlem|hunts_point': [EH_HP[0], [ehMid[0] + ehN[0] * S.ehBulge, ehMid[1] + ehN[1] * S.ehBulge], EH_HP[1]] } : {}),
-    ...(S.bvUpright ? { 'sheepshead_bay|water': [[BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [622, 1001.5], [622, 1011], [S.coneyEast, 983]] } : {}),
+    'sheepshead_bay|water': [[BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [622, 1001.5], [622, 1011], [S.coneyEast, 983]],
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
     'water|jamaica': [[793.5, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945], [801 + B, 1000], [700, 1000], [700, 1012], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
     // Staten Island: 45-degree corners, upright shores
@@ -183,7 +179,7 @@ function draft(S) {
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP_CUT[0][1]) / 2), -90], // beside the Bronx's east shore
       QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
     },
-    water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728, 926, 0]],
+    water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
     land: [],
   };
   return { MOVE, REPLACE, labels };
@@ -193,7 +189,7 @@ const DROP = [
   '536,284', '526,351', '523,371', '222,454', '158,534', '149,556', '303,699', // Manhattan
   '803,243', '969,205', '1025,313', '951,342', // the Bronx
   '764,355', '813,340', '1028,383', '1036,385', '1061,392', '497,570', // Queens
-  '375,665', '287,788', '447,786', '367,809', '469,786', '282,808', '607,922', // Brooklyn
+  '375,665', '287,788', '447,786', '367,809', '469,786', '282,808', // Brooklyn
   '157,820', '263,839', // Staten Island
 ];
 
@@ -357,7 +353,9 @@ function check(cs, regions, bs) {
   if (narrow < 20) problems.push(`water only ${narrow.toFixed(0)} wide between ${where}`);
   notes.push(`narrowest water ${narrow.toFixed(0)} (${where})`);
   bs.forEach((b, i) => notes.push(`${b.name} ${Math.round(dist(geo.bridges[i].a, geo.bridges[i].b))} -> ${Math.round(dist(b.a, b.b))}`));
-  // a bridge lands clear of the corners where its District's shore meets a border
+  // a bridge crosses its river square (every bridge is on a 49-wide reach), clear of the
+  // corners where its District's shore meets a border
+  bs.forEach(b => { if (dist(b.a, b.b) > RIVER + 4) problems.push(`${b.name} is ${dist(b.a, b.b).toFixed(0)} long: it no longer crosses square`); });
   bs.forEach(b => [[b.a, b.join[0]], [b.b, b.join[1]]].forEach(([end, id]) => {
     const js = cs.filter(c => c.sides.includes(id) && c.sides.includes('water')).flatMap(c => [c.pts[0], c.pts[c.pts.length - 1]]);
     const d = Math.min(...js.map(q => dist(q, end)));
