@@ -102,18 +102,20 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   builds are untouched). The jury is out (Nick):
   - **Hanging signs** (`--labels=sign`, `placeSign()`). Pieces will cover a centred label, and
     the old edge placer looked odd because each label went somewhere different. Here every
-    District gets one small plaque (type medallion, name and venue, a 30-unit Still) hung by
-    two gilt hangers as high as it fits, centred across the room there, clear of the keylines:
-    one rule, so it reads as designed, and the open ground below is one piece. A District too
-    narrow for one line stacks its name; **East Harlem** is too narrow even then (its slanted
-    sides allow 139 units where the sign needs 142) and keeps its centred label.
+    District gets one small plaque (type medallion, name and venue) hung by two gilt hangers
+    as high as it fits, centred across the room there, clear of the keylines: one rule, so it
+    reads as designed. **The Still is not on the sign** (Nick, 2026-09-29: it made the signs
+    too big): it stands in the District at full size, where it has the most room round it,
+    clear of the borders and the sign (`placeStill()`), so a landmark in the open ground below
+    the sign. A District too narrow for one line stacks its name; all 25 now take a sign.
 - **The Tomorrow panel is standard** (Nick liked it, 2026-09-29; `tomorrow()`): under the
   title, the Mash socket and a 36 mm socket for tomorrow's Turn Tokens as **one stack, #1 on
   top**, so "claim the lowest-numbered token left" becomes "take the top token". Both are set
   today for tomorrow, which the panel teaches. Four separate 36 mm slots would not fit: New
   Jersey narrows to under 100 units below the key, and moving Queens' Nassau line in to make
-  a column cost Flushing about 45% of its room. The Mash left the key's row for it, and the
-  title rose 22 to make space.
+  a column cost Flushing about 45% of its room. **Under the Heat corner the Tomorrow panel and
+  the key sit side by side, and the title sits under both** (Nick: not sandwiched between
+  them).
 - **The key is types only** (Nick, 2026-09-29: the sentences were long-winded; bridges explain
   themselves and the Rulebook covers them): Speakeasy, High Society, Ward, Dock and Still.
   Prices ride as chips, the Moonshine bottle `$300` and the Rum glass `$500` (`Art/Icons`);

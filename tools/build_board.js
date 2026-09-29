@@ -270,15 +270,16 @@ function cluster(d, layout, stacked = false) {
   if (layout === 's') {
     // A hanging sign: a small plaque, the type's medallion at its left, the name (and
     // venue) in the middle, the Still at its right, hung from the border above it.
-    // stacked: the name on two lines, for a District too narrow for one
-    const sr = 9, sh = 30, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pad = 4;
+    // stacked: the name on two lines, for a District too narrow for one. The Still is
+    // not on the sign: it stands in the District (stillAt, set by placeSign).
+    const sr = 9, pad = 4.5;
     const names = stacked ? upper(d.name).split(' ') : [upper(d.name)];
     const tw = Math.max(...names.map(n => width(TYPE.sign, n)), d.venue ? width(TYPE.signVenue, d.venue) : 0);
-    const w = pad + 2 * sr + 5 + tw + 6 + sw + pad, h = sh + 2 * pad, tx = pad + 2 * sr + 5;
+    const w = pad + 2 * sr + 6 + tw + pad + 2, h = (stacked ? 34 : 26) + 2 * pad, tx = pad + 2 * sr + 6;
     const rows = names.length + (d.venue ? 0.75 : 0), step = 10.5;
     const nameYs = names.map((n, i) => h / 2 - (rows - 1) * step / 2 + i * step), venueY = nameYs[nameYs.length - 1] + 9.5;
-    return {
-      w, h, layout,
+    const self = {
+      w, h, layout, stillAt: null,
       roundelAt: (x, yy) => [x + pad + sr, yy + h / 2 + (hs ? 3 : 0)],
       draw(x, yy) {
         const poly0 = geo.regions[d.id], c = 3;
@@ -298,12 +299,14 @@ function cluster(d, layout, stacked = false) {
         let s = hang ? `<path d="${hang}" stroke="${C.goldLine}" stroke-width=".9" stroke-opacity=".85"/>` : '';
         s += `<path d="${plate}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
           + `<path d="${plate}" fill="url(#lacquer)" fill-opacity=".92" stroke="url(#bezelGilt)" stroke-width="1.2"/>`;
-        s += `<g filter="url(#lift)">${roundel(d.zone, x + pad + sr, yy + h / 2 + (hs ? 3 : 0), sr) + still(d.still, x + w - pad - sw, yy + pad, sh)}</g>`;
+        s += `<g filter="url(#lift)">${roundel(d.zone, x + pad + sr, yy + h / 2 + (hs ? 3 : 0), sr)}</g>`;
         names.forEach((n, i) => { s += text(n, x + tx, yy + nameYs[i], TYPE.sign, { fill: nameFill, middle: true }); });
         if (d.venue) s += text(d.venue, x + tx, yy + venueY, TYPE.signVenue, { fill: C.body, middle: true });
+        if (self.stillAt) s += `<g filter="url(#lift)">${still(d.still, self.stillAt[0], self.stillAt[1], TOKEN_H)}</g>`;
         return s;
       },
     };
+    return self;
   }
   if (layout === 'h') {
     // Still on the left; roundel inline with the name, the crown room above it
@@ -430,6 +433,23 @@ function place(d, others) {
 // border as it can get (Nick's choice, 2026-09-28: cleaner, though pieces will sit
 // round it). 'edge': pushed aside to leave the widest open ground for pieces.
 const LABEL_PLACEMENT = arg('labels') || 'centre';
+// The Still, with the sign on the border: it stands where it has the most room round it,
+// clear of the borders (the keylines too) and of the sign, so, in the middle of the
+// ground below the sign; along a strip, the spot nearest the District's middle.
+function placeStill(d, sign) {
+  const p = geo.regions[d.id], M = d.zone === 'speak' || d.zone === 'hs' ? 12 : 7, [gx, gy] = centroid(p);
+  const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
+  let best = null;
+  for (let y = Math.min(...ys); y <= Math.max(...ys) - TOKEN_H; y += 2) for (let x = Math.min(...xs); x <= Math.max(...xs) - TOKEN_W; x += 2) {
+    const r = [x, y, TOKEN_W, TOKEN_H];
+    if (!rectInside([x - M, y - M, TOKEN_W + 2 * M, TOKEN_H + 2 * M], p) || rectGap(r, sign) < 10) continue;
+    const corners = [[x, y], [x + TOKEN_W, y], [x + TOKEN_W, y + TOKEN_H], [x, y + TOKEN_H]];
+    const clear = Math.min(...p.map(v => rectDist(v, r)), ...corners.map(q => edgeDist(q, p)), rectGap(r, sign));
+    const score = clear - 0.05 * Math.hypot(x + TOKEN_W / 2 - gx, y + TOKEN_H / 2 - gy);
+    if (!best || score > best.score) best = { score, x, y };
+  }
+  return best ? [best.x, best.y] : null;
+}
 // 'sign': the sign hangs as high in the District as it fits, centred across the room
 // there, clear of the Speakeasy and High Society keylines; if it never fits, the
 // District keeps its centred label.
@@ -443,7 +463,11 @@ function placeSign(d) {
   for (const M of framed ? [13, 9] : [7]) for (let y = y0; y <= y1 - c.h; y += 1) {
     const fit = [];
     for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
-    if (fit.length) return { x: (fit[0] + fit[fit.length - 1]) / 2, y, c, open: M };
+    if (fit.length) {
+      const x = (fit[0] + fit[fit.length - 1]) / 2;
+      c.stillAt = placeStill(d, [x, y, c.w, c.h]);
+      return { x, y, c, open: M };
+    }
   }
   console.log(`  ${d.id}: no room for a sign; centred label kept`);
   return placeCentre(d);
@@ -488,11 +512,12 @@ function placeCentre(d) {
 // placement, so a geometry change can be judged by the space it leaves.
 const ROOM_MARGIN = 6;
 function room(d, { x, y, c }) {
-  const p = geo.regions[d.id], M = ROOM_MARGIN, box = [x - M, y - M, c.w + 2 * M, c.h + 2 * M];
+  const p = geo.regions[d.id], M = ROOM_MARGIN, boxes = [[x - M, y - M, c.w + 2 * M, c.h + 2 * M]];
+  if (c.stillAt) boxes.push([c.stillAt[0] - M, c.stillAt[1] - M, TOKEN_W + 2 * M, TOKEN_H + 2 * M]);
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   let n = 0;
   for (let gy = Math.min(...ys); gy <= Math.max(...ys); gy += 2) for (let gx = Math.min(...xs); gx <= Math.max(...xs); gx += 2)
-    if (inside([gx, gy], p) && rectDist([gx, gy], box) > 0 && edgeDist([gx, gy], p) >= M) n++;
+    if (inside([gx, gy], p) && boxes.every(b => rectDist([gx, gy], b) > 0) && edgeDist([gx, gy], p) >= M) n++;
   return n * 4 * (BOARD_MM / 1080) ** 2 / 100;
 }
 function placeAll() {
@@ -847,8 +872,12 @@ function heatPlate(mid) {
 // tomorrow's Turn Tokens as one stack, #1 on top, so each boss who Lays Low takes the top
 // token (the lowest left, as the rule says). Turn Tokens are 36 mm square; the socket fits
 // the stack.
+const TOMORROW = (() => {
+  const mash = 24 * MM, tok = 36 * MM, mashY = 42, tokY = mashY + mash + 17;
+  return { mash, tok, mashY, tokY, w: tok + 28, h: tokY + tok + 11 };
+})();
 function tomorrow(x, y) {
-  const mash = 24 * MM, tok = 36 * MM, w = tok + 28, spec = TYPE.tomorrow;
+  const { mash, tok, w, h } = TOMORROW, spec = TYPE.tomorrow;
   const sock = (sx, sy, side, r) => {
     const sq = i => `x="${f(sx + i)}" y="${f(sy + i)}" width="${f(side - 2 * i)}" height="${f(side - 2 * i)}" rx="${f(r - i / 2)}"`;
     return `<rect ${sq(0)} fill="url(#heatFloor)"/><rect ${sq(0)} fill="url(#heatRecess)"/>`
@@ -857,12 +886,12 @@ function tomorrow(x, y) {
       + `<rect ${sq(0)} fill="none" stroke="${GILT[0]}" stroke-opacity=".35" stroke-width=".5"/>`;
   };
   // name, rule, then each socket under its own label
-  const cx = x + w / 2, mashY = y + 41, tokY = mashY + mash + 20, h = tokY + tok + 12 - y;
+  const cx = x + w / 2, mashY = y + TOMORROW.mashY, tokY = y + TOMORROW.tokY;
   const rule = yy => `<path d="M${f(x + 12)} ${f(yy)} H${f(x + w - 12)}" stroke="${C.goldLine}" stroke-opacity=".5" stroke-width=".6"/>`
     + diamondAt([cx, yy], 1.6, C.goldLine);
   return {
     h, w,
-    fg: panel(x, y, w, h) + gilt('TOMORROW', cx, y + 15, spec) + rule(y + 24)
+    fg: panel(x, y, w, h) + gilt('TOMORROW', cx, y + 15, spec) + rule(y + 23.5)
       + text('MASH', cx, mashY - 7, spec, { fill: C.body, anchor: 'middle', middle: true }) + sock(cx - mash / 2, mashY, mash, 6)
       + text('TURN ORDER', cx, tokY - 7, spec, { fill: C.body, anchor: 'middle', middle: true }) + sock(cx - tok / 2, tokY, tok, 7),
   };
@@ -886,7 +915,7 @@ function key(x, y) {
   const chipsX = 28 + headW + 10, chipW = p => 12 + width(TYPE.price, p), CHIP_GAP = 9;
   const chipsW = Math.max(...rows.map(([, , ch]) => ch.reduce((a, [, p]) => a + chipW(p), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
   // One pitch for every row, roomy enough that the High Society crown clears the row above.
-  const PITCH = 16.5, w = chipsX + chipsW + 12, h = 14 + (rows.length - 1) * PITCH + 13;
+  const PITCH = 16.5, w = chipsX + chipsW + 12, h = 14 + (rows.length - 1) * PITCH + 17;
   let s = panel(x, y, w, h);
   rows.forEach(([k, t, chips], i) => {
     const cy = y + 14 + i * PITCH, ix = x + 15;
@@ -903,9 +932,11 @@ function key(x, y) {
   return { fg: s, w, h };
 }
 
+// Under the Heat corner: the Tomorrow panel, the key beside it, the title under both.
+const PANELS_Y = () => HEAT.edge[1] + 12;
 function sidePanels() {
-  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y), heat = heatTrack(), t = tomorrow(HEAT.tx, TITLE_Y + 34);
-  return { bg: heat.bg, fg: heat.fg + k.fg + t.fg, top: heat.top };
+  const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
+  return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
 }
 
 // The seam round the board, between the gilt edge and the hairline, stepping in
@@ -915,11 +946,10 @@ function seams() {
   return stitch(`M${ex + 3.4} ${a} H${W - a} V${W - a} H${a} V${ey + 3.4} H${ex + 3.4} Z`);
 }
 
-// The title sits under the key, the Tomorrow panel under it.
-const TITLE_Y = 283;
+const TITLE_Y = () => PANELS_Y() + TOMORROW.h + 12 + 27; // the top rule 12 under the panels
 function title() {
   // The map's title block: the city and the year, between Deco rules.
-  const cx = 116, cy = TITLE_Y;
+  const cx = 116, cy = TITLE_Y();
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
   const rule = (y, gap) => `<path d="M${f(cx - cityW / 2)} ${y} H${f(cx - gap)} M${f(cx + gap)} ${y} H${f(cx + cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
