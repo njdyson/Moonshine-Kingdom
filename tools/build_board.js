@@ -285,25 +285,29 @@ function cluster(d, layout, opts = {}) {
     const rows = names.length + (d.venue ? 0.75 : 0), step = 10.5;
     const nameYs = names.map((n, i) => bh / 2 - (rows - 1) * step / 2 + i * step), venueY = nameYs[nameYs.length - 1] + 9.5;
     const medal = (x, yy) => [x + sx + pad + sr, yy + sy + bh / 2 + (hs ? 3 : 0)];
+    // each hanger: [x, the sign's top there, the border straight above it]
+    const hangers = (x, yy) => {
+      const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
+      return (drop ? [[X + 12, Y], [X + bw - 12, Y]] : [[X + 12, Y], [PX + pw / 2, PY]]).map(([hx, hy]) => {
+        let top = -Infinity;
+        poly0.forEach((a, i) => {
+          const b = poly0[(i + 1) % poly0.length];
+          if ((a[0] - hx) * (b[0] - hx) > 0 || a[0] === b[0]) return;
+          const ey = a[1] + (b[1] - a[1]) * (hx - a[0]) / (b[0] - a[0]);
+          if (ey < hy && ey > top) top = ey;
+        });
+        return [hx, hy, top];
+      });
+    };
     const chamfered = (x, yy, ww, hh, c) => `M${f(x + c)} ${f(yy)} H${f(x + ww - c)} L${f(x + ww)} ${f(yy + c)} V${f(yy + hh - c)} L${f(x + ww - c)} ${f(yy + hh)} H${f(x + c)} L${f(x)} ${f(yy + hh - c)} V${f(yy + c)} Z`;
     return {
-      w, h, layout,
+      w, h, layout, opts, hangers,
       roundelAt: medal,
       draw(x, yy) {
         const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
-        // hangers: from the tops up to the border straight above
-        const hooks = drop ? [[X + 12, Y], [X + bw - 12, Y]] : [[X + 12, Y], [PX + pw / 2, PY]];
+        // hangers: from the tops up to the border straight above, always
         let hang = '';
-        for (const [hx, hy] of hooks) {
-          let top = -Infinity;
-          poly0.forEach((a, i) => {
-            const b = poly0[(i + 1) % poly0.length];
-            if ((a[0] - hx) * (b[0] - hx) > 0 || a[0] === b[0]) return;
-            const ey = a[1] + (b[1] - a[1]) * (hx - a[0]) / (b[0] - a[0]);
-            if (ey < hy && ey > top) top = ey;
-          });
-          if (top > -Infinity && hy - top < 44) hang += `M${f(hx)} ${f(top + 1.2)} V${f(hy)} `;
-        }
+        for (const [hx, hy, top] of hangers(x, yy)) if (top > -Infinity) hang += `M${f(hx)} ${f(top + 1.2)} V${f(hy)} `;
         let s = hang ? `<path d="${hang}" stroke="${C.goldLine}" stroke-width=".9" stroke-opacity=".85"/>` : '';
         const sign = chamfered(X, Y, bw, bh, 3), plate = chamfered(PX, PY, pw, ph, 2);
         s += `<path d="${sign}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
@@ -448,6 +452,13 @@ function place(d, others) {
 // border as it can get (Nick's choice, 2026-09-28: cleaner, though pieces will sit
 // round it). 'edge': pushed aside to leave the widest open ground for pieces.
 const LABEL_PLACEMENT = arg('labels') || 'centre';
+// The sign's shapes, each with what it costs in hanger units to use it: the usual one
+// free, a stacked name where the usual one hangs much higher, and the Still's plate
+// hung under the sign only where nothing else fits.
+const SIGN_SHAPES = d => {
+  const two = d.name.includes(' ');
+  return [[{}, 0], ...(two ? [[{ stacked: true }, 15]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 75]] : [])];
+};
 // 'sign': the sign hangs as high in the District as it fits, centred across the room
 // there, clear of the Speakeasy and High Society keylines; if it never fits, the
 // District keeps its centred label.
@@ -455,18 +466,24 @@ function placeSign(d) {
   const p = geo.regions[d.id], framed = d.zone === 'speak' || d.zone === 'hs';
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-  // clear of the keylines where it can be; a narrow District lets it closer, then
-  // stacks its name on two lines, then bolts the Still's plate under the sign
-  const two = d.name.includes(' ');
-  const variants = [{}, ...(two ? [{ stacked: true }] : []), { drop: true }, ...(two ? [{ stacked: true, drop: true }] : [])];
-  for (const opts of variants) for (const M of framed ? [13, 9] : [7]) {
+  // Every shape is tried, clear of the keylines where it can be (a narrow District lets
+  // it closer), and the one whose hangers come out shortest, with its cost, wins.
+  const variants = SIGN_SHAPES(d);
+  let best = null;
+  for (const [opts, cost] of variants) for (const M of framed ? [13, 9] : [7]) {
     const c = cluster(d, 's', opts);
     for (let y = y0; y <= y1 - c.h; y += 1) {
       const fit = [];
       for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
-      if (fit.length) return { x: (fit[0] + fit[fit.length - 1]) / 2, y, c, open: M };
+      if (!fit.length) continue;
+      const x = (fit[0] + fit[fit.length - 1]) / 2;
+      const hang = Math.max(...c.hangers(x, y).map(([, hy, top]) => hy - top));
+      const score = hang + cost + (M < 13 && framed ? 4 : 0);
+      if (!best || score < best.score) best = { score, hang, x, y, c, open: M };
+      break;
     }
   }
+  if (best) return best;
   console.log(`  ${d.id}: no room for a sign; centred label kept`);
   return placeCentre(d);
 }
@@ -1203,7 +1220,15 @@ async function printPdf(browser, svg) {
   const placed = placeAll();
   for (const d of DISTRICTS) {
     const { x, y, c, open } = placed[d.id];
-    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  ${LABEL_PLACEMENT === 'centre' ? 'clearance' : 'open ground'} ${open === null ? 'pinned' : f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²`);
+    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  ${LABEL_PLACEMENT === 'centre' ? 'clearance' : 'open ground'} ${open === null ? 'pinned' : f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²${placed[d.id].hang !== undefined ? `  hangers ${f(placed[d.id].hang, 0)}${c.opts && c.opts.stacked ? ' stacked' : ''}${c.opts && c.opts.drop ? ' drop' : ''}` : ''}`);
+  }
+  if (arg('report')) { // each District's placement and room, and its sign's shapes, as JSON
+    const report = Object.fromEntries(DISTRICTS.map(d => {
+      const { x, y, c, hang } = placed[d.id];
+      const shapes = SIGN_SHAPES(d).map(([opts, cost]) => { const k = cluster(d, 's', opts); return { opts, cost, w: k.w, h: k.h }; });
+      return [d.id, { zone: d.zone, x, y, w: c.w, h: c.h, layout: c.layout, hang, room: room(d, placed[d.id]), shapes }];
+    }));
+    fs.writeFileSync(arg('report'), JSON.stringify(report, null, 1));
   }
   const print = buildSvg(fontCss, 'print', placed), screen = buildSvg(fontCss, 'screen', placed);
   fs.mkdirSync(OUT_DIR, { recursive: true });

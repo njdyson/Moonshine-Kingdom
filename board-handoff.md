@@ -37,9 +37,11 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   moves are built from named lines, so the intent reads in the code: `MN_WEST`, `NJ`, `ER_MN`
   and so on.
 - **What changed.** Manhattan's west coast is one straight line (Nick: it is straight in real
-  life) with New Jersey's shore parallel, so the Hudson is an even 44. The East River is one
-  channel 49 wide in three reaches: 45 degrees past the Williamsburg and Queensboro, a level
-  turn under the Bowery, then parallel to the Hudson past the Brooklyn Bridge. Hell Gate and
+  life) with New Jersey's shore parallel, so the Hudson is an even 44. New Jersey then runs
+  down beside the Bowery's west side and is squared off level with the Bowery's foot (Nick,
+  2026-09-29), so the Hudson keeps its 44 to the harbour. The East River is one channel 49
+  wide in three reaches: 45 degrees past the Williamsburg and Queensboro, a level turn under
+  the Bowery, then parallel to the Hudson past the Brooklyn Bridge. Hell Gate and
   the Sound are the same 49, a chevron turning at the Hunts Point / Throggs Neck line; that
   also opened the 22-unit pinch between Throggs Neck and Whitestone, which are not connected
   and read as if they nearly touched. Manhattan's borders are level at 262, 358, 453 and 548.
@@ -69,10 +71,14 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   | Traced | 32 (West Side) | 34, 36, 50, 65 |
   | Drafted, first pass | 34 (Morris Park, Sugar Hill) | 34, 34, 45, 64 |
   | Drafted, balanced | 42 (Tenderloin) | 47, 47, 57, 64 |
+  | Drafted, re-tuned for signs | 40 (Fordham, Hunts Point) | 47, 44, 54, 64 |
 
-  Nine Districts now sit between 42 and 46. The big ones stay big because nothing small
-  borders them: Jamaica (114), Sheepshead Bay (72), Coney Island (70). Change a setting by hand
-  and the room report says what it cost.
+  The last row is the current `SETTINGS`, measured the same way (centred labels). They were
+  re-tuned for the hanging signs (below), so with the signs on the figures are 39 (Fordham) and
+  46, 48, 58, 68. If the centred labels win instead, re-tune for them.
+
+  The big ones stay big because nothing small borders them: Jamaica (114), Sheepshead Bay (77),
+  Coney Island (71). Change a setting by hand and the room report says what it cost.
 - **Chamfers** (`Drafted/Chamfered`) bevel coast corners sharper than 110 degrees that aren't
   junctions. The drafting already made most corners 45-degree cuts, so only four qualify
   (Throggs Neck's tip, the Bowery's south-west corner, the Rockaway spit, Sheepshead's hook).
@@ -81,7 +87,9 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   Rockaways now one straight line, Jamaica's piers face the ocean instead of the bay.
 - **Checks** before writing: no crossings, no run under 3 units, no District area off by more
   than 20%, no short border shrinking below 80%, no water under 20 wide between Districts that
-  don't meet (the narrowest is 25, the Bowery to Westerleigh).
+  don't meet (the narrowest is 22, the Kill van Kull under New Jersey), and no bridge landing
+  within 20 units of a border on its shore (the skeleton's closest is 22, the Queensboro in
+  Astoria).
 - The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point) is unchanged; splitting it
   would add a border.
 - `Art/Board/Drafted/Before and after.jpg` puts the two screen boards side by side.
@@ -108,8 +116,26 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
     (Nick, 2026-09-29), a touch taller than the sign, with its own gilt edge and a bolt in
     each corner, so name and Still stay one sign but read as two parts. Tried and cut the same
     day: the Still standing apart in the District, which lost the link between name and Still.
-    A narrow District stacks its name (Coney Island), and one narrower still bolts the plate
-    under the sign instead (East Harlem); all 25 take a sign.
+    A narrow District stacks its name (Coney Island); all 25 take a sign.
+  - **Every sign hangs, and the hangers are kept short** (Nick, 2026-09-29: Astoria and
+    Sheepshead Bay were missing hangers). Hangers run to the border straight above however
+    long they are; an earlier cap at 44 units dropped them. `placeSign()` tries every shape
+    and keeps the one whose longest hanger, plus a cost for the less usual shape, is least:
+    a stacked name costs 15, the plate bolted under the sign 60 (only where nothing else
+    fits; no District needs it now). `--report=<file>` writes each District's sign and room
+    as JSON. The geometry was then re-tuned for hangers as well as room (a scratch script
+    over `SETTINGS`, not kept): Throggs Neck's hangers went from 37 to 21, Astoria's from 58
+    to 50, Whitestone's from 30 to 20. New settings: `ehBulge`/`ehKnee` bend the East
+    Harlem / Hunts Point border into Hunts Point low down, so East Harlem's sign hangs lower
+    where it is wider, stacked with the Still beside it (Nick asked for this; it had needed
+    the plate under the sign); `hpEast` moves Hunts Point / Throggs Neck's shore end 16 east
+    so Hunts Point wins some of that back; `astoriaTop` places the Astoria / Whitestone
+    border on the Hell Gate shore, kept clear of the Hell Gate Bridge (the tuner's first
+    pass put the border under its landing, hence the bridge check above). The tuner moved
+    Williamsburg's south point up to 700 for Red Hook's hangers; that cost the crown room 13
+    cm², so it sits at 724 (Williamsburg 58 with signs, Red Hook's hangers 42 rather than 35).
+    The pointed Districts keep long hangers because their tops are points: Astoria 50,
+    Brownsville 47, Williamsburg 46, Red Hook 42, Sugar Hill 41, East Harlem 39.
 - **The Tomorrow panel is standard** (Nick liked it, 2026-09-29; `tomorrow()`): under the
   title, the Mash socket and a 36 mm socket for tomorrow's Turn Tokens as **one stack, #1 on
   top**, so "claim the lowest-numbered token left" becomes "take the top token". Both are set
