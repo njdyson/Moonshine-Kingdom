@@ -79,6 +79,24 @@ const BOROUGHS = {
 // (WARD_BAND: its width, depth and feather), so the colour matches and the Ward reads
 // as the rough end of town. Every District has a narrow one.
 const WARD_BAND = { width: 34, opacity: 0.7, blur: 7 };
+
+// Print lift: dark tones print darker than they look on a screen (ink spreads on the paper),
+// so the print build lightens the land, the water and New Jersey, and eases the Ward band.
+// A starting point, not a measured profile: judge it from a printed proof strip.
+const PRINT_LIFT = { light: 1.13, sat: 1.1, wardBand: 0.55 };
+let MODE = 'screen'; // set by buildSvg
+function lift(hex) {
+  if (MODE !== 'print') return hex;
+  let [r, g, b] = [1, 3, 5].map(i => parseInt(hex.substr(i, 2), 16) / 255);
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l0 = (mx + mn) / 2, d = mx - mn;
+  let h = 0, s0 = d ? d / (1 - Math.abs(2 * l0 - 1)) : 0;
+  if (d) h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  const l = Math.min(1, l0 * PRINT_LIFT.light), sa = Math.min(1, s0 * PRINT_LIFT.sat);
+  const c = (1 - Math.abs(2 * l - 1)) * sa, x = c * (1 - Math.abs(((h % 6) + 6) % 6 % 2 - 1)), m = l - c / 2;
+  const hh = ((h % 6) + 6) % 6;
+  const [r1, g1, b1] = hh < 1 ? [c, x, 0] : hh < 2 ? [x, c, 0] : hh < 3 ? [0, c, x] : hh < 4 ? [0, x, c] : hh < 5 ? [x, 0, c] : [c, 0, x];
+  return '#' + [r1, g1, b1].map(v => Math.round((v + m) * 255).toString(16).padStart(2, '0')).join('');
+}
 const fillId = d => `fill-${d.boro}`;
 
 // ---------------------------------------------------------------- roster
@@ -376,7 +394,7 @@ function placeAll() {
 function waterLining() {
   // Engraved coast rings: alternate gold and sea strokes, widest first, under the land.
   const land = [...DISTRICTS.map(d => FULL[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
-  const bg = C.sea[1];
+  const bg = lift(C.sea[1]);
   const rings = [[22, C.goldLine, 0.06], [18.5, bg, 1], [13.5, C.goldLine, 0.09], [10.5, bg, 1], [6.5, C.goldLine, 0.15], [4, bg, 1]];
   return rings.map(([w, col, op]) =>
     `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
@@ -389,7 +407,7 @@ function districtFills() {
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/>`
-      + (d.zone === 'ward' ? `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity="${WARD_BAND.opacity}" stroke-width="${WARD_BAND.width}" stroke-linejoin="round" filter="url(#wardBand)"/>` : '') + '</g>';
+      + (d.zone === 'ward' ? `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity="${MODE === 'print' ? PRINT_LIFT.wardBand : WARD_BAND.opacity}" stroke-width="${WARD_BAND.width}" stroke-linejoin="round" filter="url(#wardBand)"/>` : '') + '</g>';
     s += decoFrame(d, geo.regions[d.id]);
   }
   return s;
@@ -561,7 +579,7 @@ function placePiers() {
 }
 function piers() {
   return placePiers().map(({ d, q, u, n }) => {
-    const col = BOROUGHS[d.boro].fill[0];
+    const col = lift(BOROUGHS[d.boro].fill[0]);
     const P = (along, across) => `${f(q[0] + n[0] * along + u[0] * across)} ${f(q[1] + n[1] * along + u[1] * across)}`;
     const body = `M${P(-2.5, -PIER.half)} L${P(PIER.len, -PIER.half)} L${P(PIER.len, PIER.half)} L${P(-2.5, PIER.half)} Z`;
     return `<path d="${body}" fill="#000" fill-opacity=".45" transform="translate(1 1.6)" filter="url(#blur2)"/>`
@@ -840,7 +858,7 @@ function frame() {
 function defs(fontCss, mode) {
   let s = `<style>${fontCss}</style>`;
   for (const [k, b] of Object.entries(BOROUGHS))
-    s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${b.fill[0]}"/><stop offset="1" stop-color="${b.fill[1]}"/></radialGradient>`;
+    s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${lift(b.fill[0])}"/><stop offset="1" stop-color="${lift(b.fill[1])}"/></radialGradient>`;
   // The Heat Track's metals and lacquer.
   const metal = (id, [lt, md, dk], x2 = 1, y2 = 1) => `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}"><stop offset="0" stop-color="${lt}"/><stop offset=".28" stop-color="${md}"/><stop offset=".52" stop-color="${dk}"/><stop offset=".78" stop-color="${md}"/><stop offset="1" stop-color="${lt}"/></linearGradient>`;
   s += metal('bezelGilt', GILT) + metal('bezelCopper', COPPER);
@@ -854,8 +872,8 @@ function defs(fontCss, mode) {
   s += `<linearGradient id="heatTray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050302"/><stop offset="1" stop-color="#1c140c"/></linearGradient>`;
   s += `<linearGradient id="heatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${GILT[2]}"/><stop offset=".5" stop-color="${GILT[1]}"/><stop offset="1" stop-color="${GILT[0]}"/></linearGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
-  s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
-  s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
+  s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${lift(C.sea[0])}"/><stop offset="1" stop-color="${lift(C.sea[1])}"/></radialGradient>`;
+  s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${lift(C.offboard)}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   s += `<filter id="wardBand" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="${WARD_BAND.blur}"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
@@ -935,6 +953,7 @@ function allText() {
 }
 
 function buildSvg(fontCss, mode, placed) {
+  MODE = mode;
   const art = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining()
     + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
     + districtFills() + borders() + piers() + bridges();

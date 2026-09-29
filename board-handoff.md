@@ -195,6 +195,15 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
   margin set by the manufacturer's own template, which wins over this. **Safe margin:**
   nothing but the black band sits outside the gold edge's centre line, 7 units (3.9 mm) in.
   If a manufacturer wants more, the frame (`FRAME_OUT`, `FRAME_IN`) moves in, not the art.
+  The Borough names sit at least 12 mm from the trim (The Bronx and Staten Island were nudged
+  in on 2026-09-29, from 10 and 9); the HEAT plate and the gold edge are the parts at risk on
+  a wrapped board, at about 4 mm.
+- **Print lift** (`PRINT_LIFT`, 2026-09-29): dark tones print darker than on screen (ink spreads
+  on the paper), so the print build alone lifts the land, water and New Jersey (lightness x1.13,
+  saturation x1.1) and eases the Ward band (70% to 55%). The screen build is untouched. A
+  starting point, not a measured profile: print a proof strip (Queens, Brooklyn, a Ward, the
+  water) on the real stock before the full board, and tune from that. The leather is shading
+  only (no displacement), so it never moves a line.
 - **Heat Track sockets are the Ledger's**: 39 mm casino chips, 2 mm apart, in a tray padded
   6 mm (`css/ledger-board.css`, the poker-chip build). If the Ledger's socket changes,
   `heatTrack()` changes with it. Five sockets need 381 units, a little more than the New Jersey
