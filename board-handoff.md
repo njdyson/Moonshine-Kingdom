@@ -82,6 +82,8 @@ works better"), so this makes the angles deliberate instead.
   (`BK_COL`) and meets the bay's 45-degree corner on a foot. The Hunts Point / Throggs Neck line
   (`hpCol`) is upright too, and **Throggs Neck's tip is cut** 24 units back (`TN_CUT`; Nick: it
   was harsh).
+- **Morris Park is square** (Nick, 2026-09-29: it looks neater). Its bottom, once sloping
+  from 184 to 190 at the shore, runs level on Fordham's line (`bronxRow`) to the east shore.
 - **Jamaica Bay** is 90 units wider than traced (`bayEast`), which trims Jamaica, once the one
   outlier (138). 130 wider was tried and made a sea of dead water.
 - **Bridges** keep their places (bar the Hell Gate's shift) and cross square to the new banks,

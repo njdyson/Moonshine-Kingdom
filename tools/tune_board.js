@@ -43,7 +43,7 @@ const CM = (609.6 / 1080) ** 2 / 100, STEP = 2, FRAME_IN = 13;
 
 // Each setting the tuner may move: [path in SETTINGS, lowest, highest].
 const KNOBS = [
-  ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215], ['morrisEast', 160, 255],
+  ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215],
   ['hellGate', 3, 15], ['hpCol', 770, 830], ['hpFoot', 30, 90], ['ehKnee.0', 700, 735], ['ehKnee.1', 260, 315],
   ['manhattanWest', 0, 12], ['manhattan.0', 250, 300], ['manhattan.1', 340, 400], ['manhattan.2', 440, 495],
   ['manhattan.3', 535, 585], ['eastHarlem', -12, 32],

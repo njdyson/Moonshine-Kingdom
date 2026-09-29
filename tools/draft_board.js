@@ -98,8 +98,7 @@ const deg = a => (a * Math.PI) / 180;
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
   bronxCols: [692, 862], // Belmont | Fordham | Morris Park
-  bronxRow: 184, // Fordham / Throggs Neck, level
-  morrisEast: 190, // where Morris Park / Throggs Neck meets the east shore
+  bronxRow: 184, // Fordham and Morris Park / Throggs Neck, level to the east shore
   hellGate: 3, // the Hell Gate and Sound reaches' angle, degrees: a chevron
   manhattanWest: 9, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
   manhattanLift: 26, cornerLift: 14, // Sugar Hill / Belmont raised into Belmont: at the coast, and at the four-way corner
@@ -208,7 +207,7 @@ function draft(S) {
     '307,696': atY(ER_BW, S.boweryBottom), '171,686': [atY(MN_WEST, m4)[0], S.boweryBottom],
     // The Bronx: an upright east shore, level blocks
     '715,53': [b1, W], '715,160': [b1, BH[1]], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
-    '1029,231': [BRONX_EAST, S.morrisEast], '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
+    '1029,231': [BRONX_EAST, S.bronxRow], '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
     // Queens: the river banks, level and upright borders
     '720,373': meet(HG_QN, ER_QN), '766,356': AW,
     '1033,386': QN_NORTH, '1080,392': [1080, QN_NORTH[1]],
@@ -234,7 +233,7 @@ function draft(S) {
   const REPLACE = {
     // the Bronx: Belmont's shore upright from Manhattan's tip to the frame; Throggs Neck's tip cut off
     'water|belmont': [[TIPB[0], W], TIPB],
-    'throggs_neck|water': [[BRONX_EAST, S.morrisEast], ...TIP_CUT, BEND],
+    'throggs_neck|water': [[BRONX_EAST, S.bronxRow], ...TIP_CUT, BEND],
     'east_harlem|hunts_point': [CORNER, S.ehKnee, EH_SHORE], // East Harlem wider low down, for its sign
     'east_harlem|water': [EH_SHORE, [694, 328], meet(line(ehFoot, [1, 1]), ER_MN)],
     'belmont|hunts_point': [[b1, BH[1]], BH, CORNER],

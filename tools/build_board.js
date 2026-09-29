@@ -400,6 +400,19 @@ function waterLining() {
     `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
 }
 
+// Trial Ward treatments (2026-09-29, waiting on Nick): band (the feathered band, the
+// default), mat, hatch and beads. Set WARD_STYLE to build one.
+const WARD_STYLE = process.env.WARD_STYLE || 'band';
+function wardMark(d, p) {
+  const q = straightRing(geo.regions[d.id]);
+  if (WARD_STYLE === 'band') return `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity="${MODE === 'print' ? PRINT_LIFT.wardBand : WARD_BAND.opacity}" stroke-width="${WARD_BAND.width}" stroke-linejoin="round" filter="url(#wardBand)"/>`;
+  if (WARD_STYLE === 'mat') return `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="28" stroke-linejoin="miter"/>`
+    + `<path d="${ringPath(insetRing(q, 14))}" fill="none" stroke="${C.goldLine}" stroke-opacity=".6" stroke-width=".9" stroke-linejoin="miter"/>`;
+  if (WARD_STYLE === 'hatch') return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="26" stroke-linejoin="miter"/>`
+    + `<path d="${ringPath(insetRing(q, 13))}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
+  if (WARD_STYLE === 'beads') return `<path d="${ringPath(insetRing(q, 7))}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0 6.5" stroke-linejoin="round"/>`;
+  return '';
+}
 function districtFills() {
   let s = '';
   for (const d of DISTRICTS) {
@@ -407,7 +420,7 @@ function districtFills() {
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/>`
-      + (d.zone === 'ward' ? `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity="${MODE === 'print' ? PRINT_LIFT.wardBand : WARD_BAND.opacity}" stroke-width="${WARD_BAND.width}" stroke-linejoin="round" filter="url(#wardBand)"/>` : '') + '</g>';
+      + (d.zone === 'ward' ? wardMark(d, p) : '') + '</g>';
     s += decoFrame(d, geo.regions[d.id]);
   }
   return s;
@@ -875,6 +888,7 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${lift(C.sea[0])}"/><stop offset="1" stop-color="${lift(C.sea[1])}"/></radialGradient>`;
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${lift(C.offboard)}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
+  s += `<pattern id="wardHatch" patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(45)"><rect width="5" height="5" fill="#000" fill-opacity=".18"/><path d="M0 0 V5" stroke="${C.goldLine}" stroke-opacity=".32" stroke-width="1.1"/></pattern>`;
   s += `<filter id="wardBand" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="${WARD_BAND.blur}"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   // lift: the Stills and zone roundels cast a soft shadow, like pieces on the board
