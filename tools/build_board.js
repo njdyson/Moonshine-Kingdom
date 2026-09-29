@@ -285,8 +285,11 @@ function cluster(d, opts = {}) {
     });
   };
   const chamfered = (x, yy, ww, hh, c) => `M${f(x + c)} ${f(yy)} H${f(x + ww - c)} L${f(x + ww)} ${f(yy + c)} V${f(yy + hh - c)} L${f(x + ww - c)} ${f(yy + hh)} H${f(x + c)} L${f(x)} ${f(yy + hh - c)} V${f(yy + c)} Z`;
+  // where a fold may cross the sign without cutting its art: the gap between the medallion
+  // and the name, and the gap between the name and the Still's plate (x in the cluster)
+  const seams = drop ? [] : [[sx + pad + 2 * sr + 1, sx + tx - 1], [sx + tx + tw + 1, px - 1]];
   return {
-    w, h, opts, hangers,
+    w, h, opts, hangers, seams,
     draw(x, yy) {
       const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
       // hangers: from the tops up to the border straight above, always
@@ -348,31 +351,47 @@ const SIGN_SHAPES = d => {
   const two = d.name.includes(' ');
   return [[{}, 0], ...(two ? [[{ stacked: true }, 15]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 75]] : [])];
 };
+// The board folds in four (a quad fold: one fold down the middle, one across). A sign keeps
+// FOLD_CLEAR off both, or lets the middle fold run through one of its seams (between the
+// medallion and the name, or the name and the Still's plate), nudged along its row if it
+// must, so no crease runs through its art. A District too narrow for either (Sheepshead Bay,
+// whose sign fills its column) keeps its sign where it was, and the build reports it.
+const FOLD = 540, FOLD_CLEAR = 3 * MM, FOLD_SLACK = 25;
+const offFold = (a, len) => a + len <= FOLD - FOLD_CLEAR || a >= FOLD + FOLD_CLEAR;
 // The sign hangs as high in the District as it fits, centred across the room there,
-// clear of the Speakeasy and High Society keylines.
+// clear of the Speakeasy and High Society keylines and the folds.
 function placeSign(d) {
   const p = geo.regions[d.id], framed = d.zone === 'speak' || d.zone === 'hs';
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
   // Every shape is tried, clear of the keylines where it can be (a narrow District lets
   // it closer), and the one whose hangers come out shortest, with its cost, wins.
-  const variants = SIGN_SHAPES(d);
-  let best = null;
-  for (const [opts, cost] of variants) for (const M of framed ? [13, 9] : [7]) {
-    const c = cluster(d, opts);
-    for (let y = y0; y <= y1 - c.h; y += 1) {
-      const fit = [];
-      for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
-      if (!fit.length) continue;
-      const x = (fit[0] + fit[fit.length - 1]) / 2;
-      const hang = Math.max(...c.hangers(x, y).map(([, hy, top]) => hy - top));
-      const score = hang + cost + (M < 13 && framed ? 4 : 0);
-      if (!best || score < best.score) best = { score, hang, x, y, c, open: M };
-      break;
+  const search = foldSafe => {
+    let best = null;
+    for (const [opts, cost] of SIGN_SHAPES(d)) for (const M of framed ? [13, 9] : [7]) {
+      const c = cluster(d, opts);
+      const ok = x => offFold(x, c.w) || c.seams.some(([a, b]) => FOLD - x >= a && FOLD - x <= b);
+      for (let y = y0; y <= y1 - c.h; y += 1) {
+        if (foldSafe && !offFold(y, c.h)) continue;
+        const fit = [];
+        for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
+        const mid = (fit[0] + fit[fit.length - 1]) / 2, clear = foldSafe ? fit.filter(ok) : fit;
+        if (!clear.length) continue;
+        const x = !foldSafe || ok(mid) ? mid : clear.reduce((a, b) => (Math.abs(b - mid) < Math.abs(a - mid) ? b : a));
+        const hang = Math.max(...c.hangers(x, y).map(([, hy, top]) => hy - top));
+        const score = hang + cost + (M < 13 && framed ? 4 : 0);
+        const fold = !offFold(y, c.h) || !ok(x) ? 'CROSSED' : offFold(x, c.w) ? '' : 'seam';
+        if (!best || score < best.score) best = { score, hang, x, y, c, open: M, fold };
+        break;
+      }
     }
-  }
-  if (!best) throw new Error(`No room for a sign in ${d.id}: the drafting has made it too small`);
-  return best;
+    return best;
+  };
+  // The fold-safe place wins unless it hangs FOLD_SLACK further down than the free one
+  // (Sugar Hill's would hang 86); a sign left on a fold is reported by the build.
+  const free = search(false), safe = search(true);
+  if (!free) throw new Error(`No room for a sign in ${d.id}: the drafting has made it too small`);
+  return safe && safe.score <= free.score + FOLD_SLACK ? safe : free;
 }
 // Room for pieces: the District's ground at least ROOM_MARGIN from every border and
 // clear of its sign (by the same margin), in cm² at 24in. Printed with each placement,
@@ -817,13 +836,21 @@ function title() {
   // and in the ground left under the panels.
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
-  const rule = (y, gap) => `<path d="M${f(-cityW / 2)} ${y} H${f(-gap)} M${f(gap)} ${y} H${f(cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
+  const rule = (y, gap, c = 0) => `<path d="M${f(-cityW / 2)} ${y} H${f(c - gap)} M${f(c + gap)} ${y} H${f(cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
+  // The board folds in four, and the fold across it runs lengthwise through the title, so the
+  // title sits with that fold in the space between NEW and YORK, and the year slides along its
+  // rule until the fold falls between two digits. Widths carry each letter's trailing spacing:
+  // a word's letters end a spacing short of its width.
+  const W = t => width(TYPE.titleCity, t), Y = t => width(TYPE.titleYear, t);
+  const gap = 2.2 - cityW / 2 + (W('NEW') - TYPE.titleCity.spacing + W('NEW YORK') - W('YORK')) / 2; // along the title, from its centre
+  const yx = ['1', '19', '192'].map(t => gap + yearW / 2 - Y(t) + TYPE.titleYear.spacing / 2)
+    .reduce((a, b) => (Math.abs(b - 4) < Math.abs(a - 4) ? b : a)); // the year's centre, nearest where it sat
   let s = rule(-27, 9) + diamond(0, -27, 3.6);
   s += text('NEW YORK', 2.2, -5, TYPE.titleCity, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true });
-  s += rule(20, yearW / 2 + 10);
-  s += text('1929', 4, 20, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
-  const top = PANELS_Y() + TOMORROW.h + 16, foot = Math.max(...geo.regions.nj.map(q => q[1])) - 16;
-  const x = (FRAME_IN + njShore(foot)) / 2 + 1.5, y = Math.max(top + cityW / 2, (top + foot) / 2);
+  s += rule(20, yearW / 2 + 10, yx);
+  s += text('1929', yx, 20, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
+  const foot = Math.max(...geo.regions.nj.map(q => q[1])) - 16;
+  const x = (FRAME_IN + njShore(foot)) / 2 + 1.5, y = FOLD + gap;
   return `<g transform="translate(${f(x)} ${f(y)}) rotate(-90)">${s}</g>`;
 }
 
@@ -947,7 +974,7 @@ function allText() {
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
   for (const [, t, chips] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); for (const [, p] of chips) add(TYPE.price, p); }
   add(TYPE.panelHead, 'HEAT');
-  add(TYPE.titleCity, 'NEW YORK');
+  add(TYPE.titleCity, 'NEW YORK'); add(TYPE.titleCity, 'NEW'); add(TYPE.titleCity, 'YORK'); for (const t of ['1', '19', '192']) add(TYPE.titleYear, t);
   add(TYPE.titleYear, '1929');
   return items;
 }
@@ -1064,7 +1091,7 @@ async function printPdf(browser, svg) {
   const placed = placeAll();
   for (const d of DISTRICTS) {
     const { x, y, c, open } = placed[d.id];
-    console.log(`  ${d.id.padEnd(15)} sign at ${f(x, 0)},${f(y, 0)}  margin ${f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²  hangers ${f(placed[d.id].hang, 0)}${c.opts.stacked ? ' stacked' : ''}${c.opts.drop ? ' drop' : ''}`);
+    console.log(`  ${d.id.padEnd(15)} sign at ${f(x, 0)},${f(y, 0)}  margin ${f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²  hangers ${f(placed[d.id].hang, 0)}${c.opts.stacked ? ' stacked' : ''}${c.opts.drop ? ' drop' : ''}${placed[d.id].fold ? ' fold: ' + placed[d.id].fold : ''}`);
   }
   if (arg('report')) { // each District's placement and room, and its sign's shapes, as JSON
     const report = Object.fromEntries(DISTRICTS.map(d => {

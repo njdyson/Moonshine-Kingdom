@@ -108,7 +108,7 @@ const SETTINGS = {
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 816, // Hunts Point / Throggs Neck, upright (the Hell Gate turns there)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
-  queensRows: [488, 670, 807], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
+  queensRows: [485, 670, 807], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
   coronaBottom: 700, // Corona / Richmond Hill, level from the Queens / Brooklyn line
   williamsburgSouth: 749, // Williamsburg's southern point, on Red Hook / Brownsville
@@ -264,7 +264,8 @@ function draft(S) {
     boro: {
       MN: [...atY(shift(MN_WEST, 22), 440).map(r1), -54.5], // beside the Tenderloin and Five Points, clear of West Side's piers
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP_CUT[0][1]) / 2), -90], // beside the Bronx's east shore
-      QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
+      // BK: the fold down the middle falls between its O and K (the board folds in four)
+      QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [523, 1030, 8.6], SI: [172, 1050, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
   };
@@ -360,8 +361,9 @@ function bridgesFor(cs) {
 // A bridge's name sits in the water beside it, along the river, where it was.
 function bridgeLabels(bs) {
   const was = {
-    'Hell Gate Bridge': 50, 'Queensboro Bridge': 44, 'Williamsburg Bridge': 44, 'Brooklyn Bridge': -44,
-  }; // distance along the river from the bridge, as on the board (the side it was on)
+    'Hell Gate Bridge': 50, 'Queensboro Bridge': 44, 'Williamsburg Bridge': -50, 'Brooklyn Bridge': -44,
+  }; // distance along the river from the bridge, and which side (the Williamsburg's moved downstream,
+  // off the centre of the board, where the two folds cross)
   const out = {};
   for (const b of bs) {
     const m = [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2], u = unit(b.b[0] - b.a[0], b.b[1] - b.a[1]);

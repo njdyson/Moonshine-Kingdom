@@ -210,6 +210,22 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
   in around it and the hairline follows (`frame()`), so the New Jersey coast meets its edge
   instead of running under a floating panel (Nick, 2026-09-28).
 - **Mash square**: 24 mm.
+- **The printer and the folds** (2026-09-29): boardgamesmaker.com's 24x24 board, a **quad
+  fold** (one fold down the middle, one across, four 12in panels), 1/8in bleed plus a further
+  1/8in safe margin (the build's 3.4 mm bleed and 3.9 mm gold edge meet both), 300 dpi, sent as
+  PNG, TIFF or JPG, not PDF: the `--print` PNG is the file. **Nothing is printed on a fold where
+  it can be helped**:
+  - Signs keep 3 mm off both folds (`FOLD`, `FOLD_CLEAR` in `placeSign()`), or let the middle
+    fold run through a seam, between the medallion and the name or the name and the Still's
+    plate (Belmont and Williamsburg do). Corona hangs lower and Flushing higher (the Whitestone /
+    Flushing border went up 3) to clear the fold across. A sign whose fold-safe place would
+    hang more than `FOLD_SLACK` lower keeps its place, and the build prints `fold: CROSSED`:
+    **Sugar Hill** (the fold crosses its Still plate; its fold-safe place hangs 86) and
+    **Sheepshead Bay** (the fold clips the end of its name; its sign fills its column).
+  - The title sits with the fold across in the space between NEW and YORK, and the year slides
+    along its rule so the fold falls between its 9 and 2 (`title()`). BROOKLYN sits with the
+    middle fold between its O and K. The Williamsburg Bridge's name moved downstream, off the
+    centre where the folds cross.
 
 ## Bridges (period accurate, named for Jobs)
 
