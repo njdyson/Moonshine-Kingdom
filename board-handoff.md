@@ -88,7 +88,8 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
 - **The Deco style** (`--style=deco`, written to `Drafted/Deco/`; Nick, 2026-09-29). The
   type tints told a Dock from a Speakeasy only faintly, and the piers now do that job, so this
   tells the types apart by drawing instead. One colour per Borough for Docks, Speakeasies and
-  High Society; **Wards a touch darker** (20% towards black: the rough end of town).
+  High Society; **Wards darker** (30% towards black, `WARD_DARK`: the rough end of town; 20%
+  was too faint).
   **Speakeasies** get a gold keyline inset 7 units inside their border with a small diamond at
   each corner. **High Society** gets a double keyline (6 and 10.5 in) with the frame's Deco
   fan opened or closed to fill each corner, and a brighter diamond: the same frame with more
@@ -188,15 +189,21 @@ keeps them on a re-trace.
   prefers the Districts flat.
 - **Finishing touches:** piers off each Dock's most open stretch of shore, in the Dock's own
   colour (placed automatically, clear of land, bridges and labels); Art Deco quarter fans in the
-  frame's corner steps and at the Heat corner's turn; a soft drop shadow under every Still and
-  zone roundel, so they sit on the board like pieces.
+  frame's corner steps (the one at the Heat corner's turn was cut, 2026-09-29: it sat on the map
+  and looked odd); a soft drop shadow under every Still and zone roundel, so they sit on the
+  board like pieces.
 - **Zone roundels are 28 units across** (`R = 14`, about 16 mm at 24in), big enough to read
   a District's type at a glance beside its Still.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest
-  right on the Heat Track"; wrapping it into two rows would break that. The sockets copy the
-  Ledger's (dark wells, a faint gold ring); only the numerals warm from gold towards rust, with
-  RAID on the 5th. Nick asked for subtle escalation or none: `HEAT_NUM` and `HEAT_TINT` hold it,
-  and setting both flat gives the Ledger's plain look.
+  right on the Heat Track"; wrapping it into two rows would break that. The sockets keep the
+  Ledger's size and spacing (39 mm chips, 2 mm apart). **Dressed as a gilt instrument** since
+  2026-09-29 (Nick found the plain wells "a touch cheap" and wants a premium feel): a polished
+  gold bezel round each socket, a lacquer floor with a fine guilloché sunburst and a track
+  ring like a watch dial, a shadow under the bezel's upper edge so the floor reads as
+  recessed, numerals engraved in graded gold over a drop shadow, diamonds in the spandrels
+  between sockets, a routed tray with a gilt lip, and HEAT between Deco rules. Escalation
+  stays subtle, as Nick asked: the floors warm a touch towards rust (`HEAT_TINT`), and only the
+  5th, the Raid, changes metal, to rose-copper on an oxblood floor (`GILT`, `COPPER`).
 - **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
 - **Title is NEW YORK 1929, nothing more.** No logo, no compass, and since 2026-09-28 no north
   line either (Nick found it too prominent).

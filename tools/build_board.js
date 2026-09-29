@@ -83,7 +83,7 @@ const BOROUGHS = {
 const TONE = { speak: 'warm', hs: 'warm', dock: 'cool' };
 const TINT = { warm: '#7a4e22', cool: '#2c5058' }, TINT_AMOUNT = 0.13; // slate, not blue: blue turns red to plum
 const mix = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
-const WARD_DARK = 0.2; // 'deco': Wards this much towards black
+const WARD_DARK = 0.3; // 'deco': Wards this much towards black
 const toneOf = d => (STYLE === 'deco' ? (d.zone === 'ward' ? 'dark' : '') : TONE[d.zone] || '');
 const tint = (c, tone) => (tone === 'dark' ? mix(c, '#000000', WARD_DARK) : tone ? mix(c, TINT[tone], TINT_AMOUNT) : c);
 const fillId = d => `fill-${d.boro}${toneOf(d) ? '-' + toneOf(d) : ''}`;
@@ -699,21 +699,60 @@ const HEAT = (() => {
   const inner = [tx + trayW + m, ty + trayH + m]; // the corner's inner hairline
   return { d, gap, padX, trayW, trayH, tx, ty, edge: [inner[0] + 6, inner[1] + 6] };
 })();
-const HEAT_NUM = ['#9c8650', '#a37b4b', '#a86f46', '#aa6241', '#ad533b'];
+// Escalation is kept subtle (Nick): the floors warm a touch towards rust, and only the
+// 5th, the Raid, changes metal: rose-copper on an oxblood floor.
 const HEAT_TINT = [0, 0.03, 0.05, 0.07, 0.1];
+// Metals: [light, mid, shadow] for gilt bezels and engraved numerals.
+const GILT = ['#f6e3a1', '#c9a437', '#6b5424'], COPPER = ['#f2c3a4', '#b8674d', '#5a2618'];
 function heatTrack() {
   const { d, gap, padX, trayW, trayH, tx, ty, edge: [ex, ey] } = HEAT;
-  const a = (FRAME_OUT + FRAME_IN) / 2;
+  const a = (FRAME_OUT + FRAME_IN) / 2, R = d / 2, cy = ty + trayH / 2, mid = tx + trayW / 2;
   const bg = `<path d="M0 0 H${f(ex)} V${f(ey)} H0 Z" fill="url(#panel)"/>` + stitch(`M${a} ${a} H${f(ex - 3.4)} V${f(ey - 3.4)} H${a} Z`);
-  let s = text('HEAT', tx + trayW / 2, FRAME_IN + 12, TYPE.panelHead, { fill: C.goldBright, anchor: 'middle', middle: true });
-  s += `<rect x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}" fill="#000" fill-opacity=".35" stroke="#6b5a2e" stroke-opacity=".4" stroke-width="1"/>`;
+  // The title between Deco rules, each ending in a diamond by the word.
+  const ty0 = FRAME_IN + 12, half = width(TYPE.panelHead, 'HEAT') / 2 + 12;
+  const diamond = (x, y, r, fill) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${fill}"/>`;
+  let s = `<path d="M${f(tx + 26)} ${ty0} H${f(mid - half)} M${f(mid + half)} ${ty0} H${f(tx + trayW - 26)}" stroke="${C.goldLine}" stroke-opacity=".8" stroke-width=".9"/>`
+    + diamond(mid - half, ty0, 2.6, C.goldBright) + diamond(mid + half, ty0, 2.6, C.goldBright)
+    + diamond(tx + 26, ty0, 1.6, C.goldLine) + diamond(tx + trayW - 26, ty0, 1.6, C.goldLine)
+    + text('HEAT', mid + 0.6, ty0 + 0.9, TYPE.panelHead, { fill: '#000', anchor: 'middle', opacity: 0.7, middle: true })
+    + text('HEAT', mid, ty0, TYPE.panelHead, { fill: 'url(#giltText)', anchor: 'middle', middle: true });
+  // The tray: a routed channel, shadowed under its top lip, a gilt lip catching the light below.
+  const pill = `x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}"`;
+  s += `<clipPath id="heat-tray"><rect ${pill}/></clipPath>`
+    + `<rect ${pill} fill="url(#heatTray)"/>`
+    + `<rect ${pill} fill="none" stroke="#000" stroke-opacity=".75" stroke-width="7" clip-path="url(#heat-tray)" filter="url(#blur2)" transform="translate(0 1.5)"/>`
+    + `<rect ${pill} fill="none" stroke="url(#heatLip)" stroke-width="1.5"/>`;
   for (let i = 0; i < 5; i++) {
-    const cx = tx + padX + d / 2 + i * (d + gap), cy = ty + trayH / 2, raid = i === 4;
-    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2)}" fill="url(#socket)"/>`
-      + (HEAT_TINT[i] ? `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2)}" fill="#b0503a" fill-opacity="${HEAT_TINT[i]}"/>` : '')
-      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(d / 2 - 1)}" fill="none" stroke="${raid ? '#8a4a36' : '#7a6a3a'}" stroke-width="2"/>`
-      + text(String(i + 1), cx, cy - (raid ? 5 : 0), { family: 'Cinzel', weight: 700, size: 28, spacing: 0 }, { fill: HEAT_NUM[i], anchor: 'middle', middle: true });
-    if (raid) s += text('RAID', cx + 1, cy + 19, TYPE.small, { fill: '#b8674d', anchor: 'middle', middle: true });
+    const cx = tx + padX + R + i * (d + gap), raid = i === 4, metal = raid ? 'Copper' : 'Gilt';
+    // the floor: lacquer (oxblood for the Raid), recessed under its bezel
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R)}" fill="url(#heatFloor${raid ? 'Raid' : ''})"/>`
+      + (HEAT_TINT[i] && !raid ? `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R)}" fill="#b0503a" fill-opacity="${HEAT_TINT[i]}"/>` : '');
+    // a guilloché sunburst and an inner track ring, like a watch dial
+    let rays = '';
+    for (let k = 0; k < 72; k++) {
+      const t = k * 5 * Math.PI / 180, r0 = k % 2 ? 9 : 6;
+      rays += `M${f(cx + Math.cos(t) * r0)} ${f(cy + Math.sin(t) * r0)} L${f(cx + Math.cos(t) * (R - 7))} ${f(cy + Math.sin(t) * (R - 7))} `;
+    }
+    s += `<path d="${rays}" stroke="${raid ? COPPER[1] : C.goldLine}" stroke-opacity=".13" stroke-width=".45"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 7)}" fill="none" stroke="${raid ? COPPER[1] : C.goldLine}" stroke-opacity=".45" stroke-width=".6"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 9)}" fill="none" stroke="${raid ? COPPER[1] : C.goldLine}" stroke-opacity=".2" stroke-width=".4"/>`;
+    // recess: the floor darkens under the bezel's upper edge
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 2)}" fill="url(#heatRecess)"/>`;
+    // the bezel: polished metal, a dark seat inside it and a bright rim outside
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 1.8)}" fill="none" stroke="url(#bezel${metal})" stroke-width="3.4"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 3.7)}" fill="none" stroke="#000" stroke-opacity=".7" stroke-width=".6"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 0.1)}" fill="none" stroke="${raid ? COPPER[0] : GILT[0]}" stroke-opacity=".35" stroke-width=".5"/>`;
+    // the numeral, engraved: a shadow below it, the metal on top
+    const num = { family: 'Cinzel', weight: 700, size: 30, spacing: 0 }, ny = cy - (raid ? 5 : 0);
+    s += text(String(i + 1), cx + 0.9, ny + 1.3, num, { fill: '#000', anchor: 'middle', opacity: 0.75, middle: true })
+      + text(String(i + 1), cx, ny, num, { fill: `url(#${raid ? 'copperText' : 'giltText'})`, anchor: 'middle', middle: true });
+    if (raid) s += text('RAID', cx + 0.6, cy + 20.5, TYPE.small, { fill: '#000', anchor: 'middle', opacity: 0.7, middle: true })
+      + text('RAID', cx, cy + 19.8, TYPE.small, { fill: 'url(#copperText)', anchor: 'middle', middle: true });
+    // diamonds in the spandrels between sockets, above and below
+    if (i < 4) {
+      const mx = cx + R + gap / 2;
+      s += diamond(mx, ty + 9.5, 2.3, C.goldLine) + diamond(mx, ty + trayH - 9.5, 2.3, C.goldLine);
+    }
   }
   return { bg, fg: s };
 }
@@ -803,7 +842,7 @@ function frame() {
   for (const [x, y] of [[o, o], [W - o, o], [o, W - o], [W - o, W - o]]) s += diamond(x, y, 3.5);
   s += diamond(ex, ey, 3.5);
   // Deco fans in the hairline's corner steps, opening onto the map
-  s += fan(W - i - st, i + st, 90, 18) + fan(W - i - st, W - i - st, 180, 18) + fan(i + st, W - i - st, 270, 18) + fan(ex + 6, ey + 6, 0, 11);
+  s += fan(W - i - st, i + st, 90, 18) + fan(W - i - st, W - i - st, 180, 18) + fan(i + st, W - i - st, 270, 18);
   return s;
 }
 
@@ -818,6 +857,16 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="glow"><stop offset="0" stop-color="${C.goldBright}" stop-opacity=".16"/><stop offset="1" stop-color="${C.goldBright}" stop-opacity="0"/></radialGradient>`;
   s += `<radialGradient id="moon" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbf4dc"/><stop offset=".7" stop-color="#ddd3b2"/><stop offset="1" stop-color="#a99c78"/></radialGradient>`;
   s += `<radialGradient id="socket"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="#000"/></radialGradient>`;
+  // The Heat Track's metals and lacquer.
+  const metal = (id, [lt, md, dk], x2 = 1, y2 = 1) => `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}"><stop offset="0" stop-color="${lt}"/><stop offset=".28" stop-color="${md}"/><stop offset=".52" stop-color="${dk}"/><stop offset=".78" stop-color="${md}"/><stop offset="1" stop-color="${lt}"/></linearGradient>`;
+  s += metal('bezelGilt', GILT) + metal('bezelCopper', COPPER);
+  const engraved = (id, [lt, md, dk]) => `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${lt}"/><stop offset=".55" stop-color="${md}"/><stop offset="1" stop-color="${dk}"/></linearGradient>`;
+  s += engraved('giltText', GILT) + engraved('copperText', COPPER);
+  s += `<radialGradient id="heatFloor" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#2b1e13"/><stop offset=".75" stop-color="#140d08"/><stop offset="1" stop-color="#050302"/></radialGradient>`;
+  s += `<radialGradient id="heatFloorRaid" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#4d1a14"/><stop offset=".75" stop-color="#2a0c09"/><stop offset="1" stop-color="#0d0403"/></radialGradient>`;
+  s += `<linearGradient id="heatRecess" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset=".85" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#f3dc95" stop-opacity=".06"/></linearGradient>`;
+  s += `<linearGradient id="heatTray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050302"/><stop offset="1" stop-color="#1c140c"/></linearGradient>`;
+  s += `<linearGradient id="heatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${GILT[2]}"/><stop offset=".5" stop-color="${GILT[1]}"/><stop offset="1" stop-color="${GILT[0]}"/></linearGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
@@ -891,6 +940,7 @@ function allText() {
   for (const [t] of WATER_LABELS) add(TYPE.water, t);
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
   for (const [, t, sub] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); if (sub) add(TYPE.keyText, sub); }
+  add(TYPE.panelHead, 'HEAT');
   add(TYPE.titleCity, 'NEW YORK');
   add(TYPE.titleYear, '1929');
   return items;
