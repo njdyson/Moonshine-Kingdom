@@ -71,19 +71,17 @@ const BOROUGHS = {
   SI: { n: 5, name: 'Staten Island', fill: ['#3b3935', '#282623'] },
 };
 // One colour per Borough, so the Borough reads first (Raids and Squads work by
-// Borough), with Wards a touch darker, the rough end of town. The other types are
-// told apart by drawing: Speakeasies by an inset gold keyline with a diamond at each
-// corner, High Society by a double keyline with a Deco fan in each corner (decoFrame),
-// Docks by their piers.
-// Wards share their Borough's fill and take a wide dark band round the edge instead
-// (WARD_BAND: its width, depth and feather), so the colour matches and the Ward reads
-// as the rough end of town. Every District has a narrow one.
-const WARD_BAND = { width: 34, opacity: 0.7, blur: 7 };
+// Borough). The types are told apart by drawing: Speakeasies by an inset gold keyline
+// with a diamond at each corner, High Society by a double keyline with a Deco fan in
+// each corner (decoFrame), Docks by their piers, Wards by an engraved band of gold
+// hatching inside the edge, closed by a keyline (wardMark). The band is drawn, not
+// shaded, so the Ward sits flat; a feathered dark band made it look sunk.
+const WARD_HATCH = { band: 13, pitch: 5, line: 1.1, gold: 0.32, shade: 0.18 };
 
 // Print lift: dark tones print darker than they look on a screen (ink spreads on the paper),
-// so the print build lightens the land, the water and New Jersey, and eases the Ward band.
+// so the print build lightens the land, the water and New Jersey, and eases the Ward hatching's shade.
 // A starting point, not a measured profile: judge it from a printed proof strip.
-const PRINT_LIFT = { light: 1.13, sat: 1.1, wardBand: 0.55 };
+const PRINT_LIFT = { light: 1.13, sat: 1.1, wardShade: 0.14 };
 let MODE = 'screen'; // set by buildSvg
 function lift(hex) {
   if (MODE !== 'print') return hex;
@@ -400,18 +398,10 @@ function waterLining() {
     `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
 }
 
-// Trial Ward treatments (2026-09-29, waiting on Nick): band (the feathered band, the
-// default), mat, hatch and beads. Set WARD_STYLE to build one.
-const WARD_STYLE = process.env.WARD_STYLE || 'band';
 function wardMark(d, p) {
-  const q = straightRing(geo.regions[d.id]);
-  if (WARD_STYLE === 'band') return `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity="${MODE === 'print' ? PRINT_LIFT.wardBand : WARD_BAND.opacity}" stroke-width="${WARD_BAND.width}" stroke-linejoin="round" filter="url(#wardBand)"/>`;
-  if (WARD_STYLE === 'mat') return `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="28" stroke-linejoin="miter"/>`
-    + `<path d="${ringPath(insetRing(q, 14))}" fill="none" stroke="${C.goldLine}" stroke-opacity=".6" stroke-width=".9" stroke-linejoin="miter"/>`;
-  if (WARD_STYLE === 'hatch') return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="26" stroke-linejoin="miter"/>`
-    + `<path d="${ringPath(insetRing(q, 13))}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
-  if (WARD_STYLE === 'beads') return `<path d="${ringPath(insetRing(q, 7))}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0 6.5" stroke-linejoin="round"/>`;
-  return '';
+  const k = insetRing(straightRing(geo.regions[d.id]), WARD_HATCH.band);
+  return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="${2 * WARD_HATCH.band}" stroke-linejoin="miter"/>`
+    + `<path d="${ringPath(k)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
 }
 function districtFills() {
   let s = '';
@@ -888,8 +878,8 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${lift(C.sea[0])}"/><stop offset="1" stop-color="${lift(C.sea[1])}"/></radialGradient>`;
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${lift(C.offboard)}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
-  s += `<pattern id="wardHatch" patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(45)"><rect width="5" height="5" fill="#000" fill-opacity=".18"/><path d="M0 0 V5" stroke="${C.goldLine}" stroke-opacity=".32" stroke-width="1.1"/></pattern>`;
-  s += `<filter id="wardBand" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="${WARD_BAND.blur}"/></filter>`;
+  const H = WARD_HATCH, shade = MODE === 'print' ? PRINT_LIFT.wardShade : H.shade;
+  s += `<pattern id="wardHatch" patternUnits="userSpaceOnUse" width="${H.pitch}" height="${H.pitch}" patternTransform="rotate(45)"><rect width="${H.pitch}" height="${H.pitch}" fill="#000" fill-opacity="${shade}"/><path d="M0 0 V${H.pitch}" stroke="${C.goldLine}" stroke-opacity="${H.gold}" stroke-width="${H.line}"/></pattern>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   // lift: the Stills and zone roundels cast a soft shadow, like pieces on the board
   s += `<filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx=".8" dy="1.5" stdDeviation="1.3" flood-color="#000" flood-opacity=".6"/></filter>`;

@@ -120,10 +120,13 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
 ## The look
 
 - **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take
-  a wide dark band round the edge** (`WARD_BAND`: 34 wide, 70% black, feathered 7), the rough
-  end of town, with the Borough's own colour in the middle so the colours match. It replaced a
-  whole-Ward tint 30% towards black, which made Wards read as a different colour; a 56-wide
-  band at 80% blacked out narrow Five Points. The piers tell a Dock. **Speakeasies** get a gold keyline 7 units inside their border
+  an engraved band of gold hatching** inside the edge (`WARD_HATCH`: 13 wide, 45-degree lines
+  every 5 units over a light shade), closed by a keyline, the rough end of town, with the
+  Borough's own colour in the middle so the colours match. It replaced a feathered dark band
+  (34 wide, 70% black), which read as a shadow and made Wards look sunk into the board (Nick,
+  2026-09-29); a flat dark mat and a beaded keyline were tried beside it the same day, and the
+  hatching read clearest. Before the band, a whole-Ward tint 30% towards black made Wards read
+  as a different colour. The piers tell a Dock. **Speakeasies** get a gold keyline 7 units inside their border
   with a small diamond at each corner. **High Society** gets a double keyline (6 and 10.5 in)
   with the frame's Deco fan opened or closed to fill each corner, and a brighter diamond: the
   same frame with more flourish. Corners sharper than 20 degrees or blunter than 150 take no
@@ -201,7 +204,7 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
   board, the HEAT plate and the gold edge, at about 4 mm, are the parts at risk.
 - **Print lift** (`PRINT_LIFT`, 2026-09-29): dark tones print darker than on screen (ink spreads
   on the paper), so the print build alone lifts the land, water and New Jersey (lightness x1.13,
-  saturation x1.1) and eases the Ward band (70% to 55%). The screen build is untouched. A
+  saturation x1.1) and eases the shade under the Ward hatching (18% to 14%). The screen build is untouched. A
   starting point, not a measured profile: print a proof strip (Queens, Brooklyn, a Ward, the
   water) on the real stock before the full board, and tune from that. The leather is shading
   only (no displacement), so it never moves a line.
@@ -272,9 +275,9 @@ keeps them on a re-trace.
   with them on 2026-09-29. The roster still keeps each District's Town Planner mark, so they
   could come back on the signs; git history has the tray (`tray()` in `build_board.js`).
 - **The Borough reads first** (Raids and Squads work by Borough), so District types are told
-  apart by drawing, not colour: the Deco frames and the piers (see The look), with Wards
-  banded dark at the edge. Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
-  cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales; Nick
+  apart by drawing, not colour: the Deco frames, the piers and the Wards' hatched edge (see
+  The look). Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
+  cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales across the whole District; Nick
   prefers the Districts flat).
 - **Finishing touches:** piers off each Dock's most open stretch of shore, in the Dock's own
   colour (placed automatically, clear of land, bridges and labels); Art Deco quarter fans in the
