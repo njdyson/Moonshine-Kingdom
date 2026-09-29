@@ -7,6 +7,10 @@
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor (not committed): a 24in PDF at 300dpi, the
 //                                       7200px PNG it is made from, and a 4320px screen JPEG
+//   node tools/build_board.js --geometry=Drafted
+//                                       an experiment: the same build from the geometry in
+//                                       Art/Board/Drafted/, written there, leaving the board
+//                                       and the index tile alone
 //
 // Two builds share everything but the texture: the print board carries the full
 // pebbled leather, which reads at 24in; the screen board keeps only soft wrinkles
@@ -30,7 +34,8 @@ const os = require('os');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const DIR = path.join(ROOT, 'Art', 'Board');
+const EXPERIMENT = (process.argv.find(a => a.startsWith('--geometry=')) || '').slice(11);
+const DIR = path.join(ROOT, 'Art', 'Board', EXPERIMENT);
 const OUT = {
   printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
@@ -112,13 +117,14 @@ const OFFBOARD = ['nj', 'north', 'east'];
 
 // Labels in the water or on off-board land, by visual centre: [x, y, rotation].
 // Centres sit midway between the shores (or shore and frame), angles follow them.
-const BORO_LABELS = {
+// An experiment's geometry may carry its own ("labels"), placed for its shores.
+const BORO_LABELS = (geo.labels && geo.labels.boro) || {
   MN: [247, 378, -52.5], BX: [1049.5, 280, -90], QN: [890, 1037, -6.6], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
 };
-const WATER_LABELS = [['EAST RIVER', 405, 637, -6], ['JAMAICA BAY', 732, 921, 0]];
+const WATER_LABELS = (geo.labels && geo.labels.water) || [['EAST RIVER', 405, 637, -6], ['JAMAICA BAY', 732, 921, 0]];
 // Bridge names (from board-geometry.json) sit in the water beside each bridge,
 // along the river, so Jobs can name a crossing: [x, y, rotation] by name.
-const BRIDGE_LABELS = {
+const BRIDGE_LABELS = (geo.labels && geo.labels.bridges) || {
   'Hell Gate Bridge': [775, 331.5, -8], 'Queensboro Bridge': [625.5, 428.2, -43.6],
   'Williamsburg Bridge': [538.2, 505, -44.2], 'Brooklyn Bridge': [318.4, 712.8, -60.6],
 };
@@ -908,7 +914,7 @@ async function printPdf(browser, svg) {
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
-  await indexTile(browser, screen);
+  if (!EXPERIMENT) await indexTile(browser, screen);
   if (full) await printPdf(browser, print);
   await browser.close();
 })();

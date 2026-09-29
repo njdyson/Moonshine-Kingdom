@@ -1,0 +1,311 @@
+#!/usr/bin/env node
+// Experiment (2026-09-29): the traced board, redrawn as a draughtsman would draw it.
+// Reads the skeleton, Art/Board/board-geometry.json, and writes
+//
+//   Art/Board/Drafted/board-geometry.json             straight lines, exact angles
+//   Art/Board/Drafted/Chamfered/board-geometry.json   the same, sharp coast corners bevelled
+//
+//   node tools/draft_board.js      then   node tools/build_board.js --geometry=Drafted
+//                                         node tools/build_board.js --geometry=Drafted/Chamfered
+//
+// The tracer followed the Affinity art pixel by pixel, so the map is nearly a
+// designed one: borders a few degrees off level, rivers that wander in width, 3 to 5
+// unit jogs. This keeps every shape and every connection and makes the near-misses
+// exact:
+//
+// - Manhattan's west coast is one straight line and New Jersey's shore runs parallel
+//   to it, so the Hudson is an even channel.
+// - The East River is one channel of constant width in three straight reaches: 45
+//   degrees past the bridges, a level turn at the Bowery, then parallel to the Hudson
+//   down to the harbour. Hell Gate and the Sound are one even channel too, which also
+//   opens the pinch between Throggs Neck and Whitestone (not connected; it read as if
+//   they nearly touched).
+// - Borders within a few degrees of level or upright are made exact; tracer jogs go.
+// - Staten Island and Jamaica Bay become 45-degree Deco shapes.
+//
+// Every chain keeps its two sides and its two end junctions, so no adjacency changes.
+// The script checks for crossings, shrunken borders and closed-up water before writing.
+// Bridges keep their places and cross square to the new banks.
+
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..');
+const SRC = path.join(ROOT, 'Art', 'Board', 'board-geometry.json');
+const OUT = path.join(ROOT, 'Art', 'Board', 'Drafted');
+const geo = JSON.parse(fs.readFileSync(SRC, 'utf8'));
+const r1 = v => Math.round(v * 10) / 10;
+const key = p => `${p[0]},${p[1]}`;
+const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+
+// ---------------------------------------------------------------- lines
+const unit = (x, y) => { const l = Math.hypot(x, y); return [x / l, y / l]; };
+const line = (p, d) => ({ p, d: unit(...d) });
+const through = (a, b) => line(a, [b[0] - a[0], b[1] - a[1]]);
+const shift = (l, k) => ({ p: [l.p[0] - l.d[1] * k, l.p[1] + l.d[0] * k], d: l.d }); // k units to the line's right
+const atY = (l, y) => [l.p[0] + (l.d[0] * (y - l.p[1])) / l.d[1], y];
+const atX = (l, x) => [x, l.p[1] + (l.d[1] * (x - l.p[0])) / l.d[0]];
+const foot = (l, q) => { const t = (q[0] - l.p[0]) * l.d[0] + (q[1] - l.p[1]) * l.d[1]; return [l.p[0] + l.d[0] * t, l.p[1] + l.d[1] * t]; };
+function meet(a, b) {
+  const den = a.d[0] * b.d[1] - a.d[1] * b.d[0];
+  const t = ((b.p[0] - a.p[0]) * b.d[1] - (b.p[1] - a.p[1]) * b.d[0]) / den;
+  return [a.p[0] + a.d[0] * t, a.p[1] + a.d[1] * t];
+}
+const deg = a => (a * Math.PI) / 180;
+
+const RIVER = 49; // the East River's width, Hell Gate and the Sound included
+const MN_WEST = through([464, 108], [150, 548]); // Manhattan's west coast, one line
+const NJ = shift(MN_WEST, 44); // the Hudson: 44 wide, parallel
+const EH_WEST = through([535, 279], [509, 453]); // East Harlem's west side, one line
+const ER_MN = line([694, 328], [-1, 1]); // East River, Manhattan bank, 45 degrees
+const ER_QN = shift(ER_MN, -RIVER);
+const ER_RH = line([287, 788], MN_WEST.d); // the harbour reach, parallel to the Hudson
+const ER_BW = shift(ER_RH, RIVER);
+const BOWERY_BANK = 602, RED_HOOK_BANK = BOWERY_BANK + RIVER; // the level turn
+const HG_BX = line([694, 328], [Math.cos(deg(15)), -Math.sin(deg(15))]); // Hell Gate, rising east
+const HG_QN = shift(HG_BX, RIVER);
+const BEND = atX(HG_BX, 829); // turns at the Hunts Point / Throggs Neck line
+const SOUND_BX = line(BEND, [Math.cos(deg(15)), Math.sin(deg(15))]); // the Sound, falling east
+const SOUND_QN = shift(SOUND_BX, RIVER);
+const EAST_EDGE = 1031.5; // Queens against Nassau
+const BRONX_EAST = 1030; // the Bronx's east shore, upright
+const QN_NORTH = atX(SOUND_QN, EAST_EDGE);
+const SOUTH_SHORE = 1020; // the Rockaways, level
+const NARROWS = [258, atY(ER_RH, 792)[0]]; // Staten Island's east shore, Coney Island's west
+
+// ---------------------------------------------------------------- the drafting
+// Each skeleton point: where it goes (MOVE) or dropped (DROP, the tracer's jogs and
+// points a straight line no longer needs). Chains listed in REPLACE get new interior
+// points outright, where a shape gains corners it didn't have.
+const MOVE = {
+  // New Jersey and Westchester
+  '382,165': atX(NJ, 382), '142,476': atY(NJ, 476),
+  '544,0': [533, 0], '533,51': [533, 53], '1056,0': [BRONX_EAST, 0], '1050,53': [BRONX_EAST, 53],
+  // Manhattan: level borders at 262, 358, 453 and 548, meeting one straight coast
+  '371,248': atY(MN_WEST, 262), '535,279': atY(EH_WEST, 262),
+  '290,360': atY(MN_WEST, 358), '523,357': atY(EH_WEST, 358),
+  '220,452': atY(MN_WEST, 453), '150,548': atY(MN_WEST, 548),
+  '533,477': meet(through([509, 453], [533, 477]), ER_MN), '466,549': atY(ER_MN, 548),
+  '447,589': atY(ER_MN, BOWERY_BANK), '342,615': atY(ER_BW, BOWERY_BANK),
+  '307,696': atY(ER_BW, 688), '171,686': [150, 688],
+  // The Bronx: an upright east shore, level blocks
+  '898,53': [890, 53], '881,199': [890, 198], '799,196': [799, 198], '1029,231': [BRONX_EAST, 231],
+  '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
+  // Queens: the river banks, level and upright borders
+  '720,373': meet(HG_QN, ER_QN), '766,356': foot(HG_QN, [766, 356]), '834,336': meet(HG_QN, SOUND_QN),
+  '1033,386': QN_NORTH, '1080,392': [1080, QN_NORTH[1]],
+  '597,494': foot(ER_QN, [597, 494]),
+  '838,496': [834.5, 488], '831,548': [834.5, 548], '1031,479': [EAST_EDGE, 488],
+  '892,650': [892, 650.5], '1031,651': [EAST_EDGE, 650.5],
+  '794,782': [793.5, 782], '895,783': [895, 782], '1031,832': [EAST_EDGE, 832],
+  '1032,991': [EAST_EDGE, SOUTH_SHORE], '1080,988': [1080, SOUTH_SHORE],
+  // Brooklyn: the East River's reaches, Red Hook's level south side, upright borders
+  '447,651': atY(ER_QN, RED_HOOK_BANK), '425,681': atY(ER_RH, RED_HOOK_BANK), '283,797': atY(ER_RH, 792),
+  '602,704': [595.5, 704], '589,792': [595.5, 792], '451,787': [444, 792], '437,983': [444, 983],
+  '299,989': [NARROWS[1], 989],
+  // Jamaica Bay: a 45-degree octagon (its east side is in REPLACE)
+  '709,848': [680, 853], '793,857': [793.5, 853],
+  '598,934': [600, 933], '593,974': [600, 975], '622,989': [622, 997], '621,1011': [622, 1011],
+  // Staten Island: an octagon (see REPLACE), level borders
+  '37,816': [36, 826], '261,837': [NARROWS[0], 826], '30,910': [36, 921], '272,932': [NARROWS[0], 921],
+};
+const DROP = [
+  '544,18', '1056,20', '1051,60', '19,706', // off-board shores
+  '536,284', '526,351', '523,371', '222,454', '158,534', '149,556', '303,699', // Manhattan
+  '803,243', '969,205', '1025,313', '951,342', // the Bronx
+  '764,355', '813,340', '1028,383', '1036,385', '1061,392', '497,570', // Queens
+  '375,665', '287,788', '447,786', '367,809', '469,786', '282,808', '607,922', // Brooklyn
+  '157,820', '263,839', // Staten Island
+];
+const REPLACE = {
+  // Jamaica: the bay's east side as an octagon, then a level spit and shore
+  'water|jamaica': [[793.5, 853], [820, 853], [856, 889], [856, 945], [801, 1000], [700, 1000], [700, 1012], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
+  // Staten Island: 45-degree corners, upright shores
+  'water|westerleigh': [[36, 826], [36, 740], [63, 713], [221, 713], [NARROWS[0], 750], [NARROWS[0], 826]],
+  'water|tottenville': [[36, 921], [36, 1005], [63, 1032], [209, 1032], [NARROWS[0], 983], [NARROWS[0], 921]],
+};
+
+// Where the labels in the water sit on this map: midway between shores, at their angle.
+const LABELS = {
+  boro: {
+    MN: [...foot(shift(MN_WEST, 22), [247, 378]).map(r1), -54.5],
+    BX: [(BRONX_EAST + 1067) / 2, 280, -90], QN: [890, (SOUTH_SHORE + 1067) / 2, 0],
+    BK: [525, 1030, 8.6], SI: [172, 1050, 0],
+  },
+  water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728, 926, 0]],
+  bridges: {}, // filled in below, beside each re-landed bridge
+};
+
+// ---------------------------------------------------------------- apply
+const moved = q => { const m = MOVE[key(q)]; return m ? m.map(r1) : q; };
+const dropped = new Set(DROP);
+for (const k of [...Object.keys(MOVE), ...DROP]) {
+  if (!geo.chains.some(c => c.pts.some(q => key(q) === k)) && !Object.values(geo.regions).some(r => r.some(q => key(q) === k)))
+    throw new Error('No skeleton point at ' + k);
+}
+const chains = geo.chains.map(c => {
+  const sides = c.sides.join('|'), a = moved(c.pts[0]), b = moved(c.pts[c.pts.length - 1]);
+  const rep = REPLACE[sides] || REPLACE[c.sides.slice().reverse().join('|')];
+  if (rep) {
+    const pts = rep.map(q => q.map(r1));
+    const fwd = key(pts[0]) === key(a) ? pts : pts.slice().reverse();
+    if (key(fwd[0]) !== key(a) || key(fwd[fwd.length - 1]) !== key(b)) throw new Error(`REPLACE for ${sides} must run junction to junction`);
+    return { sides: c.sides, pts: fwd };
+  }
+  return { sides: c.sides, pts: c.pts.filter((q, i) => i === 0 || i === c.pts.length - 1 || !dropped.has(key(q))).map(moved) };
+});
+
+// Chamfers: a Deco bevel on each sharp coast corner (turning 70 degrees or more)
+// that is not a junction, cut back CHAMFER units along both sides.
+const CHAMFER = 10;
+function chamfer(cs) {
+  return cs.map(c => {
+    if (!c.sides.includes('water')) return c;
+    const p = c.pts, out = [p[0]];
+    for (let i = 1; i < p.length - 1; i++) {
+      const a = unit(p[i - 1][0] - p[i][0], p[i - 1][1] - p[i][1]), b = unit(p[i + 1][0] - p[i][0], p[i + 1][1] - p[i][1]);
+      const inner = Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1])));
+      const k = Math.min(CHAMFER, 0.4 * dist(p[i], p[i - 1]), 0.4 * dist(p[i], p[i + 1]));
+      if (inner > deg(110) || k < 4) { out.push(p[i]); continue; }
+      out.push([p[i][0] + a[0] * k, p[i][1] + a[1] * k].map(r1), [p[i][0] + b[0] * k, p[i][1] + b[1] * k].map(r1));
+    }
+    out.push(p[p.length - 1]);
+    return { sides: c.sides, pts: out };
+  });
+}
+
+// Regions: walk each skeleton ring, swapping each chain run for its new points;
+// frame edges, which no chain covers, pass through (moved where MOVE says).
+function regionsFrom(cs) {
+  const edge = new Map();
+  geo.chains.forEach((c, i) => c.pts.forEach((q, k) => {
+    if (k === c.pts.length - 1) return;
+    const n = c.pts[k + 1];
+    edge.set(`${key(q)}>${key(n)}`, { i, rev: false });
+    edge.set(`${key(n)}>${key(q)}`, { i, rev: true });
+  }));
+  const out = {};
+  for (const [id, ring] of Object.entries(geo.regions)) {
+    const n = ring.length, e = k => edge.get(`${key(ring[k % n])}>${key(ring[(k + 1) % n])}`);
+    let start = 0;
+    while (start < n) { const a = e((start - 1 + n) % n), b = e(start); if (!a || !b || a.i !== b.i) break; start++; }
+    const r = [];
+    for (let k = 0; k < n;) {
+      const h = e(start + k);
+      if (!h) { r.push(moved(ring[(start + k) % n])); k++; continue; }
+      const c = cs[h.i].pts;
+      r.push(...(h.rev ? c.slice().reverse() : c).slice(0, -1));
+      while (k < n && e(start + k) && e(start + k).i === h.i) k++;
+    }
+    out[id] = r;
+  }
+  return out;
+}
+
+// Bridges keep their place (the old midpoint) and cross square to the new bank.
+function bridgesFor(cs) {
+  const shoreOf = id => cs.filter(c => c.sides.includes(id) && c.sides.includes('water')).flatMap(c => c.pts.slice(1).map((q, k) => [c.pts[k], q]));
+  const nearestSeg = (segs, q) => segs.reduce((best, s) => {
+    const d = Math.min(...[0, 0.25, 0.5, 0.75, 1].map(t => dist(q, [s[0][0] + (s[1][0] - s[0][0]) * t, s[0][1] + (s[1][1] - s[0][1]) * t])));
+    return !best || d < best.d ? { s, d } : best;
+  }, null).s;
+  const land = (m, u, segs) => {
+    let best = null;
+    for (const [p, q] of segs) {
+      const hit = meet({ p: m, d: u }, through(p, q)), t = (hit[0] - m[0]) * u[0] + (hit[1] - m[1]) * u[1];
+      const inSeg = dist(p, hit) + dist(hit, q) - dist(p, q) < 0.01;
+      if (inSeg && t > 0 && (!best || t < best.t)) best = { hit, t };
+    }
+    return best && best.hit;
+  };
+  return geo.bridges.map(b => {
+    const m = [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2], sa = shoreOf(b.join[0]), sb = shoreOf(b.join[1]);
+    const [p, q] = nearestSeg(sa, m);
+    let u = unit(-(q[1] - p[1]), q[0] - p[0]); // square to the bank
+    if ((b.b[0] - b.a[0]) * u[0] + (b.b[1] - b.a[1]) * u[1] < 0) u = [-u[0], -u[1]];
+    const a = land(m, [-u[0], -u[1]], sa), bb = land(m, u, sb);
+    if (!a || !bb) throw new Error(`${b.name} found no bank`);
+    return { ...b, a: a.map(r1), b: bb.map(r1) };
+  });
+}
+// A bridge's name sits in the water beside it, along the river, where it was.
+function bridgeLabels(bs) {
+  const was = {
+    'Hell Gate Bridge': 50, 'Queensboro Bridge': 44, 'Williamsburg Bridge': 44, 'Brooklyn Bridge': -44,
+  }; // distance along the river from the bridge, as on the board (the side it was on)
+  const out = {};
+  for (const b of bs) {
+    const m = [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2], u = unit(b.b[0] - b.a[0], b.b[1] - b.a[1]);
+    let along = [u[1], -u[0]]; // the river's direction, read left to right
+    if (along[0] < 0) along = [-along[0], -along[1]];
+    const k = was[b.name];
+    out[b.name] = [r1(m[0] + along[0] * k), r1(m[1] + along[1] * k), r1((Math.atan2(along[1], along[0]) * 180) / Math.PI)];
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------- checks
+const area = p => Math.abs(p.reduce((s, a, i) => { const b = p[(i + 1) % p.length]; return s + a[0] * b[1] - b[0] * a[1]; }, 0)) / 2;
+const length = p => p.slice(1).reduce((s, q, i) => s + dist(p[i], q), 0);
+function segDist(q, a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1], L = dx * dx + dy * dy;
+  const t = L ? Math.max(0, Math.min(1, ((q[0] - a[0]) * dx + (q[1] - a[1]) * dy) / L)) : 0;
+  return Math.hypot(q[0] - a[0] - t * dx, q[1] - a[1] - t * dy);
+}
+function check(cs, regions, bs) {
+  const problems = [], notes = [];
+  const cr = (p, q, r) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]);
+  const segs = cs.flatMap((c, i) => c.pts.slice(1).map((q, k) => ({ i, k, a: c.pts[k], b: q })));
+  for (let x = 0; x < segs.length; x++) for (let y = x + 1; y < segs.length; y++) {
+    const s1 = segs[x], s2 = segs[y];
+    if (s1.i === s2.i && Math.abs(s1.k - s2.k) < 2) continue;
+    if (cr(s1.a, s1.b, s2.a) * cr(s1.a, s1.b, s2.b) < 0 && cr(s2.a, s2.b, s1.a) * cr(s2.a, s2.b, s1.b) < 0)
+      problems.push(`${cs[s1.i].sides} crosses ${cs[s2.i].sides}`);
+  }
+  for (const c of cs) for (let k = 0; k < c.pts.length - 1; k++) if (dist(c.pts[k], c.pts[k + 1]) < 3) problems.push(`${c.sides} has a ${dist(c.pts[k], c.pts[k + 1]).toFixed(1)} unit run`);
+  for (const [id, r] of Object.entries(regions)) {
+    const ch = area(r) / area(geo.regions[id]) - 1;
+    if (Math.abs(ch) > 0.2) problems.push(`${id} area ${Math.round(ch * 100)}%`);
+    else if (Math.abs(ch) > 0.05) notes.push(`${id} ${ch > 0 ? '+' : ''}${Math.round(ch * 100)}%`);
+  }
+  cs.forEach((c, i) => {
+    if (c.sides.includes('water')) return;
+    const was = length(geo.chains[i].pts), now = length(c.pts);
+    if (now < 0.8 * was && now < 60) problems.push(`${c.sides} border ${Math.round(was)} -> ${Math.round(now)}`);
+  });
+  // the narrowest water between shores of Districts that don't share a junction
+  const coast = cs.filter(c => c.sides.includes('water') && !c.sides.every(s => s === 'water'));
+  const landOf = c => c.sides.find(s => s !== 'water');
+  const ends = c => [c.pts[0], c.pts[c.pts.length - 1]].map(key);
+  let narrow = Infinity, where = '';
+  for (let x = 0; x < coast.length; x++) for (let y = x + 1; y < coast.length; y++) {
+    const a = coast[x], b = coast[y];
+    if (landOf(a) === landOf(b) || ends(a).some(k => ends(b).includes(k))) continue;
+    for (const q of a.pts) for (let k = 0; k < b.pts.length - 1; k++) {
+      const d = segDist(q, b.pts[k], b.pts[k + 1]);
+      if (d < narrow) { narrow = d; where = `${landOf(a)} / ${landOf(b)}`; }
+    }
+  }
+  if (narrow < 20) problems.push(`water only ${narrow.toFixed(0)} wide between ${where}`);
+  notes.push(`narrowest water ${narrow.toFixed(0)} (${where})`);
+  bs.forEach((b, i) => notes.push(`${b.name} ${Math.round(dist(geo.bridges[i].a, geo.bridges[i].b))} -> ${Math.round(dist(b.a, b.b))}`));
+  return { problems, notes };
+}
+
+// ---------------------------------------------------------------- write
+function write(dir, cs, note) {
+  const regions = regionsFrom(cs), bridges = bridgesFor(cs);
+  const { problems, notes } = check(cs, regions, bridges);
+  console.log(path.relative(ROOT, dir) + ':\n  ' + notes.join('\n  '));
+  if (problems.length) { console.error('Not written:\n  ' + problems.join('\n  ')); process.exit(1); }
+  const labels = { ...LABELS, bridges: bridgeLabels(bridges) };
+  const j = v => JSON.stringify(v);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'board-geometry.json'), `{"note":${j(note)},"size":${j(geo.size)},"regions":{\n`
+    + Object.entries(regions).map(([id, r]) => `${j(id)}:${j(r)}`).join(',\n')
+    + '},\n"chains":[\n' + cs.map(j).join(',\n') + '],\n"bridges":' + j(bridges) + ',\n"labels":' + j(labels) + '}\n');
+  console.log('wrote', path.relative(ROOT, path.join(dir, 'board-geometry.json')));
+}
+const NOTE = 'Drafted experiment (2026-09-29), written by tools/draft_board.js from Art/Board/board-geometry.json (the skeleton). Same Districts, chains and bridges, redrawn with straight lines and exact angles. "labels" places the water and bridge names for this map.';
+write(OUT, chains, NOTE);
+write(path.join(OUT, 'Chamfered'), chamfer(chains), NOTE.replace('exact angles.', 'exact angles, sharp coast corners bevelled.'));

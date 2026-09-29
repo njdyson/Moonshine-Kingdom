@@ -16,6 +16,58 @@ the repo, point Node at it (`NODE_PATH=/opt/node22/lib/node_modules` in the clou
 `PLAYWRIGHT_PATH`. The build fetches its four fonts from Google Fonts and embeds them in the SVG,
 so the SVG renders the same anywhere; the build itself needs the network.
 
+## Experiment: the drafted board (branch `board-drafted-experiment`, 2026-09-29)
+
+Nick asked for a less angular board; curved borders were tried first (branch
+`board-organic-experiment`) and rejected as hand-drawn and scribbled: "the angular map works
+better". This goes the other way, making the angles deliberate. The traced map is nearly a
+designed one: about 30% of its border length runs a few degrees off level, 17% a few degrees
+off upright, the rivers wander in width, and the tracer left 3 to 5 unit jogs. The drafted pass
+keeps every shape and every connection and makes those near-misses exact.
+
+```
+node tools/draft_board.js                              # skeleton -> Art/Board/Drafted/, both variants, checked
+node tools/build_board.js --geometry=Drafted           # builds into Art/Board/Drafted/
+node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevelled corners
+```
+
+- **The traced geometry stays the source.** `tools/draft_board.js` reads `board-geometry.json`
+  untouched and applies a table of drafting moves: `MOVE` (where each point goes), `DROP` (jogs
+  and points a straight line no longer needs) and `REPLACE` (chains that gain corners). The
+  moves are built from named lines, so the intent reads in the code: `MN_WEST`, `NJ`, `ER_MN`
+  and so on.
+- **What changed.** Manhattan's west coast is one straight line (Nick: it is straight in real
+  life) with New Jersey's shore parallel, so the Hudson is an even 44. The East River is one
+  channel 49 wide in three reaches: 45 degrees past the Williamsburg and Queensboro, a level
+  turn under the Bowery, then parallel to the Hudson past the Brooklyn Bridge. Hell Gate and
+  the Sound are the same 49, a chevron turning at the Hunts Point / Throggs Neck line; that
+  also opened the 22-unit pinch between Throggs Neck and Whitestone, which are not connected
+  and read as if they nearly touched. Manhattan's borders are level at 262, 358, 453 and 548.
+  The Bronx's east shore and Queens' Nassau line are upright; Red Hook's south side and the
+  Rockaways are level. Staten Island and Jamaica Bay are 45-degree octagons.
+- **Bridges** keep their places and cross square to the new banks, so all four are 49 long
+  (they were 43 to 55). Their names, and the water labels, move with the shores: the drafted
+  geometry carries them as `"labels"`, which `build_board.js` uses when a geometry has them.
+- **Areas.** Most Districts move by under 5%. The largest: Throggs Neck -10% (the Sound
+  widened), Coney Island +9%, Westerleigh +8%, Stapleton -8%, Whitestone -8%. Morris Park, a
+  crown room, lost 15% to a level south border in the first draft; that border now keeps its
+  old east end, and the loss is 5%.
+- **Chamfers** (`Drafted/Chamfered`) bevel coast corners sharper than 110 degrees that aren't
+  junctions. The drafting already made most corners 45-degree cuts, so only four qualify
+  (Throggs Neck's tip, the Bowery's south-west corner, the Rockaway spit, Sheepshead's hook).
+  The difference is slight.
+- **Piers** are placed as before, on each Dock's longest open straight shore; with the
+  Rockaways now one straight line, Jamaica's piers face the ocean instead of the bay.
+- **Checks** before writing: no crossings, no run under 3 units, no District area off by more
+  than 20%, no short border shrinking below 80%, no water under 20 wide between Districts that
+  don't meet (the narrowest is 25, the Bowery to Westerleigh).
+- The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point) is unchanged; splitting it
+  would add a border.
+- `Art/Board/Drafted/Before and after.jpg` puts the two screen boards side by side.
+- **To adopt it:** copy `Drafted/board-geometry.json` over the skeleton (or build from it by
+  default), rebuild, and drop the `--geometry` switch if nothing else uses it. **To discard
+  it:** delete the branch.
+
 ## Files
 
 - `Art/Board/board-geometry.json`: the map as data, traced from the Affinity PNG in its own
