@@ -97,6 +97,22 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   than 150 take no ornament, and junctions along a straight border are not corners. The
   default build (`STYLE = 'tone'`) is untouched and still rebuilds byte for byte.
   `Drafted/Deco/Before and after.jpg` compares the two on the drafted board.
+- **Mocks, 2026-09-29** (`Drafted/Mock/`, built with
+  `--geometry=Drafted --style=deco --labels=sign --tomorrow --out=Mock`; both switches are off
+  by default and the other builds are untouched):
+  - **Hanging signs** (`--labels=sign`, `placeSign()`). Pieces will cover a centred label, and
+    the old edge placer looked odd because each label went somewhere different. Here every
+    District gets one small plaque (type medallion, name and venue, a 30-unit Still) hung by
+    two gilt hangers as high as it fits, centred across the room there, clear of the keylines:
+    one rule, so it reads as designed, and the open ground below is one piece. A District too
+    narrow for one line stacks its name; **East Harlem** is too narrow even then (its slanted
+    sides allow 139 units where the sign needs 142) and keeps its centred label.
+  - **Tomorrow** (`--tomorrow`, `tomorrow()`): the Mash leaves the key's row for a panel under
+    the title, with a 36 mm socket for tomorrow's Turn Tokens as **one stack, #1 on top**, so
+    "claim the lowest-numbered token left" becomes "take the top token". Four separate 36 mm
+    slots would not fit: New Jersey narrows to under 100 units below the key, and moving
+    Queens' Nassau line in to make a column cost Flushing about 45% of its room. The title
+    moves up 22 to make space.
 - **To adopt it:** copy `Drafted/board-geometry.json` over the skeleton (or build from it by
   default), rebuild, and drop the `--geometry` switch if nothing else uses it. **To discard
   it:** delete the branch.
