@@ -1,9 +1,8 @@
 # The board: vector rebuild
 
 Status (2026-09-29): the **drafted map with hanging signs and the Deco style is the board**, on
-`main`. mk-online still serves an earlier vector board (`mk-online/dist/board.svg`, deployed
-in a23d1e4, with Westchester and Nassau and clickable Districts), so the online game shows
-that until it is redeployed. The Affinity export (`Art/Board (Large).png`) is untouched.
+`main`. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online a1b0ff4), with
+clickable Districts and its connection graph taken from `board-geometry.json`. The Affinity export (`Art/Board (Large).png`) is untouched.
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
@@ -319,10 +318,13 @@ keeps them on a re-trace.
 - ~~**Rulebook wording.**~~ Fixed 2026-09-28: the Big Bust tiebreak reads "ranked highest on its
   Still's Pressure Strip", matching the Town Planner. (The Kingpin's Guide still says "the
   Borough's Pressure Strip"; it lags by design.)
-- **mk-online.** It serves `mk-online/dist/board.svg`, the vector board from before the
-  drafting (Westchester and Nassau still on it). The drafted geometry is ready for it; the
-  mk-online source is its own repo (`njdyson/mk-online`), not this one.
-  `mk-online-board-handoff.md` is the brief for that update, with the full connection graph.
+- ~~**mk-online.**~~ Done 2026-09-29 (mk-online a1b0ff4): the drafted board, its click areas,
+  sign-aware piece spots, the Heat, Mash and Turn Order sockets, and the graph. The game's graph
+  had still followed the old raster board, so ten connections changed, not one:
+  East Harlem to Five Points, Astoria to Flushing, Brownsville to Jamaica, Red Hook to Sheepshead
+  Bay, and the Hell Gate and Brooklyn Bridges came in; Tenderloin to Bowery, Corona to
+  Whitestone, Throggs Neck to Whitestone and Astoria to Williamsburg went. If the map changes
+  again, `mk-online-board-handoff.md` is still the brief.
 - **Affinity round-trip.** The SVG opens in Affinity, but the texture and soft shadows are SVG
   filters and will likely drop out, and Cinzel, Barlow, Barlow Condensed and Bebas Neue (the Still
   tokens' numbers) must be installed locally.
