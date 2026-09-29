@@ -99,7 +99,7 @@ const deg = a => (a * Math.PI) / 180;
 const SETTINGS = {
   bronxCols: [692, 862], // Belmont | Fordham | Morris Park
   bronxRow: 184, // Fordham and Morris Park / Throggs Neck, level to the east shore
-  hellGate: 3, // the Hell Gate and Sound reaches' angle, degrees: a chevron
+  hellGate: 3, // the Hell Gate's angle, degrees, rising east to the Sound
   manhattanWest: 9, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
   manhattanLift: 26, cornerLift: 14, // Sugar Hill / Belmont raised into Belmont: at the coast, and at the four-way corner
   manhattan: [262, 367, 463, 553], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
@@ -124,7 +124,6 @@ const SETTINGS = {
 const RIVER = 49; // the East River's width, Hell Gate and the Sound included
 const EAST_EDGE = 1080; // Queens runs to the board's edge, under the frame
 const BRONX_EAST = 1030; // the Bronx's east shore, upright
-const TN_CUT = 24; // Throggs Neck's tip, cut back this far along both shores
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
 const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0] }; // moved along its river, clear of East Harlem's stretch of the Hell Gate
@@ -146,7 +145,7 @@ function draft(S) {
   const HG_BX = line([694, 328], [Math.cos(deg(S.hellGate)), -Math.sin(deg(S.hellGate))]); // Hell Gate, rising east
   const HG_QN = shift(HG_BX, RIVER);
   const BEND = atX(HG_BX, S.hpCol); // turns at Hunts Point / Throggs Neck
-  const SOUND_BX = line(BEND, [Math.cos(deg(S.hellGate)), Math.sin(deg(S.hellGate))]); // the Sound, falling east
+  const SOUND_BX = line(BEND, [1, 0]); // the Sound, level
   const SOUND_QN = shift(SOUND_BX, RIVER);
   const QN_NORTH = atX(SOUND_QN, EAST_EDGE);
   const RH_STUB = atY(ER_RH, S.redHookSouth - S.rhStub); // Red Hook's shore turns upright here, in line with Coney Island's
@@ -228,12 +227,11 @@ function draft(S) {
     '37,816': [36, s1], '261,837': [NARROWS[0], s1], '30,910': [36, s2], '272,932': [NARROWS[0], s2],
   };
   const T = S.stapletonTop, B = S.bayEast;
-  const TIP = atX(SOUND_BX, BRONX_EAST), sound = unit(-SOUND_BX.d[0], -SOUND_BX.d[1]);
-  const TIP_CUT = [[BRONX_EAST, TIP[1] - TN_CUT], [TIP[0] + sound[0] * TN_CUT, TIP[1] + sound[1] * TN_CUT]];
+  const TIP = atX(SOUND_BX, BRONX_EAST);
   const REPLACE = {
-    // the Bronx: Belmont's shore upright from Manhattan's tip to the frame; Throggs Neck's tip cut off
+    // the Bronx: Belmont's shore upright from Manhattan's tip to the frame; Throggs Neck square
     'water|belmont': [[TIPB[0], W], TIPB],
-    'throggs_neck|water': [[BRONX_EAST, S.bronxRow], ...TIP_CUT, BEND],
+    'throggs_neck|water': [[BRONX_EAST, S.bronxRow], TIP, BEND],
     'east_harlem|hunts_point': [CORNER, S.ehKnee, EH_SHORE], // East Harlem wider low down, for its sign
     'east_harlem|water': [EH_SHORE, [694, 328], meet(line(ehFoot, [1, 1]), ER_MN)],
     'belmont|hunts_point': [[b1, BH[1]], BH, CORNER],
@@ -262,7 +260,7 @@ function draft(S) {
   const labels = {
     boro: {
       MN: [...atY(shift(MN_WEST, 22), 440).map(r1), -54.5], // beside the Tenderloin and Five Points, clear of West Side's piers
-      BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP_CUT[0][1]) / 2), -90], // beside the Bronx's east shore
+      BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],

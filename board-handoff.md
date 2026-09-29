@@ -36,7 +36,9 @@ works better"), so this makes the angles deliberate instead.
   are even channels: the Hudson 44 wide, down to the harbour (New Jersey is squared off level
   with the Bowery's foot); the East River 49, in three reaches (45 degrees past the Williamsburg
   and Queensboro, a level turn under the Bowery, then parallel to the Hudson); Hell Gate and the
-  Sound 49, a shallow chevron (3 degrees) turning at Hunts Point / Throggs Neck. Staten Island
+  Sound 49: the Hell Gate rises 3 degrees to Hunts Point / Throggs Neck, and the Sound runs level
+  from there (Nick, 2026-09-29; it fell 3 degrees, a chevron, which sloped Throggs Neck and
+  Whitestone). Staten Island
   and Jamaica Bay are 45-degree octagons.
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
@@ -80,8 +82,9 @@ works better"), so this makes the angles deliberate instead.
   (hangers over 90) if it sits high. Brooklyn is three columns under Red Hook: Coney Island, Sheepshead Bay (`coneyEast`) and
   Brownsville, whose border with Sheepshead Bay runs straight on down from Red Hook's
   (`BK_COL`) and meets the bay's 45-degree corner on a foot. The Hunts Point / Throggs Neck line
-  (`hpCol`) is upright too, and **Throggs Neck's tip is cut** 24 units back (`TN_CUT`; Nick: it
-  was harsh).
+  (`hpCol`) is upright too, and **Throggs Neck is a rectangle** on the level Sound. Its tip
+  was cut back 24 units while the Sound sloped (Nick: the point was harsh); squaring it made the
+  cut unnecessary.
 - **Morris Park is square** (Nick, 2026-09-29: it looks neater). Its bottom, once sloping
   from 184 to 190 at the shore, runs level on Fordham's line (`bronxRow`) to the east shore.
 - **Jamaica Bay** is 90 units wider than traced (`bayEast`), which trims Jamaica, once the one
@@ -113,9 +116,10 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | Traced, centred labels | 32 (West Side) | 34, 36, 50, 65 |
 | Drafted, first balance, centred labels | 42 (Tenderloin) | 47, 47, 57, 64 |
 | With the signs, before the Queens / Brooklyn line | 39 (Whitestone) | 47, 57, 65, 83 |
-| Now (as the build reports) | 39 (Whitestone) | 46, 57, 59, 72 |
+| Squared Morris Park, level Sound | 42 (West Side) | 46, 56, 59, 72 |
 
-Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
+Rooms now run 42 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
+smallest (39), is 46 since the Sound went level.
 
 ## The look
 
@@ -329,8 +333,7 @@ keeps them on a re-trace.
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. Other known weak spots: Whitestone is the smallest room (39), squeezed by the Queens
-  column and Astoria's border with Flushing.
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are West Side (42), Tenderloin and Westerleigh (43).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.
