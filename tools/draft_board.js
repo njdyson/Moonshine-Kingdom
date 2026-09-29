@@ -53,62 +53,107 @@ function meet(a, b) {
 }
 const deg = a => (a * Math.PI) / 180;
 
+// The drafting's settings: where the level and upright borders sit. They are
+// balanced for room (see board-handoff.md): the smaller Districts, the crown rooms
+// first, get what the roomy ones can spare.
+const SETTINGS = {
+  westchester: 44, // the Bronx's north line
+  bronxCols: [690, 868], // Belmont | Fordham | Morris Park
+  bronxRow: 192, // Fordham / Throggs Neck, level
+  morrisEast: 228, // where Morris Park / Throggs Neck meets the east shore
+  hellGate: 9, // the Hell Gate and Sound reaches' angle, degrees: a chevron
+  manhattanWest: 8, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
+  manhattan: [275, 375, 469, 553], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
+  eastHarlem: 1, // East Harlem's west side, shifted east
+  astoriaCorona: 538, // level
+  williamsburgSouth: 732, // Williamsburg's southern point, on Red Hook / Brownsville
+  redHookSouth: 792, // Red Hook's level south side
+  boweryBottom: 668, stapletonTop: 696, // the Kill van Kull between them
+  staten: [810, 916], // level borders: Westerleigh | Stapleton | Tottenville
+};
+
 const RIVER = 49; // the East River's width, Hell Gate and the Sound included
-const MN_WEST = through([464, 108], [150, 548]); // Manhattan's west coast, one line
-const NJ = shift(MN_WEST, 44); // the Hudson: 44 wide, parallel
-const EH_WEST = through([535, 279], [509, 453]); // East Harlem's west side, one line
-const ER_MN = line([694, 328], [-1, 1]); // East River, Manhattan bank, 45 degrees
-const ER_QN = shift(ER_MN, -RIVER);
-const ER_RH = line([287, 788], MN_WEST.d); // the harbour reach, parallel to the Hudson
-const ER_BW = shift(ER_RH, RIVER);
-const BOWERY_BANK = 602, RED_HOOK_BANK = BOWERY_BANK + RIVER; // the level turn
-const HG_BX = line([694, 328], [Math.cos(deg(15)), -Math.sin(deg(15))]); // Hell Gate, rising east
-const HG_QN = shift(HG_BX, RIVER);
-const BEND = atX(HG_BX, 829); // turns at the Hunts Point / Throggs Neck line
-const SOUND_BX = line(BEND, [Math.cos(deg(15)), Math.sin(deg(15))]); // the Sound, falling east
-const SOUND_QN = shift(SOUND_BX, RIVER);
 const EAST_EDGE = 1031.5; // Queens against Nassau
 const BRONX_EAST = 1030; // the Bronx's east shore, upright
-const QN_NORTH = atX(SOUND_QN, EAST_EDGE);
 const SOUTH_SHORE = 1020; // the Rockaways, level
-const NARROWS = [258, atY(ER_RH, 792)[0]]; // Staten Island's east shore, Coney Island's west
+const BOWERY_BANK = 602, RED_HOOK_BANK = BOWERY_BANK + RIVER; // the East River's level turn
 
-// ---------------------------------------------------------------- the drafting
-// Each skeleton point: where it goes (MOVE) or dropped (DROP, the tracer's jogs and
-// points a straight line no longer needs). Chains listed in REPLACE get new interior
-// points outright, where a shape gains corners it didn't have.
-const MOVE = {
-  // New Jersey and Westchester
-  '382,165': atX(NJ, 382), '142,476': atY(NJ, 476),
-  '544,0': [533, 0], '533,51': [533, 53], '1056,0': [BRONX_EAST, 0], '1050,53': [BRONX_EAST, 53],
-  // Manhattan: level borders at 262, 358, 453 and 548, meeting one straight coast
-  '371,248': atY(MN_WEST, 262), '535,279': atY(EH_WEST, 262),
-  '290,360': atY(MN_WEST, 358), '523,357': atY(EH_WEST, 358),
-  '220,452': atY(MN_WEST, 453), '150,548': atY(MN_WEST, 548),
-  '533,477': meet(through([509, 453], [533, 477]), ER_MN), '466,549': atY(ER_MN, 548),
-  '447,589': atY(ER_MN, BOWERY_BANK), '342,615': atY(ER_BW, BOWERY_BANK),
-  '307,696': atY(ER_BW, 688), '171,686': [150, 688],
-  // The Bronx: an upright east shore, level blocks
-  '898,53': [890, 53], '881,199': [890, 198], '799,196': [799, 198], '1029,231': [BRONX_EAST, 231],
-  '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
-  // Queens: the river banks, level and upright borders
-  '720,373': meet(HG_QN, ER_QN), '766,356': foot(HG_QN, [766, 356]), '834,336': meet(HG_QN, SOUND_QN),
-  '1033,386': QN_NORTH, '1080,392': [1080, QN_NORTH[1]],
-  '597,494': foot(ER_QN, [597, 494]),
-  '838,496': [834.5, 488], '831,548': [834.5, 548], '1031,479': [EAST_EDGE, 488],
-  '892,650': [892, 650.5], '1031,651': [EAST_EDGE, 650.5],
-  '794,782': [793.5, 782], '895,783': [895, 782], '1031,832': [EAST_EDGE, 832],
-  '1032,991': [EAST_EDGE, SOUTH_SHORE], '1080,988': [1080, SOUTH_SHORE],
-  // Brooklyn: the East River's reaches, Red Hook's level south side, upright borders
-  '447,651': atY(ER_QN, RED_HOOK_BANK), '425,681': atY(ER_RH, RED_HOOK_BANK), '283,797': atY(ER_RH, 792),
-  '602,704': [595.5, 704], '589,792': [595.5, 792], '451,787': [444, 792], '437,983': [444, 983],
-  '299,989': [NARROWS[1], 989],
-  // Jamaica Bay: a 45-degree octagon (its east side is in REPLACE)
-  '709,848': [680, 853], '793,857': [793.5, 853],
-  '598,934': [600, 933], '593,974': [600, 975], '622,989': [622, 997], '621,1011': [622, 1011],
-  // Staten Island: an octagon (see REPLACE), level borders
-  '37,816': [36, 826], '261,837': [NARROWS[0], 826], '30,910': [36, 921], '272,932': [NARROWS[0], 921],
-};
+function draft(S) {
+  const MN_WEST = shift(through([464, 108], [150, 548]), S.manhattanWest); // Manhattan's west coast, one line
+  const NJ = shift(MN_WEST, 44); // the Hudson: 44 wide, parallel
+  const EH_WEST = through([535 + S.eastHarlem, 279], [509 + S.eastHarlem, 453]); // East Harlem's west side
+  const ER_MN = line([694, 328], [-1, 1]); // East River, Manhattan bank, 45 degrees
+  const ER_QN = shift(ER_MN, -RIVER);
+  const ER_RH = line([287, 788], MN_WEST.d); // the harbour reach, parallel to the Hudson
+  const ER_BW = shift(ER_RH, RIVER);
+  const HG_BX = line([694, 328], [Math.cos(deg(S.hellGate)), -Math.sin(deg(S.hellGate))]); // Hell Gate, rising east
+  const HG_QN = shift(HG_BX, RIVER);
+  const BEND = atX(HG_BX, 829); // turns at the Hunts Point / Throggs Neck line
+  const SOUND_BX = line(BEND, [Math.cos(deg(S.hellGate)), Math.sin(deg(S.hellGate))]); // the Sound, falling east
+  const SOUND_QN = shift(SOUND_BX, RIVER);
+  const QN_NORTH = atX(SOUND_QN, EAST_EDGE);
+  const NARROWS = [258, atY(ER_RH, S.redHookSouth)[0]]; // Staten Island's east shore, Coney Island's west
+  const [m1, m2, m3, m4] = S.manhattan, [b1, b2] = S.bronxCols, W = S.westchester, [s1, s2] = S.staten;
+  const ehFoot = atY(EH_WEST, m3);
+  const WB = [597, 494], AC = [637 - ((548 - S.astoriaCorona) * 40) / 54, S.astoriaCorona]; // along Williamsburg / Astoria
+
+  // Each skeleton point: where it goes (MOVE) or dropped (DROP, the tracer's jogs and
+  // points a straight line no longer needs). Chains listed in REPLACE get new interior
+  // points outright, where a shape gains corners it didn't have.
+  const MOVE = {
+    // New Jersey and Westchester
+    '382,165': atX(NJ, 382), '142,476': atY(NJ, 476),
+    '464,108': meet(MN_WEST, through([464, 108], [606, 191])), // Manhattan's tip, on Sugar Hill / Belmont
+    '544,0': [533, 0], '533,51': [533, W], '1056,0': [BRONX_EAST, 0], '1050,53': [BRONX_EAST, W],
+    // Manhattan: level borders meeting one straight coast
+    '371,248': atY(MN_WEST, m1), '535,279': atY(EH_WEST, m1),
+    '290,360': atY(MN_WEST, m2), '523,357': atY(EH_WEST, m2),
+    '220,452': atY(MN_WEST, m3), '509,453': ehFoot, '150,548': atY(MN_WEST, m4),
+    '533,477': meet(line(ehFoot, [1, 1]), ER_MN), '466,549': atY(ER_MN, m4),
+    '447,589': atY(ER_MN, BOWERY_BANK), '342,615': atY(ER_BW, BOWERY_BANK),
+    '307,696': atY(ER_BW, S.boweryBottom), '171,686': [atY(MN_WEST, m4)[0], S.boweryBottom],
+    // The Bronx: an upright east shore, level blocks
+    '715,53': [b1, W], '715,160': [b1, 160], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [799, S.bronxRow],
+    '1029,231': [BRONX_EAST, S.morrisEast], '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
+    // Queens: the river banks, level and upright borders
+    '720,373': meet(HG_QN, ER_QN), '766,356': foot(HG_QN, [766, 356]), '834,336': meet(HG_QN, SOUND_QN),
+    '1033,386': QN_NORTH, '1080,392': [1080, QN_NORTH[1]],
+    '597,494': foot(ER_QN, WB), '637,548': AC,
+    '838,496': [834.5, 488], '831,548': [834.5, S.astoriaCorona], '1031,479': [EAST_EDGE, 488],
+    '892,650': [892, 650.5], '1031,651': [EAST_EDGE, 650.5],
+    '794,782': [793.5, 782], '895,783': [895, 782], '1031,832': [EAST_EDGE, 832],
+    '1032,991': [EAST_EDGE, SOUTH_SHORE], '1080,988': [1080, SOUTH_SHORE],
+    // Brooklyn: the East River's reaches, Red Hook's level south side, upright borders
+    '447,651': atY(ER_QN, RED_HOOK_BANK), '425,681': atY(ER_RH, RED_HOOK_BANK), '283,797': atY(ER_RH, S.redHookSouth),
+    '602,704': [595.5, S.williamsburgSouth], '589,792': [595.5, S.redHookSouth],
+    '451,787': [444, S.redHookSouth], '437,983': [444, 983], '299,989': [NARROWS[1], 989],
+    // Jamaica Bay: a 45-degree octagon (its east side is in REPLACE)
+    '709,848': [680, 853], '793,857': [793.5, 853],
+    '598,934': [600, 933], '593,974': [600, 975], '622,989': [622, 997], '621,1011': [622, 1011],
+    // Staten Island: an octagon (see REPLACE), level borders
+    '37,816': [36, s1], '261,837': [NARROWS[0], s1], '30,910': [36, s2], '272,932': [NARROWS[0], s2],
+  };
+  const T = S.stapletonTop;
+  const REPLACE = {
+    // Jamaica: the bay's east side as an octagon, then a level spit and shore
+    'water|jamaica': [[793.5, 853], [820, 853], [856, 889], [856, 945], [801, 1000], [700, 1000], [700, 1012], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
+    // Staten Island: 45-degree corners, upright shores
+    'water|westerleigh': [[36, s1], [36, T + 27], [63, T], [NARROWS[0] - 37, T], [NARROWS[0], T + 37], [NARROWS[0], s1]],
+    'water|tottenville': [[36, s2], [36, 1005], [63, 1032], [209, 1032], [NARROWS[0], 983], [NARROWS[0], s2]],
+  };
+  // Where the labels in the water sit on this map: midway between shores, at their angle.
+  const throggsTip = atX(SOUND_BX, BRONX_EAST)[1];
+  const labels = {
+    boro: {
+      MN: [...atY(shift(MN_WEST, 22), 440).map(r1), -54.5], // beside the Tenderloin and Five Points, clear of West Side's piers
+      BX: [(BRONX_EAST + 1067) / 2, r1((W + throggsTip) / 2), -90], // beside the Bronx's east shore
+      QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
+    },
+    water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728, 926, 0]],
+    land: [['WESTCHESTER', 800, r1((13 + W) / 2), 0], ['NASSAU', 1049, 700, 90]],
+  };
+  return { MOVE, REPLACE, labels };
+}
 const DROP = [
   '544,18', '1056,20', '1051,60', '19,706', // off-board shores
   '536,284', '526,351', '523,371', '222,454', '158,534', '149,556', '303,699', // Manhattan
@@ -117,43 +162,29 @@ const DROP = [
   '375,665', '287,788', '447,786', '367,809', '469,786', '282,808', '607,922', // Brooklyn
   '157,820', '263,839', // Staten Island
 ];
-const REPLACE = {
-  // Jamaica: the bay's east side as an octagon, then a level spit and shore
-  'water|jamaica': [[793.5, 853], [820, 853], [856, 889], [856, 945], [801, 1000], [700, 1000], [700, 1012], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
-  // Staten Island: 45-degree corners, upright shores
-  'water|westerleigh': [[36, 826], [36, 740], [63, 713], [221, 713], [NARROWS[0], 750], [NARROWS[0], 826]],
-  'water|tottenville': [[36, 921], [36, 1005], [63, 1032], [209, 1032], [NARROWS[0], 983], [NARROWS[0], 921]],
-};
-
-// Where the labels in the water sit on this map: midway between shores, at their angle.
-const LABELS = {
-  boro: {
-    MN: [...foot(shift(MN_WEST, 22), [247, 378]).map(r1), -54.5],
-    BX: [(BRONX_EAST + 1067) / 2, 280, -90], QN: [890, (SOUTH_SHORE + 1067) / 2, 0],
-    BK: [525, 1030, 8.6], SI: [172, 1050, 0],
-  },
-  water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728, 926, 0]],
-  bridges: {}, // filled in below, beside each re-landed bridge
-};
 
 // ---------------------------------------------------------------- apply
-const moved = q => { const m = MOVE[key(q)]; return m ? m.map(r1) : q; };
 const dropped = new Set(DROP);
-for (const k of [...Object.keys(MOVE), ...DROP]) {
-  if (!geo.chains.some(c => c.pts.some(q => key(q) === k)) && !Object.values(geo.regions).some(r => r.some(q => key(q) === k)))
-    throw new Error('No skeleton point at ' + k);
-}
-const chains = geo.chains.map(c => {
-  const sides = c.sides.join('|'), a = moved(c.pts[0]), b = moved(c.pts[c.pts.length - 1]);
-  const rep = REPLACE[sides] || REPLACE[c.sides.slice().reverse().join('|')];
-  if (rep) {
-    const pts = rep.map(q => q.map(r1));
-    const fwd = key(pts[0]) === key(a) ? pts : pts.slice().reverse();
-    if (key(fwd[0]) !== key(a) || key(fwd[fwd.length - 1]) !== key(b)) throw new Error(`REPLACE for ${sides} must run junction to junction`);
-    return { sides: c.sides, pts: fwd };
+function chainsFor(S) {
+  const { MOVE, REPLACE } = draft(S);
+  for (const k of [...Object.keys(MOVE), ...DROP]) {
+    if (!geo.chains.some(c => c.pts.some(q => key(q) === k)) && !Object.values(geo.regions).some(r => r.some(q => key(q) === k)))
+      throw new Error('No skeleton point at ' + k);
   }
-  return { sides: c.sides, pts: c.pts.filter((q, i) => i === 0 || i === c.pts.length - 1 || !dropped.has(key(q))).map(moved) };
-});
+  const moved = q => { const m = MOVE[key(q)]; return m ? m.map(r1) : q; };
+  const chains = geo.chains.map(c => {
+    const sides = c.sides.join('|'), a = moved(c.pts[0]), b = moved(c.pts[c.pts.length - 1]);
+    const rep = REPLACE[sides] || REPLACE[c.sides.slice().reverse().join('|')];
+    if (rep) {
+      const pts = rep.map(q => q.map(r1));
+      const fwd = key(pts[0]) === key(a) ? pts : pts.slice().reverse();
+      if (key(fwd[0]) !== key(a) || key(fwd[fwd.length - 1]) !== key(b)) throw new Error(`REPLACE for ${sides} must run junction to junction`);
+      return { sides: c.sides, pts: fwd };
+    }
+    return { sides: c.sides, pts: c.pts.filter((q, i) => i === 0 || i === c.pts.length - 1 || !dropped.has(key(q))).map(moved) };
+  });
+  return { chains, moved };
+}
 
 // Chamfers: a Deco bevel on each sharp coast corner (turning 70 degrees or more)
 // that is not a junction, cut back CHAMFER units along both sides.
@@ -176,7 +207,7 @@ function chamfer(cs) {
 
 // Regions: walk each skeleton ring, swapping each chain run for its new points;
 // frame edges, which no chain covers, pass through (moved where MOVE says).
-function regionsFrom(cs) {
+function regionsFrom(cs, moved) {
   const edge = new Map();
   geo.chains.forEach((c, i) => c.pts.forEach((q, k) => {
     if (k === c.pts.length - 1) return;
@@ -293,12 +324,17 @@ function check(cs, regions, bs) {
 }
 
 // ---------------------------------------------------------------- write
-function write(dir, cs, note) {
-  const regions = regionsFrom(cs), bridges = bridgesFor(cs);
+// The whole map for a set of SETTINGS; chamfered bevels the sharp coast corners.
+function build(S, chamfered = false) {
+  const { chains, moved } = chainsFor(S), cs = chamfered ? chamfer(chains) : chains;
+  const regions = regionsFrom(cs, moved), bridges = bridgesFor(cs);
+  return { chains: cs, regions, bridges, labels: { ...draft(S).labels, bridges: bridgeLabels(bridges) } };
+}
+function write(dir, map, note) {
+  const { chains: cs, regions, bridges, labels } = map;
   const { problems, notes } = check(cs, regions, bridges);
   console.log(path.relative(ROOT, dir) + ':\n  ' + notes.join('\n  '));
   if (problems.length) { console.error('Not written:\n  ' + problems.join('\n  ')); process.exit(1); }
-  const labels = { ...LABELS, bridges: bridgeLabels(bridges) };
   const j = v => JSON.stringify(v);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'board-geometry.json'), `{"note":${j(note)},"size":${j(geo.size)},"regions":{\n`
@@ -307,5 +343,8 @@ function write(dir, cs, note) {
   console.log('wrote', path.relative(ROOT, path.join(dir, 'board-geometry.json')));
 }
 const NOTE = 'Drafted experiment (2026-09-29), written by tools/draft_board.js from Art/Board/board-geometry.json (the skeleton). Same Districts, chains and bridges, redrawn with straight lines and exact angles. "labels" places the water and bridge names for this map.';
-write(OUT, chains, NOTE);
-write(path.join(OUT, 'Chamfered'), chamfer(chains), NOTE.replace('exact angles.', 'exact angles, sharp coast corners bevelled.'));
+if (require.main === module) {
+  write(OUT, build(SETTINGS), NOTE);
+  write(path.join(OUT, 'Chamfered'), build(SETTINGS, true), NOTE.replace('exact angles.', 'exact angles, sharp coast corners bevelled.'));
+}
+module.exports = { SETTINGS, build, check };

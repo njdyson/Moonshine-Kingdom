@@ -45,13 +45,34 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   and read as if they nearly touched. Manhattan's borders are level at 262, 358, 453 and 548.
   The Bronx's east shore and Queens' Nassau line are upright; Red Hook's south side and the
   Rockaways are level. Staten Island and Jamaica Bay are 45-degree octagons.
+- **Labels.** The Bronx's label is centred on its east shore, which now runs to the top of
+  the board; Manhattan's sits beside the Tenderloin and Five Points, clear of West Side's
+  piers; Westchester's is centred in its strip.
 - **Bridges** keep their places and cross square to the new banks, so all four are 49 long
   (they were 43 to 55). Their names, and the water labels, move with the shores: the drafted
   geometry carries them as `"labels"`, which `build_board.js` uses when a geometry has them.
-- **Areas.** Most Districts move by under 5%. The largest: Throggs Neck -10% (the Sound
-  widened), Coney Island +9%, Westerleigh +8%, Stapleton -8%, Whitestone -8%. Morris Park, a
-  crown room, lost 15% to a level south border in the first draft; that border now keeps its
-  old east end, and the loss is 5%.
+- **Room for pieces, balanced** (Nick, 2026-09-29: "every district [must] fit as many pieces
+  in as possible"). The build now prints each District's **room**: its ground at least 6 units
+  (about 3 mm) in from every border and clear of its label, in cm² at 24in. No piece sizes are
+  recorded anywhere, so this is area, not a piece count. The drafted borders sit on `SETTINGS`
+  at the top of `draft_board.js`, and those were tuned by a hill-climb (a scratch script, not
+  kept) that raised the smallest Districts, the crown rooms weighted extra, with every land
+  border kept at 32 units or longer so it still reads as a connection. Its moves: Manhattan
+  widened 8 units west (New Jersey follows, so the Hudson keeps its 44) and its level borders
+  lowered; the Westchester line up 9; Morris Park 22 units wider; Hell Gate's chevron flattened
+  from 15 to 9 degrees, giving the Bronx some of Queens' shore; Williamsburg's south point
+  down 28; Corona's north border up 10; the Bowery's bottom up 20 so Staten Island could grow
+  north. Before and after:
+
+  | | Smallest | Crown rooms (Sugar Hill, Morris Park, Williamsburg, Richmond Hill) |
+  | --- | --- | --- |
+  | Traced | 32 (West Side) | 34, 36, 50, 65 |
+  | Drafted, first pass | 34 (Morris Park, Sugar Hill) | 34, 34, 45, 64 |
+  | Drafted, balanced | 42 (Tenderloin) | 47, 47, 57, 64 |
+
+  Nine Districts now sit between 42 and 46. The big ones stay big because nothing small
+  borders them: Jamaica (114), Sheepshead Bay (72), Coney Island (70). Change a setting by hand
+  and the room report says what it cost.
 - **Chamfers** (`Drafted/Chamfered`) bevel coast corners sharper than 110 degrees that aren't
   junctions. The drafting already made most corners 45-degree cuts, so only four qualify
   (Throggs Neck's tip, the Bowery's south-west corner, the Rockaway spit, Sheepshead's hook).

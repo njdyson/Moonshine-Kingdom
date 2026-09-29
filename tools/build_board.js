@@ -128,7 +128,7 @@ const BRIDGE_LABELS = (geo.labels && geo.labels.bridges) || {
   'Hell Gate Bridge': [775, 331.5, -8], 'Queensboro Bridge': [625.5, 428.2, -43.6],
   'Williamsburg Bridge': [538.2, 505, -44.2], 'Brooklyn Bridge': [318.4, 712.8, -60.6],
 };
-const LAND_LABELS = [['WESTCHESTER', 800, 32, 0], ['NASSAU', 1049, 700, 90]];
+const LAND_LABELS = (geo.labels && geo.labels.land) || [['WESTCHESTER', 800, 32, 0], ['NASSAU', 1049, 700, 90]];
 
 // ---------------------------------------------------------------- type
 const TYPE = {
@@ -399,6 +399,18 @@ function placeCentre(d) {
   }
   if (!best) throw new Error('No room for the label in ' + d.id);
   return best;
+}
+// Room for pieces: the District's ground at least ROOM_MARGIN from every border and
+// clear of its label cluster (by the same margin), in cm² at 24in. Printed with each
+// placement, so a geometry change can be judged by the space it leaves.
+const ROOM_MARGIN = 6;
+function room(d, { x, y, c }) {
+  const p = geo.regions[d.id], M = ROOM_MARGIN, box = [x - M, y - M, c.w + 2 * M, c.h + 2 * M];
+  const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
+  let n = 0;
+  for (let gy = Math.min(...ys); gy <= Math.max(...ys); gy += 2) for (let gx = Math.min(...xs); gx <= Math.max(...xs); gx += 2)
+    if (inside([gx, gy], p) && rectDist([gx, gy], box) > 0 && edgeDist([gx, gy], p) >= M) n++;
+  return n * 4 * (BOARD_MM / 1080) ** 2 / 100;
 }
 function placeAll() {
   if (LABEL_PLACEMENT === 'centre') return Object.fromEntries(DISTRICTS.map(d => [d.id, placeCentre(d)]));
@@ -903,7 +915,7 @@ async function printPdf(browser, svg) {
   const placed = placeAll();
   for (const d of DISTRICTS) {
     const { x, y, c, open } = placed[d.id];
-    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  ${LABEL_PLACEMENT === 'centre' ? 'clearance' : 'open ground'} ${open === null ? 'pinned' : f(open, 0)}`);
+    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  ${LABEL_PLACEMENT === 'centre' ? 'clearance' : 'open ground'} ${open === null ? 'pinned' : f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²`);
   }
   const print = buildSvg(fontCss, 'print', placed), screen = buildSvg(fontCss, 'screen', placed);
   for (const [file, svg] of [[OUT.printSvg, print], [OUT.screenSvg, screen]]) {
