@@ -62,10 +62,10 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   make them look nice too, cutting or reshaping where it helps). Sheepshead Bay / Brownsville
   runs straight on down from Red Hook / Brownsville to the bay (`BK_COL`), so Brooklyn is three
   columns under Red Hook; Richmond Hill / Jamaica is level like Queens' other rows. Jamaica Bay
-  is 90 units wider (`bayEast`), which trims Jamaica, the one outlier (130 wide was tried: it
-  turned good ground into a sea of dead water); Coney Island gives Sheepshead Bay the width its
-  sign needs (`coneyEast`). The re-tune scores evenness (the spread of room sizes) as well as
-  the smallest rooms, and keeps each crown room at 55 or more where it can.
+  is 90 units wider (`bayEast`; 130 was tried and turned good ground into a sea of dead water);
+  Coney Island gives Sheepshead Bay the width its sign needs (`coneyEast`). The re-tune scores
+  evenness (the spread of room sizes) as well as the smallest rooms, and keeps each crown room
+  at 55 or more where it can.
 - **Square corners** (Nick, 2026-09-29: tight corners are dead space, since pieces can't fit in
   them, so squared corners are best where possible). Where a border met a slanted shore or
   border at a tight angle it now meets it square, usually on a short foot (`FOOT`, 24):
@@ -75,17 +75,24 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   Narrows in line with Coney Island's, and Staten Island moves east with it (`NARROWS_GAP` keeps
   the channel); Astoria / Corona meets Williamsburg on a foot; Hunts Point / Throggs Neck
   (`hpCol`) and Astoria / Whitestone and Corona / Flushing (`queensCol`) run upright; Belmont's
-  shore runs straight up from Manhattan's tip; Jamaica Bay's corner at Brownsville is square.
+  shore runs straight up from Manhattan's tip.
   The four-way corner was the hard one: East Harlem needs a shallow border with Hunts Point for
   its sign's width, which left Hunts Point a tight corner. Now East Harlem / Hunts Point runs
   out to a knee and drops upright to the Hell Gate (`ehKnee`; East Harlem takes a short stretch
   of that shore, and the Hell Gate Bridge moves 30 east to stay clear of it, `BRIDGE_SHIFT`),
   and Belmont / Hunts Point leaves the corner on a foot square to it before running level to
-  Fordham (`hpFoot`). The re-tune flattened the Hell Gate's chevron from 9 to 3 degrees. Sixteen
-  corners under 80 degrees are now one, Brownsville's at 79.6; the drafting reports any it
-  finds. `Drafted/Mock/Tight corners, before and after.jpg` circles them. With signs, rooms run
-  41 to 74 bar Jamaica (129); the crown rooms are 47, 57, 60 and 60; no sign needs its plate
-  hung underneath.
+  Fordham (`hpFoot`). The re-tune flattened the Hell Gate's chevron from 9 to 3 degrees.
+  Richmond Hill and the bay were the last (Nick: Richmond Hill's west end looked pointy, a wedge
+  between two slanted borders, and the bay's square west corner, left by squaring Brownsville,
+  looked wrong). Corona's bottom now runs level from Williamsburg's east corner (`wbEast`) and
+  Brownsville's east side upright from it to the bay (`bvEast`), so Richmond Hill is a rectangle;
+  it steps up a little at its top left to meet Flushing (`queensRows`), because one level line
+  for both would tie Flushing's height to Corona's and make it the biggest District (97). The bay
+  has its 45-degree corner back, and Sheepshead Bay / Brownsville meets it on a foot. Sixteen
+  corners under 80 degrees are now none; the drafting reports any it finds, and
+  `Drafted/Mock/Tight corners, before and after.jpg` circles them. With signs, rooms run 39
+  (Whitestone) to 83 (Richmond Hill), Jamaica included (79; it was 129); the crown rooms are 47,
+  57, 65 and 83; no sign needs its plate hung underneath.
 - **Throggs Neck's tip is cut** 24 units back along both shores (`TN_CUT`; Nick: the point was
   harsh), in both variants.
 - **Labels.** The Bronx's label is centred on its east shore, between the frame and Throggs
@@ -115,14 +122,14 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   | Drafted, re-tuned for signs | 40 (Fordham, Hunts Point) | 47, 44, 54, 64 |
   | Drafted, flush to the frame | 41 (Tenderloin) | 47, 50, 54, 77 |
   | Drafted, evened out | 41 (Tenderloin) | 47, 53, 54, 57 |
-  | Drafted, square corners | 41 (Tenderloin) | 46, 53, 57, 56 |
+  | Drafted, square corners | 41 (Tenderloin) | 46, 54, 62, 79 |
 
   The last row is the current `SETTINGS`, measured the same way (centred labels). They are
-  tuned for the hanging signs (below), so with the signs on the figures are 41 (West Side)
-  and 47, 57, 60, 60. If the centred labels win instead, re-tune for them.
+  tuned for the hanging signs (below), so with the signs on the figures are 39 (Whitestone)
+  and 47, 57, 65, 83. If the centred labels win instead, re-tune for them.
 
-  The big ones stay big because nothing small borders them: Jamaica (129), Flushing (73),
-  Red Hook (73). Change a setting by hand and the room report says what it cost.
+  The biggest are Jamaica (80), Richmond Hill (79), Brownsville (79) and Flushing (76). Change a
+  setting by hand and the room report says what it cost.
 - **Chamfers** (`Drafted/Chamfered`) bevel coast corners sharper than 110 degrees that aren't
   junctions. The drafting already made most corners 45-degree cuts (Throggs Neck's tip among
   them), so only three qualify (the Bowery's south-west corner, the Rockaway spit,
