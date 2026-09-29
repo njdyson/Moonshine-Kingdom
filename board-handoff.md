@@ -1,7 +1,7 @@
 # The board: vector rebuild
 
 Status (2026-09-29): the **drafted map with hanging signs and the Deco style is the board**, on
-`main`. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online a1b0ff4), with
+`main`. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online cc5d519), with
 clickable Districts and its connection graph taken from `board-geometry.json`. The Affinity export (`Art/Board (Large).png`) is untouched.
 
 ```
@@ -339,7 +339,9 @@ keeps them on a re-trace.
   Bay, and the Hell Gate and Brooklyn Bridges came in; Tenderloin to Bowery, Corona to
   Whitestone, Throggs Neck to Whitestone and Astoria to Williamsburg went. If the map changes
   again, `mk-online-board-handoff.md` is still the brief.
-- **mk-online is one redraw behind.** It took the geometry while Corona had its spur of East
+- ~~**mk-online is one redraw behind.**~~ Caught up 2026-09-29 (mk-online cc5d519): Astoria /
+  Williamsburg is back and Corona is inland; `boardcheck.ts` passes, 43 connections, 21 Coastal.
+  It took the geometry while Corona had its spur of East
   River shore, so it drops **Astoria / Williamsburg** (and would count Corona as Coastal). The
   board has since put that border back, and every connection now matches the traced map. The
   shapes changed too: the Queens / Brooklyn line (Astoria takes the strip), Manhattan raised
