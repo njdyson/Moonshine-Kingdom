@@ -68,6 +68,7 @@ const BOARD_PX = BOARD_IN * 300; // print render: 300dpi
 // trim on every side, for the printer's cut (6 units, 3.4 mm; a printer's own template
 // wins). 0 to 1080 stays the 24in trim; the screen build and the previews stop at it.
 const BLEED = 6;
+const FRAME_OUT = 7, FRAME_IN = 13; // the frame's gold edge and its hairline
 
 // ---------------------------------------------------------------- palette
 // Muted land so every mob colour, and the blue Squads, stand out on it.
@@ -135,7 +136,7 @@ const SETUP = {
 // board committing to one. The roster keeps the Town Planner's marks; true draws
 // them again, with the key's Setup row.
 const SHOW_SETUP = false;
-const OFFBOARD = ['nj', 'north', 'east'];
+const OFFBOARD = ['nj', 'north', 'east'].filter(k => geo.regions[k]); // New Jersey, Westchester, Nassau
 
 // Labels in the water or on off-board land, by visual centre: [x, y, rotation].
 // Centres sit midway between the shores (or shore and frame), angles follow them.
@@ -165,6 +166,7 @@ const TYPE = {
   panelHead: { family: 'Cinzel', weight: 700, size: 11.5, spacing: 3.2 },
   small: { family: 'Barlow Condensed', weight: 700, size: 8, spacing: 1.3 },
   titleCity: { family: 'Cinzel', weight: 700, size: 26, spacing: 4.5 },
+  titleStack: { family: 'Cinzel', weight: 700, size: 30, spacing: 5 },
   titleYear: { family: 'Cinzel', weight: 700, size: 15, spacing: 8 },
   price: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.4 },
   sign: { family: 'Barlow Condensed', weight: 700, size: 12.5, spacing: 1 },
@@ -179,6 +181,25 @@ const poly = p => `M${p.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')} Z`;
 const pts = p => p.map(([x, y]) => `${f(x)},${f(y)}`).join(' ');
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const byId = Object.fromEntries(DISTRICTS.map(d => [d.id, d]));
+// A District may run under the frame to the board's edge, as New Jersey does (the
+// drafted board has no Westchester or Nassau). Its fill keeps the whole shape; the
+// rest (keylines, sign, room) works from the part inside the frame's hairline.
+const FULL = { ...geo.regions };
+for (const d of DISTRICTS) geo.regions[d.id] = insideFrame(geo.regions[d.id]);
+function insideFrame(p) {
+  const lo = FRAME_IN, hi = 1080 - FRAME_IN;
+  if (p.every(([x, y]) => x >= lo && x <= hi && y >= lo && y <= hi)) return p;
+  const cut = (q, inside, at) => q.flatMap((v, i) => {
+    const u = q[(i - 1 + q.length) % q.length];
+    return inside(v) ? (inside(u) ? [v] : [at(u, v), v]) : inside(u) ? [at(u, v)] : [];
+  });
+  const atX = x => (u, v) => [x, u[1] + (v[1] - u[1]) * (x - u[0]) / (v[0] - u[0])];
+  const atY = y => (u, v) => [u[0] + (v[0] - u[0]) * (y - u[1]) / (v[1] - u[1]), y];
+  let q = cut(p, v => v[0] >= lo, atX(lo));
+  q = cut(q, v => v[0] <= hi, atX(hi));
+  q = cut(q, v => v[1] >= lo, atY(lo));
+  return cut(q, v => v[1] <= hi, atY(hi));
+}
 const upper = s => s.toUpperCase();
 
 let WIDTHS = new Map();
@@ -551,7 +572,7 @@ function placeAll() {
 // ---------------------------------------------------------------- map layers
 function waterLining() {
   // Engraved coast rings: alternate gold and sea strokes, widest first, under the land.
-  const land = [...DISTRICTS.map(d => geo.regions[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
+  const land = [...DISTRICTS.map(d => FULL[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
   const bg = C.sea[1];
   const rings = [[22, C.goldLine, 0.06], [18.5, bg, 1], [13.5, C.goldLine, 0.09], [10.5, bg, 1], [6.5, C.goldLine, 0.15], [4, bg, 1]];
   return rings.map(([w, col, op]) =>
@@ -561,7 +582,7 @@ function waterLining() {
 function districtFills(placed) {
   let s = '';
   for (const d of DISTRICTS) {
-    const p = geo.regions[d.id];
+    const p = FULL[d.id];
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     if (d.zone === 'hs' && STYLE === 'tone') {
@@ -576,7 +597,7 @@ function districtFills(placed) {
         + `<circle cx="${f(cx)}" cy="${f(cy)}" r="120" fill="url(#glow)"/></g>`;
     }
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/></g>`;
-    if (STYLE === 'deco') s += decoFrame(d, p);
+    if (STYLE === 'deco') s += decoFrame(d, geo.regions[d.id]);
   }
   return s;
 }
@@ -708,7 +729,7 @@ function pierObstacles() {
   return obs;
 }
 function placePiers() {
-  const land = [...DISTRICTS.map(d => geo.regions[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
+  const land = [...DISTRICTS.map(d => FULL[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
   const obs = pierObstacles(), out = [];
   const free = q => !land.some(p => inside(q, p)) && !obs.some(o => inside(q, o))
     && q[0] > FRAME_IN + 4 && q[0] < 1080 - FRAME_IN - 4 && q[1] > FRAME_IN + 4 && q[1] < 1080 - FRAME_IN - 4;
@@ -808,7 +829,6 @@ const gilt = (t, x, y, spec) => text(t, x + 0.6, y + 0.9, spec, { fill: '#000', 
 // It sits in a corner cut out of the map: the frame steps in around it (see
 // frame()), so no coastline runs under it. Sockets look like the Ledger's; only
 // the numerals warm from gold towards rust as the Heat climbs.
-const FRAME_OUT = 7, FRAME_IN = 13;
 const HEAT = (() => {
   const d = 39 * MM, gap = 2 * MM, padX = 6 * MM, padY = 4 * MM, m = 7;
   const trayW = 5 * d + 4 * gap + 2 * padX, trayH = d + 2 * padY;
@@ -961,17 +981,50 @@ function seams() {
 }
 
 const TITLE_Y = () => PANELS_Y() + TOMORROW.h + 12 + 27; // the top rule 12 under the panels
+// The title's layout, a mock (Nick, 2026-09-29: try it lower, in New Jersey's empty
+// half): 'across' under the panels, as it was; 'stacked' on three lines, lower, where
+// New Jersey narrows; 'upright' reading up the strip beside the Bowery.
+const TITLE = arg('title') || 'across';
+// New Jersey's shore at height y: its furthest point east.
+function njShore(y) {
+  const p = geo.regions.nj;
+  let x = -Infinity;
+  p.forEach((a, i) => {
+    const b = p[(i + 1) % p.length];
+    if ((a[1] - y) * (b[1] - y) > 0 || a[1] === b[1]) return;
+    x = Math.max(x, a[0] + (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]));
+  });
+  return x;
+}
 function title() {
   // The map's title block: the city and the year, between Deco rules.
-  const cx = 116, cy = TITLE_Y();
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
-  const rule = (y, gap) => `<path d="M${f(cx - cityW / 2)} ${y} H${f(cx - gap)} M${f(cx + gap)} ${y} H${f(cx + cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
-  let s = rule(cy - 27, 9) + diamond(cx, cy - 27, 3.6);
-  s += text('NEW YORK', cx + 2.2, cy - 5, TYPE.titleCity, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true });
-  s += rule(cy + 20, yearW / 2 + 10);
-  s += text('1929', cx + 4, cy + 20, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
-  return s;
+  const block = (cx, cy, lines) => {
+    const w = lines ? Math.max(...lines.map(t => width(TYPE.titleStack, t))) : cityW;
+    const rule = (y, gap) => `<path d="M${f(cx - w / 2)} ${y} H${f(cx - gap)} M${f(cx + gap)} ${y} H${f(cx + w / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
+    let s = rule(cy - 27, 9) + diamond(cx, cy - 27, 3.6);
+    if (!lines) s += text('NEW YORK', cx + 2.2, cy - 5, TYPE.titleCity, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true });
+    else lines.forEach((t, i) => { s += text(t, cx + 2.5, cy - 5 + i * 34, TYPE.titleStack, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true }); });
+    const yy = cy + 20 + (lines ? 34 * (lines.length - 1) + 4 : 0);
+    s += rule(yy, yearW / 2 + 10);
+    s += text('1929', cx + 4, yy, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
+    return s;
+  };
+  if (TITLE === 'across') return block(116, TITLE_Y());
+  // the ground left under the panels, down to New Jersey's foot
+  const top = PANELS_Y() + TOMORROW.h + 16, foot = Math.max(...geo.regions.nj.map(q => q[1])) - 16;
+  if (TITLE === 'upright') {
+    // turned to read up the strip, centred between the frame and the shore at its foot
+    const x = (FRAME_IN + njShore(foot)) / 2 + 1.5, y = Math.max(top + cityW / 2, (top + foot) / 2);
+    return `<g transform="translate(${f(x)} ${f(y)}) rotate(-90)">${block(0, 0)}</g>`;
+  }
+  // stacked: as low as it fits beside the shore, and no lower than the middle of the ground
+  const lines = ['NEW', 'YORK'], w = Math.max(...lines.map(t => width(TYPE.titleStack, t))), up = 31, down = 20 + 34 + 4 + 9;
+  const cx = HEAT.tx + w / 2 + 4;
+  let cy = top + up;
+  while (cy + down < foot && njShore(cy + down + 1) - 10 >= cx + w / 2 && cy < (top + foot) / 2 - (up + down) / 2 + up) cy += 1;
+  return block(cx, cy, lines);
 }
 
 // A quarter sunburst: rays and two arcs from (x, y), spanning a0 to a0 + 90 degrees.
@@ -1105,6 +1158,8 @@ function allText() {
   add({ ...TYPE.panelHead, size: 10.5 }, 'HEAT');
   add(TYPE.panelHead, 'MASH');
   add(TYPE.titleCity, 'NEW YORK');
+  add(TYPE.titleStack, 'NEW');
+  add(TYPE.titleStack, 'YORK');
   add(TYPE.titleYear, '1929');
   return items;
 }
