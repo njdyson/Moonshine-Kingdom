@@ -193,7 +193,6 @@ function loadIcon(file) {
 }
 const ICONS = {
   speak: loadIcon('Tumbler.svg'), ward: loadIcon('Fist.svg'), dock: loadIcon('anchor.svg'),
-  moonshine: loadIcon('Moonshine.svg'), rum: loadIcon('Rum.svg'),
   crown: loadIcon('Crown.svg'), martini: loadIcon('Gin.svg'),
 };
 function icon(kind, cx, cy, size, color, strokeWidth) {
@@ -725,8 +724,15 @@ function tomorrow(x, y) {
 }
 
 // The key is the price list (Nick, 2026-09-29: the Ward, Dock and Still rows went; the
-// Rulebook teaches the types). Each row is a venue and what it buys, a glass and a price:
-// the High Society row has only Rum, which says "Rum only" without the words.
+// Rulebook teaches the types). Each row is a venue and what it buys, a barrel and a price:
+// the High Society row has only Rum, which says "Rum only" without the words. A barrel is
+// drawn as the cube that stands for it on the table (Nick: grey Moonshine, brown Rum).
+const CUBE = { moonshine: '#9b9892', rum: '#7b4a26' };
+function cube(liquor, cx, cy, size) {
+  const h = size / 2, col = CUBE[liquor];
+  return `<rect x="${f(cx - h)}" y="${f(cy - h)}" width="${f(size)}" height="${f(size)}" rx="1.2" fill="${col}" stroke="#000" stroke-opacity=".55" stroke-width=".6" filter="url(#lift)"/>`
+    + `<path d="M${f(cx - h + 1.2)} ${f(cy + h - 1.6)} V${f(cy - h + 1.2)} H${f(cx + h - 1.6)}" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width=".7" stroke-linecap="round"/>`;
+}
 const KEY_ROWS = [
   ['speak', 'Speakeasy', [['moonshine', '$300'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500']]],
@@ -744,7 +750,7 @@ function key(x, y) {
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
     for (const [liquor, price] of chips) {
-      s += icon(liquor, cx + 4.5, cy, 10, C.gold) + text(price, cx + 11, cy, TYPE.price, { fill: C.body, middle: true });
+      s += cube(liquor, cx + 4.5, cy, 8) + text(price, cx + 11, cy, TYPE.price, { fill: C.body, middle: true });
       cx += chipW(price) + CHIP_GAP;
     }
   });

@@ -148,8 +148,9 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
   not fit in New Jersey. **Under the Heat corner the Tomorrow panel and the key sit side by
   side** (Nick: the title was not to be sandwiched between them).
 - **The key is the price list** (Nick, 2026-09-29): two rows, Speakeasy and High Society, each
-  with what it buys as chips, the Moonshine bottle `$300` and the Rum glass `$500`
-  (`Art/Icons`); High Society shows only Rum, which says "Rum only" without the words. The Ward,
+  with what it buys as chips: a barrel drawn as the cube that stands for it on the table, grey
+  Moonshine `$300` and brown Rum `$500` (`CUBE`; Nick, 2026-09-29: it replaced a bottle and a
+  glass, which didn't match the pieces); High Society shows only Rum, which says "Rum only" without the words. The Ward,
   Dock and Still rows were cut: the Rulebook teaches the types, the piers tell a Dock and the
   Still is its own token. Before that it lost its sentences (long-winded; bridges explain
   themselves).
