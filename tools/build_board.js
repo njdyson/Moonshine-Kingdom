@@ -259,7 +259,7 @@ function roundel(zone, cx, cy, r) {
 // Two arrangements, h (Still left of the text) and v (Still over the text); the
 // placer tries both. Returns the size and a draw(x, y) for the chosen spot.
 const R = 14; // roundel radius: 28 units, about 16 mm at 24in
-function cluster(d, layout, stacked = false) {
+function cluster(d, layout, opts = {}) {
   const names = (d.lines || [d.name]).map(upper);
   const nameW = Math.max(...names.map(n => width(TYPE.name, n)));
   const venueW = d.venue ? width(TYPE.venue, d.venue) : 0;
@@ -268,45 +268,60 @@ function cluster(d, layout, stacked = false) {
   const hs = d.zone === 'hs', nameFill = hs ? C.goldBright : C.ink;
   const lines = []; // [kind, text, baseline]
   if (layout === 's') {
-    // A hanging sign: a small plaque, the type's medallion at its left, the name (and
-    // venue) in the middle, the Still at its right, hung from the border above it.
-    // stacked: the name on two lines, for a District too narrow for one. The Still is
-    // not on the sign: it stands in the District (stillAt, set by placeSign).
-    const sr = 9, pad = 4.5;
+    // A hanging sign: a small plaque with the type's medallion and the name (and venue),
+    // hung from the border above it, and the Still on its own plate bolted to the sign's
+    // right end, taller than the sign so it reads as a separate part (Nick, 2026-09-29).
+    // stacked: the name on two lines. drop: the plate bolted under the sign's middle
+    // instead, for a District too narrow for the two side by side.
+    const { stacked = false, drop = false } = opts;
+    const sr = 9, pad = 4.5, sh = 30, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pp = 5, lap = 6;
+    const pw = sw + 2 * pp, ph = sh + 2 * pp; // the Still's plate
     const names = stacked ? upper(d.name).split(' ') : [upper(d.name)];
     const tw = Math.max(...names.map(n => width(TYPE.sign, n)), d.venue ? width(TYPE.signVenue, d.venue) : 0);
-    const w = pad + 2 * sr + 6 + tw + pad + 2, h = (stacked ? 34 : 26) + 2 * pad, tx = pad + 2 * sr + 6;
+    const bw = pad + 2 * sr + 6 + tw + (drop ? pad + 2 : 8 + lap), bh = (stacked ? 34 : 26) + 2 * pad, tx = pad + 2 * sr + 6;
+    const w = drop ? Math.max(bw, pw) : bw - lap + pw, h = drop ? bh - lap + ph : Math.max(bh, ph);
+    const sx = drop ? (w - bw) / 2 : 0, sy = drop ? 0 : (h - bh) / 2; // the sign, in the cluster
+    const px = drop ? (w - pw) / 2 : bw - lap, py = drop ? bh - lap : (h - ph) / 2; // the plate
     const rows = names.length + (d.venue ? 0.75 : 0), step = 10.5;
-    const nameYs = names.map((n, i) => h / 2 - (rows - 1) * step / 2 + i * step), venueY = nameYs[nameYs.length - 1] + 9.5;
-    const self = {
-      w, h, layout, stillAt: null,
-      roundelAt: (x, yy) => [x + pad + sr, yy + h / 2 + (hs ? 3 : 0)],
+    const nameYs = names.map((n, i) => bh / 2 - (rows - 1) * step / 2 + i * step), venueY = nameYs[nameYs.length - 1] + 9.5;
+    const medal = (x, yy) => [x + sx + pad + sr, yy + sy + bh / 2 + (hs ? 3 : 0)];
+    const chamfered = (x, yy, ww, hh, c) => `M${f(x + c)} ${f(yy)} H${f(x + ww - c)} L${f(x + ww)} ${f(yy + c)} V${f(yy + hh - c)} L${f(x + ww - c)} ${f(yy + hh)} H${f(x + c)} L${f(x)} ${f(yy + hh - c)} V${f(yy + c)} Z`;
+    return {
+      w, h, layout,
+      roundelAt: medal,
       draw(x, yy) {
-        const poly0 = geo.regions[d.id], c = 3;
-        const plate = `M${f(x + c)} ${f(yy)} H${f(x + w - c)} L${f(x + w)} ${f(yy + c)} V${f(yy + h - c)} L${f(x + w - c)} ${f(yy + h)} H${f(x + c)} L${f(x)} ${f(yy + h - c)} V${f(yy + c)} Z`;
-        // hangers: from the plaque's top up to the border straight above
+        const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
+        // hangers: from the tops up to the border straight above
+        const hooks = drop ? [[X + 12, Y], [X + bw - 12, Y]] : [[X + 12, Y], [PX + pw / 2, PY]];
         let hang = '';
-        for (const hx of [x + 12, x + w - 12]) {
+        for (const [hx, hy] of hooks) {
           let top = -Infinity;
           poly0.forEach((a, i) => {
             const b = poly0[(i + 1) % poly0.length];
             if ((a[0] - hx) * (b[0] - hx) > 0 || a[0] === b[0]) return;
             const ey = a[1] + (b[1] - a[1]) * (hx - a[0]) / (b[0] - a[0]);
-            if (ey < yy && ey > top) top = ey;
+            if (ey < hy && ey > top) top = ey;
           });
-          if (top > -Infinity && yy - top < 40) hang += `M${f(hx)} ${f(top + 1.2)} V${f(yy)} `;
+          if (top > -Infinity && hy - top < 44) hang += `M${f(hx)} ${f(top + 1.2)} V${f(hy)} `;
         }
         let s = hang ? `<path d="${hang}" stroke="${C.goldLine}" stroke-width=".9" stroke-opacity=".85"/>` : '';
-        s += `<path d="${plate}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
-          + `<path d="${plate}" fill="url(#lacquer)" fill-opacity=".92" stroke="url(#bezelGilt)" stroke-width="1.2"/>`;
-        s += `<g filter="url(#lift)">${roundel(d.zone, x + pad + sr, yy + h / 2 + (hs ? 3 : 0), sr)}</g>`;
-        names.forEach((n, i) => { s += text(n, x + tx, yy + nameYs[i], TYPE.sign, { fill: nameFill, middle: true }); });
-        if (d.venue) s += text(d.venue, x + tx, yy + venueY, TYPE.signVenue, { fill: C.body, middle: true });
-        if (self.stillAt) s += `<g filter="url(#lift)">${still(d.still, self.stillAt[0], self.stillAt[1], TOKEN_H)}</g>`;
+        const sign = chamfered(X, Y, bw, bh, 3), plate = chamfered(PX, PY, pw, ph, 2);
+        s += `<path d="${sign}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
+          + `<path d="${sign}" fill="url(#lacquer)" fill-opacity=".92" stroke="url(#bezelGilt)" stroke-width="1.2"/>`;
+        s += `<g filter="url(#lift)">${roundel(d.zone, ...medal(x, yy), sr)}</g>`;
+        names.forEach((n, i) => { s += text(n, X + tx, Y + nameYs[i], TYPE.sign, { fill: nameFill, middle: true }); });
+        if (d.venue) s += text(d.venue, X + tx, Y + venueY, TYPE.signVenue, { fill: C.body, middle: true });
+        // the Still's plate, bolted on over the sign: its own edge and a bolt in each corner
+        s += `<path d="${plate}" fill="#000" fill-opacity=".55" transform="translate(1.2 2)" filter="url(#blur2)"/>`
+          + `<path d="${plate}" fill="url(#stillPlate)" stroke="url(#bezelGilt)" stroke-width="1.6"/>`
+          + `<path d="${chamfered(PX + 2.2, PY + 2.2, pw - 4.4, ph - 4.4, 1.2)}" fill="none" stroke="#000" stroke-opacity=".6" stroke-width=".5"/>`;
+        for (const [bx, by] of [[PX + 3.4, PY + 3.4], [PX + pw - 3.4, PY + 3.4], [PX + pw - 3.4, PY + ph - 3.4], [PX + 3.4, PY + ph - 3.4]])
+          s += `<circle cx="${f(bx)}" cy="${f(by)}" r="1.45" fill="url(#bezelGilt)" stroke="#000" stroke-opacity=".55" stroke-width=".35"/>`
+            + `<path d="M${f(bx - 0.8)} ${f(by)} H${f(bx + 0.8)}" stroke="#000" stroke-opacity=".5" stroke-width=".35"/>`;
+        s += `<g filter="url(#lift)">${still(d.still, PX + pp, PY + pp, sh)}</g>`;
         return s;
       },
     };
-    return self;
   }
   if (layout === 'h') {
     // Still on the left; roundel inline with the name, the crown room above it
@@ -433,23 +448,6 @@ function place(d, others) {
 // border as it can get (Nick's choice, 2026-09-28: cleaner, though pieces will sit
 // round it). 'edge': pushed aside to leave the widest open ground for pieces.
 const LABEL_PLACEMENT = arg('labels') || 'centre';
-// The Still, with the sign on the border: it stands where it has the most room round it,
-// clear of the borders (the keylines too) and of the sign, so, in the middle of the
-// ground below the sign; along a strip, the spot nearest the District's middle.
-function placeStill(d, sign) {
-  const p = geo.regions[d.id], M = d.zone === 'speak' || d.zone === 'hs' ? 12 : 7, [gx, gy] = centroid(p);
-  const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
-  let best = null;
-  for (let y = Math.min(...ys); y <= Math.max(...ys) - TOKEN_H; y += 2) for (let x = Math.min(...xs); x <= Math.max(...xs) - TOKEN_W; x += 2) {
-    const r = [x, y, TOKEN_W, TOKEN_H];
-    if (!rectInside([x - M, y - M, TOKEN_W + 2 * M, TOKEN_H + 2 * M], p) || rectGap(r, sign) < 10) continue;
-    const corners = [[x, y], [x + TOKEN_W, y], [x + TOKEN_W, y + TOKEN_H], [x, y + TOKEN_H]];
-    const clear = Math.min(...p.map(v => rectDist(v, r)), ...corners.map(q => edgeDist(q, p)), rectGap(r, sign));
-    const score = clear - 0.05 * Math.hypot(x + TOKEN_W / 2 - gx, y + TOKEN_H / 2 - gy);
-    if (!best || score > best.score) best = { score, x, y };
-  }
-  return best ? [best.x, best.y] : null;
-}
 // 'sign': the sign hangs as high in the District as it fits, centred across the room
 // there, clear of the Speakeasy and High Society keylines; if it never fits, the
 // District keeps its centred label.
@@ -458,15 +456,15 @@ function placeSign(d) {
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
   // clear of the keylines where it can be; a narrow District lets it closer, then
-  // stacks its name on two lines
-  for (const c of [cluster(d, 's'), ...(d.name.includes(' ') ? [cluster(d, 's', true)] : [])])
-  for (const M of framed ? [13, 9] : [7]) for (let y = y0; y <= y1 - c.h; y += 1) {
-    const fit = [];
-    for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
-    if (fit.length) {
-      const x = (fit[0] + fit[fit.length - 1]) / 2;
-      c.stillAt = placeStill(d, [x, y, c.w, c.h]);
-      return { x, y, c, open: M };
+  // stacks its name on two lines, then bolts the Still's plate under the sign
+  const two = d.name.includes(' ');
+  const variants = [{}, ...(two ? [{ stacked: true }] : []), { drop: true }, ...(two ? [{ stacked: true, drop: true }] : [])];
+  for (const opts of variants) for (const M of framed ? [13, 9] : [7]) {
+    const c = cluster(d, 's', opts);
+    for (let y = y0; y <= y1 - c.h; y += 1) {
+      const fit = [];
+      for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
+      if (fit.length) return { x: (fit[0] + fit[fit.length - 1]) / 2, y, c, open: M };
     }
   }
   console.log(`  ${d.id}: no room for a sign; centred label kept`);
@@ -513,7 +511,6 @@ function placeCentre(d) {
 const ROOM_MARGIN = 6;
 function room(d, { x, y, c }) {
   const p = geo.regions[d.id], M = ROOM_MARGIN, boxes = [[x - M, y - M, c.w + 2 * M, c.h + 2 * M]];
-  if (c.stillAt) boxes.push([c.stillAt[0] - M, c.stillAt[1] - M, TOKEN_W + 2 * M, TOKEN_H + 2 * M]);
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   let n = 0;
   for (let gy = Math.min(...ys); gy <= Math.max(...ys); gy += 2) for (let gx = Math.min(...xs); gx <= Math.max(...xs); gx += 2)
@@ -1006,6 +1003,7 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="heatFloor" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#2b1e13"/><stop offset=".75" stop-color="#140d08"/><stop offset="1" stop-color="#050302"/></radialGradient>`;
   s += `<radialGradient id="heatFloorRaid" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#4d1a14"/><stop offset=".75" stop-color="#2a0c09"/><stop offset="1" stop-color="#0d0403"/></radialGradient>`;
   s += `<linearGradient id="heatRecess" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset=".85" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#f3dc95" stop-opacity=".06"/></linearGradient>`;
+  s += `<linearGradient id="stillPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33241a"/><stop offset="1" stop-color="#150e09"/></linearGradient>`;
   s += `<linearGradient id="lacquer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#261b11"/><stop offset="1" stop-color="#0e0906"/></linearGradient>`;
   s += `<linearGradient id="heatTray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050302"/><stop offset="1" stop-color="#1c140c"/></linearGradient>`;
   s += `<linearGradient id="heatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${GILT[2]}"/><stop offset=".5" stop-color="${GILT[1]}"/><stop offset="1" stop-color="${GILT[0]}"/></linearGradient>`;

@@ -102,12 +102,14 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   builds are untouched). The jury is out (Nick):
   - **Hanging signs** (`--labels=sign`, `placeSign()`). Pieces will cover a centred label, and
     the old edge placer looked odd because each label went somewhere different. Here every
-    District gets one small plaque (type medallion, name and venue) hung by two gilt hangers
-    as high as it fits, centred across the room there, clear of the keylines: one rule, so it
-    reads as designed. **The Still is not on the sign** (Nick, 2026-09-29: it made the signs
-    too big): it stands in the District at full size, where it has the most room round it,
-    clear of the borders and the sign (`placeStill()`), so a landmark in the open ground below
-    the sign. A District too narrow for one line stacks its name; all 25 now take a sign.
+    District gets one small plaque (type medallion, name and venue) hung by gilt hangers as
+    high as it fits, centred across the room there, clear of the keylines: one rule, so it
+    reads as designed. **The Still rides on its own plate bolted to the sign's right end**
+    (Nick, 2026-09-29), a touch taller than the sign, with its own gilt edge and a bolt in
+    each corner, so name and Still stay one sign but read as two parts. Tried and cut the same
+    day: the Still standing apart in the District, which lost the link between name and Still.
+    A narrow District stacks its name (Coney Island), and one narrower still bolts the plate
+    under the sign instead (East Harlem); all 25 take a sign.
 - **The Tomorrow panel is standard** (Nick liked it, 2026-09-29; `tomorrow()`): under the
   title, the Mash socket and a 36 mm socket for tomorrow's Turn Tokens as **one stack, #1 on
   top**, so "claim the lowest-numbered token left" becomes "take the top token". Both are set
