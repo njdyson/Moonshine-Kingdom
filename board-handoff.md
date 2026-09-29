@@ -339,6 +339,13 @@ keeps them on a re-trace.
   Bay, and the Hell Gate and Brooklyn Bridges came in; Tenderloin to Bowery, Corona to
   Whitestone, Throggs Neck to Whitestone and Astoria to Williamsburg went. If the map changes
   again, `mk-online-board-handoff.md` is still the brief.
+- **mk-online is one redraw behind.** It took the geometry while Corona had its spur of East
+  River shore, so it drops **Astoria / Williamsburg** (and would count Corona as Coastal). The
+  board has since put that border back, and every connection now matches the traced map. The
+  shapes changed too: the Queens / Brooklyn line (Astoria takes the strip), Manhattan raised
+  into Belmont, Coney Island widened (the Narrows and Staten Island moved west), and the key's
+  +1 Kickback chip. Rerun `mk-online-board-handoff.md` against the current
+  `board-geometry.json`; its `boardcheck.ts` should then show Astoria / Williamsburg coming back.
 - **Affinity round-trip.** The SVG opens in Affinity, but the texture and soft shadows are SVG
   filters and will likely drop out, and Cinzel, Barlow, Barlow Condensed and Bebas Neue (the Still
   tokens' numbers) must be installed locally.

@@ -46,7 +46,9 @@ current game presumably uses. What changed is only the shapes:
   diamond. Astoria and Williamsburg still share a border along it.
 
 (An earlier version of this handoff, briefly on `main` on 2026-09-29, dropped Astoria /
-Williamsburg and made Corona Coastal. That was reverted. If the game picked it up, put it back.)
+Williamsburg and made Corona Coastal. That was reverted. The game did pick it up (mk-online
+a1b0ff4, deployed here in 5cf2640), so the next update must put Astoria / Williamsburg back and
+take Corona off the Coastal list.)
 
 ### The full graph (authoritative, from `board-geometry.json`)
 
