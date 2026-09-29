@@ -893,7 +893,7 @@ function defs(fontCss, mode) {
 // finer, flatter skin stitched in. The screen presets drop the pebbles.
 const LEATHER = {
   print: {
-    board: { creases: [[0.1, 4], [0.13, 17], [0.17, 29]], blur: 0.45, pebble: 0.6, wrinkle: [0.016, 0.6], relief: 1.7, depth: 0.6, sheen: 0.15, dye: 0.3 },
+    board: { creases: [[0.1, 4], [0.13, 17], [0.17, 29]], blur: 0.45, pebble: 0.6, wrinkle: [0.016, 0.6], relief: 1.25, depth: 0.42, sheen: 0.12, dye: 0.3 },
     fine: { creases: [[0.3, 5], [0.38, 18], [0.48, 30]], blur: 0.22, pebble: 0.7, wrinkle: [0.03, 0.2], relief: 0.9, depth: 0.4, sheen: 0.08, dye: 0.12 },
   },
   screen: {

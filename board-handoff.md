@@ -195,9 +195,9 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
   margin set by the manufacturer's own template, which wins over this. **Safe margin:**
   nothing but the black band sits outside the gold edge's centre line, 7 units (3.9 mm) in.
   If a manufacturer wants more, the frame (`FRAME_OUT`, `FRAME_IN`) moves in, not the art.
-  The Borough names sit at least 12 mm from the trim (The Bronx and Staten Island were nudged
-  in on 2026-09-29, from 10 and 9); the HEAT plate and the gold edge are the parts at risk on
-  a wrapped board, at about 4 mm.
+  The Borough names sit 9 mm (Staten Island) to 13 mm from the trim; nudging The Bronx and
+  Staten Island in to 12 mm was tried and put back (Nick: too tight to the land). On a wrapped
+  board, the HEAT plate and the gold edge, at about 4 mm, are the parts at risk.
 - **Print lift** (`PRINT_LIFT`, 2026-09-29): dark tones print darker than on screen (ink spreads
   on the paper), so the print build alone lifts the land, water and New Jersey (lightness x1.13,
   saturation x1.1) and eases the Ward band (70% to 55%). The screen build is untouched. A
@@ -301,7 +301,7 @@ keeps them on a re-trace.
   line either (Nick found it too prominent).
 - **Leather, generated, not an image.** `leatherFilter()` builds a pebble grain from crease
   patterns multiplied (one alone draws worm-like squiggles at print scale), over soft wrinkles,
-  with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm); the Heat corner is a
+  with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm), its relief softened by about a quarter on 2026-09-29 (Nick: better to under-do it than overdo it, until a proof says otherwise); the Heat corner is a
   **finer, flatter skin**, stitched in. The key and Mash panels carry no stitching or leather
   (Nick, 2026-09-28); since 2026-09-29 they are **lacquered plaques** to match the Heat Track:
   a polished gilt edge with a dark seat inside it, a hairline, a small diamond on each Deco
