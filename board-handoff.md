@@ -16,6 +16,43 @@ the repo, point Node at it (`NODE_PATH=/opt/node22/lib/node_modules` in the clou
 `PLAYWRIGHT_PATH`. The build fetches its four fonts from Google Fonts and embeds them in the SVG,
 so the SVG renders the same anywhere; the build itself needs the network.
 
+## Experiment: organic borders (branch `board-organic-experiment`, 2026-09-29)
+
+Nick asked whether the Districts could be less angular while keeping their connections clear,
+as a copy that can be thrown away. Everything it adds lives beside the board, not in it:
+
+```
+node tools/smooth_board.js              # skeleton -> Art/Board/Organic/board-geometry.json, with checks
+node tools/build_board.js --organic     # the same build from that geometry, into Art/Board/Organic/
+```
+
+- **The traced geometry stays the source.** `tools/smooth_board.js` reads
+  `board-geometry.json` untouched and writes a curved copy in the same format (regions, one
+  shared chain per border, bridges), so mk-online could take either. To move a border, edit
+  the skeleton and re-run.
+- **What it does.** Coasts are curved as whole shorelines, straight through the junctions on
+  them, with rounded corners and a slow meander (two long waves, a few units high) that fades
+  out in narrow water and near bridge landings. Land borders keep their junctions and take a
+  gentle bow, capped at 6.5 units, on whichever side opens the tighter angle at their ends.
+  Bridges re-land where their axis meets the new shore. All the knobs are in `P` at the top.
+- **What it checks before writing.** No chain crosses another; no border shortens below 92%;
+  no District's area moves more than 12%; no strait under 60 units closes up; each bridge
+  stays within 10 units of its old length. Topology cannot change: every chain keeps its two
+  sides and its two end junctions, so every adjacency survives. `--force` writes a failing
+  result so it can be looked at.
+- **Piers now follow a curved shore** (`alongShore()` in the build): each pier sits square to
+  its own stretch of coast. On the straight board this nudges most piers by about a unit and
+  moves the Bowery's from its south shore to its west shore, so the straight board was **not**
+  rebuilt on this branch.
+- `Art/Board/Organic/Before and after.jpg` puts the two screen boards side by side.
+- **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point meet at one point)
+  is unchanged. Splitting it would create a border between one diagonal pair, which is a rules
+  change. The thick Borough line running through it keeps Sugar Hill and Hunts Point, and
+  Belmont and East Harlem, reading as apart.
+- **To adopt it:** point `DIR` at the organic geometry by default (or copy it over the
+  skeleton's outputs), rebuild the index tile, and delete the `--organic` switch. **To
+  discard it:** delete the branch.
+
 ## Files
 
 - `Art/Board/board-geometry.json`: the map as data, traced from the Affinity PNG in its own

@@ -7,6 +7,10 @@
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor (not committed): a 24in PDF at 300dpi, the
 //                                       7200px PNG it is made from, and a 4320px screen JPEG
+//   node tools/build_board.js --organic the curved-borders experiment: the same build from
+//                                       Art/Board/Organic/board-geometry.json (written by
+//                                       tools/smooth_board.js), into Art/Board/Organic/,
+//                                       leaving the board and the index tile alone
 //
 // Two builds share everything but the texture: the print board carries the full
 // pebbled leather, which reads at 24in; the screen board keeps only soft wrinkles
@@ -30,7 +34,8 @@ const os = require('os');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const DIR = path.join(ROOT, 'Art', 'Board');
+const ORGANIC = process.argv.includes('--organic');
+const DIR = path.join(ROOT, 'Art', 'Board', ORGANIC ? 'Organic' : '');
 const OUT = {
   printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
@@ -494,40 +499,55 @@ function pierObstacles() {
   }
   return obs;
 }
+// The shore as samples every `step` units, each with its direction there (the chord
+// across 12 units of shore, so a curved coast gives each pier its own heading).
+function alongShore(p, step) {
+  const cum = [0];
+  for (let i = 1; i < p.length; i++) cum.push(cum[i - 1] + Math.hypot(p[i][0] - p[i - 1][0], p[i][1] - p[i - 1][1]));
+  const L = cum[cum.length - 1];
+  const at = s => {
+    s = Math.max(0, Math.min(L, s));
+    let i = 0;
+    while (i < p.length - 2 && cum[i + 1] < s) i++;
+    const t = (s - cum[i]) / (cum[i + 1] - cum[i] || 1);
+    return [p[i][0] + (p[i + 1][0] - p[i][0]) * t, p[i][1] + (p[i + 1][1] - p[i][1]) * t];
+  };
+  const out = [];
+  for (let s = 9; s <= L - 9; s += step) {
+    const a = at(s - 6), b = at(s + 6), l = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    out.push({ q: at(s), u: [(b[0] - a[0]) / l, (b[1] - a[1]) / l] });
+  }
+  return out;
+}
 function placePiers() {
   const land = [...DISTRICTS.map(d => geo.regions[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
-  const obs = pierObstacles(), out = [];
+  const obs = pierObstacles(), out = [], STEP = 3;
   const free = q => !land.some(p => inside(q, p)) && !obs.some(o => inside(q, o))
     && q[0] > FRAME_IN + 4 && q[0] < 1080 - FRAME_IN - 4 && q[1] > FRAME_IN + 4 && q[1] < 1080 - FRAME_IN - 4;
   for (const d of DISTRICTS.filter(dd => dd.zone === 'dock')) {
     const poly0 = geo.regions[d.id];
     let best = null;
     for (const c of geo.chains.filter(ch => ch.sides.includes(d.id) && ch.sides.includes('water'))) {
-      for (let i = 0; i < c.pts.length - 1; i++) {
-        const [p0, p1] = [c.pts[i], c.pts[i + 1]], L = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
-        if (L < 24) continue;
-        const ux = (p1[0] - p0[0]) / L, uy = (p1[1] - p0[1]) / L;
-        let nx = -uy, ny = ux;
-        const mid = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
-        if (inside([mid[0] + nx * 2, mid[1] + ny * 2], poly0)) { nx = -nx; ny = -ny; } // point out to sea
-        let run = [];
-        const flush = () => { if (!best || run.length > best.run.length) best = { run: run.slice(), u: [ux, uy], n: [nx, ny] }; run = []; };
-        for (let t = 9; t <= L - 9; t += 3) {
-          const q = [p0[0] + ux * t, p0[1] + uy * t];
-          const probe = [];
-          for (let s2 = 2; s2 <= PIER.len + 6; s2 += 2) for (const w of [-PIER.half - 1, 0, PIER.half + 1]) probe.push([q[0] + nx * s2 + ux * w, q[1] + ny * s2 + uy * w]);
-          if (probe.every(free)) run.push(q); else flush();
-        }
-        flush();
+      // a run: shore where every pier fits, turning no more than 20 degrees along it
+      let run = [];
+      const flush = () => { if (!best || run.length > best.length) best = run; run = []; };
+      for (const { q, u } of alongShore(c.pts, STEP)) {
+        let n = [-u[1], u[0]];
+        if (inside([q[0] + n[0] * 2, q[1] + n[1] * 2], poly0)) n = [-n[0], -n[1]]; // point out to sea
+        const probe = [];
+        for (let s2 = 2; s2 <= PIER.len + 6; s2 += 2) for (const w of [-PIER.half - 1, 0, PIER.half + 1]) probe.push([q[0] + n[0] * s2 + u[0] * w, q[1] + n[1] * s2 + u[1] * w]);
+        if (!probe.every(free)) { flush(); continue; }
+        if (run.length && run[0].u[0] * u[0] + run[0].u[1] * u[1] < Math.cos(20 * Math.PI / 180)) flush();
+        run.push({ q, u, n });
       }
+      flush();
     }
-    if (!best || !best.run.length) continue;
-    const span = (best.run.length - 1) * 3, n = Math.min(PIER.count, Math.floor(span / PIER.gap) + 1);
-    const midIdx = (best.run.length - 1) / 2, [ux, uy] = best.u;
-    const c0 = best.run[Math.floor(midIdx)];
+    if (!best || !best.length) continue;
+    const span = (best.length - 1) * STEP, n = Math.min(PIER.count, Math.floor(span / PIER.gap) + 1);
+    const mid = Math.floor((best.length - 1) / 2);
     for (let k = 0; k < n; k++) {
-      const off = (k - (n - 1) / 2) * PIER.gap;
-      out.push({ d, q: [c0[0] + ux * off, c0[1] + uy * off], u: best.u, n: best.n });
+      const { q, u, n: nn } = best[mid + Math.round(((k - (n - 1) / 2) * PIER.gap) / STEP)];
+      out.push({ d, q, u, n: nn });
     }
   }
   return out;
@@ -908,7 +928,7 @@ async function printPdf(browser, svg) {
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
-  await indexTile(browser, screen);
+  if (!ORGANIC) await indexTile(browser, screen);
   if (full) await printPdf(browser, print);
   await browser.close();
 })();
