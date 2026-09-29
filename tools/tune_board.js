@@ -48,7 +48,7 @@ const KNOBS = [
   ['manhattanWest', 0, 12], ['manhattan.0', 250, 300], ['manhattan.1', 340, 400], ['manhattan.2', 440, 495],
   ['manhattan.3', 535, 585], ['eastHarlem', -12, 32],
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
-  ['queensRows.2', 720, 840], ['wbEast', 600, 720], ['bvEast', 740, 830],
+  ['queensRows.2', 720, 840], ['astoriaShore', 600, 625], ['coronaShore', 25, 50], ['coronaBottom', 660, 740],
   ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90],
   ['boweryBottom', 660, 690], ['stapletonTop', 690, 715], ['staten.0', 800, 850], ['staten.1', 895, 950],
 ];
@@ -141,7 +141,7 @@ function ground(p) { // cm² at least 6 units in from every border
 const length = pts => pts.slice(1).reduce((s, q, i) => s + Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]), 0);
 function evaluate(S) {
   if (S.stapletonTop - S.boweryBottom < 22) return null;
-  if (S.queensRows[1] > S.wbEast) return null; // Flushing's bottom never below Corona's
+  if (S.queensRows[1] > S.coronaBottom) return null; // Flushing's bottom never below Corona's
   let m;
   try { m = build(S); } catch (e) { return null; }
   if (check(m.chains, m.regions, m.bridges).problems.length || tightCorners(m.regions).length) return null;

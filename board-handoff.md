@@ -41,10 +41,11 @@ works better"), so this makes the angles deliberate instead.
   and Jamaica Bay are 45-degree octagons.
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
-  24) to meet it square: Manhattan's level borders at the Hudson, Five Points / Bowery at the
-  East River, Astoria / Corona at Williamsburg. Belmont / Hunts Point turns on a longer foot
-  (`hpFoot`, 60) to meet East Harlem / Hunts Point square.
-  Williamsburg / Red Hook runs square to the East River, which makes Williamsburg a diamond;
+  24) to meet it square: Manhattan's level borders at the Hudson and Five Points / Bowery at the
+  East River. Belmont / Hunts Point turns on a longer foot (`hpFoot`, 60) to meet East Harlem /
+  Hunts Point square.
+  Williamsburg / Red Hook and the Queens / Brooklyn line both run square to the East River,
+  which makes Williamsburg a square set on its corner;
   Red Hook's shore turns upright at the Narrows in line with Coney Island's (Staten Island moves
   east with it, `NARROWS_GAP`). The drafting reports any corner under 80 degrees; there are none.
 - **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point. East
@@ -58,13 +59,23 @@ works better"), so this makes the angles deliberate instead.
   water east of the Bronx stays, and Belmont's shore runs straight up from Manhattan's tip, so
   the Hudson keeps a mouth. **Staten Island keeps its shore all round** (Nick: it should read as
   an island; running it to the frame was tried and cut).
+- **The Queens / Brooklyn line is two straight runs** (Nick, 2026-09-29: he likes clean
+  borders between Boroughs, and the old one zigzagged). It leaves the East River square (45
+  degrees) from the end of Corona's shore (`astoriaShore`, `coronaShore`), past Williamsburg and
+  Brownsville / Corona, and turns upright where Corona's bottom meets it (`coronaBottom`), down
+  past Richmond Hill and Jamaica to the bay. Williamsburg / Brownsville runs square to it, so
+  Williamsburg is a square on its corner. Astoria / Corona leaves the shore square, then runs
+  level. **This changed a connection**: Astoria and Williamsburg no longer meet, because
+  Corona takes the East River shore between them (see Decisions). The Queensboro Bridge moved 25
+  up-river (`BRIDGE_SHIFT`) to give Astoria's corner room; it still joins East Harlem and Astoria.
+  The first try, a square with a 136-unit river side, could not fit Williamsburg's sign; the
+  square needs about 150.
 - **Queens and Brooklyn in rows and columns.** Queens' rows are level (Whitestone | Flushing |
   Richmond Hill | Jamaica), and one upright line (`queensCol`) runs from the Hell Gate down past
-  Astoria / Whitestone, Astoria / Flushing and Corona / Flushing. Corona's bottom runs level from
-  Williamsburg's east corner (`wbEast`) and Brownsville's east side upright from it to the bay
-  (`bvEast`), so Richmond Hill is a rectangle; it steps up a little at its top left to meet
-  Flushing, because one level line for both ties Flushing's height to Corona's (it made Flushing
-  97). Brooklyn is three columns under Red Hook: Coney Island, Sheepshead Bay (`coneyEast`) and
+  Astoria / Whitestone, Astoria / Flushing and Corona / Flushing. Richmond Hill steps up a
+  little at its top left to meet Flushing (30 units): one level line for both makes Richmond
+  Hill thin (room 53) and Flushing huge (110) if it sits low, and starves Brownsville's sign
+  (hangers over 90) if it sits high. Brooklyn is three columns under Red Hook: Coney Island, Sheepshead Bay (`coneyEast`) and
   Brownsville, whose border with Sheepshead Bay runs straight on down from Red Hook's
   (`BK_COL`) and meets the bay's 45-degree corner on a foot. The Hunts Point / Throggs Neck line
   (`hpCol`) is upright too, and **Throggs Neck's tip is cut** 24 units back (`TN_CUT`; Nick: it
@@ -97,9 +108,10 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | --- | --- | --- |
 | Traced, centred labels | 32 (West Side) | 34, 36, 50, 65 |
 | Drafted, first balance, centred labels | 42 (Tenderloin) | 47, 47, 57, 64 |
-| Now, with the signs (as the build reports) | 39 (Whitestone) | 47, 57, 65, 83 |
+| With the signs, before the Queens / Brooklyn line | 39 (Whitestone) | 47, 57, 65, 83 |
+| Now (as the build reports) | 39 (Whitestone) | 47, 57, 58, 72 |
 
-Rooms now run 39 to 83, Jamaica (79) included; it was 138.
+Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
 
 ## The look
 
@@ -121,8 +133,8 @@ Rooms now run 39 to 83, Jamaica (79) included; it was 138.
   in two parts (the Still standing apart in the District was tried and lost the link). Every
   shape is tried and the one whose longest hanger, plus a cost, is shortest wins: a stacked name
   costs 15, the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
-  Hangers always run to the border straight above. The longest are Williamsburg's 46 and
-  Brownsville's 47, whose tops are a point and a slant. If a sign ever doesn't fit, the build
+  Hangers always run to the border straight above. The longest are Brownsville's 42 and
+  Sugar Hill's 41, whose tops are slants. If a sign ever doesn't fit, the build
   stops with an error.
 - **The title reads up New Jersey's strip beside the Bowery** (Nick, 2026-09-29: try it lower,
   in the empty half). It could not simply move down, since New Jersey narrows under the panels.
@@ -133,10 +145,12 @@ Rooms now run 39 to 83, Jamaica (79) included; it was 138.
   top token". Both are set today for tomorrow, which the panel teaches. Four separate slots would
   not fit in New Jersey. **Under the Heat corner the Tomorrow panel and the key sit side by
   side** (Nick: the title was not to be sandwiched between them).
-- **The key is types only** (Nick: the sentences were long-winded; bridges explain themselves
-  and the Rulebook covers them): Speakeasy, High Society, Ward, Dock and Still. Prices ride as
-  chips, the Moonshine bottle `$300` and the Rum glass `$500` (`Art/Icons`); High Society shows
-  only Rum, which says "Rum only" without the words.
+- **The key is the price list** (Nick, 2026-09-29): two rows, Speakeasy and High Society, each
+  with what it buys as chips, the Moonshine bottle `$300` and the Rum glass `$500`
+  (`Art/Icons`); High Society shows only Rum, which says "Rum only" without the words. The Ward,
+  Dock and Still rows were cut: the Rulebook teaches the types, the piers tell a Dock and the
+  Still is its own token. Before that it lost its sentences (long-winded; bridges explain
+  themselves).
 
 ## Files
 
@@ -215,6 +229,14 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
+- **Connections changed on purpose** (`FLIPS` in `draft_board.js`, which flips a border to the
+  two Districts at its ends; the traced map is untouched). **Astoria / Williamsburg** (Nick,
+  2026-09-29), for the straight Queens / Brooklyn line: Corona takes the East River shore
+  between them, so Corona is now Coastal. Williamsburg is Land Connected to Red Hook,
+  Brownsville and Corona, plus Five Points by Bridge; its ordinary Speakeasy next door is Red
+  Hook alone. The Rulebook's Land Connected example, CLAUDE.md and `mk-online-rules-sync.md`
+  12.5 say so. mk-online's graph changes when it takes this geometry.
+
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are the Still Token art itself** (`Art/Still Tokens/SVG`), so board and tokens agree.
@@ -265,8 +287,8 @@ keeps them on a re-trace.
   a polished gilt edge with a dark seat inside it, a hairline, a small diamond on each Deco
   chamfer, and a soft shadow lifting them off the hide. The Mash and Turn Token sockets (in
   the Tomorrow panel) are recessed in the Heat Track's lacquer and gilt, their names engraved
-  above them. **The key's rows share one pitch** (16.5 units): the High Society crown
-  used to add a gap under the first row. Saddle stitching runs round the board
+  above them. **The key's row pitch** (19 units) leaves the High Society crown clear of the
+  Speakeasy medallion above it. Saddle stitching runs round the board
   edge and inside the Heat corner. The **screen** build drops the pebbles and
   keeps only soft wrinkles and dye, because at screen size the grain turns to noise (Nick asked
   for it). Presets live in `LEATHER`. It prints crisp at any size and needs no licence; a CC0
@@ -279,16 +301,13 @@ keeps them on a re-trace.
 
 ## Open
 
-- **Next: a fresh pass on the Queens / Brooklyn border** (Nick, 2026-09-29). He likes the clean,
-  straightish borders between Boroughs; the Queens / Brooklyn one is now jagged (Williamsburg's
-  diamond side, Corona's level bottom, Brownsville's upright side, Richmond Hill's step) and
-  looks off. **The connection graph may change** if it helps the layout. Today the drafting keeps
-  every adjacency from the traced map (each chain keeps its two sides), so changing one means
-  editing `Art/Board/Traced/board-geometry.json` or teaching `draft_board.js` to add or drop a
-  chain, then checking what names that connection: the Almanac's bracket lesson (Red Hook and
-  the Bowery across the Brooklyn Bridge), Jobs that name a crossing, and mk-online's graph.
-  Other known weak spots: Whitestone is the smallest room (39), squeezed by the Queens column
-  and Astoria's border with Flushing; Brownsville's hangers are the longest (47).
+- **Other short borders** Nick may want gone: East Harlem / Five Points (32), Astoria /
+  Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
+  Red Hook (47). Brownsville / Jamaica was on the list with Astoria / Williamsburg but was kept:
+  it sits on the straight upright run, so dropping it adds nothing to the look, and it would
+  put Richmond Hill (a crown room) on the bay, making it Coastal. Any of them is a new entry in
+  `FLIPS`. Other known weak spots: Whitestone is the smallest room (39), squeezed by the Queens
+  column and Astoria's border with Flushing.
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.

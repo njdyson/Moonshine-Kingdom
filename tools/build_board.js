@@ -723,28 +723,23 @@ function tomorrow(x, y) {
   };
 }
 
-// The key: the District types and the Still, as they appear on the map (Nick,
-// 2026-09-29: types only, the rest is the Rulebook's). A Speakeasy's and a High Society
-// Venue's prices ride beside them as chips, a glass and a price: the High Society row
-// has only Rum, which says "Rum only" without the words.
+// The key is the price list (Nick, 2026-09-29: the Ward, Dock and Still rows went; the
+// Rulebook teaches the types). Each row is a venue and what it buys, a glass and a price:
+// the High Society row has only Rum, which says "Rum only" without the words.
 const KEY_ROWS = [
   ['speak', 'Speakeasy', [['moonshine', '$300'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500']]],
-  ['ward', 'Ward', []],
-  ['dock', 'Dock', []],
-  ['still', 'Still', []],
 ];
 function key(x, y) {
   const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const chipsX = 28 + headW + 10, chipW = p => 12 + width(TYPE.price, p), CHIP_GAP = 9;
   const chipsW = Math.max(...KEY_ROWS.map(([, , ch]) => ch.reduce((a, [, p]) => a + chipW(p), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
-  // One pitch for every row, roomy enough that the High Society crown clears the row above.
-  const PITCH = 16.5, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
+  // Roomy enough that the High Society crown clears the Speakeasy medallion above it.
+  const PITCH = 19, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
   let s = panel(x, y, w, h);
   KEY_ROWS.forEach(([k, t, chips], i) => {
     const cy = y + 14 + i * PITCH, ix = x + 15;
-    if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
-    else s += roundel(k, ix, cy, 5.4);
+    s += roundel(k, ix, cy, 5.4);
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
     for (const [liquor, price] of chips) {

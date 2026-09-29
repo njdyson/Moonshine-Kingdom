@@ -208,7 +208,7 @@ Peak cash is unchanged, since the Rum run always existed. Barring swill from tho
 came next (same day): it states the room's job in one line instead of two clauses, empties
 the stack's till in place, and gives the **ordinary Speakeasy next door** a reason to be
 held and taken. Every High Society room has one adjacent (Sugar Hill to East Harlem, Morris
-Park to Fordham, Richmond Hill to Flushing, Williamsburg to Red Hook or Astoria), so the
+Park to Fordham, Richmond Hill to Flushing, Williamsburg to Red Hook), so the
 Moonshine is never stranded: it walks one block, or Trades up at the Dock. Numbers and reasoning are in
 `kickback-blowback-handoff.md`; `tools/sim_kickback_ledger.js` reproduces them.
 

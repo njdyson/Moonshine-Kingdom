@@ -6,7 +6,7 @@
 //   node tools/draft_board.js      then   node tools/build_board.js
 //
 // The skeleton gives the Districts, their borders and the bridges; this keeps every
-// connection and redraws the shapes to a plan:
+// connection but those FLIPS changes, and redraws the shapes to a plan:
 //
 // - Straight lines at a few exact angles: level, upright, 45 degrees, and the Hudson's
 //   (Manhattan's west coast is one straight line). The rivers are even channels: the
@@ -21,7 +21,7 @@
 //   evenness, and short hangers on the signs; see board-handoff.md.
 //
 // Every chain keeps its two sides and its two end junctions, so no adjacency changes
-// (the chains against Westchester and Nassau go with them). The script checks for
+// but the FLIPS (the chains against Westchester and Nassau go with them). The script checks for
 // crossings, shrunken borders, closed-up water and bridges that no longer cross square
 // before writing. Bridges keep their places (BRIDGE_SHIFT moves one) and cross square
 // to the new banks.
@@ -33,9 +33,47 @@ const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'Art', 'Board', 'Traced', 'board-geometry.json');
 const OUT = path.join(ROOT, 'Art', 'Board', 'board-geometry.json');
 const geo = JSON.parse(fs.readFileSync(SRC, 'utf8'));
+const traced = JSON.parse(JSON.stringify(geo.regions)); // before the flips, for the area check
 const r1 = v => Math.round(v * 10) / 10;
 const key = p => `${p[0]},${p[1]}`;
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+
+// ---------------------------------------------------------------- connections
+// The traced map's connections, changed where Nick has chosen a cleaner layout. A flip
+// takes the border between two Districts (A | B, from junction J1 to J2) and gives it to
+// the two faces at its ends instead (X at J1, Y at J2), so A and B no longer meet and X
+// and Y do. The points keep their keys: J1 becomes the junction of A, X and Y, and J2 of
+// B, X and Y, and MOVE places them as usual.
+//
+// - Astoria | Williamsburg (2026-09-29): Corona takes the East River shore between them,
+//   so the Queens / Brooklyn line can leave the river square, in one straight run.
+const FLIPS = [['astoria', 'williamsburg']];
+const RESHAPED = new Set(); // every District a flip touches: the area check leaves them be
+function flip(g, [A, B]) {
+  const i = g.chains.findIndex(c => c.sides.includes(A) && c.sides.includes(B)), c = g.chains[i];
+  const [J1, J2] = [c.pts[0], c.pts[c.pts.length - 1]].map(key);
+  const at = (j, not) => g.chains.find(d => d !== c && [d.pts[0], d.pts[d.pts.length - 1]].some(q => key(q) === j) && d.sides.includes(not));
+  const faceAt = (j) => { const d = at(j, A), e = at(j, B); return [d.sides.find(x => x !== A), e.sides.find(x => x !== B)]; };
+  const [X] = faceAt(J1), [Y] = faceAt(J2);
+  const reend = (d, from, to) => { d.pts = d.pts.map(q => key(q) === from ? to.split(',').map(Number) : q); };
+  reend(at(J1, B), J1, J2); // B | X now ends at J2
+  reend(at(J2, A), J2, J1); // A | Y now starts at J1
+  g.chains[i] = { sides: [X, Y], pts: c.pts.slice() };
+  const ring = id => g.regions[id];
+  const drop = (id, j) => { if (ring(id)) g.regions[id] = ring(id).filter(q => key(q) !== j); };
+  // a ring gains the other end beside the one it had, between it and its neighbour on
+  // the chain that now runs to the gained end
+  const add = (id, have, gain, via) => {
+    const r = ring(id); if (!r) return; // the water has no ring
+    const k = r.findIndex(q => key(q) === have), n = r.length, on = q => via.pts.some(v => key(v) === key(q));
+    r.splice(on(r[(k - 1 + n) % n]) ? k : k + 1, 0, gain.split(',').map(Number));
+  };
+  const bySides = (u, v) => g.chains.find(d => d.sides.includes(u) && d.sides.includes(v));
+  const XB = bySides(X, B), AY = bySides(A, Y);
+  drop(A, J2); drop(B, J1); add(X, J1, J2, XB); add(Y, J2, J1, AY);
+  for (const id of [A, B, X, Y]) RESHAPED.add(id);
+}
+for (const f of FLIPS) flip(geo, f);
 
 // ---------------------------------------------------------------- lines
 const unit = (x, y) => { const l = Math.hypot(x, y); return [x / l, y / l]; };
@@ -64,12 +102,13 @@ const SETTINGS = {
   manhattanWest: 9, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
   manhattan: [274, 376, 469, 555], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
   eastHarlem: 1, // East Harlem's west side, shifted east
-  astoriaCorona: 530, // level
+  astoriaCorona: 530, // Astoria / Corona, level once it has left the shore square
   hpCol: 816, // Hunts Point / Throggs Neck, upright (the Hell Gate turns there)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
-  queensRows: [488, 648, 807], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
-  wbEast: 680, // Williamsburg's east corner (y), on its side toward Corona: Corona's bottom runs level from it
-  bvEast: 815, // Brownsville's east side, upright from that line down to the bay
+  queensRows: [488, 670, 807], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
+  astoriaShore: 614, // Astoria / Corona on the East River (x)
+  coronaShore: 30, // Corona's stretch of the East River, between Astoria and Williamsburg
+  coronaBottom: 700, // Corona / Richmond Hill, level from the Queens / Brooklyn line
   williamsburgSouth: 749, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 796, // Red Hook's level south side
   coneyEast: 440, // Coney Island / Sheepshead Bay, upright
@@ -86,7 +125,9 @@ const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const TN_CUT = 24; // Throggs Neck's tip, cut back this far along both shores
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
-const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0] }; // moved along its river, clear of East Harlem's stretch of the Hell Gate
+// Moved along their rivers: the Hell Gate clear of East Harlem's stretch of the Hell Gate,
+// the Queensboro up-river, clear of Corona's stretch of the East River
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [18, -18] };
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
@@ -111,11 +152,10 @@ function draft(S) {
   const RH_STUB = atY(ER_RH, S.redHookSouth - FOOT); // Red Hook's shore turns upright here, in line with Coney Island's
   const NARROWS = [RH_STUB[0] - NARROWS_GAP, RH_STUB[0]]; // Staten Island's east shore, Brooklyn's
   const [m1, m2, m3, m4] = S.manhattan, [b1, b2] = S.bronxCols, W = 0, [s1, s2] = S.staten;
-  const [q1, q2, q3] = S.queensRows, qc = S.queensCol, cb = S.wbEast, bv = S.bvEast; // Flushing's bottom, Corona's
+  const [q1, q2, q3] = S.queensRows, qc = S.queensCol, cb = S.coronaBottom;
   const QN_TURN = meet(HG_QN, SOUND_QN), AW = qc <= QN_TURN[0] ? atX(HG_QN, qc) : atX(SOUND_QN, qc); // Astoria / Whitestone on the shore
   const ehFoot = atY(EH_WEST, m3);
   const BOWERY_WEST = atY(MN_WEST, m4)[0], NJ_CORNER = atX(NJ, BOWERY_WEST - 44);
-  const WB = [597, 494], AC = [637 - ((548 - S.astoriaCorona) * 40) / 54, S.astoriaCorona]; // along Williamsburg / Astoria
   // A level border meeting a slanted line at a tight corner gets a foot: its last FOOT
   // units turned to meet the line square. From P, where it met the line, running along
   // the line's direction d away from the tight corner: [where the foot lands, where it leaves the level].
@@ -125,11 +165,16 @@ function draft(S) {
   };
   const upCoast = [-MN_WEST.d[0], -MN_WEST.d[1]]; // up Manhattan's west coast
   const MF = [m1, m2, m3, m4].map(m => footOf(atY(MN_WEST, m), upCoast, true)); // each Manhattan border's foot on the Hudson
-  const wbSide = unit(707 - AC[0], 644 - AC[1]); // Williamsburg's side toward Corona
-  const WB_E = [AC[0] + (wbSide[0] / wbSide[1]) * (cb - AC[1]), cb]; // Williamsburg's east corner
+  // Queens / Brooklyn: a line square off the East River from the end of Corona's shore,
+  // Williamsburg / Brownsville square to it (so Williamsburg is a rectangle), turning
+  // upright where Corona's bottom meets it, down to the bay. Astoria / Corona leaves the
+  // shore square too, before it runs level.
+  const AST = atX(ER_QN, S.astoriaShore), CR = [AST[0] - S.coronaShore / Math.SQRT2, AST[1] + S.coronaShore / Math.SQRT2];
+  const QB = line(CR, [1, 1]), WB_E = meet(QB, line([BK_COL, S.williamsburgSouth], [1, -1]));
+  const QB_C = atY(QB, cb), bv = QB_C[0]; // Brownsville's east side, upright from there to the bay
+  const AC_FOOT = [AST[0] + S.astoriaCorona - AST[1], S.astoriaCorona];
   // Sheepshead Bay / Brownsville meets the bay's 45-degree corner square, on a foot
   const sbFoot = FOOT / Math.SQRT2, SB_BAY = [BK_COL + sbFoot, 680 + 853 - BK_COL - sbFoot];
-  const CF = footOf(AC, wbSide, true); // Astoria / Corona's foot on Williamsburg
   const bwFoot = [atY(ER_MN, m4)[0] - FOOT * Math.SQRT2, m4], BW_J = meet(line(bwFoot, [1, 1]), ER_MN); // Five Points / Bowery, square to the East River
   const WB_J = meet(line([BK_COL, S.williamsburgSouth], [1, 1]), ER_QN); // Williamsburg / Red Hook, square to the East River
   const TIPB = meet(MN_WEST, through([464, 108], [606, 191])); // Manhattan's tip
@@ -161,10 +206,10 @@ function draft(S) {
     // Queens: the river banks, level and upright borders
     '720,373': meet(HG_QN, ER_QN), '766,356': AW,
     '1033,386': QN_NORTH, '1080,392': [1080, QN_NORTH[1]],
-    '597,494': foot(ER_QN, WB), '637,548': CF[0],
+    '597,494': AST, '637,548': CR,
     '838,496': [qc, q1], '831,548': [qc, S.astoriaCorona], '1031,479': [EAST_EDGE, q1],
-    // Corona's bottom level from Williamsburg to the Queens column; Richmond Hill steps up to Flushing there
-    '707,644': WB_E, '750,705': [bv, cb], '892,650': [qc, q2], '1031,651': [EAST_EDGE, q2],
+    // Corona's bottom level from the Queens / Brooklyn line to the Queens column; Richmond Hill steps up to Flushing there
+    '707,644': WB_E, '750,705': QB_C, '892,650': [qc, q2], '1031,651': [EAST_EDGE, q2],
     '794,782': [bv, q3], '895,783': [895, q3], '1031,832': [EAST_EDGE, q3],
     '1032,991': [EAST_EDGE, SOUTH_SHORE], '1080,988': [1080, SOUTH_SHORE],
     // Brooklyn: the East River's reaches, Red Hook's level south side, upright borders
@@ -187,7 +232,7 @@ function draft(S) {
     'east_harlem|hunts_point': [[606, 191], S.ehKnee, EH_SHORE], // East Harlem wider low down, for its sign
     'east_harlem|water': [EH_SHORE, [694, 328], meet(line(ehFoot, [1, 1]), ER_MN)],
     'belmont|hunts_point': [[b1, BH[1]], BH, [606, 191]],
-    'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), [bv, cb]],
+    'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
     'sheepshead_bay|brownsville': [[BK_COL, S.redHookSouth], [BK_COL, SB_BAY[1] - sbFoot], SB_BAY],
     'sheepshead_bay|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [622, 1001.5], [622, 1011], [S.coneyEast, 983]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
@@ -196,10 +241,10 @@ function draft(S) {
     'five_points|tenderloin': [MF[2][0], MF[2][1], ehFoot],
     'five_points|bowery': [MF[3][0], MF[3][1], bwFoot, BW_J],
     'water|bowery': [MF[3][0], atY(MN_WEST, m4), [atY(MN_WEST, m4)[0], S.boweryBottom], atY(ER_BW, S.boweryBottom), atY(ER_BW, BOWERY_BANK), atY(ER_MN, BOWERY_BANK), BW_J],
-    // Astoria / Corona on a foot at Williamsburg; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows
-    'astoria|corona': [CF[0], CF[1], [qc, S.astoriaCorona]],
+    // Astoria / Corona square off the shore, then level; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows
+    'astoria|corona': [AST, AC_FOOT, [qc, S.astoriaCorona]],
     // the Hell Gate's turn on the Queens side is Astoria's or Whitestone's, whichever it falls in
-    'water|astoria': [AW, ...(qc > QN_TURN[0] ? [QN_TURN] : []), meet(HG_QN, ER_QN), foot(ER_QN, WB)],
+    'water|astoria': [AW, ...(qc > QN_TURN[0] ? [QN_TURN] : []), meet(HG_QN, ER_QN), AST],
     'water|whitestone': [AW, ...(qc < QN_TURN[0] ? [QN_TURN] : []), QN_NORTH],
     'water|red_hook': [WB_J, atY(ER_QN, RED_HOOK_BANK), atY(ER_RH, RED_HOOK_BANK), RH_STUB, [RH_STUB[0], S.redHookSouth]],
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
@@ -360,9 +405,9 @@ function check(cs, regions, bs) {
   }
   for (const c of cs) for (let k = 0; k < c.pts.length - 1; k++) if (dist(c.pts[k], c.pts[k + 1]) < 3) problems.push(`${c.sides} has a ${dist(c.pts[k], c.pts[k + 1]).toFixed(1)} unit run`);
   for (const [id, r] of Object.entries(regions)) {
-    const ch = area(r) / area(geo.regions[id]) - 1;
+    const ch = area(r) / area(traced[id]) - 1;
     const framed = r.some(q => q[0] <= 0 || q[0] >= 1080 || q[1] <= 0); // took in Westchester or Nassau
-    if (Math.abs(ch) > 0.2 && !framed) problems.push(`${id} area ${Math.round(ch * 100)}%`);
+    if (Math.abs(ch) > 0.2 && !framed && !RESHAPED.has(id)) problems.push(`${id} area ${Math.round(ch * 100)}%`);
     else if (Math.abs(ch) > 0.05) notes.push(`${id} ${ch > 0 ? '+' : ''}${Math.round(ch * 100)}%`);
   }
   const sk = c => c.sides.slice().sort().join('|');
