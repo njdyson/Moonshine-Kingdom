@@ -52,24 +52,40 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   the Bronx stays, so the Bronx still reads as a shore. Like New Jersey, those Districts run
   under the frame to the board's edge, and the build clips them at the frame's hairline
   (`insideFrame()` in `build_board.js`) for everything but their fill: keylines, signs, room.
-  Belmont's shore turns upright at the old Westchester line (`HARLEM`, 44) and runs up to the
-  frame, so the Harlem River keeps its mouth. The space landed where it could reach: the Bronx
-  and eastern Queens. The re-tune (below) passed the Bronx's share down to Hunts Point and
-  Throggs Neck; Manhattan, Brooklyn and Staten Island are walled off by water, so their
-  figures barely move. Staten Island keeps its shore all round (Nick: it should read as an
-  island); running it to the frame too was tried and cut the same day.
+  Belmont's shore runs straight up from Manhattan's tip to the frame, so the Hudson keeps a
+  mouth there. The space landed where it could reach: the Bronx and eastern Queens. The re-tune
+  (below) passed the Bronx's share down to Hunts Point and Throggs Neck; Manhattan, Brooklyn and
+  Staten Island are walled off by water, so their figures barely move. Staten Island keeps its
+  shore all round (Nick: it should read as an island); running it to the frame too was tried and
+  cut the same day.
 - **Evened out, and tidied** (Nick, 2026-09-29: even the Districts out with the new room, and
-  make them look nice too, cutting or reshaping where it helps). Three borders now follow the
-  map's own lines, which reads as drawn rather than traced: Sheepshead Bay / Brownsville runs
-  straight on down from Red Hook / Brownsville to the bay (`BK_COL`), so Brooklyn is three
-  columns under Red Hook; Richmond Hill / Jamaica is level like Queens' other rows; and Corona /
-  Flushing runs parallel to Williamsburg / Corona, so Corona has parallel sides. Jamaica Bay is
-  90 units wider (`bayEast`), which trims Jamaica, the one outlier; Coney Island gives Sheepshead
-  Bay the width its sign needs (`coneyEast`). The re-tune scored evenness (the spread of room
-  sizes) as well as the smallest rooms, and kept each crown room at 55 or more where it could:
-  outside Jamaica, rooms with signs now run 42 to 77 (they ran 42 to 83, with Jamaica at 138,
-  now 110). Williamsburg's south point stays at 724: every tuner run wanted it higher, for Red
-  Hook's hangers, at the crown room's cost.
+  make them look nice too, cutting or reshaping where it helps). Sheepshead Bay / Brownsville
+  runs straight on down from Red Hook / Brownsville to the bay (`BK_COL`), so Brooklyn is three
+  columns under Red Hook; Richmond Hill / Jamaica is level like Queens' other rows. Jamaica Bay
+  is 90 units wider (`bayEast`), which trims Jamaica, the one outlier (130 wide was tried: it
+  turned good ground into a sea of dead water); Coney Island gives Sheepshead Bay the width its
+  sign needs (`coneyEast`). The re-tune scores evenness (the spread of room sizes) as well as
+  the smallest rooms, and keeps each crown room at 55 or more where it can.
+- **Square corners** (Nick, 2026-09-29: tight corners are dead space, since pieces can't fit in
+  them, so squared corners are best where possible). Where a border met a slanted shore or
+  border at a tight angle it now meets it square, usually on a short foot (`FOOT`, 24):
+  Manhattan's level borders turn up to meet the Hudson square, and Five Points / Bowery the East
+  River (as East Harlem / Five Points always did); Williamsburg / Red Hook runs square to the
+  East River, which makes Williamsburg a clean diamond; Red Hook's shore turns upright at the
+  Narrows in line with Coney Island's, and Staten Island moves east with it (`NARROWS_GAP` keeps
+  the channel); Astoria / Corona meets Williamsburg on a foot; Hunts Point / Throggs Neck
+  (`hpCol`) and Astoria / Whitestone and Corona / Flushing (`queensCol`) run upright; Belmont's
+  shore runs straight up from Manhattan's tip; Jamaica Bay's corner at Brownsville is square.
+  The four-way corner was the hard one: East Harlem needs a shallow border with Hunts Point for
+  its sign's width, which left Hunts Point a tight corner. Now East Harlem / Hunts Point runs
+  out to a knee and drops upright to the Hell Gate (`ehKnee`; East Harlem takes a short stretch
+  of that shore, and the Hell Gate Bridge moves 30 east to stay clear of it, `BRIDGE_SHIFT`),
+  and Belmont / Hunts Point leaves the corner on a foot square to it before running level to
+  Fordham (`hpFoot`). The re-tune flattened the Hell Gate's chevron from 9 to 3 degrees. Sixteen
+  corners under 80 degrees are now one, Brownsville's at 79.6; the drafting reports any it
+  finds. `Drafted/Mock/Tight corners, before and after.jpg` circles them. With signs, rooms run
+  41 to 74 bar Jamaica (129); the crown rooms are 47, 57, 60 and 60; no sign needs its plate
+  hung underneath.
 - **Throggs Neck's tip is cut** 24 units back along both shores (`TN_CUT`; Nick: the point was
   harsh), in both variants.
 - **Labels.** The Bronx's label is centred on its east shore, between the frame and Throggs
@@ -99,13 +115,14 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   | Drafted, re-tuned for signs | 40 (Fordham, Hunts Point) | 47, 44, 54, 64 |
   | Drafted, flush to the frame | 41 (Tenderloin) | 47, 50, 54, 77 |
   | Drafted, evened out | 41 (Tenderloin) | 47, 53, 54, 57 |
+  | Drafted, square corners | 41 (Tenderloin) | 46, 53, 57, 56 |
 
   The last row is the current `SETTINGS`, measured the same way (centred labels). They are
-  tuned for the hanging signs (below), so with the signs on the figures are 42 (Tenderloin,
-  West Side) and 46, 55, 58, 61. If the centred labels win instead, re-tune for them.
+  tuned for the hanging signs (below), so with the signs on the figures are 41 (West Side)
+  and 47, 57, 60, 60. If the centred labels win instead, re-tune for them.
 
-  The big ones stay big because nothing small borders them: Jamaica (111), Flushing (77),
-  Brownsville (74). Change a setting by hand and the room report says what it cost.
+  The big ones stay big because nothing small borders them: Jamaica (129), Flushing (73),
+  Red Hook (73). Change a setting by hand and the room report says what it cost.
 - **Chamfers** (`Drafted/Chamfered`) bevel coast corners sharper than 110 degrees that aren't
   junctions. The drafting already made most corners 45-degree cuts (Throggs Neck's tip among
   them), so only three qualify (the Bowery's south-west corner, the Rockaway spit,
@@ -114,14 +131,14 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
 - **Piers** are placed as before, on each Dock's longest open straight shore; with the
   Rockaways now one straight line, Jamaica's piers face the ocean instead of the bay.
 - **Checks** before writing: no crossings, no run under 3 units, no District area off by more
-  than 20% (bar those that took in Westchester or Nassau), no short border shrinking below 80%,
+  than 20% (bar those that took in Westchester or Nassau), no shrunk border under 45 units,
   no water under 20 wide between Districts that don't meet (the narrowest is 22, the Kill van
   Kull under New Jersey), and every bridge square across its 49-wide river (within 4 units:
   a one-unit move of the Bowery's foot once turned the Brooklyn Bridge to 84) and landing at
   least 20 units from a border on its shore (the skeleton's closest is 22, the Queensboro in
   Astoria).
-- The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point) is unchanged; splitting it
-  would add a border.
+- The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point; splitting
+  it would add a border.
 - `Art/Board/Drafted/Before and after.jpg` puts the two screen boards side by side.
 - **The Deco style** (`--style=deco`, written to `Drafted/Deco/`; Nick, 2026-09-29). The
   type tints told a Dock from a Speakeasy only faintly, and the piers now do that job, so this
@@ -153,21 +170,12 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
     the one whose longest hanger, plus a cost for the less usual shape, is least: a stacked name
     costs 15, the plate bolted under the sign 60 (only where nothing else fits; no District
     needs it now). `--report=<file>` writes each District's sign and room as JSON. The geometry
-    was then re-tuned for hangers as well as room (a scratch script over `SETTINGS`, not kept),
-    and again once the map met the frame: Throggs Neck's hangers went from 37 to 14, Hunts
-    Point's from 31 to 18, Astoria's from 58 to 47, Whitestone's from 30 to 18. New settings:
-    `ehBulge`/`ehKnee` bend the East Harlem / Hunts Point border into Hunts Point low down, so
-    East Harlem's sign hangs lower where it is wider, stacked with the Still beside it (Nick
-    asked for this; it had needed the plate under the sign); `hpEast` moves Hunts Point /
-    Throggs Neck's shore end 24 east so Hunts Point wins some of that back; `hpTop` and
-    `queensRows` let the Bronx's and Queens' inner borders pass on the space the frame freed;
-    `astoriaTop` places the Astoria / Whitestone border on the Hell Gate shore, kept clear of
-    the Hell Gate Bridge (the tuner's first pass put the border under its landing, hence the
-    bridge check above). The tuner moved Williamsburg's south point up to 700 (twice) for Red
-    Hook's hangers; that costs the crown room 10 to 13 cm², so it sits at 724 (Williamsburg 58
-    with signs, Red Hook's hangers 42 rather than 35). The pointed Districts keep long hangers
-    because their tops are points: Astoria 47, Brownsville 46, Williamsburg 46, Red Hook 42,
-    Sugar Hill 41, East Harlem 35.
+    was then re-tuned for hangers as well as room each time it changed (a scratch script over
+    `SETTINGS`, not kept). East Harlem is wider low down (`ehKnee`), so its sign hangs there,
+    stacked with the Still beside it (Nick asked for this; it had needed the plate under the
+    sign). Squaring the corners also took the points off Astoria and Throggs Neck, so their
+    hangers are 33 and 16. The longest left are Williamsburg's 46 and Sugar Hill's 41, where the
+    District's top is a point.
   - **The title, three ways** (Nick, 2026-09-29: try it lower, in New Jersey's empty half;
     `--title=`, `title()`). It could not simply move down: New Jersey narrows under the panels
     and the title's corner already met the Hudson. `across` is the title as it was, under the

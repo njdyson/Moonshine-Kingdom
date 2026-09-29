@@ -63,25 +63,25 @@ const deg = a => (a * Math.PI) / 180;
 // first, get what the roomy ones can spare. Since the signs, they also keep the
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
-  bronxCols: [687, 860], // Belmont | Fordham | Morris Park
-  bronxRow: 180, // Fordham / Throggs Neck, level
-  hpTop: 148, // where Belmont / Fordham meets Hunts Point
-  morrisEast: 186, // where Morris Park / Throggs Neck meets the east shore
-  hellGate: 9, // the Hell Gate and Sound reaches' angle, degrees: a chevron
-  manhattanWest: 7, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
-  manhattan: [275, 377, 469, 553], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
+  bronxCols: [692, 864], // Belmont | Fordham | Morris Park
+  bronxRow: 184, // Fordham / Throggs Neck, level
+  morrisEast: 192, // where Morris Park / Throggs Neck meets the east shore
+  hellGate: 3, // the Hell Gate and Sound reaches' angle, degrees: a chevron
+  manhattanWest: 9, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
+  manhattan: [274, 376, 469, 555], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
   eastHarlem: 1, // East Harlem's west side, shifted east
   astoriaCorona: 530, // level
-  hpCol: 815, // Hunts Point / Throggs Neck, upright (the Hell Gate turns there)
-  queensCol: 840, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
-  queensRows: [480, 651.5, 773], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
-  williamsburgSouth: 750, // Williamsburg's southern point, on Red Hook / Brownsville
-  redHookSouth: 800, // Red Hook's level south side
-  coneyEast: 435, // Coney Island / Sheepshead Bay, upright
+  hpCol: 816, // Hunts Point / Throggs Neck, upright (the Hell Gate turns there)
+  queensCol: 838, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
+  queensRows: [488, 637.5, 751], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
+  williamsburgSouth: 757, // Williamsburg's southern point, on Red Hook / Brownsville
+  redHookSouth: 802, // Red Hook's level south side
+  coneyEast: 436, // Coney Island / Sheepshead Bay, upright
   boweryBottom: 668, stapletonTop: 690, // the Kill van Kull between them
   staten: [806, 914], // level borders: Westerleigh | Stapleton | Tottenville
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
-  ehBulge: 27, ehKnee: 0.72, // East Harlem / Hunts Point bent into Hunts Point by this much, this far down it
+  ehKnee: [715, 290], // East Harlem / Hunts Point turns upright here, dropping square to the Hell Gate
+  hpFoot: 60, // Belmont / Hunts Point's foot, square to East Harlem / Hunts Point, before it runs level
 };
 
 const RIVER = 49; // the East River's width, Hell Gate and the Sound included
@@ -90,6 +90,7 @@ const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const TN_CUT = 24; // Throggs Neck's tip, cut back this far along both shores
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0] }; // moved along its river, clear of East Harlem's stretch of the Hell Gate
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
@@ -133,6 +134,11 @@ function draft(S) {
   const bwFoot = [atY(ER_MN, m4)[0] - FOOT * Math.SQRT2, m4], BW_J = meet(line(bwFoot, [1, 1]), ER_MN); // Five Points / Bowery, square to the East River
   const WB_J = meet(line([BK_COL, S.williamsburgSouth], [1, 1]), ER_QN); // Williamsburg / Red Hook, square to the East River
   const TIPB = meet(MN_WEST, through([464, 108], [606, 191])); // Manhattan's tip
+  // The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point): East Harlem /
+  // Hunts Point runs out to the knee, then upright to the Hell Gate; Belmont / Hunts Point
+  // leaves the corner on a foot square to it, then runs level to Fordham.
+  const [ekx, eky] = S.ehKnee, EH_SHORE = atX(HG_BX, ekx);
+  const ehDir = unit(ekx - 606, eky - 191), BH = [606 + ehDir[1] * S.hpFoot, 191 - ehDir[0] * S.hpFoot];
 
   // Each skeleton point: where it goes (MOVE) or dropped (DROP, the tracer's jogs and
   // points a straight line no longer needs). Chains listed in REPLACE get new interior
@@ -148,11 +154,11 @@ function draft(S) {
     '371,248': MF[0][0], '535,279': atY(EH_WEST, m1),
     '290,360': MF[1][0], '523,357': atY(EH_WEST, m2),
     '220,452': MF[2][0], '509,453': ehFoot, '150,548': MF[3][0],
-    '533,477': meet(line(ehFoot, [1, 1]), ER_MN), '466,549': BW_J,
+    '533,477': meet(line(ehFoot, [1, 1]), ER_MN), '466,549': BW_J, '694,328': EH_SHORE,
     '447,589': atY(ER_MN, BOWERY_BANK), '342,615': atY(ER_BW, BOWERY_BANK),
     '307,696': atY(ER_BW, S.boweryBottom), '171,686': [atY(MN_WEST, m4)[0], S.boweryBottom],
     // The Bronx: an upright east shore, level blocks
-    '715,53': [b1, W], '715,160': [b1, S.hpTop], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
+    '715,53': [b1, W], '715,160': [b1, BH[1]], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
     '1029,231': [BRONX_EAST, S.morrisEast], '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
     // Queens: the river banks, level and upright borders
     '720,373': meet(HG_QN, ER_QN), '766,356': AW,
@@ -175,13 +181,13 @@ function draft(S) {
   const T = S.stapletonTop, B = S.bayEast;
   const TIP = atX(SOUND_BX, BRONX_EAST), sound = unit(-SOUND_BX.d[0], -SOUND_BX.d[1]);
   const TIP_CUT = [[BRONX_EAST, TIP[1] - TN_CUT], [TIP[0] + sound[0] * TN_CUT, TIP[1] + sound[1] * TN_CUT]];
-  const EH_HP = [[606, 191], [694, 328]], ehMid = [0, 1].map(k => EH_HP[0][k] + (EH_HP[1][k] - EH_HP[0][k]) * S.ehKnee);
-  const ehN = unit(EH_HP[1][1] - EH_HP[0][1], -(EH_HP[1][0] - EH_HP[0][0])); // into Hunts Point
   const REPLACE = {
     // the Bronx: Belmont's shore upright from Manhattan's tip to the frame; Throggs Neck's tip cut off
     'water|belmont': [[TIPB[0], W], TIPB],
     'throggs_neck|water': [[BRONX_EAST, S.morrisEast], ...TIP_CUT, BEND],
-    ...(S.ehBulge ? { 'east_harlem|hunts_point': [EH_HP[0], [ehMid[0] + ehN[0] * S.ehBulge, ehMid[1] + ehN[1] * S.ehBulge], EH_HP[1]] } : {}),
+    'east_harlem|hunts_point': [[606, 191], S.ehKnee, EH_SHORE], // East Harlem wider low down, for its sign
+    'east_harlem|water': [EH_SHORE, [694, 328], meet(line(ehFoot, [1, 1]), ER_MN)],
+    'belmont|hunts_point': [[b1, BH[1]], BH, [606, 191]],
     'sheepshead_bay|water': [[BK_COL, 853], [BK_COL, 975], [622, 1001.5], [622, 1011], [S.coneyEast, 983]],
     'brownsville|water': [[793.5, 853], [BK_COL, 853]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
@@ -310,7 +316,8 @@ function bridgesFor(cs) {
     return best && best.hit;
   };
   return geo.bridges.map(b => {
-    const m = [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2], sa = shoreOf(b.join[0]), sb = shoreOf(b.join[1]);
+    const [sx, sy] = BRIDGE_SHIFT[b.name] || [0, 0];
+    const m = [(b.a[0] + b.b[0]) / 2 + sx, (b.a[1] + b.b[1]) / 2 + sy], sa = shoreOf(b.join[0]), sb = shoreOf(b.join[1]);
     const [p, q] = nearestSeg(sa, m);
     let u = unit(-(q[1] - p[1]), q[0] - p[0]); // square to the bank
     if ((b.b[0] - b.a[0]) * u[0] + (b.b[1] - b.a[1]) * u[1] < 0) u = [-u[0], -u[1]];
