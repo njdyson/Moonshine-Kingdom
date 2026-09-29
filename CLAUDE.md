@@ -282,12 +282,13 @@ Blowback.
 
 ## The board
 
-Since 2026-09-28 the board is being rebuilt as generated vector art: `tools/build_board.js`
-draws it from `Art/Board/board-geometry.json` (the traced map) and a roster copied from the
-Town Planner. Read `board-handoff.md` before touching it: it holds the build commands, the
-24-inch print spec (Heat Track sockets are the Ledger's 39 mm chips), and the decisions Nick
-has made so far. It was merged to `main` on 2026-09-28; the Affinity PNG (`Art/Board (Large).png`)
-is still what mk-online serves.
+The board is generated vector art. `tools/draft_board.js` redraws the traced map
+(`Art/Board/Traced/`) with straight lines, even rivers and square corners into
+`Art/Board/board-geometry.json`, and `tools/build_board.js` draws the board from that and a
+roster copied from the Town Planner, each District with a hanging sign. Read `board-handoff.md`
+before touching it: it holds the build commands, the 24-inch print spec (Heat Track sockets are
+the Ledger's 39 mm chips), the decisions Nick has made so far, and the next pass he has in mind.
+The Affinity PNG (`Art/Board (Large).png`) is still what mk-online serves.
 
 ## What not to edit
 
@@ -302,7 +303,7 @@ A rules change is never one file. The player-facing set is:
 `Rulebook`, `The Almanac`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
 `The Volstead Act` (shelved), `Still Tokens`, `Turn Tokens`, `The Ledger` (both), `Brew Simulator`,
 `Combat Simulator`, `Federal Crackdown Tracker`, `index.html`, and the board
-(`tools/build_board.js`: its roster, key and setup marks).
+(`tools/build_board.js`: its roster and key).
 
 After changing a rule, grep the whole set for the old wording. The Town Planner and the
 Playbooks carry compressed restatements of rules that the Rulebook states in full, and

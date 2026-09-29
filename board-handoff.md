@@ -1,228 +1,160 @@
 # The board: vector rebuild
 
-Status (2026-09-28): **merged to `main`**, still being refined one round at a time. The
-Affinity export (`Art/Board (Large).png`) is untouched and is still what mk-online serves, so
-the online game shows the old board until it is switched over.
+Status (2026-09-29): the **drafted map with hanging signs and the Deco style is the board**, on
+`main`. The Affinity export (`Art/Board (Large).png`) is untouched and is still what mk-online
+serves, so the online game shows the old board until it is switched over.
 
 ```
-node tools/build_board.js           # print and screen SVGs + a 2160px JPEG of each, seconds
+node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
+node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the index tile
 node tools/build_board.js --print   # also, git-ignored: the 24in print PDF (300dpi), its 7200px PNG,
                                     # and a 4320px screen JPEG; about a minute
-node tools/trace_board.js           # only if the Affinity board changes; rewrites the geometry
+node tools/build_board.js --report=/tmp/signs.json && node tools/tune_board.js /tmp/signs.json
+                                    # suggests SETTINGS for the drafting; ten to twenty minutes
+node tools/trace_board.js           # only if the Affinity board changes; rewrites the traced map
 ```
 
-Both scripts need Playwright's Chromium. Where Playwright is installed globally rather than in
-the repo, point Node at it (`NODE_PATH=/opt/node22/lib/node_modules` in the cloud sandbox) or set
+The build needs Playwright's Chromium. Where Playwright is installed globally rather than in the
+repo, point Node at it (`NODE_PATH=/opt/node22/lib/node_modules` in the cloud sandbox) or set
 `PLAYWRIGHT_PATH`. The build fetches its four fonts from Google Fonts and embeds them in the SVG,
 so the SVG renders the same anywhere; the build itself needs the network.
 
-## Experiment: the drafted board (branch `board-drafted-experiment`, 2026-09-29)
+## How the map is made
 
-Nick asked for a less angular board; curved borders were tried first (branch
-`board-organic-experiment`) and rejected as hand-drawn and scribbled: "the angular map works
-better". This goes the other way, making the angles deliberate. The traced map is nearly a
-designed one: about 30% of its border length runs a few degrees off level, 17% a few degrees
-off upright, the rivers wander in width, and the tracer left 3 to 5 unit jogs. The drafted pass
-keeps every shape and every connection and makes those near-misses exact.
+The Affinity board was traced (`tools/trace_board.js`) into `Art/Board/Traced/board-geometry.json`:
+one polygon per District, every border one shared chain, the bridges. `tools/draft_board.js`
+reads that skeleton and redraws it to a plan, keeping every District and every connection:
+`MOVE` (where each point goes), `DROP` (points a straight line no longer needs) and `REPLACE`
+(chains that gain corners), built from named lines (`MN_WEST`, `NJ`, `ER_MN`...) so the intent
+reads in the code. Its `SETTINGS` place the level and upright borders. Nick asked for a less
+angular board; curved borders were tried first and rejected as hand-drawn ("the angular map
+works better"), so this makes the angles deliberate instead.
 
-```
-node tools/draft_board.js                              # skeleton -> Art/Board/Drafted/, both variants, checked
-node tools/build_board.js --geometry=Drafted           # builds into Art/Board/Drafted/
-node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevelled corners
-```
+- **Straight lines at a few exact angles**: level, upright, 45 degrees, and the Hudson's.
+  Manhattan's west coast is one straight line (Nick: it is straight in real life). The rivers
+  are even channels: the Hudson 44 wide, down to the harbour (New Jersey is squared off level
+  with the Bowery's foot); the East River 49, in three reaches (45 degrees past the Williamsburg
+  and Queensboro, a level turn under the Bowery, then parallel to the Hudson); Hell Gate and the
+  Sound 49, a shallow chevron (3 degrees) turning at Hunts Point / Throggs Neck. Staten Island
+  and Jamaica Bay are 45-degree octagons.
+- **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
+  a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
+  24) to meet it square: Manhattan's level borders at the Hudson, Five Points / Bowery at the
+  East River, Astoria / Corona at Williamsburg, Belmont / Hunts Point at the four-way corner.
+  Williamsburg / Red Hook runs square to the East River, which makes Williamsburg a diamond;
+  Red Hook's shore turns upright at the Narrows in line with Coney Island's (Staten Island moves
+  east with it, `NARROWS_GAP`). The drafting reports any corner under 80 degrees; there are none.
+- **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point. East
+  Harlem needs a shallow border with Hunts Point for its sign's width, so that border runs out to
+  a knee and drops upright to the Hell Gate (`ehKnee`; East Harlem takes a short stretch of that
+  shore, and the Hell Gate Bridge moves 30 east to land clear of it, `BRIDGE_SHIFT`); Belmont /
+  Hunts Point leaves the corner square to it before running level to Fordham (`hpFoot`).
+- **No Westchester or Nassau** (Nick: sit the Districts flush against the border). The Bronx runs
+  up to the frame and Queens out to it, under it to the board's edge as New Jersey does; the
+  build clips them at the frame's hairline (`insideFrame()`) for everything but their fill. The
+  water east of the Bronx stays, and Belmont's shore runs straight up from Manhattan's tip, so
+  the Hudson keeps a mouth. **Staten Island keeps its shore all round** (Nick: it should read as
+  an island; running it to the frame was tried and cut).
+- **Queens and Brooklyn in rows and columns.** Queens' rows are level (Whitestone | Flushing |
+  Richmond Hill | Jamaica), and one upright line (`queensCol`) runs from the Hell Gate down past
+  Astoria / Whitestone, Astoria / Flushing and Corona / Flushing. Corona's bottom runs level from
+  Williamsburg's east corner (`wbEast`) and Brownsville's east side upright from it to the bay
+  (`bvEast`), so Richmond Hill is a rectangle; it steps up a little at its top left to meet
+  Flushing, because one level line for both ties Flushing's height to Corona's (it made Flushing
+  97). Brooklyn is three columns under Red Hook: Coney Island, Sheepshead Bay (`coneyEast`) and
+  Brownsville, whose border with Sheepshead Bay runs straight on down from Red Hook's
+  (`BK_COL`) and meets the bay's 45-degree corner on a foot. The Hunts Point / Throggs Neck line
+  (`hpCol`) is upright too, and **Throggs Neck's tip is cut** 24 units back (`TN_CUT`; Nick: it
+  was harsh).
+- **Jamaica Bay** is 90 units wider than traced (`bayEast`), which trims Jamaica, once the one
+  outlier (138). 130 wider was tried and made a sea of dead water.
+- **Bridges** keep their places (bar the Hell Gate's shift) and cross square to the new banks,
+  so all four are 49 long. Their names and the water labels move with the shores: the geometry
+  carries them as `"labels"`.
+- **Checks** before writing: no crossings, no run under 3 units, no District area off the
+  traced map's by more than 20% (bar those that took in Westchester or Nassau), no shrunk border
+  under 45 units (`MIN_BORDER`, about 25 mm, so it still reads as a connection), no water under
+  20 wide between Districts that don't meet (the narrowest is 22, the Kill van Kull), and every
+  bridge square across its river (within 4 units: a one-unit move of the Bowery's foot once
+  turned the Brooklyn Bridge to 84) and landing at least 20 units from a border on its shore.
 
-- **The traced geometry stays the source.** `tools/draft_board.js` reads `board-geometry.json`
-  untouched and applies a table of drafting moves: `MOVE` (where each point goes), `DROP` (jogs
-  and points a straight line no longer needs) and `REPLACE` (chains that gain corners). The
-  moves are built from named lines, so the intent reads in the code: `MN_WEST`, `NJ`, `ER_MN`
-  and so on.
-- **What changed.** Manhattan's west coast is one straight line (Nick: it is straight in real
-  life) with New Jersey's shore parallel, so the Hudson is an even 44. New Jersey then runs
-  down beside the Bowery's west side and is squared off level with the Bowery's foot (Nick,
-  2026-09-29), so the Hudson keeps its 44 to the harbour. The East River is one channel 49
-  wide in three reaches: 45 degrees past the Williamsburg and Queensboro, a level turn under
-  the Bowery, then parallel to the Hudson past the Brooklyn Bridge. Hell Gate and
-  the Sound are the same 49, a chevron turning at the Hunts Point / Throggs Neck line; that
-  also opened the 22-unit pinch between Throggs Neck and Whitestone, which are not connected
-  and read as if they nearly touched. Manhattan's borders are level at 262, 358, 453 and 548.
-  The Bronx's east shore is upright; Red Hook's south side and the Rockaways are level.
-  Staten Island and Jamaica Bay are 45-degree octagons.
-- **No Westchester or Nassau** (Nick, 2026-09-29: gain space by sitting the Districts flush
-  against the border). The Bronx runs up to the frame and Queens out to it; the water east of
-  the Bronx stays, so the Bronx still reads as a shore. Like New Jersey, those Districts run
-  under the frame to the board's edge, and the build clips them at the frame's hairline
-  (`insideFrame()` in `build_board.js`) for everything but their fill: keylines, signs, room.
-  Belmont's shore runs straight up from Manhattan's tip to the frame, so the Hudson keeps a
-  mouth there. The space landed where it could reach: the Bronx and eastern Queens. The re-tune
-  (below) passed the Bronx's share down to Hunts Point and Throggs Neck; Manhattan, Brooklyn and
-  Staten Island are walled off by water, so their figures barely move. Staten Island keeps its
-  shore all round (Nick: it should read as an island); running it to the frame too was tried and
-  cut the same day.
-- **Evened out, and tidied** (Nick, 2026-09-29: even the Districts out with the new room, and
-  make them look nice too, cutting or reshaping where it helps). Sheepshead Bay / Brownsville
-  runs straight on down from Red Hook / Brownsville to the bay (`BK_COL`), so Brooklyn is three
-  columns under Red Hook; Richmond Hill / Jamaica is level like Queens' other rows. Jamaica Bay
-  is 90 units wider (`bayEast`; 130 was tried and turned good ground into a sea of dead water);
-  Coney Island gives Sheepshead Bay the width its sign needs (`coneyEast`). The re-tune scores
-  evenness (the spread of room sizes) as well as the smallest rooms, and keeps each crown room
-  at 55 or more where it can.
-- **Square corners** (Nick, 2026-09-29: tight corners are dead space, since pieces can't fit in
-  them, so squared corners are best where possible). Where a border met a slanted shore or
-  border at a tight angle it now meets it square, usually on a short foot (`FOOT`, 24):
-  Manhattan's level borders turn up to meet the Hudson square, and Five Points / Bowery the East
-  River (as East Harlem / Five Points always did); Williamsburg / Red Hook runs square to the
-  East River, which makes Williamsburg a clean diamond; Red Hook's shore turns upright at the
-  Narrows in line with Coney Island's, and Staten Island moves east with it (`NARROWS_GAP` keeps
-  the channel); Astoria / Corona meets Williamsburg on a foot; Hunts Point / Throggs Neck
-  (`hpCol`) and Astoria / Whitestone and Corona / Flushing (`queensCol`) run upright; Belmont's
-  shore runs straight up from Manhattan's tip.
-  The four-way corner was the hard one: East Harlem needs a shallow border with Hunts Point for
-  its sign's width, which left Hunts Point a tight corner. Now East Harlem / Hunts Point runs
-  out to a knee and drops upright to the Hell Gate (`ehKnee`; East Harlem takes a short stretch
-  of that shore, and the Hell Gate Bridge moves 30 east to stay clear of it, `BRIDGE_SHIFT`),
-  and Belmont / Hunts Point leaves the corner on a foot square to it before running level to
-  Fordham (`hpFoot`). The re-tune flattened the Hell Gate's chevron from 9 to 3 degrees.
-  Richmond Hill and the bay were the last (Nick: Richmond Hill's west end looked pointy, a wedge
-  between two slanted borders, and the bay's square west corner, left by squaring Brownsville,
-  looked wrong). Corona's bottom now runs level from Williamsburg's east corner (`wbEast`) and
-  Brownsville's east side upright from it to the bay (`bvEast`), so Richmond Hill is a rectangle;
-  it steps up a little at its top left to meet Flushing (`queensRows`), because one level line
-  for both would tie Flushing's height to Corona's and make it the biggest District (97). The bay
-  has its 45-degree corner back, and Sheepshead Bay / Brownsville meets it on a foot. Sixteen
-  corners under 80 degrees are now none; the drafting reports any it finds, and
-  `Drafted/Mock/Tight corners, before and after.jpg` circles them. With signs, rooms run 39
-  (Whitestone) to 83 (Richmond Hill), Jamaica included (79; it was 129); the crown rooms are 47,
-  57, 65 and 83; no sign needs its plate hung underneath.
-- **Throggs Neck's tip is cut** 24 units back along both shores (`TN_CUT`; Nick: the point was
-  harsh), in both variants.
-- **Labels.** The Bronx's label is centred on its east shore, between the frame and Throggs
-  Neck's cut; Manhattan's sits beside the Tenderloin and Five Points, clear of West Side's
-  piers.
-- **Bridges** keep their places and cross square to the new banks, so all four are 49 long
-  (they were 43 to 55). Their names, and the water labels, move with the shores: the drafted
-  geometry carries them as `"labels"`, which `build_board.js` uses when a geometry has them.
-- **Room for pieces, balanced** (Nick, 2026-09-29: "every district [must] fit as many pieces
-  in as possible"). The build now prints each District's **room**: its ground at least 6 units
-  (about 3 mm) in from every border and clear of its label, in cm² at 24in. No piece sizes are
-  recorded anywhere, so this is area, not a piece count. The drafted borders sit on `SETTINGS`
-  at the top of `draft_board.js`, and those were tuned by a hill-climb (a scratch script, not
-  kept) that raised the smallest Districts, the crown rooms weighted extra, with every land
-  border kept at 32 units or longer so it still reads as a connection. Its moves: Manhattan
-  widened 8 units west (New Jersey follows, so the Hudson keeps its 44) and its level borders
-  lowered; the Westchester line up 9; Morris Park 22 units wider; Hell Gate's chevron flattened
-  from 15 to 9 degrees, giving the Bronx some of Queens' shore; Williamsburg's south point
-  down 28; Corona's north border up 10; the Bowery's bottom up 20 so Staten Island could grow
-  north. Before and after:
+### Room for pieces, and the tuner
 
-  | | Smallest | Crown rooms (Sugar Hill, Morris Park, Williamsburg, Richmond Hill) |
-  | --- | --- | --- |
-  | Traced | 32 (West Side) | 34, 36, 50, 65 |
-  | Drafted, first pass | 34 (Morris Park, Sugar Hill) | 34, 34, 45, 64 |
-  | Drafted, balanced | 42 (Tenderloin) | 47, 47, 57, 64 |
-  | Drafted, re-tuned for signs | 40 (Fordham, Hunts Point) | 47, 44, 54, 64 |
-  | Drafted, flush to the frame | 41 (Tenderloin) | 47, 50, 54, 77 |
-  | Drafted, evened out | 41 (Tenderloin) | 47, 53, 54, 57 |
-  | Drafted, square corners | 41 (Tenderloin) | 46, 54, 62, 79 |
+The build prints each District's **room**: its ground at least 6 units (about 3 mm) in from every
+border and clear of its sign, in cm² at 24in. No piece sizes are recorded anywhere, so this is
+area, not a piece count. `SETTINGS` were tuned with `tools/tune_board.js`, which nudges one
+setting at a time and keeps what scores better: the smallest rooms first, then each crown room
+kept at 55 or more where it can be, then evenness (the spread of room sizes), then short
+hangers. It refuses anything that fails the drafting's checks or makes a tight corner. It cannot
+move two settings together, and it has no eye: it twice pushed Williamsburg's south point up for
+Red Hook's hangers at the crown room's cost, it grew Jamaica Bay into dead water,
+and it traded Hunts Point for Fordham, each undone by hand. Treat its output as a suggestion.
 
-  The last row is the current `SETTINGS`, measured the same way (centred labels). They are
-  tuned for the hanging signs (below), so with the signs on the figures are 39 (Whitestone)
-  and 47, 57, 65, 83. If the centred labels win instead, re-tune for them.
+| | Smallest room | Crown rooms (Sugar Hill, Morris Park, Williamsburg, Richmond Hill) |
+| --- | --- | --- |
+| Traced, centred labels | 32 (West Side) | 34, 36, 50, 65 |
+| Drafted, first balance, centred labels | 42 (Tenderloin) | 47, 47, 57, 64 |
+| Now, with the signs (as the build reports) | 39 (Whitestone) | 47, 57, 65, 83 |
 
-  The biggest are Jamaica (80), Richmond Hill (79), Brownsville (79) and Flushing (76). Change a
-  setting by hand and the room report says what it cost.
-- **Chamfers** (`Drafted/Chamfered`) bevel coast corners sharper than 110 degrees that aren't
-  junctions. The drafting already made most corners 45-degree cuts (Throggs Neck's tip among
-  them), so only three qualify (the Bowery's south-west corner, the Rockaway spit,
-  Sheepshead's hook).
-  The difference is slight.
-- **Piers** are placed as before, on each Dock's longest open straight shore; with the
-  Rockaways now one straight line, Jamaica's piers face the ocean instead of the bay.
-- **Checks** before writing: no crossings, no run under 3 units, no District area off by more
-  than 20% (bar those that took in Westchester or Nassau), no shrunk border under 45 units,
-  no water under 20 wide between Districts that don't meet (the narrowest is 22, the Kill van
-  Kull under New Jersey), and every bridge square across its 49-wide river (within 4 units:
-  a one-unit move of the Bowery's foot once turned the Brooklyn Bridge to 84) and landing at
-  least 20 units from a border on its shore (the skeleton's closest is 22, the Queensboro in
-  Astoria).
-- The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point; splitting
-  it would add a border.
-- `Art/Board/Drafted/Before and after.jpg` puts the two screen boards side by side.
-- **The Deco style** (`--style=deco`, written to `Drafted/Deco/`; Nick, 2026-09-29). The
-  type tints told a Dock from a Speakeasy only faintly, and the piers now do that job, so this
-  tells the types apart by drawing instead. One colour per Borough for Docks, Speakeasies and
-  High Society; **Wards darker** (30% towards black, `WARD_DARK`: the rough end of town; 20%
-  was too faint).
-  **Speakeasies** get a gold keyline inset 7 units inside their border with a small diamond at
-  each corner. **High Society** gets a double keyline (6 and 10.5 in) with the frame's Deco
-  fan opened or closed to fill each corner, and a brighter diamond: the same frame with more
-  flourish, **in place of the sunburst and glow**. Corners sharper than 20 degrees or blunter
-  than 150 take no ornament, and junctions along a straight border are not corners. The
-  default build (`STYLE = 'tone'`) is untouched and still rebuilds byte for byte.
-  `Drafted/Deco/Before and after.jpg` compares the two on the drafted board.
-- **The sign mock, 2026-09-29** (`Drafted/Mock/`, built with
-  `--geometry=Drafted --style=deco --labels=sign --out=Mock --title=upright`; off by default,
-  and the other builds are untouched). The jury is out (Nick):
-  - **Hanging signs** (`--labels=sign`, `placeSign()`). Pieces will cover a centred label, and
-    the old edge placer looked odd because each label went somewhere different. Here every
-    District gets one small plaque (type medallion, name and venue) hung by gilt hangers as
-    high as it fits, centred across the room there, clear of the keylines: one rule, so it
-    reads as designed. **The Still rides on its own plate bolted to the sign's right end**
-    (Nick, 2026-09-29), a touch taller than the sign, with its own gilt edge and a bolt in
-    each corner, so name and Still stay one sign but read as two parts. Tried and cut the same
-    day: the Still standing apart in the District, which lost the link between name and Still.
-    A narrow District stacks its name (Coney Island); all 25 take a sign.
-  - **Every sign hangs, and the hangers are kept short** (Nick, 2026-09-29: Astoria and
-    Sheepshead Bay were missing hangers). Hangers run to the border straight above however long
-    they are; an earlier cap at 44 units dropped them. `placeSign()` tries every shape and keeps
-    the one whose longest hanger, plus a cost for the less usual shape, is least: a stacked name
-    costs 15, the plate bolted under the sign 60 (only where nothing else fits; no District
-    needs it now). `--report=<file>` writes each District's sign and room as JSON. The geometry
-    was then re-tuned for hangers as well as room each time it changed (a scratch script over
-    `SETTINGS`, not kept). East Harlem is wider low down (`ehKnee`), so its sign hangs there,
-    stacked with the Still beside it (Nick asked for this; it had needed the plate under the
-    sign). Squaring the corners also took the points off Astoria and Throggs Neck, so their
-    hangers are 33 and 16. The longest left are Williamsburg's 46 and Sugar Hill's 41, where the
-    District's top is a point.
-  - **The title, three ways** (Nick, 2026-09-29: try it lower, in New Jersey's empty half;
-    `--title=`, `title()`). It could not simply move down: New Jersey narrows under the panels
-    and the title's corner already met the Hudson. `across` is the title as it was, under the
-    panels (the default build keeps it); `stacked` sets NEW / YORK / 1929 on three lines, as
-    low as the shore allows; `upright` turns it to read up the strip beside the Bowery,
-    centred in the ground under the panels, which echoes THE BRONX on the opposite edge. The
-    mock uses `upright`. `Drafted/Mock/Title options.jpg` shows the three in that order.
-- **The Tomorrow panel is standard** (Nick liked it, 2026-09-29; `tomorrow()`): under the
-  title, the Mash socket and a 36 mm socket for tomorrow's Turn Tokens as **one stack, #1 on
-  top**, so "claim the lowest-numbered token left" becomes "take the top token". Both are set
-  today for tomorrow, which the panel teaches. Four separate 36 mm slots would not fit: New
-  Jersey narrows to under 100 units below the key, and moving Queens' east edge in to make
-  a column cost Flushing about 45% of its room. **Under the Heat corner the Tomorrow panel and
-  the key sit side by side, and the title sits under both** (Nick: not sandwiched between
-  them).
-- **The key is types only** (Nick, 2026-09-29: the sentences were long-winded; bridges explain
-  themselves and the Rulebook covers them): Speakeasy, High Society, Ward, Dock and Still.
-  Prices ride as chips, the Moonshine bottle `$300` and the Rum glass `$500` (`Art/Icons`);
-  High Society shows only Rum, which says "Rum only" without the words. The Kickback and
-  "Water Connected to every Dock" are left to the Rulebook.
-- **To adopt it:** copy `Drafted/board-geometry.json` over the skeleton (or build from it by
-  default), rebuild, and drop the `--geometry` switch if nothing else uses it. **To discard
-  it:** delete the branch.
+Rooms now run 39 to 83, Jamaica (79) included; it was 138.
+
+## The look
+
+- **Deco style** (Nick, 2026-09-29). One colour per Borough for Docks, Speakeasies and High
+  Society; **Wards darker** (30% towards black, `WARD_DARK`: the rough end of town; 20% was too
+  faint). The piers tell a Dock. **Speakeasies** get a gold keyline 7 units inside their border
+  with a small diamond at each corner. **High Society** gets a double keyline (6 and 10.5 in)
+  with the frame's Deco fan opened or closed to fill each corner, and a brighter diamond: the
+  same frame with more flourish. Corners sharper than 20 degrees or blunter than 150 take no
+  ornament, and junctions along a straight border are not corners. It replaced a colour shift
+  per type (Speakeasies warmer, Docks cooler), which told them apart only faintly, and a gold
+  sunburst on High Society.
+- **Hanging signs** (`placeSign()`, Nick, 2026-09-29). Pieces would cover a centred label, and
+  an earlier placer that pushed labels aside looked odd because each went somewhere different.
+  Every District gets one small plaque (type medallion, name and venue) hung by gilt hangers as
+  high as it fits, centred across the room there, clear of the keylines: one rule, so it reads as
+  designed. **The Still rides on its own plate bolted to the sign's right end**, a touch taller
+  than the sign, with its own gilt edge and a bolt in each corner, so name and Still are one sign
+  in two parts (the Still standing apart in the District was tried and lost the link). Every
+  shape is tried and the one whose longest hanger, plus a cost, is shortest wins: a stacked name
+  costs 15, the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
+  Hangers always run to the border straight above. The longest are Williamsburg's 46 and
+  Brownsville's 47, whose tops are a point and a slant. If a sign ever doesn't fit, the build
+  stops with an error.
+- **The title reads up New Jersey's strip beside the Bowery** (Nick, 2026-09-29: try it lower,
+  in the empty half). It could not simply move down, since New Jersey narrows under the panels.
+  Upright, centred in the ground under the panels, it echoes THE BRONX on the opposite edge.
+  Tried: across under the panels (as it was), and stacked on three lines.
+- **The Tomorrow panel** (`tomorrow()`): the Mash socket and a 36 mm socket for tomorrow's Turn
+  Tokens as **one stack, #1 on top**, so "claim the lowest-numbered token left" becomes "take the
+  top token". Both are set today for tomorrow, which the panel teaches. Four separate slots would
+  not fit in New Jersey. **Under the Heat corner the Tomorrow panel and the key sit side by
+  side** (Nick: the title was not to be sandwiched between them).
+- **The key is types only** (Nick: the sentences were long-winded; bridges explain themselves
+  and the Rulebook covers them): Speakeasy, High Society, Ward, Dock and Still. Prices ride as
+  chips, the Moonshine bottle `$300` and the Rum glass `$500` (`Art/Icons`); High Society shows
+  only Rum, which says "Rum only" without the words.
 
 ## Files
 
-- `Art/Board/board-geometry.json`: the map as data, traced from the Affinity PNG in its own
-  1080-unit frame. One polygon per District and off-board landmass, every border one shared
-  chain (so neighbours can never gap or overlap), and the four bridges. The tracer reproduces
-  it exactly. mk-online can take click areas and the adjacency graph straight from it.
+- `Art/Board/Traced/board-geometry.json`: the traced map, the skeleton the drafting reads. The
+  tracer reproduces it exactly.
+- `Art/Board/board-geometry.json`: the board's map as data, written by `tools/draft_board.js`.
+  One polygon per District and for New Jersey, every border one shared chain (so neighbours can
+  never gap or overlap), the four bridges, and where the water and bridge names sit. mk-online can
+  take click areas and the adjacency graph straight from it.
+- `tools/draft_board.js`: the drafting, its `SETTINGS` and its checks. `tools/tune_board.js`:
+  the tuner.
 - `tools/build_board.js`: the roster (zone, Still, venue, Setup mark per District, copied from
-  the Town Planner), palette, type, label placement, key and panels. Everything on the board is
-  generated from here; nothing is hand-placed in the SVG.
+  the Town Planner), palette, type, signs, key and panels. Everything on the board is generated
+  from here; nothing is hand-placed in the SVG.
 - The outputs, all committed: `Board v0.9.svg` (the print master, full leather) with
   `Board v0.9 (print preview).jpg`, and `Board v0.9 (screen).svg` with `Board v0.9 (screen).jpg`
   (the same board with a flat texture, for the website and mk-online). The two builds differ
   only in the `LEATHER` preset.
 - `Art/Index/board.jpg`: the index page's tile ("The City Map", first under Components), an
-  800 x 450 crop of the screen board (`TILE_CROP`), rebuilt with the board. The tile opens
-  `Board v0.9 (screen).jpg`.
+  800 x 450 crop of the screen board (`TILE_CROP`: the East River's bridges, Williamsburg and
+  Richmond Hill), rebuilt with the board. The tile opens `Board v0.9 (screen).jpg`.
 
 ## Physical spec
 
@@ -278,36 +210,31 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
-- **Labels are centred in each District** (Nick, 2026-09-28: cleaner, accepting that pieces will
-  sit round them). Each cluster goes where it is furthest from every border, and along a strip
-  the spot nearest the District's middle; all use the stacked layout. The earlier placer is
-  still there behind `LABEL_PLACEMENT = 'edge'`: it pushes each cluster aside to leave the
-  largest open circle for pieces and keeps it clear of its neighbours' across a border. Worth
-  comparing once pieces are on a printed board.
+- **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
+  an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are the Still Token art itself** (`Art/Still Tokens/SVG`), so board and tokens agree.
 - **Muted Borough tones.** Mob colours aren't set and the Squads are blue, so the land stays
   quiet. Brooklyn moved from red to bronze to part it from Manhattan.
-- **High Society Venues:** the martini (`Art/Icons/Gin.svg`) under a crown, plus a gold
-  sunburst from the crown. The inner gold keyline they once had is gone (Nick). Speakeasies
-  keep the tumbler, one colour for all.
+- **High Society Venues:** the martini (`Art/Icons/Gin.svg`) under a crown on the sign's
+  medallion, and the Deco double keyline (see The look), which replaced a gold sunburst.
+  Speakeasies keep the tumbler.
 - **No setup marks on the board** (Nick, 2026-09-28): he wants to playtest other setups
-  without the print committing to one. `SHOW_SETUP = true` brings them back: ghosted pieces in
-  a dashed tray, no words (Home Turf: Safehouse, Boss, 2 Runners; 3 Runners; a Squad shield,
-  kept quiet so a crown room never read as always policed), plus the key's Setup row. The
-  roster keeps each District's Town Planner mark either way.
-- **Each District type shifts its Borough's colour a touch** (`TONE`, `TINT`): Speakeasies
-  and High Society warmer, Docks cooler, Wards the Borough's own colour. The Borough must still
-  read first (Raids and Squads work by Borough), so the shift is 13%, and "cool" is a slate,
-  not a blue: blue turned Manhattan's red Docks plum, a step towards Queens. Tried first and
-  rejected (Nick, 2026-09-28): a tooled pattern per type (waves, brick, fish scales); he
-  prefers the Districts flat.
+  without the print committing to one. The marks (ghosted pieces in a dashed tray, no words,
+  and a Setup row in the key) only ever drew beside the centred labels, so their switch went
+  with them on 2026-09-29. The roster still keeps each District's Town Planner mark, so they
+  could come back on the signs; git history has the tray (`tray()` in `build_board.js`).
+- **The Borough reads first** (Raids and Squads work by Borough), so District types are told
+  apart by drawing, not colour: the Deco frames and the piers (see The look), with only Wards
+  darker. Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
+  cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales; Nick
+  prefers the Districts flat).
 - **Finishing touches:** piers off each Dock's most open stretch of shore, in the Dock's own
   colour (placed automatically, clear of land, bridges and labels); Art Deco quarter fans in the
   frame's corner steps (the one at the Heat corner's turn was cut, 2026-09-29: it sat on the map
-  and looked odd); a soft drop shadow under every Still and zone roundel, so they sit on the
+  and looked odd); a soft drop shadow under every Still and type medallion, so they sit on the
   board like pieces.
-- **Zone roundels are 28 units across** (`R = 14`, about 16 mm at 24in), big enough to read
-  a District's type at a glance beside its Still.
+- **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 30 units
+  tall (17 mm): small enough to keep the signs out of the pieces' way, large enough to read.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest
   right on the Heat Track"; wrapping it into two rows would break that. The sockets keep the
   Ledger's size and spacing (39 mm chips, 2 mm apart). **Dressed as a gilt instrument** since
@@ -342,12 +269,21 @@ keeps them on a re-trace.
   print grain at print scale, not in the downscaled preview. Every leather filter ends by
   masking to `SourceAlpha`: the lighting is opaque across the whole region, and without the mask
   the panel filter painted grey over the entire map.
-- Water and land labels are placed by visual centre, midway between the shores and at their
-  angle, so they stay centred if the type changes. New Jersey is unlabelled (Nick cut it);
-  Westchester and Nassau are labelled on the traced board and gone from the drafted one.
+- Water labels are placed by visual centre, midway between the shores and at their angle, so
+  they stay centred if the type changes. New Jersey is unlabelled (Nick cut it).
 
 ## Open
 
+- **Next: a fresh pass on the Queens / Brooklyn border** (Nick, 2026-09-29). He likes the clean,
+  straightish borders between Boroughs; the Queens / Brooklyn one is now jagged (Williamsburg's
+  diamond side, Corona's level bottom, Brownsville's upright side, Richmond Hill's step) and
+  looks off. **The connection graph may change** if it helps the layout. Today the drafting keeps
+  every adjacency from the traced map (each chain keeps its two sides), so changing one means
+  editing `Art/Board/Traced/board-geometry.json` or teaching `draft_board.js` to add or drop a
+  chain, then checking what names that connection: the Almanac's bracket lesson (Red Hook and
+  the Bowery across the Brooklyn Bridge), Jobs that name a crossing, and mk-online's graph.
+  Other known weak spots: Whitestone is the smallest room (39), squeezed by the Queens column
+  and Astoria's border with Flushing; Brownsville's hangers are the longest (47).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.

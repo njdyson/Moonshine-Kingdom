@@ -1,20 +1,15 @@
 #!/usr/bin/env node
-// Builds the game board as a vector SVG from Art/Board/board-geometry.json and
-// the District Roster below, then renders it through Playwright's Chromium.
+// Builds the game board as a vector SVG from Art/Board/board-geometry.json (the drafted
+// map, written by tools/draft_board.js) and the District Roster below, then renders it
+// through Playwright's Chromium.
 //
 //   node tools/build_board.js           print and screen SVGs, 2160px previews of each, and
 //                                       the index page's tile (Art/Index/board.jpg)
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor (not committed): a 24in PDF at 300dpi, the
 //                                       7200px PNG it is made from, and a 4320px screen JPEG
-//   node tools/build_board.js --geometry=Drafted
-//                                       an experiment: the same build from the geometry in
-//                                       Art/Board/Drafted/, written there, leaving the board
-//                                       and the index tile alone
-//   node tools/build_board.js --style=deco
-//                                       an experiment: Districts told apart by Deco frames,
-//                                       not tints (see STYLE), written to a Deco/ folder
-//                                       beside the build's usual output; combines with --geometry
+//   --report=<file>                     also each District's sign, room and sign shapes as
+//                                       JSON, for tuning the drafting's settings
 //
 // Two builds share everything but the texture: the print board carries the full
 // pebbled leather, which reads at 24in; the screen board keeps only soft wrinkles
@@ -29,38 +24,27 @@
 // Stills are the Still Token art itself (Art/Still Tokens/SVG), so the printed
 // board and the prototype tokens can never disagree.
 //
-// Each District's label cluster is placed automatically (LABEL_PLACEMENT below):
-// centred in the District, or pushed to an edge to leave open ground for pieces.
-// Pin one by hand with `place: ['h' | 'v', x, y]` if the choice ever looks wrong.
+// Each District carries a hanging sign (placeSign): its type's medallion, name and
+// venue on a small plaque hung from the border above, with the Still on a plate
+// bolted to it, placed automatically as high as it fits.
 
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const EXPERIMENT = (process.argv.find(a => a.startsWith('--geometry=')) || '').slice(11);
-const DIR = path.join(ROOT, 'Art', 'Board', EXPERIMENT);
-// District styling. 'tone', the board so far: each type shifts its Borough's colour
-// (Speakeasies and High Society warmer, Docks cooler) and High Society carries a gold
-// sunburst. 'deco', an experiment (Nick, 2026-09-29): one colour per Borough with Wards
-// a touch darker; Speakeasies framed by an inset gold keyline with a diamond in each
-// corner; High Society by a double keyline with a Deco fan in each corner, in place of
-// the sunburst. Docks are told by their piers.
-const STYLE = process.argv.includes('--style=deco') ? 'deco' : 'tone';
+const DIR = path.join(ROOT, 'Art', 'Board');
 const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').slice(k.length + 3);
-// A mock (2026-09-29): --labels=sign hangs each District's sign from its top border
-// (see placeSign). --out=<name> names the output folder, beside the geometry.
-const OUT_DIR = path.join(DIR, arg('out') || (STYLE === 'deco' ? 'Deco' : ''));
 const OUT = {
-  printSvg: path.join(OUT_DIR, 'Board v0.9.svg'), screenSvg: path.join(OUT_DIR, 'Board v0.9 (screen).svg'),
-  screenJpg: path.join(OUT_DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(OUT_DIR, 'Board v0.9 (print preview).jpg'),
-  printPng: path.join(OUT_DIR, 'Board v0.9 (print).png'), printPdf: path.join(OUT_DIR, 'Board v0.9 (print).pdf'),
-  screenLarge: path.join(OUT_DIR, 'Board v0.9 (screen, large).jpg'),
+  printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
+  screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
+  printPng: path.join(DIR, 'Board v0.9 (print).png'), printPdf: path.join(DIR, 'Board v0.9 (print).pdf'),
+  screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
   indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
 };
 // The index tile: 800 x 450 like its neighbours, cropped on the East River's bridges
 // and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
-const TILE_CROP = [304, 374, 672]; // 672 x 378 scales to exactly 800 x 450
+const TILE_CROP = [366, 372, 672]; // 672 x 378 scales to exactly 800 x 450
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const BOARD_PX = BOARD_IN * 300; // print render: 300dpi
@@ -85,19 +69,19 @@ const BOROUGHS = {
   BK: { n: 4, name: 'Brooklyn', fill: ['#5a4630', '#3d2f1f'] },
   SI: { n: 5, name: 'Staten Island', fill: ['#3b3935', '#282623'] },
 };
-// District types shift their Borough's colour a touch, so the Borough still reads
-// first (Raids and Squads work by Borough): Speakeasies and High Society warmer,
-// like lamplight; Docks cooler, like the water; Wards the Borough's own colour.
-const TONE = { speak: 'warm', hs: 'warm', dock: 'cool' };
-const TINT = { warm: '#7a4e22', cool: '#2c5058' }, TINT_AMOUNT = 0.13; // slate, not blue: blue turns red to plum
+// One colour per Borough, so the Borough reads first (Raids and Squads work by
+// Borough), with Wards a touch darker, the rough end of town. The other types are
+// told apart by drawing: Speakeasies by an inset gold keyline with a diamond at each
+// corner, High Society by a double keyline with a Deco fan in each corner (decoFrame),
+// Docks by their piers.
 const mix = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
-const WARD_DARK = 0.3; // 'deco': Wards this much towards black
-const toneOf = d => (STYLE === 'deco' ? (d.zone === 'ward' ? 'dark' : '') : TONE[d.zone] || '');
-const tint = (c, tone) => (tone === 'dark' ? mix(c, '#000000', WARD_DARK) : tone ? mix(c, TINT[tone], TINT_AMOUNT) : c);
+const WARD_DARK = 0.3; // Wards this much towards black (20% was too faint)
+const toneOf = d => (d.zone === 'ward' ? 'dark' : '');
+const tint = (c, tone) => (tone === 'dark' ? mix(c, '#000000', WARD_DARK) : c);
 const fillId = d => `fill-${d.boro}${toneOf(d) ? '-' + toneOf(d) : ''}`;
 
 // ---------------------------------------------------------------- roster
-// setup: the Town Planner's Setup column. lines: a hand break for long names.
+// setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
   { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
@@ -120,53 +104,29 @@ const DISTRICTS = [
   { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint', setup: 'runners' },
   { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar' },
-  { id: 'sheepshead_bay', name: 'Sheepshead Bay', boro: 'BK', zone: 'dock', still: 4, setup: 'runners', lines: ['Sheepshead', 'Bay'] },
+  { id: 'sheepshead_bay', name: 'Sheepshead Bay', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
   { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'ward', still: 6 },
   { id: 'westerleigh', name: 'Westerleigh', boro: 'SI', zone: 'dock', still: 2 },
   { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 4 },
 ];
-// Setup marks: the starting pieces, ghosted in a dashed tray, from the Town
-// Planner's Setup column. Pieces only; the words live in the Town Planner.
-const SETUP = {
-  home: ['safehouse', 'boss', 'runner', 'runner'], // Home Turf: Safehouse, Boss and 2 Runners
-  runners: ['runner', 'runner', 'runner'],
-  squad: ['squad'],
-};
-// Off since 2026-09-28: Nick wants to playtest other setups without the printed
-// board committing to one. The roster keeps the Town Planner's marks; true draws
-// them again, with the key's Setup row.
-const SHOW_SETUP = false;
-const OFFBOARD = ['nj', 'north', 'east'].filter(k => geo.regions[k]); // New Jersey, Westchester, Nassau
+const OFFBOARD = ['nj']; // New Jersey: land, off the board
 
-// Labels in the water or on off-board land, by visual centre: [x, y, rotation].
-// Centres sit midway between the shores (or shore and frame), angles follow them.
-// An experiment's geometry may carry its own ("labels"), placed for its shores.
-const BORO_LABELS = (geo.labels && geo.labels.boro) || {
-  MN: [247, 378, -52.5], BX: [1049.5, 280, -90], QN: [890, 1037, -6.6], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
-};
-const WATER_LABELS = (geo.labels && geo.labels.water) || [['EAST RIVER', 405, 637, -6], ['JAMAICA BAY', 732, 921, 0]];
-// Bridge names (from board-geometry.json) sit in the water beside each bridge,
-// along the river, so Jobs can name a crossing: [x, y, rotation] by name.
-const BRIDGE_LABELS = (geo.labels && geo.labels.bridges) || {
-  'Hell Gate Bridge': [775, 331.5, -8], 'Queensboro Bridge': [625.5, 428.2, -43.6],
-  'Williamsburg Bridge': [538.2, 505, -44.2], 'Brooklyn Bridge': [318.4, 712.8, -60.6],
-};
-const LAND_LABELS = (geo.labels && geo.labels.land) || [['WESTCHESTER', 800, 32, 0], ['NASSAU', 1049, 700, 90]];
+// Labels in the water, by visual centre: [x, y, rotation]. The drafting places them
+// midway between the shores, at their angle ("labels" in board-geometry.json).
+const BORO_LABELS = geo.labels.boro, WATER_LABELS = geo.labels.water;
+// Bridge names sit in the water beside each bridge, along the river, so Jobs can name
+// a crossing: [x, y, rotation] by name.
+const BRIDGE_LABELS = geo.labels.bridges;
 
 // ---------------------------------------------------------------- type
 const TYPE = {
-  name: { family: 'Barlow Condensed', weight: 700, size: 14.5, spacing: 1.1 },
-  venue: { family: 'Barlow', weight: 500, size: 9, spacing: 0.2, italic: true },
   boro: { family: 'Cinzel', weight: 700, size: 19, spacing: 3.6 },
   water: { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 3.4, italic: true },
-  land: { family: 'Barlow Condensed', weight: 600, size: 9.5, spacing: 5 },
   bridge: { family: 'Barlow Condensed', weight: 600, size: 8, spacing: 0.8, italic: true },
   keyHead: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.8 },
-  keyText: { family: 'Barlow', weight: 500, size: 7.6, spacing: 0.1 },
   panelHead: { family: 'Cinzel', weight: 700, size: 11.5, spacing: 3.2 },
   small: { family: 'Barlow Condensed', weight: 700, size: 8, spacing: 1.3 },
   titleCity: { family: 'Cinzel', weight: 700, size: 26, spacing: 4.5 },
-  titleStack: { family: 'Cinzel', weight: 700, size: 30, spacing: 5 },
   titleYear: { family: 'Cinzel', weight: 700, size: 15, spacing: 8 },
   price: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.4 },
   sign: { family: 'Barlow Condensed', weight: 700, size: 12.5, spacing: 1 },
@@ -261,7 +221,6 @@ function still(n, x, y, h) {
   const s = h / TOKEN_BOX[3];
   return `<g transform="translate(${f(x - TOKEN_BOX[0] * s)} ${f(y - TOKEN_BOX[1] * s)}) scale(${f(s, 4)})">${TOKENS[n]}</g>`;
 }
-const TOKEN_H = 42, TOKEN_W = TOKEN_H * TOKEN_BOX[2] / TOKEN_BOX[3];
 
 // Zone roundel: the same mark on the map and in the key. A High Society Venue is
 // a Speakeasy with a crown on it; its glass is the martini, not the tumbler.
@@ -276,133 +235,67 @@ function roundel(zone, cx, cy, r) {
     + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
 }
 
-// ---------------------------------------------------------------- label clusters
-// Two arrangements, h (Still left of the text) and v (Still over the text); the
-// placer tries both. Returns the size and a draw(x, y) for the chosen spot.
-const R = 14; // roundel radius: 28 units, about 16 mm at 24in
-function cluster(d, layout, opts = {}) {
-  const names = (d.lines || [d.name]).map(upper);
-  const nameW = Math.max(...names.map(n => width(TYPE.name, n)));
-  const venueW = d.venue ? width(TYPE.venue, d.venue) : 0;
-  const setup = SHOW_SETUP && d.setup ? SETUP[d.setup] : null;
-  const setupW = setup ? trayWidth(setup) : 0;
+// ---------------------------------------------------------------- signs
+// A hanging sign: a small plaque with the type's medallion and the name (and venue),
+// hung from the border above it, and the Still on its own plate bolted to the sign's
+// right end, taller than the sign so it reads as a separate part (Nick, 2026-09-29).
+// stacked: the name on two lines. drop: the plate bolted under the sign's middle
+// instead, for a District too narrow for the two side by side. Returns the size and a
+// draw(x, y) for the chosen spot.
+function cluster(d, opts = {}) {
   const hs = d.zone === 'hs', nameFill = hs ? C.goldBright : C.ink;
-  const lines = []; // [kind, text, baseline]
-  if (layout === 's') {
-    // A hanging sign: a small plaque with the type's medallion and the name (and venue),
-    // hung from the border above it, and the Still on its own plate bolted to the sign's
-    // right end, taller than the sign so it reads as a separate part (Nick, 2026-09-29).
-    // stacked: the name on two lines. drop: the plate bolted under the sign's middle
-    // instead, for a District too narrow for the two side by side.
-    const { stacked = false, drop = false } = opts;
-    const sr = 9, pad = 4.5, sh = 30, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pp = 5, lap = 6;
-    const pw = sw + 2 * pp, ph = sh + 2 * pp; // the Still's plate
-    const names = stacked ? upper(d.name).split(' ') : [upper(d.name)];
-    const tw = Math.max(...names.map(n => width(TYPE.sign, n)), d.venue ? width(TYPE.signVenue, d.venue) : 0);
-    const bw = pad + 2 * sr + 6 + tw + (drop ? pad + 2 : 8 + lap), bh = (stacked ? 34 : 26) + 2 * pad, tx = pad + 2 * sr + 6;
-    const w = drop ? Math.max(bw, pw) : bw - lap + pw, h = drop ? bh - lap + ph : Math.max(bh, ph);
-    const sx = drop ? (w - bw) / 2 : 0, sy = drop ? 0 : (h - bh) / 2; // the sign, in the cluster
-    const px = drop ? (w - pw) / 2 : bw - lap, py = drop ? bh - lap : (h - ph) / 2; // the plate
-    const rows = names.length + (d.venue ? 0.75 : 0), step = 10.5;
-    const nameYs = names.map((n, i) => bh / 2 - (rows - 1) * step / 2 + i * step), venueY = nameYs[nameYs.length - 1] + 9.5;
-    const medal = (x, yy) => [x + sx + pad + sr, yy + sy + bh / 2 + (hs ? 3 : 0)];
-    // each hanger: [x, the sign's top there, the border straight above it]
-    const hangers = (x, yy) => {
-      const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
-      return (drop ? [[X + 12, Y], [X + bw - 12, Y]] : [[X + 12, Y], [PX + pw / 2, PY]]).map(([hx, hy]) => {
-        let top = -Infinity;
-        poly0.forEach((a, i) => {
-          const b = poly0[(i + 1) % poly0.length];
-          if ((a[0] - hx) * (b[0] - hx) > 0 || a[0] === b[0]) return;
-          const ey = a[1] + (b[1] - a[1]) * (hx - a[0]) / (b[0] - a[0]);
-          if (ey < hy && ey > top) top = ey;
-        });
-        return [hx, hy, top];
+  const { stacked = false, drop = false } = opts;
+  const sr = 9, pad = 4.5, sh = 30, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pp = 5, lap = 6;
+  const pw = sw + 2 * pp, ph = sh + 2 * pp; // the Still's plate
+  const names = stacked ? upper(d.name).split(' ') : [upper(d.name)];
+  const tw = Math.max(...names.map(n => width(TYPE.sign, n)), d.venue ? width(TYPE.signVenue, d.venue) : 0);
+  const bw = pad + 2 * sr + 6 + tw + (drop ? pad + 2 : 8 + lap), bh = (stacked ? 34 : 26) + 2 * pad, tx = pad + 2 * sr + 6;
+  const w = drop ? Math.max(bw, pw) : bw - lap + pw, h = drop ? bh - lap + ph : Math.max(bh, ph);
+  const sx = drop ? (w - bw) / 2 : 0, sy = drop ? 0 : (h - bh) / 2; // the sign, in the cluster
+  const px = drop ? (w - pw) / 2 : bw - lap, py = drop ? bh - lap : (h - ph) / 2; // the plate
+  const rows = names.length + (d.venue ? 0.75 : 0), step = 10.5;
+  const nameYs = names.map((n, i) => bh / 2 - (rows - 1) * step / 2 + i * step), venueY = nameYs[nameYs.length - 1] + 9.5;
+  const medal = (x, yy) => [x + sx + pad + sr, yy + sy + bh / 2 + (hs ? 3 : 0)];
+  // each hanger: [x, the sign's top there, the border straight above it]
+  const hangers = (x, yy) => {
+    const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
+    return (drop ? [[X + 12, Y], [X + bw - 12, Y]] : [[X + 12, Y], [PX + pw / 2, PY]]).map(([hx, hy]) => {
+      let top = -Infinity;
+      poly0.forEach((a, i) => {
+        const b = poly0[(i + 1) % poly0.length];
+        if ((a[0] - hx) * (b[0] - hx) > 0 || a[0] === b[0]) return;
+        const ey = a[1] + (b[1] - a[1]) * (hx - a[0]) / (b[0] - a[0]);
+        if (ey < hy && ey > top) top = ey;
       });
-    };
-    const chamfered = (x, yy, ww, hh, c) => `M${f(x + c)} ${f(yy)} H${f(x + ww - c)} L${f(x + ww)} ${f(yy + c)} V${f(yy + hh - c)} L${f(x + ww - c)} ${f(yy + hh)} H${f(x + c)} L${f(x)} ${f(yy + hh - c)} V${f(yy + c)} Z`;
-    return {
-      w, h, layout, opts, hangers,
-      roundelAt: medal,
-      draw(x, yy) {
-        const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
-        // hangers: from the tops up to the border straight above, always
-        let hang = '';
-        for (const [hx, hy, top] of hangers(x, yy)) if (top > -Infinity) hang += `M${f(hx)} ${f(top + 1.2)} V${f(hy)} `;
-        let s = hang ? `<path d="${hang}" stroke="${C.goldLine}" stroke-width=".9" stroke-opacity=".85"/>` : '';
-        const sign = chamfered(X, Y, bw, bh, 3), plate = chamfered(PX, PY, pw, ph, 2);
-        s += `<path d="${sign}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
-          + `<path d="${sign}" fill="url(#lacquer)" fill-opacity=".92" stroke="url(#bezelGilt)" stroke-width="1.2"/>`;
-        s += `<g filter="url(#lift)">${roundel(d.zone, ...medal(x, yy), sr)}</g>`;
-        names.forEach((n, i) => { s += text(n, X + tx, Y + nameYs[i], TYPE.sign, { fill: nameFill, middle: true }); });
-        if (d.venue) s += text(d.venue, X + tx, Y + venueY, TYPE.signVenue, { fill: C.body, middle: true });
-        // the Still's plate, bolted on over the sign: its own edge and a bolt in each corner
-        s += `<path d="${plate}" fill="#000" fill-opacity=".55" transform="translate(1.2 2)" filter="url(#blur2)"/>`
-          + `<path d="${plate}" fill="url(#stillPlate)" stroke="url(#bezelGilt)" stroke-width="1.6"/>`
-          + `<path d="${chamfered(PX + 2.2, PY + 2.2, pw - 4.4, ph - 4.4, 1.2)}" fill="none" stroke="#000" stroke-opacity=".6" stroke-width=".5"/>`;
-        for (const [bx, by] of [[PX + 3.4, PY + 3.4], [PX + pw - 3.4, PY + 3.4], [PX + pw - 3.4, PY + ph - 3.4], [PX + 3.4, PY + ph - 3.4]])
-          s += `<circle cx="${f(bx)}" cy="${f(by)}" r="1.45" fill="url(#bezelGilt)" stroke="#000" stroke-opacity=".55" stroke-width=".35"/>`
-            + `<path d="M${f(bx - 0.8)} ${f(by)} H${f(bx + 0.8)}" stroke="#000" stroke-opacity=".5" stroke-width=".35"/>`;
-        s += `<g filter="url(#lift)">${still(d.still, PX + pp, PY + pp, sh)}</g>`;
-        return s;
-      },
-    };
-  }
-  if (layout === 'h') {
-    // Still on the left; roundel inline with the name, the crown room above it
-    const x0 = TOKEN_W + 7, rcy = R + (hs ? 1.2 * R : 0);
-    let y = rcy + 5.1;
-    names.forEach((n, i) => { lines.push(['name', n, y]); y += 14.5; });
-    y -= 1.5;
-    if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
-    if (setup) lines.push(['setup', '', y + 1.5]);
-    const w = x0 + Math.max(2 * R + 5 + nameW, venueW, setupW);
-    const h = Math.max(TOKEN_H, lines[lines.length - 1][2] + 3);
-    return {
-      w, h, layout,
-      roundelAt: (x, yy) => [x + x0 + R, yy + rcy],
-      draw(x, yy) {
-        let s = `<g filter="url(#lift)">${still(d.still, x, yy, TOKEN_H) + roundel(d.zone, x + x0 + R, yy + rcy, R)}</g>`;
-        for (const [kind, t, b] of lines) {
-          if (kind === 'name') s += text(t, x + x0 + 2 * R + 5, yy + b, TYPE.name, { fill: nameFill, halo: 2.6 });
-          if (kind === 'venue') s += text(t, x + x0, yy + b, TYPE.venue, { fill: C.body, halo: 2.2 });
-          if (kind === 'setup') s += tray(setup, x + x0, yy + b - 3);
-        }
-        return s;
-      },
-    };
-  }
-  // v: roundel and Still side by side, text centred below; a crown needs headroom
-  const rowW = 2 * R + 6 + TOKEN_W, top = hs ? 7 : 0;
-  let y = top + TOKEN_H + 15.5;
-  names.forEach(n => { lines.push(['name', n, y]); y += 14.5; });
-  y -= 1.5;
-  if (d.venue) { lines.push(['venue', d.venue, y]); y += 11.5; }
-  if (setup) lines.push(['setup', '', y + 1.5]);
-  const w = Math.max(rowW, nameW, venueW, setupW);
-  const h = lines[lines.length - 1][2] + 3;
+      return [hx, hy, top];
+    });
+  };
+  const chamfered = (x, yy, ww, hh, c) => `M${f(x + c)} ${f(yy)} H${f(x + ww - c)} L${f(x + ww)} ${f(yy + c)} V${f(yy + hh - c)} L${f(x + ww - c)} ${f(yy + hh)} H${f(x + c)} L${f(x)} ${f(yy + hh - c)} V${f(yy + c)} Z`;
   return {
-    w, h, layout,
-    roundelAt: (x, yy) => [x + (w - rowW) / 2 + R, yy + top + TOKEN_H / 2],
+    w, h, opts, hangers,
     draw(x, yy) {
-      const rx = x + (w - rowW) / 2;
-      let s = `<g filter="url(#lift)">${roundel(d.zone, rx + R, yy + top + TOKEN_H / 2, R) + still(d.still, rx + 2 * R + 6, yy + top, TOKEN_H)}</g>`;
-      for (const [kind, t, b] of lines) {
-        if (kind === 'name') s += text(t, x + w / 2, yy + b, TYPE.name, { fill: nameFill, anchor: 'middle', halo: 2.6 });
-        if (kind === 'venue') s += text(t, x + w / 2, yy + b, TYPE.venue, { fill: C.body, anchor: 'middle', halo: 2.2 });
-        if (kind === 'setup') s += tray(setup, x + w / 2 - setupW / 2, yy + b - 3);
-      }
+      const poly0 = geo.regions[d.id], X = x + sx, Y = yy + sy, PX = x + px, PY = yy + py;
+      // hangers: from the tops up to the border straight above, always
+      let hang = '';
+      for (const [hx, hy, top] of hangers(x, yy)) if (top > -Infinity) hang += `M${f(hx)} ${f(top + 1.2)} V${f(hy)} `;
+      let s = hang ? `<path d="${hang}" stroke="${C.goldLine}" stroke-width=".9" stroke-opacity=".85"/>` : '';
+      const sign = chamfered(X, Y, bw, bh, 3), plate = chamfered(PX, PY, pw, ph, 2);
+      s += `<path d="${sign}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
+        + `<path d="${sign}" fill="url(#lacquer)" fill-opacity=".92" stroke="url(#bezelGilt)" stroke-width="1.2"/>`;
+      s += `<g filter="url(#lift)">${roundel(d.zone, ...medal(x, yy), sr)}</g>`;
+      names.forEach((n, i) => { s += text(n, X + tx, Y + nameYs[i], TYPE.sign, { fill: nameFill, middle: true }); });
+      if (d.venue) s += text(d.venue, X + tx, Y + venueY, TYPE.signVenue, { fill: C.body, middle: true });
+      // the Still's plate, bolted on over the sign: its own edge and a bolt in each corner
+      s += `<path d="${plate}" fill="#000" fill-opacity=".55" transform="translate(1.2 2)" filter="url(#blur2)"/>`
+        + `<path d="${plate}" fill="url(#stillPlate)" stroke="url(#bezelGilt)" stroke-width="1.6"/>`
+        + `<path d="${chamfered(PX + 2.2, PY + 2.2, pw - 4.4, ph - 4.4, 1.2)}" fill="none" stroke="#000" stroke-opacity=".6" stroke-width=".5"/>`;
+      for (const [bx, by] of [[PX + 3.4, PY + 3.4], [PX + pw - 3.4, PY + 3.4], [PX + pw - 3.4, PY + ph - 3.4], [PX + 3.4, PY + ph - 3.4]])
+        s += `<circle cx="${f(bx)}" cy="${f(by)}" r="1.45" fill="url(#bezelGilt)" stroke="#000" stroke-opacity=".55" stroke-width=".35"/>`
+          + `<path d="M${f(bx - 0.8)} ${f(by)} H${f(bx + 0.8)}" stroke="#000" stroke-opacity=".5" stroke-width=".35"/>`;
+      s += `<g filter="url(#lift)">${still(d.still, PX + pp, PY + pp, sh)}</g>`;
       return s;
     },
   };
-}
-// A dashed tray of ghosted pieces; (x, cy) is its left edge and vertical centre.
-const GHOST = 8.5, GHOST_GAP = 1.4, TRAY_PAD = 4, TRAY_H = 12;
-const trayWidth = icons => 2 * TRAY_PAD + icons.length * GHOST + (icons.length - 1) * GHOST_GAP;
-function tray(icons, x, cy) {
-  let s = `<rect x="${f(x)}" y="${f(cy - TRAY_H / 2)}" width="${f(trayWidth(icons))}" height="${TRAY_H}" rx="${TRAY_H / 2}" fill="#000" fill-opacity=".2" stroke="${C.muted}" stroke-opacity=".6" stroke-width=".8" stroke-dasharray="2 1.5"/>`;
-  icons.forEach((ic, i) => { s += icon(ic, x + TRAY_PAD + GHOST / 2 + i * (GHOST + GHOST_GAP), cy, GHOST, C.muted); });
-  return `<g opacity=".7">${s}</g>`;
 }
 
 // ---------------------------------------------------------------- placement
@@ -434,45 +327,6 @@ function rectInside([x, y, w, h], p) {
   return true;
 }
 
-// Largest open circle left in the District once the cluster (plus margin) sits
-// at a spot: the ground the pieces get. Clusters also keep clear of their
-// neighbours' across a border, so no Still reads as belonging next door.
-const rectGap = (a, b) => Math.hypot(Math.max(0, a[0] - b[0] - b[2], b[0] - a[0] - a[2]), Math.max(0, a[1] - b[1] - b[3], b[1] - a[1] - a[3]));
-const MARGIN = 7;
-function place(d, others) {
-  if (d.place) {
-    const [layout, x, y] = d.place;
-    return { x, y, c: cluster(d, layout), open: null };
-  }
-  const p = geo.regions[d.id], M = MARGIN;
-  const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
-  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-  const bridgeEnds = geo.bridges.flatMap(b => b.join.map((id, i) => [id, i ? b.b : b.a]))
-    .filter(([id]) => id === d.id).map(([, q]) => q);
-  const samples = [];
-  for (let y = y0; y <= y1; y += 4) for (let x = x0; x <= x1; x += 4)
-    if (inside([x, y], p)) samples.push([x, y, edgeDist([x, y], p)]);
-  let best = null;
-  for (const layout of ['h', 'v']) {
-    const c = cluster(d, layout);
-    for (let y = y0; y <= y1 - c.h; y += 3) for (let x = x0; x <= x1 - c.w; x += 3) {
-      const r = [x - M, y - M, c.w + 2 * M, c.h + 2 * M];
-      if (!rectInside(r, p)) continue;
-      if (bridgeEnds.some(o => rectDist(o, r) < 16)) continue;
-      let open = 0;
-      for (const [sx, sy, de] of samples) open = Math.max(open, Math.min(de, rectDist([sx, sy], r)));
-      let score = open - 0.04 * (y - y0) - (layout === 'h' ? 4 : 0);
-      for (const o of others) score -= Math.max(0, 60 - rectGap(r, o)) * 0.45;
-      if (!best || score > best.score) best = { score, x, y, c, open };
-    }
-  }
-  if (!best) throw new Error('No room for the label in ' + d.id);
-  return best;
-}
-// 'centre': each cluster sits in the middle of its District, as far from every
-// border as it can get (Nick's choice, 2026-09-28: cleaner, though pieces will sit
-// round it). 'edge': pushed aside to leave the widest open ground for pieces.
-const LABEL_PLACEMENT = arg('labels') || 'centre';
 // The sign's shapes, each with what it costs in hanger units to use it: the usual one
 // free, a stacked name where the usual one hangs much higher, and the Still's plate
 // hung under the sign only where nothing else fits.
@@ -480,9 +334,8 @@ const SIGN_SHAPES = d => {
   const two = d.name.includes(' ');
   return [[{}, 0], ...(two ? [[{ stacked: true }, 15]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 75]] : [])];
 };
-// 'sign': the sign hangs as high in the District as it fits, centred across the room
-// there, clear of the Speakeasy and High Society keylines; if it never fits, the
-// District keeps its centred label.
+// The sign hangs as high in the District as it fits, centred across the room there,
+// clear of the Speakeasy and High Society keylines.
 function placeSign(d) {
   const p = geo.regions[d.id], framed = d.zone === 'speak' || d.zone === 'hs';
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
@@ -492,7 +345,7 @@ function placeSign(d) {
   const variants = SIGN_SHAPES(d);
   let best = null;
   for (const [opts, cost] of variants) for (const M of framed ? [13, 9] : [7]) {
-    const c = cluster(d, 's', opts);
+    const c = cluster(d, opts);
     for (let y = y0; y <= y1 - c.h; y += 1) {
       const fit = [];
       for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
@@ -504,43 +357,7 @@ function placeSign(d) {
       break;
     }
   }
-  if (best) return best;
-  console.log(`  ${d.id}: no room for a sign; centred label kept`);
-  return placeCentre(d);
-}
-function centroid(p) {
-  let a = 0, cx = 0, cy = 0;
-  p.forEach(([x0, y0], i) => {
-    const [x1, y1] = p[(i + 1) % p.length], k = x0 * y1 - x1 * y0;
-    a += k; cx += (x0 + x1) * k; cy += (y0 + y1) * k;
-  });
-  return [cx / (3 * a), cy / (3 * a)];
-}
-function placeCentre(d) {
-  if (d.place) {
-    const [layout, x, y] = d.place;
-    return { x, y, c: cluster(d, layout), open: null };
-  }
-  const p = geo.regions[d.id], [gx, gy] = centroid(p);
-  const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
-  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-  // Stacked everywhere, so centred labels all read alike; side by side only if
-  // the stack cannot fit.
-  let best = null;
-  for (const layout of ['v', 'h']) {
-    if (best) break;
-    const c = cluster(d, layout);
-    for (let y = y0; y <= y1 - c.h; y += 2) for (let x = x0; x <= x1 - c.w; x += 2) {
-      const r = [x, y, c.w, c.h];
-      if (!rectInside([x - 5, y - 5, c.w + 10, c.h + 10], p)) continue;
-      const corners = [[x, y], [x + c.w, y], [x + c.w, y + c.h], [x, y + c.h]];
-      const clear = Math.min(...p.map(v => rectDist(v, r)), ...corners.map(q => edgeDist(q, p)));
-      // widest spot wins; along a strip, the one nearest the District's centre
-      const score = clear - 0.05 * Math.hypot(x + c.w / 2 - gx, y + c.h / 2 - gy);
-      if (!best || score > best.score) best = { score, x, y, c, open: clear };
-    }
-  }
-  if (!best) throw new Error('No room for the label in ' + d.id);
+  if (!best) throw new Error(`No room for a sign in ${d.id}: the drafting has made it too small`);
   return best;
 }
 // Room for pieces: the District's ground at least ROOM_MARGIN from every border and
@@ -556,17 +373,7 @@ function room(d, { x, y, c }) {
   return n * 4 * (BOARD_MM / 1080) ** 2 / 100;
 }
 function placeAll() {
-  if (LABEL_PLACEMENT === 'centre') return Object.fromEntries(DISTRICTS.map(d => [d.id, placeCentre(d)]));
-  if (LABEL_PLACEMENT === 'sign') return Object.fromEntries(DISTRICTS.map(d => [d.id, placeSign(d)]));
-  const box = ({ x, y, c }) => [x - MARGIN, y - MARGIN, c.w + 2 * MARGIN, c.h + 2 * MARGIN];
-  let placed = Object.fromEntries(DISTRICTS.map(d => [d.id, place(d, [])]));
-  for (let pass = 0; pass < 3; pass++) {
-    for (const d of DISTRICTS) {
-      const others = DISTRICTS.filter(o => o.id !== d.id).map(o => box(placed[o.id]));
-      placed[d.id] = place(d, others);
-    }
-  }
-  return placed;
+  return Object.fromEntries(DISTRICTS.map(d => [d.id, placeSign(d)]));
 }
 
 // ---------------------------------------------------------------- map layers
@@ -585,19 +392,8 @@ function districtFills(placed) {
     const p = FULL[d.id];
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
-    if (d.zone === 'hs' && STYLE === 'tone') {
-      // High Society: a gold sunburst from the crown.
-      const [cx, cy] = placed[d.id].c.roundelAt(placed[d.id].x, placed[d.id].y);
-      let rays = '';
-      for (let a = 0; a < 360; a += 7.5) {
-        const t = a * Math.PI / 180;
-        rays += `M${f(cx)} ${f(cy)} L${f(cx + Math.cos(t) * 320)} ${f(cy + Math.sin(t) * 320)} `;
-      }
-      s += `<g clip-path="url(#clip-${d.id})"><path d="${rays}" stroke="${C.goldBright}" stroke-opacity=".1" stroke-width="2.2"/>`
-        + `<circle cx="${f(cx)}" cy="${f(cy)}" r="120" fill="url(#glow)"/></g>`;
-    }
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/></g>`;
-    if (STYLE === 'deco') s += decoFrame(d, geo.regions[d.id]);
+    s += decoFrame(d, geo.regions[d.id]);
   }
   return s;
 }
@@ -792,7 +588,6 @@ function mapLabels() {
       + text(t, left + 31, 0, TYPE.boro, { fill: C.gold, halo: 3, middle: true }) + `</g>`;
   }
   for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85, middle: true });
-  for (const [t, x, y, r] of LAND_LABELS) s += text(t, x, y, TYPE.land, { fill: '#8d826c', anchor: 'middle', rotate: r, opacity: 0.8, middle: true });
   for (const { name } of geo.bridges) {
     const [x, y, r] = BRIDGE_LABELS[name];
     s += text(name, x, y, TYPE.bridge, { fill: C.muted, anchor: 'middle', rotate: r, halo: 2.2, middle: true });
@@ -941,10 +736,9 @@ const KEY_ROWS = [
   ['ward', 'Ward', []],
   ['dock', 'Dock', []],
   ['still', 'Still', []],
-  ['setup', 'Setup', []],
 ];
 function key(x, y) {
-  const rows = KEY_ROWS.filter(([k]) => k !== 'setup' || SHOW_SETUP);
+  const rows = KEY_ROWS;
   const headW = Math.max(...rows.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const chipsX = 28 + headW + 10, chipW = p => 12 + width(TYPE.price, p), CHIP_GAP = 9;
   const chipsW = Math.max(...rows.map(([, , ch]) => ch.reduce((a, [, p]) => a + chipW(p), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
@@ -954,7 +748,6 @@ function key(x, y) {
   rows.forEach(([k, t, chips], i) => {
     const cy = y + 14 + i * PITCH, ix = x + 15;
     if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
-    else if (k === 'setup') s += tray(['runner'], ix - trayWidth(['runner']) / 2, cy);
     else s += roundel(k, ix, cy, 5.4);
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
@@ -980,11 +773,6 @@ function seams() {
   return stitch(`M${ex + 3.4} ${a} H${W - a} V${W - a} H${a} V${ey + 3.4} H${ex + 3.4} Z`);
 }
 
-const TITLE_Y = () => PANELS_Y() + TOMORROW.h + 12 + 27; // the top rule 12 under the panels
-// The title's layout, a mock (Nick, 2026-09-29: try it lower, in New Jersey's empty
-// half): 'across' under the panels, as it was; 'stacked' on three lines, lower, where
-// New Jersey narrows; 'upright' reading up the strip beside the Bowery.
-const TITLE = arg('title') || 'across';
 // New Jersey's shore at height y: its furthest point east.
 function njShore(y) {
   const p = geo.regions.nj;
@@ -997,34 +785,20 @@ function njShore(y) {
   return x;
 }
 function title() {
-  // The map's title block: the city and the year, between Deco rules.
+  // The map's title block: the city and the year, between Deco rules, turned to read up
+  // New Jersey's strip beside the Bowery (Nick, 2026-09-29: it had sat under the panels,
+  // and the strip below was empty). Centred between the frame and the shore at its foot,
+  // and in the ground left under the panels.
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
-  const block = (cx, cy, lines) => {
-    const w = lines ? Math.max(...lines.map(t => width(TYPE.titleStack, t))) : cityW;
-    const rule = (y, gap) => `<path d="M${f(cx - w / 2)} ${y} H${f(cx - gap)} M${f(cx + gap)} ${y} H${f(cx + w / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
-    let s = rule(cy - 27, 9) + diamond(cx, cy - 27, 3.6);
-    if (!lines) s += text('NEW YORK', cx + 2.2, cy - 5, TYPE.titleCity, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true });
-    else lines.forEach((t, i) => { s += text(t, cx + 2.5, cy - 5 + i * 34, TYPE.titleStack, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true }); });
-    const yy = cy + 20 + (lines ? 34 * (lines.length - 1) + 4 : 0);
-    s += rule(yy, yearW / 2 + 10);
-    s += text('1929', cx + 4, yy, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
-    return s;
-  };
-  if (TITLE === 'across') return block(116, TITLE_Y());
-  // the ground left under the panels, down to New Jersey's foot
+  const rule = (y, gap) => `<path d="M${f(-cityW / 2)} ${y} H${f(-gap)} M${f(gap)} ${y} H${f(cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
+  let s = rule(-27, 9) + diamond(0, -27, 3.6);
+  s += text('NEW YORK', 2.2, -5, TYPE.titleCity, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true });
+  s += rule(20, yearW / 2 + 10);
+  s += text('1929', 4, 20, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
   const top = PANELS_Y() + TOMORROW.h + 16, foot = Math.max(...geo.regions.nj.map(q => q[1])) - 16;
-  if (TITLE === 'upright') {
-    // turned to read up the strip, centred between the frame and the shore at its foot
-    const x = (FRAME_IN + njShore(foot)) / 2 + 1.5, y = Math.max(top + cityW / 2, (top + foot) / 2);
-    return `<g transform="translate(${f(x)} ${f(y)}) rotate(-90)">${block(0, 0)}</g>`;
-  }
-  // stacked: as low as it fits beside the shore, and no lower than the middle of the ground
-  const lines = ['NEW', 'YORK'], w = Math.max(...lines.map(t => width(TYPE.titleStack, t))), up = 31, down = 20 + 34 + 4 + 9;
-  const cx = HEAT.tx + w / 2 + 4;
-  let cy = top + up;
-  while (cy + down < foot && njShore(cy + down + 1) - 10 >= cx + w / 2 && cy < (top + foot) / 2 - (up + down) / 2 + up) cy += 1;
-  return block(cx, cy, lines);
+  const x = (FRAME_IN + njShore(foot)) / 2 + 1.5, y = Math.max(top + cityW / 2, (top + foot) / 2);
+  return `<g transform="translate(${f(x)} ${f(y)}) rotate(-90)">${s}</g>`;
 }
 
 // A quarter sunburst: rays and two arcs from (x, y), spanning a0 to a0 + 90 degrees.
@@ -1058,11 +832,10 @@ function frame() {
 function defs(fontCss, mode) {
   let s = `<style>${fontCss}</style>`;
   for (const [k, b] of Object.entries(BOROUGHS))
-    for (const tone of STYLE === 'deco' ? ['', 'dark'] : ['', 'warm', 'cool']) {
+    for (const tone of ['', 'dark']) {
       const [c0, c1] = b.fill.map(c => tint(c, tone));
       s += `<radialGradient id="fill-${k}${tone ? '-' + tone : ''}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${c0}"/><stop offset="1" stop-color="${c1}"/></radialGradient>`;
     }
-  s += `<radialGradient id="glow"><stop offset="0" stop-color="${C.goldBright}" stop-opacity=".16"/><stop offset="1" stop-color="${C.goldBright}" stop-opacity="0"/></radialGradient>`;
   s += `<radialGradient id="moon" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbf4dc"/><stop offset=".7" stop-color="#ddd3b2"/><stop offset="1" stop-color="#a99c78"/></radialGradient>`;
   s += `<radialGradient id="socket"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="#000"/></radialGradient>`;
   // The Heat Track's metals and lacquer.
@@ -1073,7 +846,7 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="heatFloor" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#2b1e13"/><stop offset=".75" stop-color="#140d08"/><stop offset="1" stop-color="#050302"/></radialGradient>`;
   s += `<radialGradient id="heatFloorRaid" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#4d1a14"/><stop offset=".75" stop-color="#2a0c09"/><stop offset="1" stop-color="#0d0403"/></radialGradient>`;
   s += `<linearGradient id="heatRecess" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset=".85" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#f3dc95" stop-opacity=".06"/></linearGradient>`;
-  if (LABEL_PLACEMENT === 'sign') s += `<linearGradient id="stillPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33241a"/><stop offset="1" stop-color="#150e09"/></linearGradient>`;
+  s += `<linearGradient id="stillPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33241a"/><stop offset="1" stop-color="#150e09"/></linearGradient>`;
   s += `<linearGradient id="lacquer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#261b11"/><stop offset="1" stop-color="#0e0906"/></linearGradient>`;
   s += `<linearGradient id="heatTray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050302"/><stop offset="1" stop-color="#1c140c"/></linearGradient>`;
   s += `<linearGradient id="heatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${GILT[2]}"/><stop offset=".5" stop-color="${GILT[1]}"/><stop offset="1" stop-color="${GILT[0]}"/></linearGradient>`;
@@ -1143,8 +916,6 @@ function allText() {
   const items = [];
   const add = (spec, t) => items.push({ ...spec, text: t });
   for (const d of DISTRICTS) {
-    (d.lines || [d.name]).forEach(n => add(TYPE.name, upper(n)));
-    if (d.venue) add(TYPE.venue, d.venue);
     add(TYPE.sign, upper(d.name));
     upper(d.name).split(' ').forEach(n => add(TYPE.sign, n));
     if (d.venue) add(TYPE.signVenue, d.venue);
@@ -1158,8 +929,6 @@ function allText() {
   add({ ...TYPE.panelHead, size: 10.5 }, 'HEAT');
   add(TYPE.panelHead, 'MASH');
   add(TYPE.titleCity, 'NEW YORK');
-  add(TYPE.titleStack, 'NEW');
-  add(TYPE.titleStack, 'YORK');
   add(TYPE.titleYear, '1929');
   return items;
 }
@@ -1275,18 +1044,18 @@ async function printPdf(browser, svg) {
   const placed = placeAll();
   for (const d of DISTRICTS) {
     const { x, y, c, open } = placed[d.id];
-    console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  ${LABEL_PLACEMENT === 'centre' ? 'clearance' : 'open ground'} ${open === null ? 'pinned' : f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²${placed[d.id].hang !== undefined ? `  hangers ${f(placed[d.id].hang, 0)}${c.opts && c.opts.stacked ? ' stacked' : ''}${c.opts && c.opts.drop ? ' drop' : ''}` : ''}`);
+    console.log(`  ${d.id.padEnd(15)} sign at ${f(x, 0)},${f(y, 0)}  clear of keylines ${f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²  hangers ${f(placed[d.id].hang, 0)}${c.opts.stacked ? ' stacked' : ''}${c.opts.drop ? ' drop' : ''}`);
   }
   if (arg('report')) { // each District's placement and room, and its sign's shapes, as JSON
     const report = Object.fromEntries(DISTRICTS.map(d => {
       const { x, y, c, hang } = placed[d.id];
-      const shapes = SIGN_SHAPES(d).map(([opts, cost]) => { const k = cluster(d, 's', opts); return { opts, cost, w: k.w, h: k.h }; });
-      return [d.id, { zone: d.zone, x, y, w: c.w, h: c.h, layout: c.layout, hang, room: room(d, placed[d.id]), shapes }];
+      const shapes = SIGN_SHAPES(d).map(([opts, cost]) => { const k = cluster(d, opts); return { opts, cost, w: k.w, h: k.h }; });
+      return [d.id, { zone: d.zone, x, y, w: c.w, h: c.h, hang, room: room(d, placed[d.id]), shapes }];
     }));
     fs.writeFileSync(arg('report'), JSON.stringify(report, null, 1));
   }
   const print = buildSvg(fontCss, 'print', placed), screen = buildSvg(fontCss, 'screen', placed);
-  fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.mkdirSync(DIR, { recursive: true });
   for (const [file, svg] of [[OUT.printSvg, print], [OUT.screenSvg, screen]]) {
     fs.writeFileSync(file, svg);
     console.log('wrote', path.relative(ROOT, file));
@@ -1295,7 +1064,7 @@ async function printPdf(browser, svg) {
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
-  if (!EXPERIMENT) await indexTile(browser, screen);
+  await indexTile(browser, screen);
   if (full) await printPdf(browser, print);
   await browser.close();
 })();

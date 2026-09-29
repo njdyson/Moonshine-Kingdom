@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Traces Art/Board (Large).png into Art/Board/board-geometry.json: one polygon per
+// Traces Art/Board (Large).png into Art/Board/Traced/board-geometry.json: one polygon per
 // District and off-board landmass, one shared chain per border, and the bridges.
 //
 //   node tools/trace_board.js
@@ -18,7 +18,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'Art', 'Board (Large).png');
-const OUT = path.join(ROOT, 'Art', 'Board', 'board-geometry.json');
+const OUT = path.join(ROOT, 'Art', 'Board', 'Traced', 'board-geometry.json');
 const W = 1080, H = 1080;
 
 // Seeds sit near each name on the Affinity board; the nearest non-gold pixel is used.

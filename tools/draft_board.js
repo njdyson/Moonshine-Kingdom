@@ -1,43 +1,37 @@
 #!/usr/bin/env node
-// Experiment (2026-09-29): the traced board, redrawn as a draughtsman would draw it.
-// Reads the skeleton, Art/Board/board-geometry.json, and writes
+// The board's map, drawn as a draughtsman would draw it. Reads the traced map (the
+// skeleton, Art/Board/Traced/board-geometry.json, traced from the Affinity art by
+// tools/trace_board.js) and writes the board's geometry, which tools/build_board.js draws:
 //
-//   Art/Board/Drafted/board-geometry.json             straight lines, exact angles
-//   Art/Board/Drafted/Chamfered/board-geometry.json   the same, sharp coast corners bevelled
+//   node tools/draft_board.js      then   node tools/build_board.js
 //
-//   node tools/draft_board.js      then   node tools/build_board.js --geometry=Drafted
-//                                         node tools/build_board.js --geometry=Drafted/Chamfered
+// The skeleton gives the Districts, their borders and the bridges; this keeps every
+// connection and redraws the shapes to a plan:
 //
-// The tracer followed the Affinity art pixel by pixel, so the map is nearly a
-// designed one: borders a few degrees off level, rivers that wander in width, 3 to 5
-// unit jogs. This keeps every shape and every connection and makes the near-misses
-// exact:
-//
-// - Manhattan's west coast is one straight line and New Jersey's shore runs parallel
-//   to it, so the Hudson is an even channel.
-// - The East River is one channel of constant width in three straight reaches: 45
-//   degrees past the bridges, a level turn at the Bowery, then parallel to the Hudson
-//   down to the harbour. Hell Gate and the Sound are one even channel too, which also
-//   opens the pinch between Throggs Neck and Whitestone (not connected; it read as if
-//   they nearly touched).
-// - Borders within a few degrees of level or upright are made exact; tracer jogs go.
-// - Staten Island and Jamaica Bay become 45-degree Deco shapes.
-// - Westchester and Nassau go: the Bronx runs up to the frame and Queens out to it,
-//   under it to the board's edge as New Jersey does (the build clips them at the
-//   frame's hairline). The water east of the Bronx stays, and Staten Island keeps its
-//   shore all round (Nick: it should read as an island).
+// - Straight lines at a few exact angles: level, upright, 45 degrees, and the Hudson's
+//   (Manhattan's west coast is one straight line). The rivers are even channels: the
+//   Hudson 44 wide, the East River, Hell Gate and the Sound 49.
+// - Square corners where it can be done (Nick: tight corners are dead space). A border
+//   meeting a slanted shore or border at a tight angle turns on a short foot (FOOT) to
+//   meet it square. The drafting reports any corner under 80 degrees.
+// - The Bronx and Queens run to the frame (no Westchester or Nassau), under it to the
+//   board's edge as New Jersey does; the build clips them at the frame's hairline. The
+//   water east of the Bronx stays, and Staten Island keeps its shore all round.
+// - SETTINGS place the level and upright borders. They are tuned for room for pieces,
+//   evenness, and short hangers on the signs; see board-handoff.md.
 //
 // Every chain keeps its two sides and its two end junctions, so no adjacency changes
-// (the chains against Westchester and Nassau go with them).
-// The script checks for crossings, shrunken borders and closed-up water before writing.
-// Bridges keep their places and cross square to the new banks.
+// (the chains against Westchester and Nassau go with them). The script checks for
+// crossings, shrunken borders, closed-up water and bridges that no longer cross square
+// before writing. Bridges keep their places (BRIDGE_SHIFT moves one) and cross square
+// to the new banks.
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const SRC = path.join(ROOT, 'Art', 'Board', 'board-geometry.json');
-const OUT = path.join(ROOT, 'Art', 'Board', 'Drafted');
+const SRC = path.join(ROOT, 'Art', 'Board', 'Traced', 'board-geometry.json');
+const OUT = path.join(ROOT, 'Art', 'Board');
 const geo = JSON.parse(fs.readFileSync(SRC, 'utf8'));
 const r1 = v => Math.round(v * 10) / 10;
 const key = p => `${p[0]},${p[1]}`;
@@ -259,25 +253,6 @@ function chainsFor(S) {
   return { chains, moved };
 }
 
-// Chamfers: a Deco bevel on each sharp coast corner (turning 70 degrees or more)
-// that is not a junction, cut back CHAMFER units along both sides.
-const CHAMFER = 10;
-function chamfer(cs) {
-  return cs.map(c => {
-    if (!c.sides.includes('water')) return c;
-    const p = c.pts, out = [p[0]];
-    for (let i = 1; i < p.length - 1; i++) {
-      const a = unit(p[i - 1][0] - p[i][0], p[i - 1][1] - p[i][1]), b = unit(p[i + 1][0] - p[i][0], p[i + 1][1] - p[i][1]);
-      const inner = Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1])));
-      const k = Math.min(CHAMFER, 0.4 * dist(p[i], p[i - 1]), 0.4 * dist(p[i], p[i + 1]));
-      if (inner > deg(110) || k < 4) { out.push(p[i]); continue; }
-      out.push([p[i][0] + a[0] * k, p[i][1] + a[1] * k].map(r1), [p[i][0] + b[0] * k, p[i][1] + b[1] * k].map(r1));
-    }
-    out.push(p[p.length - 1]);
-    return { sides: c.sides, pts: out };
-  });
-}
-
 // Regions: walk each skeleton ring, swapping each chain run for its new points;
 // frame edges, which no chain covers, pass through (moved where MOVE says).
 function regionsFrom(cs, moved) {
@@ -358,6 +333,23 @@ function segDist(q, a, b) {
   const t = L ? Math.max(0, Math.min(1, ((q[0] - a[0]) * dx + (q[1] - a[1]) * dy) / L)) : 0;
   return Math.hypot(q[0] - a[0] - t * dx, q[1] - a[1] - t * dy);
 }
+// Tight corners, under 80 degrees: pieces can't use them (Nick), so the drafting reports
+// them and the tuner rejects them. Measured inside the frame.
+function tightCorners(regions) {
+  const tight = [];
+  for (const [id, r] of Object.entries(regions)) {
+    if (!(id in geo.regions) || ['nj', ...GONE].includes(id)) continue;
+    const p = r.map(([x, y]) => [Math.min(Math.max(x, FRAME_IN), 1080 - FRAME_IN), Math.min(Math.max(y, FRAME_IN), 1080 - FRAME_IN)])
+      .filter((v, i, a) => dist(v, a[(i + 1) % a.length]) > 0.5);
+    const turn = Math.sign(p.reduce((t, a, i) => { const b = p[(i + 1) % p.length]; return t + a[0] * b[1] - b[0] * a[1]; }, 0)); // winding
+    p.forEach((v, i) => {
+      const a = p[(i - 1 + p.length) % p.length], b = p[(i + 1) % p.length];
+      const ang = (((turn > 0 ? -1 : 1) * Math.atan2((a[0] - v[0]) * (b[1] - v[1]) - (a[1] - v[1]) * (b[0] - v[0]), (a[0] - v[0]) * (b[0] - v[0]) + (a[1] - v[1]) * (b[1] - v[1]))) * 180 / Math.PI + 360) % 360;
+      if (ang < 80) tight.push(`${id} ${Math.round(ang)}°`);
+    });
+  }
+  return tight;
+}
 function check(cs, regions, bs) {
   const problems = [], notes = [];
   const cr = (p, q, r) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]);
@@ -395,19 +387,7 @@ function check(cs, regions, bs) {
     }
   }
   if (narrow < 20) problems.push(`water only ${narrow.toFixed(0)} wide between ${where}`);
-  // tight corners: pieces can't use them, so they are reported (as seen inside the frame)
-  const tight = [];
-  for (const [id, r] of Object.entries(regions)) {
-    if (!(id in geo.regions) || ['nj', ...GONE].includes(id)) continue;
-    const p = r.map(([x, y]) => [Math.min(Math.max(x, FRAME_IN), 1080 - FRAME_IN), Math.min(Math.max(y, FRAME_IN), 1080 - FRAME_IN)])
-      .filter((v, i, a) => dist(v, a[(i + 1) % a.length]) > 0.5);
-    const turn = Math.sign(p.reduce((t, a, i) => { const b = p[(i + 1) % p.length]; return t + a[0] * b[1] - b[0] * a[1]; }, 0)); // winding
-    p.forEach((v, i) => {
-      const a = p[(i - 1 + p.length) % p.length], b = p[(i + 1) % p.length];
-      const ang = (((turn > 0 ? -1 : 1) * Math.atan2((a[0] - v[0]) * (b[1] - v[1]) - (a[1] - v[1]) * (b[0] - v[0]), (a[0] - v[0]) * (b[0] - v[0]) + (a[1] - v[1]) * (b[1] - v[1]))) * 180 / Math.PI + 360) % 360;
-      if (ang < 80) tight.push(`${id} ${Math.round(ang)}°`);
-    });
-  }
+  const tight = tightCorners(regions);
   notes.push(`tight corners (under 80 degrees): ${tight.join(', ') || 'none'}`);
   notes.push(`narrowest water ${narrow.toFixed(0)} (${where})`);
   bs.forEach((b, i) => notes.push(`${b.name} ${Math.round(dist(geo.bridges[i].a, geo.bridges[i].b))} -> ${Math.round(dist(b.a, b.b))}`));
@@ -423,9 +403,9 @@ function check(cs, regions, bs) {
 }
 
 // ---------------------------------------------------------------- write
-// The whole map for a set of SETTINGS; chamfered bevels the sharp coast corners.
-function build(S, chamfered = false) {
-  const { chains, moved } = chainsFor(S), cs = chamfered ? chamfer(chains) : chains;
+// The whole map for a set of SETTINGS.
+function build(S) {
+  const { chains: cs, moved } = chainsFor(S);
   const regions = regionsFrom(cs, moved), bridges = bridgesFor(cs);
   for (const k of GONE) delete regions[k];
   return { chains: cs.filter(c => !c.sides.some(s => GONE.includes(s))), regions, bridges, labels: { ...draft(S).labels, bridges: bridgeLabels(bridges) } };
@@ -442,9 +422,6 @@ function write(dir, map, note) {
     + '},\n"chains":[\n' + cs.map(j).join(',\n') + '],\n"bridges":' + j(bridges) + ',\n"labels":' + j(labels) + '}\n');
   console.log('wrote', path.relative(ROOT, path.join(dir, 'board-geometry.json')));
 }
-const NOTE = 'Drafted experiment (2026-09-29), written by tools/draft_board.js from Art/Board/board-geometry.json (the skeleton). Same Districts, borders and bridges, redrawn with straight lines and exact angles; Westchester and Nassau are gone, so the Bronx and Queens run to the frame. "labels" places the water and bridge names for this map.';
-if (require.main === module) {
-  write(OUT, build(SETTINGS), NOTE);
-  write(path.join(OUT, 'Chamfered'), build(SETTINGS, true), NOTE.replace('exact angles.', 'exact angles, sharp coast corners bevelled.'));
-}
-module.exports = { SETTINGS, build, check };
+const NOTE = 'Written by tools/draft_board.js from Art/Board/Traced/board-geometry.json (the traced map). The same Districts, borders and bridges, redrawn with straight lines, exact angles and square corners; the Bronx and Queens run to the frame. "labels" places the water and bridge names for this map.';
+if (require.main === module) write(OUT, build(SETTINGS), NOTE);
+module.exports = { SETTINGS, build, check, tightCorners };
