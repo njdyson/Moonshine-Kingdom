@@ -322,6 +322,7 @@ keeps them on a re-trace.
 - **mk-online.** It serves `mk-online/dist/board.svg`, the vector board from before the
   drafting (Westchester and Nassau still on it). The drafted geometry is ready for it; the
   mk-online source is its own repo (`njdyson/mk-online`), not this one.
+  `mk-online-board-handoff.md` is the brief for that update, with the full connection graph.
 - **Affinity round-trip.** The SVG opens in Affinity, but the texture and soft shadows are SVG
   filters and will likely drop out, and Cinzel, Barlow, Barlow Condensed and Bebas Neue (the Still
   tokens' numbers) must be installed locally.
