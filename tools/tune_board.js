@@ -48,7 +48,7 @@ const KNOBS = [
   ['manhattanWest', 0, 12], ['manhattan.0', 250, 300], ['manhattan.1', 340, 400], ['manhattan.2', 440, 495],
   ['manhattan.3', 535, 585], ['eastHarlem', -12, 32],
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
-  ['queensRows.2', 720, 840], ['astoriaShore', 600, 625], ['wbShoulder', 20, 50], ['coronaBottom', 660, 740],
+  ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
   ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90],
   ['boweryBottom', 660, 690], ['stapletonTop', 690, 715], ['staten.0', 800, 850], ['staten.1', 895, 950],
 ];

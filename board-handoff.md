@@ -47,7 +47,10 @@ works better"), so this makes the angles deliberate instead.
   Williamsburg / Red Hook and the Queens / Brooklyn line both run square to the East River,
   which makes Williamsburg a square set on its corner;
   Red Hook's shore turns upright at the Narrows in line with Coney Island's (Staten Island moves
-  east with it, `NARROWS_GAP`). The drafting reports any corner under 80 degrees; there are none.
+  with it, `NARROWS_GAP`), `rhStub` (10) above Red Hook's south side. That stub was 24; shortening
+  it moved the Narrows west and widened Coney Island (Nick: it looked squashed), at a few
+  cm² from each Staten Island District. Widening Coney from the east was tried and cut: past
+  about 442, Sheepshead Bay's sign has to hang its Still plate underneath. The drafting reports any corner under 80 degrees; there are none.
 - **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point. East
   Harlem needs a shallow border with Hunts Point for its sign's width, so that border runs out to
   a knee and drops upright to the Hell Gate (`ehKnee`; East Harlem takes a short stretch of that
@@ -61,17 +64,15 @@ works better"), so this makes the angles deliberate instead.
   an island; running it to the frame was tried and cut).
 - **The Queens / Brooklyn line is two straight runs** (Nick, 2026-09-29: he likes clean
   borders between Boroughs, and the old one zigzagged). It leaves the East River square (45
-  degrees), `wbShoulder` (30) down the shore from Astoria's corner (`astoriaShore`), runs past
-  Williamsburg and Brownsville / Corona, and turns upright where Corona's bottom meets it
-  (`coronaBottom`), down past Richmond Hill and Jamaica to the bay. Williamsburg / Brownsville
-  runs square to it, so Williamsburg is a square on its corner. Astoria's border leaves the
-  shore square too, parallel to the line, as far as Astoria's corner, then runs level.
-  Williamsburg takes the 30-wide strip between the two, cut square across at Astoria's corner,
-  so **Astoria / Williamsburg is kept** (along Astoria's slanted foot). The Queensboro Bridge moved
-  25 up-river (`BRIDGE_SHIFT`) to give Astoria's corner room; it still joins East Harlem and
-  Astoria. Tried and cut the same day: Corona taking that strip as a spur of East River shore,
-  which dropped Astoria / Williamsburg (Nick disliked the spur); and a square with a 136-unit
-  river side, which could not fit Williamsburg's sign (it needs about 150).
+  degrees) at Williamsburg's top corner (`wbTop`), runs past Astoria, Corona and Brownsville /
+  Corona, and turns upright where Corona's bottom meets it (`coronaBottom`), down past Richmond
+  Hill and Jamaica to the bay. Williamsburg / Brownsville runs square to it, so Williamsburg is
+  a square on its corner. Astoria comes down the line to Corona, and Astoria / Corona leaves it
+  square on a foot, then runs level. **Every connection is kept**: Astoria / Williamsburg runs
+  along the line. Tried and cut the same day (Nick): Corona taking a spur of East River shore
+  between Astoria and Williamsburg, which dropped their border; Williamsburg taking that strip
+  instead, which kept the border but broke the diamond and the line; and a square with a
+  136-unit river side, which could not fit Williamsburg's sign (it needs about 150).
 - **Queens and Brooklyn in rows and columns.** Queens' rows are level (Whitestone | Flushing |
   Richmond Hill | Jamaica), and one upright line (`queensCol`) runs from the Hell Gate down past
   Astoria / Whitestone, Astoria / Flushing and Corona / Flushing. Richmond Hill steps up a
@@ -111,7 +112,7 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | Traced, centred labels | 32 (West Side) | 34, 36, 50, 65 |
 | Drafted, first balance, centred labels | 42 (Tenderloin) | 47, 47, 57, 64 |
 | With the signs, before the Queens / Brooklyn line | 39 (Whitestone) | 47, 57, 65, 83 |
-| Now (as the build reports) | 39 (Whitestone) | 46, 57, 65, 72 |
+| Now (as the build reports) | 39 (Whitestone) | 46, 57, 59, 72 |
 
 Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
 
@@ -152,7 +153,9 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
 - **The key is the price list** (Nick, 2026-09-29): two rows, Speakeasy and High Society, each
   with what it buys as chips: a barrel drawn as the cube that stands for it on the table, grey
   Moonshine `$300` and brown Rum `$500` (`CUBE`; Nick, 2026-09-29: it replaced a bottle and a
-  glass, which didn't match the pieces); High Society shows only Rum, which says "Rum only" without the words. The Ward,
+  glass, which didn't match the pieces); High Society shows only Rum, which says "Rum only" without the words,
+  and a gilt **+1 chip** after its price for the Kickback (a Ledger marker; its limits, a
+  marker in Reserves and an empty slot, are the Rulebook's). The Ward,
   Dock and Still rows were cut: the Rulebook teaches the types, the piers tell a Dock and the
   Still is its own token. Before that it lost its sentences (long-winded; bridges explain
   themselves).

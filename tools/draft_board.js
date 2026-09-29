@@ -105,15 +105,15 @@ const SETTINGS = {
   manhattanLift: 26, cornerLift: 14, // Sugar Hill / Belmont raised into Belmont: at the coast, and at the four-way corner
   manhattan: [262, 367, 463, 553], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
   eastHarlem: 1, // East Harlem's west side, shifted east
-  astoriaCorona: 530, // Astoria / Corona, level once it has left the shore square
+  astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 816, // Hunts Point / Throggs Neck, upright (the Hell Gate turns there)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
   queensRows: [488, 670, 807], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
-  astoriaShore: 614, // Astoria / Corona on the East River (x)
-  wbShoulder: 30, // Williamsburg's strip up the shore, between the Queens / Brooklyn line and Astoria's foot
+  wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
   coronaBottom: 700, // Corona / Richmond Hill, level from the Queens / Brooklyn line
   williamsburgSouth: 749, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 796, // Red Hook's level south side
+  rhStub: 10, // Red Hook's shore runs upright this far above its south side: shorter moves the Narrows west, widening Coney Island
   coneyEast: 440, // Coney Island / Sheepshead Bay, upright
   boweryBottom: 668, stapletonTop: 690, // the Kill van Kull between them
   staten: [806, 914], // level borders: Westerleigh | Stapleton | Tottenville
@@ -128,9 +128,7 @@ const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const TN_CUT = 24; // Throggs Neck's tip, cut back this far along both shores
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
-// Moved along their rivers: the Hell Gate clear of East Harlem's stretch of the Hell Gate,
-// the Queensboro up-river, clear of Corona's stretch of the East River
-const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [18, -18] };
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0] }; // moved along its river, clear of East Harlem's stretch of the Hell Gate
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
@@ -152,7 +150,7 @@ function draft(S) {
   const SOUND_BX = line(BEND, [Math.cos(deg(S.hellGate)), Math.sin(deg(S.hellGate))]); // the Sound, falling east
   const SOUND_QN = shift(SOUND_BX, RIVER);
   const QN_NORTH = atX(SOUND_QN, EAST_EDGE);
-  const RH_STUB = atY(ER_RH, S.redHookSouth - FOOT); // Red Hook's shore turns upright here, in line with Coney Island's
+  const RH_STUB = atY(ER_RH, S.redHookSouth - S.rhStub); // Red Hook's shore turns upright here, in line with Coney Island's
   const NARROWS = [RH_STUB[0] - NARROWS_GAP, RH_STUB[0]]; // Staten Island's east shore, Brooklyn's
   const [m1, m2, m3, m4] = S.manhattan, [b1, b2] = S.bronxCols, W = 0, [s1, s2] = S.staten;
   const [q1, q2, q3] = S.queensRows, qc = S.queensCol, cb = S.coronaBottom;
@@ -168,16 +166,15 @@ function draft(S) {
   };
   const upCoast = [-MN_WEST.d[0], -MN_WEST.d[1]]; // up Manhattan's west coast
   const MF = [m1, m2, m3, m4].map(m => footOf(atY(MN_WEST, m), upCoast, true)); // each Manhattan border's foot on the Hudson
-  // Queens / Brooklyn: a line square off the East River (CR, wbShoulder in from Astoria's
-  // corner on the shore), Williamsburg / Brownsville square to it, turning upright where
-  // Corona's bottom meets it, down to the bay. Astoria's border leaves the shore square too
-  // (with Williamsburg, parallel to the line), then runs level (with Corona). Williamsburg
-  // takes the strip between the two, cut square across at Astoria's corner.
-  const AST = atX(ER_QN, S.astoriaShore), CR = [AST[0] - S.wbShoulder / Math.SQRT2, AST[1] + S.wbShoulder / Math.SQRT2];
-  const QB = line(CR, [1, 1]), WB_E = meet(QB, line([BK_COL, S.williamsburgSouth], [1, -1]));
+  // Queens / Brooklyn: one line square off the East River from Williamsburg's top corner,
+  // Williamsburg / Brownsville square to it (so Williamsburg is a square on its corner),
+  // turning upright where Corona's bottom meets it, down to the bay. Astoria / Corona leaves
+  // the line square on a foot, then runs level.
+  const CR = atX(ER_QN, S.wbTop), QB = line(CR, [1, 1]);
+  const WB_E = meet(QB, line([BK_COL, S.williamsburgSouth], [1, -1]));
   const QB_C = atY(QB, cb), bv = QB_C[0]; // Brownsville's east side, upright from there to the bay
-  const AC_FOOT = [AST[0] + S.astoriaCorona - AST[1], S.astoriaCorona];
-  const WB_CUT = [AC_FOOT[0] - S.wbShoulder / Math.SQRT2, AC_FOOT[1] + S.wbShoulder / Math.SQRT2]; // on the line, square across from Astoria's corner
+  const AC_J = atY(QB, S.astoriaCorona + FOOT / Math.SQRT2); // Astoria / Corona / Williamsburg, on the line
+  const AC_BEND = [AC_J[0] + FOOT / Math.SQRT2, S.astoriaCorona]; // where the foot turns level
   // Sheepshead Bay / Brownsville meets the bay's 45-degree corner square, on a foot
   const sbFoot = FOOT / Math.SQRT2, SB_BAY = [BK_COL + sbFoot, 680 + 853 - BK_COL - sbFoot];
   const bwFoot = [atY(ER_MN, m4)[0] - FOOT * Math.SQRT2, m4], BW_J = meet(line(bwFoot, [1, 1]), ER_MN); // Five Points / Bowery, square to the East River
@@ -215,7 +212,7 @@ function draft(S) {
     // Queens: the river banks, level and upright borders
     '720,373': meet(HG_QN, ER_QN), '766,356': AW,
     '1033,386': QN_NORTH, '1080,392': [1080, QN_NORTH[1]],
-    '597,494': AST, '637,548': AC_FOOT,
+    '597,494': CR, '637,548': AC_J,
     '838,496': [qc, q1], '831,548': [qc, S.astoriaCorona], '1031,479': [EAST_EDGE, q1],
     // Corona's bottom level from the Queens / Brooklyn line to the Queens column; Richmond Hill steps up to Flushing there
     '707,644': WB_E, '750,705': QB_C, '892,650': [qc, q2], '1031,651': [EAST_EDGE, q2],
@@ -250,12 +247,10 @@ function draft(S) {
     'five_points|tenderloin': [MF[2][0], MF[2][1], ehFoot],
     'five_points|bowery': [MF[3][0], MF[3][1], bwFoot, BW_J],
     'water|bowery': [MF[3][0], atY(MN_WEST, m4), [atY(MN_WEST, m4)[0], S.boweryBottom], atY(ER_BW, S.boweryBottom), atY(ER_BW, BOWERY_BANK), atY(ER_MN, BOWERY_BANK), BW_J],
-    // Astoria / Corona level from Astoria's corner; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows
-    'astoria|corona': [AC_FOOT, [qc, S.astoriaCorona]],
-    // Williamsburg's shoulder: up the shore to Astoria, whose foot it follows, then square across to the line
-    'williamsburg|corona': [AC_FOOT, WB_CUT, WB_E],
+    // Astoria / Corona on a foot at the Queens / Brooklyn line; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows
+    'astoria|corona': [AC_J, AC_BEND, [qc, S.astoriaCorona]],
     // the Hell Gate's turn on the Queens side is Astoria's or Whitestone's, whichever it falls in
-    'water|astoria': [AW, ...(qc > QN_TURN[0] ? [QN_TURN] : []), meet(HG_QN, ER_QN), AST],
+    'water|astoria': [AW, ...(qc > QN_TURN[0] ? [QN_TURN] : []), meet(HG_QN, ER_QN), CR],
     'water|whitestone': [AW, ...(qc < QN_TURN[0] ? [QN_TURN] : []), QN_NORTH],
     'water|red_hook': [WB_J, atY(ER_QN, RED_HOOK_BANK), atY(ER_RH, RED_HOOK_BANK), RH_STUB, [RH_STUB[0], S.redHookSouth]],
     // Jamaica: the bay's east side as an octagon, then a level spit and shore

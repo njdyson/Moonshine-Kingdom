@@ -33,7 +33,7 @@ map; see `board-handoff.md`.
   positions from `heatTrack()` and `tomorrow()` in `tools/build_board.js`, or read them off the
   SVG, rather than trusting the old offsets.
 - **The key** is now only the price list (Speakeasy: grey Moonshine cube $300, brown Rum cube
-  $500; High Society: Rum $500). If the UI duplicates the key or the prices, match it.
+  $500; High Society: Rum $500 plus a +1 chip for the Kickback). If the UI duplicates the key or the prices, match it.
 
 ## Connection changes
 
@@ -42,8 +42,8 @@ current game presumably uses. What changed is only the shapes:
 
 - **Westchester and Nassau are gone** from the art. They were never Districts, so nothing should
   reference them, but check.
-- Williamsburg now reaches up the East River to Astoria along a strip beside Corona; the two
-  still share a border there, as before.
+- The Queens / Brooklyn border is one straight line off the East River, and Williamsburg is a
+  diamond. Astoria and Williamsburg still share a border along it.
 
 (An earlier version of this handoff, briefly on `main` on 2026-09-29, dropped Astoria /
 Williamsburg and made Corona Coastal. That was reverted. If the game picked it up, put it back.)

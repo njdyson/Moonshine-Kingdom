@@ -733,14 +733,23 @@ function cube(liquor, cx, cy, size) {
   return `<rect x="${f(cx - h)}" y="${f(cy - h)}" width="${f(size)}" height="${f(size)}" rx="1.2" fill="${col}" stroke="#000" stroke-opacity=".55" stroke-width=".6" filter="url(#lift)"/>`
     + `<path d="M${f(cx - h + 1.2)} ${f(cy + h - 1.6)} V${f(cy - h + 1.2)} H${f(cx + h - 1.6)}" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width=".7" stroke-linecap="round"/>`;
 }
-const KEY_ROWS = [
+// A Rum barrel poured at High Society also pays a Kickback: a gilt "+1" chip after its price,
+// a Ledger marker (the Ledger's markers are poker chips). Its limits are the Rulebook's.
+function kickChip(cx, cy) {
+  return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(KICK_R)}" fill="${C.panelB}" stroke="${C.gold}" stroke-width="1.1" filter="url(#lift)"/>`
+    + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(KICK_R - 2)}" fill="none" stroke="${C.goldDim}" stroke-width=".4" stroke-dasharray="1.2 1.2"/>`
+    + text('+1', cx, cy, { family: 'Barlow Condensed', weight: 700, size: 7.6, spacing: 0 }, { fill: C.goldBright, anchor: 'middle', middle: true });
+}
+const KICK_R = 6.5, KICK_GAP = 4;
+const KEY_ROWS = [ // [roundel, name, chips: [barrel, price, Kickback?]]
   ['speak', 'Speakeasy', [['moonshine', '$300'], ['rum', '$500']]],
-  ['hs', 'High Society', [['rum', '$500']]],
+  ['hs', 'High Society', [['rum', '$500', true]]],
 ];
 function key(x, y) {
   const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
-  const chipsX = 28 + headW + 10, chipW = p => 12 + width(TYPE.price, p), CHIP_GAP = 9;
-  const chipsW = Math.max(...KEY_ROWS.map(([, , ch]) => ch.reduce((a, [, p]) => a + chipW(p), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
+  const chipsX = 28 + headW + 10, CHIP_GAP = 9;
+  const chipW = (p, kick) => 12 + width(TYPE.price, p) + (kick ? KICK_GAP + 2 * KICK_R : 0);
+  const chipsW = Math.max(...KEY_ROWS.map(([, , ch]) => ch.reduce((a, [, p, k]) => a + chipW(p, k), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
   // Roomy enough that the High Society crown clears the Speakeasy medallion above it.
   const PITCH = 19, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
   let s = panel(x, y, w, h);
@@ -749,9 +758,10 @@ function key(x, y) {
     s += roundel(k, ix, cy, 5.4);
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
-    for (const [liquor, price] of chips) {
+    for (const [liquor, price, kick] of chips) {
       s += cube(liquor, cx + 4.5, cy, 8) + text(price, cx + 11, cy, TYPE.price, { fill: C.body, middle: true });
-      cx += chipW(price) + CHIP_GAP;
+      if (kick) s += kickChip(cx + 11 + width(TYPE.price, price) + KICK_GAP + KICK_R, cy);
+      cx += chipW(price, kick) + CHIP_GAP;
     }
   });
   return { fg: s, w, h };
