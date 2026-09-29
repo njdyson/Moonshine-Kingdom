@@ -66,7 +66,7 @@ const C = {
 const BOROUGHS = {
   MN: { n: 1, name: 'Manhattan', fill: ['#5a3336', '#3e2224'] },
   BX: { n: 2, name: 'The Bronx', fill: ['#34493b', '#223127'] },
-  QN: { n: 3, name: 'Queens', fill: ['#3f3a57', '#2a263b'] },
+  QN: { n: 3, name: 'Queens', fill: ['#4a3857', '#31253a'] },
   BK: { n: 4, name: 'Brooklyn', fill: ['#5a4630', '#3d2f1f'] },
   SI: { n: 5, name: 'Staten Island', fill: ['#3b3935', '#282623'] },
 };
@@ -75,11 +75,11 @@ const BOROUGHS = {
 // told apart by drawing: Speakeasies by an inset gold keyline with a diamond at each
 // corner, High Society by a double keyline with a Deco fan in each corner (decoFrame),
 // Docks by their piers.
-const mix = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
-const WARD_DARK = 0.3; // Wards this much towards black (20% was too faint)
-const toneOf = d => (d.zone === 'ward' ? 'dark' : '');
-const tint = (c, tone) => (tone === 'dark' ? mix(c, '#000000', WARD_DARK) : c);
-const fillId = d => `fill-${d.boro}${toneOf(d) ? '-' + toneOf(d) : ''}`;
+// Wards share their Borough's fill and take a wide dark band round the edge instead
+// (WARD_BAND: its width, depth and feather), so the colour matches and the Ward reads
+// as the rough end of town. Every District has a narrow one.
+const WARD_BAND = { width: 34, opacity: 0.7, blur: 7 };
+const fillId = d => `fill-${d.boro}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
@@ -389,7 +389,8 @@ function districtFills() {
     const p = FULL[d.id];
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
-    s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/></g>`;
+    s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/>`
+      + (d.zone === 'ward' ? `<path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity="${WARD_BAND.opacity}" stroke-width="${WARD_BAND.width}" stroke-linejoin="round" filter="url(#wardBand)"/>` : '') + '</g>';
     s += decoFrame(d, geo.regions[d.id]);
   }
   return s;
@@ -561,7 +562,7 @@ function placePiers() {
 }
 function piers() {
   return placePiers().map(({ d, q, u, n }) => {
-    const col = tint(BOROUGHS[d.boro].fill[0], toneOf(d));
+    const col = BOROUGHS[d.boro].fill[0];
     const P = (along, across) => `${f(q[0] + n[0] * along + u[0] * across)} ${f(q[1] + n[1] * along + u[1] * across)}`;
     const body = `M${P(-2.5, -PIER.half)} L${P(PIER.len, -PIER.half)} L${P(PIER.len, PIER.half)} L${P(-2.5, PIER.half)} Z`;
     return `<path d="${body}" fill="#000" fill-opacity=".45" transform="translate(1 1.6)" filter="url(#blur2)"/>`
@@ -823,10 +824,7 @@ function frame() {
 function defs(fontCss, mode) {
   let s = `<style>${fontCss}</style>`;
   for (const [k, b] of Object.entries(BOROUGHS))
-    for (const tone of ['', 'dark']) {
-      const [c0, c1] = b.fill.map(c => tint(c, tone));
-      s += `<radialGradient id="fill-${k}${tone ? '-' + tone : ''}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${c0}"/><stop offset="1" stop-color="${c1}"/></radialGradient>`;
-    }
+    s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${b.fill[0]}"/><stop offset="1" stop-color="${b.fill[1]}"/></radialGradient>`;
   // The Heat Track's metals and lacquer.
   const metal = (id, [lt, md, dk], x2 = 1, y2 = 1) => `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}"><stop offset="0" stop-color="${lt}"/><stop offset=".28" stop-color="${md}"/><stop offset=".52" stop-color="${dk}"/><stop offset=".78" stop-color="${md}"/><stop offset="1" stop-color="${lt}"/></linearGradient>`;
   s += metal('bezelGilt', GILT) + metal('bezelCopper', COPPER);
@@ -843,6 +841,7 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${C.sea[0]}"/><stop offset="1" stop-color="${C.sea[1]}"/></radialGradient>`;
   s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${C.offboard}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
+  s += `<filter id="wardBand" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="${WARD_BAND.blur}"/></filter>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   // lift: the Stills and zone roundels cast a soft shadow, like pieces on the board
   s += `<filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx=".8" dy="1.5" stdDeviation="1.3" flood-color="#000" flood-opacity=".6"/></filter>`;

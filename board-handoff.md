@@ -115,9 +115,11 @@ Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
 
 ## The look
 
-- **Deco style** (Nick, 2026-09-29). One colour per Borough for Docks, Speakeasies and High
-  Society; **Wards darker** (30% towards black, `WARD_DARK`: the rough end of town; 20% was too
-  faint). The piers tell a Dock. **Speakeasies** get a gold keyline 7 units inside their border
+- **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take
+  a wide dark band round the edge** (`WARD_BAND`: 34 wide, 70% black, feathered 7), the rough
+  end of town, with the Borough's own colour in the middle so the colours match. It replaced a
+  whole-Ward tint 30% towards black, which made Wards read as a different colour; a 56-wide
+  band at 80% blacked out narrow Five Points. The piers tell a Dock. **Speakeasies** get a gold keyline 7 units inside their border
   with a small diamond at each corner. **High Society** gets a double keyline (6 and 10.5 in)
   with the frame's Deco fan opened or closed to fill each corner, and a brighter diamond: the
   same frame with more flourish. Corners sharper than 20 degrees or blunter than 150 take no
@@ -241,7 +243,9 @@ keeps them on a re-trace.
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are the Still Token art itself** (`Art/Still Tokens/SVG`), so board and tokens agree.
 - **Muted Borough tones.** Mob colours aren't set and the Squads are blue, so the land stays
-  quiet. Brooklyn moved from red to bronze to part it from Manhattan.
+  quiet. Brooklyn moved from red to bronze to part it from Manhattan. Queens moved from a blue
+  violet (`#3f3a57`) to a warmer violet (`#4a3857`), because the old one sat too close to the
+  water (Nick, 2026-09-29); a dusty mauve (`#4f3a52`) was tried and leaned towards Manhattan.
 - **High Society Venues:** the martini (`Art/Icons/Gin.svg`) under a crown on the sign's
   medallion, and the Deco double keyline (see The look), which replaced a gold sunburst.
   Speakeasies keep the tumbler.
@@ -251,8 +255,8 @@ keeps them on a re-trace.
   with them on 2026-09-29. The roster still keeps each District's Town Planner mark, so they
   could come back on the signs; git history has the tray (`tray()` in `build_board.js`).
 - **The Borough reads first** (Raids and Squads work by Borough), so District types are told
-  apart by drawing, not colour: the Deco frames and the piers (see The look), with only Wards
-  darker. Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
+  apart by drawing, not colour: the Deco frames and the piers (see The look), with Wards
+  banded dark at the edge. Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
   cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales; Nick
   prefers the Districts flat).
 - **Finishing touches:** piers off each Dock's most open stretch of shore, in the Dock's own
