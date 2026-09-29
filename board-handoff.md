@@ -61,15 +61,17 @@ works better"), so this makes the angles deliberate instead.
   an island; running it to the frame was tried and cut).
 - **The Queens / Brooklyn line is two straight runs** (Nick, 2026-09-29: he likes clean
   borders between Boroughs, and the old one zigzagged). It leaves the East River square (45
-  degrees) from the end of Corona's shore (`astoriaShore`, `coronaShore`), past Williamsburg and
-  Brownsville / Corona, and turns upright where Corona's bottom meets it (`coronaBottom`), down
-  past Richmond Hill and Jamaica to the bay. Williamsburg / Brownsville runs square to it, so
-  Williamsburg is a square on its corner. Astoria / Corona leaves the shore square, then runs
-  level. **This changed a connection**: Astoria and Williamsburg no longer meet, because
-  Corona takes the East River shore between them (see Decisions). The Queensboro Bridge moved 25
-  up-river (`BRIDGE_SHIFT`) to give Astoria's corner room; it still joins East Harlem and Astoria.
-  The first try, a square with a 136-unit river side, could not fit Williamsburg's sign; the
-  square needs about 150.
+  degrees), `wbShoulder` (30) down the shore from Astoria's corner (`astoriaShore`), runs past
+  Williamsburg and Brownsville / Corona, and turns upright where Corona's bottom meets it
+  (`coronaBottom`), down past Richmond Hill and Jamaica to the bay. Williamsburg / Brownsville
+  runs square to it, so Williamsburg is a square on its corner. Astoria's border leaves the
+  shore square too, parallel to the line, as far as Astoria's corner, then runs level.
+  Williamsburg takes the 30-wide strip between the two, cut square across at Astoria's corner,
+  so **Astoria / Williamsburg is kept** (along Astoria's slanted foot). The Queensboro Bridge moved
+  25 up-river (`BRIDGE_SHIFT`) to give Astoria's corner room; it still joins East Harlem and
+  Astoria. Tried and cut the same day: Corona taking that strip as a spur of East River shore,
+  which dropped Astoria / Williamsburg (Nick disliked the spur); and a square with a 136-unit
+  river side, which could not fit Williamsburg's sign (it needs about 150).
 - **Queens and Brooklyn in rows and columns.** Queens' rows are level (Whitestone | Flushing |
   Richmond Hill | Jamaica), and one upright line (`queensCol`) runs from the Hell Gate down past
   Astoria / Whitestone, Astoria / Flushing and Corona / Flushing. Richmond Hill steps up a
@@ -109,7 +111,7 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | Traced, centred labels | 32 (West Side) | 34, 36, 50, 65 |
 | Drafted, first balance, centred labels | 42 (Tenderloin) | 47, 47, 57, 64 |
 | With the signs, before the Queens / Brooklyn line | 39 (Whitestone) | 47, 57, 65, 83 |
-| Now (as the build reports) | 39 (Whitestone) | 47, 57, 58, 72 |
+| Now (as the build reports) | 39 (Whitestone) | 46, 57, 65, 72 |
 
 Rooms now run 39 to 91 (Flushing), Jamaica (82) included; it was 138.
 
@@ -232,13 +234,14 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
-- **Connections changed on purpose** (`FLIPS` in `draft_board.js`, which flips a border to the
-  two Districts at its ends; the traced map is untouched). **Astoria / Williamsburg** (Nick,
-  2026-09-29), for the straight Queens / Brooklyn line: Corona takes the East River shore
-  between them, so Corona is now Coastal. Williamsburg is Land Connected to Red Hook,
-  Brownsville and Corona, plus Five Points by Bridge; its ordinary Speakeasy next door is Red
-  Hook alone. The Rulebook's Land Connected example, CLAUDE.md and `mk-online-rules-sync.md`
-  12.5 say so. mk-online's graph changes when it takes this geometry.
+- **Every connection is the traced map's.** `FLIPS` in `draft_board.js` can change one (it
+  gives a border to the two Districts at its ends; the traced map is untouched) and is empty.
+  Astoria / Williamsburg was flipped and put back on 2026-09-29 (see the Queens / Brooklyn line).
+- **Manhattan was raised into Belmont** (Nick, 2026-09-29: a couple of mm on each Manhattan
+  District). Sugar Hill / Belmont moves up 26 at the coast (`manhattanLift`) and 14 at the
+  four-way corner (`cornerLift`; more makes East Harlem's top corner tight), and the level
+  borders (`manhattan`) share the height out. Moving only the tip was tried first: it gained a
+  sliver too thin to use, and Sugar Hill lost room. Belmont went from 69 to 54.
 
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
@@ -308,10 +311,9 @@ keeps them on a re-trace.
 
 - **Other short borders** Nick may want gone: East Harlem / Five Points (32), Astoria /
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
-  Red Hook (47). Brownsville / Jamaica was on the list with Astoria / Williamsburg but was kept:
-  it sits on the straight upright run, so dropping it adds nothing to the look, and it would
-  put Richmond Hill (a crown room) on the bay, making it Coastal. Any of them is a new entry in
-  `FLIPS`. Other known weak spots: Whitestone is the smallest room (39), squeezed by the Queens
+  Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
+  nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
+  Coastal. Any of them is a new entry in `FLIPS`. Other known weak spots: Whitestone is the smallest room (39), squeezed by the Queens
   column and Astoria's border with Flushing.
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
