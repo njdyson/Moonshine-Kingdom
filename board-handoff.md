@@ -97,9 +97,9 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
   than 150 take no ornament, and junctions along a straight border are not corners. The
   default build (`STYLE = 'tone'`) is untouched and still rebuilds byte for byte.
   `Drafted/Deco/Before and after.jpg` compares the two on the drafted board.
-- **Mocks, 2026-09-29** (`Drafted/Mock/`, built with
-  `--geometry=Drafted --style=deco --labels=sign --tomorrow --out=Mock`; both switches are off
-  by default and the other builds are untouched):
+- **The sign mock, 2026-09-29** (`Drafted/Mock/`, built with
+  `--geometry=Drafted --style=deco --labels=sign --out=Mock`; off by default, and the other
+  builds are untouched). The jury is out (Nick):
   - **Hanging signs** (`--labels=sign`, `placeSign()`). Pieces will cover a centred label, and
     the old edge placer looked odd because each label went somewhere different. Here every
     District gets one small plaque (type medallion, name and venue, a 30-unit Still) hung by
@@ -107,12 +107,18 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
     one rule, so it reads as designed, and the open ground below is one piece. A District too
     narrow for one line stacks its name; **East Harlem** is too narrow even then (its slanted
     sides allow 139 units where the sign needs 142) and keeps its centred label.
-  - **Tomorrow** (`--tomorrow`, `tomorrow()`): the Mash leaves the key's row for a panel under
-    the title, with a 36 mm socket for tomorrow's Turn Tokens as **one stack, #1 on top**, so
-    "claim the lowest-numbered token left" becomes "take the top token". Four separate 36 mm
-    slots would not fit: New Jersey narrows to under 100 units below the key, and moving
-    Queens' Nassau line in to make a column cost Flushing about 45% of its room. The title
-    moves up 22 to make space.
+- **The Tomorrow panel is standard** (Nick liked it, 2026-09-29; `tomorrow()`): under the
+  title, the Mash socket and a 36 mm socket for tomorrow's Turn Tokens as **one stack, #1 on
+  top**, so "claim the lowest-numbered token left" becomes "take the top token". Both are set
+  today for tomorrow, which the panel teaches. Four separate 36 mm slots would not fit: New
+  Jersey narrows to under 100 units below the key, and moving Queens' Nassau line in to make
+  a column cost Flushing about 45% of its room. The Mash left the key's row for it, and the
+  title rose 22 to make space.
+- **The key is types only** (Nick, 2026-09-29: the sentences were long-winded; bridges explain
+  themselves and the Rulebook covers them): Speakeasy, High Society, Ward, Dock and Still.
+  Prices ride as chips, the Moonshine bottle `$300` and the Rum glass `$500` (`Art/Icons`);
+  High Society shows only Rum, which says "Rum only" without the words. The Kickback and
+  "Water Connected to every Dock" are left to the Rulebook.
 - **To adopt it:** copy `Drafted/board-geometry.json` over the skeleton (or build from it by
   default), rebuild, and drop the `--geometry` switch if nothing else uses it. **To discard
   it:** delete the branch.
@@ -232,7 +238,7 @@ keeps them on a re-trace.
   edge's centre line, inside the safe margin (see Bleed). Escalation
   stays subtle, as Nick asked: the floors warm a touch towards rust (`HEAT_TINT`), and only the
   5th, the Raid, changes metal, to rose-copper on an oxblood floor (`GILT`, `COPPER`).
-- **No Liquor Value track.** The key's prices are worded as the Town Planner's legend.
+- **No Liquor Value track.** The key carries the prices as chips (see the key, above).
 - **Title is NEW YORK 1929, nothing more.** No logo, no compass, and since 2026-09-28 no north
   line either (Nick found it too prominent).
 - **Leather, generated, not an image.** `leatherFilter()` builds a pebble grain from crease
@@ -241,9 +247,9 @@ keeps them on a re-trace.
   **finer, flatter skin**, stitched in. The key and Mash panels carry no stitching or leather
   (Nick, 2026-09-28); since 2026-09-29 they are **lacquered plaques** to match the Heat Track:
   a polished gilt edge with a dark seat inside it, a hairline, a small diamond on each Deco
-  chamfer, and a soft shadow lifting them off the hide. The Mash square is a recessed socket
-  in the Heat Track's lacquer and gilt, with MASH engraved above it, centred in a panel as
-  tall as the key. **The key's rows share one pitch** (16.5 units): the High Society crown
+  chamfer, and a soft shadow lifting them off the hide. The Mash and Turn Token sockets (in
+  the Tomorrow panel) are recessed in the Heat Track's lacquer and gilt, their names engraved
+  above them. **The key's rows share one pitch** (16.5 units): the High Society crown
   used to add a gap under the first row. Saddle stitching runs round the board
   edge and inside the Heat corner. The **screen** build drops the pebbles and
   keeps only soft wrinkles and dye, because at screen size the grain turns to noise (Nick asked

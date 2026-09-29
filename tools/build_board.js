@@ -48,10 +48,8 @@ const DIR = path.join(ROOT, 'Art', 'Board', EXPERIMENT);
 // the sunburst. Docks are told by their piers.
 const STYLE = process.argv.includes('--style=deco') ? 'deco' : 'tone';
 const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').slice(k.length + 3);
-// Mocks (2026-09-29): --labels=sign hangs each District's sign from its top border
-// (see placeSign); --tomorrow gathers the Mash and tomorrow's Turn Tokens in one panel
-// (see tomorrow()). --out=<name> names the output folder, beside the geometry.
-const TOMORROW = process.argv.includes('--tomorrow');
+// A mock (2026-09-29): --labels=sign hangs each District's sign from its top border
+// (see placeSign). --out=<name> names the output folder, beside the geometry.
 const OUT_DIR = path.join(DIR, arg('out') || (STYLE === 'deco' ? 'Deco' : ''));
 const OUT = {
   printSvg: path.join(OUT_DIR, 'Board v0.9.svg'), screenSvg: path.join(OUT_DIR, 'Board v0.9 (screen).svg'),
@@ -168,6 +166,7 @@ const TYPE = {
   small: { family: 'Barlow Condensed', weight: 700, size: 8, spacing: 1.3 },
   titleCity: { family: 'Cinzel', weight: 700, size: 26, spacing: 4.5 },
   titleYear: { family: 'Cinzel', weight: 700, size: 15, spacing: 8 },
+  price: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.4 },
   sign: { family: 'Barlow Condensed', weight: 700, size: 12.5, spacing: 1 },
   signVenue: { family: 'Barlow', weight: 500, size: 7.8, spacing: 0.2, italic: true },
   tomorrow: { family: 'Cinzel', weight: 700, size: 8.6, spacing: 1.1 },
@@ -211,6 +210,7 @@ function loadIcon(file) {
 }
 const ICONS = {
   speak: loadIcon('Tumbler.svg'), ward: loadIcon('Fist.svg'), dock: loadIcon('anchor.svg'),
+  moonshine: loadIcon('Moonshine.svg'), rum: loadIcon('Rum.svg'),
   crown: loadIcon('Crown.svg'), runner: loadIcon('Runner.svg'), safehouse: loadIcon('Safehouse.svg'),
   martini: loadIcon('Gin.svg'), boss: loadIcon('Boss.svg'),
 };
@@ -842,25 +842,11 @@ function heatPlate(mid) {
     + text('HEAT', mid + 1.6, ty, spec, { fill: '#241807', anchor: 'middle', middle: true });
 }
 
-// The Mash die's square, 24 mm so any usual die sits inside it: a recessed socket in
-// the Heat Track's lacquer and gilt, the name engraved above it, the pair centred in a
-// panel as tall as the key beside it.
-function mash(x, y, h) {
-  const side = 24 * MM, w = side + 28, group = 12 + 10 + side, top = y + (h - group) / 2;
-  const sx = x + 14, sy = top + 22, sq = i => `x="${f(sx + i)}" y="${f(sy + i)}" width="${f(side - 2 * i)}" height="${f(side - 2 * i)}" rx="${f(6 - i / 2)}"`;
-  return {
-    fg: panel(x, y, w, h) + gilt('MASH', x + w / 2, top + 6, TYPE.panelHead)
-      + `<rect ${sq(0)} fill="url(#heatFloor)"/><rect ${sq(0)} fill="url(#heatRecess)"/>`
-      + `<rect ${sq(1.7)} fill="none" stroke="url(#bezelGilt)" stroke-width="3.4"/>`
-      + `<rect ${sq(3.6)} fill="none" stroke="#000" stroke-opacity=".7" stroke-width=".6"/>`
-      + `<rect ${sq(0)} fill="none" stroke="${GILT[0]}" stroke-opacity=".35" stroke-width=".5"/>`,
-  };
-}
-
-// Tomorrow (a mock): what today settles for tomorrow, in one panel under the title. The
-// Mash die, turned by the Harbormaster, and tomorrow's Turn Tokens as one stack, #1 on
-// top: each boss who Lays Low takes the top token (the lowest left, as the rule says).
-// Turn Tokens are 36 mm square; the stack's socket fits one.
+// Tomorrow: what today settles for tomorrow, in one panel under the title (Nick,
+// 2026-09-29). The Mash die, 24 mm so any usual die fits, turned by the Harbormaster; and
+// tomorrow's Turn Tokens as one stack, #1 on top, so each boss who Lays Low takes the top
+// token (the lowest left, as the rule says). Turn Tokens are 36 mm square; the socket fits
+// the stack.
 function tomorrow(x, y) {
   const mash = 24 * MM, tok = 36 * MM, w = tok + 28, spec = TYPE.tomorrow;
   const sock = (sx, sy, side, r) => {
@@ -882,43 +868,44 @@ function tomorrow(x, y) {
   };
 }
 
-// The marks as they appear on the map; prices worded as the Town Planner's legend.
+// The key: the District types and the Still, as they appear on the map (Nick,
+// 2026-09-29: types only, the rest is the Rulebook's). A Speakeasy's and a High Society
+// Venue's prices ride beside them as chips, a glass and a price: the High Society row
+// has only Rum, which says "Rum only" without the words.
 const KEY_ROWS = [
-  ['speak', 'Speakeasy', 'Moonshine $300, Rum $500'],
-  ['hs', 'High Society', 'Rum only, 1 Kickback each'],
-  ['ward', 'Ward', ''],
-  ['dock', 'Dock', 'Water Connected to every Dock'],
-  ['bridge', 'Bridge', 'Land Connected'],
-  ['still', 'Still', 'Pressure: the lit cells'],
-  ['setup', 'Setup', 'Where the pieces start'],
+  ['speak', 'Speakeasy', [['moonshine', '$300'], ['rum', '$500']]],
+  ['hs', 'High Society', [['rum', '$500']]],
+  ['ward', 'Ward', []],
+  ['dock', 'Dock', []],
+  ['still', 'Still', []],
+  ['setup', 'Setup', []],
 ];
 function key(x, y) {
   const rows = KEY_ROWS.filter(([k]) => k !== 'setup' || SHOW_SETUP);
   const headW = Math.max(...rows.map(([, t]) => width(TYPE.keyHead, upper(t))));
-  const subX = 28 + headW + 9, subW = Math.max(...rows.map(([, , t]) => (t ? width(TYPE.keyText, t) : 0)));
+  const chipsX = 28 + headW + 10, chipW = p => 12 + width(TYPE.price, p), CHIP_GAP = 9;
+  const chipsW = Math.max(...rows.map(([, , ch]) => ch.reduce((a, [, p]) => a + chipW(p), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
   // One pitch for every row, roomy enough that the High Society crown clears the row above.
-  const PITCH = 16.5, w = subX + subW + 11, h = 14 + (rows.length - 1) * PITCH + 13;
+  const PITCH = 16.5, w = chipsX + chipsW + 12, h = 14 + (rows.length - 1) * PITCH + 13;
   let s = panel(x, y, w, h);
-  rows.forEach(([k, t, sub], i) => {
+  rows.forEach(([k, t, chips], i) => {
     const cy = y + 14 + i * PITCH, ix = x + 15;
-    if (k === 'bridge') s += bridgeGlyph([ix - 7, cy], [ix + 7, cy], 1.5, 0.45);
-    else if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
+    if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
     else if (k === 'setup') s += tray(['runner'], ix - trayWidth(['runner']) / 2, cy);
     else s += roundel(k, ix, cy, 5.4);
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
-    if (sub) s += text(sub, x + subX, cy, TYPE.keyText, { fill: C.body, middle: true });
+    let cx = x + chipsX;
+    for (const [liquor, price] of chips) {
+      s += icon(liquor, cx + 4.5, cy, 10, C.gold) + text(price, cx + 11, cy, TYPE.price, { fill: C.body, middle: true });
+      cx += chipW(price) + CHIP_GAP;
+    }
   });
   return { fg: s, w, h };
 }
 
 function sidePanels() {
-  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y), heat = heatTrack();
-  if (TOMORROW) { // the Mash leaves the key's row for the Tomorrow panel, under the title
-    const t = tomorrow(HEAT.tx, TITLE_Y() + 34);
-    return { bg: heat.bg, fg: heat.fg + k.fg + t.fg, top: heat.top };
-  }
-  const m = mash(HEAT.tx + k.w + 10, y, k.h);
-  return { bg: heat.bg, fg: heat.fg + k.fg + m.fg, top: heat.top };
+  const y = HEAT.edge[1] + 12, k = key(HEAT.tx, y), heat = heatTrack(), t = tomorrow(HEAT.tx, TITLE_Y + 34);
+  return { bg: heat.bg, fg: heat.fg + k.fg + t.fg, top: heat.top };
 }
 
 // The seam round the board, between the gilt edge and the hairline, stepping in
@@ -928,11 +915,11 @@ function seams() {
   return stitch(`M${ex + 3.4} ${a} H${W - a} V${W - a} H${a} V${ey + 3.4} H${ex + 3.4} Z`);
 }
 
-// With the Tomorrow panel below it, the title rises to sit under the key.
-const TITLE_Y = () => (TOMORROW ? 283 : 305);
+// The title sits under the key, the Tomorrow panel under it.
+const TITLE_Y = 283;
 function title() {
   // The map's title block: the city and the year, between Deco rules.
-  const cx = 116, cy = TITLE_Y();
+  const cx = 116, cy = TITLE_Y;
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
   const rule = (y, gap) => `<path d="M${f(cx - cityW / 2)} ${y} H${f(cx - gap)} M${f(cx + gap)} ${y} H${f(cx + cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
@@ -1068,7 +1055,7 @@ function allText() {
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
   for (const [t] of WATER_LABELS) add(TYPE.water, t);
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
-  for (const [, t, sub] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); if (sub) add(TYPE.keyText, sub); }
+  for (const [, t, chips] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); for (const [, p] of chips) add(TYPE.price, p); }
   add(TYPE.panelHead, 'HEAT');
   add({ ...TYPE.panelHead, size: 10.5 }, 'HEAT');
   add(TYPE.panelHead, 'MASH');
