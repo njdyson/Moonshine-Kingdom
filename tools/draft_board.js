@@ -24,8 +24,8 @@
 // - Staten Island and Jamaica Bay become 45-degree Deco shapes.
 // - Westchester and Nassau go: the Bronx runs up to the frame and Queens out to it,
 //   under it to the board's edge as New Jersey does (the build clips them at the
-//   frame's hairline). The water east of the Bronx stays. Staten Island meets the
-//   frame too, on its west.
+//   frame's hairline). The water east of the Bronx stays, and Staten Island keeps its
+//   shore all round (Nick: it should read as an island).
 //
 // Every chain keeps its two sides and its two end junctions, so no adjacency changes
 // (the chains against Westchester and Nassau go with them).
@@ -94,7 +94,6 @@ const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const HARLEM = 44; // Belmont's shore turns upright here, up to the frame
 const TN_CUT = 24; // Throggs Neck's tip, cut back this far along both shores
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
-const SI_WEST = 0; // Staten Island's west shore: to the board's edge, under the frame
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
 const SOUTH_SHORE = 1020; // the Rockaways, level
 const BK_COL = 595.5; // Red Hook / Brownsville, upright
@@ -158,7 +157,7 @@ function draft(S) {
     '709,848': [680, 853], '793,857': [793.5, 853],
     '598,934': [600, 933], '593,974': [600, 975], '622,989': [622, 997], '621,1011': [622, 1011],
     // Staten Island: an octagon (see REPLACE), level borders
-    '37,816': [SI_WEST, s1], '261,837': [NARROWS[0], s1], '30,910': [SI_WEST, s2], '272,932': [NARROWS[0], s2],
+    '37,816': [36, s1], '261,837': [NARROWS[0], s1], '30,910': [36, s2], '272,932': [NARROWS[0], s2],
   };
   const T = S.stapletonTop, B = S.bayEast;
   const TIP = atX(SOUND_BX, BRONX_EAST), sound = unit(-SOUND_BX.d[0], -SOUND_BX.d[1]);
@@ -173,9 +172,9 @@ function draft(S) {
     ...(S.bvUpright ? { 'sheepshead_bay|water': [[BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [622, 1001.5], [622, 1011], [S.coneyEast, 983]] } : {}),
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
     'water|jamaica': [[793.5, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945], [801 + B, 1000], [700, 1000], [700, 1012], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
-    // Staten Island: against the frame, 45-degree corners on the Narrows
-    'water|westerleigh': [[SI_WEST, s1], [SI_WEST, T], [NARROWS[0] - 37, T], [NARROWS[0], T + 37], [NARROWS[0], s1]],
-    'water|tottenville': [[SI_WEST, s2], [SI_WEST, 1032], [209, 1032], [NARROWS[0], 983], [NARROWS[0], s2]],
+    // Staten Island: 45-degree corners, upright shores
+    'water|westerleigh': [[36, s1], [36, T + 27], [63, T], [NARROWS[0] - 37, T], [NARROWS[0], T + 37], [NARROWS[0], s1]],
+    'water|tottenville': [[36, s2], [36, 1005], [63, 1032], [209, 1032], [NARROWS[0], 983], [NARROWS[0], s2]],
   };
   // Where the labels in the water sit on this map: midway between shores, at their angle.
   const labels = {
