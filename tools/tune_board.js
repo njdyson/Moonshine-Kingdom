@@ -18,7 +18,8 @@
 //     environment to weigh it differently)
 //   - 0.25 x the signs' penalty: each hanger past 18 units, and half each sign's shape
 //     cost (a stacked name 15, the Still's plate hung underneath 60)
-// Room is as the build counts it: ground 6 units in from every border, less the sign.
+// Room is close to the build's count, on a coarser grid: ground 6 units in from every
+// border, less the sign's box and its margin.
 // A setting is refused outright if the drafting's checks fail, a corner goes under 80
 // degrees, a land border runs under 32 units, a sign no longer fits, the Kill van Kull
 // narrows under 22, or Flushing's bottom drops below Corona's.
@@ -27,7 +28,6 @@
 // keyline margins); if the sign's design changes there, change it here too.
 
 const fs = require('fs');
-const path = require('path');
 const { SETTINGS, build, check, tightCorners } = require('./draft_board.js');
 
 const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').slice(k.length + 3);
@@ -41,7 +41,7 @@ const HS = ['sugar_hill', 'morris_park', 'williamsburg', 'richmond_hill'];
 const SPREAD = +(process.env.SPREAD || 0.4); // how much an uneven board costs
 const CM = (609.6 / 1080) ** 2 / 100, STEP = 2, FRAME_IN = 13;
 
-// Each setting the tuner may move: [path in SETTINGS, lowest, highest, unit].
+// Each setting the tuner may move: [path in SETTINGS, lowest, highest].
 const KNOBS = [
   ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215], ['morrisEast', 160, 255],
   ['hellGate', 3, 15], ['hpCol', 770, 830], ['hpFoot', 30, 90], ['ehKnee.0', 700, 735], ['ehKnee.1', 260, 315],
@@ -182,8 +182,8 @@ show('start', best);
 if (!best.out) process.exit(1);
 for (const step of [8, 4, 2, 1]) for (let improved = true; improved;) {
   improved = false;
-  for (const [k, lo, hi, unit = 1] of KNOBS) for (const d of [-step, step]) {
-    const v = Math.round((get(S, k) + d * unit) * 1000) / 1000;
+  for (const [k, lo, hi] of KNOBS) for (const d of [-step, step]) {
+    const v = get(S, k) + d;
     if (v < lo || v > hi) continue;
     const T = clone(S); set(T, k, v);
     const r = score(T);

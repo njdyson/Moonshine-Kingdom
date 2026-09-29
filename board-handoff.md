@@ -1,17 +1,19 @@
 # The board: vector rebuild
 
 Status (2026-09-29): the **drafted map with hanging signs and the Deco style is the board**, on
-`main`. The Affinity export (`Art/Board (Large).png`) is untouched and is still what mk-online
-serves, so the online game shows the old board until it is switched over.
+`main`. mk-online still serves an earlier vector board (`mk-online/dist/board.svg`, deployed
+in a23d1e4, with Westchester and Nassau and clickable Districts), so the online game shows
+that until it is redeployed. The Affinity export (`Art/Board (Large).png`) is untouched.
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
 node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the index tile
-node tools/build_board.js --print   # also, git-ignored: the 24in print PDF (300dpi), its 7200px PNG,
+node tools/build_board.js --print   # also, git-ignored: the 24in print PDF (300dpi), its 7280px PNG,
                                     # and a 4320px screen JPEG; about a minute
 node tools/build_board.js --report=/tmp/signs.json && node tools/tune_board.js /tmp/signs.json
                                     # suggests SETTINGS for the drafting; ten to twenty minutes
-node tools/trace_board.js           # only if the Affinity board changes; rewrites the traced map
+node tools/trace_board.js           # only if the Affinity board changes; rewrites the traced map,
+                                    # and the drafting's point keys then need matching to it
 ```
 
 The build needs Playwright's Chromium. Where Playwright is installed globally rather than in the
@@ -40,7 +42,8 @@ works better"), so this makes the angles deliberate instead.
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
   24) to meet it square: Manhattan's level borders at the Hudson, Five Points / Bowery at the
-  East River, Astoria / Corona at Williamsburg, Belmont / Hunts Point at the four-way corner.
+  East River, Astoria / Corona at Williamsburg. Belmont / Hunts Point turns on a longer foot
+  (`hpFoot`, 60) to meet East Harlem / Hunts Point square.
   Williamsburg / Red Hook runs square to the East River, which makes Williamsburg a diamond;
   Red Hook's shore turns upright at the Narrows in line with Coney Island's (Staten Island moves
   east with it, `NARROWS_GAP`). The drafting reports any corner under 80 degrees; there are none.
@@ -138,11 +141,13 @@ Rooms now run 39 to 83, Jamaica (79) included; it was 138.
 ## Files
 
 - `Art/Board/Traced/board-geometry.json`: the traced map, the skeleton the drafting reads. The
-  tracer reproduces it exactly.
+  tracer reproduces it exactly. The drafting keys its edits by this file's point coordinates,
+  so a re-trace or a hand edit here means matching `draft_board.js`'s MOVE, DROP and REPLACE
+  keys to the new points.
 - `Art/Board/board-geometry.json`: the board's map as data, written by `tools/draft_board.js`.
   One polygon per District and for New Jersey, every border one shared chain (so neighbours can
-  never gap or overlap), the four bridges, and where the water and bridge names sit. mk-online can
-  take click areas and the adjacency graph straight from it.
+  never gap or overlap), the four bridges, and where the water and bridge names sit. mk-online
+  can take click areas and the adjacency graph straight from it.
 - `tools/draft_board.js`: the drafting, its `SETTINGS` and its checks. `tools/tune_board.js`:
   the tuner.
 - `tools/build_board.js`: the roster (zone, Still, venue, Setup mark per District, copied from
@@ -151,10 +156,10 @@ Rooms now run 39 to 83, Jamaica (79) included; it was 138.
 - The outputs, all committed: `Board v0.9.svg` (the print master, full leather) with
   `Board v0.9 (print preview).jpg`, and `Board v0.9 (screen).svg` with `Board v0.9 (screen).jpg`
   (the same board with a flat texture, for the website and mk-online). The two builds differ
-  only in the `LEATHER` preset.
+  in the `LEATHER` preset and the print bleed.
 - `Art/Index/board.jpg`: the index page's tile ("The City Map", first under Components), an
-  800 x 450 crop of the screen board (`TILE_CROP`: the East River's bridges, Williamsburg and
-  Richmond Hill), rebuilt with the board. The tile opens `Board v0.9 (screen).jpg`.
+  800 x 450 crop of the screen board (`TILE_CROP`: the Queensboro and Williamsburg Bridges and
+  two crown rooms), rebuilt with the board. The tile opens `Board v0.9 (screen).jpg`.
 
 ## Physical spec
 
@@ -162,7 +167,7 @@ Rooms now run 39 to 83, Jamaica (79) included; it was 138.
   sizes go through the `MM` constant.
 - **Bleed** (since 2026-09-29): the print master SVG, its 300dpi PNG and the PDF carry the
   frame's black **6 units (3.4 mm) past the trim** on every side (`BLEED`): the PNG is 7280 px
-  and the PDF page 616.6 mm square, for a 609.6 mm board. Coordinates are unchanged (0 to 1080
+  and the PDF page 616.4 mm square, for a 609.6 mm board. Coordinates are unchanged (0 to 1080
   is the trim); the screen build and both previews stop at the trim. 3 mm is the usual minimum
   for flat printing; a wrapped board (a printed sheet folded over greyboard) needs a wrap
   margin set by the manufacturer's own template, which wins over this. **Safe margin:**
@@ -290,8 +295,9 @@ keeps them on a re-trace.
 - ~~**Rulebook wording.**~~ Fixed 2026-09-28: the Big Bust tiebreak reads "ranked highest on its
   Still's Pressure Strip", matching the Town Planner. (The Kingpin's Guide still says "the
   Borough's Pressure Strip"; it lags by design.)
-- **mk-online.** The geometry is ready for it; the mk-online source is its own repo
-  (`njdyson/mk-online`), not this one.
+- **mk-online.** It serves `mk-online/dist/board.svg`, the vector board from before the
+  drafting (Westchester and Nassau still on it). The drafted geometry is ready for it; the
+  mk-online source is its own repo (`njdyson/mk-online`), not this one.
 - **Affinity round-trip.** The SVG opens in Affinity, but the texture and soft shadows are SVG
-  filters and will likely drop out, and Cinzel, Barlow, Barlow Condensed and Bebas Neue must be
-  installed locally.
+  filters and will likely drop out, and Cinzel, Barlow, Barlow Condensed and Bebas Neue (the Still
+  tokens' numbers) must be installed locally.

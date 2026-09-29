@@ -288,7 +288,8 @@ The board is generated vector art. `tools/draft_board.js` redraws the traced map
 roster copied from the Town Planner, each District with a hanging sign. Read `board-handoff.md`
 before touching it: it holds the build commands, the 24-inch print spec (Heat Track sockets are
 the Ledger's 39 mm chips), the decisions Nick has made so far, and the next pass he has in mind.
-The Affinity PNG (`Art/Board (Large).png`) is still what mk-online serves.
+mk-online still serves an earlier vector board (`mk-online/dist/board.svg`, with Westchester
+and Nassau), so the online game lags this one until it is redeployed.
 
 ## What not to edit
 

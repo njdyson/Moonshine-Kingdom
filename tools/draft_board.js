@@ -31,7 +31,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'Art', 'Board', 'Traced', 'board-geometry.json');
-const OUT = path.join(ROOT, 'Art', 'Board');
+const OUT = path.join(ROOT, 'Art', 'Board', 'board-geometry.json');
 const geo = JSON.parse(fs.readFileSync(SRC, 'utf8'));
 const r1 = v => Math.round(v * 10) / 10;
 const key = p => `${p[0]},${p[1]}`;
@@ -143,7 +143,6 @@ function draft(S) {
   // points a straight line no longer needs). Chains listed in REPLACE get new interior
   // points outright, where a shape gains corners it didn't have.
   const MOVE = {
-    // New Jersey and Westchester
     // New Jersey: parallel to Manhattan's west coast, then to the Bowery's west side, and
     // squared off level with the Bowery's bottom, so the Hudson is one width all the way
     '382,165': atX(NJ, 382), '142,476': NJ_CORNER, '94,655': [NJ_CORNER[0], S.boweryBottom], '0,707': [0, S.boweryBottom],
@@ -217,7 +216,6 @@ function draft(S) {
       QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
-    land: [],
   };
   return { MOVE, REPLACE, labels };
 }
@@ -410,18 +408,16 @@ function build(S) {
   for (const k of GONE) delete regions[k];
   return { chains: cs.filter(c => !c.sides.some(s => GONE.includes(s))), regions, bridges, labels: { ...draft(S).labels, bridges: bridgeLabels(bridges) } };
 }
-function write(dir, map, note) {
-  const { chains: cs, regions, bridges, labels } = map;
+function write({ chains: cs, regions, bridges, labels }) {
   const { problems, notes } = check(cs, regions, bridges);
-  console.log(path.relative(ROOT, dir) + ':\n  ' + notes.join('\n  '));
+  console.log(notes.join('\n'));
   if (problems.length) { console.error('Not written:\n  ' + problems.join('\n  ')); process.exit(1); }
   const j = v => JSON.stringify(v);
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'board-geometry.json'), `{"note":${j(note)},"size":${j(geo.size)},"regions":{\n`
+  fs.writeFileSync(OUT, `{"note":${j(NOTE)},"size":${j(geo.size)},"regions":{\n`
     + Object.entries(regions).map(([id, r]) => `${j(id)}:${j(r)}`).join(',\n')
     + '},\n"chains":[\n' + cs.map(j).join(',\n') + '],\n"bridges":' + j(bridges) + ',\n"labels":' + j(labels) + '}\n');
-  console.log('wrote', path.relative(ROOT, path.join(dir, 'board-geometry.json')));
+  console.log('wrote', path.relative(ROOT, OUT));
 }
 const NOTE = 'Written by tools/draft_board.js from Art/Board/Traced/board-geometry.json (the traced map). The same Districts, borders and bridges, redrawn with straight lines, exact angles and square corners; the Bronx and Queens run to the frame. "labels" places the water and bridge names for this map.';
-if (require.main === module) write(OUT, build(SETTINGS), NOTE);
+if (require.main === module) write(build(SETTINGS));
 module.exports = { SETTINGS, build, check, tightCorners };

@@ -11,7 +11,9 @@
 // border can never open a gap or an overlap. Bridges are the brown planks in the
 // water whose two ends land on different Districts.
 //
-// Only needed if the Affinity board changes; otherwise edit the JSON directly.
+// Only needed if the Affinity board changes. tools/draft_board.js keys its edits by the
+// traced points' coordinates, so after a re-trace its MOVE, DROP and REPLACE keys need
+// matching to the new points before it will draft the board again.
 
 const fs = require('fs');
 const path = require('path');
@@ -203,7 +205,7 @@ function keptBridges() {
   const chains = all.filter(c => c.sides.some(s => s !== 'water' && s !== 'OUT' && !OFFBOARD.includes(s))
     || (c.sides.includes('water') && c.sides.some(s => OFFBOARD.includes(s))));
   const out = {
-    note: 'Board geometry traced from Art/Board (Large).png by tools/trace_board.js (1080 x 1080 units, same frame as the original). Every land border is one shared chain, so neighbouring Districts cannot drift apart. Edit here, then run tools/build_board.js. Bridges are named and kept by hand since 2026-09-28: the Queensboro was moved south from the Affinity position (a Triborough, opened 1936) to its 1929 line, East 59th Street to Long Island City, still joining East Harlem and Astoria.',
+    note: 'Board geometry traced from Art/Board (Large).png by tools/trace_board.js (1080 x 1080 units, same frame as the original). Every land border is one shared chain, so neighbouring Districts cannot drift apart. tools/draft_board.js redraws it as Art/Board/board-geometry.json and keys its edits by the points here, so edit it only with the drafting in mind. Bridges are named and kept by hand since 2026-09-28: the Queensboro was moved south from the Affinity position (a Triborough, opened 1936) to its 1929 line, East 59th Street to Long Island City, still joining East Harlem and Astoria.',
     // Once named, the bridges are kept by hand (the Queensboro was moved from the
     // Affinity position for period accuracy), so a re-trace keeps them.
     size: [W, H], regions, chains, bridges: keptBridges() || findBridges(px, seg),

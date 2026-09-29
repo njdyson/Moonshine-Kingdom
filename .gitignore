@@ -11,7 +11,7 @@ mk-online/*
 # a copy in mk-online/public/ exists for local dev only — don't ship in dist.
 mk-online/dist/Board (Large).png
 
-# 5400px print render from tools/build_board.js --print; rebuild it, don't commit it
+# 7280px print render from tools/build_board.js --print; rebuild it, don't commit it
 Art/Board/**/*(print).png
 Art/Board/**/*(screen, large).jpg
 __pycache__/

@@ -7,7 +7,8 @@
 //                                       the index page's tile (Art/Index/board.jpg)
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor (not committed): a 24in PDF at 300dpi, the
-//                                       7200px PNG it is made from, and a 4320px screen JPEG
+//                                       7280px PNG it is made from (the bleed included), and a
+//                                       4320px screen JPEG
 //   --report=<file>                     also each District's sign, room and sign shapes as
 //                                       JSON, for tuning the drafting's settings
 //
@@ -42,8 +43,8 @@ const OUT = {
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
   indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
 };
-// The index tile: 800 x 450 like its neighbours, cropped on the East River's bridges
-// and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
+// The index tile: 800 x 450 like its neighbours, cropped on the Queensboro and Williamsburg
+// Bridges and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
 const TILE_CROP = [366, 372, 672]; // 672 x 378 scales to exactly 800 x 450
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
@@ -133,7 +134,8 @@ const TYPE = {
   signVenue: { family: 'Barlow', weight: 500, size: 7.8, spacing: 0.2, italic: true },
   tomorrow: { family: 'Cinzel', weight: 700, size: 8.6, spacing: 1.1 },
 };
-const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,500;0,600;0,700;1,500&family=Barlow+Condensed:ital,wght@0,600;0,700;1,600&family=Bebas+Neue&family=Cinzel:wght@700&display=block';
+// The faces TYPE uses, plus Bebas Neue for the numbers in the Still tokens' own SVGs.
+const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@1,500&family=Barlow+Condensed:ital,wght@0,700;1,600&family=Bebas+Neue&family=Cinzel:wght@700&display=block';
 
 // ---------------------------------------------------------------- helpers
 const f = (v, dp = 2) => +(+v).toFixed(dp);
@@ -141,9 +143,9 @@ const poly = p => `M${p.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')} Z`;
 const pts = p => p.map(([x, y]) => `${f(x)},${f(y)}`).join(' ');
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const byId = Object.fromEntries(DISTRICTS.map(d => [d.id, d]));
-// A District may run under the frame to the board's edge, as New Jersey does (the
-// drafted board has no Westchester or Nassau). Its fill keeps the whole shape; the
-// rest (keylines, sign, room) works from the part inside the frame's hairline.
+// A District may run under the frame to the board's edge, as New Jersey does (the Bronx
+// and Queens). Its fill keeps the whole shape; the rest (keylines, sign, room) works from
+// the part inside the frame's hairline.
 const FULL = { ...geo.regions };
 for (const d of DISTRICTS) geo.regions[d.id] = insideFrame(geo.regions[d.id]);
 function insideFrame(p) {
@@ -192,14 +194,9 @@ function loadIcon(file) {
 const ICONS = {
   speak: loadIcon('Tumbler.svg'), ward: loadIcon('Fist.svg'), dock: loadIcon('anchor.svg'),
   moonshine: loadIcon('Moonshine.svg'), rum: loadIcon('Rum.svg'),
-  crown: loadIcon('Crown.svg'), runner: loadIcon('Runner.svg'), safehouse: loadIcon('Safehouse.svg'),
-  martini: loadIcon('Gin.svg'), boss: loadIcon('Boss.svg'),
+  crown: loadIcon('Crown.svg'), martini: loadIcon('Gin.svg'),
 };
 function icon(kind, cx, cy, size, color, strokeWidth) {
-  if (kind === 'squad') { // a police shield
-    const s = size / 11;
-    return `<path transform="translate(${f(cx - 5 * s)} ${f(cy - 5.5 * s)}) scale(${f(s, 4)})" d="M5 0 L10 1.6 V5.2 C10 8.2 7.6 10.2 5 11 C2.4 10.2 0 8.2 0 5.2 V1.6 Z" fill="${color}"/>`;
-  }
   const { vb } = ICONS[kind];
   const inner = strokeWidth ? ICONS[kind].inner.replace(/stroke-width="[^"]*"/g, `stroke-width="${strokeWidth}"`) : ICONS[kind].inner;
   const s = size / Math.max(vb[2], vb[3]);
@@ -361,15 +358,15 @@ function placeSign(d) {
   return best;
 }
 // Room for pieces: the District's ground at least ROOM_MARGIN from every border and
-// clear of its label cluster (by the same margin), in cm² at 24in. Printed with each
-// placement, so a geometry change can be judged by the space it leaves.
+// clear of its sign (by the same margin), in cm² at 24in. Printed with each placement,
+// so a geometry change can be judged by the space it leaves.
 const ROOM_MARGIN = 6;
 function room(d, { x, y, c }) {
-  const p = geo.regions[d.id], M = ROOM_MARGIN, boxes = [[x - M, y - M, c.w + 2 * M, c.h + 2 * M]];
+  const p = geo.regions[d.id], M = ROOM_MARGIN, sign = [x - M, y - M, c.w + 2 * M, c.h + 2 * M];
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   let n = 0;
   for (let gy = Math.min(...ys); gy <= Math.max(...ys); gy += 2) for (let gx = Math.min(...xs); gx <= Math.max(...xs); gx += 2)
-    if (inside([gx, gy], p) && boxes.every(b => rectDist([gx, gy], b) > 0) && edgeDist([gx, gy], p) >= M) n++;
+    if (inside([gx, gy], p) && rectDist([gx, gy], sign) > 0 && edgeDist([gx, gy], p) >= M) n++;
   return n * 4 * (BOARD_MM / 1080) ** 2 / 100;
 }
 function placeAll() {
@@ -386,7 +383,7 @@ function waterLining() {
     `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
 }
 
-function districtFills(placed) {
+function districtFills() {
   let s = '';
   for (const d of DISTRICTS) {
     const p = FULL[d.id];
@@ -738,14 +735,13 @@ const KEY_ROWS = [
   ['still', 'Still', []],
 ];
 function key(x, y) {
-  const rows = KEY_ROWS;
-  const headW = Math.max(...rows.map(([, t]) => width(TYPE.keyHead, upper(t))));
+  const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const chipsX = 28 + headW + 10, chipW = p => 12 + width(TYPE.price, p), CHIP_GAP = 9;
-  const chipsW = Math.max(...rows.map(([, , ch]) => ch.reduce((a, [, p]) => a + chipW(p), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
+  const chipsW = Math.max(...KEY_ROWS.map(([, , ch]) => ch.reduce((a, [, p]) => a + chipW(p), 0) + Math.max(0, ch.length - 1) * CHIP_GAP));
   // One pitch for every row, roomy enough that the High Society crown clears the row above.
-  const PITCH = 16.5, w = chipsX + chipsW + 12, h = 14 + (rows.length - 1) * PITCH + 17;
+  const PITCH = 16.5, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
   let s = panel(x, y, w, h);
-  rows.forEach(([k, t, chips], i) => {
+  KEY_ROWS.forEach(([k, t, chips], i) => {
     const cy = y + 14 + i * PITCH, ix = x + 15;
     if (k === 'still') s += still(7, ix - 5.5, cy - 6.8, 13.6);
     else s += roundel(k, ix, cy, 5.4);
@@ -836,8 +832,6 @@ function defs(fontCss, mode) {
       const [c0, c1] = b.fill.map(c => tint(c, tone));
       s += `<radialGradient id="fill-${k}${tone ? '-' + tone : ''}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${c0}"/><stop offset="1" stop-color="${c1}"/></radialGradient>`;
     }
-  s += `<radialGradient id="moon" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fbf4dc"/><stop offset=".7" stop-color="#ddd3b2"/><stop offset="1" stop-color="#a99c78"/></radialGradient>`;
-  s += `<radialGradient id="socket"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="#000"/></radialGradient>`;
   // The Heat Track's metals and lacquer.
   const metal = (id, [lt, md, dk], x2 = 1, y2 = 1) => `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}"><stop offset="0" stop-color="${lt}"/><stop offset=".28" stop-color="${md}"/><stop offset=".52" stop-color="${dk}"/><stop offset=".78" stop-color="${md}"/><stop offset="1" stop-color="${lt}"/></linearGradient>`;
   s += metal('bezelGilt', GILT) + metal('bezelCopper', COPPER);
@@ -920,14 +914,11 @@ function allText() {
     upper(d.name).split(' ').forEach(n => add(TYPE.sign, n));
     if (d.venue) add(TYPE.signVenue, d.venue);
   }
-  for (const t of ['TOMORROW', 'MASH', 'TURN ORDER']) add(TYPE.tomorrow, t);
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
   for (const [t] of WATER_LABELS) add(TYPE.water, t);
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
   for (const [, t, chips] of KEY_ROWS) { add(TYPE.keyHead, upper(t)); for (const [, p] of chips) add(TYPE.price, p); }
   add(TYPE.panelHead, 'HEAT');
-  add({ ...TYPE.panelHead, size: 10.5 }, 'HEAT');
-  add(TYPE.panelHead, 'MASH');
   add(TYPE.titleCity, 'NEW YORK');
   add(TYPE.titleYear, '1929');
   return items;
@@ -936,7 +927,7 @@ function allText() {
 function buildSvg(fontCss, mode, placed) {
   const art = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining()
     + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
-    + districtFills(placed) + borders() + piers() + bridges();
+    + districtFills() + borders() + piers() + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
   const side = sidePanels(), b = mode === 'print' ? BLEED : 0, S = 1080 + 2 * b;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-b} ${-b} ${S} ${S}" width="${S}" height="${S}">`
@@ -1044,7 +1035,7 @@ async function printPdf(browser, svg) {
   const placed = placeAll();
   for (const d of DISTRICTS) {
     const { x, y, c, open } = placed[d.id];
-    console.log(`  ${d.id.padEnd(15)} sign at ${f(x, 0)},${f(y, 0)}  clear of keylines ${f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²  hangers ${f(placed[d.id].hang, 0)}${c.opts.stacked ? ' stacked' : ''}${c.opts.drop ? ' drop' : ''}`);
+    console.log(`  ${d.id.padEnd(15)} sign at ${f(x, 0)},${f(y, 0)}  margin ${f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²  hangers ${f(placed[d.id].hang, 0)}${c.opts.stacked ? ' stacked' : ''}${c.opts.drop ? ' drop' : ''}`);
   }
   if (arg('report')) { // each District's placement and room, and its sign's shapes, as JSON
     const report = Object.fromEntries(DISTRICTS.map(d => {
