@@ -117,9 +117,10 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | Drafted, first balance, centred labels | 42 (Tenderloin) | 47, 47, 57, 64 |
 | With the signs, before the Queens / Brooklyn line | 39 (Whitestone) | 47, 57, 65, 83 |
 | Squared Morris Park, level Sound | 42 (West Side) | 46, 56, 59, 72 |
+| Now, with the larger Stills (as the build reports) | 40 (West Side) | 44, 54, 57, 71 |
 
-Rooms now run 42 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
-smallest (39), is 46 since the Sound went level.
+Rooms now run 40 to 89 (Flushing), Jamaica (80) included; it was 138. Whitestone, once the
+smallest (39), is 45 since the Sound went level.
 
 ## The look
 
@@ -146,8 +147,8 @@ smallest (39), is 46 since the Sound went level.
   in two parts (the Still standing apart in the District was tried and lost the link). Every
   shape is tried and the one whose longest hanger, plus a cost, is shortest wins: a stacked name
   costs 15, the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
-  Hangers always run to the border straight above. The longest are Brownsville's 42 and
-  Sugar Hill's 41, whose tops are slants. If a sign ever doesn't fit, the build
+  Hangers always run to the border straight above. The longest are Brownsville's 46 and
+  Sugar Hill's 44, whose tops are slants. If a sign ever doesn't fit, the build
   stops with an error.
 - **The title reads up New Jersey's strip beside the Bowery** (Nick, 2026-09-29: try it lower,
   in the empty half). It could not simply move down, since New Jersey narrows under the panels.
@@ -288,8 +289,10 @@ keeps them on a re-trace.
   frame's corner steps (the one at the Heat corner's turn was cut, 2026-09-29: it sat on the map
   and looked odd); a soft drop shadow under every Still and type medallion, so they sit on the
   board like pieces.
-- **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 30 units
-  tall (17 mm): small enough to keep the signs out of the pieces' way, large enough to read.
+- **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 33 units
+  tall (18.5 mm): small enough to keep the signs out of the pieces' way, large enough to read.
+  It was 17 mm until Nick asked for it a mm or two larger (2026-09-29); at 19 mm Sheepshead Bay's
+  plate has to hang under its sign, so 18.5 is the ceiling while the map keeps this shape.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest
   right on the Heat Track"; wrapping it into two rows would break that. The sockets keep the
   Ledger's size and spacing (39 mm chips, 2 mm apart). **Dressed as a gilt instrument** since
@@ -333,7 +336,7 @@ keeps them on a re-trace.
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are West Side (42), Tenderloin and Westerleigh (43).
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are West Side (40), Westerleigh (41), Stapleton and Tenderloin (42).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.

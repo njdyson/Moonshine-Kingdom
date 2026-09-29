@@ -257,7 +257,7 @@ function roundel(zone, cx, cy, r) {
 function cluster(d, opts = {}) {
   const hs = d.zone === 'hs', nameFill = hs ? C.goldBright : C.ink;
   const { stacked = false, drop = false } = opts;
-  const sr = 9, pad = 4.5, sh = 30, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pp = 5, lap = 6;
+  const sr = 9, pad = 4.5, sh = 18.5 * MM, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pp = 5, lap = 6;
   const pw = sw + 2 * pp, ph = sh + 2 * pp; // the Still's plate
   const names = stacked ? upper(d.name).split(' ') : [upper(d.name)];
   const tw = Math.max(...names.map(n => width(TYPE.sign, n)), d.venue ? width(TYPE.signVenue, d.venue) : 0);
