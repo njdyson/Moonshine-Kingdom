@@ -11,6 +11,10 @@
 //                                       an experiment: the same build from the geometry in
 //                                       Art/Board/Drafted/, written there, leaving the board
 //                                       and the index tile alone
+//   node tools/build_board.js --style=deco
+//                                       an experiment: Districts told apart by Deco frames,
+//                                       not tints (see STYLE), written to a Deco/ folder
+//                                       beside the build's usual output; combines with --geometry
 //
 // Two builds share everything but the texture: the print board carries the full
 // pebbled leather, which reads at 24in; the screen board keeps only soft wrinkles
@@ -36,11 +40,19 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const EXPERIMENT = (process.argv.find(a => a.startsWith('--geometry=')) || '').slice(11);
 const DIR = path.join(ROOT, 'Art', 'Board', EXPERIMENT);
+// District styling. 'tone', the board so far: each type shifts its Borough's colour
+// (Speakeasies and High Society warmer, Docks cooler) and High Society carries a gold
+// sunburst. 'deco', an experiment (Nick, 2026-09-29): one colour per Borough with Wards
+// a touch darker; Speakeasies framed by an inset gold keyline with a diamond in each
+// corner; High Society by a double keyline with a Deco fan in each corner, in place of
+// the sunburst. Docks are told by their piers.
+const STYLE = process.argv.includes('--style=deco') ? 'deco' : 'tone';
+const OUT_DIR = STYLE === 'deco' ? path.join(DIR, 'Deco') : DIR;
 const OUT = {
-  printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
-  screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
-  printPng: path.join(DIR, 'Board v0.9 (print).png'), printPdf: path.join(DIR, 'Board v0.9 (print).pdf'),
-  screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
+  printSvg: path.join(OUT_DIR, 'Board v0.9.svg'), screenSvg: path.join(OUT_DIR, 'Board v0.9 (screen).svg'),
+  screenJpg: path.join(OUT_DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(OUT_DIR, 'Board v0.9 (print preview).jpg'),
+  printPng: path.join(OUT_DIR, 'Board v0.9 (print).png'), printPdf: path.join(OUT_DIR, 'Board v0.9 (print).pdf'),
+  screenLarge: path.join(OUT_DIR, 'Board v0.9 (screen, large).jpg'),
   indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
 };
 // The index tile: 800 x 450 like its neighbours, cropped on the East River's bridges
@@ -71,7 +83,10 @@ const BOROUGHS = {
 const TONE = { speak: 'warm', hs: 'warm', dock: 'cool' };
 const TINT = { warm: '#7a4e22', cool: '#2c5058' }, TINT_AMOUNT = 0.13; // slate, not blue: blue turns red to plum
 const mix = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
-const fillId = d => `fill-${d.boro}${TONE[d.zone] ? '-' + TONE[d.zone] : ''}`;
+const WARD_DARK = 0.2; // 'deco': Wards this much towards black
+const toneOf = d => (STYLE === 'deco' ? (d.zone === 'ward' ? 'dark' : '') : TONE[d.zone] || '');
+const tint = (c, tone) => (tone === 'dark' ? mix(c, '#000000', WARD_DARK) : tone ? mix(c, TINT[tone], TINT_AMOUNT) : c);
+const fillId = d => `fill-${d.boro}${toneOf(d) ? '-' + toneOf(d) : ''}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column. lines: a hand break for long names.
@@ -441,7 +456,7 @@ function districtFills(placed) {
     const p = geo.regions[d.id];
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
-    if (d.zone === 'hs') {
+    if (d.zone === 'hs' && STYLE === 'tone') {
       // High Society: a gold sunburst from the crown.
       const [cx, cy] = placed[d.id].c.roundelAt(placed[d.id].x, placed[d.id].y);
       let rays = '';
@@ -453,7 +468,79 @@ function districtFills(placed) {
         + `<circle cx="${f(cx)}" cy="${f(cy)}" r="120" fill="url(#glow)"/></g>`;
     }
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/></g>`;
+    if (STYLE === 'deco') s += decoFrame(d, p);
   }
+  return s;
+}
+
+// ---------------------------------------------------------------- Deco frames
+// The District's outline with its straight runs merged (junctions along a straight
+// border are not corners), then moved in by k: each corner along the bisector of its
+// two edges, as far as keeps both edges k away (capped where a corner is very sharp).
+function straightRing(p) {
+  let q = p.filter((v, i) => dist2(v, p[(i + 1) % p.length]) > 0.01);
+  for (let again = true; again;) {
+    again = false;
+    for (let i = 0; i < q.length; i++) {
+      const a = q[(i - 1 + q.length) % q.length], v = q[i], b = q[(i + 1) % q.length];
+      const turn = Math.abs(Math.atan2(cross(a, v, b), (v[0] - a[0]) * (b[0] - v[0]) + (v[1] - a[1]) * (b[1] - v[1])));
+      if (turn < 3 * Math.PI / 180) { q.splice(i, 1); again = true; break; }
+    }
+  }
+  return q;
+}
+const dist2 = (a, b) => (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2;
+const signedArea = p => p.reduce((s, a, i) => { const b = p[(i + 1) % p.length]; return s + a[0] * b[1] - b[0] * a[1]; }, 0) / 2;
+function insetRing(q, k) {
+  const sgn = Math.sign(signedArea(q));
+  const inward = (a, b) => { const l = Math.hypot(b[0] - a[0], b[1] - a[1]); return [-sgn * (b[1] - a[1]) / l, sgn * (b[0] - a[0]) / l]; };
+  return q.map((v, i) => {
+    const a = q[(i - 1 + q.length) % q.length], b = q[(i + 1) % q.length];
+    const n1 = inward(a, v), n2 = inward(v, b), bx = n1[0] + n2[0], by = n1[1] + n2[1], bl = Math.hypot(bx, by);
+    const cosHalf = (bx * n1[0] + by * n1[1]) / bl, m = k / Math.max(cosHalf, 0.4);
+    return [v[0] + bx / bl * m, v[1] + by / bl * m];
+  });
+}
+// Convex corners of a ring: the point, the two edge directions leaving it, and the angle between.
+function convexCorners(q) {
+  const sgn = Math.sign(signedArea(q)), out = [];
+  q.forEach((v, i) => {
+    const a = q[(i - 1 + q.length) % q.length], b = q[(i + 1) % q.length];
+    if (Math.sign(cross(a, v, b)) !== sgn) return; // reflex
+    const u1 = [a[0] - v[0], a[1] - v[1]], u2 = [b[0] - v[0], b[1] - v[1]];
+    const l1 = Math.hypot(...u1), l2 = Math.hypot(...u2);
+    const angle = Math.acos(Math.max(-1, Math.min(1, (u1[0] * u2[0] + u1[1] * u2[1]) / l1 / l2)));
+    out.push({ v, u1: [u1[0] / l1, u1[1] / l1], u2: [u2[0] / l2, u2[1] / l2], angle, room: Math.min(l1, l2) });
+  });
+  return out;
+}
+const ringPath = q => `M${q.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')} Z`;
+const diamondAt = ([x, y], r, col) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${col}"/>`;
+// A Deco fan filling a corner: rays across the corner's angle, long and short by
+// turns, between two arcs; the frame's own corner fans, opened or closed to fit.
+function cornerFan({ v, u1, u2, angle }, r) {
+  const a1 = Math.atan2(u1[1], u1[0]), turn = Math.sign(u1[0] * u2[1] - u1[1] * u2[0]) || 1;
+  const pt = (t, rr) => { const a = a1 + turn * angle * t; return `${f(v[0] + Math.cos(a) * rr)} ${f(v[1] + Math.sin(a) * rr)}`; };
+  let d = '';
+  for (let k = 1; k <= 5; k++) d += `M${pt(k / 6, r * 0.3)} L${pt(k / 6, k % 2 ? r : r * 0.72)} `;
+  const arc = rr => `M${pt(0, rr)} A${f(rr)} ${f(rr)} 0 0 ${turn > 0 ? 1 : 0} ${pt(1, rr)} `;
+  return `<path d="${d}${arc(r * 0.3)}${arc(r * 1.08)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".7" stroke-width=".9" stroke-linecap="round"/>`;
+}
+const DECO = { line: 7, outer: 6, inner: 10.5, fan: 17, sharpest: 20, bluntest: 150 }; // insets and sizes, in units
+function decoFrame(d, p) {
+  if (d.zone !== 'speak' && d.zone !== 'hs') return '';
+  const q = straightRing(p), deg = a => a * 180 / Math.PI;
+  const fits = c => deg(c.angle) >= DECO.sharpest && deg(c.angle) <= DECO.bluntest;
+  if (d.zone === 'speak') {
+    const k = insetRing(q, DECO.line);
+    return `<path d="${ringPath(k)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".6" stroke-width=".9" stroke-linejoin="miter"/>`
+      + convexCorners(k).filter(fits).map(c => diamondAt(c.v, 2.4, C.gold)).join('');
+  }
+  const o = insetRing(q, DECO.outer), i = insetRing(q, DECO.inner);
+  let s = `<path d="${ringPath(o)}" fill="none" stroke="${C.gold}" stroke-opacity=".8" stroke-width="1.3" stroke-linejoin="miter"/>`
+    + `<path d="${ringPath(i)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
+  for (const c of convexCorners(i).filter(fits)) s += cornerFan(c, Math.min(DECO.fan, 0.3 * c.room));
+  s += convexCorners(o).filter(fits).map(c => diamondAt(c.v, 2.8, C.goldBright)).join('');
   return s;
 }
 
@@ -552,7 +639,7 @@ function placePiers() {
 }
 function piers() {
   return placePiers().map(({ d, q, u, n }) => {
-    const b = BOROUGHS[d.boro], col = TONE[d.zone] ? mix(b.fill[0], TINT[TONE[d.zone]], TINT_AMOUNT) : b.fill[0];
+    const col = tint(BOROUGHS[d.boro].fill[0], toneOf(d));
     const P = (along, across) => `${f(q[0] + n[0] * along + u[0] * across)} ${f(q[1] + n[1] * along + u[1] * across)}`;
     const body = `M${P(-2.5, -PIER.half)} L${P(PIER.len, -PIER.half)} L${P(PIER.len, PIER.half)} L${P(-2.5, PIER.half)} Z`;
     return `<path d="${body}" fill="#000" fill-opacity=".45" transform="translate(1 1.6)" filter="url(#blur2)"/>`
@@ -724,8 +811,8 @@ function frame() {
 function defs(fontCss, mode) {
   let s = `<style>${fontCss}</style>`;
   for (const [k, b] of Object.entries(BOROUGHS))
-    for (const tone of ['', 'warm', 'cool']) {
-      const [c0, c1] = b.fill.map(c => (tone ? mix(c, TINT[tone], TINT_AMOUNT) : c));
+    for (const tone of STYLE === 'deco' ? ['', 'dark'] : ['', 'warm', 'cool']) {
+      const [c0, c1] = b.fill.map(c => tint(c, tone));
       s += `<radialGradient id="fill-${k}${tone ? '-' + tone : ''}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${c0}"/><stop offset="1" stop-color="${c1}"/></radialGradient>`;
     }
   s += `<radialGradient id="glow"><stop offset="0" stop-color="${C.goldBright}" stop-opacity=".16"/><stop offset="1" stop-color="${C.goldBright}" stop-opacity="0"/></radialGradient>`;
@@ -918,6 +1005,7 @@ async function printPdf(browser, svg) {
     console.log(`  ${d.id.padEnd(15)} ${c.layout} at ${f(x, 0)},${f(y, 0)}  ${LABEL_PLACEMENT === 'centre' ? 'clearance' : 'open ground'} ${open === null ? 'pinned' : f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²`);
   }
   const print = buildSvg(fontCss, 'print', placed), screen = buildSvg(fontCss, 'screen', placed);
+  fs.mkdirSync(OUT_DIR, { recursive: true });
   for (const [file, svg] of [[OUT.printSvg, print], [OUT.screenSvg, screen]]) {
     fs.writeFileSync(file, svg);
     console.log('wrote', path.relative(ROOT, file));

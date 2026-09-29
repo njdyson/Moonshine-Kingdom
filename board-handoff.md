@@ -85,6 +85,17 @@ node tools/build_board.js --geometry=Drafted/Chamfered # the variant with bevell
 - The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point) is unchanged; splitting it
   would add a border.
 - `Art/Board/Drafted/Before and after.jpg` puts the two screen boards side by side.
+- **The Deco style** (`--style=deco`, written to `Drafted/Deco/`; Nick, 2026-09-29). The
+  type tints told a Dock from a Speakeasy only faintly, and the piers now do that job, so this
+  tells the types apart by drawing instead. One colour per Borough for Docks, Speakeasies and
+  High Society; **Wards a touch darker** (20% towards black: the rough end of town).
+  **Speakeasies** get a gold keyline inset 7 units inside their border with a small diamond at
+  each corner. **High Society** gets a double keyline (6 and 10.5 in) with the frame's Deco
+  fan opened or closed to fill each corner, and a brighter diamond: the same frame with more
+  flourish, **in place of the sunburst and glow**. Corners sharper than 20 degrees or blunter
+  than 150 take no ornament, and junctions along a straight border are not corners. The
+  default build (`STYLE = 'tone'`) is untouched and still rebuilds byte for byte.
+  `Drafted/Deco/Before and after.jpg` compares the two on the drafted board.
 - **To adopt it:** copy `Drafted/board-geometry.json` over the skeleton (or build from it by
   default), rebuild, and drop the `--geometry` switch if nothing else uses it. **To discard
   it:** delete the branch.

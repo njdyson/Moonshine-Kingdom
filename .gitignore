@@ -12,10 +12,8 @@ mk-online/*
 mk-online/dist/Board (Large).png
 
 # 5400px print render from tools/build_board.js --print; rebuild it, don't commit it
-Art/Board/*(print).png
-Art/Board/*(screen, large).jpg
-Art/Board/Drafted/**/*(print).png
-Art/Board/Drafted/**/*(screen, large).jpg
+Art/Board/**/*(print).png
+Art/Board/**/*(screen, large).jpg
 __pycache__/
 
 # one-shot mapping written by tools/optimise_art.py --apply
