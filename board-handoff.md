@@ -7,7 +7,7 @@ clickable Districts and its connection graph taken from `board-geometry.json`. T
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
 node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the index tile
-node tools/build_board.js --print   # also, git-ignored: the 24in print PDF (300dpi), its 7280px PNG,
+node tools/build_board.js --print   # also, git-ignored: the 24in print PDF (300dpi; --dpi=200 for a lighter proof), its 7280px PNG,
                                     # and a 4320px screen JPEG; about a minute
 node tools/build_board.js --report=/tmp/signs.json && node tools/tune_board.js /tmp/signs.json
                                     # suggests SETTINGS for the drafting; ten to twenty minutes

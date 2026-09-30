@@ -13,6 +13,7 @@ mk-online/dist/Board (Large).png
 
 # 7280px print render from tools/build_board.js --print; rebuild it, don't commit it
 Art/Board/**/*(print).png
+Art/Board/**/*(print, *dpi).png
 Art/Board/**/*(screen, large).jpg
 __pycache__/
 

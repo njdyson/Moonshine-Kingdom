@@ -6,7 +6,8 @@
 //   node tools/build_board.js           print and screen SVGs, 2160px previews of each, and
 //                                       the index page's tile (Art/Index/board.jpg)
 //   node tools/build_board.js --print   also the files to open or send without an SVG
-//                                       editor (not committed): a 24in PDF at 300dpi, the
+//                                       editor (not committed): a 24in PDF at 300dpi (--dpi=N
+//                                       for another, named with it), the
 //                                       7280px PNG it is made from (the bleed included), and a
 //                                       4320px screen JPEG
 //   --report=<file>                     also each District's sign, room and sign shapes as
@@ -35,11 +36,12 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const DIR = path.join(ROOT, 'Art', 'Board');
+const dpiTag = () => (arg('dpi') && +arg('dpi') !== 300 ? `, ${+arg('dpi')}dpi` : '');
 const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').slice(k.length + 3);
 const OUT = {
   printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
-  printPng: path.join(DIR, 'Board v0.9 (print).png'), printPdf: path.join(DIR, 'Board v0.9 (print).pdf'),
+  printPng: path.join(DIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(DIR, `Board v0.9 (print${dpiTag()}).pdf`),
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
   indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
 };
@@ -48,7 +50,8 @@ const OUT = {
 const TILE_CROP = [366, 372, 672]; // 672 x 378 scales to exactly 800 x 450
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
-const BOARD_PX = BOARD_IN * 300; // print render: 300dpi
+const DPI = +arg('dpi') || 300; // print render: 300dpi unless --dpi=N
+const BOARD_PX = BOARD_IN * DPI;
 // Bleed: the print master, its PNG and its PDF carry the frame's black this far past the
 // trim on every side, for the printer's cut (6 units, 3.4 mm; a printer's own template
 // wins). 0 to 1080 stays the 24in trim; the screen build and the previews stop at it.
