@@ -346,14 +346,26 @@ const SIGN_SHAPES = d => {
   const two = d.name.includes(' ');
   return [[{}, 0], ...(two ? [[{ stacked: true }, 15]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 75]] : [])];
 };
-// The sign hangs as high in the District as it fits, centred across the room there,
-// clear of the Speakeasy and High Society keylines.
+// The sign hangs as high in the District as it fits, clear of the Speakeasy and High
+// Society keylines, and as near the District's centre line as it can: the middle of its
+// full width inside the frame, not just of the room where it hangs. A District that
+// widens lower down (Canarsie) would otherwise hang its sign off to one side of its top.
+// Each unit off the centre line costs SIGN_CENTRE units of hanger (at 1, Canarsie's sign
+// stayed put: dropping it to the centre cost as much hanger as it saved).
+const SIGN_CENTRE = 2;
 function placeSign(d) {
   const p = geo.regions[d.id], framed = d.zone === 'speak' || d.zone === 'hs';
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  // the centre line: the District's centroid (its balance point, inside the frame), so a
+  // thin spit or tail doesn't drag it sideways
+  const clip = p.map(([x, y]) => [Math.min(Math.max(x, FRAME_IN), 1080 - FRAME_IN), y]);
+  let A = 0, CX = 0;
+  clip.forEach((a, i) => { const b = clip[(i + 1) % clip.length], k = a[0] * b[1] - b[0] * a[1]; A += k; CX += (a[0] + b[0]) * k; });
+  const mid = CX / (3 * A);
   // Every shape is tried, clear of the keylines where it can be (a narrow District lets
-  // it closer), and the one whose hangers come out shortest, with its cost, wins.
+  // it closer), at every height, and the one whose hangers and distance off the centre
+  // line, with its cost, come out least wins.
   const variants = SIGN_SHAPES(d);
   let best = null;
   for (const [opts, cost] of variants) for (const M of framed ? [13, 9] : [7]) {
@@ -362,11 +374,10 @@ function placeSign(d) {
       const fit = [];
       for (let x = x0; x <= x1 - c.w; x += 1) if (rectInside([x - M, y - M, c.w + 2 * M, c.h + 2 * M], p)) fit.push(x);
       if (!fit.length) continue;
-      const x = (fit[0] + fit[fit.length - 1]) / 2;
+      const x = Math.min(Math.max(mid - c.w / 2, fit[0]), fit[fit.length - 1]), off = Math.abs(x + c.w / 2 - mid);
       const hang = Math.max(...c.hangers(x, y).map(([, hy, top]) => hy - top));
-      const score = hang + cost + (M < 13 && framed ? 4 : 0);
-      if (!best || score < best.score) best = { score, hang, x, y, c, open: M };
-      break;
+      const score = hang + SIGN_CENTRE * off + cost + (M < 13 && framed ? 4 : 0);
+      if (!best || score < best.score) best = { score, hang, off, x, y, c, open: M };
     }
   }
   if (!best) throw new Error(`No room for a sign in ${d.id}: the drafting has made it too small`);
@@ -1091,7 +1102,7 @@ async function printPdf(browser, svg) {
   const placed = placeAll();
   for (const d of DISTRICTS) {
     const { x, y, c, open } = placed[d.id];
-    console.log(`  ${d.id.padEnd(15)} sign at ${f(x, 0)},${f(y, 0)}  margin ${f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²  hangers ${f(placed[d.id].hang, 0)}${c.opts.stacked ? ' stacked' : ''}${c.opts.drop ? ' drop' : ''}`);
+    console.log(`  ${d.id.padEnd(15)} sign at ${f(x, 0)},${f(y, 0)}  margin ${f(open, 0)}  room ${f(room(d, placed[d.id]), 0)} cm²  hangers ${f(placed[d.id].hang, 0)}  off ${f(placed[d.id].off, 0)}${c.opts.stacked ? ' stacked' : ''}${c.opts.drop ? ' drop' : ''}`);
   }
   if (arg('report')) { // each District's placement and room, and its sign's shapes, as JSON
     const report = Object.fromEntries(DISTRICTS.map(d => {

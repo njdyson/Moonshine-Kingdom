@@ -151,14 +151,21 @@ smallest (39), is 45 since the Sound went level.
 - **Hanging signs** (`placeSign()`, Nick, 2026-09-29). Pieces would cover a centred label, and
   an earlier placer that pushed labels aside looked odd because each went somewhere different.
   Every District gets one small plaque (type medallion, name and venue) hung by gilt hangers as
-  high as it fits, centred across the room there, clear of the keylines: one rule, so it reads as
-  designed. **The Still rides on its own plate bolted to the sign's right end**, a touch taller
+  high as it fits, as near the District's centre line as it can, clear of the keylines: one rule,
+  so it reads as designed. The centre line is the District's centroid (its balance point inside
+  the frame), and each unit off it costs 2 units of hanger (`SIGN_CENTRE`; Nick, 2026-09-30).
+  Until then a sign was centred across the room at the height it hung, which pushed Canarsie's
+  to the left of its top edge once the District widened below. The rule also moved the Manhattan
+  parallelograms' signs a little left (West Side, Tenderloin, Five Points) and the Bowery's
+  right, and dropped Astoria's into the middle of its room, on the board's longest hangers (57).
+  A bounding-box centre line was tried first: Jamaica's spit and Astoria's shore dragged it
+  off. **The Still rides on its own plate bolted to the sign's right end**, a touch taller
   than the sign, with its own gilt edge and a bolt in each corner, so name and Still are one sign
   in two parts (the Still standing apart in the District was tried and lost the link). Every
   shape is tried and the one whose longest hanger, plus a cost, is shortest wins: a stacked name
   costs 15, the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
-  Hangers always run to the border straight above. The longest are Brownsville's 46 and
-  Sugar Hill's 44, whose tops are slants. If a sign ever doesn't fit, the build
+  Hangers always run to the border straight above. The longest are Astoria's 57 and
+  Brownsville's 51, whose tops are slants. If a sign ever doesn't fit, the build
   stops with an error.
 - **The title reads up New Jersey's strip beside the Bowery** (Nick, 2026-09-29: try it lower,
   in the empty half). It could not simply move down, since New Jersey narrows under the panels.
