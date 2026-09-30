@@ -311,6 +311,13 @@ keeps them on a re-trace.
   frame's corner steps (the one at the Heat corner's turn was cut, 2026-09-29: it sat on the map
   and looked odd); a soft drop shadow under every Still and type medallion, so they sit on the
   board like pieces.
+- **Names on one line where they fit** (Nick, 2026-09-30: he dislikes the wrap). The name's letter
+  spacing went 1 to 0.5 and the sign's gaps 6 to 4 (medallion to name) and 8 to 6 (name to
+  plate), at the same 12.5 size, which puts East Harlem on one line. **Hunts Point still wraps**:
+  its widest band is 147 against the 159 a one-line sign needs at its old spacing, and even at
+  font 12 its one-line sign only fits low down, on 54 to 59 of hanger. It needs about 12 more
+  units of width at its top from the drafting (the four-way corner and East Harlem's knee).
+  A smaller name font was measured and rejected: not enough on its own, even at 11.
 - **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 33 units
   tall (18.5 mm): small enough to keep the signs out of the pieces' way, large enough to read.
   It was 17 mm until Nick asked for it a mm or two larger (2026-09-29); at 19 mm Sheepshead Bay's

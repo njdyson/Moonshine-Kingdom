@@ -146,7 +146,7 @@ const TYPE = {
   titleCity: { family: 'Cinzel', weight: 700, size: 26, spacing: 4.5 },
   titleYear: { family: 'Cinzel', weight: 700, size: 15, spacing: 8 },
   price: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.4 },
-  sign: { family: 'Barlow Condensed', weight: 700, size: 12.5, spacing: 1 },
+  sign: { family: 'Barlow Condensed', weight: 700, size: 12.5, spacing: 0.5 }, // spacing 1 until 2026-09-30: tightened so East Harlem's name fits on one line
   signVenue: { family: 'Barlow', weight: 500, size: 7.8, spacing: 0.2, italic: true },
   tomorrow: { family: 'Cinzel', weight: 700, size: 8.6, spacing: 1.1 },
 };
@@ -261,7 +261,8 @@ function cluster(d, opts = {}) {
   const pw = sw + 2 * pp, ph = sh + 2 * pp; // the Still's plate
   const names = stacked ? upper(d.name).split(' ') : [upper(d.name)];
   const tw = Math.max(...names.map(n => width(TYPE.sign, n)), d.venue ? width(TYPE.signVenue, d.venue) : 0);
-  const bw = pad + 2 * sr + 6 + tw + (drop ? pad + 2 : 8 + lap), bh = (stacked ? 34 : 26) + 2 * pad, tx = pad + 2 * sr + 6;
+  const G1 = 4, G2 = 6; // gaps: medallion to name, name to plate (6 and 8 until 2026-09-30)
+  const bw = pad + 2 * sr + G1 + tw + (drop ? pad + 2 : G2 + lap), bh = (stacked ? 34 : 26) + 2 * pad, tx = pad + 2 * sr + G1;
   const w = drop ? Math.max(bw, pw) : bw - lap + pw, h = drop ? bh - lap + ph : Math.max(bh, ph);
   const sx = drop ? (w - bw) / 2 : 0, sy = drop ? 0 : (h - bh) / 2; // the sign, in the cluster
   const px = drop ? (w - pw) / 2 : bw - lap, py = drop ? bh - lap : (h - ph) / 2; // the plate
