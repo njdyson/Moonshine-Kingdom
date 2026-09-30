@@ -41,7 +41,7 @@ BOARD = [
     ('Red Hook', BK, {'speakeasy'}, 6, ''),
     ('Canarsie', BK, {'dock'}, 4, 'start-dock'),
     ('Brownsville', BK, {'ward'}, 5, 'home'),
-    ('Stapleton', ST, {'ward'}, 6, ''),
+    ('Stapleton', ST, {'ward'}, 8, ''),
     ('Westerleigh', ST, {'dock'}, 2, ''),
     ('Tottenville', ST, {'dock'}, 4, ''),
 ]

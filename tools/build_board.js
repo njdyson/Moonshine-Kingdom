@@ -122,7 +122,7 @@ const DISTRICTS = [
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint', setup: 'runners' },
   { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar' },
   { id: 'sheepshead_bay', name: 'Canarsie', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
-  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'ward', still: 6 },
+  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'ward', still: 8 },
   { id: 'westerleigh', name: 'Westerleigh', boro: 'SI', zone: 'dock', still: 2 },
   { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 4 },
 ];

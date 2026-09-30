@@ -378,11 +378,11 @@ reads as a deliberate buff to the Knights — the sim's weakest mob — but it i
 |---|---|---|
 | **7** | **4** | Sugar Hill, Morris Park, Richmond Hill, Williamsburg — **all four are High Society, police-locked at setup, one per mainland Borough** |
 | 4 | 3 | Corona, Canarsie, Tottenville |
-| 6 | 3 | Flushing, Red Hook, Stapleton |
-| 2, 3, 5, 8, 9, 10, 11 | 2 each | |
+| 8 | 3 | The Tenderloin, Fordham, Stapleton |
+| 2, 3, 5, 6, 9, 10, 11 | 2 each | |
 | 12 | 1 | East Harlem |
 
-**Only 7 can be stacked four deep. Only 4, 6 and 7 reach three.** Everything else is a pair.
+**Only 7 can be stacked four deep. Only 4, 7 and 8 reach three (Stapleton was a 6 until 2026-09-30).** Everything else is a pair.
 `Pressure = 6 − |Still − 7|` (written down nowhere but the ledger's values; verified across all 25).
 
 ### Generic targets that are self-balancing (use freely, no quota)

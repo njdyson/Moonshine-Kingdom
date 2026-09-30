@@ -28,7 +28,7 @@ DISTRICTS = [
     ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7), ('Coney Island', BK, {'speakeasy'}, 3),
     ('Red Hook', BK, {'speakeasy'}, 6), ('Canarsie', BK, {'dock'}, 4),
     ('Brownsville', BK, {'ward'}, 5),
-    ('Stapleton', ST, {'ward'}, 6), ('Westerleigh', ST, {'dock'}, 2), ('Tottenville', ST, {'dock'}, 4),
+    ('Stapleton', ST, {'ward'}, 8), ('Westerleigh', ST, {'dock'}, 2), ('Tottenville', ST, {'dock'}, 4),
 ]
 
 

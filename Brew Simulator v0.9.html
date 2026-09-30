@@ -142,7 +142,7 @@
       <button class="ghost mini" data-preset="4">4 matching</button>
       <button class="ghost mini" data-preset="m678">mismatched 6/7/8</button>
       <button class="ghost mini" data-preset="m78">mismatched 7/8</button>
-      <button class="ghost mini" data-preset="c8">2 clumped 8s (starvable)</button>
+      <button class="ghost mini" data-preset="c8">3 clumped 8s (starvable)</button>
       <button class="ghost mini" data-preset="s39">spread 3+9 (Mash-proof)</button>
       <button class="ghost mini" data-preset="s3939">spread 3/3+9/9</button>
       <button class="ghost mini" data-preset="spine">Sugar Hill spread 7/12/11/8 (Connected)</button>
@@ -274,16 +274,16 @@ document.getElementById('addStill').addEventListener('click', () => stillRow(7, 
 //     the ODD men earn -- 1,1,2,2,3,3,4,4,5 -- and extra men are garrison,
 //     not production.
 //
-//  2. THE BOILER CENSUS. The map has: 7 x4 | 4,6 x3 | 2,3,5,8,9,10,11 x2 | 12 x1.
-//     So a 4-stack exists ONLY on 7, and only 4, 6 and 7 reach a 3-stack.
+//  2. THE BOILER CENSUS. The map has: 7 x4 | 4,8 x3 | 2,3,5,6,9,10,11 x2 | 12 x1.
+//     So a 4-stack exists ONLY on 7, and only 4, 7 and 8 reach a 3-stack.
 //     Everything else caps at a pair. Do not invent builds the board can't hold.
 //
 //  A THIRD LIMIT ARRIVED WITH SPLIT THE BATCH, and it is pure geography: `conn`
 //  marks a Still whose District is Connected to the BOSS'S District by Land or
 //  Bridge, so the relay can reach it. It is set from the actual map below, and
 //  the map is unkind to clumps -- the four 7s are one to a Borough and NO TWO OF
-//  THEM TOUCH, so no 7-stack relays anything. Same for the two 8s (Tenderloin in
-//  Manhattan, Fordham in the Bronx) and both 3+9 spreads (Jamaica/Coney Island
+//  THEM TOUCH, so no 7-stack relays anything. Same for the three 8s (Tenderloin in
+//  Manhattan, Fordham in the Bronx, Stapleton on Staten Island) and both 3+9 spreads (Jamaica/Coney Island
 //  against Bowery/Hunts Point). Only a build bought down one street can relay.
 const PRESETS = {
   // 1-3 sevens: crewed 5 apiece, the production sweet spot per boiler.
@@ -295,14 +295,14 @@ const PRESETS = {
   // still beats 5/5/5 = 9. Odd numbers, remember: the lone man earns a barrel.
   '4':   [{num:7,mob:5},{num:7,mob:5},{num:7,mob:5},{num:7,mob:1}],
   // Boss on the 7 (Morris Park), which borders Fordham's 8 -- so the 8 relays.
-  // The 6 (Flushing / Red Hook / Stapleton) touches neither, hence conn stays off.
+  // The 6 (Flushing / Red Hook) touches neither, hence conn stays off.
   'm678':[{num:7,mob:5},{num:8,mob:5,conn:true},{num:6,mob:5}],
   'm78': [{num:7,mob:5},{num:8,mob:5,conn:true}],
   // A clump on a STARVABLE number: great on a rolled Mash, but a Hostile
   // A rival Dock leader names Mash 1 and it fires nothing -- net $0. The lockout, live.
-  // Only TWO 8-boilers exist (The Tenderloin, Fordham), so this is a pair, not
-  // a trio: the starvable clump is structurally weaker than the 7-stack anyway.
-  'c8':  [{num:8,mob:5},{num:8,mob:5}],
+  // Three 8-boilers exist (The Tenderloin, Fordham, Stapleton), no two touching:
+  // the biggest starvable clump on the board, and still weaker than the 7-stack.
+  'c8':  [{num:8,mob:5},{num:8,mob:5},{num:8,mob:5}],
   // Spread-defence builds: a low and a high boiler so no single Mash face can
   // lock out both. Only one end ever fires in a morning.
   's39': [{num:3,mob:5},{num:9,mob:5}],
@@ -496,7 +496,7 @@ document.getElementById('runCompare').addEventListener('click', () => {
     ['4 matching Stills', PRESETS['4']],
     ['3 mismatched (6/7/8)', PRESETS['m678']],
     ['2 mismatched (7/8)', PRESETS['m78']],
-    ['2 clumped 8s (starvable)', PRESETS['c8']],
+    ['3 clumped 8s (starvable)', PRESETS['c8']],
     ['spread 3+9 (proof)', PRESETS['s39']],
     ['spread 3/3+9/9', PRESETS['s3939']],
     ['Sugar Hill spread 7/12/11/8', PRESETS['spine']],
