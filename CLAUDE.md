@@ -115,8 +115,9 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 
 Since 2026-09-26 cash is open information: it sits on the table in front of you and anyone may
 ask for a count (the Rulebook's Cash entry). Everything else already was: Jobs and their
-stakes, Respect, the Nod, barrels, Heat and Ledgers. The one hidden thing in the game is a
-Vipers Job held face-down by Whispers.
+stakes, Respect, the Nod, barrels, Heat and Ledgers. The one hidden thing in the game is the
+top card of the Jobs deck, which Whispers lets the Vipers read (since 2026-09-30; before that
+Whispers claimed it face-down).
 
 ## The crown is a Play: Take the Crown, and only the Nod carries it
 
@@ -292,8 +293,12 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **Loose Liquor belongs to nobody**: whoever takes Control of the block takes it.
 - **The raided crew's owner picks** which Land Connected Safe District it runs to.
 - **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
-- **Open**: Whispers may become peek-only (intel, no face-down claim), and starting Boroughs
-  may become a random draw instead of the reverse-order pick. Neither is decided.
+- **Whispers is peek-only**: the Vipers may look at the top card of the Jobs deck at any time.
+  The face-down claim is gone. Nick rates the peek the higher-skill play: they can prepare for a
+  Job before it reaches the Market.
+- **Starting Boroughs are random** (the reverse-order pick is gone). How to draw them at the
+  table is open: "at random" is the placeholder. Ideas: a Borough on the back of the four Nod
+  cards, or four Borough cards kept as your home-Borough card (possibly with an edge there).
 
 
 The board is generated vector art. `tools/draft_board.js` redraws the traced map
