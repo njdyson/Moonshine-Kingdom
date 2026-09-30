@@ -131,7 +131,7 @@ smallest (39), is 45 since the Sound went level.
   (34 wide, 70% black), which read as a shadow and made Wards look sunk into the board (Nick,
   2026-09-29); a flat dark mat and a beaded keyline were tried beside it the same day, and the
   hatching read clearest. Before the band, a whole-Ward tint 30% towards black made Wards read
-  as a different colour. The piers tell a Dock. **Speakeasies** get a gold keyline 7 units inside their border
+  as a different colour. **Docks** take a rope (`dockMark()`, `ROPE`, Nick, 2026-09-30): a hawser 4.5 units inside the edge, gold strands laid slantwise over a dark core, so every type has an edge of its own; a plain dashed line was Nick's first thought, and the rope was preferred as the harbour's own mark. The piers still stand off each Dock's shore. **Speakeasies** get a gold keyline 7 units inside their border
   with a small diamond at each corner. **High Society** gets a double keyline (6 and 10.5 in)
   with the frame's Deco fan opened or closed to fill each corner, and a brighter diamond: the
   same frame with more flourish. Corners sharper than 20 degrees or blunter than 150 take no
@@ -165,9 +165,14 @@ smallest (39), is 45 since the Sound went level.
   glass, which didn't match the pieces); High Society shows only Rum, which says "Rum only" without the words,
   and a gilt **+1 chip** after its price for the Kickback (a Ledger marker; its limits, a
   marker in Reserves and an empty slot, are the Rulebook's). The Ward,
-  Dock and Still rows were cut: the Rulebook teaches the types, the piers tell a Dock and the
-  Still is its own token. Before that it lost its sentences (long-winded; bridges explain
+  Dock and Still rows were cut: the Rulebook teaches the types, the rope and piers tell a Dock
+  and the Still is its own token. Before that it lost its sentences (long-winded; bridges explain
   themselves).
+
+- **Borough numbers ride on police shields** (Nick, 2026-09-30). The number exists only to
+  order the Squads in a Raid (the Rulebook's "numbered Borough order printed on the board"),
+  so it sits on a small gold shield, and **Staten Island has none**: no Squad patrols it. It
+  was a gold square on all five Boroughs, 1 to 5.
 
 ## Files
 
@@ -280,7 +285,7 @@ keeps them on a re-trace.
   with them on 2026-09-29. The roster still keeps each District's Town Planner mark, so they
   could come back on the signs; git history has the tray (`tray()` in `build_board.js`).
 - **The Borough reads first** (Raids and Squads work by Borough), so District types are told
-  apart by drawing, not colour: the Deco frames, the piers and the Wards' hatched edge (see
+  apart by drawing, not colour: the Deco frames, the Docks' rope and the Wards' hatched edge (see
   The look). Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
   cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales across the whole District; Nick
   prefers the Districts flat).

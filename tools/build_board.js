@@ -73,7 +73,7 @@ const BOROUGHS = {
 // One colour per Borough, so the Borough reads first (Raids and Squads work by
 // Borough). The types are told apart by drawing: Speakeasies by an inset gold keyline
 // with a diamond at each corner, High Society by a double keyline with a Deco fan in
-// each corner (decoFrame), Docks by their piers, Wards by an engraved band of gold
+// each corner (decoFrame), Docks by a rope laid inside the edge (dockMark) and their piers, Wards by an engraved band of gold
 // hatching inside the edge, closed by a keyline (wardMark). The band is drawn, not
 // shaded, so the Ward sits flat; a feathered dark band made it look sunk.
 const WARD_HATCH = { band: 13, pitch: 5, line: 1.1, gold: 0.32, shade: 0.18 };
@@ -403,6 +403,24 @@ function wardMark(d, p) {
   return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="${2 * WARD_HATCH.band}" stroke-linejoin="miter"/>`
     + `<path d="${ringPath(k)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
 }
+// A Dock's edge is a hawser: a rope laid in just inside the border, its strands
+// cut slantwise across a dark core. Close enough to the edge to stay clear of the sign.
+const ROPE = { inset: 4.5, core: 4, pitch: 3, lean: 1.6 };
+function dockMark(p) {
+  const q = insetRing(straightRing(p), ROPE.inset), R = ROPE;
+  let strands = '';
+  q.forEach((a, i) => {
+    const b = q[(i + 1) % q.length], L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L, nx = -uy, ny = ux, h = R.core / 2;
+    for (let t = R.pitch / 2; t < L; t += R.pitch) {
+      const x = a[0] + ux * t, y = a[1] + uy * t;
+      // each strand bellies forward a little, so the lay reads as twisted, not ruled
+      strands += `M${f(x - ux * R.lean - nx * h)} ${f(y - uy * R.lean - ny * h)} Q${f(x + ux * R.lean * 0.9)} ${f(y + uy * R.lean * 0.9)} ${f(x + ux * R.lean + nx * h)} ${f(y + uy * R.lean + ny * h)} `;
+    }
+  });
+  return `<path d="${ringPath(q)}" fill="none" stroke="${C.shadow}" stroke-opacity=".8" stroke-width="${R.core + 0.8}" stroke-linejoin="miter"/>`
+    + `<path d="${strands}" fill="none" stroke="${C.gold}" stroke-opacity=".9" stroke-width="1.5" stroke-linecap="round"/>`;
+}
 function districtFills() {
   let s = '';
   for (const d of DISTRICTS) {
@@ -411,6 +429,7 @@ function districtFills() {
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/>`
       + (d.zone === 'ward' ? wardMark(d, p) : '') + '</g>';
+    if (d.zone === 'dock') s += dockMark(geo.regions[d.id]);
     s += decoFrame(d, geo.regions[d.id]);
   }
   return s;
@@ -598,12 +617,14 @@ function bridges() {
 function mapLabels() {
   let s = '';
   for (const [k, [x, y, r]] of Object.entries(BORO_LABELS)) {
-    const b = BOROUGHS[k], t = upper(b.name);
-    const total = 22 + 9 + width(TYPE.boro, t), left = -total / 2;
+    // The number orders the Squads in a Raid, so it rides on a police shield, and only
+    // where a Squad patrols: Staten Island has none, so it has no number.
+    const b = BOROUGHS[k], t = upper(b.name), badge = k !== 'SI';
+    const total = (badge ? 22 + 9 : 0) + width(TYPE.boro, t), left = -total / 2, L = left;
     s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`
-      + `<rect x="${f(left)}" y="-11" width="22" height="22" rx="3" fill="${C.gold}" stroke="${C.shadow}" stroke-width="1.2"/>`
-      + text(String(b.n), left + 11, 0, { family: 'Cinzel', weight: 700, size: 16, spacing: 0 }, { fill: '#1b150e', anchor: 'middle', middle: true })
-      + text(t, left + 31, 0, TYPE.boro, { fill: C.gold, halo: 3, middle: true }) + `</g>`;
+      + (badge ? `<path d="M${f(L)} -12.5 Q${f(L + 11)} -9.5 ${f(L + 22)} -12.5 L${f(L + 22)} 1.5 Q${f(L + 22)} 9 ${f(L + 11)} 13.5 Q${f(L)} 9 ${f(L)} 1.5 Z" fill="${C.gold}" stroke="${C.shadow}" stroke-width="1.2" stroke-linejoin="round"/>`
+        + text(String(b.n), L + 11, -0.5, { family: 'Cinzel', weight: 700, size: 16, spacing: 0 }, { fill: '#1b150e', anchor: 'middle', middle: true }) : '')
+      + text(t, left + (badge ? 31 : 0), 0, TYPE.boro, { fill: C.gold, halo: 3, middle: true }) + `</g>`;
   }
   for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85, middle: true });
   for (const { name } of geo.bridges) {
