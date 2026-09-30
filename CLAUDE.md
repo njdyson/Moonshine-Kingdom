@@ -304,7 +304,7 @@ of it. Redraw the board and mk-online needs the same update again (`mk-online-bo
 A rules change is never one file. The player-facing set is:
 
 `Rulebook`, `The Almanac`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
-`The Volstead Act` (shelved), `Still Tokens`, `Turn Tokens`, `The Ledger` (both), `Brew Simulator`,
+`The Volstead Act` (shelved), `Still Tokens`, `Turn Tokens`, `The Ledger`, `Brew Simulator`,
 `Combat Simulator`, `Federal Crackdown Tracker`, `index.html`, and the board
 (`tools/build_board.js`: its roster and key).
 
