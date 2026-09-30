@@ -280,7 +280,21 @@ day) and one still-open proposal: a Blowback shield for the Still that brewed. T
 not implemented and should not be without Nick asking; read the file before touching the
 Blowback.
 
-## The board
+## Engine and Rulebook rulings (2026-09-30)
+
+Nick's rulings on the differences mk-online's harness found (the list is in mk-online's
+`harness/README.md`):
+
+- **Skiff is a Move on your own turn, nothing more.** The escape by boat on a Fold or Advance
+  was cut; don't bring it back.
+- **Stealth is a Move where the Occupier can only Hold Fire.** The Pin is the standard one,
+  free Fall Back included.
+- **Loose Liquor belongs to nobody**: whoever takes Control of the block takes it.
+- **The raided crew's owner picks** which Land Connected Safe District it runs to.
+- **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
+- **Open**: Whispers may become peek-only (intel, no face-down claim), and starting Boroughs
+  may become a random draw instead of the reverse-order pick. Neither is decided.
+
 
 The board is generated vector art. `tools/draft_board.js` redraws the traced map
 (`Art/Board/Traced/`) with straight lines, even rivers and square corners into
