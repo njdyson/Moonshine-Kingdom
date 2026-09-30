@@ -157,15 +157,15 @@ smallest (39), is 45 since the Sound went level.
   Until then a sign was centred across the room at the height it hung, which pushed Canarsie's
   to the left of its top edge once the District widened below. The rule also moved the Manhattan
   parallelograms' signs a little left (West Side, Tenderloin, Five Points) and the Bowery's
-  right, and dropped Astoria's into the middle of its room, on the board's longest hangers (57).
+  right, and dropped Astoria's into the middle of its room, on hangers of 57 (55 after the Bronx columns moved).
   A bounding-box centre line was tried first: Jamaica's spit and Astoria's shore dragged it
   off. **The Still rides on its own plate bolted to the sign's right end**, a touch taller
   than the sign, with its own gilt edge and a bolt in each corner, so name and Still are one sign
   in two parts (the Still standing apart in the District was tried and lost the link). Every
   shape is tried and the one whose longest hanger, plus a cost, is shortest wins: a stacked name
-  costs 15, the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
-  Hangers always run to the border straight above. The longest are Astoria's 57 and
-  Brownsville's 51, whose tops are slants. If a sign ever doesn't fit, the build
+  costs 25 (15 until 2026-09-30), the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
+  Hangers always run to the border straight above. The longest are Hunts Point's 56 and
+  Astoria's 55, whose widest ground lies well below their tops. If a sign ever doesn't fit, the build
   stops with an error.
 - **The title reads up New Jersey's strip beside the Bowery** (Nick, 2026-09-29: try it lower,
   in the empty half). It could not simply move down, since New Jersey narrows under the panels.
@@ -313,10 +313,13 @@ keeps them on a re-trace.
   board like pieces.
 - **Names on one line where they fit** (Nick, 2026-09-30: he dislikes the wrap). The name's letter
   spacing went 1 to 0.5 and the sign's gaps 6 to 4 (medallion to name) and 8 to 6 (name to
-  plate), at the same 12.5 size, which puts East Harlem on one line. **Hunts Point still wraps**:
-  its widest band is 147 against the 159 a one-line sign needs at its old spacing, and even at
-  font 12 its one-line sign only fits low down, on 54 to 59 of hanger. It needs about 12 more
-  units of width at its top from the drafting (the four-way corner and East Harlem's knee).
+  plate), at the same 12.5 size, which puts East Harlem on one line. **Hunts Point** took two more steps (same day):
+  the Hunts Point / Throggs Neck upright moved 816 to 825 (`hpCol`) and Fordham / Morris Park
+  with it, 862 to 871 (`bronxCols`; the Fordham / Throggs Neck border is 46 long against a
+  45 minimum, so one can't move without the other), and a stacked name now costs 25 units of
+  hanger, not 15. Its one-line sign fits only below East Harlem's diagonal, so it hangs on 56,
+  with Astoria's 55 the board's longest; at a 15 penalty the wrap still won. No sign on the
+  board wraps now. Room: Hunts Point 50 to 48, Morris Park 54 to 51, Throggs Neck 56 to 53.
   A smaller name font was measured and rejected: not enough on its own, even at 11.
 - **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 33 units
   tall (18.5 mm): small enough to keep the signs out of the pieces' way, large enough to read.

@@ -98,7 +98,7 @@ function meet(a, b) {
 // first, get what the roomy ones can spare. Since the signs, they also keep the
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
-  bronxCols: [692, 862], // Belmont | Fordham | Morris Park
+  bronxCols: [692, 871], // Belmont | Fordham | Morris Park (Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol)
   bronxRow: 184, // Fordham and Morris Park / Throggs Neck, level to the east shore
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
   manhattanWest: 9, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
@@ -106,7 +106,7 @@ const SETTINGS = {
   manhattan: [262, 367, 463, 553], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
   eastHarlem: 1, // East Harlem's west side, shifted east
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
-  hpCol: 816, // Hunts Point / Throggs Neck, upright (the Hell Gate turns there)
+  hpCol: 825, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
   queensRows: [488, 670, 807], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it

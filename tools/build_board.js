@@ -341,11 +341,11 @@ function rectInside([x, y, w, h], p) {
 }
 
 // The sign's shapes, each with what it costs in hanger units to use it: the usual one
-// free, a stacked name where the usual one hangs much higher, and the Still's plate
+// free, a stacked name (25; 15 until 2026-09-30, Nick dislikes the wrap) where the usual one hangs much higher, and the Still's plate
 // hung under the sign only where nothing else fits.
 const SIGN_SHAPES = d => {
   const two = d.name.includes(' ');
-  return [[{}, 0], ...(two ? [[{ stacked: true }, 15]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 75]] : [])];
+  return [[{}, 0], ...(two ? [[{ stacked: true }, 25]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 75]] : [])];
 };
 // The sign hangs as high in the District as it fits, clear of the Speakeasy and High
 // Society keylines, and as near the District's centre line as it can: the middle of its
