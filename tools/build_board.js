@@ -758,6 +758,14 @@ const TOMORROW = (() => {
   const mash = 24 * MM, tok = 36 * MM, mashY = 42, tokY = mashY + mash + 17;
   return { mash, tok, mashY, tokY, w: tok + 28, h: tokY + tok + 11 };
 })();
+// SUNSET is cut into the Turn Order socket's floor, under tomorrow's stack: the tokens
+// cover it all Day, and the last boss to Lay Low takes the last one and uncovers it
+// (Nick, 2026-09-30). With three players both #4s are boxed, so it still empties then.
+function sunset(cx, cy) {
+  const t = { family: 'Cinzel', weight: 700, size: 8.5, spacing: 1.6 };
+  return text('SUNSET', cx + 0.6, cy + 0.8, t, { fill: '#000', anchor: 'middle', opacity: 0.7, middle: true })
+    + text('SUNSET', cx, cy, t, { fill: 'url(#giltText)', anchor: 'middle', opacity: 0.8, middle: true });
+}
 function tomorrow(x, y) {
   const { mash, tok, w, h } = TOMORROW, spec = TYPE.tomorrow;
   const sock = (sx, sy, side, r) => {
@@ -775,7 +783,8 @@ function tomorrow(x, y) {
     h, w,
     fg: panel(x, y, w, h) + gilt('TOMORROW', cx, y + 15, spec) + rule(y + 23.5)
       + text('MASH', cx, mashY - 7, spec, { fill: C.body, anchor: 'middle', middle: true }) + sock(cx - mash / 2, mashY, mash, 6)
-      + text('TURN ORDER', cx, tokY - 7, spec, { fill: C.body, anchor: 'middle', middle: true }) + sock(cx - tok / 2, tokY, tok, 7),
+      + text('TURN ORDER', cx, tokY - 7, spec, { fill: C.body, anchor: 'middle', middle: true }) + sock(cx - tok / 2, tokY, tok, 7)
+      + sunset(cx, tokY + tok / 2),
   };
 }
 

@@ -173,7 +173,7 @@ smallest (39), is 45 since the Sound went level.
   Tried: across under the panels (as it was), and stacked on three lines.
 - **The Tomorrow panel** (`tomorrow()`): the Mash socket and a 36 mm socket for tomorrow's Turn
   Tokens as **one stack, #1 on top**, so "claim the lowest-numbered token left" becomes "take the
-  top token". Both are set today for tomorrow, which the panel teaches. Four separate slots would
+  top token". Both are set today for tomorrow, which the panel teaches. **SUNSET** is cut into the Turn Order socket's floor (Nick, 2026-09-30): the stack covers it all Day, and the last boss to Lay Low takes the last token and uncovers it, which is the moment the Rulebook calls Sunset. The Rulebook, Playbooks and Town Planner say "take the top token from tomorrow's stack". Four separate slots would
   not fit in New Jersey. **Under the Heat corner the Tomorrow panel and the key sit side by
   side** (Nick: the title was not to be sandwiched between them).
 - **The key is the price list** (Nick, 2026-09-29): two rows, Speakeasy and High Society, each
