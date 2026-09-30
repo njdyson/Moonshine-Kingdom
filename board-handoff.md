@@ -1,7 +1,7 @@
 # The board: vector rebuild
 
 Status (2026-09-29): the **drafted map with hanging signs and the Deco style is the board**, on
-`main`. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online cc5d519), with
+`main`. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
 clickable Districts and its connection graph taken from `board-geometry.json`. The Affinity export (`Art/Board (Large).png`) is untouched.
 
 ```
