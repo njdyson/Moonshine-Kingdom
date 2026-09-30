@@ -73,7 +73,7 @@ const BOROUGHS = {
 // One colour per Borough, so the Borough reads first (Raids and Squads work by
 // Borough). The types are told apart by drawing: Speakeasies by an inset gold keyline
 // with a diamond at each corner, High Society by a double keyline with a Deco fan in
-// each corner (decoFrame), Docks by a rope laid inside the edge (dockMark) and their piers, Wards by an engraved band of gold
+// each corner (decoFrame), Docks by a dashed line inside the edge (dockMark) and their piers, Wards by an engraved band of gold
 // hatching inside the edge, closed by a keyline (wardMark). The band is drawn, not
 // shaded, so the Ward sits flat; a feathered dark band made it look sunk.
 const WARD_HATCH = { band: 13, pitch: 5, line: 1.1, gold: 0.32, shade: 0.18 };
@@ -121,7 +121,7 @@ const DISTRICTS = [
   { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint', setup: 'runners' },
   { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar' },
-  { id: 'sheepshead_bay', name: 'Sheepshead Bay', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
+  { id: 'sheepshead_bay', name: 'Canarsie', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
   { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'ward', still: 6 },
   { id: 'westerleigh', name: 'Westerleigh', boro: 'SI', zone: 'dock', still: 2 },
   { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 4 },
@@ -403,23 +403,21 @@ function wardMark(d, p) {
   return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="${2 * WARD_HATCH.band}" stroke-linejoin="miter"/>`
     + `<path d="${ringPath(k)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
 }
-// A Dock's edge is a hawser: a rope laid in just inside the border, its strands
-// cut slantwise across a dark core. Close enough to the edge to stay clear of the sign.
-const ROPE = { inset: 4.5, core: 4, pitch: 3, lean: 1.6 };
+// A Dock's edge is a dashed gold line just inside the border, the harbour's chalk line.
+// Each side is dashed on its own, stretched to fit, so every corner is a dash's end.
+const DOCK_EDGE = { inset: 5, dash: 7, gap: 4, line: 1.2 };
 function dockMark(p) {
-  const q = insetRing(straightRing(p), ROPE.inset), R = ROPE;
-  let strands = '';
+  const q = insetRing(straightRing(p), DOCK_EDGE.inset), { dash, gap } = DOCK_EDGE;
+  let d = '';
   q.forEach((a, i) => {
     const b = q[(i + 1) % q.length], L = Math.hypot(b[0] - a[0], b[1] - a[1]);
-    const ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L, nx = -uy, ny = ux, h = R.core / 2;
-    for (let t = R.pitch / 2; t < L; t += R.pitch) {
-      const x = a[0] + ux * t, y = a[1] + uy * t;
-      // each strand bellies forward a little, so the lay reads as twisted, not ruled
-      strands += `M${f(x - ux * R.lean - nx * h)} ${f(y - uy * R.lean - ny * h)} Q${f(x + ux * R.lean * 0.9)} ${f(y + uy * R.lean * 0.9)} ${f(x + ux * R.lean + nx * h)} ${f(y + uy * R.lean + ny * h)} `;
+    const n = Math.max(1, Math.round((L + gap) / (dash + gap))), k = (L + gap) / (n * (dash + gap));
+    for (let j = 0; j < n; j++) {
+      const t0 = j * (dash + gap) * k / L, t1 = (j * (dash + gap) + dash) * k / L;
+      d += `M${f(a[0] + (b[0] - a[0]) * t0)} ${f(a[1] + (b[1] - a[1]) * t0)} L${f(a[0] + (b[0] - a[0]) * t1)} ${f(a[1] + (b[1] - a[1]) * t1)} `;
     }
   });
-  return `<path d="${ringPath(q)}" fill="none" stroke="${C.shadow}" stroke-opacity=".8" stroke-width="${R.core + 0.8}" stroke-linejoin="miter"/>`
-    + `<path d="${strands}" fill="none" stroke="${C.gold}" stroke-opacity=".9" stroke-width="1.5" stroke-linecap="round"/>`;
+  return `<path d="${d}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="${DOCK_EDGE.line}" stroke-linecap="butt"/>`;
 }
 function districtFills() {
   let s = '';

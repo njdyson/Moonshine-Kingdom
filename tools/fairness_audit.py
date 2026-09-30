@@ -39,7 +39,7 @@ BOARD = [
     ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7, 'police'),
     ('Coney Island', BK, {'speakeasy'}, 3, 'start-speak'),
     ('Red Hook', BK, {'speakeasy'}, 6, ''),
-    ('Sheepshead Bay', BK, {'dock'}, 4, 'start-dock'),
+    ('Canarsie', BK, {'dock'}, 4, 'start-dock'),
     ('Brownsville', BK, {'ward'}, 5, 'home'),
     ('Stapleton', ST, {'ward'}, 6, ''),
     ('Westerleigh', ST, {'dock'}, 2, ''),
@@ -77,7 +77,7 @@ CARDS = [
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
     ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {}),
     ("The Angel's Share",     1, 'Unload',    {'speakeasy'},                {}),
-    # LANDMARK: Jamaica Bay = Sheepshead Bay (Brooklyn's STARTING Dock) and
+    # LANDMARK: Jamaica Bay = Canarsie (Brooklyn's STARTING Dock) and
     # Jamaica (Queens' STARTING Dock), so both those seats own a target at setup.
     ('Night Landing',         1, 'Move',      {'dock'},                     {BK: 'friendly', Q: 'friendly'}),
     ("Squatter's Rights",     1, 'Move',      {'any'},                      {}),
@@ -89,7 +89,7 @@ CARDS = [
     ('The Grand Tour',        1, 'Unload',    {'speakeasy'},                {M: 'friendly', Q: 'friendly', BK: 'friendly'}),
     # Sunny's Bar = Red Hook, Brooklyn's NON-starting Speakeasy (empty at setup) —
     # so Brooklyn must still take it, but it's on their doorstep and their starting
-    # Dock (Sheepshead Bay) is where they make the Rum.
+    # Dock (Canarsie) is where they make the Rum.
     ('Cuban Prince',          3, 'Unload',    {'speakeasy', 'press5'},      {BK: 'friendly'}),
     ('Rum Row',               3, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Eviction',          3, 'Open Fire', {'any'},                      {}),

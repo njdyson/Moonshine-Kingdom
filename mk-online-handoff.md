@@ -104,7 +104,7 @@ The 25 districts were renumbered so each Borough has unique pressures AND every 
 | **Manhattan** | Five Points **10**, Sugar Hill **7** (HS), East Harlem **12**, The Tenderloin **8**, West Side **11**, The Bowery **9** |
 | **The Bronx** | Hunts Point **9**, Morris Park **7** (HS), Belmont **11**, Fordham **8**, Throggs Neck **10** |
 | **Queens** | Corona **4**, Richmond Hill **7** (HS), Astoria **2**, Flushing **6**, Whitestone **5**, Jamaica **3** |
-| **Brooklyn** | Brownsville **5**, Williamsburg **7** (HS), Coney Island **3**, Red Hook **6**, Sheepshead Bay **4** |
+| **Brooklyn** | Brownsville **5**, Williamsburg **7** (HS), Coney Island **3**, Red Hook **6**, Canarsie **4** |
 | **Staten Island** | Stapleton **6**, Westerleigh **12**, Tottenville **4** |
 
 Token-bag multiset (for any "supply" logic): 7×4, 6×3, 4×3, 12×1, and 2× each of {2,3,5,8,9,10,11}. Total 25.

@@ -26,7 +26,7 @@ DISTRICTS = [
     ('Flushing', Q, {'speakeasy'}, 6), ('Whitestone', Q, {'dock'}, 5),
     ('Jamaica', Q, {'dock'}, 3), ('Corona', Q, {'ward'}, 4),
     ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7), ('Coney Island', BK, {'speakeasy'}, 3),
-    ('Red Hook', BK, {'speakeasy'}, 6), ('Sheepshead Bay', BK, {'dock'}, 4),
+    ('Red Hook', BK, {'speakeasy'}, 6), ('Canarsie', BK, {'dock'}, 4),
     ('Brownsville', BK, {'ward'}, 5),
     ('Stapleton', ST, {'ward'}, 6), ('Westerleigh', ST, {'dock'}, 2), ('Tottenville', ST, {'dock'}, 4),
 ]
@@ -54,7 +54,7 @@ DS = [D(r) for r in DISTRICTS]
 # is luck. Type classes are broad — "a Speakeasy" is 12 districts, "a Dock" is 8 —
 # so landmarks are how a card gets a small, glanceable, unarguable target set.
 EAST_RIVER = {'East Harlem', 'Astoria', 'Williamsburg', 'Red Hook'}   # 4 Speakeasies
-JAMAICA_BAY = {'Sheepshead Bay', 'Jamaica'}                            # 2 Docks
+JAMAICA_BAY = {'Canarsie', 'Jamaica'}                            # 2 Docks
 
 # A Play: verb, target district, and a bag of booleans/magnitudes.
 # Each Job is (name, respect, verb, predicate(play) -> bool)

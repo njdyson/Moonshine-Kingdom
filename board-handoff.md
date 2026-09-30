@@ -36,9 +36,10 @@ works better"), so this makes the angles deliberate instead.
   are even channels: the Hudson 44 wide, down to the harbour (New Jersey is squared off level
   with the Bowery's foot); the East River 49, in three reaches (45 degrees past the Williamsburg
   and Queensboro, a level turn under the Bowery, then parallel to the Hudson); Hell Gate and the
-  Sound 49: the Hell Gate rises 3 degrees to Hunts Point / Throggs Neck, and the Sound runs level
-  from there (Nick, 2026-09-29; it fell 3 degrees, a chevron, which sloped Throggs Neck and
-  Whitestone). Staten Island
+  Sound 49, one level line from East Harlem to the frame (`hellGate`, Nick, 2026-09-30: the
+  Hell Gate had risen 3 degrees to Hunts Point / Throggs Neck, a kink on Astoria's shore; it
+  runs at the Sound's old level, so Whitestone and Throggs Neck keep their room. Before
+  2026-09-29 it fell 3 degrees, a chevron, which sloped Throggs Neck and Whitestone). Staten Island
   and Jamaica Bay are 45-degree octagons.
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
@@ -50,8 +51,14 @@ works better"), so this makes the angles deliberate instead.
   Red Hook's shore turns upright at the Narrows in line with Coney Island's (Staten Island moves
   with it, `NARROWS_GAP`), `rhStub` (10) above Red Hook's south side. That stub was 24; shortening
   it moved the Narrows west and widened Coney Island (Nick: it looked squashed), at a few
-  cm² from each Staten Island District. Widening Coney from the east was tried and cut: past
-  about 442, Sheepshead Bay's sign has to hang its Still plate underneath. The drafting reports any corner under 80 degrees; there are none.
+  cm² from each Staten Island District. Coney was still squashed, its name stacked on two
+  lines, so on 2026-09-30 it widened from the east (`coneyEast` 440 to 458) and takes its name
+  on one line. That needed the Dock beside it renamed: **Sheepshead Bay is now Canarsie**
+  (Nick asked for a shorter name; Canarsie is a real Jamaica Bay
+  neighbourhood, and the District fronts the bay). `BK_COL` moved 595.5 to 600 as well, so Canarsie's sign
+  keeps its plate beside it (59 cm² of room, from 64; Brownsville's longest hanger 46 to 51).
+  Past about 460, or under about 598, Canarsie's plate has to hang under its sign. The
+  District's id stays `sheepshead_bay`, so the traced map and mk-online's ids still match. The drafting reports any corner under 80 degrees; there are none.
 - **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point. East
   Harlem needs a shallow border with Hunts Point for its sign's width, so that border runs out to
   a knee and drops upright to the Hell Gate (`ehKnee`; East Harlem takes a short stretch of that
@@ -79,8 +86,8 @@ works better"), so this makes the angles deliberate instead.
   Astoria / Whitestone, Astoria / Flushing and Corona / Flushing. Richmond Hill steps up a
   little at its top left to meet Flushing (30 units): one level line for both makes Richmond
   Hill thin (room 53) and Flushing huge (110) if it sits low, and starves Brownsville's sign
-  (hangers over 90) if it sits high. Brooklyn is three columns under Red Hook: Coney Island, Sheepshead Bay (`coneyEast`) and
-  Brownsville, whose border with Sheepshead Bay runs straight on down from Red Hook's
+  (hangers over 90) if it sits high. Brooklyn is three columns under Red Hook: Coney Island, Canarsie (`coneyEast`) and
+  Brownsville, whose border with Canarsie runs straight on down from Red Hook's
   (`BK_COL`) and meets the bay's 45-degree corner on a foot. The Hunts Point / Throggs Neck line
   (`hpCol`) is upright too, and **Throggs Neck is a rectangle** on the level Sound. Its tip
   was cut back 24 units while the Sound sloped (Nick: the point was harsh); squaring it made the
@@ -131,7 +138,7 @@ smallest (39), is 45 since the Sound went level.
   (34 wide, 70% black), which read as a shadow and made Wards look sunk into the board (Nick,
   2026-09-29); a flat dark mat and a beaded keyline were tried beside it the same day, and the
   hatching read clearest. Before the band, a whole-Ward tint 30% towards black made Wards read
-  as a different colour. **Docks** take a rope (`dockMark()`, `ROPE`, Nick, 2026-09-30): a hawser 4.5 units inside the edge, gold strands laid slantwise over a dark core, so every type has an edge of its own; a plain dashed line was Nick's first thought, and the rope was preferred as the harbour's own mark. The piers still stand off each Dock's shore. **Speakeasies** get a gold keyline 7 units inside their border
+  as a different colour. **Docks** take a dashed gold line 5 units inside the edge (`dockMark()`, `DOCK_EDGE`, Nick, 2026-09-30), each side dashed on its own and stretched to fit so every corner is a dash's end, so every type has an edge of its own. A rope (gold strands laid slantwise over a dark core) was tried first the same day and cut: too bold and noisy. The piers stand off each Dock's shore. **Speakeasies** get a gold keyline 7 units inside their border
   with a small diamond at each corner. **High Society** gets a double keyline (6 and 10.5 in)
   with the frame's Deco fan opened or closed to fill each corner, and a brighter diamond: the
   same frame with more flourish. Corners sharper than 20 degrees or blunter than 150 take no
@@ -165,7 +172,7 @@ smallest (39), is 45 since the Sound went level.
   glass, which didn't match the pieces); High Society shows only Rum, which says "Rum only" without the words,
   and a gilt **+1 chip** after its price for the Kickback (a Ledger marker; its limits, a
   marker in Reserves and an empty slot, are the Rulebook's). The Ward,
-  Dock and Still rows were cut: the Rulebook teaches the types, the rope and piers tell a Dock
+  Dock and Still rows were cut: the Rulebook teaches the types, the dashed edge and piers tell a Dock
   and the Still is its own token. Before that it lost its sentences (long-winded; bridges explain
   themselves).
 
@@ -285,7 +292,7 @@ keeps them on a re-trace.
   with them on 2026-09-29. The roster still keeps each District's Town Planner mark, so they
   could come back on the signs; git history has the tray (`tray()` in `build_board.js`).
 - **The Borough reads first** (Raids and Squads work by Borough), so District types are told
-  apart by drawing, not colour: the Deco frames, the Docks' rope and the Wards' hatched edge (see
+  apart by drawing, not colour: the Deco frames, the Docks' dashed edge and the Wards' hatched edge (see
   The look). Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
   cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales across the whole District; Nick
   prefers the Districts flat).
@@ -297,7 +304,9 @@ keeps them on a re-trace.
 - **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 33 units
   tall (18.5 mm): small enough to keep the signs out of the pieces' way, large enough to read.
   It was 17 mm until Nick asked for it a mm or two larger (2026-09-29); at 19 mm Sheepshead Bay's
-  plate has to hang under its sign, so 18.5 is the ceiling while the map keeps this shape.
+  plate had to hang under its sign, so 18.5 was the ceiling. The Brooklyn redraw of
+  2026-09-30 (Canarsie) hasn't been tested at 19 mm; Canarsie now has less spare width, so
+  expect the same ceiling.
 - **The Heat Track is one row, numbered left to right.** A Raid chases the marker "furthest
   right on the Heat Track"; wrapping it into two rows would break that. The sockets keep the
   Ledger's size and spacing (39 mm chips, 2 mm apart). **Dressed as a gilt instrument** since

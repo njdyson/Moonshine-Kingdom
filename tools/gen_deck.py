@@ -166,7 +166,7 @@ ONES = [
     # harbour lights behind: the flavour line drawn as a picture. At 13 characters
     # the new name also clears the 16-char title--long threshold.
     # LANDMARK: "on Jamaica Bay" is labelled on the board and holds exactly two
-    # Docks: Sheepshead Bay (Bk) and Jamaica (Q). Coney Island sits on that water
+    # Docks: Canarsie (Bk) and Jamaica (Q). Coney Island sits on that water
     # but carries no anchor, so there is nothing to argue about. This was the fix
     # for the deck's other big geographic swing: this card was a strict
     # SUBSET of The Smuggler's Run (Staten -> mainland at 6+ barrels IS "4+ across

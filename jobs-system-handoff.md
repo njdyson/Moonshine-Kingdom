@@ -209,7 +209,7 @@ The board labels two bodies of water, and they give small, glanceable, unarguabl
 | Landmark | Set | Districts |
 |---|---|---|
 | **East River** | East Harlem (M) · Astoria (Q) · Williamsburg (Bk) · Red Hook (Bk) | 4 Speakeasies |
-| **Jamaica Bay** | Sheepshead Bay (Bk) · Jamaica (Q) | 2 Docks |
+| **Jamaica Bay** | Canarsie (Bk) · Jamaica (Q) | 2 Docks |
 
 **Coney Island is on neither** — it is on the ocean and it carries no anchor. Nick's test for any new
 landmark: *it has to be unarguable on the board.* A label printed **in** the water it names passes; a
@@ -377,7 +377,7 @@ reads as a deliberate buff to the Knights — the sim's weakest mob — but it i
 | Boiler | Count | Districts |
 |---|---|---|
 | **7** | **4** | Sugar Hill, Morris Park, Richmond Hill, Williamsburg — **all four are High Society, police-locked at setup, one per mainland Borough** |
-| 4 | 3 | Corona, Sheepshead Bay, Tottenville |
+| 4 | 3 | Corona, Canarsie, Tottenville |
 | 6 | 3 | Flushing, Red Hook, Stapleton |
 | 2, 3, 5, 8, 9, 10, 11 | 2 each | |
 | 12 | 1 | East Harlem |
