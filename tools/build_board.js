@@ -73,7 +73,7 @@ const BOROUGHS = {
 // One colour per Borough, so the Borough reads first (Raids and Squads work by
 // Borough). The types are told apart by drawing: Speakeasies by an inset gold keyline
 // with a diamond at each corner, High Society by a double keyline with a Deco fan in
-// each corner (decoFrame), Docks by a dashed line inside the edge (dockMark) and their piers, Wards by an engraved band of gold
+// each corner (decoFrame), Docks by a dash-dot line inside the edge (dockMark) and their piers, Wards by an engraved band of gold
 // hatching inside the edge, closed by a keyline (wardMark). The band is drawn, not
 // shaded, so the Ward sits flat; a feathered dark band made it look sunk.
 const WARD_HATCH = { band: 13, pitch: 5, line: 1.1, gold: 0.32, shade: 0.18 };
@@ -403,21 +403,25 @@ function wardMark(d, p) {
   return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="${2 * WARD_HATCH.band}" stroke-linejoin="miter"/>`
     + `<path d="${ringPath(k)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
 }
-// A Dock's edge is a dashed gold line just inside the border, the harbour's chalk line.
-// Each side is dashed on its own, stretched to fit, so every corner is a dash's end.
-const DOCK_EDGE = { inset: 5, dash: 7, gap: 4, line: 1.2 };
+// A Dock's edge is a dash-dot gold line just inside the border, the chart's line for a
+// harbour limit (plain dashes read as the leather's stitching). Each side is spaced on
+// its own, stretched to fit, so every corner is a dash's end.
+const DOCK_EDGE = { inset: 5, dash: 8, gap: 2.6, dot: 0.85, line: 1.2 };
 function dockMark(p) {
-  const q = insetRing(straightRing(p), DOCK_EDGE.inset), { dash, gap } = DOCK_EDGE;
-  let d = '';
+  const q = insetRing(straightRing(p), DOCK_EDGE.inset), { dash, gap, dot } = DOCK_EDGE, P = dash + 2 * gap;
+  let d = '', dots = '';
   q.forEach((a, i) => {
     const b = q[(i + 1) % q.length], L = Math.hypot(b[0] - a[0], b[1] - a[1]);
-    const n = Math.max(1, Math.round((L + gap) / (dash + gap))), k = (L + gap) / (n * (dash + gap));
-    for (let j = 0; j < n; j++) {
-      const t0 = j * (dash + gap) * k / L, t1 = (j * (dash + gap) + dash) * k / L;
-      d += `M${f(a[0] + (b[0] - a[0]) * t0)} ${f(a[1] + (b[1] - a[1]) * t0)} L${f(a[0] + (b[0] - a[0]) * t1)} ${f(a[1] + (b[1] - a[1]) * t1)} `;
+    const n = Math.max(1, Math.round((L - dash) / P)), k = L / (n * P + dash);
+    const at = t => [a[0] + (b[0] - a[0]) * t / L, a[1] + (b[1] - a[1]) * t / L];
+    for (let j = 0; j <= n; j++) {
+      const [x0, y0] = at(j * P * k), [x1, y1] = at((j * P + dash) * k);
+      d += `M${f(x0)} ${f(y0)} L${f(x1)} ${f(y1)} `;
+      if (j < n) { const [cx, cy] = at((j * P + dash + gap) * k); dots += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${dot}"/>`; }
     }
   });
-  return `<path d="${d}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="${DOCK_EDGE.line}" stroke-linecap="butt"/>`;
+  return `<path d="${d}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="${DOCK_EDGE.line}" stroke-linecap="butt"/>`
+    + `<g fill="${C.gold}" fill-opacity=".75">${dots}</g>`;
 }
 function districtFills() {
   let s = '';

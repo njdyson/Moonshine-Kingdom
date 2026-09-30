@@ -141,7 +141,7 @@ smallest (39), is 45 since the Sound went level.
   (34 wide, 70% black), which read as a shadow and made Wards look sunk into the board (Nick,
   2026-09-29); a flat dark mat and a beaded keyline were tried beside it the same day, and the
   hatching read clearest. Before the band, a whole-Ward tint 30% towards black made Wards read
-  as a different colour. **Docks** take a dashed gold line 5 units inside the edge (`dockMark()`, `DOCK_EDGE`, Nick, 2026-09-30), each side dashed on its own and stretched to fit so every corner is a dash's end, so every type has an edge of its own. A rope (gold strands laid slantwise over a dark core) was tried first the same day and cut: too bold and noisy. The piers stand off each Dock's shore. **Speakeasies** get a gold keyline 7 units inside their border
+  as a different colour. **Docks** take a dash-dot gold line 5 units inside the edge (`dockMark()`, `DOCK_EDGE`, Nick, 2026-09-30), each side spaced on its own and stretched to fit so every corner is a dash's end, so every type has an edge of its own. On trial against plain dashes, which read as the leather's stitching; a rope (gold strands laid slantwise over a dark core) was tried first the same day and cut: too bold and noisy. The piers stand off each Dock's shore. **Speakeasies** get a gold keyline 7 units inside their border
   with a small diamond at each corner. **High Society** gets a double keyline (6 and 10.5 in)
   with the frame's Deco fan opened or closed to fill each corner, and a brighter diamond: the
   same frame with more flourish. Corners sharper than 20 degrees or blunter than 150 take no
@@ -175,7 +175,7 @@ smallest (39), is 45 since the Sound went level.
   glass, which didn't match the pieces); High Society shows only Rum, which says "Rum only" without the words,
   and a gilt **+1 chip** after its price for the Kickback (a Ledger marker; its limits, a
   marker in Reserves and an empty slot, are the Rulebook's). The Ward,
-  Dock and Still rows were cut: the Rulebook teaches the types, the dashed edge and piers tell a Dock
+  Dock and Still rows were cut: the Rulebook teaches the types, the dash-dot edge and piers tell a Dock
   and the Still is its own token. Before that it lost its sentences (long-winded; bridges explain
   themselves).
 
@@ -295,7 +295,7 @@ keeps them on a re-trace.
   with them on 2026-09-29. The roster still keeps each District's Town Planner mark, so they
   could come back on the signs; git history has the tray (`tray()` in `build_board.js`).
 - **The Borough reads first** (Raids and Squads work by Borough), so District types are told
-  apart by drawing, not colour: the Deco frames, the Docks' dashed edge and the Wards' hatched edge (see
+  apart by drawing, not colour: the Deco frames, the Docks' dash-dot edge and the Wards' hatched edge (see
   The look). Tried and rejected before that: a colour shift per type (Speakeasies warmer, Docks
   cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales across the whole District; Nick
   prefers the Districts flat).
