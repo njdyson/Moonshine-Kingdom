@@ -403,8 +403,8 @@ function wardMark(d, p) {
   return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="${2 * WARD_HATCH.band}" stroke-linejoin="miter"/>`
     + `<path d="${ringPath(k)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
 }
-// A Dock's edge is a dash-dot gold line just inside the border, the chart's line for a
-// harbour limit (plain dashes read as the leather's stitching). Each side is spaced on
+// A Dock's edge is a dash-dot gold line just inside the border: rope strung between
+// posts (plain dashes read as the leather's stitching). Each side is spaced on
 // its own, stretched to fit, so every corner is a dash's end.
 const DOCK_EDGE = { inset: 5, dash: 8, gap: 2.6, dot: 0.85, line: 1.2 };
 function dockMark(p) {
