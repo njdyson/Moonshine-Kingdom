@@ -56,7 +56,7 @@ works better"), so this makes the angles deliberate instead.
   on one line. That needed the Dock beside it renamed: **Sheepshead Bay is now Canarsie**
   (Nick asked for a shorter name; Canarsie is a real Jamaica Bay
   neighbourhood, and the District fronts the bay). `BK_COL` moved 595.5 to 600 as well, so Canarsie's sign
-  keeps its plate beside it (59 cm² of room, from 64; Brownsville's longest hanger 46 to 51).
+  keeps its plate beside it (Brownsville's longest hanger 46 to 51).
   Past about 460, or under about 598, Canarsie's plate has to hang under its sign. The
   District's id stays `sheepshead_bay`, so the traced map and mk-online's ids still match. The drafting reports any corner under 80 degrees; there are none.
 - **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point. East
@@ -87,8 +87,11 @@ works better"), so this makes the angles deliberate instead.
   little at its top left to meet Flushing (30 units): one level line for both makes Richmond
   Hill thin (room 53) and Flushing huge (110) if it sits low, and starves Brownsville's sign
   (hangers over 90) if it sits high. Brooklyn is three columns under Red Hook: Coney Island, Canarsie (`coneyEast`) and
-  Brownsville, whose border with Canarsie runs straight on down from Red Hook's
-  (`BK_COL`) and meets the bay's 45-degree corner on a foot. The Hunts Point / Throggs Neck line
+  Brownsville, whose border with Canarsie leaves Red Hook's corner (`BK_COL`) at 45 degrees and
+  meets Jamaica Bay's 45-degree shore square (Nick, 2026-09-30; it ran upright down to the bay
+  on a foot, and the traced map had a slant here too). It gave Canarsie 13 cm² (59 to 72) and
+  took 12 from Brownsville (75 to 63). Run straight to the bay's corner instead, it met the
+  shore at a 35-degree slant, which read as the one odd angle in Brooklyn. The Hunts Point / Throggs Neck line
   (`hpCol`) is upright too, and **Throggs Neck is a rectangle** on the level Sound. Its tip
   was cut back 24 units while the Sound sloped (Nick: the point was harsh); squaring it made the
   cut unnecessary.
@@ -323,7 +326,9 @@ keeps them on a re-trace.
   5th, the Raid, changes metal, to rose-copper on an oxblood floor (`GILT`, `COPPER`).
 - **No Liquor Value track.** The key carries the prices as chips (see the key, above).
 - **Title is NEW YORK 1929, nothing more.** No logo, no compass, and since 2026-09-28 no north
-  line either (Nick found it too prominent).
+  line either (Nick found it too prominent). No Job needs one: the two river Jobs say "along
+  the East River", which the water label answers (checked 2026-09-30). Git history has
+  `northArrow()` if a Job ever names a direction.
 - **Leather, generated, not an image.** `leatherFilter()` builds a pebble grain from crease
   patterns multiplied (one alone draws worm-like squiggles at print scale), over soft wrinkles,
   with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm), its relief softened by about a quarter on 2026-09-29 (Nick: better to under-do it than overdo it, until a proof says otherwise); the Heat corner is a

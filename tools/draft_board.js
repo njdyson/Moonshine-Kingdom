@@ -50,8 +50,9 @@ const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 const FLIPS = [];
 // Districts whose size changed on purpose, which the area check leaves be: every District a
 // flip touches, West Side and East Harlem, grown with Manhattan (manhattanLift), and
-// Canarsie (sheepshead_bay), which gave Coney Island the width for its name (coneyEast).
-const RESHAPED = new Set(['west_side', 'east_harlem', 'sheepshead_bay']);
+// Canarsie (sheepshead_bay), which gave Coney Island the width for its name (coneyEast) and
+// took Brownsville's corner on the bay.
+const RESHAPED = new Set(['west_side', 'east_harlem', 'sheepshead_bay', 'brownsville']);
 function flip(g, [A, B]) {
   const i = g.chains.findIndex(c => c.sides.includes(A) && c.sides.includes(B)), c = g.chains[i];
   const [J1, J2] = [c.pts[0], c.pts[c.pts.length - 1]].map(key);
@@ -173,8 +174,9 @@ function draft(S) {
   const QB_C = atY(QB, cb), bv = QB_C[0]; // Brownsville's east side, upright from there to the bay
   const AC_J = atY(QB, S.astoriaCorona + FOOT / Math.SQRT2); // Astoria / Corona / Williamsburg, on the line
   const AC_BEND = [AC_J[0] + FOOT / Math.SQRT2, S.astoriaCorona]; // where the foot turns level
-  // Canarsie / Brownsville meets the bay's 45-degree corner square, on a foot
-  const sbFoot = FOOT / Math.SQRT2, SB_BAY = [BK_COL + sbFoot, 680 + 853 - BK_COL - sbFoot];
+  // Canarsie / Brownsville runs at 45 degrees from Red Hook's corner down to Jamaica Bay,
+  // meeting the bay's 45-degree shore square (the bay's corner itself made a 35-degree slant)
+  const sbRun = (680 + 853 - BK_COL - S.redHookSouth) / 2, SB_BAY = [BK_COL + sbRun, S.redHookSouth + sbRun];
   const bwFoot = [atY(ER_MN, m4)[0] - FOOT * Math.SQRT2, m4], BW_J = meet(line(bwFoot, [1, 1]), ER_MN); // Five Points / Bowery, square to the East River
   const WB_J = meet(line([BK_COL, S.williamsburgSouth], [1, 1]), ER_QN); // Williamsburg / Red Hook, square to the East River
   // Sugar Hill / Belmont, raised into Belmont (manhattanLift at the coast, cornerLift at the
@@ -236,7 +238,8 @@ function draft(S) {
     'east_harlem|water': [EH_SHORE, meet(HG_BX, ER_MN), meet(line(ehFoot, [1, 1]), ER_MN)],
     'belmont|hunts_point': [[b1, BH[1]], BH, CORNER],
     'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
-    'sheepshead_bay|brownsville': [[BK_COL, S.redHookSouth], [BK_COL, SB_BAY[1] - sbFoot], SB_BAY],
+    'sheepshead_bay|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
+    'brownsville|water': [[bv, 853], [680, 853], SB_BAY],
     'sheepshead_bay|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [BK_COL + 26.5, 1001.5], [BK_COL + 26.5, 1011], [S.coneyEast, 983]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'sugar_hill|west_side': [MF[0][0], MF[0][1], atY(EH_WEST, m1)],
