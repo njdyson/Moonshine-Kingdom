@@ -79,7 +79,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 ## 4. Plays
 
-Costs are in Ledger markers. **H** = draws 1 Heat (one spent marker goes to the Heat Track).
+Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers goes to the Heat Track instead of back to Reserves. It costs no extra marker (Extort is 2 markers in all).
 
 | Play (engine) | Cost | Effect and restrictions |
 |---|---|---|
