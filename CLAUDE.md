@@ -127,7 +127,9 @@ belongs to whoever Controls the block it sits in; that rule's one home is Barrel
 in Territory. So barrels sent alone into a District you don't Control stop being yours, with no
 Standoff. That is the point, not a hole: it is how a boss sells a rival his stock (Deals on the
 Side: only Cash crosses the table, liquor goes by Move), and how he plants evidence to steer a
-Big Bust (which picks the door only; Follow the Smoke still picks the mob).
+Big Bust. Follow the Smoke still picks the mob, so planting only picks the door, but the door is
+what matters: a rival's dug-in stronghold, or the High Society room his Boss is walking to. It
+is a second answer to the room-as-fortress worry under "Watch in playtest".
 
 Do not restrict lone barrels to your own turf, and do not split them into a Play of their own
 ("Shift" or "Distribute" was floated and set aside as rule bloat). Tunnel's edge is reach
