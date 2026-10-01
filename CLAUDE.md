@@ -306,7 +306,7 @@ roster copied from the Town Planner, each District with a hanging sign. Read `bo
 before touching it: it holds the build commands, the 24-inch print spec (Heat Track sockets are
 the Ledger's 39 mm chips), the decisions Nick has made so far, and the next pass he has in mind.
 mk-online serves a snapshot of this board (`mk-online/dist/board.svg`, taken 2026-09-30 from mk-online
-b015afe, with Canarsie and Stapleton's 8). Its click areas, piece spots, sockets and connection graph come from
+b015afe, with Canarsie and Stapleton's 8; refreshed 2026-10-01 when Canarsie's id became `canarsie`). Its click areas, piece spots, sockets and connection graph come from
 `board-geometry.json`, and mk-online's `scripts/boardcheck.ts` checks its graph against a copy
 of it. Redraw the board and mk-online needs the same update again (`mk-online-board-handoff.md`).
 

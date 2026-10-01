@@ -58,7 +58,7 @@ works better"), so this makes the angles deliberate instead.
   neighbourhood, and the District fronts the bay). `BK_COL` moved 595.5 to 600 as well, so Canarsie's sign
   keeps its plate beside it (Brownsville's longest hanger 46 to 51).
   Past about 460, or under about 598, Canarsie's plate has to hang under its sign. The
-  District's id stays `sheepshead_bay`, so the traced map and mk-online's ids still match. The drafting reports any corner under 80 degrees; there are none.
+  District's id became `canarsie` on 2026-10-01, in the traced map, the tools and mk-online's engine together; the drawing did not change. The drafting reports any corner under 80 degrees; there are none.
 - **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point. East
   Harlem needs a shallow border with Hunts Point for its sign's width, so that border runs out to
   a knee and drops upright to the Hell Gate (`ehKnee`; East Harlem takes a short stretch of that

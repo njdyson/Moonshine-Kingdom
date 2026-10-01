@@ -56,17 +56,17 @@ Land borders (39):
 ```
 astoria | corona              brownsville | williamsburg     flushing | whitestone
 astoria | flushing            coney_island | red_hook        fordham | hunts_point
-astoria | whitestone          coney_island | sheepshead_bay  fordham | morris_park
+astoria | whitestone          coney_island | canarsie        fordham | morris_park
 astoria | williamsburg        corona | flushing              fordham | throggs_neck
 belmont | fordham             corona | richmond_hill         hunts_point | throggs_neck
 belmont | hunts_point         corona | williamsburg          jamaica | richmond_hill
 belmont | sugar_hill          east_harlem | five_points      morris_park | throggs_neck
-bowery | five_points          east_harlem | hunts_point      red_hook | sheepshead_bay
+bowery | five_points          east_harlem | hunts_point      red_hook | canarsie
 brownsville | corona          east_harlem | sugar_hill       red_hook | williamsburg
 brownsville | jamaica         east_harlem | tenderloin       stapleton | tottenville
 brownsville | red_hook        east_harlem | west_side        stapleton | westerleigh
 brownsville | richmond_hill   five_points | tenderloin       sugar_hill | west_side
-brownsville | sheepshead_bay  flushing | richmond_hill       tenderloin | west_side
+brownsville | canarsie        flushing | richmond_hill       tenderloin | west_side
 ```
 
 Bridges (4), which also count as Land Connected:
@@ -82,7 +82,7 @@ Coastal Districts (21; every District but Corona, Flushing, Fordham and Richmond
 
 ```
 astoria belmont bowery brownsville coney_island east_harlem five_points hunts_point jamaica
-morris_park red_hook sheepshead_bay stapleton sugar_hill tenderloin throggs_neck tottenville
+morris_park red_hook canarsie stapleton sugar_hill tenderloin throggs_neck tottenville
 west_side westerleigh whitestone williamsburg
 ```
 

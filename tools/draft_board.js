@@ -50,9 +50,9 @@ const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 const FLIPS = [];
 // Districts whose size changed on purpose, which the area check leaves be: every District a
 // flip touches, West Side and East Harlem, grown with Manhattan (manhattanLift), and
-// Canarsie (sheepshead_bay), which gave Coney Island the width for its name (coneyEast) and
+// Canarsie (canarsie), which gave Coney Island the width for its name (coneyEast) and
 // took Brownsville's corner on the bay.
-const RESHAPED = new Set(['west_side', 'east_harlem', 'sheepshead_bay', 'brownsville']);
+const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville']);
 function flip(g, [A, B]) {
   const i = g.chains.findIndex(c => c.sides.includes(A) && c.sides.includes(B)), c = g.chains[i];
   const [J1, J2] = [c.pts[0], c.pts[c.pts.length - 1]].map(key);
@@ -238,9 +238,9 @@ function draft(S) {
     'east_harlem|water': [EH_SHORE, meet(HG_BX, ER_MN), meet(line(ehFoot, [1, 1]), ER_MN)],
     'belmont|hunts_point': [[b1, BH[1]], BH, CORNER],
     'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
-    'sheepshead_bay|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
+    'canarsie|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
     'brownsville|water': [[bv, 853], [680, 853], SB_BAY],
-    'sheepshead_bay|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [BK_COL + 26.5, 1001.5], [BK_COL + 26.5, 1011], [S.coneyEast, 983]],
+    'canarsie|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [BK_COL + 26.5, 1001.5], [BK_COL + 26.5, 1011], [S.coneyEast, 983]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'sugar_hill|west_side': [MF[0][0], MF[0][1], atY(EH_WEST, m1)],
     'west_side|tenderloin': [MF[1][0], MF[1][1], atY(EH_WEST, m2)],

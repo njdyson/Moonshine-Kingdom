@@ -30,7 +30,7 @@ const SEEDS = [
   ['morris_park', 925, 140], ['hunts_point', 690, 245], ['throggs_neck', 885, 270], ['astoria', 700, 475],
   ['whitestone', 870, 430], ['corona', 730, 620], ['flushing', 900, 580], ['richmond_hill', 870, 735],
   ['jamaica', 895, 905], ['williamsburg', 540, 630], ['red_hook', 430, 735], ['brownsville', 650, 790],
-  ['coney_island', 330, 900], ['sheepshead_bay', 500, 905], ['westerleigh', 110, 775], ['stapleton', 110, 880],
+  ['coney_island', 330, 900], ['canarsie', 500, 905], ['westerleigh', 110, 775], ['stapleton', 110, 880],
   ['tottenville', 110, 985],
   ['water', 730, 960], ['water', 560, 470], ['water', 60, 690], ['water', 1045, 120], ['water', 700, 1050],
   ['nj', 100, 450], ['north', 800, 32], ['east', 1048, 600],
