@@ -198,6 +198,10 @@ Three deliberate knock-ons:
 
 ### Mob colours are fixed
 
+> **Re-paired 2026-10-01** (Nick couldn't get used to this set): **Sicilians YELLOW · Vipers RED ·
+> Knights BLUE · Irish GREEN**, in the Playbooks and mk-online's `src/ui/colors.ts`. The
+> reasoning below (fixed, canonical, not binding) stands; only the pairing moved.
+
 **Sicilians RED · Irish GREEN · Vipers BLUE · Knights YELLOW.** Was free choice ("each player claims
 a color"). Fixed wins because the mobs have *persistent board-relevant* powers, so identity is read
 every turn — and Safehouse-only Recruit sharpened that, since "where is their Safehouse and can they
