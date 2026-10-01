@@ -115,8 +115,9 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 
 Since 2026-09-26 cash is open information: it sits on the table in front of you and anyone may
 ask for a count (the Rulebook's Cash entry). Everything else already was: Jobs and their
-stakes, Respect, the Nod, barrels, Heat and Ledgers. The one hidden thing in the game is a
-Vipers Job held face-down by Whispers.
+stakes, Respect, the Nod, barrels, Heat and Ledgers. The one hidden thing in the game is the
+top card of the Jobs deck, which Whispers lets the Vipers read (since 2026-09-30; before that
+Whispers claimed it face-down).
 
 ## Barrels travel alone
 
@@ -296,6 +297,25 @@ last man up can chain a pour, a Bribe and the Crown with nobody left to answer.
 day) and one still-open proposal: a Blowback shield for the Still that brewed. The shield is
 not implemented and should not be without Nick asking; read the file before touching the
 Blowback.
+
+## Engine and Rulebook rulings (2026-09-30)
+
+Nick's rulings on the differences mk-online's harness found (the list is in mk-online's
+`harness/README.md`):
+
+- **Skiff is a Move on your own turn, nothing more.** The escape by boat on a Fold or Advance
+  was cut; don't bring it back.
+- **Stealth is a Move where the Occupier can only Hold Fire.** The Pin is the standard one,
+  free Fall Back included.
+- **Loose Liquor belongs to nobody**: whoever takes Control of the block takes it.
+- **The raided crew's owner picks** which Land Connected Safe District it runs to.
+- **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
+- **Whispers is peek-only**: the Vipers may look at the top card of the Jobs deck at any time.
+  The face-down claim is gone. Nick rates the peek the higher-skill play: they can prepare for a
+  Job before it reaches the Market.
+- **Starting Boroughs are random** (the reverse-order pick is gone). How to draw them at the
+  table is open: "at random" is the placeholder. Ideas: a Borough on the back of the four Nod
+  cards, or four Borough cards kept as your home-Borough card (possibly with an edge there).
 
 ## The board
 

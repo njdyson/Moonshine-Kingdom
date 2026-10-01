@@ -606,14 +606,13 @@ has to ask for the seat on his own turn.
 - [x] **Remove the Boss's +1 brew barrel** (5.1) — reconfirmed 2026-07-30: the Rulebook's Key
       Concepts legend still described the old bonus and has now been corrected, so the tabletop
       files are finally free of it. The build is still the only place it survives.
-- [ ] **The Scatter is Land Connected only** (2026-07-30). A raided crew flees on foot; Dock-to-Dock
+- [x] **The Scatter is Land Connected only** (2026-07-30). A raided crew flees on foot; Dock-to-Dock
       sea lanes do NOT count, so a Dock with no free land exit is Cornered and the crew is arrested.
       **Combat retreat is unchanged** — Advance/Fold may still cross water via Docks. If the port
       shares one "connected" helper between Raid-flee and combat-retreat, it needs to branch here.
-      — **STILL OPEN, and the one live divergence left outside the variants.** The helpers are
-      already separate, so the branch is not needed: `safeFleeDistrict` in `src/game/raid.ts` is
-      raid-only, and it is the single place that appends the dock-to-dock neighbours. Dropping
-      that loop ports the rule; combat's Advance/Fold path is untouched by it.
+      Ported: `scatterCandidates` in `src/game/raid.ts` reads land connections only (the dock
+      lanes are used only for the Squad's own reach). Since 2026-09-30 the crew's owner picks
+      among them (`chooseScatter`); see `harness/README.md` in the mk-online repo.
 - [x] **Safehouse +1 Threat, stacking with Ambush** (6.1.1); Torch cost 1 (6.1.2)
 - [x] **Ambush: Cost 1 from Ledger, blocked when spent out or Laid Low** (6.2.1); the spent marker
       goes Ledger → Heat Track and keeps its owner (6.2.2); the Irish Plunder-in-place-of-Ambush
