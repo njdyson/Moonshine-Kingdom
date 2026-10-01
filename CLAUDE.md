@@ -118,6 +118,21 @@ ask for a count (the Rulebook's Cash entry). Everything else already was: Jobs a
 stakes, Respect, the Nod, barrels, Heat and Ledgers. The one hidden thing in the game is a
 Vipers Job held face-down by Whispers.
 
+## Barrels travel alone
+
+Since 2026-10-01 (a wording pass; the rule itself is old). A Move can send barrels with no
+Mobster beside them: the **distribution network** runs them, and the Mobsters ride shotgun
+(the Runners' blurb no longer calls them "wheelmen who haul hooch"). When a Play ends, liquor
+belongs to whoever Controls the block it sits in; that rule's one home is Barrels Hold Nothing,
+in Territory. So barrels sent alone into a District you don't Control stop being yours, with no
+Standoff. That is the point, not a hole: it is how a boss sells a rival his stock (Deals on the
+Side: only Cash crosses the table, liquor goes by Move), and how he plants evidence to steer a
+Big Bust (which picks the door only; Follow the Smoke still picks the mob).
+
+Do not restrict lone barrels to your own turf, and do not split them into a Play of their own
+("Shift" or "Distribute" was floated and set aside as rule bloat). Tunnel's edge is reach
+(Connected or not); its card dropped "(no Mobsters)", which read as if the Vipers owned the power.
+
 ## The crown is a Play: Take the Crown, and only the Nod carries it
 
 Since 2026-09-25. There are no Borough Deeds, Titles, or other board-scoring cards. Respect is
