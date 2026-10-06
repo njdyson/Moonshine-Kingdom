@@ -426,30 +426,38 @@ player carries to the table ("he's going for the Kill Shot"); the maxim is the a
 | 4 | The Other Way Out | Guide: The Other Way Out: Spread the Ends |
 | 5 | The Leash | Guide: "his turf is a leash on the number he can pick" |
 | 6 | The Kill Shot | Guide: The Kill Shot: Mirror, Then Lay Low First |
-| 7 | The Split | Split the Batch |
+| 7 | The Sidecar | new; a second Still rides alongside the Boss's (and a 1920s cocktail) |
 | 8 | The Double | Guide: "your seat doesn't matter, until your number doubles" |
 | 9 | The Claim-Late Doctrine | Guide, Part II |
 | 10 | The Cheap Rungs | the lesson's "cheapest rungs on the ladder" |
 | 11 | The Tell | new; Rothstein's poker, for the board leaking a plan |
 | 12 | Bury the Card | new; a buried card is out of play |
-| 13 | The Rum Run | Guide: "Batch the run" |
-| 14 | The Fortress | the Almanac's own term |
+| 13 | The Nightcap | new; the pour comes at the end of the day |
+| 14 | The Sucker Bet | new; even numbers into a fortress, "one try in seventy" |
 | 15 | The Picket | the Almanac's own term (section 3) |
 | 16 | The Sitting Duck | the Almanac's own term (section 3) |
-| 17 | The Beachhead | Guide: The Beachhead: Armies That Don't March |
+| 17 | Strangers Next Door | the lesson's "five strangers who never crossed a street" |
 | 18 | Fold, Check or Raise | Guide: Fold, Check, Raise: the Standoff Is a Poker Street |
 | 19 | The Long Shot | new; standing is the long shot the lesson prices |
-| 20 | The Family Business | new |
+| 20 | Your Own Accent | the Rulebook's "every family kills in its own accent" |
 | 21 | The Bulk Discount | Guide: "the bulk discount hiding in each" |
-| 22 | Follow the Smoke | the Rulebook's name for picking the mob |
+| 22 | The Cold Trail | new; be loud early and let your trail go cold |
 | 23 | The Decoy Warehouse | Guide: Lever three, the decoy warehouse; "frame-up" bolded in the body |
 | 24 | The Liquor Defense | Guide, The Frame-Up |
 | 25 | The Refund | the Law chapter's lede ("a trigger, a way of picking a door, and a refund") |
-| 26 | The Handshake | the Rulebook's Binding Handshake |
+| 26 | The Wax Seal | Nick: a deal nobody else can tamper with |
 | 27 | Cheap Paper | the lesson's "selling paper the street has already discounted" |
 | 28 | The Walk | the Almanac's own term (section 3) |
 | 29 | The Cartel | Guide: the cartel of denial |
 | 30 | The Shotgun Wedding | new; the Truce marries the table at gunpoint |
+
+Second round, same day (Nick: "use a bit more imagination"): a name that repeats a rule's name
+teaches nothing the rule doesn't, and a name that sits next to a Job card's title gets mistaken
+for that card. So The Handshake, Follow the Smoke and The Split went, and so did The Beachhead (a
+Job), The Fortress (Fortress Staten), The Rum Run (Rum Row, The Smuggler's Run) and The Family
+Business (The Five Families). "In the Blood" was tried for 20 and dropped beside the Blood Oath.
+Lessons 14, 22 and 26 gained a phrase that seats the name ("a sucker bet", "let your trail go
+cold", "a seal only you can break").
 
 The body now uses three of the Guide's other handles: **staring contest** (lesson 2), the
 leash (lesson 5) and **frame-up** (lesson 23). Kept out: "dead money" and "slow play" (section

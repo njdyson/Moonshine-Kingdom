@@ -165,8 +165,10 @@ Shadows, and "fresh end / stale end" is deleted game-wide.
   optimises backwards**: escalation wants 5s late, the deterrent thesis wants them **early**, and
   under a static Market the deterrent argument is much the stronger of the two.
 
-**Parked: a cash bounty on unclaimed Jobs** (Nick, 2026-10-06; discussed before, first written
-down here). The cleanest version:
+**Parked: The Take, a cash bounty on unclaimed Jobs** (Nick, 2026-10-06). The name is old:
+Rules v5.1 to v6.1 paid a fixed Take on every completed Contract ($500 a Gig, $1,500 a Racket,
+$3,000 a Score; see `Archive/`), and it was gone by Rulebook v0.63. This version grows on the
+card instead, which only works because the Market is static. The cleanest form:
 
 - A Job enters the Market carrying **$100 per marker of its Stake**: $100 on a 1, $200 on a 3,
   $300 on a 5.
