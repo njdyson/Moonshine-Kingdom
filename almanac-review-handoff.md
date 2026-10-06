@@ -1,5 +1,8 @@
 # The Almanac: combat stress test and revision
 
+Status (2026-10-06): a second pass checked every lesson against the rules, the deck and the board,
+corrected what was wrong and added depth where the numbers called for it. Section 5 records it.
+
 Status (2026-09-26): **applied.** Nick accepted the whole proposal the same day and is reading
 the result one lesson at a time; The Almanac is now the text of record, so the draft prose that
 used to sit in this file has been removed. What remains is the evidence (section 1), the map
@@ -304,3 +307,102 @@ None of these change a rule. They're what the stress test turned up about the wa
    Rulebook's Cash entry now says so. So "buy the Nod last" is about attention, not secrecy: the
    table can see a man a Bribe short with $5,000 in front of him, but there's no Nod on the table
    yet to rally them.
+
+---
+
+## 5. The 2026-10-06 pass: every lesson verified, depth added
+
+Nick asked for each point in the Almanac to be verified, explored further where there was depth
+left, and better written. Every claim was checked against the Rulebook, the Jobs deck (parsed from
+`Jobs Cards v0.9.html`) and the board graph (land borders, bridges and coasts read from
+`Art/Board/board-geometry.json`). Every combat figure was re-run; the new ones are section 9 of
+`tools/sim_almanac_combat.js`, and the Kickback figures are the second block of
+`tools/sim_kickback_ledger.js`. All the figures from the first pass still reproduce.
+
+### 5.1 Corrections
+
+| Lesson | Was | Now | Why |
+| --- | --- | --- | --- |
+| 3 | crew each Still with five and stop | crew in odd numbers | 7 men brew 4 and 9 brew 5. Only the even man is wasted |
+| 3 | the room opens when a Raid moves its Squad; be next door | a Squad leaves only by kicking in a door beside it, so make it one you can spare | a Squad steps onto its target, and stays put if nobody in reach has Heat |
+| 4 | "the one bracket in town whose ends touch" is Red Hook and the Bowery | that one, plus Stapleton's 8 between Westerleigh's 2 and Tottenville's 4 | Staten Island has two touching brackets, both on Docks, and no Squad |
+| 4 | you'll pour something every morning | one end is live every morning | a live end still needs its face in the pool |
+| 5 | his turf tells you tomorrow's number a day early | his next number before he names it | tomorrow's Mash is already public |
+| 7 | move him the night before, not the morning of | walk him today to where tomorrow wants him | nobody moves in the morning |
+| 7 | his number is his payday and his funeral | his crew's funeral; never leave him alone on a boiler | the Blowback takes Runners first |
+| 11 | every Borough has a 5 with its name on it | every mainland Borough, with the four named | Staten Island's 5 (The Smuggler's Run) is no bounty |
+| 15 | nobody has the men for more than one fortress | one Safehouse, one Boss, one fortress | the limit is the pieces, not the men |
+| 15 | every other block is held by 0 to 3 men | a crewed Still holds five, and five men stand off a Boss and eight a third of the time | lesson 3 tells you to crew Stills, so the Gun chapter has to price them |
+| 20 | a Hit into "a full garrison" kills two times in three | your Boss and five into the lesson 14 fortress, four times in five | the old figure had no stated setup at the book's own 3-volley budget |
+| 20 | Torch burns a Safehouse for 1 Influence and a Runner | a Runner and a marker once you're inside; prep, not a takeover | it needs the Move too, and it loses fights (5.3) |
+| 22 | each Squad hunts the freshest marker | the freshest in its reach; a later marker is armor only if its owner shares your precinct | Follow the Smoke reads only mobs in reach |
+| 23 | a Dock with one land exit is a cell with a view | the Bowery, Jamaica and Whitestone have two; hold the one the Squad isn't standing on | no mainland Dock has one land exit |
+| 25 | the man with a clean position should pull the trigger | the man with nothing in reach he'd mind losing | whoever fires the fifth is the freshest name |
+| 27 | a man one point from the crown keeps his word | a man sitting on exactly ten, since one Welsher puts him under the bar | states the reason |
+| 28 | three bosses stop fighting | the others | the game is 3 to 4 players |
+
+The cold read also fixed a few lines that worked only for a reader who remembered something else.
+Lesson 11's title is now "Your board talks before your cards do", since the cards are face-up.
+Lesson 19 now points to lesson 24 for the four-Heat trick instead of restating it. Lesson 16's
+closing image is no longer repeated word for word in the chapter's What I've Seen.
+
+### 5.2 Additions
+
+| Lesson | Added | Evidence |
+| --- | --- | --- |
+| 2, 6 | Lay Low and nothing you hold can Ambush until morning; an early Lay Low leaves your blocks ducks | Lay Low clears the Ledger; the Ambush is paid from it |
+| 3 | every barrel a Still can brew is a man its Blowback can kill | the Muscle Ratio's Brew and Dead columns are the same |
+| 5 | take the Harbormaster's job: a tie hands the Mash back to the die, and every Dock is one Move from every other | at least four Docks start empty |
+| 6 | the first-pick odds at three players (one in two) | 1 - (5/6)^4 = 52% |
+| 8 | a second number of yours is a double by another name (Sugar Hill and East Harlem on a Mash of 6) | you draft one Red |
+| 10 | the 7th marker pays for its two markers in two days; Shylock's fee is flat, so his money is cheapest early | Plays = min(5, Influence - tied up); Square Up is $2,000 whenever |
+| 12 | denial works only if your token picks before his | the Offers run in reverse Turn Order |
+| 13 | the Kickback can't print markers: a five-Rum pour refills five only with six markers clear of Jobs and the Track; short of that, pour in threes | `sim_kickback_ledger.js`, second block |
+| 13, 28 | the Greed Tax puts your name on the Track, so a leader pours in threes | Follow the Smoke |
+| 17 | every man you've buried waits in your supply to be hired at the Safehouse | Recruit hires from supply |
+| 20 | Whispers lets the Vipers build for a card before it's dealt; three of the four rooms are on the water (Skiff); a man with no house can't Recruit, and a Sicilian with no house isn't Untouchable | 2026-09-30 ruling; coasts; Untouchable keys on the Safehouse |
+| 23, 29 | plant barrels on a rival's door, his stronghold or his room; the Track picks the mob, you pick the door | barrels travel alone (2026-10-01) |
+| 23, 29 | a cornered crew is arrested Boss and all, so holding every other road out of his room takes his Boss off the board | Cornered, in the Scatter |
+| 25, 29 | Ratting takes the Card off whoever wears it, and hands back his two points | the Mark of the Snitch |
+| 28 | start the crowning day with five markers: two for the judge, two for the crown, one for the gun | Bribe 2, Ambush 1, Crown 2 |
+| 28 | claim the 5 that names your room's Borough; it marches an army there and explains the walk | the four bounties are Borough-disjoint |
+| 29 | shut the Wards that touch rooms first: Corona and Brownsville border Richmond Hill and Williamsburg; Five Points bridges to Williamsburg | board graph |
+| 29 | the quick road into three rooms is a Dock hop; Hold Fire lets a walking Boss cross two blocks in one Play, so Ambush him | Advance after Hold Fire |
+| 30 | once wed, only one partner needs the Nod, so put every Bribe on one man's books and both men's cash behind it | Claiming the Empire |
+
+### 5.3 Layout
+
+Lesson 23 grew by a paragraph, so the Law chapter's page seam moved up a lesson: page 11 now ends
+after lesson 22, and page 12 opens with lesson 23. The one-turn table moved from lesson 29's page
+to the top of the next, like the Mash table in the Stills chapter. Still 16 pages, each on one
+A4 sheet, measured in print media with Playwright's Chromium and the real Google Fonts. The
+fullest is the Stills opener at 97.0%; every other page is at 95% or less.
+
+### 5.4 For Nick: design observations, not Almanac edits
+
+1. **Torch loses fights.** Spending one of a three-marker raid's volleys and a Runner on the
+   match drops a Boss and five against the lesson 14 fortress from 23% to 3% (Boss and six: 49%
+   to 11%). The Safehouse's +1 Threat is worth less than a volley and a body. The Guide already
+   calls Torch a siege tool, and the Almanac now says so. Its real value is unhousing a rival (no
+   Recruit until he pays $500 and a Play) and stripping a Sicilian's Untouchable.
+2. **The Rat Card can be worn as a lock.** A Rat takes the Card from whoever holds it, so a
+   leader who Ratted early makes every later call hand him back two points. That switches off
+   one of the table's answers to a dug-in room ("Rat him out of the room") at a known price of
+   2 Respect, paid up front. Worth watching against a bar of 10.
+3. **The four rooms are not alike.** Morris Park has two land exits (Fordham, Throggs Neck), so a
+   Rat with the other exit held arrests the whole room, Boss and all. Sugar Hill has three,
+   Richmond Hill four, Williamsburg five. Ward adjacency runs the other way: Richmond Hill and
+   Williamsburg are one step from two Wards each (Corona, Brownsville; Five Points bridges to
+   Williamsburg), so a Boss killed there is back in a Play, while Sugar Hill and Morris Park are
+   two steps from the nearest Ward. Three rooms sit beside a Dock (all but Williamsburg), and the
+   Knights' Skiff lands in three (all but Richmond Hill).
+4. **The Kickback needs a deep pool.** With five markers clear of Jobs and the Track (6
+   Influence and a Stake 1, or 8 and a 5), a five-Rum pour loses its fifth Kickback, and the
+   10-barrel batch run nets nothing. The Rulebook's Unload example ("pour five Rum on your last
+   two markers and the Ledger empties, then refills to five") is true only with six or more, and
+   the "no marker in Reserves" clause covers the rest, so no rule changes. But it means the
+   Kickback engine rewards the Bribe ladder, and a staked leader pours in threes.
+5. **Staten Island's bracket.** Stapleton's 8 touches Westerleigh's 2 and Tottenville's 4, both
+   Docks, with no Squad ever in reach: Harbormaster piers, a Split-able bracket and Raid immunity
+   in one Borough. No Speakeasy there, so every barrel ships by water. The first pass cut the
+   Staten Island lesson; it now has one sentence in lesson 4.

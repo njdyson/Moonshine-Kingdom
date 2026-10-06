@@ -269,6 +269,10 @@ keeps them on a re-trace.
   Land. **The Almanac is fixed** (2026-09-28): the only land-touching bracket on the board is
   Red Hook's 6 and The Bowery's 9, across the Brooklyn Bridge, and the lesson now names it. The
   Kingpin's Guide still has the old claim and its $740 figure; it lags the rules by design.
+  *Update 2026-10-06:* Stapleton's Still became an 8 on 2026-09-30 (it was a 6), which made two
+  more touching brackets on Staten Island: Stapleton's 8 with Westerleigh's 2 and with
+  Tottenville's 4. Red Hook and the Bowery remain the only one on the mainland. The Almanac's
+  lesson 4 names both.
 - **The Milk Run** names the Williamsburg Bridge again ("across the Williamsburg Bridge"). It
   had dropped the name only because no component printed it. The Almanac now names the Brooklyn
   Bridge too. Both rely on this board, so they should merge with it.

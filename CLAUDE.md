@@ -287,11 +287,14 @@ belong to playtest rather than invention:
   rules, so the figure was cut from the Rulebook and the site. Put one back only from a timed
   playtest.
 
-`almanac-review-handoff.md` (2026-09-26) holds the combat stress test behind The Almanac's Gun
-and endgame lessons (pickets, the sitting duck, folding on barrels, the walk to the room);
-`tools/sim_almanac_combat.js` reproduces every figure. Its last section lists endgame
-observations for playtest: only a Sicilian Hit reliably stops a Boss dug into a room, and the
-last man up can chain a pour, a Bribe and the Crown with nobody left to answer.
+`almanac-review-handoff.md` (2026-09-26, second pass 2026-10-06) holds the combat stress test
+behind The Almanac's Gun and endgame lessons (pickets, the sitting duck, folding on barrels, the
+walk to the room) and the second pass's lesson-by-lesson corrections; `tools/sim_almanac_combat.js`
+and `tools/sim_kickback_ledger.js` reproduce every figure. Sections 4 and 5.4 list observations
+for playtest: only a Sicilian Hit reliably stops a Boss dug into a room; the last man up can chain
+a pour, a Bribe and the Crown with nobody left to answer; a leader wearing the Rat Card makes
+every later Rat hand him back two points; and the four rooms differ in exits and in their
+distance from a Ward.
 
 `kickback-blowback-handoff.md` (2026-09-22) holds the Rum-only Kickback (shipped the same
 day) and one still-open proposal: a Blowback shield for the Still that brewed. The shield is

@@ -9,7 +9,7 @@
  * casualties) rather than copying them:
  *   - the Occupier's answer: Ambush, or Hold Fire (the "duck" line); a Fold is priced
  *     against Hold Fire in section 4
- *   - the Invader's volley budget, and the Sicilian Hit
+ *   - the Invader's volley budget, the Sicilian Hit, and the Knights' Torch
  * Section 0 checks the rebuilt loop against simulateTrial before anything else runs.
  */
 
@@ -19,12 +19,13 @@ const C = combat();
 const QUICK = process.argv.includes("--quick");
 const N = QUICK ? 20000 : 200000;
 
-// One fight. inv: {r, b, irish, hit}; occ: {r, b, safe}; answer: "ambush" | "hold".
+// One fight. inv: {r, b, irish, hit, torch}; occ: {r, b, safe}; answer: "ambush" | "hold".
 // The Invader fires up to `volleys` times (a Hit costs 2 of them) or until a side is gone.
+// A Knight with `torch` spends the first of them, and a Runner, burning the Safehouse.
 function fight(inv0, occ0, answer, volleys) {
   const inv = { runners: inv0.r, bosses: inv0.b ? 1 : 0, kit: inv0.irish ? "irish" : "none" };
   const occ = { runners: occ0.r, bosses: occ0.b ? 1 : 0 };
-  const safe = occ0.safe ? 1 : 0;
+  let safe = occ0.safe ? 1 : 0;
   const invStart = C.mobsterCount(inv);
   const occStart = C.mobsterCount(occ);
   let spent = 0;
@@ -32,6 +33,12 @@ function fight(inv0, occ0, answer, volleys) {
   if (answer === "ambush" && C.alive(inv) && C.alive(occ)) {
     const threat = C.clamp(1 + occ.bosses + 1 + safe, 1, 4);
     C.applyCasualties(inv, C.rollHits(C.diceFromMobsters(C.mobsterCount(occ)), threat), false);
+  }
+
+  if (inv0.torch && safe && inv.runners >= 1 && volleys - spent >= 1) {
+    inv.runners -= 1;
+    safe = 0;
+    spent += 1;
   }
 
   while (C.alive(inv) && C.alive(occ)) {
@@ -69,7 +76,7 @@ function run(inv, occ, answer, volleys, n = N) {
 
 const pct = (x) => `${(x * 100).toFixed(0).padStart(3)}%`;
 const num = (x) => x.toFixed(1);
-const crew = (s) => (s.b ? `Boss+${s.r}` : `${s.r}R`) + (s.irish ? " Irish" : "") + (s.hit ? " Hit" : "");
+const crew = (s) => (s.b ? `Boss+${s.r}` : `${s.r}R`) + (s.irish ? " Irish" : "") + (s.hit ? " Hit" : "") + (s.torch ? " Torch" : "");
 const post = (s) => (s.b ? `Boss+${s.r}` : `${s.r}R`) + (s.safe ? "+SH" : "");
 
 // ---------------------------------------------------------------------------
@@ -266,6 +273,35 @@ function section8() {
   console.log("   The room's Blowback removes its Muscle Ratio, Runners first: Boss+4 keeps Boss+1, Boss+6 keeps Boss+2.");
 }
 
+// ---------------------------------------------------------------------------
+// The 2026-10-06 pass: the family figures in lesson 20 and the crewed Still in lesson 15.
+function section9() {
+  console.log("\n9. FAMILY EDGES AND THE FIVE-MAN STILL (3 volleys)");
+  console.log("   raid               defender   answer | take  his Boss dies  your Boss dies");
+  const row = (inv, occ, ans) => {
+    const x = run(inv, occ, ans, 3);
+    console.log(`   ${crew(inv).padEnd(18)} ${post(occ).padStart(9)}   ${ans.padEnd(6)} | ${pct(x.take)}       ${occ.b ? pct(x.occBossDead) : "   -"}           ${inv.b ? pct(x.invBossDead) : "   -"}`);
+  };
+  const fortress = { r: 3, b: 1, safe: true };
+  console.log("   Irish Firepower (lesson 20: about 8% to about 33%)");
+  row({ r: 4, b: 1 }, fortress, "ambush");
+  row({ r: 4, b: 1, irish: true }, fortress, "ambush");
+  console.log("   Sicilian Hit into the fortress (lesson 20: four times in five)");
+  for (const r of [4, 5, 6]) row({ r, b: 1, hit: true }, fortress, "ambush");
+  console.log("   Vipers Stealth (the Occupier can only Hold Fire) vs the front door (lesson 20)");
+  row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "hold");
+  row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "ambush");
+  console.log("   Knights Torch: the same three markers, one of them spent on the match (lesson 20)");
+  for (const r of [5, 6]) {
+    row({ r, b: 1 }, fortress, "ambush");
+    row({ r, b: 1, torch: true }, fortress, "ambush");
+  }
+  console.log("   A Still crewed with five (lesson 15: five men stand off a Boss and eight one time in three)");
+  for (const r of [6, 8]) row({ r, b: 1 }, { r: 5 }, "ambush");
+  console.log("   ...and the same Still after its Blowback leaves two");
+  row({ r: 3, b: 1 }, { r: 2 }, "ambush");
+}
+
 section0();
 section1();
 section2();
@@ -275,3 +311,4 @@ section5();
 section6();
 section7();
 section8();
+section9();
