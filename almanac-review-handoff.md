@@ -396,12 +396,15 @@ fullest is the Stills opener at 97.0%; every other page is at 95% or less.
    Williamsburg), so a Boss killed there is back in a Play, while Sugar Hill and Morris Park are
    two steps from the nearest Ward. Three rooms sit beside a Dock (all but Williamsburg), and the
    Knights' Skiff lands in three (all but Richmond Hill).
-4. **The Kickback needs a deep pool.** With five markers clear of Jobs and the Track (6
-   Influence and a Stake 1, or 8 and a 5), a five-Rum pour loses its fifth Kickback, and the
-   10-barrel batch run nets nothing. The Rulebook's Unload example ("pour five Rum on your last
-   two markers and the Ledger empties, then refills to five") is true only with six or more, and
-   the "no marker in Reserves" clause covers the rest, so no rule changes. But it means the
-   Kickback engine rewards the Bribe ladder, and a staked leader pours in threes.
+4. **A full five-Rum Kickback needs six clear markers, not five.** The pour's own Greed Tax
+   locks one marker on the Track, so the Ledger can refill only to (markers clear of Jobs and
+   the Track) minus one. A clean boss at 6 Influence has exactly six, so the Rulebook's Unload
+   example ("pour five Rum on your last two markers and the Ledger empties, then refills to
+   five") holds from the start. It falls short by one with any single marker tied up: a 1-Stake
+   Job at 6 Influence, a 5 held at 8, one Heat marker, or the first pour's Greed Tax when you pour
+   twice in a day. So the ten-barrel batch nets +2 at a clean 6 Influence and +3 from 7. The "no
+   marker in Reserves" clause already covers it, so no rule changes; it only means the 7th Bribe
+   buys Kickback slack, and a staked boss pours in threes.
 5. **Staten Island's bracket.** Stapleton's 8 touches Westerleigh's 2 and Tottenville's 4, both
    Docks, with no Squad ever in reach: Harbormaster piers, a Split-able bracket and Raid immunity
    in one Borough. No Speakeasy there, so every barrel ships by water. The first pass cut the
