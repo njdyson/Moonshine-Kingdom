@@ -165,6 +165,46 @@ Shadows, and "fresh end / stale end" is deleted game-wide.
   optimises backwards**: escalation wants 5s late, the deterrent thesis wants them **early**, and
   under a static Market the deterrent argument is much the stronger of the two.
 
+**Parked: a cash bounty on unclaimed Jobs** (Nick, 2026-10-06; discussed before, first written
+down here). The cleanest version:
+
+- A Job enters the Market carrying **$100 per marker of its Stake**: $100 on a 1, $200 on a 3,
+  $300 on a 5.
+- After each Offers, every Job still on the street gains **$100**.
+- The pile pays when you **complete** the Job. It stops growing once the card is claimed, and a
+  Walk Away sends it back to the bank.
+
+Why it appeals:
+
+- **Theme:** a Job pays cash as well as Respect.
+- **It prices silt instead of tolerating it** (2b.4): a card nobody can act on gets sweeter
+  until somebody will, while easy cards go cheap. The table sets the price, not the designer.
+- **It gives the Reverse Snake's late token cash:** the Offers run in reverse Turn Order, so
+  whoever Lays Low last grabs the fattest pile first. That gives the cards side of the token a
+  cash value to set against the first seat's brewing edge, and $100 is the dial.
+- **It makes claim timing a bet:** wait for the pile, and a rival who can do the deed may take
+  it first.
+- **It passes the Rat test (§8):** nothing hangs on a Raid.
+
+Why it's parked: the game is being streamlined, and it is fiddly on the table. The bills have to
+be tucked under each card so the text stays readable, and a claimed card's pile has to ride
+under it, unmixed, until the Job completes. It is also a per-card timer, which this section's
+rejected-alternatives list calls the fiddle to avoid. The cash at least displays its own age,
+which answers "a token hides the timer worse", but not "having a timer to track at all". In
+mk-online the fiddle is zero, so that is the place to try it first.
+
+Settled, if it comes back:
+
+- **Pay on completion, never on claim.** Paid on claim, a 1 that is free to hold (6 Influence,
+  clean Track) becomes a cash pickup: claim it, Walk Away next morning, keep the money.
+- **Add the money after the Offers**, so a card taken on its first morning pays only its
+  starting bounty.
+- **Consider a cap** (about $1,000). A dead Staten Island card could otherwise grow until two
+  players arrange its conditions and split the pile.
+- **It puts more cash on the table**, so pair it with a dearer top of the Bribe ladder (the 9th
+  and 10th, which gate the Nod). Leave the 7th and 8th alone: they are the cheap tempo rungs
+  that make holding Jobs affordable.
+
 **Knock-on:** Vipers' **Whispers** (peek the deck top, claim it face-down instead of a Market card) is
 mildly **buffed** — under a static Market it is the only route to a card that isn't already public.
 Worth watching alongside §8.5, which already rated it strong.
