@@ -330,9 +330,10 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 Since 2026-10-07 the Scatter's Run For It reads like Fold: the crew runs to one **Connected** Safe
 District, across water via Docks if it likes. It was land-only from 2026-07-30 ("No boats; a Dock
 is a dead end"). Nick reversed it because Raids were culling too often, and because the board made
-one cull close to automatic: the Queens Squad starts on Richmond Hill beside the Queens starting
-Dock, Jamaica, whose only other land exit is Brownsville, Brooklyn's home Ward. No other Borough's
-starting Dock was that exposed.
+one cull close to automatic: the Queens Squad starts on Richmond Hill beside what was then the
+Queens starting Dock, Jamaica, whose only other land exit is Brownsville, Brooklyn's home Ward. No
+other Borough's starting Dock was that exposed. (Queens has started on Whitestone since the same
+day; see Starting turf.)
 
 The 2026-07-30 case had four legs. Consistency with Skiff and Tunnel fell on 2026-09-30 (Skiff is a
 Move on your own turn; Tunnel carries no crew). The cost that remains is real and accepted: a crew
@@ -355,6 +356,38 @@ Squads stay in their own Borough. Letting them roam was weighed on 2026-10-07 an
 rein of the map sends all four after the one freshest name, and one step across Borough lines lets
 them bunch up and leave a Borough with no police. The Borough lock is what makes the existing levers
 (Heat timing, planted barrels, the Rat) readable.
+
+## Starting turf: the North on 8, 9, 10; the South on 4, 5, 6
+
+Since 2026-10-07 (Nick). Each Borough still starts with a Safehouse, its Boss and 2 Runners in its
+Ward, and 3 Runners each in one Speakeasy and one Dock, but the Speakeasy and Dock moved so that the
+North starts on its 8, 9 and 10 and the South on its 4, 5 and 6:
+
+| Borough | Ward | Speakeasy | Dock |
+| --- | --- | --- | --- |
+| Manhattan | Five Points 10 | The Tenderloin 8 | The Bowery 9 |
+| The Bronx | Hunts Point 9 | Fordham 8 | Throggs Neck 10 |
+| Queens | Corona 4 | Flushing 6 | Whitestone 5 |
+| Brooklyn | Brownsville 5 | Red Hook 6 | Canarsie 4 |
+
+The two sides mirror each other round the 7, so every Borough's starting Stills total the same
+Pressure, 12 (it was 6 in Manhattan and Queens, 9 in the Bronx and Brooklyn). The list's one home is
+the Town Planner's Setup column: the Rulebook's Setup defers to it, the board build's roster copies
+it (undrawn), and mk-online's `STARTING_TURF` follows it.
+
+Watch in playtest:
+
+- **Each Borough now starts on its orphan Speakeasy**, the one `jobs-system-handoff.md` built the
+  four 3-Respect friendly Jobs on (The Big Squeeze, Hell's Highway, Poison Panic, Cuban Prince).
+  Still one per seat, so still symmetric, but each is now a Job on the home seat's own turf.
+- **Night Landing** (a Dock on Jamaica Bay) suited Queens and Brooklyn, who both started on one;
+  now only Brooklyn does. `tools/fairness_audit.py` puts Queens last on the weighted seat balance
+  (weighted spread 1 to 2).
+- **Manhattan's start no longer touches Sugar Hill**: on Day 1 its Squad has nothing in reach and
+  its Crown room is two blocks off. The Bronx, Queens and Brooklyn each start with two Districts
+  beside their Squad and their room.
+- The Brooklyn Bridge now joins two starting Districts (the Bowery and Red Hook); the Hell Gate
+  Bridge (Hunts Point to Astoria) no longer does.
 
 ## The board
 

@@ -578,6 +578,18 @@ the bot's own reach test (`raidExposed`). The bots price a Raid by running the e
 of the board, so a Dock crew's escape is already in the price (17.3). `scripts/raid-reach-check.ts`
 guards both rulings.
 
+## 18. Starting turf: the North on 8, 9, 10; the South on 4, 5, 6 (2026-10-07)
+
+| Borough | Was (Ward, Speakeasy, Dock) | Now |
+|---|---|---|
+| Manhattan | Five Points, East Harlem, West Side | Five Points, The Tenderloin, The Bowery |
+| The Bronx | Hunts Point, Belmont, Throggs Neck | Hunts Point, Fordham, Throggs Neck |
+| Queens | Corona, Astoria, Jamaica | Corona, Flushing, Whitestone |
+| Brooklyn | Brownsville, Coney Island, Canarsie | Brownsville, Red Hook, Canarsie |
+
+Ported the same day (mk-online 3d24a96): `STARTING_TURF` in `src/game/setup.ts`, and the reference
+copy `LEDGER_STILLS` in `src/game/data.ts`. The bots read the board, so nothing else changes.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -687,3 +699,4 @@ guards both rulings.
 - [x] **The Scatter crosses water** (17.1, 17.2): `scatterCandidates` uses the Fold test, Docks included
 - [x] **Bots: a Dock crew can't be cornered; corner at Coney Island and Morris Park** (17.3)
 - [x] **A Squad's reach is Land Connected only** (17.4): no Dock-to-Dock hop inside its Borough
+- [x] **Starting turf: the North on 8, 9, 10; the South on 4, 5, 6** (§18)

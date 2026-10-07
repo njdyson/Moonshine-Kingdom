@@ -540,6 +540,12 @@ police-locked**, and *all four sit at Pressure 5*:
 | Queens | Astoria | Richmond Hill | **Paradise Alley** (Flushing) | Poison Panic |
 | Brooklyn | Coney Island | Williamsburg | **Sunny's Bar** (Red Hook) | Cuban Prince |
 
+**2026-10-07: Nick's new setup starts every Borough on its orphan** (the North on its 8, 9 and 10,
+the South on its 4, 5 and 6; CLAUDE.md, Starting turf). The table above is the design as built.
+Each friendly card now names its seat's own starting Speakeasy: still one per seat, but no longer a
+block to take first. The unheld Speakeasies are now East Harlem, Belmont, Astoria and Coney Island,
+at Pressure 1 or 2. Whether the four cards want retuning is a playtest question.
+
 These are each borough's **friendly** card, all at 3 Respect. Matched by **one bounty per borough,
 all Open Fire 5s and borough-disjoint** (which is also what guarantees "never two 5s"):
 Bloody Sunday (M) · Over the Top (Bx) · Toll Booth Trap (Q) · Butcher's Ledger (Bk).

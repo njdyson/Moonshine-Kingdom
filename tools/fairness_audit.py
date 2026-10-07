@@ -17,28 +17,30 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 M, BX, Q, BK, ST = 'Manhattan', 'Bronx', 'Queens', 'Brooklyn', 'Staten'
 
-# name, borough, tags, still, setup  — setup from Turn Structure & Ledger (Zone col)
+# name, borough, tags, still, setup: setup from the Town Planner's Setup column.
+# Since 2026-10-07 the North (Manhattan, Bronx) starts on its 8, 9 and 10 and the
+# South (Queens, Brooklyn) on its 4, 5 and 6.
 BOARD = [
     ('Sugar Hill', M, {'highSociety', 'speakeasy'}, 7, 'police'),
-    ('East Harlem', M, {'speakeasy'}, 12, 'start-speak'),
-    ('The Tenderloin', M, {'speakeasy'}, 8, ''),
-    ('West Side', M, {'dock'}, 11, 'start-dock'),
-    ('The Bowery', M, {'dock'}, 9, ''),
+    ('East Harlem', M, {'speakeasy'}, 12, ''),
+    ('The Tenderloin', M, {'speakeasy'}, 8, 'start-speak'),
+    ('West Side', M, {'dock'}, 11, ''),
+    ('The Bowery', M, {'dock'}, 9, 'start-dock'),
     ('Five Points', M, {'ward'}, 10, 'home'),
     ('Morris Park', BX, {'highSociety', 'speakeasy'}, 7, 'police'),
-    ('Belmont', BX, {'speakeasy'}, 11, 'start-speak'),
-    ('Fordham', BX, {'speakeasy'}, 8, ''),
+    ('Belmont', BX, {'speakeasy'}, 11, ''),
+    ('Fordham', BX, {'speakeasy'}, 8, 'start-speak'),
     ('Throggs Neck', BX, {'dock'}, 10, 'start-dock'),
     ('Hunts Point', BX, {'ward'}, 9, 'home'),
     ('Richmond Hill', Q, {'highSociety', 'speakeasy'}, 7, 'police'),
-    ('Astoria', Q, {'speakeasy'}, 2, 'start-speak'),
-    ('Flushing', Q, {'speakeasy'}, 6, ''),
-    ('Whitestone', Q, {'dock'}, 5, ''),
-    ('Jamaica', Q, {'dock'}, 3, 'start-dock'),
+    ('Astoria', Q, {'speakeasy'}, 2, ''),
+    ('Flushing', Q, {'speakeasy'}, 6, 'start-speak'),
+    ('Whitestone', Q, {'dock'}, 5, 'start-dock'),
+    ('Jamaica', Q, {'dock'}, 3, ''),
     ('Corona', Q, {'ward'}, 4, 'home'),
     ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7, 'police'),
-    ('Coney Island', BK, {'speakeasy'}, 3, 'start-speak'),
-    ('Red Hook', BK, {'speakeasy'}, 6, ''),
+    ('Coney Island', BK, {'speakeasy'}, 3, ''),
+    ('Red Hook', BK, {'speakeasy'}, 6, 'start-speak'),
     ('Canarsie', BK, {'dock'}, 4, 'start-dock'),
     ('Brownsville', BK, {'ward'}, 5, 'home'),
     ('Stapleton', ST, {'ward'}, 8, ''),
@@ -77,29 +79,34 @@ CARDS = [
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
     ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {}),
     ("The Angel's Share",     1, 'Unload',    {'speakeasy'},                {}),
-    # LANDMARK: Jamaica Bay = Canarsie (Brooklyn's STARTING Dock) and
-    # Jamaica (Queens' STARTING Dock), so both those seats own a target at setup.
-    ('Night Landing',         1, 'Move',      {'dock'},                     {BK: 'friendly', Q: 'friendly'}),
+    # LANDMARK: Jamaica Bay = Canarsie (Brooklyn's STARTING Dock) and Jamaica.
+    # Until 2026-10-07 Jamaica was Queens' starting Dock too and both seats owned a
+    # target at setup; Queens now starts on Whitestone, so only Brooklyn does.
+    ('Night Landing',         1, 'Move',      {'dock'},                     {BK: 'friendly'}),
     ("Squatter's Rights",     1, 'Move',      {'any'},                      {}),
-    # LANDMARK: East River = East Harlem (Manhattan's STARTING Speakeasy), Astoria
-    # (Queens' STARTING Speakeasy), Williamsburg (Brooklyn's police-locked High
-    # Society) and Red Hook (Brooklyn's orphan). The BRONX has no East River
+    # LANDMARK: East River = East Harlem (beside Manhattan's home Ward), Astoria
+    # (beside all three of Queens' starting Districts), Williamsburg (Brooklyn's
+    # police-locked High Society) and Red Hook (Brooklyn's STARTING Speakeasy since
+    # 2026-10-07). Each is on its seat's doorstep at worst. The BRONX has no East River
     # Speakeasy — Throggs Neck is on that water but it is a Dock. So this card is
     # the one seat-asymmetry the landmark introduced; watch section 4.
     ('The Grand Tour',        1, 'Unload',    {'speakeasy'},                {M: 'friendly', Q: 'friendly', BK: 'friendly'}),
-    # Sunny's Bar = Red Hook, Brooklyn's NON-starting Speakeasy (empty at setup) —
-    # so Brooklyn must still take it, but it's on their doorstep and their starting
-    # Dock (Canarsie) is where they make the Rum.
+    # Sunny's Bar = Red Hook, Brooklyn's STARTING Speakeasy since 2026-10-07 (it was
+    # the empty one on their doorstep), and their starting Dock (Canarsie), where
+    # they make the Rum, is next door.
     ('Cuban Prince',          3, 'Unload',    {'speakeasy', 'press5'},      {BK: 'friendly'}),
     ('Rum Row',               3, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Eviction',          3, 'Open Fire', {'any'},                      {}),
     ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
     ('The Insurance Job',     3, 'Rat',       {'any'},                      {}),
-    # MANHATTAN'S FRIENDLY — orphan Speakeasy #4 (The Haymarket, the Tenderloin).
+    # MANHATTAN'S FRIENDLY: The Haymarket (the Tenderloin), its starting Speakeasy
+    # since 2026-10-07 (the orphan #4 before).
     ('The Big Squeeze',       3, 'Unload',    {'speakeasy', 'press5'},      {M: 'friendly'}),
-    # BRONX'S FRIENDLY — orphan district Fordham (The Penny Whistle).
+    # BRONX'S FRIENDLY: Fordham (The Penny Whistle), its starting Speakeasy since
+    # 2026-10-07 (the orphan before).
     ("Hell's Highway",        3, 'Move',      {'press5'},                   {BX: 'friendly'}),
-    # Paradise Alley = Flushing -> QUEENS' FRIENDLY (mirrors Cuban Prince/Sunny's Bar).
+    # Paradise Alley = Flushing -> QUEENS' FRIENDLY, its starting Speakeasy since
+    # 2026-10-07 (mirrors Cuban Prince/Sunny's Bar).
     ('Poison Panic',          3, 'Unload',    {'speakeasy', 'press5'},      {Q: 'friendly'}),
     ('Gin Pipeline',          3, 'Move',      {'press5'},                   {}),
     ('Union Dues',            3, 'Recruit',   {'ward'},                     {}),
