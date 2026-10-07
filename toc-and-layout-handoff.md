@@ -4,6 +4,9 @@
 **Repo:** `njdyson/Moonshine-Kingdom` · **Dev branch:** `claude/kingpins-guide-improvements-7s1d8f` (currently in sync with `main`).
 **Live site:** https://mk.psybob.uk
 
+**2026-10-07:** the Kingpin's Guide is archived (`Archive/Kingpin's Guide v0.9.html`), so the
+Guide's half of this handoff is closed. The Rulebook's half stands.
+
 ---
 
 ## 1. The ask (three tasks)

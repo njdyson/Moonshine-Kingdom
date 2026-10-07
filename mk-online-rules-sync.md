@@ -272,7 +272,7 @@ so small garrisons (1 die) should strongly prefer Fold; duck status makes lay-lo
 decision; and a Rum Kickback re-arm (+3 Plays at dusk) raiding already-laid-low rivals is the new
 strongest aggressive line. Minimum bar: bots must not crash into the new Ambush gate or the
 explicit Lay Low Play. See `mk-online-bot-lookahead-handoff.md` before touching evaluation, and
-the Kingpin's Guide "Duck Window" section for the human-readable strategy the bots should at least
+the Kingpin's Guide "Duck Window" section (archived 2026-10-07: `Archive/Kingpin's Guide v0.9.html`) for the human-readable strategy the bots should at least
 not embarrass themselves against.
 
 ## 7. Puppeteering cut; the Handshake pays in Respect (2026-08-02)

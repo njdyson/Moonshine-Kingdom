@@ -28,8 +28,7 @@ is usually an improvement, since the dash is often padding a point the surroundi
 already makes.
 
 **En dashes are fine and are in active use.** `&ndash;` marks numeric ranges (`1&ndash;6`,
-`84&ndash;92%`) and separates a Play from its cost in Kingpin's Guide headings
-(`Ambush &ndash; 1 Influence`). Do not "fix" those.
+`84&ndash;92%`). Do not "fix" those.
 
 Check before committing:
 
@@ -99,9 +98,11 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   Every Almanac lesson has a **name** before its maxim (The Reverse Snake, The Kill Shot, The
   Decoy Warehouse), mostly the Kingpin's Guide's coinages; keep them when editing, since the
   names are what players carry to the table (`almanac-review-handoff.md` 5.5).
-- The **Kingpin's Guide** is off the site (no index tile). It stays in the repo as the
-  long-form design reference and may lag the rules (it still says Commission Seat, and still
-  crowns at Sunset on 20 Respect).
+- The **Kingpin's Guide** was archived on 2026-10-07 (`Archive/Kingpin's Guide v0.9.html`):
+  The Almanac replaced it. It still holds useful long-form material to mine, but it lags the rules
+  (it still says Commission Seat, and still crowns at Sunset on 20 Respect), and like everything
+  in `Archive/` it is frozen. Don't bring its claims back without checking them against the
+  Rulebook.
 
 ## v0.9.8 streamlined rules
 
@@ -341,14 +342,14 @@ usually the Rum. Watch in playtest: a crew that sails to an empty Dock takes Con
 Raid can hand it a free Move across the map and swing the Harbormaster.
 
 The places a crew can still be boxed with one road left are not Docks: Coney Island (Squad on Red
-Hook or Canarsie) and Morris Park (Squad on Fordham or Throggs Neck). The Almanac's lesson 23 and the
-Kingpin's Guide name those two. Do not restore "on foot" or "Land Connected" to the Scatter.
+Hook or Canarsie) and Morris Park (Squad on Fordham or Throggs Neck). The Almanac's lesson 23 names
+those two. Do not restore "on foot" or "Land Connected" to the Scatter.
 
 **Squads walk** (same day). A Squad's reach is the Districts directly **Land Connected** to it
 inside its own Borough. The Rulebook had said "Connected", which let a Squad hop by water between
 the two Docks of one Borough (West Side and the Bowery, Whitestone and Jamaica), and mk-online built
-it that way. Nick ruled it out as a hop nobody would spot; the Kingpin's Guide had always said a
-Squad "cannot jump the water". Crews may sail, cops walk.
+it that way. Nick ruled it out as a hop nobody would spot; the (now archived) Kingpin's Guide
+had always said a Squad "cannot jump the water". Crews may sail, cops walk.
 
 Squads stay in their own Borough. Letting them roam was weighed on 2026-10-07 and not taken: free
 rein of the map sends all four after the one freshest name, and one step across Borough lines lets

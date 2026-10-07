@@ -1223,7 +1223,7 @@ img {
     margin: 0;
 }
 
-/* Two-column flow for a long contents list (the Kingpin's Guide). Each Part
+/* Two-column flow for a long contents list (The Almanac, and the archived Kingpin's Guide). Each Part
    block is kept whole so a Part heading never splits from its subsections. */
 .toc-list.toc-columns {
     column-count: 2;

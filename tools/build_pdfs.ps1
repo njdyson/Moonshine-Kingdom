@@ -2,7 +2,7 @@
     Build the shipping PDFs into "V0.9 PDFs".
 
     WHY THIS EXISTS RATHER THAN PRINTING FROM THE BROWSER: as of 2026-07-29 the
-    Rulebook and the Kingpin's Guide print from Chrome's Ctrl+P dialog at ~2/3
+    Rulebook prints from Chrome's Ctrl+P dialog at ~2/3
     size in the top-left of the sheet (cause still unfound; see
     memory/rulebook-print-workflow.md). Headless --print-to-pdf does NOT have the
     bug: it renders exact A4 at 100% with no blank pages. So this script is both
@@ -33,7 +33,6 @@ $outDir = Join-Path $repo 'V0.9 PDFs'
 # source HTML -> output base name; Screen = also emit a compressed companion
 $docs = @(
     @{ Name = 'Rulebook';        Src = 'Rulebook v0.9.html';        Screen = $true  }
-    @{ Name = "Kingpin's Guide"; Src = "Kingpin's Guide v0.9.html"; Screen = $true  }
 )
 
 if ($List) {
@@ -53,7 +52,7 @@ if (-not $chrome) { throw 'Chrome not found. Edit $chrome in tools/build_pdfs.ps
 if (-not (Test-Path $outDir)) { New-Item -ItemType Directory -Path $outDir | Out-Null }
 
 function Get-PdfInfo($path) {
-    # NOTE: r"..." not r'...' — "Kingpin's Guide" contains an apostrophe, which
+    # NOTE: r"..." not r'...': a name with an apostrophe (as "Kingpin's Guide" had)
     # closes a single-quoted Python literal and silently kills this readout.
     $py = @"
 import sys, pypdfium2 as pdfium

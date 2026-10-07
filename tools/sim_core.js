@@ -1,7 +1,7 @@
 /* Loads the simulators' maths straight out of the component HTML.
  *
  * The Brew and Combat Simulators are the canonical models: they are what the
- * Kingpin's Guide quotes its odds from. This module lifts the pure functions
+ * strategy writing (The Almanac, and the archived Kingpin's Guide) quotes its odds from. This module lifts the pure functions
  * out of them by name so an analysis script can call them from node.
  *
  * Deliberately NOT a copy. A frozen duplicate of the maths would drift out of
