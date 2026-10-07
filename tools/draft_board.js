@@ -126,6 +126,7 @@ const SETTINGS = {
   staten: [803, 913], // level borders: Westerleigh | Stapleton | Tottenville
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
+  southShore: 1020, // the south shore of Brooklyn and Queens, level: Coney Island, Canarsie and the Rockaways
   ehKnee: 715, // East Harlem / Hunts Point runs from the four-way corner at 45 degrees to here (x), then drops upright to the Hell Gate
 };
 
@@ -142,7 +143,6 @@ const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [70, -7
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
-const SOUTH_SHORE = 1020; // the Rockaways, level
 const BK_COL = 600; // Red Hook / Brownsville and Canarsie / Brownsville, upright (595.5 until 2026-09-30: moved east so Canarsie's sign fits on one line)
 const BOWERY_BANK = 602, RED_HOOK_BANK = BOWERY_BANK + RIVER; // the East River's level turn
 const HUDSON = 44; // the Hudson's width
@@ -170,7 +170,7 @@ function draft(S) {
   // Manhattan's west coast turns upright to the Bowery's west shore at MN_TURN. New Jersey's
   // shore runs from the Heat corner (it runs up under the corner from there) to the board's
   // edge (NJ_END), so the Hudson opens to the frame beside the Bowery.
-  const BOWERY_WEST = S.boweryWest;
+  const BOWERY_WEST = S.boweryWest, SOUTH_SHORE = S.southShore, LIFT = 1020 - SOUTH_SHORE; // Jamaica Bay's foot and Canarsie's spit rise with the shore
   const MN_TURN = atX(MN_WEST, BOWERY_WEST), NJ_TOP = HEAT_CORNER, NJ_END = atX(NJ, 0);
   if (MN_TURN[1] < m2 + FOOT) throw new Error('The Hudson turns upright above the Tenderloin: Manhattan is too wide');
   // A level border meeting a slanted line at a tight corner gets a foot: its last FOOT
@@ -285,10 +285,10 @@ function draft(S) {
     'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
     'canarsie|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
     'brownsville|water': [[bv, 853], [680, 853], SB_BAY],
-    'canarsie|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [BK_COL + 26.5, 1001.5], [BK_COL + 26.5, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
+    'canarsie|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975 - LIFT], [BK_COL + 26.5, 1001.5 - LIFT], [BK_COL + 26.5, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Brooklyn's south shore level, in line with the Rockaways', Coney Island's corner on the Narrows
     // turned at 45 degrees from where Tottenville's turns, so the Narrows open evenly to the sea
-    'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], 983], [NARROWS[1] + SOUTH_SHORE - 983, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
+    'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], SOUTH_SHORE - 37], [NARROWS[1] + 37, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'sugar_hill|west_side': [MF[0][0], MF[0][1], [EHX, m1]],
     'west_side|tenderloin': [MF[1][0], MF[1][1], [FPX, m2]],
@@ -304,7 +304,7 @@ function draft(S) {
     'water|whitestone': [AW, ...(qc < QN_TURN[0] ? [QN_TURN] : []), QN_NORTH],
     'water|red_hook': [WB_J, atY(ER_QN, RED_HOOK_BANK), atY(ER_RH, RED_HOOK_BANK), RH_STUB, [RH_STUB[0], S.redHookSouth]],
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
-    'water|jamaica': [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945], [801 + B, 1000], [700, 1000], [700, 1012], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
+    'water|jamaica': [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
     // Staten Island: 45-degree corners, upright shores
     'water|westerleigh': [[36, s1], [36, T + 27], [63, T], [NARROWS[0] - 37, T], [NARROWS[0], T + 37], [NARROWS[0], s1]],
     'water|tottenville': [[36, s2], [36, 1005], [63, 1032], [NARROWS[0] - 49, 1032], [NARROWS[0], 983], [NARROWS[0], s2]],
@@ -316,7 +316,7 @@ function draft(S) {
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       // Staten Island, Brooklyn and Queens on one line along the frame's foot, at Staten Island's
       // (midway between Tottenville's shore and the frame), each centred under its south shore
-      QN: [890, 1050, 0], BK: [(NARROWS[1] + SOUTH_SHORE - 983 + BK_COL + 26.5) / 2, 1050, 0], SI: [172, 1050, 0],
+      QN: [890, 1050, 0], BK: [(NARROWS[1] + 37 + BK_COL + 26.5) / 2, 1050, 0], SI: [172, 1050, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
   };
