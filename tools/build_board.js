@@ -13,6 +13,8 @@
 //                                       bleed included) and a 4320px screen JPEG, not committed
 //   --report=<file>                     also each District's sign, room and sign shapes as
 //                                       JSON, for tuning the drafting's settings
+//   --rooms                             only the placements and rooms, nothing written: a
+//                                       few seconds, for trying a drafting change
 //
 // Two builds share everything but the texture: the print board carries the full
 // pebbled leather, which reads at 24in; the screen board carries the same grain
@@ -381,7 +383,9 @@ function placeSign(d) {
       const x = Math.min(Math.max(mid - c.w / 2, fit[0]), fit[fit.length - 1]), off = Math.abs(x + c.w / 2 - mid);
       const hang = Math.max(...c.hangers(x, y).map(([, hy, top]) => hy - top));
       const score = hang + SIGN_CENTRE * off + cost + (M < 13 && framed ? 4 : 0);
-      if (!best || score < best.score) best = { score, hang, off, x, y, c, open: M };
+      // at one margin, a tie goes to the shorter hangers: down a 45-degree wall, each unit
+      // nearer the centre line costs exactly a unit of hanger either side, so the scores run level
+      if (!best || score < best.score - 1e-6 || (score < best.score + 1e-6 && M === best.open && hang < best.hang)) best = { score, hang, off, x, y, c, open: M };
     }
   }
   if (!best) throw new Error(`No room for a sign in ${d.id}: the drafting has made it too small`);
@@ -891,10 +895,11 @@ function key(x, y) {
   return { fg: s, w, h };
 }
 
-// Under the Heat corner: the Tomorrow panel, the key beside it, the title below them.
+// Under the Heat corner: the title over the Tomorrow panel, and the key beside them.
 const PANELS_Y = () => HEAT.edge[1] + 12;
 function sidePanels() {
-  const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
+  const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y + titleH()), k = key(HEAT.tx + t.w + 10, y);
+  if (HEAT.tx + t.w + 6 > njShore(y + titleH() + t.h)) throw new Error('The Tomorrow panel runs into the Hudson');
   return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
 }
 
@@ -917,10 +922,9 @@ function njShore(y) {
   return x;
 }
 function title() {
-  // The map's title block: the city and the year, between Deco rules, set along New
-  // Jersey's shore to read up the Hudson, in the ground the panels leave (Nick,
-  // 2026-10-07: Manhattan widened into the strip beside the Bowery where it read up the
-  // board's edge). Centred along the shore between the frame and the panels.
+  // The map's title block: the city and the year, between Deco rules, level and small, in
+  // the corner under the Heat Track, over the Tomorrow panel, which drops to make room
+  // (Nick, 2026-10-07). Drawn at full size and scaled to the panel's width.
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
   const rule = (y, gap) => `<path d="M${f(-cityW / 2)} ${y} H${f(-gap)} M${f(gap)} ${y} H${f(cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
@@ -928,43 +932,14 @@ function title() {
   s += text('NEW YORK', 2.2, -5, TYPE.titleCity, { fill: 'url(#giltType)', anchor: 'middle', halo: 3.4, middle: true });
   s += rule(20, yearW / 2 + 10);
   s += text('1929', 4, 20, TYPE.titleYear, { fill: 'url(#giltType)', anchor: 'middle', halo: 3, middle: true });
-  // The block, as drawn: the diamond above, the year's foot below, and the shore's line.
-  const TOP = -31, FOOT = 26, M = 8, [a, b] = njCoast();
-  const u = [b[0] - a[0], b[1] - a[1]], L = Math.hypot(...u), d = [u[0] / L, u[1] / L], n = [d[1], -d[0]]; // up the shore; n points inland
-  const deg = Math.atan2(d[1], d[0]) * 180 / Math.PI, panels = panelBoxes();
-  const at = t => [a[0] + d[0] * t + n[0] * (FOOT + M), a[1] + d[1] * t + n[1] * (FOOT + M)];
-  const corners = ([x, y]) => [[-cityW / 2, TOP], [cityW / 2, TOP], [cityW / 2, FOOT], [-cityW / 2, FOOT]]
-    .map(([p, q]) => [x + d[0] * p - n[0] * q, y + d[1] * p - n[1] * q]);
-  const rect = ([px, py, pw, ph]) => [[px - M, py - M], [px + pw + M, py - M], [px + pw + M, py + ph + M], [px - M, py + ph + M]];
-  const clear = c => { const q = corners(c); return q.every(([x, y]) => x >= FRAME_IN + M && y >= FRAME_IN + M) && !panels.some(p => overlap(q, rect(p))); };
-  const fits = [];
-  for (let t = 0; t <= L; t += 1) if (clear(at(t))) fits.push(t);
-  if (!fits.length) throw new Error('The title no longer fits along New Jersey\'s shore');
-  const [x, y] = at((fits[0] + fits[fits.length - 1]) / 2);
-  return `<g transform="translate(${f(x)} ${f(y)}) rotate(${f(deg)})">${s}</g>`;
+  const k = titleScale(), x = HEAT.tx + TOMORROW.w / 2, y = PANELS_Y() + TITLE.pad - TITLE.top * k;
+  return `<g transform="translate(${f(x)} ${f(y)}) scale(${f(k, 4)})">${s}</g>`;
 }
-// Whether two convex polygons overlap (separating axes).
-function overlap(p, q) {
-  for (const poly of [p, q]) for (let i = 0; i < poly.length; i++) {
-    const [a, b] = [poly[i], poly[(i + 1) % poly.length]], ax = [b[1] - a[1], a[0] - b[0]];
-    const span = r => r.map(([x, y]) => x * ax[0] + y * ax[1]);
-    const [s1, s2] = [span(p), span(q)];
-    if (Math.max(...s1) <= Math.min(...s2) || Math.max(...s2) <= Math.min(...s1)) return false;
-  }
-  return true;
-}
-// New Jersey's shore: its one slanted edge, from its foot up to the Heat corner.
-function njCoast() {
-  const p = geo.regions.nj, e = p.map((q, i) => [q, p[(i + 1) % p.length]]).filter(([q, r]) => q[0] !== r[0] && q[1] !== r[1]);
-  if (e.length !== 1) throw new Error('New Jersey\'s shore should be one straight slant');
-  const [q, r] = e[0];
-  return q[1] > r[1] ? [q, r] : [r, q];
-}
-// The Tomorrow panel and the key, as [x, y, w, h].
-function panelBoxes() {
-  const y = PANELS_Y(), kx = HEAT.tx + TOMORROW.w + 10, k = key(kx, y);
-  return [[HEAT.tx, y, TOMORROW.w, TOMORROW.h], [kx, y, k.w, k.h]];
-}
+// The title's box: a little narrower than the Tomorrow panel, scaled from the block as drawn,
+// whose diamond tops it at -31 and whose year foots it at 26; the panel starts TITLE.gap below.
+const TITLE = { w: TOMORROW.w - 4, top: -31, foot: 26, pad: 2, gap: 12 };
+const titleScale = () => TITLE.w / width(TYPE.titleCity, 'NEW YORK');
+const titleH = () => TITLE.pad + (TITLE.foot - TITLE.top) * titleScale() + TITLE.gap;
 
 // A quarter sunburst: rays and two arcs from (x, y), spanning a0 to a0 + 90 degrees.
 function fan(x, y, a0, r) {
@@ -1384,6 +1359,7 @@ async function printPdf(browser, svg) {
     }));
     fs.writeFileSync(arg('report'), JSON.stringify(report, null, 1));
   }
+  if (process.argv.includes('--rooms')) return browser.close(); // the placements alone, for trying a drafting change
   const print = buildSvg(fontCss, 'print', placed), screen = buildSvg(fontCss, 'screen', placed);
   fs.mkdirSync(DIR, { recursive: true });
   for (const [file, svg] of [[OUT.printSvg, print], [OUT.screenSvg, screen]]) {

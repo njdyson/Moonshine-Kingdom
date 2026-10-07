@@ -17,7 +17,7 @@
 //   - 0.4 x the spread of room sizes (their standard deviation; SPREAD=... in the
 //     environment to weigh it differently)
 //   - 0.25 x the signs' penalty: each hanger past 18 units, and half each sign's shape
-//     cost (a stacked name 15, the Still's plate hung underneath 60)
+//     cost (a stacked name 25, the Still's plate hung underneath 60)
 // Room is close to the build's count, on a coarser grid: ground 6 units in from every
 // border, less the sign's box and its margin.
 // A setting is refused outright if the drafting's checks fail, a corner goes under 80
@@ -44,9 +44,9 @@ const CM = (609.6 / 1080) ** 2 / 100, STEP = 2, FRAME_IN = 13;
 // Each setting the tuner may move: [path in SETTINGS, lowest, highest].
 const KNOBS = [
   ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215],
-  ['hellGate', 3, 15], ['hpCol', 770, 830], ['hpFoot', 30, 90], ['ehKnee.0', 700, 735], ['ehKnee.1', 260, 315],
-  ['manhattan.0', 250, 330], ['manhattan.1', 340, 420], ['manhattan.2', 430, 520],
-  ['manhattan.3', 530, 620], ['eastHarlem', -12, 32],
+  ['huntsTop', 120, 184], ['hpCol', 770, 830], ['corner', 190, 240],
+  ['manhattan.0', 250, 340], ['manhattan.1', 340, 440], ['manhattan.2', 430, 530],
+  ['manhattan.3', 530, 620], ['eastHarlem.0', 470, 560], ['eastHarlem.1', 400, 500],
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
   ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
   ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90],
@@ -106,12 +106,16 @@ const above = (p, hx, hy) => {
 };
 
 // ---------------------------------------------------------------- signs and room
-// The sign as placeSign() in build_board.js hangs it: every shape tried, as high as it
-// fits and centred across the room there, the one with the shortest hangers (plus its
-// shape's cost) kept.
+// The sign as placeSign() in build_board.js hangs it: every shape tried at every height,
+// as near the District's centre line (its centroid inside the frame) as it fits, the one
+// whose hangers, distance off that line (SIGN_CENTRE a unit) and shape's cost come out least kept.
+const SIGN_CENTRE = 2;
 function sign(id, p) {
   const framed = ['speak', 'hs'].includes(SIGNS[id].zone), xs = p.map(q => q[0]), ys = p.map(q => q[1]);
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  let A = 0, CX = 0;
+  p.forEach((a, i) => { const b = p[(i + 1) % p.length], k = a[0] * b[1] - b[0] * a[1]; A += k; CX += (a[0] + b[0]) * k; });
+  const mid = CX / (3 * A);
   let best = null;
   for (const { w, h, opts, cost } of SIGNS[id].shapes) for (const M of framed ? [13, 9] : [7]) {
     const drop = !!opts.drop, bh = opts.stacked ? 43 : 35, ph = 40, pw = 35.1; // the sign's and the plate's heights, the plate's width
@@ -119,12 +123,11 @@ function sign(id, p) {
       const fit = [];
       for (let x = x0; x <= x1 - w; x += STEP) if (rectInside([x - M, y - M, w + 2 * M, h + 2 * M], p)) fit.push(x);
       if (!fit.length) continue;
-      const x = (fit[0] + fit[fit.length - 1]) / 2;
+      const x = Math.min(Math.max(mid - w / 2, fit[0]), fit[fit.length - 1]), off = Math.abs(x + w / 2 - mid);
       const hooks = drop ? [[x + 12, y], [x + w - 12, y]] : [[x + 12, y + (h - bh) / 2], [x + w - pw / 2, y + (h - ph) / 2]];
       const hang = Math.max(...hooks.map(([hx, hy]) => hy - above(p, hx, hy)));
-      const score = hang + cost + (framed && M < 13 ? 4 : 0);
+      const score = hang + SIGN_CENTRE * off + cost + (framed && M < 13 ? 4 : 0);
       if (!best || score < best.score) best = { score, hang, cost, w, h };
-      break;
     }
   }
   return best;
