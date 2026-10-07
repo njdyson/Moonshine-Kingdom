@@ -151,12 +151,12 @@ Hits remove **Runners first**, then the Boss.
 - **Heat**: a Play marked H, a fight's first shot, Torch, and a Greed Tax sale each add 1 marker (the spent marker itself).
 - **The Raid** is triggered when the **5th marker** lands, once the Play that placed it has fully resolved (a sale completes first; a fight ends first), or at once by Rat.
 - **Squad order**: the four Squads (Staten Island has none) resolve one at a time, Manhattan, Bronx, Queens, Brooklyn.
-- **Reach**: Districts directly Connected to the Squad inside its own Borough (water counts if the Squad stands on a Dock). It must be held by a mob and have no Squad. **The Sicilian Safehouse District is never in reach.**
+- **Reach**: Districts directly Land Connected to the Squad (border or bridge, never water) inside its own Borough. It must be held by a mob and have no Squad. **The Sicilian Safehouse District is never in reach.**
 - **Target mob**: among mobs holding a District in reach, the one whose marker sits **furthest right** on the Heat Track. If none of them has a marker, the Squad stays put.
 - **Target District**: that mob's reachable District with the **most barrels**; ties go to the highest Still Pressure.
 - **Scatter**: the Squad moves in.
   - The Safehouse there burns (back to supply) and all barrels there go to the supply.
-  - Mobsters flee to one Land Connected Safe District, never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low.
+  - Mobsters flee to one Connected Safe District (across water via Docks too, as for Fold), never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low.
   - With no such District they are all arrested (back to supply, Boss included).
   - The Squad now holds and padlocks the District.
 - **Aftermath**: all Heat markers return to their owners' Reserves.
