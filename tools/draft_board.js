@@ -112,7 +112,7 @@ const SETTINGS = {
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
   corner: [608, 198], // the four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point)
   manhattan: [298, 415, 560], // level borders: Sugar Hill | West Side, the row across Manhattan, the Bowery's top
-  fivePoints: 325, // Five Points' west side, upright, below the row
+  fivePoints: 345, // Five Points' west side, upright, below the row (325 until 2026-10-07: moved east to lift the Tenderloin's sign)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 825, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
