@@ -1255,6 +1255,26 @@ async function measure(browser, fontCss, items) {
   return new Map(items.map((i, k) => [wkey(i, i.text), widths[k]]));
 }
 
+// The Still numeral's ink, for laying it out by what shows (tools/still_art.js): each
+// digit's [left, right] ink from its origin, the gap between two 0s' inks, and the digits'
+// cap height, from the browser's own text metrics at the numeral's size.
+async function measureInk(browser, fontCss) {
+  const page = await browser.newPage();
+  await page.setContent(`<!doctype html><html><head><style>${fontCss}</style></head><body></body></html>`);
+  // measured ten times over size, since the browser rounds ink bounds to whole pixels
+  const ink = await page.evaluate(async (size) => {
+    const k = 10, font = `${size * k}px "Bebas Neue"`;
+    await document.fonts.load(font);
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = font;
+    const m = c => ctx.measureText(c), digits = {};
+    for (const c of '0123456789') { const t = m(c); digits[c] = [-t.actualBoundingBoxLeft / k, t.actualBoundingBoxRight / k]; }
+    return { digits, gap: m('0').width / k - (digits[0][1] - digits[0][0]), cap: m('H').actualBoundingBoxAscent / k };
+  }, STILL.NUM.size);
+  await page.close();
+  return ink;
+}
+
 // Each output: [file, scale, svg, quality, trim]. trim cuts a print SVG's bleed off,
 // for the preview; otherwise the whole SVG is rendered, bleed and all.
 async function render(browser, outputs) {
@@ -1320,6 +1340,7 @@ async function printPdf(browser, svg) {
   const browser = await chromium.launch(process.env.HTTPS_PROXY ? { proxy: { server: process.env.HTTPS_PROXY } } : {});
   const fontCss = await embeddedFonts(browser);
   WIDTHS = await measure(browser, fontCss, allText());
+  STILL.setInk(await measureInk(browser, fontCss));
   const placed = placeAll();
   for (const d of DISTRICTS) {
     const { x, y, c, open } = placed[d.id];

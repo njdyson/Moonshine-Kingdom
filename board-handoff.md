@@ -343,7 +343,14 @@ keeps them on a re-trace.
   is 54** in the token's 100 x 108 box, centred on the boiler, where it was 37 and set left of
   centre (about 45% taller), and **the rivets** moved from a column down the boiler's left side,
   which boxed the numeral in, to its four corners. A numeral of 50 with the rivets left in place
-  was the first step the same day. The plate and its drawn bounds (`BOX`) are unchanged, so no
+  was the first step the same day. **The numeral is set by its ink** (Nick, same day: the
+  double figures looked off centre): Bebas Neue's figures are tabular, so a 1 sits in a cell
+  far wider than its stroke, and "10" and "12" set by their advances sat 1.25 units right of
+  centre with a loose gap after the 1. The build measures each digit's ink in the browser
+  (`measureInk()`, at ten times size, since the browser rounds ink bounds to whole pixels),
+  and `still_art.js` places the digits one 0-to-0 gap apart and centres the whole on the
+  boiler both ways: every numeral, 2 to 12, now sits within 0.4 units (under 0.1 mm on the
+  board) of the boiler's centre, measured off the rendered tokens. The plate and its drawn bounds (`BOX`) are unchanged, so no
   sign moved.
 - **Muted Borough tones.** Mob colours aren't set and the Squads are blue, so the land stays
   quiet. Brooklyn moved from red to bronze to part it from Manhattan. Queens moved from a blue

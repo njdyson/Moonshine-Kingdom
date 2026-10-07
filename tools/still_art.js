@@ -14,10 +14,27 @@
 
 const GOLD = '#d4af37', LACQUER = '#130207', TUBE = '#0d0005', RIVET = '#8a7329', NUMERAL = '#f5e9d9';
 const RAMP = ['#e8c85a', '#dcb246', '#d49a37', '#cf7f33', '#c8632e', '#c0472a']; // bottom to top
-// The numeral, in Bebas Neue (0.4 em a digit, caps 0.7 em tall): as large as fits the
-// boiler's 51-unit width with "12" in it, and centred on the boiler (it was 37, set left of
-// centre between the rivets; 50 for one day, 2026-10-07, before the rivets moved).
+// The numeral, in Bebas Neue: as large as fits the boiler's 51-unit width with "12" in it,
+// centred on the boiler (it was 37, set left of centre between the rivets; 50 for one day,
+// 2026-10-07, before the rivets moved). x and mid are the boiler's centre.
 const NUM = { size: 54, x: 41, mid: 55 };
+// The numeral is laid out by its ink, not its advance. Bebas Neue's figures are tabular, so
+// a 1 sits in a cell far wider than its stroke, and "10", "11" and "12" set by their advances
+// sat right of centre with a gap after the 1 (Nick, 2026-10-07). The build measures each
+// digit's ink in the browser and hands it over (setInk); each digit is then placed so the
+// inks sit one standard gap apart, the gap between two 0s, and the whole is centred on the
+// boiler both ways. Without measurements it falls back to centring by advance.
+let INK = null;
+const setInk = m => { INK = m; };
+function numeral(n) {
+  const t = String(n), font = `font-family="'Bebas Neue', Impact, sans-serif" font-size="${NUM.size}" fill="${NUMERAL}"`;
+  if (!INK) return `<text x="${NUM.x}" y="${NUM.mid + NUM.size * 0.35}" text-anchor="middle" ${font}>${t}</text>`;
+  const ds = [...t].map(c => INK.digits[c]); // each digit's ink, [left, right] from its origin
+  const total = ds.reduce((a, [l, r]) => a + r - l, 0) + INK.gap * (ds.length - 1);
+  let at = NUM.x - total / 2;
+  const xs = ds.map(([l, r]) => { const x = at - l; at += r - l + INK.gap; return x.toFixed(2); });
+  return `<text x="${xs.join(' ')}" y="${(NUM.mid + INK.cap / 2).toFixed(2)}" ${font}>${t}</text>`;
+}
 // The drawn bounds, for placing the art: [x, y, width, height] in the box.
 const BOX = [12.5, 9.9, 78.2, 93.4];
 
@@ -29,7 +46,7 @@ function stillBody(n) {
     + `<path d="M24 92 l-3.5 10 M58 92 l3.5 10" stroke="${GOLD}" stroke-width="2.6" stroke-linecap="round"/>`
     + `<rect x="14" y="18" width="54" height="74" rx="10" fill="${LACQUER}" stroke="${GOLD}" stroke-width="3"/>`;
   for (const [x, y] of [[21, 25], [61, 25], [21, 85], [61, 85]]) s += `<circle cx="${x}" cy="${y}" r="1.5" fill="${RIVET}"/>`;
-  s += `<text x="${NUM.x}" y="${NUM.mid + NUM.size * 0.35}" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="${NUM.size}" fill="${NUMERAL}">${n}</text>`
+  s += numeral(n)
     + `<rect x="65" y="51" width="14" height="6" rx="2" fill="${LACQUER}" stroke="${GOLD}" stroke-width="1.6"/>`
     + `<rect x="76.5" y="18" width="13" height="76" rx="6.5" fill="${TUBE}" stroke="${GOLD}" stroke-width="2.4"/>`;
   RAMP.forEach((col, k) => {
@@ -43,4 +60,4 @@ function stillBody(n) {
 // (an SVG shown through <img> can't fetch a webfont; the Still Tokens page uses the PNGs).
 const stillSvg = n => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 108" width="200" height="216">\n  ${stillBody(n)}\n</svg>\n`;
 
-module.exports = { stillBody, stillSvg, pressure, BOX, NUM };
+module.exports = { stillBody, stillSvg, pressure, setInk, BOX, NUM };
