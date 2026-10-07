@@ -590,6 +590,12 @@ keeps them on a re-trace.
 | Williamsburg Bridge | Five Points and Williamsburg | 1903 |
 | Brooklyn Bridge | The Bowery and Red Hook | 1883 |
 
+- **Each name stands the same distance off its bridge** (Nick, 2026-10-07): 8 units clear of the
+  crossbars (`BRIDGE_GAP` in `build_board.js`), measured from the name's real width, so a long
+  name sits no closer than a short one. The gaps had run from 1.4 (Williamsburg) to 14.4 (Hell
+  Gate), because the drafting set each name's centre a fixed distance off. The drafting now gives
+  only the side and the angle (`bridgeLabels()`), and the build places the name.
+
 - **The Queensboro was moved.** The Affinity board had this crossing from upper East Harlem, which
   is the Triborough's line (opened 1936). The 1929 crossing runs from East 59th Street to Long
   Island City, so it now leaves East Harlem's southern shore for Astoria's. It still joins the

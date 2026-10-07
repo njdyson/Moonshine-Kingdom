@@ -142,7 +142,7 @@ const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its
 // Queensboro up the East River onto East Harlem's shore, which ends at Manhattan's row, a little
 // south of its middle so the bridge's name stays clear of the Hell Gate's bend (since 2026-10-07), and the Brooklyn up the harbour reach, mid-way along the stretch of
 // the Bowery's shore that faces Red Hook's (since 2026-10-07, when the Bowery's foot rose)
-const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [52, -52], 'Brooklyn Bridge': [16, -23] };
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [49, -49], 'Brooklyn Bridge': [16, -23] };
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
@@ -423,7 +423,8 @@ function bridgesFor(cs) {
 function bridgeLabels(bs) {
   const was = {
     'Hell Gate Bridge': 50, 'Queensboro Bridge': 44, 'Williamsburg Bridge': 44, 'Brooklyn Bridge': -44,
-  }; // distance along the river from the bridge, as on the board (the side it was on)
+  }; // which side of its bridge each name sits on, along the river (the sign); the build sets the
+  // distance from the name's measured length, so every name stands as far off its bridge
   const out = {};
   for (const b of bs) {
     const m = [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2], u = unit(b.b[0] - b.a[0], b.b[1] - b.a[1]);

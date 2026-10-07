@@ -142,7 +142,17 @@ const OFFBOARD = ['nj']; // New Jersey: land, off the board
 const BORO_LABELS = geo.labels.boro, WATER_LABELS = geo.labels.water;
 // Bridge names sit in the water beside each bridge, along the river, so Jobs can name
 // a crossing: [x, y, rotation] by name.
-const BRIDGE_LABELS = geo.labels.bridges;
+// A bridge's name sits in the water beside it, along the river, on the side and at the angle the
+// drafting chose (geo.labels.bridges), BRIDGE_GAP clear of the bridge's crossbars, so every name
+// stands the same distance off its bridge whatever its length. Placed once the type is measured.
+const BRIDGE_GAP = 8, BRIDGE_REACH = 7.5; // the bridge's half-width along the river, to its crossbars' outer edge
+function bridgeLabel(name) {
+  const b = geo.bridges.find(q => q.name === name), [lx, ly, r] = geo.labels.bridges[name];
+  const m = [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2], t = r * Math.PI / 180, u = [Math.cos(t), Math.sin(t)];
+  const side = Math.sign((lx - m[0]) * u[0] + (ly - m[1]) * u[1]) || 1;
+  const k = side * (BRIDGE_REACH + BRIDGE_GAP + width(TYPE.bridge, name) / 2);
+  return [m[0] + u[0] * k, m[1] + u[1] * k, r];
+}
 
 // ---------------------------------------------------------------- type
 const TYPE = {
@@ -590,7 +600,7 @@ function pierObstacles() {
   for (const [k, [x, y, r]] of Object.entries(BORO_LABELS))
     obs.push(orientedBox(x, y, r, (31 + width(TYPE.boro, upper(BOROUGHS[k].name))) / 2 + 4, 15));
   for (const [t, x, y, r] of WATER_LABELS) obs.push(orientedBox(x, y, r, width(TYPE.water, t) / 2 + 4, 9));
-  for (const { name } of geo.bridges) { const [x, y, r] = BRIDGE_LABELS[name]; obs.push(orientedBox(x, y, r, width(TYPE.bridge, name) / 2 + 4, 8)); }
+  for (const { name } of geo.bridges) { const [x, y, r] = bridgeLabel(name); obs.push(orientedBox(x, y, r, width(TYPE.bridge, name) / 2 + 4, 8)); }
   for (const { a, b } of geo.bridges) {
     const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
     obs.push(orientedBox((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI, L / 2 + 14, 16));
@@ -680,7 +690,7 @@ function mapLabels() {
   }
   for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85, middle: true });
   for (const { name } of geo.bridges) {
-    const [x, y, r] = BRIDGE_LABELS[name];
+    const [x, y, r] = bridgeLabel(name);
     s += text(name, x, y, TYPE.bridge, { fill: C.muted, anchor: 'middle', rotate: r, halo: 2.2, middle: true });
   }
   return s;
