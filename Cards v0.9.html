@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/card-back.css">
 <style>
 /* ============================================================
    Cards v0.9: the 20 cards that are not Jobs:
@@ -279,41 +280,10 @@ body{
    CARD BACKS
    Nothing in this deck is shuffled or dealt, so every back
    carries its own name. (The Borough Deeds, which were, left
-   the box in v0.9.7.)
+   the box in v0.9.7.) The look is css/card-back.css, shared
+   with the Jobs deck: the name sits on one line on a gilt
+   plate.
    ============================================================ */
-.back{
-  position:relative;
-  width:63mm;height:88mm;
-  background:
-    radial-gradient(circle at 50% 42%,rgba(212,175,55,.10),transparent 58%),
-    linear-gradient(var(--panel-a),var(--panel-b));
-  border:1.5px solid var(--gold-line);
-  border-radius:3mm;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2.6mm;
-  overflow:hidden;
-}
-.back::after{
-  content:"";position:absolute;inset:1.4mm;
-  border:.4mm solid rgba(185,147,47,.3);border-radius:2mm;pointer-events:none;
-}
-.back::before{
-  content:"";position:absolute;inset:3.4mm;
-  border:.25mm solid rgba(185,147,47,.16);border-radius:1.4mm;pointer-events:none;
-}
-.back-dia{width:2.6mm;height:2.6mm;background:var(--gold);transform:rotate(45deg)}
-.back-rule{width:26mm;height:.3mm;background:linear-gradient(90deg,transparent,rgba(201,164,55,.8),transparent)}
-.back-title{
-  font:700 19pt Cinzel,serif;color:var(--gold-bright);
-  letter-spacing:1.5px;text-align:center;line-height:1;
-  text-shadow:0 2px 6px rgba(0,0,0,.6);
-}
-.back-title--sm{font-size:15pt}
-.back-sub{font:600 6pt Barlow;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase}
-.back-foot{
-  position:absolute;bottom:5mm;
-  font:italic 400 6pt Barlow;color:rgba(184,165,119,.65);
-}
 /* holds a duplex cell open on a part-filled sheet */
 .back-blank{width:63mm;height:88mm;display:none}
 
@@ -521,10 +491,10 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The<br>Rat</div><div class="back-rule"></div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">The Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 <!-- =============================================================
@@ -575,10 +545,10 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title back-title--sm">Shylock&rsquo;s<br>Mark</div><div class="back-rule"></div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 <!-- =============================================================
@@ -637,10 +607,10 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 <div class="tier-head">
@@ -687,10 +657,10 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">Welsher</div><div class="back-rule"></div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 <!-- =============================================================
@@ -740,10 +710,10 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-dia"></div><div class="back-title">The Nod</div><div class="back-rule"></div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The Nod</div><div class="back-rule"></div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The Nod</div><div class="back-rule"></div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-dia"></div><div class="back-title">The Nod</div><div class="back-rule"></div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 </body>

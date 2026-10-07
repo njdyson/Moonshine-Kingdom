@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Card backs: one design for both decks
+   --------------------------------------------------------------------------
+   Used by "Jobs Cards v0.9.html" (every back reads Job) and "Cards v0.9.html"
+   (each back carries its card's name: nothing in that deck is shuffled or
+   dealt). One file, so the two decks cannot drift apart.
+
+   The ornament (--back-art, below) borrows the board's dress, so the cards
+   sit with the other components: a gilt keyline with a jewel on each Deco
+   chamfer (the Ledger and the key's plaques), an inner keyline stepped at
+   the corners round a quarter fan (the board's frame), a faint sunburst, and
+   the same fan opened to a half: a sun rising behind the name. Over it:
+
+     name    on a gilt plate, the sun's horizon, as the Ledger's name is cut
+             into its cartouche and HEAT into the board's
+     kicker  wide-tracked Barlow below: what kind of card
+     foot    New York and 1929 between rules, the board's title in small
+
+   No circles. A gilt ring is where a marker goes (the Heat Track, the
+   Ledger), so the first draft's ring medallion read as a socket (Nick,
+   2026-10-07). Fans and diamonds are only ever ornament.
+
+   Markup, one per card:
+     <div class="back"><div class="back-title">Job</div>
+       <div class="back-sub">Moonshine Kingdom</div>
+       <div class="back-foot">New York &middot; 1929</div></div>
+
+   The decks keep their own print and trim rules for .back (duplex grid,
+   square corners); nothing here changes the card's 63 x 88mm box.
+   ========================================================================== */
+
+.back {
+    --gold-bright: #e8cc72;
+    --gold-line: #b9932f;
+    --gold-dim: #a98c4f;
+    --panel-a: #241c14;
+    --panel-b: #19130c;
+    /* THE ORNAMENT IS INLINE ON PURPOSE. Backs are display:none on screen
+       and only appear in print, so a linked image file is never fetched
+       before Chrome prints: as Art/Cards/Back.svg the backs printed bare
+       (2026-10-07). An inline data URI needs no fetch.
+       Drawn in mm on the 63 x 88 card (# is written %23). The sun and the
+       sunburst rise from 31.5, 40; --plate-y puts the plate on it. */
+    --back-art: url("data:image/svg+xml,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 63 88'>\
+<defs>\
+<linearGradient id='gilt' x1='0' y1='0' x2='1' y2='1'>\
+<stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
+<stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
+<stop offset='1' stop-color='%23f6e3a1'/></linearGradient>\
+<radialGradient id='fade'><stop offset='.35' stop-color='%23fff'/>\
+<stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient>\
+<mask id='fadeout' maskUnits='userSpaceOnUse' x='0' y='0' width='63' height='88'>\
+<circle cx='31.5' cy='40' r='44' fill='url(%23fade)'/></mask>\
+<path id='inner' d='M7.2 4.2H55.8V7.2H58.8V80.8H55.8V83.8H7.2V80.8H4.2V7.2H7.2Z'/>\
+<clipPath id='field'><use href='%23inner'/></clipPath>\
+<g id='fan' fill='none' stroke='%23c9a437' stroke-opacity='.85' stroke-width='.2'>\
+<path d='M5.2 0A5.2 5.2 0 0 1 0 5.2M1.6 0A1.6 1.6 0 0 1 0 1.6'/>\
+<path d='M1.55 .41L3.38 .91M1.39 .8L3.55 2.05M1.13 1.13L3.11 3.11M.8 1.39L2.05 3.55M.41 1.55L.91 3.38'/></g>\
+<path id='jewel' d='M0-1L1 0L0 1L-1 0Z' fill='%23e8cc72'/>\
+</defs>\
+<g clip-path='url(%23field)' mask='url(%23fadeout)'>\
+<circle cx='31.5' cy='40' r='23' fill='none' stroke='%23c9a437' stroke-opacity='.1' stroke-width='46' pathLength='96' stroke-dasharray='.16 .84'/></g>\
+<path d='M4.6 2.2H58.4L60.8 4.6V83.4L58.4 85.8H4.6L2.2 83.4V4.6Z' fill='none' stroke='url(%23gilt)' stroke-width='.55'/>\
+<use href='%23jewel' x='3.4' y='3.4'/><use href='%23jewel' x='59.6' y='3.4'/>\
+<use href='%23jewel' x='59.6' y='84.6'/><use href='%23jewel' x='3.4' y='84.6'/>\
+<use href='%23inner' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.22'/>\
+<use href='%23fan' transform='translate(7.2 7.2)'/><use href='%23fan' transform='translate(55.8 7.2) scale(-1 1)'/>\
+<use href='%23fan' transform='translate(55.8 80.8) scale(-1 -1)'/><use href='%23fan' transform='translate(7.2 80.8) scale(1 -1)'/>\
+<path d='M13.5 40A18 18 0 0 1 49.5 40Z' fill='%230e0905' fill-opacity='.45'/>\
+<path d='M13.5 40A18 18 0 0 1 49.5 40' fill='none' stroke='url(%23gilt)' stroke-width='.65'/>\
+<path d='M14.9 40A16.6 16.6 0 0 1 48.1 40' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.2'/>\
+<path d='M25.3 40A6.2 6.2 0 0 1 37.7 40' fill='none' stroke='%23c9a437' stroke-width='.3'/>\
+<path fill='none' stroke='%23c9a437' stroke-opacity='.85' stroke-width='.28' d='\
+M24.41 38.75L16.33 37.33M24.73 37.54L20.22 35.9M25.26 36.4L18.16 32.3M25.98 35.37L22.31 32.29\
+M26.87 34.48L21.6 28.2M27.9 33.76L25.5 29.61M29.04 33.23L26.23 25.53M30.25 32.91L29.42 28.18\
+M31.5 32.8L31.5 24.6M32.75 32.91L33.58 28.18M33.96 33.23L36.77 25.53M35.1 33.76L37.5 29.61\
+M36.13 34.48L41.4 28.2M37.02 35.37L40.69 32.29M37.74 36.4L44.84 32.3M38.27 37.54L42.78 35.9\
+M38.59 38.75L46.67 37.33'/>\
+<path d='M31.5 46V52' stroke='%23c9a437' stroke-opacity='.6' stroke-width='.22'/><use href='%23jewel' x='31.5' y='53'/>\
+</svg>");
+    --plate-y: 40mm;
+
+    position: relative;
+    box-sizing: border-box;
+    width: 63mm;
+    height: 88mm;
+    border: 1.5px solid var(--gold-line);
+    border-radius: 3mm;
+    overflow: hidden;
+    /* border-box, so the 63 x 88 drawing lands on the card's own millimetres */
+    background:
+        var(--back-art) 0 0 / 100% 100% no-repeat border-box,
+        radial-gradient(circle at 50% 45%, rgba(212, 175, 55, .12), transparent 55%) border-box,
+        linear-gradient(var(--panel-a), var(--panel-b)) border-box;
+}
+
+/* --- the name, cut into a gilt plate. Display type is mixed case, never
+   uppercased (the Reskin's rule). One line: the plate is as wide as the name
+   needs and never narrower than the sun, so it always holds up both ends of
+   the arc. --- */
+.back-title {
+    position: absolute;
+    left: 50%;
+    top: var(--plate-y);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    min-width: 38mm;
+    padding: 1.7mm 5.2mm 1.5mm;
+    font: 700 13pt/1 Cinzel, serif;
+    letter-spacing: .8px;
+    color: #2a1d0c;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 .25mm 0 rgba(255, 244, 205, .55);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f6e3a1'/%3E%3Cstop offset='.45' stop-color='%23c9a437'/%3E%3Cstop offset='1' stop-color='%238a6c2c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M4 0 H96 L100 5 L96 10 H4 L0 5 Z' fill='url%28%23g%29'/%3E%3Cpath d='M4.6 .9 H95.4 L98.9 5 L95.4 9.1 H4.6 L1.1 5 Z' fill='none' stroke='%232a1d0c' stroke-opacity='.55' stroke-width='.35' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    filter: drop-shadow(0 .5mm .5mm rgba(0, 0, 0, .65));
+}
+
+/* --- what kind of card, below the sun --- */
+.back-sub {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 61mm;
+    text-align: center;
+    font: 600 5.6pt Barlow, sans-serif;
+    letter-spacing: 2.6px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+}
+
+/* --- the board's title, in small: rules either side --- */
+.back-foot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8.2mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2mm;
+    font: 700 6pt Cinzel, serif;
+    letter-spacing: 1.4px;
+    color: var(--gold-dim);
+}
+.back-foot::before,
+.back-foot::after {
+    content: "";
+    width: 5mm;
+    height: .25mm;
+}
+.back-foot::before { background: linear-gradient(90deg, transparent, rgba(201, 164, 55, .75)); }
+.back-foot::after { background: linear-gradient(90deg, rgba(201, 164, 55, .75), transparent); }

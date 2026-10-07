@@ -522,8 +522,9 @@ CLS = {1: "gig", 3: "racket", 5: "score"}
 # Back reads "Job", singular and unbroken: it is the back of ONE card, and the
 # two-line "The/Jobs" set the title band taller than the Rat and Marks backs in
 # Cards v0.9. Folded back from a hand edit, 2026-07-24.
-BACK = ('  <div class="back"><div class="back-dia"></div><div class="back-title">Job</div>'
-        '<div class="back-rule"></div><div class="back-sub">Moonshine Kingdom</div>'
+# The back's look is css/card-back.css, shared with Cards v0.9 (2026-10-07).
+BACK = ('  <div class="back"><div class="back-title">Job</div>'
+        '<div class="back-sub">Moonshine Kingdom</div>'
         '<div class="back-foot">New York &middot; 1929</div></div>')
 
 
