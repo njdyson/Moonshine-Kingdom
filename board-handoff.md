@@ -174,15 +174,16 @@ or 45 degrees; the odd angles left are shores (the harbour reach, Coney Island, 
   vertical from the corner, but puts Hunts Point's corner over East Harlem's top, as a strip
   between the Bronx's row and the corner, and pushes Sugar Hill's top down to the corner,
   squeezing West Side and the Tenderloin.
-- **East Harlem's west side is one upright** (`eastHarlem`, x 509), and its foot on Five Points
-  one level line (y 470) meeting the East River on a foot. The river closes on the upright, so
+- **East Harlem's west side is one upright** (`eastHarlem`, x 512), and its foot on Five Points
+  one level line (y 468) meeting the East River on a foot. The river closes on the upright, so
   East Harlem / Five Points can't sit as low as the Tenderloin needs: **Five Points' top steps
-  up** 27 units at East Harlem's corner. The Tenderloin is 95 tall and West Side 101 (107 and 87
-  this morning). The tuner wanted an even room, not an even height, and left the Tenderloin 85
-  tall, so the heights were set by eye. The Tenderloin stays Manhattan's longest strip, since
-  the coast widens each row going south: it can't look as chunky as West Side without taking
-  most of Manhattan's room (64 already, the most there). Five Points is 69 tall on its left
-  and 96 at East Harlem's foot.
+  up** 14 units at East Harlem's corner. The four rows under Sugar Hill share about 360 units
+  of height, so they are set by eye nearly even: West Side 95, the Tenderloin 89, Five Points
+  86 (100 at East Harlem's foot), the Bowery 84 (the first pass had 107, 87, 77 and 95). A try
+  that gave the Tenderloin 95 left Five Points 69 (Nick: too thin). The tuner wants even rooms,
+  not even heights, and would leave the southern rows thin, since the coast widens each row
+  going south: Five Points has the most room (75), West Side the least (45). More height would
+  have to come from the Bowery's foot, which Staten Island took.
 - **Hunts Point's top runs level at 160** (`huntsTop`), 24 above the Bronx row, taking a strip
   from Belmont and Fordham, and drops to Throggs Neck's row at 45 degrees just short of it, so
   Morris Park and Throggs Neck are untouched. Belmont / Fordham moved 692 to 675 to even Belmont
@@ -197,8 +198,8 @@ or 45 degrees; the odd angles left are shores (the harbour reach, Coney Island, 
 
 | Room (cm²) | This morning | Manhattan one width | Now |
 | --- | --- | --- | --- |
-| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 55, 50, 64 |
-| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 54, 51, 54 |
+| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 52, 45, 55 |
+| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 75, 49, 53 |
 | Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 | 59, 59, 60 |
 | Westerleigh, Stapleton, Tottenville | 40, 41, 41 | 44, 45, 44 | 44, 45, 44 |
 
@@ -223,7 +224,7 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | With the larger Stills | 40 (West Side) | 44, 54, 57, 71 |
 | With the wider Kill van Kull (as the build reports, 2026-10-07) | 40 (Westerleigh) | 47, 51, 59, 74 |
 | Manhattan one width and Staten Island raised (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
-| Now, with straight lines round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 55, 51, 59, 74 |
+| Now, with straight lines round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
 
 Rooms now run 44 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
 smallest (39), is 46 since the Sound went level.
@@ -573,11 +574,11 @@ keeps them on a re-trace.
 
 ## Open
 
-- **Other short borders** Nick may want gone: East Harlem / Five Points (33), Astoria /
+- **Other short borders** Nick may want gone: East Harlem / Five Points (32), Astoria /
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh and Tottenville (44), Stapleton and Corona (45), and Hunts Point and Whitestone (46).
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh and Tottenville (44), Stapleton, Corona and West Side (45), and Whitestone (46).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.

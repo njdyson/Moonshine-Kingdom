@@ -105,8 +105,8 @@ const SETTINGS = {
   huntsTop: 160, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
   corner: 213, // the four-way corner's height (Sugar Hill, Belmont, East Harlem, Hunts Point)
-  manhattan: [301, 402, 497, 566], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
-  eastHarlem: [509, 470], // East Harlem's west side, upright (x), and its foot on Five Points, level (y)
+  manhattan: [298, 393, 482, 568], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
+  eastHarlem: [512, 468], // East Harlem's west side, upright (x), and its foot on Five Points, level (y)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 825, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
