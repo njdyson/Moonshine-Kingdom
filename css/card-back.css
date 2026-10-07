@@ -9,13 +9,16 @@
    sit with the other components: a gilt keyline with a jewel on each Deco
    chamfer (the Ledger and the key's plaques), an inner keyline stepped at
    the corners round a quarter fan (the board's frame), a faint sunburst, and
-   a medallion dressed as a Heat Track socket: gilt bezel, lacquer floor,
-   guilloche between two track rings. Over it:
+   the same fan opened to a half: a sun rising behind the name. Over it:
 
-     name    on a gilt plate across the medallion, as the Ledger's name is
-             cut into its cartouche and HEAT into the board's
-     kicker  wide-tracked Barlow under the medallion: what kind of card
+     name    on a gilt plate, the sun's horizon, as the Ledger's name is cut
+             into its cartouche and HEAT into the board's
+     kicker  wide-tracked Barlow below: what kind of card
      foot    New York and 1929 between rules, the board's title in small
+
+   No circles. A gilt ring is where a marker goes (the Heat Track, the
+   Ledger), so the first draft's ring medallion read as a socket (Nick,
+   2026-10-07). Fans and diamonds are only ever ornament.
 
    Markup, one per card:
      <div class="back"><div class="back-title">Job</div>
@@ -36,8 +39,8 @@
        and only appear in print, so a linked image file is never fetched
        before Chrome prints: as Art/Cards/Back.svg the backs printed bare
        (2026-10-07). An inline data URI needs no fetch.
-       Drawn in mm on the 63 x 88 card (# is written %23). The medallion's
-       centre is 31.5, 40; --seal-y puts the plate on it. */
+       Drawn in mm on the 63 x 88 card (# is written %23). The sun and the
+       sunburst rise from 31.5, 40; --plate-y puts the plate on it. */
     --back-art: url("data:image/svg+xml,\
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 63 88'>\
 <defs>\
@@ -45,11 +48,6 @@
 <stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
 <stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
 <stop offset='1' stop-color='%23f6e3a1'/></linearGradient>\
-<radialGradient id='floor' cx='.5' cy='.58' r='.55'>\
-<stop offset='0' stop-color='%232b1e13'/><stop offset='.75' stop-color='%23140d08'/>\
-<stop offset='1' stop-color='%23050302'/></radialGradient>\
-<linearGradient id='recess' x1='0' y1='0' x2='0' y2='1'>\
-<stop offset='0' stop-opacity='.6'/><stop offset='.3' stop-opacity='0'/></linearGradient>\
 <radialGradient id='fade'><stop offset='.35' stop-color='%23fff'/>\
 <stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient>\
 <mask id='fadeout' maskUnits='userSpaceOnUse' x='0' y='0' width='63' height='88'>\
@@ -69,18 +67,19 @@
 <use href='%23inner' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.22'/>\
 <use href='%23fan' transform='translate(7.2 7.2)'/><use href='%23fan' transform='translate(55.8 7.2) scale(-1 1)'/>\
 <use href='%23fan' transform='translate(55.8 80.8) scale(-1 -1)'/><use href='%23fan' transform='translate(7.2 80.8) scale(1 -1)'/>\
-<g transform='translate(31.5 40)'>\
-<circle r='14.6' fill='url(%23floor)'/>\
-<circle r='6.8' fill='none' stroke='%23b9932f' stroke-opacity='.16' stroke-width='13.6' pathLength='72' stroke-dasharray='.11 .89'/>\
-<circle r='2.4' fill='%232b1e13'/>\
-<circle r='9.1' fill='none' stroke='%23b9932f' stroke-opacity='.45' stroke-width='.22'/>\
-<circle r='9.9' fill='none' stroke='%23b9932f' stroke-opacity='.22' stroke-width='.14'/>\
-<circle r='14.6' fill='url(%23recess)'/>\
-<circle r='14.75' fill='none' stroke='%23000' stroke-opacity='.7' stroke-width='.25'/>\
-<circle r='15.45' fill='none' stroke='url(%23gilt)' stroke-width='1.2'/>\
-<circle r='16.1' fill='none' stroke='%23f6e3a1' stroke-opacity='.35' stroke-width='.1'/>\
-</g></svg>");
-    --seal-y: 40mm;
+<path d='M13.5 40A18 18 0 0 1 49.5 40Z' fill='%230e0905' fill-opacity='.45'/>\
+<path d='M13.5 40A18 18 0 0 1 49.5 40' fill='none' stroke='url(%23gilt)' stroke-width='.65'/>\
+<path d='M14.9 40A16.6 16.6 0 0 1 48.1 40' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.2'/>\
+<path d='M25.3 40A6.2 6.2 0 0 1 37.7 40' fill='none' stroke='%23c9a437' stroke-width='.3'/>\
+<path fill='none' stroke='%23c9a437' stroke-opacity='.85' stroke-width='.28' d='\
+M24.41 38.75L16.33 37.33M24.73 37.54L20.22 35.9M25.26 36.4L18.16 32.3M25.98 35.37L22.31 32.29\
+M26.87 34.48L21.6 28.2M27.9 33.76L25.5 29.61M29.04 33.23L26.23 25.53M30.25 32.91L29.42 28.18\
+M31.5 32.8L31.5 24.6M32.75 32.91L33.58 28.18M33.96 33.23L36.77 25.53M35.1 33.76L37.5 29.61\
+M36.13 34.48L41.4 28.2M37.02 35.37L40.69 32.29M37.74 36.4L44.84 32.3M38.27 37.54L42.78 35.9\
+M38.59 38.75L46.67 37.33'/>\
+<path d='M31.5 46V52' stroke='%23c9a437' stroke-opacity='.6' stroke-width='.22'/><use href='%23jewel' x='31.5' y='53'/>\
+</svg>");
+    --plate-y: 40mm;
 
     position: relative;
     box-sizing: border-box;
@@ -98,12 +97,12 @@
 
 /* --- the name, cut into a gilt plate. Display type is mixed case, never
    uppercased (the Reskin's rule). One line: the plate is as wide as the name
-   needs and never narrower than the medallion, so it always bridges the
-   bezel. --- */
+   needs and never narrower than the sun, so it always holds up both ends of
+   the arc. --- */
 .back-title {
     position: absolute;
     left: 50%;
-    top: var(--seal-y);
+    top: var(--plate-y);
     transform: translate(-50%, -50%);
     z-index: 1;
     min-width: 38mm;
@@ -118,7 +117,7 @@
     filter: drop-shadow(0 .5mm .5mm rgba(0, 0, 0, .65));
 }
 
-/* --- what kind of card, under the medallion --- */
+/* --- what kind of card, below the sun --- */
 .back-sub {
     position: absolute;
     left: 0;
