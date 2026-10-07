@@ -37,8 +37,20 @@ map; see `board-handoff.md`.
 
 ## Connection changes
 
-None. Every connection and every Coastal District is the same as the traced map's, which the
-current game presumably uses. What changed is only the shapes:
+**Manhattan, since 2026-10-07.** Manhattan is laid like bricks (one level line across it, East
+Harlem's upright above it and Five Points' further west below it), which changes three of its
+connections from the traced map's:
+
+- **East Harlem / Tenderloin is gone.**
+- **West Side / Five Points is new.**
+- **Tenderloin / Bowery is new** (the Tenderloin took the stretch of Hudson shore that was Five
+  Points', so the Bowery has three roads out by land, not two).
+
+The Coastal list is unchanged (Five Points keeps its East River shore), and the Queensboro Bridge
+still joins East Harlem and Astoria, moved up the river to East Harlem's shorter shore. The game
+needs its graph updated to match.
+
+Every other connection is the traced map's. Elsewhere only the shapes changed:
 
 - **Westchester and Nassau are gone** from the art. They were never Districts, so nothing should
   reference them, but check.
@@ -51,22 +63,23 @@ a1b0ff4, deployed here in 5cf2640), and mk-online cc5d519 put Astoria / Williams
 
 ### The full graph (authoritative, from `board-geometry.json`)
 
-Land borders (39):
+Land borders (40):
 
 ```
-astoria | corona              brownsville | williamsburg     flushing | whitestone
-astoria | flushing            coney_island | red_hook        fordham | hunts_point
-astoria | whitestone          coney_island | canarsie        fordham | morris_park
-astoria | williamsburg        corona | flushing              fordham | throggs_neck
-belmont | fordham             corona | richmond_hill         hunts_point | throggs_neck
-belmont | hunts_point         corona | williamsburg          jamaica | richmond_hill
-belmont | sugar_hill          east_harlem | five_points      morris_park | throggs_neck
-bowery | five_points          east_harlem | hunts_point      red_hook | canarsie
-brownsville | corona          east_harlem | sugar_hill       red_hook | williamsburg
-brownsville | jamaica         east_harlem | tenderloin       stapleton | tottenville
-brownsville | red_hook        east_harlem | west_side        stapleton | westerleigh
-brownsville | richmond_hill   five_points | tenderloin       sugar_hill | west_side
-brownsville | canarsie        flushing | richmond_hill       tenderloin | west_side
+astoria | corona              brownsville | williamsburg    flushing | whitestone
+astoria | flushing            canarsie | coney_island       fordham | hunts_point
+astoria | whitestone          canarsie | red_hook           fordham | morris_park
+astoria | williamsburg        coney_island | red_hook       fordham | throggs_neck
+belmont | fordham             corona | flushing             hunts_point | throggs_neck
+belmont | hunts_point         corona | richmond_hill        jamaica | richmond_hill
+belmont | sugar_hill          corona | williamsburg         morris_park | throggs_neck
+bowery | five_points          east_harlem | five_points     red_hook | williamsburg
+bowery | tenderloin           east_harlem | hunts_point     stapleton | tottenville
+brownsville | canarsie        east_harlem | sugar_hill      stapleton | westerleigh
+brownsville | corona          east_harlem | west_side       sugar_hill | west_side
+brownsville | jamaica         five_points | tenderloin      tenderloin | west_side
+brownsville | red_hook        five_points | west_side
+brownsville | richmond_hill   flushing | richmond_hill
 ```
 
 Bridges (4), which also count as Land Connected:

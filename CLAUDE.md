@@ -335,6 +335,8 @@ mk-online serves a snapshot of this board (`mk-online/dist/board.svg`, taken 202
 b015afe, with Canarsie and Stapleton's 8; refreshed 2026-10-01 when Canarsie's id became `canarsie`). Its click areas, piece spots, sockets and connection graph come from
 `board-geometry.json`, and mk-online's `scripts/boardcheck.ts` checks its graph against a copy
 of it. Redraw the board and mk-online needs the same update again (`mk-online-board-handoff.md`).
+Since 2026-10-07 Manhattan is laid like bricks, which changed three connections (East Harlem /
+Tenderloin gone, West Side / Five Points and Tenderloin / Bowery new); mk-online's graph lags them.
 
 ## What not to edit
 

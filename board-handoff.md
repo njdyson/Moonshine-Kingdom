@@ -38,7 +38,7 @@ so the SVG renders the same anywhere; the build itself needs the network.
 
 The Affinity board was traced (`tools/trace_board.js`) into `Art/Board/Traced/board-geometry.json`:
 one polygon per District, every border one shared chain, the bridges. `tools/draft_board.js`
-reads that skeleton and redraws it to a plan, keeping every District and every connection:
+reads that skeleton and redraws it to a plan, keeping every District and, but for `FLIPS`, every connection:
 `MOVE` (where each point goes), `DROP` (points a straight line no longer needs) and `REPLACE`
 (chains that gain corners), built from named lines (`MN_WEST`, `NJ`, `ER_MN`...) so the intent
 reads in the code. Its `SETTINGS` place the level and upright borders. Nick asked for a less
@@ -176,7 +176,8 @@ to East Harlem's, which left West Side 35 and the Tenderloin 46. The 45-degree X
 Sugar Hill and East Harlem diamond-topped and pushed Manhattan's rows down. Git history has it
 (`6e0983a`, `d2637f6`).
 
-**Now, a gentler straightening** on the first pass's corner:
+**Then a gentler straightening** on the first pass's corner. Its Manhattan (East Harlem's slant and
+the rows) was replaced the same day by the bricks, below; the rest stands:
 
 - **Sugar Hill / Belmont runs from the four-way corner square to the coast, at 45 degrees**
   (`corner`), so Sugar Hill's top is a right-angled peak like Williamsburg's and its sign hangs
@@ -200,12 +201,55 @@ Sugar Hill and East Harlem diamond-topped and pushed Manhattan's rows down. Git 
   across the room, so it read Sugar Hill's 77 as 36), and `build_board.js --rooms` prints the
   placements alone in a few seconds, for trying a drafting change.
 
-| Room (cm²) | This morning | Manhattan one width | Now |
-| --- | --- | --- | --- |
-| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 54, 45, 52 |
-| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 71, 56, 68 |
-| Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 | 48, 52, 52 |
-| Westerleigh, Stapleton, Tottenville | 40, 41, 41 | 44, 45, 44 | 44, 45, 44 |
+### Manhattan laid like bricks
+
+Nick, 2026-10-07, on the gentle version: "The layout doesn't have to stay the same, as long as
+the board remains interesting and connections aren't just a serial row." So the straight lines
+got another go in Manhattan, this time free to change which Districts touch.
+
+Manhattan is laid in rows like brickwork: Sugar Hill beside East Harlem, West Side beside East
+Harlem, the Tenderloin beside Five Points, and the Bowery across the bottom. **One level line (the
+row, `manhattan[1]`) crosses Manhattan from shore to shore.** Above it East Harlem's west side is
+upright; below it Five Points' west side is upright too (`fivePoints`), further west, so West Side
+sits on both the Tenderloin and Five Points. Sugar Hill / East Harlem comes down from the
+four-way corner at 45 degrees straight into the junction with West Side, so East Harlem's upright
+is set by Sugar Hill's foot (`manhattan[0]`), not a setting of its own. Every land border in
+Manhattan is now level, upright or at 45 degrees.
+
+Why the step: the coast and the East River slant the same way, so a column with one upright
+widens on the west and tapers on the east as it runs south. That taper was the dint in the
+all-straight version. Stepping the upright west at the row keeps both columns even, and it
+makes the row a border every District above and below it can be seen to share.
+
+Two flips (`FLIPS`) do it, and three connections change:
+
+- **East Harlem / Tenderloin is gone.**
+- **West Side / Five Points is new**, along the row.
+- **Tenderloin / Bowery is new**: the Tenderloin took Five Points' stretch of Hudson shore, so the
+  Bowery has three roads out by land, not two (The Almanac's Raid lesson named it with Jamaica and
+  Whitestone as the Docks with two, and now names those two). The old raster board had this
+  border; the traced map didn't.
+
+Nothing else moved: every bridge keeps its join, the Coastal list is the same, and Sugar Hill's
+neighbours (and so the Squad's doors) are unchanged. The **Queensboro Bridge** moved up the East
+River (`BRIDGE_SHIFT`) to the middle of East Harlem's shore, which now ends at the row. One
+knock-on for Nick: Manhattan's setup (Home Turf at Five Points, 3 Runners on East Harlem and West
+Side) is now a triangle, all three touching; before, West Side didn't touch Five Points. The
+Boroughs' setups already differ in this (the Bronx's home touches both its Runner Districts,
+Queens' and Brooklyn's touch one).
+
+The flip itself had a bug, fixed here: it moved the junctions but left a flipped border's interior
+points in the old Districts' outlines, which drew a spike once a flipped chain had a bend.
+
+| Room (cm²) | This morning | Manhattan one width | Gentle straightening | Bricks |
+| --- | --- | --- | --- | --- |
+| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 54, 45, 52 | 62, 64, 59 |
+| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 71, 56, 68 | 61, 58, 53 |
+| Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 | 48, 52, 52 | 48, 52, 52 |
+| Westerleigh, Stapleton, Tottenville | 40, 41, 41 | 44, 45, 44 | 44, 45, 44 | 44, 45, 44 |
+
+By area Manhattan's six run 91 to 101 cm², against 80 to 112 before. The settings were found
+by a search over the four Manhattan settings for even areas, then checked for room.
 
 ### Room for pieces, and the tuner
 
@@ -228,7 +272,8 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | With the larger Stills | 40 (West Side) | 44, 54, 57, 71 |
 | With the wider Kill van Kull (as the build reports, 2026-10-07) | 40 (Westerleigh) | 47, 51, 59, 74 |
 | Manhattan one width and Staten Island raised (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
-| Now, straightened round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 54, 51, 59, 74 |
+| Straightened round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 54, 51, 59, 74 |
+| Now, Manhattan laid like bricks (2026-10-07) | 44 (Westerleigh, Tottenville) | 62, 51, 59, 74 |
 
 Rooms now run 44 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
 smallest (39), is 46 since the Sound went level.
@@ -426,9 +471,10 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
-- **Every connection is the traced map's.** `FLIPS` in `draft_board.js` can change one (it
-  gives a border to the two Districts at its ends; the traced map is untouched) and is empty.
-  Astoria / Williamsburg was flipped and put back on 2026-09-29 (see the Queens / Brooklyn line).
+- **Every connection is the traced map's but Manhattan's three.** `FLIPS` in `draft_board.js`
+  changes one (it gives a border to the two Districts at its ends; the traced map is untouched).
+  It holds two since 2026-10-07, Manhattan laid like bricks (see that section). Astoria /
+  Williamsburg was flipped and put back on 2026-09-29 (see the Queens / Brooklyn line).
 - **Manhattan was raised into Belmont** (Nick, 2026-09-29: a couple of mm on each Manhattan
   District). Sugar Hill / Belmont moves up 26 at the coast (`manhattanLift`) and 14 at the
   four-way corner (`cornerLift`; more makes East Harlem's top corner tight), and the level
@@ -579,11 +625,14 @@ keeps them on a re-trace.
 
 ## Open
 
-- **Other short borders** Nick may want gone: East Harlem / Five Points (37), Astoria /
+- **mk-online is one redraw behind** (2026-10-07): Manhattan's bricks change three connections
+  (East Harlem / Tenderloin gone, West Side / Five Points and Tenderloin / Bowery new).
+  `mk-online-board-handoff.md` lists them and the full graph.
+- **Other short borders** Nick may want gone: Astoria /
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh and Tottenville (44), Stapleton, Corona and West Side (45), and Whitestone (46).
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh and Tottenville (44), Stapleton and Corona (45), and Whitestone (46).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.
