@@ -45,12 +45,12 @@ const CM = (609.6 / 1080) ** 2 / 100, STEP = 2, FRAME_IN = 13;
 const KNOBS = [
   ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215],
   ['hellGate', 3, 15], ['hpCol', 770, 830], ['hpFoot', 30, 90], ['ehKnee.0', 700, 735], ['ehKnee.1', 260, 315],
-  ['manhattanWest', 0, 12], ['manhattan.0', 250, 300], ['manhattan.1', 340, 400], ['manhattan.2', 440, 495],
-  ['manhattan.3', 535, 585], ['eastHarlem', -12, 32],
+  ['manhattan.0', 250, 330], ['manhattan.1', 340, 420], ['manhattan.2', 430, 520],
+  ['manhattan.3', 530, 620], ['eastHarlem', -12, 32],
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
   ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
   ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90],
-  ['boweryBottom', 660, 690], ['stapletonTop', 690, 715], ['staten.0', 800, 850], ['staten.1', 895, 950],
+  ['boweryBottom', 640, 690], ['stapletonTop', 672, 715], ['staten.0', 800, 850], ['staten.1', 895, 950],
 ];
 
 // ---------------------------------------------------------------- geometry

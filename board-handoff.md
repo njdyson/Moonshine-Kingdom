@@ -2,13 +2,15 @@
 
 Status (2026-09-29): the **drafted map with hanging signs and the Deco style is the board**, on
 `main`. A print-finish pass on 2026-10-07 (grooved borders, a cellular pebble grain, smooth calf
-water, a graduated Heat Track, gilt lettering) changed the look only; the geometry is untouched.
-See The look and Decisions. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
+water, a graduated Heat Track, gilt lettering) changed the look only. Later the same day
+**Manhattan became one width** (the Hudson parallel to the East River, into New Jersey's
+empty south), the Bowery's foot and Staten Island rose, and the title moved onto New Jersey's
+shore. See Manhattan is one width, The look and Decisions. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
 clickable Districts and its connection graph taken from `board-geometry.json`. Its snapshot
-predates the 2026-10-07 finish pass and the wider Kill van Kull the same day. The connection
-graph is unchanged, but Staten Island's three Districts moved (up to 10 units), so catching it
-up means taking both the new screen SVG and `board-geometry.json` (for their click areas and
-piece spots) into mk-online's source and deploying as `DEPLOY.md` says. The Affinity export (`Art/Board (Large).png`) is untouched.
+predates every 2026-10-07 change. The connection graph is unchanged, but all of Manhattan,
+Belmont, Fordham, Hunts Point, Staten Island, New Jersey and the Brooklyn Bridge moved, so
+catching it up means taking both the new screen SVG and `board-geometry.json` (for their
+click areas and piece spots) into mk-online's source and deploying as `DEPLOY.md` says. The Affinity export (`Art/Board (Large).png`) is untouched.
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
@@ -39,11 +41,15 @@ reads in the code. Its `SETTINGS` place the level and upright borders. Nick aske
 angular board; curved borders were tried first and rejected as hand-drawn ("the angular map
 works better"), so this makes the angles deliberate instead.
 
-- **Straight lines at a few exact angles**: level, upright, 45 degrees, and the Hudson's.
-  Manhattan's west coast is one straight line (Nick: it is straight in real life). The rivers
-  are even channels: the Hudson 44 wide, down to the harbour (New Jersey is squared off level
-  with the Bowery's foot); the East River 49, in three reaches (45 degrees past the Williamsburg
-  and Queensboro, a level turn under the Bowery, then parallel to the Hudson); Hell Gate and the
+- **Straight lines at a few exact angles**: level, upright, 45 degrees, and the East River's
+  harbour reach. Manhattan's west coast is one straight line (Nick: it is straight in real
+  life), at 45 degrees, parallel to the East River (see Manhattan is one width). The rivers
+  are even channels: the Hudson 44 wide, from the Heat corner's corner down to where New
+  Jersey meets the board's edge, then open to the frame beside the Bowery, whose west shore
+  stands upright a Hudson's width in from the frame (`BOWERY_WEST`); the East River 49, in
+  three reaches (45 degrees past the Williamsburg and Queensboro, a level turn under the
+  Bowery, then the harbour reach down to the Narrows, at the Hudson's old angle, `HARBOUR`, so
+  Brooklyn and Staten Island's east shore stayed put when the Hudson turned); Hell Gate and the
   Sound 49, one level line from East Harlem to the frame (`hellGate`, Nick, 2026-09-30: the
   Hell Gate had risen 3 degrees to Hunts Point / Throggs Neck, a kink on Astoria's shore; it
   runs at the Sound's old level, so Whitestone and Throggs Neck keep their room. Before
@@ -51,8 +57,9 @@ works better"), so this makes the angles deliberate instead.
   and Jamaica Bay are 45-degree octagons.
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
-  24) to meet it square: Manhattan's level borders at the Hudson and Five Points / Bowery at the
-  East River. Belmont / Hunts Point turns on a longer foot (`hpFoot`, 60) to meet East Harlem /
+  24) to meet it square: Manhattan's level borders at the Hudson (bar Five Points / Bowery,
+  which meets the Bowery's upright west shore square) and Five Points / Bowery at the East
+  River. Belmont / Hunts Point turns on a longer foot (`hpFoot`, 60) to meet East Harlem /
   Hunts Point square.
   Williamsburg / Red Hook and the Queens / Brooklyn line both run square to the East River,
   which makes Williamsburg a square set on its corner;
@@ -118,6 +125,43 @@ works better"), so this makes the angles deliberate instead.
   bridge square across its river (within 4 units: a one-unit move of the Bowery's foot once
   turned the Brooklyn Bridge to 84) and landing at least 20 units from a border on its shore.
 
+### Manhattan is one width
+
+Nick, 2026-10-07: make Manhattan a consistent width from north to south by cutting into the
+blank space in New Jersey's south, and give the smallest Districts a touch more room with it.
+The west coast had run at about 54 degrees against the East River's 45, so the island
+narrowed from about 320 units across at the Hell Gate to about 260 at the Bowery. It now runs
+at 45 degrees, parallel, and Manhattan is **301 units across** from the Hell Gate to the
+Bowery. That width is where **New Jersey's shore leaves the Heat corner's corner**
+(`HEAT_CORNER`, `NJ = line(HEAT_CORNER, [-1, 1])`): narrower would show New Jersey beside the
+Heat corner, and wider would shrink New Jersey until neither the title nor the key fits. The
+coast swings about the top, so the north end barely moved (Manhattan's tip 22 east and 20
+down) and the south moved far out: the Bowery's west shore went from x 135 to 57. New Jersey
+is now a triangle under the Heat corner, ending at the board's edge level with Five Points,
+and its strip beside the Bowery (where the title read up the board) is gone.
+
+The ground went round Manhattan and on to Staten Island (`tune_board.js` on the Manhattan,
+Belmont-lift and Staten Island settings, then looked at by eye). The Bowery, now far wider,
+gave 16 units of height: its foot rose 668 to 652 and Staten Island's top 700 to 684, so the
+Kill van Kull keeps its 32. The **Brooklyn Bridge** moved up the harbour reach with it
+(`BRIDGE_SHIFT`), to the middle of the stretch of the Bowery's shore that faces Red Hook's;
+it lands about 15 units clear of each shore's corner. Five Points' top dropped (`manhattan`
+to 286, 393, 480, 557), so East Harlem's west side moved 12 west (`eastHarlem` -11) to keep
+East Harlem / Five Points at 34. The lift into Belmont came down (see Decisions).
+
+| Room (cm²) | Before | After |
+| --- | --- | --- |
+| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 |
+| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 |
+| Westerleigh, Stapleton, Tottenville | 40, 41, 41 | 44, 45, 44 |
+| Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 |
+
+The cost is **Sugar Hill's sign**: the tip's move made the District a diamond whose widest
+ground is in its middle, so its sign hangs there on hangers of 77, the board's longest (it was
+43). The sign can't hang higher: Sugar Hill is too narrow above it. The tuner doesn't see
+this, because it still centres a sign across the room where the build has used the centroid
+rule since 2026-09-30 (`SIGN_CENTRE`): it reads Sugar Hill's hangers as 36.
+
 ### Room for pieces, and the tuner
 
 The build prints each District's **room**: its ground at least 6 units (about 3 mm) in from every
@@ -137,9 +181,10 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | With the signs, before the Queens / Brooklyn line | 39 (Whitestone) | 47, 57, 65, 83 |
 | Squared Morris Park, level Sound | 42 (West Side) | 46, 56, 59, 72 |
 | With the larger Stills | 40 (West Side) | 44, 54, 57, 71 |
-| Now, with the wider Kill van Kull (as the build reports, 2026-10-07) | 40 (Westerleigh) | 47, 51, 59, 74 |
+| With the wider Kill van Kull (as the build reports, 2026-10-07) | 40 (Westerleigh) | 47, 51, 59, 74 |
+| Now, with Manhattan one width and Staten Island raised (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
 
-Rooms now run 40 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
+Rooms now run 44 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
 smallest (39), is 46 since the Sound went level.
 
 - **The Kill van Kull is as wide as the Narrows** (Nick, 2026-10-07: with the harbour lamps
@@ -149,7 +194,8 @@ smallest (39), is 46 since the Sound went level.
   (`stapletonTop` 690 to 700) and its level borders 7 and 3 (`staten` 806 and 914 to 813 and
   917), so each of its Districts is 3 to 4 units shorter and its south shore stays put: 32
   units (18 mm), the Narrows' width. Room: Westerleigh 43 to 40, Stapleton 44 to 41,
-  Tottenville 44 to 41, now the three smallest on the board.
+  Tottenville 44 to 41, the three smallest on the board, until Manhattan widened the same day
+  and the whole channel moved up 16 (see Manhattan is one width).
 
 ## The look
 
@@ -189,13 +235,21 @@ smallest (39), is 46 since the Sound went level.
   in two parts (the Still standing apart in the District was tried and lost the link). Every
   shape is tried and the one whose longest hanger, plus a cost, is shortest wins: a stacked name
   costs 25 (15 until 2026-09-30), the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
-  Hangers always run to the border straight above. The longest are Hunts Point's 56 and
-  Astoria's 55, whose widest ground lies well below their tops. If a sign ever doesn't fit, the build
+  Hangers always run to the border straight above. The longest are Sugar Hill's 77 (since
+  2026-10-07; see Manhattan is one width) and Astoria's 54, whose widest ground lies well
+  below their tops. If a sign ever doesn't fit, the build
   stops with an error.
-- **The title reads up New Jersey's strip beside the Bowery** (Nick, 2026-09-29: try it lower,
-  in the empty half). It could not simply move down, since New Jersey narrows under the panels.
-  Upright, centred in the ground under the panels, it echoes THE BRONX on the opposite edge.
-  Tried: across under the panels (as it was), and stacked on three lines.
+- **The title is set along New Jersey's shore** (2026-10-07), at 45 degrees, reading up the
+  Hudson, centred along the shore between the frame and the panels (`title()`). From
+  2026-09-29 it read up New Jersey's strip beside the Bowery (Nick: try it lower, in the empty
+  half), upright, echoing THE BRONX on the opposite edge; that strip went when Manhattan
+  widened into it. At full size an upright title no longer fits anywhere on the left edge: in
+  New Jersey's triangle under the Tomorrow panel it fits at about 75% (no bigger than the
+  Borough names), and the open Hudson beside the Bowery is 44 wide where it needs about 76.
+  Along the shore it keeps its full size, about 15 units clear of the Tomorrow panel's corner;
+  Manhattan could widen only about 7 more before it stopped fitting. MANHATTAN reads in the river just
+  below it, parallel. Tried before: across under the panels (as it was until 2026-09-29), and
+  stacked on three lines. If Nick dislikes the slant, the 75% upright is the fallback.
 - **The Tomorrow panel** (`tomorrow()`): the Mash socket and a 36 mm socket for tomorrow's Turn
   Tokens as **one stack, #1 on top**, so "claim the lowest-numbered token left" becomes "take the
   top token". Both are set today for tomorrow, which the panel teaches. **SUNSET** is cut into the Turn Order socket's floor (Nick, 2026-09-30): the stack covers it all Day, and the last boss to Lay Low takes the last token and uncovers it, which is the moment the Rulebook calls Sunset. The Rulebook, Playbooks and Town Planner say "take the top token from tomorrow's stack". Four separate slots would
@@ -281,10 +335,12 @@ smallest (39), is 46 since the Sound went level.
   only (no displacement), so it never moves a line.
 - **Heat Track sockets are the Ledger's**: 39 mm casino chips, 2 mm apart, in a tray padded
   6 mm (`css/ledger-board.css`, the poker-chip build). If the Ledger's socket changes,
-  `heatTrack()` changes with it. Five sockets need 381 units, a little more than the New Jersey
-  strip, so the Heat Track sits in a **corner cut out of the map**: the board's gold edge steps
-  in around it and the hairline follows (`frame()`), so the New Jersey coast meets its edge
-  instead of running under a floating panel (Nick, 2026-09-28).
+  `heatTrack()` changes with it. Five sockets need 381 units, so the Heat Track sits in a
+  **corner cut out of the map**: the board's gold edge steps in around it and the hairline
+  follows (`frame()`), so the New Jersey coast meets its edge instead of running under a
+  floating panel (Nick, 2026-09-28). Since 2026-10-07 the coast leaves the corner's own corner
+  (`HEAT_CORNER` in `draft_board.js`, copied from `HEAT.edge`): if the Heat corner changes size,
+  the Hudson, and with it Manhattan's width, moves with it.
 - **Mash square**: 24 mm.
 
 ## Bridges (period accurate, named for Jobs)
@@ -332,7 +388,10 @@ keeps them on a re-trace.
   District). Sugar Hill / Belmont moves up 26 at the coast (`manhattanLift`) and 14 at the
   four-way corner (`cornerLift`; more makes East Harlem's top corner tight), and the level
   borders (`manhattan`) share the height out. Moving only the tip was tried first: it gained a
-  sliver too thin to use, and Sugar Hill lost room. Belmont went from 69 to 54.
+  sliver too thin to use, and Sugar Hill lost room. Belmont went from 69 to 54. When Manhattan
+  widened (2026-10-07) the lift came down to 22 at the coast and 0 at the corner: the wider
+  island gave every Manhattan District more room than the lift had, and holding 14 at the
+  corner left Belmont 48 and hung Sugar Hill's sign lower still. Belmont is 55.
 
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
@@ -396,7 +455,8 @@ keeps them on a re-trace.
   with it, 862 to 871 (`bronxCols`; the Fordham / Throggs Neck border is 46 long against a
   45 minimum, so one can't move without the other), and a stacked name now costs 25 units of
   hanger, not 15. Its one-line sign fits only below East Harlem's diagonal, so it hangs on 56,
-  with Astoria's 55 the board's longest; at a 15 penalty the wrap still won. No sign on the
+  with Astoria's 55 the board's longest (45 since the four-way corner came down, 2026-10-07);
+  at a 15 penalty the wrap still won. No sign on the
   board wraps now. Room: Hunts Point 50 to 48, Morris Park 54 to 51, Throggs Neck 56 to 53.
   A smaller name font was measured and rejected: not enough on its own, even at 11.
 - **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 33 units
@@ -475,11 +535,11 @@ keeps them on a re-trace.
 
 ## Open
 
-- **Other short borders** Nick may want gone: East Harlem / Five Points (32), Astoria /
+- **Other short borders** Nick may want gone: East Harlem / Five Points (34), Astoria /
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh (40), Stapleton and Tottenville (41), and West Side (42).
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh and Tottenville (44), Stapleton and Corona (45), and Hunts Point and Whitestone (46).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.

@@ -8,8 +8,9 @@
 // The skeleton gives the Districts, their borders and the bridges; this keeps every
 // connection but those FLIPS changes, and redraws the shapes to a plan:
 //
-// - Straight lines at a few exact angles: level, upright, 45 degrees, and the Hudson's
-//   (Manhattan's west coast is one straight line). The rivers are even channels: the
+// - Straight lines at a few exact angles: level, upright, 45 degrees, and the East River's
+//   harbour reach. Manhattan's west coast is one straight line, parallel to the East River,
+//   so Manhattan is one width from north to south. The rivers are even channels: the
 //   Hudson 44 wide, the East River, Hell Gate and the Sound 49.
 // - Square corners where it can be done (Nick: tight corners are dead space). A border
 //   meeting a slanted shore or border at a tight angle turns on a short foot (FOOT) to
@@ -49,10 +50,11 @@ const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 // River shore between them) and put back the same day: Nick disliked the spur.
 const FLIPS = [];
 // Districts whose size changed on purpose, which the area check leaves be: every District a
-// flip touches, West Side and East Harlem, grown with Manhattan (manhattanLift), and
-// Canarsie (canarsie), which gave Coney Island the width for its name (coneyEast) and
+// flip touches, Manhattan's, grown when it widened to one width (and West Side and East
+// Harlem with manhattanLift before that), Staten Island's, which rose with the Bowery's foot,
+// and Canarsie (canarsie), which gave Coney Island the width for its name (coneyEast) and
 // took Brownsville's corner on the bay.
-const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville']);
+const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville', 'sugar_hill', 'tenderloin', 'five_points', 'bowery', 'westerleigh', 'stapleton', 'tottenville']);
 function flip(g, [A, B]) {
   const i = g.chains.findIndex(c => c.sides.includes(A) && c.sides.includes(B)), c = g.chains[i];
   const [J1, J2] = [c.pts[0], c.pts[c.pts.length - 1]].map(key);
@@ -101,10 +103,9 @@ const SETTINGS = {
   bronxCols: [692, 871], // Belmont | Fordham | Morris Park (Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol)
   bronxRow: 184, // Fordham and Morris Park / Throggs Neck, level to the east shore
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
-  manhattanWest: 9, // Manhattan's west coast moved out (New Jersey follows, so the Hudson keeps its width)
-  manhattanLift: 26, cornerLift: 14, // Sugar Hill / Belmont raised into Belmont: at the coast, and at the four-way corner
-  manhattan: [262, 367, 463, 553], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
-  eastHarlem: 1, // East Harlem's west side, shifted east
+  manhattanLift: 22, cornerLift: 0, // Sugar Hill / Belmont raised into Belmont: at the coast, and at the four-way corner (26 and 14 until Manhattan widened, 2026-10-07)
+  manhattan: [286, 393, 480, 557], // level borders: Sugar Hill | West Side | Tenderloin | Five Points | Bowery
+  eastHarlem: -11, // East Harlem's west side, shifted east (west when negative; 1 until 2026-10-07, moved west to keep East Harlem / Five Points over 32 as Five Points' top dropped)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 825, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
@@ -115,8 +116,8 @@ const SETTINGS = {
   redHookSouth: 796, // Red Hook's level south side
   rhStub: 10, // Red Hook's shore runs upright this far above its south side: shorter moves the Narrows west, widening Coney Island
   coneyEast: 458, // Coney Island / Canarsie, upright (440 until 2026-09-30: moved east so Coney Island's name fits on one line)
-  boweryBottom: 668, stapletonTop: 700, // the Kill van Kull between them, as wide as the Narrows (stapletonTop was 690 until 2026-10-07)
-  staten: [813, 917], // level borders: Westerleigh | Stapleton | Tottenville (806 and 914 until 2026-10-07)
+  boweryBottom: 652, stapletonTop: 684, // the Kill van Kull between them, as wide as the Narrows (668 and 700 until 2026-10-07: the widened Bowery gave height to Staten Island)
+  staten: [803, 913], // level borders: Westerleigh | Stapleton | Tottenville
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   ehKnee: [715, 290], // East Harlem / Hunts Point turns upright here, dropping square to the Hell Gate
   hpFoot: 60, // Belmont / Hunts Point's foot, square to East Harlem / Hunts Point, before it runs level
@@ -127,21 +128,28 @@ const EAST_EDGE = 1080; // Queens runs to the board's edge, under the frame
 const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
-const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0] }; // moved along its river, clear of East Harlem's stretch of the Hell Gate
+// Bridges moved along their rivers: the Hell Gate clear of East Harlem's stretch of it, and the
+// Brooklyn up the harbour reach, mid-way along the stretch of the Bowery's shore that faces
+// Red Hook's (since 2026-10-07, when the Bowery's foot rose)
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Brooklyn Bridge': [16, -23] };
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
 const SOUTH_SHORE = 1020; // the Rockaways, level
 const BK_COL = 600; // Red Hook / Brownsville and Canarsie / Brownsville, upright (595.5 until 2026-09-30: moved east so Canarsie's sign fits on one line)
 const BOWERY_BANK = 602, RED_HOOK_BANK = BOWERY_BANK + RIVER; // the East River's level turn
+const HUDSON = 44; // the Hudson's width
+const HARBOUR = [-314, 440]; // the harbour reach's direction, Red Hook to the Narrows (the Hudson ran parallel to it until 2026-10-07)
+const BOWERY_WEST = FRAME_IN + HUDSON; // the Bowery's west shore, upright, a Hudson's width in from the frame
+const HEAT_CORNER = [413.9, 120.27]; // the Heat corner's outer corner, as build_board.js draws it (HEAT.edge)
 
 function draft(S) {
-  const MN_WEST = shift(through([464, 108], [150, 548]), S.manhattanWest); // Manhattan's west coast, one line
-  const NJ = shift(MN_WEST, 44); // the Hudson: 44 wide, parallel
   const EH_WEST = through([535 + S.eastHarlem, 279], [509 + S.eastHarlem, 453]); // East Harlem's west side
   const ER_MN = line([694, 328], [-1, 1]); // East River, Manhattan bank, 45 degrees
   const ER_QN = shift(ER_MN, -RIVER);
-  const ER_RH = line([287, 788], MN_WEST.d); // the harbour reach, parallel to the Hudson
+  const NJ = line(HEAT_CORNER, [-1, 1]); // New Jersey's shore, at 45 degrees from the Heat corner's corner
+  const MN_WEST = shift(NJ, -HUDSON); // Manhattan's west coast, one line across the Hudson, parallel to the East River
+  const ER_RH = line([287, 788], HARBOUR); // the harbour reach
   const ER_BW = shift(ER_RH, RIVER);
   const HG_BX = line([694, S.hellGate], [1, 0]); // Hell Gate, level, and the Sound runs on from it
   const HG_QN = shift(HG_BX, RIVER);
@@ -155,7 +163,11 @@ function draft(S) {
   const [q1, q2, q3] = S.queensRows, qc = S.queensCol, cb = S.coronaBottom;
   const QN_TURN = meet(HG_QN, SOUND_QN), AW = qc <= QN_TURN[0] ? atX(HG_QN, qc) : atX(SOUND_QN, qc); // Astoria / Whitestone on the shore
   const ehFoot = atY(EH_WEST, m3);
-  const BOWERY_WEST = atY(MN_WEST, m4)[0], NJ_CORNER = atX(NJ, BOWERY_WEST - 44);
+  // Manhattan's west coast turns upright to the Bowery's west shore at MN_TURN. New Jersey's
+  // shore runs from the Heat corner (it runs up under the corner from there) to the board's
+  // edge (NJ_END), so the Hudson opens to the frame beside the Bowery.
+  const MN_TURN = atX(MN_WEST, BOWERY_WEST), NJ_TOP = HEAT_CORNER, NJ_END = atX(NJ, 0);
+  if (MN_TURN[1] < m3) throw new Error('The Hudson turns upright above Tenderloin / Five Points: Manhattan is too wide');
   // A level border meeting a slanted line at a tight corner gets a foot: its last FOOT
   // units turned to meet the line square. From P, where it met the line, running along
   // the line's direction d away from the tight corner: [where the foot lands, where it leaves the level].
@@ -165,6 +177,8 @@ function draft(S) {
   };
   const upCoast = [-MN_WEST.d[0], -MN_WEST.d[1]]; // up Manhattan's west coast
   const MF = [m1, m2, m3, m4].map(m => footOf(atY(MN_WEST, m), upCoast, true)); // each Manhattan border's foot on the Hudson
+  // Five Points / Bowery meets the coast on a foot, or the Bowery's upright shore square
+  const onCoast = m4 < MN_TURN[1], FP_BW = onCoast ? MF[3][0] : [BOWERY_WEST, m4];
   // Queens / Brooklyn: one line square off the East River from Williamsburg's top corner,
   // Williamsburg / Brownsville square to it (so Williamsburg is a square on its corner),
   // turning upright where Corona's bottom meets it, down to the bay. Astoria / Corona leaves
@@ -194,18 +208,18 @@ function draft(S) {
   // points a straight line no longer needs). Chains listed in REPLACE get new interior
   // points outright, where a shape gains corners it didn't have.
   const MOVE = {
-    // New Jersey: parallel to Manhattan's west coast, then to the Bowery's west side, and
-    // squared off level with the Bowery's bottom, so the Hudson is one width all the way
-    '382,165': atX(NJ, 382), '142,476': NJ_CORNER, '94,655': [NJ_CORNER[0], S.boweryBottom], '0,707': [0, S.boweryBottom],
+    // New Jersey (see REPLACE)
+    '382,0': [NJ_TOP[0], 0], '382,165': NJ_TOP, '0,707': NJ_END,
     '464,108': TIPB, '606,191': CORNER, // Manhattan's tip, and the four-way corner, on Sugar Hill / Belmont
     '544,0': [TIPB[0], 0], '533,51': [TIPB[0], W], '1056,0': [BRONX_EAST, 0], '1050,53': [BRONX_EAST, W],
-    // Manhattan: level borders meeting one straight coast, each on a foot
+    // Manhattan: level borders meeting one straight coast, each on a foot (Five Points / Bowery
+    // meets the Bowery's upright shore square instead, once the coast has turned)
     '371,248': MF[0][0], '535,279': atY(EH_WEST, m1),
     '290,360': MF[1][0], '523,357': atY(EH_WEST, m2),
-    '220,452': MF[2][0], '509,453': ehFoot, '150,548': MF[3][0],
+    '220,452': MF[2][0], '509,453': ehFoot, '150,548': FP_BW, ...(onCoast ? {} : { '158,534': MN_TURN }), // Five Points takes the coast's turn
     '533,477': meet(line(ehFoot, [1, 1]), ER_MN), '466,549': BW_J, '694,328': EH_SHORE,
     '447,589': atY(ER_MN, BOWERY_BANK), '342,615': atY(ER_BW, BOWERY_BANK),
-    '307,696': atY(ER_BW, S.boweryBottom), '171,686': [atY(MN_WEST, m4)[0], S.boweryBottom],
+    '307,696': atY(ER_BW, S.boweryBottom), '171,686': [BOWERY_WEST, S.boweryBottom],
     // The Bronx: an upright east shore, level blocks
     '715,53': [b1, W], '715,160': [b1, BH[1]], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
     '1029,231': [BRONX_EAST, S.bronxRow], '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
@@ -245,8 +259,10 @@ function draft(S) {
     'sugar_hill|west_side': [MF[0][0], MF[0][1], atY(EH_WEST, m1)],
     'west_side|tenderloin': [MF[1][0], MF[1][1], atY(EH_WEST, m2)],
     'five_points|tenderloin': [MF[2][0], MF[2][1], ehFoot],
-    'five_points|bowery': [MF[3][0], MF[3][1], bwFoot, BW_J],
-    'water|bowery': [MF[3][0], atY(MN_WEST, m4), [atY(MN_WEST, m4)[0], S.boweryBottom], atY(ER_BW, S.boweryBottom), atY(ER_BW, BOWERY_BANK), atY(ER_MN, BOWERY_BANK), BW_J],
+    'five_points|bowery': [FP_BW, ...(onCoast ? [MF[3][1]] : []), bwFoot, BW_J],
+    'water|bowery': [FP_BW, ...(onCoast ? [MN_TURN] : []), [BOWERY_WEST, S.boweryBottom], atY(ER_BW, S.boweryBottom), atY(ER_BW, BOWERY_BANK), atY(ER_MN, BOWERY_BANK), BW_J],
+    // New Jersey: parallel to Manhattan's west coast, from under the Heat corner to the board's edge
+    'nj|water': [[NJ_TOP[0], 0], NJ_TOP, NJ_END],
     // Astoria / Corona on a foot at the Queens / Brooklyn line; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows
     'astoria|corona': [AC_J, AC_BEND, [qc, S.astoriaCorona]],
     // the Hell Gate's turn on the Queens side is Astoria's or Whitestone's, whichever it falls in
@@ -262,7 +278,7 @@ function draft(S) {
   // Where the labels in the water sit on this map: midway between shores, at their angle.
   const labels = {
     boro: {
-      MN: [...atY(shift(MN_WEST, 22), 440).map(r1), -54.5], // beside the Tenderloin and Five Points, clear of West Side's piers
+      MN: [...atY(shift(MN_WEST, HUDSON / 2), 440).map(r1), -45], // beside the Tenderloin and Five Points, clear of West Side's piers
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
     },
@@ -297,7 +313,7 @@ function chainsFor(S) {
       if (key(fwd[0]) !== key(a) || key(fwd[fwd.length - 1]) !== key(b)) throw new Error(`REPLACE for ${sides} must run junction to junction`);
       return { sides: c.sides, pts: fwd };
     }
-    return { sides: c.sides, pts: c.pts.filter((q, i) => i === 0 || i === c.pts.length - 1 || !dropped.has(key(q))).map(moved) };
+    return { sides: c.sides, pts: c.pts.filter((q, i) => i === 0 || i === c.pts.length - 1 || !dropped.has(key(q)) || key(q) in MOVE).map(moved) };
   });
   return { chains, moved };
 }
