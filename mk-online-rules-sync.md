@@ -570,10 +570,10 @@ has to ask for the seat on his own turn.
 | 17.1 | Run For It: the crew flees to a **Land Connected** Safe District; a Dock with no free land exit is Cornered. | **Any Connected Safe District**, the same test as Fold: a crew raided on a Dock may flee to any Safe Dock across the water. Still never the District the Squad came from, and still the owner's pick (`chooseScatter`). |
 | 17.2 | Cornered lists water and the map's edge as blocked exits. | **Cornered = no Connected Safe District left.** Nothing else changes: the Safehouse burns, all liquor goes to the Supply, and a cornered crew is arrested. |
 | 17.3 | Bots treat a Dock as a dead end when pricing Raid risk or planning a corner. | **A Dock crew is all but uncatchable** (Staten Island's Docks are nearly always Safe). Price the cornering play only at blocks with no pier, chiefly Coney Island and Morris Park. A crew that sails to an empty Dock takes Control of it, which can move the Harbormaster. |
+| 17.4 | A Squad's reach is the Districts **Connected** to it in its own Borough, so it can hop Dock to Dock (West Side and the Bowery, Whitestone and Jamaica). | **Land Connected only**, still inside its own Borough. The dock lanes are no longer part of any Raid: crews may sail, Squads walk. |
 
-`scatterCandidates` in `src/game/raid.ts` should use the same Connected helper as Fold. A Squad's
-own reach is untouched by this section; whether it should still cross water is an open question
-(CLAUDE.md, "A raided crew may sail").
+`scatterCandidates` in `src/game/raid.ts` should use the same Connected helper as Fold, and the
+Squad's reach should drop the dock lanes it uses today (17.4).
 
 ## Checklist
 
@@ -625,7 +625,8 @@ own reach is untouched by this section; whether it should still cross water is a
       Ported: `scatterCandidates` in `src/game/raid.ts` reads land connections only (the dock
       lanes are used only for the Squad's own reach). Since 2026-09-30 the crew's owner picks
       among them (`chooseScatter`); see `harness/README.md` in the mk-online repo.
-      **Superseded by §17 (2026-10-07): the Scatter now crosses water.**
+      **Superseded by §17 (2026-10-07): the Scatter now crosses water, and the Squad's reach
+      no longer does.**
 - [x] **Safehouse +1 Threat, stacking with Ambush** (6.1.1); Torch cost 1 (6.1.2)
 - [x] **Ambush: Cost 1 from Ledger, blocked when spent out or Laid Low** (6.2.1); the spent marker
       goes Ledger → Heat Track and keeps its owner (6.2.2); the Irish Plunder-in-place-of-Ambush
@@ -682,3 +683,4 @@ own reach is untouched by this section; whether it should still cross water is a
 - [ ] **Bots: the Nod is the win key; never trust a Sunset payment from a player who can crown** (16.5)
 - [ ] **The Scatter crosses water** (17.1, 17.2): `scatterCandidates` uses the Fold test, Docks included
 - [ ] **Bots: a Dock crew can't be cornered; corner at Coney Island and Morris Park** (17.3)
+- [ ] **A Squad's reach is Land Connected only** (17.4): no Dock-to-Dock hop inside its Borough

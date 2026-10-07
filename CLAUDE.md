@@ -344,11 +344,16 @@ The places a crew can still be boxed with one road left are not Docks: Coney Isl
 Hook or Canarsie) and Morris Park (Squad on Fordham or Throggs Neck). The Almanac's lesson 23 and the
 Kingpin's Guide name those two. Do not restore "on foot" or "Land Connected" to the Scatter.
 
-**Open: does a Squad's reach cross water?** The Raid's reach is "the Districts directly Connected
-to it inside its own Borough", and Connected includes Docks, so a Squad can hop West Side to the
-Bowery or Whitestone to Jamaica (mk-online implements it that way). Nick's lean (2026-10-07) is
-Land Connected only, as the hop is easy to miss; not yet ruled, and tied to a wider question of
-whether Squads should leave their Borough at all.
+**Squads walk** (same day). A Squad's reach is the Districts directly **Land Connected** to it
+inside its own Borough. The Rulebook had said "Connected", which let a Squad hop by water between
+the two Docks of one Borough (West Side and the Bowery, Whitestone and Jamaica), and mk-online built
+it that way. Nick ruled it out as a hop nobody would spot; the Kingpin's Guide had always said a
+Squad "cannot jump the water". Crews may sail, cops walk.
+
+Squads stay in their own Borough. Letting them roam was weighed on 2026-10-07 and not taken: free
+rein of the map sends all four after the one freshest name, and one step across Borough lines lets
+them bunch up and leave a Borough with no police. The Borough lock is what makes the existing levers
+(Heat timing, planted barrels, the Rat) readable.
 
 ## The board
 
