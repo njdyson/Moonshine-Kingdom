@@ -572,8 +572,11 @@ has to ask for the seat on his own turn.
 | 17.3 | Bots treat a Dock as a dead end when pricing Raid risk or planning a corner. | **A Dock crew is all but uncatchable** (Staten Island's Docks are nearly always Safe). Price the cornering play only at blocks with no pier, chiefly Coney Island and Morris Park. A crew that sails to an empty Dock takes Control of it, which can move the Harbormaster. |
 | 17.4 | A Squad's reach is the Districts **Connected** to it in its own Borough, so it can hop Dock to Dock (West Side and the Bowery, Whitestone and Jamaica). | **Land Connected only**, still inside its own Borough. The dock lanes are no longer part of any Raid: crews may sail, Squads walk. |
 
-`scatterCandidates` in `src/game/raid.ts` should use the same Connected helper as Fold, and the
-Squad's reach should drop the dock lanes it uses today (17.4).
+Ported 2026-10-07 (mk-online b80e22f): `scatterCandidates` and `foldDestinations` share
+`connectedDistricts` in `src/game/data.ts`, and `reachableDistricts` reads land links only, as does
+the bot's own reach test (`raidExposed`). The bots price a Raid by running the engine's on a copy
+of the board, so a Dock crew's escape is already in the price (17.3). `scripts/raid-reach-check.ts`
+guards both rulings.
 
 ## Checklist
 
@@ -681,6 +684,6 @@ Squad's reach should drop the dock lanes it uses today (17.4).
       Respect ≥ 10, Final Standoff and Loose Change deleted
 - [ ] **Blood Oath: 20 combined, the crowning partner holds the Nod and is Capo** (16.4), variant not built yet
 - [ ] **Bots: the Nod is the win key; never trust a Sunset payment from a player who can crown** (16.5)
-- [ ] **The Scatter crosses water** (17.1, 17.2): `scatterCandidates` uses the Fold test, Docks included
-- [ ] **Bots: a Dock crew can't be cornered; corner at Coney Island and Morris Park** (17.3)
-- [ ] **A Squad's reach is Land Connected only** (17.4): no Dock-to-Dock hop inside its Borough
+- [x] **The Scatter crosses water** (17.1, 17.2): `scatterCandidates` uses the Fold test, Docks included
+- [x] **Bots: a Dock crew can't be cornered; corner at Coney Island and Morris Park** (17.3)
+- [x] **A Squad's reach is Land Connected only** (17.4): no Dock-to-Dock hop inside its Borough

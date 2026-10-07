@@ -1,4 +1,4 @@
-# mk-online: take the new board (2026-09-29)
+# mk-online: take the new board (2026-09-29, last done 2026-10-07)
 
 For an agent updating the online game (`njdyson/mk-online`) to the board in this repo. Read
 `DEPLOY.md` first: mk-online is its own repo, CI commits its build to its own `dist/`, and this
@@ -7,12 +7,28 @@ the change in the mk-online source, let it build, then mirror `dist/` in as `DEP
 
 ## What the game shows now
 
-The live game (deployed in a23d1e4, source e0c1f7b) shows `board.svg` as an `<img>`
-(`className: board-map-img`), with clickable Districts and live Heat and Mash drawn over it. That
-SVG is the vector board **from before the drafting**: the traced Affinity shapes, with
-Westchester and Nassau as off-board land. Its click areas and connection graph presumably come
-from the same traced map (`Art/Board/Traced/board-geometry.json`). Check that in the source
-before relying on it.
+The game shows `public/board.svg` (a copy of `Art/Board/Board v0.9 (screen).svg`) as an `<img>`,
+with clickable Districts, piece strips and live Heat, Mash and Turn Order drawn over it. Since
+2026-10-07 (mk-online 31456d5) that is the 2026-10-07 board, Manhattan's bricks included. Its
+overlay data, `src/ui/boardGeometry.ts`, is generated, and its connection graph is
+`ADJACENCY_PAIRS` in `src/game/data.ts`.
+
+## Catching it up after a redraw
+
+```
+# here: the sign report (each sign's box), a few seconds; the SVG is not rewritten
+NODE_PATH=/opt/node22/lib/node_modules node tools/build_board.js --rooms --report=/tmp/signs.json
+# in mk-online
+cp "<this repo>/Art/Board/Board v0.9 (screen).svg" public/board.svg
+cp "<this repo>/Art/Board/board-geometry.json" scripts/board-geometry.json
+node scripts/board-ui-geometry.mjs --signs=/tmp/signs.json   # rewrites src/ui/boardGeometry.ts
+npx vite-node scripts/boardcheck.ts                          # then fix ADJACENCY_PAIRS until it passes
+```
+
+The generator clips the click areas to the frame's hairline, takes the signs from the report,
+reads the Heat, Mash and Turn Order sockets off the SVG, and puts each piece strip (80 x 26) at
+the spot nearest under its sign that fits inside the District, clear of every sign, its hangers
+and the bridges. The sections below are the original brief, kept for what the files hold.
 
 ## What to take from this repo
 
@@ -48,7 +64,7 @@ connections from the traced map's:
 
 The Coastal list is unchanged (Five Points keeps its East River shore), and the Queensboro Bridge
 still joins East Harlem and Astoria, moved up the river to East Harlem's shorter shore. The game
-needs its graph updated to match.
+took all three on 2026-10-07 (mk-online 31456d5).
 
 Every other connection is the traced map's. Elsewhere only the shapes changed:
 
