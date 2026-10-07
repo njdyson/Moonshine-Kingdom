@@ -4,12 +4,13 @@
 // through Playwright's Chromium.
 //
 //   node tools/build_board.js           print and screen SVGs, 2160px previews of each, and
-//                                       the index page's tile (Art/Index/board.jpg)
+//                                       the index page's two tiles (Art/Index/board.jpg and
+//                                       board-print.jpg)
 //   node tools/build_board.js --print   also the files to open or send without an SVG
-//                                       editor (not committed): a 24in PDF at 300dpi (--dpi=N
-//                                       for another, named with it), the
-//                                       7280px PNG it is made from (the bleed included), and a
-//                                       4320px screen JPEG
+//                                       editor: a 24in PDF at 300dpi, committed, since the
+//                                       index links it (--dpi=N for another, named with it and
+//                                       not committed); the 7280px PNG it is made from (the
+//                                       bleed included) and a 4320px screen JPEG, not committed
 //   --report=<file>                     also each District's sign, room and sign shapes as
 //                                       JSON, for tuning the drafting's settings
 //
@@ -43,11 +44,14 @@ const OUT = {
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
   printPng: path.join(DIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(DIR, `Board v0.9 (print${dpiTag()}).pdf`),
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
-  indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
+  indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'), printTile: path.join(ROOT, 'Art', 'Index', 'board-print.jpg'),
 };
 // The index tile: 800 x 450 like its neighbours, cropped on the Queensboro and Williamsburg
 // Bridges and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
 const TILE_CROP = [366, 372, 672]; // 672 x 378 scales to exactly 800 x 450
+// The print PDF's tile: a close-up of the print board at 300dpi and over (Sugar Hill's sign on
+// the pebbled hide), so it shows what the print adds. 200 x 112.5 scales to 800 x 450.
+const PRINT_TILE_CROP = [380, 140, 200];
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const DPI = +arg('dpi') || 300; // print render: 300dpi unless --dpi=N
@@ -1224,14 +1228,15 @@ async function render(browser, outputs) {
   }
 }
 
-async function indexTile(browser, svg) {
-  const [x, y, w] = TILE_CROP;
-  const page = await browser.newPage({ viewport: { width: 1080, height: 1080 }, deviceScaleFactor: 800 / w });
+// An index tile: an 800 x 450 crop of a board SVG, [x, y, width] in board units.
+async function indexTile(browser, svg, file, [x, y, w]) {
+  const size = +svg.match(/<svg[^>]* width="([\d.]+)"/)[1], b = (size - 1080) / 2; // a print SVG's bleed
+  const page = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 800 / w });
   await page.setContent(`<!doctype html><html><body style="margin:0;background:#000">${svg}</body></html>`);
   await page.evaluate(async () => { await document.fonts.ready; });
-  await page.screenshot({ path: OUT.indexTile, clip: { x, y, width: w, height: w * 9 / 16 }, quality: 85, timeout: 0 });
+  await page.screenshot({ path: file, clip: { x: x + b, y: y + b, width: w, height: w * 9 / 16 }, quality: 85, timeout: 0 });
   await page.close();
-  console.log('wrote', path.relative(ROOT, OUT.indexTile));
+  console.log('wrote', path.relative(ROOT, file));
 }
 
 // The print PDF: one 24in page holding the 300dpi render as a JPEG. Printing the SVG
@@ -1280,7 +1285,8 @@ async function printPdf(browser, svg) {
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
-  await indexTile(browser, screen);
+  await indexTile(browser, screen, OUT.indexTile, TILE_CROP);
+  await indexTile(browser, print, OUT.printTile, PRINT_TILE_CROP);
   if (full) await printPdf(browser, print);
   await browser.close();
 })();

@@ -1,4 +1,4 @@
-# PDFs are generated locally — not tracked in git
+# PDFs are generated locally, not tracked in git (bar the board's print PDF, below)
 *.pdf
 PDFs/
 
@@ -8,10 +8,13 @@ mk-online/*
 !mk-online/dist/
 
 # Board image is served from the domain root (one level above mk-online);
-# a copy in mk-online/public/ exists for local dev only — don't ship in dist.
+# a copy in mk-online/public/ exists for local dev only; don't ship in dist.
 mk-online/dist/Board (Large).png
 
 # 7280px print render from tools/build_board.js --print; rebuild it, don't commit it
+# The 300dpi print PDF is the exception: the index links it, so the site needs it.
+# Rebuild it with --print whenever the board changes.
+!Art/Board/Board v0.9 (print).pdf
 Art/Board/**/*(print).png
 Art/Board/**/*(print, *dpi).png
 Art/Board/**/*(screen, large).jpg

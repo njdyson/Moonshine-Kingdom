@@ -10,9 +10,10 @@ means taking the new screen SVG into mk-online's source and deploying as `DEPLOY
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
-node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the index tile
-node tools/build_board.js --print   # also, git-ignored: the 24in print PDF (300dpi; --dpi=200 for a lighter proof), its 7280px PNG,
-                                    # and a 4320px screen JPEG; about a minute
+node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the two index tiles
+node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the index links it), and,
+                                    # git-ignored: its 7280px PNG, a 4320px screen JPEG, and any --dpi=200
+                                    # proof; two to three minutes. Rerun it whenever the board changes.
 node tools/build_board.js --report=/tmp/signs.json && node tools/tune_board.js /tmp/signs.json
                                     # suggests SETTINGS for the drafting; ten to twenty minutes
 node tools/trace_board.js           # only if the Affinity board changes; rewrites the traced map,
@@ -220,9 +221,17 @@ smallest (39), is 45 since the Sound went level.
   `Board v0.9 (print preview).jpg`, and `Board v0.9 (screen).svg` with `Board v0.9 (screen).jpg`
   (the same board with a flat texture, for the website and mk-online). The two builds differ
   in the `LEATHER` preset and the print bleed.
+- `Board v0.9 (print).pdf` (since 2026-10-07): the print file to send, one 616.4 mm page (the
+  609.6 mm board and its bleed) holding the 300dpi render. It is the one board render
+  committed, because the index links it and the site deploys from the repo; `.gitignore`
+  excepts it by name. A plain build doesn't rewrite it, so rerun `--print` after any board
+  change or it goes stale.
 - `Art/Index/board.jpg`: the index page's tile ("The City Map", first under Components), an
   800 x 450 crop of the screen board (`TILE_CROP`: the Queensboro and Williamsburg Bridges and
   two crown rooms), rebuilt with the board. The tile opens `Board v0.9 (screen).jpg`.
+  `Art/Index/board-print.jpg` is the tile beside it ("The City Map (Print)"), a close-up of the
+  print board at over 300dpi (`PRINT_TILE_CROP`: Sugar Hill's sign on the pebbled hide), and
+  opens the print PDF.
 
 ## Physical spec
 
