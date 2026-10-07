@@ -50,7 +50,8 @@ works better"), so this makes the angles deliberate instead.
   life), at 45 degrees, parallel to the East River (see Manhattan is one width). The rivers
   are even channels: the Hudson 44 wide, from the Heat corner's corner down to where New
   Jersey meets the board's edge, then open to the frame beside the Bowery, whose west shore
-  stands upright a Hudson's width in from the frame (`BOWERY_WEST`); the East River 49, in
+  stands upright (`boweryWest`, 96; a Hudson's width in from the frame, 57, until Nick cut
+  Manhattan's south-west corner off on 2026-10-07); the East River 49, in
   three reaches (45 degrees past the Williamsburg and Queensboro, a level turn under the
   Bowery, then the harbour reach down to the Narrows, at the Hudson's old angle, `HARBOUR`, so
   Brooklyn and Staten Island's east shore stayed put when the Hudson turned); Hell Gate and the
@@ -293,6 +294,34 @@ of the names and the name now sits where they were.
 Brooklyn gained ground: Canarsie's room 70 to 82, Coney Island's 76 to 79. Both were already among
 the roomier Districts, and nothing smaller gave anything up.
 
+### Manhattan's corner cut, Staten Island wider
+
+Nick, 2026-10-07: perhaps the Manhattan Districts make the rest look too small, so cut off
+Manhattan's south-west corner (he drew the line, upright at about x 96, from the Hudson down
+past the Bowery's west end); and Staten Island could do with expanding a touch.
+
+- **The Bowery's west shore moved in from 57 to 96** (`boweryWest`, a setting now; it was a
+  Hudson's width in from the frame). The coast turns upright at y 500, in the Tenderloin, so the
+  Tenderloin loses its south-west point and the Bowery 39 units of its west end. The Hudson now
+  opens into the bay beside the Bowery, as it really does at the Battery.
+- **The Bowery's top rose 5** (`manhattan[2]` 545 to 540) to even the three below the row: by area
+  the Tenderloin 94, Five Points and the Bowery 91. Manhattan's six now run 91 to 101.
+- **Staten Island is 15 units wider**, from Brooklyn: the cut gives it nothing directly, since the
+  Kill van Kull still lies under the Bowery. The Narrows moved east (`rhStub` 10 to 30, so Red
+  Hook's shore runs upright 30 above its south side; the Narrows move about 0.75 a unit), and
+  Coney Island / Canarsie moved with them (`coneyEast` 458 to 474) to keep Coney Island's width,
+  which its name needs on one line (4 units to spare). Canarsie pays: room 82 to 71, its sign on 28
+  (it narrows at the top, and its name needs 132 of its 126 there, so the sign hangs where the
+  Brownsville border widens it). Staten Island's room went from 44, 45, 44 to 50, 49, 49
+  (Westerleigh, Stapleton, Tottenville). Further east would narrow Canarsie again (its sign already
+  hangs low) or Coney Island, whose name has 4 units to spare.
+
+| Room (cm²) | Before | Now |
+| --- | --- | --- |
+| The Tenderloin, the Bowery, Five Points | 58, 64, 56 | 53, 56, 56 |
+| Westerleigh, Stapleton, Tottenville | 44, 45, 44 | 50, 49, 49 |
+| Coney Island, Canarsie, Red Hook | 79, 82, 72 | 81, 71, 72 |
+
 ### Room for pieces, and the tuner
 
 The build prints each District's **room**: its ground at least 6 units (about 3 mm) in from every
@@ -315,9 +344,10 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | With the wider Kill van Kull (as the build reports, 2026-10-07) | 40 (Westerleigh) | 47, 51, 59, 74 |
 | Manhattan one width and Staten Island raised (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
 | Straightened round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 54, 51, 59, 74 |
-| Now, Manhattan laid like bricks (2026-10-07) | 44 (Westerleigh, Tottenville) | 62, 51, 59, 74 |
+| Manhattan laid like bricks (2026-10-07) | 44 (Westerleigh, Tottenville) | 62, 51, 59, 74 |
+| Now, Manhattan's corner cut and Staten Island wider (2026-10-07) | 45 (Corona) | 62, 51, 59, 74 |
 
-Rooms now run 44 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
+Rooms now run 45 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
 smallest (39), is 46 since the Sound went level.
 
 - **The Kill van Kull is as wide as the Narrows** (Nick, 2026-10-07: with the harbour lamps
@@ -674,7 +704,7 @@ keeps them on a re-trace.
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh and Tottenville (44), Stapleton and Corona (45), and Whitestone (46).
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Corona (45), Whitestone (46), Belmont (48) and Staten Island's three (49 and 50).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.

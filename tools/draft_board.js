@@ -111,7 +111,7 @@ const SETTINGS = {
   huntsTop: 150, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
   corner: [608, 198], // the four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point)
-  manhattan: [298, 415, 545], // level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
+  manhattan: [298, 415, 540], // level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 825, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
@@ -120,11 +120,12 @@ const SETTINGS = {
   coronaBottom: 700, // Corona / Richmond Hill, level from the Queens / Brooklyn line
   williamsburgSouth: 749, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 796, // Red Hook's level south side
-  rhStub: 10, // Red Hook's shore runs upright this far above its south side: shorter moves the Narrows west, widening Coney Island
-  coneyEast: 458, // Coney Island / Canarsie, upright (440 until 2026-09-30: moved east so Coney Island's name fits on one line)
+  rhStub: 30, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
+  coneyEast: 474, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
   boweryBottom: 652, stapletonTop: 684, // the Kill van Kull between them, as wide as the Narrows (668 and 700 until 2026-10-07: the widened Bowery gave height to Staten Island)
   staten: [803, 913], // level borders: Westerleigh | Stapleton | Tottenville
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
+  boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
   ehKnee: 715, // East Harlem / Hunts Point runs from the four-way corner at 45 degrees to here (x), then drops upright to the Hell Gate
 };
 
@@ -146,7 +147,6 @@ const BK_COL = 600; // Red Hook / Brownsville and Canarsie / Brownsville, uprigh
 const BOWERY_BANK = 602, RED_HOOK_BANK = BOWERY_BANK + RIVER; // the East River's level turn
 const HUDSON = 44; // the Hudson's width
 const HARBOUR = [-314, 440]; // the harbour reach's direction, Red Hook to the Narrows (the Hudson ran parallel to it until 2026-10-07)
-const BOWERY_WEST = FRAME_IN + HUDSON; // the Bowery's west shore, upright, a Hudson's width in from the frame
 const HEAT_CORNER = [413.9, 120.27]; // the Heat corner's outer corner, as build_board.js draws it (HEAT.edge)
 
 function draft(S) {
@@ -170,6 +170,7 @@ function draft(S) {
   // Manhattan's west coast turns upright to the Bowery's west shore at MN_TURN. New Jersey's
   // shore runs from the Heat corner (it runs up under the corner from there) to the board's
   // edge (NJ_END), so the Hudson opens to the frame beside the Bowery.
+  const BOWERY_WEST = S.boweryWest;
   const MN_TURN = atX(MN_WEST, BOWERY_WEST), NJ_TOP = HEAT_CORNER, NJ_END = atX(NJ, 0);
   if (MN_TURN[1] < m2 + FOOT) throw new Error('The Hudson turns upright above the Tenderloin: Manhattan is too wide');
   // A level border meeting a slanted line at a tight corner gets a foot: its last FOOT
