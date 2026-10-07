@@ -1720,14 +1720,19 @@ img {
     }
 
     /* ----------------------------------------------------------------------
-       .dense-page - Power Plays and Pinned: Fight or Flight.
+       .dense-page - Power Plays, Pinned: Fight or Flight, and Phase 2: The Hustle.
 
-       These two carry the most rules text in the book and are the only pages
+       The first two carry the most rules text in the book and are the only pages
        a full 350px cover pushes past the sheet (measured 97.8% and 97.5% full
        before the cover grew). Rather than give them a smaller plate and break
        the one-cover-height rule, buy the ~10px and ~45px back from vertical
        rhythm. Nothing here changes type size, so the page still reads as a
        peer of its neighbours.
+
+       The Hustle joined them on 2026-10-07: the Move row's "Barrels travel
+       alone" (2026-10-01) took it to 1173px against the sheet's 1122, and the
+       spill printed a blank page. The rules below bring it to 1112px; the
+       turn box and table margins are the part only it needed.
        ---------------------------------------------------------------------- */
     .dense-page p {
         margin-bottom: 0.72em;
@@ -1742,6 +1747,14 @@ img {
     .dense-page .note {
         padding: 7px 9px;
         margin: 0.7em 0;
+    }
+
+    .dense-page .action-economy-box {
+        margin: 8px 0 6px;
+    }
+
+    .dense-page table {
+        margin-bottom: 0.7em;
     }
 
     /* The 9px cover gap these two pages used to carry is GONE: it was the last

@@ -33,6 +33,7 @@ $outDir = Join-Path $repo 'V0.9 PDFs'
 # source HTML -> output base name; Screen = also emit a compressed companion
 $docs = @(
     @{ Name = 'Rulebook';        Src = 'Rulebook v0.9.html';        Screen = $true  }
+    @{ Name = 'The Almanac';     Src = 'The Almanac v0.9.html';     Screen = $true  }
 )
 
 if ($List) {
