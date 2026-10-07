@@ -4,8 +4,7 @@
 // through Playwright's Chromium.
 //
 //   node tools/build_board.js           print and screen SVGs, 2160px previews of each (the
-//                                       City Map page shows them), the index page's tile
-//                                       (Art/Index/board.jpg) and the Still tokens
+//                                       City Map page shows them) and the Still tokens
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor: a 24in PDF at 300dpi, committed, since the
 //                                       City Map page links it (--dpi=N for another, named with it and
@@ -48,12 +47,8 @@ const OUT = {
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
   printPng: path.join(DIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(DIR, `Board v0.9 (print${dpiTag()}).pdf`),
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
-  indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
   tokens: path.join(ROOT, 'Art', 'Still Tokens'), // SVG/still-NN.svg and PNG/still-NN.png
 };
-// The index tile: 800 x 450 like its neighbours, cropped on the Queensboro and Williamsburg
-// Bridges and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
-const TILE_CROP = [366, 334, 672]; // 672 x 378 scales to exactly 800 x 450 (y 372 until 2026-10-07: the Queensboro had moved south)
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const DPI = +arg('dpi') || 300; // print render: 300dpi unless --dpi=N
@@ -1306,17 +1301,6 @@ async function render(browser, outputs) {
   }
 }
 
-// An index tile: an 800 x 450 crop of a board SVG, [x, y, width] in board units.
-async function indexTile(browser, svg, file, [x, y, w]) {
-  const size = +svg.match(/<svg[^>]* width="([\d.]+)"/)[1], b = (size - 1080) / 2; // a print SVG's bleed
-  const page = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 800 / w });
-  await page.setContent(`<!doctype html><html><body style="margin:0;background:#000">${svg}</body></html>`);
-  await page.evaluate(async () => { await document.fonts.ready; });
-  await page.screenshot({ path: file, clip: { x: x + b, y: y + b, width: w, height: w * 9 / 16 }, quality: 85, timeout: 0 });
-  await page.close();
-  console.log('wrote', path.relative(ROOT, file));
-}
-
 // The prototype Still tokens (Still Tokens v0.9.html): an SVG and a 1000 x 1080 PNG per
 // number, drawn by tools/still_art.js like the board's. The page shows the PNGs, since an
 // SVG through <img> can't load the numeral's webfont; here it renders with the board's.
@@ -1381,7 +1365,6 @@ async function printPdf(browser, svg) {
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
-  await indexTile(browser, screen, OUT.indexTile, TILE_CROP);
   await stillTokens(browser, fontCss);
   if (full) await printPdf(browser, print);
   await browser.close();

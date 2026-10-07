@@ -16,7 +16,7 @@ click areas and piece spots) into mk-online's source and deploying as `DEPLOY.md
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
-node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the index tile,
+node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each,
                                     # and the Still tokens' SVGs and PNGs (Art/Still Tokens)
 node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the City Map page links it), and,
                                     # git-ignored: its 7280px PNG, a 4320px screen JPEG, and any --dpi=200
@@ -536,10 +536,13 @@ smallest (39), is 46 since the Sound went level.
   committed, because the City Map page links it and the site deploys from the repo; `.gitignore`
   excepts it by name. A plain build doesn't rewrite it, so rerun `--print` after any board
   change or it goes stale.
-- `Art/Index/board.jpg`: the index page's tile ("The City Map", first under Components), an
-  800 x 450 crop of the screen board (`TILE_CROP`: the Queensboro and Williamsburg Bridges with
-  their names, and two crown rooms, Williamsburg and Richmond Hill; re-framed 38 units up on
-  2026-10-07, when the Queensboro moved south and was cut by the top edge), rebuilt with the board. It is the board's one tile and opens
+- `Art/Index/city-map.jpg`: the index page's tile ("The City Map", first under Components), the
+  Rulebook's Unload picture (the Brooklyn Bridge and the skyline at night, from
+  `Art/Rulebook/opt/Unload.webp`) at 800 x 450. Nick, 2026-10-07: a cityscape, not a map preview.
+  Until then the build cropped the tile from the screen board (`Art/Index/board.jpg`,
+  `TILE_CROP`); that output is gone, so git history has it if the preview is ever wanted back.
+  The Rulebook's other cityscapes are already on the index: Kingdom is the Rulebook's tile and
+  Street the hero. The tile opens
   **`City Map v0.9.html`** (Nick, 2026-10-07: one link, with the finishes inside): the board's
   viewer, a Screen / Print toggle over the two 2160px previews (`#screen` and `#print` in the
   URL, so either can be linked), click to see the map at full size, and in Print the PDF to
