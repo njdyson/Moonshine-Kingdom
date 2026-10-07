@@ -115,8 +115,8 @@ const SETTINGS = {
   redHookSouth: 796, // Red Hook's level south side
   rhStub: 10, // Red Hook's shore runs upright this far above its south side: shorter moves the Narrows west, widening Coney Island
   coneyEast: 458, // Coney Island / Canarsie, upright (440 until 2026-09-30: moved east so Coney Island's name fits on one line)
-  boweryBottom: 668, stapletonTop: 690, // the Kill van Kull between them
-  staten: [806, 914], // level borders: Westerleigh | Stapleton | Tottenville
+  boweryBottom: 668, stapletonTop: 700, // the Kill van Kull between them, as wide as the Narrows (stapletonTop was 690 until 2026-10-07)
+  staten: [813, 917], // level borders: Westerleigh | Stapleton | Tottenville (806 and 914 until 2026-10-07)
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   ehKnee: [715, 290], // East Harlem / Hunts Point turns upright here, dropping square to the Hell Gate
   hpFoot: 60, // Belmont / Hunts Point's foot, square to East Harlem / Hunts Point, before it runs level

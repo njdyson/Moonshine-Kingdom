@@ -5,8 +5,10 @@ Status (2026-09-29): the **drafted map with hanging signs and the Deco style is 
 water, a graduated Heat Track, gilt lettering) changed the look only; the geometry is untouched.
 See The look and Decisions. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
 clickable Districts and its connection graph taken from `board-geometry.json`. Its snapshot
-predates the 2026-10-07 finish pass. Nothing it clicks or overlays moved, so catching it up
-means taking the new screen SVG into mk-online's source and deploying as `DEPLOY.md` says. The Affinity export (`Art/Board (Large).png`) is untouched.
+predates the 2026-10-07 finish pass and the wider Kill van Kull the same day. The connection
+graph is unchanged, but Staten Island's three Districts moved (up to 10 units), so catching it
+up means taking both the new screen SVG and `board-geometry.json` (for their click areas and
+piece spots) into mk-online's source and deploying as `DEPLOY.md` says. The Affinity export (`Art/Board (Large).png`) is untouched.
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
@@ -110,7 +112,8 @@ works better"), so this makes the angles deliberate instead.
 - **Checks** before writing: no crossings, no run under 3 units, no District area off the
   traced map's by more than 20% (bar those that took in Westchester or Nassau), no shrunk border
   under 45 units (`MIN_BORDER`, about 25 mm, so it still reads as a connection), no water under
-  20 wide between Districts that don't meet (the narrowest is 22, the Kill van Kull), and every
+  20 wide between Districts that don't meet (the narrowest is 32: the Kill van Kull and the
+  Narrows), and every
   bridge square across its river (within 4 units: a one-unit move of the Bowery's foot once
   turned the Brooklyn Bridge to 84) and landing at least 20 units from a border on its shore.
 
@@ -132,10 +135,20 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | Drafted, first balance, centred labels | 42 (Tenderloin) | 47, 47, 57, 64 |
 | With the signs, before the Queens / Brooklyn line | 39 (Whitestone) | 47, 57, 65, 83 |
 | Squared Morris Park, level Sound | 42 (West Side) | 46, 56, 59, 72 |
-| Now, with the larger Stills (as the build reports) | 40 (West Side) | 44, 54, 57, 71 |
+| With the larger Stills | 40 (West Side) | 44, 54, 57, 71 |
+| Now, with the wider Kill van Kull (as the build reports, 2026-10-07) | 40 (Westerleigh) | 47, 51, 59, 74 |
 
-Rooms now run 40 to 89 (Flushing), Jamaica (80) included; it was 138. Whitestone, once the
-smallest (39), is 45 since the Sound went level.
+Rooms now run 40 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
+smallest (39), is 46 since the Sound went level.
+
+- **The Kill van Kull is as wide as the Narrows** (Nick, 2026-10-07: with the harbour lamps
+  on the piers either side, the Bowery looked too close to Staten Island). It was 22 units
+  (12 mm), the narrowest water on the board, and the piers reaching in from both shores left
+  under 6 mm of water between their tips and the far bank. Staten Island's top moved down 10
+  (`stapletonTop` 690 to 700) and its level borders 7 and 3 (`staten` 806 and 914 to 813 and
+  917), so each of its Districts is 3 to 4 units shorter and its south shore stays put: 32
+  units (18 mm), the Narrows' width. Room: Westerleigh 43 to 40, Stapleton 44 to 41,
+  Tottenville 44 to 41, now the three smallest on the board.
 
 ## The look
 
@@ -425,7 +438,7 @@ keeps them on a re-trace.
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are West Side (40), Westerleigh (41), Stapleton and Tenderloin (42).
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Westerleigh (40), Stapleton and Tottenville (41), and West Side (42).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.
