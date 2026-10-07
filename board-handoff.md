@@ -61,7 +61,8 @@ works better"), so this makes the angles deliberate instead.
   2026-09-29 it fell 3 degrees, a chevron, which sloped Throggs Neck and Whitestone). Staten Island
   and Jamaica Bay are 45-degree octagons. Staten Island's four corners are cut alike (`CUT`, 37,
   Nick, 2026-10-07; they were 27, 37, 27 and 49, from the trace), the same as Coney Island's
-  corner across the Narrows.
+  corner across the Narrows. Its three rows are one height, 116 (`staten` [800, 916]; they were
+  117, 112 and 119).
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
   24) to meet it square: Manhattan's level borders at the Hudson (bar Five Points / Bowery,
@@ -384,9 +385,9 @@ between its east shore and the frame, was already about that) and **centred on w
 - BROOKLYN under Coney Island and Canarsie, QUEENS under the Rockaways, both 18 under the south
   shore (y 1018), so they are level with each other but not with STATEN ISLAND (Tottenville's shore
   is 32 lower).
-- MANHATTAN in the middle of the Hudson, moved up the channel (y 440 to 420) so its shield clears
-  the mouth, where the coast turns upright and New Jersey meets the frame; its far end stays clear
-  of West Side's piers.
+- MANHATTAN in the middle of the Hudson, moved up the channel (y 440 to 405, in two nudges) so its
+  shield clears the mouth, where the coast turns upright and New Jersey meets the frame; West
+  Side's piers move up the coast out of its way.
 
 ### Room for pieces, and the tuner
 

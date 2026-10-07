@@ -123,7 +123,7 @@ const SETTINGS = {
   rhStub: 30, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
   coneyEast: 474, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
   boweryBottom: 652, stapletonTop: 684, // the Kill van Kull between them, as wide as the Narrows (668 and 700 until 2026-10-07: the widened Bowery gave height to Staten Island)
-  staten: [801, 913], // level borders: Westerleigh | Stapleton | Tottenville
+  staten: [800, 916], // level borders: Westerleigh | Stapleton | Tottenville, three rows of 116 (801 and 913 until 2026-10-07)
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
   rockaways: true, // Jamaica's strip of shore under Jamaica Bay (Nick, 2026-10-07: a feature, not usable space; it keeps the bay a bay)
@@ -319,7 +319,7 @@ function draft(S) {
     boro: {
       // in the Hudson, its shield clear of the mouth (the coast turns upright at MN_TURN, y 500) and
       // its far end clear of West Side's piers
-      MN: [...atY(shift(MN_WEST, HUDSON / 2), 420).map(r1), -45],
+      MN: [...atY(shift(MN_WEST, HUDSON / 2), 405).map(r1), -45],
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       // Staten Island, Brooklyn and Queens each BORO_GAP under its own south shore (the Bronx's sits
       // as far off its east shore), centred under it: Staten Island under the island, Brooklyn under
