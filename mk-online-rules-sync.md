@@ -563,6 +563,19 @@ has to ask for the seat on his own turn.
 | 16.4 | Blood Oath: 40 combined; one Boss in a room crowns the Alliance; the higher contributor is Capo. | **20 combined Respect, both partners Solvent. The partner who crowns must hold the Nod and have his own Boss in a High Society Venue, and he is the Capo.** |
 | 16.5 | Bots value the Nod as 10 Respect. | **Value it as the win key**: every winner climbs the whole Bribe ladder. Take the Crown the moment it is legal. Against a rival with the Nod and 10+ Respect whose Boss is in, or one Move from, a room, the Boss kill (11.8) and sitting in the room are the highest-value Plays. Discount to zero any Handshake payment due at Sunset from a player who can crown before then. |
 
+## 17. The Market restocks after the Offers (2026-10-07)
+
+A Take no longer refills its gap. The Market is restocked once, after every player has had his
+Offer, and the opening Market is dealt face-down and turns up at Day 1's restock, so Day 1 has no
+Offers. See `jobs-system-handoff.md` §2b, *The restock*.
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 17.1 | Take a Job deals a fresh card into the gap at once. | **Leave the gap.** After the last player's Offer (Take, Walk Away or pass), deal a card into every empty slot; reshuffle the discards if the deck runs dry. Later pickers choose from a thinner Market. |
+| 17.2 | Setup deals the Market face-up (1s and 3s, 5s shuffled in after). | **Same cards, face-down**, revealed at Day 1's restock. Skip Day 1's Offers entirely. |
+| 17.3 | Bots may count on the refill a Take reveals. | **No refill mid-Offers.** A bot's claim tomorrow is from the cards on the table today (less what higher tokens take), which makes the late token's first pick worth more in the Lay Low heuristic (8.4). |
+| 17.4 | Whispers peeks at the deck top. | **Unchanged.** The top card is now the first card of tomorrow's restock. |
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -667,3 +680,5 @@ has to ask for the seat on his own turn.
       Respect ≥ 10, Final Standoff and Loose Change deleted
 - [ ] **Blood Oath: 20 combined, the crowning partner holds the Nod and is Capo** (16.4), variant not built yet
 - [ ] **Bots: the Nod is the win key; never trust a Sunset payment from a player who can crown** (16.5)
+- [ ] **The Market restocks after the Offers** (17.1); the opening Market is face-down and Day 1 has no Offers (17.2)
+- [ ] **Bots: no refill mid-Offers; value the late token's first pick on today's Market** (17.3)

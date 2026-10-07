@@ -122,6 +122,22 @@ stakes, Respect, the Nod, barrels, Heat and Ledgers. The one hidden thing in the
 top card of the Jobs deck, which Whispers lets the Vipers read (since 2026-09-30; before that
 Whispers claimed it face-down).
 
+## The Market restocks after the Offers
+
+Since 2026-10-07. A Job taken at the Offers leaves its gap empty; once every boss has chosen,
+deal a fresh Job into each gap. The opening Market (Player Count + 1, 1s and 3s, the 5s shuffled in
+after) is dealt **face-down** at setup and turns face-up at Day 1's restock, so **Day 1 has no
+Offers**. The rule's one home is Grease the Wheels; the Town Planner restates it.
+
+Why: the immediate refill was a lottery that dealt the next picker a card nobody chose. Now every
+Job is face-up a full Day before anyone can claim it, the high token picks from the full Market
+while the low token takes what's left (a sharper Reverse Snake), and Day 1 is learned on the board
+instead of over five cards of prose. Whispers loses a little (the table gets a Day's notice too, and
+the Vipers see only the first card of tomorrow's restock); Nick accepts it, and the buff on file is
+a fixed top two cards. Don't restore the immediate refill. The Speakeasy grid (a Job per Controlled
+Speakeasy, tiered 1/3/5 by bar) is parked in `jobs-system-handoff.md` §2b with the problems to solve
+first.
+
 ## Barrels travel alone
 
 Since 2026-10-01 (a wording pass; the rule itself is old). A Move can send barrels with no
