@@ -126,7 +126,7 @@ const SETTINGS = {
   staten: [801, 913], // level borders: Westerleigh | Stapleton | Tottenville
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
-  rockaways: false, // Jamaica's strip of shore under Jamaica Bay (cut 2026-10-07: 23 cm² no piece could use; the bay opens to the sea)
+  rockaways: true, // Jamaica's strip of shore under Jamaica Bay (Nick, 2026-10-07: a feature, not usable space; it keeps the bay a bay)
   southShore: 1000, // the south shore of Brooklyn and Queens, level: Coney Island, Canarsie and Jamaica (1020 until 2026-10-07)
   ehKnee: 715, // East Harlem / Hunts Point runs from the four-way corner at 45 degrees to here (x), then drops upright to the Hell Gate
 };

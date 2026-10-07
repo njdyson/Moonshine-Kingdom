@@ -327,7 +327,8 @@ past the Bowery's west end); and Staten Island could do with expanding a touch.
 Nick, 2026-10-07: the map will look more balanced if the Districts are all of a size, even if
 that means reducing some. The yardstick is **visible area** (clipped at the frame's inner edge,
 since Queens and the Bronx run under the frame), not room. It ran 76 (Corona) to 127 (Jamaica),
-a spread (standard deviation) of 13.8 cm²; it now runs 79 (Whitestone) to 109, spread 10.2.
+a spread (standard deviation) of 13.8 cm²; it now runs 79 (Whitestone) to 109, spread 10.2,
+counting Jamaica without the Rockaways (below).
 
 **What the pieces need.** Barrels are 10 mm cubes and stack; Mobsters are standard meeples (16 x
 16 x 10 mm; the playtest ones a touch smaller); the Safehouse is a pawn. With 3 mm of finger room
@@ -344,11 +345,12 @@ pass (spread 9.1) grew Jamaica Bay east into dead water (as an earlier tuner run
 then), dropped the south shore 30 and made Brownsville the largest; a second pass kept the bay and
 held Corona's bottom near 700. Then by hand:
 
-- **The Rockaways are gone** (`rockaways: false`). Jamaica's strip of shore under the bay was
-  about 23 cm² that no piece could use, and kept Jamaica the largest District whatever else moved.
-  The bay now opens to the sea between Canarsie and Jamaica, and Canarsie's hooked spit, which
-  answered the Rockaways' tip, is a plain upright shore. **This is the change Nick may not want**:
-  `rockaways: true` brings both back, with Jamaica at about 118.
+- **The Rockaways stay** (`rockaways`). Jamaica's strip of shore under the bay is about 23 cm²
+  that no piece can use, so it was cut for a version (the bay opened to the sea, and Canarsie's
+  hooked spit became a plain shore). Nick put it back the same day: "the rockaway is clearly just
+  a feature, not usable space", and it keeps the bay a bay. **What matters is that the Districts
+  look balanced, not that they measure equal**, so Jamaica is counted by its block above the bay
+  (108); with the strip it measures 129. `rockaways: false` is still there if it is ever wanted.
 - **Brooklyn and Queens' south shore rose 20** (`southShore` 1020 to 1000): Coney Island, Canarsie
   and Jamaica each lose a strip. The three Borough names stay on their line along the frame (y
   1050), so they sit a little lower in their water; QUEENS keeps its place, since Jamaica's
@@ -363,8 +365,8 @@ held Corona's bottom near 700. Then by hand:
 
 | Visible area (cm²) | Before | Now |
 | --- | --- | --- |
-| Flushing, Jamaica, Richmond Hill | 125, 127, 113 | 109, 108, 109 |
-| Coney Island, Canarsie, Red Hook | 120, 108, 110 | 109, 97, 109 |
+| Flushing, Jamaica (with the Rockaways), Richmond Hill | 125, 127, 113 | 109, 129, 109 |
+| Coney Island, Canarsie, Red Hook | 120, 108, 110 | 109, 100, 109 |
 | Corona, Whitestone, Belmont | 76, 81, 82 | 80, 79, 85 |
 
 What is left of the spread: the Bronx, Staten Island, Whitestone and Corona sit at 79 to 90, and
