@@ -136,6 +136,7 @@ const EAST_EDGE = 1080; // Queens runs to the board's edge, under the frame
 const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
+const CUT = 37; // the harbour's 45-degree corners: Staten Island's four and Coney Island's on the Narrows
 const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its shore
 // Bridges moved along their rivers: the Hell Gate clear of East Harlem's stretch of it, the
 // Queensboro up the East River to the middle of East Harlem's shore, which ends at Manhattan's
@@ -291,7 +292,7 @@ function draft(S) {
       : [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Brooklyn's south shore level, in line with the Rockaways', Coney Island's corner on the Narrows
     // turned at 45 degrees from where Tottenville's turns, so the Narrows open evenly to the sea
-    'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], SOUTH_SHORE - 37], [NARROWS[1] + 37, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
+    'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], SOUTH_SHORE - CUT], [NARROWS[1] + CUT, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'sugar_hill|west_side': [MF[0][0], MF[0][1], [EHX, m1]],
     'west_side|tenderloin': [MF[1][0], MF[1][1], [FPX, m2]],
@@ -309,9 +310,9 @@ function draft(S) {
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
     'water|jamaica': S.rockaways ? [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]]
       : [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
-    // Staten Island: 45-degree corners, upright shores
-    'water|westerleigh': [[36, s1], [36, T + 27], [63, T], [NARROWS[0] - 37, T], [NARROWS[0], T + 37], [NARROWS[0], s1]],
-    'water|tottenville': [[36, s2], [36, 1005], [63, 1032], [NARROWS[0] - 49, 1032], [NARROWS[0], 983], [NARROWS[0], s2]],
+    // Staten Island: an octagon, its four corners cut alike (27, 37, 27 and 49 until 2026-10-07)
+    'water|westerleigh': [[36, s1], [36, T + CUT], [36 + CUT, T], [NARROWS[0] - CUT, T], [NARROWS[0], T + CUT], [NARROWS[0], s1]],
+    'water|tottenville': [[36, s2], [36, 1032 - CUT], [36 + CUT, 1032], [NARROWS[0] - CUT, 1032], [NARROWS[0], 1032 - CUT], [NARROWS[0], s2]],
   };
   // Where the labels in the water sit on this map: midway between shores, at their angle.
   const labels = {
@@ -324,7 +325,7 @@ function draft(S) {
       // as far off its east shore), centred under it: Staten Island under the island, Brooklyn under
       // Coney Island and Canarsie, Queens under the Rockaways
       SI: [(36 + NARROWS[0]) / 2, 1032 + BORO_GAP, 0],
-      BK: [(NARROWS[1] + 37 + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, SOUTH_SHORE + BORO_GAP, 0],
+      BK: [(NARROWS[1] + CUT + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, SOUTH_SHORE + BORO_GAP, 0],
       QN: [((S.rockaways ? 708 : 856 + B) + 1080 - FRAME_IN) / 2, SOUTH_SHORE + BORO_GAP, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],

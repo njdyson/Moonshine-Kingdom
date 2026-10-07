@@ -59,7 +59,9 @@ works better"), so this makes the angles deliberate instead.
   Hell Gate had risen 3 degrees to Hunts Point / Throggs Neck, a kink on Astoria's shore; it
   runs at the Sound's old level, so Whitestone and Throggs Neck keep their room. Before
   2026-09-29 it fell 3 degrees, a chevron, which sloped Throggs Neck and Whitestone). Staten Island
-  and Jamaica Bay are 45-degree octagons.
+  and Jamaica Bay are 45-degree octagons. Staten Island's four corners are cut alike (`CUT`, 37,
+  Nick, 2026-10-07; they were 27, 37, 27 and 49, from the trace), the same as Coney Island's
+  corner across the Narrows.
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
   24) to meet it square: Manhattan's level borders at the Hudson (bar Five Points / Bowery,
