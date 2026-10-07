@@ -284,12 +284,10 @@ the mouth of Jamaica Bay. **Coney Island's corner on the Narrows** turns at 45 d
 where Tottenville's turns across the water, so the Narrows open evenly to the sea; Canarsie's spit
 runs down to the new line.
 
-**The three names along the foot of the board share one line** (y 1050): STATEN ISLAND's, midway
-between Tottenville's shore (1032) and the frame. Queens' had sat midway between its own shore
-and the frame (1043.5), and on Brooklyn's new line it read as a near miss beside Staten Island's.
-Each name is centred under its own level south shore (BROOKLYN between Coney Island's corner and
-Canarsie's spit). **Canarsie's piers moved** to its Jamaica Bay shore, since the piers keep clear
-of the names and the name now sits where they were.
+For a while the three names along the foot of the board shared one line (y 1050, STATEN ISLAND's).
+Once the south shore rose, BROOKLYN and QUEENS sat further from their land than the other names,
+and Nick preferred them close: see The Borough names. **Canarsie's piers moved** to its Jamaica
+Bay shore, since the piers keep clear of the names.
 
 Brooklyn gained ground: Canarsie's room 70 to 82, Coney Island's 76 to 79. Both were already among
 the roomier Districts, and nothing smaller gave anything up.
@@ -352,9 +350,7 @@ held Corona's bottom near 700. Then by hand:
   look balanced, not that they measure equal**, so Jamaica is counted by its block above the bay
   (108); with the strip it measures 129. `rockaways: false` is still there if it is ever wanted.
 - **Brooklyn and Queens' south shore rose 20** (`southShore` 1020 to 1000): Coney Island, Canarsie
-  and Jamaica each lose a strip. The three Borough names stay on their line along the frame (y
-  1050), so they sit a little lower in their water; QUEENS keeps its place, since Jamaica's
-  stretch of shore is too short to centre it under.
+  and Jamaica each lose a strip.
 - **Queens' rows**: Flushing / Richmond Hill rose 20 and Richmond Hill / Jamaica 14
   (`queensRows` [488, 650, 793]); Corona's bottom dropped 12 (`coronaBottom` 712), and the Queens
   column moved 4 east (`queensCol` 855), for Corona. **Whitestone is the one that can't grow**:
@@ -373,6 +369,22 @@ What is left of the spread: the Bronx, Staten Island, Whitestone and Corona sit 
 Brooklyn and Queens' larger ones (Astoria, Brownsville, Jamaica, Richmond Hill, Coney Island, Red
 Hook, Flushing) at 106 to 109. Closing it further means shrinking those more, and
 the levers left (Jamaica Bay, a higher south shore) are the ones that read as dead water.
+
+### The Borough names
+
+Nick, 2026-10-07: Staten Island's name sat off the island's centre (it had been kept clear of the
+frame's corner fan), Manhattan's hung past the end of the Hudson, and Brooklyn's and Queens' sat
+further from their land than the others. Now every name sits **the same distance off its own
+shore** (`BORO_GAP`, 18 units from the shore to the middle of the capitals; the Bronx's, midway
+between its east shore and the frame, was already about that) and **centred on what it names**:
+
+- STATEN ISLAND under the island (its first letter about 5 mm from the corner fan).
+- BROOKLYN under Coney Island and Canarsie, QUEENS under the Rockaways, both 18 under the south
+  shore (y 1018), so they are level with each other but not with STATEN ISLAND (Tottenville's shore
+  is 32 lower).
+- MANHATTAN in the middle of the Hudson, moved up the channel (y 440 to 420) so its shield clears
+  the mouth, where the coast turns upright and New Jersey meets the frame; its far end stays clear
+  of West Side's piers.
 
 ### Room for pieces, and the tuner
 
@@ -539,7 +551,7 @@ smallest (39), is 46 since the Sound went level.
   margin set by the manufacturer's own template, which wins over this. **Safe margin:**
   nothing but the black band sits outside the gold edge's centre line, 7 units (3.9 mm) in.
   If a manufacturer wants more, the frame (`FRAME_OUT`, `FRAME_IN`) moves in, not the art.
-  The Borough names sit 9 mm (Staten Island) to 13 mm from the trim; nudging The Bronx and
+  The Borough names sit 9 mm (Staten Island) or more from the trim; nudging The Bronx and
   Staten Island in to 12 mm was tried and put back (Nick: too tight to the land). On a wrapped
   board, the HEAT plate and the gold edge, at about 4 mm, are the parts at risk.
 - **Print lift** (`PRINT_LIFT`, 2026-09-29): dark tones print darker than on screen (ink spreads

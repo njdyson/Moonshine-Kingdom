@@ -136,6 +136,7 @@ const EAST_EDGE = 1080; // Queens runs to the board's edge, under the frame
 const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
+const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its shore
 // Bridges moved along their rivers: the Hell Gate clear of East Harlem's stretch of it, the
 // Queensboro up the East River to the middle of East Harlem's shore, which ends at Manhattan's
 // row (since 2026-10-07), and the Brooklyn up the harbour reach, mid-way along the stretch of
@@ -315,12 +316,16 @@ function draft(S) {
   // Where the labels in the water sit on this map: midway between shores, at their angle.
   const labels = {
     boro: {
-      MN: [...atY(shift(MN_WEST, HUDSON / 2), 440).map(r1), -45], // beside the Tenderloin, clear of West Side's piers
+      // in the Hudson, its shield clear of the mouth (the coast turns upright at MN_TURN, y 500) and
+      // its far end clear of West Side's piers
+      MN: [...atY(shift(MN_WEST, HUDSON / 2), 420).map(r1), -45],
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
-      // Staten Island, Brooklyn and Queens on one line along the frame's foot, at Staten Island's
-      // (midway between Tottenville's shore and the frame); Staten Island and Brooklyn centred under
-      // their south shores, Queens where it sat (Jamaica's shore is too short to centre it under)
-      QN: [890, 1050, 0], BK: [(NARROWS[1] + 37 + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, 1050, 0], SI: [172, 1050, 0],
+      // Staten Island, Brooklyn and Queens each BORO_GAP under its own south shore (the Bronx's sits
+      // as far off its east shore), centred under it: Staten Island under the island, Brooklyn under
+      // Coney Island and Canarsie, Queens under the Rockaways
+      SI: [(36 + NARROWS[0]) / 2, 1032 + BORO_GAP, 0],
+      BK: [(NARROWS[1] + 37 + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, SOUTH_SHORE + BORO_GAP, 0],
+      QN: [((S.rockaways ? 708 : 856 + B) + 1080 - FRAME_IN) / 2, SOUTH_SHORE + BORO_GAP, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
   };
