@@ -1,8 +1,12 @@
 # The board: vector rebuild
 
 Status (2026-09-29): the **drafted map with hanging signs and the Deco style is the board**, on
-`main`. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
-clickable Districts and its connection graph taken from `board-geometry.json`. The Affinity export (`Art/Board (Large).png`) is untouched.
+`main`. A print-finish pass on 2026-10-07 (grooved borders, a cellular pebble grain, smooth calf
+water, a graduated Heat Track, gilt lettering) changed the look only; the geometry is untouched.
+See The look and Decisions. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
+clickable Districts and its connection graph taken from `board-geometry.json`. Its snapshot
+predates the 2026-10-07 finish pass. Nothing it clicks or overlays moved, so catching it up
+means taking the new screen SVG into mk-online's source and deploying as `DEPLOY.md` says. The Affinity export (`Art/Board (Large).png`) is untouched.
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
@@ -148,6 +152,12 @@ smallest (39), is 45 since the Sound went level.
   ornament, and junctions along a straight border are not corners. It replaced a colour shift
   per type (Speakeasies warmer, Docks cooler), which told them apart only faintly, and a gold
   sunburst on High Society.
+- **Borders are gold wire set in a dark groove** (`BORDER`, 2026-10-07, for print). District
+  borders are 1.8 units (1 mm) of gold over a 4.6-unit groove at half black; Borough borders 3
+  over 6.4, with the coast's bright core. They were 1.2 and 2.6 with no groove, and at print
+  scale a District border read no heavier than the Speakeasy keyline 7 units inside it, so
+  where Districts meet was hard to pick out of the Deco frames beside it. The grooves are one
+  layer (no dark knot where borders cross) and are clipped to the land.
 - **Hanging signs** (`placeSign()`, Nick, 2026-09-29). Pieces would cover a centred label, and
   an earlier placer that pushed labels aside looked odd because each went somewhere different.
   Every District gets one small plaque (type medallion, name and venue) hung by gilt hangers as
@@ -314,7 +324,9 @@ keeps them on a re-trace.
   colour (placed automatically, clear of land, bridges and labels); Art Deco quarter fans in the
   frame's corner steps (the one at the Heat corner's turn was cut, 2026-09-29: it sat on the map
   and looked odd); a soft drop shadow under every Still and type medallion, so they sit on the
-  board like pieces.
+  board like pieces. Since 2026-10-07 the title, the Borough names and the police shields are
+  gilt (`giltType`, `bezelGilt`), engraved like the Heat Track's numerals, where they were flat
+  gold.
 - **Names on one line where they fit** (Nick, 2026-09-30: he dislikes the wrap). The name's letter
   spacing went 1 to 0.5 and the sign's gaps 6 to 4 (medallion to name) and 8 to 6 (name to
   plate), at the same 12.5 size, which puts East Harlem on one line. **Hunts Point** took two more steps (same day):
@@ -342,18 +354,34 @@ keeps them on a re-trace.
   from the board's gold edge** (`heatPlate()`), a Deco cartouche drawn over the frame, not a
   line above the tray: that band went, and the Heat corner is 13 units shorter, pulling its
   corner back from Manhattan's tip (Nick: it sat too close). The plate starts at the gold
-  edge's centre line, inside the safe margin (see Bleed). Escalation
-  stays subtle, as Nick asked: the floors warm a touch towards rust (`HEAT_TINT`), and only the
-  5th, the Raid, changes metal, to rose-copper on an oxblood floor (`GILT`, `COPPER`).
+  edge's centre line, inside the safe margin (see Bleed). **Escalation is graduated**
+  (Nick, 2026-10-07: towards the red, subtly and classily): each socket's floor, bezel,
+  numerals, dial lines and the diamonds between them are mixed from gilt-on-lacquer towards
+  the Raid's rose-copper on oxblood by `HEAT_WARM` (0, 12, 26, 45, 100%), so the track runs
+  gilt, warm gold, rose gold, copper, and the 5th still lands as a change of metal; the
+  tray's floor warms towards the Raid's end too (`heatTrayWarm`). Until then only the floors
+  warmed (a rust tint of 3 to 10%, `HEAT_TINT`) and the 5th alone was copper.
 - **No Liquor Value track.** The key carries the prices as chips (see the key, above).
 - **Title is NEW YORK 1929, nothing more.** No logo, no compass, and since 2026-09-28 no north
   line either (Nick found it too prominent). No Job needs one: the two river Jobs say "along
   the East River", which the water label answers (checked 2026-09-30). Git history has
   `northArrow()` if a Job ever names a direction.
-- **Leather, generated, not an image.** `leatherFilter()` builds a pebble grain from crease
-  patterns multiplied (one alone draws worm-like squiggles at print scale), over soft wrinkles,
-  with a sheen and uneven dye. The board is a coarse hide (pebbles 2 to 3 mm), its relief softened by about a quarter on 2026-09-29 (Nick: better to under-do it than overdo it, until a proof says otherwise); the Heat corner is a
-  **finer, flatter skin**, stitched in. The key and Mash panels carry no stitching or leather
+- **Leather, generated, not an image.** Pebbled hide is a net of rounded cells parted by fine
+  creases, so since 2026-10-07 the grain is drawn as one (`pebbleTile()`, `PEBBLE`): Poisson-disc
+  sites on a 120-unit tile that wraps, a tenth dropped so some pebbles grow large, each site's
+  Voronoi cell shrunk by the crease, rounded and set at one of six heights, with a scatter of
+  pores. The tile repeats turned 13 degrees off the board's grid; the wrinkles and dye over it
+  never repeat, and no seam shows. `leatherFilter()` reads it through `feImage`, blurs it to
+  dome the pebbles, adds soft wrinkles and a fine micro-grain (which also dithers the
+  lighting's 8-bit terraces), then lights it with a sheen and uneven dye. The pebbles are
+  about 2.5 mm. Until 2026-10-07 the grain was crease patterns multiplied, which at print scale
+  read as stucco or hammered metal rather than hide. The relief was set by eye at 300dpi and
+  kept on the gentle side (Nick, 2026-09-29: better to under-do it than overdo it, until a
+  proof says otherwise); `LEATHER.print.board.relief` is the dial. **The water is smooth
+  calf** (`LEATHER.print.water`, 2026-10-07): no pebbles, a little more sheen, so the pebbled
+  land reads as panels inlaid in it, and the land casts a soft shadow onto it from the upper
+  left, where the leather's light comes from (`landShadow()`). The Heat corner is a
+  **finer, flatter skin**, the same tile at 0.55 scale, stitched in. The key and Mash panels carry no stitching or leather
   (Nick, 2026-09-28); since 2026-09-29 they are **lacquered plaques** to match the Heat Track:
   a polished gilt edge with a dark seat inside it, a hairline, a small diamond on each Deco
   chamfer, and a soft shadow lifting them off the hide. The Mash and Turn Token sockets (in
@@ -364,9 +392,16 @@ keeps them on a re-trace.
   keeps only soft wrinkles and dye, because at screen size the grain turns to noise (Nick asked
   for it). Presets live in `LEATHER`. It prints crisp at any size and needs no licence; a CC0
   scan (ambientCG, Poly Haven) could be tiled in if it ever needs to be photographic. Judge the
-  print grain at print scale, not in the downscaled preview. Every leather filter ends by
-  masking to `SourceAlpha`: the lighting is opaque across the whole region, and without the mask
-  the panel filter painted grey over the entire map.
+  print grain at print scale, not in the downscaled preview: crop the SVG at a device scale of
+  6.667 (300dpi), since the lighting works per pixel and reads differently at 2x. Every leather
+  filter ends by masking to `SourceAlpha`: the lighting is opaque across the whole region, and
+  without the mask the panel filter painted grey over the entire map. Every leather layer also
+  spans the board with an unpainted rect (`hide()`): Chromium sizes a filter's work from its
+  layer's bounds, and where they fell short (the land without its water) the pebbles rendered
+  soft at preview scale, though not at 300dpi. The pebbles come in through an `feImage`
+  element reference, which Chromium renders; Firefox has not historically, and Affinity drops
+  the filters altogether (see Open), so outside Chromium the print SVG may show wrinkles
+  without pebbles. The PDF and PNG are rendered by Chromium and carry them.
 - Water labels are placed by visual centre, midway between the shores and at their angle, so
   they stay centred if the type changes. New Jersey is unlabelled (Nick cut it).
 

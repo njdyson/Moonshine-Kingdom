@@ -413,6 +413,13 @@ function waterLining() {
     `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
 }
 
+// The land, lit from the upper left like the leather, casts a soft shadow on the water,
+// so the Districts sit on it as inlaid panels.
+function landShadow() {
+  const land = [...DISTRICTS.map(d => FULL[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
+  return `<g opacity=".55" filter="url(#landShadow)"><g transform="translate(1.4 2.4)" fill="#000">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g></g>`;
+}
+
 function wardMark(d, p) {
   const k = insetRing(straightRing(geo.regions[d.id]), WARD_HATCH.band);
   return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="${2 * WARD_HATCH.band}" stroke-linejoin="miter"/>`
@@ -534,12 +541,20 @@ function borders() {
     else if ([a, b].includes('water')) off.push(c.pts);
   }
   const line = (list, w, col, op = 1) => `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round">${list.map(q => `<polyline points="${pts(q)}"/>`).join('')}</g>`;
+  // Each land border is a gold wire set in a dark groove, so it stands clear of the Deco
+  // keylines beside it, which are drawn on the hide (BORDER, 2026-10-07: they were 1.2 and
+  // 2.6 with no groove, and a District border read no heavier than a Speakeasy's keyline).
+  // The grooves are one layer, so they don't darken where they cross, and stop at the shore.
+  const B = BORDER, land = DISTRICTS.map(d => `<path d="${poly(FULL[d.id])}"/>`).join('');
   return line(off, 1.4, C.goldDim, 0.5)
-    + line(inner, 1.2, C.goldLine, 0.85)
-    + line(boro, 2.6, C.gold)
+    + `<clipPath id="land">${land}</clipPath><g clip-path="url(#land)" opacity="${B.groove}">${line(inner, B.inner[1], '#000')}${line(boro, B.boro[1], '#000')}</g>`
+    + line(inner, B.inner[0], C.goldLine)
+    + line(boro, B.boro[0], C.gold)
     + line(coast, 3.2, C.gold)
-    + line(coast, 0.7, '#f3dc95', 0.5);
+    + line([...boro, ...coast], 0.7, '#f3dc95', 0.5);
 }
+// Border weights, [gold, its groove], in units (1 unit is 0.56 mm at 24in), and the groove's darkness.
+const BORDER = { inner: [1.8, 4.6], boro: [3, 6.4], groove: 0.5 };
 
 // Plan view of a suspension bridge: railed deck, cables along both sides over two
 // towers, splayed abutments on each shore, and a shadow on the water.
@@ -639,9 +654,9 @@ function mapLabels() {
     const b = BOROUGHS[k], t = upper(b.name), badge = k !== 'SI';
     const total = (badge ? 22 + 9 : 0) + width(TYPE.boro, t), left = -total / 2, L = left;
     s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`
-      + (badge ? `<path d="M${f(L)} -12.5 Q${f(L + 11)} -9.5 ${f(L + 22)} -12.5 L${f(L + 22)} 1.5 Q${f(L + 22)} 9 ${f(L + 11)} 13.5 Q${f(L)} 9 ${f(L)} 1.5 Z" fill="${C.gold}" stroke="${C.shadow}" stroke-width="1.2" stroke-linejoin="round"/>`
+      + (badge ? `<path d="M${f(L)} -12.5 Q${f(L + 11)} -9.5 ${f(L + 22)} -12.5 L${f(L + 22)} 1.5 Q${f(L + 22)} 9 ${f(L + 11)} 13.5 Q${f(L)} 9 ${f(L)} 1.5 Z" fill="url(#bezelGilt)" stroke="${C.shadow}" stroke-width="1.2" stroke-linejoin="round"/>`
         + text(String(b.n), L + 11, -0.5, { family: 'Cinzel', weight: 700, size: 16, spacing: 0 }, { fill: '#1b150e', anchor: 'middle', middle: true }) : '')
-      + text(t, left + (badge ? 31 : 0), 0, TYPE.boro, { fill: C.gold, halo: 3, middle: true }) + `</g>`;
+      + text(t, left + (badge ? 31 : 0), 0, TYPE.boro, { fill: 'url(#giltType)', halo: 3, middle: true }) + `</g>`;
   }
   for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85, middle: true });
   for (const { name } of geo.bridges) {
@@ -678,8 +693,8 @@ const gilt = (t, x, y, spec) => text(t, x + 0.6, y + 0.9, spec, { fill: '#000', 
 // apart in a tray padded 6 mm), numbered left to right so a Raid's "furthest
 // right on the Heat Track" reads straight off it. The 5th Heat sets off a Raid.
 // It sits in a corner cut out of the map: the frame steps in around it (see
-// frame()), so no coastline runs under it. Sockets look like the Ledger's; only
-// the numerals warm from gold towards rust as the Heat climbs.
+// frame()), so no coastline runs under it. Sockets look like the Ledger's, and the
+// whole instrument warms from gilt towards copper and oxblood as the Heat climbs.
 const HEAT = (() => {
   const d = 39 * MM, gap = 2 * MM, padX = 6 * MM, padY = 4 * MM, m = 7;
   const trayW = 5 * d + 4 * gap + 2 * padX, trayH = d + 2 * padY;
@@ -687,11 +702,18 @@ const HEAT = (() => {
   const inner = [tx + trayW + m, ty + trayH + m]; // the corner's inner hairline
   return { d, gap, padX, trayW, trayH, tx, ty, edge: [inner[0] + 6, inner[1] + 6] };
 })();
-// Escalation is kept subtle (Nick): the floors warm a touch towards rust, and only the
-// 5th, the Raid, changes metal: rose-copper on an oxblood floor.
-const HEAT_TINT = [0, 0.03, 0.05, 0.07, 0.1];
+// Escalation is graduated and kept subtle (Nick, 2026-10-07): each socket's floor,
+// bezel, numerals and dial lines are mixed from gilt-on-lacquer towards the Raid's
+// rose-copper on oxblood, by HEAT_WARM. It eases in, so the first steps only warm and
+// the 5th still lands as a change of metal. (Until 2026-10-07 only the floors warmed, by
+// a rust tint of 3 to 10%, and the 5th alone was copper.)
+const HEAT_WARM = [0, 0.12, 0.26, 0.45, 1];
 // Metals: [light, mid, shadow] for gilt bezels and engraved numerals.
 const GILT = ['#f6e3a1', '#c9a437', '#6b5424'], COPPER = ['#f2c3a4', '#b8674d', '#5a2618'];
+// The lacquer floors, [centre, middle, edge]: the gilt sockets' and the Raid's.
+const FLOOR = ['#2b1e13', '#140d08', '#050302'], FLOOR_RAID = ['#4d1a14', '#2a0c09', '#0d0403'];
+const mix = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
+const mixAll = (A, B, t) => A.map((c, i) => mix(c, B[i], t));
 function heatTrack() {
   const { d, gap, padX, trayW, trayH, tx, ty, edge: [ex, ey] } = HEAT;
   const a = (FRAME_OUT + FRAME_IN) / 2, R = d / 2, cy = ty + trayH / 2, mid = tx + trayW / 2;
@@ -700,39 +722,38 @@ function heatTrack() {
   // The tray: a routed channel, shadowed under its top lip, a gilt lip catching the light below.
   const pill = `x="${f(tx)}" y="${f(ty)}" width="${f(trayW)}" height="${f(trayH)}" rx="${f(trayH / 2)}"`;
   s += `<clipPath id="heat-tray"><rect ${pill}/></clipPath>`
-    + `<rect ${pill} fill="url(#heatTray)"/>`
+    + `<rect ${pill} fill="url(#heatTray)"/><rect ${pill} fill="url(#heatTrayWarm)"/>`
     + `<rect ${pill} fill="none" stroke="#000" stroke-opacity=".75" stroke-width="7" clip-path="url(#heat-tray)" filter="url(#blur2)" transform="translate(0 1.5)"/>`
     + `<rect ${pill} fill="none" stroke="url(#heatLip)" stroke-width="1.5"/>`;
   for (let i = 0; i < 5; i++) {
-    const cx = tx + padX + R + i * (d + gap), raid = i === 4, metal = raid ? 'Copper' : 'Gilt';
-    // the floor: lacquer (oxblood for the Raid), recessed under its bezel
-    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R)}" fill="url(#heatFloor${raid ? 'Raid' : ''})"/>`
-      + (HEAT_TINT[i] && !raid ? `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R)}" fill="#b0503a" fill-opacity="${HEAT_TINT[i]}"/>` : '');
+    const cx = tx + padX + R + i * (d + gap), raid = i === 4, w = HEAT_WARM[i], line = mix(C.goldLine, COPPER[1], w);
+    // the floor: lacquer warming to oxblood, recessed under its bezel
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R)}" fill="url(#heatFloor${i})"/>`;
     // a guilloché sunburst and an inner track ring, like a watch dial
     let rays = '';
     for (let k = 0; k < 72; k++) {
       const t = k * 5 * Math.PI / 180, r0 = k % 2 ? 9 : 6;
       rays += `M${f(cx + Math.cos(t) * r0)} ${f(cy + Math.sin(t) * r0)} L${f(cx + Math.cos(t) * (R - 7))} ${f(cy + Math.sin(t) * (R - 7))} `;
     }
-    s += `<path d="${rays}" stroke="${raid ? COPPER[1] : C.goldLine}" stroke-opacity=".13" stroke-width=".45"/>`
-      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 7)}" fill="none" stroke="${raid ? COPPER[1] : C.goldLine}" stroke-opacity=".45" stroke-width=".6"/>`
-      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 9)}" fill="none" stroke="${raid ? COPPER[1] : C.goldLine}" stroke-opacity=".2" stroke-width=".4"/>`;
+    s += `<path d="${rays}" stroke="${line}" stroke-opacity=".13" stroke-width=".45"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 7)}" fill="none" stroke="${line}" stroke-opacity=".45" stroke-width=".6"/>`
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 9)}" fill="none" stroke="${line}" stroke-opacity=".2" stroke-width=".4"/>`;
     // recess: the floor darkens under the bezel's upper edge
     s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 2)}" fill="url(#heatRecess)"/>`;
     // the bezel: polished metal, a dark seat inside it and a bright rim outside
-    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 1.8)}" fill="none" stroke="url(#bezel${metal})" stroke-width="3.4"/>`
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 1.8)}" fill="none" stroke="url(#heatBezel${i})" stroke-width="3.4"/>`
       + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 3.7)}" fill="none" stroke="#000" stroke-opacity=".7" stroke-width=".6"/>`
-      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 0.1)}" fill="none" stroke="${raid ? COPPER[0] : GILT[0]}" stroke-opacity=".35" stroke-width=".5"/>`;
+      + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(R - 0.1)}" fill="none" stroke="${mix(GILT[0], COPPER[0], w)}" stroke-opacity=".35" stroke-width=".5"/>`;
     // the numeral, engraved: a shadow below it, the metal on top
     const num = { family: 'Cinzel', weight: 700, size: 30, spacing: 0 }, ny = cy - (raid ? 5 : 0);
     s += text(String(i + 1), cx + 0.9, ny + 1.3, num, { fill: '#000', anchor: 'middle', opacity: 0.75, middle: true })
-      + text(String(i + 1), cx, ny, num, { fill: `url(#${raid ? 'copperText' : 'giltText'})`, anchor: 'middle', middle: true });
+      + text(String(i + 1), cx, ny, num, { fill: `url(#heatText${i})`, anchor: 'middle', middle: true });
     if (raid) s += text('RAID', cx + 0.6, cy + 20.5, TYPE.small, { fill: '#000', anchor: 'middle', opacity: 0.7, middle: true })
       + text('RAID', cx, cy + 19.8, TYPE.small, { fill: 'url(#copperText)', anchor: 'middle', middle: true });
-    // diamonds in the spandrels between sockets, above and below
+    // diamonds in the spandrels between sockets, above and below, in the metal between them
     if (i < 4) {
-      const mx = cx + R + gap / 2;
-      s += diamondAt([mx, ty + 9.5], 2.3, C.goldLine) + diamondAt([mx, ty + trayH - 9.5], 2.3, C.goldLine);
+      const mx = cx + R + gap / 2, dm = mix(C.goldLine, COPPER[1], (w + HEAT_WARM[i + 1]) / 2);
+      s += diamondAt([mx, ty + 9.5], 2.3, dm) + diamondAt([mx, ty + trayH - 9.5], 2.3, dm);
     }
   }
   return { bg, fg: s, top: heatPlate(mid) };
@@ -869,9 +890,9 @@ function title() {
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
   const rule = (y, gap) => `<path d="M${f(-cityW / 2)} ${y} H${f(-gap)} M${f(gap)} ${y} H${f(cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
   let s = rule(-27, 9) + diamond(0, -27, 3.6);
-  s += text('NEW YORK', 2.2, -5, TYPE.titleCity, { fill: C.goldBright, anchor: 'middle', halo: 3.4, middle: true });
+  s += text('NEW YORK', 2.2, -5, TYPE.titleCity, { fill: 'url(#giltType)', anchor: 'middle', halo: 3.4, middle: true });
   s += rule(20, yearW / 2 + 10);
-  s += text('1929', 4, 20, TYPE.titleYear, { fill: C.gold, anchor: 'middle', halo: 3, middle: true });
+  s += text('1929', 4, 20, TYPE.titleYear, { fill: 'url(#giltType)', anchor: 'middle', halo: 3, middle: true });
   const top = PANELS_Y() + TOMORROW.h + 16, foot = Math.max(...geo.regions.nj.map(q => q[1])) - 16;
   const x = (FRAME_IN + njShore(foot)) / 2 + 1.5, y = Math.max(top + cityW / 2, (top + foot) / 2);
   return `<g transform="translate(${f(x)} ${f(y)}) rotate(-90)">${s}</g>`;
@@ -911,15 +932,24 @@ function defs(fontCss, mode) {
     s += `<radialGradient id="fill-${k}" cx=".45" cy=".4" r=".8"><stop offset="0" stop-color="${lift(b.fill[0])}"/><stop offset="1" stop-color="${lift(b.fill[1])}"/></radialGradient>`;
   // The Heat Track's metals and lacquer.
   const metal = (id, [lt, md, dk], x2 = 1, y2 = 1) => `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}"><stop offset="0" stop-color="${lt}"/><stop offset=".28" stop-color="${md}"/><stop offset=".52" stop-color="${dk}"/><stop offset=".78" stop-color="${md}"/><stop offset="1" stop-color="${lt}"/></linearGradient>`;
-  s += metal('bezelGilt', GILT) + metal('bezelCopper', COPPER);
+  s += metal('bezelGilt', GILT);
   const engraved = (id, [lt, md, dk]) => `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${lt}"/><stop offset=".55" stop-color="${md}"/><stop offset="1" stop-color="${dk}"/></linearGradient>`;
   s += engraved('giltText', GILT) + engraved('copperText', COPPER);
-  s += `<radialGradient id="heatFloor" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#2b1e13"/><stop offset=".75" stop-color="#140d08"/><stop offset="1" stop-color="#050302"/></radialGradient>`;
-  s += `<radialGradient id="heatFloorRaid" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="#4d1a14"/><stop offset=".75" stop-color="#2a0c09"/><stop offset="1" stop-color="#0d0403"/></radialGradient>`;
+  // the map's own lettering (title and Borough names): gilt a shade brighter than the
+  // Heat numerals', since it sits on the hide and the water, not on lacquer
+  s += engraved('giltType', ['#f8e9b0', '#dcb955', '#a07c2c']);
+  const floor = (id, [c, m, e]) => `<radialGradient id="${id}" cx=".5" cy=".58" r=".62"><stop offset="0" stop-color="${c}"/><stop offset=".75" stop-color="${m}"/><stop offset="1" stop-color="${e}"/></radialGradient>`;
+  s += floor('heatFloor', FLOOR);
+  // the Heat Track's sockets, each a step further from gilt towards copper (HEAT_WARM)
+  HEAT_WARM.forEach((w, i) => {
+    s += floor(`heatFloor${i}`, mixAll(FLOOR, FLOOR_RAID, w)) + metal(`heatBezel${i}`, mixAll(GILT, COPPER, w)) + engraved(`heatText${i}`, mixAll(GILT, COPPER, w));
+  });
   s += `<linearGradient id="heatRecess" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset=".85" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#f3dc95" stop-opacity=".06"/></linearGradient>`;
   s += `<linearGradient id="stillPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33241a"/><stop offset="1" stop-color="#150e09"/></linearGradient>`;
   s += `<linearGradient id="lacquer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#261b11"/><stop offset="1" stop-color="#0e0906"/></linearGradient>`;
   s += `<linearGradient id="heatTray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050302"/><stop offset="1" stop-color="#1c140c"/></linearGradient>`;
+  // the tray's floor warms towards the Raid's end, under the sockets' own warming
+  s += `<linearGradient id="heatTrayWarm" x1="0" y1="0" x2="1" y2="0"><stop offset=".3" stop-color="${FLOOR_RAID[0]}" stop-opacity="0"/><stop offset="1" stop-color="${FLOOR_RAID[0]}" stop-opacity=".45"/></linearGradient>`;
   s += `<linearGradient id="heatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${GILT[2]}"/><stop offset=".5" stop-color="${GILT[1]}"/><stop offset="1" stop-color="${GILT[0]}"/></linearGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${lift(C.sea[0])}"/><stop offset="1" stop-color="${lift(C.sea[1])}"/></radialGradient>`;
@@ -930,44 +960,153 @@ function defs(fontCss, mode) {
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   // lift: the Stills and zone roundels cast a soft shadow, like pieces on the board
   s += `<filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx=".8" dy="1.5" stdDeviation="1.3" flood-color="#000" flood-opacity=".6"/></filter>`;
-  s += leatherFilter('leather', LEATHER[mode].board) + leatherFilter('leatherFine', LEATHER[mode].fine);
+  if (LEATHER[mode].board.pebbles) s += pebbleFields();
+  s += leatherFilter('leather', LEATHER[mode].board) + leatherFilter('leatherWater', LEATHER[mode].water) + leatherFilter('leatherFine', LEATHER[mode].fine);
+  s += `<filter id="landShadow" x="-2%" y="-2%" width="104%" height="104%"><feGaussianBlur stdDeviation="2.6"/></filter>`;
   return `<defs>${s}</defs>`;
 }
 
 // ---------------------------------------------------------------- leather
-// All procedural, so it prints crisp at any size. The pebble grain is single-octave
-// crease patterns multiplied, so their crossings close off irregular cells (one
-// pattern alone draws worm-like squiggles at print scale); blurred to round the
-// pebbles, over soft wrinkles. It is lit for shading, soft-light blended onto the
-// art, given a sheen on the raised grain, then mottled like uneven dye.
-// board: the hide, pebbles 2 to 3 mm across at 24in. fine: the Heat corner, a
-// finer, flatter skin stitched in. The screen presets drop the pebbles.
+// All procedural, so it prints crisp at any size. Pebbled hide is a net of rounded
+// cells parted by fine creases, so the grain is drawn as one (pebbleTile): a Voronoi
+// tile of rounded pebbles, each at its own height, with a scatter of pores, blurred
+// to dome them, over soft wrinkles. It is lit for shading, soft-light blended onto
+// the art, given a sheen on the raised grain, then mottled like uneven dye.
+// board: the land's hide, pebbles about 2.5 mm across at 24in. water: smooth calf with
+// a little more sheen, so the pebbled land reads as panels inlaid in it. fine: the Heat
+// corner, a finer, flatter skin stitched in. The screen presets drop the pebbles.
 const LEATHER = {
   print: {
-    board: { creases: [[0.1, 4], [0.13, 17], [0.17, 29]], blur: 0.45, pebble: 0.6, wrinkle: [0.016, 0.6], relief: 1.25, depth: 0.42, sheen: 0.12, dye: 0.3 },
-    fine: { creases: [[0.3, 5], [0.38, 18], [0.48, 30]], blur: 0.22, pebble: 0.7, wrinkle: [0.03, 0.2], relief: 0.9, depth: 0.4, sheen: 0.08, dye: 0.12 },
+    board: { pebbles: { field: 'pebbleField', blur: 0.85, amount: 0.55, under: 0.37 }, micro: [0.9, 0.03], wrinkle: [0.016, 0.6], relief: 2.9, depth: 0.42, sheen: 0.12, dye: 0.3 },
+    water: { micro: [1.1, 0.02], wrinkle: [0.012, 0.8], relief: 1.6, depth: 0.32, sheen: 0.14, dye: 0.25 },
+    fine: { pebbles: { field: 'pebbleFieldFine', blur: 0.45, amount: 0.6, under: 0.6 }, micro: [1.6, 0.03], wrinkle: [0.03, 0.2], relief: 2.3, depth: 0.4, sheen: 0.08, dye: 0.12 },
   },
   screen: {
-    board: { creases: [], wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
-    fine: { creases: [], wrinkle: [0.03, 1], relief: 0.8, depth: 0.2, sheen: 0, dye: 0.08 },
+    board: { wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
+    water: { wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
+    fine: { wrinkle: [0.03, 1], relief: 0.8, depth: 0.2, sheen: 0, dye: 0.08 },
   },
 };
+// The pebble tile: Poisson-disc sites on a torus (irregular but even, so no clumps or
+// holes), a tenth of them dropped so some pebbles grow large, and each site's Voronoi
+// cell drawn shrunk by the crease and rounded. Heights are grey (white is high); pores
+// are black pits. It repeats as a pattern, turned off the board's grid; the wrinkles
+// and dye laid over it never repeat, which hides the seams. tile and r in board units.
+const PEBBLE = { tile: 120, r: 3.4, crease: 0.32, drop: 0.1, round: 0.45, rise: [0.86, 1], pores: 0.45, seed: 1929 };
+function rng(seed) { // mulberry32: the same grain on every build
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), a | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function pebbleTile(id, o = PEBBLE) {
+  const { tile: T, r } = o, rand = rng(o.seed);
+  // Poisson-disc sites (Bridson), wrapping at the tile's edges
+  const n = Math.ceil(T / (r / Math.SQRT2)), cs = T / n, grid = new Int32Array(n * n).fill(-1), sites = [], active = [];
+  const torus = (a, b) => { let dx = Math.abs(a[0] - b[0]), dy = Math.abs(a[1] - b[1]); dx = Math.min(dx, T - dx); dy = Math.min(dy, T - dy); return dx * dx + dy * dy; };
+  const cellOf = ([x, y]) => (Math.floor(y / cs) % n) * n + Math.floor(x / cs) % n;
+  const crowded = q => {
+    const gx = Math.floor(q[0] / cs), gy = Math.floor(q[1] / cs);
+    for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
+      const k = grid[((gy + dy + n) % n) * n + (gx + dx + n) % n];
+      if (k >= 0 && torus(sites[k], q) < r * r) return true;
+    }
+    return false;
+  };
+  const add = q => { grid[cellOf(q)] = sites.length; active.push(sites.length); sites.push(q); };
+  add([rand() * T, rand() * T]);
+  while (active.length) {
+    const ai = Math.floor(rand() * active.length), p = sites[active[ai]];
+    let placed = false;
+    for (let k = 0; k < 30 && !placed; k++) {
+      const a = rand() * 2 * Math.PI, d = r * (1 + rand());
+      const q = [((p[0] + Math.cos(a) * d) % T + T) % T, ((p[1] + Math.sin(a) * d) % T + T) % T];
+      if (!crowded(q)) { add(q); placed = true; }
+    }
+    if (!placed) active.splice(ai, 1);
+  }
+  const keep = sites.filter(() => rand() >= o.drop);
+  // every site's copies in the 3 x 3 tiles round it, for the cells that wrap
+  const all = [];
+  for (const [x, y] of keep) for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++) all.push([x + i * T, y + j * T]);
+  const reach = 4.5 * r, levels = [[], [], [], [], [], []];
+  for (const p of keep) {
+    // the cell: a square cut down by the bisector with each near site, moved in by half the crease
+    let cell = [[p[0] - reach, p[1] - reach], [p[0] + reach, p[1] - reach], [p[0] + reach, p[1] + reach], [p[0] - reach, p[1] + reach]];
+    for (const q of all) {
+      const dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy);
+      if (!L || L > 2 * reach) continue;
+      const lim = L / 2 - o.crease / 2, ux = dx / L, uy = dy / L, side = v => (v[0] - p[0]) * ux + (v[1] - p[1]) * uy - lim;
+      const out = [];
+      cell.forEach((a, i) => {
+        const b = cell[(i + 1) % cell.length], sa = side(a), sb = side(b);
+        if (sa <= 0) out.push(a);
+        if (sa * sb < 0) { const t = sa / (sa - sb); out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]); }
+      });
+      cell = out;
+      if (cell.length < 3) break;
+    }
+    if (cell.length < 3) continue;
+    // rounded: each corner becomes a curve between points a little way along its two edges
+    const along = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+    const draw = (dx, dy) => {
+      let d = '';
+      cell.forEach((v, i) => {
+        const a = cell[(i - 1 + cell.length) % cell.length], b = cell[(i + 1) % cell.length];
+        const p0 = along(v, a, o.round / 2), p1 = along(v, b, o.round / 2);
+        d += `${i ? 'L' : 'M'}${f(p0[0] + dx, 1)} ${f(p0[1] + dy, 1)}Q${f(v[0] + dx, 1)} ${f(v[1] + dy, 1)} ${f(p1[0] + dx, 1)} ${f(p1[1] + dy, 1)}`;
+      });
+      return d + 'Z';
+    };
+    const xs = cell.map(v => v[0]), ys = cell.map(v => v[1]), lvl = Math.floor(rand() * levels.length);
+    for (const dx of [0, ...(Math.min(...xs) < 0 ? [T] : []), ...(Math.max(...xs) > T ? [-T] : [])])
+      for (const dy of [0, ...(Math.min(...ys) < 0 ? [T] : []), ...(Math.max(...ys) > T ? [-T] : [])]) levels[lvl].push(draw(dx, dy));
+  }
+  let pores = '';
+  const wraps = (v, m) => [0, ...(v < m ? [T] : []), ...(v > T - m ? [-T] : [])];
+  for (let k = Math.round(keep.length * o.pores); k > 0; k--) {
+    const x = rand() * T, y = rand() * T, pr = f(0.18 + rand() * 0.14);
+    for (const dx of wraps(x, pr)) for (const dy of wraps(y, pr))
+      pores += `M${f(x + dx - pr)} ${f(y + dy)}a${pr} ${pr} 0 1 0 ${f(2 * pr)} 0a${pr} ${pr} 0 1 0 ${f(-2 * pr)} 0`;
+  }
+  const body = levels.map((ds, i) => `<path fill="#${Math.round(255 * (o.rise[0] + (o.rise[1] - o.rise[0]) * i / (levels.length - 1))).toString(16).padStart(2, '0').repeat(3)}" d="${ds.join('')}"/>`).join('');
+  return `<pattern id="${id}" width="${T}" height="${T}" patternUnits="userSpaceOnUse"><rect width="${T}" height="${T}" fill="#000"/>${body}<path fill="#000" d="${pores}"/></pattern>`;
+}
+// The fields the leather filters read through feImage: the tile laid over the board,
+// turned off its grid; the fine skin's at a little over half the scale.
+function pebbleFields() {
+  return pebbleTile('pebbleTile')
+    + `<pattern id="pebbleTileFine" href="#pebbleTile" patternTransform="rotate(-21) scale(.55)"/>`
+    + `<pattern id="pebbleTileBoard" href="#pebbleTile" patternTransform="rotate(13)"/>`
+    + `<rect id="pebbleField" width="1080" height="1080" fill="url(#pebbleTileBoard)"/>`
+    + `<rect id="pebbleFieldFine" width="1080" height="1080" fill="url(#pebbleTileFine)"/>`;
+}
 function leatherFilter(id, o) {
   const grey = slope => ['R', 'G', 'B'].map(ch => `<feFunc${ch} type="linear" slope="${slope}" intercept="${f(0.5 - 0.743 * slope, 3)}"/>`).join('');
   const light = '<feDistantLight azimuth="225" elevation="48"/>';
-  const crease = (freq, seed, name) => `<feTurbulence type="turbulence" baseFrequency="${freq}" numOctaves="1" seed="${seed}" result="${name}t"/>`
-    + `<feColorMatrix in="${name}t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1.6 0 0 0 1.05" result="${name}"/>`;
   let s = `<filter id="${id}" x="0" y="0" width="1080" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">`
     + `<feTurbulence type="fractalNoise" baseFrequency="${o.wrinkle[0]}" numOctaves="3" seed="9" result="wr"/>`
     + `<feColorMatrix in="wr" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  ${o.wrinkle[1]} 0 0 0 0" result="wrinkles"/>`;
   let height = 'wrinkles';
-  if (o.creases.length) {
-    o.creases.forEach(([freq, seed], i) => { s += crease(freq, seed, `c${i}`); });
-    let cells = 'c0';
-    for (let i = 1; i < o.creases.length; i++) { s += `<feComposite in="${cells}" in2="c${i}" operator="arithmetic" k1="1" result="m${i}"/>`; cells = `m${i}`; }
-    s += `<feGaussianBlur in="${cells}" stdDeviation="${o.blur}" result="pebbles"/>`
-      + `<feComposite in="pebbles" in2="wrinkles" operator="arithmetic" k2="${o.pebble}" k3="1" result="height"/>`;
+  if (o.pebbles) {
+    // the tile's grey becomes height (alpha), blurred to dome each pebble, over the wrinkles;
+    // amount and under keep the sum under 1, where the height would clip flat
+    s += `<feImage href="#${o.pebbles.field}" x="0" y="0" width="1080" height="1080" result="pt"/>`
+      + `<feColorMatrix in="pt" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" result="pa"/>`
+      + `<feGaussianBlur in="pa" stdDeviation="${o.pebbles.blur}" result="pebbles"/>`
+      + `<feComposite in="pebbles" in2="wrinkles" operator="arithmetic" k2="${o.pebbles.amount}" k3="${o.pebbles.under}" result="height"/>`;
     height = 'height';
+  }
+  if (o.micro) {
+    // a fine grain over the surface, which also breaks up the lighting's 8-bit terraces
+    // (on smooth calf, without it, they print as faint contour lines)
+    s += `<feTurbulence type="fractalNoise" baseFrequency="${o.micro[0]}" numOctaves="2" seed="5" result="mt"/>`
+      + `<feColorMatrix in="mt" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  ${o.micro[1]} 0 0 0 0" result="micro"/>`
+      + `<feComposite in="${height}" in2="micro" operator="arithmetic" k2="1" k3="1" result="grain"/>`;
+    height = 'grain';
   }
   s += `<feDiffuseLighting in="${height}" surfaceScale="${o.relief}" diffuseConstant="1" lighting-color="#fff" result="lit">${light}</feDiffuseLighting>`
     + `<feComponentTransfer in="lit" result="shade">${grey(o.depth)}</feComponentTransfer>`
@@ -1003,10 +1142,15 @@ function allText() {
   return items;
 }
 
+// A layer under one of the leather filters. Each spans the whole board with an unpainted
+// rect: Chromium sizes the filter's work from the layer's bounds, and where they fell short
+// of the board (the land, once the water had a layer of its own) it rendered the pebbles
+// soft at preview scale, though not at 300dpi.
+const hide = (id, filter, content) => `<g id="${id}" filter="url(#${filter})"><rect width="1080" height="1080" fill="none"/>${content}</g>`;
 function buildSvg(fontCss, mode, placed) {
   MODE = mode;
-  const art = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining()
-    + OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
+  const water = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining() + landShadow();
+  const land = OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
     + districtFills() + borders() + piers() + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
   const side = sidePanels(), b = mode === 'print' ? BLEED : 0, S = 1080 + 2 * b;
@@ -1014,8 +1158,9 @@ function buildSvg(fontCss, mode, placed) {
     + `<title>Moonshine Kingdom: the City Map</title>`
     + defs(fontCss, mode)
     + (b ? `<rect x="${-b}" y="${-b}" width="${S}" height="${S}" fill="#0b0907"/>` : '')
-    + `<g id="map" filter="url(#leather)">${art}${seams()}</g>`
-    + `<g id="panel-grounds" filter="url(#leatherFine)">${side.bg}</g>`
+    + hide('water', 'leatherWater', water)
+    + hide('map', 'leather', land + seams())
+    + hide('panel-grounds', 'leatherFine', side.bg)
     + `<g id="labels">${mapLabels()}${labels}</g>`
     + `<g id="panels">${side.fg}${title()}</g>`
     + `<g id="frame">${frame()}${side.top}</g>`
