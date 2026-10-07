@@ -43,10 +43,10 @@ const CM = (609.6 / 1080) ** 2 / 100, STEP = 2, FRAME_IN = 13;
 
 // Each setting the tuner may move: [path in SETTINGS, lowest, highest].
 const KNOBS = [
-  ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215],
-  ['huntsTop', 120, 184], ['hpCol', 770, 830], ['corner', 190, 240],
-  ['manhattan.0', 250, 340], ['manhattan.1', 340, 440], ['manhattan.2', 430, 530],
-  ['manhattan.3', 530, 620], ['eastHarlem.0', 470, 560], ['eastHarlem.1', 400, 500],
+  ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215], ['huntsTop', 120, 215],
+  ['hpCol', 770, 830], ['ehKnee', 700, 735], ['corner.0', 580, 640], ['corner.1', 180, 230],
+  ['manhattan.0', 250, 330], ['manhattan.1', 340, 420], ['manhattan.2', 430, 520],
+  ['manhattan.3', 530, 620], ['eastHarlem', -12, 32],
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
   ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
   ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90],

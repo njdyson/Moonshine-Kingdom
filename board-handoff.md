@@ -4,10 +4,10 @@ Status (2026-09-29): the **drafted map with hanging signs and the Deco style is 
 `main`. A print-finish pass on 2026-10-07 (grooved borders, a cellular pebble grain, smooth calf
 water, a graduated Heat Track, gilt lettering) changed the look only. Later the same day
 **Manhattan became one width** (the Hudson parallel to the East River, into New Jersey's
-empty south) and the Bowery's foot and Staten Island rose; a second pass the same day put the
-four-way corner on 45-degree lines, gave East Harlem a true vertical and Hunts Point more room,
-and set the title small and level over the Tomorrow panel. See Manhattan is one width, Straight
-lines round the four-way corner, The look and Decisions. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
+empty south) and the Bowery's foot and Staten Island rose. Then the borders round the
+four-way corner were straightened, gently (an all-straight version with a true vertical for
+East Harlem was tried and reverted), and the title went small and level under the panels. See
+Manhattan is one width, Straightening round the four-way corner, The look and Decisions. mk-online serves it too (`mk-online/dist/board.svg`, from mk-online b015afe, the 2026-09-30 board), with
 clickable Districts and its connection graph taken from `board-geometry.json`. Its snapshot
 predates every 2026-10-07 change. The connection graph is unchanged, but all of Manhattan,
 Belmont, Fordham, Hunts Point, Staten Island, New Jersey and the Brooklyn Bridge moved, so
@@ -62,8 +62,8 @@ works better"), so this makes the angles deliberate instead.
 - **Square corners** (Nick: tight corners are dead space, since pieces can't fit in them). Where
   a border meets a slanted shore or border at a tight angle it turns on a short foot (`FOOT`,
   24) to meet it square: Manhattan's level borders at the Hudson (bar Five Points / Bowery,
-  which meets the Bowery's upright west shore square), and Five Points / Bowery and East
-  Harlem / Five Points at the East River.
+  which meets the Bowery's upright west shore square) and Five Points / Bowery at the East
+  River.
   Williamsburg / Red Hook and the Queens / Brooklyn line both run square to the East River,
   which makes Williamsburg a square set on its corner;
   Red Hook's shore turns upright at the Narrows in line with Coney Island's (Staten Island moves
@@ -77,16 +77,15 @@ works better"), so this makes the angles deliberate instead.
   keeps its plate beside it (Brownsville's longest hanger 46 to 51).
   Past about 460, or under about 598, Canarsie's plate has to hang under its sign. The
   District's id became `canarsie` on 2026-10-01, in the traced map, the tools and mk-online's engine together; the drawing did not change. The drafting reports any corner under 80 degrees; there are none.
-- **The four-way corner is where two 45-degree lines cross** (Sugar Hill, Belmont, East Harlem,
-  Hunts Point; see Straight lines round the four-way corner), so all four meet it square. One
-  line runs from Manhattan's tip, which it leaves square to the coast, down through the corner
-  to the Hell Gate's mouth, where the East River meets it: Sugar Hill / Belmont above the corner,
-  East Harlem / Hunts Point below, so the Hell Gate's Bronx shore is all Hunts Point's. The other
-  runs parallel to the coast: Sugar Hill / East Harlem down from the corner to where East
-  Harlem's west side turns upright (`eastHarlem`), and Belmont / Hunts Point up from it to Hunts
-  Point's top (`huntsTop`), which runs level and drops to Throggs Neck's row at 45 degrees just
-  short of it. `corner` slides the corner along the first line. Sugar Hill's top is a peak, like
-  Williamsburg's, and its sign hangs centred under it from both slopes.
+- **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point
+  (`corner`), and the borders that leave it run at 45 degrees (see Straightening round the
+  four-way corner). Sugar Hill / Belmont runs square to the coast, so Sugar Hill's top is a
+  right-angled peak, like Williamsburg's, and its sign hangs centred under it from both slopes.
+  East Harlem / Hunts Point runs out to a knee and drops upright to the Hell Gate (`ehKnee`; East
+  Harlem takes a short stretch of that shore, and the Hell Gate Bridge moves 30 east to land
+  clear of it, `BRIDGE_SHIFT`). Belmont / Hunts Point leaves the corner square to it, up to Hunts
+  Point's top (`huntsTop`), which runs level across Belmont and Fordham and drops to the Bronx's
+  row at 45 degrees just short of Throggs Neck.
 - **No Westchester or Nassau** (Nick: sit the Districts flush against the border). The Bronx runs
   up to the frame and Queens out to it, under it to the board's edge as New Jersey does; the
   build clips them at the frame's hairline (`insideFrame()`) for everything but their fill. The
@@ -157,50 +156,55 @@ it lands about 15 units clear of each shore's corner. The rest of this first pas
 balance round the four-way corner, Sugar Hill's sign, the title along New Jersey's shore) was
 redone the same day: see the next section.
 
-### Straight lines round the four-way corner
+### Straightening round the four-way corner
 
 Nick, 2026-10-07, on the first pass: Manhattan's shape looked better, but the title looked
-cramped (smaller and level, between the trackers, the Tomorrow panel coming down to make room),
-the Districts looked unbalanced again (Hunts Point too small, the Tenderloin too thin), East
-Harlem's near-vertical should be a true vertical, he disliked Sugar Hill's sign (it hung low on
-a 77-unit hanger), and "most of the board uses straight lines now, so I'd like to try and run
+cramped, the Districts looked unbalanced again (Hunts Point too small, the Tenderloin too thin),
+East Harlem's near-vertical should be a true vertical, he disliked Sugar Hill's sign (it hung low
+on a 77-unit hanger), and "most of the board uses straight lines now, so I'd like to try and run
 with that a bit". The last odd angles on the board's land borders were all here: Sugar Hill /
-Belmont (37 degrees), East Harlem / Hunts Point (42), East Harlem's west side (82), Fordham /
-Hunts Point (20), and the knee and foot round them. Every land border is now level, upright
-or 45 degrees; the odd angles left are shores (the harbour reach, Coney Island, Canarsie).
+Belmont (37 degrees), East Harlem / Hunts Point (42), East Harlem's west side (82) and Fordham /
+Hunts Point (20).
 
-- **A 45-degree X at the corner** (see The four-way corner, under How the map is made). A
-  level-and-upright cross was tried first: it gives Sugar Hill a level top and East Harlem one
-  vertical from the corner, but puts Hunts Point's corner over East Harlem's top, as a strip
-  between the Bronx's row and the corner, and pushes Sugar Hill's top down to the corner,
-  squeezing West Side and the Tenderloin.
-- **East Harlem's west side is one upright** (`eastHarlem`, x 512), and its foot on Five Points
-  one level line (y 468) meeting the East River on a foot. The river closes on the upright, so
-  East Harlem / Five Points can't sit as low as the Tenderloin needs: **Five Points' top steps
-  up** 14 units at East Harlem's corner. The four rows under Sugar Hill share about 360 units
-  of height, so they are set by eye nearly even: West Side 95, the Tenderloin 89, Five Points
-  86 (100 at East Harlem's foot), the Bowery 84 (the first pass had 107, 87, 77 and 95). A try
-  that gave the Tenderloin 95 left Five Points 69 (Nick: too thin). The tuner wants even rooms,
-  not even heights, and would leave the southern rows thin, since the coast widens each row
-  going south: Five Points has the most room (75), West Side the least (45). More height would
-  have to come from the Bowery's foot, which Staten Island took.
-- **Hunts Point's top runs level at 160** (`huntsTop`), 24 above the Bronx row, taking a strip
-  from Belmont and Fordham, and drops to Throggs Neck's row at 45 degrees just short of it, so
-  Morris Park and Throggs Neck are untouched. Belmont / Fordham moved 692 to 675 to even Belmont
-  and Fordham.
-- **Sugar Hill's sign hangs centred under its peak**, on hangers of 38, as Williamsburg's does.
-  It needed one fix in the sign placer: at one margin, a tie now goes to the shorter hangers.
-  Down a 45-degree wall each unit nearer the centre line costs exactly a unit of hanger either
-  side, so every height scored level and rounding had hung the sign at the foot of the run.
-- The tuner (`tune_board.js`) now hangs signs by the build's centroid rule (it still centred
-  them across the room, so it read Sugar Hill's 77 as 36), and `build_board.js --rooms` prints
-  the placements alone in a few seconds, for trying a drafting change.
+**Tried and reverted the same day: everything straight.** The four-way corner became two
+45-degree lines crossing, East Harlem / Hunts Point ran to the Hell Gate's mouth, and East
+Harlem's west side was one true vertical. Nick: overall he didn't like it, though he likes the
+idea; the worst was the dint at East Harlem's tip, untidy and unclear about which Districts
+touch. It can't be tidied: the East River closes on a true vertical, so East Harlem tapers to a
+point, and either Five Points' top steps up beside it (the dint) or the Tenderloin's foot rises
+to East Harlem's, which left West Side 35 and the Tenderloin 46. The 45-degree X also made
+Sugar Hill and East Harlem diamond-topped and pushed Manhattan's rows down. Git history has it
+(`6e0983a`, `d2637f6`).
+
+**Now, a gentler straightening** on the first pass's corner:
+
+- **Sugar Hill / Belmont runs from the four-way corner square to the coast, at 45 degrees**
+  (`corner`), so Sugar Hill's top is a right-angled peak like Williamsburg's and its sign hangs
+  centred under it, on 38 (the first pass's 77). Sugar Hill / East Harlem happens to run at 45
+  degrees too. The corner needs x + y of at least about 801, or the peak is too narrow for the
+  sign and its plate drops under it.
+- **East Harlem / Hunts Point runs at 45 degrees** to its knee (`ehKnee`), then upright to the
+  Hell Gate as before, and **Belmont / Hunts Point leaves the corner square to it** up to Hunts
+  Point's top (`huntsTop`, 150), which runs level across Belmont and Fordham and drops to the
+  Bronx's row at 45 degrees just short of Throggs Neck. Fordham's slanted bottom is gone, and
+  Morris Park and Throggs Neck are untouched.
+- **East Harlem's west side keeps its slight slant** (82 degrees), the one odd angle left on a
+  land border: it tracks the river, so East Harlem keeps its width down to Five Points.
+- **Rows** (`manhattan`): West Side 100, the Tenderloin 92, Five Points 84, the Bowery 90 (the
+  first pass had 107, 87, 77 and 95).
+- **Sugar Hill's sign needed one fix in the sign placer**: at one margin, a tie now goes to the
+  shorter hangers. Down a 45-degree wall each unit nearer the centre line costs exactly a unit
+  of hanger either side, so every height scored level and rounding had hung the sign at the foot
+  of the run.
+- The tuner (`tune_board.js`) now hangs signs by the build's centroid rule (it centred them
+  across the room, so it read Sugar Hill's 77 as 36), and `build_board.js --rooms` prints the
+  placements alone in a few seconds, for trying a drafting change.
 
 | Room (cm²) | This morning | Manhattan one width | Now |
 | --- | --- | --- | --- |
-| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 52, 45, 55 |
-| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 75, 49, 53 |
-| Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 | 59, 59, 60 |
+| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 54, 45, 52 |
+| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 71, 56, 68 |
+| Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 | 48, 52, 52 |
 | Westerleigh, Stapleton, Tottenville | 40, 41, 41 | 44, 45, 44 | 44, 45, 44 |
 
 ### Room for pieces, and the tuner
@@ -224,7 +228,7 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | With the larger Stills | 40 (West Side) | 44, 54, 57, 71 |
 | With the wider Kill van Kull (as the build reports, 2026-10-07) | 40 (Westerleigh) | 47, 51, 59, 74 |
 | Manhattan one width and Staten Island raised (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
-| Now, with straight lines round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
+| Now, straightened round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 54, 51, 59, 74 |
 
 Rooms now run 44 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
 smallest (39), is 46 since the Sound went level.
@@ -279,17 +283,18 @@ smallest (39), is 46 since the Sound went level.
   costs 25 (15 until 2026-09-30), the plate hung under the sign 60 (no District needs that now; Nick doesn't like it).
   Hangers always run to the border straight above. The longest is Astoria's 54, whose widest
   ground lies well below its top. A peaked District (Sugar Hill, Williamsburg) hangs its sign
-  from both slopes; at one margin, a tie goes to the shorter hangers (see Straight lines round
+  from both slopes; at one margin, a tie goes to the shorter hangers (see Straightening round
   the four-way corner). If a sign ever doesn't fit, the build
   stops with an error.
-- **The title sits small and level over the Tomorrow panel** (Nick, 2026-10-07: smaller and
-  horizontal, between the trackers, the Tomorrow panel coming down to make room): NEW YORK over
-  1929 between Deco rules, drawn at full size and scaled to the panel's width (`TITLE`), its top
-  level with the key's. History: across under the panels until 2026-09-29; then upright in New
-  Jersey's strip beside the Bowery (Nick: try it lower, in the empty half), echoing THE BRONX;
-  that strip went when Manhattan widened, and for a few hours on 2026-10-07 the title lay at 45
-  degrees along New Jersey's shore, at full size (Nick: cramped). Stacked on three lines was
-  tried too.
+- **The title sits small and level in New Jersey under the panels** (2026-10-07): NEW YORK
+  over 1929 between Deco rules, drawn at full size and scaled to `TITLE.w` (110, about 60%),
+  centred between the frame and the shore. History: across under the panels until 2026-09-29;
+  then upright in New Jersey's strip beside the Bowery (Nick: try it lower, in the empty half),
+  echoing THE BRONX; that strip went when Manhattan widened. On 2026-10-07 it lay at 45 degrees
+  along New Jersey's shore at full size (Nick: cramped; make it smaller and level, between the
+  trackers), then sat over the Tomorrow panel, pushing it down (Nick: both panels or neither).
+  Both won't go: the key can drop only 10 units before it reaches the Hudson, and even a
+  one-line title needs about 20. Stacked on three lines was tried too.
 - **The Tomorrow panel** (`tomorrow()`): the Mash socket and a 36 mm socket for tomorrow's Turn
   Tokens as **one stack, #1 on top**, so "claim the lowest-numbered token left" becomes "take the
   top token". Both are set today for tomorrow, which the panel teaches. **SUNSET** is cut into the Turn Order socket's floor (Nick, 2026-09-30): the stack covers it all Day, and the last boss to Lay Low takes the last token and uncovers it, which is the moment the Rulebook calls Sunset. The Rulebook, Playbooks and Town Planner say "take the top token from tomorrow's stack". Four separate slots would
@@ -429,8 +434,8 @@ keeps them on a re-trace.
   four-way corner (`cornerLift`; more makes East Harlem's top corner tight), and the level
   borders (`manhattan`) share the height out. Moving only the tip was tried first: it gained a
   sliver too thin to use, and Sugar Hill lost room. Belmont went from 69 to 54. The lift went
-  on 2026-10-07, when the four-way corner was redrawn on 45-degree lines (see The four-way
-  corner), with Manhattan wider than any lift had made it; Belmont is 59.
+  on 2026-10-07, when Sugar Hill / Belmont was set square to the coast (see The four-way corner),
+  with Manhattan wider than any lift had made it; Belmont is 48, and gave Hunts Point its top.
 
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
@@ -494,8 +499,8 @@ keeps them on a re-trace.
   with it, 862 to 871 (`bronxCols`; the Fordham / Throggs Neck border is 46 long against a
   45 minimum, so one can't move without the other), and a stacked name now costs 25 units of
   hanger, not 15. Its one-line sign fits only below East Harlem's diagonal, so it hangs on 56,
-  with Astoria's 55 the board's longest (13 since 2026-10-07, when Hunts Point's top ran level
-  over its whole width); at a 15 penalty the wrap still won. No sign on the
+  with Astoria's 55 the board's longest (31 since 2026-10-07, when Hunts Point's top ran
+  level); at a 15 penalty the wrap still won. No sign on the
   board wraps now. Room: Hunts Point 50 to 48, Morris Park 54 to 51, Throggs Neck 56 to 53.
   A smaller name font was measured and rejected: not enough on its own, even at 11.
 - **The sign's type medallion is 18 units across** (about 10 mm at 24in) and its Still 33 units
@@ -574,7 +579,7 @@ keeps them on a re-trace.
 
 ## Open
 
-- **Other short borders** Nick may want gone: East Harlem / Five Points (32), Astoria /
+- **Other short borders** Nick may want gone: East Harlem / Five Points (37), Astoria /
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it

@@ -895,11 +895,10 @@ function key(x, y) {
   return { fg: s, w, h };
 }
 
-// Under the Heat corner: the title over the Tomorrow panel, and the key beside them.
+// Under the Heat corner: the Tomorrow panel, the key beside it, the title below them.
 const PANELS_Y = () => HEAT.edge[1] + 12;
 function sidePanels() {
-  const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y + titleH()), k = key(HEAT.tx + t.w + 10, y);
-  if (HEAT.tx + t.w + 6 > njShore(y + titleH() + t.h)) throw new Error('The Tomorrow panel runs into the Hudson');
+  const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
   return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
 }
 
@@ -922,9 +921,10 @@ function njShore(y) {
   return x;
 }
 function title() {
-  // The map's title block: the city and the year, between Deco rules, level and small, in
-  // the corner under the Heat Track, over the Tomorrow panel, which drops to make room
-  // (Nick, 2026-10-07). Drawn at full size and scaled to the panel's width.
+  // The map's title block: the city and the year, between Deco rules, small and level in
+  // New Jersey under the panels, centred in the ground between the frame and the shore (Nick,
+  // 2026-10-07: the title over one panel pushed it down, and over both they don't fit). Drawn
+  // at full size and scaled to TITLE.w.
   const cityW = width(TYPE.titleCity, 'NEW YORK'), yearW = width(TYPE.titleYear, '1929');
   const diamond = (x, y, r) => `<path d="M${f(x)} ${f(y - r)} L${f(x + r)} ${f(y)} L${f(x)} ${f(y + r)} L${f(x - r)} ${f(y)} Z" fill="${C.goldBright}"/>`;
   const rule = (y, gap) => `<path d="M${f(-cityW / 2)} ${y} H${f(-gap)} M${f(gap)} ${y} H${f(cityW / 2)}" stroke="${C.gold}" stroke-width="1"/>`;
@@ -932,14 +932,15 @@ function title() {
   s += text('NEW YORK', 2.2, -5, TYPE.titleCity, { fill: 'url(#giltType)', anchor: 'middle', halo: 3.4, middle: true });
   s += rule(20, yearW / 2 + 10);
   s += text('1929', 4, 20, TYPE.titleYear, { fill: 'url(#giltType)', anchor: 'middle', halo: 3, middle: true });
-  const k = titleScale(), x = HEAT.tx + TOMORROW.w / 2, y = PANELS_Y() + TITLE.pad - TITLE.top * k;
+  const k = TITLE.w / cityW, top = PANELS_Y() + TOMORROW.h + TITLE.gap, foot = top + (TITLE.foot - TITLE.top) * k;
+  const right = njShore(foot) - 8;
+  if (right - HEAT.tx < TITLE.w) throw new Error('The title no longer fits in New Jersey under the panels');
+  const x = (HEAT.tx + right) / 2, y = top - TITLE.top * k;
   return `<g transform="translate(${f(x)} ${f(y)}) scale(${f(k, 4)})">${s}</g>`;
 }
-// The title's box: a little narrower than the Tomorrow panel, scaled from the block as drawn,
-// whose diamond tops it at -31 and whose year foots it at 26; the panel starts TITLE.gap below.
-const TITLE = { w: TOMORROW.w - 4, top: -31, foot: 26, pad: 2, gap: 12 };
-const titleScale = () => TITLE.w / width(TYPE.titleCity, 'NEW YORK');
-const titleH = () => TITLE.pad + (TITLE.foot - TITLE.top) * titleScale() + TITLE.gap;
+// The title's size and place: TITLE.w wide, its block's top (the diamond, -31 at full size)
+// and foot (the year, 26), TITLE.gap under the Tomorrow panel.
+const TITLE = { w: 110, top: -31, foot: 26, gap: 16 };
 
 // A quarter sunburst: rays and two arcs from (x, y), spanning a0 to a0 + 90 degrees.
 function fan(x, y, a0, r) {
