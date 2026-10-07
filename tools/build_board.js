@@ -53,7 +53,7 @@ const OUT = {
 };
 // The index tile: 800 x 450 like its neighbours, cropped on the Queensboro and Williamsburg
 // Bridges and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
-const TILE_CROP = [366, 372, 672]; // 672 x 378 scales to exactly 800 x 450
+const TILE_CROP = [366, 334, 672]; // 672 x 378 scales to exactly 800 x 450 (y 372 until 2026-10-07: the Queensboro had moved south)
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const DPI = +arg('dpi') || 300; // print render: 300dpi unless --dpi=N
