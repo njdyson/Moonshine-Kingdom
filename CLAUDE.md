@@ -314,7 +314,8 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **Stealth is a Move where the Occupier can only Hold Fire.** The Pin is the standard one,
   free Fall Back included.
 - **Loose Liquor belongs to nobody**: whoever takes Control of the block takes it.
-- **The raided crew's owner picks** which Land Connected Safe District it runs to.
+- **The raided crew's owner picks** which Connected Safe District it runs to (by water too since
+  2026-10-07; see below).
 - **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
 - **Whispers is peek-only**: the Vipers may look at the top card of the Jobs deck at any time.
   The face-down claim is gone. Nick rates the peek the higher-skill play: they can prepare for a
@@ -322,6 +323,37 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **Starting Boroughs are random** (the reverse-order pick is gone). How to draw them at the
   table is open: "at random" is the placeholder. Ideas: a Borough on the back of the four Nod
   cards, or four Borough cards kept as your home-Borough card (possibly with an edge there).
+
+## A raided crew may sail
+
+Since 2026-10-07 the Scatter's Run For It reads like Fold: the crew runs to one **Connected** Safe
+District, across water via Docks if it likes. It was land-only from 2026-07-30 ("No boats; a Dock
+is a dead end"). Nick reversed it because Raids were culling too often, and because the board made
+one cull close to automatic: the Queens Squad starts on Richmond Hill beside the Queens starting
+Dock, Jamaica, whose only other land exit is Brownsville, Brooklyn's home Ward. No other Borough's
+starting Dock was that exposed.
+
+The 2026-07-30 case had four legs. Consistency with Skiff and Tunnel fell on 2026-09-30 (Skiff is a
+Move on your own turn; Tunnel carries no crew). The cost that remains is real and accepted: a crew
+raided on a Dock almost always has a Safe pier to sail for, since Staten Island's two Docks are
+usually empty and no Squad goes there. The Raid still takes all the liquor, which on a Dock is
+usually the Rum. Watch in playtest: a crew that sails to an empty Dock takes Control of it, so a
+Raid can hand it a free Move across the map and swing the Harbormaster.
+
+The places a crew can still be boxed with one road left are not Docks: Coney Island (Squad on Red
+Hook or Canarsie) and Morris Park (Squad on Fordham or Throggs Neck). The Almanac's lesson 23 and the
+Kingpin's Guide name those two. Do not restore "on foot" or "Land Connected" to the Scatter.
+
+**Squads walk** (same day). A Squad's reach is the Districts directly **Land Connected** to it
+inside its own Borough. The Rulebook had said "Connected", which let a Squad hop by water between
+the two Docks of one Borough (West Side and the Bowery, Whitestone and Jamaica), and mk-online built
+it that way. Nick ruled it out as a hop nobody would spot; the Kingpin's Guide had always said a
+Squad "cannot jump the water". Crews may sail, cops walk.
+
+Squads stay in their own Borough. Letting them roam was weighed on 2026-10-07 and not taken: free
+rein of the map sends all four after the one freshest name, and one step across Borough lines lets
+them bunch up and leave a Borough with no police. The Borough lock is what makes the existing levers
+(Heat timing, planted barrels, the Rat) readable.
 
 ## The board
 
