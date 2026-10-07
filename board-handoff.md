@@ -12,7 +12,8 @@ piece spots) into mk-online's source and deploying as `DEPLOY.md` says. The Affi
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
-node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the two index tiles
+node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the two index tiles,
+                                    # and the Still tokens' SVGs and PNGs (Art/Still Tokens)
 node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the index links it), and,
                                     # git-ignored: its 7280px PNG, a 4320px screen JPEG, and any --dpi=200
                                     # proof; two to three minutes. Rerun it whenever the board changes.
@@ -232,6 +233,7 @@ smallest (39), is 46 since the Sound went level.
   One polygon per District and for New Jersey, every border one shared chain (so neighbours can
   never gap or overlap), the four bridges, and where the water and bridge names sit. mk-online
   can take click areas and the adjacency graph straight from it.
+- `tools/still_art.js`: the Still, drawn from its number, for the signs and the tokens.
 - `tools/draft_board.js`: the drafting, its `SETTINGS` and its checks. `tools/tune_board.js`:
   the tuner.
 - `tools/build_board.js`: the roster (zone, Still, venue, Setup mark per District, copied from
@@ -331,13 +333,18 @@ keeps them on a re-trace.
 
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
-- **Stills are the Still Token art itself** (`Art/Still Tokens/SVG`), so board and tokens agree.
-  **The numeral is 50 in the token's units** (Nick, 2026-10-07: more prominent), set 2 right
-  of the boiler's centre to clear its rivets: about 35% taller than the 37 it was, which read
-  as a small mark in a dark window from across the table. The plate is the same size. The
-  token PNGs (`Art/Still Tokens/PNG`, 1000 x 1080) were re-rendered from the SVGs with the
-  board's embedded Bebas Neue, through Chromium; there is no generator script, so a change to
-  the SVGs means re-rendering them the same way.
+- **Stills are generated** (`tools/still_art.js`, since 2026-10-07; Nick: he likes the design,
+  and was open to a generated version). The board's signs and the prototype tokens are one
+  drawing: the build draws each sign's Still from `stillBody()` and writes the token SVGs and
+  1000 x 1080 PNGs (`Art/Still Tokens`) on every run, with the board's embedded Bebas Neue, so
+  the two can't disagree and nothing is edited by hand. The Pressure gauge is lit from the
+  rule, 6 - |Still - 7|. It redraws the eleven hand-made SVGs exactly (checked element by
+  element, gauges included) bar two things, for a more prominent number (Nick): **the numeral
+  is 54** in the token's 100 x 108 box, centred on the boiler, where it was 37 and set left of
+  centre (about 45% taller), and **the rivets** moved from a column down the boiler's left side,
+  which boxed the numeral in, to its four corners. A numeral of 50 with the rivets left in place
+  was the first step the same day. The plate and its drawn bounds (`BOX`) are unchanged, so no
+  sign moved.
 - **Muted Borough tones.** Mob colours aren't set and the Squads are blue, so the land stays
   quiet. Brooklyn moved from red to bronze to part it from Manhattan. Queens moved from a blue
   violet (`#3f3a57`) to a warmer violet (`#4a3857`), because the old one sat too close to the

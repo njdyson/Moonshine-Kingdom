@@ -25,8 +25,9 @@
 //
 // The roster must match the Town Planner's District Roster: zone, Still number,
 // venue and Setup mark for every District, Borough numbers in Raid order.
-// Stills are the Still Token art itself (Art/Still Tokens/SVG), so the printed
-// board and the prototype tokens can never disagree.
+// Stills are drawn by tools/still_art.js, which also gives the prototype tokens their
+// art (this build writes Art/Still Tokens/SVG and PNG), so the printed board and the
+// tokens can never disagree.
 //
 // Each District carries a hanging sign (placeSign): its type's medallion, name and
 // venue on a small plaque hung from the border above, with the Still on a plate
@@ -46,6 +47,7 @@ const OUT = {
   printPng: path.join(DIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(DIR, `Board v0.9 (print${dpiTag()}).pdf`),
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
   indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'), printTile: path.join(ROOT, 'Art', 'Index', 'board-print.jpg'),
+  tokens: path.join(ROOT, 'Art', 'Still Tokens'), // SVG/still-NN.svg and PNG/still-NN.png
 };
 // The index tile: 800 x 450 like its neighbours, cropped on the Queensboro and Williamsburg
 // Bridges and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
@@ -230,16 +232,12 @@ function icon(kind, cx, cy, size, color, strokeWidth) {
   return `<g transform="translate(${f(tx)} ${f(ty)}) scale(${f(s, 4)})" ${paint}>${inner}</g>`;
 }
 
-// The Still Token art, trimmed to its drawn bounds (x 12.5-90.7, y 9.9-103.3).
-const TOKEN_BOX = [12.5, 9.9, 78.2, 93.4];
-const TOKENS = {};
-for (let n = 2; n <= 12; n++) {
-  const src = fs.readFileSync(path.join(ROOT, 'Art', 'Still Tokens', 'SVG', `still-${String(n).padStart(2, '0')}.svg`), 'utf8');
-  TOKENS[n] = src.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>[\s\S]*$/, '').replace('<defs></defs>', '').replace(/\n\s*/g, '');
-}
+// The Still (tools/still_art.js), placed by its drawn bounds.
+const STILL = require('./still_art');
+const TOKEN_BOX = STILL.BOX;
 function still(n, x, y, h) {
   const s = h / TOKEN_BOX[3];
-  return `<g transform="translate(${f(x - TOKEN_BOX[0] * s)} ${f(y - TOKEN_BOX[1] * s)}) scale(${f(s, 4)})">${TOKENS[n]}</g>`;
+  return `<g transform="translate(${f(x - TOKEN_BOX[0] * s)} ${f(y - TOKEN_BOX[1] * s)}) scale(${f(s, 4)})">${STILL.stillBody(n)}</g>`;
 }
 
 // Zone roundel: the same mark on the map and in the key. A High Society Venue is
@@ -1283,6 +1281,22 @@ async function indexTile(browser, svg, file, [x, y, w]) {
   console.log('wrote', path.relative(ROOT, file));
 }
 
+// The prototype Still tokens (Still Tokens v0.9.html): an SVG and a 1000 x 1080 PNG per
+// number, drawn by tools/still_art.js like the board's. The page shows the PNGs, since an
+// SVG through <img> can't load the numeral's webfont; here it renders with the board's.
+async function stillTokens(browser, fontCss) {
+  const page = await browser.newPage({ viewport: { width: 1000, height: 1080 } });
+  for (let n = 2; n <= 12; n++) {
+    const name = `still-${String(n).padStart(2, '0')}`, svg = STILL.stillSvg(n);
+    fs.writeFileSync(path.join(OUT.tokens, 'SVG', `${name}.svg`), svg);
+    await page.setContent(`<!doctype html><html><head><style>${fontCss} html,body{margin:0;background:transparent}</style></head><body>${svg.replace('width="200" height="216"', 'width="1000" height="1080"')}</body></html>`);
+    await page.evaluate(async () => { await document.fonts.load('50px "Bebas Neue"'); await document.fonts.ready; });
+    await page.screenshot({ path: path.join(OUT.tokens, 'PNG', `${name}.png`), omitBackground: true, clip: { x: 0, y: 0, width: 1000, height: 1080 } });
+  }
+  await page.close();
+  console.log('wrote', path.relative(ROOT, OUT.tokens), 'SVG and PNG, 2 to 12');
+}
+
 // The print PDF: one 24in page holding the 300dpi render as a JPEG. Printing the SVG
 // straight to PDF would rasterise its filters at the browser's own, lower resolution.
 async function printPdf(browser, svg) {
@@ -1331,6 +1345,7 @@ async function printPdf(browser, svg) {
   await render(browser, outputs);
   await indexTile(browser, screen, OUT.indexTile, TILE_CROP);
   await indexTile(browser, print, OUT.printTile, PRINT_TILE_CROP);
+  await stillTokens(browser, fontCss);
   if (full) await printPdf(browser, print);
   await browser.close();
 })();

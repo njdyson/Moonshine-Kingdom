@@ -18,6 +18,10 @@
    retuned without a reprint.
 
    Art: Art/Still Tokens/PNG/still-NN.png (one per number, 2-12).
+   GENERATED, since 2026-10-07: tools/still_art.js draws the Still and
+   tools/build_board.js writes the SVGs and PNGs here on every build,
+   the same drawing the board's signs carry. Don't edit them by hand;
+   change still_art.js and rebuild.
    The PNGs are used rather than the SVGs deliberately, because the SVG
    carries the numeral as LIVE TEXT in 'Bebas Neue', and an external
    SVG loaded through <img> cannot pull a webfont, so it would
@@ -38,9 +42,10 @@
    THE GAUGE UP THE RIGHT-HAND SIDE OF EACH TOKEN IS NOT DECORATION.
    It is the Pressure reading, drawn as lit segments off a six-step
    red-to-gold ramp: 7 runs the full six, 2 and 12 run one. Verified
-   against all eleven PNGs. Don't "tidy" it to a uniform bar, and if
-   the Still numbering is ever rebalanced the art has to be redrawn
-   with it. (Counting fill colours in the SVG source will tell you
+   against all eleven PNGs. Don't "tidy" it to a uniform bar. The
+   generator lights it from that formula, so if the Still numbering
+   or the Pressure rule is ever rebalanced, still_art.js changes with
+   it. (Counting fill colours in the SVG source will tell you
    they are all identical, because every file defines the whole ramp in its
    palette and only lights part of it. Count lit segments, not
    declared colours.)
