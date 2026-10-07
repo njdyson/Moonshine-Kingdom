@@ -322,11 +322,61 @@ past the Bowery's west end); and Staten Island could do with expanding a touch.
 | Westerleigh, Stapleton, Tottenville | 44, 45, 44 | 50, 49, 49 |
 | Coney Island, Canarsie, Red Hook | 79, 82, 72 | 81, 71, 72 |
 
+### Evening out the sizes
+
+Nick, 2026-10-07: the map will look more balanced if the Districts are all of a size, even if
+that means reducing some. The yardstick is **visible area** (clipped at the frame's inner edge,
+since Queens and the Bronx run under the frame), not room. It ran 76 (Corona) to 127 (Jamaica),
+a spread (standard deviation) of 13.8 cm²; it now runs 79 (Whitestone) to 109, spread 10.2.
+
+**What the pieces need.** Barrels are 10 mm cubes and stack; Mobsters are standard meeples (16 x
+16 x 10 mm; the playtest ones a touch smaller); the Safehouse is a pawn. With 3 mm of finger room
+each, a standing meeple takes about 2.5 cm², a 16 mm pawn 3.6 and a barrel stack 1.7. A busy
+District, 9 Mobsters (the Muscle Ratio stops counting at 9: half of 9, rounded up, is 5), the
+Safehouse and two barrel stacks, takes about 30 cm²; five invaders in a Standoff bring it to about
+42. So **about 45 cm² of room is a comfortable floor**, and every District meets it. Nick's old
+24-inch prototype held ten meeples in a Hunts Point of roughly 28 cm², so it is generous. Space is
+not the constraint; evenness is.
+
+How it was found: `tools/tune_board.js`'s search, scored instead on the spread of visible areas,
+with a floor of 45 cm² of room, no stacked or dropped signs, and Manhattan left as set. Its first
+pass (spread 9.1) grew Jamaica Bay east into dead water (as an earlier tuner run did, undone
+then), dropped the south shore 30 and made Brownsville the largest; a second pass kept the bay and
+held Corona's bottom near 700. Then by hand:
+
+- **The Rockaways are gone** (`rockaways: false`). Jamaica's strip of shore under the bay was
+  about 23 cm² that no piece could use, and kept Jamaica the largest District whatever else moved.
+  The bay now opens to the sea between Canarsie and Jamaica, and Canarsie's hooked spit, which
+  answered the Rockaways' tip, is a plain upright shore. **This is the change Nick may not want**:
+  `rockaways: true` brings both back, with Jamaica at about 118.
+- **Brooklyn and Queens' south shore rose 20** (`southShore` 1020 to 1000): Coney Island, Canarsie
+  and Jamaica each lose a strip. The three Borough names stay on their line along the frame (y
+  1050), so they sit a little lower in their water; QUEENS keeps its place, since Jamaica's
+  stretch of shore is too short to centre it under.
+- **Queens' rows**: Flushing / Richmond Hill rose 20 and Richmond Hill / Jamaica 14
+  (`queensRows` [488, 650, 793]); Corona's bottom dropped 12 (`coronaBottom` 712), and the Queens
+  column moved 4 east (`queensCol` 855), for Corona. **Whitestone is the one that can't grow**:
+  the Sound is above it, and its bottom can't drop without shortening Astoria / Flushing (42) under
+  the 32 the tuner allows; moving the column east narrows it.
+- Small moves the tuner made elsewhere: the Bronx columns 693 and 872 (Belmont 82 to 85, Fordham
+  88 to 85), `bronxRow` 185, `hpCol` 824, `williamsburgSouth` 751, `staten[0]` 801.
+
+| Visible area (cm²) | Before | Now |
+| --- | --- | --- |
+| Flushing, Jamaica, Richmond Hill | 125, 127, 113 | 109, 108, 109 |
+| Coney Island, Canarsie, Red Hook | 120, 108, 110 | 109, 97, 109 |
+| Corona, Whitestone, Belmont | 76, 81, 82 | 80, 79, 85 |
+
+What is left of the spread: the Bronx, Staten Island, Whitestone and Corona sit at 79 to 90, and
+Brooklyn and Queens' larger ones (Astoria, Brownsville, Jamaica, Richmond Hill, Coney Island, Red
+Hook, Flushing) at 106 to 109. Closing it further means shrinking those more, and
+the levers left (Jamaica Bay, a higher south shore) are the ones that read as dead water.
+
 ### Room for pieces, and the tuner
 
 The build prints each District's **room**: its ground at least 6 units (about 3 mm) in from every
-border and clear of its sign, in cm² at 24in. No piece sizes are recorded anywhere, so this is
-area, not a piece count. `SETTINGS` were tuned with `tools/tune_board.js`, which nudges one
+border and clear of its sign, in cm² at 24in. It is area, not a piece count; for what the
+pieces need, see Evening out the sizes. `SETTINGS` were tuned with `tools/tune_board.js`, which nudges one
 setting at a time and keeps what scores better: the smallest rooms first, then each crown room
 kept at 55 or more where it can be, then evenness (the spread of room sizes), then short
 hangers. It refuses anything that fails the drafting's checks or makes a tight corner. It cannot
@@ -345,9 +395,10 @@ and it traded Hunts Point for Fordham, each undone by hand. Treat its output as 
 | Manhattan one width and Staten Island raised (2026-10-07) | 44 (Westerleigh, Tottenville) | 52, 51, 59, 74 |
 | Straightened round the four-way corner (2026-10-07) | 44 (Westerleigh, Tottenville) | 54, 51, 59, 74 |
 | Manhattan laid like bricks (2026-10-07) | 44 (Westerleigh, Tottenville) | 62, 51, 59, 74 |
-| Now, Manhattan's corner cut and Staten Island wider (2026-10-07) | 45 (Corona) | 62, 51, 59, 74 |
+| Manhattan's corner cut and Staten Island wider (2026-10-07) | 45 (Corona) | 62, 51, 59, 74 |
+| Now, evened out (2026-10-07) | 45 (Whitestone) | 62, 52, 62, 68 |
 
-Rooms now run 45 to 91 (Flushing), Jamaica (82) included; it was 138. Whitestone, once the
+Rooms now run 45 to 75 (Flushing); Jamaica was 138 once. Whitestone, once the
 smallest (39), is 46 since the Sound went level.
 
 - **The Kill van Kull is as wide as the Narrows** (Nick, 2026-10-07: with the harbour lamps
@@ -704,7 +755,7 @@ keeps them on a re-trace.
   Flushing (42), Fordham / Throggs Neck (46), Brownsville / Jamaica (46) and Brownsville /
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
-  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Corona (45), Whitestone (46), Belmont (48) and Staten Island's three (49 and 50).
+  Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Whitestone (45), then Corona, Fordham, Westerleigh and Tottenville (49).
 - **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
   four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
   the High Society rows. Not changed yet; waiting on Nick.

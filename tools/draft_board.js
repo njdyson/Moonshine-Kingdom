@@ -106,27 +106,28 @@ function meet(a, b) {
 // first, get what the roomy ones can spare. Since the signs, they also keep the
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
-  bronxCols: [685, 871], // Belmont | Fordham | Morris Park (Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol)
-  bronxRow: 184, // Fordham and Morris Park / Throggs Neck, level to the east shore
+  bronxCols: [693, 872], // Belmont | Fordham | Morris Park (Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol; 685 and 871 until the evening-out of 2026-10-07)
+  bronxRow: 185, // Fordham and Morris Park / Throggs Neck, level to the east shore
   huntsTop: 150, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
   corner: [608, 198], // the four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point)
   manhattan: [298, 415, 540], // level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
-  hpCol: 825, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
-  queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
-  queensRows: [488, 670, 807], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica
+  hpCol: 824, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
+  queensCol: 855, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (851 until 2026-10-07)
+  queensRows: [488, 650, 793], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (670 and 807 until 2026-10-07)
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
-  coronaBottom: 700, // Corona / Richmond Hill, level from the Queens / Brooklyn line
-  williamsburgSouth: 749, // Williamsburg's southern point, on Red Hook / Brownsville
+  coronaBottom: 712, // Corona / Richmond Hill, level from the Queens / Brooklyn line (700 until 2026-10-07)
+  williamsburgSouth: 751, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 796, // Red Hook's level south side
   rhStub: 30, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
   coneyEast: 474, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
   boweryBottom: 652, stapletonTop: 684, // the Kill van Kull between them, as wide as the Narrows (668 and 700 until 2026-10-07: the widened Bowery gave height to Staten Island)
-  staten: [803, 913], // level borders: Westerleigh | Stapleton | Tottenville
+  staten: [801, 913], // level borders: Westerleigh | Stapleton | Tottenville
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
-  southShore: 1020, // the south shore of Brooklyn and Queens, level: Coney Island, Canarsie and the Rockaways
+  rockaways: false, // Jamaica's strip of shore under Jamaica Bay (cut 2026-10-07: 23 cm² no piece could use; the bay opens to the sea)
+  southShore: 1000, // the south shore of Brooklyn and Queens, level: Coney Island, Canarsie and Jamaica (1020 until 2026-10-07)
   ehKnee: 715, // East Harlem / Hunts Point runs from the four-way corner at 45 degrees to here (x), then drops upright to the Hell Gate
 };
 
@@ -285,7 +286,8 @@ function draft(S) {
     'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
     'canarsie|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
     'brownsville|water': [[bv, 853], [680, 853], SB_BAY],
-    'canarsie|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975 - LIFT], [BK_COL + 26.5, 1001.5 - LIFT], [BK_COL + 26.5, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
+    'canarsie|water': S.rockaways ? [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975 - LIFT], [BK_COL + 26.5, 1001.5 - LIFT], [BK_COL + 26.5, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]]
+      : [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Brooklyn's south shore level, in line with the Rockaways', Coney Island's corner on the Narrows
     // turned at 45 degrees from where Tottenville's turns, so the Narrows open evenly to the sea
     'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], SOUTH_SHORE - 37], [NARROWS[1] + 37, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
@@ -304,7 +306,8 @@ function draft(S) {
     'water|whitestone': [AW, ...(qc < QN_TURN[0] ? [QN_TURN] : []), QN_NORTH],
     'water|red_hook': [WB_J, atY(ER_QN, RED_HOOK_BANK), atY(ER_RH, RED_HOOK_BANK), RH_STUB, [RH_STUB[0], S.redHookSouth]],
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
-    'water|jamaica': [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
+    'water|jamaica': S.rockaways ? [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]]
+      : [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
     // Staten Island: 45-degree corners, upright shores
     'water|westerleigh': [[36, s1], [36, T + 27], [63, T], [NARROWS[0] - 37, T], [NARROWS[0], T + 37], [NARROWS[0], s1]],
     'water|tottenville': [[36, s2], [36, 1005], [63, 1032], [NARROWS[0] - 49, 1032], [NARROWS[0], 983], [NARROWS[0], s2]],
@@ -315,8 +318,9 @@ function draft(S) {
       MN: [...atY(shift(MN_WEST, HUDSON / 2), 440).map(r1), -45], // beside the Tenderloin, clear of West Side's piers
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       // Staten Island, Brooklyn and Queens on one line along the frame's foot, at Staten Island's
-      // (midway between Tottenville's shore and the frame), each centred under its south shore
-      QN: [890, 1050, 0], BK: [(NARROWS[1] + 37 + BK_COL + 26.5) / 2, 1050, 0], SI: [172, 1050, 0],
+      // (midway between Tottenville's shore and the frame); Staten Island and Brooklyn centred under
+      // their south shores, Queens where it sat (Jamaica's shore is too short to centre it under)
+      QN: [890, 1050, 0], BK: [(NARROWS[1] + 37 + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, 1050, 0], SI: [172, 1050, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
   };

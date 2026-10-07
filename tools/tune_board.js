@@ -22,7 +22,7 @@
 // border, less the sign's box and its margin.
 // A setting is refused outright if the drafting's checks fail, a corner goes under 80
 // degrees, a land border runs under 32 units, a sign no longer fits, the Kill van Kull
-// narrows under 22, or Flushing's bottom drops below Corona's.
+// narrows under 32, or Flushing's bottom drops below Corona's.
 //
 // The sign is measured here as build_board.js draws it (its plate, its hangers, the
 // keyline margins); if the sign's design changes there, change it here too.
@@ -48,7 +48,7 @@ const KNOBS = [
   ['manhattan.0', 270, 330], ['manhattan.1', 390, 450], ['manhattan.2', 500, 590],
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
   ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
-  ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90],
+  ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90], ['southShore', 990, 1020],
   ['boweryBottom', 640, 690], ['stapletonTop', 672, 715], ['staten.0', 800, 850], ['staten.1', 895, 950],
 ];
 
@@ -142,7 +142,7 @@ function ground(p) { // cm² at least 6 units in from every border
 // ---------------------------------------------------------------- scoring
 const length = pts => pts.slice(1).reduce((s, q, i) => s + Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]), 0);
 function evaluate(S) {
-  if (S.stapletonTop - S.boweryBottom < 22) return null;
+  if (S.stapletonTop - S.boweryBottom < 32) return null; // the Kill van Kull as wide as the Narrows
   if (S.queensRows[1] > S.coronaBottom) return null; // Flushing's bottom never below Corona's
   let m;
   try { m = build(S); } catch (e) { return null; }
