@@ -111,8 +111,7 @@ const SETTINGS = {
   huntsTop: 150, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
   corner: [608, 198], // the four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point)
-  manhattan: [298, 415, 560], // level borders: Sugar Hill | West Side, the row across Manhattan, the Bowery's top
-  fivePoints: 345, // Five Points' west side, upright, below the row (325 until 2026-10-07: moved east to lift the Tenderloin's sign)
+  manhattan: [298, 415, 545], // level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 825, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 851, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound
@@ -198,7 +197,7 @@ function draft(S) {
   const sbRun = (680 + 853 - BK_COL - S.redHookSouth) / 2, SB_BAY = [BK_COL + sbRun, S.redHookSouth + sbRun];
   // a level border's foot on the East River, square to it: [where it leaves the level, where it lands]
   const riverFoot = y => { const q = [atY(ER_MN, y)[0] - FOOT * Math.SQRT2, y]; return [q, meet(line(q, [1, 1]), ER_MN)]; };
-  const [bwFoot, BW_J] = riverFoot(m3); // Five Points / Bowery
+  const CROOK = atY(ER_BW, BOWERY_BANK); // where the Bowery's shore turns from the river's level turn down the harbour reach
   const WB_J = meet(line([BK_COL, S.williamsburgSouth], [1, 1]), ER_QN); // Williamsburg / Red Hook, square to the East River
   // Sugar Hill / Belmont runs from the four-way corner square to the west coast, at 45
   // degrees; Manhattan's tip is where it meets the coast
@@ -216,10 +215,13 @@ function draft(S) {
   // west side is upright too (FPX), further west, so West Side sits on both the Tenderloin and
   // Five Points. The coast and the river slant the same way, so a column that kept one upright
   // would widen on the west and taper on the east as it ran south; the step west at the row
-  // keeps the bricks even.
-  const EHX = CORNER[0] - (m1 - CORNER[1]), EHY = m2, FPX = S.fivePoints;
+  // keeps the bricks even. Five Points' upright drops straight onto the crook in the river
+  // (CROOK), so Five Points runs down to it and the Bowery's top steps down there, from the
+  // Tenderloin's foot (m3) to the crook.
+  const EHX = CORNER[0] - (m1 - CORNER[1]), EHY = m2, FPX = CROOK[0];
   const [ebFoot, EB_J] = riverFoot(EHY);
-  if (FPX > EHX - 3 || ebFoot[0] < EHX + 3 || bwFoot[0] < FPX + 3) throw new Error('Five Points\' upright must sit west of East Harlem\'s, and both clear of the East River');
+  if (FPX > EHX - 3 || ebFoot[0] < EHX + 3) throw new Error('Five Points\' upright must sit west of East Harlem\'s, and East Harlem\'s clear of the East River');
+  if (m3 > BOWERY_BANK - 3) throw new Error('The Tenderloin / Bowery border must sit above the crook in the river');
   const BH = atY(line(CORNER, [1, -1]), S.huntsTop);
   const HT = S.bronxRow - S.huntsTop, HT_DROP = [S.hpCol - HT, S.huntsTop];
   if (KNEE[1] > S.hellGate - 3) throw new Error('East Harlem / Hunts Point reaches the Hell Gate before its knee');
@@ -238,8 +240,7 @@ function draft(S) {
     '371,248': MF[0][0], '535,279': [EHX, m1],
     '290,360': MF[1][0], '523,357': [FPX, m2],
     '220,452': TB_W, '509,453': [EHX, EHY], '533,477': EB_J, '150,548': [FPX, m3],
-    '466,549': BW_J, '694,328': EH_SHORE,
-    '447,589': atY(ER_MN, BOWERY_BANK), '342,615': atY(ER_BW, BOWERY_BANK),
+    '466,549': CROOK, '694,328': EH_SHORE,
     '307,696': atY(ER_BW, S.boweryBottom), '171,686': [BOWERY_WEST, S.boweryBottom],
     // The Bronx: an upright east shore, level blocks
     '715,53': [b1, W], '715,160': [b1, S.huntsTop], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
@@ -287,8 +288,9 @@ function draft(S) {
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'sugar_hill|west_side': [MF[0][0], MF[0][1], [EHX, m1]],
     'west_side|tenderloin': [MF[1][0], MF[1][1], [FPX, m2]],
-    'five_points|bowery': [[FPX, m3], bwFoot, BW_J],
-    'water|bowery': [TB_W, ...(onCoast ? [MN_TURN] : []), [BOWERY_WEST, S.boweryBottom], atY(ER_BW, S.boweryBottom), atY(ER_BW, BOWERY_BANK), atY(ER_MN, BOWERY_BANK), BW_J],
+    'five_points|bowery': [[FPX, m3], CROOK],
+    'five_points|water': [EB_J, atY(ER_MN, BOWERY_BANK), CROOK],
+    'water|bowery': [TB_W, ...(onCoast ? [MN_TURN] : []), [BOWERY_WEST, S.boweryBottom], atY(ER_BW, S.boweryBottom), CROOK],
     // New Jersey: parallel to Manhattan's west coast, from under the Heat corner to the board's edge
     'nj|water': [[NJ_TOP[0], 0], NJ_TOP, NJ_END],
     // Astoria / Corona on a foot at the Queens / Brooklyn line; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows

@@ -210,7 +210,7 @@ got another go in Manhattan, this time free to change which Districts touch.
 Manhattan is laid in rows like brickwork: Sugar Hill beside East Harlem, West Side beside East
 Harlem, the Tenderloin beside Five Points, and the Bowery across the bottom. **One level line (the
 row, `manhattan[1]`) crosses Manhattan from shore to shore.** Above it East Harlem's west side is
-upright; below it Five Points' west side is upright too (`fivePoints`), further west, so West Side
+upright; below it Five Points' west side is upright too (set by the crook in the river, below), further west, so West Side
 sits on both the Tenderloin and Five Points. Sugar Hill / East Harlem comes down from the
 four-way corner at 45 degrees straight into the junction with West Side, so East Harlem's upright
 is set by Sugar Hill's foot (`manhattan[0]`), not a setting of its own. Every land border in
@@ -241,12 +241,12 @@ Queens' and Brooklyn's touch one).
 The flip itself had a bug, fixed here: it moved the junctions but left a flipped border's interior
 points in the old Districts' outlines, which drew a spike once a flipped chain had a bend.
 
-| Room (cm²) | This morning | Manhattan one width | Gentle straightening | Bricks | Wider Tenderloin |
-| --- | --- | --- | --- | --- | --- |
-| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 54, 45, 52 | 62, 64, 59 | 62, 64, 68 |
-| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 71, 56, 68 | 61, 58, 53 | 53, 58, 53 |
-| Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 | 48, 52, 52 | 48, 52, 52 | 48, 52, 52 |
-| Westerleigh, Stapleton, Tottenville | 40, 41, 41 | 44, 45, 44 | 44, 45, 44 | 44, 45, 44 | 44, 45, 44 |
+| Room (cm²) | This morning | Manhattan one width | Gentle straightening | Bricks | Wider Tenderloin | Bowery taller |
+| --- | --- | --- | --- | --- | --- | --- |
+| Sugar Hill, West Side, Tenderloin | 47, 42, 44 | 52, 53, 50 | 54, 45, 52 | 62, 64, 59 | 62, 64, 68 | 62, 64, 58 |
+| Five Points, the Bowery, East Harlem | 59, 53, 66 | 63, 61, 69 | 71, 56, 68 | 61, 58, 53 | 53, 58, 53 | 56, 64, 53 |
+| Belmont, Fordham, Hunts Point | 54, 51, 49 | 55, 53, 46 | 48, 52, 52 | 48, 52, 52 | 48, 52, 52 | 48, 52, 52 |
+| Westerleigh, Stapleton, Tottenville | 40, 41, 41 | 44, 45, 44 | 44, 45, 44 | 44, 45, 44 | 44, 45, 44 | 44, 45, 44 |
 
 By area Manhattan's six ran 91 to 101 cm², against 80 to 112 before. The settings were found
 by a search over the four Manhattan settings for even areas, then checked for room.
@@ -256,8 +256,21 @@ Its sign hung on 62, the longest on the board, because the coast widens it towar
 Bowery and pulls its centre down. Five Points' upright moved 20 east (`fivePoints` 325 to 345):
 an even strip down the Tenderloin's side raises its centre, and the sign now hangs on 52.
 Each 10 units buys about 5 of hanger and costs Five Points about 4 cm² of room, so 20 stops
-with Five Points level with East Harlem (53). By area Manhattan now runs 87 (Five Points) to
+with Five Points level with East Harlem (53). By area Manhattan ran 87 (Five Points) to
 109 (the Tenderloin).
+
+**The Bowery a bit taller, and Five Points down to the crook in the river** (Nick, same day).
+The Bowery had run under both the Tenderloin and Five Points to the East River, ending in a thin
+tail where the river's level turn cuts up into it. Now **Five Points' west side drops straight
+onto the crook**, the corner where the Bowery's shore turns from the level turn down the harbour
+reach (`CROOK`): Five Points takes the tail and the level turn's shore, and the Bowery is a plain
+block from the Hudson to Five Points, with the harbour reach (and the Brooklyn Bridge) at its
+corner. The crook sets Five Points' upright (x 359.5, about 14 east of the 345 it had), so `fivePoints`
+is gone. The Bowery's top under the Tenderloin rose 15 (`manhattan[2]` 560 to 545), taking it from
+the Tenderloin; Five Points / Bowery runs 57 down the upright. The Tenderloin, shorter and a touch
+wider, hangs its sign on 41 (52 before). By area Manhattan's six now run 91 to 101 cm²: East
+Harlem and Five Points 91, West Side and the Bowery 100, Sugar Hill and the Tenderloin 101. No
+connection changed.
 
 ### Room for pieces, and the tuner
 
