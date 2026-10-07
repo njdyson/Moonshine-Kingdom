@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Card backs: one design for both decks
+   --------------------------------------------------------------------------
+   Used by "Jobs Cards v0.9.html" (every back reads Job) and "Cards v0.9.html"
+   (each back carries its card's name: nothing in that deck is shuffled or
+   dealt). One file, so the two decks cannot drift apart.
+
+   The ornament (--back-art, below) borrows the board's dress, so the cards
+   sit with the other components: a gilt keyline with a jewel on each Deco
+   chamfer (the Ledger and the key's plaques), an inner keyline stepped at
+   the corners round a quarter fan (the board's frame), a faint sunburst, and
+   a medallion dressed as a Heat Track socket: gilt bezel, lacquer floor,
+   guilloche between two track rings. Over it:
+
+     name    on a gilt plate across the medallion, as the Ledger's name is
+             cut into its cartouche and HEAT into the board's
+     kicker  wide-tracked Barlow under the medallion: what kind of card
+     foot    New York and 1929 between rules, the board's title in small
+
+   Markup, one per card:
+     <div class="back"><div class="back-title">Job</div>
+       <div class="back-sub">Moonshine Kingdom</div>
+       <div class="back-foot">New York &middot; 1929</div></div>
+
+   The decks keep their own print and trim rules for .back (duplex grid,
+   square corners); nothing here changes the card's 63 x 88mm box.
+   ========================================================================== */
+
+.back {
+    --gold-bright: #e8cc72;
+    --gold-line: #b9932f;
+    --gold-dim: #a98c4f;
+    --panel-a: #241c14;
+    --panel-b: #19130c;
+    /* THE ORNAMENT IS INLINE ON PURPOSE. Backs are display:none on screen
+       and only appear in print, so a linked image file is never fetched
+       before Chrome prints: as Art/Cards/Back.svg the backs printed bare
+       (2026-10-07). An inline data URI needs no fetch.
+       Drawn in mm on the 63 x 88 card (# is written %23). The medallion's
+       centre is 31.5, 40; --seal-y puts the plate on it. */
+    --back-art: url("data:image/svg+xml,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 63 88'>\
+<defs>\
+<linearGradient id='gilt' x1='0' y1='0' x2='1' y2='1'>\
+<stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
+<stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
+<stop offset='1' stop-color='%23f6e3a1'/></linearGradient>\
+<radialGradient id='floor' cx='.5' cy='.58' r='.55'>\
+<stop offset='0' stop-color='%232b1e13'/><stop offset='.75' stop-color='%23140d08'/>\
+<stop offset='1' stop-color='%23050302'/></radialGradient>\
+<linearGradient id='recess' x1='0' y1='0' x2='0' y2='1'>\
+<stop offset='0' stop-opacity='.6'/><stop offset='.3' stop-opacity='0'/></linearGradient>\
+<radialGradient id='fade'><stop offset='.35' stop-color='%23fff'/>\
+<stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient>\
+<mask id='fadeout' maskUnits='userSpaceOnUse' x='0' y='0' width='63' height='88'>\
+<circle cx='31.5' cy='40' r='44' fill='url(%23fade)'/></mask>\
+<path id='inner' d='M7.2 4.2H55.8V7.2H58.8V80.8H55.8V83.8H7.2V80.8H4.2V7.2H7.2Z'/>\
+<clipPath id='field'><use href='%23inner'/></clipPath>\
+<g id='fan' fill='none' stroke='%23c9a437' stroke-opacity='.85' stroke-width='.2'>\
+<path d='M5.2 0A5.2 5.2 0 0 1 0 5.2M1.6 0A1.6 1.6 0 0 1 0 1.6'/>\
+<path d='M1.55 .41L3.38 .91M1.39 .8L3.55 2.05M1.13 1.13L3.11 3.11M.8 1.39L2.05 3.55M.41 1.55L.91 3.38'/></g>\
+<path id='jewel' d='M0-1L1 0L0 1L-1 0Z' fill='%23e8cc72'/>\
+</defs>\
+<g clip-path='url(%23field)' mask='url(%23fadeout)'>\
+<circle cx='31.5' cy='40' r='23' fill='none' stroke='%23c9a437' stroke-opacity='.1' stroke-width='46' pathLength='96' stroke-dasharray='.16 .84'/></g>\
+<path d='M4.6 2.2H58.4L60.8 4.6V83.4L58.4 85.8H4.6L2.2 83.4V4.6Z' fill='none' stroke='url(%23gilt)' stroke-width='.55'/>\
+<use href='%23jewel' x='3.4' y='3.4'/><use href='%23jewel' x='59.6' y='3.4'/>\
+<use href='%23jewel' x='59.6' y='84.6'/><use href='%23jewel' x='3.4' y='84.6'/>\
+<use href='%23inner' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.22'/>\
+<use href='%23fan' transform='translate(7.2 7.2)'/><use href='%23fan' transform='translate(55.8 7.2) scale(-1 1)'/>\
+<use href='%23fan' transform='translate(55.8 80.8) scale(-1 -1)'/><use href='%23fan' transform='translate(7.2 80.8) scale(1 -1)'/>\
+<g transform='translate(31.5 40)'>\
+<circle r='14.6' fill='url(%23floor)'/>\
+<circle r='6.8' fill='none' stroke='%23b9932f' stroke-opacity='.16' stroke-width='13.6' pathLength='72' stroke-dasharray='.11 .89'/>\
+<circle r='2.4' fill='%232b1e13'/>\
+<circle r='9.1' fill='none' stroke='%23b9932f' stroke-opacity='.45' stroke-width='.22'/>\
+<circle r='9.9' fill='none' stroke='%23b9932f' stroke-opacity='.22' stroke-width='.14'/>\
+<circle r='14.6' fill='url(%23recess)'/>\
+<circle r='14.75' fill='none' stroke='%23000' stroke-opacity='.7' stroke-width='.25'/>\
+<circle r='15.45' fill='none' stroke='url(%23gilt)' stroke-width='1.2'/>\
+<circle r='16.1' fill='none' stroke='%23f6e3a1' stroke-opacity='.35' stroke-width='.1'/>\
+</g></svg>");
+    --seal-y: 40mm;
+
+    position: relative;
+    box-sizing: border-box;
+    width: 63mm;
+    height: 88mm;
+    border: 1.5px solid var(--gold-line);
+    border-radius: 3mm;
+    overflow: hidden;
+    /* border-box, so the 63 x 88 drawing lands on the card's own millimetres */
+    background:
+        var(--back-art) 0 0 / 100% 100% no-repeat border-box,
+        radial-gradient(circle at 50% 45%, rgba(212, 175, 55, .12), transparent 55%) border-box,
+        linear-gradient(var(--panel-a), var(--panel-b)) border-box;
+}
+
+/* --- the name, cut into a gilt plate. Display type is mixed case, never
+   uppercased (the Reskin's rule). One line: the plate is as wide as the name
+   needs and never narrower than the medallion, so it always bridges the
+   bezel. --- */
+.back-title {
+    position: absolute;
+    left: 50%;
+    top: var(--seal-y);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    min-width: 38mm;
+    padding: 1.7mm 5.2mm 1.5mm;
+    font: 700 13pt/1 Cinzel, serif;
+    letter-spacing: .8px;
+    color: #2a1d0c;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 .25mm 0 rgba(255, 244, 205, .55);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f6e3a1'/%3E%3Cstop offset='.45' stop-color='%23c9a437'/%3E%3Cstop offset='1' stop-color='%238a6c2c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M4 0 H96 L100 5 L96 10 H4 L0 5 Z' fill='url%28%23g%29'/%3E%3Cpath d='M4.6 .9 H95.4 L98.9 5 L95.4 9.1 H4.6 L1.1 5 Z' fill='none' stroke='%232a1d0c' stroke-opacity='.55' stroke-width='.35' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    filter: drop-shadow(0 .5mm .5mm rgba(0, 0, 0, .65));
+}
+
+/* --- what kind of card, under the medallion --- */
+.back-sub {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 61mm;
+    text-align: center;
+    font: 600 5.6pt Barlow, sans-serif;
+    letter-spacing: 2.6px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+}
+
+/* --- the board's title, in small: rules either side --- */
+.back-foot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8.2mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2mm;
+    font: 700 6pt Cinzel, serif;
+    letter-spacing: 1.4px;
+    color: var(--gold-dim);
+}
+.back-foot::before,
+.back-foot::after {
+    content: "";
+    width: 5mm;
+    height: .25mm;
+}
+.back-foot::before { background: linear-gradient(90deg, transparent, rgba(201, 164, 55, .75)); }
+.back-foot::after { background: linear-gradient(90deg, rgba(201, 164, 55, .75), transparent); }
