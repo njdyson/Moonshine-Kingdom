@@ -3,12 +3,12 @@
 // map, written by tools/draft_board.js) and the District Roster below, then renders it
 // through Playwright's Chromium.
 //
-//   node tools/build_board.js           print and screen SVGs, 2160px previews of each, and
-//                                       the index page's two tiles (Art/Index/board.jpg and
-//                                       board-print.jpg)
+//   node tools/build_board.js           print and screen SVGs, 2160px previews of each (the
+//                                       City Map page shows them), the index page's tile
+//                                       (Art/Index/board.jpg) and the Still tokens
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor: a 24in PDF at 300dpi, committed, since the
-//                                       index links it (--dpi=N for another, named with it and
+//                                       City Map page links it (--dpi=N for another, named with it and
 //                                       not committed); the 7280px PNG it is made from (the
 //                                       bleed included) and a 4320px screen JPEG, not committed
 //   --report=<file>                     also each District's sign, room and sign shapes as
@@ -46,15 +46,12 @@ const OUT = {
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
   printPng: path.join(DIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(DIR, `Board v0.9 (print${dpiTag()}).pdf`),
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
-  indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'), printTile: path.join(ROOT, 'Art', 'Index', 'board-print.jpg'),
+  indexTile: path.join(ROOT, 'Art', 'Index', 'board.jpg'),
   tokens: path.join(ROOT, 'Art', 'Still Tokens'), // SVG/still-NN.svg and PNG/still-NN.png
 };
 // The index tile: 800 x 450 like its neighbours, cropped on the Queensboro and Williamsburg
 // Bridges and two crown rooms. [x, y, width] in board units; the height follows at 16:9.
 const TILE_CROP = [366, 372, 672]; // 672 x 378 scales to exactly 800 x 450
-// The print PDF's tile: a close-up of the print board at 300dpi and over (Sugar Hill's sign on
-// the pebbled hide), so it shows what the print adds. 200 x 112.5 scales to 800 x 450.
-const PRINT_TILE_CROP = [380, 140, 200];
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const DPI = +arg('dpi') || 300; // print render: 300dpi unless --dpi=N
@@ -1365,7 +1362,6 @@ async function printPdf(browser, svg) {
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
   await indexTile(browser, screen, OUT.indexTile, TILE_CROP);
-  await indexTile(browser, print, OUT.printTile, PRINT_TILE_CROP);
   await stillTokens(browser, fontCss);
   if (full) await printPdf(browser, print);
   await browser.close();

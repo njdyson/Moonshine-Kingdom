@@ -12,7 +12,7 @@ mk-online/*
 mk-online/dist/Board (Large).png
 
 # 7280px print render from tools/build_board.js --print; rebuild it, don't commit it
-# The 300dpi print PDF is the exception: the index links it, so the site needs it.
+# The 300dpi print PDF is the exception: the City Map page links it, so the site needs it.
 # Rebuild it with --print whenever the board changes.
 !Art/Board/Board v0.9 (print).pdf
 Art/Board/**/*(print).png

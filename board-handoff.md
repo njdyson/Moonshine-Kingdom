@@ -12,9 +12,9 @@ piece spots) into mk-online's source and deploying as `DEPLOY.md` says. The Affi
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
-node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the two index tiles,
+node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each, the index tile,
                                     # and the Still tokens' SVGs and PNGs (Art/Still Tokens)
-node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the index links it), and,
+node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the City Map page links it), and,
                                     # git-ignored: its 7280px PNG, a 4320px screen JPEG, and any --dpi=200
                                     # proof; two to three minutes. Rerun it whenever the board changes.
 node tools/build_board.js --report=/tmp/signs.json && node tools/tune_board.js /tmp/signs.json
@@ -241,19 +241,22 @@ smallest (39), is 46 since the Sound went level.
   from here; nothing is hand-placed in the SVG.
 - The outputs, all committed: `Board v0.9.svg` (the print master, full leather) with
   `Board v0.9 (print preview).jpg`, and `Board v0.9 (screen).svg` with `Board v0.9 (screen).jpg`
-  (the same board with a flat texture, for the website and mk-online). The two builds differ
+  (the same board with a faint grain, for the website and mk-online). The two builds differ
   in the `LEATHER` preset and the print bleed.
 - `Board v0.9 (print).pdf` (since 2026-10-07): the print file to send, one 616.4 mm page (the
   609.6 mm board and its bleed) holding the 300dpi render. It is the one board render
-  committed, because the index links it and the site deploys from the repo; `.gitignore`
+  committed, because the City Map page links it and the site deploys from the repo; `.gitignore`
   excepts it by name. A plain build doesn't rewrite it, so rerun `--print` after any board
   change or it goes stale.
 - `Art/Index/board.jpg`: the index page's tile ("The City Map", first under Components), an
   800 x 450 crop of the screen board (`TILE_CROP`: the Queensboro and Williamsburg Bridges and
-  two crown rooms), rebuilt with the board. The tile opens `Board v0.9 (screen).jpg`.
-  `Art/Index/board-print.jpg` is the tile beside it ("The City Map (Print)"), a close-up of the
-  print board at over 300dpi (`PRINT_TILE_CROP`: Sugar Hill's sign on the pebbled hide), and
-  opens the print PDF.
+  two crown rooms), rebuilt with the board. It is the board's one tile and opens
+  **`City Map v0.9.html`** (Nick, 2026-10-07: one link, with the finishes inside): the board's
+  viewer, a Screen / Print toggle over the two 2160px previews (`#screen` and `#print` in the
+  URL, so either can be linked), click to see the map at full size, and in Print the PDF to
+  download. It reads the build's files by name, so it needs no rebuild of its own. For a few
+  hours on 2026-10-07 the index had a second tile, "The City Map (Print)", with its own
+  close-up thumbnail; the page replaced both.
 
 ## Physical spec
 

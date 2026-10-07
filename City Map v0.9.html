@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moonshine Kingdom v0.9: The City Map</title>
+<meta name="description" content="The Moonshine Kingdom game board, New York 1929, in its screen and print finishes.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ──────────────────────────────────────────────────────────────
+   The City Map: the board's viewer, the index's one way in to it.
+
+   Two finishes of one board, both built by tools/build_board.js:
+   Screen (a faint leather grain, for screens and mk-online) and
+   Print (the full grain, tones lifted for ink). The images are the
+   build's 2160px previews; the print PDF is the file to send to a
+   printer. The toggle sets the URL hash (#screen, #print), so either
+   finish can be linked. Click the map to see it at full size.
+   ────────────────────────────────────────────────────────────── */
+
+:root{
+  --gold:        #c9a437;
+  --gold-bright: #e8cc72;
+  --gold-line:   #b9932f;
+  --gold-faint:  #7a6a3a;
+  --ink:   #efe3cd;
+  --body:  #d8caae;
+  --muted: #b8a577;
+  --bg:      #100c08;
+  --panel-a: #241c14;
+  --panel-b: #19130c;
+  --panel-line: #6b5a2e;
+  --font-display:'Cinzel', Georgia, serif;
+  --font-body:   'Barlow', sans-serif;
+  --bar: 64px;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box }
+html, body{ background:var(--bg); color:var(--ink); font-family:var(--font-body); font-weight:300; line-height:1.5 }
+a{ color:inherit }
+
+.bar{
+  position:sticky; top:0; z-index:5;
+  display:flex; align-items:center; gap:14px 22px; flex-wrap:wrap;
+  min-height:var(--bar); padding:10px 16px;
+  background:linear-gradient(180deg, var(--panel-a), var(--panel-b));
+  border-bottom:1px solid var(--panel-line);
+}
+.back{
+  font-family:var(--font-display); font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none; white-space:nowrap;
+}
+.back:hover, .back:focus-visible{ color:var(--gold-bright) }
+.bar h1{
+  font-family:var(--font-display); font-weight:700; font-size:clamp(17px, 2.4vw, 22px);
+  letter-spacing:.12em; text-transform:uppercase; color:var(--gold-bright); margin-right:auto;
+}
+.bar h1 small{ font-size:.6em; letter-spacing:.2em; color:var(--muted); font-weight:400; margin-left:.6em }
+
+/* the finish toggle: one segmented control */
+.toggle{ display:inline-flex; border:1px solid var(--gold-line); border-radius:3px; overflow:hidden }
+.toggle button{
+  font:600 12px/1 var(--font-body); letter-spacing:.2em; text-transform:uppercase;
+  padding:10px 16px; min-height:40px; border:0; cursor:pointer;
+  background:transparent; color:var(--body);
+}
+.toggle button + button{ border-left:1px solid var(--gold-line) }
+.toggle button[aria-pressed="true"]{ background:linear-gradient(180deg, var(--gold-bright), var(--gold)); color:#1b150e }
+.toggle button:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:-4px }
+
+.actions{ display:flex; gap:10px; flex-wrap:wrap }
+.btn{
+  display:inline-flex; align-items:center; min-height:40px; padding:0 14px;
+  font:500 12px/1 var(--font-body); letter-spacing:.14em; text-transform:uppercase; text-decoration:none;
+  color:var(--gold-bright); border:1px solid var(--panel-line); border-radius:3px; white-space:nowrap;
+}
+.btn:hover, .btn:focus-visible{ border-color:var(--gold-bright) }
+.btn[hidden]{ display:none }
+
+.note{ padding:10px 16px 0; color:var(--muted); font-size:14px; text-align:center }
+.note b{ color:var(--body); font-weight:500 }
+
+/* the map: fitted to the window, or at full size to scroll round (click to switch) */
+.stage{ padding:12px 16px 24px; display:flex; justify-content:center }
+.stage img{ display:block; cursor:zoom-in; box-shadow:0 10px 40px rgba(0,0,0,.6) }
+.stage.fit img{ width:100%; max-width:min(100%, calc(100vh - var(--bar) - 90px)); height:auto }
+.stage.full{ display:block; overflow:auto; max-height:calc(100vh - var(--bar) - 40px) }
+.stage.full img{ width:2160px; max-width:none; cursor:zoom-out; margin:0 auto }
+</style>
+</head>
+
+<body>
+
+<header class="bar">
+  <a class="back" href="index.html#components">&larr; Index</a>
+  <h1>The City Map <small>v0.9</small></h1>
+  <div class="toggle" role="group" aria-label="Finish">
+    <button type="button" data-finish="screen" aria-pressed="true">Screen</button>
+    <button type="button" data-finish="print" aria-pressed="false">Print</button>
+  </div>
+  <div class="actions">
+    <a class="btn" id="full" href="Art/Board/Board%20v0.9%20(screen).jpg" target="_blank" rel="noopener">Open image</a>
+    <a class="btn" id="pdf" href="Art/Board/Board%20v0.9%20(print).pdf" download hidden>Print PDF (24in)</a>
+  </div>
+</header>
+
+<p class="note" id="note"></p>
+
+<main class="stage fit" id="stage">
+  <img id="map" src="Art/Board/Board%20v0.9%20(screen).jpg" width="2160" height="2160" alt="The City Map: New York in 1929, its five Boroughs divided into Districts, with the Heat Track, the Tomorrow panel and the key in the top left corner.">
+</main>
+
+<script>
+(function(){
+  var FINISH = {
+    screen: {
+      img: 'Art/Board/Board%20v0.9%20(screen).jpg',
+      note: '<b>Screen</b>: the board as it reads on a screen, with a faint leather grain.'
+    },
+    print: {
+      img: 'Art/Board/Board%20v0.9%20(print%20preview).jpg',
+      note: '<b>Print</b>: the 24in finish, with the full leather grain and its tones lifted for ink. This is a preview; the PDF is the file to print.'
+    }
+  };
+  var img = document.getElementById('map'), stage = document.getElementById('stage');
+  var note = document.getElementById('note'), full = document.getElementById('full'), pdf = document.getElementById('pdf');
+  var buttons = [].slice.call(document.querySelectorAll('.toggle button'));
+
+  function show(name){
+    var f = FINISH[name] ? name : 'screen';
+    img.src = FINISH[f].img;
+    full.href = FINISH[f].img;
+    note.innerHTML = FINISH[f].note + ' Click the map to see it at full size.';
+    pdf.hidden = f !== 'print';
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.finish === f)); });
+    if (location.hash !== '#' + f) history.replaceState(null, '', '#' + f);
+  }
+  buttons.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.finish); }); });
+  window.addEventListener('hashchange', function(){ show(location.hash.slice(1)); });
+  show(location.hash.slice(1));
+
+  // the other finish, fetched once the page is idle, so the toggle swaps at once
+  window.addEventListener('load', function(){
+    Object.keys(FINISH).forEach(function(k){ var i = new Image(); i.src = FINISH[k].img; });
+  });
+
+  // click to switch between fitted and full size, keeping the clicked spot under the pointer
+  img.addEventListener('click', function(e){
+    var r = img.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+    var zoomed = stage.classList.toggle('full');
+    stage.classList.toggle('fit', !zoomed);
+    if (zoomed) {
+      var s = stage.getBoundingClientRect();
+      stage.scrollLeft = fx * img.offsetWidth - (e.clientX - s.left);
+      stage.scrollTop = fy * img.offsetHeight - (e.clientY - s.top);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
