@@ -200,15 +200,22 @@ smallest (39), is 46 since the Sound went level.
   top token". Both are set today for tomorrow, which the panel teaches. **SUNSET** is cut into the Turn Order socket's floor (Nick, 2026-09-30): the stack covers it all Day, and the last boss to Lay Low takes the last token and uncovers it, which is the moment the Rulebook calls Sunset. The Rulebook, Playbooks and Town Planner say "take the top token from tomorrow's stack". Four separate slots would
   not fit in New Jersey. **Under the Heat corner the Tomorrow panel and the key sit side by
   side** (Nick: the title was not to be sandwiched between them).
-- **The key is the price list** (Nick, 2026-09-29): two rows, Speakeasy and High Society, each
+- **The key says what each type of District does** (Nick, 2026-10-07: all four types, so every
+  medallion on the map is named). It grew out of the price list (Nick, 2026-09-29), whose two
+  rows lead it: Speakeasy and High Society, each
   with what it buys as chips: a barrel drawn as the cube that stands for it on the table, grey
   Moonshine `$300` and brown Rum `$500` (`CUBE`; Nick, 2026-09-29: it replaced a bottle and a
   glass, which didn't match the pieces); High Society shows only Rum, which says "Rum only" without the words,
   and a gilt **+1 chip** after its price for the Kickback (a Ledger marker; its limits, a
-  marker in Reserves and an empty slot, are the Rulebook's). The Ward,
-  Dock and Still rows were cut: the Rulebook teaches the types, the dash-dot edge and piers tell a Dock
-  and the Still is its own token. Before that it lost its sentences (long-winded; bridges explain
-  themselves).
+  marker in Reserves and an empty slot, are the Rulebook's). Below them, in the same terms:
+  **Dock**, a grey cube, a gilt arrow and a brown one (Trade, Moonshine up to Rum, one for one),
+  and **Ward**, "Boss Rises" (the Rulebook's "A Boss Rises in a Ward"; the Irish Peddle is
+  theirs alone, so it stays on their Playbook). The build stops if the key ever runs into the
+  Hudson's shore. History: on 2026-09-29 the Ward, Dock and Still rows were cut, since the
+  Rulebook teaches the types and the dash-dot edge and piers tell a Dock; they came back on
+  2026-10-07 as one line each in the price list's own terms, not the sentences the key had
+  lost before that (long-winded; bridges explain themselves). The Still row stays out: the
+  Still is its own plate on every sign.
 
 - **Borough numbers ride on police shields** (Nick, 2026-09-30). The number exists only to
   order the Squads in a Raid (the Rulebook's "numbered Borough order printed on the board"),
@@ -325,6 +332,12 @@ keeps them on a re-trace.
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are the Still Token art itself** (`Art/Still Tokens/SVG`), so board and tokens agree.
+  **The numeral is 50 in the token's units** (Nick, 2026-10-07: more prominent), set 2 right
+  of the boiler's centre to clear its rivets: about 35% taller than the 37 it was, which read
+  as a small mark in a dark window from across the table. The plate is the same size. The
+  token PNGs (`Art/Still Tokens/PNG`, 1000 x 1080) were re-rendered from the SVGs with the
+  board's embedded Bebas Neue, through Chromium; there is no generator script, so a change to
+  the SVGs means re-rendering them the same way.
 - **Muted Borough tones.** Mob colours aren't set and the Squads are blue, so the land stays
   quiet. Brooklyn moved from red to bronze to part it from Manhattan. Queens moved from a blue
   violet (`#3f3a57`) to a warmer violet (`#4a3857`), because the old one sat too close to the
