@@ -272,6 +272,27 @@ wider, hangs its sign on 41 (52 before). By area Manhattan's six now run 91 to 1
 Harlem and Five Points 91, West Side and the Bowery 100, Sugar Hill and the Tenderloin 101. No
 connection changed.
 
+### Brooklyn's south shore is level
+
+Nick, 2026-10-07: straighten the bottom of Brooklyn so its name runs level. Coney Island's shore
+came to a point (a V down to y 1033) and Canarsie's sloped 9 degrees up to it, so BROOKLYN ran
+along the slope at 8.6 degrees, the one Borough name at a tilt that wasn't following a coast
+(Manhattan's and the Bronx's run along theirs). Now both shores are **level at the Rockaways'
+line** (`SOUTH_SHORE`, 1020), so Brooklyn's and Queens' south shores are one line broken only by
+the mouth of Jamaica Bay. **Coney Island's corner on the Narrows** turns at 45 degrees from y 983,
+where Tottenville's turns across the water, so the Narrows open evenly to the sea; Canarsie's spit
+runs down to the new line.
+
+**The three names along the foot of the board share one line** (y 1050): STATEN ISLAND's, midway
+between Tottenville's shore (1032) and the frame. Queens' had sat midway between its own shore
+and the frame (1043.5), and on Brooklyn's new line it read as a near miss beside Staten Island's.
+Each name is centred under its own level south shore (BROOKLYN between Coney Island's corner and
+Canarsie's spit). **Canarsie's piers moved** to its Jamaica Bay shore, since the piers keep clear
+of the names and the name now sits where they were.
+
+Brooklyn gained ground: Canarsie's room 70 to 82, Coney Island's 76 to 79. Both were already among
+the roomier Districts, and nothing smaller gave anything up.
+
 ### Room for pieces, and the tuner
 
 The build prints each District's **room**: its ground at least 6 units (about 3 mm) in from every

@@ -258,7 +258,7 @@ function draft(S) {
     '447,651': WB_J, '425,681': atY(ER_RH, RED_HOOK_BANK), '283,797': [RH_STUB[0], S.redHookSouth],
     '602,704': [BK_COL, S.williamsburgSouth], '589,792': [BK_COL, S.redHookSouth],
     '639,894': SB_BAY,
-    '451,787': [S.coneyEast, S.redHookSouth], '437,983': [S.coneyEast, 983], '299,989': [NARROWS[1], 989],
+    '451,787': [S.coneyEast, S.redHookSouth], '437,983': [S.coneyEast, SOUTH_SHORE],
     // Jamaica Bay: a 45-degree octagon (its Canarsie and Jamaica sides are in REPLACE)
     '709,848': [680, 853], '793,857': [bv, 853],
     // Staten Island: an octagon (see REPLACE), level borders
@@ -284,7 +284,10 @@ function draft(S) {
     'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
     'canarsie|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
     'brownsville|water': [[bv, 853], [680, 853], SB_BAY],
-    'canarsie|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [BK_COL + 26.5, 1001.5], [BK_COL + 26.5, 1011], [S.coneyEast, 983]],
+    'canarsie|water': [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975], [BK_COL + 26.5, 1001.5], [BK_COL + 26.5, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
+    // Brooklyn's south shore level, in line with the Rockaways', Coney Island's corner on the Narrows
+    // turned at 45 degrees from where Tottenville's turns, so the Narrows open evenly to the sea
+    'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], 983], [NARROWS[1] + SOUTH_SHORE - 983, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'sugar_hill|west_side': [MF[0][0], MF[0][1], [EHX, m1]],
     'west_side|tenderloin': [MF[1][0], MF[1][1], [FPX, m2]],
@@ -308,9 +311,11 @@ function draft(S) {
   // Where the labels in the water sit on this map: midway between shores, at their angle.
   const labels = {
     boro: {
-      MN: [...atY(shift(MN_WEST, HUDSON / 2), 440).map(r1), -45], // beside the Tenderloin and Five Points, clear of West Side's piers
+      MN: [...atY(shift(MN_WEST, HUDSON / 2), 440).map(r1), -45], // beside the Tenderloin, clear of West Side's piers
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
-      QN: [890, (SOUTH_SHORE + 1067) / 2, 0], BK: [525, 1030, 8.6], SI: [172, 1050, 0],
+      // Staten Island, Brooklyn and Queens on one line along the frame's foot, at Staten Island's
+      // (midway between Tottenville's shore and the frame), each centred under its south shore
+      QN: [890, 1050, 0], BK: [(NARROWS[1] + SOUTH_SHORE - 983 + BK_COL + 26.5) / 2, 1050, 0], SI: [172, 1050, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
   };
