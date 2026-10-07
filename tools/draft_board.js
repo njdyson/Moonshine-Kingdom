@@ -139,10 +139,10 @@ const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
 const CUT = 37; // the harbour's 45-degree corners: Staten Island's four and Coney Island's on the Narrows
 const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its shore
 // Bridges moved along their rivers: the Hell Gate clear of East Harlem's stretch of it, the
-// Queensboro up the East River to the middle of East Harlem's shore, which ends at Manhattan's
-// row (since 2026-10-07), and the Brooklyn up the harbour reach, mid-way along the stretch of
+// Queensboro up the East River onto East Harlem's shore, which ends at Manhattan's row, a little
+// south of its middle so the bridge's name stays clear of the Hell Gate's bend (since 2026-10-07), and the Brooklyn up the harbour reach, mid-way along the stretch of
 // the Bowery's shore that faces Red Hook's (since 2026-10-07, when the Bowery's foot rose)
-const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [70, -70], 'Brooklyn Bridge': [16, -23] };
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [52, -52], 'Brooklyn Bridge': [16, -23] };
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it

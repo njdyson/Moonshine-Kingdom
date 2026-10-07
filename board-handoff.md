@@ -236,7 +236,8 @@ Two flips (`FLIPS`) do it, and three connections change:
 
 Nothing else moved: every bridge keeps its join, the Coastal list is the same, and Sugar Hill's
 neighbours (and so the Squad's doors) are unchanged. The **Queensboro Bridge** moved up the East
-River (`BRIDGE_SHIFT`) to the middle of East Harlem's shore, which now ends at the row. One
+River (`BRIDGE_SHIFT`) onto East Harlem's shore, which now ends at the row, a little south of its
+middle so its name stays clear of the Hell Gate's bend (Nick, same day). One
 knock-on for Nick: Manhattan's setup (Home Turf at Five Points, 3 Runners on East Harlem and West
 Side) is now a triangle, all three touching; before, West Side didn't touch Five Points. The
 Boroughs' setups already differ in this (the Bronx's home touches both its Runner Districts,
