@@ -635,8 +635,8 @@ function placePiers() {
   }
   return out;
 }
-function piers() {
-  return placePiers().map(({ d, q, u, n }) => {
+function piers(list) {
+  return list.map(({ d, q, u, n }) => {
     const col = lift(BOROUGHS[d.boro].fill[0]);
     const P = (along, across) => `${f(q[0] + n[0] * along + u[0] * across)} ${f(q[1] + n[1] * along + u[1] * across)}`;
     const body = `M${P(-2.5, -PIER.half)} L${P(PIER.len, -PIER.half)} L${P(PIER.len, PIER.half)} L${P(-2.5, PIER.half)} Z`;
@@ -644,6 +644,22 @@ function piers() {
       + `<path d="${body}" fill="${col}"/>`
       + `<path d="M${P(0.5, -PIER.half)} L${P(PIER.len, -PIER.half)} L${P(PIER.len, PIER.half)} L${P(0.5, PIER.half)}" fill="none" stroke="${C.gold}" stroke-width="1.1" stroke-linejoin="round"/>`;
   }).join('');
+}
+
+// Harbour lamps (2026-10-07): a gilt lamp on the end of every pier, with a little light on
+// the water, so the eight Docks, each Water Connected to all the rest, catch the eye from
+// across the table. The piers keep their Dock's colour, so they still read as its land.
+// Drawn over the leather, so the hide's grain doesn't print across the light.
+const LAMP = { r: 2.7, glow: 15 };
+function lamps(list) {
+  let glow = '', lamp = '';
+  for (const { q, n } of list) {
+    const x = f(q[0] + n[0] * (PIER.len - 1.2)), y = f(q[1] + n[1] * (PIER.len - 1.2));
+    glow += `<circle cx="${x}" cy="${y}" r="${LAMP.glow}"/>`;
+    lamp += `<circle cx="${x}" cy="${y}" r="${LAMP.r}" fill="url(#bezelGilt)" stroke="${C.shadow}" stroke-width=".6"/>`
+      + `<circle cx="${f(x - 0.7)}" cy="${f(y - 0.7)}" r=".75" fill="#fff6d8" fill-opacity=".85"/>`;
+  }
+  return `<g fill="url(#lampGlow)">${glow}</g><g filter="url(#lift)">${lamp}</g>`;
 }
 
 function bridges() {
@@ -967,6 +983,8 @@ function defs(fontCss, mode) {
   if (LEATHER[mode].board.pebbles) s += pebbleFields();
   s += leatherFilter('leather', LEATHER[mode].board) + leatherFilter('leatherWater', LEATHER[mode].water) + leatherFilter('leatherFine', LEATHER[mode].fine);
   s += `<filter id="landShadow" x="-2%" y="-2%" width="104%" height="104%"><feGaussianBlur stdDeviation="2.6"/></filter>`;
+  // a harbour lamp's light on the water
+  s += `<radialGradient id="lampGlow"><stop offset="0" stop-color="#f3d27a" stop-opacity=".55"/><stop offset=".35" stop-color="#e8b84a" stop-opacity=".22"/><stop offset="1" stop-color="#e8b84a" stop-opacity="0"/></radialGradient>`;
   return `<defs>${s}</defs>`;
 }
 
@@ -1154,8 +1172,9 @@ const hide = (id, filter, content) => `<g id="${id}" filter="url(#${filter})"><r
 function buildSvg(fontCss, mode, placed) {
   MODE = mode;
   const water = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining() + landShadow();
+  const pierList = placePiers();
   const land = OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
-    + districtFills() + borders() + piers() + bridges();
+    + districtFills() + borders() + piers(pierList) + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
   const side = sidePanels(), b = mode === 'print' ? BLEED : 0, S = 1080 + 2 * b;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-b} ${-b} ${S} ${S}" width="${S}" height="${S}">`
@@ -1165,6 +1184,7 @@ function buildSvg(fontCss, mode, placed) {
     + hide('water', 'leatherWater', water)
     + hide('map', 'leather', land + seams())
     + hide('panel-grounds', 'leatherFine', side.bg)
+    + `<g id="lamps">${lamps(pierList)}</g>`
     + `<g id="labels">${mapLabels()}${labels}</g>`
     + `<g id="panels">${side.fg}${title()}</g>`
     + `<g id="frame">${frame()}${side.top}</g>`

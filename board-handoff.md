@@ -330,7 +330,12 @@ keeps them on a re-trace.
   cooler; too faint to read), and a tooled pattern per type (waves, brick, fish scales across the whole District; Nick
   prefers the Districts flat).
 - **Finishing touches:** piers off each Dock's most open stretch of shore, in the Dock's own
-  colour (placed automatically, clear of land, bridges and labels); Art Deco quarter fans in the
+  colour (placed automatically, clear of land, bridges and labels), each ending since
+  2026-10-07 in a gilt **harbour lamp** with a pool of light on the water (`lamps()`, `LAMP`;
+  Nick: an outside review asked for the eight Docks, every one Water Connected to the rest, to
+  jump out from across the table). The lamps sit over the leather, so its grain doesn't print
+  across the light, and the piers keep their Dock's colour, so they still read as its land. A
+  first try at a 2.3-unit lamp and a fainter glow read as specks at arm's length; Art Deco quarter fans in the
   frame's corner steps (the one at the Heat corner's turn was cut, 2026-09-29: it sat on the map
   and looked odd); a soft drop shadow under every Still and type medallion, so they sit on the
   board like pieces. Since 2026-10-07 the title, the Borough names and the police shields are
