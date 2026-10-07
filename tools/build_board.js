@@ -15,8 +15,9 @@
 //                                       JSON, for tuning the drafting's settings
 //
 // Two builds share everything but the texture: the print board carries the full
-// pebbled leather, which reads at 24in; the screen board keeps only soft wrinkles
-// and dye, because at screen size the grain turns to noise.
+// pebbled leather, which reads at 24in; the screen board carries the same grain
+// faintly, since a screen renders the lighting at a lower scale, where the same
+// relief reads several times stronger.
 //
 // The board prints 24 inches square: 1080 units across, so 1 unit is 0.564 mm.
 // Anything a physical piece must fit (the Heat Track's poker chips, the Mash
@@ -75,7 +76,7 @@ const BOROUGHS = {
   BX: { n: 2, name: 'The Bronx', fill: ['#34493b', '#223127'] },
   QN: { n: 3, name: 'Queens', fill: ['#4a3857', '#31253a'] },
   BK: { n: 4, name: 'Brooklyn', fill: ['#5a4630', '#3d2f1f'] },
-  SI: { n: 5, name: 'Staten Island', fill: ['#3b3935', '#282623'] },
+  SI: { n: 5, name: 'Staten Island', fill: ['#374e4b', '#233432'] }, // verdigris (a warm grey until 2026-10-07, too near New Jersey's)
 };
 // One colour per Borough, so the Borough reads first (Raids and Squads work by
 // Borough). The types are told apart by drawing: Speakeasies by an inset gold keyline
@@ -1004,9 +1005,9 @@ const LEATHER = {
     fine: { pebbles: { field: 'pebbleFieldFine', blur: 0.45, amount: 0.6, under: 0.6 }, micro: [1.6, 0.03], wrinkle: [0.03, 0.2], relief: 2.3, depth: 0.4, sheen: 0.08, dye: 0.12 },
   },
   screen: {
-    board: { wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
+    board: { pebbles: { field: 'pebbleField', blur: 0.85, amount: 0.25, under: 0.6 }, wrinkle: [0.012, 1], relief: 2.3, depth: 0.35, sheen: 0.05, dye: 0.25 },
     water: { wrinkle: [0.012, 1], relief: 1.4, depth: 0.35, sheen: 0.05, dye: 0.25 },
-    fine: { wrinkle: [0.03, 1], relief: 0.8, depth: 0.2, sheen: 0, dye: 0.08 },
+    fine: { pebbles: { field: 'pebbleFieldFine', blur: 0.45, amount: 0.25, under: 0.6 }, wrinkle: [0.03, 1], relief: 1.33, depth: 0.2, sheen: 0, dye: 0.08 },
   },
 };
 // The pebble tile: Poisson-disc sites on a torus (irregular but even, so no clumps or

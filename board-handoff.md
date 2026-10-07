@@ -329,6 +329,11 @@ keeps them on a re-trace.
   quiet. Brooklyn moved from red to bronze to part it from Manhattan. Queens moved from a blue
   violet (`#3f3a57`) to a warmer violet (`#4a3857`), because the old one sat too close to the
   water (Nick, 2026-09-29); a dusty mauve (`#4f3a52`) was tried and leaned towards Manhattan.
+  **Staten Island is verdigris** (`#374e4b`), the Statue of Liberty's copper patina: its warm
+  grey (`#3b3935`) read too close to New Jersey's (Nick, 2026-10-07). Olive and a deep teal
+  were tried beside it the same day: the olive read muddy beside Brooklyn's bronze, and the
+  teal drifted towards the water and the Squads' blue. Verdigris is bluer than the Bronx's
+  forest green, and the two Boroughs are a board apart.
 - **High Society Venues:** the martini (`Art/Icons/Gin.svg`) under a crown on the sign's
   medallion, and the Deco double keyline (see The look), which replaced a gold sunburst.
   Speakeasies keep the tumbler.
@@ -415,9 +420,15 @@ keeps them on a re-trace.
   the Tomorrow panel) are recessed in the Heat Track's lacquer and gilt, their names engraved
   above them. **The key's row pitch** (19 units) leaves the High Society crown clear of the
   Speakeasy medallion above it. Saddle stitching runs round the board
-  edge and inside the Heat corner. The **screen** build drops the pebbles and
-  keeps only soft wrinkles and dye, because at screen size the grain turns to noise (Nick asked
-  for it). Presets live in `LEATHER`. It prints crisp at any size and needs no licence; a CC0
+  edge and inside the Heat corner. The **screen** build carries the pebbles faintly
+  (Nick, 2026-10-07: he wanted the leather on screen too, just not overpowering). From
+  2026-09-29 it had dropped them, keeping only wrinkles and dye, because the crease grain of
+  the time turned to noise at screen size. The screen presets take the same tile at under
+  half the print's share of the height (`amount` 0.25 against 0.55) and a gentler relief,
+  since the screen JPEG is rendered at 2x, where the same relief reads about three times as
+  strong as at 300dpi, and they keep the water smooth calf. mk-online draws the SVG live, at
+  whatever scale its window gives it; if the grain looks noisy there, the dial is
+  `LEATHER.screen.board.pebbles.amount`. Presets live in `LEATHER`. It prints crisp at any size and needs no licence; a CC0
   scan (ambientCG, Poly Haven) could be tiled in if it ever needs to be photographic. Judge the
   print grain at print scale, not in the downscaled preview: crop the SVG at a device scale of
   6.667 (300dpi), since the lighting works per pixel and reads differently at 2x. Every leather
