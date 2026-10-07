@@ -146,7 +146,7 @@ const BRIDGE_LABELS = geo.labels.bridges;
 
 // ---------------------------------------------------------------- type
 const TYPE = {
-  boro: { family: 'Cinzel', weight: 700, size: 19, spacing: 3.6 },
+  boro: { family: 'Cinzel', weight: 700, size: 19, spacing: 2.6 }, // spacing 3.6 until 2026-10-07
   water: { family: 'Barlow Condensed', weight: 600, size: 10, spacing: 3.4, italic: true },
   bridge: { family: 'Barlow Condensed', weight: 600, size: 8, spacing: 0.8, italic: true },
   keyHead: { family: 'Barlow Condensed', weight: 700, size: 9.5, spacing: 0.8 },

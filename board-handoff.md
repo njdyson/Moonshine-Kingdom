@@ -381,7 +381,10 @@ further from their land than the others. Now every name sits **the same distance
 shore** (`BORO_GAP`, 18 units from the shore to the middle of the capitals; the Bronx's, midway
 between its east shore and the frame, was already about that) and **centred on what it names**:
 
-- STATEN ISLAND under the island (its first letter about 5 mm from the corner fan).
+- STATEN ISLAND under the island (its first letter about 8 mm from the corner fan, once the
+  spacing tightened).
+- The names' letter spacing tightened from 3.6 to 2.6 (`TYPE.boro`, Nick, same day), so each sits
+  more compactly on its stretch of water.
 - BROOKLYN under Coney Island and Canarsie, QUEENS under the Rockaways, both 18 under the south
   shore (y 1018), so they are level with each other but not with STATEN ISLAND (Tottenville's shore
   is 32 lower).
