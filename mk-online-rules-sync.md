@@ -563,6 +563,18 @@ has to ask for the seat on his own turn.
 | 16.4 | Blood Oath: 40 combined; one Boss in a room crowns the Alliance; the higher contributor is Capo. | **20 combined Respect, both partners Solvent. The partner who crowns must hold the Nod and have his own Boss in a High Society Venue, and he is the Capo.** |
 | 16.5 | Bots value the Nod as 10 Respect. | **Value it as the win key**: every winner climbs the whole Bribe ladder. Take the Crown the moment it is legal. Against a rival with the Nod and 10+ Respect whose Boss is in, or one Move from, a room, the Boss kill (11.8) and sitting in the room are the highest-value Plays. Discount to zero any Handshake payment due at Sunset from a player who can crown before then. |
 
+## 17. A raided crew may sail (2026-10-07, reverses the 2026-07-30 land-only Scatter)
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 17.1 | Run For It: the crew flees to a **Land Connected** Safe District; a Dock with no free land exit is Cornered. | **Any Connected Safe District**, the same test as Fold: a crew raided on a Dock may flee to any Safe Dock across the water. Still never the District the Squad came from, and still the owner's pick (`chooseScatter`). |
+| 17.2 | Cornered lists water and the map's edge as blocked exits. | **Cornered = no Connected Safe District left.** Nothing else changes: the Safehouse burns, all liquor goes to the Supply, and a cornered crew is arrested. |
+| 17.3 | Bots treat a Dock as a dead end when pricing Raid risk or planning a corner. | **A Dock crew is all but uncatchable** (Staten Island's Docks are nearly always Safe). Price the cornering play only at blocks with no pier, chiefly Coney Island and Morris Park. A crew that sails to an empty Dock takes Control of it, which can move the Harbormaster. |
+
+`scatterCandidates` in `src/game/raid.ts` should use the same Connected helper as Fold. A Squad's
+own reach is untouched by this section; whether it should still cross water is an open question
+(CLAUDE.md, "A raided crew may sail").
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -613,6 +625,7 @@ has to ask for the seat on his own turn.
       Ported: `scatterCandidates` in `src/game/raid.ts` reads land connections only (the dock
       lanes are used only for the Squad's own reach). Since 2026-09-30 the crew's owner picks
       among them (`chooseScatter`); see `harness/README.md` in the mk-online repo.
+      **Superseded by §17 (2026-10-07): the Scatter now crosses water.**
 - [x] **Safehouse +1 Threat, stacking with Ambush** (6.1.1); Torch cost 1 (6.1.2)
 - [x] **Ambush: Cost 1 from Ledger, blocked when spent out or Laid Low** (6.2.1); the spent marker
       goes Ledger → Heat Track and keeps its owner (6.2.2); the Irish Plunder-in-place-of-Ambush
@@ -667,3 +680,5 @@ has to ask for the seat on his own turn.
       Respect ≥ 10, Final Standoff and Loose Change deleted
 - [ ] **Blood Oath: 20 combined, the crowning partner holds the Nod and is Capo** (16.4), variant not built yet
 - [ ] **Bots: the Nod is the win key; never trust a Sunset payment from a player who can crown** (16.5)
+- [ ] **The Scatter crosses water** (17.1, 17.2): `scatterCandidates` uses the Fold test, Docks included
+- [ ] **Bots: a Dock crew can't be cornered; corner at Coney Island and Morris Park** (17.3)
