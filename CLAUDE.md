@@ -98,11 +98,11 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   Every Almanac lesson has a **name** before its maxim (The Reverse Snake, The Kill Shot, The
   Decoy Warehouse), mostly the Kingpin's Guide's coinages; keep them when editing, since the
   names are what players carry to the table (`almanac-review-handoff.md` 5.5).
-- The **Kingpin's Guide** was archived on 2026-10-07 (`Archive/Kingpin's Guide v0.9.html`):
+- The **Kingpin's Guide** was archived on 2026-10-07 and, with the rest of the repo's frozen
+  history, moved out of the repo entirely on 2026-10-08 (see "What not to edit" below for where).
   The Almanac replaced it. It still holds useful long-form material to mine, but it lags the rules
-  (it still says Commission Seat, and still crowns at Sunset on 20 Respect), and like everything
-  in `Archive/` it is frozen. Don't bring its claims back without checking them against the
-  Rulebook.
+  (it still says Commission Seat, and still crowns at Sunset on 20 Respect). Don't bring its
+  claims back without checking them against the Rulebook.
 
 ## v0.9.8 streamlined rules
 
@@ -473,7 +473,13 @@ copy of `board-geometry.json`. Redraw the board and mk-online needs the same upd
 
 ## What not to edit
 
-- `Archive/` is frozen history. Never edit it, and never let it skew a repo-wide count.
+- There is no in-repo `Archive/` any more. On 2026-10-08 its contents moved to the outer
+  "Moonshine Kingdom" Drive folder's own `Archive/` (under a dated era subfolder), alongside the
+  rest of the project's pre-repo history, so the repo stops carrying its weight and repo-wide
+  greps/counts stop tripping over its old terminology. It is still frozen history: don't mine it
+  for claims without checking them against the current Rulebook, and don't recreate an in-repo
+  `Archive/` to stash new "old versions" in, since the next session won't know to leave it alone
+  the way this rule protected the old one.
 - `mk-online/dist/` is committed build output with no source in this repo (the source is
   `njdyson/mk-online`). Do not hand-edit the bundle; mirror it in as `DEPLOY.md` says.
 
