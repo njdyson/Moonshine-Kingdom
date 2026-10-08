@@ -785,9 +785,11 @@ keeps them on a re-trace.
   Red Hook (47). Brownsville / Jamaica sits on the straight upright run, so dropping it adds
   nothing to the look, and it would put Richmond Hill (a crown room) on the bay, making it
   Coastal. Any of them is a new entry in `FLIPS`. The smallest rooms are Whitestone (45), then Corona, Fordham, Westerleigh and Tottenville (49).
-- **Martini sync.** The Rulebook's component list still says "12 Speakeasies (Tumbler Glass),
-  four of them High Society Venues (Crown)", and the Town Planner roster shows the tumbler on
-  the High Society rows. Not changed yet; waiting on Nick.
+- ~~**Martini sync.**~~ Done 2026-10-08 (Nick): High Society is marked by the martini alone
+  off the board. The Rulebook's component list says "High Society Venues (Martini Glass)", its
+  map legend shows the martini, and the Town Planner's roster and key carry the board's gold
+  disc and martini without the crown. The crown means where the Crown is taken, not the type, so
+  it stays on the board's sign and nowhere else marks a District with it.
 - ~~**Rulebook wording.**~~ Fixed 2026-09-28: the Big Bust tiebreak reads "ranked highest on its
   Still's Pressure Strip", matching the Town Planner. (The Kingpin's Guide still says "the
   Borough's Pressure Strip"; it lags by design.)

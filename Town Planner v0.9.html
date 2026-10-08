@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8">
 <!-- Mobile renders one full A5 card per row, scaled to fit (pinch to zoom).
-     574 clears the 520px card + gutter so each card shows whole, exactly as it
+     574 clears the 568px card so each card shows whole, exactly as it
      prints, instead of overflowing the phone width and clipping. -->
 <meta name="viewport" content="width=574">
 <title>Moonshine Kingdom: Town Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow+Condensed:wght@600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    PALETTE
+   The board's own values (tools/build_board.js), so the card and
+   the board read as one set: its gilt, its lacquer, its Borough
+   fills and the Still's gauge.
    ============================================================ */
 :root{
   --gold:#c9a437;
@@ -20,7 +23,9 @@
   --gold-line:#b9932f;
   --gold-dim:#a98c4f;
   --gold-label:#d4af37;
+  --gold-deep:#7a6224;
   --silver:#c9cdd4;
+  --shadow:#0a0705;
 
   --ink:#efe3cd;
   --ink-2:#f2e6cf;
@@ -29,16 +34,35 @@
 
   --panel-a:#241c14;
   --panel-b:#19130c;
+  --lacquer-a:#261b11;
+  --lacquer-b:#0e0906;
   --rule:rgba(185,147,47,.16);
   --cell:rgba(107,90,46,.3);
-  --cell-strong:rgba(185,147,47,.4);
+  --cell-strong:rgba(185,147,47,.45);
+
+  /* Metal: the board's GILT, light to shadow and back, as a diagonal sheen */
+  --gilt:linear-gradient(135deg,#f6e3a1 0%,#c9a437 28%,#6b5424 52%,#c9a437 78%,#f6e3a1 100%);
+  /* A plate's face: lit from above, as HEAT's plate and the Ledger's name */
+  --gilt-face:linear-gradient(#f6e3a1,#c9a437 45%,#8a6c2c);
 
   --tag-home:#d98a6a;
   --tag-squad:#8fb0d8;
 
+  /* Barrels: the cubes that stand for them on the table (the board's key) */
+  --moonshine:#9b9892;
+  --rum:#7b4a26;
+
   /* Canonical gold icon tint: matches .icon in css/moonshine-rules.css */
   --gold-tint:invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
 }
+
+/* The Boroughs wear the board's colours (BOROUGHS in tools/build_board.js):
+   b1 and b2 are its radial fill, tint carries a wash of it across the row. */
+.b-mn{--b1:#5a3336;--b2:#3e2224;--tint:rgba(90,51,54,.30)}
+.b-bx{--b1:#34493b;--b2:#223127;--tint:rgba(52,73,59,.34)}
+.b-qn{--b1:#4a3857;--b2:#31253a;--tint:rgba(74,56,87,.34)}
+.b-bk{--b1:#5a4630;--b2:#3d2f1f;--tint:rgba(90,70,48,.30)}
+.b-si{--b1:#374e4b;--b2:#233432;--tint:rgba(55,78,75,.32)}
 
 /* ============================================================
    PAGE
@@ -51,21 +75,31 @@ body{
   color:var(--ink);
   font-family:Barlow,sans-serif;
   -webkit-font-smoothing:antialiased;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 a{color:var(--gold-label);text-decoration:none}
 a:hover{color:var(--gold-bright)}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
 
 #__overlay{
   position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.55;
   background:radial-gradient(circle at 50% 38%,transparent 52%,rgba(0,0,0,.6));
 }
-#__gallerywrap{max-width:1060px;margin:0 auto;padding:34px 20px 70px}
+#__gallerywrap{max-width:1220px;margin:0 auto;padding:34px 20px 70px}
 #__printpages{display:none}
+/* A phone shows one card across its 574px viewport, so the gutter shrinks to fit */
+@media (max-width:620px){#__gallerywrap{padding:20px 3px 40px}}
 
 .masthead{text-align:center;margin-bottom:34px}
 .masthead-kicker{font:600 9px Barlow;letter-spacing:5px;color:var(--gold-dim);text-transform:uppercase}
-.masthead-title{font:700 40px Cinzel,serif;color:var(--gold-bright);letter-spacing:2px;margin:6px 0 2px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.masthead-title{font:700 40px Cinzel,serif;color:var(--gold-bright);letter-spacing:2px;margin:6px 0 4px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 .masthead-sub{font:600 11px Barlow;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+.masthead-rule{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px}
+.masthead-rule::before,.masthead-rule::after{content:"";width:120px;height:1px}
+.masthead-rule::before{background:linear-gradient(90deg,transparent,var(--gold))}
+.masthead-rule::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.masthead-rule i{width:6px;height:6px;background:var(--gold-bright);transform:rotate(45deg)}
 
 .gallery{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;align-items:flex-start}
 
@@ -74,89 +108,159 @@ a:hover{color:var(--gold-bright)}
    ============================================================ */
 .card{
   position:relative;
-  width:520px;
-  /* Same fixed box as the playbooks (520 wide; 925 + 40 padding + 4 border = 969),
-     so every card in the prototype cuts to one size and duplex sides line up. The
-     wider box (was 470) wraps fewer lines, so content clears the 925 height with
-     room to spare. See the playbook file for the full reasoning. */
-  height:925px;
-  background:linear-gradient(var(--panel-a),var(--panel-b));
-  border:2px solid var(--gold-line);
-  border-radius:0;            /* sharp: prototype is guillotined, not corner-punched */
-  padding:22px 22px 18px;
+  box-sizing:border-box;
+  /* The same outer box as before the Deco dress (520 + 44 padding + 4 border
+     by 925 + 40 + 4), so the card still cuts to the playbooks' size and
+     duplex sides line up. The frame is drawn, not bordered. */
+  width:568px;
+  height:969px;
+  padding:30px 30px 32px;
   display:flex;
   flex-direction:column;
-  box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.55);
   overflow:hidden;
+  /* --frame on top, then a faint sunburst behind the name, then lacquer */
+  background:
+    var(--frame) 0 0 / 100% 100% no-repeat,
+    radial-gradient(ellipse 60% 22% at 50% 4%,rgba(212,175,55,.10),transparent 70%),
+    linear-gradient(var(--lacquer-a),var(--panel-b) 40%,var(--lacquer-b));
+  box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.45);
+
+  /* The frame: the board's dress at the card's own size (568 x 969 px). A gilt
+     keyline with a jewel on each Deco chamfer (the Ledger, the key's plaques,
+     the card backs), a dark seat and a hairline inside it, then an inner keyline
+     stepped at each corner round a quarter fan (the board's frame), and a faint
+     sunburst rising behind the name. Inline, so print needs no fetch.
+     # is written %23. */
+  --frame:url("data:image/svg+xml,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 568 969'>\
+<defs>\
+<linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+<stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
+<stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
+<stop offset='1' stop-color='%23f6e3a1'/></linearGradient>\
+<radialGradient id='fade' cx='.5' cy='.5' r='.5'><stop offset='.2' stop-color='%23fff'/>\
+<stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient>\
+<mask id='fadeout' maskUnits='userSpaceOnUse' x='0' y='0' width='568' height='969'>\
+<ellipse cx='284' cy='58' rx='270' ry='150' fill='url(%23fade)'/></mask>\
+<path id='diamond' d='M0-2.6L2.6 0L0 2.6L-2.6 0Z' fill='%23e8cc72'/>\
+</defs>\
+<g mask='url(%23fadeout)'><circle cx='284' cy='58' r='130' fill='none' stroke='%23c9a437' stroke-opacity='.08' stroke-width='260' pathLength='96' stroke-dasharray='.14 .86'/></g>\
+<path d='M16 6H552L562 16V953L552 963H16L6 953V16Z' fill='none' stroke='url(%23g)' stroke-width='2.2'/>\
+<path d='M17.6 7.6H550.4L560.4 17.6V951.4L550.4 961.4H17.6L7.6 951.4V17.6Z' fill='none' stroke='%23000' stroke-opacity='.6' stroke-width='.7'/>\
+<path d='M19.8 9.8H548.2L558.2 19.8V949.2L548.2 959.2H19.8L9.8 949.2V19.8Z' fill='none' stroke='%23b9932f' stroke-opacity='.4' stroke-width='.7'/>\
+<use href='%23diamond' x='11' y='11'/><use href='%23diamond' x='557' y='11'/>\
+<use href='%23diamond' x='557' y='958'/><use href='%23diamond' x='11' y='958'/>\
+<path d='M26 16H542V26H552V943H542V953H26V943H16V26H26Z' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.8'/>\
+<path fill='none' stroke='%23b9932f' stroke-opacity='.75' stroke-width='.8' stroke-linecap='round' d='\
+M29.19 26.85L36.63 28.85M28.86 27.65L32.86 29.96M28.33 28.33L33.78 33.78M27.65 28.86L29.96 32.86M26.85 29.19L28.85 36.63\
+M29.3 26A3.3 3.3 0 0 1 26 29.3M37.88 26A11.88 11.88 0 0 1 26 37.88\
+M541.15 29.19L539.15 36.63M540.35 28.86L538.04 32.86M539.67 28.33L534.22 33.78M539.14 27.65L535.14 29.96M538.81 26.85L531.37 28.85\
+M542 29.3A3.3 3.3 0 0 1 538.7 26M542 37.88A11.88 11.88 0 0 1 530.12 26\
+M538.81 942.15L531.37 940.15M539.14 941.35L535.14 939.04M539.67 940.67L534.22 935.22M540.35 940.14L538.04 936.14M541.15 939.81L539.15 932.37\
+M538.7 943A3.3 3.3 0 0 1 542 939.7M530.12 943A11.88 11.88 0 0 1 542 931.12\
+M26.85 939.81L28.85 932.37M27.65 940.14L29.96 936.14M28.33 940.67L33.78 935.22M28.86 941.35L32.86 939.04M29.19 942.15L36.63 940.15\
+M26 939.7A3.3 3.3 0 0 1 29.3 943M26 931.12A11.88 11.88 0 0 1 37.88 943'/>\
+</svg>");
 }
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:var(--gold-line)}
-.card::after{content:"";position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:0;pointer-events:none}
-
-.card-head{text-align:center;border-bottom:2px solid var(--gold-line);padding-bottom:10px}
-.card-kicker{font:600 8px Barlow;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase}
-.card-title{font:700 27px Cinzel,serif;color:var(--gold-bright);letter-spacing:1px;margin-top:3px}
-
-/* Inline emphasis inside body copy */
-.step-body b,.note b,.final-body b,.raid-note b{color:var(--gold-bright);font-weight:700}
-.step-body i,.note i{font-style:italic}
-b.silver{color:var(--silver)}
 
 /* ============================================================
-   PHASE RAIL
+   CARD HEAD: the name cut into a gilt plate, as the Ledger's
+   name and the board's HEAT are, a diamond either side
    ============================================================ */
-.rail{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);align-items:center;gap:12px;margin-top:16px}
-.rail-pill{text-align:center;border:1.5px solid var(--gold);border-radius:8px;padding:9px 8px;background:linear-gradient(#2c2115,#171009)}
-.rail-name{font:700 12px Cinzel,serif;letter-spacing:1px;color:var(--gold-bright)}
-.rail-sub{display:block;font:600 7.5px Barlow;letter-spacing:.6px;color:var(--muted);text-transform:uppercase;margin-top:2px}
-.rail-arrow{font:700 15px Barlow;color:var(--gold);text-align:center}
+.card-head{text-align:center;padding-top:2px}
+.plate{
+  display:inline-flex;align-items:center;gap:12px;
+}
+.plate::before,.plate::after{content:"";width:6px;height:6px;background:var(--gold-bright);transform:rotate(45deg)}
+.plate-name{
+  display:inline-block;
+  padding:7px 30px 6px;
+  font:700 23px/1 Cinzel,serif;letter-spacing:1px;
+  color:#2a1d0c;
+  text-shadow:0 1px 0 rgba(255,244,205,.55);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f6e3a1'/%3E%3Cstop offset='.45' stop-color='%23c9a437'/%3E%3Cstop offset='1' stop-color='%238a6c2c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M4 0 H96 L100 5 L96 10 H4 L0 5 Z' fill='url%28%23g%29'/%3E%3Cpath d='M4.6 .9 H95.4 L98.9 5 L95.4 9.1 H4.6 L1.1 5 Z' fill='none' stroke='%232a1d0c' stroke-opacity='.55' stroke-width='.35' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.65));
+}
+.card-kicker{margin-top:9px;font:600 8px Barlow;letter-spacing:3.4px;color:var(--gold-dim);text-transform:uppercase}
+/* A Deco rule under the head: gilt fading out from a centre jewel */
+.head-rule{display:flex;align-items:center;gap:8px;margin:8px 0 0}
+.head-rule::before,.head-rule::after{content:"";flex:1;height:1px}
+.head-rule::before{background:linear-gradient(90deg,transparent,var(--gold-line) 70%)}
+.head-rule::after{background:linear-gradient(90deg,var(--gold-line) 30%,transparent)}
+.head-rule i{width:5px;height:5px;background:var(--gold-bright);transform:rotate(45deg)}
 
-.note{
-  margin-top:10px;
-  border:1px solid rgba(185,147,47,.3);
-  border-radius:6px;
-  background:rgba(0,0,0,.25);
-  padding:6px 10px;
-  font:400 10px/1.35 Barlow;
-  color:var(--body);
-  text-align:center;
+/* Inline emphasis inside body copy */
+.step-body b,.final-text b,.raid-note b{color:var(--gold-bright);font-weight:700}
+.step-body i{font-style:italic}
+b.silver{color:var(--silver)}
+.nowrap{white-space:nowrap}
+
+/* ============================================================
+   PLAQUE: a gilt edge round a lacquer face, cut on the Deco chamfer
+   ============================================================ */
+.plaque{
+  --c:8px;
+  position:relative;
+  padding:1.6px;
+  background:var(--gilt);
+  clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% var(--c),100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,var(--c) 100%,0 calc(100% - var(--c)),0 var(--c));
+}
+.plaque-face{
+  height:100%;box-sizing:border-box;
+  background:linear-gradient(#2c2115,var(--lacquer-b));
+  clip-path:polygon(calc(var(--c) - .6px) 0,calc(100% - var(--c) + .6px) 0,100% calc(var(--c) - .6px),100% calc(100% - var(--c) + .6px),calc(100% - var(--c) + .6px) 100%,calc(var(--c) - .6px) 100%,0 calc(100% - var(--c) + .6px),0 calc(var(--c) - .6px));
 }
 
 /* ============================================================
    SECTION HEADS
    ============================================================ */
-.sec{display:flex;align-items:center;gap:10px;margin:14px 0 4px}
-.sec-name{font:700 16px Cinzel,serif;letter-spacing:1px;color:var(--gold-bright)}
-.sec-kicker{font:italic 500 10px Barlow;color:var(--muted)}
-.sec-rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)}
+.sec{display:flex;align-items:flex-end;gap:10px;margin:18px 0 3px}
+.card-head+.sec{margin-top:14px}
+.sec-title{display:flex;flex-direction:column}
+.sec-tag{font:600 7px Barlow;letter-spacing:2.6px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1px}
+.sec-name{font:700 17px Cinzel,serif;letter-spacing:1px;color:var(--gold-bright);text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.sec-kicker{font:italic 500 10px Barlow;color:var(--muted);padding-bottom:3px}
+.sec-rule{flex:1;display:flex;align-items:center;align-self:center;margin-top:8px}
+.sec-rule::before{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.75),rgba(185,147,47,.12))}
+.sec-rule::after{content:"";width:4px;height:4px;margin-left:3px;background:var(--gold-dim);transform:rotate(45deg);opacity:.7}
 
-.roster-head{display:flex;align-items:center;gap:8px;margin:13px 0 5px}
-.roster-head--raids{margin-top:14px}
-.roster-dia{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
-.roster-label{font:700 11px Cinzel,serif;letter-spacing:2.5px;color:var(--gold-label)}
+.roster-head{display:flex;align-items:center;gap:8px;margin:12px 0 6px}
+.roster-head--raids{margin-top:11px;margin-bottom:4px}
+.roster-dia{width:8px;height:8px;background:var(--gilt-face);transform:rotate(45deg)}
+.roster-label{font:700 11.5px Cinzel,serif;letter-spacing:2.5px;color:var(--gold-label)}
 
 /* ============================================================
-   STEP ROWS
+   STEP ROWS, strung on a gilt spine so the Day reads as a track
    ============================================================ */
-.step{display:flex;gap:10px;align-items:flex-start;padding:6px 2px;border-bottom:1px solid var(--rule)}
+.step{position:relative;display:flex;gap:10px;align-items:flex-start;padding:8px 2px 8px 0}
+.step::after{content:"";position:absolute;left:34px;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.22),transparent)}
+.step:last-child::after{display:none}
+/* the spine: from each marker down to the next, so it ends at the last one */
+.step:not(:last-child)::before{content:"";position:absolute;left:11.5px;top:19.5px;bottom:-19.5px;width:1px;background:rgba(185,147,47,.42)}
+.steps--raid .step:not(:last-child)::before{top:16.5px;bottom:-16.5px}
 /* one labelled action per line: the bodies used to run together as prose */
 .sub{display:block}
 .sub+.sub{margin-top:2px}
-/* Breaks a sub off the list above it. The Ledger is funded by everyone AFTER
-   The Offers resolve, so it must not read as a fourth option to choose from. */
-.sub--gap{margin-top:7px;padding-top:6px;border-top:1px dotted rgba(185,147,47,.3)}
-.step--end{border-bottom:0}
+/* Breaks a sub off the list above it. The restock and the Ledger come AFTER
+   The Offers resolve, so they must not read as more options to choose from. */
+.sub--gap{margin-top:7px;padding-top:6px;border-top:1px dotted rgba(185,147,47,.35)}
+/* A step's number on a small gilt plate, cut on the Deco chamfer */
 .step-num{
-  flex:0 0 22px;height:22px;border-radius:4px;
-  background:var(--gold);color:#1b150e;
+  position:relative;z-index:1;
+  flex:0 0 23px;height:23px;
+  background:var(--gilt-face);color:#1b150e;
   display:flex;align-items:center;justify-content:center;
   font:700 13px Cinzel,serif;
-  box-shadow:inset 0 -1px 0 rgba(0,0,0,.25);
+  text-shadow:0 1px 0 rgba(255,244,205,.5);
+  clip-path:polygon(5px 0,calc(100% - 5px) 0,100% 5px,100% calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,0 calc(100% - 5px),0 5px);
 }
-.step-dot{flex:0 0 24px;height:24px;display:flex;align-items:center;justify-content:center}
-.step-dot::before{content:"";width:10px;height:10px;background:var(--gold);transform:rotate(45deg)}
-.step-label{flex:0 0 90px;font:700 12px Barlow;color:var(--ink-2);padding-top:3px}
-.step-label--narrow{flex-basis:82px}
-.step-body{flex:1;font:400 11px/1.4 Barlow;color:var(--body);padding-top:2px}
+/* The Hustle repeats until everyone lays low, so its beats are jewels, not numbers */
+.step-dot{position:relative;z-index:1;flex:0 0 23px;height:23px;display:flex;align-items:center;justify-content:center}
+.step-dot::before{content:"";width:10px;height:10px;background:var(--gilt-face);transform:rotate(45deg);box-shadow:0 0 0 3px #150f0a}
+.step-label{flex:0 0 102px;font:700 12px Barlow;color:var(--ink-2);padding-top:3px}
+.step-label--narrow{flex-basis:84px}
+.steps--raid .step{padding:5px 2px 5px 0}
+.step-body{flex:1;font:400 11px/1.42 Barlow;color:var(--body);padding-top:2.5px}
 
 /* Canonical inline icon: mirrors .icon in css/moonshine-rules.css */
 .icon{
@@ -166,51 +270,105 @@ b.silver{color:var(--silver)}
 }
 
 /* ============================================================
-   THE CROWN AND SUNSET
+   THE CROWN AND SUNSET: the card's one plaque
    ============================================================ */
-.final{margin-top:14px;border:1px solid var(--gold-line);border-radius:9px;background:rgba(201,164,55,.06);padding:9px 13px}
-.final-title{text-align:center;font:700 12px Cinzel,serif;letter-spacing:2px;color:var(--gold-bright);margin-bottom:5px}
-.final-body{font:400 10.5px/1.5 Barlow;color:var(--body);text-align:center}
+.final{margin-top:auto;--c:11px;padding:2px}
+.final .plaque-face{padding:12px 16px 12px;background:radial-gradient(ellipse 80% 70% at 50% 0%,rgba(201,164,55,.10),transparent 70%),linear-gradient(#2a1f14,var(--lacquer-b))}
+.final-title{
+  display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:9px;
+  font:700 13px Cinzel,serif;letter-spacing:2px;color:var(--gold-bright);
+}
+.final-title::before,.final-title::after{content:"";flex:1;height:1px}
+.final-title::before{background:linear-gradient(90deg,transparent,rgba(185,147,47,.6))}
+.final-title::after{background:linear-gradient(90deg,rgba(185,147,47,.6),transparent)}
+.final-title .ico{width:15px;height:15px;color:var(--gold-bright);margin-top:-3px}
+.final-row{display:flex;gap:12px;align-items:baseline;padding:4px 0}
+.final-row+.final-row{border-top:1px solid var(--rule)}
+.final-label{flex:0 0 104px;font:700 10px Cinzel,serif;letter-spacing:.4px;color:var(--gold-bright);white-space:nowrap}
+.final-text{flex:1;font:400 10.5px/1.45 Barlow;color:var(--body)}
+
+/* ============================================================
+   ICONS AND MEDALLIONS
+   The zone roundels are the board's (roundel() in tools/build_board.js):
+   a lacquer disc in a gold ring for the Speakeasy, Dock and Ward, and a
+   gold disc with the martini for High Society. The board's crown over the
+   martini marks where the Crown is taken; the roster marks the type alone.
+   ============================================================ */
+.ico{display:inline-block;width:1em;height:1em;fill:currentColor;vertical-align:middle}
+.ico--crown{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.med{
+  position:relative;flex:0 0 auto;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:14px;height:14px;box-sizing:border-box;border-radius:50%;
+  background:rgba(20,14,9,.9);border:1px solid var(--gold);color:var(--gold);
+  box-shadow:0 1px 1.5px rgba(0,0,0,.6);
+  vertical-align:middle;
+}
+.med .ico{width:10px;height:10px}
+.med--ward .ico{width:11px;height:11px}
+.med--hs{background:var(--gold-bright);border-color:var(--shadow);color:#2a1d0c}
+/* the bowl carries the glass's weight, so it sits a touch low to look centred, as on the board */
+.med--hs .ico{width:9px;height:9px;transform:translateY(.7px)}
 
 /* ============================================================
    DISTRICT ROSTER TABLE
    ============================================================ */
-.roster{border:1px solid #6b5a2e;border-radius:7px;overflow:hidden}
+.roster{
+  border:1px solid rgba(185,147,47,.55);
+  box-shadow:0 0 0 3px rgba(0,0,0,.35),0 0 0 4px rgba(185,147,47,.18);
+  background:rgba(8,5,3,.35);
+}
 table.lg{width:100%;border-collapse:collapse}
 
 .lg th{
-  background:#1a140d;color:var(--gold-label);
-  font:700 8.5px Cinzel,serif;letter-spacing:.4px;
-  border-bottom:1px solid #6b5a2e;
+  background:linear-gradient(#2a1f14,#140e09);color:var(--gold-label);
+  font:700 8.5px Cinzel,serif;letter-spacing:.8px;
+  border-bottom:1px solid var(--gold-line);
   padding:5px 5px;text-align:center;
 }
 .lg th.th-l{text-align:left;padding:5px 6px}
 .lg th.th-n{padding:5px 3px}
 
-.lg td{padding:3px 6px;border-top:1px solid var(--cell)}
-.lg tr.grp>td{border-top:1.5px solid var(--cell-strong)}
+.lg tbody tr{background:linear-gradient(90deg,var(--tint),rgba(0,0,0,0) 85%)}
+.lg td{height:16px;padding:0 6px;border-top:1px solid var(--cell);line-height:14px}
+.lg td>*{vertical-align:middle}
+.lg tbody tr:first-child>td{border-top:1.5px solid var(--cell-strong)}
+.lg tbody:first-of-type tr:first-child>td{border-top:0}
 
+/* The Borough: its board colour, its name in gilt, and the gilt police shield
+   the board numbers it with, the order its Squad moves in a Raid. Staten Island
+   has no Squad, so, as on the board, it carries no shield. */
 .lg-boro{
-  padding:4px;text-align:center;
-  font:700 13px Cinzel,serif;color:var(--gold-bright);
-  background:rgba(201,164,55,.05);
-  border-top:1.5px solid var(--cell-strong);
-  border-right:1px solid rgba(107,90,46,.45);
-  line-height:1.05;
+  width:76px;padding:4px 3px;text-align:center;vertical-align:middle;
+  font:700 12px/1.05 Cinzel,serif;letter-spacing:.5px;color:var(--gold-bright);
+  text-shadow:0 1px 2px rgba(0,0,0,.8);
+  background:radial-gradient(circle at 45% 40%,var(--b1),var(--b2) 95%) !important;
+  box-shadow:inset 0 0 14px rgba(0,0,0,.45);
+  border-right:1px solid rgba(185,147,47,.5);
 }
-/* The board numbers the Boroughs and Raids resolve in that order, so the
-   roster carries the same numeral rather than leaving it implied by row order. */
-.boro-num{
-  display:block;margin:0 auto 3px;
-  width:15px;height:15px;border-radius:3px;
-  background:var(--gold);color:#1b150e;
-  font:700 10px Cinzel,serif;line-height:15px;
+/* The board's shield (mapLabels in tools/build_board.js): a 22 x 26 badge with a
+   dipped brow, in polished gilt, the numeral cut in dark Cinzel. */
+.shield{
+  display:block;margin:0 auto 4px;
+  width:20px;height:24px;box-sizing:border-box;padding-top:3px;
+  font:700 13.5px/18px Cinzel,serif;color:#1b150e;text-shadow:0 1px 0 rgba(255,244,205,.45);
+  background:url("data:image/svg+xml,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -14 24 28.5'>\
+<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+<stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
+<stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
+<stop offset='1' stop-color='%23f6e3a1'/></linearGradient></defs>\
+<path d='M0 -12.5Q11 -9.5 22 -12.5L22 1.5Q22 9 11 13.5Q0 9 0 1.5Z' fill='url(%23g)' stroke='%230a0705' stroke-width='1.2' stroke-linejoin='round'/>\
+</svg>") center / 100% 100% no-repeat;
+  filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.7));
 }
-.lg-dist{font:600 10px Barlow;color:var(--ink-2)}
+.shield--inline{display:inline-block;vertical-align:middle;position:relative;top:-1px;margin:0 0 0 2px;width:13px;height:15.5px;padding-top:1.5px;font-size:9px;line-height:11px;font-style:normal}
+
+.lg-dist{font:600 10px Barlow;color:var(--ink-2);white-space:nowrap}
 .lg-zone{font:400 9.5px Barlow;text-align:left;white-space:nowrap}
-.lg-still{text-align:center;font:500 10px Barlow;color:#cbb98a}
-.lg-press{text-align:center;font:700 10px Barlow;color:var(--gold-bright)}
-.lg-setup{font:400 9px Barlow}
+.lg-zone .med{margin-right:5px}
+.lg-still,.lg-press{text-align:center}
+.lg-setup{font:400 9px Barlow;white-space:nowrap}
 
 /* Zone label colours */
 .z-hs{color:var(--gold-bright);font-weight:700}
@@ -218,34 +376,72 @@ table.lg{width:100%;border-collapse:collapse}
 .z-speak{color:var(--body)}
 .z-dock{color:var(--muted)}
 
-/* Zone icons: black source art, tinted gold by filter */
-.zi{
-  width:10px;height:10px;
-  vertical-align:-1px;margin-right:4px;
-  filter:var(--gold-tint);
+/* The Still: its number on a lacquer plate in a gilt rim, set in the token's
+   Bebas Neue (tools/still_art.js) */
+.still{
+  display:inline-block;min-width:19px;height:13px;box-sizing:border-box;padding:0 3px;
+  font:400 12px/13px "Bebas Neue",Impact,sans-serif;letter-spacing:.3px;color:#f5e9d9;text-align:center;
+  background:linear-gradient(#33241a,#150e09);
+  border:1px solid var(--gold);border-radius:2.5px;
+  box-shadow:0 1px 1.5px rgba(0,0,0,.6);
+  vertical-align:middle;
 }
-.zi--speak{opacity:.82}
-.zi--dock{opacity:.68}
+/* Pressure: the Still's own gauge laid on its side, that many segments lit from
+   the left of the token's six-step gold-to-red ramp. No numeral: one beside the
+   Still's own read as a second Still number. */
+.gauge{
+  --p:0;position:relative;display:inline-block;vertical-align:middle;width:41px;height:8px;
+  background:linear-gradient(90deg,#e8c85a 0 7px,#dcb246 7px 14px,#d49a37 14px 21px,#cf7f33 21px 28px,#c8632e 28px 35px,#c0472a 35px);
+  -webkit-mask:repeating-linear-gradient(90deg,#000 0 5.5px,transparent 5.5px 7px);
+  mask:repeating-linear-gradient(90deg,#000 0 5.5px,transparent 5.5px 7px);
+}
+.gauge::after{content:"";position:absolute;top:0;right:0;bottom:0;width:calc((6 - var(--p)) * 7px);background:rgba(13,0,5,.84)}
+.p1{--p:1}.p2{--p:2}.p3{--p:3}.p4{--p:4}.p5{--p:5}.p6{--p:6}
 
-/* Setup tags */
-.tag{font-weight:700;font-size:9px}
-.tag-home{color:var(--tag-home)}
-.tag-run{color:var(--gold-bright)}
-.tag-squad{color:var(--tag-squad)}
+/* Setup marks */
+.tag{
+  display:inline-block;padding:0 5px;height:12px;box-sizing:border-box;
+  font:700 8.5px/11px "Barlow Condensed",Barlow,sans-serif;letter-spacing:.6px;text-transform:uppercase;
+  border:1px solid;border-radius:2px;vertical-align:middle;
+}
+.tag-home{color:var(--tag-home);border-color:rgba(217,138,106,.55);background:rgba(217,138,106,.10)}
+.tag-run{color:var(--gold-bright);border-color:rgba(232,204,114,.45);background:rgba(232,204,114,.07)}
+.tag-squad{color:var(--tag-squad);border-color:rgba(143,176,216,.55);background:rgba(143,176,216,.10)}
 
 /* ============================================================
-   LEGEND
+   KEY: the board's key, in the roster's foot
    ============================================================ */
-.legend{
-  display:flex;flex-wrap:wrap;gap:5px 13px;justify-content:center;
-  margin-top:7px;
-  font:600 8px Barlow;letter-spacing:.4px;text-transform:uppercase;
+.key{
+  border-top:1px solid var(--gold-line);
+  background:linear-gradient(#1d150d,#0e0906);
+  padding:6px 9px 7px;
+  font:700 8.5px "Barlow Condensed",Barlow,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:var(--body);
 }
-.legend-row{display:flex;flex-wrap:wrap;gap:5px 13px;justify-content:center;width:100%}
-.legend-item{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
-.legend .zi{margin-right:1px}
+.key-zones{display:flex;justify-content:space-between;gap:10px}
+.key-item{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.key-name{color:var(--ink);margin-right:4px}
+.key-name--hs{color:var(--gold-bright)}
+.cube{
+  display:inline-block;width:8px;height:8px;border-radius:1.5px;box-sizing:border-box;
+  border:.6px solid rgba(0,0,0,.55);
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.3),0 1px 1px rgba(0,0,0,.6);
+  vertical-align:-1px;margin-right:3px;
+}
+.cube--moon{background:var(--moonshine)}
+.cube--rum{background:var(--rum)}
+.key-sep{color:var(--gold-dim);margin:0 1px}
+/* A Kickback: a Ledger marker, so a gilt-rimmed chip */
+.kick{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:13px;height:13px;box-sizing:border-box;border-radius:50%;
+  border:1px solid var(--gold);background:var(--panel-b);color:var(--gold-bright);
+  font:700 7.5px "Barlow Condensed",sans-serif;letter-spacing:0;margin-right:3px;
+  box-shadow:inset 0 0 0 1.5px var(--panel-b),inset 0 0 0 2px rgba(169,140,79,.6);
+}
+.key-setup{display:flex;justify-content:space-between;gap:8px;margin-top:6px;padding-top:6px;border-top:1px dotted rgba(185,147,47,.3)}
+.key-setup .key-item{gap:4px;color:var(--muted);text-transform:none;font:500 8.5px Barlow;letter-spacing:.2px}
 
-.raid-note{text-align:center;font:italic 500 10px/1.35 Barlow;color:var(--muted);margin-bottom:6px}
+.raid-note{text-align:center;font:italic 500 10px/1.4 Barlow;color:var(--muted);margin-bottom:3px}
 
 /* ============================================================
    PRINT
@@ -260,6 +456,15 @@ table.lg{width:100%;border-collapse:collapse}
 </style>
 </head>
 <body>
+<!-- Zone icons from Art/Icons, their own colours stripped so one colour tints
+     them, as tools/build_board.js loads them for the board's roundels. -->
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-speak" viewBox="0 0 491.035 491.035"><path d="M62,90l26.5,328c1.8,22,3.8,22,23.5,22h267c19.7,0,21.7,0,23.5-22L429,90h-26 l-22.5,279c-1.1,14-2.2,14-15.5,14H126c-13.3,0-14.4,0-15.5-14L88,90H62z"/><path d="M107,243c43-17,88,13,138,1c50-12,95,14,139-3l-9.5,116c-1.1,14-2.4,14-15.5,14 H132c-13.1,0-14.4,0-15.5-14L107,243z"/></symbol>
+<symbol id="i-ward" viewBox="0 0 14 14"><path d="m 4.8461824,12.970882 c 1.8e-4,-0.016 0.1119,-0.7744 0.24827,-1.6853 l 0.24795,-1.6562003 -1.29291,-1.8525 c -0.7111,-1.0189 -1.31225,-1.8897 -1.33589,-1.9352 -0.0669,-0.1286 -0.061,-0.2641 0.0185,-0.4257 0.0338,-0.069 0.42386,-0.6837 0.86676,-1.3665 0.70718,-1.0902 0.81341,-1.246 0.87197,-1.279 0.0787,-0.044 0.13048,-0.047 0.23209,-0.013 0.082,0.028 2.62228,1.2404 2.68581,1.2821 0.0562,0.037 0.0679,0.1244 0.0334,0.2486 -0.0462,0.1663 -0.12287,0.2913 -0.26745,0.4364 -0.22416,0.2249 -0.47613,0.3247 -0.81806,0.324 -0.27061,-6e-4 -0.5458,-0.07 -0.83002,-0.2101 -0.0629,-0.031 -0.11683,-0.056 -0.11987,-0.056 -0.007,0 -0.39919,0.7554 -0.39919,0.7698 0,0.01 0.11251,0.067 0.25003,0.1357 0.42498,0.2115 0.72737,0.4214 1.04394,0.7247 0.69766,0.6686 1.13453,1.5165 1.4402,2.7953 0.009,0.037 0.0637,-0.2235 0.20753,-0.9834 0.10824,-0.572 0.20294,-1.032 0.21207,-1.0302 0.009,0 0.2954,0.147 0.63628,0.3225 0.34088,0.1755 0.6295,0.3154 0.64138,0.3108 0.0119,-0.01 0.35482,-0.3533 0.7620806,-0.775 0.40726,-0.4217 0.74726,-0.7674 0.75556,-0.7684 0.0215,0 -0.002,0.5951 -0.0309,0.7711 -0.0129,0.08 -0.0394,0.1929 -0.0588,0.2513 -0.0194,0.058 -0.33874,0.719 -0.70959,1.468 l -0.6742706,1.3619003 0,1.4317 0,1.4318 -2.30858,0 c -2.18766,0 -2.30857,0 -2.30826,-0.029 z m 2.80818,-1.345 c 0.0895,-0.5288 0.16702,-0.9416 0.17901,-0.9535 0.0116,-0.012 0.17491,-0.131 0.36285,-0.2655 0.26892,-0.1926 0.32928,-0.2424 0.28336,-0.2337 -0.40414,0.076 -0.75813,0.086 -1.02938,0.029 -0.17718,-0.037 -0.37697,-0.1049 -0.6208,-0.2096003 l -0.14168,-0.061 0.35214,0.3550003 0.35214,0.355 0.036,0.8418 c 0.0361,0.8439 0.0535,1.1467 0.0633,1.1001 0.003,-0.014 0.0763,-0.4447 0.1631,-0.9576 z m 1.63365,-4.3583003 c -0.24871,-0.144 -0.64469,-0.6193 -0.59794,-0.7177 0.0205,-0.043 1.7867206,-1.9839 1.8156006,-1.995 0.13627,-0.052 0.77565,0.713 0.81818,0.9793 0.0115,0.072 0.12819,-0.041 -1.01907,0.9887 -0.4858806,0.436 -0.8946806,0.7927 -0.9084306,0.7928 -0.0138,10e-5 -0.0625,-0.022 -0.10834,-0.048 z m -0.95916,-0.972 c -0.36197,-0.2382 -0.87936,-0.7608 -0.84412,-0.8526 0.005,-0.012 0.39994,-0.5561 0.87818,-1.2083 0.74036,-1.0095 0.87557,-1.1857 0.91028,-1.1857 0.21597,0 0.9599106,0.6618 1.1376606,1.012 0.0702,0.1382 0.12447,0.066 -0.9257706,1.2306 -0.74241,0.8233 -0.97115,1.0672 -1.00427,1.0709 -0.0282,0 -0.0802,-0.02 -0.15196,-0.067 z m -0.76001,-1.3964 c 0.0669,-0.2546 0.0965,-0.4697 0.0908,-0.6584 -0.007,-0.2174 -0.028,-0.2875 -0.11359,-0.372 -0.0249,-0.025 -0.23941,-0.1453 -0.47676,-0.2682 -0.23735,-0.123 -0.43353,-0.225 -0.43596,-0.2267 -0.002,0 0.20803,-0.3587 0.4677,-0.7932 l 0.47211,-0.7901 0.10737,0 c 0.0865,0.001 0.13749,0.015 0.26258,0.069 0.51594,0.2249 1.15552,0.7326 1.11553,0.8856 -0.006,0.024 -1.45956,2.152 -1.49245,2.1852 -0.005,0 -0.003,-0.01 0.003,-0.033 z m -1.89789,-1.9775 c -0.37588,-0.1784 -0.68906,-0.33 -0.69597,-0.3369 -0.0154,-0.015 0.82535,-1.5354 0.86653,-1.5667 0.0761,-0.058 0.39834,0.027 0.7462,0.1966 0.39932,0.1944 0.69174,0.4227 0.69174,0.54 0,0.039 -0.88326,1.4946 -0.90595,1.4929 -0.0105,-9e-4 -0.32668,-0.1475 -0.70255,-0.3259 z"/></symbol>
+<symbol id="i-dock" viewBox="0 0 24 24"><path d="M19,13H17a1,1,0,0,0,0,2h.91A6,6,0,0,1,13,19.91V11h1a1,1,0,0,0,0-2H13V7.82a3,3,0,1,0-2,0V9H10a1,1,0,0,0,0,2h1v8.91A6,6,0,0,1,6.09,15H7a1,1,0,0,0,0-2H5a1,1,0,0,0-1,1,8,8,0,0,0,16,0A1,1,0,0,0,19,13ZM12,6a1,1,0,1,1,1-1A1,1,0,0,1,12,6Z"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="M4 8L6 20H18L20 8M4 8L5.71624 9.37299C6.83218 10.2657 7.39014 10.7121 7.95256 10.7814C8.4453 10.8421 8.94299 10.7173 9.34885 10.4314C9.81211 10.1051 10.0936 9.4483 10.6565 8.13476L12 5M4 8C4.55228 8 5 7.55228 5 7C5 6.44772 4.55228 6 4 6C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8ZM20 8L18.2838 9.373C17.1678 10.2657 16.6099 10.7121 16.0474 10.7814C15.5547 10.8421 15.057 10.7173 14.6511 10.4314C14.1879 10.1051 13.9064 9.4483 13.3435 8.13476L12 5M20 8C20.5523 8 21 7.55228 21 7C21 6.44772 20.5523 6 20 6C19.4477 6 19 6.44772 19 7C19 7.55228 19.4477 8 20 8ZM12 5C12.5523 5 13 4.55228 13 4C13 3.44772 12.5523 3 12 3C11.4477 3 11 3.44772 11 4C11 4.55228 11.4477 5 12 5ZM12 4H12.01M20 7H20.01M4 7H4.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-martini" viewBox="0 0 491.035 491.035"><path d="M459.017,29.493c4.949-4.948,6.416-12.371,3.743-18.832 C460.083,4.208,453.785,0,446.805,0H44.235c-6.99,0-13.288,4.208-15.957,10.661c-2.682,6.461-1.205,13.884,3.743,18.832 l196.223,196.206v195.573L114.536,476.41c-3.215,1.576-4.94,5.161-4.131,8.647c0.799,3.504,3.905,5.978,7.49,5.978h255.25 c3.585,0,6.686-2.474,7.481-5.978c0.817-3.486-0.907-7.071-4.131-8.647l-113.7-55.139V225.698L459.017,29.493z M405.098,34.545 l-45.323,45.323c-39.639-6.678-72.694,14.453-108.978,23.551c-40.365,10.122-85.011-25.037-125.503-29.52L85.932,34.545H405.098z"/></symbol>
+</defs></svg>
 <div id="__overlay"></div>
 
 <div id="__gallerywrap">
@@ -267,6 +472,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="masthead-kicker">Prohibition · New York · 1929</div>
     <div class="masthead-title">Moonshine Kingdom</div>
     <div class="masthead-sub">Town Planner &amp; Turn Structure</div>
+    <div class="masthead-rule"><i></i></div>
   </div>
 
   <div class="gallery">
@@ -274,81 +480,85 @@ table.lg{width:100%;border-collapse:collapse}
   <!-- ============ TURN STRUCTURE (FRONT) ============ -->
   <div data-card class="card">
     <div class="card-head">
+      <div class="plate"><span class="plate-name">Turn Structure</span></div>
       <div class="card-kicker">The Day Cycle · Sequence of Play</div>
-      <div class="card-title">Turn Structure</div>
-    </div>
-
-    <div class="rail">
-      <div class="rail-pill"><span class="rail-name">Shadows</span><span class="rail-sub">Production</span></div>
-      <span class="rail-arrow">&rarr;</span>
-      <div class="rail-pill"><span class="rail-name">The Hustle</span><span class="rail-sub">Action Cycle</span></div>
+      <div class="head-rule"><i></i></div>
     </div>
 
     <!-- PHASE 1 -->
     <div class="sec">
-      <span class="sec-name">Shadows</span>
-      <span class="sec-kicker">Fill barrels and open new deals</span>
+      <span class="sec-title"><span class="sec-tag">Phase I</span><span class="sec-name">Shadows</span></span>
+      <span class="sec-kicker">Four steps, in order, before anyone makes a Play</span>
       <span class="sec-rule"></span>
     </div>
-    <div class="step">
-      <span class="step-num">1</span>
-      <div class="step-label">The Brew</div>
-      <div class="step-body"><span class="sub"><b>Roll:</b> Token #1 rolls <b>Red</b> (Players + 1).</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews <i>before the next drafts</i>. Brew = Mash + Red; matching Stills brew by Muscle Ratio. The Boss's Still also fires <b>1 Land Connected</b> Still.</span><span class="sub"><b>Barrels are first come, first served:</b> take yours as you brew, in whatever order you like.</span></div>
-    </div>
-    <div class="step">
-      <span class="step-num">2</span>
-      <div class="step-label">The Blowback</div>
-      <div class="step-body">Leftover Red + Mash. Matching Stills <b>kill</b> by Muscle Ratio, Runners first.</div>
-    </div>
-    <div class="step">
-      <span class="step-num">3</span>
-      <div class="step-label">Grease Wheels</div>
-      <div class="step-body"><span class="sub"><b>The Offers:</b> <i>Reverse</i> Turn Order. <b>Choose one:</b></span><span class="sub"><b>Take a Job:</b> Stake Reserves equal to its Stake, refill the gap.</span><span class="sub"><b>Walk Away:</b> Discard a claimed Job, markers home.</span><span class="sub"><b>Pass:</b> Take nothing, keep everything.</span><span class="sub sub--gap"><b>Then all Fund the Ledger:</b> fill 5 slots from Reserves. Only these pay.</span></div>
-    </div>
-    <div class="step step--end">
-      <span class="step-num">4</span>
-      <div class="step-label">Harbormaster</div>
-      <div class="step-body"><span class="sub"><b>Set tomorrow's Mash:</b> Most <b>Docks</b> is the Harbormaster: name any face (1&ndash;6).</span><span class="sub">If tied for the lead, <b>roll</b> the Mash die.</span></div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-label">The Brew</div>
+        <div class="step-body"><span class="sub"><b>Roll:</b> Turn Token #1 rolls the <b>Red</b> pool: one die per player, plus one.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews <i>before the next drafts</i>: each of your Stills on Mash + Red pours its Muscle Ratio in barrels.</span><span class="sub"><b>Split the Batch:</b> If your Boss's Still fires, you may also fire <b>1 Land Connected</b> Still you Control.</span><span class="sub"><b>First come, first served:</b> Take barrels as you brew. If the Supply runs dry, later seats go short.</span></div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-label">The Blowback</div>
+        <div class="step-body">The leftover Red + Mash: every Still on that number bursts, <b>whoever Controls it</b>, and kills its Muscle Ratio in Mobsters there, Runners first.</div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-label">Grease the Wheels</div>
+        <div class="step-body"><span class="sub"><b>The Offers:</b> In <i>reverse</i> Turn Order, each boss chooses one:</span><span class="sub"><b>Take a Job:</b> Claim one and stake Reserves equal to its Stake.</span><span class="sub"><b>Walk Away:</b> Discard a Job you hold; its stake returns to Reserves.</span><span class="sub"><b>Stand Pat:</b> Change nothing.</span><span class="sub sub--gap"><b>Restock the Market:</b> Once all have chosen, deal a Job into every gap. <i>Day 1 has no Offers: turn the Market face-up.</i></span><span class="sub"><b>Fund the Ledger:</b> Everyone fills 5 slots from Reserves. Only these pay.</span></div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-label">The Harbormaster</div>
+        <div class="step-body"><b>Set tomorrow's Mash:</b> Whoever Controls the most <b>Docks</b> names any face <span class="nowrap">(1&ndash;6)</span>. A tied lead <b>rolls</b> the die instead.</div>
+      </div>
     </div>
 
     <!-- PHASE 2 -->
     <div class="sec">
-      <span class="sec-name">The Hustle</span>
-      <span class="sec-kicker">Take Plays in Turn Order until everyone lays low</span>
+      <span class="sec-title"><span class="sec-tag">Phase II</span><span class="sec-name">The Hustle</span></span>
+      <span class="sec-kicker">One Play a turn, in Turn Order, until the last boss Lays Low</span>
       <span class="sec-rule"></span>
     </div>
-    <div class="step">
-      <span class="step-dot"></span>
-      <div class="step-label">Take Play</div>
-      <div class="step-body">Make <b>1 Play</b>: Standard 1, Power 2, <b>Lay Low</b> 0. Resolve combat first.</div>
-    </div>
-    <div class="step">
-      <span class="step-dot"></span>
-      <div class="step-label">Resolve</div>
-      <div class="step-body">Spent markers return to Reserves. Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> sends 1 to the <b>Heat Track</b>.</div>
-    </div>
-    <div class="step step--end">
-      <span class="step-dot"></span>
-      <div class="step-label">Lay Low (0)</div>
-      <div class="step-body"><span class="sub">The free Play that ends your Day, made on your turn.</span><span class="sub">Each unspent <b>Ledger</b> marker cashes for <b>$100</b>, the <b>Collect</b> rate, all at once.</span><span class="sub">Clear Ledger to Reserves, then take the top token from tomorrow's stack.</span></div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-dot"></span>
+        <div class="step-label">Make a Play</div>
+        <div class="step-body">No passing: <b>Standard</b> costs 1 Influence, <b>Power</b> 2, <b>Lay Low</b> nothing. Resolve any combat it starts before the Play ends.</div>
+      </div>
+      <div class="step">
+        <span class="step-dot"></span>
+        <div class="step-label">Pay the Cost</div>
+        <div class="step-body">Spent markers return to Reserves; a Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Play locks 1 on the <b>Heat Track</b>.</div>
+      </div>
+      <div class="step">
+        <span class="step-dot"></span>
+        <div class="step-label">Lay Low</div>
+        <div class="step-body">The free Play that ends your Day. Clear your <b>Ledger</b> to Reserves at <b>$100</b> per unspent marker, then take the top token from tomorrow's stack.</div>
+      </div>
     </div>
 
-    <div class="final">
-      <div class="final-title">THE CROWN &amp; SUNSET</div>
-      <div class="final-body"><span class="sub"><b>Take the Crown:</b> the <b>Nod</b>'s Power Play (2), claimed at 10 Influence. With your <b>Boss</b> in a <b>High Society Venue</b>, no unpaid <b>Mark</b> and <b>10+ Respect</b>, you win on the spot. Nothing else is settled.</span><span class="sub"><b>Respect:</b> completed <b>Jobs</b>, less <b>2</b> for the <b>Rat</b> and <b>1</b> per <b>Welsher</b>.</span><span class="sub"><b>Sunset:</b> when the final player Lays Low, unmet promises take their <b>Welsher</b>. Flip today's Turn Tokens and begin the next Day.</span></div>
+    <div class="final plaque">
+      <div class="plaque-face">
+        <div class="final-title"><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg>The Crown &amp; Sunset<svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></div>
+        <div class="final-row"><span class="final-label">Take the Crown</span><span class="final-text">Win on the spot with this Power Play (2), made on your turn with <b>10+ Respect</b>, the <b>Nod</b> (claimed at 10 Influence), no unpaid <b>Mark</b> and your <b>Boss</b> in a <b>High Society Venue</b>. Nothing else is settled.</span></div>
+        <div class="final-row"><span class="final-label">Respect</span><span class="final-text">Your completed <b>Jobs</b>, less <b>2</b> while you hold the <b>Rat</b> and <b>1</b> per <b>Welsher</b>.</span></div>
+        <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low, each unmet promise earns its breaker a <b>Welsher</b>, and the tokens taken today become tomorrow's Turn Order.</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- ============ TOWN PLANNING LEDGER (BACK) ============ -->
+  <!-- ============ TOWN PLANNER (BACK) ============ -->
   <div data-card class="card">
     <div class="card-head">
+      <div class="plate"><span class="plate-name">Town Planner</span></div>
       <div class="card-kicker">Squad Deployment · District Roster</div>
-      <div class="card-title">Town Planner</div>
+      <div class="head-rule"><i></i></div>
     </div>
 
     <div class="roster-head">
       <span class="roster-dia"></span>
-      <span class="roster-label">DISTRICT ROSTER</span>
+      <span class="roster-label">District Roster</span>
       <span class="sec-rule"></span>
     </div>
 
@@ -364,240 +574,243 @@ table.lg{width:100%;border-collapse:collapse}
             <th class="th-l">Setup</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- MANHATTAN -->
-          <tr class="grp">
-            <td rowspan="6" class="lg-boro"><span class="boro-num">1</span>Manhattan</td>
+        <tbody class="b-mn">
+          <tr>
+            <td rowspan="6" class="lg-boro"><span class="shield">1</span>Manhattan</td>
             <td class="lg-dist">Five Points</td>
-            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
-            <td class="lg-still">10</td>
-            <td class="lg-press">3</td>
+            <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
+            <td class="lg-still"><span class="still">10</span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Sugar Hill</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Cotton Club (High Society)</span></td>
-            <td class="lg-still">7</td>
-            <td class="lg-press">6</td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Cotton Club</span></td>
+            <td class="lg-still"><span class="still">7</span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">East Harlem</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">The Silver Dollar</span></td>
-            <td class="lg-still">12</td>
-            <td class="lg-press">1</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Silver Dollar</span></td>
+            <td class="lg-still"><span class="still">12</span></td>
+            <td class="lg-press"><i class="gauge p1"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">The Tenderloin</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">The Haymarket</span></td>
-            <td class="lg-still">8</td>
-            <td class="lg-press">5</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Haymarket</span></td>
+            <td class="lg-still"><span class="still">8</span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">West Side</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">11</td>
-            <td class="lg-press">2</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">11</span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">The Bowery</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">9</td>
-            <td class="lg-press">4</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">9</span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
+        </tbody>
 
-          <!-- THE BRONX -->
-          <tr class="grp">
-            <td rowspan="5" class="lg-boro"><span class="boro-num">2</span>The<br>Bronx</td>
+        <tbody class="b-bx">
+          <tr>
+            <td rowspan="5" class="lg-boro"><span class="shield">2</span>The<br>Bronx</td>
             <td class="lg-dist">Hunts Point</td>
-            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
-            <td class="lg-still">9</td>
-            <td class="lg-press">4</td>
+            <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
+            <td class="lg-still"><span class="still">9</span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Morris Park</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Jockey Club (High Society)</span></td>
-            <td class="lg-still">7</td>
-            <td class="lg-press">6</td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Jockey Club</span></td>
+            <td class="lg-still"><span class="still">7</span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Belmont</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">DeLillo's</span></td>
-            <td class="lg-still">11</td>
-            <td class="lg-press">2</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">DeLillo's</span></td>
+            <td class="lg-still"><span class="still">11</span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Fordham</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">The Penny Whistle</span></td>
-            <td class="lg-still">8</td>
-            <td class="lg-press">5</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Penny Whistle</span></td>
+            <td class="lg-still"><span class="still">8</span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Throggs Neck</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">10</td>
-            <td class="lg-press">3</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">10</span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
+        </tbody>
 
-          <!-- QUEENS -->
-          <tr class="grp">
-            <td rowspan="6" class="lg-boro"><span class="boro-num">3</span>Queens</td>
+        <tbody class="b-qn">
+          <tr>
+            <td rowspan="6" class="lg-boro"><span class="shield">3</span>Queens</td>
             <td class="lg-dist">Corona</td>
-            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
-            <td class="lg-still">4</td>
-            <td class="lg-press">3</td>
+            <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
+            <td class="lg-still"><span class="still">4</span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Richmond Hill</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Triangle (High Society)</span></td>
-            <td class="lg-still">7</td>
-            <td class="lg-press">6</td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Triangle</span></td>
+            <td class="lg-still"><span class="still">7</span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Astoria</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">Bohemian Hall</span></td>
-            <td class="lg-still">2</td>
-            <td class="lg-press">1</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Bohemian Hall</span></td>
+            <td class="lg-still"><span class="still">2</span></td>
+            <td class="lg-press"><i class="gauge p1"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Flushing</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">Paradise Alley</span></td>
-            <td class="lg-still">6</td>
-            <td class="lg-press">5</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Paradise Alley</span></td>
+            <td class="lg-still"><span class="still">6</span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Whitestone</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">5</td>
-            <td class="lg-press">4</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">5</span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Jamaica</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">3</td>
-            <td class="lg-press">2</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">3</span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
+        </tbody>
 
-          <!-- BROOKLYN -->
-          <tr class="grp">
-            <td rowspan="5" class="lg-boro"><span class="boro-num">4</span>Brooklyn</td>
+        <tbody class="b-bk">
+          <tr>
+            <td rowspan="5" class="lg-boro"><span class="shield">4</span>Brooklyn</td>
             <td class="lg-dist">Brownsville</td>
-            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
-            <td class="lg-still">5</td>
-            <td class="lg-press">4</td>
+            <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
+            <td class="lg-still"><span class="still">5</span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Williamsburg</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-hs">The Havemeyer (High Society)</span></td>
-            <td class="lg-still">7</td>
-            <td class="lg-press">6</td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Havemeyer</span></td>
+            <td class="lg-still"><span class="still">7</span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Coney Island</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">Ruby's Joint</span></td>
-            <td class="lg-still">3</td>
-            <td class="lg-press">2</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Ruby's Joint</span></td>
+            <td class="lg-still"><span class="still">3</span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Red Hook</td>
-            <td class="lg-zone"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">Sunny's Bar</span></td>
-            <td class="lg-still">6</td>
-            <td class="lg-press">5</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Sunny's Bar</span></td>
+            <td class="lg-still"><span class="still">6</span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Canarsie</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">4</td>
-            <td class="lg-press">3</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">4</span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
+        </tbody>
 
-          <!-- STATEN ISLAND -->
-          <tr class="grp">
-            <td rowspan="3" class="lg-boro"><span class="boro-num">5</span>Staten<br>Island</td>
+        <tbody class="b-si">
+          <tr>
+            <td rowspan="3" class="lg-boro">Staten<br>Island</td>
             <td class="lg-dist">Stapleton</td>
-            <td class="lg-zone"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></td>
-            <td class="lg-still">8</td>
-            <td class="lg-press">5</td>
+            <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
+            <td class="lg-still"><span class="still">8</span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Westerleigh</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">2</td>
-            <td class="lg-press">1</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">2</span></td>
+            <td class="lg-press"><i class="gauge p1"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Tottenville</td>
-            <td class="lg-zone"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></td>
-            <td class="lg-still">4</td>
-            <td class="lg-press">3</td>
+            <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
+            <td class="lg-still"><span class="still">4</span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"></td>
           </tr>
         </tbody>
       </table>
-    </div>
 
-    <div class="legend">
-      <div class="legend-row">
-        <span class="legend-item"><img class="zi zi--speak" src="Art/Icons/Tumbler.svg" alt=""><span class="z-speak">Speakeasy: Moonshine $300, Rum $500</span></span>
-        <span class="legend-item"><span class="z-hs"><img class="zi" src="Art/Icons/Crown.svg" alt="High Society"> High Society: Rum only, 1 Kickback each</span></span>
-        <span class="legend-item"><img class="zi" src="Art/Icons/Fist.svg" alt=""><span class="z-ward">Ward</span></span>
-        <span class="legend-item"><img class="zi zi--dock" src="Art/Icons/anchor.svg" alt=""><span class="z-dock">Dock</span></span>
-      </div>
-      <div class="legend-row">
-        <span class="legend-item tag-home">&#9670; Home Turf: Safehouse, Boss &amp; 2 Runners</span>
-        <span class="legend-item tag-run">&#9670; 3 Runners</span>
-        <span class="legend-item tag-squad">&#9670; Police Squad: padlocked until a Raid</span>
+      <div class="key">
+        <div class="key-zones">
+          <span class="key-item"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="key-name">Speakeasy</span><span><span class="cube cube--moon"></span>Moonshine $300</span><span class="key-sep">·</span><span><span class="cube cube--rum"></span>Rum $500</span></span>
+          <span class="key-item"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="key-name key-name--hs">High Society</span><span><span class="cube cube--rum"></span>Rum only, $500</span><span class="key-sep">·</span><span class="kick">+1</span><span>Kickback a barrel</span></span>
+        </div>
+        <div class="key-setup">
+          <span class="key-item"><span class="tag tag-home">Home Turf</span>Safehouse, Boss &amp; 2 Runners</span>
+          <span class="key-item"><span class="tag tag-run">3 Runners</span></span>
+          <span class="key-item"><span class="tag tag-squad">Police Squad</span>padlocked until a Raid moves it</span>
+        </div>
       </div>
     </div>
 
     <div class="roster-head roster-head--raids">
       <span class="roster-dia"></span>
-      <span class="roster-label">POLICE RAIDS</span>
+      <span class="roster-label">Police Raids</span>
       <span class="sec-rule"></span>
     </div>
-    <div class="raid-note"><b>Trigger:</b> The <b>Rat</b> Play, or the 5th Heat. Resolve every Squad one at a time, in <b>numbered Borough order</b> above.</div>
+    <div class="raid-note"><span class="sub"><b>Trigger:</b> The 5th marker on the Heat Track, or the <b>Rat</b> Play. Pause the turn.</span><span class="sub">Every Squad moves, one at a time, in <b>numbered Borough order</b>: <span class="shield shield--inline">1</span> <span class="shield shield--inline">2</span> <span class="shield shield--inline">3</span> <span class="shield shield--inline">4</span></span></div>
 
-    <div class="step">
-      <span class="step-num">1</span>
-      <div class="step-label step-label--narrow">Most Wanted</div>
-      <div class="step-body">A Squad looks only at Districts <b>directly Land Connected within its Borough</b> and steps toward the rival whose marker sits <b>furthest right</b> on the Heat Track. No marker = ignored; no Heat to chase = it holds its corner.</div>
-    </div>
-    <div class="step">
-      <span class="step-num">2</span>
-      <div class="step-label step-label--narrow">The Big Bust</div>
-      <div class="step-body">If that rival holds more than one such District, hit the one with the <b>most Barrels</b>; ties break to the <b>hottest boiler</b>, most steam on its Still's Pressure Strip.</div>
-    </div>
-    <div class="step">
-      <span class="step-num">3</span>
-      <div class="step-label step-label--narrow">The Scatter</div>
-      <div class="step-body">Safehouse destroyed &amp; all Liquor seized. The crew flees to a <b>Connected Safe District</b>, Dock to Dock if you like (never back toward the Squad); if there's none, the whole crew is <b>arrested</b>. No bribe, no buyout.</div>
-    </div>
-    <div class="step step--end">
-      <span class="step-num">4</span>
-      <div class="step-label step-label--narrow">Aftermath</div>
-      <div class="step-body">The Squad holds the District (impassable; padlocks any Speakeasy/Still). Once all Squads move, Heat markers return to owners' Reserves.</div>
+    <div class="steps steps--raid">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-label step-label--narrow">Most Wanted</div>
+        <div class="step-body">A Squad reaches only Districts <b>directly Land Connected</b> to it <b>in its own Borough</b>, never the Sicilian Safehouse. It hunts the mob in reach whose marker sits <b>furthest right</b> on the Heat Track. None of them on it? It stays put.</div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-label step-label--narrow">The Big Bust</div>
+        <div class="step-body">If that mob holds several Districts in reach, the Squad picks the one with the <b>most barrels</b>; a tie goes to the <b>hottest boiler</b>, the highest Pressure.</div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-label step-label--narrow">The Scatter</div>
+        <div class="step-body">The Squad steps in: any Safehouse burns, all liquor goes to the Supply. The crew runs to a <b>Connected Safe District</b> its owner picks, by water too, never the one the Squad came from. Nowhere Safe? The crew is <b>arrested</b>.</div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-label step-label--narrow">Aftermath</div>
+        <div class="step-body">The Squad holds the District: impassable, padlocking any Speakeasy or Still. Once every Squad has moved, each Heat marker returns to its owner's Reserves.</div>
+      </div>
     </div>
   </div>
 

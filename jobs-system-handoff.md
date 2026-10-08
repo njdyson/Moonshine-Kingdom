@@ -1,5 +1,9 @@
 # The Jobs System — Handoff (v0.8, 2026-07-17)
 
+> **2026-10-07: the Market restocks after the Offers, and Day 1 has none.** A Job taken at the
+> Offers leaves its gap empty until every boss has chosen; then a fresh card goes into each gap.
+> The opening Market is dealt face-down and turns up at Day 1's restock. See §2b, *The restock*.
+
 > **2026-09-10 (v0.9.7): Borough Deeds are cut and Titles pay no Respect.** The crown is 10
 > Respect from Jobs alone. The five Deed-keyed cards (Tenement Army, The Empty Casket,
 > Squatter's Rights, Union Dues, Last One Standing) now name the District count in the Borough
@@ -48,13 +52,13 @@ layer *doing*. Everything else is downstream. This is a restoration: the v10 dec
 | The three options | **Take a Job**, **Walk Away**, or **nothing at all** — one of the three, never two. Passing is legal and the rulebook now says so outright. |
 | No Boss, no business | A crew with no Boss on the board skips The Offers entirely. |
 | Holding Jobs | No hand limit. Run as many at once as your Reserves can stake. |
-| Market | Player Count + 1, face-up. **Static: no order, no ends, no fresh/stale.** |
-| Churn | **NONE.** The Market moves only when a player moves it — a Job leaves, deal a fresh card into the gap. Nothing ages out. **See §2b before adding any churn back.** |
+| Market | Player Count + 1, face-up. **Static: no order, no ends, no fresh/stale.** Restocked once a morning, after the Offers (2026-10-07). |
+| Churn | **NONE.** The Market moves only when a player moves it: a Job taken leaves a gap, and once every boss has chosen at the Offers, a fresh card goes into each gap (2026-10-07; it used to refill at once). Nothing ages out. **See §2b before adding any churn back.** |
 | Discard | A real discard pile, reshuffled if the deck runs dry. Only Walk Aways reach it. Completed Jobs leave **permanently** (Respect pile) — the deck is consumable. |
 | Abandoning | **Walk Away**, and it costs your entire Offer for the Day (a7d41d8 closed the free-discard loophole). Card → discard, markers home. |
 | Resolution | **The Play is the unit.** A Job is a deed, not a board position. It counts even if undone before the Play ended. **Only your own Play counts** (2026-09-25), with the fight it starts and any Raid it sets off: Ambush, return fire, a Fold or a Scatter on a rival's Play completes nothing. The old wording never said whose Play, so the Toll Booth Trap, the Butcher's Ledger and the Irish Goodbye could pay on defence (a defender never takes Control, so the Goodbye's clause is always true), and Squatter's Rights on a Fold. |
 | Deck size | **12 / 12 / 8** (1s / 3s / 5s) = **32 cards printed**. |
-| Setup | **Set the 5s aside, shuffle the rest, deal Player Count + 1 face-up, then shuffle the 5s back into the deck.** No per-player deck build. The opening Market is **1s and 3s only** — see the Day 1 Reserves crunch below. In the rulebook this is step 4, **"Stack the Job Deck"**, and it reads "the eight **5-Respect Jobs**", not "the eight 5s" (2026-07-19: a new player has no reason to read a bare "5" as a Respect value). **Beware the lossy shorthand "shuffle all 32, deal P+1"** — that phrase means *no per-player build*, NOT that the 5s go in before the deal; taken literally it deletes the 1s-and-3s opening. |
+| Setup | **Set the 5s aside, shuffle the rest, deal Player Count + 1 face-down, then shuffle the 5s back into the deck.** The Market turns face-up at Day 1's restock, so Day 1 has no Offers (2026-10-07; it was dealt face-up). No per-player deck build. The opening Market is **1s and 3s only**: see the Day 1 Reserves crunch below. In the rulebook this is step 5, **"Stack the Job Deck"**, and it reads "the eight **5-Respect Jobs**", not "the eight 5s" (2026-07-19: a new player has no reason to read a bare "5" as a Respect value). **Beware the lossy shorthand "shuffle all 32, deal P+1"**: that phrase means *no per-player build*, NOT that the 5s go in before the deal; taken literally it deletes the 1s-and-3s opening. |
 
 ### The 3:3:2 per-player build is GONE — and why it was safe to drop
 The old setup counted **3 ones / 3 threes / 2 fives per player** and boxed the rest, defended here as
@@ -95,11 +99,15 @@ fires before Day 1's brew — the Ledger pre-load duplicated a step that Day 1 a
 2026-07-18:** setup hands all 6 markers to **Reserves** and lets Day 1's own Fund the Ledger step do
 its work. Identical end state on a no-stake opening (5 on the Ledger, 1 spare); the difference is that
 Day 1 staking now behaves like every other day, which is what the economy always assumed.
+*(2026-10-07: Day 1 has no Offers now, so nobody stakes on Day 1. The fix stands: it is what lets
+Day 1's Fund the Ledger run as an ordinary morning.)*
 
 **Why the opening Market is still restricted to 1s and 3s.** Not because a 5 is unclaimable — it is
 claimable from Day 1. Because a 5 costs **half your first day's actions** at the exact moment everyone
 is poorest, *and a static Market has no churn to clear it*. A 5 dealt at setup would squat a slot until
 someone is both rich enough and willing, which may be many Days. One setup step removes the dead zone.
+*(Since 2026-10-07 the opening Market is first claimable on Day 2. The argument holds: unless a boss
+Bribed on Day 1, he still has 6 markers, and a 5 still costs half the morning's Plays.)*
 
 ### The arc (still a feature, now steeper — this is the thing to watch)
 Completed Jobs leave permanently, so the 1s still bleed out one-way and the market still escalates.
@@ -199,17 +207,82 @@ Settled, if it comes back:
 
 - **Pay on completion, never on claim.** Paid on claim, a 1 that is free to hold (6 Influence,
   clean Track) becomes a cash pickup: claim it, Walk Away next morning, keep the money.
-- **Add the money after the Offers**, so a card taken on its first morning pays only its
-  starting bounty.
+- **Add the money after the Offers and before the restock**, so a card taken at its first
+  Offers pays only its starting bounty.
 - **Consider a cap** (about $1,000). A dead Staten Island card could otherwise grow until two
   players arrange its conditions and split the pile.
 - **It puts more cash on the table**, so pair it with a dearer top of the Bribe ladder (the 9th
   and 10th, which gate the Nod). Leave the 7th and 8th alone: they are the cheap tempo rungs
   that make holding Jobs affordable.
 
-**Knock-on:** Vipers' **Whispers** (peek the deck top, claim it face-down instead of a Market card) is
-mildly **buffed** — under a static Market it is the only route to a card that isn't already public.
-Worth watching alongside §8.5, which already rated it strong.
+**Knock-on:** Vipers' **Whispers** (peek at the deck top; peek-only since 2026-09-30, when the
+face-down claim was cut) is mildly **buffed** by a static Market: it is the only look at a card that
+isn't already public. Worth watching alongside §8.5, which already rated it strong.
+
+### The restock (Nick, 2026-10-07)
+
+**A Job taken at the Offers leaves its gap empty. Once every boss has chosen, deal a fresh card
+into each gap.** The opening Market (Player Count + 1, 1s and 3s, the 5s shuffled in after) is
+dealt **face-down** at setup and turns face-up at Day 1's restock, so Day 1 has no Offers. Before
+this, a Take dealt the replacement at once.
+
+Why:
+
+1. **The refill was a lottery.** Take a card and a fresh one landed in front of the next picker:
+   nobody chose it, and a good draw was pure luck for whoever sat next. Now every card is face-up
+   a full Day before anyone can claim it, which gives point 2 above (a named card moves Bosses
+   whether or not it's taken) a Day to work every time.
+2. **It sharpens the Reverse Snake.** The high token picks from the full Market and the low token
+   from what's left, which at 4p can be two cards. The low token already brews first, so this is
+   the price of that seat, and Collect's "first to the Offers" is worth more.
+3. **Day 1 is learned on the board.** Five cards of prose were the heaviest read of the first
+   morning, the same cost the Splendor rows were charged above. Day 1's Lay Low race now decides
+   Day 2's first pick with the Market in view, so the token's second job is taught on the first Day.
+4. **Denial is cleaner.** Burying a card no longer deals the next picker a fresh one.
+
+What it does not do: the same number of cards enter a Day, so the scarcity falls on the late
+picker, not on the table. Real scarcity would mean restocking fewer than P+1, which is a separate
+decision.
+
+What it costs:
+
+- **Whispers loses a little.** The peeked card used to be dealt mid-Offers to a picker with no
+  warning; now the table gets a Day's notice of every card, and the Vipers see only the first card
+  of tomorrow's restock. Nick accepts this. If the Vipers play flat, the simple buff is a fixed
+  **top two cards**. "The top n, one per gap" was floated and doesn't work as a count: there are
+  no gaps during the Day, and tomorrow's number isn't known until tomorrow's Offers.
+- **Day 1's last seat** (a random token) gets no first pick for holding the Blowback match. One
+  Day, and a random seat.
+
+### Parked: the Speakeasy grid (Nick, 2026-10-07)
+
+A 4 x 3 mat with one slot per Speakeasy (12, all mainland, three per Borough). Each morning,
+after the Offers, every Speakeasy somebody Controls gets a Job if its slot is empty, from one of
+three decks: the starting Speakeasies deal 1s, the four orphans (§6b) deal 3s, the High Society
+Venues deal 5s. Any player may take any card. The theme: Jobs are whispered over a drink.
+
+It is the Splendor rows (above, and `rules-streamline-handoff.md`'s three face-down piles) with an
+occupancy gate, and the gate answers what killed them: Day 1 shows at most P cards, all 1s, and
+no 5 appears until a Raid opens a High Society room and somebody walks in. The 1s keep a row of
+their own, which answers §8.1. Held back because, as first drafted:
+
+- **Discarding the card when its Speakeasy is Raided or abandoned fails the Rat test (§8).** Plant
+  barrels (the Big Bust goes for the most) and Rat, and the card a rival is lining up is gone.
+  Abandonment is a dodge: walk out of the bar and the bounty naming you dies, against point 2
+  above. If it returns, Control spawns a card and only a Take removes one.
+- **Spawning helps the table, not the holder.** Any player takes any card, in reverse Turn Order,
+  so walking into a High Society room may deal a 5 to whoever picks first tomorrow, perhaps a 5
+  naming your own Borough. It needs an edge for the holder (simplest: stake one less on a Job at a
+  Speakeasy you Control, minimum 1), and any edge at High Society piles onto the room that is
+  already the leader's fortress (CLAUDE.md, "Watch in playtest").
+- **It moves the bounties late.** All four Borough bounties are 5s (§6b), so they would wait
+  behind the police until the first Raid. This section chose bounties early over escalation; the
+  grid reverses that.
+- **Upkeep:** three decks and three discards, a Whispers ruling (which deck?), a 1/2/3 mark on the
+  board, and up to 12 prose cards face-up by midgame, since a card stays until taken.
+
+Try it in mk-online first. A Ward version (a Job per Controlled Ward) was mentioned and set
+aside: a weaker theme, and it loses the three tiers.
 
 ---
 
@@ -632,11 +705,15 @@ setup table that silently split a numbered step in half.
 3. **How many Days after someone hits 10 Influence does the game end?** Consistently under four →
    Jobs have become the whole endgame and Deeds/Titles are decoration.
 4. **When the 1s run out, is the trailing player stranded?** (See the arc, §2.)
-5. **Vipers' Whispers** (deck-top peek + face-down claim). Nick rates it strong.
+5. **Vipers' Whispers** (deck-top peek; the face-down claim was cut 2026-09-30). Nick rates it
+   strong. Since the restock (§2b) every card gets a Day's notice, so check the peek still pays;
+   the buff on file is the top two cards.
 6. **Hate-drafting.** a7d41d8 made Take and Walk Away mutually exclusive, so denying one card costs
    **two** Offers — the Take on Day 1, the Walk Away on Day 2 — with the stake locked in between.
    Measure whether that price is steep enough. Note it is also now the **only** route to the discard
    pile, so hate-drafting is the only thing that can exhaust the deck mid-game.
+7. **The restock (§2b).** At 4p, how many cards does the low token see at the Offers, and does
+   that seat feel the squeeze? Does a Day 1 with no Offers teach the game faster?
 
 ### The one structural crack to keep an eye on
 This note used to read *"Heat can be a churn dial or a tax dial, never both,"* and warned against ever

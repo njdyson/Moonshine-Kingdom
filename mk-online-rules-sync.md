@@ -590,6 +590,19 @@ guards both rulings.
 Ported the same day (mk-online 3d24a96): `STARTING_TURF` in `src/game/setup.ts`, and the reference
 copy `LEDGER_STILLS` in `src/game/data.ts`. The bots read the board, so nothing else changes.
 
+## 19. The Market restocks after the Offers (2026-10-07)
+
+A Take no longer refills its gap. The Market is restocked once, after every player has had his
+Offer, and the opening Market is dealt face-down and turns up at Day 1's restock, so Day 1 has no
+Offers. See `jobs-system-handoff.md` §2b, *The restock*.
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 19.1 | Take a Job deals a fresh card into the gap at once. | **Leave the gap.** After the last player's Offer (Take, Walk Away or pass), deal a card into every empty slot; reshuffle the discards if the deck runs dry. Later pickers choose from a thinner Market. |
+| 19.2 | Setup deals the Market face-up (1s and 3s, 5s shuffled in after). | **Same cards, face-down**, revealed at Day 1's restock. Skip Day 1's Offers entirely. |
+| 19.3 | Bots may count on the refill a Take reveals. | **No refill mid-Offers.** A bot's claim tomorrow is from the cards on the table today (less what higher tokens take), which makes the late token's first pick worth more in the Lay Low heuristic (8.4). |
+| 19.4 | Whispers peeks at the deck top. | **Unchanged.** The top card is now the first card of tomorrow's restock. |
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -700,3 +713,5 @@ copy `LEDGER_STILLS` in `src/game/data.ts`. The bots read the board, so nothing 
 - [x] **Bots: a Dock crew can't be cornered; corner at Coney Island and Morris Park** (17.3)
 - [x] **A Squad's reach is Land Connected only** (17.4): no Dock-to-Dock hop inside its Borough
 - [x] **Starting turf: the North on 8, 9, 10; the South on 4, 5, 6** (§18)
+- [ ] **The Market restocks after the Offers** (19.1); the opening Market is face-down and Day 1 has no Offers (19.2)
+- [ ] **Bots: no refill mid-Offers; value the late token's first pick on today's Market** (19.3)
