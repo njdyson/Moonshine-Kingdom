@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <!-- Mobile renders one full A5 card per row, scaled to fit (pinch to zoom).
-     614 clears the 560px card + gutter so each card shows whole, exactly as it
-     prints, instead of overflowing the phone width and clipping. -->
+     614 clears the 608px card (560 + padding + border) so each card shows whole,
+     exactly as it prints, instead of overflowing the phone width and clipping. -->
 <meta name="viewport" content="width=614">
 <title>Moonshine Kingdom: Mob Playbooks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,8 @@
 <style>
 /* ============================================================
    PALETTE
+   The board's values (tools/build_board.js), as the Town Planner,
+   the Ledger and the card backs use them.
    ============================================================ */
 :root{
   --gold:#c9a437;
@@ -22,6 +24,7 @@
   --gold-label:#d4af37;
   --gold-em:#e9c968;
   --gold-faint:#7a6a3a;
+  --shadow:#0a0705;
 
   --ink:#efe3cd;
   --ink-2:#f2e6cf;
@@ -33,6 +36,8 @@
 
   --panel-a:#241c14;
   --panel-b:#19130c;
+  --lacquer-a:#261b11;
+  --lacquer-b:#0e0906;
   --panel-line:#6b5a2e;
   --flow-line:#5a4a26;
   --head-bg:#1a140d;
@@ -42,6 +47,10 @@
   --cell:rgba(107,90,46,.3);
   --cell-strong:rgba(107,90,46,.4);
   --wash:rgba(201,164,55,.06);
+
+  /* Metal: the board's GILT as a diagonal sheen, and a plate's face lit from above */
+  --gilt:linear-gradient(135deg,#f6e3a1 0%,#c9a437 28%,#6b5424 52%,#c9a437 78%,#f6e3a1 100%);
+  --gilt-face:linear-gradient(#f6e3a1,#c9a437 45%,#8a6c2c);
 
   /* Canonical gold icon tint: matches .icon in css/moonshine-rules.css */
   --gold-tint:invert(79%) sepia(51%) saturate(1001%) hue-rotate(359deg) brightness(87%) contrast(90%);
@@ -58,6 +67,8 @@ body{
   color:var(--ink);
   font-family:Barlow,sans-serif;
   -webkit-font-smoothing:antialiased;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 a{color:var(--gold-label);text-decoration:none}
 a:hover{color:var(--gold-bright)}
@@ -66,13 +77,20 @@ a:hover{color:var(--gold-bright)}
   position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.55;
   background:radial-gradient(circle at 50% 38%,transparent 52%,rgba(0,0,0,.6));
 }
-#__gallerywrap{max-width:1060px;margin:0 auto;padding:34px 20px 70px}
+#__gallerywrap{max-width:1300px;margin:0 auto;padding:34px 20px 70px}
 #__printpages{display:none}
+/* A phone shows one card across its 614px viewport, so the gutter shrinks to fit */
+@media (max-width:660px){#__gallerywrap{padding:20px 3px 40px}}
 
 .masthead{text-align:center;margin-bottom:34px}
 .masthead-kicker{font:600 9px Barlow;letter-spacing:5px;color:var(--gold-dim);text-transform:uppercase}
-.masthead-title{font:700 40px Cinzel,serif;color:var(--gold-bright);letter-spacing:2px;margin:6px 0 2px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.masthead-title{font:700 40px Cinzel,serif;color:var(--gold-bright);letter-spacing:2px;margin:6px 0 4px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 .masthead-sub{font:600 11px Barlow;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+.masthead-rule{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px}
+.masthead-rule::before,.masthead-rule::after{content:"";width:120px;height:1px}
+.masthead-rule::before{background:linear-gradient(90deg,transparent,var(--gold))}
+.masthead-rule::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.masthead-rule i{width:6px;height:6px;background:var(--gold-bright);transform:rotate(45deg)}
 
 .gallery{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;align-items:flex-start}
 
@@ -94,36 +112,91 @@ a:hover{color:var(--gold-bright)}
      box comes from tight row padding (3px) and section margins (7px). That
      buffer is deliberate - iOS/Safari wraps a few lines more than Chromium. */
   min-height:925px;
-  background:linear-gradient(var(--panel-a),var(--panel-b));
-  border:2px solid var(--gold-line);
+  /* The 2px border stays in the box (the print maths count it) but is drawn
+     by the frame, which paints from the border's outer edge. */
+  border:2px solid transparent;
   border-radius:0;            /* sharp: prototype is guillotined, not corner-punched */
   padding:22px 22px 18px;
   display:flex;
   flex-direction:column;
-  box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.55);
+  /* --frame on top, then a faint sunburst behind the name, then lacquer */
+  background:
+    var(--frame) 0 0 / 100% 100% no-repeat border-box,
+    radial-gradient(ellipse 60% 18% at 50% 4%,rgba(212,175,55,.09),transparent 70%) border-box,
+    linear-gradient(var(--lacquer-a),var(--panel-b) 40%,var(--lacquer-b)) border-box;
+  box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.45);
   overflow:hidden;
+
+  /* The frame: the board's dress at the card's own size (608 x 969 px, the
+     border box), as the Town Planner and the card backs wear it. A gilt keyline
+     with a jewel on each Deco chamfer, a dark seat and a hairline inside it,
+     then an inner keyline stepped at each corner. The quarter fans sit in the
+     top corners only: the fronts' last rows run into the bottom ones. Drawn
+     to the box's min height; a card that grows on a phone stretches it a
+     touch, and print pins every card to the box. # is written %23. */
+  --frame:url("data:image/svg+xml,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 608 969' preserveAspectRatio='none'>\
+<defs>\
+<linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+<stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
+<stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
+<stop offset='1' stop-color='%23f6e3a1'/></linearGradient>\
+<path id='diamond' d='M0-2.6L2.6 0L0 2.6L-2.6 0Z' fill='%23e8cc72'/>\
+</defs>\
+<path d='M16 6H592L602 16V953L592 963H16L6 953V16Z' fill='none' stroke='url(%23g)' stroke-width='2.2'/>\
+<path d='M17.6 7.6H590.4L600.4 17.6V951.4L590.4 961.4H17.6L7.6 951.4V17.6Z' fill='none' stroke='%23000' stroke-opacity='.6' stroke-width='.7'/>\
+<path d='M19.8 9.8H588.2L598.2 19.8V949.2L588.2 959.2H19.8L9.8 949.2V19.8Z' fill='none' stroke='%23b9932f' stroke-opacity='.4' stroke-width='.7'/>\
+<use href='%23diamond' x='11' y='11'/><use href='%23diamond' x='597' y='11'/>\
+<use href='%23diamond' x='597' y='958'/><use href='%23diamond' x='11' y='958'/>\
+<path d='M26 16H582V26H592V943H582V953H26V943H16V26H26Z' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.8'/>\
+<path fill='none' stroke='%23b9932f' stroke-opacity='.75' stroke-width='.8' stroke-linecap='round' d='\
+M29.19 26.85L36.63 28.85M28.86 27.65L32.86 29.96M28.33 28.33L33.78 33.78M27.65 28.86L29.96 32.86M26.85 29.19L28.85 36.63\
+M29.3 26A3.3 3.3 0 0 1 26 29.3M37.88 26A11.88 11.88 0 0 1 26 37.88\
+M581.15 29.19L579.15 36.63M580.35 28.86L578.04 32.86M579.67 28.33L574.22 33.78M579.14 27.65L575.14 29.96M578.81 26.85L571.37 28.85\
+M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
+</svg>");
 }
 /* Mob colour = the player's piece colour. One value per mob; swap freely.
    Nothing in the RULES references a colour, so the pairing is canonical, not binding.
-   Reference cards (no .card--*) fall back to gold. */
+   Reference cards (no .card--*) carry no colour. */
 .card--red{--mob:#c0392b}
 .card--green{--mob:#3f8551}
 .card--blue{--mob:#3a6ea5}
 .card--yellow{--mob:#e0a11b}
-.card-bar{position:absolute;top:0;left:0;right:0;height:6px;background:var(--mob,var(--gold-line))}
+/* The mob's colour as an enamel band set into the frame's head, between its
+   hairline and the inner keyline (it was a bar along the card's top edge). */
+.card-bar{
+  position:absolute;top:9px;left:28px;right:28px;height:5px;
+  background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,0) 50%,rgba(0,0,0,.25)),var(--mob,transparent);
+  clip-path:polygon(5px 0,calc(100% - 5px) 0,100% 50%,calc(100% - 5px) 100%,5px 100%,0 50%);
+}
 /* Sits inside the existing kicker line, so it adds no card height (cards are height-bound at print) */
 .mob-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mob);
   border:1px solid rgba(0,0,0,.5);box-shadow:0 0 0 1px rgba(232,200,90,.35);
   vertical-align:middle;margin-right:6px;position:relative;top:-1px}
-.card-frame{position:absolute;inset:6px;border:1px solid rgba(185,147,47,.35);border-radius:0;pointer-events:none}
 
-.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:2px solid var(--gold-line);padding-bottom:10px}
-.card-head--back{align-items:center}
+/* The head, centred: kicker, the name cut into a gilt plate (as the Town Planner's,
+   the Ledger's and the card backs' are), and the tagline. The plate is sized to the
+   old name line, so the head is no taller. */
+.card-head{position:relative;text-align:center;padding-bottom:10px;margin-bottom:2px}
+.card-head::before{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--gold-line) 18%,var(--gold-line) 82%,transparent)}
+.card-head::after{content:"";position:absolute;left:50%;bottom:-3.3px;width:6px;height:6px;margin-left:-3px;
+  background:var(--gold-bright);transform:rotate(45deg)}
 .kicker{font:600 8px Barlow;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase}
-.mob-name{font:700 25px Cinzel,serif;color:var(--gold-bright);letter-spacing:.5px;line-height:1.05;margin-top:3px}
-.mob-tag{font:italic 500 11px Barlow;color:var(--muted);margin-top:3px}
-.back-title{font:700 23px Cinzel,serif;color:var(--gold-bright);letter-spacing:.5px;margin-top:3px}
-.back-dia{width:16px;height:16px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 0 2px rgba(0,0,0,.3)}
+.plate{display:inline-flex;align-items:center;gap:10px;margin-top:3px}
+.plate::before,.plate::after{content:"";width:5px;height:5px;background:var(--gold-bright);transform:rotate(45deg)}
+.mob-name,.back-title{
+  display:inline-block;
+  padding:4px 24px 3px;
+  font:700 20px/1 Cinzel,serif;letter-spacing:.6px;
+  color:#2a1d0c;
+  text-shadow:0 1px 0 rgba(255,244,205,.55);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f6e3a1'/%3E%3Cstop offset='.45' stop-color='%23c9a437'/%3E%3Cstop offset='1' stop-color='%238a6c2c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M4 0 H96 L100 5 L96 10 H4 L0 5 Z' fill='url%28%23g%29'/%3E%3Cpath d='M4.6 .9 H95.4 L98.9 5 L95.4 9.1 H4.6 L1.1 5 Z' fill='none' stroke='%232a1d0c' stroke-opacity='.55' stroke-width='.35' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  filter:drop-shadow(0 1.5px 1.5px rgba(0,0,0,.65));
+}
+.mob-tag{font:italic 500 11px Barlow;color:var(--muted);margin-top:4px}
+.back-sub{font:italic 500 11px Barlow;color:var(--muted);margin-top:4px}
 
 /* Inline emphasis inside body copy */
 .desc b,.trait-body b,.flow-body b,.pin-note b{color:var(--gold-em);font-weight:700}
@@ -138,26 +211,47 @@ a:hover{color:var(--gold-bright)}
 .nb{white-space:nowrap}
 
 /* ============================================================
-   SECTION HEADS
+   SECTION HEADS: the Town Planner's, a gilt jewel and a fading
+   rule that ends on a small diamond
    ============================================================ */
 .sec{display:flex;align-items:center;gap:8px;margin:8px 0 4px}
 .sec--trait{margin-bottom:4px}
 .sec--res{margin-bottom:5px}
-.sec--flow{margin:12px 0 5px}
+.sec--flow{margin:16px 0 6px}
 .sec--sig{margin:5px 0 4px}
-.sec-dia{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.sec-dia{width:8px;height:8px;background:var(--gilt-face);transform:rotate(45deg)}
 .sec--sig .sec-dia{width:9px;height:9px}
-.sec-name{font:700 11px Cinzel,serif;letter-spacing:2.5px;color:var(--gold-label)}
-.sec-rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.7),transparent)}
+.sec-name{font:700 11.5px Cinzel,serif;letter-spacing:2.5px;color:var(--gold-label)}
+.sec-rule{flex:1;display:flex;align-items:center}
+.sec-rule::before{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.75),rgba(185,147,47,.12))}
+.sec-rule::after{content:"";width:4px;height:4px;margin-left:3px;background:var(--gold-dim);transform:rotate(45deg);opacity:.7}
 
 /* ============================================================
    TRAIT + SIGNATURE PANELS
+   Lacquer panels in a gilt keyline, cut on the Deco chamfer (the
+   board's plaques), where they were rounded boxes.
    ============================================================ */
-.trait{border:1px solid var(--panel-line);border-radius:9px;background:var(--wash);padding:9px 13px}
+.trait,.sig,.flow-cell,.bonus-cell{
+  --c:7px;
+  position:relative;isolation:isolate;
+  border:0;border-radius:0;
+  background:rgba(185,147,47,.55);
+  clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% var(--c),100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,var(--c) 100%,0 calc(100% - var(--c)),0 var(--c));
+}
+.trait::before,.sig::before,.flow-cell::before,.bonus-cell::before{
+  content:"";position:absolute;inset:1px;z-index:-1;
+  background:radial-gradient(ellipse 90% 80% at 50% 0%,rgba(201,164,55,.08),transparent 70%),linear-gradient(#251b12,#120c07);
+  clip-path:polygon(calc(var(--c) - .4px) 0,calc(100% - var(--c) + .4px) 0,100% calc(var(--c) - .4px),100% calc(100% - var(--c) + .4px),calc(100% - var(--c) + .4px) 100%,calc(var(--c) - .4px) 100%,0 calc(100% - var(--c) + .4px),0 calc(var(--c) - .4px));
+}
+.trait{padding:10px 14px}
 .trait-name{font:700 12px Barlow;color:var(--ink-2)}
 .trait-body{font:400 11px/1.5 Barlow;color:var(--body)}
 
-.sig{margin-top:9px;border:1px solid var(--panel-line);border-radius:9px;background:var(--wash);padding:5px 12px 8px}
+/* The last panel sits on the card's foot, so every card in the set ends on one line */
+.sig{--c:9px;margin-top:9px;padding:6px 13px 9px}
+.sig:last-child{margin-top:auto}
+/* the old 9px gap, kept above it however full the card */
+.card>:nth-last-child(2){margin-bottom:9px}
 
 /* ============================================================
    PLAY ROWS
@@ -165,18 +259,23 @@ a:hover{color:var(--gold-bright)}
 /* Fronts are row-count-bound: ~14 rows, so every 1px here costs ~14px of card.
    4px is the ceiling that still clears the 925 print box on the busiest mob. */
 .play{display:flex;gap:11px;align-items:flex-start;padding:4px 2px;border-bottom:1px solid var(--rule)}
-.act{display:flex;gap:11px;align-items:flex-start;padding:5px 2px;border-bottom:1px solid var(--rule)}
+/* The backs are not row-bound (they share one layout and have room), so their rows breathe */
+.act{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
 
+/* A Play's cost in markers, so it is drawn as a marker's socket: a gilt bezel
+   round a lacquer floor, the Ledger's in miniature. */
 .cost{
-  flex:0 0 26px;height:26px;border-radius:50%;
-  border:1.5px solid var(--gold);color:var(--gold-bright);
+  flex:0 0 26px;height:26px;box-sizing:border-box;border-radius:50%;
+  border:1.6px solid transparent;color:var(--gold-bright);
   display:flex;align-items:center;justify-content:center;
   font:700 13px Cinzel,serif;
-  background:rgba(201,164,55,.08);
+  background:radial-gradient(circle at 50% 40%,#2e2216,#0c0805 75%) padding-box,var(--gilt) border-box;
+  box-shadow:0 1px 2px rgba(0,0,0,.6),inset 0 0 0 1px rgba(0,0,0,.55);
+  text-shadow:0 1px 1px rgba(0,0,0,.8);
 }
 .cost--sm{height:22px;font:700 12px Cinzel,serif}
-.cost--free{border-color:var(--gold-faint);color:var(--muted);background:none}
+.cost--free{color:var(--muted);background:radial-gradient(circle at 50% 40%,#1d150d,#0c0805 75%) padding-box,linear-gradient(135deg,#8c7744,#4a3d1e 52%,#8c7744) border-box}
 
 .name{flex:0 0 74px;font:700 12px Barlow;color:var(--ink-2);padding-top:4px}
 .name--sm{padding-top:2px}
@@ -190,19 +289,19 @@ a:hover{color:var(--gold-bright)}
    RESOLUTION TABLES
    ============================================================ */
 .res{display:flex;gap:10px}
-.res-tbl{flex:1;border:1px solid var(--panel-line);border-radius:7px;overflow:hidden}
+.res-tbl{flex:1;border:1px solid rgba(185,147,47,.55);box-shadow:0 0 0 2px rgba(0,0,0,.35),0 0 0 3px rgba(185,147,47,.16);background:rgba(8,5,3,.35)}
 .res-grid{display:grid;grid-template-columns:1fr 1fr}
-.res-h{background:var(--head-bg);color:var(--gold-label);font:700 10.5px Cinzel,serif;text-align:center;padding:6px 5px;border-bottom:1px solid var(--panel-line)}
-.res-k{text-align:center;padding:5px 4px;font:500 11.5px Barlow;color:var(--value);border-top:1px solid var(--cell)}
-.res-v{text-align:center;padding:5px 4px;font:700 11.5px Barlow;color:var(--gold-bright);border-top:1px solid var(--cell);border-left:1px solid var(--cell-strong)}
+.res-h{background:linear-gradient(#2a1f14,#140e09);color:var(--gold-label);font:700 10.5px Cinzel,serif;text-align:center;padding:6px 5px;border-bottom:1px solid var(--gold-line)}
+.res-k{text-align:center;padding:6px 4px;font:500 11.5px Barlow;color:var(--value);border-top:1px solid var(--cell)}
+.res-v{text-align:center;padding:6px 4px;font:700 11.5px Barlow;color:var(--gold-bright);border-top:1px solid var(--cell);border-left:1px solid var(--cell-strong)}
 /* first data row sits flush under the header rule */
 .res-grid>:nth-child(3),.res-grid>:nth-child(4){border-top:0}
 
 /* ============================================================
    COMBAT BONUS CHIPS
    ============================================================ */
-.bonus{display:flex;gap:8px;margin:11px 0 2px}
-.bonus-cell{flex:1;text-align:center;border:1px solid var(--flow-line);border-radius:7px;background:rgba(0,0,0,.25);padding:8px 3px}
+.bonus{display:flex;gap:8px;margin:13px 0 2px}
+.bonus-cell{flex:1;text-align:center;padding:8px 3px}
 .bonus-num{font:700 14px Cinzel,serif;color:var(--gold-bright)}
 .bonus-lbl{font:500 9.5px Barlow;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 
@@ -210,15 +309,25 @@ a:hover{color:var(--gold-bright)}
    COMBAT SEQUENCE
    ============================================================ */
 .flow{display:flex;gap:7px}
-.flow-cell{flex:1;border:1px solid var(--flow-line);border-radius:7px;background:var(--flow-bg);padding:9px 9px}
+.flow-cell{flex:1;padding:10px 10px}
 .flow-head{display:flex;align-items:center;gap:6px;margin-bottom:4px}
-.flow-num{width:18px;height:18px;background:var(--gold);color:#1b150e;font:700 10px Cinzel,serif;display:flex;align-items:center;justify-content:center;border-radius:3px}
+/* a step's number on a small gilt plate, as the Town Planner numbers its steps */
+.flow-num{
+  width:18px;height:18px;background:var(--gilt-face);color:#1b150e;
+  font:700 10px Cinzel,serif;text-shadow:0 1px 0 rgba(255,244,205,.5);
+  display:flex;align-items:center;justify-content:center;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0 calc(100% - 4px),0 4px);
+}
 .flow-name{font:700 11.5px Barlow;color:var(--ink-2)}
 .flow-body{font:400 10.5px/1.4 Barlow;color:var(--body-2)}
 
-.phase{background:var(--head-bg);border:1px solid var(--panel-line);border-radius:5px;padding:5px 8px;margin:12px 0 3px;font:700 10.5px Cinzel,serif;letter-spacing:1.5px;color:var(--gold-label);text-align:center}
-.phase--pinned{margin-top:10px}
-.pin-note{text-align:center;font:italic 500 10.5px Barlow;color:var(--muted);margin-top:7px}
+/* Who chooses: a title between gilt rules, as the Town Planner heads its plaque */
+.phase{display:flex;align-items:center;gap:9px;margin:17px 0 4px;font:700 11px Cinzel,serif;letter-spacing:1.5px;color:var(--gold-label)}
+.phase::before,.phase::after{content:"";flex:1;height:1px}
+.phase::before{background:linear-gradient(90deg,transparent,rgba(185,147,47,.6))}
+.phase::after{background:linear-gradient(90deg,rgba(185,147,47,.6),transparent)}
+.phase--pinned{margin-top:15px}
+.pin-note{text-align:center;font:italic 500 10.5px Barlow;color:var(--muted);margin-top:8px}
 
 /* ============================================================
    PRINT
@@ -240,6 +349,7 @@ a:hover{color:var(--gold-bright)}
     <div class="masthead-kicker">Prohibition · New York · 1929</div>
     <div class="masthead-title">Moonshine Kingdom</div>
     <div class="masthead-sub">The Four Mob Playbooks</div>
+    <div class="masthead-rule"><i></i></div>
   </div>
 
   <div class="gallery">
@@ -247,28 +357,25 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ SICILIAN FRONT ============ -->
   <div data-card class="card card--yellow">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
     <div class="card-head">
-      <div>
-        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Yellow</div>
-        <div class="mob-name">Sicilian Syndicate</div>
-        <div class="mob-tag">Old money. Longer memory.</div>
-      </div>
+      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Yellow</div>
+      <div class="plate"><span class="mob-name">Sicilian Syndicate</span></div>
+      <div class="mob-tag">Old money. Longer memory.</div>
     </div>
 
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
+    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
     <div class="trait"><span class="trait-name">Untouchable.</span> <span class="trait-body">The precinct captains are on the payroll. Police Squads never enter your <b>Safehouse</b> District during a Raid; if it would be targeted, they choose the next most wanted legal District in reach.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any Mobsters and/or Barrels from one District to a connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and every barrel pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -276,7 +383,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
@@ -293,7 +400,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">Buy <b>1 permanent Influence</b> for your Reserves: <b>$2,000</b> for your 7th marker, then <b>$3,000</b>, <b>$4,000</b> and <b>$5,000</b>. Ceiling <b>10</b>; at 10, claim <b>the Nod</b>, your key to <b>Take the Crown</b>. <b>Boss required.</b></div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
@@ -310,7 +417,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">With your Boss <b>off the board</b>, place him in any <b>Safe Ward</b>.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">ACCOUNTING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Accounting</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
@@ -328,7 +435,7 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">SIGNATURE PLAYS</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Signature Plays</span><span class="sec-rule"></span></div>
       <div class="play">
         <div class="cost">2</div>
         <div class="name">Hit <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
@@ -345,16 +452,12 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ SICILIAN BACK ============ -->
   <div data-card class="card">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
-    <div class="card-head card-head--back">
-      <div>
-        <div class="kicker">Combat Reference</div>
-        <div class="back-title">The Lowdown</div>
-      </div>
-      <span class="back-dia"></span>
+    <div class="card-head">
+      <div class="kicker">Combat Reference</div>
+      <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 
-    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">RESOLUTION</span><span class="sec-rule"></span></div>
+    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">Resolution</span><span class="sec-rule"></span></div>
     <div class="res">
       <div class="res-tbl">
         <div class="res-grid">
@@ -385,7 +488,7 @@ a:hover{color:var(--gold-bright)}
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
-    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">COMBAT SEQUENCE</span><span class="sec-rule"></span></div>
+    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">Combat Sequence</span><span class="sec-rule"></span></div>
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
@@ -401,19 +504,19 @@ a:hover{color:var(--gold-bright)}
       </div>
     </div>
 
-    <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
+    <div class="phase">Standoff &middot; Occupier's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm"><b>Only you roll</b>, at +1 Threat: the Invader can't fire back. Pins the Invader. Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District: flee to a Connected Safe District, abandoning Safehouse and Liquor. Nowhere to go? No Fold.</div></div>
 
-    <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
+    <div class="phase phase--pinned">Pinned &middot; Invader's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters, with any barrels they carry, to a Safe District Connected to this one, across water if you like.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
       <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
     </div>
@@ -422,28 +525,25 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ VIPERS FRONT ============ -->
   <div data-card class="card card--red">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
     <div class="card-head">
-      <div>
-        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Red</div>
-        <div class="mob-name">East Side Vipers</div>
-        <div class="mob-tag">They hear it before you say it.</div>
-      </div>
+      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Red</div>
+      <div class="plate"><span class="mob-name">East Side Vipers</span></div>
+      <div class="mob-tag">They hear it before you say it.</div>
     </div>
 
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
+    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
     <div class="trait"><span class="trait-name">Whispers.</span> <span class="trait-body">You may look at the <b>top card of the Jobs deck</b> at any time. Keep it to yourself.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any Mobsters and/or Barrels from one District to a connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and every barrel pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -451,7 +551,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
@@ -468,7 +568,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">Buy <b>1 permanent Influence</b> for your Reserves: <b>$2,000</b> for your 7th marker, then <b>$3,000</b>, <b>$4,000</b> and <b>$5,000</b>. Ceiling <b>10</b>; at 10, claim <b>the Nod</b>, your key to <b>Take the Crown</b>. <b>Boss required.</b></div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
@@ -485,7 +585,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">With your Boss <b>off the board</b>, place him in any <b>Safe Ward</b>.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">ACCOUNTING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Accounting</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
@@ -503,11 +603,11 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">SIGNATURE PLAYS</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Signature Plays</span><span class="sec-rule"></span></div>
       <div class="play">
         <div class="cost">1</div>
         <div class="name">Stealth</div>
-        <div class="desc">Move up to 5 Mobsters (no liquor) into a connected rival District. <b>Pinned</b>, but the Occupier can only <b>Hold Fire</b>.</div>
+        <div class="desc">Move up to 5 Mobsters (no liquor) into a Connected rival District. <b>Pinned</b>, but the Occupier can only <b>Hold Fire</b>.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
@@ -520,16 +620,12 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ VIPERS BACK ============ -->
   <div data-card class="card">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
-    <div class="card-head card-head--back">
-      <div>
-        <div class="kicker">Combat Reference</div>
-        <div class="back-title">The Lowdown</div>
-      </div>
-      <span class="back-dia"></span>
+    <div class="card-head">
+      <div class="kicker">Combat Reference</div>
+      <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 
-    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">RESOLUTION</span><span class="sec-rule"></span></div>
+    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">Resolution</span><span class="sec-rule"></span></div>
     <div class="res">
       <div class="res-tbl">
         <div class="res-grid">
@@ -560,7 +656,7 @@ a:hover{color:var(--gold-bright)}
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
-    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">COMBAT SEQUENCE</span><span class="sec-rule"></span></div>
+    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">Combat Sequence</span><span class="sec-rule"></span></div>
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
@@ -576,19 +672,19 @@ a:hover{color:var(--gold-bright)}
       </div>
     </div>
 
-    <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
+    <div class="phase">Standoff &middot; Occupier's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm"><b>Only you roll</b>, at +1 Threat: the Invader can't fire back. Pins the Invader. Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District: flee to a Connected Safe District, abandoning Safehouse and Liquor. Nowhere to go? No Fold.</div></div>
 
-    <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
+    <div class="phase phase--pinned">Pinned &middot; Invader's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters, with any barrels they carry, to a Safe District Connected to this one, across water if you like.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
       <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
     </div>
@@ -597,28 +693,25 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ KNIGHTS FRONT ============ -->
   <div data-card class="card card--blue">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
     <div class="card-head">
-      <div>
-        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Blue</div>
-        <div class="mob-name">Harlem Knights</div>
-        <div class="mob-tag">Every pier from Havana to Harlem.</div>
-      </div>
+      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Blue</div>
+      <div class="plate"><span class="mob-name">Harlem Knights</span></div>
+      <div class="mob-tag">Every pier from Havana to Harlem.</div>
     </div>
 
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
+    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
     <div class="trait"><span class="trait-name">Network.</span> <span class="trait-body">Friends on every pier from Havana to Harlem. Whenever you <b>Trade</b> at a Dock, gain <b>1 extra barrel</b> of Havana Rum free, if one's left in the supply.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any Mobsters and/or Barrels from one District to a connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and every barrel pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -626,7 +719,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
@@ -643,7 +736,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">Buy <b>1 permanent Influence</b> for your Reserves: <b>$2,000</b> for your 7th marker, then <b>$3,000</b>, <b>$4,000</b> and <b>$5,000</b>. Ceiling <b>10</b>; at 10, claim <b>the Nod</b>, your key to <b>Take the Crown</b>. <b>Boss required.</b></div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
@@ -660,7 +753,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">With your Boss <b>off the board</b>, place him in any <b>Safe Ward</b>.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">ACCOUNTING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Accounting</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
@@ -678,7 +771,7 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">SIGNATURE PLAYS</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Signature Plays</span><span class="sec-rule"></span></div>
       <div class="play">
         <div class="cost">1</div>
         <div class="name">Skiff</div>
@@ -695,16 +788,12 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ KNIGHTS BACK ============ -->
   <div data-card class="card">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
-    <div class="card-head card-head--back">
-      <div>
-        <div class="kicker">Combat Reference</div>
-        <div class="back-title">The Lowdown</div>
-      </div>
-      <span class="back-dia"></span>
+    <div class="card-head">
+      <div class="kicker">Combat Reference</div>
+      <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 
-    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">RESOLUTION</span><span class="sec-rule"></span></div>
+    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">Resolution</span><span class="sec-rule"></span></div>
     <div class="res">
       <div class="res-tbl">
         <div class="res-grid">
@@ -735,7 +824,7 @@ a:hover{color:var(--gold-bright)}
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
-    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">COMBAT SEQUENCE</span><span class="sec-rule"></span></div>
+    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">Combat Sequence</span><span class="sec-rule"></span></div>
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
@@ -751,19 +840,19 @@ a:hover{color:var(--gold-bright)}
       </div>
     </div>
 
-    <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
+    <div class="phase">Standoff &middot; Occupier's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm"><b>Only you roll</b>, at +1 Threat: the Invader can't fire back. Pins the Invader. Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District: flee to a Connected Safe District, abandoning Safehouse and Liquor. Nowhere to go? No Fold.</div></div>
 
-    <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
+    <div class="phase phase--pinned">Pinned &middot; Invader's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters, with any barrels they carry, to a Safe District Connected to this one, across water if you like.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
       <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
     </div>
@@ -772,28 +861,25 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ IRISH FRONT ============ -->
   <div data-card class="card card--green">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
     <div class="card-head">
-      <div>
-        <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Green</div>
-        <div class="mob-name">Hell's Kitchen Irish</div>
-        <div class="mob-tag">They always come heavy.</div>
-      </div>
+      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Green</div>
+      <div class="plate"><span class="mob-name">Hell's Kitchen Irish</span></div>
+      <div class="mob-tag">They always come heavy.</div>
     </div>
 
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">FACTION TRAIT</span><span class="sec-rule"></span></div>
+    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
     <div class="trait"><span class="trait-name">Firepower.</span> <span class="trait-body">They always come heavy. When you <b>Open Fire</b>, roll <b>1 extra attack die</b> (max 5). Invading only, never on defence, not even an Ambush.</span></div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">LOGISTICS</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send any Mobsters and/or Barrels from one District to a connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send any Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but stop being yours where you don't Control. Mobsters into rival turf: <b>Standoff</b>. Undefended rival <b>Safehouse</b>: take or raze it, no Standoff. Never into Police turf.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and every barrel pays a <b>Kickback</b> (1 spent Influence per barrel). 4+ barrels: Greed Tax.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 4+ barrels: Greed Tax.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -801,7 +887,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">DIPLOMACY</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
@@ -818,7 +904,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">Buy <b>1 permanent Influence</b> for your Reserves: <b>$2,000</b> for your 7th marker, then <b>$3,000</b>, <b>$4,000</b> and <b>$5,000</b>. Ceiling <b>10</b>; at 10, claim <b>the Nod</b>, your key to <b>Take the Crown</b>. <b>Boss required.</b></div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">EMPIRE BUILDING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Recruit</div>
@@ -835,7 +921,7 @@ a:hover{color:var(--gold-bright)}
       <div class="desc">With your Boss <b>off the board</b>, place him in any <b>Safe Ward</b>.</div>
     </div>
 
-    <div class="sec"><span class="sec-dia"></span><span class="sec-name">ACCOUNTING</span><span class="sec-rule"></span></div>
+    <div class="sec"><span class="sec-dia"></span><span class="sec-name">Accounting</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Extort <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
@@ -853,7 +939,7 @@ a:hover{color:var(--gold-bright)}
     </div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">SIGNATURE PLAYS</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Signature Plays</span><span class="sec-rule"></span></div>
       <div class="play">
         <div class="cost">1</div>
         <div class="name">Plunder</div>
@@ -870,16 +956,12 @@ a:hover{color:var(--gold-bright)}
   <!-- ============ IRISH BACK ============ -->
   <div data-card class="card">
     <div class="card-bar"></div>
-    <div class="card-frame"></div>
-    <div class="card-head card-head--back">
-      <div>
-        <div class="kicker">Combat Reference</div>
-        <div class="back-title">The Lowdown</div>
-      </div>
-      <span class="back-dia"></span>
+    <div class="card-head">
+      <div class="kicker">Combat Reference</div>
+      <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 
-    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">RESOLUTION</span><span class="sec-rule"></span></div>
+    <div class="sec sec--res"><span class="sec-dia"></span><span class="sec-name">Resolution</span><span class="sec-rule"></span></div>
     <div class="res">
       <div class="res-tbl">
         <div class="res-grid">
@@ -910,7 +992,7 @@ a:hover{color:var(--gold-bright)}
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
-    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">COMBAT SEQUENCE</span><span class="sec-rule"></span></div>
+    <div class="sec sec--flow"><span class="sec-dia"></span><span class="sec-name">Combat Sequence</span><span class="sec-rule"></span></div>
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
@@ -926,19 +1008,19 @@ a:hover{color:var(--gold-bright)}
       </div>
     </div>
 
-    <div class="phase">STANDOFF &middot; OCCUPIER'S CHOICE</div>
+    <div class="phase">Standoff &middot; Occupier's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Ambush <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm"><b>Only you roll</b>, at +1 Threat: the Invader can't fire back. Pins the Invader. Firing first, the fight's Heat is yours. Spent out or Laid Low? No Ambush.</div></div>
     <div class="act"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Hold Fire</div><div class="desc desc--sm">Pins the Invader without a fight, letting them pass through unharmed.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fold</div><div class="desc desc--sm">Surrender the District: flee to a Connected Safe District, abandoning Safehouse and Liquor. Nowhere to go? No Fold.</div></div>
 
-    <div class="phase phase--pinned">PINNED &middot; INVADER'S CHOICE</div>
+    <div class="phase phase--pinned">Pinned &middot; Invader's Choice</div>
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Open Fire <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div><div class="desc desc--sm">vs Rival. Roll Muscle; both sides kill. Only the fight's first shot draws Heat: yours if the Occupier Held Fire, already his if he Ambushed.</div></div>
-    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters (with any barrels they hold) to a safe connected District.</div></div>
+    <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters, with any barrels they carry, to a Safe District Connected to this one, across water if you like.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
 
     <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">COOPERATION</span><span class="sec-rule"></span></div>
+      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
       <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
       <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
     </div>
