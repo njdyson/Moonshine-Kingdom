@@ -288,7 +288,7 @@ function section9() {
   row({ r: 4, b: 1, irish: true }, fortress, "ambush");
   console.log("   Sicilian Hit into the fortress (lesson 20: four times in five)");
   for (const r of [4, 5, 6]) row({ r, b: 1, hit: true }, fortress, "ambush");
-  console.log("   Vipers Stealth (the Occupier can only Hold Fire) vs the front door (lesson 20)");
+  console.log("   Vipers Stealth (no Ambush: the Occupier Holds Fire and stands) vs the front door (lesson 20)");
   row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "hold");
   row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "ambush");
   console.log("   Knights Torch: the same three markers, one of them spent on the match (lesson 20)");

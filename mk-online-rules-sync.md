@@ -603,6 +603,17 @@ Offers. See `jobs-system-handoff.md` §2b, *The restock*.
 | 19.3 | Bots may count on the refill a Take reveals. | **No refill mid-Offers.** A bot's claim tomorrow is from the cards on the table today (less what higher tokens take), which makes the late token's first pick worth more in the Lay Low heuristic (8.4). |
 | 19.4 | Whispers peeks at the deck top. | **Unchanged.** The top card is now the first card of tomorrow's restock. |
 
+## 20. Stealth blocks the Ambush, not the Fold (2026-10-08, amends the 2026-09-30 ruling)
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 20.1 | A Stealth skips the Occupier's answer: the fight opens Pinned, as if he had Held Fire. | **It opens on the Occupier's answer, as any Move does.** He may Hold Fire (the usual Pin) or Fold. |
+| 20.2 | The Occupier cannot Ambush a Stealth, because the answer step never comes. | **He still cannot Ambush**, now refused at the answer itself, even with a marker in hand. |
+
+Ported the same day (mk-online cbfc27d): `stealth` opens the Standoff through `initiateCombat` with a
+`stealth` flag, and `ambushBlockReason` refuses the Ambush for it, so the UI, the harness options and
+the bots' answer (which may now Fold) all follow. `scripts/stealth-check.ts` guards it.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -715,3 +726,4 @@ Offers. See `jobs-system-handoff.md` §2b, *The restock*.
 - [x] **Starting turf: the North on 8, 9, 10; the South on 4, 5, 6** (§18)
 - [ ] **The Market restocks after the Offers** (19.1); the opening Market is face-down and Day 1 has no Offers (19.2)
 - [ ] **Bots: no refill mid-Offers; value the late token's first pick on today's Market** (19.3)
+- [x] **Stealth blocks the Ambush, not the Fold** (§20): it opens on the Occupier's answer

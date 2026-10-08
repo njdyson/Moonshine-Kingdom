@@ -460,7 +460,7 @@ Play"**: The Pier Six Brawl · The Irish Goodbye · The Butcher's Ledger.
 | Queens | The Toll Booth Trap | kill the **head** | Sicilian Syndicate | **Hit** — the Boss takes the first hit |
 | Manhattan | Bloody Sunday | burn the **base** | Harlem Knights | **Torch** — burn a rival Safehouse |
 | Brooklyn | The Butcher's Ledger | the **body count** | Hell's Kitchen Irish | **Firepower** — +1 die, Open Fire only |
-| Bronx | Over the Top | take the **ground** | East Side Vipers | **Stealth** — no Ambush, and they cannot Fold |
+| Bronx | Over the Top | take the **ground** | East Side Vipers | **Stealth**: no Ambush |
 
 Three consequences: **(1)** four distinct acts, so no two bounties are the same card twice; **(2)** every
 mob has one marquee 5 its trait was made for; **(3)** all four MUST stay outcome-worded or each
