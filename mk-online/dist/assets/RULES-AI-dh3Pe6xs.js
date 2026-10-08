@@ -131,7 +131,7 @@ Hits remove **Runners first**, then the Boss.
 
 - **Ambush** (1): only the Occupier rolls, at +1 Threat. This is the fight's Heat marker, and it pins the Invader. It needs a Ledger marker and is not allowed once you have Laid Low.
 - **Hold Fire** (0): the Invader is pinned and no one rolls.
-- **Fold** (0): the Occupier's Mobsters flee to one Connected Safe District, leaving the barrels. The Invader takes Control, the barrels, and the choice to take over or raze the Safehouse. It is not allowed with nowhere Safe to flee.
+- **Fold** (0): the Occupier's Mobsters **Scram**: they run to one Connected Safe District (across water via Docks too), never the one the Invader came from, leaving the barrels. The Invader takes Control, the barrels, and the choice to take over or raze the Safehouse. It is not allowed with nowhere Safe to Scram.
 
 **Step 2: Pinned.** The Invader repeats until the fight resolves:
 
@@ -158,7 +158,7 @@ Hits remove **Runners first**, then the Boss.
 - **Target District**: that mob's reachable District with the **most barrels**; ties go to the highest Still Pressure.
 - **Scatter**: the Squad moves in.
   - The Safehouse there burns (back to supply) and all barrels there go to the supply.
-  - Mobsters flee to one Connected Safe District (across water via Docks too, as for Fold), never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low.
+  - Mobsters **Scram**, as from a Fold: to one Connected Safe District (across water via Docks too), never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low.
   - With no such District they are all arrested (back to supply, Boss included).
   - The Squad now holds and padlocks the District.
 - **Aftermath**: all Heat markers return to their owners' Reserves.
