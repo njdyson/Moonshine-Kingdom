@@ -193,12 +193,11 @@ M26 939.7A3.3 3.3 0 0 1 29.3 943M26 931.12A11.88 11.88 0 0 1 37.88 943'/>\
 .step-body b,.final-text b,.raid-note b{color:var(--gold-bright);font-weight:700}
 .step-body i{font-style:italic}
 b.silver{color:var(--silver)}
+.nowrap{white-space:nowrap}
 
 /* ============================================================
-   PHASE RAIL: the Day's two phases on lacquered plaques
+   PLAQUE: a gilt edge round a lacquer face, cut on the Deco chamfer
    ============================================================ */
-.rail{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);align-items:center;gap:10px;margin-top:16px}
-/* A plaque: a gilt edge round a lacquer face, both cut on the Deco chamfer */
 .plaque{
   --c:8px;
   position:relative;
@@ -211,20 +210,17 @@ b.silver{color:var(--silver)}
   background:linear-gradient(#2c2115,var(--lacquer-b));
   clip-path:polygon(calc(var(--c) - .6px) 0,calc(100% - var(--c) + .6px) 0,100% calc(var(--c) - .6px),100% calc(100% - var(--c) + .6px),calc(100% - var(--c) + .6px) 100%,calc(var(--c) - .6px) 100%,0 calc(100% - var(--c) + .6px),0 calc(var(--c) - .6px));
 }
-.rail .plaque-face{text-align:center;padding:7px 8px 8px}
-.rail-tag{display:block;font:600 7px Barlow;letter-spacing:2.6px;color:var(--gold-dim);text-transform:uppercase}
-.rail-name{display:block;font:700 14px Cinzel,serif;letter-spacing:1px;color:var(--gold-bright);margin-top:1px}
-.rail-sub{display:block;font:600 7.5px Barlow;letter-spacing:.8px;color:var(--muted);text-transform:uppercase;margin-top:1px}
-/* The Ledger's gilt chevron */
-.chev{justify-self:center;width:13px;height:20px;background:var(--gilt-face);clip-path:polygon(0 0,45% 0,100% 50%,45% 100%,0 100%,55% 50%)}
 
 /* ============================================================
    SECTION HEADS
    ============================================================ */
-.sec{display:flex;align-items:center;gap:10px;margin:20px 0 4px}
+.sec{display:flex;align-items:flex-end;gap:10px;margin:18px 0 3px}
+.card-head+.sec{margin-top:14px}
+.sec-title{display:flex;flex-direction:column}
+.sec-tag{font:600 7px Barlow;letter-spacing:2.6px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1px}
 .sec-name{font:700 17px Cinzel,serif;letter-spacing:1px;color:var(--gold-bright);text-shadow:0 1px 3px rgba(0,0,0,.6)}
-.sec-kicker{font:italic 500 10px Barlow;color:var(--muted)}
-.sec-rule{flex:1;display:flex;align-items:center}
+.sec-kicker{font:italic 500 10px Barlow;color:var(--muted);padding-bottom:3px}
+.sec-rule{flex:1;display:flex;align-items:center;align-self:center;margin-top:8px}
 .sec-rule::before{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(185,147,47,.75),rgba(185,147,47,.12))}
 .sec-rule::after{content:"";width:4px;height:4px;margin-left:3px;background:var(--gold-dim);transform:rotate(45deg);opacity:.7}
 
@@ -261,7 +257,7 @@ b.silver{color:var(--silver)}
 /* The Hustle repeats until everyone lays low, so its beats are jewels, not numbers */
 .step-dot{position:relative;z-index:1;flex:0 0 23px;height:23px;display:flex;align-items:center;justify-content:center}
 .step-dot::before{content:"";width:10px;height:10px;background:var(--gilt-face);transform:rotate(45deg);box-shadow:0 0 0 3px #150f0a}
-.step-label{flex:0 0 92px;font:700 12px Barlow;color:var(--ink-2);padding-top:3px}
+.step-label{flex:0 0 102px;font:700 12px Barlow;color:var(--ink-2);padding-top:3px}
 .step-label--narrow{flex-basis:84px}
 .steps--raid .step{padding:5px 2px 5px 0}
 .step-body{flex:1;font:400 11px/1.42 Barlow;color:var(--body);padding-top:2.5px}
@@ -495,71 +491,65 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="head-rule"><i></i></div>
     </div>
 
-    <div class="rail">
-      <div class="plaque"><div class="plaque-face"><span class="rail-tag">Phase I</span><span class="rail-name">Shadows</span><span class="rail-sub">Production</span></div></div>
-      <span class="chev"></span>
-      <div class="plaque"><div class="plaque-face"><span class="rail-tag">Phase II</span><span class="rail-name">The Hustle</span><span class="rail-sub">Action Cycle</span></div></div>
-    </div>
-
     <!-- PHASE 1 -->
     <div class="sec">
-      <span class="sec-name">Shadows</span>
-      <span class="sec-kicker">Fill barrels and open new deals</span>
+      <span class="sec-title"><span class="sec-tag">Phase I</span><span class="sec-name">Shadows</span></span>
+      <span class="sec-kicker">Four steps, in order, before anyone makes a Play</span>
       <span class="sec-rule"></span>
     </div>
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-label">The Brew</div>
-        <div class="step-body"><span class="sub"><b>Roll:</b> Token #1 rolls <b>Red</b> (Players + 1).</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews <i>before the next drafts</i>. Brew = Mash + Red; matching Stills brew by Muscle Ratio. The Boss's Still also fires <b>1 Land Connected</b> Still.</span><span class="sub"><b>Barrels are first come, first served:</b> take yours as you brew, in whatever order you like.</span></div>
+        <div class="step-body"><span class="sub"><b>Roll:</b> Turn Token #1 rolls the <b>Red</b> pool: one die per player, plus one.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews <i>before the next drafts</i>: each of your Stills on Mash + Red pours its Muscle Ratio in barrels.</span><span class="sub"><b>Split the Batch:</b> If your Boss's Still fires, you may also fire <b>1 Land Connected</b> Still you Control.</span><span class="sub"><b>First come, first served:</b> Take barrels as you brew. If the Supply runs dry, later seats go short.</span></div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-label">The Blowback</div>
-        <div class="step-body">Leftover Red + Mash. Matching Stills <b>kill</b> by Muscle Ratio, Runners first.</div>
+        <div class="step-body">The leftover Red + Mash: every Still on that number bursts, <b>whoever Controls it</b>, and kills its Muscle Ratio in Mobsters there, Runners first.</div>
       </div>
       <div class="step">
         <span class="step-num">3</span>
-        <div class="step-label">Grease Wheels</div>
-        <div class="step-body"><span class="sub"><b>The Offers:</b> <i>Reverse</i> Turn Order. <b>Choose one:</b></span><span class="sub"><b>Take a Job:</b> Stake Reserves equal to its Stake.</span><span class="sub"><b>Walk Away:</b> Discard a claimed Job, markers home.</span><span class="sub"><b>Pass:</b> Take nothing, keep everything.</span><span class="sub sub--gap"><b>Then restock:</b> deal a Job into every gap. <i>Day 1: no Offers; turn the Market face-up.</i></span><span class="sub"><b>Then all Fund the Ledger:</b> fill 5 slots from Reserves. Only these pay.</span></div>
+        <div class="step-label">Grease the Wheels</div>
+        <div class="step-body"><span class="sub"><b>The Offers:</b> In <i>reverse</i> Turn Order, each boss chooses one:</span><span class="sub"><b>Take a Job:</b> Claim one and stake Reserves equal to its Stake.</span><span class="sub"><b>Walk Away:</b> Discard a Job you hold; its stake returns to Reserves.</span><span class="sub"><b>Stand Pat:</b> Change nothing.</span><span class="sub sub--gap"><b>Restock the Market:</b> Once all have chosen, deal a Job into every gap. <i>Day 1 has no Offers: turn the Market face-up.</i></span><span class="sub"><b>Fund the Ledger:</b> Everyone fills 5 slots from Reserves. Only these pay.</span></div>
       </div>
       <div class="step">
         <span class="step-num">4</span>
-        <div class="step-label">Harbormaster</div>
-        <div class="step-body"><span class="sub"><b>Set tomorrow's Mash:</b> Most <b>Docks</b> is the Harbormaster: name any face (1&ndash;6).</span><span class="sub">If tied for the lead, <b>roll</b> the Mash die.</span></div>
+        <div class="step-label">The Harbormaster</div>
+        <div class="step-body"><b>Set tomorrow's Mash:</b> Whoever Controls the most <b>Docks</b> names any face <span class="nowrap">(1&ndash;6)</span>. A tied lead <b>rolls</b> the die instead.</div>
       </div>
     </div>
 
     <!-- PHASE 2 -->
     <div class="sec">
-      <span class="sec-name">The Hustle</span>
-      <span class="sec-kicker">Take Plays in Turn Order until everyone lays low</span>
+      <span class="sec-title"><span class="sec-tag">Phase II</span><span class="sec-name">The Hustle</span></span>
+      <span class="sec-kicker">One Play a turn, in Turn Order, until the last boss Lays Low</span>
       <span class="sec-rule"></span>
     </div>
     <div class="steps">
       <div class="step">
         <span class="step-dot"></span>
-        <div class="step-label">Take Play</div>
-        <div class="step-body">Make <b>1 Play</b>: Standard 1, Power 2, <b>Lay Low</b> 0. Resolve combat first.</div>
+        <div class="step-label">Make a Play</div>
+        <div class="step-body">No passing: <b>Standard</b> costs 1 Influence, <b>Power</b> 2, <b>Lay Low</b> nothing. Resolve any combat it starts before the Play ends.</div>
       </div>
       <div class="step">
         <span class="step-dot"></span>
-        <div class="step-label">Resolve</div>
-        <div class="step-body">Spent markers return to Reserves. Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> sends 1 to the <b>Heat Track</b>.</div>
+        <div class="step-label">Pay the Cost</div>
+        <div class="step-body">Spent markers return to Reserves; a Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Play locks 1 on the <b>Heat Track</b>.</div>
       </div>
       <div class="step">
         <span class="step-dot"></span>
-        <div class="step-label">Lay Low (0)</div>
-        <div class="step-body"><span class="sub">The free Play that ends your Day, made on your turn.</span><span class="sub">Each unspent <b>Ledger</b> marker cashes for <b>$100</b>, the <b>Collect</b> rate, all at once.</span><span class="sub">Clear Ledger to Reserves, then take the top token from tomorrow's stack.</span></div>
+        <div class="step-label">Lay Low</div>
+        <div class="step-body">The free Play that ends your Day. Clear your <b>Ledger</b> to Reserves at <b>$100</b> per unspent marker, then take the top token from tomorrow's stack.</div>
       </div>
     </div>
 
     <div class="final plaque">
       <div class="plaque-face">
         <div class="final-title"><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg>The Crown &amp; Sunset<svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></div>
-        <div class="final-row"><span class="final-label">Take the Crown</span><span class="final-text">The <b>Nod</b>'s Power Play (2), claimed at 10 Influence. With your <b>Boss</b> in a <b>High Society Venue</b>, no unpaid <b>Mark</b> and <b>10+ Respect</b>, you win on the spot. Nothing else is settled.</span></div>
-        <div class="final-row"><span class="final-label">Respect</span><span class="final-text">Completed <b>Jobs</b>, less <b>2</b> for the <b>Rat</b> and <b>1</b> per <b>Welsher</b>.</span></div>
-        <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low, unmet promises take their <b>Welsher</b>. Flip today's Turn Tokens and begin the next Day.</span></div>
+        <div class="final-row"><span class="final-label">Take the Crown</span><span class="final-text">Win on the spot with this Power Play (2), made on your turn with <b>10+ Respect</b>, the <b>Nod</b> (claimed at 10 Influence), no unpaid <b>Mark</b> and your <b>Boss</b> in a <b>High Society Venue</b>. Nothing else is settled.</span></div>
+        <div class="final-row"><span class="final-label">Respect</span><span class="final-text">Your completed <b>Jobs</b>, less <b>2</b> while you hold the <b>Rat</b> and <b>1</b> per <b>Welsher</b>.</span></div>
+        <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low, each unmet promise earns its breaker a <b>Welsher</b>, and the tokens taken today become tomorrow's Turn Order.</span></div>
       </div>
     </div>
   </div>
@@ -789,12 +779,12 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="key">
         <div class="key-zones">
           <span class="key-item"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="key-name">Speakeasy</span><span><span class="cube cube--moon"></span>Moonshine $300</span><span class="key-sep">·</span><span><span class="cube cube--rum"></span>Rum $500</span></span>
-          <span class="key-item"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></span><span class="key-name key-name--hs">High Society</span><span><span class="cube cube--rum"></span>Rum only, $500</span><span class="key-sep">·</span><span class="kick">+1</span><span>Kickback each</span></span>
+          <span class="key-item"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></span><span class="key-name key-name--hs">High Society</span><span><span class="cube cube--rum"></span>Rum only, $500</span><span class="key-sep">·</span><span class="kick">+1</span><span>Kickback a barrel</span></span>
         </div>
         <div class="key-setup">
           <span class="key-item"><span class="tag tag-home">Home Turf</span>Safehouse, Boss &amp; 2 Runners</span>
           <span class="key-item"><span class="tag tag-run">3 Runners</span></span>
-          <span class="key-item"><span class="tag tag-squad">Police Squad</span>padlocked until a Raid</span>
+          <span class="key-item"><span class="tag tag-squad">Police Squad</span>padlocked until a Raid moves it</span>
         </div>
       </div>
     </div>
@@ -804,28 +794,28 @@ table.lg{width:100%;border-collapse:collapse}
       <span class="roster-label">Police Raids</span>
       <span class="sec-rule"></span>
     </div>
-    <div class="raid-note"><span class="sub"><b>Trigger:</b> The <b>Rat</b> Play, or the 5th Heat.</span><span class="sub">Resolve every Squad one at a time, in <b>numbered Borough order</b>: <span class="shield shield--inline">1</span> <span class="shield shield--inline">2</span> <span class="shield shield--inline">3</span> <span class="shield shield--inline">4</span></span></div>
+    <div class="raid-note"><span class="sub"><b>Trigger:</b> The 5th marker on the Heat Track, or the <b>Rat</b> Play. Pause the turn.</span><span class="sub">Every Squad moves, one at a time, in <b>numbered Borough order</b>: <span class="shield shield--inline">1</span> <span class="shield shield--inline">2</span> <span class="shield shield--inline">3</span> <span class="shield shield--inline">4</span></span></div>
 
     <div class="steps steps--raid">
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-label step-label--narrow">Most Wanted</div>
-        <div class="step-body">A Squad looks only at Districts <b>directly Land Connected within its Borough</b> and steps toward the rival whose marker sits <b>furthest right</b> on the Heat Track. No marker = ignored; no Heat to chase = it holds its corner.</div>
+        <div class="step-body">A Squad reaches only Districts <b>directly Land Connected</b> to it <b>in its own Borough</b>, never the Sicilian Safehouse. It hunts the mob in reach whose marker sits <b>furthest right</b> on the Heat Track. None of them on it? It stays put.</div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-label step-label--narrow">The Big Bust</div>
-        <div class="step-body">If that rival holds more than one such District, hit the one with the <b>most Barrels</b>; ties break to the <b>hottest boiler</b>, most steam on its Still's Pressure Strip.</div>
+        <div class="step-body">If that mob holds several Districts in reach, the Squad picks the one with the <b>most barrels</b>; a tie goes to the <b>hottest boiler</b>, the highest Pressure.</div>
       </div>
       <div class="step">
         <span class="step-num">3</span>
         <div class="step-label step-label--narrow">The Scatter</div>
-        <div class="step-body">Safehouse destroyed &amp; all Liquor seized. The crew flees to a <b>Connected Safe District</b>, Dock to Dock if you like (never back toward the Squad); if there's none, the whole crew is <b>arrested</b>. No bribe, no buyout.</div>
+        <div class="step-body">The Squad steps in: any Safehouse burns, all liquor goes to the Supply. The crew runs to a <b>Connected Safe District</b> its owner picks, by water too, never the one the Squad came from. Nowhere Safe? The crew is <b>arrested</b>.</div>
       </div>
       <div class="step">
         <span class="step-num">4</span>
         <div class="step-label step-label--narrow">Aftermath</div>
-        <div class="step-body">The Squad holds the District (impassable; padlocks any Speakeasy/Still). Once all Squads move, Heat markers return to owners' Reserves.</div>
+        <div class="step-body">The Squad holds the District: impassable, padlocking any Speakeasy or Still. Once every Squad has moved, each Heat marker returns to its owner's Reserves.</div>
       </div>
     </div>
   </div>
