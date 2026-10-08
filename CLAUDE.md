@@ -356,11 +356,11 @@ take more blocks and kill fewer Bosses than they did. Do not bring back "never F
 
 ## Scram: one run for a Fold and a Raid
 
-Since 2026-10-08 (Nick). A Folding crew and a raided one run the same way, and the run has one
-name: it **Scrams**, to one Connected Safe District of its owner's choice, across water via Docks
-if he likes, **never the one the trouble came from**, carrying no liquor. Fold gained that last
-clause the same day: before it, a Fold could land on the block the Invader had just emptied and
-take it, so the two crews swapped blocks. The Scatter always barred the Squad's block.
+Since 2026-10-08 (Nick). A Folding crew and a raided one run the same way, and the run has one name:
+it **Scrams**, to one Connected Safe District of its owner's choice, **never the one the trouble
+came from**, carrying no liquor. Fold gained that last clause the same day: before it, a Fold could
+land on the block the Invader had just emptied and take it, so the two crews swapped blocks. The
+Scatter always barred the Squad's block.
 
 What stays apart is what the trigger decides, not the run: **Fold** is the Occupier's choice and
 keeps its name (The Almanac's lessons 18 and 19 are built on the poker trio, and a Fold hands the
@@ -369,6 +369,28 @@ Invader; a Raid burns the Safehouse and sends the liquor to the Supply. Nowhere 
 Fold, but an arrest in a Raid. The Raid step stays **The Scatter**; Scram is the run inside it.
 Scram is explained inline where it happens (the Fold entry, the Scatter), not as a Territory
 entry: Nick's call. "Scram" is 1928 slang.
+
+## Movement reads as one family
+
+Since 2026-10-08 (a consistency pass; Nick). Every movement is a Move or a variation on one, and
+the shared terms carry the rules:
+
+- **"Connected" already includes water**, so no movement adds "across water via Docks if you
+  like". That rider was cut from Advance, Fold, the Scatter's Scram, the Playbooks' Advance and
+  the Town Planner: it was left over from the land-only Scatter, and its absence on Move made
+  readers wonder whether Move crossed water. Fall Back keeps "across water if that's how you
+  came", since a Skiff's origin isn't Connected in the usual sense.
+- **Advance takes as many of the carried barrels as you like; the rest are the Occupier's.** Do
+  not simplify this to "all of them": leaving barrels is a play (Nick). A rival who Ambushed you
+  holds the freshest Heat marker, so the barrels you leave make his block the Big Bust. The
+  Rulebook's Advance entry carries that as its flavour line; mk-online's Advance has steppers.
+- **Stealth targets a Hostile District** (the defined term: guarded by rival Mobsters). An
+  undefended Safehouse is a plain Move's job, and the engine always refused a Stealth there.
+- **Skiff is otherwise a Move**: a Standoff in Hostile turf, take over or raze an undefended
+  Safehouse. Its entry names the four inland Districts (Fordham, Corona, Flushing, Richmond Hill),
+  which mk-online's `NON_COASTAL` holds and `scripts/boardcheck.ts` checks against the board.
+- The Playbooks' **Fall Back** row says the carried barrels stay for the Occupier and that an
+  empty Ledger forces it (it grew to two lines; every card still fits its print box).
 
 ## A raided crew may sail
 

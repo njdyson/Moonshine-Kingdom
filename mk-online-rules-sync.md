@@ -634,6 +634,17 @@ the bots' answer (which may now Fold) all follow. `scripts/stealth-check.ts` gua
 Ported the same day (mk-online 7c00c75): `foldDestinations` drops `combat.originId`, and
 `scripts/scram-check.ts` guards it (it fails on every block without the change).
 
+## 22. Movement reads as one family (2026-10-08)
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 22.1 | Advance takes every carried barrel (the UI offers no choice; the harness can't take none). | **As many as the player likes**; the rest are the Occupier's (planting evidence on a rival who Ambushed). The engine already took a list. |
+| 22.2 | Stealth's text says "rival District". | **Hostile District**, as the engine always required. |
+| 22.3 | Skiff's Coastal test is "touching water". | **All but Fordham, Corona, Flushing and Richmond Hill**, named in the text. |
+
+Ported the same day (mk-online 2e3babc): Advance steppers in the fight panel, explicit barrel counts in the
+harness (`m=0` leaves them all), and the descriptions, play reference and RULES-AI.md updated.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -749,3 +760,4 @@ Ported the same day (mk-online 7c00c75): `foldDestinations` drops `combat.origin
 - [x] **Bots: value the late token's first pick on today's Market** (19.3, with the §8.4 Collect motive)
 - [x] **Stealth blocks the Ambush, not the Fold** (§20): it opens on the Occupier's answer
 - [x] **A Fold Scrams: never to the block the Invader came from** (§21)
+- [x] **Movement wording: Advance's barrel choice reachable online, Stealth Hostile, Skiff's inland list** (§22)
