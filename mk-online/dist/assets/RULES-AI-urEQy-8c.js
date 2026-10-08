@@ -131,12 +131,12 @@ Hits remove **Runners first**, then the Boss.
 
 - **Ambush** (1): only the Occupier rolls, at +1 Threat. This is the fight's Heat marker, and it pins the Invader. It needs a Ledger marker and is not allowed once you have Laid Low.
 - **Hold Fire** (0): the Invader is pinned and no one rolls.
-- **Fold** (0): the Occupier's Mobsters **Scram**: they run to one Connected Safe District (across water via Docks too), never the one the Invader came from, leaving the barrels. The Invader takes Control, the barrels, and the choice to take over or raze the Safehouse. It is not allowed with nowhere Safe to Scram.
+- **Fold** (0): the Occupier's Mobsters **Scram**: they run to one Connected Safe District, never the one the Invader came from, leaving the barrels. The Invader takes Control, the barrels, and the choice to take over or raze the Safehouse. It is not allowed with nowhere Safe to Scram.
 
 **Step 2: Pinned.** The Invader repeats until the fight resolves:
 
 - **Open Fire** (assault, 1): both sides roll together; the Occupier gets no Ambush bonus.
-- **Advance** (1): move the pinned crew, with its carried barrels, to a Safe District Connected to this one.
+- **Advance** (1): move the pinned crew to a Safe District Connected to this one, with as many of its carried barrels as you choose; the rest are left for the Occupier (a way to plant evidence on a rival who Ambushed you, since his Heat marker is now the freshest).
 - **Fall Back** (fallBack, 0): return to the origin District. Carried barrels are left for the Occupier. You must Fall Back if your Ledger is empty.
 
 **Heat**: a fight draws exactly **one** Heat marker, owned by whoever fired first (the Ambusher, or the Invader on his first Open Fire or Hit). The Boiling Point is checked after the fight ends.
@@ -158,7 +158,7 @@ Hits remove **Runners first**, then the Boss.
 - **Target District**: that mob's reachable District with the **most barrels**; ties go to the highest Still Pressure.
 - **Scatter**: the Squad moves in.
   - The Safehouse there burns (back to supply) and all barrels there go to the supply.
-  - Mobsters **Scram**, as from a Fold: to one Connected Safe District (across water via Docks too), never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low.
+  - Mobsters **Scram**, as from a Fold: to one Connected Safe District, never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low.
   - With no such District they are all arrested (back to supply, Boss included).
   - The Squad now holds and padlocks the District.
 - **Aftermath**: all Heat markers return to their owners' Reserves.
@@ -177,12 +177,12 @@ Hits remove **Runners first**, then the Boss.
 
 **East Side Vipers: Whispers.** They may look at the top card of the Jobs deck at any time (your state shows it). It is the first card dealt at the next restock, so a gap left at the Offers brings it in (claimable the morning after).
 
-- **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **rival-held** District. The Occupier cannot Ambush: they Hold Fire (you are Pinned as usual: Open Fire, Advance or Fall Back) or Fold.
+- **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **Hostile** District (rival Mobsters on it). The Occupier cannot Ambush: they Hold Fire (you are Pinned as usual: Open Fire, Advance or Fall Back) or Fold.
 - **Tunnel** (tunnel, 1): move 1–5 barrels, no Mobsters, between your Safehouse District and any other District you Control, in either direction.
 
 **Harlem Knights: Network.** Each Trade gives +1 free Rum, if the supply has one.
 
-- **Skiff** (skiff, 1): up to 5 Mobsters, no barrels, from a Coastal District you Control to any other Coastal District (Coastal means touching water). Not into a Squad District. A rival District gives a normal Standoff; an undefended rival Safehouse gives take over or raze.
+- **Skiff** (skiff, 1): up to 5 Mobsters, no barrels, from a Coastal District you Control to any other Coastal District (every District but Fordham, Corona, Flushing and Richmond Hill). Not into a Squad District. A rival District gives a normal Standoff; an undefended rival Safehouse gives take over or raze.
 - **Torch** (torch, 1, in a fight while pinned): sacrifice one pinned Runner to destroy the rival Safehouse there. Always Heat; the fight continues.
 
 ## 9. Strategic notes
