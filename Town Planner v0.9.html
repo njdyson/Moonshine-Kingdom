@@ -307,7 +307,8 @@ b.silver{color:var(--silver)}
 .med .ico{width:10px;height:10px}
 .med--ward .ico{width:11px;height:11px}
 .med--hs{background:var(--gold-bright);border-color:var(--shadow);color:#2a1d0c}
-.med--hs .ico{width:9px;height:9px}
+/* the bowl carries the glass's weight, so it sits a touch low to look centred, as on the board */
+.med--hs .ico{width:9px;height:9px;transform:translateY(.7px)}
 
 /* ============================================================
    DISTRICT ROSTER TABLE
@@ -361,7 +362,7 @@ table.lg{width:100%;border-collapse:collapse}
 </svg>") center / 100% 100% no-repeat;
   filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.7));
 }
-.shield--inline{display:inline-block;vertical-align:-4px;margin:0 0 0 2px;width:13px;height:15.5px;padding-top:1.5px;font-size:9px;line-height:11px;font-style:normal}
+.shield--inline{display:inline-block;vertical-align:middle;position:relative;top:-1px;margin:0 0 0 2px;width:13px;height:15.5px;padding-top:1.5px;font-size:9px;line-height:11px;font-style:normal}
 
 .lg-dist{font:600 10px Barlow;color:var(--ink-2);white-space:nowrap}
 .lg-zone{font:400 9.5px Barlow;text-align:left;white-space:nowrap}
@@ -385,17 +386,16 @@ table.lg{width:100%;border-collapse:collapse}
   box-shadow:0 1px 1.5px rgba(0,0,0,.6);
   vertical-align:middle;
 }
-/* Pressure: the reading, then the Still's own gauge laid on its side, that many
-   segments lit from the left of the token's six-step gold-to-red ramp. */
-.press{display:inline-flex;align-items:center;gap:5px;vertical-align:middle}
-.press b{font:700 10px Barlow;color:var(--gold-bright);width:6px;text-align:right}
+/* Pressure: the Still's own gauge laid on its side, that many segments lit from
+   the left of the token's six-step gold-to-red ramp. No numeral: one beside the
+   Still's own read as a second Still number. */
 .gauge{
-  --p:0;position:relative;width:35px;height:7px;
-  background:linear-gradient(90deg,#e8c85a 0 6px,#dcb246 6px 12px,#d49a37 12px 18px,#cf7f33 18px 24px,#c8632e 24px 30px,#c0472a 30px);
-  -webkit-mask:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 6px);
-  mask:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 6px);
+  --p:0;position:relative;display:inline-block;vertical-align:middle;width:41px;height:8px;
+  background:linear-gradient(90deg,#e8c85a 0 7px,#dcb246 7px 14px,#d49a37 14px 21px,#cf7f33 21px 28px,#c8632e 28px 35px,#c0472a 35px);
+  -webkit-mask:repeating-linear-gradient(90deg,#000 0 5.5px,transparent 5.5px 7px);
+  mask:repeating-linear-gradient(90deg,#000 0 5.5px,transparent 5.5px 7px);
 }
-.gauge::after{content:"";position:absolute;top:0;right:0;bottom:0;width:calc((6 - var(--p)) * 6px);background:rgba(13,0,5,.84)}
+.gauge::after{content:"";position:absolute;top:0;right:0;bottom:0;width:calc((6 - var(--p)) * 7px);background:rgba(13,0,5,.84)}
 .p1{--p:1}.p2{--p:2}.p3{--p:3}.p4{--p:4}.p5{--p:5}.p6{--p:6}
 
 /* Setup marks */
@@ -580,42 +580,42 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-dist">Five Points</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">10</span></td>
-            <td class="lg-press"><span class="press"><b>3</b><i class="gauge p3"></i></span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Sugar Hill</td>
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Cotton Club</span></td>
             <td class="lg-still"><span class="still">7</span></td>
-            <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">East Harlem</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Silver Dollar</span></td>
             <td class="lg-still"><span class="still">12</span></td>
-            <td class="lg-press"><span class="press"><b>1</b><i class="gauge p1"></i></span></td>
+            <td class="lg-press"><i class="gauge p1"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">The Tenderloin</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Haymarket</span></td>
             <td class="lg-still"><span class="still">8</span></td>
-            <td class="lg-press"><span class="press"><b>5</b><i class="gauge p5"></i></span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">West Side</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">11</span></td>
-            <td class="lg-press"><span class="press"><b>2</b><i class="gauge p2"></i></span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">The Bowery</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">9</span></td>
-            <td class="lg-press"><span class="press"><b>4</b><i class="gauge p4"></i></span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
         </tbody>
@@ -626,35 +626,35 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-dist">Hunts Point</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">9</span></td>
-            <td class="lg-press"><span class="press"><b>4</b><i class="gauge p4"></i></span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Morris Park</td>
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Jockey Club</span></td>
             <td class="lg-still"><span class="still">7</span></td>
-            <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Belmont</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">DeLillo's</span></td>
             <td class="lg-still"><span class="still">11</span></td>
-            <td class="lg-press"><span class="press"><b>2</b><i class="gauge p2"></i></span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Fordham</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Penny Whistle</span></td>
             <td class="lg-still"><span class="still">8</span></td>
-            <td class="lg-press"><span class="press"><b>5</b><i class="gauge p5"></i></span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Throggs Neck</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">10</span></td>
-            <td class="lg-press"><span class="press"><b>3</b><i class="gauge p3"></i></span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
         </tbody>
@@ -665,42 +665,42 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-dist">Corona</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">4</span></td>
-            <td class="lg-press"><span class="press"><b>3</b><i class="gauge p3"></i></span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Richmond Hill</td>
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Triangle</span></td>
             <td class="lg-still"><span class="still">7</span></td>
-            <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Astoria</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Bohemian Hall</span></td>
             <td class="lg-still"><span class="still">2</span></td>
-            <td class="lg-press"><span class="press"><b>1</b><i class="gauge p1"></i></span></td>
+            <td class="lg-press"><i class="gauge p1"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Flushing</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Paradise Alley</span></td>
             <td class="lg-still"><span class="still">6</span></td>
-            <td class="lg-press"><span class="press"><b>5</b><i class="gauge p5"></i></span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Whitestone</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">5</span></td>
-            <td class="lg-press"><span class="press"><b>4</b><i class="gauge p4"></i></span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Jamaica</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">3</span></td>
-            <td class="lg-press"><span class="press"><b>2</b><i class="gauge p2"></i></span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
         </tbody>
@@ -711,35 +711,35 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-dist">Brownsville</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">5</span></td>
-            <td class="lg-press"><span class="press"><b>4</b><i class="gauge p4"></i></span></td>
+            <td class="lg-press"><i class="gauge p4"></i></td>
             <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Williamsburg</td>
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Havemeyer</span></td>
             <td class="lg-still"><span class="still">7</span></td>
-            <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
+            <td class="lg-press"><i class="gauge p6"></i></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Coney Island</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Ruby's Joint</span></td>
             <td class="lg-still"><span class="still">3</span></td>
-            <td class="lg-press"><span class="press"><b>2</b><i class="gauge p2"></i></span></td>
+            <td class="lg-press"><i class="gauge p2"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Red Hook</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Sunny's Bar</span></td>
             <td class="lg-still"><span class="still">6</span></td>
-            <td class="lg-press"><span class="press"><b>5</b><i class="gauge p5"></i></span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Canarsie</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">4</span></td>
-            <td class="lg-press"><span class="press"><b>3</b><i class="gauge p3"></i></span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
         </tbody>
@@ -750,21 +750,21 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-dist">Stapleton</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">8</span></td>
-            <td class="lg-press"><span class="press"><b>5</b><i class="gauge p5"></i></span></td>
+            <td class="lg-press"><i class="gauge p5"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Westerleigh</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">2</span></td>
-            <td class="lg-press"><span class="press"><b>1</b><i class="gauge p1"></i></span></td>
+            <td class="lg-press"><i class="gauge p1"></i></td>
             <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Tottenville</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">4</span></td>
-            <td class="lg-press"><span class="press"><b>3</b><i class="gauge p3"></i></span></td>
+            <td class="lg-press"><i class="gauge p3"></i></td>
             <td class="lg-setup"></td>
           </tr>
         </tbody>
