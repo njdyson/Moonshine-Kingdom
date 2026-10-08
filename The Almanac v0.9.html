@@ -125,7 +125,7 @@
     </style>
     <script>
     /* PRINT-READY TOGGLE. A desktop-only control that swaps the light screen
-       WebP covers (Art/Rulebook/opt/*.webp) for the full-resolution source
+       WebP covers (Art/*/opt/*.webp) for the full-resolution source
        PNGs, so a browser "Save as PDF" exports the covers losslessly. Off by
        default (fast browsing); the choice persists in localStorage. Placed in
        the <head> so it survives even if the <body> is regenerated. Never shown
@@ -136,7 +136,7 @@
         imgs.forEach(function (i) { if (on) i.loading = 'eager'; i.src = on ? i.dataset.png : i.dataset.webp; });
       }
       function build() {
-        imgs = [].slice.call(document.querySelectorAll('img[src*="Art/Rulebook/opt/"]'));
+        imgs = [].slice.call(document.querySelectorAll('img[src*="/opt/"]'));
         imgs.forEach(function (i) {
           var w = i.getAttribute('src');
           i.dataset.webp = w;
@@ -242,7 +242,7 @@
     <div class="container one-column">
         <h2 id="sit-down">Sit Down, Charlie</h2>
         <div class="cover">
-            <img class="cover-wide" src="Art/Rulebook/opt/Speakeasy.webp" alt="The back booth at Lindy's" width="100%" loading="lazy">
+            <img class="cover-wide" src="Art/Almanac/opt/Lindys.webp" alt="The back booth at Lindy's" width="100%" loading="lazy">
         </div>
         <p class="lede">
             Sit down, Charlie. Have the cheesecake; it's the only honest thing on Broadway. You've learned the rules,
@@ -280,7 +280,7 @@
     <div class="container one-column">
         <h2 id="stills">I &middot; The Stills</h2>
         <div class="cover">
-            <img class="cover-wide" src="Art/Rulebook/opt/Distillation.webp" alt="The Stills" width="100%" loading="lazy">
+            <img class="cover-wide" src="Art/Almanac/opt/Distillery.webp" alt="Reading the books among the Stills" width="100%" loading="lazy">
         </div>
         <p class="lede">
             Every chump at a craps table thinks the dice decide who eats. I've spent my whole life around dice, Charlie.
@@ -401,7 +401,7 @@
     <div class="container one-column">
         <h2 id="offers">II &middot; The Offers</h2>
         <div class="cover">
-            <img class="cover-wide" src="Art/Rulebook/opt/Embargo.webp" alt="Counting the take" width="100%" loading="lazy">
+            <img class="cover-wide" src="Art/Almanac/opt/War Room.webp" alt="Choosing the work over the map" width="100%" loading="lazy">
         </div>
         <p class="lede">
             The Jobs Market is where Respect is for sale. Suckers treat it like a shop. It's a queue, and you pay rent
@@ -508,7 +508,7 @@
     <div class="container one-column">
         <h2 id="gun">III &middot; The Gun</h2>
         <div class="cover">
-            <img class="cover-wide" src="Art/Rulebook/opt/Ambush.webp" alt="The Gun" width="100%" loading="lazy">
+            <img class="cover-wide" src="Art/Almanac/opt/Shootout.webp" alt="A gunfight in the rain" width="100%" loading="lazy">
         </div>
         <p class="lede">
             Every fight is a bet, Charlie, and most men place it without looking at the odds. Guns don't win this town;
@@ -690,7 +690,7 @@
     <div class="container one-column">
         <h2 id="law">IV &middot; The Law</h2>
         <div class="cover">
-            <img class="cover-wide" src="Art/Rulebook/opt/Police.webp" alt="The Law" width="100%" loading="lazy">
+            <img class="cover-wide" src="Art/Almanac/opt/Payoff.webp" alt="Paying off the captain" width="100%" loading="lazy">
         </div>
         <p class="lede">
             Most men treat the cops like weather. I've paid enough of them to know better: the law is a machine, with a
@@ -792,7 +792,7 @@
     <div class="container one-column">
         <h2 id="table">V &middot; The Table</h2>
         <div class="cover">
-            <img class="cover-wide" src="Art/Rulebook/opt/Crown.webp" alt="The Table" width="100%" loading="lazy">
+            <img class="cover-wide" src="Art/Almanac/opt/Commission.webp" alt="The families at the table" width="100%" loading="lazy">
         </div>
         <p class="lede">
             Everything else I told you, you can count. This part you have to play. There are no shared victories in this
