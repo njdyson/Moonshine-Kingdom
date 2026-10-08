@@ -290,8 +290,9 @@ b.silver{color:var(--silver)}
 /* ============================================================
    ICONS AND MEDALLIONS
    The zone roundels are the board's (roundel() in tools/build_board.js):
-   a lacquer disc in a gold ring for the Speakeasy, Dock and Ward; for
-   High Society a gold disc, the martini, and a crown on top.
+   a lacquer disc in a gold ring for the Speakeasy, Dock and Ward, and a
+   gold disc with the martini for High Society. The board's crown over the
+   martini marks where the Crown is taken; the roster marks the type alone.
    ============================================================ */
 .ico{display:inline-block;width:1em;height:1em;fill:currentColor;vertical-align:middle}
 .ico--crown{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
@@ -305,13 +306,8 @@ b.silver{color:var(--silver)}
 }
 .med .ico{width:10px;height:10px}
 .med--ward .ico{width:11px;height:11px}
-.med--hs{background:var(--gold-bright);border-color:var(--shadow);color:#2a1d0c;margin-top:3px}
+.med--hs{background:var(--gold-bright);border-color:var(--shadow);color:#2a1d0c}
 .med--hs .ico{width:9px;height:9px}
-.med--hs .ico--crown{
-  position:absolute;left:50%;top:-7px;width:9px;height:9px;transform:translateX(-50%);
-  color:var(--gold-bright);stroke-width:2.4;
-  filter:drop-shadow(0 0 1px var(--shadow)) drop-shadow(0 0 .5px var(--shadow));
-}
 
 /* ============================================================
    DISTRICT ROSTER TABLE
@@ -370,7 +366,6 @@ table.lg{width:100%;border-collapse:collapse}
 .lg-dist{font:600 10px Barlow;color:var(--ink-2);white-space:nowrap}
 .lg-zone{font:400 9.5px Barlow;text-align:left;white-space:nowrap}
 .lg-zone .med{margin-right:5px}
-.lg-zone .med--hs{margin-top:0;top:1.5px;width:13px;height:13px;margin-left:.5px;margin-right:5.5px}
 .lg-still,.lg-press{text-align:center}
 .lg-setup{font:400 9px Barlow;white-space:nowrap}
 
@@ -426,7 +421,6 @@ table.lg{width:100%;border-collapse:collapse}
 .key-item{display:flex;align-items:center;gap:5px;white-space:nowrap}
 .key-name{color:var(--ink);margin-right:4px}
 .key-name--hs{color:var(--gold-bright)}
-.key-zones .med--hs{margin-top:2px}
 .cube{
   display:inline-block;width:8px;height:8px;border-radius:1.5px;box-sizing:border-box;
   border:.6px solid rgba(0,0,0,.55);
@@ -591,7 +585,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Sugar Hill</td>
-            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></span><span class="z-hs">The Cotton Club</span></td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Cotton Club</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -637,7 +631,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Morris Park</td>
-            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></span><span class="z-hs">The Jockey Club</span></td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Jockey Club</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -676,7 +670,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Richmond Hill</td>
-            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></span><span class="z-hs">The Triangle</span></td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Triangle</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -722,7 +716,7 @@ table.lg{width:100%;border-collapse:collapse}
           </tr>
           <tr>
             <td class="lg-dist">Williamsburg</td>
-            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></span><span class="z-hs">The Havemeyer</span></td>
+            <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Havemeyer</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><span class="press"><b>6</b><i class="gauge p6"></i></span></td>
             <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
@@ -779,7 +773,7 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="key">
         <div class="key-zones">
           <span class="key-item"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="key-name">Speakeasy</span><span><span class="cube cube--moon"></span>Moonshine $300</span><span class="key-sep">·</span><span><span class="cube cube--rum"></span>Rum $500</span></span>
-          <span class="key-item"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></span><span class="key-name key-name--hs">High Society</span><span><span class="cube cube--rum"></span>Rum only, $500</span><span class="key-sep">·</span><span class="kick">+1</span><span>Kickback a barrel</span></span>
+          <span class="key-item"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="key-name key-name--hs">High Society</span><span><span class="cube cube--rum"></span>Rum only, $500</span><span class="key-sep">·</span><span class="kick">+1</span><span>Kickback a barrel</span></span>
         </div>
         <div class="key-setup">
           <span class="key-item"><span class="tag tag-home">Home Turf</span>Safehouse, Boss &amp; 2 Runners</span>
