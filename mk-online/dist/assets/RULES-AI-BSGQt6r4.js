@@ -175,7 +175,7 @@ Hits remove **Runners first**, then the Boss.
 
 **East Side Vipers: Whispers.** They may look at the top card of the Jobs deck at any time (your state shows it). It is the next card dealt into the Market when someone takes a Job.
 
-- **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **rival-held** District. You start Pinned; the Occupier gets no Ambush and no Fold. Then Open Fire, Advance or Fall Back.
+- **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **rival-held** District. The Occupier cannot Ambush: they Hold Fire (you are Pinned as usual: Open Fire, Advance or Fall Back) or Fold.
 - **Tunnel** (tunnel, 1): move 1–5 barrels, no Mobsters, between your Safehouse District and any other District you Control, in either direction.
 
 **Harlem Knights: Network.** Each Trade gives +1 free Rum, if the supply has one.
