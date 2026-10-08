@@ -607,8 +607,10 @@ Ported 2026-10-08 (mk-online cdc0a3e): a Take leaves its gap, and `closeOffers` 
 `src/game/shadows.ts` restocks every gap from the deck top before the Ledgers are funded.
 `marketFaceDown` hides the opening Market until Day 1's Brew and Blowback are done, and Day 1 skips
 the Offers. For the bots (19.3), the Vipers' `revealValue` is gone, since a claim no longer deals the
-seen card mid-Offers. The bots have no Lay Low heuristic that sits late for a better Offers pick
-(the §8.4 motive was never built), so the late token's first pick is not yet priced.
+seen card mid-Offers. The late token's first pick is priced the same day (mk-online d0f8fa3): while
+a rival is still out and the Market holds a Job the bot can likely pull off, it stays on the street,
+preferring a quiet one-marker Play or a paying Unload to a Collect (`pushOffersHold`,
+`applyOffersHold`; numbers in mk-online's `BOT-WINRATE-HANDOFF.md`, session 6).
 `scripts/restock-check.ts` guards 19.1 and 19.2.
 
 ## 20. Stealth blocks the Ambush, not the Fold (2026-10-08, amends the 2026-09-30 ruling)
@@ -734,5 +736,5 @@ the bots' answer (which may now Fold) all follow. `scripts/stealth-check.ts` gua
 - [x] **Starting turf: the North on 8, 9, 10; the South on 4, 5, 6** (§18)
 - [x] **The Market restocks after the Offers** (19.1); the opening Market is face-down and Day 1 has no Offers (19.2)
 - [x] **Bots: no refill mid-Offers** (19.3): the Vipers' `revealValue` is gone
-- [ ] **Bots: value the late token's first pick on today's Market** (19.3, with the §8.4 Collect motive)
+- [x] **Bots: value the late token's first pick on today's Market** (19.3, with the §8.4 Collect motive)
 - [x] **Stealth blocks the Ambush, not the Fold** (§20): it opens on the Occupier's answer
