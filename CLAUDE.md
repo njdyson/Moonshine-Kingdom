@@ -354,15 +354,31 @@ barrels, and a thin block facing one will usually Fold (The Almanac's lesson 20:
 a Stealth take a Boss, two Runners and a Safehouse three times in four if he stands). So the Vipers
 take more blocks and kill fewer Bosses than they did. Do not bring back "never Fold".
 
+## Scram: one run for a Fold and a Raid
+
+Since 2026-10-08 (Nick). A Folding crew and a raided one run the same way, and the run has one
+name: it **Scrams**, to one Connected Safe District of its owner's choice, across water via Docks
+if he likes, **never the one the trouble came from**, carrying no liquor. Fold gained that last
+clause the same day: before it, a Fold could land on the block the Invader had just emptied and
+take it, so the two crews swapped blocks. The Scatter always barred the Squad's block.
+
+What stays apart is what the trigger decides, not the run: **Fold** is the Occupier's choice and
+keeps its name (The Almanac's lessons 18 and 19 are built on the poker trio, and a Fold hands the
+Invader a Seize); a Raid gives no choice but where. A Fold leaves barrels and Safehouse to the
+Invader; a Raid burns the Safehouse and sends the liquor to the Supply. Nowhere to Scram means no
+Fold, but an arrest in a Raid. The Raid step stays **The Scatter**; Scram is the run inside it.
+Scram is explained inline where it happens (the Fold entry, the Scatter), not as a Territory
+entry: Nick's call. "Scram" is 1928 slang.
+
 ## A raided crew may sail
 
-Since 2026-10-07 the Scatter's Run For It reads like Fold: the crew runs to one **Connected** Safe
-District, across water via Docks if it likes. It was land-only from 2026-07-30 ("No boats; a Dock
-is a dead end"). Nick reversed it because Raids were culling too often, and because the board made
-one cull close to automatic: the Queens Squad starts on Richmond Hill beside what was then the
-Queens starting Dock, Jamaica, whose only other land exit is Brownsville, Brooklyn's home Ward. No
-other Borough's starting Dock was that exposed. (Queens has started on Whitestone since the same
-day; see Starting turf.)
+Since 2026-10-07 a raided crew runs as a Folding one does (since 2026-10-08 both are one run,
+**Scram**; see above): to one **Connected** Safe District, across water via Docks if it likes. It
+was land-only from 2026-07-30 ("No boats; a Dock is a dead end"). Nick reversed it because Raids
+were culling too often, and because the board made one cull close to automatic: the Queens Squad
+starts on Richmond Hill beside what was then the Queens starting Dock, Jamaica, whose only other
+land exit is Brownsville, Brooklyn's home Ward. No other Borough's starting Dock was that exposed.
+(Queens has started on Whitestone since the same day; see Starting turf.)
 
 The 2026-07-30 case had four legs. Consistency with Skiff and Tunnel fell on 2026-09-30 (Skiff is a
 Move on your own turn; Tunnel carries no crew). The cost that remains is real and accepted: a crew

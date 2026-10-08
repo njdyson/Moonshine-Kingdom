@@ -624,6 +624,16 @@ Ported the same day (mk-online cbfc27d): `stealth` opens the Standoff through `i
 `stealth` flag, and `ambushBlockReason` refuses the Ambush for it, so the UI, the harness options and
 the bots' answer (which may now Fold) all follow. `scripts/stealth-check.ts` guards it.
 
+## 21. Scram: one run for a Fold and a Raid (2026-10-08)
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 21.1 | A Folding crew flees to any Connected Safe District, including the block the Invader came from if he emptied it (it is Safe, and moving in takes it). | **Never the one the Invader came from**, as a raided crew never runs to the Squad's block. |
+| 21.2 | The run is "flee" for a Fold and "Run For It" in the Scatter. | **Both Scram.** Fold and The Scatter keep their names; Scram is the run inside them. Logs, UI and harness text say so. |
+
+Ported the same day (mk-online 7c00c75): `foldDestinations` drops `combat.originId`, and
+`scripts/scram-check.ts` guards it (it fails on every block without the change).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -738,3 +748,4 @@ the bots' answer (which may now Fold) all follow. `scripts/stealth-check.ts` gua
 - [x] **Bots: no refill mid-Offers** (19.3): the Vipers' `revealValue` is gone
 - [x] **Bots: value the late token's first pick on today's Market** (19.3, with the §8.4 Collect motive)
 - [x] **Stealth blocks the Ambush, not the Fold** (§20): it opens on the Occupier's answer
+- [x] **A Fold Scrams: never to the block the Invader came from** (§21)
