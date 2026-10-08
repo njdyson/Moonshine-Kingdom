@@ -603,6 +603,14 @@ Offers. See `jobs-system-handoff.md` §2b, *The restock*.
 | 19.3 | Bots may count on the refill a Take reveals. | **No refill mid-Offers.** A bot's claim tomorrow is from the cards on the table today (less what higher tokens take), which makes the late token's first pick worth more in the Lay Low heuristic (8.4). |
 | 19.4 | Whispers peeks at the deck top. | **Unchanged.** The top card is now the first card of tomorrow's restock. |
 
+Ported 2026-10-08 (mk-online cdc0a3e): a Take leaves its gap, and `closeOffers` in
+`src/game/shadows.ts` restocks every gap from the deck top before the Ledgers are funded.
+`marketFaceDown` hides the opening Market until Day 1's Brew and Blowback are done, and Day 1 skips
+the Offers. For the bots (19.3), the Vipers' `revealValue` is gone, since a claim no longer deals the
+seen card mid-Offers. The bots have no Lay Low heuristic that sits late for a better Offers pick
+(the §8.4 motive was never built), so the late token's first pick is not yet priced.
+`scripts/restock-check.ts` guards 19.1 and 19.2.
+
 ## 20. Stealth blocks the Ambush, not the Fold (2026-10-08, amends the 2026-09-30 ruling)
 
 | # | Behaviour | Now |
@@ -724,6 +732,7 @@ the bots' answer (which may now Fold) all follow. `scripts/stealth-check.ts` gua
 - [x] **Bots: a Dock crew can't be cornered; corner at Coney Island and Morris Park** (17.3)
 - [x] **A Squad's reach is Land Connected only** (17.4): no Dock-to-Dock hop inside its Borough
 - [x] **Starting turf: the North on 8, 9, 10; the South on 4, 5, 6** (§18)
-- [ ] **The Market restocks after the Offers** (19.1); the opening Market is face-down and Day 1 has no Offers (19.2)
-- [ ] **Bots: no refill mid-Offers; value the late token's first pick on today's Market** (19.3)
+- [x] **The Market restocks after the Offers** (19.1); the opening Market is face-down and Day 1 has no Offers (19.2)
+- [x] **Bots: no refill mid-Offers** (19.3): the Vipers' `revealValue` is gone
+- [ ] **Bots: value the late token's first pick on today's Market** (19.3, with the §8.4 Collect motive)
 - [x] **Stealth blocks the Ambush, not the Fold** (§20): it opens on the Occupier's answer

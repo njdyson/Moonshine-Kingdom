@@ -46,9 +46,11 @@ The game ends mid-Day on the spot. Nothing else is settled.
    - Runners die first; the Boss dies only if no Runner is left there.
    - Barrels and turf are kept.
 5. **The Offers**, in **reverse** Turn Order, one action each:
-   - **Take a Job** (claimJob): stake Influence from **Reserves** equal to its Stake. The Market refills from the deck.
+   - **Take a Job** (claimJob): stake Influence from **Reserves** equal to its Stake. Its gap stays empty for the rest of the Offers.
    - **Walk Away** from a held Job (walkAwayJob): the stake returns to Reserves and the card is discarded.
    - **Stand pat** (confirmGrease).
+   - **Restock**: automatic, once everyone has chosen. A fresh Job is dealt into each gap, face-up for the whole Day before anyone can claim it.
+   - **Day 1 has no Offers.** The opening Market is dealt face-down and turns face-up here instead.
 6. **Fund the Ledger**: automatic. Reserves move into the Ledger up to 5. Staked markers stay on their Jobs.
 7. **Harbormaster** (setMash): the player Controlling the **most Docks** (no tie) names tomorrow's Mash, 1–6. On a tie or with no Docks held, it is rolled.
 
@@ -173,7 +175,7 @@ Hits remove **Runners first**, then the Boss.
 - **Plunder** (plunder, 1, in a fight while pinned): roll as for Open Fire, but each hit steals 1 barrel (pickPlunder) instead of killing. The Occupier's hits still kill. No Heat. Stolen barrels leave with an Advance and are dropped on a Fall Back.
 - **Peddle** (peddle, 1): sell **Moonshine only** in a **Ward** you Control at $300 a barrel. Greed Tax at 4+.
 
-**East Side Vipers: Whispers.** They may look at the top card of the Jobs deck at any time (your state shows it). It is the next card dealt into the Market when someone takes a Job.
+**East Side Vipers: Whispers.** They may look at the top card of the Jobs deck at any time (your state shows it). It is the first card dealt at the next restock, so a gap left at the Offers brings it in (claimable the morning after).
 
 - **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **rival-held** District. The Occupier cannot Ambush: they Hold Fire (you are Pinned as usual: Open Fire, Advance or Fall Back) or Fold.
 - **Tunnel** (tunnel, 1): move 1–5 barrels, no Mobsters, between your Safehouse District and any other District you Control, in either direction.
