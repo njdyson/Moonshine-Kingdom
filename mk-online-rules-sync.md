@@ -590,6 +590,17 @@ guards both rulings.
 Ported the same day (mk-online 3d24a96): `STARTING_TURF` in `src/game/setup.ts`, and the reference
 copy `LEDGER_STILLS` in `src/game/data.ts`. The bots read the board, so nothing else changes.
 
+## 19. Stealth blocks the Ambush, not the Fold (2026-10-08, amends the 2026-09-30 ruling)
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 19.1 | A Stealth skips the Occupier's answer: the fight opens Pinned, as if he had Held Fire. | **It opens on the Occupier's answer, as any Move does.** He may Hold Fire (the usual Pin) or Fold. |
+| 19.2 | The Occupier cannot Ambush a Stealth, because the answer step never comes. | **He still cannot Ambush**, now refused at the answer itself, even with a marker in hand. |
+
+Ported the same day in mk-online: `stealth` opens the Standoff through `initiateCombat` with a
+`stealth` flag, and `ambushBlockReason` refuses the Ambush for it, so the UI, the harness options and
+the bots' answer (which may now Fold) all follow. `scripts/stealth-check.ts` guards it.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

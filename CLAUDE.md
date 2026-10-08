@@ -312,8 +312,8 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 
 - **Skiff is a Move on your own turn, nothing more.** The escape by boat on a Fold or Advance
   was cut; don't bring it back.
-- **Stealth is a Move where the Occupier can only Hold Fire.** The Pin is the standard one,
-  free Fall Back included.
+- **Stealth is a Move where the Occupier cannot Ambush** (since 2026-10-08; see below). Hold
+  Fire and Fold stay open, and the Pin is the standard one, free Fall Back included.
 - **Loose Liquor belongs to nobody**: whoever takes Control of the block takes it.
 - **The raided crew's owner picks** which Connected Safe District it runs to (by water too since
   2026-10-07; see below).
@@ -324,6 +324,19 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **Starting Boroughs are random** (the reverse-order pick is gone). How to draw them at the
   table is open: "at random" is the placeholder. Ideas: a Borough on the back of the four Nod
   cards, or four Borough cards kept as your home-Borough card (possibly with an edge there).
+
+## Stealth blocks the Ambush, not the Fold
+
+Since 2026-10-08 (Nick). From 2026-09-30 a Stealth left the Occupier only Hold Fire. Barring the
+Fold made the plain Move a tell: a Viper who wanted the block without a fight had to come by the
+front door to leave the Fold open, and that told the Occupier to Ambush. Now the Occupier answers a
+Stealth as he would any Move, less the Ambush, so the way a Viper comes in says nothing about what
+he wants.
+
+Watch in playtest: Stealth now beats a plain Move for any Viper crew of five or fewer with no
+barrels, and a thin block facing one will usually Fold (The Almanac's lesson 20: a Boss and four on
+a Stealth take a Boss, two Runners and a Safehouse three times in four if he stands). So the Vipers
+take more blocks and kill fewer Bosses than they did. Do not bring back "never Fold".
 
 ## A raided crew may sail
 
