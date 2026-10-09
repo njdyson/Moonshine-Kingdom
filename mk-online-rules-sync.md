@@ -645,6 +645,23 @@ Ported the same day (mk-online 7c00c75): `foldDestinations` drops `combat.origin
 Ported the same day (mk-online 2e3babc): Advance steppers in the fight panel, explicit barrel counts in the
 harness (`m=0` leaves them all), and the descriptions, play reference and RULES-AI.md updated.
 
+## 23. Six gaps in the Rulebook's wording (2026-10-09)
+
+An outside review asked where the Rulebook was silent. Each answer below is what the engine (RULES-AI.md,
+and the bundle in `dist/`) or the Jobs notes in `tools/gen_deck.py` already did, so **nothing to port**.
+
+| # | Question | The Rulebook now says |
+|---|----------|-----------------------|
+| 23.1 | When does a Job complete: mid-Play, or as it ends? (An Unload's Kickbacks draw on Reserves, so a stake returned mid-Play could feed them.) | **As the Play ends**, as the Jobs deck masthead always said. The stake comes home after the Kickbacks. |
+| 23.2 | Does a Signature Play count toward a Job? Can one Play complete two? | **Yes to both.** Jobs are worded by outcome (gen_deck.py's Toll Booth Trap note), and the audits only bar two 5s on one Play. |
+| 23.3 | Does a Raid your Play sets off "kill" the crew it arrests? | **No.** Kill Jobs check `killsByMe` in your own fight. |
+| 23.4 | Both crews wiped out in one volley? | **Nobody wins.** The Occupier's Safehouse holds the block; with none it stands empty. |
+| 23.5 | A fight's first shot and a Torch in one Play take the track from 4 to 6? | **Both land, in the order drawn.** The sixth sits past the end of the track as the freshest noise (the engine never caps `heat`). |
+| 23.6 | Whose barrels does a Move send? | **Your own**: the engine's Move starts from a District you Control. |
+
+Also: Collect's "take a later Turn Token" now says the token comes when you Lay Low; Extort says "one Heat
+marker"; and the Components say each side rolls its own dice colour in a fight, Red alone brewing.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
