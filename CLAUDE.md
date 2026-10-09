@@ -354,6 +354,17 @@ barrels, and a thin block facing one will usually Fold (The Almanac's lesson 20:
 a Stealth take a Boss, two Runners and a Safehouse three times in four if he stands). So the Vipers
 take more blocks and kill fewer Bosses than they did. Do not bring back "never Fold".
 
+## Torch is a shot; Red dice for the Invader
+
+Since 2026-10-09 (Nick). Torch draws the fight's Heat only if it is the first shot, as Hit does. It
+used to draw Heat always, so a fight's first shot plus a Torch put two markers down in one Play and
+could take the track from 4 to 6. Now no Play draws more than one marker. In a fight the Invader rolls
+**Red** and the Occupier **White**, so nobody has to remember who rolled which; Red also brews.
+
+Collect is stated as what it is: a marker spent on $100, which Laying Low would pay anyway, so it buys a
+turn longer on the street. What that does to tomorrow's Turn Token is The Almanac's to teach (lesson 2);
+the Rulebook entry describing it through tokens read as a token procedure and was cut.
+
 ## Scram: one run for a Fold and a Raid
 
 Since 2026-10-08 (Nick). A Folding crew and a raided one run the same way, and the run has one name:

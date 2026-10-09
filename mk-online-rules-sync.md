@@ -645,6 +645,32 @@ Ported the same day (mk-online 7c00c75): `foldDestinations` drops `combat.origin
 Ported the same day (mk-online 2e3babc): Advance steppers in the fight panel, explicit barrel counts in the
 harness (`m=0` leaves them all), and the descriptions, play reference and RULES-AI.md updated.
 
+## 23. Five gaps in the Rulebook's wording (2026-10-09)
+
+An outside review asked where the Rulebook was silent. Each answer below is what the engine (RULES-AI.md,
+and the bundle in `dist/`) or the Jobs notes in `tools/gen_deck.py` already did, so **nothing to port**.
+
+| # | Question | The Rulebook now says |
+|---|----------|-----------------------|
+| 23.1 | When does a Job complete: mid-Play, or as it ends? (An Unload's Kickbacks draw on Reserves, so a stake returned mid-Play could feed them.) | **As the Play ends**, as the Jobs deck masthead always said. The stake comes home after the Kickbacks. |
+| 23.2 | Does a Signature Play count toward a Job? Can one Play complete two? | **Yes to both.** Jobs are worded by outcome (gen_deck.py's Toll Booth Trap note), and the audits only bar two 5s on one Play. |
+| 23.3 | Does a Raid your Play sets off "kill" the crew it arrests? | **No.** Kill Jobs check `killsByMe` in your own fight. |
+| 23.4 | Both crews wiped out in one volley? | **Nobody wins.** The Occupier's Safehouse holds the block; with none it stands empty. |
+| 23.5 | Whose barrels does a Move send? | **Your own**: the engine's Move starts from a District you Control. |
+
+Also wording only: Collect is stated as what it is (spend a marker on $100; Laying Low pays the same, so it
+buys a turn longer on the street), with no Turn Token talk; Extort says "one Heat marker".
+
+## 24. Torch is a shot; Red dice for the Invader (2026-10-09, Nick)
+
+| # | Behaviour | Now |
+|---|-----------|-----|
+| 24.1 | Torch **always** draws Heat, so a fight could add two markers (the first shot and the Torch) and take the track from 4 to 6. | **Torch draws the fight's Heat only if it is the first shot**, as Hit does. A fight adds at most one marker, so no Play draws two and the track never overflows. **To port:** Torch sets `firstShotFired` and pushes Heat only when it was unset (today it always pushes). |
+| 24.2 | The Rulebook gave no dice colours for a fight. | **The Invader rolls Red, the Occupier White**, so nobody has to remember who rolled which. Red also brews. Cosmetic online; worth matching if the fight panel colours its dice. |
+
+The Rulebook, Playbooks (Knights' Torch row), The Almanac (lesson 21 now counts three sources of Heat) and the
+Combat Simulator (Torch after an Ambush draws nothing) are updated.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
