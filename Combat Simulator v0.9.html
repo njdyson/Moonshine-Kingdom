@@ -604,7 +604,7 @@
       plunder: "Each of your hits steals 1 barrel instead of killing; the Occupier's hits still kill. No Heat, ever. Keeps 1 Influence back to Advance out with the loot.",
       sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat only if you shoot first.",
       stealth: "The Occupier cannot Ambush; this models one who Holds Fire and stands. Crew capped at 5 mobsters, no liquor carried.",
-      torch: "Spends 1 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +1 Threat) before the volleys start. Always Heat."
+      torch: "Spends 1 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +1 Threat) before the volleys start. Heat only if it's the fight's first shot."
     };
 
     function clamp(n, min, max) {
@@ -741,7 +741,7 @@
         inv.runners -= 1;
         occ.safehouse = false;
         spent += 1;
-        heat = true;
+        if (!occHeat) heat = true;   // the match is a shot: Heat only if nobody fired first
       }
 
       while (alive(inv) && alive(occ)) {
