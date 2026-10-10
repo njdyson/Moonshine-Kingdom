@@ -726,6 +726,50 @@ starts at the whole pile and shows no Greed Tax flag. The bots' Peddle candidate
 the street rate against the Unload candidates' bar price. `scripts/torch-peddle-check.ts` guards it (a
 six-barrel Peddle paid $1,800 and drew Heat before the change).
 
+## 28. The Jobs deck rewrite (2026-10-10, Nick)
+
+Twenty-eight objectives reworded, ten of them with a different trigger, and two cards change tier.
+The full before-and-after is in `jobs-audit-handoff.md`; `tools/overlap_audit.py` holds a predicate
+for every card that a port can copy. **To port** (the cards whose trigger or tier changes):
+
+| Card | Now completes on |
+| --- | --- |
+| Tenement Army (1) | Recruit 4+ Runners in one Play at **Stapleton** |
+| The Empty Casket (1) | Rise into any **Empty Ward** (the Borough condition is gone) |
+| The Dutchman's Deal (1) | Trade 3+ barrels at **West Side** (not either Manhattan Dock) |
+| The Angel's Share (1) | Unload 3+ barrels of **either** liquor at East Harlem |
+| Squatter's Rights (1) | a **Move** that puts a Mobster into an Empty District in a rival's home Borough (not a Secure, Rise or barrels alone) |
+| Poison Panic (3) | Unload 6+ barrels of **either** liquor at Flushing |
+| Gin Pipeline (3) | Move 6+ barrels of either liquor into **your own home Ward**, from anywhere |
+| The Smuggler's Run (**now 3**, Stake 2) | Seize a Dock with a Move from Staten Island carrying 4+ Rum (same trigger) |
+| Last One Standing (3) | Secure your Safehouse in **Astoria** |
+| Union Dues (**now 5**, Stake 3) | Recruit 4+ Runners in one Play in a **rival's home Ward** |
+| High Roller (5) | Secure into a High Society Venue holding 4+ Rum (no adjacency) |
+
+"Home Borough" is the Borough a player drew at setup, and "home Ward" its Ward; at three players one
+Borough is nobody's, so it is never a rival's. A Blood Oath partner is not a rival (11.5). Every
+other card keeps its trigger and needs only its string. The opening Market still sets the 5s aside,
+so The Smuggler's Run can now be dealt on Day 1 and Union Dues can't. Bots: Union Dues is a reason to
+keep a garrison in the home Ward.
+
+## 29. Borough cards: the Nod, and the crown away from home (2026-10-10, Nick)
+
+A rule change. **Take the Crown needs the Boss in a High Society Venue outside his home Borough.**
+The four Nod cards are gone; four Borough cards, dealt at setup, name each boss's home Borough,
+hold his unbought Influence (a Bribe takes the top marker) and carry Take the Crown. **The Nod is a
+status**, not a card: 10+ Respect, all 10 Influence bought and no Mark. CLAUDE.md, *Borough cards*, has the why. **To port:**
+
+| | Now |
+| --- | --- |
+| Setup | Starting Boroughs are still random (the engine already deals them); at three players one is nobody's home. |
+| Victory test | The Nod (Respect >= 10, all 10 Influence bought, no Mark), and the Boss in a High Society Venue **not in his home Borough**. |
+| The Nod | A derived status, never stored: it can be lost (a Rat Card or Welsher dropping Respect below 10, a Loan's Mark) and regained. Show it per player; "has the Nod" is the table's alarm. Any "claimed the Nod at 10 Influence" event should say the city instead. |
+| Blood Oath | The Alliance's Nod: one partner with all 10 Influence, 20 combined Respect, no Mark on either. That partner crowns, and his own home Borough is barred. |
+| Bots | Crown rooms are the three away ones: for Manhattan and Queens, Williamsburg is one Move from home; for Brooklyn, Richmond Hill; for the Bronx, Sugar Hill or Williamsburg at two. A bot's own room is worth holding for Kickbacks, not for the walk. Defend the home room as a landlord: every visiting Boss there is the leader's. |
+
+Strings: RULES-AI.md's crown conditions and its Nod line ("claim the Nod"), and any tooltip that
+names the Nod as a card.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -847,3 +891,5 @@ six-barrel Peddle paid $1,800 and drew Heat before the change).
 - [x] **Destroy, not raze, in every string** (§25)
 - [x] **Empty, unguarded, barrels in every string** (§26)
 - [x] **Peddle at $200 with no Greed Tax; bots sell the whole pile** (§27)
+- [ ] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28)
+- [ ] **Borough cards: no crown in your home Borough; the Nod is all 10 bought** (§29)

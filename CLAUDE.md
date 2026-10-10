@@ -73,23 +73,23 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   as muddle. "The crown of this town has lain in the gutter since November" nods to Rothstein
   without naming him.
 - **The endgame reads in one order everywhere**: the crown, then what the families want (a
-  name, which is Respect; the city, which is the Nod; a man nobody owns, which is no Mark),
-  then the walk into a High Society Venue and the Play. The Rulebook's Goal page is "The Crown
-  of New York", with Jobs and **The Nod: Buy the City** as its two sections; it was "Earning
-  Respect" with the Nod filed under it, a layout left over from the card paying 10 Respect.
-  The Nod's one-line why: "The families bring the guns. The new man brings the city."
+  name, which is Respect; the city, which is Influence; a man nobody owns, which is no Mark;
+  all three together are **the Nod**), then the walk into a High Society Venue and the Play.
+  The Rulebook's Goal page is "The Crown of New York", with Jobs and **Influence: Buy the City**
+  as its two sections (it was "The Nod: Buy the City" until the Nod became the three together,
+  and "Earning Respect" before that); the Nod's one home is Winning the Game. Buy the City's
+  one-line why: "The families bring the guns. The new man brings the city."
 - **Sunset** is a moment, not a phase: the instant the final player Lays Low. It keeps its
   name because other rules point at it (the Handshake deadline, the Welsher, the Turn Tokens,
   and a promise "due at Sunset" dying when the Crown is taken). Deals run out "at Sunset",
   never "at the end of the Day" or "by Day's end": one name for one moment.
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
-  Reaching 10 Influence claims **the Nod** (the city vouching for you). The card
-  was called the Commission Seat until 2026-09-23; it was renamed because a card called a
-  Seat read as the win. Don't bring the old name back. Since 2026-09-25 it pays no Respect:
-  it carries the Play that wins, so "the Nod" (permission from above) now fits it exactly.
-  "The Nomination" was weighed on 2026-09-26 and not taken: it promises a nominator and a
-  vote still to come, and nobody votes; you claim the Nod yourself at 10. Don't call the Nod
-  "untouchable" either: that is the Sicilians' keyword.
+  All 10 bought is the city. **The Nod** is the families' say-so, and since 2026-10-10 it is a
+  status, not a card: you hold it while you have 10+ Respect, all 10 Influence and no Mark (see
+  *Borough cards*). The Nod card was called the Commission Seat until 2026-09-23; it was renamed
+  because a card called a Seat read as the win. Don't bring the old name back. "The Nomination"
+  was weighed on 2026-09-26 and not taken: it promises a nominator and a vote still to come, and
+  nobody votes. Don't call the Nod "untouchable" either: that is the Sicilians' keyword.
 - **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
   Rothstein once, in the scene that opens A Day in the Life, and stops; the front page is a hook,
   not a history. **The Almanac** is the prequel and the
@@ -139,6 +139,35 @@ a fixed top two cards. Don't restore the immediate refill. The Speakeasy grid (a
 Speakeasy, tiered 1/3/5 by bar) is parked in `jobs-system-handoff.md` §2b with the problems to solve
 first.
 
+## Jobs: one verb, one place
+
+Since 2026-10-10 (Nick; `jobs-audit-handoff.md`). Every Job objective follows one house style,
+written out above the card table in `tools/gen_deck.py`:
+
+- **One verb, one place, and at most one other condition**, which should be a fact you can see on
+  the table. Naming one District is the point: while the card sits in the Market, that District is
+  where the table looks.
+- Counts read "N+ barrels", "N+ Moonshine" or "N+ Rum", and end "in one Play". A single event
+  (Seize, Secure, Rise, take over, kill a Boss) needs no such phrase.
+- Name the **District**, the big word on the board's sign, not the venue under it.
+- Use the defined word: Seize, Empty, take over, **home Borough** and **home Ward** (in the Glossary
+  since the same day). Never a count of Districts across a Borough. Those were the Deeds' stand-ins:
+  Tenement Army's described your own home Ward, so it was free on Day 2, and two had no answer for
+  a tie.
+
+**The Smuggler's Run is a 3 and Union Dues a 5** (same day). The Smuggler's Run Seizes a Dock, every
+mainland Dock is in a bounty Borough, and a firefight is part of the Move that starts it, so it could
+pay beside a bounty 5 on one Play. Run `tools/overlap_audit.py` before moving any card that can
+Seize or kill into the 5s: it models a Move and its fight as one Play, and it refuses to run until
+each card's printed objective matches its model.
+
+**A Fold turns down a kill Job, and that stays.** It denies The Toll Booth Trap, The Butcher's Ledger
+and The Irish Goodbye, and pays every Seize Job. The denial is priced (the folding crew leaves the
+District, its barrels and its Safehouse), it turns a face-up kill Job into a bluff that buys ground,
+and it puts the kill fights where running costs too much, above all a High Society room in the
+endgame. Watch in playtest: Queens and Brooklyn can turn their bounty down by Folding; the Bronx and
+Manhattan can't.
+
 ## Barrels travel alone
 
 Since 2026-10-01 (a wording pass; the rule itself is old). A Move can send barrels with no
@@ -156,17 +185,17 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 ("Shift" or "Distribute" was floated and set aside as rule bloat). Tunnel's edge is reach
 (Connected or not); its card dropped "(no Mobsters)", which read as if the Vipers owned the power.
 
-## The crown is a Play: Take the Crown, and only the Nod carries it
+## The crown is a Play: Take the Crown, with the Nod
 
 Since 2026-09-25. There are no Borough Deeds, Titles, or other board-scoring cards. Respect is
-completed Jobs, less **2** for the Rat Card and **1** per Welsher. **The Nod**, claimed the
-instant a player reaches **10 Influence**, pays no Respect: it carries the game's one ending
-Play, **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn with your
-**Boss in a High Society Venue**, no unpaid **Shylock's Mark** and **10+ Respect**, and you win
-on the spot. An unpaid Mark does not change Respect, but it bars the Crown until it is cleared.
+completed Jobs, less **2** for the Rat Card and **1** per Welsher. The game's one ending Play is
+**Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn holding **the Nod**
+(10+ Respect, all 10 Influence, no unpaid **Shylock's Mark**; a status since 2026-10-10) with
+your **Boss in a High Society Venue outside his home Borough**, and you win on the spot. An
+unpaid Mark does not change Respect, but it costs you the Nod until it is cleared.
 It is a special, one-time Play that the Nod unlocks, so it lives on the Winning the Game page
 (a heading and a three-item list; a Plays-style table there split the page and was cut) and on
-the Nod card. Keep it out of the standard Power Plays table
+the Borough cards (the Nod card until 2026-10-10; see below). Keep it out of the standard Power Plays table
 and off the Playbooks' Play lists: listed beside Bribe and Rise, it read as an ordinary Play.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
@@ -177,11 +206,12 @@ at once, so only a promise not yet due goes free. One boss acts at a time, so th
 tiebreak: the Final Standoff is gone, and with it the Loose Change the Playbooks printed.
 
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
-never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod, so every winner
+never a flat price. The 7th and 8th are tempo markers; the 10th completes the city, so every winner
 has climbed all four rungs ($14,000).
 In the Blood Oath, an Alliance needs **20 combined Respect** with neither partner holding a
 Mark (the design docs call this "Solvent"; the Rulebook never defined it, so it isn't
-player-facing), and a partner **holding the Nod** Takes the Crown with his own Boss in a High Society Venue; whoever
+player-facing), and the partner with **all 10 Influence** Takes the Crown with his own Boss in a High Society
+Venue his Borough card names (the Alliance's Nod is those three together); whoever
 crowns is the Capo. The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown
 Tracker, and The Almanac must agree on these values.
 
@@ -191,7 +221,8 @@ one turn out, without a special rule. The Nod is public, so is Respect, and the 
 markers mean a boss who spends out qualifying waits for tomorrow.
 
 **Where the crown is won** (since 2026-09-24; it was "Boss on the board"). The Boss must be
-standing in one of the four High Society Venues when he Takes the Crown, and a fallen Boss still
+standing in a High Society Venue outside his home Borough (since 2026-10-10; see Borough cards,
+below) when he Takes the Crown, and a fallen Boss still
 **Rises only in a Safe Ward**. The gap between the two is the point: it gives the endgame a
 third act, where the leader's Boss is the table's target and a kill costs him a Rise, a walk
 and the Crown: five markers at least, a whole Ledger. Rivals get two kinds of denial, both visible and paid for: kill the Boss and hold the
@@ -218,12 +249,52 @@ Rejected on the way, so nobody rebuilds them:
 Watch in playtest:
 
 - The room doubles as the leader's fortress (Boss, Safehouse, Ambush, and the Recruit point on
-  one square). The counter already in the rules is the Raid: the Big Bust goes for the most
-  barrels, and a Rum stockpile there is Raid bait.
+  one square). The counters in the rules are the Raid (the Big Bust goes for the most barrels,
+  and a Rum stockpile there is Raid bait) and, since 2026-10-10, the away crown: the fortress
+  has to be built in another boss's Borough, next door to his home Ward.
 - **The last boss up.** Rivals who have Laid Low get no turns and can't Ambush, so a boss with
   three markers left after them can walk in and crown back to back.
 - Against a bar of 10, the Rat's **2** and each Welsher's **1** weigh twice what they did.
 - The Bribe ladder is now compulsory: whether $14,000 lengthens games is untimed.
+
+## Borough cards: the Nod, and the crown away from home
+
+Since 2026-10-10 (Nick). The four **Borough cards** replace the four Nod cards in the Cards sheet,
+using the archived Deed plates (`Art/Cards/Manhattan.jpg` and its three siblings). Deal one to each
+boss at setup, face-up: it is his **home Borough** (three players: box the fourth, and that Borough
+is nobody's home). Each card carries:
+
+- **Your unbought Influence**, stacked on it at setup (the 4 markers that used to wait loose in
+  your supply). A Bribe moves the top one to your Reserves; the last one off leaves the card bare.
+- **The Nod**, stated in one line: this card bare, 10+ Respect, no Mark.
+- **Take the Crown**, worded per card, naming the **three High Society Venues outside its Borough**
+  in the positive (Manhattan's reads "Morris Park, Richmond Hill or Williamsburg"). **No boss
+  crowns in his own Borough.** The Blood Oath's crowning partner uses his own card.
+- Its home Ward, in the kicker, for the two Jobs that name one.
+
+Why: "home Borough" had no reminder on the table, and how to draw Boroughs was open. The away crown
+ends the home fortress (Boss, Safehouse, Ambush and Recruit point on one square behind the home
+garrison): every room now has a landlord who can't crown there but lives next door. The home room
+still pays its Kickbacks; it just can't win you the game.
+
+A stack, not a ladder of sockets: four 39 mm chips won't fit a 63 mm card, and the stack's height
+reads fuzzy from across the table, which Nick wants (it guards against the pile-on on a boss one
+Bribe short). A bare card is unmistakable, the Crown is still its own Play, and every Bribe is a
+public Power Play, so nobody is blindsided.
+
+Watch in playtest: **Williamsburg** is one Move from both the Manhattan and Queens home Wards (by
+the bridge from Five Points, and from Corona), so Brooklyn hosts the endgame; Brooklyn's nearest
+room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is three or more Moves from
+every other home, so the Bronx's room becomes a backwater. Each Borough's 5-Respect bounty now
+mostly hits whoever is invading that Borough's room. At three players the unclaimed Borough's room
+has no landlord.
+
+**The Nod is a status** (later the same day, Nick). For a few hours it meant the bare card alone, one of
+three conditions, so "he's got the Nod" didn't say he could win. Now it names the three the families
+want (a name, the city, clean books), and Take the Crown needs the Nod and the room. It teaches in two
+steps (earn the Nod; walk into an away room and Take the Crown), it is the phrase the table needs ("he's
+got the Nod: stop his Boss"), and it can be lost: a Rat Card or a Welsher below 10 Respect, or a Loan's
+Mark. Where the Almanac used "buy the Nod" for the tenth judge it now says "buy the city".
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
@@ -344,9 +415,8 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **Whispers is peek-only**: the Vipers may look at the top card of the Jobs deck at any time.
   The face-down claim is gone. Nick rates the peek the higher-skill play: they can prepare for a
   Job before it reaches the Market.
-- **Starting Boroughs are random** (the reverse-order pick is gone). How to draw them at the
-  table is open: "at random" is the placeholder. Ideas: a Borough on the back of the four Nod
-  cards, or four Borough cards kept as your home-Borough card (possibly with an edge there).
+- **Starting Boroughs are random** (the reverse-order pick is gone). Since 2026-10-10 they are
+  dealt as the four Borough cards (see Borough cards, above).
 
 ## Stealth blocks the Ambush, not the Fold
 
