@@ -679,6 +679,21 @@ over or destroy it". **To port:** the UI strings that say raze ("Raze it", "take
 "take over or raze?", "razes the Safehouse", "Safehouse razed") should say destroy. The move name
 `evictRaze` can stay.
 
+## 26. District words: Empty, unguarded, barrels (2026-10-10, Nick)
+
+Wording only; no rule changes. **Defenseless** is renamed **Empty** (the same Districts: no Mobsters,
+no Safehouse, no Squad), a rival Safehouse with no Mobsters is **unguarded** (it was "Undefended HQ"),
+and rule text says **barrels**, not Liquor. **To port** (strings seen in the `dist/` bundle):
+
+- Job objectives: The Empty Casket ("an **Empty Ward**") and Squatter's Rights ("an **Empty District**").
+- "Rise failed: the Ward must be Safe (yours, or Defenseless)" and "Secure failed: ... (yours, or a
+  Defenseless block)": say Empty, and District.
+- "storms an Undefended HQ": unguarded Safehouse (with §25's raze fix in the same line).
+- "Carried Liquor stays for the Occupier" and the Fold's "leaving Liquor and Safehouse behind": barrels.
+- RULES-AI.md's Safe District line ("yours, or Defenseless").
+
+The flag `riseIntoDefenseless` can stay; it already means "a Ward that wasn't yours".
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

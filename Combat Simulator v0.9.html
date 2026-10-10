@@ -463,7 +463,7 @@
             <div class="acc-body">
             Each trial: opening Ambush (unless Stealth), then the Pinned invader spends Influence per volley until it runs out:
             <strong>Open Fire costs 1</strong>, <strong>Hit costs 2</strong>, <strong>Torch costs 1</strong> plus a sacrificed Runner.
-            At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, liquor lost).
+            At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, barrels lost).
             A <strong>Plunder</strong> raid always keeps 1 Influence back to <strong>Advance</strong> out with the loot
             (Fall Back would drop it). Firepower is the free Irish Trait: it boosts the invader's Open Fire volleys only,
             never an Ambush or any defence.
@@ -506,7 +506,7 @@
             <div class="summary-title" id="withdrawTitle">Fall Back (Out of Influence)</div>
             <div id="unresolvedRate" class="summary-value warn">-</div>
             <div id="unresolvedCount" class="summary-sub">-</div>
-            <div class="summary-sub muted" id="withdrawSub" style="margin-top:2px; font-size:0.75rem;">Mobsters survive; liquor left behind</div>
+            <div class="summary-sub muted" id="withdrawSub" style="margin-top:2px; font-size:0.75rem;">Mobsters survive; barrels left behind</div>
           </div>
         </div>
 
@@ -603,7 +603,7 @@
       irish: "Firepower Trait: +1 attack die (max 5) on every Open Fire volley. Free. Invading only, never on an Ambush or when defending.",
       plunder: "Each of your hits steals 1 barrel instead of killing; the Occupier's hits still kill. No Heat, ever. Keeps 1 Influence back to Advance out with the loot.",
       sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat only if you shoot first.",
-      stealth: "The Occupier cannot Ambush; this models one who Holds Fire and stands. Crew capped at 5 mobsters, no liquor carried.",
+      stealth: "The Occupier cannot Ambush; this models one who Holds Fire and stands. Crew capped at 5 mobsters, no barrels carried.",
       torch: "Spends 1 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +1 Threat) before the volleys start. Heat only if it's the fight's first shot."
     };
 
@@ -848,7 +848,7 @@
         els.withdrawSub.textContent = "Invader withdraws with the stolen barrels";
       } else {
         els.withdrawTitle.textContent = "Fall Back (Out of Influence)";
-        els.withdrawSub.textContent = "Mobsters survive; liquor left behind";
+        els.withdrawSub.textContent = "Mobsters survive; barrels left behind";
       }
     }
 

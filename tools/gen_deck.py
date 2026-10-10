@@ -89,8 +89,10 @@ ONES = [
     # their turf is the deterrent this deck is built on). "A Borough whose Deed you don't
     # hold" is the same glance-verifiable test Union Dues and Last One Standing use --
     # you hold the card or you don't -- rather than a Control state that changes mid-Play.
+    # "Defenseless" was renamed "Empty" on 2026-10-10: the same Districts (no Mobsters,
+    # no Safehouse, no Squad), in a word that cannot be misread as "a rival block nobody guards".
     ("The Empty Casket", "The Empty Casket.jpg", "Rise",
-     "Rise your <b>Boss</b> into a <b>Defenseless Ward</b> in a Borough where <b>you Control no other District</b>.",
+     "Rise your <b>Boss</b> into an <b>Empty Ward</b> in a Borough where <b>you Control no other District</b>.",
      "They buried the wrong man. Ask anyone. Go on, ask."),
     # COUNTERPLAY PASS (2026-08-04). Scored diff 1 -- the easiest card in the deck by a
     # clear margin, and BLOCK 0: nobody goes to Staten, so nobody can stop you going.
@@ -178,7 +180,7 @@ ONES = [
     # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
     # record the Deed-era reasoning.
     ("Squatter&rsquo;s Rights", "Ghost Town.jpg", "Move",
-     "Take Control of a <b>Defenseless District</b> in a Borough where a <b>rival Controls 2+ Districts</b>.",
+     "Take Control of an <b>Empty District</b> in a Borough where a <b>rival Controls 2+ Districts</b>.",
      "They left the lights on. They didn&rsquo;t leave anybody."),
     # LANDMARK (Nick, 2026-07-19): "along the East River" is a labelled feature on
     # the board, so the set is readable at a glance and cannot be argued: East

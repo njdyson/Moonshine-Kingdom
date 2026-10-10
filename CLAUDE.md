@@ -330,7 +330,7 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
   was cut; don't bring it back.
 - **Stealth is a Move where the Occupier cannot Ambush** (since 2026-10-08; see below). Hold
   Fire and Fold stay open, and the Pin is the standard one, free Fall Back included.
-- **Loose Liquor belongs to nobody**: whoever takes Control of the block takes it.
+- **Loose barrels belong to nobody**: whoever takes Control of the District takes them.
 - **The raided crew's owner picks** which Connected Safe District it runs to (by water too since
   2026-10-07; see below).
 - **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
@@ -375,6 +375,28 @@ in Territory: take Control of a block holding one and it can't stay, so **take i
 in from wherever it stood, free) or **destroy** it. Move, Skiff, the Fold and Victory point there. Do
 not call the takeover a Secure: it read as costing a Play or $500.
 
+## District words: Empty, Hostile, unguarded; barrels, not Liquor
+
+Since 2026-10-10 (Nick). A District is in one of five states, each with one word:
+
+| On the District | Word |
+| --- | --- |
+| Your Mobster or Safehouse | you **Control** it |
+| No Mobsters, no Safehouse, no Squad (barrels don't count) | **Empty** |
+| Rival Mobsters | **Hostile** |
+| A rival Safehouse with no Mobsters | **unguarded** |
+| A Police Squad | **Impassable** |
+
+**Safe** is yours or Empty. "Empty" replaced **Defenseless**, which read as "a rival block nobody
+guards", the unguarded case, which it never included; the same Districts, so the Jobs that used it
+(The Empty Casket, Squatter's Rights) are unchanged in play. "Undefended HQ", "standing alone" and
+"Empty rival Safehouse" are all **unguarded** now. Where a rule depends on rival Mobsters, say
+**Hostile**, not "rival turf": an unguarded Safehouse is rival turf and gets no Standoff.
+
+Rule sentences say **District**, not block, and **barrels**, not Liquor. "Block" and "liquor" stay in
+flavour (italics, scene-setting, the Almanac's voice), and "Liquor Barrels" stays as the component's
+name. "Loose Liquor" is retired: barrels in a District nobody Controls are nobody's.
+
 ## The Glossary
 
 Since 2026-10-10 the Rulebook ends with **Glossary: Speak the Lingo**: one line per term of art the
@@ -393,7 +415,7 @@ Scatter always barred the Squad's block.
 What stays apart is what the trigger decides, not the run: **Fold** is the Occupier's choice and
 keeps its name (The Almanac's lessons 18 and 19 are built on the poker trio, and a Fold hands the
 Invader a Seize); a Raid gives no choice but where. A Fold leaves barrels and Safehouse to the
-Invader; a Raid burns the Safehouse and sends the liquor to the Supply. Nowhere to Scram means no
+Invader; a Raid destroys the Safehouse and sends the barrels to the Supply. Nowhere to Scram means no
 Fold, but an arrest in a Raid. The Raid step stays **The Scatter**; Scram is the run inside it.
 Scram is explained inline where it happens (the Fold entry, the Scatter), not as a Territory
 entry: Nick's call. "Scram" is 1928 slang.
@@ -413,8 +435,8 @@ the shared terms carry the rules:
   holds the freshest Heat marker, so the barrels you leave make his block the Big Bust. The
   Rulebook's Advance entry carries that as its flavour line; mk-online's Advance has steppers.
 - **Stealth targets a Hostile District** (the defined term: guarded by rival Mobsters). An
-  undefended Safehouse is a plain Move's job, and the engine always refused a Stealth there.
-- **Skiff is otherwise a Move**: a Standoff in Hostile turf, take over or raze an undefended
+  unguarded Safehouse is a plain Move's job, and the engine always refused a Stealth there.
+- **Skiff is otherwise a Move**: a Standoff in Hostile turf, take over or destroy an unguarded
   Safehouse. Its entry names the four inland Districts (Fordham, Corona, Flushing, Richmond Hill),
   which mk-online's `NON_COASTAL` holds and `scripts/boardcheck.ts` checks against the board.
 - The Playbooks' **Fall Back** row says the carried barrels stay for the Occupier and that an
