@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moonshine Kingdom: Cards v0.9 (The Nod, Debts &amp; Dishonor)</title>
+<title>Moonshine Kingdom: Cards v0.9 (Boroughs, Debts &amp; Dishonor)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
 <style>
 /* ============================================================
    Cards v0.9: the 20 cards that are not Jobs:
-     4 Nods · 1 Rat · 7 Shylock's Marks · 8 Welshers
+     4 Boroughs · 1 Rat · 7 Shylock's Marks · 8 Welshers
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8) and stays cut: it paid a
@@ -24,6 +24,10 @@
    On 2026-09-25 the Nod stopped paying Respect and became the key
    to the win instead: it carries the game's one ending Play, Take
    the Crown, so every winner has bought one.
+   On 2026-10-10 the four Nods became the four Borough cards: dealt
+   at setup, each names its boss's home Borough, holds his unbought
+   Influence (the last marker off is the Nod) and carries Take the
+   Crown, naming the three High Society Venues outside its Borough.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
    the Welsher, −1 Respect forever. They share the debts geometry.
@@ -246,15 +250,17 @@ body{
 /* --- the two geometries --- */
 .card--holding .art{flex:0 0 38mm}
 .card--holding .rules{flex:0 0 16mm}
-.card--commission .art{flex:0 0 38mm}
-.card--commission .rules{flex:0 0 16mm}
+/* boroughs: 2026-10-10. Their rules carry the stack, the Bribe ladder and
+   Take the Crown (18.2mm of text), so the art gives up 3.5mm to the rules.
+   art + rules = 54mm, the same as the other geometries. */
+.card--borough .art{flex:0 0 34.5mm}
+.card--borough .rules{flex:0 0 19.5mm}
 .card--debt .art{flex:0 0 38mm}
 .card--debt .rules{flex:0 0 16mm}
 
 /* --- respect badge. The Rat and Welshers carry their negative values;
-   Marks carry the broken crown. The Nod carries none: it pays no Respect
-   (2026-09-25). The art it wants is the Mark's crown made whole; until
-   that plate exists, no badge beats a wrong one. --- */
+   Marks carry the broken crown. The Borough cards carry none: the Nod
+   on them pays no Respect (2026-09-25). --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
@@ -278,9 +284,9 @@ body{
 
 /* ============================================================
    CARD BACKS
-   Nothing in this deck is shuffled or dealt, so every back
-   carries its own name. (The Borough Deeds, which were, left
-   the box in v0.9.7.) The look is css/card-back.css, shared
+   Debts are never shuffled or dealt, so each of their backs
+   carries its own name. The Borough cards are dealt face-down at
+   setup, so their four backs are identical. The look is css/card-back.css, shared
    with the Jobs deck: the name sits on one line on a gilt
    plate.
    ============================================================ */
@@ -435,11 +441,11 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
-  <div class="masthead-title">The Nod, Debts &amp; Dishonor</div>
-  <div class="masthead-sub">v0.9 &middot; 20 Cards &middot; 4 Nods &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
+  <div class="masthead-title">Boroughs, Debts &amp; Dishonor</div>
+  <div class="masthead-sub">v0.9 &middot; 20 Cards &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
   <p class="masthead-note">
     The Jobs deck pays you for what you <b>do</b>, in Respect. These cards mark the price of a broken word,
-    and the Nod you claim when the whole city answers to you.
+    and the home turf you buy your way out of: the last Influence off your Borough card is the Nod.
   </p>
 </div>
 
@@ -664,56 +670,58 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEET 5: four Nods. Claim one immediately on
-     reaching 10 Influence; it is the only way to Take the Crown,
-     so the Bribe ladder is every winner's road. The art is
-     the existing Commission table, re-framed into the current deck.
-     All fronts and backs are identical, so duplex mirroring is moot.
+     SHEET 5: the four Borough cards (2026-10-10; they replace the
+     four Nods). Deal one to each boss at setup: it names his home
+     Borough and holds his unbought Influence, and the last marker
+     off it is the Nod. Each carries Take the Crown, naming the three
+     High Society Venues outside its Borough: no boss crowns at home.
+     Dealt face-down at random, so all four backs are identical and
+     duplex mirroring is moot. The art is the archived Deed plates.
      ============================================================= -->
 <div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE NOD</span>
-  <span class="meta">claim at 10 Influence &middot; the key to the crown &middot; sheet 5 of 5</span>
+  <span class="dia"></span><span class="lbl">THE BOROUGHS</span>
+  <span class="meta">one dealt to each boss &middot; your unbought Influence, and the crown away from home &middot; sheet 5 of 5</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
-  <div class="card card--commission">
-    <div class="tier"><span class="kicker">Political Power</span></div>
-    <h2 class="title">The Nod</h2>
-    <div class="art"><img src="Art/Table.png" alt=""></div>
-    <div class="rules-label">Power Play</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With your Boss in a <b>High Society Venue</b>, no unpaid <b>Mark</b> and <b>10+ Respect</b>, you win.</span></div>
-    <div class="flavour">Every judge in town owes you. The Commission is listening.</div>
+  <div class="card card--borough">
+    <div class="tier"><span class="kicker">Home Ward: Five Points</span></div>
+    <h2 class="title">Manhattan</h2>
+    <div class="art"><img src="Art/Cards/Manhattan.jpg" alt=""></div>
+    <div class="rules-label">The Nod</div>
+    <div class="rules"><span>Stack your unbought <b>Influence</b> here. Bribes: $2,000, $3,000, $4,000, $5,000.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Morris Park</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="flavour">The money lives here. So do the men who count it.</div>
   </div>
-  <div class="card card--commission">
-    <div class="tier"><span class="kicker">Political Power</span></div>
-    <h2 class="title">The Nod</h2>
-    <div class="art"><img src="Art/Table.png" alt=""></div>
-    <div class="rules-label">Power Play</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With your Boss in a <b>High Society Venue</b>, no unpaid <b>Mark</b> and <b>10+ Respect</b>, you win.</span></div>
-    <div class="flavour">Every judge in town owes you. The Commission is listening.</div>
+  <div class="card card--borough">
+    <div class="tier"><span class="kicker">Home Ward: Hunts Point</span></div>
+    <h2 class="title">The Bronx</h2>
+    <div class="art"><img src="Art/Cards/Bronx.jpg" alt=""></div>
+    <div class="rules-label">The Nod</div>
+    <div class="rules"><span>Stack your unbought <b>Influence</b> here. Bribes: $2,000, $3,000, $4,000, $5,000.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Sugar Hill</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="flavour">Up past the El, the ballpark and the Jockey Club.</div>
   </div>
-  <div class="card card--commission">
-    <div class="tier"><span class="kicker">Political Power</span></div>
-    <h2 class="title">The Nod</h2>
-    <div class="art"><img src="Art/Table.png" alt=""></div>
-    <div class="rules-label">Power Play</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With your Boss in a <b>High Society Venue</b>, no unpaid <b>Mark</b> and <b>10+ Respect</b>, you win.</span></div>
-    <div class="flavour">Every judge in town owes you. The Commission is listening.</div>
+  <div class="card card--borough">
+    <div class="tier"><span class="kicker">Home Ward: Corona</span></div>
+    <h2 class="title">Queens</h2>
+    <div class="art"><img src="Art/Cards/Queens.jpg" alt=""></div>
+    <div class="rules-label">The Nod</div>
+    <div class="rules"><span>Stack your unbought <b>Influence</b> here. Bribes: $2,000, $3,000, $4,000, $5,000.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="flavour">Rail yards, back roads, and a bridge to the money.</div>
   </div>
-  <div class="card card--commission">
-    <div class="tier"><span class="kicker">Political Power</span></div>
-    <h2 class="title">The Nod</h2>
-    <div class="art"><img src="Art/Table.png" alt=""></div>
-    <div class="rules-label">Power Play</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With your Boss in a <b>High Society Venue</b>, no unpaid <b>Mark</b> and <b>10+ Respect</b>, you win.</span></div>
-    <div class="flavour">Every judge in town owes you. The Commission is listening.</div>
+  <div class="card card--borough">
+    <div class="tier"><span class="kicker">Home Ward: Brownsville</span></div>
+    <h2 class="title">Brooklyn</h2>
+    <div class="art"><img src="Art/Cards/Brooklyn.jpg" alt=""></div>
+    <div class="rules-label">The Nod</div>
+    <div class="rules"><span>Stack your unbought <b>Influence</b> here. Bribes: $2,000, $3,000, $4,000, $5,000.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Richmond Hill</b>, you win.</span></div>
+    <div class="flavour">The bridge brings the money. The docks keep it.</div>
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">The Nod</div><div class="back-sub">The City Vouches for You</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Home Borough</div><div class="back-sub">Dealt at Setup</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Home Borough</div><div class="back-sub">Dealt at Setup</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Home Borough</div><div class="back-sub">Dealt at Setup</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Home Borough</div><div class="back-sub">Dealt at Setup</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 </body>

@@ -307,8 +307,9 @@ look.
    dear for a 1, the plainest fallback is *Recruit 5+ Runners in one Play*: simple, but solitaire.
 7. **District names over venue names.** The venues dropped off The Big Squeeze, Poison Panic and
    Cuban Prince; a flavour line could take them back.
-8. **"Home Borough"** is defined in the Glossary (Rulebook Setup now says "as their home Borough").
-   The Town Planner still labels each Ward "Home Turf", which reads fine beside it.
+8. **"Home Borough"** now has a card on the table: since later the same day the four Borough cards
+   (replacing the Nod cards) are dealt at setup and name each boss's home Borough and home Ward.
+   See CLAUDE.md, *Borough cards*.
 
 ## Files changed
 
