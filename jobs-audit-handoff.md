@@ -1,8 +1,11 @@
 # Jobs Deck Audit (2026-10-10)
 
 An audit of all 32 Jobs against the current rules, for clarity first and board tension second.
-**Nothing here is applied yet.** Every rewrite is a proposal for Nick; `tools/gen_deck.py` and
-`Jobs Cards v0.9.html` are untouched.
+
+**Applied 2026-10-10** (Nick: "make the rewrites you suggested"). Every recommendation below is in
+`tools/gen_deck.py` and the printed deck, with the tier swap, the home Borough Glossary line and the
+rebuilt audits. The card tables keep the before and after as a record; *Open for review*, at the
+end, lists the calls most likely to want another look.
 
 What was checked: each objective read cold against its Play's Rulebook entry, the Glossary's
 defined terms, the 2026-10-07 starting turf, and the board's connection graph; then the whole deck
@@ -234,8 +237,7 @@ longest, so print fit should hold. Not yet print-verified.
 
 ## What the proposed deck does to the numbers
 
-From the corrected model (`jobs_model.py`, in this session's scratchpad, not the repo) and a copy
-of `fairness_audit.py`:
+From the corrected model (now `tools/overlap_audit.py`) and `tools/fairness_audit.py`:
 
 | | Printed deck | Proposed deck |
 | --- | --- | --- |
@@ -274,34 +276,45 @@ is out of date:
   Squatter's Rights is only checked on a Move. The Empty Casket's model doesn't require a Ward.
 - **The drift guard** compares names and Respect only, so none of this tripped it.
 
-The scratch model fixes all of these and runs in about five seconds. It should be ported into
-`overlap_audit.py` and `breadth_audit.py` with the card changes, along with the three
-classifications in `fairness_audit.py`. `jobs-system-handoff.md` §3's line that the bounties make the
-hard rule "structurally impossible" to break should be corrected at the same time.
+**Fixed 2026-10-10.** `overlap_audit.py` holds the corrected model (it runs in about half a
+second), `breadth_audit.py` imports it instead of copying the enumeration by hand, and the drift
+guard now compares each card's printed objective as well as its name and Respect: reword a card and
+the audits stop until its predicate is re-read. With The Smuggler's Run put back at 5, the rebuilt
+audit reports all 13 two-5s Plays, so it would have caught finding 1. `fairness_audit.py` has the
+three classifications, `difficulty_audit.py` has re-scored the reworked cards, and
+`jobs-system-handoff.md` §3 is corrected.
 
 ---
 
-## Decisions for Nick
+## Open for review
 
-1. **The Smuggler's Run:** swap tiers with Union Dues (recommended), or keep it a 5 with no fight.
-2. **"Home Borough" as a term.** The Rulebook's Setup already gives each player a Borough "as their
-   home turf", but the Town Planner labels the Ward "Home Turf". Proposed Glossary line:
-   *Home Borough: the mainland Borough you drew at setup. Its Ward is your home Ward.* At three
-   players one Borough is nobody's home, so it never counts as a rival's.
-3. **District names over venue names** on the cards. The venues drop off The Big Squeeze, Poison
-   Panic and Cuban Prince unless a flavour line takes them.
-4. **Tenement Army at Stapleton** costs a Secure ($500) and a Play before the Recruit. If that's too
+Each of these went the way the audit recommended. They are the ones most likely to want another
+look.
+
+1. **The tier swap.** The Smuggler's Run is a 3 and Union Dues a 5. The alternative was to keep The
+   Smuggler's Run a 5 with no fight: *Move 4+ Rum from Staten Island into a Dock you Control in a
+   rival's home Borough.*
+2. **Union Dues at 5** is a judgement, not measured. It scores as contested (block 3 + provocation
+   5 in `difficulty_audit.py`), but it has not been played.
+3. **High Roller now scores "thin" at 5** (block 2 + provocation 3, from 3 + 5). Dropping the
+   adjacency clause cured the guaranteed Beachhead stack and cost the next-door tension. If that
+   matters more, the other cure is to change The Beachhead instead.
+4. **Gin Pipeline scores solitaire at 3.** It always was; the new wording just says so. A candidate
+   for a named target.
+5. **Where Last One Standing points.** Astoria takes the seat spread to 1 on paper, but finding 7
+   says Queens is better protected in a fight than the spread shows.
+6. **Tenement Army at Stapleton** costs a Secure ($500) and a Play before the Recruit. If that's too
    dear for a 1, the plainest fallback is *Recruit 5+ Runners in one Play*: simple, but solitaire.
-5. **Gin Pipeline:** accept it as honest filler, or retarget it to a named District.
-6. **Where Last One Standing points.** Astoria fixes the seat spread on paper, but finding 7 says
-   Queens is better protected in a fight than the spread shows.
-7. **Union Dues at 5:** a judgement, not measured. It's contested and a campaign, which is what the
-   2026-08-04 pass asked of a 5, but it has not been played.
+7. **District names over venue names.** The venues dropped off The Big Squeeze, Poison Panic and
+   Cuban Prince; a flavour line could take them back.
+8. **"Home Borough"** is defined in the Glossary (Rulebook Setup now says "as their home Borough").
+   The Town Planner still labels each Ward "Home Turf", which reads fine beside it.
 
-## If adopted, the files
+## Files changed
 
-`tools/gen_deck.py` (the table and its notes; then `--force`), `Jobs Cards v0.9.html` (regenerated),
-`tools/overlap_audit.py`, `tools/breadth_audit.py`, `tools/fairness_audit.py`,
-`tools/difficulty_audit.py` (re-score the reworked cards), the Rulebook's Setup and Glossary (home
-Borough), `jobs-system-handoff.md` (§3 and the deck notes), and mk-online's Jobs and harness
-(`mk-online-rules-sync.md` gets a section). No other component names a Job.
+`tools/gen_deck.py` (the table and its notes), `Jobs Cards v0.9.html` (regenerated, still 16 A4
+pages), `tools/overlap_audit.py` (rebuilt), `tools/breadth_audit.py`, `tools/fairness_audit.py`,
+`tools/difficulty_audit.py`, the Rulebook's Setup and Glossary (still 23 pages),
+`jobs-system-handoff.md`, CLAUDE.md (*Jobs: one verb, one place*), and `mk-online-rules-sync.md`
+§28 for the port. mk-online's own Jobs code is in the mk-online repo and is not changed here. No
+other component names a Job.

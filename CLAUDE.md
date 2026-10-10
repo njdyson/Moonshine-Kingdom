@@ -139,6 +139,35 @@ a fixed top two cards. Don't restore the immediate refill. The Speakeasy grid (a
 Speakeasy, tiered 1/3/5 by bar) is parked in `jobs-system-handoff.md` §2b with the problems to solve
 first.
 
+## Jobs: one verb, one place
+
+Since 2026-10-10 (Nick; `jobs-audit-handoff.md`). Every Job objective follows one house style,
+written out above the card table in `tools/gen_deck.py`:
+
+- **One verb, one place, and at most one other condition**, which should be a fact you can see on
+  the table. Naming one District is the point: while the card sits in the Market, that District is
+  where the table looks.
+- Counts read "N+ barrels", "N+ Moonshine" or "N+ Rum", and end "in one Play". A single event
+  (Seize, Secure, Rise, take over, kill a Boss) needs no such phrase.
+- Name the **District**, the big word on the board's sign, not the venue under it.
+- Use the defined word: Seize, Empty, take over, **home Borough** and **home Ward** (in the Glossary
+  since the same day). Never a count of Districts across a Borough. Those were the Deeds' stand-ins:
+  Tenement Army's described your own home Ward, so it was free on Day 2, and two had no answer for
+  a tie.
+
+**The Smuggler's Run is a 3 and Union Dues a 5** (same day). The Smuggler's Run Seizes a Dock, every
+mainland Dock is in a bounty Borough, and a firefight is part of the Move that starts it, so it could
+pay beside a bounty 5 on one Play. Run `tools/overlap_audit.py` before moving any card that can
+Seize or kill into the 5s: it models a Move and its fight as one Play, and it refuses to run until
+each card's printed objective matches its model.
+
+**A Fold turns down a kill Job, and that stays.** It denies The Toll Booth Trap, The Butcher's Ledger
+and The Irish Goodbye, and pays every Seize Job. The denial is priced (the folding crew leaves the
+District, its barrels and its Safehouse), it turns a face-up kill Job into a bluff that buys ground,
+and it puts the kill fights where running costs too much, above all a High Society room in the
+endgame. Watch in playtest: Queens and Brooklyn can turn their bounty down by Folding; the Bronx and
+Manhattan can't.
+
 ## Barrels travel alone
 
 Since 2026-10-01 (a wording pass; the rule itself is old). A Move can send barrels with no
