@@ -671,6 +671,14 @@ buys a turn longer on the street), with no Turn Token talk; Extort says "one Hea
 The Rulebook, Playbooks (Knights' Torch row), The Almanac (lesson 21 now counts three sources of Heat) and the
 Combat Simulator (Torch after an Ambush draws nothing) are updated.
 
+## 25. "Destroy", not "raze" (2026-10-10, Nick)
+
+Wording only; the rule is unchanged. The tabletop set now has one verb for a Safehouse sent back to
+its owner's supply: **destroy**. The choice on taking a block with a rival Safehouse reads "take it
+over or destroy it". **To port:** the UI strings that say raze ("Raze it", "take it over or raze it",
+"take over or raze?", "razes the Safehouse", "Safehouse razed") should say destroy. The move name
+`evictRaze` can stay.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
