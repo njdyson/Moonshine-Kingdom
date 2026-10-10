@@ -73,23 +73,23 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   as muddle. "The crown of this town has lain in the gutter since November" nods to Rothstein
   without naming him.
 - **The endgame reads in one order everywhere**: the crown, then what the families want (a
-  name, which is Respect; the city, which is the Nod; a man nobody owns, which is no Mark),
-  then the walk into a High Society Venue and the Play. The Rulebook's Goal page is "The Crown
-  of New York", with Jobs and **The Nod: Buy the City** as its two sections; it was "Earning
-  Respect" with the Nod filed under it, a layout left over from the card paying 10 Respect.
-  The Nod's one-line why: "The families bring the guns. The new man brings the city."
+  name, which is Respect; the city, which is Influence; a man nobody owns, which is no Mark;
+  all three together are **the Nod**), then the walk into a High Society Venue and the Play.
+  The Rulebook's Goal page is "The Crown of New York", with Jobs and **Influence: Buy the City**
+  as its two sections (it was "The Nod: Buy the City" until the Nod became the three together,
+  and "Earning Respect" before that); the Nod's one home is Winning the Game. Buy the City's
+  one-line why: "The families bring the guns. The new man brings the city."
 - **Sunset** is a moment, not a phase: the instant the final player Lays Low. It keeps its
   name because other rules point at it (the Handshake deadline, the Welsher, the Turn Tokens,
   and a promise "due at Sunset" dying when the Crown is taken). Deals run out "at Sunset",
   never "at the end of the Day" or "by Day's end": one name for one moment.
 - **Influence** stays political: judges, aldermen and precinct captains bought with Bribes.
-  Reaching 10 Influence claims **the Nod** (the city vouching for you). The card
-  was called the Commission Seat until 2026-09-23; it was renamed because a card called a
-  Seat read as the win. Don't bring the old name back. Since 2026-09-25 it pays no Respect:
-  it carries the Play that wins, so "the Nod" (permission from above) now fits it exactly.
-  "The Nomination" was weighed on 2026-09-26 and not taken: it promises a nominator and a
-  vote still to come, and nobody votes; you claim the Nod yourself at 10. Don't call the Nod
-  "untouchable" either: that is the Sicilians' keyword.
+  All 10 bought is the city. **The Nod** is the families' say-so, and since 2026-10-10 it is a
+  status, not a card: you hold it while you have 10+ Respect, all 10 Influence and no Mark (see
+  *Borough cards*). The Nod card was called the Commission Seat until 2026-09-23; it was renamed
+  because a card called a Seat read as the win. Don't bring the old name back. "The Nomination"
+  was weighed on 2026-09-26 and not taken: it promises a nominator and a vote still to come, and
+  nobody votes. Don't call the Nod "untouchable" either: that is the Sicilians' keyword.
 - **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
   Rothstein once, in the scene that opens A Day in the Life, and stops; the front page is a hook,
   not a history. **The Almanac** is the prequel and the
@@ -185,15 +185,14 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 ("Shift" or "Distribute" was floated and set aside as rule bloat). Tunnel's edge is reach
 (Connected or not); its card dropped "(no Mobsters)", which read as if the Vipers owned the power.
 
-## The crown is a Play: Take the Crown, and only the Nod carries it
+## The crown is a Play: Take the Crown, with the Nod
 
 Since 2026-09-25. There are no Borough Deeds, Titles, or other board-scoring cards. Respect is
-completed Jobs, less **2** for the Rat Card and **1** per Welsher. **The Nod**, claimed the
-instant a player reaches **10 Influence**, pays no Respect: it carries the game's one ending
-Play, **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn with your
-**Boss in a High Society Venue outside his home Borough**, no unpaid **Shylock's Mark** and
-**10+ Respect**, and you win
-on the spot. An unpaid Mark does not change Respect, but it bars the Crown until it is cleared.
+completed Jobs, less **2** for the Rat Card and **1** per Welsher. The game's one ending Play is
+**Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn holding **the Nod**
+(10+ Respect, all 10 Influence, no unpaid **Shylock's Mark**; a status since 2026-10-10) with
+your **Boss in a High Society Venue outside his home Borough**, and you win on the spot. An
+unpaid Mark does not change Respect, but it costs you the Nod until it is cleared.
 It is a special, one-time Play that the Nod unlocks, so it lives on the Winning the Game page
 (a heading and a three-item list; a Plays-style table there split the page and was cut) and on
 the Borough cards (the Nod card until 2026-10-10; see below). Keep it out of the standard Power Plays table
@@ -207,11 +206,12 @@ at once, so only a promise not yet due goes free. One boss acts at a time, so th
 tiebreak: the Final Standoff is gone, and with it the Loose Change the Playbooks printed.
 
 The Bribe ladder escalates: **$2,000, $3,000, $4,000, $5,000** for the 7th to 10th markers,
-never a flat price. The 7th and 8th are tempo markers; the 10th claims the Nod, so every winner
+never a flat price. The 7th and 8th are tempo markers; the 10th completes the city, so every winner
 has climbed all four rungs ($14,000).
 In the Blood Oath, an Alliance needs **20 combined Respect** with neither partner holding a
 Mark (the design docs call this "Solvent"; the Rulebook never defined it, so it isn't
-player-facing), and a partner **holding the Nod** Takes the Crown with his own Boss in a High Society Venue; whoever
+player-facing), and the partner with **all 10 Influence** Takes the Crown with his own Boss in a High Society
+Venue his Borough card names (the Alliance's Nod is those three together); whoever
 crowns is the Capo. The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown
 Tracker, and The Almanac must agree on these values.
 
@@ -265,8 +265,8 @@ boss at setup, face-up: it is his **home Borough** (three players: box the fourt
 is nobody's home). Each card carries:
 
 - **Your unbought Influence**, stacked on it at setup (the 4 markers that used to wait loose in
-  your supply). A Bribe moves the top one to your Reserves. The last one off leaves the card bare,
-  and **a bare card is the Nod**. The word stays: it names the state, and the Almanac leans on it.
+  your supply). A Bribe moves the top one to your Reserves; the last one off leaves the card bare.
+- **The Nod**, stated in one line: this card bare, 10+ Respect, no Mark.
 - **Take the Crown**, worded per card, naming the **three High Society Venues outside its Borough**
   in the positive (Manhattan's reads "Morris Park, Richmond Hill or Williamsburg"). **No boss
   crowns in his own Borough.** The Blood Oath's crowning partner uses his own card.
@@ -288,6 +288,13 @@ room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is thr
 every other home, so the Bronx's room becomes a backwater. Each Borough's 5-Respect bounty now
 mostly hits whoever is invading that Borough's room. At three players the unclaimed Borough's room
 has no landlord.
+
+**The Nod is a status** (later the same day, Nick). For a few hours it meant the bare card alone, one of
+three conditions, so "he's got the Nod" didn't say he could win. Now it names the three the families
+want (a name, the city, clean books), and Take the Crown needs the Nod and the room. It teaches in two
+steps (earn the Nod; walk into an away room and Take the Crown), it is the phrase the table needs ("he's
+got the Nod: stop his Boss"), and it can be lost: a Rat Card or a Welsher below 10 Respect, or a Loan's
+Mark. Where the Almanac used "buy the Nod" for the tenth judge it now says "buy the city".
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
 

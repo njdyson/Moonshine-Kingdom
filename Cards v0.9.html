@@ -26,8 +26,10 @@
    the Crown, so every winner has bought one.
    On 2026-10-10 the four Nods became the four Borough cards: dealt
    at setup, each names its boss's home Borough, holds his unbought
-   Influence (the last marker off is the Nod) and carries Take the
-   Crown, naming the three High Society Venues outside its Borough.
+   Influence and carries Take the Crown, naming the three High Society
+   Venues outside its Borough. The Nod is no longer a card: it is the
+   status of 10+ Respect, all 10 Influence bought and no unpaid Mark,
+   printed on each Borough card beside the Play it unlocks.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
    the Welsher, −1 Respect forever. They share the debts geometry.
@@ -259,8 +261,7 @@ body{
 .card--debt .rules{flex:0 0 16mm}
 
 /* --- respect badge. The Rat and Welshers carry their negative values;
-   Marks carry the broken crown. The Borough cards carry none: the Nod
-   on them pays no Respect (2026-09-25). --- */
+   Marks carry the broken crown. The Borough cards carry none. --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
@@ -445,7 +446,7 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="masthead-sub">v0.9 &middot; 20 Cards &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
   <p class="masthead-note">
     The Jobs deck pays you for what you <b>do</b>, in Respect. These cards mark the price of a broken word,
-    and the home turf you buy your way out of: the last Influence off your Borough card is the Nod.
+    and the home turf you buy your way out of, to take the crown on another man's.
   </p>
 </div>
 
@@ -672,8 +673,8 @@ body.trim .card,body.trim .back{border-radius:0}
 <!-- =============================================================
      SHEET 5: the four Borough cards (2026-10-10; they replace the
      four Nods). Deal one to each boss at setup: it names his home
-     Borough and holds his unbought Influence, and the last marker
-     off it is the Nod. Each carries Take the Crown, naming the three
+     Borough and holds his unbought Influence. Each states the Nod
+     and carries Take the Crown, naming the three
      High Society Venues outside its Borough: no boss crowns at home.
      Dealt face-down at random, so all four backs are identical and
      duplex mirroring is moot. The art is the archived Deed plates.
@@ -688,32 +689,32 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="kicker">Home Ward: Five Points</span></div>
     <h2 class="title">Manhattan</h2>
     <div class="art"><img src="Art/Cards/Manhattan.jpg" alt=""></div>
-    <div class="rules-label">The Nod</div>
-    <div class="rules"><span>Stack your unbought <b>Influence</b> here.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Morris Park</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules-label">The Crown</div>
+    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Morris Park</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
     <div class="flavour">The money lives here. So do the men who count it.</div>
   </div>
   <div class="card card--borough">
     <div class="tier"><span class="kicker">Home Ward: Hunts Point</span></div>
     <h2 class="title">The Bronx</h2>
     <div class="art"><img src="Art/Cards/Bronx.jpg" alt=""></div>
-    <div class="rules-label">The Nod</div>
-    <div class="rules"><span>Stack your unbought <b>Influence</b> here.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Sugar Hill</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules-label">The Crown</div>
+    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Sugar Hill</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
     <div class="flavour">Up past the El, the ballpark and the Jockey Club.</div>
   </div>
   <div class="card card--borough">
     <div class="tier"><span class="kicker">Home Ward: Corona</span></div>
     <h2 class="title">Queens</h2>
     <div class="art"><img src="Art/Cards/Queens.jpg" alt=""></div>
-    <div class="rules-label">The Nod</div>
-    <div class="rules"><span>Stack your unbought <b>Influence</b> here.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules-label">The Crown</div>
+    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Williamsburg</b>, you win.</span></div>
     <div class="flavour">Rail yards, back roads, and a bridge to the money.</div>
   </div>
   <div class="card card--borough">
     <div class="tier"><span class="kicker">Home Ward: Brownsville</span></div>
     <h2 class="title">Brooklyn</h2>
     <div class="art"><img src="Art/Cards/Brooklyn.jpg" alt=""></div>
-    <div class="rules-label">The Nod</div>
-    <div class="rules"><span>Stack your unbought <b>Influence</b> here.<span class="brk"></span><b>Take the Crown (2).</b> With none left here, <b>10+ Respect</b>, no unpaid <b>Mark</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Richmond Hill</b>, you win.</span></div>
+    <div class="rules-label">The Crown</div>
+    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Richmond Hill</b>, you win.</span></div>
     <div class="flavour">The bridge brings the money. The docks keep it.</div>
   </div>
 </div>
