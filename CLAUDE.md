@@ -191,11 +191,12 @@ Since 2026-09-25. There are no Borough Deeds, Titles, or other board-scoring car
 completed Jobs, less **2** for the Rat Card and **1** per Welsher. **The Nod**, claimed the
 instant a player reaches **10 Influence**, pays no Respect: it carries the game's one ending
 Play, **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn with your
-**Boss in a High Society Venue**, no unpaid **Shylock's Mark** and **10+ Respect**, and you win
+**Boss in a High Society Venue outside his home Borough**, no unpaid **Shylock's Mark** and
+**10+ Respect**, and you win
 on the spot. An unpaid Mark does not change Respect, but it bars the Crown until it is cleared.
 It is a special, one-time Play that the Nod unlocks, so it lives on the Winning the Game page
 (a heading and a three-item list; a Plays-style table there split the page and was cut) and on
-the Nod card. Keep it out of the standard Power Plays table
+the Borough cards (the Nod card until 2026-10-10; see below). Keep it out of the standard Power Plays table
 and off the Playbooks' Play lists: listed beside Bribe and Rise, it read as an ordinary Play.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
@@ -220,7 +221,8 @@ one turn out, without a special rule. The Nod is public, so is Respect, and the 
 markers mean a boss who spends out qualifying waits for tomorrow.
 
 **Where the crown is won** (since 2026-09-24; it was "Boss on the board"). The Boss must be
-standing in one of the four High Society Venues when he Takes the Crown, and a fallen Boss still
+standing in a High Society Venue outside his home Borough (since 2026-10-10; see Borough cards,
+below) when he Takes the Crown, and a fallen Boss still
 **Rises only in a Safe Ward**. The gap between the two is the point: it gives the endgame a
 third act, where the leader's Boss is the table's target and a kill costs him a Rise, a walk
 and the Crown: five markers at least, a whole Ledger. Rivals get two kinds of denial, both visible and paid for: kill the Boss and hold the
@@ -247,12 +249,45 @@ Rejected on the way, so nobody rebuilds them:
 Watch in playtest:
 
 - The room doubles as the leader's fortress (Boss, Safehouse, Ambush, and the Recruit point on
-  one square). The counter already in the rules is the Raid: the Big Bust goes for the most
-  barrels, and a Rum stockpile there is Raid bait.
+  one square). The counters in the rules are the Raid (the Big Bust goes for the most barrels,
+  and a Rum stockpile there is Raid bait) and, since 2026-10-10, the away crown: the fortress
+  has to be built in another boss's Borough, next door to his home Ward.
 - **The last boss up.** Rivals who have Laid Low get no turns and can't Ambush, so a boss with
   three markers left after them can walk in and crown back to back.
 - Against a bar of 10, the Rat's **2** and each Welsher's **1** weigh twice what they did.
 - The Bribe ladder is now compulsory: whether $14,000 lengthens games is untimed.
+
+## Borough cards: the Nod, and the crown away from home
+
+Since 2026-10-10 (Nick). The four **Borough cards** replace the four Nod cards in the Cards sheet,
+using the archived Deed plates (`Art/Cards/Manhattan.jpg` and its three siblings). Deal one to each
+boss at setup, face-up: it is his **home Borough** (three players: box the fourth, and that Borough
+is nobody's home). Each card carries:
+
+- **Your unbought Influence**, stacked on it at setup (the 4 markers that used to wait loose in
+  your supply). A Bribe moves the top one to your Reserves. The last one off leaves the card bare,
+  and **a bare card is the Nod**. The word stays: it names the state, and the Almanac leans on it.
+- **Take the Crown**, worded per card, naming the **three High Society Venues outside its Borough**
+  in the positive (Manhattan's reads "Morris Park, Richmond Hill or Williamsburg"). **No boss
+  crowns in his own Borough.** The Blood Oath's crowning partner uses his own card.
+- Its home Ward, in the kicker, for the two Jobs that name one.
+
+Why: "home Borough" had no reminder on the table, and how to draw Boroughs was open. The away crown
+ends the home fortress (Boss, Safehouse, Ambush and Recruit point on one square behind the home
+garrison): every room now has a landlord who can't crown there but lives next door. The home room
+still pays its Kickbacks; it just can't win you the game.
+
+A stack, not a ladder of sockets: four 39 mm chips won't fit a 63 mm card, and the stack's height
+reads fuzzy from across the table, which Nick wants (it guards against the pile-on on a boss one
+Bribe short). A bare card is unmistakable, the Crown is still its own Play, and every Bribe is a
+public Power Play, so nobody is blindsided.
+
+Watch in playtest: **Williamsburg** is one Move from both the Manhattan and Queens home Wards (by
+the bridge from Five Points, and from Corona), so Brooklyn hosts the endgame; Brooklyn's nearest
+room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is three or more Moves from
+every other home, so the Bronx's room becomes a backwater. Each Borough's 5-Respect bounty now
+mostly hits whoever is invading that Borough's room. At three players the unclaimed Borough's room
+has no landlord.
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
@@ -373,9 +408,8 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **Whispers is peek-only**: the Vipers may look at the top card of the Jobs deck at any time.
   The face-down claim is gone. Nick rates the peek the higher-skill play: they can prepare for a
   Job before it reaches the Market.
-- **Starting Boroughs are random** (the reverse-order pick is gone). How to draw them at the
-  table is open: "at random" is the placeholder. Ideas: a Borough on the back of the four Nod
-  cards, or four Borough cards kept as your home-Borough card (possibly with an edge there).
+- **Starting Boroughs are random** (the reverse-order pick is gone). Since 2026-10-10 they are
+  dealt as the four Borough cards (see Borough cards, above).
 
 ## Stealth blocks the Ambush, not the Fold
 

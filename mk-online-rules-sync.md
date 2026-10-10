@@ -731,6 +731,24 @@ other card keeps its trigger and needs only its string. The opening Market still
 so The Smuggler's Run can now be dealt on Day 1 and Union Dues can't. Bots: Union Dues is a reason to
 keep a garrison in the home Ward.
 
+## 29. Borough cards: the Nod, and the crown away from home (2026-10-10, Nick)
+
+A rule change. **Take the Crown needs the Boss in a High Society Venue outside his home Borough.**
+The four Nod cards are gone; four Borough cards, dealt at setup, name each boss's home Borough,
+hold his unbought Influence (a Bribe takes the top marker; the card bare is the Nod) and carry
+Take the Crown. CLAUDE.md, *Borough cards*, has the why. **To port:**
+
+| | Now |
+| --- | --- |
+| Setup | Starting Boroughs are still random (the engine already deals them); at three players one is nobody's home. |
+| Victory test | Respect >= 10, all 10 Influence bought, no Mark, Boss in a High Society Venue **not in his home Borough**. |
+| The Nod | No card to claim: it is the state of having bought all 10. Any UI that shows "claimed the Nod" can stay as an event. |
+| Blood Oath | The crowning partner's own home Borough is barred (16.4 otherwise unchanged). |
+| Bots | Crown rooms are the three away ones: for Manhattan and Queens, Williamsburg is one Move from home; for Brooklyn, Richmond Hill; for the Bronx, Sugar Hill or Williamsburg at two. A bot's own room is worth holding for Kickbacks, not for the walk. Defend the home room as a landlord: every visiting Boss there is the leader's. |
+
+Strings: RULES-AI.md's crown conditions and its Nod line ("claim the Nod"), and any tooltip that
+names the Nod as a card.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -848,3 +866,4 @@ keep a garrison in the home Ward.
 - [x] **A Fold Scrams: never to the block the Invader came from** (§21)
 - [x] **Movement wording: Advance's barrel choice reachable online, Stealth Hostile, Skiff's inland list** (§22)
 - [ ] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28)
+- [ ] **Borough cards: no crown in your home Borough; the Nod is all 10 bought** (§29)
