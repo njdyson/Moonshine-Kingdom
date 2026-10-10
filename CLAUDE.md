@@ -235,7 +235,8 @@ Since 2026-09-22:
   barrel Unloaded there pays an Influence **Kickback**. The usual limits apply: a marker in
   Reserves and an empty Ledger slot, else the Kickback is lost. ("The High Society joints
   don't buy swill.")
-- the Greed Tax is unchanged, at 4+ barrels in one Play, wherever you sell
+- the Greed Tax is unchanged, at 4+ barrels Unloaded in one Play, wherever you sell (Peddle
+  is exempt since 2026-10-10; see below)
 
 Why: the four High Society Venues sit on the four #7 Stills, which the Harbormaster can never
 lock out. When any barrel paid a Kickback, two 7-Mobster stacks could brew, Unload in place
@@ -264,10 +265,16 @@ entry says so in as many words (the turn box lists "Pay the cost" last, which re
 without it); the Almanac's Rum table ("5 Rum, net +3") and `tools/sim_kickback_ledger.js` assume it.
 
 The one other liquor-type restriction is the Irish **Peddle**, which sells **Moonshine
-only**, and **only in Wards you Control**: Speakeasy sales belong to Unload. Peddle costs 1
-Play where Unload costs 2, and that discount is the whole card. Let it reach Speakeasies and it
-makes Unload a dead Play for Irish Moonshine. Do not "restore consistency" by opening Peddle to
-either liquor or to more addresses. (`mk-online-rules-sync.md` §9.6 holds the ruling.)
+only**, and **only in Wards you Control**: Speakeasy sales belong to Unload. Since 2026-10-10
+(Nick) it pays the **$200 street rate** and **never draws Heat**: no Greed Tax, however many
+barrels. It used to sell at the bar's $300 for half the Influence, a strict discount that made
+Unload a dead Play for Irish Moonshine. Now the Irish choose: a small batch fetches more at a bar
+(three barrels: $900 by Unload, $600 by Peddle), and a big pile goes out quietly in one Play
+(ten: $2,000 and no Heat, where an Unload pays $3,000 and draws it). Do not "restore
+consistency" by opening Peddle to either liquor or to more addresses, or by putting the Greed
+Tax back on it. Watch in playtest: a packed Ward is now a silent cash engine, and a quiet Peddle
+clears Raid bait without making the Irish the freshest noise. (`mk-online-rules-sync.md` §9.6
+and §27.)
 
 The Rum pool is **20** barrels, and Trade at a Dock (1:1 from Moonshine) is the only way Rum
 enters the game. Trade is worth **$200 a barrel** in cash, plus the Kickback if the Rum is
