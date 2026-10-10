@@ -7,7 +7,8 @@ water, a graduated Heat Track, gilt lettering) changed the look only. Later the 
 empty south) and the Bowery's foot and Staten Island rose. Then the borders round the
 four-way corner were straightened, gently (an all-straight version with a true vertical for
 East Harlem was tried and reverted), and the title went small and level under the panels. See
-Manhattan is one width, Straightening round the four-way corner, The look and Decisions. mk-online serves it too (`mk-online/dist/board.svg`, the 2026-10-07 board, from mk-online 31456d5),
+Manhattan is one width, Straightening round the four-way corner, The look and Decisions. On
+2026-10-10 East Harlem's corner on the Hell Gate was cut off (see East Harlem's corner cut). mk-online serves it too (`mk-online/dist/board.svg`, the 2026-10-07 board, from mk-online 31456d5),
 with clickable Districts, piece spots and its connection graph taken from `board-geometry.json`;
 after a redraw, `mk-online-board-handoff.md` is the brief for catching it up. The Affinity export (`Art/Board (Large).png`) is untouched.
 
@@ -82,9 +83,10 @@ works better"), so this makes the angles deliberate instead.
   (`corner`), and the borders that leave it run at 45 degrees (see Straightening round the
   four-way corner). Sugar Hill / Belmont runs square to the coast, so Sugar Hill's top is a
   right-angled peak, like Williamsburg's, and its sign hangs centred under it from both slopes.
-  East Harlem / Hunts Point runs out to a knee and drops upright to the Hell Gate (`ehKnee`; East
-  Harlem takes a short stretch of that shore, and the Hell Gate Bridge moves 30 east to land
-  clear of it, `BRIDGE_SHIFT`). Belmont / Hunts Point leaves the corner square to it, up to Hunts
+  East Harlem / Hunts Point runs out to a knee and drops upright onto the crook where the Hell
+  Gate meets the East River (`EH_SHORE`), so Hunts Point has the whole of the Hell Gate's Bronx
+  bank and the Hell Gate Bridge lands near its middle (`BRIDGE_SHIFT`; see East Harlem's corner
+  cut). Belmont / Hunts Point leaves the corner square to it, up to Hunts
   Point's top (`huntsTop`), which runs level across Belmont and Fordham and drops to the Bronx's
   row at 45 degrees just short of Throggs Neck.
 - **No Westchester or Nassau** (Nick: sit the Districts flush against the border). The Bronx runs
@@ -186,7 +188,8 @@ the rows) was replaced the same day by the bricks, below; the rest stands:
   degrees too. The corner needs x + y of at least about 801, or the peak is too narrow for the
   sign and its plate drops under it.
 - **East Harlem / Hunts Point runs at 45 degrees** to its knee (`ehKnee`), then upright to the
-  Hell Gate as before, and **Belmont / Hunts Point leaves the corner square to it** up to Hunts
+  Hell Gate as before (since 2026-10-10 onto the crook, and the setting is gone: see East
+  Harlem's corner cut), and **Belmont / Hunts Point leaves the corner square to it** up to Hunts
   Point's top (`huntsTop`, 150), which runs level across Belmont and Fordham and drops to the
   Bronx's row at 45 degrees just short of Throggs Neck. Fordham's slanted bottom is gone, and
   Morris Park and Throggs Neck are untouched.
@@ -389,6 +392,25 @@ between its east shore and the frame, was already about that) and **centred on w
 - MANHATTAN in the middle of the Hudson, moved up the channel (y 440 to 405, in two nudges) so its
   shield clears the mouth, where the coast turns upright and New Jersey meets the frame; West
   Side's piers move up the coast out of its way.
+
+### East Harlem's corner cut
+
+Nick, 2026-10-10: cut East Harlem's corner off so it meets the crook in the river, without
+moving its sign any lower. East Harlem / Hunts Point ran at 45 degrees to a knee at x 715
+(`ehKnee`), then dropped upright to the Hell Gate, so East Harlem took a stub of the Hell Gate's
+level shore, about 15 units, beside the crook where it turns down the East River. The knee now
+sits straight above the crook (`EH_SHORE`, x 700.4) and the upright drops onto it, so East
+Harlem's shore is the East River's alone. The crook sets the knee, so `ehKnee` is gone from
+`SETTINGS` and from the tuner.
+
+- **No connection changed.** East Harlem still meets Hunts Point (on a border 6 units shorter)
+  and is still Coastal, on the East River.
+- **East Harlem's sign didn't move** (539, 285, on hangers of 38). Its room went 53.3 to 52.7 cm²
+  and its area 91.6 to 90.5, a touch under Five Points' 90.8, so it is now Manhattan's smallest.
+- **Hunts Point** grew 88.6 to 89.7 cm² by area. Its sign rose a unit (hangers 33 to 32), which
+  narrows the strip above it by more than the corner adds, so its room reads 51.7 to 51.3.
+- **The Hell Gate Bridge stays put** (x 758). Its 30-unit shift was made to land clear of East
+  Harlem's stub; it now sits near the middle of Hunts Point's shore (x 700 to 824).
 
 ### Room for pieces, and the tuner
 
@@ -776,6 +798,9 @@ keeps them on a re-trace.
 
 ## Open
 
+- **mk-online is one redraw behind** (2026-10-10): East Harlem's corner cut. No connection changed,
+  so only the screen SVG and the click areas and piece spots for East Harlem and Hunts Point need
+  catching up; `mk-online-board-handoff.md` is the brief.
 - ~~**mk-online is one redraw behind.**~~ Caught up 2026-10-07 (mk-online 31456d5): Manhattan's
   bricks (East Harlem / Tenderloin gone, West Side / Five Points and Tenderloin / Bowery new), the
   new screen SVG, and click areas and piece spots regenerated by its `scripts/board-ui-geometry.mjs`;
