@@ -52,7 +52,7 @@ a weighting is a second set of opinions layered on the first.
   DICE      Can you do everything right and still fail? Combat only. Muscle
             Ratio caps dice at 5; at base Threat each die is ~1/3.
   MASS      Volume that must exist and be in one place: barrels, Runners,
-            Mobsters. Costs Plays AND supply, and feeds the Reckoning Sweep.
+            Mobsters. Costs Plays AND supply.
   WINDOW    How narrow is the opportunity? Police-locked venues, mobile
             one-per-rival pieces. Can the card sit dead for many Days?
   BLOCK     COUNTERPLAY. Once this card is face-up and rivals see you building
@@ -89,29 +89,29 @@ CARDS = [
      "One named crossing -- rivals can garrison either end, but it is one Play."),
     ("The Beachhead", 1, "Secure", 1, 1, 0, 0, 1, 1, 0, 1,
      "Rival can relocate the Safehouse you are creeping up on."),
-    ("Tenement Army", 1, "Recruit", 1, 0, 0, 2, 0, 1, 0, 1,
-     "REWRITTEN: 4+, and the Sweep caps the block at 5 -- disperse or pay."),
+    ("Tenement Army", 1, "Recruit", 2, 0, 0, 1, 0, 1, 2, 0,
+     "Stapleton: Secure to Staten first, then hire. A parked Runner denies it."),
     ("Last Call", 1, "Unload", 1, 0, 0, 1, 0, 2, 3, 1,
-     "REWRITTEN: one named venue (Coney Island), garrisoned from setup."),
-    ("The Empty Casket", 1, "Rise", 1, 0, 0, 0, 1, 2, 1, 2,
-     "REWRITTEN: Rise into a Ward a RIVAL holds. Blockable, provocative."),
+     "One named bar (Coney Island), beside two Brooklyn starts."),
+    ("The Empty Casket", 1, "Rise", 1, 2, 0, 0, 1, 1, 1, 0,
+     "Your Boss must die first; lands on Stapleton or a Ward left empty."),
     ("Fortress Staten", 1, "Secure", 2, 0, 0, 1, 0, 1, 1, 0,
      "REWRITTEN: +4 Barrels, which must be hauled across water."),
     ("The Pier Six Brawl", 1, "Open Fire", 1, 1, 0, 0, 1, 2, 1, 1,
-     "REWRITTEN: Seize a rival Dock. No dice; garrisoning is a real answer."),
-    ("The Dutchman's Deal", 1, "Trade", 2, 0, 0, 1, 0, 2, 2, 0,
-     "REWRITTEN: the two Manhattan Docks. Contested turf, 2-district width."),
+     "Seize a Dock with no Safehouse. No dice needed; a garrison answers it."),
+    ("The Dutchman's Deal", 1, "Trade", 2, 0, 0, 1, 0, 2, 3, 1,
+     "One named Dock (West Side), empty at setup, beside Sugar Hill."),
     ("The Angel's Share", 1, "Unload", 2, 0, 0, 1, 0, 2, 3, 1,
-     "REWRITTEN: one named venue (East Harlem), garrisoned from setup."),
+     "One named bar (East Harlem), between the Manhattan and Bronx homes."),
     ("Night Landing", 1, "Move", 2, 0, 0, 1, 1, 2, 1, 0,
      "Only 2 Docks. Take or garrison both and the card is dead."),
-    ("Squatter's Rights", 1, "Move", 1, 1, 0, 0, 1, 1, 0, 1,
-     "Rival can garrison the Defenseless district once they see you coming."),
+    ("Squatter's Rights", 1, "Move", 1, 0, 0, 0, 1, 1, 1, 1,
+     "Any Empty block in a rival's home Borough; he can fill it first."),
     ("The Grand Tour", 1, "Unload", 1, 0, 0, 1, 0, 1, 1, 0,
      "4 named venues -- denying all four is not worth anyone's Days."),
     # ------------------------------- 3 RESPECT -------------------------------
-    ("Cuban Prince", 3, "Unload", 2, 0, 0, 1, 0, 2, 3, 1,
-     "ONE named venue. Take Sunny's Bar and the card is dead."),
+    ("Cuban Prince", 3, "Move", 2, 0, 0, 1, 0, 2, 3, 1,
+     "ONE named District (Red Hook), Brooklyn's own bar since 2026-10-07."),
     ("Rum Row", 3, "Trade", 2, 0, 0, 2, 1, 1, 1, 0,
      "Staten is uncontested, which is exactly why it is not blockable."),
     ("The Eviction", 3, "Open Fire", 2, 2, 1, 1, 1, 2, 0, 2,
@@ -121,17 +121,17 @@ CARDS = [
     ("The Insurance Job", 3, "Rat", 3, 0, 0, 0, 2, 1, 0, 0,
      "Engineering the Raid onto yourself is private. Nobody interferes."),
     ("The Big Squeeze", 3, "Unload", 2, 0, 0, 2, 0, 2, 3, 1,
-     "ONE named venue (The Haymarket). Denial is a single Play."),
+     "ONE named District (The Tenderloin), Manhattan's own bar."),
     ("Hell's Highway", 3, "Move", 2, 0, 0, 2, 0, 2, 3, 1,
      "ONE named district (Fordham). Garrison it and the card stalls."),
     ("Poison Panic", 3, "Unload", 2, 0, 0, 2, 0, 2, 3, 1,
-     "ONE named venue (Paradise Alley). Same shape as its three siblings."),
-    ("Gin Pipeline", 3, "Move", 2, 0, 0, 2, 0, 2, 1, 1,
-     "REWRITTEN: named destination (a Ward you Control) -- a deniable end."),
-    ("Union Dues", 3, "Recruit", 2, 0, 0, 2, 0, 2, 0, 1,
-     "Forces your Safehouse into a named Ward -- rivals can take it first."),
-    ("Last One Standing", 3, "Secure", 2, 0, 0, 0, 0, 2, 0, 1,
-     "Must Secure a venue in a rival's Borough; they can hold it against you."),
+     "ONE named District (Flushing). Same shape as its three siblings."),
+    ("Gin Pipeline", 3, "Move", 2, 0, 0, 2, 0, 1, 1, 0,
+     "Your own home Ward: honest filler, and hard for anyone to deny."),
+    ("The Smuggler's Run", 3, "Move", 3, 1, 0, 3, 1, 3, 2, 2,
+     "A 3 since 2026-10-10: Seize a Dock off Staten with 4 Rum. Hardest 3."),
+    ("Last One Standing", 3, "Secure", 1, 0, 1, 0, 0, 2, 3, 2,
+     "ONE named bar (Astoria). Queens garrisons it; others Seize it first."),
     ("The Irish Goodbye", 3, "Open Fire", 2, 2, 1, 1, 1, 1, 1, 1,
      "REWRITTEN: 3+ -> 2+ kills. Dice variance was the wrong kind of hard."),
     # ------------------------------- 5 RESPECT -------------------------------
@@ -143,14 +143,14 @@ CARDS = [
      "Target can simply disperse below 5 defenders and it goes dead."),
     ("The Five Families", 5, "Extort", 3, 0, 0, 0, 1, 3, 0, 1,
      "WHACK-A-MOLE: 5 boroughs held at once, publicly, each separately deniable."),
-    ("The Smuggler's Run", 5, "Move", 3, 1, 0, 3, 1, 3, 2, 2,
-     "REWRITTEN: land 6 Rum on a Dock a RIVAL holds. Now a contested run."),
+    ("Union Dues", 5, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
+     "A rival's home Ward: take it or wait him out. Every seat guards home."),
     ("Bloody Sunday", 5, "Open Fire", 2, 1, 2, 1, 1, 2, 3, 3,
      "Manhattan garrisons its Safehouse -- but it cannot leave the Borough."),
     ("The Butcher's Ledger", 5, "Open Fire", 2, 3, 3, 2, 2, 1, 3, 2,
      "Rivals avoid massing in Brooklyn, but cannot 'block' a kill count."),
-    ("High Roller", 5, "Secure", 3, 1, 0, 2, 3, 3, 3, 2,
-     "REWRITTEN: the HS district must be one a RIVAL Controls. Storm uptown."),
+    ("High Roller", 5, "Secure", 3, 0, 0, 2, 3, 2, 2, 1,
+     "Raid-gated room with 4 Rum stockpiled in it: contested, and Raid bait."),
 ]
 
 AXES = ("setup", "rival", "dice", "mass", "window", "block")
@@ -206,11 +206,11 @@ for tier in (5, 3):
     for r in sorted(by_tier[tier], key=lambda r: (r['block'] + r['prov'])):
         engage = r['block'] + r['prov']
         if engage <= 3:
-            verdict = "SOLITAIRE — demote or re-objective"
+            verdict = "SOLITAIRE: demote or re-objective"
         elif engage <= 5:
             verdict = "thin"
         else:
-            verdict = "contested — correct shape"
+            verdict = "contested, correct shape"
         print(f"    block {r['block']} + prov {r['prov']} = {engage:2}  "
               f"{r['name']:26} {verdict}")
     print()
@@ -261,7 +261,7 @@ for label, test in (
      lambda r: r['diff'] <= med_d and r['block'] + r['prov'] <= med_e),
 ):
     band = sorted([r for r in R if test(r)], key=lambda r: -r['diff'])
-    print(f"\n  {label} — {len(band)}")
+    print(f"\n  {label}: {len(band)}")
     for r in band:
         print(f"     diff {r['diff']:2}  engage {r['block'] + r['prov']:2}  "
               f"{r['name']:26} ({r['respect']})")

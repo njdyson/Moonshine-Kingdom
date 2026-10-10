@@ -705,6 +705,32 @@ Heat list ("a Greed Tax sale" should name Unload only), plus any Peddle tooltip 
 flag. Bots: Peddle is now the quiet bulk sale, worth it from about five barrels up; below that an
 Unload at a bar pays more.
 
+## 28. The Jobs deck rewrite (2026-10-10, Nick)
+
+Twenty-eight objectives reworded, ten of them with a different trigger, and two cards change tier.
+The full before-and-after is in `jobs-audit-handoff.md`; `tools/overlap_audit.py` holds a predicate
+for every card that a port can copy. **To port** (the cards whose trigger or tier changes):
+
+| Card | Now completes on |
+| --- | --- |
+| Tenement Army (1) | Recruit 4+ Runners in one Play at **Stapleton** |
+| The Empty Casket (1) | Rise into any **Empty Ward** (the Borough condition is gone) |
+| The Dutchman's Deal (1) | Trade 3+ barrels at **West Side** (not either Manhattan Dock) |
+| The Angel's Share (1) | Unload 3+ barrels of **either** liquor at East Harlem |
+| Squatter's Rights (1) | a **Move** that puts a Mobster into an Empty District in a rival's home Borough (not a Secure, Rise or barrels alone) |
+| Poison Panic (3) | Unload 6+ barrels of **either** liquor at Flushing |
+| Gin Pipeline (3) | Move 6+ barrels of either liquor into **your own home Ward**, from anywhere |
+| The Smuggler's Run (**now 3**, Stake 2) | Seize a Dock with a Move from Staten Island carrying 4+ Rum (same trigger) |
+| Last One Standing (3) | Secure your Safehouse in **Astoria** |
+| Union Dues (**now 5**, Stake 3) | Recruit 4+ Runners in one Play in a **rival's home Ward** |
+| High Roller (5) | Secure into a High Society Venue holding 4+ Rum (no adjacency) |
+
+"Home Borough" is the Borough a player drew at setup, and "home Ward" its Ward; at three players one
+Borough is nobody's, so it is never a rival's. A Blood Oath partner is not a rival (11.5). Every
+other card keeps its trigger and needs only its string. The opening Market still sets the 5s aside,
+so The Smuggler's Run can now be dealt on Day 1 and Union Dues can't. Bots: Union Dues is a reason to
+keep a garrison in the home Ward.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -821,3 +847,4 @@ Unload at a bar pays more.
 - [x] **Stealth blocks the Ambush, not the Fold** (§20): it opens on the Occupier's answer
 - [x] **A Fold Scrams: never to the block the Invader came from** (§21)
 - [x] **Movement wording: Advance's barrel choice reachable online, Stealth Hostile, Skiff's inland list** (§22)
+- [ ] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28)

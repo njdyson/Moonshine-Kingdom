@@ -4,7 +4,7 @@
 Tests Nick's banked principles (memory: contract-deck-design):
   1. The deck should read as a FAIR MAP of the board. Uneven coverage hands a
      deck-memoriser an edge invisible to a newcomer.
-  2. District-TYPE bias is tolerable; BOROUGH bias is not — it creates a
+  2. District-TYPE bias is tolerable; BOROUGH bias is not: it creates a
      starting-position exploit.
 
 Jobs are events, not holdings, so this adds a third measure the Contract audit
@@ -55,7 +55,7 @@ def press(still):
 
 # Which district TYPES each card's objective rewards.
 # types: ward / highSociety / dock / speakeasy / press5 / any
-# home: {borough: stance} — a card can name two boroughs and treat them
+# home: {borough: stance}. A card can name two boroughs and treat them
 #   DIFFERENTLY, which the first version of this audit could not express.
 #   'friendly' = easier for the player who STARTS there
 #   'hostile'  = harder for them / points armies at them
@@ -65,20 +65,24 @@ CARDS = [
     ('The Milk Run',          1, 'Move',      {'any'},
      # CORRECTION: not Brooklyn-friendly. The bridge runs Five Points <-> Williamsburg.
      # Five Points is MANHATTAN'S home turf (Safehouse + Boss from setup), while
-     # Williamsburg is Brooklyn's HIGH SOCIETY district — police-locked and
+     # Williamsburg is Brooklyn's HIGH SOCIETY district, police-locked and
      # impassable until a Raid. So Manhattan hauls from turf it already owns;
      # Brooklyn must push barrels INTO Manhattan's garrison, where anything left
      # behind becomes Manhattan's.
      {M: 'friendly', BK: 'neutral'}),
     ('The Beachhead',         1, 'Secure',    {'any'},                      {}),
-    ('Tenement Army',         1, 'Recruit',   {'ward'},                     {}),
-    ('Last Call',             1, 'Unload',    {'speakeasy'},                {}),
+    # Stapleton, Staten Island's Ward, since 2026-10-10: nobody's home turf.
+    ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),
+    # Coney Island: the empty bar beside two Brooklyn starts (Red Hook, Canarsie).
+    ('Last Call',             1, 'Unload',    {'speakeasy'},                {BK: 'friendly'}),
     ('The Empty Casket',      1, 'Rise',      {'ward'},                     {}),
     ('Fortress Staten',       1, 'Secure',    {'any'},                      {ST: 'neutral'}),
-    # HOSTILE half of Jamaica Bay — mirrors Night Landing.
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
-    ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {}),
-    ("The Angel's Share",     1, 'Unload',    {'speakeasy'},                {}),
+    # West Side since 2026-10-10: the empty Manhattan Dock beside Five Points and
+    # the Tenderloin (every starting Dock reaches it by water, Manhattan by land too).
+    ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {M: 'friendly'}),
+    # East Harlem borders both Five Points and Hunts Point: two seats' home Wards.
+    ("The Angel's Share",     1, 'Unload',    {'speakeasy'},                {M: 'friendly', BX: 'friendly'}),
     # LANDMARK: Jamaica Bay = Canarsie (Brooklyn's STARTING Dock) and Jamaica.
     # Until 2026-10-07 Jamaica was Queens' starting Dock too and both seats owned a
     # target at setup; Queens now starts on Whitestone, so only Brooklyn does.
@@ -88,13 +92,13 @@ CARDS = [
     # (beside all three of Queens' starting Districts), Williamsburg (Brooklyn's
     # police-locked High Society) and Red Hook (Brooklyn's STARTING Speakeasy since
     # 2026-10-07). Each is on its seat's doorstep at worst. The BRONX has no East River
-    # Speakeasy — Throggs Neck is on that water but it is a Dock. So this card is
+    # Speakeasy: Throggs Neck is on that water but it is a Dock. So this card is
     # the one seat-asymmetry the landmark introduced; watch section 4.
     ('The Grand Tour',        1, 'Unload',    {'speakeasy'},                {M: 'friendly', Q: 'friendly', BK: 'friendly'}),
     # Sunny's Bar = Red Hook, Brooklyn's STARTING Speakeasy since 2026-10-07 (it was
     # the empty one on their doorstep), and their starting Dock (Canarsie), where
     # they make the Rum, is next door.
-    ('Cuban Prince',          3, 'Unload',    {'speakeasy', 'press5'},      {BK: 'friendly'}),
+    ('Cuban Prince',          3, 'Move',      {'speakeasy', 'press5'},      {BK: 'friendly'}),
     ('Rum Row',               3, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Eviction',          3, 'Open Fire', {'any'},                      {}),
     ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
@@ -108,19 +112,22 @@ CARDS = [
     # Paradise Alley = Flushing -> QUEENS' FRIENDLY, its starting Speakeasy since
     # 2026-10-07 (mirrors Cuban Prince/Sunny's Bar).
     ('Poison Panic',          3, 'Unload',    {'speakeasy', 'press5'},      {Q: 'friendly'}),
-    ('Gin Pipeline',          3, 'Move',      {'press5'},                   {}),
-    ('Union Dues',            3, 'Recruit',   {'ward'},                     {}),
+    # Your own home Ward since 2026-10-10: every seat's, so it nets to zero.
+    ('Gin Pipeline',          3, 'Move',      {'ward'},                     {}),
+    # A 5 since 2026-10-10, in a rival's home Ward: aimed at every seat alike.
+    ('Union Dues',            5, 'Recruit',   {'ward'},                     {}),
     # Re-verbed Rise -> Secure 2026-07-19; fills the empty 3-Respect Secure slot.
-    ('Last One Standing',     3, 'Secure',    {'speakeasy'},                {}),
-    # HOSTILE half of the East River — mirrors The Grand Tour.
+    # Astoria since 2026-10-10: Queens' empty bar, beside all three Queens starts.
+    ('Last One Standing',     3, 'Secure',    {'speakeasy'},                {Q: 'friendly'}),
+    # HOSTILE half of the East River: it mirrors The Grand Tour.
     ('The Irish Goodbye',     3, 'Open Fire', {'speakeasy'},                {M: 'hostile', Q: 'hostile', BK: 'hostile'}),
     ('Opening Night',         5, 'Unload',    {'highSociety', 'speakeasy'}, {}),
     ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
     ('Over the Top',          5, 'Open Fire', {'any'},                      {BX: 'hostile'}),
     ('The Five Families',     5, 'Extort',    {'any'},
      {M: 'neutral', BX: 'neutral', Q: 'neutral', BK: 'neutral', ST: 'neutral'}),
-    ("The Smuggler's Run",    5, 'Move',      {'dock'},                     {ST: 'neutral'}),
-    # MANHATTAN'S BOUNTY — Five Points is Manhattan's Ward and home turf.
+    ("The Smuggler's Run",    3, 'Move',      {'dock'},                     {ST: 'neutral'}),
+    # MANHATTAN'S BOUNTY. Five Points is Manhattan's Ward and home turf.
     ('Bloody Sunday',         5, 'Open Fire', {'any'},                      {M: 'hostile'}),
     ("The Butcher's Ledger",  5, 'Open Fire', {'any'},                      {BK: 'hostile'}),
     ('High Roller',           5, 'Secure',    {'highSociety'},              {}),
@@ -144,7 +151,7 @@ for t, n in sorted(TYPE_COUNT.items(), key=lambda kv: -kv[1]):
     read = 'well covered' if cov >= 0.75 else 'healthy' if cov >= 0.5 else 'STARVED'
     print(f'  {t:14}{n:>9}{c:>7}{cov:>14.2f}   {read}')
 generic = sum(1 for x in CARDS if 'any' in x[3])
-print(f'\n  ("any District" / no type demanded: {generic} cards — these are type-neutral)')
+print(f'\n  ("any District" / no type demanded: {generic} cards; these are type-neutral)')
 
 print()
 print('=' * 78)
@@ -180,13 +187,13 @@ print()
 spread = max(nets.values()) - min(nets.values())
 print(f'  SPREAD (best seat - worst seat): {spread}')
 print('  ' + ('FAIR' if spread == 0 else
-              f'UNFAIR — best seat {max(nets, key=nets.get)}, worst {min(nets, key=nets.get)}'))
+              f'UNFAIR: best seat {max(nets, key=nets.get)}, worst {min(nets, key=nets.get)}'))
 
 print()
-print('  Bounty symmetry — is every mainland borough equally hunted?')
+print('  Bounty symmetry: is every mainland borough equally hunted?')
 for b in (M, BX, Q, BK):
     ho = [x[0] for x in CARDS if x[4].get(b) == 'hostile']
-    mark = 'ok' if len(ho) == 1 else ('NO BOUNTY — safest seat' if not ho else 'over-targeted')
+    mark = 'ok' if len(ho) == 1 else ('NO BOUNTY, safest seat' if not ho else 'over-targeted')
     print(f'    {b:11} {len(ho)} hostile card(s)   {mark}')
 
 print()
@@ -211,4 +218,4 @@ print()
 print(f'  WEIGHTED SPREAD: {wspread}   '
       f'(best {max(wnets, key=wnets.get)}, worst {min(wnets, key=wnets.get)})')
 print('  ' + ('FLAT' if wspread == 0 else
-              'residual — every seat has 1 friendly + 1 bounty, but not at matching tiers'))
+              'residual: every seat has 1 friendly + 1 bounty, but not at matching tiers'))

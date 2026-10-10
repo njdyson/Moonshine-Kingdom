@@ -1,5 +1,11 @@
 # The Jobs System — Handoff (v0.8, 2026-07-17)
 
+> **2026-10-10: the deck audit, applied.** See `jobs-audit-handoff.md`. The Smuggler's Run broke
+> "never two 5s" (it Seizes a Dock, and every mainland Dock is in a bounty Borough), so it is a 3
+> and Union Dues is a 5. The five Deed-count cards below now name a place or a home Borough,
+> every objective follows one house style (CLAUDE.md, *Jobs: one verb, one place*), and
+> `overlap_audit.py` models a Move and the fight it starts as one Play, as the Rulebook does.
+
 > **2026-10-07: the Market restocks after the Offers, and Day 1 has none.** A Job taken at the
 > Offers leaves its gap empty until every boss has chosen; then a fresh card goes into each gap.
 > The opening Market is dealt face-down and turns up at Day 1's restock. See §2b, *The restock*.
@@ -381,6 +387,9 @@ How each cluster was closed:
    Trap (Q) · Butcher's Ledger (Bk) · Over the Top (Bx) · Bloody Sunday (M). **That disjointness is
    what makes "never two 5s" structurally impossible rather than merely unobserved, and it is the
    same set as the bounty set in §6b — one constraint doing two jobs. Don't collapse it.**
+   *(2026-10-10: true for the four Open Fire 5s among themselves, never for a Move card that
+   Seizes. The Smuggler's Run could pay beside each bounty on one Move until it became a 3; the
+   old model kept Move and Open Fire apart and could not see it. See `jobs-audit-handoff.md`.)*
 4. **A pre-existing violation the handoff never listed:** `Toll Booth Trap` + `Over the Top` were both
    5s firing on one Open Fire (storm a Queens district held by 5+ including the Boss = **10**). Only
    the solver found it. Same for `Butcher's Ledger` in Brooklyn. Closed by the disjointness above.
