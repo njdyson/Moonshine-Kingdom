@@ -661,6 +661,10 @@ and the bundle in `dist/`) or the Jobs notes in `tools/gen_deck.py` already did,
 Also wording only: Collect is stated as what it is (spend a marker on $100; Laying Low pays the same, so it
 buys a turn longer on the street), with no Turn Token talk; Extort says "one Heat marker".
 
+Wording taken on 2026-10-10 (mk-online 32418fc): RULES-AI.md's Collect and Extort rows say the same. The
+same day's Open Fire pass (only the Invader pays; the return fire is free and always comes, even Laid Low)
+was already the engine's behaviour; the fight panel, play reference and RULES-AI.md now say so.
+
 ## 24. Torch is a shot; Red dice for the Invader (2026-10-09, Nick)
 
 | # | Behaviour | Now |
@@ -671,6 +675,11 @@ buys a turn longer on the street), with no Turn Token talk; Extort says "one Hea
 The Rulebook, Playbooks (Knights' Torch row), The Almanac (lesson 21 now counts three sources of Heat) and the
 Combat Simulator (Torch after an Ambush draws nothing) are updated.
 
+Ported 2026-10-10 (mk-online 32418fc): `torch` claims the marker through `claimFirstShotHeat`, as a shot,
+and otherwise returns its spent marker to Reserves. The fight panel shows the Heat flag on Torch and Hit only
+while no shot has been fired, and labels the dice Red (Invader) and White (Occupier).
+`scripts/torch-peddle-check.ts` guards it.
+
 ## 25. "Destroy", not "raze" (2026-10-10, Nick)
 
 Wording only; the rule is unchanged. The tabletop set now has one verb for a Safehouse sent back to
@@ -678,6 +687,9 @@ its owner's supply: **destroy**. The choice on taking a block with a rival Safeh
 over or destroy it". **To port:** the UI strings that say raze ("Raze it", "take it over or raze it",
 "take over or raze?", "razes the Safehouse", "Safehouse razed") should say destroy. The move name
 `evictRaze` can stay.
+
+Ported 2026-10-10 (mk-online 32418fc): every player-facing and harness string says destroy, the harness's
+option label included; `evictRaze` and the `safehouseRazed` field keep their names.
 
 ## 26. District words: Empty, unguarded, barrels (2026-10-10, Nick)
 
@@ -694,6 +706,10 @@ and rule text says **barrels**, not Liquor. **To port** (strings seen in the `di
 
 The flag `riseIntoDefenseless` can stay; it already means "a Ward that wasn't yours".
 
+Ported 2026-10-10 (mk-online 32418fc): all five, plus Stealth's and Skiff's "(no Liquor)", the play
+reference's Move ("Into a Hostile District") and Fall Back rows. RULES-AI.md's Safe District line now
+defines Empty and unguarded.
+
 ## 27. Peddle: the street rate, and no Greed Tax (2026-10-10, Nick)
 
 A rule change. **Peddle pays $200 a barrel** (was $300) and **never draws Heat**: the Greed Tax is
@@ -704,6 +720,11 @@ Heat marker). Strings: RULES-AI.md's Peddle line ("at $300 a barrel. Greed Tax a
 Heat list ("a Greed Tax sale" should name Unload only), plus any Peddle tooltip that shows a Heat
 flag. Bots: Peddle is now the quiet bulk sale, worth it from about five barrels up; below that an
 Unload at a bar pays more.
+
+Ported 2026-10-10 (mk-online 32418fc): `PEDDLE_PRICE` is 200 and `peddle` draws no Heat; the Peddle form
+starts at the whole pile and shows no Greed Tax flag. The bots' Peddle candidate sells the lot, scored at
+the street rate against the Unload candidates' bar price. `scripts/torch-peddle-check.ts` guards it (a
+six-barrel Peddle paid $1,800 and drew Heat before the change).
 
 ## Checklist
 
@@ -821,3 +842,8 @@ Unload at a bar pays more.
 - [x] **Stealth blocks the Ambush, not the Fold** (§20): it opens on the Occupier's answer
 - [x] **A Fold Scrams: never to the block the Invader came from** (§21)
 - [x] **Movement wording: Advance's barrel choice reachable online, Stealth Hostile, Skiff's inland list** (§22)
+- [x] **Rulebook wording gaps: nothing to port; Collect, Extort and Open Fire text matched** (§23)
+- [x] **Torch draws Heat only as the fight's first shot; dice named Red and White** (§24)
+- [x] **Destroy, not raze, in every string** (§25)
+- [x] **Empty, unguarded, barrels in every string** (§26)
+- [x] **Peddle at $200 with no Greed Tax; bots sell the whole pile** (§27)

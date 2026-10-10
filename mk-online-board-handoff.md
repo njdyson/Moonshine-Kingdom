@@ -1,4 +1,4 @@
-# mk-online: take the new board (2026-09-29, last done 2026-10-07)
+# mk-online: take the new board (2026-09-29, last done 2026-10-10)
 
 For an agent updating the online game (`njdyson/mk-online`) to the board in this repo. Read
 `DEPLOY.md` first: mk-online is its own repo, CI commits its build to its own `dist/`, and this
@@ -9,9 +9,9 @@ the change in the mk-online source, let it build, then mirror `dist/` in as `DEP
 
 The game shows `public/board.svg` (a copy of `Art/Board/Board v0.9 (screen).svg`) as an `<img>`,
 with clickable Districts, piece strips and live Heat, Mash and Turn Order drawn over it. Since
-2026-10-07 (mk-online 31456d5) that is the 2026-10-07 board, Manhattan's bricks included. Its
-overlay data, `src/ui/boardGeometry.ts`, is generated, and its connection graph is
-`ADJACENCY_PAIRS` in `src/game/data.ts`.
+2026-10-10 (mk-online 32418fc) that is the 2026-10-10 board, Manhattan's bricks and East Harlem's
+corner cut included. Its overlay data, `src/ui/boardGeometry.ts`, is generated, and its connection
+graph is `ADJACENCY_PAIRS` in `src/game/data.ts`.
 
 ## Catching it up after a redraw
 
@@ -28,7 +28,10 @@ npx vite-node scripts/boardcheck.ts                          # then fix ADJACENC
 The generator clips the click areas to the frame's hairline, takes the signs from the report,
 reads the Heat, Mash and Turn Order sockets off the SVG, and puts each piece strip (80 x 26) at
 the spot nearest under its sign that fits inside the District, clear of every sign, its hangers
-and the bridges. The sections below are the original brief, kept for what the files hold.
+and the bridges. Since 2026-10-10 (mk-online 73c3b3e) it also places each Police Squad's badge,
+centred in the open ground under the sign and as large as fits (the Tenderloin's is the smallest),
+and the game no longer washes a Controlled District in its owner's colour, so every Borough shows
+its printed colour. The sections below are the original brief, kept for what the files hold.
 
 ## What to take from this repo
 
