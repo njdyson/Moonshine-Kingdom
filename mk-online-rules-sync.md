@@ -694,6 +694,17 @@ and rule text says **barrels**, not Liquor. **To port** (strings seen in the `di
 
 The flag `riseIntoDefenseless` can stay; it already means "a Ward that wasn't yours".
 
+## 27. Peddle: the street rate, and no Greed Tax (2026-10-10, Nick)
+
+A rule change. **Peddle pays $200 a barrel** (was $300) and **never draws Heat**: the Greed Tax is
+Unload's alone. Moonshine only, Wards you Control only, Cost 1, all unchanged.
+
+**To port:** the Peddle price, and drop its Greed Tax check (today 4+ barrels on a Peddle push a
+Heat marker). Strings: RULES-AI.md's Peddle line ("at $300 a barrel. Greed Tax at 4+") and its
+Heat list ("a Greed Tax sale" should name Unload only), plus any Peddle tooltip that shows a Heat
+flag. Bots: Peddle is now the quiet bulk sale, worth it from about five barrels up; below that an
+Unload at a bar pays more.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
