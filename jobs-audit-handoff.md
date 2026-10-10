@@ -123,6 +123,41 @@ starts on (East Harlem, Belmont, Astoria, Coney Island) are a new one-per-Boroug
 Three of them carry a card already or in this proposal (The Angel's Share, Last Call, Last One
 Standing), so they would share.
 
+### 7. A Fold turns down a kill Job (keep it)
+
+Raised by Nick after the first draft. A Fold is free and leaves nobody to shoot, so it denies exactly
+the three Jobs paid in bodies: The Toll Booth Trap, The Butcher's Ledger and The Irish Goodbye. It
+pays every Job paid in ground, since a Fold "hands him a Seize as surely as losing does" (Almanac
+19): Over the Top, The Copper Heist, The Pier Six Brawl, The Smuggler's Run, The Eviction and Bloody
+Sunday all complete on one.
+
+The denial has a price. The Folding crew leaves the District, its barrels and its Safehouse, and with
+no Safe exit it can't Fold at all. So kill Jobs land where running costs more than the Respect: a
+Safehouse block, a Rum pile, a cornered District (Coney Island and Morris Park, Almanac 23), and
+above all a High Society room in the endgame, where a Boss who Folds gives up his walk to the Crown.
+That's where the game wants its fights. The face-up card also works before it pays, because it
+taxes standing: the target Folds and the holder takes the block. That is the bluff, and the Almanac
+already teaches both halves (lesson 11, "a claim can lie for you"; lesson 19, read his Jobs before
+you answer). A kill Job and a Seize Job aimed at the same block leave the defender no free answer.
+The proposals keep every such pair.
+
+Two things to watch:
+
+- **The bounties split two and two.** Queens and Brooklyn can turn their bounty down by Folding, at
+  the cost of the block. The Bronx and Manhattan can't, because a Fold pays Over the Top and Bloody
+  Sunday. All four have a slower dodge (keep your Boss out of Queens, keep Bronx and Brooklyn stacks
+  under five, keep your Safehouse out of Manhattan), but only two have one mid-fight. The fairness
+  audit weighs Respect and can't see this. It also weakens the fairness case for moving Last One
+  Standing to Astoria: Queens is the worst seat by weight, but one of the two that can dodge its
+  bounty mid-fight. The rewrite's other two reasons (no Borough count, no High Roller stack) still
+  hold; where it points is a playtest call.
+- **A crew on a Dock can almost always Fold**, since every other Dock is a Connected exit. The Toll
+  Booth Trap at Whitestone or Jamaica, and The Butcher's Ledger at Canarsie, need a target that
+  chooses to stand.
+
+It also bears on finding 1: at Throggs Neck and on the Manhattan Docks a Fold can't stop the double
+5, because it pays both.
+
 ---
 
 ## House style for an objective
@@ -258,7 +293,9 @@ hard rule "structurally impossible" to break should be corrected at the same tim
 4. **Tenement Army at Stapleton** costs a Secure ($500) and a Play before the Recruit. If that's too
    dear for a 1, the plainest fallback is *Recruit 5+ Runners in one Play*: simple, but solitaire.
 5. **Gin Pipeline:** accept it as honest filler, or retarget it to a named District.
-6. **Union Dues at 5:** a judgement, not measured. It's contested and a campaign, which is what the
+6. **Where Last One Standing points.** Astoria fixes the seat spread on paper, but finding 7 says
+   Queens is better protected in a fight than the spread shows.
+7. **Union Dues at 5:** a judgement, not measured. It's contested and a campaign, which is what the
    2026-08-04 pass asked of a 5, but it has not been played.
 
 ## If adopted, the files
