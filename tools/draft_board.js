@@ -128,7 +128,6 @@ const SETTINGS = {
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
   rockaways: true, // Jamaica's strip of shore under Jamaica Bay (Nick, 2026-10-07: a feature, not usable space; it keeps the bay a bay)
   southShore: 1000, // the south shore of Brooklyn and Queens, level: Coney Island, Canarsie and Jamaica (1020 until 2026-10-07)
-  ehKnee: 715, // East Harlem / Hunts Point runs from the four-way corner at 45 degrees to here (x), then drops upright to the Hell Gate
 };
 
 const RIVER = 49; // the East River's width, Hell Gate and the Sound included
@@ -138,7 +137,7 @@ const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted s
 const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
 const CUT = 37; // the harbour's 45-degree corners: Staten Island's four and Coney Island's on the Narrows
 const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its shore
-// Bridges moved along their rivers: the Hell Gate clear of East Harlem's stretch of it, the
+// Bridges moved along their rivers: the Hell Gate to about the middle of Hunts Point's shore, the
 // Queensboro up the East River onto East Harlem's shore, which ends at Manhattan's row, a little
 // south of its middle so the bridge's name stays clear of the Hell Gate's bend (since 2026-10-07), and the Brooklyn up the harbour reach, mid-way along the stretch of
 // the Bowery's shore that faces Red Hook's (since 2026-10-07, when the Bowery's foot rose)
@@ -207,11 +206,13 @@ function draft(S) {
   // degrees; Manhattan's tip is where it meets the coast
   const CORNER = S.corner, TIPB = meet(MN_WEST, line(CORNER, [-1, -1]));
   // The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point): East Harlem /
-  // Hunts Point runs out at 45 degrees to the knee, then upright to the Hell Gate; Belmont /
+  // Hunts Point runs out at 45 degrees to the knee, then upright onto the crook where the Hell Gate
+  // meets the East River, so East Harlem's shore is the East River's alone (until 2026-10-10 the
+  // knee sat about 15 further east, ehKnee 715, and East Harlem took a stub of the Hell Gate); Belmont /
   // Hunts Point leaves the corner square to it, up to Hunts Point's top (huntsTop), which runs
   // level across Belmont and Fordham and drops to the Bronx's row at 45 degrees just short of
   // Throggs Neck.
-  const KNEE = atX(line(CORNER, [1, 1]), S.ehKnee), EH_SHORE = atX(HG_BX, S.ehKnee);
+  const EH_SHORE = meet(HG_BX, ER_MN), KNEE = atX(line(CORNER, [1, 1]), EH_SHORE[0]);
   // Manhattan laid like bricks, in rows: Sugar Hill and East Harlem, West Side and East Harlem,
   // the Tenderloin and Five Points, the Bowery. One level line (m2, the row) crosses Manhattan
   // from shore to shore. Above it East Harlem's west side is upright (EHX), from where Sugar
@@ -275,7 +276,7 @@ function draft(S) {
     'water|belmont': [[TIPB[0], W], TIPB],
     'throggs_neck|water': [[BRONX_EAST, S.bronxRow], TIP, BEND],
     'east_harlem|hunts_point': [CORNER, KNEE, EH_SHORE],
-    'east_harlem|water': [EH_SHORE, meet(HG_BX, ER_MN), EB_J],
+    'east_harlem|water': [EH_SHORE, EB_J],
     'sugar_hill|east_harlem': [CORNER, [EHX, m1]],
     'west_side|east_harlem': [[EHX, m1], [EHX, EHY]],
     'west_side|five_points': [[FPX, m2], [EHX, m2]],

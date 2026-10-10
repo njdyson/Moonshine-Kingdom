@@ -44,7 +44,7 @@ const CM = (609.6 / 1080) ** 2 / 100, STEP = 2, FRAME_IN = 13;
 // Each setting the tuner may move: [path in SETTINGS, lowest, highest].
 const KNOBS = [
   ['bronxCols.0', 640, 735], ['bronxCols.1', 845, 905], ['bronxRow', 140, 215], ['huntsTop', 120, 215],
-  ['hpCol', 770, 830], ['ehKnee', 700, 735], ['corner.0', 580, 640], ['corner.1', 180, 230],
+  ['hpCol', 770, 830], ['corner.0', 580, 640], ['corner.1', 180, 230],
   ['manhattan.0', 270, 330], ['manhattan.1', 390, 450], ['manhattan.2', 500, 590],
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
   ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
