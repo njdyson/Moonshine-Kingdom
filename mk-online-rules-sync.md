@@ -735,15 +735,15 @@ keep a garrison in the home Ward.
 
 A rule change. **Take the Crown needs the Boss in a High Society Venue outside his home Borough.**
 The four Nod cards are gone; four Borough cards, dealt at setup, name each boss's home Borough,
-hold his unbought Influence (a Bribe takes the top marker; the card bare is the Nod) and carry
-Take the Crown. CLAUDE.md, *Borough cards*, has the why. **To port:**
+hold his unbought Influence (a Bribe takes the top marker) and carry Take the Crown. **The Nod is a
+status**, not a card: 10+ Respect, all 10 Influence bought and no Mark. CLAUDE.md, *Borough cards*, has the why. **To port:**
 
 | | Now |
 | --- | --- |
 | Setup | Starting Boroughs are still random (the engine already deals them); at three players one is nobody's home. |
-| Victory test | Respect >= 10, all 10 Influence bought, no Mark, Boss in a High Society Venue **not in his home Borough**. |
-| The Nod | No card to claim: it is the state of having bought all 10. Any UI that shows "claimed the Nod" can stay as an event. |
-| Blood Oath | The crowning partner's own home Borough is barred (16.4 otherwise unchanged). |
+| Victory test | The Nod (Respect >= 10, all 10 Influence bought, no Mark), and the Boss in a High Society Venue **not in his home Borough**. |
+| The Nod | A derived status, never stored: it can be lost (a Rat Card or Welsher dropping Respect below 10, a Loan's Mark) and regained. Show it per player; "has the Nod" is the table's alarm. Any "claimed the Nod at 10 Influence" event should say the city instead. |
+| Blood Oath | The Alliance's Nod: one partner with all 10 Influence, 20 combined Respect, no Mark on either. That partner crowns, and his own home Borough is barred. |
 | Bots | Crown rooms are the three away ones: for Manhattan and Queens, Williamsburg is one Move from home; for Brooklyn, Richmond Hill; for the Bronx, Sugar Hill or Williamsburg at two. A bot's own room is worth holding for Kickbacks, not for the walk. Defend the home room as a landlord: every visiting Boss there is the leader's. |
 
 Strings: RULES-AI.md's crown conditions and its Nod line ("claim the Nod"), and any tooltip that
