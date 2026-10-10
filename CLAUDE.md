@@ -365,6 +365,23 @@ Collect is stated as what it is: a marker spent on $100, which Laying Low would 
 turn longer on the street. What that does to tomorrow's Turn Token is The Almanac's to teach (lesson 2);
 the Rulebook entry describing it through tokens read as a token procedure and was cut.
 
+## A Safehouse is taken over or destroyed
+
+Since 2026-10-10 (Nick). One mechanical verb: a Safehouse sent back to its owner's supply is
+**destroyed**, never "razed" (undefined, and gone from the set) or "burns". "Burn down" (Torch) and
+"Condemned" (the Raid's Scatter) stay as flavour labels; the rule sentence under each says destroyed.
+The printed Bloody Sunday card already said "Destroy". The choice has one home, **A Rival Safehouse**
+in Territory: take Control of a block holding one and it can't stay, so **take it over** (yours moves
+in from wherever it stood, free) or **destroy** it. Move, Skiff, the Fold and Victory point there. Do
+not call the takeover a Secure: it read as costing a Play or $500.
+
+## The Glossary
+
+Since 2026-10-10 the Rulebook ends with **Glossary: Speak the Lingo**: one line per term of art the
+aids use without defining, each naming the section that holds the rule. It defines the word and
+stops; the rule stays in its section. It is a second home for every definition it carries, so a
+change to Connected, Safe, Control, Kill, Seize or any other term listed must be made there too.
+
 ## Scram: one run for a Fold and a Raid
 
 Since 2026-10-08 (Nick). A Folding crew and a raided one run the same way, and the run has one name:
@@ -505,7 +522,7 @@ A rules change is never one file. The player-facing set is:
 
 After changing a rule, grep the whole set for the old wording. The Town Planner and the
 Playbooks carry compressed restatements of rules that the Rulebook states in full, and
-those restatements drift silently.
+those restatements drift silently. So does the Rulebook's own Glossary.
 
 ## When a rule is cut, don't argue with its ghost
 
