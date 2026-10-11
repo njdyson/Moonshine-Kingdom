@@ -73,6 +73,7 @@ DS = [D(r) for r in DISTRICTS]
 EAST_RIVER = {'East Harlem', 'Astoria', 'Williamsburg', 'Red Hook'}   # 4 Speakeasies
 JAMAICA_BAY = {'Canarsie', 'Jamaica'}                                  # 2 Docks
 WILLIAMSBURG_BRIDGE = {'Five Points', 'Williamsburg'}
+HELL_GATE_BRIDGE = {'Hunts Point', 'Astoria'}
 
 
 # --- THE JOBS ----------------------------------------------------------------
@@ -86,47 +87,41 @@ def J(name, respect, verbs, text, fn):
 
 JOBS = [
     # --- 1 Respect ---
+    # The bar set (2026-10-11, round 2): one Unload card per ordinary Speakeasy.
+] + [J(n, 1, ['Unload'], f'Unload 4+ barrels at {bar} in one Play.',
+       (lambda bar: lambda p, d: p['barrels'] >= 4 and d.name == bar)(bar))
+     for n, bar in (("The Angel's Share", 'East Harlem'), ('High Spirits', 'The Tenderloin'),
+                    ('Bathtub Gin', 'Belmont'), ('Coffin Varnish', 'Fordham'),
+                    ('Giggle Water', 'Astoria'), ('Poison Panic', 'Flushing'),
+                    ('Last Call', 'Coney Island'), ('Off the Boat', 'Red Hook'))] + [
     J('The Milk Run', 1, ['Move'],
       'Move 4+ barrels across the Williamsburg Bridge in one Play.',
-      lambda p, d: p['barrels'] >= 4 and p['route'] == 'bridge'),
+      lambda p, d: p['barrels'] >= 4 and p['route'] == 'wburg'),
+    J("The Dutchman's Deal", 1, ['Trade'],
+      'Trade 3+ barrels at West Side in one Play.',
+      lambda p, d: p['barrels'] >= 3 and d.name == 'West Side'),
+    J('Night Landing', 1, ['Move'],
+      'Move 4+ barrels across water into a Jamaica Bay Dock in one Play.',
+      lambda p, d: p['barrels'] >= 4 and p['route'] == 'water' and d.name in JAMAICA_BAY),
+    # No Safehouse guard since 2026-10-11: The Eviction, which it kept off, is cut.
+    J('The Pier Six Brawl', 1, ['Move'],
+      'Seize a Dock.',
+      lambda p, d: p['seize'] and d.has('dock')),
     J('The Beachhead', 1, ['Secure'],
       'Secure your Safehouse in a District Land Connected to a rival Safehouse.',
       lambda p, d: p['adj_rival_sh']),
     J('Tenement Army', 1, ['Recruit'],
       'Recruit 4+ Runners in one Play at Stapleton.',
       lambda p, d: p['runners'] >= 4 and d.name == 'Stapleton'),
-    J('Last Call', 1, ['Unload'],
-      'Unload 4+ barrels at Coney Island in one Play.',
-      lambda p, d: p['barrels'] >= 4 and d.name == 'Coney Island'),
-    J('The Empty Casket', 1, ['Rise'],
-      'Rise your Boss in an Empty Ward.',
-      lambda p, d: p['state'] == 'empty' and d.has('ward')),
-    J('Fortress Staten', 1, ['Secure'],
-      'Secure your Safehouse in a Staten Island District holding 4+ barrels.',
-      lambda p, d: d.boro == ST and p['barrels'] >= 4),
-    # "no Safehouse" keeps The Eviction off it (handoff §3, cluster 3).
-    J('The Pier Six Brawl', 1, ['Move'],
-      'Seize a Dock with no Safehouse.',
-      lambda p, d: p['seize'] and d.has('dock') and not p['rival_sh']),
-    J("The Dutchman's Deal", 1, ['Trade'],
-      'Trade 3+ barrels at West Side in one Play.',
-      lambda p, d: p['barrels'] >= 3 and d.name == 'West Side'),
-    J("The Angel's Share", 1, ['Unload'],
-      'Unload 3+ barrels at East Harlem in one Play.',
-      lambda p, d: p['barrels'] >= 3 and d.name == 'East Harlem'),
-    J('Night Landing', 1, ['Move'],
-      'Move 4+ barrels across water into a Jamaica Bay Dock in one Play.',
-      lambda p, d: p['barrels'] >= 4 and p['route'] == 'water' and d.name in JAMAICA_BAY),
-    # "Move a Mobster": a crew, not barrels alone, and not a Secure or a Rise.
-    J("Squatter's Rights", 1, ['Move'],
-      "Move a Mobster into an Empty District in a rival's home Borough.",
-      lambda p, d: p['state'] == 'empty' and p['crew'] and p['home'] == 'rival'),
-    J('The Grand Tour', 1, ['Unload'],
-      'Unload 4+ barrels at an East River Speakeasy in one Play.',
-      lambda p, d: p['barrels'] >= 4 and d.name in EAST_RIVER),
+    J('Rum Row', 1, ['Trade'],
+      'Trade 4+ barrels at a Staten Island Dock in one Play.',
+      lambda p, d: p['barrels'] >= 4 and d.boro == ST),
+    # Modelled on the District the Raid padlocks, which must be yours.
+    J('The Insurance Job', 1, ['Rat'],
+      'Rat, and have the Raid padlock a Pressure 1 or 2 Still you Control.',
+      lambda p, d: d.press <= 2),
     # --- 3 Respect ---
-    # The Extort set (2026-10-11): an Extort reads the whole map, so it is modelled once,
-    # with the Boroughs whose three Speakeasies you hold (see _extort).
+    # The Extort cards read the whole map, so an Extort is modelled once (see _extort).
     J('Empire State', 3, ['Extort'],
       'Extort while you Control all three Speakeasies in Manhattan.',
       lambda p, d: M in p['bars']),
@@ -139,65 +134,43 @@ JOBS = [
     J('The Black Hand', 3, ['Extort'],
       'Extort while you Control all three Speakeasies in Brooklyn.',
       lambda p, d: BK in p['bars']),
-    J('Rum Row', 3, ['Trade'],
-      'Trade 4+ barrels at a Staten Island Dock in one Play.',
-      lambda p, d: p['barrels'] >= 4 and d.boro == ST),
-    # take over XOR destroy (the rulebook's own either/or), so The Eviction and
-    # Bloody Sunday can never co-fire.
-    J('The Eviction', 3, ['Move'],
-      "Take over a rival's Safehouse.",
-      lambda p, d: p['sh'] == 'takeover'),
-    J('The Copper Heist', 3, ['Move'],
-      'Seize a High Society Venue with no Safehouse.',
-      lambda p, d: p['seize'] and d.has('highSociety') and not p['rival_sh']),
-    # Modelled on the District the Raid padlocks, which must be yours.
-    J('The Insurance Job', 3, ['Rat'],
-      'Rat, and have the Raid padlock a Pressure 1 or 2 Still you Control.',
-      lambda p, d: d.press <= 2),
-    # "you Control": a District already yours before the Move, so never a fight.
-    J('Gin Pipeline', 3, ['Move'],
-      "Move 6+ barrels into a District you Control in a rival's home Borough in one Play.",
-      lambda p, d: p['barrels'] >= 6 and p['state'] == 'control' and p['home'] == 'rival'),
-    J("The Smuggler's Run", 3, ['Move'],
-      'Seize a Dock by Moving 4+ Rum in from Staten Island.',
-      lambda p, d: p['seize'] and d.has('dock') and p['from_staten']
-      and p['barrels'] >= 4 and p['rum']),
+    J('The Five Families', 3, ['Extort'],
+      'Extort while you Control a District in all five Boroughs.',
+      lambda p, d: p['all5']),
+    J('Cuban Prince', 3, ['Extort'],
+      'Extort while you Control 4+ Docks.',
+      lambda p, d: p['docks4']),
+    J("Hell's Highway", 3, ['Move'],
+      'Move your Boss and 4+ Rum across the Hell Gate Bridge in one Play.',
+      lambda p, d: p['route'] == 'hellgate' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
     J('Last One Standing', 3, ['Secure'],
       'Secure your Safehouse in Astoria holding 6+ Rum.',
       lambda p, d: d.name == 'Astoria' and p['barrels'] >= 6 and p['rum']),
-    # "take no Control" makes it unable to co-fire with any Seize card.
-    J('The Irish Goodbye', 3, ['Move'],
-      'Kill 2+ rival Mobsters at an East River Speakeasy in one Play, and take no Control.',
-      lambda p, d: p['kills'] >= 2 and d.name in EAST_RIVER and not p['seize']),
-    # --- 5 Respect ---
-    J('Opening Night', 5, ['Unload'],
+    J("The Smuggler's Run", 3, ['Move'],
+      "Move 4+ Rum from Staten Island into a rival's Dock, and Seize it.",
+      lambda p, d: p['seize'] and d.has('dock') and p['from_staten']
+      and p['barrels'] >= 4 and p['rum']),
+    J('The Copper Heist', 3, ['Move'],
+      'Seize a District with a Pressure 5 Still.',
+      lambda p, d: p['seize'] and d.press == 5),
+    J('Opening Night', 3, ['Unload'],
       'Unload 8+ Rum at a High Society Venue in one Play.',
       lambda p, d: p['barrels'] >= 8 and d.has('highSociety')),
-    # Fires on Open Fire, Hit or Plunder alike: worded by outcome.
-    J('The Toll Booth Trap', 5, ['Move'],
-      'Kill a rival Boss in Queens, with your own Boss in the fight.',
-      lambda p, d: p['boss_killed'] and p['own_boss'] and d.boro == Q),
-    # A Fold of 5+ pays it too: a Fold hands the Invader a Seize.
-    J('Over the Top', 5, ['Move'],
-      'Seize a Bronx District defended by 5+ Mobsters.',
-      lambda p, d: p['seize'] and p['defenders'] >= 5 and d.boro == BX),
-    J('The Five Families', 5, ['Extort'],
-      'Extort while you Control a District in all five Boroughs.',
-      lambda p, d: p['all5']),
-    J('Union Dues', 5, ['Recruit'],
+    J('Union Dues', 3, ['Recruit'],
       "Recruit 4+ Runners in one Play in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
-    # Torch destroys without a Seize; the Mobsters clause keeps a Rat's Raid out.
-    J('Bloody Sunday', 5, ['Move'],
-      'Destroy a rival Safehouse in Manhattan, with your own Mobsters in the District.',
-      lambda p, d: p['sh'] in ('destroy', 'torch') and d.boro == M),
-    J("The Butcher's Ledger", 5, ['Move'],
-      'Kill 5+ rival Mobsters in Brooklyn in one Play.',
-      lambda p, d: p['kills'] >= 5 and d.boro == BK),
-    J('High Roller', 5, ['Secure'],
-      'Secure your Safehouse in a High Society Venue holding 4+ Rum.',
-      lambda p, d: d.has('highSociety') and p['barrels'] >= 4 and p['rum']),
-]
+    # --- 5 Respect: the murder sets (2026-10-11, round 2) ---
+    # `kills` counts Runners; `boss_killed` is the Boss. Runners die first, so a Boss who
+    # stood with four or more Runners dies only after five kills: "but no Boss" is what
+    # keeps a Borough's two 5s apart.
+] + [J(n, 5, ['Move'], f'Kill 5+ rival Runners, but no Boss, in {label} in one Play.',
+       (lambda b: lambda p, d: p['kills'] >= 5 and not p['boss_killed'] and d.boro == b)(b))
+     for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
+                         ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
+    J(n, 5, ['Move'], f'Kill a rival Boss in {label}.',
+      (lambda b: lambda p, d: p['boss_killed'] and d.boro == b)(b))
+    for n, label, b in (('Room 349', 'Manhattan', M), ('The One-Way Ride', 'the Bronx', BX),
+                        ('The Toll Booth Trap', 'Queens', Q), ('The Last Hand', 'Brooklyn', BK))]
 
 STAKE = {1: 1, 3: 2, 5: 3}
 VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat')
@@ -225,7 +198,8 @@ BARRELS = (0, 3, 4, 6, 8)
 def _p(**kw):
     p = dict(barrels=0, rum=False, runners=0, kills=0, defenders=0, seize=False,
              boss_killed=False, own_boss=False, crew=False, route='land',
-             from_staten=False, sh='none', adj_rival_sh=False, all5=False, bars=frozenset())
+             from_staten=False, sh='none', adj_rival_sh=False, all5=False, bars=frozenset(),
+             docks4=False)
     p.update(kw)
     p['rival_sh'] = p['state'] in ('hostile_sh', 'unguarded')
     return p
@@ -267,8 +241,10 @@ def _plays(verb, d, state, home):
             else:
                 shs = ('torch',) if out == 'torch' else ('none',)
             for sh in shs:
-                for route in ('land', 'bridge', 'water'):
-                    if route == 'bridge' and d.name not in WILLIAMSBURG_BRIDGE:
+                for route in ('land', 'wburg', 'hellgate', 'water'):
+                    if route == 'wburg' and d.name not in WILLIAMSBURG_BRIDGE:
+                        continue
+                    if route == 'hellgate' and d.name not in HELL_GATE_BRIDGE:
                         continue
                     if route == 'water' and not d.has('dock'):
                         continue
@@ -320,14 +296,17 @@ def _fight(fight, state, home, out, sh, route, from_staten, barrels, rum, crew):
     base = dict(state=state, home=home, seize=out == 'seize', sh=sh, route=route,
                 from_staten=from_staten, barrels=barrels, rum=rum, crew=crew)
     if not fight:
-        yield _p(**base)
+        # A crew may bring its Boss on any Move (Hell's Highway reads it).
+        for own_boss in ((False, True) if crew else (False,)):
+            yield _p(own_boss=own_boss, **base)
         return
     # defenders 1 stands for "fewer than five". A Fold is a seize with no kills.
+    # kills counts Runners; the Boss falls after his Runners, or first to a Sicilian Hit.
     for defenders in (1, 5):
         for kills in (0, 2, 5):
-            if kills > defenders and defenders < 5:
+            if kills >= defenders and defenders < 5:
                 continue
-            for boss_killed in ((False, True) if kills else (False,)):
+            for boss_killed in (False, True):
                 for own_boss in (False, True):
                     yield _p(defenders=defenders, kills=kills, boss_killed=boss_killed,
                              own_boss=own_boss, **base)
@@ -345,9 +324,11 @@ MAINLAND = (M, BX, Q, BK)
 
 def _extort():
     for all5 in (False, True):
-        for k in range(len(MAINLAND) + 1):
-            for held in itertools.combinations(MAINLAND, k):
-                yield _p(state='control', home='none', all5=all5, bars=frozenset(held))
+        for docks4 in (False, True):
+            for k in range(len(MAINLAND) + 1):
+                for held in itertools.combinations(MAINLAND, k):
+                    yield _p(state='control', home='none', all5=all5, docks4=docks4,
+                             bars=frozenset(held))
 
 
 def co_firing():

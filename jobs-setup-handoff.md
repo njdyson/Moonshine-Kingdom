@@ -1,4 +1,91 @@
-# Jobs Deck: the 3s and 5s Need Setup (2026-10-11)
+# Jobs Deck: Setup, then Sets (2026-10-11)
+
+Two passes on one day, both applied on the `claude/job-deck-balance-57zjc0` branch. **Round 2 is the
+live deck**; round 1 is the record of how it got there, and its card tables describe a deck that has
+since changed again.
+
+## Round 2: symmetric sets (later on 2026-10-11)
+
+Nick rated every card on a review page (https://claude.ai/artifact/DJ6iKhq2fLiB87eTu4YEc9, private to
+him; his piles, stars and notes are in its `reviews` collection, readable with `ArtifactData`). Then:
+
+> I think my inclination is to make more symmetrical sets. This helps with balance and simplicity as
+> players can parse them quickly if they are a familiar format/type.
+>
+> Could we take it further? Make all 8 non-HS speakeasies unload cards at 1 respect. Add a set of
+> boss kill 5s, so the 5's simply become murder cards.
+
+**Applied on the branch.** The deck is now **36 cards, 16 / 12 / 8** (18 A4 pages; the Rulebook's
+component list says 36). Most cards come in sets, one per place, in one wording:
+
+| Tier | Set | Cards |
+| --- | --- | --- |
+| 1 | **The bars**: Unload 4+ barrels at X in one Play | The Angel's Share (East Harlem), High Spirits (the Tenderloin), Bathtub Gin (Belmont), Coffin Varnish (Fordham), Giggle Water (Astoria), Poison Panic (Flushing), Last Call (Coney Island), Off the Boat (Red Hook) |
+| 3 | **The Extort set**: Extort while you Control all three Speakeasies in X | Empire State, The Big Squeeze, King of Queens, The Black Hand |
+| 5 | **Body counts**: Kill 5+ rival Runners, but no Boss, in X in one Play | Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
+| 5 | **Bosses**: Kill a rival Boss in X | Room 349 (Manhattan), The One-Way Ride (the Bronx), The Toll Booth Trap (Queens), The Last Hand (Brooklyn) |
+
+The rest are singles. **1s:** The Milk Run, The Dutchman's Deal, Night Landing, The Pier Six Brawl
+("Seize a Dock", guard dropped), The Beachhead, Tenement Army, Rum Row (down from 3), The Insurance
+Job (down from 3). **3s:** The Five Families (down from 5, new art), Cuban Prince ("Extort while you
+Control 4+ Docks"), Hell's Highway ("Move your Boss and 4+ Rum across the Hell Gate Bridge in one
+Play"), Last One Standing, The Smuggler's Run (reworded: "Move 4+ Rum from Staten Island into a
+rival's Dock, and Seize it"), The Copper Heist ("Seize a District with a Pressure 5 Still"), Opening
+Night (down from 5), Union Dues (down from 5).
+
+**Cut:** The Grand Tour (its "East River" invited an argument about Coney Island; the bars replace
+it), The Empty Casket (stale: nobody loses a Boss for 1), Squatter's Rights (Nick's discard),
+Fortress Staten (Nick's drop candidate), The Eviction, Gin Pipeline (too complex, and any "into your
+home Borough" wording lets six barrels go out and straight back), The Irish Goodbye (easy with a big
+crew, dead if the target Folds), High Roller (overlaps the endgame).
+
+Every change follows a note Nick left on the page except four calls of mine: cutting The Eviction
+(unrated) to fit 12 threes, the names and art of the ten new cards, and the "but no Boss" clause.
+
+### "But no Boss" is load-bearing
+
+Combat removes Runners first, and the Boss dies only when no Runner is left (a Sicilian Hit aside).
+So killing a Boss who stood with four or more Runners is also five kills, and without the clause one
+fight would pay a Borough's body count and its Boss together: two 5s, 10 Respect, the whole bar.
+With it, the two are exclusive in any one Play, and one Play is only ever in one Borough, so no Play
+can pay two 5s. `overlap_audit.py` counts Runner kills and the Boss separately and proves it.
+
+### What it does to the numbers
+
+| | Round 1 | Round 2 |
+| --- | --- | --- |
+| Never two 5s | Passes | Passes |
+| Co-firing sets over 2 Districts | 7 | 1 (The Pier Six Brawl rides every Smuggler's Run, 4 Respect, now that its guard is gone) |
+| Biggest stack on one District | 12 (Jamaica, Canarsie) | 10 (the same two Docks) |
+| Biggest stack on one Extort | 11 | 12, four Extort 3s; it needs 8 staked plus the Extort's 2, so all ten Influence |
+| 5s: difficulty range | 7 to 13 | 12 to 13, all "contested" |
+| 3s flagged solitaire | 3 | 0 (The Five Families, Opening Night and Cuban Prince read "thin") |
+| Respect-weighted seat spread | 1 | **3** (the Bronx -1, Queens -2, Manhattan -3, Brooklyn -4) |
+
+**The seat spread is the singles.** The three sets are equal by construction: each seat has two bar
+1s, one Extort 3 and two 5s aimed at it. What separates the seats is the friendly singles: the Bronx
+has Hell's Highway (3) and shares The Angel's Share, Queens has Last One Standing (3), Manhattan has
+The Milk Run and The Dutchman's Deal (1 each), and Brooklyn has only Night Landing (1). A Brooklyn
+3, or turning one landmark single into a set, would close it.
+
+### Open for review (round 2)
+
+1. **Half the 3s are Extort cards** (six of twelve). A boss can Extort once a Day, so they compete
+   for one Play, but one Extort can pay several at once.
+2. **The murder sets favour two mobs.** The Irish Firepower die helps body counts; the Sicilian Hit
+   makes any Boss take the first hit. The Knights and the Vipers have no marquee 5 now.
+3. **Every Boss is hunted everywhere.** A Boss card exists for each Borough, the crown is taken in an
+   away room, and a kill costs a Rise. That is the endgame's third act, louder. Watch for kill-fests.
+4. **The Copper Heist** is the easiest 3 (difficulty 6): four of its five targets are the starting
+   bars. Nick's intent is that it makes players garrison home.
+5. **The deck grew** from 32 to 36. The extra cards are all 1s, which is the handoff's own patch for
+   the 1s running dry (`jobs-system-handoff.md` §2, the arc).
+6. **Names**: Room 349 nods to the Park Central room where the story starts, unnamed. All ten new
+   names and their art are proposals.
+
+---
+
+## Round 1: the setup test
 
 Nick, the day after the deck audit (`jobs-audit-handoff.md`):
 
@@ -8,14 +95,10 @@ Nick, the day after the deck audit (`jobs-audit-handoff.md`):
 > extort enough. I think a series of 4 cards (3 respect) extorting every speakeasy in a borough would
 > be a good, symmetrical set. Jobs like the Cuban Prince are perhaps too easy.
 
-**Applied 2026-10-11** on the `claude/job-deck-balance-57zjc0` branch: the Extort set as asked, and
-three more 3s reworked because they failed the test below. Every 5 passed and is unchanged. The deck
-is still 12 / 12 / 8 and still prints on 16 A4 pages. *Open for review*, at the end, lists the calls
-that were mine rather than Nick's.
+Round 1 added the Extort set as asked and reworked three more 3s that failed the test below; every
+5 passed. The deck stayed 12 / 12 / 8.
 
----
-
-## The test
+### The test
 
 A 3 or a 5 needs **setup**: Plays spent for this Job and nothing else, before the Play that scores
 it, that the table can see coming. It fails in one of two ways:
@@ -38,9 +121,9 @@ moves its Squad), **holding several Districts at once** (whack-a-mole), the **Ru
 Trade at a Dock, haul), **Staten Island** (every trip is a crossing), a **rival's home turf**, and
 your **Boss** in harm's way.
 
-## The verdicts
+### The verdicts
 
-### 3 Respect
+#### 3 Respect
 
 | Card | Verdict | Why |
 | --- | --- | --- |
@@ -57,7 +140,7 @@ your **Boss** in harm's way.
 | The Insurance Job | Passes, kept | You have to make yourself the Raid's target and steer it to your worst boiler. |
 | The Smuggler's Run | Passes, kept | Staten Island, the Rum chain and a Seize. The hardest 3 before today. |
 
-### 5 Respect: all pass, all unchanged
+#### 5 Respect: all pass, all unchanged
 
 | Card | The setup |
 | --- | --- |
@@ -70,9 +153,9 @@ your **Boss** in harm's way.
 | The Butcher's Ledger | Two big stacks in Brooklyn, and a defender who stands. |
 | High Roller | A room opened by a Raid, and four Rum in it. |
 
-## What changed
+### What changed
 
-### The Extort set (Nick's), replacing the four home-bar 3s
+#### The Extort set (Nick's), replacing the four home-bar 3s
 
 | Card | Objective | Art |
 | --- | --- | --- |
@@ -114,7 +197,7 @@ Squad back onto it. The home seat starts holding one of the three and borders th
 card is its seat's friendly 3, as the card it replaced was. For anyone else it is an invasion that
 ends next to a crown room.
 
-### Three more 3s reworked
+#### Three more 3s reworked
 
 | Card | Was | Now |
 | --- | --- | --- |
@@ -142,7 +225,7 @@ ends next to a crown room.
 
 The other twenty-five cards keep their text.
 
-## What it does to the numbers
+### What it does to the numbers
 
 From `tools/overlap_audit.py`, `breadth_audit.py`, `fairness_audit.py` and `difficulty_audit.py`,
 before and after:
@@ -173,7 +256,7 @@ breadth audit reports it as "the whole map (Extort)". It never meets a non-Extor
 These are the most engineered stacks in the deck, which the breadth rule calls the feature. They do
 sit above the crown's bar of 10, like the Smuggler's Run stacks already did.
 
-## Open for review
+### Open for review
 
 The Extort set is Nick's. These are mine.
 
@@ -211,10 +294,13 @@ The Extort set is Nick's. These are mine.
 
 ## Files changed
 
-`tools/gen_deck.py` (the table and its notes), `Jobs Cards v0.9.html` (regenerated, 16 A4 pages, no
-overflow in screen or print), `tools/overlap_audit.py` (the new predicates, and Extort modelled
-map-wide), `tools/breadth_audit.py` (labels the map-wide Extort), `tools/fairness_audit.py`,
-`tools/difficulty_audit.py`, `CLAUDE.md` (*Jobs: the 3s and 5s need setup*, and *Starting turf*),
-`jobs-system-handoff.md` (dated notes), `jobs-audit-handoff.md` (a pointer), and
-`mk-online-rules-sync.md` §30 for the port. No other component names a Job. mk-online's Jobs code is
-not changed here, and is still waiting on §28.
+Round 2: `tools/gen_deck.py` (the card table, the set notes, and tier counts read off the table),
+`Jobs Cards v0.9.html` (regenerated: 36 cards, 18 A4 pages, no overflow in screen or print),
+`tools/overlap_audit.py` (bar Unloads, Runner kills counted apart from the Boss, both bridges as
+routes, a Boss riding a Move, 4+ Docks on an Extort), `tools/fairness_audit.py` (two bounties per seat
+is now "ok"), `tools/difficulty_audit.py`, the Rulebook's component list (36 Job Cards), `CLAUDE.md`
+(*Jobs: one verb, one place*, *Jobs: sets, and setup*, *Borough cards*), `jobs-system-handoff.md`,
+`jobs-audit-handoff.md`, and `mk-online-rules-sync.md` §30 (rewritten for the round-2 deck).
+
+Round 1 touched the same tools and docs. No other player-facing component names a Job. mk-online's
+Jobs code is not changed here, and is still waiting on §28.

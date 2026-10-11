@@ -1,5 +1,12 @@
 # The Jobs System — Handoff (v0.8, 2026-07-17)
 
+> **2026-10-11, round 2: symmetric sets, and a 36-card deck (16 / 12 / 8).** See
+> `jobs-setup-handoff.md`. The 1s carry an Unload card for each of the eight ordinary Speakeasies;
+> the 3s carry the Extort set; every 5 is a killing, a body count and a Boss for each Borough, kept
+> apart by "but no Boss". The Five Families, Opening Night and Union Dues are 3s. The §6b orphan set
+> and the four-bounty set below are records now: every seat has two friendly bar 1s, one Extort 3 and
+> two 5s aimed at it.
+
 > **2026-10-11: the 3s and 5s need setup.** See `jobs-setup-handoff.md`. The four home-bar 3s
 > (§6b's orphan set) are replaced by the Extort set, one per Borough: *Extort while you Control all
 > three Speakeasies in* Manhattan, the Bronx, Queens or Brooklyn. §3 cluster 2's objection to them

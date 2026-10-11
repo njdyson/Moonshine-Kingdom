@@ -770,29 +770,29 @@ status**, not a card: 10+ Respect, all 10 Influence bought and no Mark. CLAUDE.m
 Strings: RULES-AI.md's crown conditions and its Nod line ("claim the Nod"), and any tooltip that
 names the Nod as a card.
 
-## 30. The 3s need setup: the Extort set (2026-10-11, Nick)
+## 30. The Jobs deck in sets: 36 cards (2026-10-11, Nick)
 
-Seven 3-Respect Jobs change; nothing else in the rules does. It stacks on §28, which is still to
-port, so port §28 first. The why is in `jobs-setup-handoff.md`; `tools/overlap_audit.py` holds a
-predicate for each card. **To port:**
+The deck is rebuilt (two passes the same day; `jobs-setup-handoff.md`). Nothing else in the rules
+changes. It replaces §28's card list, so port this instead of §28's. `tools/overlap_audit.py` holds a
+predicate for every card. **36 cards, 16 / 12 / 8** (stakes 1 / 2 / 3 as before); setup still sets
+the 5s aside for the opening deal.
 
-| Card | Completes on |
+| Tier | Cards and what completes them |
 | --- | --- |
-| Empire State (new, replaces The Big Squeeze at the Tenderloin) | an **Extort** while you Control Sugar Hill, East Harlem and The Tenderloin |
-| The Big Squeeze (new objective, replaces Hell's Highway) | an **Extort** while you Control Morris Park, Belmont and Fordham |
-| King of Queens (new, replaces Poison Panic) | an **Extort** while you Control Richmond Hill, Astoria and Flushing |
-| The Black Hand (new, replaces Cuban Prince) | an **Extort** while you Control Williamsburg, Coney Island and Red Hook |
-| The Copper Heist | a Seize of a **High Society Venue** with no Safehouse (not any Pressure 5+ Still) |
-| Gin Pipeline | a Move of 6+ barrels into a District you **already Control** in a **rival's home Borough** |
-| Last One Standing | a Secure in Astoria while 6+ **Rum** sits there |
+| 1, the bars | an **Unload of 4+ barrels** at one named bar: The Angel's Share (East Harlem), High Spirits (The Tenderloin), Bathtub Gin (Belmont), Coffin Varnish (Fordham), Giggle Water (Astoria), Poison Panic (Flushing), Last Call (Coney Island), Off the Boat (Red Hook) |
+| 1, singles | The Milk Run, The Dutchman's Deal, Night Landing, Tenement Army, The Beachhead (all as §28); The Pier Six Brawl (**any** Seize of a Dock, Safehouse or not); Rum Row and The Insurance Job (same triggers, **now 1s**) |
+| 3, Extort | an **Extort** while you Control: all three Speakeasies of Manhattan (Empire State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); a District in all five Boroughs (The Five Families, **now a 3**); 4+ Docks (Cuban Prince) |
+| 3, singles | Hell's Highway (a Move across the **Hell Gate Bridge** carrying your **Boss** and 4+ Rum); Last One Standing (Secure in Astoria while 6+ Rum sits there); The Smuggler's Run (as §28); The Copper Heist (a Seize of a District whose Still is **Pressure 5**: the four starting bars and Stapleton); Opening Night and Union Dues (same triggers, **now 3s**) |
+| 5, body counts | a fight in the named Borough that kills **5+ Runners and no Boss**: Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
+| 5, Bosses | a fight in the named Borough that **kills a Boss**: Room 349 (Manhattan), The One-Way Ride (the Bronx), The Toll Booth Trap (Queens, no own-Boss clause now), The Last Hand (Brooklyn) |
 
-All four Extort cards are Stake 2, Respect 3, art `Empire State.jpg`, `Big Squeeze.jpg`,
-`King of Queens.jpg`, `Black Hand.jpg`. One Extort can complete several of them and The Five
-Families at once. A District under a Squad can't be Controlled, so a Squad on any of a Borough's
-three bars blocks that card. Strings: card text and the deck count (the four new ids replace
-`cuban-prince`, `big-squeeze`, `hells-highway`, `poison-panic`). Bots: the Extort set is a reason
-to steer a Squad off a room (be the freshest noise in reach, most barrels on a Dock or Ward) and to
-take a rival's room (The Copper Heist) when he holds all three of his bars.
+Removed: The Grand Tour, The Empty Casket, Squatter's Rights, Fortress Staten, The Eviction, Gin
+Pipeline, The Irish Goodbye, High Roller. New art files: `High Spirits`, `Bathtub Chemistry`,
+`Cutting`, `Cobble Hill` (Giggle Water), `Switch` (Off the Boat), `Rum Wars`, `The Big Sleep` (Room
+349), `Gatsby` (The One-Way Ride), `Debt Collector` (The Last Hand), `Scheme` (The Five Families).
+One Extort can complete several Extort Jobs at once. Count Runner kills apart from the Boss: the body
+counts need five Runners and no Boss killed in that Play. Bots: every Boss is a 5 in every Borough,
+so value Boss safety higher; the Extort set is a reason to steer a Squad off a room.
 
 ## Checklist
 
@@ -917,4 +917,4 @@ take a rival's room (The Copper Heist) when he holds all three of his bars.
 - [x] **Peddle at $200 with no Greed Tax; bots sell the whole pile** (§27)
 - [ ] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28)
 - [ ] **Borough cards: no crown in your home Borough; the Nod is all 10 bought** (§29)
-- [ ] **The 3s need setup: the Extort set, and The Copper Heist, Gin Pipeline, Last One Standing** (§30)
+- [ ] **The Jobs deck in sets: 36 cards, every 5 a killing** (§30; supersedes §28's card list)

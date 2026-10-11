@@ -62,76 +62,59 @@ def press(still):
 #   'neutral'  = naming it neither favours nor punishes the home player
 CARDS = [
     # (name, respect, verb, types, home)
-    ('The Milk Run',          1, 'Move',      {'any'},
-     # CORRECTION: not Brooklyn-friendly. The bridge runs Five Points <-> Williamsburg.
-     # Five Points is MANHATTAN'S home turf (Safehouse + Boss from setup), while
-     # Williamsburg is Brooklyn's HIGH SOCIETY district, police-locked and
-     # impassable until a Raid. So Manhattan hauls from turf it already owns;
-     # Brooklyn must push barrels INTO Manhattan's garrison, where anything left
-     # behind becomes Manhattan's.
-     {M: 'friendly', BK: 'neutral'}),
-    ('The Beachhead',         1, 'Secure',    {'any'},                      {}),
-    # Stapleton, Staten Island's Ward, since 2026-10-10: nobody's home turf.
-    ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),
-    # Coney Island: the empty bar beside two Brooklyn starts (Red Hook, Canarsie).
-    ('Last Call',             1, 'Unload',    {'speakeasy'},                {BK: 'friendly'}),
-    ('The Empty Casket',      1, 'Rise',      {'ward'},                     {}),
-    ('Fortress Staten',       1, 'Secure',    {'any'},                      {ST: 'neutral'}),
-    ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
-    # West Side since 2026-10-10: the empty Manhattan Dock beside Five Points and
-    # the Tenderloin (every starting Dock reaches it by water, Manhattan by land too).
-    ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {M: 'friendly'}),
+    # --- 1 Respect: the bar set (2026-10-11, round 2), two per seat by construction ---
     # East Harlem borders both Five Points and Hunts Point: two seats' home Wards.
     ("The Angel's Share",     1, 'Unload',    {'speakeasy'},                {M: 'friendly', BX: 'friendly'}),
-    # LANDMARK: Jamaica Bay = Canarsie (Brooklyn's STARTING Dock) and Jamaica.
-    # Until 2026-10-07 Jamaica was Queens' starting Dock too and both seats owned a
-    # target at setup; Queens now starts on Whitestone, so only Brooklyn does.
+    ('High Spirits',          1, 'Unload',    {'speakeasy', 'press5'},      {M: 'friendly'}),
+    ('Bathtub Gin',           1, 'Unload',    {'speakeasy'},                {BX: 'friendly'}),
+    ('Coffin Varnish',        1, 'Unload',    {'speakeasy', 'press5'},      {BX: 'friendly'}),
+    ('Giggle Water',          1, 'Unload',    {'speakeasy'},                {Q: 'friendly'}),
+    ('Poison Panic',          1, 'Unload',    {'speakeasy', 'press5'},      {Q: 'friendly'}),
+    ('Last Call',             1, 'Unload',    {'speakeasy'},                {BK: 'friendly'}),
+    ('Off the Boat',          1, 'Unload',    {'speakeasy', 'press5'},      {BK: 'friendly'}),
+    # --- 1 Respect: singles ---
+    # Not Brooklyn-friendly: the bridge runs from Manhattan's home Ward to Brooklyn's
+    # police-locked room, so Manhattan hauls from turf it already owns.
+    ('The Milk Run',          1, 'Move',      {'any'},                      {M: 'friendly', BK: 'neutral'}),
+    # West Side: the empty Manhattan Dock beside Five Points and the Tenderloin.
+    ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {M: 'friendly'}),
+    # Jamaica Bay = Canarsie (Brooklyn's starting Dock) and Jamaica.
     ('Night Landing',         1, 'Move',      {'dock'},                     {BK: 'friendly'}),
-    ("Squatter's Rights",     1, 'Move',      {'any'},                      {}),
-    # LANDMARK: East River = East Harlem (beside Manhattan's home Ward), Astoria
-    # (beside all three of Queens' starting Districts), Williamsburg (Brooklyn's
-    # police-locked High Society) and Red Hook (Brooklyn's STARTING Speakeasy since
-    # 2026-10-07). Each is on its seat's doorstep at worst. The BRONX has no East River
-    # Speakeasy: Throggs Neck is on that water but it is a Dock. So this card is
-    # the one seat-asymmetry the landmark introduced; watch section 4.
-    ('The Grand Tour',        1, 'Unload',    {'speakeasy'},                {M: 'friendly', Q: 'friendly', BK: 'friendly'}),
-    # THE EXTORT SET (2026-10-11), one per seat, replacing the four home-bar 3s (Cuban
-    # Prince, The Big Squeeze at the Tenderloin, Hell's Highway, Poison Panic). Each
-    # Borough's three Speakeasies are its two bars and its High Society Venue: the home
-    # seat starts on one and borders the other two, so each card is its seat's friendly,
-    # at the same 3 as the card it replaced. Rivals can still take it by invading.
+    ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
+    ('The Beachhead',         1, 'Secure',    {'any'},                      {}),
+    ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),
+    ('Rum Row',               1, 'Trade',     {'dock'},                     {ST: 'neutral'}),
+    ('The Insurance Job',     1, 'Rat',       {'any'},                      {}),
+    # --- 3 Respect: the Extort set, one per seat, each its seat's friendly 3 ---
     # 'press5': each set holds its seat's starting bar (Pressure 5) and its room (6).
     ('Empire State',          3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {M: 'friendly'}),
     ('The Big Squeeze',       3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BX: 'friendly'}),
     ('King of Queens',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {Q: 'friendly'}),
     ('The Black Hand',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BK: 'friendly'}),
-    ('Rum Row',               3, 'Trade',     {'dock'},                     {ST: 'neutral'}),
-    ('The Eviction',          3, 'Open Fire', {'any'},                      {}),
-    # The four High Society Venues since 2026-10-11 (one per Borough), not every
-    # Pressure 5+ Still.
-    ('The Copper Heist',      3, 'Open Fire', {'highSociety', 'press5'},    {}),
-    ('The Insurance Job',     3, 'Rat',       {'any'},                      {}),
-    # Into a District you Control in a rival's home Borough since 2026-10-11 (your own
-    # home Ward before): aimed at every seat alike, so it nets to zero.
-    ('Gin Pipeline',          3, 'Move',      {'any'},                      {}),
-    # A 5 since 2026-10-10, in a rival's home Ward: aimed at every seat alike.
-    ('Union Dues',            5, 'Recruit',   {'ward'},                     {}),
-    # Re-verbed Rise -> Secure 2026-07-19; fills the empty 3-Respect Secure slot.
-    # Astoria since 2026-10-10: Queens' empty bar, beside all three Queens starts.
-    # Holding 6+ Rum since 2026-10-11: still Queens' (three Plays from Whitestone).
-    ('Last One Standing',     3, 'Secure',    {'speakeasy'},                {Q: 'friendly'}),
-    # HOSTILE half of the East River: it mirrors The Grand Tour.
-    ('The Irish Goodbye',     3, 'Open Fire', {'speakeasy'},                {M: 'hostile', Q: 'hostile', BK: 'hostile'}),
-    ('Opening Night',         5, 'Unload',    {'highSociety', 'speakeasy'}, {}),
-    ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
-    ('Over the Top',          5, 'Open Fire', {'any'},                      {BX: 'hostile'}),
-    ('The Five Families',     5, 'Extort',    {'any'},
+    ('The Five Families',     3, 'Extort',    {'any'},
      {M: 'neutral', BX: 'neutral', Q: 'neutral', BK: 'neutral', ST: 'neutral'}),
+    ('Cuban Prince',          3, 'Extort',    {'dock'},                     {}),
+    # --- 3 Respect: singles ---
+    # The Hell Gate runs from Hunts Point (the Bronx's home Ward) to Astoria: the Bronx
+    # starts on its near end with its Boss; anyone else crosses into the Bronx garrison.
+    ("Hell's Highway",        3, 'Move',      {'any'},                      {BX: 'friendly'}),
+    # Astoria, Queens' empty bar, three Plays from Whitestone.
+    ('Last One Standing',     3, 'Secure',    {'speakeasy'},                {Q: 'friendly'}),
     ("The Smuggler's Run",    3, 'Move',      {'dock'},                     {ST: 'neutral'}),
-    # MANHATTAN'S BOUNTY. Five Points is Manhattan's Ward and home turf.
+    # The five Pressure 5 Stills: every seat's starting bar and Stapleton, so it is
+    # aimed at every seat alike.
+    ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
+    ('Opening Night',         3, 'Unload',    {'highSociety', 'speakeasy'}, {}),
+    ('Union Dues',            3, 'Recruit',   {'ward'},                     {}),
+    # --- 5 Respect: the murder sets, two bounties per seat ---
     ('Bloody Sunday',         5, 'Open Fire', {'any'},                      {M: 'hostile'}),
+    ('Over the Top',          5, 'Open Fire', {'any'},                      {BX: 'hostile'}),
+    ('Rum Wars',              5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
     ("The Butcher's Ledger",  5, 'Open Fire', {'any'},                      {BK: 'hostile'}),
-    ('High Roller',           5, 'Secure',    {'highSociety'},              {}),
+    ('Room 349',              5, 'Open Fire', {'any'},                      {M: 'hostile'}),
+    ('The One-Way Ride',      5, 'Open Fire', {'any'},                      {BX: 'hostile'}),
+    ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
+    ('The Last Hand',         5, 'Open Fire', {'any'},                      {BK: 'hostile'}),
 ]
 
 TYPE_COUNT = {
@@ -194,7 +177,7 @@ print()
 print('  Bounty symmetry: is every mainland borough equally hunted?')
 for b in (M, BX, Q, BK):
     ho = [x[0] for x in CARDS if x[4].get(b) == 'hostile']
-    mark = 'ok' if len(ho) == 1 else ('NO BOUNTY, safest seat' if not ho else 'over-targeted')
+    mark = 'ok' if len(ho) == 2 else ('NO BOUNTY, safest seat' if not ho else 'over-targeted')
     print(f'    {b:11} {len(ho)} hostile card(s)   {mark}')
 
 print()

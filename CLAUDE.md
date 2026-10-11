@@ -155,38 +155,47 @@ written out above the card table in `tools/gen_deck.py`:
   Tenement Army's described your own home Ward, so it was free on Day 2, and two had no answer for
   a tie.
 
-**The Smuggler's Run is a 3 and Union Dues a 5** (same day). The Smuggler's Run Seizes a Dock, every
-mainland Dock is in a bounty Borough, and a firefight is part of the Move that starts it, so it could
-pay beside a bounty 5 on one Play. Run `tools/overlap_audit.py` before moving any card that can
-Seize or kill into the 5s: it models a Move and its fight as one Play, and it refuses to run until
-each card's printed objective matches its model.
+**The Smuggler's Run is a 3** (same day; Union Dues went to 5 with it, and back to 3 on 2026-10-11).
+The Smuggler's Run Seizes a Dock, every mainland Dock is in a bounty Borough, and a firefight is part
+of the Move that starts it, so as a 5 it could pay beside a bounty 5 on one Play. Run
+`tools/overlap_audit.py` before moving any card that can Seize or kill into the 5s: it models a Move
+and its fight as one Play, and it refuses to run until each card's printed objective matches its
+model.
 
-**A Fold turns down a kill Job, and that stays.** It denies The Toll Booth Trap, The Butcher's Ledger
-and The Irish Goodbye, and pays every Seize Job. The denial is priced (the folding crew leaves the
-District, its barrels and its Safehouse), it turns a face-up kill Job into a bluff that buys ground,
-and it puts the kill fights where running costs too much, above all a High Society room in the
-endgame. Watch in playtest: Queens and Brooklyn can turn their bounty down by Folding; the Bronx and
-Manhattan can't.
+**A Fold turns down a kill Job, and that stays.** It denies all eight 5s, and pays every Seize Job
+(The Pier Six Brawl, The Smuggler's Run, The Copper Heist). The denial is priced (the folding crew
+leaves the District, its barrels and its Safehouse), it turns a face-up kill Job into a bluff that
+buys ground, and it puts the kill fights where running costs too much, above all a High Society
+room in the endgame. Every seat can turn its own Borough's bounties down by Folding.
 
-## Jobs: the 3s and 5s need setup
+## Jobs: sets, and setup
 
-Since 2026-10-11 (Nick; `jobs-setup-handoff.md`). A 3 or a 5 must need Plays spent for it alone,
-before the Play that scores it, that the table can see coming. Two ways to fail: a **home chore**
-(on your starting turf, unreachable, what you'd do anyway) and a **windfall** (a target so common
-that a fight or sale you'd make anyway pays it). Every seat starts on its Pressure 5 bar, and Secure
-reaches any Safe District on the map for $500, so check any card that names a starting bar, a type
-the starting bars share, or a Secure with no other gate.
+Since 2026-10-11 (Nick; `jobs-setup-handoff.md`). Two rules shape the deck.
 
-The four home-bar 3s (Cuban Prince, Hell's Highway, Poison Panic, and The Big Squeeze at the
-Tenderloin) are replaced by **the Extort set**: *Extort while you Control all three Speakeasies in*
-Manhattan (Empire State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The
-Black Hand). Each Borough's three are its two bars and its High Society Venue, so the card waits on
-a Raid to move the Squad off the room, then on three Districts held at once. Each is its seat's
-friendly 3. These names were Extort cards once, cut because the Borough Deed already paid for
-holding a Borough; the Deeds' removal ended that objection, so don't cut them on it again. The
-Copper Heist (now the rooms), Gin Pipeline (now a foothold in a rival's home Borough) and Last One
-Standing (now Astoria with 6+ Rum) were reworked on the same test. The overlap model treats an
-Extort as one map-wide Play.
+**A 3 or a 5 needs setup**: Plays spent for it alone, before the Play that scores it, that the table
+can see coming. Two ways to fail: a **home chore** (on your starting turf, unreachable, what you'd do
+anyway) and a **windfall** (a target so common that a fight or sale you'd make anyway pays it).
+Every seat starts on its Pressure 5 bar, and Secure reaches any Safe District on the map for $500,
+so check any card that names a starting bar, a type the starting bars share, or a Secure with no
+other gate.
+
+**Most cards come in symmetric sets**, one card per place in one wording, so a player reads a set
+once. The deck is 36 cards, 16 / 12 / 8:
+
+- **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
+  barrels at X in one Play"), and eight singles for the landmarks, the Docks and Staten Island.
+- **3s**: **the Extort set**, *Extort while you Control all three Speakeasies in* Manhattan (Empire
+  State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); The Five
+  Families and Cuban Prince (4+ Docks) as Extort cards too; and six singles.
+- **5s**: murder, and nothing else. A **body count** per Borough ("Kill 5+ rival Runners, but no
+  Boss, in X in one Play") and a **Boss** per Borough ("Kill a rival Boss in X"). "But no Boss" keeps
+  a Borough's two 5s apart: Runners die first, so a Boss killed behind four Runners is also five
+  kills, and one fight would pay 10.
+
+The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
+Borough; the Deeds' removal ended that objection, so don't cut them on it again. The overlap model
+treats an Extort as one map-wide Play. Nick rates the deck card by card on a review page; its link
+is in `jobs-setup-handoff.md`.
 
 ## Barrels travel alone
 
@@ -290,7 +299,7 @@ is nobody's home). Each card carries:
 - **Take the Crown**, worded per card, naming the **three High Society Venues outside its Borough**
   in the positive (Manhattan's reads "Morris Park, Richmond Hill or Williamsburg"). **No boss
   crowns in his own Borough.** The Blood Oath's crowning partner uses his own card.
-- Its home Ward, in the kicker, for the two Jobs that name one.
+- Its home Ward, in the kicker, for Union Dues, the Job that names one.
 
 Why: "home Borough" had no reminder on the table, and how to draw Boroughs was open. The away crown
 ends the home fortress (Boss, Safehouse, Ambush and Recruit point on one square behind the home
@@ -305,8 +314,8 @@ public Power Play, so nobody is blindsided.
 Watch in playtest: **Williamsburg** is one Move from both the Manhattan and Queens home Wards (by
 the bridge from Five Points, and from Corona), so Brooklyn hosts the endgame; Brooklyn's nearest
 room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is three or more Moves from
-every other home, so the Bronx's room becomes a backwater. Each Borough's 5-Respect bounty now
-mostly hits whoever is invading that Borough's room. At three players the unclaimed Borough's room
+every other home, so the Bronx's room becomes a backwater. Each Borough's two 5-Respect bounties now
+mostly hit whoever is invading that Borough's room. At three players the unclaimed Borough's room
 has no landlord.
 
 **The Nod is a status** (later the same day, Nick). For a few hours it meant the bare card alone, one of
