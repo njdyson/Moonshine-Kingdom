@@ -149,7 +149,9 @@ written out above the card table in `tools/gen_deck.py`:
   where the table looks.
 - Counts read "N+ barrels", "N+ Moonshine" or "N+ Rum", and end "in one Play". A single event
   (Seize, Secure, Rise, take over, kill a Boss) needs no such phrase.
-- Name the **District**, the big word on the board's sign, not the venue under it.
+- Name the **District**, the big word on the board's sign. A bar card names the bar too, from the
+  small line under it: "at the Haymarket in the Tenderloin" (Nick, 2026-10-11). The bar is the theme;
+  the District is what the table finds.
 - Use the defined word: Seize, Empty, take over, **home Borough** and **home Ward** (in the Glossary
   since the same day). Never a count of Districts across a Borough. Those were the Deeds' stand-ins:
   Tenement Army's described your own home Ward, so it was free on Day 2, and two had no answer for
@@ -183,7 +185,8 @@ other gate.
 once. The deck is 36 cards, 16 / 12 / 8:
 
 - **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
-  barrels at X in one Play"), and eight singles for the landmarks, the Docks and Staten Island.
+  barrels at <bar> in <District> in one Play"), and eight singles for the landmarks, the Docks and
+  Staten Island.
 - **3s**: **the Extort set**, *Extort while you Control all three Speakeasies in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); The Five
   Families and Cuban Prince (4+ Docks) as Extort cards too; and six singles.

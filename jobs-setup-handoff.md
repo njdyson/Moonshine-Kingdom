@@ -20,10 +20,14 @@ component list says 36). Most cards come in sets, one per place, in one wording:
 
 | Tier | Set | Cards |
 | --- | --- | --- |
-| 1 | **The bars**: Unload 4+ barrels at X in one Play | The Angel's Share (East Harlem), High Spirits (the Tenderloin), Bathtub Gin (Belmont), Coffin Varnish (Fordham), Giggle Water (Astoria), Poison Panic (Flushing), Last Call (Coney Island), Off the Boat (Red Hook) |
+| 1 | **The bars**: Unload 4+ barrels at <bar> in <District> in one Play | The Angel's Share (The Silver Dollar, East Harlem), High Spirits (The Haymarket, the Tenderloin), Bathtub Gin (DeLillo's, Belmont), Coffin Varnish (The Penny Whistle, Fordham), Giggle Water (Bohemian Hall, Astoria), Poison Panic (Paradise Alley, Flushing), Last Call (Ruby's Joint, Coney Island), Off the Boat (Sunny's Bar, Red Hook) |
 | 3 | **The Extort set**: Extort while you Control all three Speakeasies in X | Empire State, The Big Squeeze, King of Queens, The Black Hand |
 | 5 | **Body counts**: Kill 5+ rival Runners, but no Boss, in X in one Play | Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
 | 5 | **Bosses**: Kill a rival Boss in X | Room 349 (Manhattan), The One-Way Ride (the Bronx), The Toll Booth Trap (Queens), The Last Hand (Brooklyn) |
+
+The bar cards name the bar from the board's sign as well as its District (Nick: more thematic),
+which settles the 2026-10-10 audit's open item 7 the other way: venue names are back, beside the
+District rather than instead of it.
 
 The rest are singles. **1s:** The Milk Run, The Dutchman's Deal, Night Landing, The Pier Six Brawl
 ("Seize a Dock", guard dropped), The Beachhead, Tenement Army, Rum Row (down from 3), The Insurance

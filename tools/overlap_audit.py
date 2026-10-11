@@ -88,12 +88,16 @@ def J(name, respect, verbs, text, fn):
 JOBS = [
     # --- 1 Respect ---
     # The bar set (2026-10-11, round 2): one Unload card per ordinary Speakeasy.
-] + [J(n, 1, ['Unload'], f'Unload 4+ barrels at {bar} in one Play.',
+] + [J(n, 1, ['Unload'], f'Unload 4+ barrels at {venue} in {bar} in one Play.',
        (lambda bar: lambda p, d: p['barrels'] >= 4 and d.name == bar)(bar))
-     for n, bar in (("The Angel's Share", 'East Harlem'), ('High Spirits', 'The Tenderloin'),
-                    ('Bathtub Gin', 'Belmont'), ('Coffin Varnish', 'Fordham'),
-                    ('Giggle Water', 'Astoria'), ('Poison Panic', 'Flushing'),
-                    ('Last Call', 'Coney Island'), ('Off the Boat', 'Red Hook'))] + [
+     for n, venue, bar in (("The Angel's Share", 'The Silver Dollar', 'East Harlem'),
+                           ('High Spirits', 'The Haymarket', 'The Tenderloin'),
+                           ('Bathtub Gin', "DeLillo's", 'Belmont'),
+                           ('Coffin Varnish', 'The Penny Whistle', 'Fordham'),
+                           ('Giggle Water', 'Bohemian Hall', 'Astoria'),
+                           ('Poison Panic', 'Paradise Alley', 'Flushing'),
+                           ('Last Call', "Ruby's Joint", 'Coney Island'),
+                           ('Off the Boat', "Sunny's Bar", 'Red Hook'))] + [
     J('The Milk Run', 1, ['Move'],
       'Move 4+ barrels across the Williamsburg Bridge in one Play.',
       lambda p, d: p['barrels'] >= 4 and p['route'] == 'wburg'),

@@ -16,13 +16,18 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 # other condition, which should be a fact you can see on the table. Counts read
 # "N+ barrels", "N+ Moonshine" or "N+ Rum", and every count ends "in one Play"; a single
 # event (Seize, Secure, Rise, take over, kill a Boss) needs no such phrase. Name the
-# District, the big word on the board's sign, not the venue on the small line under it.
+# District, the big word on the board's sign. A bar card also names the bar on the small line
+# under it, as "at <bar> in <District>" (Nick, 2026-10-11): the bar is the theme, the District is
+# what the table finds on the board.
 # Use the defined word (Seize, Empty, take over, home Borough) rather than spelling out
 # its meaning, and never ask for a count of Districts across a Borough: those were the
 # Deeds' stand-ins, and they could not be checked at a glance or settle a tie.
 ONES = [
     # THE BARS (Nick, 2026-10-11, round 2; jobs-setup-handoff.md). One Unload card for each of
-    # the eight ordinary Speakeasies, all worded alike: "Unload 4+ barrels at X in one Play".
+    # the eight ordinary Speakeasies, all worded alike: "Unload 4+ barrels at <bar> in <District> in
+    # one Play". The bar is the venue on the board's sign (Nick: more thematic than the District
+    # alone); the District stays so the table can find it. The 2026-10-10 audit had dropped the venue
+    # names off three cards; these put them back on all eight.
     # Every seat starts on one of its Borough's two (the Tenderloin, Fordham, Flushing, Red Hook)
     # and is one Move from the other (East Harlem, Belmont, Astoria, Coney Island), so the set is
     # two friendly 1s per seat by construction. The High Society Venues are left out: they buy Rum
@@ -42,31 +47,31 @@ ONES = [
     # every ordinary bar has bought both liquors since 2026-09-22.
     # SETS PASS 2026-10-11: 3+ became 4+, the bar set's one count.
     ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>East Harlem</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b> in one Play.",
      "What the angels take, the house bills you for anyway."),
     # Manhattan's starting bar (The Haymarket). Art: bootleggers with bottles, the ghosts behind
     # them drawn from the smoke.
     ("High Spirits", "High Spirits.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Tenderloin</b> in one Play.",
-     "The Haymarket never closes. It only gets quieter."),
+     "Unload <b>4+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b> in one Play.",
+     "It never closes. It only gets quieter."),
     # The Bronx's empty bar. Belmont is the Bronx's Little Italy; Arthur Avenue is its high street.
     ("Bathtub Gin", "Bathtub Chemistry.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Belmont</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b> in one Play.",
      "Mixed in a tub off Arthur Avenue. Poured like champagne."),
     # The Bronx's starting bar (The Penny Whistle). "Coffin varnish" was 1920s slang for liquor
     # that might kill you; the art is a man cutting a jar of it.
     ("Coffin Varnish", "Cutting.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Fordham</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>The Penny Whistle</b> in <b>Fordham</b> in one Play.",
      "Two parts water, one part kerosene, all of it profit."),
     # Queens' empty bar (Bohemian Hall). "Giggle water" is period slang for any drink. The art was
     # The Grand Tour's: a handshake over a crate of bottles.
     ("Giggle Water", "Cobble Hill.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Astoria</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b> in one Play.",
      "Poured by the pitcher, and nobody asks what is in it."),
     # Queens' starting bar (Paradise Alley). Back as a 1 on its own art: it was a 3 at 6+ until the
     # setup pass cut it as a home chore. As a 1, a home sale is the right size.
     ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Flushing</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b> in one Play.",
      "One bad batch and the whole city stops drinking."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
@@ -82,13 +87,13 @@ ONES = [
     # Speakeasy; it is the empty block beside two Brooklyn starts (Red Hook, Canarsie).
     # SETS PASS 2026-10-11: one of the bar set; text unchanged.
     ("Last Call", "Last Call.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Coney Island</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Ruby&rsquo;s Joint</b> in <b>Coney Island</b> in one Play.",
      "Pour till the taps run dry and the sirens start up."),
     # Brooklyn's starting bar (Sunny's Bar). "Off the Boat" was Cuban Prince's first name. Switch.jpg
     # (boats unloading under a suspension bridge) left Night Landing because Jamaica Bay had no bridge;
     # Red Hook sits at the Brooklyn Bridge's end, so it fits here.
     ("Off the Boat", "Switch.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Red Hook</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b> in one Play.",
      "Unloaded at midnight, poured by one, gone by two."),
     # THE SINGLES: landmarks, Docks and Staten Island, which no Borough set can carry.
     ("The Milk Run", "The Milk Run.jpg", "Move",

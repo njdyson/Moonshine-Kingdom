@@ -779,7 +779,7 @@ the 5s aside for the opening deal.
 
 | Tier | Cards and what completes them |
 | --- | --- |
-| 1, the bars | an **Unload of 4+ barrels** at one named bar: The Angel's Share (East Harlem), High Spirits (The Tenderloin), Bathtub Gin (Belmont), Coffin Varnish (Fordham), Giggle Water (Astoria), Poison Panic (Flushing), Last Call (Coney Island), Off the Boat (Red Hook) |
+| 1, the bars | an **Unload of 4+ barrels** at one named bar, worded "at <bar> in <District>": The Angel's Share (The Silver Dollar, East Harlem), High Spirits (The Haymarket, The Tenderloin), Bathtub Gin (DeLillo's, Belmont), Coffin Varnish (The Penny Whistle, Fordham), Giggle Water (Bohemian Hall, Astoria), Poison Panic (Paradise Alley, Flushing), Last Call (Ruby's Joint, Coney Island), Off the Boat (Sunny's Bar, Red Hook) |
 | 1, singles | The Milk Run, The Dutchman's Deal, Night Landing, Tenement Army, The Beachhead (all as §28); The Pier Six Brawl (**any** Seize of a Dock, Safehouse or not); Rum Row and The Insurance Job (same triggers, **now 1s**) |
 | 3, Extort | an **Extort** while you Control: all three Speakeasies of Manhattan (Empire State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); a District in all five Boroughs (The Five Families, **now a 3**); 4+ Docks (Cuban Prince) |
 | 3, singles | Hell's Highway (a Move across the **Hell Gate Bridge** carrying your **Boss** and 4+ Rum); Last One Standing (Secure in Astoria while 6+ Rum sits there); The Smuggler's Run (as §28); The Copper Heist (a Seize of a District whose Still is **Pressure 5**: the four starting bars and Stapleton); Opening Night and Union Dues (same triggers, **now 3s**) |
