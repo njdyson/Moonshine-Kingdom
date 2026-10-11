@@ -1,5 +1,11 @@
 # The Jobs System — Handoff (v0.8, 2026-07-17)
 
+> **2026-10-11: the 3s and 5s need setup.** See `jobs-setup-handoff.md`. The four home-bar 3s
+> (§6b's orphan set) are replaced by the Extort set, one per Borough: *Extort while you Control all
+> three Speakeasies in* Manhattan, the Bronx, Queens or Brooklyn. §3 cluster 2's objection to them
+> (the Deed paid twice) died with the Deeds. The Copper Heist, Gin Pipeline and Last One Standing
+> were reworked on the same test, and the overlap model reads an Extort once, map-wide.
+
 > **2026-10-10: the deck audit, applied.** See `jobs-audit-handoff.md`. The Smuggler's Run broke
 > "never two 5s" (it Seizes a Dock, and every mainland Dock is in a bounty Borough), so it is a 3
 > and Union Dues is a 5. The five Deed-count cards below now name a place or a home Borough,
@@ -380,6 +386,10 @@ How each cluster was closed:
    were all "hold N Districts in one Borough" — **that is the Borough Deed, re-paid**, i.e. verbatim
    the redundancy argument that killed Contracts. **CUT.** (Note the trap: demoting them does *not*
    help — a cheaper card lowers the stake and lets you fit *more* of them under the cap.)
+   *(2026-10-11: the Deeds were cut on 2026-09-10, so nothing re-pays a Borough now, and the four
+   are back as "Extort while you Control all three Speakeasies in" one Borough. They still co-fire
+   with each other and The Five Families on one Extort, which is the engineered kind: two of them
+   plus The Five Families is 11 at stake 7, holding six Speakeasies. See `jobs-setup-handoff.md`.)*
 3. **Seize cluster (was 11).** The engine was never `Over the Top` — it was **`The Eviction` +
    `The Copper Heist` riding along on any Seize**. Copper Heist now reads *"and **no Safehouse**"*,
    which The Eviction *requires*, so the two can **never** ride the same Seize. `Over the Top` also
@@ -627,6 +637,9 @@ the South on its 4, 5 and 6; CLAUDE.md, Starting turf). The table above is the d
 Each friendly card now names its seat's own starting Speakeasy: still one per seat, but no longer a
 block to take first. The unheld Speakeasies are now East Harlem, Belmont, Astoria and Coney Island,
 at Pressure 1 or 2. Whether the four cards want retuning is a playtest question.
+*(2026-10-11: they were home chores, and the Extort set replaced them one for one: each seat's
+friendly 3 is now its own Borough's three Speakeasies, the room included. Same tier, same seat
+balance. See `jobs-setup-handoff.md`.)*
 
 These are each borough's **friendly** card, all at 3 Respect. Matched by **one bounty per borough,
 all Open Fire 5s and borough-disjoint** (which is also what guarantees "never two 5s"):

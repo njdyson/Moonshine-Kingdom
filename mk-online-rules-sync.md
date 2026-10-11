@@ -770,6 +770,30 @@ status**, not a card: 10+ Respect, all 10 Influence bought and no Mark. CLAUDE.m
 Strings: RULES-AI.md's crown conditions and its Nod line ("claim the Nod"), and any tooltip that
 names the Nod as a card.
 
+## 30. The 3s need setup: the Extort set (2026-10-11, Nick)
+
+Seven 3-Respect Jobs change; nothing else in the rules does. It stacks on §28, which is still to
+port, so port §28 first. The why is in `jobs-setup-handoff.md`; `tools/overlap_audit.py` holds a
+predicate for each card. **To port:**
+
+| Card | Completes on |
+| --- | --- |
+| Empire State (new, replaces The Big Squeeze at the Tenderloin) | an **Extort** while you Control Sugar Hill, East Harlem and The Tenderloin |
+| The Big Squeeze (new objective, replaces Hell's Highway) | an **Extort** while you Control Morris Park, Belmont and Fordham |
+| King of Queens (new, replaces Poison Panic) | an **Extort** while you Control Richmond Hill, Astoria and Flushing |
+| The Black Hand (new, replaces Cuban Prince) | an **Extort** while you Control Williamsburg, Coney Island and Red Hook |
+| The Copper Heist | a Seize of a **High Society Venue** with no Safehouse (not any Pressure 5+ Still) |
+| Gin Pipeline | a Move of 6+ barrels into a District you **already Control** in a **rival's home Borough** |
+| Last One Standing | a Secure in Astoria while 6+ **Rum** sits there |
+
+All four Extort cards are Stake 2, Respect 3, art `Empire State.jpg`, `Big Squeeze.jpg`,
+`King of Queens.jpg`, `Black Hand.jpg`. One Extort can complete several of them and The Five
+Families at once. A District under a Squad can't be Controlled, so a Squad on any of a Borough's
+three bars blocks that card. Strings: card text and the deck count (the four new ids replace
+`cuban-prince`, `big-squeeze`, `hells-highway`, `poison-panic`). Bots: the Extort set is a reason
+to steer a Squad off a room (be the freshest noise in reach, most barrels on a Dock or Ward) and to
+take a rival's room (The Copper Heist) when he holds all three of his bars.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -893,3 +917,4 @@ names the Nod as a card.
 - [x] **Peddle at $200 with no Greed Tax; bots sell the whole pile** (§27)
 - [ ] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28)
 - [ ] **Borough cards: no crown in your home Borough; the Nod is all 10 bought** (§29)
+- [ ] **The 3s need setup: the Extort set, and The Copper Heist, Gin Pipeline, Last One Standing** (§30)

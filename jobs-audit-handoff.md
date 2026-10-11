@@ -2,6 +2,10 @@
 
 An audit of all 32 Jobs against the current rules, for clarity first and board tension second.
 
+> **2026-10-11:** seven of the 3s changed again on a new test (a 3 or 5 needs setup). The four
+> home-bar 3s gave way to the Extort set, and The Copper Heist, Gin Pipeline and Last One Standing
+> were reworked. See `jobs-setup-handoff.md`; the tables below are the 2026-10-10 record.
+
 **Applied 2026-10-10** (Nick: "make the rewrites you suggested"). Every recommendation below is in
 `tools/gen_deck.py` and the printed deck, with the tier swap, the home Borough Glossary line and the
 rebuilt audits. The card tables keep the before and after as a record; *Open for review*, at the

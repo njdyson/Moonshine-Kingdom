@@ -110,28 +110,34 @@ CARDS = [
     ("The Grand Tour", 1, "Unload", 1, 0, 0, 1, 0, 1, 1, 0,
      "4 named venues -- denying all four is not worth anyone's Days."),
     # ------------------------------- 3 RESPECT -------------------------------
-    ("Cuban Prince", 3, "Move", 2, 0, 0, 1, 0, 2, 3, 1,
-     "ONE named District (Red Hook), Brooklyn's own bar since 2026-10-07."),
+    # THE EXTORT SET (2026-10-11). Setup 3: take the empty bar, steer the Squad off the
+    # room, take the room, then Extort. Rival 1: the Squad moves only in a Raid, which you
+    # can force (Rat) at a price. Window 2: dead at setup and whenever the Squad stands on
+    # one of the three; Brooklyn 3, since its Squad's only clean step is Brooklyn's own home
+    # Ward. Block 3: three Districts held at once, each deniable, and a rival can plant
+    # barrels to pull the Squad back onto one.
+    ("Empire State", 3, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
+     "Manhattan's three bars. Squad's clean step: West Side."),
+    ("The Big Squeeze", 3, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
+     "The Bronx's three bars. Squad's clean step: Throggs Neck."),
+    ("King of Queens", 3, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
+     "Queens' three bars. Squad's clean step: Jamaica or Corona."),
+    ("The Black Hand", 3, "Extort", 3, 1, 0, 1, 3, 3, 3, 2,
+     "Brooklyn's three bars. Clean step only onto Brownsville."),
     ("Rum Row", 3, "Trade", 2, 0, 0, 2, 1, 1, 1, 0,
      "Staten is uncontested, which is exactly why it is not blockable."),
     ("The Eviction", 3, "Open Fire", 2, 2, 1, 1, 1, 2, 0, 2,
      "Target can garrison or relocate -- and will, once you are seen coming."),
-    ("The Copper Heist", 3, "Open Fire", 1, 1, 1, 0, 1, 2, 0, 1,
-     "Owner can vent Pressure or garrison the boiler to break it."),
+    ("The Copper Heist", 3, "Open Fire", 2, 2, 1, 1, 2, 2, 1, 2,
+     "REWRITTEN 2026-10-11: a room a rival holds, no Safehouse."),
     ("The Insurance Job", 3, "Rat", 3, 0, 0, 0, 2, 1, 0, 0,
      "Engineering the Raid onto yourself is private. Nobody interferes."),
-    ("The Big Squeeze", 3, "Unload", 2, 0, 0, 2, 0, 2, 3, 1,
-     "ONE named District (The Tenderloin), Manhattan's own bar."),
-    ("Hell's Highway", 3, "Move", 2, 0, 0, 2, 0, 2, 3, 1,
-     "ONE named district (Fordham). Garrison it and the card stalls."),
-    ("Poison Panic", 3, "Unload", 2, 0, 0, 2, 0, 2, 3, 1,
-     "ONE named District (Flushing). Same shape as its three siblings."),
-    ("Gin Pipeline", 3, "Move", 2, 0, 0, 2, 0, 1, 1, 0,
-     "Your own home Ward: honest filler, and hard for anyone to deny."),
+    ("Gin Pipeline", 3, "Move", 2, 0, 0, 2, 0, 2, 1, 2,
+     "REWRITTEN 2026-10-11: a foothold in a rival's Borough, then 6."),
     ("The Smuggler's Run", 3, "Move", 3, 1, 0, 3, 1, 3, 2, 2,
      "A 3 since 2026-10-10: Seize a Dock off Staten with 4 Rum. Hardest 3."),
-    ("Last One Standing", 3, "Secure", 1, 0, 1, 0, 0, 2, 3, 2,
-     "ONE named bar (Astoria). Queens garrisons it; others Seize it first."),
+    ("Last One Standing", 3, "Secure", 3, 0, 0, 2, 0, 2, 3, 1,
+     "REWRITTEN 2026-10-11: + 6 Rum. Brew, Trade, haul, then Secure."),
     ("The Irish Goodbye", 3, "Open Fire", 2, 2, 1, 1, 1, 1, 1, 1,
      "REWRITTEN: 3+ -> 2+ kills. Dice variance was the wrong kind of hard."),
     # ------------------------------- 5 RESPECT -------------------------------
@@ -233,7 +239,9 @@ BEFORE = {"The Milk Run": (3, 3), "The Beachhead": (4, 2), "Tenement Army": (3, 
           "The Five Families": (7, 4), "The Smuggler's Run": (8, 2),
           "Bloody Sunday": (9, 8), "The Butcher's Ledger": (13, 6), "High Roller": (11, 3)}
 print(f"  {'card':26} {'difficulty':>18}   {'engagement (block+prov)':>24}")
-for r in sorted(R, key=lambda r: -((r['block'] + r['prov']) - BEFORE[r['name']][1])):
+# Cards added after 2026-08-04 have no "before" and are skipped here.
+for r in sorted((r for r in R if r['name'] in BEFORE),
+                key=lambda r: -((r['block'] + r['prov']) - BEFORE[r['name']][1])):
     bd, be = BEFORE[r['name']]
     ae = r['block'] + r['prov']
     if ae == be and r['diff'] == bd:

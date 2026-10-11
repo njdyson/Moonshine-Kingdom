@@ -227,25 +227,45 @@ ONES = [
 ]
 
 THREES = [
-    # Renamed from "Off the Boat" (2026-07-19, Nick): the art has always been
-    # Cuban Prince.png, so the card is back on its own picture and the name now
-    # points at the Havana end of the run rather than the Red Hook end. No "The":
-    # at 12 characters it stays under the 16-char title--long threshold and
-    # prints at full size.
-    # SPLIT MARKET PASS (2026-08-09). Rum now pours under a Hotspot token and nowhere
-    # else, so "Unload Rum at Sunny's Bar" was unfirable: Red Hook is a standard bar.
-    # Retargeting the SALE to Brooklyn's Hotspot cost two things -- it took Brooklyn's
-    # friendly 3 off its orphan joint (breaking the one-per-seat set the Guide teaches)
-    # and it printed a 9-Respect triple with Opening Night + The Grand Tour, a new deck
-    # maximum. Moving the OBJECTIVE instead of the address fixes both: the card keeps
-    # Red Hook, keeps the Rum, and lands on the step the new economy actually made
-    # hard, which is getting the brown stuff to an address at all. The flavour line was
-    # always about the run rather than the sale, so it now reads literally.
-    # AUDIT 2026-10-10: the District, Red Hook, is the big word on the board's sign; Sunny's
-    # Bar is the small line under it.
-    ("Cuban Prince", "Cuban Prince.jpg", "Move",
-     "Move <b>3+ Rum</b> into <b>Red Hook</b> in one Play.",
-     "Havana to Red Hook, and never once a warehouse."),
+    # THE EXTORT SET (Nick, 2026-10-11; jobs-setup-handoff.md). One card per mainland
+    # Borough, each its seat's friendly 3, replacing the four home-bar 3s (Cuban Prince,
+    # The Big Squeeze, Hell's Highway, Poison Panic). Since 2026-10-07 every seat starts on
+    # the bar those four named, so each was a home chore done by Day 2 or 3.
+    #   Why these need setup: a Borough's three Speakeasies are its two ordinary bars and its
+    #   High Society Venue, and the Venue starts under that Borough's Police Squad. So the
+    #   card is dead until a Raid moves the Squad, and dead again whenever the Squad stands
+    #   on any of the three. The holder steers the Squad (Follow the Smoke, then the Big Bust:
+    #   be the freshest noise in reach, with the most barrels where you can afford the cops),
+    #   then holds three Districts at once and spends a Power Play that always draws Heat.
+    #   Rivals can break any of the three, or plant barrels to pull the Squad back onto one.
+    #   The home seat starts holding one of the three and borders the other two, so the card
+    #   is his friendly; for anyone else it is an invasion that ends next to a crown room.
+    #   The Squad's clean first step differs by Borough: Throggs Neck for the Bronx, West Side
+    #   for Manhattan, Jamaica or Corona for Queens, and only Brownsville (Brooklyn's own home
+    #   Ward) for Brooklyn, whose card is the stiffest. Watch it in playtest.
+    #   History: these four names were Extort cards once ("hold N Districts in one Borough")
+    #   and were cut because the Borough Deed already paid for holding a Borough (handoff §3,
+    #   cluster 2). The Deeds went on 2026-09-10, and the objection with them. They come back
+    #   on their own art, worded as The Five Families is: "Extort while you Control ...".
+    #   "all three" says the crowned bar counts, which a reader going by the board's gin
+    #   medallions might otherwise miss.
+    ("Empire State", "Empire State.jpg", "Extort",
+     "Extort while you Control <b>all three Speakeasies</b> in <b>Manhattan</b>.",
+     "From Sugar Hill to the Tenderloin, every till pays one man."),
+    # The name and art came off Manhattan's old home-bar 3 (Unload 6+ at The Tenderloin),
+    # which had restored them from the cut Extort card. Back on an Extort, where a squeeze
+    # belongs; the art (the wagons at the door mid-count) is Extort's Heat drawn as a picture.
+    ("The Big Squeeze", "Big Squeeze.jpg", "Extort",
+     "Extort while you Control <b>all three Speakeasies</b> in the <b>Bronx</b>.",
+     "The whole Bronx pays on Friday. Nobody has to ask twice."),
+    ("King of Queens", "King of Queens.jpg", "Extort",
+     "Extort while you Control <b>all three Speakeasies</b> in <b>Queens</b>.",
+     "Every glass poured in Queens, the King takes a sip."),
+    # The Black Hand letters (an inked palm, a sum, a threat) were the shakedown of the
+    # Italian blocks in Brooklyn and East Harlem. The art is a butcher reading one.
+    ("The Black Hand", "Black Hand.jpg", "Extort",
+     "Extort while you Control <b>all three Speakeasies</b> in <b>Brooklyn</b>.",
+     "The letter had a hand drawn on it. The shop paid by noon."),
     # Re-arted from Rum Runners Regatta.png (Nick found the set in Unused/): a full
     # moon, the mother steamer lit up, six small boats waiting off a dark shore. The
     # flavour line already described this exact image. Rum Row 3.png was tried first
@@ -275,8 +295,18 @@ THREES = [
     # can never ride the same Seize. Without it, one Open Fire on Richmond Hill
     # or Williamsburg paid 11 (Toll Booth/Butcher's Ledger + Eviction + Heist).
     # Theme holds: you're robbing a boiler standing on its own, not storming HQ.
+    # SETUP PASS 2026-10-11: one kind of District, the High Society Venue. "A Pressure 5+
+    # Still" was nine Districts, and since 2026-10-07 every seat's starting Speakeasy is one,
+    # so any Seize of a rival's home bar paid it: a windfall from a fight you'd fight anyway.
+    # The four Venues sit on the four #7 Stills, the hottest boiler in each Borough, so the
+    # flavour still reads. Now the room must be open (a Raid moved its Squad), a rival must
+    # be holding it, and you must bring enough to take it; a Fold still pays, as every Seize
+    # Job does. It is also the answer to the Extort set: taking a rival's room breaks his
+    # three. The guard stays, for the same reason as before: a room with his Safehouse in it
+    # pays The Eviction (or, in Manhattan, Bloody Sunday) instead, never both. It meets each
+    # bounty 5 only in that Borough's room (one District each).
     ("The Copper Heist", "Copper Heist.jpg", "Open Fire",
-     "Seize a District with a <b>Pressure 5+ Still</b> and <b>no Safehouse</b>.",
+     "Seize a <b>High Society Venue</b> with <b>no Safehouse</b>.",
      "The good boilers run hot. So do the men who own them."),
     # WAS "Have a Police Raid Condemn ..." with verb Raid, which had no checkpoint:
     # a Raid is an INTERRUPT, not a Play, and "The Play Is the Unit" only checks
@@ -307,30 +337,6 @@ THREES = [
     ("The Insurance Job", "Insurance Job.jpg", "Rat",
      "<b>Rat</b>, and have the Raid <b>padlock</b> a <b>Pressure 1 or 2 Still</b> you Control.",
      "He struck the match himself. Slept fine after."),
-    # MANHATTAN'S FRIENDLY: the 4th orphan Speakeasy (The Haymarket, in the
-    # Tenderloin). Name restored from the cut Extort card, and its own art reused:
-    # cops coming through the door of a joint mid-sale while men grab bottles and
-    # cash. That IS the Greed Tax (Unload 4+ draws Heat) drawn as a picture.
-    # AUDIT 2026-10-10: the District name, and "in one Play": without it the six barrels
-    # read as a Day's total.
-    ("The Big Squeeze", "Big Squeeze.jpg", "Unload",
-     "Unload <b>6+ barrels</b> at <b>The Tenderloin</b> in one Play.",
-     "Six barrels in one night. The wagons come for less."),
-    # BRONX'S FRIENDLY. Was the Bronx's second BOUNTY, which made it the worst seat;
-    # re-objectived (Nick: keep the theme, change the objective) onto the Bronx's
-    # orphan district. Fordham Road is a real Bronx thoroughfare, so "Hell's Highway"
-    # now fits the objective better than it did.
-    ("Hell&rsquo;s Highway", "Hells Highway.jpg", "Move",
-     "Move <b>6+ barrels</b> into <b>Fordham</b> in one Play.",
-     "Forty miles of bad road and worse intentions."),
-    # QUEENS' FRIENDLY, and free: Queens was the only borough with nothing easy.
-    # Paradise Alley = Flushing, Queens' non-starting Speakeasy: an exact mirror
-    # of Off the Boat at Sunny's Bar (Red Hook) for Brooklyn. Also lifts Manhattan
-    # and Queens off the named-location floor. The ironic name pairing is free.
-    # AUDIT 2026-10-10: as The Big Squeeze, and "of Moonshine" cut (see The Angel's Share).
-    ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>6+ barrels</b> at <b>Flushing</b> in one Play.",
-     "One bad batch and the whole city stops drinking."),
     # COUNTERPLAY PASS (2026-08-04). Engagement 1 -- near-solitaire: your own Still, your
     # own barrels, and ANY direction out, so there was nothing for a rival to deny.
     # Naming the destination is what creates the counterplay. A Ward is the right target:
@@ -345,8 +351,19 @@ THREES = [
     # AUDIT 2026-10-10: since 2026-10-07 every seat's starting Speakeasy is Pressure 5 and
     # borders its home Ward, so the three qualifiers described each seat's own opening.
     # Worded as what it is. Still the most solitaire 3: a candidate for a named target.
+    # SETUP PASS 2026-10-11: the far end of the pipe moves into a rival's home Borough. The
+    # home Ward was a chore (your own Still, your own block, nobody to stop you). Now you
+    # need a foothold there first, a District you Control that its owner can see and take
+    # back, and six barrels staged next to it; the delivery is the second Play, a turn round
+    # later at the soonest. Each seat's nearest foothold is an Empty District one Move or one
+    # crossing away (East Harlem or Astoria for the Bronx, Jamaica for Manhattan and Brooklyn,
+    # West Side for Queens), and its owner can reach each to take it back. "you Control" is the guard,
+    # as it was on the 2026-08-04 card: Squatter's Rights wants an Empty District and every
+    # fight Job a rival one, so this Move can pay beside Night Landing (Jamaica, Canarsie) or
+    # The Milk Run (the bridge's two ends) and nothing else. At three players the boxed
+    # Borough is nobody's home, so it never counts.
     ("Gin Pipeline", "Gin Pipeline.jpg", "Move",
-     "Move <b>6+ barrels</b> into your <b>home Ward</b> in one Play.",
+     "Move <b>6+ barrels</b> into a District you Control in a rival&rsquo;s <b>home Borough</b> in one Play.",
      "It never sees daylight. That is the entire idea."),
     # Moonshine -> RUM (Nick). A setup hedge: Rum only exists via Trade at a Dock you
     # Control, and Staten's own boilers are hopeless (Westerleigh Pressure 1,
@@ -422,8 +439,17 @@ THREES = [
     # guard above, and stacked with High Roller and The Beachhead for 9 on one Secure. Now
     # one named bar: Astoria (Bohemian Hall), Queens' empty Speakeasy, with a bridge each to
     # the Bronx and Manhattan and Brooklyn's room next door.
+    # SETUP PASS 2026-10-11: "holding 6+ Rum". Secure places a Safehouse in any Safe District
+    # on the map for $500, so the bare card was one Play from anywhere on Day 2, the easiest
+    # 3 in the deck. Astoria brews almost nothing (Still 2), so the Rum is a whole supply
+    # chain: brew, Trade at a Dock, haul it in, then Secure. Queens does it in three Plays
+    # from Whitestone, so it stays Queens' second friendly; the Bronx (by the Hell Gate) needs
+    # four and Manhattan (by the Queensboro) more, and the Bronx can strike it from its home Ward.
+    # Six Rum on the block is also the Big Bust's favourite door. Secure-only Jobs can't meet
+    # it: High Roller is the rooms, Fortress Staten is Staten Island, and The Beachhead pays
+    # beside it only while a rival Safehouse stands in Corona.
     ("Last One Standing", "Last One Standing.jpg", "Secure",
-     "Secure your Safehouse in <b>Astoria</b>.",
+     "Secure your Safehouse in <b>Astoria</b> holding <b>6+ Rum</b>.",
      "The last man at the table gets the chair."),
     # Re-themed off the Boss-kill (handoff §3, cluster 1). "Do not take Control"
     # is load-bearing: it makes this structurally unable to co-fire with ANY

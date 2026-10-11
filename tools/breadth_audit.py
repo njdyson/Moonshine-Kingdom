@@ -11,6 +11,10 @@ into by luck. So the test is not "is the stack guaranteed?" but:
 <= 2 districts  -> you had to engineer it. Feature.
  > 2 districts  -> it finds you. Flag it.
 
+An Extort reads the whole map (it pays for every District you Control), so its Jobs
+are modelled once, as "the whole map (Extort)", and their sets always show as one
+place. Judge those by what they need held and staked, not by the count (2026-10-11).
+
 The model (Districts, Jobs, every legal Play) lives in overlap_audit.py and is
 imported here. Until 2026-10-10 this file re-implemented the enumeration and had to be
 kept in step by hand; it drifted at least once (2026-08-04), so it no longer does.

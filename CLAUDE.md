@@ -168,6 +168,26 @@ and it puts the kill fights where running costs too much, above all a High Socie
 endgame. Watch in playtest: Queens and Brooklyn can turn their bounty down by Folding; the Bronx and
 Manhattan can't.
 
+## Jobs: the 3s and 5s need setup
+
+Since 2026-10-11 (Nick; `jobs-setup-handoff.md`). A 3 or a 5 must need Plays spent for it alone,
+before the Play that scores it, that the table can see coming. Two ways to fail: a **home chore**
+(on your starting turf, unreachable, what you'd do anyway) and a **windfall** (a target so common
+that a fight or sale you'd make anyway pays it). Every seat starts on its Pressure 5 bar, and Secure
+reaches any Safe District on the map for $500, so check any card that names a starting bar, a type
+the starting bars share, or a Secure with no other gate.
+
+The four home-bar 3s (Cuban Prince, Hell's Highway, Poison Panic, and The Big Squeeze at the
+Tenderloin) are replaced by **the Extort set**: *Extort while you Control all three Speakeasies in*
+Manhattan (Empire State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The
+Black Hand). Each Borough's three are its two bars and its High Society Venue, so the card waits on
+a Raid to move the Squad off the room, then on three Districts held at once. Each is its seat's
+friendly 3. These names were Extort cards once, cut because the Borough Deed already paid for
+holding a Borough; the Deeds' removal ended that objection, so don't cut them on it again. The
+Copper Heist (now the rooms), Gin Pipeline (now a foothold in a rival's home Borough) and Last One
+Standing (now Astoria with 6+ Rum) were reworked on the same test. The overlap model treats an
+Extort as one map-wide Play.
+
 ## Barrels travel alone
 
 Since 2026-10-01 (a wording pass; the rule itself is old). A Move can send barrels with no
@@ -572,8 +592,8 @@ it (undrawn), and mk-online's `STARTING_TURF` follows it.
 Watch in playtest:
 
 - **Each Borough now starts on its orphan Speakeasy**, the one `jobs-system-handoff.md` built the
-  four 3-Respect friendly Jobs on (The Big Squeeze, Hell's Highway, Poison Panic, Cuban Prince).
-  Still one per seat, so still symmetric, but each is now a Job on the home seat's own turf.
+  four 3-Respect friendly Jobs on. That made all four home chores, and on 2026-10-11 the Extort set
+  replaced them (see *Jobs: the 3s and 5s need setup*).
 - **Night Landing** (a Dock on Jamaica Bay) suited Queens and Brooklyn, who both started on one;
   now only Brooklyn does. `tools/fairness_audit.py` puts Queens last on the weighted seat balance
   (weighted spread 1 to 2).

@@ -125,9 +125,20 @@ JOBS = [
       'Unload 4+ barrels at an East River Speakeasy in one Play.',
       lambda p, d: p['barrels'] >= 4 and d.name in EAST_RIVER),
     # --- 3 Respect ---
-    J('Cuban Prince', 3, ['Move'],
-      'Move 3+ Rum into Red Hook in one Play.',
-      lambda p, d: p['barrels'] >= 3 and p['rum'] and d.name == 'Red Hook'),
+    # The Extort set (2026-10-11): an Extort reads the whole map, so it is modelled once,
+    # with the Boroughs whose three Speakeasies you hold (see _extort).
+    J('Empire State', 3, ['Extort'],
+      'Extort while you Control all three Speakeasies in Manhattan.',
+      lambda p, d: M in p['bars']),
+    J('The Big Squeeze', 3, ['Extort'],
+      'Extort while you Control all three Speakeasies in the Bronx.',
+      lambda p, d: BX in p['bars']),
+    J('King of Queens', 3, ['Extort'],
+      'Extort while you Control all three Speakeasies in Queens.',
+      lambda p, d: Q in p['bars']),
+    J('The Black Hand', 3, ['Extort'],
+      'Extort while you Control all three Speakeasies in Brooklyn.',
+      lambda p, d: BK in p['bars']),
     J('Rum Row', 3, ['Trade'],
       'Trade 4+ barrels at a Staten Island Dock in one Play.',
       lambda p, d: p['barrels'] >= 4 and d.boro == ST),
@@ -137,31 +148,23 @@ JOBS = [
       "Take over a rival's Safehouse.",
       lambda p, d: p['sh'] == 'takeover'),
     J('The Copper Heist', 3, ['Move'],
-      'Seize a District with a Pressure 5+ Still and no Safehouse.',
-      lambda p, d: p['seize'] and d.press >= 5 and not p['rival_sh']),
+      'Seize a High Society Venue with no Safehouse.',
+      lambda p, d: p['seize'] and d.has('highSociety') and not p['rival_sh']),
     # Modelled on the District the Raid padlocks, which must be yours.
     J('The Insurance Job', 3, ['Rat'],
       'Rat, and have the Raid padlock a Pressure 1 or 2 Still you Control.',
       lambda p, d: d.press <= 2),
-    J('The Big Squeeze', 3, ['Unload'],
-      'Unload 6+ barrels at The Tenderloin in one Play.',
-      lambda p, d: p['barrels'] >= 6 and d.name == 'The Tenderloin'),
-    J("Hell's Highway", 3, ['Move'],
-      'Move 6+ barrels into Fordham in one Play.',
-      lambda p, d: p['barrels'] >= 6 and d.name == 'Fordham'),
-    J('Poison Panic', 3, ['Unload'],
-      'Unload 6+ barrels at Flushing in one Play.',
-      lambda p, d: p['barrels'] >= 6 and d.name == 'Flushing'),
+    # "you Control": a District already yours before the Move, so never a fight.
     J('Gin Pipeline', 3, ['Move'],
-      'Move 6+ barrels into your home Ward in one Play.',
-      lambda p, d: p['barrels'] >= 6 and d.has('ward') and p['home'] == 'own'),
+      "Move 6+ barrels into a District you Control in a rival's home Borough in one Play.",
+      lambda p, d: p['barrels'] >= 6 and p['state'] == 'control' and p['home'] == 'rival'),
     J("The Smuggler's Run", 3, ['Move'],
       'Seize a Dock by Moving 4+ Rum in from Staten Island.',
       lambda p, d: p['seize'] and d.has('dock') and p['from_staten']
       and p['barrels'] >= 4 and p['rum']),
     J('Last One Standing', 3, ['Secure'],
-      'Secure your Safehouse in Astoria.',
-      lambda p, d: d.name == 'Astoria'),
+      'Secure your Safehouse in Astoria holding 6+ Rum.',
+      lambda p, d: d.name == 'Astoria' and p['barrels'] >= 6 and p['rum']),
     # "take no Control" makes it unable to co-fire with any Seize card.
     J('The Irish Goodbye', 3, ['Move'],
       'Kill 2+ rival Mobsters at an East River Speakeasy in one Play, and take no Control.',
@@ -222,7 +225,7 @@ BARRELS = (0, 3, 4, 6, 8)
 def _p(**kw):
     p = dict(barrels=0, rum=False, runners=0, kills=0, defenders=0, seize=False,
              boss_killed=False, own_boss=False, crew=False, route='land',
-             from_staten=False, sh='none', adj_rival_sh=False, all5=False)
+             from_staten=False, sh='none', adj_rival_sh=False, all5=False, bars=frozenset())
     p.update(kw)
     p['rival_sh'] = p['state'] in ('hostile_sh', 'unguarded')
     return p
@@ -307,9 +310,7 @@ def _plays(verb, d, state, home):
             for barrels in BARRELS[1:]:
                 yield _p(state=state, home=home, barrels=barrels)
     elif verb == 'Extort':
-        if state == 'control':
-            for all5 in (False, True):
-                yield _p(state=state, home=home, all5=all5)
+        return              # map-wide: see _extort()
     elif verb == 'Rat':
         if state == 'control':
             yield _p(state=state, home=home)
@@ -332,6 +333,23 @@ def _fight(fight, state, home, out, sh, route, from_staten, barrels, rum, crew):
                              own_boss=own_boss, **base)
 
 
+# An Extort pays $200 for every District you Control anywhere, so its Jobs read the whole
+# map, not the District it is made from. Modelling it per District (as before 2026-10-11)
+# reported The Five Families as firing in 25 places, and would have reported every pair of
+# Extort Jobs as a 25-District overlap. It is one Play-space, THE_MAP, enumerated over what
+# you hold: all five Boroughs or not, and which Boroughs' three Speakeasies are all yours.
+# Judge an Extort stack by what it needs held and staked, not by a District count.
+THE_MAP = D(('the whole map (Extort)', None, set(), 7))
+MAINLAND = (M, BX, Q, BK)
+
+
+def _extort():
+    for all5 in (False, True):
+        for k in range(len(MAINLAND) + 1):
+            for held in itertools.combinations(MAINLAND, k):
+                yield _p(state='control', home='none', all5=all5, bars=frozenset(held))
+
+
 def co_firing():
     """Return ({(verb, names): {districts}}, {name: {districts}})."""
     sets = defaultdict(set)
@@ -340,8 +358,8 @@ def co_firing():
         jobs_v = [j for j in JOBS if verb in j['verbs']]
         if not jobs_v:
             continue
-        for d in DS:
-            for p in plays(verb, d):
+        for d in ([THE_MAP] if verb == 'Extort' else DS):
+            for p in (_extort() if verb == 'Extort' else plays(verb, d)):
                 fired = tuple(sorted(j['name'] for j in jobs_v if j['fn'](p, d)))
                 for n in fired:
                     solo[n].add(d.name)

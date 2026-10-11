@@ -95,29 +95,30 @@ CARDS = [
     # Speakeasy: Throggs Neck is on that water but it is a Dock. So this card is
     # the one seat-asymmetry the landmark introduced; watch section 4.
     ('The Grand Tour',        1, 'Unload',    {'speakeasy'},                {M: 'friendly', Q: 'friendly', BK: 'friendly'}),
-    # Sunny's Bar = Red Hook, Brooklyn's STARTING Speakeasy since 2026-10-07 (it was
-    # the empty one on their doorstep), and their starting Dock (Canarsie), where
-    # they make the Rum, is next door.
-    ('Cuban Prince',          3, 'Move',      {'speakeasy', 'press5'},      {BK: 'friendly'}),
+    # THE EXTORT SET (2026-10-11), one per seat, replacing the four home-bar 3s (Cuban
+    # Prince, The Big Squeeze at the Tenderloin, Hell's Highway, Poison Panic). Each
+    # Borough's three Speakeasies are its two bars and its High Society Venue: the home
+    # seat starts on one and borders the other two, so each card is its seat's friendly,
+    # at the same 3 as the card it replaced. Rivals can still take it by invading.
+    # 'press5': each set holds its seat's starting bar (Pressure 5) and its room (6).
+    ('Empire State',          3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {M: 'friendly'}),
+    ('The Big Squeeze',       3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BX: 'friendly'}),
+    ('King of Queens',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {Q: 'friendly'}),
+    ('The Black Hand',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BK: 'friendly'}),
     ('Rum Row',               3, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Eviction',          3, 'Open Fire', {'any'},                      {}),
-    ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
+    # The four High Society Venues since 2026-10-11 (one per Borough), not every
+    # Pressure 5+ Still.
+    ('The Copper Heist',      3, 'Open Fire', {'highSociety', 'press5'},    {}),
     ('The Insurance Job',     3, 'Rat',       {'any'},                      {}),
-    # MANHATTAN'S FRIENDLY: The Haymarket (the Tenderloin), its starting Speakeasy
-    # since 2026-10-07 (the orphan #4 before).
-    ('The Big Squeeze',       3, 'Unload',    {'speakeasy', 'press5'},      {M: 'friendly'}),
-    # BRONX'S FRIENDLY: Fordham (The Penny Whistle), its starting Speakeasy since
-    # 2026-10-07 (the orphan before).
-    ("Hell's Highway",        3, 'Move',      {'press5'},                   {BX: 'friendly'}),
-    # Paradise Alley = Flushing -> QUEENS' FRIENDLY, its starting Speakeasy since
-    # 2026-10-07 (mirrors Cuban Prince/Sunny's Bar).
-    ('Poison Panic',          3, 'Unload',    {'speakeasy', 'press5'},      {Q: 'friendly'}),
-    # Your own home Ward since 2026-10-10: every seat's, so it nets to zero.
-    ('Gin Pipeline',          3, 'Move',      {'ward'},                     {}),
+    # Into a District you Control in a rival's home Borough since 2026-10-11 (your own
+    # home Ward before): aimed at every seat alike, so it nets to zero.
+    ('Gin Pipeline',          3, 'Move',      {'any'},                      {}),
     # A 5 since 2026-10-10, in a rival's home Ward: aimed at every seat alike.
     ('Union Dues',            5, 'Recruit',   {'ward'},                     {}),
     # Re-verbed Rise -> Secure 2026-07-19; fills the empty 3-Respect Secure slot.
     # Astoria since 2026-10-10: Queens' empty bar, beside all three Queens starts.
+    # Holding 6+ Rum since 2026-10-11: still Queens' (three Plays from Whitestone).
     ('Last One Standing',     3, 'Secure',    {'speakeasy'},                {Q: 'friendly'}),
     # HOSTILE half of the East River: it mirrors The Grand Tour.
     ('The Irish Goodbye',     3, 'Open Fire', {'speakeasy'},                {M: 'hostile', Q: 'hostile', BK: 'hostile'}),
