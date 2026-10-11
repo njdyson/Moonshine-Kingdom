@@ -786,7 +786,8 @@ the 5s aside for the opening deal.
 | 5, body counts | a fight in the named Borough that kills **5+ Runners and no Boss**: Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
 | 5, Bosses | a fight in the named Borough that **kills a Boss**: Room 349 (Manhattan), The One-Way Ride (the Bronx), The Toll Booth Trap (Queens, no own-Boss clause now), The Last Hand (Brooklyn) |
 
-Removed: The Grand Tour, The Empty Casket, Squatter's Rights, Fortress Staten, The Eviction, Gin
+Card strings carry no "in one Play" any more (the Rulebook's The Play Is the Unit says a count is what
+one Play did); the triggers already count per Play. Removed: The Grand Tour, The Empty Casket, Squatter's Rights, Fortress Staten, The Eviction, Gin
 Pipeline, The Irish Goodbye, High Roller. New art files: `High Spirits`, `Bathtub Chemistry`,
 `Cutting`, `Cobble Hill` (Giggle Water), `Switch` (Off the Boat), `Rum Wars`, `The Big Sleep` (Room
 349), `Gatsby` (The One-Way Ride), `Debt Collector` (The Last Hand), `Scheme` (The Five Families).

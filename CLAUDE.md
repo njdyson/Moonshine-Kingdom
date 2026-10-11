@@ -147,8 +147,9 @@ written out above the card table in `tools/gen_deck.py`:
 - **One verb, one place, and at most one other condition**, which should be a fact you can see on
   the table. Naming one District is the point: while the card sits in the Market, that District is
   where the table looks.
-- Counts read "N+ barrels", "N+ Moonshine" or "N+ Rum", and end "in one Play". A single event
-  (Seize, Secure, Rise, take over, kill a Boss) needs no such phrase.
+- Counts read "N+ barrels", "N+ Moonshine" or "N+ Rum". The Rulebook's The Play Is the Unit says
+  a count is what one Play did, so cards don't add "in one Play" (Nick, 2026-10-11; the 2026-10-10
+  audit had put it on every count).
 - Name the **District**, the big word on the board's sign. A bar card names the bar too, from the
   small line under it: "at the Haymarket in the Tenderloin" (Nick, 2026-10-11). The bar is the theme;
   the District is what the table finds.
@@ -185,13 +186,13 @@ other gate.
 once. The deck is 36 cards, 16 / 12 / 8:
 
 - **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
-  barrels at <bar> in <District> in one Play"), and eight singles for the landmarks, the Docks and
+  barrels at <bar> in <District>"), and eight singles for the landmarks, the Docks and
   Staten Island.
 - **3s**: **the Extort set**, *Extort while you Control all three Speakeasies in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); The Five
   Families and Cuban Prince (4+ Docks) as Extort cards too; and six singles.
 - **5s**: murder, and nothing else. A **body count** per Borough ("Kill 5+ rival Runners, but no
-  Boss, in X in one Play") and a **Boss** per Borough ("Kill a rival Boss in X"). "But no Boss" keeps
+  Boss, in X") and a **Boss** per Borough ("Kill a rival Boss in X"). "But no Boss" keeps
   a Borough's two 5s apart: Runners die first, so a Boss killed behind four Runners is also five
   kills, and one fight would pay 10.
 

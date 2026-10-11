@@ -14,8 +14,9 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 #
 # HOUSE STYLE (2026-10-10, jobs-audit-handoff.md). One verb, one place, and at most one
 # other condition, which should be a fact you can see on the table. Counts read
-# "N+ barrels", "N+ Moonshine" or "N+ Rum", and every count ends "in one Play"; a single
-# event (Seize, Secure, Rise, take over, kill a Boss) needs no such phrase. Name the
+# "N+ barrels", "N+ Moonshine" or "N+ Rum", with no "in one Play": since 2026-10-11 (Nick)
+# the Rulebook's The Play Is the Unit says a count is what one Play did, so the cards don't
+# repeat it (the 2026-10-10 audit had added it to every count). Name the
 # District, the big word on the board's sign. A bar card also names the bar on the small line
 # under it, as "at <bar> in <District>" (Nick, 2026-10-11): the bar is the theme, the District is
 # what the table finds on the board.
@@ -47,31 +48,31 @@ ONES = [
     # every ordinary bar has bought both liquors since 2026-09-22.
     # SETS PASS 2026-10-11: 3+ became 4+, the bar set's one count.
     ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b>.",
      "What the angels take, the house bills you for anyway."),
     # Manhattan's starting bar (The Haymarket). Art: bootleggers with bottles, the ghosts behind
     # them drawn from the smoke.
     ("High Spirits", "High Spirits.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b>.",
      "It never closes. It only gets quieter."),
     # The Bronx's empty bar. Belmont is the Bronx's Little Italy; Arthur Avenue is its high street.
     ("Bathtub Gin", "Bathtub Chemistry.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b>.",
      "Mixed in a tub off Arthur Avenue. Poured like champagne."),
     # The Bronx's starting bar (The Penny Whistle). "Coffin varnish" was 1920s slang for liquor
     # that might kill you; the art is a man cutting a jar of it.
     ("Coffin Varnish", "Cutting.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Penny Whistle</b> in <b>Fordham</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>The Penny Whistle</b> in <b>Fordham</b>.",
      "Two parts water, one part kerosene, all of it profit."),
     # Queens' empty bar (Bohemian Hall). "Giggle water" is period slang for any drink. The art was
     # The Grand Tour's: a handshake over a crate of bottles.
     ("Giggle Water", "Cobble Hill.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b>.",
      "Poured by the pitcher, and nobody asks what is in it."),
     # Queens' starting bar (Paradise Alley). Back as a 1 on its own art: it was a 3 at 6+ until the
     # setup pass cut it as a home chore. As a 1, a home sale is the right size.
     ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b>.",
      "One bad batch and the whole city stops drinking."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
@@ -87,17 +88,17 @@ ONES = [
     # Speakeasy; it is the empty block beside two Brooklyn starts (Red Hook, Canarsie).
     # SETS PASS 2026-10-11: one of the bar set; text unchanged.
     ("Last Call", "Last Call.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Ruby&rsquo;s Joint</b> in <b>Coney Island</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Ruby&rsquo;s Joint</b> in <b>Coney Island</b>.",
      "Pour till the taps run dry and the sirens start up."),
     # Brooklyn's starting bar (Sunny's Bar). "Off the Boat" was Cuban Prince's first name. Switch.jpg
     # (boats unloading under a suspension bridge) left Night Landing because Jamaica Bay had no bridge;
     # Red Hook sits at the Brooklyn Bridge's end, so it fits here.
     ("Off the Boat", "Switch.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b> in one Play.",
+     "Unload <b>4+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b>.",
      "Unloaded at midnight, poured by one, gone by two."),
     # THE SINGLES: landmarks, Docks and Staten Island, which no Borough set can carry.
     ("The Milk Run", "The Milk Run.jpg", "Move",
-     "Move <b>4+ barrels</b> across the <b>Williamsburg Bridge</b> in one Play.",
+     "Move <b>4+ barrels</b> across the <b>Williamsburg Bridge</b>.",
      "Every copper watches that bridge. Wave as you go."),
     # Briefly restricted to "a mainland Dock" to stop Rum Row paying this card
     # too, then REVERTED (Nick, 2026-07-19): that stack fires only at Westerleigh
@@ -114,7 +115,7 @@ ONES = [
     # Manhattan Dock beside Sugar Hill, and every starting Dock reaches it by water. "for
     # Rum" cut: Trade only ever makes Rum.
     ("The Dutchman's Deal", "Dutchman.jpg", "Trade",
-     "Trade <b>3+ barrels</b> at <b>West Side</b> in one Play.",
+     "Trade <b>3+ barrels</b> at <b>West Side</b>.",
      "He never gives a name. The windmill on the sack says plenty."),
     # RENAMED from "The Riverside Switch" and re-arted (Nick, 2026-07-19). The old
     # art (Switch.png) has RIVERSIDE STORAGE painted across a moonlit suspension
@@ -130,7 +131,7 @@ ONES = [
     # SUBSET of The Smuggler's Run (Staten -> mainland at 6+ barrels IS "4+ across
     # water into a Dock"), paying 6 Respect across 6 Docks. Now 2.
     ("Night Landing", "Skiff.jpg", "Move",
-     "Move <b>4+ barrels</b> across water into a <b>Jamaica Bay Dock</b> in one Play.",
+     "Move <b>4+ barrels</b> across water into a <b>Jamaica Bay Dock</b>.",
      "Two boats, one lantern, and nobody the wiser."),
     # "a Pier 6 brawl" was real period slang for an all-out waterfront fight.
     # TRIED AND REVERTED: pinning this to Jamaica Bay as the hostile mirror of
@@ -205,7 +206,7 @@ ONES = [
     # the one nobody starts in, so the Safehouse has to travel first. Disjoint from Union
     # Dues (a rival's home Ward) by construction.
     ("Tenement Army", "Tenament Army.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in one Play at <b>Stapleton</b>.",
+     "Recruit <b>4+ Runners</b> at <b>Stapleton</b>.",
      "Word goes round by supper. By dark, you have a crew."),
     # Re-arted from Rum Runners Regatta.png (Nick found the set in Unused/): a full
     # moon, the mother steamer lit up, six small boats waiting off a dark shore. The
@@ -215,7 +216,7 @@ ONES = [
     # NOT the same file as Art/Rum Row.png, which the rulebook uses on p.188.
     # SETS PASS 2026-10-11: DOWN TO 1 (Nick: too easy for a 3). Text unchanged.
     ("Rum Row", "Rum Row.jpg", "Trade",
-     "Trade <b>4+ barrels</b> at a <b>Staten Island Dock</b> in one Play.",
+     "Trade <b>4+ barrels</b> at a <b>Staten Island Dock</b>.",
      "Forty ships past the three-mile line, waiting on a lamp."),
     # WAS "Have a Police Raid Condemn ..." with verb Raid, which had no checkpoint:
     # a Raid is an INTERRUPT, not a Play, and "The Play Is the Unit" only checks
@@ -310,7 +311,7 @@ THREES = [
     # chain and a Boss on the road are the setup; a hostile far end makes it a fight. Was "Move 6+
     # barrels into Fordham", cut on the setup pass as a Bronx chore.
     ("Hell&rsquo;s Highway", "Hells Highway.jpg", "Move",
-     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Hell Gate Bridge</b> in one Play.",
+     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Hell Gate Bridge</b>.",
      "Forty miles of bad road and worse intentions."),
     # RE-VERBED Rise -> Secure (Nick, 2026-07-19). Two problems solved by one edit,
     # with no change to the 12/12/8 tier counts:
@@ -432,7 +433,7 @@ THREES = [
     # SETS PASS 2026-10-11: DOWN TO 3 (Nick: $4,000 and the Kickbacks as well as 5 Respect was too
     # much of a win/win). Text unchanged.
     ("Opening Night", "Jimmy.jpg", "Unload",
-     "Unload <b>8+ Rum</b> at a <b>High Society Venue</b> in one Play.",
+     "Unload <b>8+ Rum</b> at a <b>High Society Venue</b>.",
      "The band plays till four. Nobody asks a thing."),
     # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
     # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
@@ -466,7 +467,7 @@ THREES = [
     # wait for him to leave it. Every rival sees it coming and garrisons home.
     # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
     ("Union Dues", "Union Dues.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in one Play in a rival&rsquo;s <b>home Ward</b>.",
+     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
      "They line up at dawn. You decide who works."),
 ]
 
@@ -499,7 +500,7 @@ FIVES = [
     # The Copper Heist, which forbids a Safehouse.
     # SETS PASS 2026-10-11: Manhattan's body count (Nick: the Safehouse wording was unclear).
     ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Manhattan</b> in one Play.",
+     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Manhattan</b>.",
      "By Monday there was nothing left to come home to."),
     # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
     # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
@@ -508,18 +509,18 @@ FIVES = [
     # actually closed cluster 3). Max stack unchanged at 9.
     # SETS PASS 2026-10-11: the Bronx's body count. A Fold now denies it, as it does the others.
     ("Over the Top", "Old Guard.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>the Bronx</b> in one Play.",
+     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>the Bronx</b>.",
      "These boys went over the top in France. This is a street."),
     # SETS PASS 2026-10-11: Queens' body count. The Toll Booth Trap moved to the Boss set, where it
     # started. Art: a gunfight on a burning pier.
     ("Rum Wars", "Rum Wars.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Queens</b> in one Play.",
+     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Queens</b>.",
      "Nobody counted the bodies. Everybody counted the crates."),
     # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
     # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick). "but no Boss"
     # suits it: every name crossed out but one.
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Brooklyn</b> in one Play.",
+     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Brooklyn</b>.",
      "Every name in it is crossed out but one."),
     # SETS PASS 2026-10-11: Manhattan's Boss. A nod, not a lesson: the Park Central room where the
     # story starts, unnamed. Art: a man dead in a hotel bed, two men in the doorway.
@@ -631,6 +632,7 @@ body = f'''<body>
   <p class="masthead-note">
     Every Job is an <b>event</b>, not a board state: a verb, an object, and a moment.
     The Play is the unit: at the end of each of your own Plays, check whether that Play did the thing.
+    A count is what that one Play did.
     Things that happened during the Play count, even if undone before it ended.
   </p>
 </div>

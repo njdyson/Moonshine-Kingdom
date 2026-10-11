@@ -88,7 +88,7 @@ def J(name, respect, verbs, text, fn):
 JOBS = [
     # --- 1 Respect ---
     # The bar set (2026-10-11, round 2): one Unload card per ordinary Speakeasy.
-] + [J(n, 1, ['Unload'], f'Unload 4+ barrels at {venue} in {bar} in one Play.',
+] + [J(n, 1, ['Unload'], f'Unload 4+ barrels at {venue} in {bar}.',
        (lambda bar: lambda p, d: p['barrels'] >= 4 and d.name == bar)(bar))
      for n, venue, bar in (("The Angel's Share", 'The Silver Dollar', 'East Harlem'),
                            ('High Spirits', 'The Haymarket', 'The Tenderloin'),
@@ -99,13 +99,13 @@ JOBS = [
                            ('Last Call', "Ruby's Joint", 'Coney Island'),
                            ('Off the Boat', "Sunny's Bar", 'Red Hook'))] + [
     J('The Milk Run', 1, ['Move'],
-      'Move 4+ barrels across the Williamsburg Bridge in one Play.',
+      'Move 4+ barrels across the Williamsburg Bridge.',
       lambda p, d: p['barrels'] >= 4 and p['route'] == 'wburg'),
     J("The Dutchman's Deal", 1, ['Trade'],
-      'Trade 3+ barrels at West Side in one Play.',
+      'Trade 3+ barrels at West Side.',
       lambda p, d: p['barrels'] >= 3 and d.name == 'West Side'),
     J('Night Landing', 1, ['Move'],
-      'Move 4+ barrels across water into a Jamaica Bay Dock in one Play.',
+      'Move 4+ barrels across water into a Jamaica Bay Dock.',
       lambda p, d: p['barrels'] >= 4 and p['route'] == 'water' and d.name in JAMAICA_BAY),
     # No Safehouse guard since 2026-10-11: The Eviction, which it kept off, is cut.
     J('The Pier Six Brawl', 1, ['Move'],
@@ -115,10 +115,10 @@ JOBS = [
       'Secure your Safehouse in a District Land Connected to a rival Safehouse.',
       lambda p, d: p['adj_rival_sh']),
     J('Tenement Army', 1, ['Recruit'],
-      'Recruit 4+ Runners in one Play at Stapleton.',
+      'Recruit 4+ Runners at Stapleton.',
       lambda p, d: p['runners'] >= 4 and d.name == 'Stapleton'),
     J('Rum Row', 1, ['Trade'],
-      'Trade 4+ barrels at a Staten Island Dock in one Play.',
+      'Trade 4+ barrels at a Staten Island Dock.',
       lambda p, d: p['barrels'] >= 4 and d.boro == ST),
     # Modelled on the District the Raid padlocks, which must be yours.
     J('The Insurance Job', 1, ['Rat'],
@@ -145,7 +145,7 @@ JOBS = [
       'Extort while you Control 4+ Docks.',
       lambda p, d: p['docks4']),
     J("Hell's Highway", 3, ['Move'],
-      'Move your Boss and 4+ Rum across the Hell Gate Bridge in one Play.',
+      'Move your Boss and 4+ Rum across the Hell Gate Bridge.',
       lambda p, d: p['route'] == 'hellgate' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
     J('Last One Standing', 3, ['Secure'],
       'Secure your Safehouse in Astoria holding 6+ Rum.',
@@ -158,16 +158,16 @@ JOBS = [
       'Seize a District with a Pressure 5 Still.',
       lambda p, d: p['seize'] and d.press == 5),
     J('Opening Night', 3, ['Unload'],
-      'Unload 8+ Rum at a High Society Venue in one Play.',
+      'Unload 8+ Rum at a High Society Venue.',
       lambda p, d: p['barrels'] >= 8 and d.has('highSociety')),
     J('Union Dues', 3, ['Recruit'],
-      "Recruit 4+ Runners in one Play in a rival's home Ward.",
+      "Recruit 4+ Runners in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
     # --- 5 Respect: the murder sets (2026-10-11, round 2) ---
     # `kills` counts Runners; `boss_killed` is the Boss. Runners die first, so a Boss who
     # stood with four or more Runners dies only after five kills: "but no Boss" is what
     # keeps a Borough's two 5s apart.
-] + [J(n, 5, ['Move'], f'Kill 5+ rival Runners, but no Boss, in {label} in one Play.',
+] + [J(n, 5, ['Move'], f'Kill 5+ rival Runners, but no Boss, in {label}.',
        (lambda b: lambda p, d: p['kills'] >= 5 and not p['boss_killed'] and d.boro == b)(b))
      for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
                          ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [

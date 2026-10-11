@@ -20,20 +20,24 @@ component list says 36). Most cards come in sets, one per place, in one wording:
 
 | Tier | Set | Cards |
 | --- | --- | --- |
-| 1 | **The bars**: Unload 4+ barrels at <bar> in <District> in one Play | The Angel's Share (The Silver Dollar, East Harlem), High Spirits (The Haymarket, the Tenderloin), Bathtub Gin (DeLillo's, Belmont), Coffin Varnish (The Penny Whistle, Fordham), Giggle Water (Bohemian Hall, Astoria), Poison Panic (Paradise Alley, Flushing), Last Call (Ruby's Joint, Coney Island), Off the Boat (Sunny's Bar, Red Hook) |
+| 1 | **The bars**: Unload 4+ barrels at <bar> in <District> | The Angel's Share (The Silver Dollar, East Harlem), High Spirits (The Haymarket, the Tenderloin), Bathtub Gin (DeLillo's, Belmont), Coffin Varnish (The Penny Whistle, Fordham), Giggle Water (Bohemian Hall, Astoria), Poison Panic (Paradise Alley, Flushing), Last Call (Ruby's Joint, Coney Island), Off the Boat (Sunny's Bar, Red Hook) |
 | 3 | **The Extort set**: Extort while you Control all three Speakeasies in X | Empire State, The Big Squeeze, King of Queens, The Black Hand |
-| 5 | **Body counts**: Kill 5+ rival Runners, but no Boss, in X in one Play | Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
+| 5 | **Body counts**: Kill 5+ rival Runners, but no Boss, in X | Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
 | 5 | **Bosses**: Kill a rival Boss in X | Room 349 (Manhattan), The One-Way Ride (the Bronx), The Toll Booth Trap (Queens), The Last Hand (Brooklyn) |
 
 The bar cards name the bar from the board's sign as well as its District (Nick: more thematic),
 which settles the 2026-10-10 audit's open item 7 the other way: venue names are back, beside the
 District rather than instead of it.
 
+No card says "in one Play" (Nick: that's the rule). The Rulebook's The Play Is the Unit now says it
+once: "A count on a Job is what that one Play did: 4+ barrels means four barrels in a single Play."
+The deck's masthead says the same. The Rulebook still prints on 23 pages.
+
 The rest are singles. **1s:** The Milk Run, The Dutchman's Deal, Night Landing, The Pier Six Brawl
 ("Seize a Dock", guard dropped), The Beachhead, Tenement Army, Rum Row (down from 3), The Insurance
 Job (down from 3). **3s:** The Five Families (down from 5, new art), Cuban Prince ("Extort while you
-Control 4+ Docks"), Hell's Highway ("Move your Boss and 4+ Rum across the Hell Gate Bridge in one
-Play"), Last One Standing, The Smuggler's Run (reworded: "Move 4+ Rum from Staten Island into a
+Control 4+ Docks"), Hell's Highway ("Move your Boss and 4+ Rum across the Hell Gate
+Bridge"), Last One Standing, The Smuggler's Run (reworded: "Move 4+ Rum from Staten Island into a
 rival's Dock, and Seize it"), The Copper Heist ("Seize a District with a Pressure 5 Still"), Opening
 Night (down from 5), Union Dues (down from 5).
 
