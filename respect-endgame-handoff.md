@@ -30,8 +30,11 @@ Respect is "borderline too low".
 
 4. **Bribe** stays a Power Play (2 Influence) with your Boss on the board. Pay the price on any
    card in the piles, put the card in your Respect pile, and move one Influence marker from your
-   supply to your Reserves. Buy in **any order**. Influence still starts at 6, with a ceiling of 10:
-   your Influence is 6 plus your Bribe cards, so the cards are the count.
+   supply to your Reserves. Buy in **any order**, but **one of each kind per boss** (Nick, same
+   day): otherwise "you could nearly win by just buying Mayor cards, and you deny the other players
+   the option", and it reads better as a ladder. Four of each is then one per seat, so no pile runs
+   dry. Influence still starts at 6, with a ceiling of 10: your Influence is 6 plus your Bribe cards,
+   so the cards are the count.
 5. **Setup:** the 16 Bribe cards go in four face-up piles, one per kind, beside the board above the
    Jobs Market. Your 4 unbought Influence markers stay loose in your supply (Nick, same day: "it
    doesn't need to sit on a card in this system"). The Borough card's stack (since 2026-10-10) held
@@ -92,6 +95,18 @@ Nick generates the art; aim for what suits the theme best.
 - **Card face:** the price, the Respect drawn the way the Jobs cards draw it (so a Bribe reads like
   a Job in the Respect pile), and the marker.
 
+**First art (Nick, 2026-10-12, four square 1254 px portraits; not yet in the repo).** All four read
+at a glance, share the palette, and carry one envelope each (in the Captain's cap, under the Judge's
+law books, on the Alderman's desk, on the Mayor's table), which ties the set together. The Mayor is in
+a tuxedo at a nightclub table with a flapper in a feather headdress behind him. Two notes:
+
+- **One face.** The Captain, the Alderman and the Judge are the same moustached man, and the Mayor is
+  close. Four ages and builds would tell the cards apart faster than costume alone.
+- **The frame.** The Cards sheet's art box is 57 x 38 mm (3:2, `object-fit: cover`; the other card art
+  is 898 x 674). A square cut to that loses a sixth at the top and bottom: the Mayor loses both the
+  woman's face and his envelope, and the Captain and the Judge lose their foreheads. Either generate at
+  3:2 or give the Bribe card a taller art box, since it carries little text.
+
 ## Rejected on the way
 
 - **Respect gates the Bribe ladder; the Crown needs only a bare Borough card** (Nick's first idea).
@@ -114,11 +129,7 @@ Nick generates the art; aim for what suits the theme best.
 
 ## Open
 
-1. **Can a boss buy two of the same card?** Not yet decided. Four of each suits one of each per
-   boss: at four players every boss can buy the full set and no pile runs dry. Without that limit a
-   rich boss could buy Mayors at the best rate (four would be 16 Respect for $20,000) and empty the
-   pile on the table.
-2. **The Borough cards' text.** The stack and the Nod line go. The card keeps the home Borough, the
+1. **The Borough cards' text.** The stack and the Nod line go. The card keeps the home Borough, the
    home Ward and Take the Crown, which reads "20+ Respect, your Boss in X, Y or Z".
 
 ## Watch in playtest
