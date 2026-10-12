@@ -194,7 +194,8 @@ once. The deck is 36 cards, 16 / 12 / 8:
 - **5s**: murder, and nothing else. A **body count** per Borough ("Kill 5+ rival Runners in X")
   and a **Boss** per Borough ("Kill a rival Boss in X"). They are the one allowed exception to
   "never two 5s on one Play" (Nick, 2026-10-12): Runners die first, so paying both takes a Boss and
-  five Runners killed in one fight, and holding both stakes 6 of at most 10 markers. Don't add a
+  five Runners killed in one fight, and holding both stakes 6 of at most 10 markers. Nick likes the
+  body counts as a stand-in for the cut Sweep: any fat stack is a target. Don't add a
   "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs and fails any other.
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a

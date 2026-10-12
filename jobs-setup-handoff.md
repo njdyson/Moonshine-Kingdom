@@ -65,6 +65,9 @@ counts to rule that out. **Nick cut the clause on 2026-10-12**:
 > is very hard to fight (you'd need to take 10 runners plus a boss to the fight to avg 5 kills in 3
 > open fires).
 
+He likes what it does to the board, too: a body count pays most against a fat stack, so every
+big garrison becomes a target, a little of what the Sweep did before v0.9.8 cut it.
+
 A boss takes at most one Job a morning at the Offers, so holding both also takes two Days of drafting. "Never two 5s" is
 therefore absolute except for these four pairs: `overlap_audit.py` lists them as allowed
 (`ALLOWED_DOUBLE_FIVES`) and fails any other. Its biggest stacks now read 13 (a pair plus The Copper
