@@ -3,33 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moonshine Kingdom: Cards v0.9 (Boroughs, Debts &amp; Dishonor)</title>
+<title>Moonshine Kingdom: Cards v0.9 (Bribes, Boroughs, Debts &amp; Dishonor)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/card-back.css">
 <style>
 /* ============================================================
-   Cards v0.9: the 20 cards that are not Jobs:
-     4 Boroughs · 1 Rat · 7 Shylock's Marks · 8 Welshers
+   Cards v0.9: the 36 cards that are not Jobs:
+     16 Bribes · 4 Boroughs · 1 Rat · 7 Shylock's Marks · 8 Welshers
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8) and stays cut: it paid a
    second time for work the Jobs deck already pays for. Do not
    re-add it. The five Borough Deeds are CUT (v0.9.7) for the
    same reason. The Commission Seats returned in v0.9.9 as the
-   physical 10-Respect award for reaching 10 Influence, and were
-   renamed The Nod on 2026-09-23, when winning became earning a
-   seat on the Commission (a card called a Seat read as the win).
-   On 2026-09-25 the Nod stopped paying Respect and became the key
-   to the win instead: it carries the game's one ending Play, Take
-   the Crown, so every winner has bought one.
-   On 2026-10-10 the four Nods became the four Borough cards: dealt
-   at setup, each names its boss's home Borough, holds his unbought
-   Influence and carries Take the Crown, naming the three High Society
-   Venues outside its Borough. The Nod is no longer a card: it is the
-   status of 10+ Respect, all 10 Influence bought and no unpaid Mark,
-   printed on each Borough card beside the Play it unlocks.
+   physical 10-Respect award for reaching 10 Influence, were
+   renamed The Nod on 2026-09-23, and became the four Borough cards
+   on 2026-10-10: dealt at setup, each names its boss's home Borough
+   and carries Take the Crown, naming the three High Society Venues
+   outside its Borough.
+   On 2026-10-12 the Nod retired (respect-endgame-handoff.md): Respect
+   is the only score, 20 Takes the Crown, and Bribes buy the sixteen
+   Bribe cards (Precinct Captain 1, Alderman 2, Judge 3, Mayor 4
+   Respect; one of each per boss). Unbought Influence waits in the
+   supply, so the Borough card no longer holds a stack. Marks cost 2
+   Respect while held and the Rat 3, so every card in this deck that
+   touches the score carries a number.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
    the Welsher, −1 Respect forever. They share the debts geometry.
@@ -48,8 +48,8 @@
       along with the square/portrait sources it existed for.
    3. TWO geometries, not one. The Jobs deck freezes its bands
       because 12 cards fan out in the Market row and any jitter
-      shows. Nothing here ever fans: a Title never sits beside a
-      Mark in play. So holdings (the Titles) keep one geometry,
+      shows. Nothing here ever fans: a Bribe never sits beside a
+      Mark in play. So holdings (the Bribes) keep one geometry,
       and debts (Rat + Marks, which share a sheet) keep another. Within a type it is frozen.
         holdings : art 38mm · rules 16mm
         debts    : art 38mm · rules 16mm
@@ -181,6 +181,10 @@ body{
    badge-clearing padding; it wraps to two lines and spills a box
    built for one. Same lever, same value as the Jobs deck. */
 .title--long{font-size:10.6pt}
+/* "Precinct Captain" (2026-10-12) is wider again: 37mm at 10.6pt
+   against 36.4mm of room. "The Precinct Captain" would need 8pt, so the
+   four Bribes are titled without "The". */
+.title--longer{font-size:10.2pt}
 
 /* --- art well : full-bleed band, same recipe as the Jobs deck.
    Height is set per type below. --- */
@@ -195,14 +199,13 @@ body{
 .art img{
   width:100%;height:100%;
   object-fit:cover;display:block;
-  /* lifts the art off the dark stock in print. Runs HOTTER than
-     the Jobs deck's 1.1/1.08 on purpose (2026-08-03): this
-     deck's plates are the darkest in the building (Shylock 17,
-     Welsher 18, Rat 20 mean luminance vs the
-     Jobs deck's 22 floor), and dark print crushes them further.
-     Brightness buys the shadows back; the eased contrast keeps
-     the lift from re-burying them. */
-  filter:brightness(1.2) contrast(1.05) saturate(1.04);
+  /* lifts the art off the dark stock in print: the Jobs deck's
+     recipe. From 2026-08-03 this ran hotter (1.2/1.05) to rescue the
+     darkest plates in the building (Shylock 17, Welsher 18, Rat 20
+     mean luminance). Nick redrew all three brighter on 2026-10-12
+     (51 to 63, with the Bribes at 41 to 75), so the deck matches the
+     Jobs deck again. */
+  filter:brightness(1.1) contrast(1.08) saturate(1.04);
 }
 .art::after{
   content:"";position:absolute;inset:0;
@@ -252,35 +255,39 @@ body{
 /* --- the two geometries --- */
 .card--holding .art{flex:0 0 38mm}
 .card--holding .rules{flex:0 0 16mm}
-/* boroughs: 2026-10-10. The stack and Take the Crown measure 14.9mm of text,
-   so they share the debts geometry. (The Bribe ladder was printed here
-   for a day and cut: the Playbooks already carry it.) */
+/* boroughs: 2026-10-10. Take the Crown shares the debts geometry. */
 .card--borough .art{flex:0 0 38mm}
 .card--borough .rules{flex:0 0 16mm}
 .card--debt .art{flex:0 0 38mm}
 .card--debt .rules{flex:0 0 16mm}
 
-/* --- respect badge. The Rat and Welshers carry their negative values;
-   Marks carry the broken crown. The Borough cards carry none. --- */
+/* --- respect badge. Bribes carry their Respect like a Job; the Rat,
+   Marks and Welshers carry their negative values. The Borough cards
+   carry none. --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
   background-size:contain;background-repeat:no-repeat;background-position:center;
   filter:drop-shadow(0 .4mm .8mm rgba(0,0,0,.65));
 }
-/* The broken crown: a Mark is not Respect, but it bars the crown. */
-.respect[data-respect="none"]{background-image:url('Art/shieldNoCrown.png')}
-/* The Rat is priced, not barred, so it carries a number like the Jobs
-   deck does. shield-2.png (v0.9.7, when the brand dropped from 3 to 2)
-   is drawn to the archived Debts-deck plate's geometry: 1024px, the
-   same red, the same cream numeral, a soft glow, so beside the flat
-   broken crown on this same sheet it reads a shade hotter. shield-3.png
-   stays in Art/ as the reference plate. A reshoot in the flat 256px
-   style is a straight swap. Cosmetic debt only. */
+/* Bribes: the Jobs deck's flat 256px shields. shield4.png (2026-10-12)
+   is a stopgap made from shield5.png with a DejaVu Serif "4"; reshoot
+   it with the rest in the next art pass. */
+.respect[data-respect="1"]{background-image:url('Art/shield1.png')}
+.respect[data-respect="2"]{background-image:url('Art/shield2.png')}
+.respect[data-respect="3"]{background-image:url('Art/shield3.png')}
+.respect[data-respect="4"]{background-image:url('Art/shield4.png')}
+/* The Rat (-3 since 2026-10-12, as it was before v0.9.7) and the Marks
+   (-2 while held, same date; they carried the broken crown while a Mark
+   barred the Nod). shield-3.png and shield-2.png are drawn to the
+   archived Debts-deck plate's geometry: 1024px, the same red, the same
+   cream numeral, a soft glow. A reshoot in the flat 256px style is a
+   straight swap. Cosmetic debt only. */
+.respect[data-respect="-3"]{background-image:url('Art/shield-3.png')}
 .respect[data-respect="-2"]{background-image:url('Art/shield-2.png')}
 /* The Welsher is the Rat's little brother: a price, not a bar.
    shield-1.png is the same archived 1024px Debts-deck plate family
-   as shield-3.png above; same scale, same glow, same caveat. */
+   as the Rat's and the Marks'; same scale, same glow, same caveat. */
 .respect[data-respect="-1"]{background-image:url('Art/shield-1.png')}
 
 /* ============================================================
@@ -442,11 +449,12 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
-  <div class="masthead-title">Boroughs, Debts &amp; Dishonor</div>
-  <div class="masthead-sub">v0.9 &middot; 20 Cards &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
+  <div class="masthead-title">Bribes, Boroughs, Debts &amp; Dishonor</div>
+  <div class="masthead-sub">v0.9 &middot; 36 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
   <p class="masthead-note">
-    The Jobs deck pays you for what you <b>do</b>, in Respect. These cards mark the price of a broken word,
-    and the home turf you buy your way out of, to take the crown on another man's.
+    The Jobs deck pays you Respect for what you <b>do</b>. These cards pay it for who you <b>own</b>
+    and charge it for who owns <b>you</b>, and the Borough card names the home turf you leave to take
+    the crown on another man's.
   </p>
 </div>
 
@@ -456,7 +464,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
-  <span class="meta">a price and a padlock &middot; the brand costs Respect, the debt costs the crown &middot; sheet 1 of 5</span>
+  <span class="meta">two prices &middot; the brand costs 3 Respect, the debt 2 until it's paid &middot; sheet 1 of 9</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -467,6 +475,15 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="rules-label">The Shame</div>
     <div class="rules"><span>While you hold this card you <b>cannot Rat</b>.<span class="brk"></span>No absolution: it leaves you only when a rival <b>Rats</b>.</span></div>
     <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-3"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
@@ -474,27 +491,18 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark. You may hold multiple Marks.</span></div>
+    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="none"></div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark. You may hold multiple Marks.</span></div>
+    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="none"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Debt</span></div>
-    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
-    <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark. You may hold multiple Marks.</span></div>
-    <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="none"></div>
+    <div class="respect" data-respect="-2"></div>
   </div>
 </div>
 <div class="backs">
@@ -510,7 +518,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
-  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 2 of 5</span>
+  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 2 of 9</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -519,36 +527,36 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark. You may hold multiple Marks.</span></div>
+    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="none"></div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark. You may hold multiple Marks.</span></div>
+    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="none"></div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark. You may hold multiple Marks.</span></div>
+    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="none"></div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
     <div class="tier"><span class="kicker">Debt</span></div>
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark. You may hold multiple Marks.</span></div>
+    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="none"></div>
+    <div class="respect" data-respect="-2"></div>
   </div>
 </div>
 <div class="backs">
@@ -572,7 +580,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 3 of 5</span>
+  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 3 of 9</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -622,7 +630,7 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 4 of 5</span>
+  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 4 of 9</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -673,15 +681,14 @@ body.trim .card,body.trim .back{border-radius:0}
 <!-- =============================================================
      SHEET 5: the four Borough cards (2026-10-10; they replace the
      four Nods). Deal one to each boss at setup: it names his home
-     Borough and holds his unbought Influence. Each states the Nod
-     and carries Take the Crown, naming the three
+     Borough and carries Take the Crown, naming the three
      High Society Venues outside its Borough: no boss crowns at home.
      Dealt face-down at random, so all four backs are identical and
      duplex mirroring is moot. The art is the archived Deed plates.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE BOROUGHS</span>
-  <span class="meta">one dealt to each boss &middot; your unbought Influence, and the crown away from home &middot; sheet 5 of 5</span>
+  <span class="meta">one dealt to each boss &middot; your home turf, and the crown away from home &middot; sheet 5 of 9</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -690,7 +697,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Manhattan</h2>
     <div class="art"><img src="Art/Cards/Manhattan.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Morris Park</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Morris Park</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
     <div class="flavour">The money lives here. So do the men who count it.</div>
   </div>
   <div class="card card--borough">
@@ -698,7 +705,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">The Bronx</h2>
     <div class="art"><img src="Art/Cards/Bronx.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Sugar Hill</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Sugar Hill</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
     <div class="flavour">Up past the El, the ballpark and the Jockey Club.</div>
   </div>
   <div class="card card--borough">
@@ -706,7 +713,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Queens</h2>
     <div class="art"><img src="Art/Cards/Queens.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Williamsburg</b>, you win.</span></div>
     <div class="flavour">Rail yards, back roads, and a bridge to the money.</div>
   </div>
   <div class="card card--borough">
@@ -714,7 +721,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Brooklyn</h2>
     <div class="art"><img src="Art/Cards/Brooklyn.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>The Nod:</b> this card bare, <b>10+ Respect</b>, no <b>Mark</b>.<span class="brk"></span><b>Take the Crown (2).</b> With the Nod and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Richmond Hill</b>, you win.</span></div>
+    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Richmond Hill</b>, you win.</span></div>
     <div class="flavour">The bridge brings the money. The docks keep it.</div>
   </div>
 </div>
@@ -723,6 +730,214 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="back"><div class="back-title">Home Borough</div><div class="back-sub">Dealt at Setup</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Home Borough</div><div class="back-sub">Dealt at Setup</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Home Borough</div><div class="back-sub">Dealt at Setup</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+
+<!-- =============================================================
+     SHEETS 6-9: the sixteen Bribe cards (2026-10-12; see
+     respect-endgame-handoff.md). Laid out at setup in four face-up
+     piles above the Jobs Market, one pile per man. The Bribe Play
+     buys one: the card goes in the Respect pile and one Influence
+     marker moves from the supply to the Reserves. One of each per
+     boss, any order. Each sheet prints one of each, so the piles are
+     cut from four identical sheets. Never shuffled or dealt, so all
+     backs are identical and duplex mirroring is moot. Art is Nick's,
+     2026-10-12: every man holds one envelope.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE PAYROLL</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 6 of 9</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $2,000</span></div>
+    <h2 class="title title--longer">Precinct Captain</h2>
+    <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
+    <div class="respect" data-respect="1"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $3,000</span></div>
+    <h2 class="title">Alderman</h2>
+    <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">Every licence in the city crosses his desk.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $4,000</span></div>
+    <h2 class="title">Judge</h2>
+    <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The law is blind, and he can be made deaf.</div>
+    <div class="respect" data-respect="3"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $5,000</span></div>
+    <h2 class="title">Mayor</h2>
+    <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The Mayor at your table makes the front page.</div>
+    <div class="respect" data-respect="4"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE PAYROLL</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 7 of 9</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $2,000</span></div>
+    <h2 class="title title--longer">Precinct Captain</h2>
+    <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
+    <div class="respect" data-respect="1"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $3,000</span></div>
+    <h2 class="title">Alderman</h2>
+    <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">Every licence in the city crosses his desk.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $4,000</span></div>
+    <h2 class="title">Judge</h2>
+    <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The law is blind, and he can be made deaf.</div>
+    <div class="respect" data-respect="3"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $5,000</span></div>
+    <h2 class="title">Mayor</h2>
+    <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The Mayor at your table makes the front page.</div>
+    <div class="respect" data-respect="4"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE PAYROLL</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 8 of 9</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $2,000</span></div>
+    <h2 class="title title--longer">Precinct Captain</h2>
+    <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
+    <div class="respect" data-respect="1"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $3,000</span></div>
+    <h2 class="title">Alderman</h2>
+    <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">Every licence in the city crosses his desk.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $4,000</span></div>
+    <h2 class="title">Judge</h2>
+    <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The law is blind, and he can be made deaf.</div>
+    <div class="respect" data-respect="3"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $5,000</span></div>
+    <h2 class="title">Mayor</h2>
+    <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The Mayor at your table makes the front page.</div>
+    <div class="respect" data-respect="4"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE PAYROLL</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 9 of 9</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $2,000</span></div>
+    <h2 class="title title--longer">Precinct Captain</h2>
+    <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
+    <div class="respect" data-respect="1"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $3,000</span></div>
+    <h2 class="title">Alderman</h2>
+    <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">Every licence in the city crosses his desk.</div>
+    <div class="respect" data-respect="2"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $4,000</span></div>
+    <h2 class="title">Judge</h2>
+    <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The law is blind, and he can be made deaf.</div>
+    <div class="respect" data-respect="3"></div>
+  </div>
+  <div class="card card--holding">
+    <div class="tier"><span class="kicker">Bribe &middot; $5,000</span></div>
+    <h2 class="title">Mayor</h2>
+    <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
+    <div class="rules-label">On the Payroll</div>
+    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="flavour">The Mayor at your table makes the front page.</div>
+    <div class="respect" data-respect="4"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 </body>
