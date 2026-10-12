@@ -10,15 +10,18 @@ the positives and the archived Debts deck's glossier 1024px plates for the
 negatives, plus a patched-up 4. These replace all of them, so every value reads
 the same and a new one costs a line here.
 
-The numerals are Cinzel Black, the face the card titles are set in, converted
-to outlines: an SVG used as a CSS background can't load a web font, so the
-glyphs travel as paths and the files need nothing else to render or print.
+The numerals are Bebas Neue in the board's cream, the face and colour of the
+Still numbers on the board (tools/still_art.js), so a Respect badge reads like
+the board's own figures. They are converted to outlines: an SVG used as a CSS
+background can't load a web font, so the glyphs travel as paths and the files
+need nothing else to render or print. Like the Stills, they are laid out by
+their ink, not their advance.
 The shield's silhouette is traced from the old plates, so the badge sits in its
 12.5mm box exactly as before.
 
     pip install fonttools
-    python3 tools/build_shields.py                  # fetches Cinzel Black from Google Fonts
-    python3 tools/build_shields.py --font Cinzel-Black.ttf
+    python3 tools/build_shields.py                  # fetches Bebas Neue from Google Fonts
+    python3 tools/build_shields.py --font BebasNeue-Regular.ttf
 """
 import argparse
 import os
@@ -33,22 +36,22 @@ from fontTools.ttLib import TTFont
 
 VALUES = [1, 2, 3, 4, 5, -1, -2, -3]
 OUT_DIR = "Art/Shields"
-FONT_CSS = "https://fonts.googleapis.com/css2?family=Cinzel:wght@900"
+FONT_CSS = "https://fonts.googleapis.com/css2?family=Bebas+Neue"
 
 # viewBox 0 0 100 100. A heater shield peaked in the middle of its top edge,
 # straight sides from y 16 to 50, curving to a point at y 91.
 SHIELD = ("M50 6C44 11 36 15.5 27 16.6L17 16.3L17 50C17 66 33 82 50 91"
           "C67 82 83 66 83 50L83 16.3L73 16.6C64 15.5 56 11 50 6Z")
 
-CAP = 40          # ink height of the digits
-CY = 47           # their vertical centre
-DIGIT_GAP = 1.5
-MINUS_W, MINUS_H, MINUS_GAP = 12, 6, 2.6
+CAP = 46          # ink height of the digits (Bebas Neue is tall and narrow)
+CAP_NEG = 40      # a minus widens the figure, and the shield narrows toward its point
+CY = 48           # their vertical centre
+GAP = 3           # between the minus and the digit, ink to ink
 
 FILL_TOP, FILL_BOTTOM = "#ab2d1b", "#7f170d"
 RIM = "#5a0c05"
 KEYLINE = "#e9a27f"
-NUMERAL = "#e2d5b8"
+NUMERAL = "#f5e9d9"     # the Still numerals' cream
 NUMERAL_SHADOW = "#4a0a04"
 
 # The drop shadow is drawn here, not by CSS: Chrome rasterises any element
@@ -61,43 +64,42 @@ SHADOW_LAYERS = [(11, .09), (8, .11), (5, .13), (2, .16)]   # stroke width, opac
 
 
 def fetch_font(dest_dir):
-    """Download Cinzel Black as TTF (an old User-Agent gets TTF, not WOFF2)."""
+    """Download Bebas Neue as TTF (an old User-Agent gets TTF, not WOFF2)."""
     ua = {"User-Agent": "Mozilla/4.0"}
     css = urllib.request.urlopen(urllib.request.Request(FONT_CSS, headers=ua), timeout=30).read().decode()
     url = re.search(r"url\((https://[^)]+\.ttf)\)", css).group(1)
-    path = os.path.join(dest_dir, "Cinzel-Black.ttf")
+    path = os.path.join(dest_dir, "BebasNeue-Regular.ttf")
     with open(path, "wb") as fh:
         fh.write(urllib.request.urlopen(urllib.request.Request(url, headers=ua), timeout=30).read())
     return path
 
 
 def numeral_path(font, value):
-    """The value's glyphs (and a drawn minus bar) as one SVG path, centred."""
+    """The value's glyphs, the font's own minus included, as one SVG path, centred."""
     glyphs = font.getGlyphSet()
     cmap = font.getBestCmap()
-    digits = str(abs(value))
-    names = [cmap[ord(d)] for d in digits]
+    minus = "\u2212" if 0x2212 in cmap else "-"
+    chars = (minus if value < 0 else "") + str(abs(value))
+    names = [cmap[ord(c)] for c in chars]
     bounds = []
     for name in names:
         bp = BoundsPen(glyphs)
         glyphs[name].draw(bp)
         bounds.append(bp.bounds)                     # xMin, yMin, xMax, yMax in font units
-    y_min = min(b[1] for b in bounds)
-    scale = CAP / (max(b[3] for b in bounds) - y_min)
+    digits = bounds[1:] if value < 0 else bounds     # the digits set the size; the minus rides along
+    y_min = min(b[1] for b in digits)
+    cap = CAP_NEG if value < 0 else CAP
+    scale = cap / (max(b[3] for b in digits) - y_min)
     widths = [(b[2] - b[0]) * scale for b in bounds]
-    lead = MINUS_W + MINUS_GAP if value < 0 else 0
-    x = 50 - (lead + sum(widths) + DIGIT_GAP * (len(digits) - 1)) / 2
-    baseline = CY + CAP / 2
+    x = 50 - (sum(widths) + GAP * (len(chars) - 1)) / 2
+    baseline = CY + cap / 2
 
     parts = []
-    if value < 0:
-        parts.append(f"M{x:.2f} {CY - MINUS_H / 2:.2f}h{MINUS_W}v{MINUS_H}h{-MINUS_W}Z")
-        x += lead
     for name, b, w in zip(names, bounds, widths):
         pen = SVGPathPen(glyphs, ntos=lambda v: f"{v:.2f}".rstrip("0").rstrip("."))
         glyphs[name].draw(TransformPen(pen, (scale, 0, 0, -scale, x - b[0] * scale, baseline + y_min * scale)))
         parts.append(pen.getCommands())
-        x += w + DIGIT_GAP
+        x += w + GAP
     return "".join(parts)
 
 
@@ -122,7 +124,7 @@ def shield_svg(font, value):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--font", help="a Cinzel Black TTF; fetched from Google Fonts if omitted")
+    ap.add_argument("--font", help="a Bebas Neue TTF; fetched from Google Fonts if omitted")
     args = ap.parse_args()
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     with tempfile.TemporaryDirectory() as tmp:

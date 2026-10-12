@@ -647,8 +647,9 @@ mk-online needs the same update again (`mk-online-board-handoff.md`).
 Since 2026-10-12 every Respect badge (the Jobs deck's 1, 3 and 5; the Cards sheet's Bribes 1 to 4,
 Welsher -1, Mark -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
 `minus1.svg` to `minus3.svg`), drawn by `tools/build_shields.py` (`pip install fonttools`): one
-shield traced from the old PNGs, Cinzel Black numerals (the card titles' face) as outlines, so the
-files need no font. Edit the script and rerun it; don't hand-edit the SVGs or bring back PNG
+shield traced from the old PNGs, numerals in Bebas Neue and the board's cream (the Still numbers'
+face and colour, Nick's call: the board font, for consistency) as outlines, so the files need no
+font. Edit the script and rerun it; don't hand-edit the SVGs or bring back PNG
 shields. **No CSS `filter` on `.respect`**: Chrome prints a filtered element as a bitmap, so the
 drop shadow is drawn inside the SVG as stacked translucent strokes, and the badges print as vectors.
 
