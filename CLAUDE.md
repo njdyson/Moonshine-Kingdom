@@ -233,8 +233,12 @@ Power Plays table. On the Playbooks it is not one of the rows: listed beside Bri
 as an ordinary Play, so it closes the Plays as a gilt capstone after Lay Low, in one line that points
 to the Borough card for the rooms. To make room the fronts dropped their "Mob Playbook: colour"
 kicker (the enamel band keeps the colour; the backs' "Combat Reference" went too, to match) and Beg,
-Rat and Bribe went to one line each; the
-busiest front keeps about a line spare in its 925px print box.
+Rat and Bribe went to one line each.
+Move then handed rival turf to the reverse ("Into rival turf: see reverse"), which carries a **Rival
+Safehouse** line (walk in unguarded, or win the District by Fold or fight, then take it over or
+destroy it) under the Pinned note, and the **Handshake** as a rule panel at its foot like the
+Faction Trait: it is not a Play, so no 0-cost socket. Every card now keeps two lines or more spare
+in its 925px print box.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
 That free final betrayal is Nick's call, on purpose ("cleaner and more brutal"); do not patch

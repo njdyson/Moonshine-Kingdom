@@ -186,7 +186,7 @@ a:hover{color:var(--gold-bright)}
 .back-sub{font:italic 500 11px Barlow;color:var(--muted);margin-top:4px}
 
 /* Inline emphasis inside body copy */
-.desc b,.trait-body b,.flow-body b,.pin-note b{color:var(--gold-em);font-weight:700}
+.desc b,.trait-body b,.flow-body b,.pin-note b,.back-rule b{color:var(--gold-em);font-weight:700}
 
 /* Canonical inline icon: mirrors .icon in css/moonshine-rules.css */
 .icon{
@@ -237,6 +237,9 @@ a:hover{color:var(--gold-bright)}
 /* The last panel sits on the card's foot, so every card in the set ends on one line */
 .sig{--c:9px;margin-top:9px;padding:6px 13px 9px}
 .sig:last-child{margin-top:auto}
+/* The Handshake sits on the back's foot as a rule panel, the Faction Trait's twin: it is
+   not a Play, so it carries no cost socket (2026-10-12; it was a 0-cost row) */
+.trait--foot{margin-top:auto;padding:8px 14px}
 /* the old 9px gap, kept above it however full the card */
 .card>:nth-last-child(2){margin-bottom:9px}
 
@@ -324,6 +327,9 @@ a:hover{color:var(--gold-bright)}
 .phase::after{background:linear-gradient(90deg,rgba(185,147,47,.6),transparent)}
 .phase--pinned{margin-top:15px}
 .pin-note{text-align:center;font:italic 500 10.5px Barlow;color:var(--muted);margin-top:8px}
+/* A rule the fronts point to ("Into rival turf: see reverse"), set upright so it
+   doesn't read as the italic aside above it */
+.back-rule{text-align:center;font:400 11px/1.4 Barlow;color:var(--body);margin-top:8px;padding:0 6px}
 
 /* ============================================================
    PRINT
@@ -365,7 +371,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send your Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Mobsters into Hostile turf: <b>Standoff</b>. Unguarded <b>Safehouse</b>: take over or destroy, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Never into Police turf. Into rival turf: <b>see reverse</b>.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -492,7 +498,7 @@ a:hover{color:var(--gold-bright)}
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
-        <div class="flow-body">Enter the rival District. Your turn <b>pauses</b> for the Occupier's response.</div>
+        <div class="flow-body">Enter a <b>Hostile</b> District. Your turn <b>pauses</b> for the Occupier's response.</div>
       </div>
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">2</span><span class="flow-name">Standoff</span></div>
@@ -514,12 +520,9 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
-      <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
-    </div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   <!-- ============ VIPERS FRONT ============ -->
@@ -537,7 +540,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send your Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Mobsters into Hostile turf: <b>Standoff</b>. Unguarded <b>Safehouse</b>: take over or destroy, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Never into Police turf. Into rival turf: <b>see reverse</b>.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -664,7 +667,7 @@ a:hover{color:var(--gold-bright)}
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
-        <div class="flow-body">Enter the rival District. Your turn <b>pauses</b> for the Occupier's response.</div>
+        <div class="flow-body">Enter a <b>Hostile</b> District. Your turn <b>pauses</b> for the Occupier's response.</div>
       </div>
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">2</span><span class="flow-name">Standoff</span></div>
@@ -686,12 +689,9 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
-      <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
-    </div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   <!-- ============ KNIGHTS FRONT ============ -->
@@ -709,7 +709,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send your Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Mobsters into Hostile turf: <b>Standoff</b>. Unguarded <b>Safehouse</b>: take over or destroy, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Never into Police turf. Into rival turf: <b>see reverse</b>.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -836,7 +836,7 @@ a:hover{color:var(--gold-bright)}
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
-        <div class="flow-body">Enter the rival District. Your turn <b>pauses</b> for the Occupier's response.</div>
+        <div class="flow-body">Enter a <b>Hostile</b> District. Your turn <b>pauses</b> for the Occupier's response.</div>
       </div>
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">2</span><span class="flow-name">Standoff</span></div>
@@ -858,12 +858,9 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
-      <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
-    </div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   <!-- ============ IRISH FRONT ============ -->
@@ -881,7 +878,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Move</div>
-      <div class="desc">Send your Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Mobsters into Hostile turf: <b>Standoff</b>. Unguarded <b>Safehouse</b>: take over or destroy, no Standoff. Never into Police turf.</div>
+      <div class="desc">Send Mobsters and/or Barrels from one District to a Connected one. Barrels can go alone, but aren't yours where you don't Control. Never into Police turf. Into rival turf: <b>see reverse</b>.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
@@ -1008,7 +1005,7 @@ a:hover{color:var(--gold-bright)}
     <div class="flow">
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">1</span><span class="flow-name">Move In</span></div>
-        <div class="flow-body">Enter the rival District. Your turn <b>pauses</b> for the Occupier's response.</div>
+        <div class="flow-body">Enter a <b>Hostile</b> District. Your turn <b>pauses</b> for the Occupier's response.</div>
       </div>
       <div class="flow-cell">
         <div class="flow-head"><span class="flow-num">2</span><span class="flow-name">Standoff</span></div>
@@ -1030,12 +1027,9 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="sig">
-      <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Cooperation</span><span class="sec-rule"></span></div>
-      <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Handshake</div><div class="desc desc--sm">Shake on a deal; terms clear, resolved by <b>Sunset</b>. Not a Play. Break your word and take a <b>Welsher card</b>: &minus;1 Respect, forever.</div></div>
-      <div class="pin-note">The card lands however the deal dies, sabotage included: promise what you alone control.</div>
-    </div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   </div>
