@@ -174,6 +174,7 @@ Every item on the old "When Nick says go" list is done, art first:
   Wedding. Lesson names kept. Still 16 pages.
 - **CLAUDE.md**, **`mk-online-rules-sync.md` §31** (the port table and a checklist line), and a
   comment in `tools/gen_deck.py` on the Rat's price.
+- **The site's Cards tile** (`Art/Index/cards.jpg`) was the cut Night Mayor Title's art; it is
+  now the Mayor's Bribe portrait, cropped to 800 x 450.
 - Untouched: `The Volstead Act` (shelved), the board (its crowns mark the rooms, which haven't moved),
-  older handoffs, which are history, and the site's Cards tile, `Art/Index/cards.jpg`, which is the cut
-  Night Mayor Title's art (a Bribe portrait would suit it now).
+  and older handoffs, which are history.
