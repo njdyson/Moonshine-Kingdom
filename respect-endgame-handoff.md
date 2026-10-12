@@ -1,9 +1,9 @@
 # Endgame: Respect Is the Only Score (2026-10-12)
 
-**Status: direction agreed, nothing implemented.** The live rules (the Nod, the Bribe ladder, the
-Mark barring the Crown, the Rat at 2) stand until Nick says to make the change. Nick, after the
-discussion below: "I think the direction is the right one. It's thematic and easier to teach than
-the current system."
+**Status: shipped 2026-10-12** on the `claude/respect-endgame` branch (see *Shipped*, at the end).
+Nick, after the discussion below: "I think the direction is the right one. It's thematic and easier
+to teach than the current system." Then: "add these images for now and make the rule changes".
+CLAUDE.md's *The crown is a Play* is now the short statement of the rules; this file keeps the why.
 
 ## Why
 
@@ -131,11 +131,6 @@ still in use is on the Jobs sheet: `Last One Standing.jpg` 22, `Tenament Army.jp
 - **Names:** not "Ward Boss" (Ward and Boss are both game terms), not "Commissioner" (the
   Commission), not "the Night Mayor" (the cut Title's name).
 
-## Open
-
-1. **The Borough cards' text.** The stack and the Nod line go. The card keeps the home Borough, the
-   home Ward and Take the Crown, which reads "20+ Respect, your Boss in X, Y or Z".
-
 ## Watch in playtest
 
 - **Cash's share.** Up to 10 of the 20; 1 / 2 / 2 / 3 is the fallback.
@@ -149,27 +144,34 @@ still in use is on the Jobs sheet: `Last One Standing.jpg` 22, `Tenament Army.jp
 - **Unchanged and still worth watching:** the last boss up, three-player kingmaking, the room as a
   fortress.
 
-## When Nick says go
+## Shipped (2026-10-12)
 
-A grep on 2026-10-12 found "the Nod" in the Rulebook (12), Cards (8), The Almanac (7) and Playbooks
-(4). The set to change:
+Every item on the old "When Nick says go" list is done, art first:
 
-- **Rulebook:** The Only Crown Worth Having, Your Goal, Influence: Buy the City (its one-line why,
-  "The families bring the guns. The new man brings the city.", needs a new home or a new line), Bribe,
-  Beg, Rat, Winning the Game (The Nod goes; Take the Crown; Count Your Respect), Setup (the piles;
-  the 4 unbought markers stay in your supply, not stacked on the Borough card), the component list
-  (16 Bribe cards), the Blood Oath (The Target, Claiming the Empire, One Crown, One Capo), and the
-  Glossary (the Nod goes; Mark, Respect, Rat, Supply, and a Bribe card entry).
-- **Cards:** the Borough cards (no stack, no Nod line), the Marks (−2 while held), the Rat (−3), and
-  a new Bribe card sheet.
-- **Playbooks:** the Beg row ("Any Mark bars the Crown"), the Bribe row's prices, the Rat.
-- **Town Planner:** The Crown & Sunset.
-- **Federal Crackdown Tracker:** 20 combined becomes 40.
-- **The Almanac:** The Cheap Rungs, The Walk ("buy the tenth judge last", "the Nod and the crown are
-  two Plays on one afternoon"), the Blood Oath lessons ("only one of you needs to buy the city", the
-  Mark as padlock), and every "a Bribe short" and "the Nod" passage. Grep for the argument, not
-  just the words. Keep the lesson names.
-- **CLAUDE.md:** the Setting bullets on the Nod and the endgame order, "The crown is a Play", "Borough
-  cards" (its stack and the reasoning behind it), "Everything is on the table", and the Bribe ladder paragraph.
-- **mk-online:** a new section in `mk-online-rules-sync.md` (the engine is `njdyson/mk-online`).
-- `The Volstead Act` is shelved; leave it.
+- **Art/Cards:** the four Bribe portraits (`Precinct Captain.jpg`, `Alderman.jpg`, `Judge.jpg`,
+  `Mayor.jpg`) and the brighter `Rat.jpg`, `Shylock.jpg` and `Welsher.jpg`, all 898 x 599 JPEG q88 as
+  `tools/optimise_art.py` sizes card art. `Art/shield4.png` is a stopgap made from `shield5.png` with
+  a DejaVu Serif "4"; reshoot it in the art pass.
+- **Rulebook:** opening scene, components (Bribe Cards (16)), the Goal page (its second section is
+  now **Bribes: Buy the City**, with the four prices inline), Setup (the piles; markers in the
+  supply), Beg, Bribe, Rat, Winning the Game (Take the Crown as a two-item list: the Name, the Room;
+  Count Your Respect gains **Friends in High Places** and **On the Hook**), the Blood Oath and the
+  Glossary (Bribe card in, the Nod out). Still 23 printed pages, measured in headless Chromium. A
+  table of the four cards on the Goal page pushed it to 25; the prices went inline instead, and the
+  "bent cop" line moved to the Mayor's card.
+- **Cards:** four sheets of the payroll (sheets 6 to 9, one of each per sheet), the Rat at -3, the
+  Marks at -2, Borough cards without the stack or the Nod. The titles drop "The": "The Precinct
+  Captain" needs 8pt to fit the title box, so all four read Precinct Captain, Alderman, Judge, Mayor.
+  The art lift drops from 1.2 to the Jobs deck's 1.1, since the plates are bright now (the Borough
+  plates read a little darker for it). Every card measures 88mm with no overflow.
+- **Playbooks, Town Planner, Federal Crackdown Tracker:** the Beg, Rat and Bribe rows; the crown
+  plaque and the Respect line; 40 combined. Playbook rows measure identical to before.
+- **The Almanac:** The Cheap Rungs, Bury the Card, The Refund (which also had a stale "pays 3
+  Respect" for The Insurance Job, a 1 since 2026-10-11), Cheap Paper, The Walk (maxim now "Go in
+  first; buy the Mayor last"), The Cartel (maxim now "Watch his Boss, not his count") and The Shotgun
+  Wedding. Lesson names kept. Still 16 pages.
+- **CLAUDE.md**, **`mk-online-rules-sync.md` §31** (the port table and a checklist line), and a
+  comment in `tools/gen_deck.py` on the Rat's price.
+- Untouched: `The Volstead Act` (shelved), the board (its crowns mark the rooms, which haven't moved),
+  older handoffs, which are history, and the site's `Art/Index/cards.jpg` thumbnail, which still shows
+  the old Rat and Marks (retake it in the art pass).

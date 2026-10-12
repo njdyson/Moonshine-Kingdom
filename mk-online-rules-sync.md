@@ -1,5 +1,9 @@
 # mk-online: rules sync backlog
 
+> **2026-10-12: the Nod is gone; Respect is the only score.** Take the Crown needs 20+ Respect and
+> the Boss in an away High Society Venue. Bribes buy Bribe cards (1 to 4 Respect, one of each), a
+> Mark is -2 Respect while held, the Rat -3, the Blood Oath 40 combined. See §31.
+
 > **2026-09-25: the win is a Play.** The Nod pays no Respect; it carries **Take the Crown**,
 > a Power Play that wins on the spot with the Boss in a High Society Venue, no Mark and 10+
 > Respect. There is no Sunset victory test and no tiebreak. See §16.
@@ -796,6 +800,26 @@ counts need five Runners killed in that Play, and one fight can complete a Borou
 its Boss card together. Bots: every Boss is a 5 in every Borough,
 so value Boss safety higher; the Extort set is a reason to steer a Squad off a room.
 
+## 31. Respect is the only score: Bribe cards replace the Nod (2026-10-12, Nick)
+
+A rule change; it supersedes the Nod in §16 and §29. `respect-endgame-handoff.md` has the why.
+**To port:**
+
+| | Now |
+| --- | --- |
+| Victory test | **Respect >= 20** and the Boss in a High Society Venue outside his home Borough. Influence and Marks are no longer tested, except through Respect. |
+| Respect | Completed Jobs, plus Bribe cards (1 to 4), less 3 for the Rat Card, 2 per Mark held and 1 per Welsher. Computed, never stored. |
+| Bribe | Power Play (2), Boss on the board. Buy a Bribe card the player doesn't hold yet: Precinct Captain $2,000 / 1 Respect, Alderman $3,000 / 2, Judge $4,000 / 3, Mayor $5,000 / 4. Any order, **one of each per boss**, so Influence still tops out at 10. One Influence marker moves from the supply to the Reserves. The box has four of each, so no pile runs dry. |
+| Setup | The 4 unbought markers wait in the supply; the Borough card holds no stack. The Bribe piles sit face-up above the Market. |
+| Beg | Loan and Square Up unchanged. A Mark is -2 Respect while held and bars nothing. |
+| Rat | -3 Respect (was -2). |
+| Blood Oath | 40 combined Respect. **Either** partner crowns, with his own Boss in a High Society Venue his own Borough card names; whoever crowns is Capo. No Influence or Mark clause. |
+| The Nod | Gone. Remove the status, its badge and its alarm; the alarm is a Respect count near 20 with a Boss near a room. |
+| Bots | Value a Bribe card as its Respect plus a marker: the Captain early for the 7th marker, the Mayor (4 Respect in one quiet Play) as the closer from inside the room. A rival at 16+ with $5,000 on hand and the Mayor unbought is one Play from 20. Price the Rat at 3 and a Loan at 2 Respect until repaid. |
+
+Strings: RULES-AI.md's crown conditions, the Bribe ladder text, every "Nod" string, the Rat's -2 and the
+Mark tooltip.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -920,3 +944,4 @@ so value Boss safety higher; the Extort set is a reason to steer a Squad off a r
 - [ ] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28)
 - [ ] **Borough cards: no crown in your home Borough; the Nod is all 10 bought** (§29)
 - [ ] **The Jobs deck in sets: 36 cards, every 5 a killing** (§30; supersedes §28's card list)
+- [ ] **Respect is the only score: crown at 20, Bribe cards, Mark -2, Rat -3, Blood Oath 40** (§31; supersedes the Nod in §16 and §29)
