@@ -125,11 +125,11 @@ a:hover{color:var(--gold-bright)}
     linear-gradient(var(--lacquer-a),var(--panel-b) 40%,var(--lacquer-b));
   box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.45);
 
-  /* The frame: the board's dress at the card's own size (568 x 969 px). A gilt
-     keyline with a jewel on each Deco chamfer (the Ledger, the key's plaques,
-     the card backs), a dark seat and a hairline inside it, then an inner keyline
-     stepped at each corner round a quarter fan (the board's frame), and a faint
-     sunburst rising behind the name. Inline, so print needs no fetch.
+  /* The frame (568 x 969 px), shared with the Playbooks and the card backs: a
+     gilt keyline cut on the Deco chamfer, a dark seat and a hairline inside it,
+     and a faint sunburst rising behind the name. The inner keyline stepped at
+     each corner, the quarter fans and the jewels on the chamfers came off on
+     2026-10-12 (Nick: cleaner). Inline, so print needs no fetch.
      # is written %23. */
   --frame:url("data:image/svg+xml,\
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 568 969'>\
@@ -142,24 +142,11 @@ a:hover{color:var(--gold-bright)}
 <stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient>\
 <mask id='fadeout' maskUnits='userSpaceOnUse' x='0' y='0' width='568' height='969'>\
 <ellipse cx='284' cy='58' rx='270' ry='150' fill='url(%23fade)'/></mask>\
-<path id='diamond' d='M0-2.6L2.6 0L0 2.6L-2.6 0Z' fill='%23e8cc72'/>\
 </defs>\
 <g mask='url(%23fadeout)'><circle cx='284' cy='58' r='130' fill='none' stroke='%23c9a437' stroke-opacity='.08' stroke-width='260' pathLength='96' stroke-dasharray='.14 .86'/></g>\
 <path d='M16 6H552L562 16V953L552 963H16L6 953V16Z' fill='none' stroke='url(%23g)' stroke-width='2.2'/>\
 <path d='M17.6 7.6H550.4L560.4 17.6V951.4L550.4 961.4H17.6L7.6 951.4V17.6Z' fill='none' stroke='%23000' stroke-opacity='.6' stroke-width='.7'/>\
 <path d='M19.8 9.8H548.2L558.2 19.8V949.2L548.2 959.2H19.8L9.8 949.2V19.8Z' fill='none' stroke='%23b9932f' stroke-opacity='.4' stroke-width='.7'/>\
-<use href='%23diamond' x='11' y='11'/><use href='%23diamond' x='557' y='11'/>\
-<use href='%23diamond' x='557' y='958'/><use href='%23diamond' x='11' y='958'/>\
-<path d='M26 16H542V26H552V943H542V953H26V943H16V26H26Z' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.8'/>\
-<path fill='none' stroke='%23b9932f' stroke-opacity='.75' stroke-width='.8' stroke-linecap='round' d='\
-M29.19 26.85L36.63 28.85M28.86 27.65L32.86 29.96M28.33 28.33L33.78 33.78M27.65 28.86L29.96 32.86M26.85 29.19L28.85 36.63\
-M29.3 26A3.3 3.3 0 0 1 26 29.3M37.88 26A11.88 11.88 0 0 1 26 37.88\
-M541.15 29.19L539.15 36.63M540.35 28.86L538.04 32.86M539.67 28.33L534.22 33.78M539.14 27.65L535.14 29.96M538.81 26.85L531.37 28.85\
-M542 29.3A3.3 3.3 0 0 1 538.7 26M542 37.88A11.88 11.88 0 0 1 530.12 26\
-M538.81 942.15L531.37 940.15M539.14 941.35L535.14 939.04M539.67 940.67L534.22 935.22M540.35 940.14L538.04 936.14M541.15 939.81L539.15 932.37\
-M538.7 943A3.3 3.3 0 0 1 542 939.7M530.12 943A11.88 11.88 0 0 1 542 931.12\
-M26.85 939.81L28.85 932.37M27.65 940.14L29.96 936.14M28.33 940.67L33.78 935.22M28.86 941.35L32.86 939.04M29.19 942.15L36.63 940.15\
-M26 939.7A3.3 3.3 0 0 1 29.3 943M26 931.12A11.88 11.88 0 0 1 37.88 943'/>\
 </svg>");
 }
 

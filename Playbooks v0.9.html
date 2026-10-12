@@ -127,13 +127,13 @@ a:hover{color:var(--gold-bright)}
   box-shadow:0 12px 36px rgba(0,0,0,.6),inset 0 0 70px rgba(0,0,0,.45);
   overflow:hidden;
 
-  /* The frame: the board's dress at the card's own size (608 x 969 px, the
-     border box), as the Town Planner and the card backs wear it. A gilt keyline
-     with a jewel on each Deco chamfer, a dark seat and a hairline inside it,
-     then an inner keyline stepped at each corner. The quarter fans sit in the
-     top corners only: the fronts' last rows run into the bottom ones. Drawn
-     to the box's min height; a card that grows on a phone stretches it a
-     touch, and print pins every card to the box. # is written %23. */
+  /* The frame (608 x 969 px, the border box), shared with the Town Planner and
+     the card backs: a gilt keyline cut on the Deco chamfer, with a dark seat and
+     a hairline inside it. Since 2026-10-12 that is all (Nick: cleaner); the inner
+     keyline stepped at each corner, the quarter fans and the jewels on the
+     chamfers came off. Drawn to the box's min height; a card that grows on a
+     phone stretches it a touch, and print pins every card to the box.
+     # is written %23. */
   --frame:url("data:image/svg+xml,\
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 608 969' preserveAspectRatio='none'>\
 <defs>\
@@ -141,19 +141,10 @@ a:hover{color:var(--gold-bright)}
 <stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
 <stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
 <stop offset='1' stop-color='%23f6e3a1'/></linearGradient>\
-<path id='diamond' d='M0-2.6L2.6 0L0 2.6L-2.6 0Z' fill='%23e8cc72'/>\
 </defs>\
 <path d='M16 6H592L602 16V953L592 963H16L6 953V16Z' fill='none' stroke='url(%23g)' stroke-width='2.2'/>\
 <path d='M17.6 7.6H590.4L600.4 17.6V951.4L590.4 961.4H17.6L7.6 951.4V17.6Z' fill='none' stroke='%23000' stroke-opacity='.6' stroke-width='.7'/>\
 <path d='M19.8 9.8H588.2L598.2 19.8V949.2L588.2 959.2H19.8L9.8 949.2V19.8Z' fill='none' stroke='%23b9932f' stroke-opacity='.4' stroke-width='.7'/>\
-<use href='%23diamond' x='11' y='11'/><use href='%23diamond' x='597' y='11'/>\
-<use href='%23diamond' x='597' y='958'/><use href='%23diamond' x='11' y='958'/>\
-<path d='M26 16H582V26H592V943H582V953H26V943H16V26H26Z' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.8'/>\
-<path fill='none' stroke='%23b9932f' stroke-opacity='.75' stroke-width='.8' stroke-linecap='round' d='\
-M29.19 26.85L36.63 28.85M28.86 27.65L32.86 29.96M28.33 28.33L33.78 33.78M27.65 28.86L29.96 32.86M26.85 29.19L28.85 36.63\
-M29.3 26A3.3 3.3 0 0 1 26 29.3M37.88 26A11.88 11.88 0 0 1 26 37.88\
-M581.15 29.19L579.15 36.63M580.35 28.86L578.04 32.86M579.67 28.33L574.22 33.78M579.14 27.65L575.14 29.96M578.81 26.85L571.37 28.85\
-M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
 </svg>");
 }
 /* Mob colour = the player's piece colour. One value per mob; swap freely.
@@ -163,8 +154,8 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
 .card--green{--mob:#3f8551}
 .card--blue{--mob:#3a6ea5}
 .card--yellow{--mob:#e0a11b}
-/* The mob's colour as an enamel band set into the frame's head, between its
-   hairline and the inner keyline (it was a bar along the card's top edge). */
+/* The mob's colour as an enamel band set into the frame's head, just inside its
+   hairline (it was a bar along the card's top edge). */
 .card-bar{
   position:absolute;top:9px;left:28px;right:28px;height:5px;
   background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,0) 50%,rgba(0,0,0,.25)),var(--mob,transparent);

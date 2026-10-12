@@ -6,10 +6,12 @@
    dealt). One file, so the two decks cannot drift apart.
 
    The ornament (--back-art, below) borrows the board's dress, so the cards
-   sit with the other components: a gilt keyline with a jewel on each Deco
-   chamfer (the Ledger and the key's plaques), an inner keyline stepped at
-   the corners round a quarter fan (the board's frame), a faint sunburst, and
-   the same fan opened to a half: a sun rising behind the name. Over it:
+   sit with the other components: a gilt keyline cut on the Deco chamfer (the
+   Ledger and the key's plaques), a faint sunburst, and the board's quarter fan
+   opened to a half: a sun rising behind the name. The inner keyline stepped
+   at the corners, the corner fans and the corner jewels came off on
+   2026-10-12, as on the Playbooks and the Town Planner (Nick: cleaner). The
+   stepped outline survives only as the sunburst's clip. Over it:
 
      name    on a gilt plate, the sun's horizon, as the Ledger's name is cut
              into its cartouche and HEAT into the board's
@@ -54,19 +56,11 @@
 <circle cx='31.5' cy='40' r='44' fill='url(%23fade)'/></mask>\
 <path id='inner' d='M7.2 4.2H55.8V7.2H58.8V80.8H55.8V83.8H7.2V80.8H4.2V7.2H7.2Z'/>\
 <clipPath id='field'><use href='%23inner'/></clipPath>\
-<g id='fan' fill='none' stroke='%23c9a437' stroke-opacity='.85' stroke-width='.2'>\
-<path d='M5.2 0A5.2 5.2 0 0 1 0 5.2M1.6 0A1.6 1.6 0 0 1 0 1.6'/>\
-<path d='M1.55 .41L3.38 .91M1.39 .8L3.55 2.05M1.13 1.13L3.11 3.11M.8 1.39L2.05 3.55M.41 1.55L.91 3.38'/></g>\
 <path id='jewel' d='M0-1L1 0L0 1L-1 0Z' fill='%23e8cc72'/>\
 </defs>\
 <g clip-path='url(%23field)' mask='url(%23fadeout)'>\
 <circle cx='31.5' cy='40' r='23' fill='none' stroke='%23c9a437' stroke-opacity='.1' stroke-width='46' pathLength='96' stroke-dasharray='.16 .84'/></g>\
 <path d='M4.6 2.2H58.4L60.8 4.6V83.4L58.4 85.8H4.6L2.2 83.4V4.6Z' fill='none' stroke='url(%23gilt)' stroke-width='.55'/>\
-<use href='%23jewel' x='3.4' y='3.4'/><use href='%23jewel' x='59.6' y='3.4'/>\
-<use href='%23jewel' x='59.6' y='84.6'/><use href='%23jewel' x='3.4' y='84.6'/>\
-<use href='%23inner' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.22'/>\
-<use href='%23fan' transform='translate(7.2 7.2)'/><use href='%23fan' transform='translate(55.8 7.2) scale(-1 1)'/>\
-<use href='%23fan' transform='translate(55.8 80.8) scale(-1 -1)'/><use href='%23fan' transform='translate(7.2 80.8) scale(1 -1)'/>\
 <path d='M13.5 40A18 18 0 0 1 49.5 40Z' fill='%230e0905' fill-opacity='.45'/>\
 <path d='M13.5 40A18 18 0 0 1 49.5 40' fill='none' stroke='url(%23gilt)' stroke-width='.65'/>\
 <path d='M14.9 40A16.6 16.6 0 0 1 48.1 40' fill='none' stroke='%23b9932f' stroke-opacity='.55' stroke-width='.2'/>\
