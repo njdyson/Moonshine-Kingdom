@@ -163,7 +163,8 @@ Every item on the old "When Nick says go" list is done, art first:
   Marks at -2, Borough cards without the stack or the Nod. The titles drop "The": "The Precinct
   Captain" needs 8pt to fit the title box, so all four read Precinct Captain, Alderman, Judge, Mayor.
   The art lift drops from 1.2 to the Jobs deck's 1.1, since the plates are bright now (Nick redrew the
-  four Borough plates brighter the same day: 39 to 55 became 52 to 67). Every card measures 88mm with no overflow.
+  four Borough plates brighter the same day: 39 to 55 became 52 to 67); his second Bronx drops a patch of
+  modern graffiti, and his second Welsher drops the garbled contract text and the real brand label. Every card measures 88mm with no overflow.
 - **Playbooks, Town Planner, Federal Crackdown Tracker:** the Beg, Rat and Bribe rows; the crown
   plaque and the Respect line; 40 combined. Playbook rows measure identical to before.
 - **The Almanac:** The Cheap Rungs, Bury the Card, The Refund (which also had a stale "pays 3
