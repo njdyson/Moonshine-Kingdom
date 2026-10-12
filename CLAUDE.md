@@ -395,6 +395,13 @@ in the game bricks a paid-for asset.
 
 ## Open design threads
 
+`respect-endgame-handoff.md` (2026-10-12) holds an endgame redesign whose direction Nick has
+agreed: the Nod retires, Respect becomes the only score (20 to Take the Crown, 40 for the Blood
+Oath), and Bribes buy 16 face-up **Bribe cards** (Precinct Captain to Mayor, 1 to 4 Respect each).
+Marks go to −2 Respect while held and the Rat to −3. **Nothing is implemented**: the rules
+described in this file stay live until Nick says go. Read the handoff before touching the Nod,
+Bribe, Beg, the Rat, the Borough cards or the Blood Oath.
+
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
 Ear). It is not implemented and should not be without Nick asking. The universal Sweep and
