@@ -783,7 +783,7 @@ the 5s aside for the opening deal.
 | 1, singles | The Milk Run, The Dutchman's Deal, Night Landing, Tenement Army, The Beachhead (all as §28); The Pier Six Brawl (**any** Seize of a Dock, Safehouse or not); Rum Row and The Insurance Job (same triggers, **now 1s**) |
 | 3, Extort | an **Extort** while you Control: all three Speakeasies of Manhattan (Empire State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); a District in all five Boroughs (The Five Families, **now a 3**); 4+ Docks (Cuban Prince) |
 | 3, singles | Hell's Highway (a Move across the **Hell Gate Bridge** carrying your **Boss** and 4+ Rum); Last One Standing (Secure in Astoria while 6+ Rum sits there); The Smuggler's Run (as §28); The Copper Heist (a Seize of a District whose Still is **Pressure 5**: the four starting bars and Stapleton); Opening Night and Union Dues (same triggers, **now 3s**) |
-| 5, body counts | a fight in the named Borough that kills **5+ Runners and no Boss**: Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
+| 5, body counts | a fight in the named Borough that kills **5+ Runners**: Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
 | 5, Bosses | a fight in the named Borough that **kills a Boss**: Room 349 (Manhattan), The One-Way Ride (the Bronx), The Toll Booth Trap (Queens, no own-Boss clause now), The Last Hand (Brooklyn) |
 
 Card strings carry no "in one Play" any more (the Rulebook's The Play Is the Unit says a count is what
@@ -792,7 +792,8 @@ Pipeline, The Irish Goodbye, High Roller. New art files: `High Spirits`, `Bathtu
 `Cutting`, `Cobble Hill` (Giggle Water), `Switch` (Off the Boat), `Rum Wars`, `The Big Sleep` (Room
 349), `Gatsby` (The One-Way Ride), `Debt Collector` (The Last Hand), `Scheme` (The Five Families).
 One Extort can complete several Extort Jobs at once. Count Runner kills apart from the Boss: the body
-counts need five Runners and no Boss killed in that Play. Bots: every Boss is a 5 in every Borough,
+counts need five Runners killed in that Play, and one fight can complete a Borough's body count and
+its Boss card together. Bots: every Boss is a 5 in every Borough,
 so value Boss safety higher; the Extort set is a reason to steer a Squad off a room.
 
 ## Checklist

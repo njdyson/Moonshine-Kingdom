@@ -3,7 +3,8 @@
 
 Enumerates every Play a player could make (Play x target District x board state x
 what the Play did there) and reports which Jobs co-fire. Enforces handoff §3:
-    - HARD RULE: never two 5s on one Play.
+    - HARD RULE: never two 5s on one Play, except a Borough's body count and Boss together
+      (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
     - Watch:     a 5 plus small change is fine; big 3-stacks are suspect.
 
 breadth_audit.py imports this module, so the model lives in one place.
@@ -164,17 +165,28 @@ JOBS = [
       "Recruit 4+ Runners in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
     # --- 5 Respect: the murder sets (2026-10-11, round 2) ---
-    # `kills` counts Runners; `boss_killed` is the Boss. Runners die first, so a Boss who
-    # stood with four or more Runners dies only after five kills: "but no Boss" is what
-    # keeps a Borough's two 5s apart.
-] + [J(n, 5, ['Move'], f'Kill 5+ rival Runners, but no Boss, in {label}.',
-       (lambda b: lambda p, d: p['kills'] >= 5 and not p['boss_killed'] and d.boro == b)(b))
+    # `kills` counts Runners; `boss_killed` is the Boss. A Borough's two 5s meet only on a
+    # fight that kills its Boss and five Runners: see ALLOWED_DOUBLE_FIVES.
+] + [J(n, 5, ['Move'], f'Kill 5+ rival Runners in {label}.',
+       (lambda b: lambda p, d: p['kills'] >= 5 and d.boro == b)(b))
      for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
                          ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
     J(n, 5, ['Move'], f'Kill a rival Boss in {label}.',
       (lambda b: lambda p, d: p['boss_killed'] and d.boro == b)(b))
     for n, label, b in (('Room 349', 'Manhattan', M), ('The One-Way Ride', 'the Bronx', BX),
                         ('The Toll Booth Trap', 'Queens', Q), ('The Last Hand', 'Brooklyn', BK))]
+
+# The one exception to "never two 5s" (Nick, 2026-10-12): a Borough's body count and its Boss
+# card together. Runners die first, so it takes a Boss and five Runners killed in one fight,
+# against a District holding six or more; holding both cards stakes 6 of at most 10 markers,
+# leaving 4 for the Move and the volleys, which doesn't buy six kills; and the Offers deal one
+# card a Day. Any other pair of 5s still fails the audit.
+ALLOWED_DOUBLE_FIVES = {
+    frozenset(('Bloody Sunday', 'Room 349')),
+    frozenset(('Over the Top', 'The One-Way Ride')),
+    frozenset(('Rum Wars', 'The Toll Booth Trap')),
+    frozenset(("The Butcher's Ledger", 'The Last Hand')),
+}
 
 STAKE = {1: 1, 3: 2, 5: 3}
 VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat')
@@ -399,13 +411,22 @@ def main():
     rows.sort(reverse=True)
 
     print('=' * 78)
-    print('HARD RULE: never two 5s on one Play')
+    print('HARD RULE: never two 5s on one Play (one allowed exception)')
     print('=' * 78)
-    bad = [r for r in rows if r[1] >= 2]
+    doubles = [r for r in rows if r[1] >= 2]
+
+    def allowed(r):
+        five_names = frozenset(n for n in r[3] if respect[n] == 5)
+        return r[1] == 2 and five_names in ALLOWED_DOUBLE_FIVES
+    bad = [r for r in doubles if not allowed(r)]
+    ok = sorted({frozenset(n for n in r[3] if respect[n] == 5) for r in doubles if allowed(r)},
+                key=sorted)
     for tot, fives, verb, names, stake, dists in bad:
         print(f'  !! {tot:2} Respect  [{verb}] @ {", ".join(dists)}: {" + ".join(names)}')
     if not bad:
-        print('  PASS: no Play in the deck can fire two 5-Respect Jobs.')
+        print('  PASS: no Play can fire two 5-Respect Jobs, outside the allowed pairs.')
+    for pair in ok:
+        print(f'  allowed (a Boss and five Runners in one fight; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
 
     print()
     print('=' * 78)

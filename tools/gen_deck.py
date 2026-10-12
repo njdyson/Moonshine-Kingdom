@@ -473,13 +473,18 @@ THREES = [
 
 FIVES = [
     # THE MURDER SETS (Nick, 2026-10-11, round 2). Every 5 is a killing, in two sets of four, one
-    # card per mainland Borough each: a body count ("Kill 5+ rival Runners, but no Boss, in X in one
-    # Play") and a Boss ("Kill a rival Boss in X"). Each seat is hunted by two 5s in its own Borough.
-    # NEVER TWO 5s: one Play is in one Borough, so only that Borough's two cards can meet, and
-    # "but no Boss" keeps them apart. It is needed: Runners die before the Boss, so killing a Boss
-    # who stood with four or more Runners is five kills, and without the clause one fight would pay
-    # 10 Respect, the whole bar. Every 5 is a kill Job, so a Fold denies all eight: all four seats
-    # can now turn a bounty down mid-fight (before, only Queens and Brooklyn could).
+    # card per mainland Borough each: a body count ("Kill 5+ rival Runners in X") and a Boss ("Kill
+    # a rival Boss in X"). Each seat is hunted by two 5s in its own Borough.
+    # TWO 5s ON ONE PLAY: one Play is in one Borough, so only that Borough's two cards can meet, and
+    # only on a fight that kills a Boss AND five Runners (Runners die first, so the District held at
+    # least six). Round 2 printed "but no Boss" on the body counts to rule it out; Nick cut it on
+    # 2026-10-12 as not worth the words: holding both cards stakes 6 of at most 10 markers, leaving 4
+    # for the Move and the volleys, and six kills against a stack of six is beyond what 4 markers
+    # buy (about 10 Runners and a Boss average five kills in three Open Fires). The Offers deal one
+    # card a Day, so both must be drafted on separate Days too. overlap_audit.py reports the four
+    # same-Borough pairs as allowed and still fails any other pair of 5s.
+    # Every 5 is a kill Job, so a Fold denies all eight: all four seats can turn a bounty down
+    # mid-fight (before round 2, only Queens and Brooklyn could).
     # Mob fit, to watch: the Irish Firepower die helps body counts and the Sicilian Hit makes a Boss
     # take the first hit, so those two mobs gain most; the Knights' Torch and the Vipers' Stealth
     # have no marquee 5 now.
@@ -500,7 +505,7 @@ FIVES = [
     # The Copper Heist, which forbids a Safehouse.
     # SETS PASS 2026-10-11: Manhattan's body count (Nick: the Safehouse wording was unclear).
     ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Manhattan</b>.",
+     "Kill <b>5+ rival Runners</b> in <b>Manhattan</b>.",
      "By Monday there was nothing left to come home to."),
     # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
     # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
@@ -509,18 +514,17 @@ FIVES = [
     # actually closed cluster 3). Max stack unchanged at 9.
     # SETS PASS 2026-10-11: the Bronx's body count. A Fold now denies it, as it does the others.
     ("Over the Top", "Old Guard.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>the Bronx</b>.",
+     "Kill <b>5+ rival Runners</b> in <b>the Bronx</b>.",
      "These boys went over the top in France. This is a street."),
     # SETS PASS 2026-10-11: Queens' body count. The Toll Booth Trap moved to the Boss set, where it
     # started. Art: a gunfight on a burning pier.
     ("Rum Wars", "Rum Wars.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Queens</b>.",
+     "Kill <b>5+ rival Runners</b> in <b>Queens</b>.",
      "Nobody counted the bodies. Everybody counted the crates."),
     # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
-    # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick). "but no Boss"
-    # suits it: every name crossed out but one.
+    # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick).
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b>, but no Boss, in <b>Brooklyn</b>.",
+     "Kill <b>5+ rival Runners</b> in <b>Brooklyn</b>.",
      "Every name in it is crossed out but one."),
     # SETS PASS 2026-10-11: Manhattan's Boss. A nod, not a lesson: the Park Central room where the
     # story starts, unnamed. Art: a man dead in a hotel bed, two men in the doorway.

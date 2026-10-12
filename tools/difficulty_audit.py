@@ -148,13 +148,13 @@ CARDS = [
     # The murder sets (2026-10-11). Body counts score as The Butcher's Ledger did, Boss kills
     # as The Toll Booth Trap did: its own-Boss clause was a trade (+1 Threat), not a cost.
     ("Bloody Sunday", 5, "Open Fire", 2, 3, 3, 2, 2, 1, 3, 2,
-     "5 Runners and no Boss in Manhattan; a Fold denies it."),
+     "5 Runners killed in Manhattan; a Fold denies it."),
     ("Over the Top", 5, "Open Fire", 2, 3, 3, 2, 2, 1, 3, 2,
-     "5 Runners and no Boss in the Bronx; a Fold denies it."),
+     "5 Runners killed in the Bronx; a Fold denies it."),
     ("Rum Wars", 5, "Open Fire", 2, 3, 3, 2, 2, 1, 3, 2,
-     "5 Runners and no Boss in Queens; a Fold denies it."),
+     "5 Runners killed in Queens; a Fold denies it."),
     ("The Butcher's Ledger", 5, "Open Fire", 2, 3, 3, 2, 2, 1, 3, 2,
-     "5 Runners and no Boss in Brooklyn; a Fold denies it."),
+     "5 Runners killed in Brooklyn; a Fold denies it."),
     ("Room 349", 5, "Open Fire", 2, 3, 2, 1, 2, 2, 3, 3,
      "A Boss in Manhattan who stands; easiest with a Sicilian Hit."),
     ("The One-Way Ride", 5, "Open Fire", 2, 3, 2, 1, 2, 2, 3, 3,

@@ -23,7 +23,7 @@ component list says 36). Most cards come in sets, one per place, in one wording:
 | --- | --- | --- |
 | 1 | **The bars**: Unload 4+ barrels at <bar> in <District> | The Angel's Share (The Silver Dollar, East Harlem), High Spirits (The Haymarket, the Tenderloin), Bathtub Gin (DeLillo's, Belmont), Coffin Varnish (The Penny Whistle, Fordham), Giggle Water (Bohemian Hall, Astoria), Poison Panic (Paradise Alley, Flushing), Last Call (Ruby's Joint, Coney Island), Off the Boat (Sunny's Bar, Red Hook) |
 | 3 | **The Extort set**: Extort while you Control all three Speakeasies in X | Empire State, The Big Squeeze, King of Queens, The Black Hand |
-| 5 | **Body counts**: Kill 5+ rival Runners, but no Boss, in X | Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
+| 5 | **Body counts**: Kill 5+ rival Runners in X | Bloody Sunday (Manhattan), Over the Top (the Bronx), Rum Wars (Queens), The Butcher's Ledger (Brooklyn) |
 | 5 | **Bosses**: Kill a rival Boss in X | Room 349 (Manhattan), The One-Way Ride (the Bronx), The Toll Booth Trap (Queens), The Last Hand (Brooklyn) |
 
 The bar cards name the bar from the board's sign as well as its District (Nick: more thematic),
@@ -49,22 +49,33 @@ home Borough" wording lets six barrels go out and straight back), The Irish Good
 crew, dead if the target Folds), High Roller (overlaps the endgame).
 
 Every change follows a note Nick left on the page except four calls of mine: cutting The Eviction
-(unrated) to fit 12 threes, the names and art of the ten new cards, and the "but no Boss" clause.
+(unrated) to fit 12 threes, the names and art of the ten new cards, and a "but no Boss" clause
+Nick cut the next day (below).
 
-### "But no Boss" is load-bearing
+### A Borough's two 5s may pay together
 
 Combat removes Runners first, and the Boss dies only when no Runner is left (a Sicilian Hit aside).
-So killing a Boss who stood with four or more Runners is also five kills, and without the clause one
-fight would pay a Borough's body count and its Boss together: two 5s, 10 Respect, the whole bar.
-With it, the two are exclusive in any one Play, and one Play is only ever in one Borough, so no Play
-can pay two 5s. `overlap_audit.py` counts Runner kills and the Boss separately and proves it.
+So a Borough's body count and its Boss card both pay only on a fight that kills a Boss and five
+Runners, against a District holding six or more. Round 2 first printed "but no Boss" on the body
+counts to rule that out. **Nick cut the clause on 2026-10-12**:
+
+> It's hard to attempt 2x 5 respect cards at once, because you'd need to stake 6 influence (making it
+> nearly impossible to complete the jobs anyway with a maximum of 4 markers left). Second, if they do
+> have a boss in the same district, the maths prevents the win. A district with 5 runners and a boss
+> is very hard to fight (you'd need to take 10 runners plus a boss to the fight to avg 5 kills in 3
+> open fires).
+
+A boss takes at most one Job a morning at the Offers, so holding both also takes two Days of drafting. "Never two 5s" is
+therefore absolute except for these four pairs: `overlap_audit.py` lists them as allowed
+(`ALLOWED_DOUBLE_FIVES`) and fails any other. Its biggest stacks now read 13 (a pair plus The Copper
+Heist or Hell's Highway), but those stake 8, leaving the Move and one volley, which can't kill six.
 
 ### What it does to the numbers
 
 | | Round 1 | Round 2 |
 | --- | --- | --- |
-| Never two 5s | Passes | Passes |
-| Co-firing sets over 2 Districts | 7 | 1 (The Pier Six Brawl rides every Smuggler's Run, 4 Respect, now that its guard is gone) |
+| Never two 5s | Passes | Passes, except a Borough's body count and Boss together (allowed 2026-10-12) |
+| Co-firing sets over 2 Districts | 7 | 1 (The Pier Six Brawl rides every Smuggler's Run, 4 Respect, now that its guard is gone), plus the four allowed body-and-Boss pairs |
 | Biggest stack on one District | 12 (Jamaica, Canarsie) | 10 (the same two Docks) |
 | Biggest stack on one Extort | 11 | 12, four Extort 3s; it needs 8 staked plus the Extort's 2, so all ten Influence |
 | 5s: difficulty range | 7 to 13 | 12 to 13, all "contested" |

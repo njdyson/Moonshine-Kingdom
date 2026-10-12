@@ -52,7 +52,9 @@ for nd, tot, stake, names, dists in sorted(rows, reverse=True):
     if nd <= 2:
         continue
     where = ', '.join(dists) if nd <= 6 else f'{nd} districts'
-    print(f'  {nd:2} districts | {tot:2} Respect | stake {stake} | {" + ".join(names)}')
+    # A Borough's body count and Boss card: Nick's allowed double 5 (overlap_audit.py).
+    tag = '  (allowed double 5)' if frozenset(names) in oa.ALLOWED_DOUBLE_FIVES else ''
+    print(f'  {nd:2} districts | {tot:2} Respect | stake {stake} | {" + ".join(names)}{tag}')
     print(f'               {where}')
 
 narrow = [r for r in rows if r[0] <= 2]

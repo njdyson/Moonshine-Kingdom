@@ -191,10 +191,11 @@ once. The deck is 36 cards, 16 / 12 / 8:
 - **3s**: **the Extort set**, *Extort while you Control all three Speakeasies in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); The Five
   Families and Cuban Prince (4+ Docks) as Extort cards too; and six singles.
-- **5s**: murder, and nothing else. A **body count** per Borough ("Kill 5+ rival Runners, but no
-  Boss, in X") and a **Boss** per Borough ("Kill a rival Boss in X"). "But no Boss" keeps
-  a Borough's two 5s apart: Runners die first, so a Boss killed behind four Runners is also five
-  kills, and one fight would pay 10.
+- **5s**: murder, and nothing else. A **body count** per Borough ("Kill 5+ rival Runners in X")
+  and a **Boss** per Borough ("Kill a rival Boss in X"). They are the one allowed exception to
+  "never two 5s on one Play" (Nick, 2026-10-12): Runners die first, so paying both takes a Boss and
+  five Runners killed in one fight, and holding both stakes 6 of at most 10 markers. Don't add a
+  "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs and fails any other.
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
 Borough; the Deeds' removal ended that objection, so don't cut them on it again. The overlap model
