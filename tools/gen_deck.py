@@ -244,7 +244,7 @@ ONES = [
     # tie-break takes the boiler ranked HIGHEST on the Pressure Strip, so a low
     # Pressure district is the Squad's LAST pick. You must trick the cops into
     # kicking the wrong door. Also gives low-Pressure turf its first payoff.
-    # SETS PASS 2026-10-11: DOWN TO 1 (Nick: a niche 1). Ratting hands you the Rat Card (-2 Respect),
+    # SETS PASS 2026-10-11: DOWN TO 1 (Nick: a niche 1). Ratting hands you the Rat Card (-2 Respect then; -3 since 2026-10-12),
     # so at 1 this is a rebate on a Rat you meant to make anyway, not a profit.
     ("The Insurance Job", "Insurance Job.jpg", "Rat",
      "<b>Rat</b>, and have the Raid <b>padlock</b> a <b>Pressure 1 or 2 Still</b> you Control.",
