@@ -29,10 +29,14 @@ Respect is "borderline too low".
    | The Mayor | $5,000 | 4 | $1,250 |
 
 4. **Bribe** stays a Power Play (2 Influence) with your Boss on the board. Pay the price on any
-   card in the piles, put the card in your Respect pile, and move the top marker off your Borough
-   card into your Reserves. Buy in **any order**. Influence still starts at 6, with a ceiling of 10.
+   card in the piles, put the card in your Respect pile, and move one Influence marker from your
+   supply to your Reserves. Buy in **any order**. Influence still starts at 6, with a ceiling of 10:
+   your Influence is 6 plus your Bribe cards, so the cards are the count.
 5. **Setup:** the 16 Bribe cards go in four face-up piles, one per kind, beside the board above the
-   Jobs Market.
+   Jobs Market. Your 4 unbought Influence markers stay loose in your supply (Nick, same day: "it
+   doesn't need to sit on a card in this system"). The Borough card's stack (since 2026-10-10) held
+   them so a bare card could read as the city bought; with Influence out of the win, nothing needs
+   to read it, and the Bribe cards in your Respect pile already show how many you've bought.
 6. **Shylock:** the Loan ($1,500) and Square Up ($2,000) are unchanged. A Mark costs 2 Respect while
    you hold it and bars nothing on its own: not a Bribe, not the Crown.
 7. **The Rat Card at 3.** It was 3 before the v0.9.7 streamline, which cut it to 2 because "at a
@@ -114,10 +118,8 @@ Nick generates the art; aim for what suits the theme best.
    boss: at four players every boss can buy the full set and no pile runs dry. Without that limit a
    rich boss could buy Mayors at the best rate (four would be 16 Respect for $20,000) and empty the
    pile on the table.
-2. **Where the unbought markers sit.** The Borough card's stack still works unchanged, and nothing
-   here needs it to move.
-3. **The Borough cards' text.** The Nod line goes; Take the Crown reads "20+ Respect, your Boss in
-   X, Y or Z".
+2. **The Borough cards' text.** The stack and the Nod line go. The card keeps the home Borough, the
+   home Ward and Take the Crown, which reads "20+ Respect, your Boss in X, Y or Z".
 
 ## Watch in playtest
 
@@ -139,11 +141,12 @@ A grep on 2026-10-12 found "the Nod" in the Rulebook (12), Cards (8), The Almana
 
 - **Rulebook:** The Only Crown Worth Having, Your Goal, Influence: Buy the City (its one-line why,
   "The families bring the guns. The new man brings the city.", needs a new home or a new line), Bribe,
-  Beg, Rat, Winning the Game (The Nod goes; Take the Crown; Count Your Respect), Setup (the piles),
-  the component list (16 Bribe cards), the Blood Oath (The Target, Claiming the Empire, One Crown,
-  One Capo), and the Glossary (the Nod goes; Mark, Respect, Rat and a Bribe card entry).
-- **Cards:** the Borough cards' Nod line, the Marks (−2 while held), the Rat (−3), and a new Bribe
-  card sheet.
+  Beg, Rat, Winning the Game (The Nod goes; Take the Crown; Count Your Respect), Setup (the piles;
+  the 4 unbought markers stay in your supply, not stacked on the Borough card), the component list
+  (16 Bribe cards), the Blood Oath (The Target, Claiming the Empire, One Crown, One Capo), and the
+  Glossary (the Nod goes; Mark, Respect, Rat, Supply, and a Bribe card entry).
+- **Cards:** the Borough cards (no stack, no Nod line), the Marks (−2 while held), the Rat (−3), and
+  a new Bribe card sheet.
 - **Playbooks:** the Beg row ("Any Mark bars the Crown"), the Bribe row's prices, the Rat.
 - **Town Planner:** The Crown & Sunset.
 - **Federal Crackdown Tracker:** 20 combined becomes 40.
@@ -152,6 +155,6 @@ A grep on 2026-10-12 found "the Nod" in the Rulebook (12), Cards (8), The Almana
   Mark as padlock), and every "a Bribe short" and "the Nod" passage. Grep for the argument, not
   just the words. Keep the lesson names.
 - **CLAUDE.md:** the Setting bullets on the Nod and the endgame order, "The crown is a Play", "Borough
-  cards", "Everything is on the table", and the Bribe ladder paragraph.
+  cards" (its stack and the reasoning behind it), "Everything is on the table", and the Bribe ladder paragraph.
 - **mk-online:** a new section in `mk-online-rules-sync.md` (the engine is `njdyson/mk-online`).
 - `The Volstead Act` is shelved; leave it.
