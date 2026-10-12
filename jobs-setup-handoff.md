@@ -1,6 +1,7 @@
 # Jobs Deck: Setup, then Sets (2026-10-11)
 
-Two passes on one day, both applied on the `claude/job-deck-balance-57zjc0` branch. **Round 2 is the
+Two passes on one day, made on the `claude/job-deck-balance-57zjc0` branch and on main since
+2026-10-12 (Nick: "it will still need more work afterwards"). **Round 2 is the
 live deck**; round 1 is the record of how it got there, and its card tables describe a deck that has
 since changed again.
 
