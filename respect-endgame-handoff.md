@@ -104,10 +104,12 @@ nightclub table, with Texas (cream hat and fur, as in `Art/Texas.png`) on his sh
 envelope, which ties the set together, and the set climbs from the street to the club. The first
 round was square and one face in four costumes; both are fixed.
 
-One note: beside the existing card art (the Rat, Shylock, the Welsher, the Borough plates), which is
-dark, sepia and low-key, these run brighter and more saturated, the Captain and the Mayor most (blue
-night, purple club). A grade toward the house sepia, or "darker, muted" in the prompt, would sit them
-with the Marks and the Rat they share a Respect pile with.
+Beside them, the existing Rat, Shylock and Welsher art was dark and sepia. Nick went the other way
+the same day: he regenerated those three brighter, since bright art prints better on the dark card.
+Average brightness (0 to 255): the old three 17 to 20, darker than anything else on the Cards and Jobs
+sheets (the Jobs art runs 22 to 66); the new three 51 to 63; the Bribe set 41 to 75. The darkest art
+still in use is on the Jobs sheet: `Last One Standing.jpg` 22, `Tenament Army.jpg` 27, `Skiff.jpg` and
+`Bloody Sunday.jpg` 28, `Quiet Drop.jpg` and `Scheme.jpg` 31. None of the new images is in the repo yet.
 
 ## Rejected on the way
 
