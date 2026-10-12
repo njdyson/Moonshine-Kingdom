@@ -175,5 +175,5 @@ Every item on the old "When Nick says go" list is done, art first:
 - **CLAUDE.md**, **`mk-online-rules-sync.md` §31** (the port table and a checklist line), and a
   comment in `tools/gen_deck.py` on the Rat's price.
 - Untouched: `The Volstead Act` (shelved), the board (its crowns mark the rooms, which haven't moved),
-  older handoffs, which are history, and the site's `Art/Index/cards.jpg` thumbnail, which still shows
-  the old Rat and Marks (retake it in the art pass).
+  older handoffs, which are history, and the site's Cards tile, `Art/Index/cards.jpg`, which is the cut
+  Night Mayor Title's art (a Bribe portrait would suit it now).
