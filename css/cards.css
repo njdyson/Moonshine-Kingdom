@@ -110,11 +110,11 @@ body {
   text-indent: -9999px;
   z-index: 10;
 }
-.respect-badge[data-respect="1"] { background-image: url('../Art/shield1.png'); }
-.respect-badge[data-respect="2"] { background-image: url('../Art/shield2.png'); }
-.respect-badge[data-respect="3"] { background-image: url('../Art/shield3.png'); }
-.respect-badge[data-respect="5"] { background-image: url('../Art/shield5.png'); }
-.card .respect-badge[style*="shield-1.png"] { background-image: url('../Art/shield-1.png'); }
+/* No page loads this stylesheet any more; kept pointing at live files. */
+.respect-badge[data-respect="1"] { background-image: url('../Art/Shields/plus1.svg'); }
+.respect-badge[data-respect="2"] { background-image: url('../Art/Shields/plus2.svg'); }
+.respect-badge[data-respect="3"] { background-image: url('../Art/Shields/plus3.svg'); }
+.respect-badge[data-respect="5"] { background-image: url('../Art/Shields/plus5.svg'); }
 
 /* ======================================================================= */
 /* --- Card Back Styles --- */

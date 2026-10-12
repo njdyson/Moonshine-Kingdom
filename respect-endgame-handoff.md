@@ -150,8 +150,8 @@ Every item on the old "When Nick says go" list is done, art first:
 
 - **Art/Cards:** the four Bribe portraits (`Precinct Captain.jpg`, `Alderman.jpg`, `Judge.jpg`,
   `Mayor.jpg`) and the brighter `Rat.jpg`, `Shylock.jpg` and `Welsher.jpg`, all 898 x 599 JPEG q88 as
-  `tools/optimise_art.py` sizes card art. `Art/shield4.png` is a stopgap made from `shield5.png` with
-  a DejaVu Serif "4"; reshoot it in the art pass.
+  `tools/optimise_art.py` sizes card art. The Respect shields were then redrawn as
+  SVG the same day (`tools/build_shields.py`, `Art/Shields/`), replacing every shield PNG.
 - **Rulebook:** opening scene, components (Bribe Cards (16)), the Goal page (its second section is
   now **Bribes: Buy the City**, with the four prices inline), Setup (the piles; markers in the
   supply), Beg, Bribe, Rat, Winning the Game (Take the Crown as a two-item list: the Name, the Room;

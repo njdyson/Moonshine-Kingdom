@@ -50,11 +50,9 @@ def norm(p):
     return p.replace("\\", "/")
 
 
-# Only the five shields the decks actually reference. A bare Art/shield*.png
-# glob also catches shield-1 / shield-3 / shield2-unified, which nothing links
-# to and which have no established display size to resize against.
-SHIELDS = ["Art/shield1.png", "Art/shield2.png", "Art/shield3.png",
-           "Art/shield5.png", "Art/shieldNoCrown.png"]
+# The Respect shields were PNGs resized here until 2026-10-12; they are SVG
+# now (tools/build_shields.py), so there is nothing left to shrink.
+SHIELDS = []
 
 
 def collect():

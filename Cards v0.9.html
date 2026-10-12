@@ -268,27 +268,21 @@ body{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
   background-size:contain;background-repeat:no-repeat;background-position:center;
-  filter:drop-shadow(0 .4mm .8mm rgba(0,0,0,.65));
+  /* no CSS filter: the shadow is drawn inside the SVG, because Chrome
+     prints any filtered element as a bitmap */
 }
-/* Bribes: the Jobs deck's flat 256px shields. shield4.png (2026-10-12)
-   is a stopgap made from shield5.png with a DejaVu Serif "4"; reshoot
-   it with the rest in the next art pass. */
-.respect[data-respect="1"]{background-image:url('Art/shield1.png')}
-.respect[data-respect="2"]{background-image:url('Art/shield2.png')}
-.respect[data-respect="3"]{background-image:url('Art/shield3.png')}
-.respect[data-respect="4"]{background-image:url('Art/shield4.png')}
-/* The Rat (-3 since 2026-10-12, as it was before v0.9.7) and the Marks
-   (-2 while held, same date; they carried the broken crown while a Mark
-   barred the Nod). shield-3.png and shield-2.png are drawn to the
-   archived Debts-deck plate's geometry: 1024px, the same red, the same
-   cream numeral, a soft glow. A reshoot in the flat 256px style is a
-   straight swap. Cosmetic debt only. */
-.respect[data-respect="-3"]{background-image:url('Art/shield-3.png')}
-.respect[data-respect="-2"]{background-image:url('Art/shield-2.png')}
-/* The Welsher is the Rat's little brother: a price, not a bar.
-   shield-1.png is the same archived 1024px Debts-deck plate family
-   as the Rat's and the Marks'; same scale, same glow, same caveat. */
-.respect[data-respect="-1"]{background-image:url('Art/shield-1.png')}
+/* One family of SVG shields for every value, drawn by
+   tools/build_shields.py (2026-10-12) and shared with the Jobs deck: the
+   Bribes 1 to 4, the Welsher -1, the Marks -2 (while held; they carried a
+   broken crown while a Mark barred the Nod) and the Rat -3 (as it was
+   before v0.9.7). They replace two PNG families and a patched-up 4. */
+.respect[data-respect="1"]{background-image:url('Art/Shields/plus1.svg')}
+.respect[data-respect="2"]{background-image:url('Art/Shields/plus2.svg')}
+.respect[data-respect="3"]{background-image:url('Art/Shields/plus3.svg')}
+.respect[data-respect="4"]{background-image:url('Art/Shields/plus4.svg')}
+.respect[data-respect="-1"]{background-image:url('Art/Shields/minus1.svg')}
+.respect[data-respect="-2"]{background-image:url('Art/Shields/minus2.svg')}
+.respect[data-respect="-3"]{background-image:url('Art/Shields/minus3.svg')}
 
 /* ============================================================
    CARD BACKS
@@ -575,8 +569,6 @@ body.trim .card,body.trim .back{border-radius:0}
      Welsher plate (Art/Cards/Welsher.jpg, the torn contract,
      cropped to the deck's 898x674 landscape recipe); it retired
      the borrowed Rulebook Oath plate 2026-08-03.
-     shield-1.png is the archived Debts-deck plate, same family
-     and same cosmetic-debt caveat as the Rat's shield-2.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>

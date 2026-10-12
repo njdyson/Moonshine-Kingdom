@@ -187,16 +187,19 @@ body{
 }
 
 /* --- respect : shield badge, tucked top-right like the old deck.
-   Number is baked into the shield art, so the element carries no text. --- */
+   Number is drawn into the shield, so the element carries no text. The
+   shields are SVG since 2026-10-12, drawn by tools/build_shields.py and
+   shared with the Cards sheet. --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
   background-size:contain;background-repeat:no-repeat;background-position:center;
-  filter:drop-shadow(0 .4mm .8mm rgba(0,0,0,.65));
+  /* no CSS filter: the shadow is drawn inside the SVG, because Chrome
+     prints any filtered element as a bitmap */
 }
-.respect[data-respect="1"]{background-image:url('Art/shield1.png')}
-.respect[data-respect="3"]{background-image:url('Art/shield3.png')}
-.respect[data-respect="5"]{background-image:url('Art/shield5.png')}
+.respect[data-respect="1"]{background-image:url('Art/Shields/plus1.svg')}
+.respect[data-respect="3"]{background-image:url('Art/Shields/plus3.svg')}
+.respect[data-respect="5"]{background-image:url('Art/Shields/plus5.svg')}
 
 /* --- verb tag (design aid: hidden everywhere; generator still emits it) --- */
 .verb{
