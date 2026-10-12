@@ -95,17 +95,19 @@ Nick generates the art; aim for what suits the theme best.
 - **Card face:** the price, the Respect drawn the way the Jobs cards draw it (so a Bribe reads like
   a Job in the Respect pile), and the marker.
 
-**First art (Nick, 2026-10-12, four square 1254 px portraits; not yet in the repo).** All four read
-at a glance, share the palette, and carry one envelope each (in the Captain's cap, under the Judge's
-law books, on the Alderman's desk, on the Mayor's table), which ties the set together. The Mayor is in
-a tuxedo at a nightclub table with a flapper in a feather headdress behind him. Two notes:
+**Art (Nick, 2026-10-12, second round; not yet in the repo).** Four 1536 x 1024 images, so 3:2,
+the Cards sheet's 57 x 38 mm frame, with nothing lost to the crop. Four distinct men: a burly young
+Captain in the rain, a hand in a fedora dropping the envelope into his cap (the Boss making the drop
+in person); a jowly Alderman with a cigar under the flag and bunting; a thin old Judge in round
+glasses, the envelope under his law books; and a slim dandy of a Mayor in a fur-collared coat at a
+nightclub table, with Texas (cream hat and fur, as in `Art/Texas.png`) on his shoulder. Each has one
+envelope, which ties the set together, and the set climbs from the street to the club. The first
+round was square and one face in four costumes; both are fixed.
 
-- **One face.** The Captain, the Alderman and the Judge are the same moustached man, and the Mayor is
-  close. Four ages and builds would tell the cards apart faster than costume alone.
-- **The frame.** The Cards sheet's art box is 57 x 38 mm (3:2, `object-fit: cover`; the other card art
-  is 898 x 674). A square cut to that loses a sixth at the top and bottom: the Mayor loses both the
-  woman's face and his envelope, and the Captain and the Judge lose their foreheads. Either generate at
-  3:2 or give the Bribe card a taller art box, since it carries little text.
+One note: beside the existing card art (the Rat, Shylock, the Welsher, the Borough plates), which is
+dark, sepia and low-key, these run brighter and more saturated, the Captain and the Mayor most (blue
+night, purple club). A grade toward the house sepia, or "darker, muted" in the prompt, would sit them
+with the Marks and the Rat they share a Respect pile with.
 
 ## Rejected on the way
 
