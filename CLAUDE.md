@@ -227,8 +227,13 @@ or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 3 or 
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a High Society Venue outside his home Borough**, and you win
 on the spot. It lives on the Winning the Game page (a heading and a two-item list: the Name, the
-Room) and on the Borough cards. Keep it out of the standard Power Plays table and off the Playbooks'
-Play lists: listed beside Bribe and Rise, it read as an ordinary Play.
+Room), on the Borough cards, and since 2026-10-12 on the Playbooks (Nick: "these are all of the
+actions you can take, play that one and you win the game"). Keep it out of the Rulebook's standard
+Power Plays table. On the Playbooks it is not one of the rows: listed beside Bribe and Rise it read
+as an ordinary Play, so it closes the Plays as a gilt capstone after Lay Low, in one line that points
+to the Borough card for the rooms. To make room the fronts dropped their "Mob Playbook: colour"
+kicker (the enamel band keeps the colour) and Beg, Rat and Bribe went to one line each; the
+busiest front keeps about a line spare in its 925px print box.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
 That free final betrayal is Nick's call, on purpose ("cleaner and more brutal"); do not patch

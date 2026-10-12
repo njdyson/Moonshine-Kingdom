@@ -170,12 +170,8 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,0) 50%,rgba(0,0,0,.25)),var(--mob,transparent);
   clip-path:polygon(5px 0,calc(100% - 5px) 0,100% 50%,calc(100% - 5px) 100%,5px 100%,0 50%);
 }
-/* Sits inside the existing kicker line, so it adds no card height (cards are height-bound at print) */
-.mob-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mob);
-  border:1px solid rgba(0,0,0,.5);box-shadow:0 0 0 1px rgba(232,200,90,.35);
-  vertical-align:middle;margin-right:6px;position:relative;top:-1px}
 
-/* The head, centred: kicker, the name cut into a gilt plate (as the Town Planner's,
+/* The head, centred: the name cut into a gilt plate (a kicker above it on the backs (as the Town Planner's,
    the Ledger's and the card backs' are), and the tagline. The plate is sized to the
    old name line, so the head is no taller. */
 .card-head{position:relative;text-align:center;padding-bottom:10px;margin-bottom:2px}
@@ -262,6 +258,15 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
 /* The backs are not row-bound (they share one layout and have room), so their rows breathe */
 .act{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
+/* Take the Crown (2026-10-12): the one Play that wins the game, so it closes the list
+   in gilt instead of sitting among the rows (listed beside Bribe and Rise it read as an
+   ordinary Play). Its own rules live on the Borough card and the Rulebook's Winning the
+   Game; this row only has to say what it is. */
+.play--crown{margin-top:5px;padding:4px 8px 4px 2px;align-items:center;border-top:1px solid var(--gold-line);border-bottom:1px solid var(--gold-line);
+  background:linear-gradient(90deg,rgba(201,164,55,.02),rgba(201,164,55,.14) 22%,rgba(201,164,55,.14) 78%,rgba(201,164,55,.02))}
+.play--crown .name{flex:0 0 auto;font:700 12.5px Cinzel,serif;letter-spacing:.3px;color:var(--gold-bright);padding-top:0;white-space:nowrap}
+.play--crown .name .icon{margin:0 5px 0 0;position:relative;top:-1px}
+.play--crown .desc{padding-top:0}
 
 /* A Play's cost in markers, so it is drawn as a marker's socket: a gilt bezel
    round a lacquer floor, the Ledger's in miniature. */
@@ -358,7 +363,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card card--yellow">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Yellow</div>
       <div class="plate"><span class="mob-name">Sicilian Syndicate</span></div>
       <div class="mob-tag">Old money. Longer memory.</div>
     </div>
@@ -387,17 +391,17 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Each Mark held: <b>&minus;2 Respect</b>.</div>
+      <div class="desc"><b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (<b>&minus;2 Respect</b> while held). <b>Square Up:</b> <b>$2,000</b>. One deal a visit.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy a <b>Bribe card</b> at its price, <b>$2,000</b> to <b>$5,000</b>: <b>1 to 4 Respect</b>, and <b>1 Influence</b> from your supply. One of each. <b>Boss required.</b></div>
+      <div class="desc">Buy a <b>Bribe card</b> at its price: its <b>Respect</b> and <b>1 Influence</b>. One of each. <b>Boss required.</b></div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
@@ -432,6 +436,12 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
       <div class="cost cost--free">0</div>
       <div class="name">Lay Low</div>
       <div class="desc">End your Day: <b>Collect</b> every marker left in your Ledger (<b>$100</b> each) to Reserves, then take the top Turn Token from <b>tomorrow's stack</b>. No more Plays till tomorrow.</div>
+    </div>
+
+    <div class="play play--crown">
+      <div class="cost">2</div>
+      <div class="name"><img class="icon" src="Art/Icons/Crown.svg" alt="">Take the Crown</div>
+      <div class="desc"><b>20+ Respect</b> and your <b>Boss</b> in a room your <b>Borough card</b> names: <b>you win</b>.</div>
     </div>
 
     <div class="sig">
@@ -526,7 +536,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card card--red">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Red</div>
       <div class="plate"><span class="mob-name">East Side Vipers</span></div>
       <div class="mob-tag">They hear it before you say it.</div>
     </div>
@@ -555,17 +564,17 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Each Mark held: <b>&minus;2 Respect</b>.</div>
+      <div class="desc"><b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (<b>&minus;2 Respect</b> while held). <b>Square Up:</b> <b>$2,000</b>. One deal a visit.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy a <b>Bribe card</b> at its price, <b>$2,000</b> to <b>$5,000</b>: <b>1 to 4 Respect</b>, and <b>1 Influence</b> from your supply. One of each. <b>Boss required.</b></div>
+      <div class="desc">Buy a <b>Bribe card</b> at its price: its <b>Respect</b> and <b>1 Influence</b>. One of each. <b>Boss required.</b></div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
@@ -600,6 +609,12 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
       <div class="cost cost--free">0</div>
       <div class="name">Lay Low</div>
       <div class="desc">End your Day: <b>Collect</b> every marker left in your Ledger (<b>$100</b> each) to Reserves, then take the top Turn Token from <b>tomorrow's stack</b>. No more Plays till tomorrow.</div>
+    </div>
+
+    <div class="play play--crown">
+      <div class="cost">2</div>
+      <div class="name"><img class="icon" src="Art/Icons/Crown.svg" alt="">Take the Crown</div>
+      <div class="desc"><b>20+ Respect</b> and your <b>Boss</b> in a room your <b>Borough card</b> names: <b>you win</b>.</div>
     </div>
 
     <div class="sig">
@@ -694,7 +709,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card card--blue">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Blue</div>
       <div class="plate"><span class="mob-name">Harlem Knights</span></div>
       <div class="mob-tag">Every pier from Havana to Harlem.</div>
     </div>
@@ -723,17 +737,17 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Each Mark held: <b>&minus;2 Respect</b>.</div>
+      <div class="desc"><b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (<b>&minus;2 Respect</b> while held). <b>Square Up:</b> <b>$2,000</b>. One deal a visit.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy a <b>Bribe card</b> at its price, <b>$2,000</b> to <b>$5,000</b>: <b>1 to 4 Respect</b>, and <b>1 Influence</b> from your supply. One of each. <b>Boss required.</b></div>
+      <div class="desc">Buy a <b>Bribe card</b> at its price: its <b>Respect</b> and <b>1 Influence</b>. One of each. <b>Boss required.</b></div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
@@ -768,6 +782,12 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
       <div class="cost cost--free">0</div>
       <div class="name">Lay Low</div>
       <div class="desc">End your Day: <b>Collect</b> every marker left in your Ledger (<b>$100</b> each) to Reserves, then take the top Turn Token from <b>tomorrow's stack</b>. No more Plays till tomorrow.</div>
+    </div>
+
+    <div class="play play--crown">
+      <div class="cost">2</div>
+      <div class="name"><img class="icon" src="Art/Icons/Crown.svg" alt="">Take the Crown</div>
+      <div class="desc"><b>20+ Respect</b> and your <b>Boss</b> in a room your <b>Borough card</b> names: <b>you win</b>.</div>
     </div>
 
     <div class="sig">
@@ -862,7 +882,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card card--green">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker"><span class="mob-dot"></span>Mob Playbook &middot; Green</div>
       <div class="plate"><span class="mob-name">Hell's Kitchen Irish</span></div>
       <div class="mob-tag">They always come heavy.</div>
     </div>
@@ -891,17 +910,17 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Beg</div>
-      <div class="desc">Visit Shylock, one Mark per trip. <b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (7 in supply). <b>Square Up:</b> <b>$2,000</b> clears one. Each Mark held: <b>&minus;2 Respect</b>.</div>
+      <div class="desc"><b>Loan:</b> <b>$1,500</b> + a <b>Mark</b> (<b>&minus;2 Respect</b> while held). <b>Square Up:</b> <b>$2,000</b>. One deal a visit.</div>
     </div>
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, <b>no repeat Rat</b>, and it's yours until a rival Rats.</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
       <div class="name">Bribe</div>
-      <div class="desc">Buy a <b>Bribe card</b> at its price, <b>$2,000</b> to <b>$5,000</b>: <b>1 to 4 Respect</b>, and <b>1 Influence</b> from your supply. One of each. <b>Boss required.</b></div>
+      <div class="desc">Buy a <b>Bribe card</b> at its price: its <b>Respect</b> and <b>1 Influence</b>. One of each. <b>Boss required.</b></div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Empire Building</span><span class="sec-rule"></span></div>
@@ -936,6 +955,12 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
       <div class="cost cost--free">0</div>
       <div class="name">Lay Low</div>
       <div class="desc">End your Day: <b>Collect</b> every marker left in your Ledger (<b>$100</b> each) to Reserves, then take the top Turn Token from <b>tomorrow's stack</b>. No more Plays till tomorrow.</div>
+    </div>
+
+    <div class="play play--crown">
+      <div class="cost">2</div>
+      <div class="name"><img class="icon" src="Art/Icons/Crown.svg" alt="">Take the Crown</div>
+      <div class="desc"><b>20+ Respect</b> and your <b>Boss</b> in a room your <b>Borough card</b> names: <b>you win</b>.</div>
     </div>
 
     <div class="sig">

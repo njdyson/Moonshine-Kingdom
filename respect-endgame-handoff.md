@@ -174,6 +174,9 @@ Every item on the old "When Nick says go" list is done, art first:
   Wedding. Lesson names kept. Still 16 pages.
 - **CLAUDE.md**, **`mk-online-rules-sync.md` §31** (the port table and a checklist line), and a
   comment in `tools/gen_deck.py` on the Rat's price.
+- **Playbooks** (later the same day, Nick): Take the Crown closes each front as a gilt row after
+  Lay Low ("20+ Respect and your Boss in a room your Borough card names: you win"). Room came from
+  dropping the "Mob Playbook" kicker and taking Beg, Rat and Bribe to one line each.
 - **The site's Cards tile** (`Art/Index/cards.jpg`) was the cut Night Mayor Title's art; it is
   now the Mayor's Bribe portrait, cropped to 800 x 450.
 - Untouched: `The Volstead Act` (shelved), the board (its crowns mark the rooms, which haven't moved),
