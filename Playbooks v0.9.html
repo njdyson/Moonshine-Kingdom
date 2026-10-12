@@ -171,15 +171,15 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   clip-path:polygon(5px 0,calc(100% - 5px) 0,100% 50%,calc(100% - 5px) 100%,5px 100%,0 50%);
 }
 
-/* The head, centred: the name cut into a gilt plate (a kicker above it on the backs (as the Town Planner's,
-   the Ledger's and the card backs' are), and the tagline. The plate is sized to the
-   old name line, so the head is no taller. */
+/* The head, centred: the name cut into a gilt plate (as the Town Planner's, the
+   Ledger's and the card backs' are), and on the fronts the tagline. The plate is sized
+   to the old name line, so the head is no taller. The kicker above it ("Mob Playbook:
+   colour", "Combat Reference") went on 2026-10-12, to make room for Take the Crown. */
 .card-head{position:relative;text-align:center;padding-bottom:10px;margin-bottom:2px}
 .card-head::before{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1.5px;
   background:linear-gradient(90deg,transparent,var(--gold-line) 18%,var(--gold-line) 82%,transparent)}
 .card-head::after{content:"";position:absolute;left:50%;bottom:-3.3px;width:6px;height:6px;margin-left:-3px;
   background:var(--gold-bright);transform:rotate(45deg)}
-.kicker{font:600 8px Barlow;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase}
 .plate{display:inline-flex;align-items:center;gap:10px;margin-top:3px}
 .plate::before,.plate::after{content:"";width:5px;height:5px;background:var(--gold-bright);transform:rotate(45deg)}
 .mob-name,.back-title{
@@ -463,7 +463,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker">Combat Reference</div>
       <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 
@@ -636,7 +635,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker">Combat Reference</div>
       <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 
@@ -809,7 +807,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker">Combat Reference</div>
       <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 
@@ -982,7 +979,6 @@ M582 29.3A3.3 3.3 0 0 1 578.7 26M582 37.88A11.88 11.88 0 0 1 570.12 26'/>\
   <div data-card class="card">
     <div class="card-bar"></div>
     <div class="card-head">
-      <div class="kicker">Combat Reference</div>
       <div class="plate"><span class="back-title">The Lowdown</span></div>
     </div>
 

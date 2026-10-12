@@ -232,7 +232,8 @@ actions you can take, play that one and you win the game"). Keep it out of the R
 Power Plays table. On the Playbooks it is not one of the rows: listed beside Bribe and Rise it read
 as an ordinary Play, so it closes the Plays as a gilt capstone after Lay Low, in one line that points
 to the Borough card for the rooms. To make room the fronts dropped their "Mob Playbook: colour"
-kicker (the enamel band keeps the colour) and Beg, Rat and Bribe went to one line each; the
+kicker (the enamel band keeps the colour; the backs' "Combat Reference" went too, to match) and Beg,
+Rat and Bribe went to one line each; the
 busiest front keeps about a line spare in its 925px print box.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
