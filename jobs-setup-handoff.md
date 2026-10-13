@@ -78,6 +78,29 @@ qualify, which widens the targets a little and makes the pair with The Toll Boot
   spread is 4 (Manhattan +8, the Bronx +7, Queens +6, Brooklyn +4), up from 3, because Manhattan touches
   three of the four Bridges. Brooklyn is still the worst seat; a Brooklyn-only 3 would close it.
 
+### Bots
+
+The same 24-game batch as Round 3 (4 players, to Day 60, the same seeds), on this deck with every
+wording change above:
+
+| | Round 3 deck | This deck |
+| --- | --- | --- |
+| 5s completed | 28 (all Boss cards) | 28: Union Dues 23, Opening Night 4, The Toll Booth Trap 1 |
+| Standoffs ending in a Fold | 47% | 49% |
+| Games crowned by Day 60 | 17 | 19 |
+| Median Day crowned | 37 | 43 |
+
+**Union Dues looks too easy at 5.** In three traced games every one was the same two Plays: a rival
+had left his home Ward Empty (his Safehouse moved, or a Raid had destroyed it), so the scorer Secured
+there for $500 and Recruited four for $1,200. Round 1's reading ("take his over, or wait for him to
+leave it") assumed the wait was long; with Raids destroying Safehouses as often as the opus-vs-bots-1
+game showed, it isn't. Levers, none applied: a count the Ward has to hold (Recruit 4+ where you already
+have Runners), a Safehouse taken over rather than Secured into, or Union Dues back to 3. Bots are not
+people, but people leave home too.
+
+The body counts, The Five Families and The Toll Booth Trap barely complete for bots, which never build
+a stack of five to attack, spread to Staten Island, or corner a Boss.
+
 ### Watch in playtest
 
 1. Whether the endgame still runs one way. The Toll Booth Trap and the bridge set both put Bosses on
