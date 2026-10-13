@@ -255,6 +255,10 @@ body{
 /* --- the two geometries --- */
 .card--holding .art{flex:0 0 38mm}
 .card--holding .rules{flex:0 0 16mm}
+/* A Bribe prints only what it gives (2026-10-13): the price is in the
+   kicker, the Respect on the shield, and the band reads "+1 Influence".
+   The Play's rule lives in the Playbooks and the Rulebook. */
+.card--holding .rules > span{font:700 13pt/1 Cinzel,serif;color:var(--gold-bright);letter-spacing:.4px}
 /* boroughs: 2026-10-10. Take the Crown shares the debts geometry. */
 .card--borough .art{flex:0 0 38mm}
 .card--borough .rules{flex:0 0 16mm}
@@ -746,7 +750,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--longer">Precinct Captain</h2>
     <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
     <div class="respect" data-respect="1"></div>
   </div>
@@ -755,7 +759,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Alderman</h2>
     <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">Every licence in the city crosses his desk.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -764,7 +768,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Judge</h2>
     <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The law is blind, and he can be made deaf.</div>
     <div class="respect" data-respect="3"></div>
   </div>
@@ -773,7 +777,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Mayor</h2>
     <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The Mayor at your table makes the front page.</div>
     <div class="respect" data-respect="4"></div>
   </div>
@@ -795,7 +799,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--longer">Precinct Captain</h2>
     <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
     <div class="respect" data-respect="1"></div>
   </div>
@@ -804,7 +808,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Alderman</h2>
     <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">Every licence in the city crosses his desk.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -813,7 +817,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Judge</h2>
     <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The law is blind, and he can be made deaf.</div>
     <div class="respect" data-respect="3"></div>
   </div>
@@ -822,7 +826,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Mayor</h2>
     <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The Mayor at your table makes the front page.</div>
     <div class="respect" data-respect="4"></div>
   </div>
@@ -844,7 +848,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--longer">Precinct Captain</h2>
     <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
     <div class="respect" data-respect="1"></div>
   </div>
@@ -853,7 +857,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Alderman</h2>
     <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">Every licence in the city crosses his desk.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -862,7 +866,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Judge</h2>
     <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The law is blind, and he can be made deaf.</div>
     <div class="respect" data-respect="3"></div>
   </div>
@@ -871,7 +875,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Mayor</h2>
     <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The Mayor at your table makes the front page.</div>
     <div class="respect" data-respect="4"></div>
   </div>
@@ -893,7 +897,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--longer">Precinct Captain</h2>
     <div class="art"><img src="Art/Cards/Precinct Captain.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$2,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">He doesn&rsquo;t see the trucks. He sees the envelope.</div>
     <div class="respect" data-respect="1"></div>
   </div>
@@ -902,7 +906,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Alderman</h2>
     <div class="art"><img src="Art/Cards/Alderman.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$3,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">Every licence in the city crosses his desk.</div>
     <div class="respect" data-respect="2"></div>
   </div>
@@ -911,7 +915,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Judge</h2>
     <div class="art"><img src="Art/Cards/Judge.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$4,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The law is blind, and he can be made deaf.</div>
     <div class="respect" data-respect="3"></div>
   </div>
@@ -920,7 +924,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Mayor</h2>
     <div class="art"><img src="Art/Cards/Mayor.jpg" alt=""></div>
     <div class="rules-label">On the Payroll</div>
-    <div class="rules"><span><b>Bribe (2):</b> pay <b>$5,000</b> to the bank. Take this card and <b>1 Influence</b> from your supply.<span class="brk"></span>One of each per boss.</span></div>
+    <div class="rules"><span>+1 Influence</span></div>
     <div class="flavour">The Mayor at your table makes the front page.</div>
     <div class="respect" data-respect="4"></div>
   </div>

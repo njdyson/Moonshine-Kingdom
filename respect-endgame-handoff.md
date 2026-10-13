@@ -102,7 +102,9 @@ in person); a jowly Alderman with a cigar under the flag and bunting; a thin old
 glasses, the envelope under his law books; and a slim dandy of a Mayor in a fur-collared coat at a
 nightclub table, with Texas (cream hat and fur, as in `Art/Texas.png`) on his shoulder. Each has one
 envelope, which ties the set together, and the set climbs from the street to the club. The first
-round was square and one face in four costumes; both are fixed.
+round was square and one face in four costumes; both are fixed. On 2026-10-13 Nick swapped in a
+third Captain: an older man with a broken nose and a knowing smirk, holding out his cap on a lamplit
+street while a pinstriped sleeve drops the envelope in (brightness 60).
 
 Beside them, the existing Rat, Shylock and Welsher art was dark and sepia. Nick went the other way
 the same day: he regenerated those three brighter, since bright art prints better on the dark card.
