@@ -160,12 +160,14 @@ CARDS = [
     ("The Butcher's Ledger", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
      "5+ Runners in Brooklyn: stand and lose, or Fold, and it pays."),
     # The Variety Pass (2026-10-13): one Boss card, anywhere, and three 5s up from the 3s. The
-    # Toll Booth Trap names no place now (NAMES 1, WINDOW 1: some rival Boss is always out).
+    # Toll Booth Trap names no place now (NAMES 1, WINDOW 1: some rival Boss is always out), and
+    # is a Kill on purpose (Nick): he Folds out of it unless cornered (RIVAL 3, DEFEND 2), and a
+    # holder who wants the block uses it to make him run.
     # Opening Night names the holder's own room (NAMES 3), which is every rival's crown room, so
     # it is contested by the people walking in (BLOCK 2). The Five Families and Union Dues keep
     # the scores they had as 3s.
-    ("The Toll Booth Trap", 5, "Open Fire", 2, 2, 2, 2, 1, 2, 1, 3,
-     "Any rival Boss: alone he Folds and pays; escorted, a fight."),
+    ("The Toll Booth Trap", 5, "Open Fire", 2, 3, 2, 2, 1, 2, 1, 2,
+     "Any rival Boss, killed: he Folds unless cornered. Or a decoy."),
     ("The Five Families", 5, "Extort", 3, 0, 0, 0, 1, 3, 0, 1,
      "WHACK-A-MOLE: 5 boroughs held at once, publicly, each separately deniable."),
     ("Opening Night", 5, "Unload", 3, 1, 0, 3, 3, 2, 3, 0,

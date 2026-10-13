@@ -20,7 +20,7 @@ Nick, the same evening:
 | Tier | Change |
 | --- | --- |
 | 5 | The body counts stay, one per Borough, as Seizes (round 3). |
-| 5 | **The Toll Booth Trap**: "Seize a District from a rival Boss." Anywhere. |
+| 5 | **The Toll Booth Trap**: "Kill a rival Boss." Anywhere. |
 | 5 | **The Five Families** up from 3, text unchanged. |
 | 5 | **Opening Night** up from 3: "Unload 8+ Rum at the High Society Venue in your home Borough." |
 | 5 | **Union Dues** up from 3, text unchanged. |
@@ -31,9 +31,11 @@ Nick, the same evening:
 
 ### My calls, for review
 
-1. **"Seize", not "Kill", on The Toll Booth Trap.** Nick's message calls it "kill a rival boss", the old
-   set's name, but round 3's reason (a lone Boss Folds for free) applies to it most of all. One word to
-   change if he meant the kill.
+1. ~~"Seize", not "Kill", on The Toll Booth Trap.~~ **Settled: a Kill** (Nick, the same evening): "I'd keep
+   toll booth trap as kill a boss rather than seize. It's makes it a situational strong arm. You can
+   corner him so he can't fold, or use it as a decoy if you want them to fold (earning its name 'trap')."
+   So the Rulebook keeps its kill lines and the Glossary its Kill entry, and the Almanac's lesson 18 says
+   a Fold pays a Boss hunter nothing, "unless the block was what he came for".
 2. **Union Dues is the third 5.** It went down to 3 on 2026-10-11 only so the 5s could be murder alone,
    and it was the best-scoring 3 (hard and contested). A Recruit never shares a Play with a fight, so it
    meets no other 5. It also chains with The Eviction: take his Safehouse over, then hire in his Ward.
@@ -45,8 +47,9 @@ Nick, the same evening:
 
 ### What it does
 
-- **Never two 5s**: PASS. The Toll Booth Trap pairs with each body count on a District held by a Boss and
-  5+ Runners (the four allowed pairs, as before but now one card against four). The three promoted 5s are
+- **Never two 5s**: PASS. The Toll Booth Trap pairs with each body count on a fight that kills the Boss and
+  takes a District held by 5+ Runners (the four allowed pairs, as before but now one card against four). A
+  Fold there pays the body count alone. The three promoted 5s are
   an Extort, an Unload and a Recruit, so they meet no fight. Top stacks are still 13 at stake 8.
 - **Opening Night at home** stops the pour in the room you crown in, since no boss crowns at home. It does
   not rule out a same-Day crown: a boss who holds his home room and an away room can pour at home, take

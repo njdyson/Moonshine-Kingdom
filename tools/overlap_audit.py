@@ -4,7 +4,8 @@
 Enumerates every Play a player could make (Play x target District x board state x
 what the Play did there) and reports which Jobs co-fire. Enforces handoff §3:
     - HARD RULE: never two 5s on one Play, except a body count and The Toll Booth Trap together,
-      on a District taken from a Boss and 5+ Runners (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
+      on a fight that kills the Boss and takes a District held by 5+ Runners
+      (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
     - Watch:     a 5 plus small change is fine; big 3-stacks are suspect.
 
 breadth_audit.py imports this module, so the model lives in one place.
@@ -188,17 +189,18 @@ JOBS = [
        (lambda b: lambda p, d: p['seize'] and p['def_runners'] >= 5 and d.boro == b)(b))
      for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
                          ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
-    # The one Boss card left, anywhere (2026-10-13). It meets each body count on a District
-    # held by a Boss and 5+ Runners: see ALLOWED_DOUBLE_FIVES.
-    J('The Toll Booth Trap', 5, ['Move'], 'Seize a District from a rival Boss.',
-      lambda p, d: p['seize'] and p['def_boss'])]
+    # The one Boss card left, anywhere, and a Kill (2026-10-13): a Fold denies it. It meets each
+    # body count only on a fight that kills the Boss and takes a District held by 5+ Runners:
+    # see ALLOWED_DOUBLE_FIVES.
+    J('The Toll Booth Trap', 5, ['Move'], 'Kill a rival Boss.',
+      lambda p, d: p['boss_killed'])]
 
 # The one exception to "never two 5s" (Nick, 2026-10-12): a body count and the Boss card
-# together, on a District taken from a Boss and five or more Runners. Since 2026-10-13 a Fold
-# there pays both, so the Occupier stands, and the Invader must beat a Boss and five with the
-# 4 markers left after staking 6 of at most 10; and the Offers deal one card a Day. The Boss
-# card was one per Borough until the Variety Pass left The Toll Booth Trap alone, anywhere, so
-# it now pairs with each body count. Any other pair of 5s still fails the audit.
+# together, on a fight that kills the Boss and takes a District held by five or more Runners.
+# A Fold pays the body count alone, so the Invader must beat a Boss and five with the 4 markers
+# left after staking 6 of at most 10; and the Offers deal one card a Day. The Boss card was one
+# per Borough until the Variety Pass left The Toll Booth Trap alone, anywhere, so it now pairs
+# with each body count. Any other pair of 5s still fails the audit.
 ALLOWED_DOUBLE_FIVES = {frozenset(('The Toll Booth Trap', n)) for n in (
     'Bloody Sunday', 'Over the Top', 'Rum Wars', "The Butcher's Ledger")}
 
@@ -226,8 +228,8 @@ BARRELS = (0, 3, 4, 6, 8)
 
 
 def _p(**kw):
-    p = dict(barrels=0, rum=False, runners=0, def_runners=0, def_boss=False, seize=False,
-             own_boss=False, crew=False, route='land',
+    p = dict(barrels=0, rum=False, runners=0, def_runners=0, def_boss=False, boss_killed=False,
+             seize=False, own_boss=False, crew=False, route='land',
              from_staten=False, sh='none', adj_rival_sh=False, all5=False, bars=frozenset(),
              docks4=False)
     p.update(kw)
@@ -329,13 +331,16 @@ def _fight(fight, state, home, out, sh, route, from_staten, barrels, rum, crew):
             yield _p(own_boss=own_boss, **base)
         return
     # The crew that met you at the door: its Runners (1 stands for "fewer than five") and
-    # whether its Boss stood with them. A Fold is a seize, as a won fight is.
+    # whether its Boss stood with them. A Fold is a seize, as a won fight is, but kills nobody;
+    # a Boss can fall in a fight you win or lose (last, or first to a Sicilian Hit).
     for def_runners in (0, 1, 5):
         for def_boss in (False, True):
             if not def_runners and not def_boss:
                 continue
-            for own_boss in (False, True):
-                yield _p(def_runners=def_runners, def_boss=def_boss, own_boss=own_boss, **base)
+            for boss_killed in ((False, True) if def_boss else (False,)):
+                for own_boss in (False, True):
+                    yield _p(def_runners=def_runners, def_boss=def_boss, boss_killed=boss_killed,
+                             own_boss=own_boss, **base)
 
 
 # An Extort pays $200 for every District you Control anywhere, so its Jobs read the whole
@@ -436,7 +441,7 @@ def main():
     if not bad:
         print('  PASS: no Play can fire two 5-Respect Jobs, outside the allowed pairs.')
     for pair in ok:
-        print(f'  allowed (a District taken from a Boss and 5+ Runners; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
+        print(f'  allowed (Boss killed, District of 5+ Runners taken; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
 
     print()
     print('=' * 78)

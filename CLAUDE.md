@@ -164,16 +164,20 @@ of the Move that starts it, so as a 5 it could pay beside a bounty 5 on one Play
 and its fight as one Play, and it refuses to run until each card's printed objective matches its
 model.
 
-**A Fold is a Seize, and the fight 5s are Seizes** (Nick, 2026-10-13, after the opus-vs-bots-1
-playtest in mk-online's `harness/transcripts/`). Until then the 5s read "Kill ...", and a Fold denied
-all eight: of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every lone
-Boss Folded. Now the body counts read "Seize a District from 5+ rival Runners in X" and The Toll Booth
-Trap "Seize a District from a rival Boss", so the Occupier stands and makes the Invader win it, or runs
-and pays him 5 anyway.
+**A Fold is a Seize, and the body counts are Seizes** (Nick, 2026-10-13, after the opus-vs-bots-1
+playtest in mk-online's `harness/transcripts/`). Until then all eight 5s read "Kill ...", and a Fold
+denied them all: of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every
+lone Boss Folded. Now the body counts read "Seize a District from 5+ rival Runners in X", so the
+Occupier stands and makes the Invader win it, or runs and pays him 5 anyway.
 The crew is counted as it met the Invader at the door (the Rulebook's Pulling It Off, its one home).
-A kill in a fight the Invader loses pays nothing. Don't bring back "Kill", and don't add "or kill":
-the Fold was the hole, and one verb is the house style. No Job reads kills now, so the Glossary has
-no Kill entry.
+A kill in a fight the Invader loses pays nothing on them.
+
+**The Toll Booth Trap stays a Kill** ("Kill a rival Boss.", anywhere; Nick, the same evening): "a
+situational strong arm. You can corner him so he can't fold, or use it as a decoy if you want them to
+fold (earning its name 'trap')." A crew with no Connected Safe District to Scram to can't Fold, so the
+hunter's work is the cornering, and a face-up Trap that makes a Boss run hands over his block. It is
+the deck's one kill Job, so the Rulebook keeps its kill lines ("a Raid makes arrests, not kills", "your
+Ambush or return fire completes nothing") and the Glossary its Kill entry. Don't make it a Seize.
 
 ## Jobs: sets, and setup
 
@@ -199,13 +203,13 @@ once. The deck is 36 cards, 16 / 12 / 8:
   (A Bridge to Sell); and singles, The Eviction back among them.
 - **5s**: no longer one set (Nick, 2026-10-13: "more variety is likely better to avoid a stale
   standard ending"). A **body count** per Borough ("Seize a District from 5+ rival Runners in X"),
-  **The Toll Booth Trap** ("Seize a District from a rival Boss", anywhere), **The Five Families**,
+  **The Toll Booth Trap** ("Kill a rival Boss", anywhere), **The Five Families**,
   **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough") and **Union
   Dues**. Opening Night is home-only so the pour can't be made in the room its holder crowns in. A body
   count and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
-  2026-10-12): paying both takes a District held by a Boss and five Runners, and holding both stakes
-  6 of at most 10 markers. A Fold there pays 10, so the Occupier stands, and the Invader has to beat a
-  Boss and five. Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a
+  2026-10-12): paying both takes a fight that kills the Boss and takes a District held by five
+  Runners, and holding both stakes 6 of at most 10 markers. A Fold there pays the body count alone.
+  Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a
   target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs
   and fails any other.
 
@@ -552,7 +556,7 @@ name. "Loose Liquor" is retired: barrels in a District nobody Controls are nobod
 Since 2026-10-10 the Rulebook ends with **Glossary: Speak the Lingo**: one line per term of art the
 aids use without defining, each naming the section that holds the rule. It defines the word and
 stops; the rule stays in its section. It is a second home for every definition it carries, so a
-change to Connected, Safe, Control, Seize or any other term listed must be made there too.
+change to Connected, Safe, Control, Kill, Seize or any other term listed must be made there too.
 
 ## Scram: one run for a Fold and a Raid
 

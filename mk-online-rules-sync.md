@@ -879,7 +879,7 @@ through the real engine. RULES-AI.md says it for the agents.
 
 | Card | Now |
 | --- | --- |
-| The Toll Booth Trap (5) | "Seize a District from a rival Boss": §32's Boss card, **anywhere** |
+| The Toll Booth Trap (5) | "Kill a rival Boss": a rival Boss killed in your own Play's fight, **anywhere**; a Fold denies it (Nick kept the Kill) |
 | The Five Families (5) | up from 3, same trigger |
 | Opening Night (5) | up from 3: an Unload of **8+ Rum at the High Society Venue in the holder's home Borough** |
 | Union Dues (5) | up from 3, same trigger |
@@ -889,9 +889,10 @@ through the real engine. RULES-AI.md says it for the agents.
 | The Eviction (3, back) | "Take over a rival's Safehouse": any takeover on your own Play |
 
 The bridge cards read as Hell's Highway does: the Move carries the Boss and 4+ Rum across, whatever the
-fight at the far end does. Bots: The Eviction and Union Dues want a takeover, not a raze.
+fight at the far end does. Bots: The Eviction and Union Dues want a takeover, not a raze. The kill tally
+comes back for The Toll Booth Trap (`killedRivalBoss`, set only by the Invader's own shots).
 
-**Ported the same day** (mk-online c2e8116, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
+**Ported the same day** (mk-online c2e8116, and 167d3ce for the Kill, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
 `jobs.ts`, the evaluators (`homeRoomOf` for Opening Night, `tookOverRivalSafehouse` for The Eviction, one
 `bridgeRun` for the three Bridges), bot plans for the new cards, and `scripts/jobs-check.ts`.
 

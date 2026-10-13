@@ -466,7 +466,8 @@ FIVES = [
     # the Boss set goes but for The Toll Booth Trap, now anywhere; The Five Families, Opening Night
     # (in your home Borough) and Union Dues come up from the 3s. So the 5s are four fights, a Boss
     # hunt, an Extort, a pour and a Recruit. The only two that can meet on one Play are The Toll Booth
-    # Trap and a body count, on a District held by a Boss and 5+ Runners: the allowed pairs.
+    # Trap and a body count, on a fight that kills the Boss and takes a District held by 5+ Runners:
+    # the allowed pairs.
     # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
     # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
     # and 2 Runners from setup, so this is a campaign against a garrison behind the
@@ -517,9 +518,14 @@ FIVES = [
     # without it).
     # VARIETY PASS 2026-10-13 (Nick): the one Boss card left, anywhere. The other three are cut and
     # the 5s are no longer one set: "more variety is likely better to avoid a stale standard ending".
-    # It meets each body count on a District held by a Boss and 5+ Runners (the four allowed pairs).
+    # A KILL, not a Seize, on purpose (Nick, the same evening): "a situational strong arm. You can
+    # corner him so he can't fold, or use it as a decoy if you want them to fold (earning its name
+    # 'trap')." A Boss with no Connected Safe District to Scram to can't Fold, so the hunter's work is
+    # the cornering; and a face-up Toll Booth Trap makes a Boss run, which hands over the block.
+    # It meets each body count only on a fight that kills the Boss and takes a District held by 5+
+    # Runners (the four allowed pairs); a Fold pays the body count alone.
     ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
-     "Seize a District from a <b>rival Boss</b>.",
+     "Kill a <b>rival Boss</b>.",
      "A toll is a toll. Somebody always pays it."),
     # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
     # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
