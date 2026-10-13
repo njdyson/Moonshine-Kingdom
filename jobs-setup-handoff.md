@@ -35,8 +35,11 @@ Nick, the same evening:
 | --- | --- | --- |
 | The Extort set | Extort while you Control all three Speakeasies in X. | Extort all of the Speakeasies in X. |
 | Body counts | Seize a District from 5+ rival Runners in X. | Seize a District from 5+ rival **Mobsters** in X. |
+| The Five Families | Extort while you Control a District in all five Boroughs. | Extort a District in all five Boroughs. |
+| Cuban Prince | Extort while you Control 4+ Docks. | Extort 4+ Docks. |
 
-On the Extort set: "I don't think that can be misinterpreted and it reads much cleaner." An Extort
+On the Extort set: "I don't think that can be misinterpreted and it reads much cleaner." The other two
+Extort cards followed at Nick's say-so, so every Extort card now opens "Extort". An Extort
 collects from every District you Control, so extorting a Speakeasy means holding it, and "all of the"
 still takes in the room. On the body counts, a Boss now counts toward the five: a Boss and four Runners
 qualify, which widens the targets a little and makes the pair with The Toll Booth Trap a Boss and four.

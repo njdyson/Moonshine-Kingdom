@@ -888,13 +888,14 @@ through the real engine. RULES-AI.md says it for the agents.
 | A Bridge to Sell (3, new) | "Move your Boss and 4+ Rum across the **Brooklyn Bridge**" (the Bowery to Red Hook) |
 | The Eviction (3, back) | "Take over a rival's Safehouse": any takeover on your own Play |
 | The Extort set (3) | reworded only: "Extort all of the Speakeasies in X", same trigger |
+| The Five Families (5), Cuban Prince (3) | reworded only: "Extort a District in all five Boroughs", "Extort 4+ Docks" |
 | Body counts (5) | "Seize a District from 5+ rival **Mobsters** in X": the crew at the door counts its Boss too |
 
 The bridge cards read as Hell's Highway does: the Move carries the Boss and 4+ Rum across, whatever the
 fight at the far end does. Bots: The Eviction and Union Dues want a takeover, not a raze. The kill tally
 comes back for The Toll Booth Trap (`killedRivalBoss`, set only by the Invader's own shots).
 
-**Ported the same day** (mk-online c2e8116, 167d3ce for the Kill and 309ae35 for the wording, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
+**Ported the same day** (mk-online c2e8116, 167d3ce for the Kill, 309ae35 and a5bd194 for the wording, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
 `jobs.ts`, the evaluators (`homeRoomOf` for Opening Night, `tookOverRivalSafehouse` for The Eviction, one
 `bridgeRun` for the three Bridges), bot plans for the new cards, and `scripts/jobs-check.ts`.
 

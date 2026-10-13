@@ -297,8 +297,9 @@ THREES = [
     # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's
     # Extort card: four of the eight Docks, held at once. Holding four almost always makes you the
     # Harbormaster too. Was "Move 3+ Rum into Red Hook", cut on the setup pass as a Brooklyn chore.
+    # WORDING 2026-10-13 (Nick): "Extort 4+ Docks", in the Extort set's new style.
     ("Cuban Prince", "Cuban Prince.jpg", "Extort",
-     "Extort while you Control <b>4+ Docks</b>.",
+     "Extort <b>4+ Docks</b>.",
      "Every boat from Havana ties up at one of his piers."),
     # SETS PASS 2026-10-11 (Nick's wording). The Hell Gate joins Hunts Point (the Bronx's home Ward) and
     # Astoria, so it is the Bronx's friendly 3, the seat with the fewest cards aimed its way. The Rum
@@ -541,8 +542,9 @@ FIVES = [
     # VARIETY PASS 2026-10-13 (Nick): BACK UP TO 5, "as that's tough": a District in every Borough at
     # once, Staten Island included, is whack-a-mole the whole table can see. No other 5 is an Extort, so
     # it meets the 3s only (two Borough cards and this: 11 Respect, stake 7).
+    # WORDING 2026-10-13 (Nick): "Extort a District in all five Boroughs", in the Extort set's style.
     ("The Five Families", "Scheme.jpg", "Extort",
-     "Extort while you Control a District in <b>all five Boroughs</b>.",
+     "Extort a District in <b>all five Boroughs</b>.",
      "Not the richest table in town. Just the widest."),
     # "of Rum" is redundant with the rules (High Society pours nothing else) but
     # says the quiet part out loud on the card: 8 barrels means the whole Trade
