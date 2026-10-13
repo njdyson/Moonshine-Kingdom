@@ -70,9 +70,9 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - The Market shows players + 1 cards.
 - A Job completes at the end of **your own Play** that did the deed (including the fight it started and any Raid it set off). Its stake returns to Reserves and the card scores.
 - "Seize" means Control must change hands from a rival (a won fight, a Fold, or walking onto an unguarded Safehouse).
-- The 5s Seize **from** a crew: "Seize a District from 5+ rival Runners in X" or "from a rival Boss in X". The crew is counted as it met your Move at the door, so a Fold pays the Job as surely as winning the fight; only a stand that holds the District denies it. A kill in a fight you lose pays nothing.
+- The body counts and The Toll Booth Trap Seize **from** a crew: "Seize a District from 5+ rival Runners in X" or "Seize a District from a rival Boss" (anywhere). The crew is counted as it met your Move at the door, so a Fold pays the Job as surely as winning the fight; only a stand that holds the District denies it. A kill in a fight you lose pays nothing.
 - A count is what one Play did: "4+ barrels" means four in a single Play.
-- The deck is 36 cards (16 / 12 / 8): an Unload card for each of the eight ordinary Speakeasies, an Extort card for each mainland Borough's three Speakeasies, and a body count and a Boss for each mainland Borough among the 5s. The eight 5s are kept out of the opening Market.
+- The deck is 36 cards (16 / 12 / 8): an Unload card for each of the eight ordinary Speakeasies, an Extort card for each mainland Borough's three Speakeasies, a Boss and 4+ Rum across each of three Bridges (Hell Gate, Queensboro, Brooklyn), and among the 5s a body count for each mainland Borough, The Toll Booth Trap, The Five Families, Opening Night (your home Borough's High Society Venue) and Union Dues. The eight 5s are kept out of the opening Market.
 - A staked marker never reaches the Ledger, so while you hold Jobs you fund fewer Plays.
 
 **Deals**:
