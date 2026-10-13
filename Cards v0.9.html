@@ -54,18 +54,12 @@
         holdings : art 38mm · rules 16mm
         debts    : art 38mm · rules 16mm
       Change one band and you must take the millimetres off the
-      other; each geometry is sized to its TALLEST card's rules
-      (among debts it was the Rat
-      until v0.9, when the Welsher arrived at 11.5mm of text
-      and took the crown), so the art can only grow when that
-      one card's text shrinks.
-      The two happen to COINCIDE at v0.9: losing the Jobs
-      blackout and the absolution clause cut the Rat's rules from
-      14.9mm of text to 11.5mm, which matches the retired holdings card's
-      height, so debts moved 35/19 -> 38/16 to match. They are
-      still two knobs, not one. Measured in
-      headless Chromium at 96dpi; every card still lands on
-      88.0mm with no overflow.
+      other. Until 2026-10-13 each geometry was sized to its
+      TALLEST card's rules text; since then every card prints one
+      short line (see .rules below), so the bands are free to move
+      if the art ever needs the room. They are still two knobs,
+      not one. Measured in headless Chromium at 96dpi; every card
+      lands on 88.0mm with no overflow.
    ============================================================ */
 
 /* ============================================================
@@ -220,22 +214,25 @@ body{
   font:700 5.4pt Barlow;letter-spacing:2.2px;
   color:var(--gold-dim);text-transform:uppercase;
 }
-/* The text MUST stay wrapped in a single <span>: see the Jobs
-   deck's note. Flexing .rules directly would make every <b> its
-   own flex item and swallow the spaces between them. */
+/* Since 2026-10-13 every card prints one short line here and no rule
+   text: "+1 Influence", "Square Up: $2,000", "No Rat till a rival
+   Rats", "Forever", or a Borough's three crown rooms. The Respect is
+   on the shield and the rules live in the Playbooks and the Rulebook.
+   The text stays wrapped in a single <span> (see the Jobs deck's
+   note), so the band can flex it to the centre. */
 .rules{
   display:flex;align-items:center;justify-content:center;
   padding:0 .4mm;
 }
 .rules > span{
-  font:500 7.4pt/1.3 Barlow;
-  color:var(--ink-2);
+  font:700 13pt/1.1 Cinzel,serif;
+  color:var(--gold-bright);
+  letter-spacing:.4px;
   text-align:center;
+  text-wrap:balance;               /* the Rat's line breaks evenly, not with "Rats" alone */
 }
-.rules b{color:var(--gold-bright);font-weight:700}
-/* clause separator: a blank line between "The Claim" and the
-   power it carries, without a <p> and its margins */
-.brk{display:block;height:1.3mm}
+/* three room names, one to a line */
+.card--borough .rules > span{font-size:10.5pt;line-height:1.25}
 
 /* --- flavour : fixed 5mm, ONE line, nowrap. Anything past ~52
    characters is CLIPPED, silently. Count before you write. --- */
@@ -255,11 +252,7 @@ body{
 /* --- the two geometries --- */
 .card--holding .art{flex:0 0 38mm}
 .card--holding .rules{flex:0 0 16mm}
-/* A Bribe prints only what it gives (2026-10-13): the price is in the
-   kicker, the Respect on the shield, and the band reads "+1 Influence".
-   The Play's rule lives in the Playbooks and the Rulebook. */
-.card--holding .rules > span{font:700 13pt/1 Cinzel,serif;color:var(--gold-bright);letter-spacing:.4px}
-/* boroughs: 2026-10-10. Take the Crown shares the debts geometry. */
+/* boroughs: 2026-10-10. They share the debts geometry. */
 .card--borough .art{flex:0 0 38mm}
 .card--borough .rules{flex:0 0 16mm}
 .card--debt .art{flex:0 0 38mm}
@@ -471,7 +464,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">The Rat</h2>
     <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
     <div class="rules-label">The Shame</div>
-    <div class="rules"><span>While you hold this card you <b>cannot Rat</b>.<span class="brk"></span>No absolution: it leaves you only when a rival <b>Rats</b>.</span></div>
+    <div class="rules"><span>No Rat till a rival Rats</span></div>
     <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
     <div class="respect" data-respect="-3"></div>
   </div>
@@ -480,7 +473,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
@@ -489,7 +482,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
@@ -498,7 +491,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
@@ -525,7 +518,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
@@ -534,7 +527,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
@@ -543,7 +536,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
@@ -552,7 +545,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
     <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
     <div class="rules-label">The Vig</div>
-    <div class="rules"><span><b>&minus;2 Respect</b> while you hold it.<span class="brk"></span><b>Square Up</b> on a Beg: pay <b>$2,000</b> to the bank to discard this Mark.</span></div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
     <div class="flavour">My bond cries out for its pound of flesh.</div>
     <div class="respect" data-respect="-2"></div>
   </div>
@@ -585,7 +578,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -594,7 +587,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -603,7 +596,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -612,7 +605,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -635,7 +628,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -644,7 +637,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -653,7 +646,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -662,7 +655,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Welsher</h2>
     <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
     <div class="rules-label">The Memory</div>
-    <div class="rules"><span>No absolution: it <b>never leaves you</b>.<span class="brk"></span>They stack, and every one costs you again.</span></div>
+    <div class="rules"><span>Forever</span></div>
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
@@ -693,7 +686,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Manhattan</h2>
     <div class="art"><img src="Art/Cards/Manhattan.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Morris Park</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules"><span>Morris Park<br>Richmond Hill<br>Williamsburg</span></div>
     <div class="flavour">The money lives here. So do the men who count it.</div>
   </div>
   <div class="card card--borough">
@@ -701,7 +694,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">The Bronx</h2>
     <div class="art"><img src="Art/Cards/Bronx.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Sugar Hill</b>, <b>Richmond Hill</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules"><span>Sugar Hill<br>Richmond Hill<br>Williamsburg</span></div>
     <div class="flavour">Up past the El, the ballpark and the Jockey Club.</div>
   </div>
   <div class="card card--borough">
@@ -709,7 +702,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Queens</h2>
     <div class="art"><img src="Art/Cards/Queens.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Williamsburg</b>, you win.</span></div>
+    <div class="rules"><span>Sugar Hill<br>Morris Park<br>Williamsburg</span></div>
     <div class="flavour">Rail yards, back roads, and a bridge to the money.</div>
   </div>
   <div class="card card--borough">
@@ -717,7 +710,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <h2 class="title">Brooklyn</h2>
     <div class="art"><img src="Art/Cards/Brooklyn.jpg" alt=""></div>
     <div class="rules-label">The Crown</div>
-    <div class="rules"><span><b>Take the Crown (2).</b> With <b>20+ Respect</b> and your Boss at <b>Sugar Hill</b>, <b>Morris Park</b> or <b>Richmond Hill</b>, you win.</span></div>
+    <div class="rules"><span>Sugar Hill<br>Morris Park<br>Richmond Hill</span></div>
     <div class="flavour">The bridge brings the money. The docks keep it.</div>
   </div>
 </div>
