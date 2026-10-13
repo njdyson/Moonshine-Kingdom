@@ -1,5 +1,9 @@
 # mk-online: rules sync backlog
 
+> **2026-10-13: §28 to §31 are ported** (mk-online 7b14ae3, deployed here the same day). The
+> online game plays the 36-card deck, Bribe cards, Respect as the only score and the away crown.
+> See *Ported 2026-10-13* under §31 for what the bots made of it.
+
 > **2026-10-12: the Nod is gone; Respect is the only score.** Take the Crown needs 20+ Respect and
 > the Boss in an away High Society Venue. Bribes buy Bribe cards (1 to 4 Respect, one of each), a
 > Mark is -2 Respect while held, the Rat -3, the Blood Oath 40 combined. See §31.
@@ -820,6 +824,35 @@ A rule change; it supersedes the Nod in §16 and §29. `respect-endgame-handoff.
 Strings: RULES-AI.md's crown conditions, the Bribe ladder text, every "Nod" string, the Rat's -2 and the
 Mark tooltip.
 
+### Ported 2026-10-13 (mk-online 7b14ae3)
+
+All of §28 (through §30's card list), §29's away crown and §31. Two engine readings worth knowing:
+
+- **A Seize** is any change of Control from a rival on your own Play: a won fight, a Fold, or walking
+  onto an unguarded Safehouse (taken over or destroyed). The Glossary's definition, so The Pier Six
+  Brawl, The Smuggler's Run and The Copper Heist all pay on a walk-in.
+- **A Bribe with no card named** buys the cheapest man left. The UI and the harness always name one.
+  A save from before the Nod retired maps its bought markers to the cheapest cards, in order.
+
+`scripts/crowncheck.ts` and `scripts/jobs-check.ts` in mk-online test the crown, the Bribes and every
+card's trigger, with two triggers run through real engine Moves.
+
+**For playtest: the bots' games got longer.** Same bots, same seeds, 4 players, no MCTS:
+
+| Rules | Games | Crowned by Day 60 | Median Day crowned |
+| --- | --- | --- | --- |
+| Before (the Nod, 10 Respect, the old deck) | 24 | 24 | 27.5 |
+| Now | 48 | 30 | about 40 to 54 |
+
+The stalled games end with every boss on 15 to 19 Respect and every Bribe card bought, so the last
+points come from Jobs. The bots complete about as many Jobs as before (13.6 a game against 15.4), but
+mostly 1s: the Extort set and the murder 5s need setup they rarely manage, and the eight 5s pile up in
+the Market, which only restocks a gap a claim leaves. One leader sat in his crown room on 19 Respect for
+14 Days with $14,500 and nothing left to buy. The bots now claim a card to churn a clogged Market and
+price the card that would take them to 20 as the game, which took the crowned share from 10 to 14 in
+24 on the same seeds. Whether human tables stall the same way is a playtest question; the bots are weak
+at the setup the 3s and 5s ask for, so they are a pessimistic read.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -941,7 +974,7 @@ Mark tooltip.
 - [x] **Destroy, not raze, in every string** (§25)
 - [x] **Empty, unguarded, barrels in every string** (§26)
 - [x] **Peddle at $200 with no Greed Tax; bots sell the whole pile** (§27)
-- [ ] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28)
-- [ ] **Borough cards: no crown in your home Borough; the Nod is all 10 bought** (§29)
-- [ ] **The Jobs deck in sets: 36 cards, every 5 a killing** (§30; supersedes §28's card list)
-- [ ] **Respect is the only score: crown at 20, Bribe cards, Mark -2, Rat -3, Blood Oath 40** (§31; supersedes the Nod in §16 and §29)
+- [x] **The Jobs deck rewrite: new triggers, and The Smuggler's Run 3 / Union Dues 5** (§28; ported as §30's deck)
+- [x] **Borough cards: no crown in your home Borough** (§29; the Nod half retired with §31)
+- [x] **The Jobs deck in sets: 36 cards, every 5 a killing** (§30; supersedes §28's card list)
+- [x] **Respect is the only score: crown at 20, Bribe cards, Mark -2, Rat -3** (§31; the Blood Oath's 40 waits on the variant, which mk-online doesn't have)

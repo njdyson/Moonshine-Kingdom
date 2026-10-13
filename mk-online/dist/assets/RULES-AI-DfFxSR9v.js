@@ -6,20 +6,20 @@ var e=`# Moonshine Kingdom: Rules for an AI Player
 
 You win the instant you make **Take the Crown** (takeTheCrown), a Power Play costing 2 Influence, no Heat, on your own turn, with all of these true:
 
-- you hold **the Nod** (claimed automatically the moment you own all **10 Influence** markers; there are four Nod cards, so every player who gets there holds one);
-- **10+ Respect**;
-- **no unpaid Shylock's Mark**;
-- your **Boss stands in a High Society Venue** (one of the four Speakeasies on a #7 Still);
+- **20+ Respect**;
+- your **Boss stands in a High Society Venue outside your home Borough** (one of the four Speakeasies on a #7 Still; your Borough card names the three away ones, and no boss crowns in his own Borough);
 - 2 markers in your Ledger.
+
+Your **home Borough** is the one you were dealt at setup, and its Ward is your **home Ward**. At three players one Borough is nobody's home.
 
 The game ends mid-Day on the spot. Nothing else is settled.
 
-**Respect** = sum of completed Jobs (1, 3 or 5 each), **−2** while you hold the Rat Card, **−1** per Welsher card. All of it is public.
+**Respect** = completed Jobs (1, 3 or 5 each) plus Bribe cards (1 to 4 each), **−3** while you hold the Rat Card, **−2** per Shylock's Mark you hold, **−1** per Welsher card. All of it is public.
 
 ## 2. Components and currencies
 
 - **Mob**: 1 Boss, 15 Runners, 1 Safehouse. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
-- **Influence markers**: you own 6 at the start and Bribe up to 10. A marker is in one of four places:
+- **Influence markers**: you own 6 at the start, and each of your four Bribe cards brings one more, so 10 at most. A marker is in one of four places:
   - **Reserves** (stash): uncommitted, and the source for Job Stakes;
   - **Ledger** (operations): max **5**, the only markers you can spend;
   - **staked on a Job** until it resolves;
@@ -69,7 +69,10 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - Stakes and Respect are paired: **Stake 1 pays 1**, **Stake 2 pays 3**, **Stake 3 pays 5**.
 - The Market shows players + 1 cards.
 - A Job completes at the end of **your own Play** that did the deed (including the fight it started and any Raid it set off). Its stake returns to Reserves and the card scores.
-- "Seize" means Control must change hands from a rival.
+- "Seize" means Control must change hands from a rival (a won fight, a Fold, or walking onto an unguarded Safehouse).
+- A "kill" is a rival Mobster shot dead in your own Play's fight; a Raid's arrests are not kills. The body counts ("Kill 5+ rival Runners") count Runners only; a Boss card needs the Boss.
+- A count is what one Play did: "4+ barrels" means four in a single Play.
+- The deck is 36 cards (16 / 12 / 8): an Unload card for each of the eight ordinary Speakeasies, an Extort card for each mainland Borough's three Speakeasies, and a body count and a Boss for each mainland Borough among the 5s. The eight 5s are kept out of the opening Market.
 - Your Ambush or return fire on a rival's Play completes nothing.
 - A staked marker never reaches the Ledger, so while you hold Jobs you fund fewer Plays.
 
@@ -89,14 +92,14 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Recruit (recruit) | 1 | Hire Runners into your Safehouse District at **$300 each**. Needs the Safehouse on the board. |
 | Secure (secure) | 1 | **$500**: place or relocate your one Safehouse into any Safe District. You gain Control at once. |
 | Trade (trade) | 1 | At a Dock you Control, swap Moonshine there for Rum 1:1 (limited by the Rum supply). This is the only source of Rum. |
-| Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Any Mark bars the Crown. |
-| Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark. |
+| Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
+| Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
 | Collect (collect) | 1 | Spend a marker on +$100, which Laying Low would pay for it anyway, so it buys a turn longer on the street. |
 | Lay Low (layLow) | 0 | See §3. |
 | Unload (unload) | 2 | At a Speakeasy you Control, sell your barrels there: **Moonshine $300, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. **Greed Tax**: 4+ barrels in one Play = H. |
-| Bribe (bribe) | 2 | Buy 1 permanent Influence into Reserves: 7th **$2,000**, 8th **$3,000**, 9th **$4,000**, 10th **$5,000** (the 10th claims the Nod). Boss must be on the board. |
+| Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
 | Extort (extort) | 2, H | **$200 per District you Control**. Once per Day; draws one Heat marker. |
-| Rat (rat) | 2 | An immediate Raid (§7). Take the Rat Card (−2 Respect) from the supply or its holder. You cannot Rat while you hold it; it leaves you only when a rival Rats. |
+| Rat (rat) | 2 | An immediate Raid (§7). Take the Rat Card (−3 Respect) from the supply or its holder. You cannot Rat while you hold it; it leaves you only when a rival Rats. |
 | Rise (rise) | 2 | Boss off the board only: place him in any **Safe Ward**. |
 | Take the Crown (takeTheCrown) | 2 | See §1. |
 
@@ -191,7 +194,7 @@ Hits remove **Runners first**, then the Boss.
 - **Drafting is also defence.** The die you leave in the pool may burst your own best Still. The last seat drafts from what is left but picks first at The Offers.
 - **Laying Low early wins tempo.** You draft first tomorrow and brew before the supply runs thin. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
-- **The Crown takes three visible steps:** 10 Influence ($14,000 of Bribes), 10 Respect, and the walk into a Venue. Killing the leader's Boss costs him a Rise in a Ward plus the walk back.
+- **The Crown takes visible steps:** 20 Respect, then the walk into an away Venue, then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise in a Ward plus the walk back.
 - **The Crown ends the game before Sunset.** Promises due at Sunset go unpaid, so plan for betrayal.
 - **Raids go for barrels.** A Raid hits a mob's District with the most barrels, so a Rum stockpile in your Venue is Raid bait.
 `;export{e as default};
