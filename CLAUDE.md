@@ -159,15 +159,19 @@ written out above the card table in `tools/gen_deck.py`:
 **The Smuggler's Run is a 3** (same day; Union Dues went to 5 with it, and back to 3 on 2026-10-11).
 The Smuggler's Run Seizes a Dock, every mainland Dock is in a bounty Borough, and a firefight is part
 of the Move that starts it, so as a 5 it could pay beside a bounty 5 on one Play. Run
-`tools/overlap_audit.py` before moving any card that can Seize or kill into the 5s: it models a Move
+`tools/overlap_audit.py` before moving any card that can Seize into the 5s: it models a Move
 and its fight as one Play, and it refuses to run until each card's printed objective matches its
 model.
 
-**A Fold turns down a kill Job, and that stays.** It denies all eight 5s, and pays every Seize Job
-(The Pier Six Brawl, The Smuggler's Run, The Copper Heist). The denial is priced (the folding crew
-leaves the District, its barrels and its Safehouse), it turns a face-up kill Job into a bluff that
-buys ground, and it puts the kill fights where running costs too much, above all a High Society
-room in the endgame. Every seat can turn its own Borough's bounties down by Folding.
+**A Fold is a Seize, and every 5 is a Seize** (Nick, 2026-10-13, after the opus-vs-bots-1 playtest in
+mk-online's `harness/transcripts/`). Until then the 5s read "Kill ...", and a Fold denied all eight:
+of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every lone Boss
+Folded. Now the 5s read "Seize a District from 5+ rival Runners in X" and "Seize a District from a
+rival Boss in X", so the Occupier stands and makes the Invader win it, or runs and pays him 5 anyway.
+The crew is counted as it met the Invader at the door (the Rulebook's Pulling It Off, its one home).
+A kill in a fight the Invader loses pays nothing. Don't bring back "Kill", and don't add "or kill":
+the Fold was the hole, and one verb is the house style. No Job reads kills now, so the Glossary has
+no Kill entry.
 
 ## Jobs: sets, and setup
 
@@ -189,12 +193,14 @@ once. The deck is 36 cards, 16 / 12 / 8:
 - **3s**: **the Extort set**, *Extort while you Control all three Speakeasies in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); The Five
   Families and Cuban Prince (4+ Docks) as Extort cards too; and six singles.
-- **5s**: murder, and nothing else. A **body count** per Borough ("Kill 5+ rival Runners in X")
-  and a **Boss** per Borough ("Kill a rival Boss in X"). They are the one allowed exception to
-  "never two 5s on one Play" (Nick, 2026-10-12): Runners die first, so paying both takes a Boss and
-  five Runners killed in one fight, and holding both stakes 6 of at most 10 markers. Nick likes the
-  body counts as a stand-in for the cut Sweep: any fat stack is a target. Don't add a
-  "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs and fails any other.
+- **5s**: taking a District from a big crew, and nothing else. A **body count** per Borough ("Seize a
+  District from 5+ rival Runners in X") and a **Boss** per Borough ("Seize a District from a rival
+  Boss in X"). They are the one allowed exception to "never two 5s on one Play" (Nick, 2026-10-12):
+  paying both takes a District held by a Boss and five Runners, and holding both stakes 6 of at most
+  10 markers. A Fold there pays 10, so the Occupier stands, and the Invader has to beat a Boss and
+  five. Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a target.
+  Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs and fails
+  any other.
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
 Borough; the Deeds' removal ended that objection, so don't cut them on it again. The overlap model
@@ -539,7 +545,7 @@ name. "Loose Liquor" is retired: barrels in a District nobody Controls are nobod
 Since 2026-10-10 the Rulebook ends with **Glossary: Speak the Lingo**: one line per term of art the
 aids use without defining, each naming the section that holds the rule. It defines the word and
 stops; the rule stays in its section. It is a second home for every definition it carries, so a
-change to Connected, Safe, Control, Kill, Seize or any other term listed must be made there too.
+change to Connected, Safe, Control, Seize or any other term listed must be made there too.
 
 ## Scram: one run for a Fold and a Raid
 

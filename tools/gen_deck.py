@@ -472,7 +472,7 @@ THREES = [
 ]
 
 FIVES = [
-    # THE MURDER SETS (Nick, 2026-10-11, round 2). Every 5 is a killing, in two sets of four, one
+    # THE MURDER SETS (Nick, 2026-10-11, round 2; Seizes since 2026-10-13, below). Two sets of four, one
     # card per mainland Borough each: a body count ("Kill 5+ rival Runners in X") and a Boss ("Kill
     # a rival Boss in X"). Each seat is hunted by two 5s in its own Borough.
     # TWO 5s ON ONE PLAY: one Play is in one Borough, so only that Borough's two cards can meet, and
@@ -483,11 +483,15 @@ FIVES = [
     # buy (about 10 Runners and a Boss average five kills in three Open Fires). The Offers deal one
     # card a Day, so both must be drafted on separate Days too. overlap_audit.py reports the four
     # same-Borough pairs as allowed and still fails any other pair of 5s.
-    # Every 5 is a kill Job, so a Fold denies all eight: all four seats can turn a bounty down
-    # mid-fight (before round 2, only Queens and Brooklyn could).
-    # Mob fit, to watch: the Irish Firepower die helps body counts and the Sicilian Hit makes a Boss
-    # take the first hit, so those two mobs gain most; the Knights' Torch and the Vipers' Stealth
-    # have no marquee 5 now.
+    # THE SEIZE PASS (Nick, 2026-10-13, after the opus-vs-bots-1 playtest). Every 5 was "Kill ...",
+    # and a Fold denied all eight: 69 Standoffs, 40 Folds, six murder 5s claimed and none completed.
+    # A lone Boss Folded every time, so a Boss card needed him to stand, and nobody did. Now each
+    # card reads "Seize a District from 5+ rival Runners in X" or "from a rival Boss in X", and a
+    # Fold is a Seize (Rulebook, Pulling It Off). The crew is counted as it met you at the door.
+    # So the Occupier stands and makes you win it, or runs and pays you 5 anyway. A kill in a fight
+    # you lose pays nothing now: the Sicilian Hit still strips a Boss's +1, but has to finish the job.
+    # A Borough's pair still meets only on a Boss with 5+ Runners, and a Fold there pays 10; nobody
+    # Folds that stack if he can stand, so it stays the fight Nick priced on 2026-10-12.
     # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
     # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
     # and 2 Runners from setup, so this is a campaign against a garrison behind the
@@ -505,7 +509,7 @@ FIVES = [
     # The Copper Heist, which forbids a Safehouse.
     # SETS PASS 2026-10-11: Manhattan's body count (Nick: the Safehouse wording was unclear).
     ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>Manhattan</b>.",
+     "Seize a District from <b>5+ rival Runners</b> in <b>Manhattan</b>.",
      "By Monday there was nothing left to come home to."),
     # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
     # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
@@ -514,27 +518,27 @@ FIVES = [
     # actually closed cluster 3). Max stack unchanged at 9.
     # SETS PASS 2026-10-11: the Bronx's body count. A Fold now denies it, as it does the others.
     ("Over the Top", "Old Guard.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>the Bronx</b>.",
+     "Seize a District from <b>5+ rival Runners</b> in <b>the Bronx</b>.",
      "These boys went over the top in France. This is a street."),
     # SETS PASS 2026-10-11: Queens' body count. The Toll Booth Trap moved to the Boss set, where it
     # started. Art: a gunfight on a burning pier.
     ("Rum Wars", "Rum Wars.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>Queens</b>.",
+     "Seize a District from <b>5+ rival Runners</b> in <b>Queens</b>.",
      "Nobody counted the bodies. Everybody counted the crates."),
     # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
     # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick).
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>Brooklyn</b>.",
+     "Seize a District from <b>5+ rival Runners</b> in <b>Brooklyn</b>.",
      "Every name in it is crossed out but one."),
     # SETS PASS 2026-10-11: Manhattan's Boss. A nod, not a lesson: the Park Central room where the
     # story starts, unnamed. Art: a man dead in a hotel bed, two men in the doorway.
     ("Room 349", "The Big Sleep.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>Manhattan</b>.",
+     "Seize a District from a <b>rival Boss</b> in <b>Manhattan</b>.",
      "He went upstairs to talk business. They carried him down."),
     # SETS PASS 2026-10-11: the Bronx's Boss. "Taken for a ride" was the 1920s phrase for a gangland
     # killing. Art: a tommy gun from a running car.
     ("The One-Way Ride", "Gatsby.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>the Bronx</b>.",
+     "Seize a District from a <b>rival Boss</b> in <b>the Bronx</b>.",
      "Get in the car. Nobody asks where it is going."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
     # and exists purely to kill Bosses: the old wording locked the boss-killing mob
@@ -547,11 +551,11 @@ FIVES = [
     # SETS PASS 2026-10-11: Queens' Boss. "with your own Boss in the fight" cut (Nick: niche enough
     # without it).
     ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>Queens</b>.",
+     "Seize a District from a <b>rival Boss</b> in <b>Queens</b>.",
      "A toll is a toll. Somebody always pays it."),
     # SETS PASS 2026-10-11: Brooklyn's Boss. Art: a man taken by the collar at a card table.
     ("The Last Hand", "Debt Collector.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>Brooklyn</b>.",
+     "Seize a District from a <b>rival Boss</b> in <b>Brooklyn</b>.",
      "He was holding aces. It did not help."),
 ]
 

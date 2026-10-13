@@ -853,6 +853,26 @@ price the card that would take them to 20 as the game, which took the crowned sh
 24 on the same seeds. Whether human tables stall the same way is a playtest question; the bots are weak
 at the setup the 3s and 5s ask for, so they are a pessimistic read.
 
+## 32. The 5s are Seizes, so a Fold pays them (2026-10-13, Nick)
+
+A wording change on the eight 5s after the opus-vs-bots-1 playtest (`jobs-setup-handoff.md`, Round 3).
+Nothing else in the rules changes.
+
+| Set | Now |
+| --- | --- |
+| Body counts | "Seize a District from 5+ rival Runners in X": a Seize in the named Borough, from a crew that held **5+ Runners when the Move came in** (Bloody Sunday, Over the Top, Rum Wars, The Butcher's Ledger) |
+| Bosses | "Seize a District from a rival Boss in X": a Seize in the named Borough, from a crew with **its Boss in it** when the Move came in (Room 349, The One-Way Ride, The Toll Booth Trap, The Last Hand) |
+
+A Fold is a Seize (§30's reading), so a Fold pays both. A kill in a fight the Invader loses pays nothing,
+and nothing reads kills any more, which also retires §23.3's question. Bots: a Fold that pays the Invader
+a Job is a Respect gift, so stand against longer odds when one of his Jobs names the block.
+
+**Ported the same day** (mk-online 8b1515e, branch `claude/respect-jobs-folding-8lhwdv`): `initiateCombat` records the
+defending crew at the door (`defRunnersAtStart`, `defBossesAtStart`) in place of the kill tallies; the
+eight evaluators read it with `seizedBy`; the bots' Fold test adds 0.4 to its outnumbered ratio per point
+of Respect the Fold would hand over (capped at 2); `scripts/jobs-check.ts` runs a Fold and a won fight
+through the real engine. RULES-AI.md says it for the agents.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

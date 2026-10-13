@@ -132,6 +132,10 @@ Standing), so they would share.
 
 ### 7. A Fold turns down a kill Job (keep it)
 
+> **Reversed 2026-10-13** (Nick, after the opus-vs-bots-1 playtest): the denial was free in practice,
+> and no 5 completed. Every 5 is now a Seize from a crew, which a Fold pays. See
+> `jobs-setup-handoff.md`, Round 3. The reasoning below is the record.
+
 Raised by Nick after the first draft. A Fold is free and leaves nobody to shoot, so it denies exactly
 the three Jobs paid in bodies: The Toll Booth Trap, The Butcher's Ledger and The Irish Goodbye. It
 pays every Job paid in ground, since a Fold "hands him a Seize as surely as losing does" (Almanac

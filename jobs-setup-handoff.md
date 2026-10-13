@@ -1,9 +1,71 @@
-# Jobs Deck: Setup, then Sets (2026-10-11)
+# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes (2026-10-13)
 
 Two passes on one day, made on the `claude/job-deck-balance-57zjc0` branch and on main since
 2026-10-12 (Nick: "it will still need more work afterwards"). **Round 2 is the
-live deck**; round 1 is the record of how it got there, and its card tables describe a deck that has
-since changed again.
+live deck, with round 3's wording on the 5s** (2026-10-13); round 1 is the record of how it got there,
+and its card tables describe a deck that has since changed again.
+
+## Round 3: the 5s are Seizes (2026-10-13)
+
+After the first full online game on the round-2 deck (mk-online `harness/transcripts/opus-vs-bots-1.P0.md`:
+69 Standoffs, 40 Folds, six 5s claimed, none completed), Nick:
+
+> I think the main problem is that players can just fold to deny you. I guess a simple solution could be
+> to change the wording to "seize a district occupied by 5 runners/a boss" because then a fold would
+> count. It would mean they would have to stand and fight, or be a coward and give up 5 respect.
+
+**Applied.** Same eight cards, same sets, same art and flavour:
+
+| Set | Was | Now |
+| --- | --- | --- |
+| Body counts | Kill 5+ rival Runners in X. | Seize a District from 5+ rival Runners in X. |
+| Bosses | Kill a rival Boss in X. | Seize a District from a rival Boss in X. |
+
+"From" rather than "occupied by" or "guarded by": it is the Glossary's own definition of Seize ("take
+Control of a District from a rival"), it is the shortest, and it says whose crew is counted. The Rulebook's
+Pulling It Off gives the count one home: a Job that names who you Seize from "counts their crew as it met
+you at the door", so the men you shoot in the fight still count. It also now names the Fold in the
+definition of Seize ("by gunfire, by their Fold, or by strolling in where they left the door open").
+
+### What changes in play
+
+- **Running pays.** A lone Boss can no longer turn a Boss card down: Folding pays it, and standing usually
+  costs the Boss as well. So the owner escorts him, or keeps him out of reach of the card's holder. That is
+  the endgame walk to an away room, priced: the room's Borough has a Boss card.
+- **Only a stand that holds denies.** Kill the Invader's crew, or outlast his Ledger until he Falls Back.
+- **A kill in a fight you lose pays nothing now.** Before, killing five Runners (or the Boss) and then
+  being wiped out still paid. A mutual wipe pays nothing either. The Sicilian Hit still takes the Boss
+  first, which strips his +1 Threat, but has to finish the fight to pay.
+- **Very big stacks got safer, stacks of five got riskier.** The old body count could bleed five kills out
+  of a stack of ten and lose; now the stack has to be beaten. Nick's "any fat stack is a target" holds for
+  stacks of five to seven; past that, the stack is likelier to stand and win.
+- **A Borough's pair pays 10 on a Fold** of a Boss and five. Nobody Folds that stack if he can stand, so it
+  stays the fight Nick priced on 2026-10-12 (6 staked, 4 markers left to beat a Boss and five).
+- **Every Seize Job now pays on the same Fold**, so a Fold at a starting bar or a Dock can pay a 5 and The
+  Copper Heist or The Pier Six Brawl together. The overlap audit's stacks are unchanged (13 at most), since
+  it already modelled a Fold as a Seize.
+
+No Job reads kills any more, so the Glossary's **Kill** entry is gone, and with it the Rulebook's "a Raid
+makes arrests, not kills" and "your Ambush or return fire completes nothing" (both answered kill Jobs only).
+The Almanac's lesson 18 now tells the Occupier to price the Invader's Respect into the pile (a 5 at the
+Mayor's $1,250 a point outweighs every pile in its table); lesson 11 describes the 5s as Seizes.
+
+### Audits
+
+`overlap_audit.py` models the crew at the door (`def_runners`, `def_boss`) instead of kills: PASS, the same
+four allowed pairs, the same top stacks. `difficulty_audit.py`: the body counts keep 13 and the Boss cards
+12, but RIVAL drops to 2 (a Fold no longer dodges), BLOCK rises to 2 and DEFEND to 3, so all eight move from
+"hard and solitaire" (the body counts) to "hard and contested".
+
+### Watch in playtest
+
+1. **Kill-fests around Bosses.** Every Boss is a 5 in its Borough, and now there is no free dodge. Watch
+   whether Bosses stop leaving home until the endgame.
+2. **The lone-Boss gift.** A Boss caught alone beside a big crew is 5 Respect for one Move. That is the
+   intended pressure; if it reads as a windfall, a "with your own Boss in the fight" clause (the old Toll
+   Booth Trap's) is the lever.
+3. **Fold count.** The opus-vs-bots-1 game had 40 Folds in 69 Standoffs; expect fewer where a 5 is on the
+   block.
 
 ## Round 2: symmetric sets (later on 2026-10-11)
 

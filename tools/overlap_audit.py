@@ -3,8 +3,8 @@
 
 Enumerates every Play a player could make (Play x target District x board state x
 what the Play did there) and reports which Jobs co-fire. Enforces handoff §3:
-    - HARD RULE: never two 5s on one Play, except a Borough's body count and Boss together
-      (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
+    - HARD RULE: never two 5s on one Play, except a Borough's two 5s together, on a District
+      taken from a Boss and 5+ Runners (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
     - Watch:     a 5 plus small change is fine; big 3-stacks are suspect.
 
 breadth_audit.py imports this module, so the model lives in one place.
@@ -164,23 +164,24 @@ JOBS = [
     J('Union Dues', 3, ['Recruit'],
       "Recruit 4+ Runners in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
-    # --- 5 Respect: the murder sets (2026-10-11, round 2) ---
-    # `kills` counts Runners; `boss_killed` is the Boss. A Borough's two 5s meet only on a
-    # fight that kills its Boss and five Runners: see ALLOWED_DOUBLE_FIVES.
-] + [J(n, 5, ['Move'], f'Kill 5+ rival Runners in {label}.',
-       (lambda b: lambda p, d: p['kills'] >= 5 and d.boro == b)(b))
+    # --- 5 Respect: the murder sets (2026-10-11, round 2), Seizes since 2026-10-13 ---
+    # `def_runners` and `def_boss` are the crew that met the Move at the door, so a Fold pays
+    # as a won fight does. A Borough's two 5s meet only on a District taken from its Boss and
+    # 5+ Runners: see ALLOWED_DOUBLE_FIVES.
+] + [J(n, 5, ['Move'], f'Seize a District from 5+ rival Runners in {label}.',
+       (lambda b: lambda p, d: p['seize'] and p['def_runners'] >= 5 and d.boro == b)(b))
      for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
                          ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
-    J(n, 5, ['Move'], f'Kill a rival Boss in {label}.',
-      (lambda b: lambda p, d: p['boss_killed'] and d.boro == b)(b))
+    J(n, 5, ['Move'], f'Seize a District from a rival Boss in {label}.',
+      (lambda b: lambda p, d: p['seize'] and p['def_boss'] and d.boro == b)(b))
     for n, label, b in (('Room 349', 'Manhattan', M), ('The One-Way Ride', 'the Bronx', BX),
                         ('The Toll Booth Trap', 'Queens', Q), ('The Last Hand', 'Brooklyn', BK))]
 
 # The one exception to "never two 5s" (Nick, 2026-10-12): a Borough's body count and its Boss
-# card together. Runners die first, so it takes a Boss and five Runners killed in one fight,
-# against a District holding six or more; holding both cards stakes 6 of at most 10 markers,
-# leaving 4 for the Move and the volleys, which doesn't buy six kills; and the Offers deal one
-# card a Day. Any other pair of 5s still fails the audit.
+# card together, on a District taken from a Boss and five or more Runners. Since 2026-10-13 a
+# Fold there pays both, so the Occupier stands, and the Invader must beat a Boss and five with
+# the 4 markers left after staking 6 of at most 10; and the Offers deal one card a Day. Any
+# other pair of 5s still fails the audit.
 ALLOWED_DOUBLE_FIVES = {
     frozenset(('Bloody Sunday', 'Room 349')),
     frozenset(('Over the Top', 'The One-Way Ride')),
@@ -196,7 +197,7 @@ VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat'
 # Every distinct Play on a District, as the facts a Job can read. The board's own
 # rules prune the impossible ones, so a co-fire reported here is one a player can
 # actually make. Grids straddle every threshold the deck prints (3, 4, 6, 8 barrels;
-# 4 Runners; 2 and 5 kills; 5 defenders): a silent zero is not a pass.
+# 4 Runners; 5 defending Runners, with and without their Boss): a silent zero is not a pass.
 #
 # District state before the Play:
 #   empty      no Mobsters, no Safehouse, no Squad (barrels may lie there)
@@ -212,8 +213,8 @@ BARRELS = (0, 3, 4, 6, 8)
 
 
 def _p(**kw):
-    p = dict(barrels=0, rum=False, runners=0, kills=0, defenders=0, seize=False,
-             boss_killed=False, own_boss=False, crew=False, route='land',
+    p = dict(barrels=0, rum=False, runners=0, def_runners=0, def_boss=False, seize=False,
+             own_boss=False, crew=False, route='land',
              from_staten=False, sh='none', adj_rival_sh=False, all5=False, bars=frozenset(),
              docks4=False)
     p.update(kw)
@@ -316,16 +317,14 @@ def _fight(fight, state, home, out, sh, route, from_staten, barrels, rum, crew):
         for own_boss in ((False, True) if crew else (False,)):
             yield _p(own_boss=own_boss, **base)
         return
-    # defenders 1 stands for "fewer than five". A Fold is a seize with no kills.
-    # kills counts Runners; the Boss falls after his Runners, or first to a Sicilian Hit.
-    for defenders in (1, 5):
-        for kills in (0, 2, 5):
-            if kills >= defenders and defenders < 5:
+    # The crew that met you at the door: its Runners (1 stands for "fewer than five") and
+    # whether its Boss stood with them. A Fold is a seize, as a won fight is.
+    for def_runners in (0, 1, 5):
+        for def_boss in (False, True):
+            if not def_runners and not def_boss:
                 continue
-            for boss_killed in (False, True):
-                for own_boss in (False, True):
-                    yield _p(defenders=defenders, kills=kills, boss_killed=boss_killed,
-                             own_boss=own_boss, **base)
+            for own_boss in (False, True):
+                yield _p(def_runners=def_runners, def_boss=def_boss, own_boss=own_boss, **base)
 
 
 # An Extort pays $200 for every District you Control anywhere, so its Jobs read the whole
@@ -426,7 +425,7 @@ def main():
     if not bad:
         print('  PASS: no Play can fire two 5-Respect Jobs, outside the allowed pairs.')
     for pair in ok:
-        print(f'  allowed (a Boss and five Runners in one fight; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
+        print(f'  allowed (a District taken from a Boss and 5+ Runners; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
 
     print()
     print('=' * 78)
