@@ -74,7 +74,7 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   without naming him.
 - **The endgame reads in one order everywhere**: the crown, then what the families want (a name:
   **20 Respect**, earned by Jobs and bought by Bribes), then the walk into a High Society Venue and
-  the Play. The Rulebook's Goal page is "The Crown of New York", with **Jobs: Forge Your Legend** and
+  the Play. The Rulebook's Goal page is "Respect: Earn It or Buy It" (it was "Your Goal: The Crown of New York" until 2026-10-13, when the title moved to what the page teaches; the Crown has its one home on Winning the Game), with **Jobs: Forge Your Legend** and
   **Bribes: Buy the City** as its two sections (it was "Influence: Buy the City" until 2026-10-12,
   "The Nod: Buy the City" before that, and "Earning Respect" before that). Buy the City's one-line
   why: "The families bring the guns. The new man brings the city."
