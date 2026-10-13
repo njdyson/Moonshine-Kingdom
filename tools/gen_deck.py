@@ -274,22 +274,25 @@ THREES = [
     #   on their own art, worded as The Five Families is: "Extort while you Control ...".
     #   "all three" says the crowned bar counts, which a reader going by the board's gin
     #   medallions might otherwise miss.
+    #   WORDING 2026-10-13 (Nick): "Extort all of the Speakeasies in X". "I don't think that can be
+    #   misinterpreted and it reads much cleaner." An Extort collects from every District you
+    #   Control, so extorting a Speakeasy means holding it; "all of the" still takes in the room.
     ("Empire State", "Empire State.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in <b>Manhattan</b>.",
+     "Extort <b>all of the Speakeasies</b> in <b>Manhattan</b>.",
      "From Sugar Hill to the Tenderloin, every till pays one man."),
     # The name and art came off Manhattan's old home-bar 3 (Unload 6+ at The Tenderloin),
     # which had restored them from the cut Extort card. Back on an Extort, where a squeeze
     # belongs; the art (the wagons at the door mid-count) is Extort's Heat drawn as a picture.
     ("The Big Squeeze", "Big Squeeze.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in the <b>Bronx</b>.",
+     "Extort <b>all of the Speakeasies</b> in the <b>Bronx</b>.",
      "The whole Bronx pays on Friday. Nobody has to ask twice."),
     ("King of Queens", "King of Queens.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in <b>Queens</b>.",
+     "Extort <b>all of the Speakeasies</b> in <b>Queens</b>.",
      "Every glass poured in Queens, the King takes a sip."),
     # The Black Hand letters (an inked palm, a sum, a threat) were the shakedown of the
     # Italian blocks in Brooklyn and East Harlem. The art is a butcher reading one.
     ("The Black Hand", "Black Hand.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in <b>Brooklyn</b>.",
+     "Extort <b>all of the Speakeasies</b> in <b>Brooklyn</b>.",
      "The letter had a hand drawn on it. The shop paid by noon."),
     # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's
     # Extort card: four of the eight Docks, held at once. Holding four almost always makes you the
@@ -466,8 +469,10 @@ FIVES = [
     # the Boss set goes but for The Toll Booth Trap, now anywhere; The Five Families, Opening Night
     # (in your home Borough) and Union Dues come up from the 3s. So the 5s are four fights, a Boss
     # hunt, an Extort, a pour and a Recruit. The only two that can meet on one Play are The Toll Booth
-    # Trap and a body count, on a fight that kills the Boss and takes a District held by 5+ Runners:
+    # Trap and a body count, on a fight that kills the Boss and takes a District held by 5+ Mobsters:
     # the allowed pairs.
+    # WORDING 2026-10-13 (Nick): the body counts count Mobsters, not Runners, so a Boss and four
+    # Runners are five. The crew is still counted as it met you at the door.
     # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
     # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
     # and 2 Runners from setup, so this is a campaign against a garrison behind the
@@ -485,7 +490,7 @@ FIVES = [
     # The Copper Heist, which forbids a Safehouse.
     # SETS PASS 2026-10-11: Manhattan's body count (Nick: the Safehouse wording was unclear).
     ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Runners</b> in <b>Manhattan</b>.",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>Manhattan</b>.",
      "By Monday there was nothing left to come home to."),
     # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
     # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
@@ -494,17 +499,17 @@ FIVES = [
     # actually closed cluster 3). Max stack unchanged at 9.
     # SETS PASS 2026-10-11: the Bronx's body count. A Fold now denies it, as it does the others.
     ("Over the Top", "Old Guard.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Runners</b> in <b>the Bronx</b>.",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>the Bronx</b>.",
      "These boys went over the top in France. This is a street."),
     # SETS PASS 2026-10-11: Queens' body count. The Toll Booth Trap moved to the Boss set, where it
     # started. Art: a gunfight on a burning pier.
     ("Rum Wars", "Rum Wars.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Runners</b> in <b>Queens</b>.",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>Queens</b>.",
      "Nobody counted the bodies. Everybody counted the crates."),
     # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
     # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick).
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Runners</b> in <b>Brooklyn</b>.",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>Brooklyn</b>.",
      "Every name in it is crossed out but one."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
     # and exists purely to kill Bosses: the old wording locked the boss-killing mob
@@ -523,7 +528,7 @@ FIVES = [
     # 'trap')." A Boss with no Connected Safe District to Scram to can't Fold, so the hunter's work is
     # the cornering; and a face-up Toll Booth Trap makes a Boss run, which hands over the block.
     # It meets each body count only on a fight that kills the Boss and takes a District held by 5+
-    # Runners (the four allowed pairs); a Fold pays the body count alone.
+    # Mobsters (the four allowed pairs); a Fold pays the body count alone.
     ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
      "Kill a <b>rival Boss</b>.",
      "A toll is a toll. Somebody always pays it."),

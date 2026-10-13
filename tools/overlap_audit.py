@@ -4,7 +4,7 @@
 Enumerates every Play a player could make (Play x target District x board state x
 what the Play did there) and reports which Jobs co-fire. Enforces handoff §3:
     - HARD RULE: never two 5s on one Play, except a body count and The Toll Booth Trap together,
-      on a fight that kills the Boss and takes a District held by 5+ Runners
+      on a fight that kills the Boss and takes a District held by 5+ Mobsters
       (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
     - Watch:     a 5 plus small change is fine; big 3-stacks are suspect.
 
@@ -134,16 +134,16 @@ JOBS = [
     # --- 3 Respect ---
     # The Extort cards read the whole map, so an Extort is modelled once (see _extort).
     J('Empire State', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in Manhattan.',
+      'Extort all of the Speakeasies in Manhattan.',
       lambda p, d: M in p['bars']),
     J('The Big Squeeze', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in the Bronx.',
+      'Extort all of the Speakeasies in the Bronx.',
       lambda p, d: BX in p['bars']),
     J('King of Queens', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in Queens.',
+      'Extort all of the Speakeasies in Queens.',
       lambda p, d: Q in p['bars']),
     J('The Black Hand', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in Brooklyn.',
+      'Extort all of the Speakeasies in Brooklyn.',
       lambda p, d: BK in p['bars']),
     J('The Five Families', 5, ['Extort'],
       'Extort while you Control a District in all five Boroughs.',
@@ -185,19 +185,20 @@ JOBS = [
     # `def_runners` and `def_boss` are the crew that met the Move at the door, so a Fold pays
     # as a won fight does. The Five Families, Opening Night and Union Dues (5s since the
     # Variety Pass, 2026-10-13) are above.
-] + [J(n, 5, ['Move'], f'Seize a District from 5+ rival Runners in {label}.',
-       (lambda b: lambda p, d: p['seize'] and p['def_runners'] >= 5 and d.boro == b)(b))
+] + [J(n, 5, ['Move'], f'Seize a District from 5+ rival Mobsters in {label}.',
+       (lambda b: lambda p, d: p['seize'] and p['def_runners'] + p['def_boss'] >= 5
+        and d.boro == b)(b))
      for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
                          ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
     # The one Boss card left, anywhere, and a Kill (2026-10-13): a Fold denies it. It meets each
-    # body count only on a fight that kills the Boss and takes a District held by 5+ Runners:
+    # body count only on a fight that kills the Boss and takes a District held by 5+ Mobsters:
     # see ALLOWED_DOUBLE_FIVES.
     J('The Toll Booth Trap', 5, ['Move'], 'Kill a rival Boss.',
       lambda p, d: p['boss_killed'])]
 
 # The one exception to "never two 5s" (Nick, 2026-10-12): a body count and the Boss card
-# together, on a fight that kills the Boss and takes a District held by five or more Runners.
-# A Fold pays the body count alone, so the Invader must beat a Boss and five with the 4 markers
+# together, on a fight that kills the Boss and takes a District held by five or more Mobsters.
+# A Fold pays the body count alone, so the Invader must beat a Boss and four with the 4 markers
 # left after staking 6 of at most 10; and the Offers deal one card a Day. The Boss card was one
 # per Borough until the Variety Pass left The Toll Booth Trap alone, anywhere, so it now pairs
 # with each body count. Any other pair of 5s still fails the audit.
@@ -212,7 +213,7 @@ VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat'
 # Every distinct Play on a District, as the facts a Job can read. The board's own
 # rules prune the impossible ones, so a co-fire reported here is one a player can
 # actually make. Grids straddle every threshold the deck prints (3, 4, 6, 8 barrels;
-# 4 Runners; 5 defending Runners, with and without their Boss): a silent zero is not a pass.
+# 4 Runners; 4 and 5 defending Runners, with and without their Boss): a silent zero is not a pass.
 #
 # District state before the Play:
 #   empty      no Mobsters, no Safehouse, no Squad (barrels may lie there)
@@ -330,10 +331,10 @@ def _fight(fight, state, home, out, sh, route, from_staten, barrels, rum, crew):
         for own_boss in ((False, True) if crew else (False,)):
             yield _p(own_boss=own_boss, **base)
         return
-    # The crew that met you at the door: its Runners (1 stands for "fewer than five") and
-    # whether its Boss stood with them. A Fold is a seize, as a won fight is, but kills nobody;
+    # The crew that met you at the door: its Runners (1 stands for "fewer than four"; 4 makes
+    # five Mobsters with the Boss) and whether its Boss stood with them. A Fold is a seize, as a won fight is, but kills nobody;
     # a Boss can fall in a fight you win or lose (last, or first to a Sicilian Hit).
-    for def_runners in (0, 1, 5):
+    for def_runners in (0, 1, 4, 5):
         for def_boss in (False, True):
             if not def_runners and not def_boss:
                 continue
@@ -441,7 +442,7 @@ def main():
     if not bad:
         print('  PASS: no Play can fire two 5-Respect Jobs, outside the allowed pairs.')
     for pair in ok:
-        print(f'  allowed (Boss killed, District of 5+ Runners taken; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
+        print(f'  allowed (Boss killed, District of 5+ Mobsters taken; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
 
     print()
     print('=' * 78)

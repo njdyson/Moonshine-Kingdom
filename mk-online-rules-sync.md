@@ -861,7 +861,7 @@ Nothing else in the rules changes.
 | Set | Now |
 | --- | --- |
 | Body counts | "Seize a District from 5+ rival Runners in X": a Seize in the named Borough, from a crew that held **5+ Runners when the Move came in** (Bloody Sunday, Over the Top, Rum Wars, The Butcher's Ledger) |
-| Bosses | "Seize a District from a rival Boss in X": a Seize in the named Borough, from a crew with **its Boss in it** when the Move came in (Room 349, The One-Way Ride, The Toll Booth Trap, The Last Hand) |
+| Bosses | "Seize a District from a rival Boss in X": a Seize in the named Borough, from a crew with **its Boss in it** when the Move came in (Room 349, The One-Way Ride, The Toll Booth Trap, The Last Hand). **Superseded by §33**: three cut, The Toll Booth Trap a Kill. |
 
 A Fold is a Seize (§30's reading), so a Fold pays both. A kill in a fight the Invader loses pays nothing,
 and nothing reads kills any more, which also retires §23.3's question. Bots: a Fold that pays the Invader
@@ -887,12 +887,14 @@ through the real engine. RULES-AI.md says it for the agents.
 | The One-Way Ride (3) | "Move your Boss and 4+ Rum across the **Queensboro Bridge**" (East Harlem to Astoria) |
 | A Bridge to Sell (3, new) | "Move your Boss and 4+ Rum across the **Brooklyn Bridge**" (the Bowery to Red Hook) |
 | The Eviction (3, back) | "Take over a rival's Safehouse": any takeover on your own Play |
+| The Extort set (3) | reworded only: "Extort all of the Speakeasies in X", same trigger |
+| Body counts (5) | "Seize a District from 5+ rival **Mobsters** in X": the crew at the door counts its Boss too |
 
 The bridge cards read as Hell's Highway does: the Move carries the Boss and 4+ Rum across, whatever the
 fight at the far end does. Bots: The Eviction and Union Dues want a takeover, not a raze. The kill tally
 comes back for The Toll Booth Trap (`killedRivalBoss`, set only by the Invader's own shots).
 
-**Ported the same day** (mk-online c2e8116, and 167d3ce for the Kill, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
+**Ported the same day** (mk-online c2e8116, 167d3ce for the Kill and 309ae35 for the wording, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
 `jobs.ts`, the evaluators (`homeRoomOf` for Opening Night, `tookOverRivalSafehouse` for The Eviction, one
 `bridgeRun` for the three Bridges), bot plans for the new cards, and `scripts/jobs-check.ts`.
 

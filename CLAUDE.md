@@ -167,7 +167,8 @@ model.
 **A Fold is a Seize, and the body counts are Seizes** (Nick, 2026-10-13, after the opus-vs-bots-1
 playtest in mk-online's `harness/transcripts/`). Until then all eight 5s read "Kill ...", and a Fold
 denied them all: of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every
-lone Boss Folded. Now the body counts read "Seize a District from 5+ rival Runners in X", so the
+lone Boss Folded. Now the body counts read "Seize a District from 5+ rival Mobsters in X" (Mobsters,
+so a Boss and four Runners are five), so the
 Occupier stands and makes the Invader win it, or runs and pays him 5 anyway.
 The crew is counted as it met the Invader at the door (the Rulebook's Pulling It Off, its one home).
 A kill in a fight the Invader loses pays nothing on them.
@@ -196,19 +197,19 @@ once. The deck is 36 cards, 16 / 12 / 8:
 - **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
   barrels at <bar> in <District>"), and eight singles for the landmarks, the Docks and
   Staten Island.
-- **3s**: **the Extort set**, *Extort while you Control all three Speakeasies in* Manhattan (Empire
+- **3s**: **the Extort set**, *Extort all of the Speakeasies in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); Cuban
   Prince (4+ Docks) as an Extort card too; **the bridge set** since 2026-10-13, *Move your Boss and 4+
   Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
   (A Bridge to Sell); and singles, The Eviction back among them.
 - **5s**: no longer one set (Nick, 2026-10-13: "more variety is likely better to avoid a stale
-  standard ending"). A **body count** per Borough ("Seize a District from 5+ rival Runners in X"),
+  standard ending"). A **body count** per Borough ("Seize a District from 5+ rival Mobsters in X"),
   **The Toll Booth Trap** ("Kill a rival Boss", anywhere), **The Five Families**,
   **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough") and **Union
   Dues**. Opening Night is home-only so the pour can't be made in the room its holder crowns in. A body
   count and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
   2026-10-12): paying both takes a fight that kills the Boss and takes a District held by five
-  Runners, and holding both stakes 6 of at most 10 markers. A Fold there pays the body count alone.
+  Mobsters, and holding both stakes 6 of at most 10 markers. A Fold there pays the body count alone.
   Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a
   target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs
   and fails any other.

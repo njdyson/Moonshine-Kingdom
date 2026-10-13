@@ -29,6 +29,18 @@ Nick, the same evening:
 | 3 | **A Bridge to Sell** (new; art `Night Mayor.jpg`): "Move your Boss and 4+ Rum across the Brooklyn Bridge." |
 | 3 | **The Eviction** back: "Take over a rival's Safehouse." (art `Crimson Coup.jpg`) |
 
+### Wording, the same evening (Nick)
+
+| Cards | Was | Now |
+| --- | --- | --- |
+| The Extort set | Extort while you Control all three Speakeasies in X. | Extort all of the Speakeasies in X. |
+| Body counts | Seize a District from 5+ rival Runners in X. | Seize a District from 5+ rival **Mobsters** in X. |
+
+On the Extort set: "I don't think that can be misinterpreted and it reads much cleaner." An Extort
+collects from every District you Control, so extorting a Speakeasy means holding it, and "all of the"
+still takes in the room. On the body counts, a Boss now counts toward the five: a Boss and four Runners
+qualify, which widens the targets a little and makes the pair with The Toll Booth Trap a Boss and four.
+
 ### My calls, for review
 
 1. ~~"Seize", not "Kill", on The Toll Booth Trap.~~ **Settled: a Kill** (Nick, the same evening): "I'd keep
@@ -48,7 +60,7 @@ Nick, the same evening:
 ### What it does
 
 - **Never two 5s**: PASS. The Toll Booth Trap pairs with each body count on a fight that kills the Boss and
-  takes a District held by 5+ Runners (the four allowed pairs, as before but now one card against four). A
+  takes a District held by 5+ Mobsters (the four allowed pairs, as before but now one card against four). A
   Fold there pays the body count alone. The three promoted 5s are
   an Extort, an Unload and a Recruit, so they meet no fight. Top stacks are still 13 at stake 8.
 - **Opening Night at home** stops the pour in the room you crown in, since no boss crowns at home. It does
@@ -84,7 +96,7 @@ After the first full online game on the round-2 deck (mk-online `harness/transcr
 | Set | Was | Now |
 | --- | --- | --- |
 | Body counts | Kill 5+ rival Runners in X. | Seize a District from 5+ rival Runners in X. |
-| Bosses | Kill a rival Boss in X. | Seize a District from a rival Boss in X. |
+| Bosses | Kill a rival Boss in X. | Seize a District from a rival Boss in X. (Round 4: three cut; The Toll Booth Trap a Kill again, anywhere) |
 
 "From" rather than "occupied by" or "guarded by": it is the Glossary's own definition of Seize ("take
 Control of a District from a rival"), it is the shortest, and it says whose crew is counted. The Rulebook's

@@ -152,13 +152,13 @@ CARDS = [
     # needs MASS 2: his owner escorts him, since a lone Boss Folds and pays. Body counts keep
     # DICE 3: a stack of 5+ stands only when it likes the fight, and you must wipe it.
     ("Bloody Sunday", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Runners in Manhattan: stand and lose, or Fold, and it pays."),
+     "5+ Mobsters in Manhattan: stand and lose, or Fold, and it pays."),
     ("Over the Top", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Runners in the Bronx: stand and lose, or Fold, and it pays."),
+     "5+ Mobsters in the Bronx: stand and lose, or Fold, and it pays."),
     ("Rum Wars", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Runners in Queens: stand and lose, or Fold, and it pays."),
+     "5+ Mobsters in Queens: stand and lose, or Fold, and it pays."),
     ("The Butcher's Ledger", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Runners in Brooklyn: stand and lose, or Fold, and it pays."),
+     "5+ Mobsters in Brooklyn: stand and lose, or Fold, and it pays."),
     # The Variety Pass (2026-10-13): one Boss card, anywhere, and three 5s up from the 3s. The
     # Toll Booth Trap names no place now (NAMES 1, WINDOW 1: some rival Boss is always out), and
     # is a Kill on purpose (Nick): he Folds out of it unless cornered (RIVAL 3, DEFEND 2), and a
