@@ -264,6 +264,9 @@ so the order is a real choice: the Captain is the cheap tempo marker, the Mayor 
 the natural closer. One of each because otherwise a rich boss buys Mayors and denies the pile (Nick).
 Don't flatten the prices, put powers on the cards (that is the Titles back), or make the officials
 unique to one boss. The card titles drop "The" because "The Precinct Captain" needs 8pt to fit.
+Since 2026-10-13 the card prints only what it gives (Nick): the price in the kicker, the Respect on
+the shield, and "+1 Influence" in the rules band. The Play's rule, "one of each" included, lives in
+the Playbooks' Bribe row and the Rulebook; don't put it back on the card.
 
 In the Blood Oath, an Alliance races to **40 combined Respect** (lower, and an Alliance could form
 already past the bar, so the Truce would hand it the game), and **either partner** Takes the Crown
