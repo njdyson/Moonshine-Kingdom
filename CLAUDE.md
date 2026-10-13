@@ -227,7 +227,7 @@ or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 3 or 
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a High Society Venue outside his home Borough**, and you win
 on the spot. It lives on the Winning the Game page (a heading and a two-item list: the Name, the
-Room), on the Borough cards, and since 2026-10-12 on the Playbooks (Nick: "these are all of the
+Room) and since 2026-10-12 on the Playbooks (Nick: "these are all of the
 actions you can take, play that one and you win the game"). Keep it out of the Rulebook's standard
 Power Plays table. On the Playbooks it is not one of the rows: listed beside Bribe and Rise it read
 as an ordinary Play, so it closes the Plays as a gilt capstone after Lay Low, in one line that points
@@ -266,7 +266,10 @@ Don't flatten the prices, put powers on the cards (that is the Titles back), or 
 unique to one boss. The card titles drop "The" because "The Precinct Captain" needs 8pt to fit.
 Since 2026-10-13 the card prints only what it gives (Nick): the price in the kicker, the Respect on
 the shield, and "+1 Influence" in the rules band. The Play's rule, "one of each" included, lives in
-the Playbooks' Bribe row and the Rulebook; don't put it back on the card.
+the Playbooks' Bribe row and the Rulebook; don't put it back on the card. The same day the rest of
+the Cards sheet went the same way: **every card carries one short line and no rule text** (the
+Rat "No Rat till a rival Rats", the Mark "Square Up: $2,000", the Welsher "Forever", a Borough its
+three rooms). The Respect is on the shield, so no card restates it.
 
 In the Blood Oath, an Alliance races to **40 combined Respect** (lower, and an Alliance could form
 already past the bar, so the Truce would hand it the game), and **either partner** Takes the Crown
@@ -328,10 +331,10 @@ using the archived Deed plates (`Art/Cards/Manhattan.jpg` and its three siblings
 boss at setup, face-up: it is his **home Borough** (three players: box the fourth, and that Borough
 is nobody's home). Each card carries:
 
-- **Take the Crown**, worded per card, naming the **three High Society Venues outside its Borough**
-  in the positive (Manhattan's reads "With 20+ Respect and your Boss at Morris Park, Richmond Hill
-  or Williamsburg, you win"). **No boss crowns in his own Borough.** The Blood Oath's crowning
-  partner uses his own card.
+- Under "The Crown", the **three High Society Venues outside its Borough**, one to a line, in the
+  positive (Manhattan's: Morris Park, Richmond Hill, Williamsburg). The Play itself is on the
+  Playbooks, which point here for the rooms; until 2026-10-13 the card printed the whole Play.
+  **No boss crowns in his own Borough.** The Blood Oath's crowning partner uses his own card.
 - Its home Ward, in the kicker, for Union Dues, the Job that names one.
 
 From 2026-10-10 to 2026-10-12 the card also held the boss's four unbought Influence markers in a
