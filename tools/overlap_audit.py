@@ -3,7 +3,8 @@
 
 Enumerates every Play a player could make (Play x target District x board state x
 what the Play did there) and reports which Jobs co-fire. Enforces handoff §3:
-    - HARD RULE: never two 5s on one Play, except a Borough's body count and Boss together
+    - HARD RULE: never two 5s on one Play, except a body count and The Toll Booth Trap together,
+      on a fight that kills the Boss and takes a District held by 5+ Mobsters
       (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
     - Watch:     a 5 plus small change is fine; big 3-stacks are suspect.
 
@@ -75,6 +76,11 @@ EAST_RIVER = {'East Harlem', 'Astoria', 'Williamsburg', 'Red Hook'}   # 4 Speake
 JAMAICA_BAY = {'Canarsie', 'Jamaica'}                                  # 2 Docks
 WILLIAMSBURG_BRIDGE = {'Five Points', 'Williamsburg'}
 HELL_GATE_BRIDGE = {'Hunts Point', 'Astoria'}
+QUEENSBORO_BRIDGE = {'East Harlem', 'Astoria'}
+BROOKLYN_BRIDGE = {'The Bowery', 'Red Hook'}
+# A Move across a Bridge: its route name and the two Districts it joins.
+BRIDGES = {'wburg': WILLIAMSBURG_BRIDGE, 'hellgate': HELL_GATE_BRIDGE,
+           'qboro': QUEENSBORO_BRIDGE, 'bklyn': BROOKLYN_BRIDGE}
 
 
 # --- THE JOBS ----------------------------------------------------------------
@@ -128,22 +134,22 @@ JOBS = [
     # --- 3 Respect ---
     # The Extort cards read the whole map, so an Extort is modelled once (see _extort).
     J('Empire State', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in Manhattan.',
+      'Extort all of the Speakeasies in Manhattan.',
       lambda p, d: M in p['bars']),
     J('The Big Squeeze', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in the Bronx.',
+      'Extort all of the Speakeasies in the Bronx.',
       lambda p, d: BX in p['bars']),
     J('King of Queens', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in Queens.',
+      'Extort all of the Speakeasies in Queens.',
       lambda p, d: Q in p['bars']),
     J('The Black Hand', 3, ['Extort'],
-      'Extort while you Control all three Speakeasies in Brooklyn.',
+      'Extort all of the Speakeasies in Brooklyn.',
       lambda p, d: BK in p['bars']),
-    J('The Five Families', 3, ['Extort'],
-      'Extort while you Control a District in all five Boroughs.',
+    J('The Five Families', 5, ['Extort'],
+      'Extort a District in all five Boroughs.',
       lambda p, d: p['all5']),
     J('Cuban Prince', 3, ['Extort'],
-      'Extort while you Control 4+ Docks.',
+      'Extort 4+ Docks.',
       lambda p, d: p['docks4']),
     J("Hell's Highway", 3, ['Move'],
       'Move your Boss and 4+ Rum across the Hell Gate Bridge.',
@@ -158,35 +164,46 @@ JOBS = [
     J('The Copper Heist', 3, ['Move'],
       'Seize a District with a Pressure 5 Still.',
       lambda p, d: p['seize'] and d.press == 5),
-    J('Opening Night', 3, ['Unload'],
-      'Unload 8+ Rum at a High Society Venue.',
-      lambda p, d: p['barrels'] >= 8 and d.has('highSociety')),
-    J('Union Dues', 3, ['Recruit'],
+    # The bridge set (2026-10-13): Hell's Highway's wording on the Queensboro and Brooklyn Bridges.
+    J('The One-Way Ride', 3, ['Move'],
+      'Move your Boss and 4+ Rum across the Queensboro Bridge.',
+      lambda p, d: p['route'] == 'qboro' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
+    J('A Bridge to Sell', 3, ['Move'],
+      'Move your Boss and 4+ Rum across the Brooklyn Bridge.',
+      lambda p, d: p['route'] == 'bklyn' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
+    # Back 2026-10-13: a takeover comes with a Seize (a won fight, a Fold, or an unguarded walk-in).
+    J('The Eviction', 3, ['Move'],
+      "Take over a rival's Safehouse.",
+      lambda p, d: p['seize'] and p['sh'] == 'takeover'),
+    J('Opening Night', 5, ['Unload'],
+      'Unload 8+ Rum at the High Society Venue in your home Borough.',
+      lambda p, d: p['barrels'] >= 8 and d.has('highSociety') and p['home'] == 'own'),
+    J('Union Dues', 5, ['Recruit'],
       "Recruit 4+ Runners in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
-    # --- 5 Respect: the murder sets (2026-10-11, round 2) ---
-    # `kills` counts Runners; `boss_killed` is the Boss. A Borough's two 5s meet only on a
-    # fight that kills its Boss and five Runners: see ALLOWED_DOUBLE_FIVES.
-] + [J(n, 5, ['Move'], f'Kill 5+ rival Runners in {label}.',
-       (lambda b: lambda p, d: p['kills'] >= 5 and d.boro == b)(b))
+    # --- 5 Respect: the body counts (2026-10-11), Seizes since 2026-10-13 ---
+    # `def_runners` and `def_boss` are the crew that met the Move at the door, so a Fold pays
+    # as a won fight does. The Five Families, Opening Night and Union Dues (5s since the
+    # Variety Pass, 2026-10-13) are above.
+] + [J(n, 5, ['Move'], f'Seize a District from 5+ rival Mobsters in {label}.',
+       (lambda b: lambda p, d: p['seize'] and p['def_runners'] + p['def_boss'] >= 5
+        and d.boro == b)(b))
      for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
                          ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
-    J(n, 5, ['Move'], f'Kill a rival Boss in {label}.',
-      (lambda b: lambda p, d: p['boss_killed'] and d.boro == b)(b))
-    for n, label, b in (('Room 349', 'Manhattan', M), ('The One-Way Ride', 'the Bronx', BX),
-                        ('The Toll Booth Trap', 'Queens', Q), ('The Last Hand', 'Brooklyn', BK))]
+    # The one Boss card left, anywhere, and a Kill (2026-10-13): a Fold denies it. It meets each
+    # body count only on a fight that kills the Boss and takes a District held by 5+ Mobsters:
+    # see ALLOWED_DOUBLE_FIVES.
+    J('The Toll Booth Trap', 5, ['Move'], 'Kill a rival Boss.',
+      lambda p, d: p['boss_killed'])]
 
-# The one exception to "never two 5s" (Nick, 2026-10-12): a Borough's body count and its Boss
-# card together. Runners die first, so it takes a Boss and five Runners killed in one fight,
-# against a District holding six or more; holding both cards stakes 6 of at most 10 markers,
-# leaving 4 for the Move and the volleys, which doesn't buy six kills; and the Offers deal one
-# card a Day. Any other pair of 5s still fails the audit.
-ALLOWED_DOUBLE_FIVES = {
-    frozenset(('Bloody Sunday', 'Room 349')),
-    frozenset(('Over the Top', 'The One-Way Ride')),
-    frozenset(('Rum Wars', 'The Toll Booth Trap')),
-    frozenset(("The Butcher's Ledger", 'The Last Hand')),
-}
+# The one exception to "never two 5s" (Nick, 2026-10-12): a body count and the Boss card
+# together, on a fight that kills the Boss and takes a District held by five or more Mobsters.
+# A Fold pays the body count alone, so the Invader must beat a Boss and four with the 4 markers
+# left after staking 6 of at most 10; and the Offers deal one card a Day. The Boss card was one
+# per Borough until the Variety Pass left The Toll Booth Trap alone, anywhere, so it now pairs
+# with each body count. Any other pair of 5s still fails the audit.
+ALLOWED_DOUBLE_FIVES = {frozenset(('The Toll Booth Trap', n)) for n in (
+    'Bloody Sunday', 'Over the Top', 'Rum Wars', "The Butcher's Ledger")}
 
 STAKE = {1: 1, 3: 2, 5: 3}
 VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat')
@@ -196,7 +213,7 @@ VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat'
 # Every distinct Play on a District, as the facts a Job can read. The board's own
 # rules prune the impossible ones, so a co-fire reported here is one a player can
 # actually make. Grids straddle every threshold the deck prints (3, 4, 6, 8 barrels;
-# 4 Runners; 2 and 5 kills; 5 defenders): a silent zero is not a pass.
+# 4 Runners; 4 and 5 defending Runners, with and without their Boss): a silent zero is not a pass.
 #
 # District state before the Play:
 #   empty      no Mobsters, no Safehouse, no Squad (barrels may lie there)
@@ -212,8 +229,8 @@ BARRELS = (0, 3, 4, 6, 8)
 
 
 def _p(**kw):
-    p = dict(barrels=0, rum=False, runners=0, kills=0, defenders=0, seize=False,
-             boss_killed=False, own_boss=False, crew=False, route='land',
+    p = dict(barrels=0, rum=False, runners=0, def_runners=0, def_boss=False, boss_killed=False,
+             seize=False, own_boss=False, crew=False, route='land',
              from_staten=False, sh='none', adj_rival_sh=False, all5=False, bars=frozenset(),
              docks4=False)
     p.update(kw)
@@ -257,10 +274,8 @@ def _plays(verb, d, state, home):
             else:
                 shs = ('torch',) if out == 'torch' else ('none',)
             for sh in shs:
-                for route in ('land', 'wburg', 'hellgate', 'water'):
-                    if route == 'wburg' and d.name not in WILLIAMSBURG_BRIDGE:
-                        continue
-                    if route == 'hellgate' and d.name not in HELL_GATE_BRIDGE:
+                for route in ('land', 'water') + tuple(BRIDGES):
+                    if route in BRIDGES and d.name not in BRIDGES[route]:
                         continue
                     if route == 'water' and not d.has('dock'):
                         continue
@@ -316,15 +331,16 @@ def _fight(fight, state, home, out, sh, route, from_staten, barrels, rum, crew):
         for own_boss in ((False, True) if crew else (False,)):
             yield _p(own_boss=own_boss, **base)
         return
-    # defenders 1 stands for "fewer than five". A Fold is a seize with no kills.
-    # kills counts Runners; the Boss falls after his Runners, or first to a Sicilian Hit.
-    for defenders in (1, 5):
-        for kills in (0, 2, 5):
-            if kills >= defenders and defenders < 5:
+    # The crew that met you at the door: its Runners (1 stands for "fewer than four"; 4 makes
+    # five Mobsters with the Boss) and whether its Boss stood with them. A Fold is a seize, as a won fight is, but kills nobody;
+    # a Boss can fall in a fight you win or lose (last, or first to a Sicilian Hit).
+    for def_runners in (0, 1, 4, 5):
+        for def_boss in (False, True):
+            if not def_runners and not def_boss:
                 continue
-            for boss_killed in (False, True):
+            for boss_killed in ((False, True) if def_boss else (False,)):
                 for own_boss in (False, True):
-                    yield _p(defenders=defenders, kills=kills, boss_killed=boss_killed,
+                    yield _p(def_runners=def_runners, def_boss=def_boss, boss_killed=boss_killed,
                              own_boss=own_boss, **base)
 
 
@@ -426,7 +442,7 @@ def main():
     if not bad:
         print('  PASS: no Play can fire two 5-Respect Jobs, outside the allowed pairs.')
     for pair in ok:
-        print(f'  allowed (a Boss and five Runners in one fight; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
+        print(f'  allowed (Boss killed, District of 5+ Mobsters taken; Nick, 2026-10-12): {" + ".join(sorted(pair))}')
 
     print()
     print('=' * 78)

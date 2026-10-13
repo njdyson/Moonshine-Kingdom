@@ -274,37 +274,32 @@ THREES = [
     #   on their own art, worded as The Five Families is: "Extort while you Control ...".
     #   "all three" says the crowned bar counts, which a reader going by the board's gin
     #   medallions might otherwise miss.
+    #   WORDING 2026-10-13 (Nick): "Extort all of the Speakeasies in X". "I don't think that can be
+    #   misinterpreted and it reads much cleaner." An Extort collects from every District you
+    #   Control, so extorting a Speakeasy means holding it; "all of the" still takes in the room.
     ("Empire State", "Empire State.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in <b>Manhattan</b>.",
+     "Extort <b>all of the Speakeasies</b> in <b>Manhattan</b>.",
      "From Sugar Hill to the Tenderloin, every till pays one man."),
     # The name and art came off Manhattan's old home-bar 3 (Unload 6+ at The Tenderloin),
     # which had restored them from the cut Extort card. Back on an Extort, where a squeeze
     # belongs; the art (the wagons at the door mid-count) is Extort's Heat drawn as a picture.
     ("The Big Squeeze", "Big Squeeze.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in the <b>Bronx</b>.",
+     "Extort <b>all of the Speakeasies</b> in the <b>Bronx</b>.",
      "The whole Bronx pays on Friday. Nobody has to ask twice."),
     ("King of Queens", "King of Queens.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in <b>Queens</b>.",
+     "Extort <b>all of the Speakeasies</b> in <b>Queens</b>.",
      "Every glass poured in Queens, the King takes a sip."),
     # The Black Hand letters (an inked palm, a sum, a threat) were the shakedown of the
     # Italian blocks in Brooklyn and East Harlem. The art is a butcher reading one.
     ("The Black Hand", "Black Hand.jpg", "Extort",
-     "Extort while you Control <b>all three Speakeasies</b> in <b>Brooklyn</b>.",
+     "Extort <b>all of the Speakeasies</b> in <b>Brooklyn</b>.",
      "The letter had a hand drawn on it. The shop paid by noon."),
-    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
-    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
-    # record the Deed-era reasoning.
-    # SETS PASS 2026-10-11: DOWN TO 3, where the Extort set lives, so the 5s can be murder alone.
-    # New art (Nick: Accord was washed out and showed four men): Scheme, three men over a city map.
-    # One Extort can pay it beside Borough cards and Cuban Prince; all are 3s, so no hard-rule issue.
-    ("The Five Families", "Scheme.jpg", "Extort",
-     "Extort while you Control a District in <b>all five Boroughs</b>.",
-     "Not the richest table in town. Just the widest."),
     # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's
     # Extort card: four of the eight Docks, held at once. Holding four almost always makes you the
     # Harbormaster too. Was "Move 3+ Rum into Red Hook", cut on the setup pass as a Brooklyn chore.
+    # WORDING 2026-10-13 (Nick): "Extort 4+ Docks", in the Extort set's new style.
     ("Cuban Prince", "Cuban Prince.jpg", "Extort",
-     "Extort while you Control <b>4+ Docks</b>.",
+     "Extort <b>4+ Docks</b>.",
      "Every boat from Havana ties up at one of his piers."),
     # SETS PASS 2026-10-11 (Nick's wording). The Hell Gate joins Hunts Point (the Bronx's home Ward) and
     # Astoria, so it is the Bronx's friendly 3, the seat with the fewest cards aimed its way. The Rum
@@ -422,6 +417,135 @@ THREES = [
     ("The Copper Heist", "Copper Heist.jpg", "Open Fire",
      "Seize a District with a <b>Pressure 5 Still</b>.",
      "The good boilers run hot. So do the men who own them."),
+    # THE BRIDGE SET (VARIETY PASS, 2026-10-13). Hell's Highway's wording on the board's other two
+    # Bridges, so each 3 sends a Boss over the water with a Rum run behind him and points the table at
+    # both ends. The Williamsburg Bridge stays The Milk Run's, a 1, since its far end is a police-locked
+    # room. The Queensboro joins two empty bars (East Harlem and Astoria), next door to three home
+    # Wards; the Brooklyn Bridge joins Manhattan's starting Dock (the Bowery) to Brooklyn's starting
+    # bar (Red Hook), so it ends in a fight unless the far side Folds. A Boss on a bridge is also The
+    # Toll Booth Trap's target.
+    # The One-Way Ride keeps its name and art from the Boss set (a tommy gun from a running car), and
+    # the Queensboro is the bridge Gatsby drives into Manhattan over: a nod, not a lesson.
+    ("The One-Way Ride", "Gatsby.jpg", "Move",
+     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Queensboro Bridge</b>.",
+     "Get in the car. Nobody asks where it is going."),
+    # Named for the oldest con in the city: George C. Parker sold the Brooklyn Bridge to the newly
+    # landed, more than once. Art: a deal at night, a wad of cash, a hotel bar behind.
+    ("A Bridge to Sell", "Night Mayor.jpg", "Move",
+     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Brooklyn Bridge</b>.",
+     "He sold it to a rube on Tuesday. Tonight he is using it."),
+    # BACK (VARIETY PASS, 2026-10-13). Round 1 kept it ("an assault on the most defended block a rival
+    # has"); round 2 cut it, unrated, only to fit twelve 3s, and a refill of the 3s is the reason it
+    # returns. Since the Fold became a Seize a Fold pays it, as it always did. It meets the body counts
+    # and The Toll Booth Trap on a home Ward (a 5 and this, or the allowed pair and this: 13, stake 8),
+    # and The Copper Heist on a starting bar with a Safehouse; and it is the first half of Union Dues.
+    ("The Eviction", "Crimson Coup.jpg", "Open Fire",
+     "Take over a rival&rsquo;s <b>Safehouse</b>.",
+     "Nice place. He won&rsquo;t be needing it."),
+]
+
+FIVES = [
+    # THE MURDER SETS (Nick, 2026-10-11, round 2; Seizes, then the Variety Pass, 2026-10-13, below). Two sets of four, one
+    # card per mainland Borough each: a body count ("Kill 5+ rival Runners in X") and a Boss ("Kill
+    # a rival Boss in X"). Each seat is hunted by two 5s in its own Borough.
+    # TWO 5s ON ONE PLAY: one Play is in one Borough, so only that Borough's two cards can meet, and
+    # only on a fight that kills a Boss AND five Runners (Runners die first, so the District held at
+    # least six). Round 2 printed "but no Boss" on the body counts to rule it out; Nick cut it on
+    # 2026-10-12 as not worth the words: holding both cards stakes 6 of at most 10 markers, leaving 4
+    # for the Move and the volleys, and six kills against a stack of six is beyond what 4 markers
+    # buy (about 10 Runners and a Boss average five kills in three Open Fires). The Offers deal one
+    # card a Day, so both must be drafted on separate Days too. overlap_audit.py reports the four
+    # same-Borough pairs as allowed and still fails any other pair of 5s.
+    # THE SEIZE PASS (Nick, 2026-10-13, after the opus-vs-bots-1 playtest). Every 5 was "Kill ...",
+    # and a Fold denied all eight: 69 Standoffs, 40 Folds, six murder 5s claimed and none completed.
+    # A lone Boss Folded every time, so a Boss card needed him to stand, and nobody did. Now each
+    # card reads "Seize a District from 5+ rival Runners in X" or "from a rival Boss in X", and a
+    # Fold is a Seize (Rulebook, Pulling It Off). The crew is counted as it met you at the door.
+    # So the Occupier stands and makes you win it, or runs and pays you 5 anyway. A kill in a fight
+    # you lose pays nothing now: the Sicilian Hit still strips a Boss's +1, but has to finish the job.
+    # A Borough's pair still meets only on a Boss with 5+ Runners, and a Fold there pays 10; nobody
+    # Folds that stack if he can stand, so it stays the fight Nick priced on 2026-10-12.
+    # THE VARIETY PASS (Nick, later on 2026-10-13): "dropping the set of 8 would make sense here. More
+    # variety is likely better to avoid a stale standard ending." The body counts stay a set of four;
+    # the Boss set goes but for The Toll Booth Trap, now anywhere; The Five Families, Opening Night
+    # (in your home Borough) and Union Dues come up from the 3s. So the 5s are four fights, a Boss
+    # hunt, an Extort, a pour and a Recruit. The only two that can meet on one Play are The Toll Booth
+    # Trap and a body count, on a fight that kills the Boss and takes a District held by 5+ Mobsters:
+    # the allowed pairs.
+    # WORDING 2026-10-13 (Nick): the body counts count Mobsters, not Runners, so a Boss and four
+    # Runners are five. The crew is still counted as it met you at the door.
+    # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
+    # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
+    # and 2 Runners from setup, so this is a campaign against a garrison behind the
+    # Safehouse's +1 Threat. Borough-disjoint from Queens/Bronx/Brooklyn, so the
+    # "never two 5s" guarantee holds. Still 10 = Pressure 3, so The Copper Heist
+    # can never ride it.
+    # MANHATTAN'S BOUNTY, and the 4th distinct act in the set: Queens kills the head,
+    # Brooklyn the body count, the Bronx takes the ground, Manhattan burns the base.
+    # WAS "Seize Five Points": a hole: that named no garrison, so if the Manhattan
+    # player Secured away you could take it off a lone Runner for 5 Respect. This
+    # can't go dead either: every crew always has exactly one Safehouse, and
+    # Manhattan's starts in Five Points at setup. Combat rules do the work
+    # ("a rival Safehouse in the District is destroyed, unless you take it over").
+    # Always co-fires with The Eviction (5+3=8, legal); mutually exclusive with
+    # The Copper Heist, which forbids a Safehouse.
+    # SETS PASS 2026-10-11: Manhattan's body count (Nick: the Safehouse wording was unclear).
+    ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>Manhattan</b>.",
+     "By Monday there was nothing left to come home to."),
+    # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
+    # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
+    # The Eviction: now REDUNDANT and removed (solver-verified: The Copper Heist's own
+    # "no Safehouse" already makes it and The Eviction mutually exclusive, which is what
+    # actually closed cluster 3). Max stack unchanged at 9.
+    # SETS PASS 2026-10-11: the Bronx's body count. A Fold now denies it, as it does the others.
+    ("Over the Top", "Old Guard.jpg", "Open Fire",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>the Bronx</b>.",
+     "These boys went over the top in France. This is a street."),
+    # SETS PASS 2026-10-11: Queens' body count. The Toll Booth Trap moved to the Boss set, where it
+    # started. Art: a gunfight on a burning pier.
+    ("Rum Wars", "Rum Wars.jpg", "Open Fire",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>Queens</b>.",
+     "Nobody counted the bodies. Everybody counted the crates."),
+    # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
+    # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick).
+    ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
+     "Seize a District from <b>5+ rival Mobsters</b> in <b>Brooklyn</b>.",
+     "Every name in it is crossed out but one."),
+    # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
+    # and exists purely to kill Bosses: the old wording locked the boss-killing mob
+    # out of using its boss-killing power on the deck's only boss-kill card. Worded
+    # by outcome now, so Open Fire, Hit and Plunder all count (§4: an event has an
+    # actor, an object and a moment: not a button).
+    # "your own Boss in the fight" is a SETUP hedge, not a circumstance one: you must
+    # march your Boss into Queens and risk him. It also grants +1 Threat, so it's a
+    # real trade rather than a tax.
+    # SETS PASS 2026-10-11: Queens' Boss. "with your own Boss in the fight" cut (Nick: niche enough
+    # without it).
+    # VARIETY PASS 2026-10-13 (Nick): the one Boss card left, anywhere. The other three are cut and
+    # the 5s are no longer one set: "more variety is likely better to avoid a stale standard ending".
+    # A KILL, not a Seize, on purpose (Nick, the same evening): "a situational strong arm. You can
+    # corner him so he can't fold, or use it as a decoy if you want them to fold (earning its name
+    # 'trap')." A Boss with no Connected Safe District to Scram to can't Fold, so the hunter's work is
+    # the cornering; and a face-up Toll Booth Trap makes a Boss run, which hands over the block.
+    # It meets each body count only on a fight that kills the Boss and takes a District held by 5+
+    # Mobsters (the four allowed pairs); a Fold pays the body count alone.
+    ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
+     "Kill a <b>rival Boss</b>.",
+     "A toll is a toll. Somebody always pays it."),
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
+    # SETS PASS 2026-10-11: DOWN TO 3, where the Extort set lives, so the 5s can be murder alone.
+    # New art (Nick: Accord was washed out and showed four men): Scheme, three men over a city map.
+    # One Extort can pay it beside Borough cards and Cuban Prince; all are 3s, so no hard-rule issue.
+    # VARIETY PASS 2026-10-13 (Nick): BACK UP TO 5, "as that's tough": a District in every Borough at
+    # once, Staten Island included, is whack-a-mole the whole table can see. No other 5 is an Extort, so
+    # it meets the 3s only (two Borough cards and this: 11 Respect, stake 7).
+    # WORDING 2026-10-13 (Nick): "Extort a District in all five Boroughs", in the Extort set's style.
+    ("The Five Families", "Scheme.jpg", "Extort",
+     "Extort a District in <b>all five Boroughs</b>.",
+     "Not the richest table in town. Just the widest."),
     # "of Rum" is redundant with the rules (High Society pours nothing else) but
     # says the quiet part out loud on the card: 8 barrels means the whole Trade
     # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.
@@ -432,8 +556,13 @@ THREES = [
     # always at one bar. "in one Play" is what the count needed.
     # SETS PASS 2026-10-11: DOWN TO 3 (Nick: $4,000 and the Kickbacks as well as 5 Respect was too
     # much of a win/win). Text unchanged.
+    # VARIETY PASS 2026-10-13 (Nick): BACK UP TO 5, in your home Borough's room, "to stop a player
+    # completing this and taking the crown in the same day". No boss crowns at home, so the pour can't
+    # be made in the room he crowns in: a same-Day crown now needs two rooms held, the home room and an
+    # away one. It doesn't rule one out. Every seat has one home room, so the card is every seat's
+    # friendly 5 alike. The Kickbacks that made it "a win/win" at 5 on 2026-10-11 are still paid.
     ("Opening Night", "Jimmy.jpg", "Unload",
-     "Unload <b>8+ Rum</b> at a <b>High Society Venue</b>.",
+     "Unload <b>8+ Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.",
      "The band plays till four. Nobody asks a thing."),
     # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
     # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
@@ -466,93 +595,12 @@ THREES = [
     # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
     # wait for him to leave it. Every rival sees it coming and garrisons home.
     # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
+    # VARIETY PASS 2026-10-13: BACK UP TO 5, the third 5 Nick asked for. It went down only so the 5s
+    # could be murder alone, and they no longer are. Still the deck's best-scoring 3 (hard and
+    # contested), and a Recruit never shares a Play with a fight, so it meets no other 5.
     ("Union Dues", "Union Dues.jpg", "Recruit",
      "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
      "They line up at dawn. You decide who works."),
-]
-
-FIVES = [
-    # THE MURDER SETS (Nick, 2026-10-11, round 2). Every 5 is a killing, in two sets of four, one
-    # card per mainland Borough each: a body count ("Kill 5+ rival Runners in X") and a Boss ("Kill
-    # a rival Boss in X"). Each seat is hunted by two 5s in its own Borough.
-    # TWO 5s ON ONE PLAY: one Play is in one Borough, so only that Borough's two cards can meet, and
-    # only on a fight that kills a Boss AND five Runners (Runners die first, so the District held at
-    # least six). Round 2 printed "but no Boss" on the body counts to rule it out; Nick cut it on
-    # 2026-10-12 as not worth the words: holding both cards stakes 6 of at most 10 markers, leaving 4
-    # for the Move and the volleys, and six kills against a stack of six is beyond what 4 markers
-    # buy (about 10 Runners and a Boss average five kills in three Open Fires). The Offers deal one
-    # card a Day, so both must be drafted on separate Days too. overlap_audit.py reports the four
-    # same-Borough pairs as allowed and still fails any other pair of 5s.
-    # Every 5 is a kill Job, so a Fold denies all eight: all four seats can turn a bounty down
-    # mid-fight (before round 2, only Queens and Brooklyn could).
-    # Mob fit, to watch: the Irish Firepower die helps body counts and the Sicilian Hit makes a Boss
-    # take the first hit, so those two mobs gain most; the Knights' Torch and the Vipers' Stealth
-    # have no marquee 5 now.
-    # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
-    # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
-    # and 2 Runners from setup, so this is a campaign against a garrison behind the
-    # Safehouse's +1 Threat. Borough-disjoint from Queens/Bronx/Brooklyn, so the
-    # "never two 5s" guarantee holds. Still 10 = Pressure 3, so The Copper Heist
-    # can never ride it.
-    # MANHATTAN'S BOUNTY, and the 4th distinct act in the set: Queens kills the head,
-    # Brooklyn the body count, the Bronx takes the ground, Manhattan burns the base.
-    # WAS "Seize Five Points": a hole: that named no garrison, so if the Manhattan
-    # player Secured away you could take it off a lone Runner for 5 Respect. This
-    # can't go dead either: every crew always has exactly one Safehouse, and
-    # Manhattan's starts in Five Points at setup. Combat rules do the work
-    # ("a rival Safehouse in the District is destroyed, unless you take it over").
-    # Always co-fires with The Eviction (5+3=8, legal); mutually exclusive with
-    # The Copper Heist, which forbids a Safehouse.
-    # SETS PASS 2026-10-11: Manhattan's body count (Nick: the Safehouse wording was unclear).
-    ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>Manhattan</b>.",
-     "By Monday there was nothing left to come home to."),
-    # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
-    # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
-    # The Eviction: now REDUNDANT and removed (solver-verified: The Copper Heist's own
-    # "no Safehouse" already makes it and The Eviction mutually exclusive, which is what
-    # actually closed cluster 3). Max stack unchanged at 9.
-    # SETS PASS 2026-10-11: the Bronx's body count. A Fold now denies it, as it does the others.
-    ("Over the Top", "Old Guard.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>the Bronx</b>.",
-     "These boys went over the top in France. This is a street."),
-    # SETS PASS 2026-10-11: Queens' body count. The Toll Booth Trap moved to the Boss set, where it
-    # started. Art: a gunfight on a burning pier.
-    ("Rum Wars", "Rum Wars.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>Queens</b>.",
-     "Nobody counted the bodies. Everybody counted the crates."),
-    # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
-    # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick).
-    ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
-     "Kill <b>5+ rival Runners</b> in <b>Brooklyn</b>.",
-     "Every name in it is crossed out but one."),
-    # SETS PASS 2026-10-11: Manhattan's Boss. A nod, not a lesson: the Park Central room where the
-    # story starts, unnamed. Art: a man dead in a hotel bed, two men in the doorway.
-    ("Room 349", "The Big Sleep.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>Manhattan</b>.",
-     "He went upstairs to talk business. They carried him down."),
-    # SETS PASS 2026-10-11: the Bronx's Boss. "Taken for a ride" was the 1920s phrase for a gangland
-    # killing. Art: a tommy gun from a running car.
-    ("The One-Way Ride", "Gatsby.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>the Bronx</b>.",
-     "Get in the car. Nobody asks where it is going."),
-    # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
-    # and exists purely to kill Bosses: the old wording locked the boss-killing mob
-    # out of using its boss-killing power on the deck's only boss-kill card. Worded
-    # by outcome now, so Open Fire, Hit and Plunder all count (§4: an event has an
-    # actor, an object and a moment: not a button).
-    # "your own Boss in the fight" is a SETUP hedge, not a circumstance one: you must
-    # march your Boss into Queens and risk him. It also grants +1 Threat, so it's a
-    # real trade rather than a tax.
-    # SETS PASS 2026-10-11: Queens' Boss. "with your own Boss in the fight" cut (Nick: niche enough
-    # without it).
-    ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>Queens</b>.",
-     "A toll is a toll. Somebody always pays it."),
-    # SETS PASS 2026-10-11: Brooklyn's Boss. Art: a man taken by the collar at a card table.
-    ("The Last Hand", "Debt Collector.jpg", "Open Fire",
-     "Kill a <b>rival Boss</b> in <b>Brooklyn</b>.",
-     "He was holding aces. It did not help."),
 ]
 
 PIPS = {1: 1, 3: 2, 5: 3}

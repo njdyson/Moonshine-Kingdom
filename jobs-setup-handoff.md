@@ -1,9 +1,166 @@
-# Jobs Deck: Setup, then Sets (2026-10-11)
+# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes and Variety (2026-10-13)
 
 Two passes on one day, made on the `claude/job-deck-balance-57zjc0` branch and on main since
 2026-10-12 (Nick: "it will still need more work afterwards"). **Round 2 is the
-live deck**; round 1 is the record of how it got there, and its card tables describe a deck that has
-since changed again.
+live deck, with rounds 3 and 4 (2026-10-13) changing the 5s and three 3s**; round 1 is the record of
+how it got there, and its card tables describe a deck that has since changed again.
+
+## Round 4: the 5s break up (later on 2026-10-13)
+
+Nick, the same evening:
+
+> I also think that dropping the set of 8 would make sense here. More variety is likely better to avoid
+> a stale standard ending. I think the kill a rival boss 4 should be changed, just keeping the toll booth
+> trap as "kill a rival boss" anywhere. Then create 3 more 5s. I'd promote the five family's back up to a
+> 5 as that's tough. And perhaps opening night but change it to "in your home borough" to stop a player
+> completing this and taking the crown in the same day.
+
+**Applied.** Still 36 cards, 16 / 12 / 8.
+
+| Tier | Change |
+| --- | --- |
+| 5 | The body counts stay, one per Borough, as Seizes (round 3). |
+| 5 | **The Toll Booth Trap**: "Kill a rival Boss." Anywhere. |
+| 5 | **The Five Families** up from 3, text unchanged. |
+| 5 | **Opening Night** up from 3: "Unload 8+ Rum at the High Society Venue in your home Borough." |
+| 5 | **Union Dues** up from 3, text unchanged. |
+| cut | Room 349 and The Last Hand. |
+| 3 | **The One-Way Ride** (its name and art kept): "Move your Boss and 4+ Rum across the Queensboro Bridge." |
+| 3 | **A Bridge to Sell** (new; art `Night Mayor.jpg`): "Move your Boss and 4+ Rum across the Brooklyn Bridge." |
+| 3 | **The Eviction** back: "Take over a rival's Safehouse." (art `Crimson Coup.jpg`) |
+
+### Wording, the same evening (Nick)
+
+| Cards | Was | Now |
+| --- | --- | --- |
+| The Extort set | Extort while you Control all three Speakeasies in X. | Extort all of the Speakeasies in X. |
+| Body counts | Seize a District from 5+ rival Runners in X. | Seize a District from 5+ rival **Mobsters** in X. |
+| The Five Families | Extort while you Control a District in all five Boroughs. | Extort a District in all five Boroughs. |
+| Cuban Prince | Extort while you Control 4+ Docks. | Extort 4+ Docks. |
+
+On the Extort set: "I don't think that can be misinterpreted and it reads much cleaner." The other two
+Extort cards followed at Nick's say-so, so every Extort card now opens "Extort". An Extort
+collects from every District you Control, so extorting a Speakeasy means holding it, and "all of the"
+still takes in the room. On the body counts, a Boss now counts toward the five: a Boss and four Runners
+qualify, which widens the targets a little and makes the pair with The Toll Booth Trap a Boss and four.
+
+### My calls, for review
+
+1. ~~"Seize", not "Kill", on The Toll Booth Trap.~~ **Settled: a Kill** (Nick, the same evening): "I'd keep
+   toll booth trap as kill a boss rather than seize. It's makes it a situational strong arm. You can
+   corner him so he can't fold, or use it as a decoy if you want them to fold (earning its name 'trap')."
+   So the Rulebook keeps its kill lines and the Glossary its Kill entry, and the Almanac's lesson 18 says
+   a Fold pays a Boss hunter nothing, "unless the block was what he came for".
+2. **Union Dues is the third 5.** It went down to 3 on 2026-10-11 only so the 5s could be murder alone,
+   and it was the best-scoring 3 (hard and contested). A Recruit never shares a Play with a fight, so it
+   meets no other 5. It also chains with The Eviction: take his Safehouse over, then hire in his Ward.
+3. **The 3s refill.** Three 3s went up, so three came in, to keep the print's blocks of four. The bridge
+   set puts Hell's Highway's wording on the board's other two Bridges (the Williamsburg stays The Milk
+   Run's, a 1, since its far end is a police-locked room). The Eviction was cut in round 2, unrated, only
+   to fit twelve 3s. Names and art are proposals; the Queensboro is the bridge Gatsby drives over, and
+   George C. Parker sold the Brooklyn Bridge to the newly landed.
+
+### What it does
+
+- **Never two 5s**: PASS. The Toll Booth Trap pairs with each body count on a fight that kills the Boss and
+  takes a District held by 5+ Mobsters (the four allowed pairs, as before but now one card against four). A
+  Fold there pays the body count alone. The three promoted 5s are
+  an Extort, an Unload and a Recruit, so they meet no fight. Top stacks are still 13 at stake 8.
+- **Opening Night at home** stops the pour in the room you crown in, since no boss crowns at home. It does
+  not rule out a same-Day crown: a boss who holds his home room and an away room can pour at home, take
+  the Kickbacks, and crown away that afternoon. It is every seat's friendly 5 alike. Round 2 took it
+  down for being "a win/win" with its Kickbacks; those still pay.
+- **The Five Families**: `difficulty_audit.py` scores it the easiest 5 by a distance (7 against 11 to
+  13) and the solitaire test calls it thin, as it did at 3. Those scores are judgement: Nick's call is
+  that it's tough, and the audit can't see how hard Staten Island and four mainland blocks are to hold
+  at once. Watch it.
+- **Seat balance**: one body count per seat, and the other four 5s aim at every seat alike. The weighted
+  spread is 4 (Manhattan +8, the Bronx +7, Queens +6, Brooklyn +4), up from 3, because Manhattan touches
+  three of the four Bridges. Brooklyn is still the worst seat; a Brooklyn-only 3 would close it.
+
+### Watch in playtest
+
+1. Whether the endgame still runs one way. The Toll Booth Trap and the bridge set both put Bosses on
+   the road, and the body counts punish stacks; The Five Families pulls players out to Staten Island.
+2. Opening Night pours and the crown on the same Day, for a boss who holds two rooms.
+3. The Five Families at 5.
+
+## Round 3: the 5s are Seizes (2026-10-13)
+
+After the first full online game on the round-2 deck (mk-online `harness/transcripts/opus-vs-bots-1.P0.md`:
+69 Standoffs, 40 Folds, six 5s claimed, none completed), Nick:
+
+> I think the main problem is that players can just fold to deny you. I guess a simple solution could be
+> to change the wording to "seize a district occupied by 5 runners/a boss" because then a fold would
+> count. It would mean they would have to stand and fight, or be a coward and give up 5 respect.
+
+**Applied.** Same eight cards, same sets, same art and flavour:
+
+| Set | Was | Now |
+| --- | --- | --- |
+| Body counts | Kill 5+ rival Runners in X. | Seize a District from 5+ rival Runners in X. |
+| Bosses | Kill a rival Boss in X. | Seize a District from a rival Boss in X. (Round 4: three cut; The Toll Booth Trap a Kill again, anywhere) |
+
+"From" rather than "occupied by" or "guarded by": it is the Glossary's own definition of Seize ("take
+Control of a District from a rival"), it is the shortest, and it says whose crew is counted. The Rulebook's
+Pulling It Off gives the count one home: a Job that names who you Seize from "counts their crew as it met
+you at the door", so the men you shoot in the fight still count. It also now names the Fold in the
+definition of Seize ("by gunfire, by their Fold, or by strolling in where they left the door open").
+
+### What changes in play
+
+- **Running pays.** A lone Boss can no longer turn a Boss card down: Folding pays it, and standing usually
+  costs the Boss as well. So the owner escorts him, or keeps him out of reach of the card's holder. That is
+  the endgame walk to an away room, priced: the room's Borough has a Boss card.
+- **Only a stand that holds denies.** Kill the Invader's crew, or outlast his Ledger until he Falls Back.
+- **A kill in a fight you lose pays nothing now.** Before, killing five Runners (or the Boss) and then
+  being wiped out still paid. A mutual wipe pays nothing either. The Sicilian Hit still takes the Boss
+  first, which strips his +1 Threat, but has to finish the fight to pay.
+- **Very big stacks got safer, stacks of five got riskier.** The old body count could bleed five kills out
+  of a stack of ten and lose; now the stack has to be beaten. Nick's "any fat stack is a target" holds for
+  stacks of five to seven; past that, the stack is likelier to stand and win.
+- **A Borough's pair pays 10 on a Fold** of a Boss and five. Nobody Folds that stack if he can stand, so it
+  stays the fight Nick priced on 2026-10-12 (6 staked, 4 markers left to beat a Boss and five).
+- **Every Seize Job now pays on the same Fold**, so a Fold at a starting bar or a Dock can pay a 5 and The
+  Copper Heist or The Pier Six Brawl together. The overlap audit's stacks are unchanged (13 at most), since
+  it already modelled a Fold as a Seize.
+
+No Job reads kills any more, so the Glossary's **Kill** entry is gone, and with it the Rulebook's "a Raid
+makes arrests, not kills" and "your Ambush or return fire completes nothing" (both answered kill Jobs only).
+The Almanac's lesson 18 now tells the Occupier to price the Invader's Respect into the pile (a 5 at the
+Mayor's $1,250 a point outweighs every pile in its table); lesson 11 describes the 5s as Seizes.
+
+### Audits
+
+`overlap_audit.py` models the crew at the door (`def_runners`, `def_boss`) instead of kills: PASS, the same
+four allowed pairs, the same top stacks. `difficulty_audit.py`: the body counts keep 13 and the Boss cards
+12, but RIVAL drops to 2 (a Fold no longer dodges), BLOCK rises to 2 and DEFEND to 3, so all eight move from
+"hard and solitaire" (the body counts) to "hard and contested".
+
+### Bots
+
+mk-online's heuristic bots, 24 games at 4 players to Day 60 on the same seeds, before and after (the
+bots' Fold test now adds the Respect a Fold would hand over):
+
+| | Kill wording | Seize wording |
+| --- | --- | --- |
+| 5s completed | 10 (all Boss cards) | 28 (all Boss cards) |
+| Standoffs ending in a Fold | 49% | 47% |
+| Games crowned by Day 60 | 17 | 17 |
+| Median Day crowned | 39 | 37 |
+
+The bots never complete a body count either way: they rarely build a stack of five, and never take one.
+That is the bots' weakness at setup, not the card.
+
+### Watch in playtest
+
+1. **Kill-fests around Bosses.** Every Boss is a 5 in its Borough, and now there is no free dodge. Watch
+   whether Bosses stop leaving home until the endgame.
+2. **The lone-Boss gift.** A Boss caught alone beside a big crew is 5 Respect for one Move. That is the
+   intended pressure; if it reads as a windfall, a "with your own Boss in the fight" clause (the old Toll
+   Booth Trap's) is the lever.
+3. **Fold count.** The opus-vs-bots-1 game had 40 Folds in 69 Standoffs; expect fewer where a 5 is on the
+   block.
 
 ## Round 2: symmetric sets (later on 2026-10-11)
 

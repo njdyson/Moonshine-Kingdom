@@ -91,7 +91,7 @@ CARDS = [
     ('The Big Squeeze',       3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BX: 'friendly'}),
     ('King of Queens',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {Q: 'friendly'}),
     ('The Black Hand',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BK: 'friendly'}),
-    ('The Five Families',     3, 'Extort',    {'any'},
+    ('The Five Families',     5, 'Extort',    {'any'},
      {M: 'neutral', BX: 'neutral', Q: 'neutral', BK: 'neutral', ST: 'neutral'}),
     ('Cuban Prince',          3, 'Extort',    {'dock'},                     {}),
     # --- 3 Respect: singles ---
@@ -104,17 +104,22 @@ CARDS = [
     # The five Pressure 5 Stills: every seat's starting bar and Stapleton, so it is
     # aimed at every seat alike.
     ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
-    ('Opening Night',         3, 'Unload',    {'highSociety', 'speakeasy'}, {}),
-    ('Union Dues',            3, 'Recruit',   {'ward'},                     {}),
-    # --- 5 Respect: the murder sets, two bounties per seat ---
+    # The bridge set (2026-10-13). The Queensboro's ends are empty bars: East Harlem beside the
+    # Manhattan and Bronx home Wards, Astoria beside three Queens starts and the Bronx's Ward. The Brooklyn
+    # Bridge joins Manhattan's starting Dock to Brooklyn's starting bar.
+    ('The One-Way Ride',      3, 'Move',      {'speakeasy'},                {M: 'friendly', BX: 'friendly', Q: 'friendly'}),
+    ('A Bridge to Sell',      3, 'Move',      {'dock', 'speakeasy', 'press5'}, {M: 'friendly', BK: 'friendly'}),
+    # A rival's Safehouse: aimed at every seat alike.
+    ('The Eviction',          3, 'Open Fire', {'ward'},                     {}),
+    # --- 5 Respect: the body counts, one per seat; the rest aimed at every seat alike ---
     ('Bloody Sunday',         5, 'Open Fire', {'any'},                      {M: 'hostile'}),
     ('Over the Top',          5, 'Open Fire', {'any'},                      {BX: 'hostile'}),
     ('Rum Wars',              5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
     ("The Butcher's Ledger",  5, 'Open Fire', {'any'},                      {BK: 'hostile'}),
-    ('Room 349',              5, 'Open Fire', {'any'},                      {M: 'hostile'}),
-    ('The One-Way Ride',      5, 'Open Fire', {'any'},                      {BX: 'hostile'}),
-    ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
-    ('The Last Hand',         5, 'Open Fire', {'any'},                      {BK: 'hostile'}),
+    ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {}),
+    # Each seat's own room, so every seat's friendly 5 alike.
+    ('Opening Night',         5, 'Unload',    {'highSociety', 'speakeasy'}, {}),
+    ('Union Dues',            5, 'Recruit',   {'ward'},                     {}),
 ]
 
 TYPE_COUNT = {
@@ -177,7 +182,8 @@ print()
 print('  Bounty symmetry: is every mainland borough equally hunted?')
 for b in (M, BX, Q, BK):
     ho = [x[0] for x in CARDS if x[4].get(b) == 'hostile']
-    mark = 'ok' if len(ho) == 2 else ('NO BOUNTY, safest seat' if not ho else 'over-targeted')
+    # One body count per seat since 2026-10-13 (two, with a Boss card each, before).
+    mark = 'ok' if len(ho) == 1 else ('NO BOUNTY, safest seat' if not ho else 'over-targeted')
     print(f'    {b:11} {len(ho)} hostile card(s)   {mark}')
 
 print()

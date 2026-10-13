@@ -853,6 +853,52 @@ price the card that would take them to 20 as the game, which took the crowned sh
 24 on the same seeds. Whether human tables stall the same way is a playtest question; the bots are weak
 at the setup the 3s and 5s ask for, so they are a pessimistic read.
 
+## 32. The 5s are Seizes, so a Fold pays them (2026-10-13, Nick)
+
+A wording change on the eight 5s after the opus-vs-bots-1 playtest (`jobs-setup-handoff.md`, Round 3).
+Nothing else in the rules changes.
+
+| Set | Now |
+| --- | --- |
+| Body counts | "Seize a District from 5+ rival Runners in X": a Seize in the named Borough, from a crew that held **5+ Runners when the Move came in** (Bloody Sunday, Over the Top, Rum Wars, The Butcher's Ledger) |
+| Bosses | "Seize a District from a rival Boss in X": a Seize in the named Borough, from a crew with **its Boss in it** when the Move came in (Room 349, The One-Way Ride, The Toll Booth Trap, The Last Hand). **Superseded by §33**: three cut, The Toll Booth Trap a Kill. |
+
+A Fold is a Seize (§30's reading), so a Fold pays both. A kill in a fight the Invader loses pays nothing,
+and nothing reads kills any more, which also retires §23.3's question. Bots: a Fold that pays the Invader
+a Job is a Respect gift, so stand against longer odds when one of his Jobs names the block.
+
+**Ported the same day** (mk-online 8b1515e, branch `claude/respect-jobs-folding-8lhwdv`): `initiateCombat` records the
+defending crew at the door (`defRunnersAtStart`, `defBossesAtStart`) in place of the kill tallies; the
+eight evaluators read it with `seizedBy`; the bots' Fold test adds 0.4 to its outnumbered ratio per point
+of Respect the Fold would hand over (capped at 2); `scripts/jobs-check.ts` runs a Fold and a won fight
+through the real engine. RULES-AI.md says it for the agents.
+
+## 33. The 5s break up (later on 2026-10-13, Nick)
+
+`jobs-setup-handoff.md`, Round 4. Still 36 cards, 16 / 12 / 8.
+
+| Card | Now |
+| --- | --- |
+| The Toll Booth Trap (5) | "Kill a rival Boss": a rival Boss killed in your own Play's fight, **anywhere**; a Fold denies it (Nick kept the Kill) |
+| The Five Families (5) | up from 3, same trigger |
+| Opening Night (5) | up from 3: an Unload of **8+ Rum at the High Society Venue in the holder's home Borough** |
+| Union Dues (5) | up from 3, same trigger |
+| Room 349, The Last Hand | cut |
+| The One-Way Ride (3) | "Move your Boss and 4+ Rum across the **Queensboro Bridge**" (East Harlem to Astoria) |
+| A Bridge to Sell (3, new) | "Move your Boss and 4+ Rum across the **Brooklyn Bridge**" (the Bowery to Red Hook) |
+| The Eviction (3, back) | "Take over a rival's Safehouse": any takeover on your own Play |
+| The Extort set (3) | reworded only: "Extort all of the Speakeasies in X", same trigger |
+| The Five Families (5), Cuban Prince (3) | reworded only: "Extort a District in all five Boroughs", "Extort 4+ Docks" |
+| Body counts (5) | "Seize a District from 5+ rival **Mobsters** in X": the crew at the door counts its Boss too |
+
+The bridge cards read as Hell's Highway does: the Move carries the Boss and 4+ Rum across, whatever the
+fight at the far end does. Bots: The Eviction and Union Dues want a takeover, not a raze. The kill tally
+comes back for The Toll Booth Trap (`killedRivalBoss`, set only by the Invader's own shots).
+
+**Ported the same day** (mk-online c2e8116, 167d3ce for the Kill, 309ae35 and a5bd194 for the wording, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
+`jobs.ts`, the evaluators (`homeRoomOf` for Opening Night, `tookOverRivalSafehouse` for The Eviction, one
+`bridgeRun` for the three Bridges), bot plans for the new cards, and `scripts/jobs-check.ts`.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
