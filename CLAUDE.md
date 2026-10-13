@@ -481,7 +481,7 @@ Stealth as he would any Move, less the Ambush, so the way a Viper comes in says 
 he wants.
 
 Watch in playtest: Stealth now beats a plain Move for any Viper crew of five or fewer with no
-barrels, and a thin block facing one will usually Fold (The Almanac's lesson 20: a Boss and four on
+barrels, and a thin block facing one will usually Fold (The Almanac's lesson 19: a Boss and four on
 a Stealth take a Boss, two Runners and a Safehouse three times in four if he stands). So the Vipers
 take more blocks and kill fewer Bosses than they did. Do not bring back "never Fold".
 
@@ -544,7 +544,7 @@ land on the block the Invader had just emptied and take it, so the two crews swa
 Scatter always barred the Squad's block.
 
 What stays apart is what the trigger decides, not the run: **Fold** is the Occupier's choice and
-keeps its name (The Almanac's lessons 18 and 19 are built on the poker trio, and a Fold hands the
+keeps its name (The Almanac's lessons 17 and 18 are built on the poker trio, and a Fold hands the
 Invader a Seize); a Raid gives no choice but where. A Fold leaves barrels and Safehouse to the
 Invader; a Raid destroys the Safehouse and sends the barrels to the Supply. Nowhere to Scram means no
 Fold, but an arrest in a Raid. The Raid step stays **The Scatter**; Scram is the run inside it.
@@ -591,7 +591,7 @@ usually the Rum. Watch in playtest: a crew that sails to an empty Dock takes Con
 Raid can hand it a free Move across the map and swing the Harbormaster.
 
 The places a crew can still be boxed with one road left are not Docks: Coney Island (Squad on Red
-Hook or Canarsie) and Morris Park (Squad on Fordham or Throggs Neck). The Almanac's lesson 23 names
+Hook or Canarsie) and Morris Park (Squad on Fordham or Throggs Neck). The Almanac's lesson 21 names
 those two. Do not restore "on foot" or "Land Connected" to the Scatter.
 
 **Squads walk** (same day). A Squad's reach is the Districts directly **Land Connected** to it

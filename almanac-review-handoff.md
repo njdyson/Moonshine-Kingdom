@@ -1,5 +1,14 @@
 # The Almanac: combat stress test and revision
 
+Status (2026-10-13): a third pass checked every lesson against the 2026-10-07 to 2026-10-12 rule
+changes (Scram by water, Stealth leaving the Fold open, Torch as a shot, the away crown, Bribe cards,
+the Extort and murder sets). One stale claim: lesson 11 listed four different 5s by Borough; the deck
+now holds a body count and a Boss per Borough, and the lesson says so. Two thin lessons were folded
+into their neighbours and the book renumbered from 30 to 28: **Bury the Card** (was 12) is now the
+closing paragraph of The Claim-Late Doctrine (9), and **The Bulk Discount** (was 21) opens The Cold
+Trail (now 20). Lesson numbers below this line are the pre-2026-10-13 ones: 13 to 20 are now one
+lower, 22 to 30 two lower.
+
 Status (2026-10-06): a second pass checked every lesson against the rules, the deck and the board,
 corrected what was wrong and added depth where the numbers called for it. Section 5 records it.
 
