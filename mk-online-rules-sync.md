@@ -873,6 +873,28 @@ eight evaluators read it with `seizedBy`; the bots' Fold test adds 0.4 to its ou
 of Respect the Fold would hand over (capped at 2); `scripts/jobs-check.ts` runs a Fold and a won fight
 through the real engine. RULES-AI.md says it for the agents.
 
+## 33. The 5s break up (later on 2026-10-13, Nick)
+
+`jobs-setup-handoff.md`, Round 4. Still 36 cards, 16 / 12 / 8.
+
+| Card | Now |
+| --- | --- |
+| The Toll Booth Trap (5) | "Seize a District from a rival Boss": §32's Boss card, **anywhere** |
+| The Five Families (5) | up from 3, same trigger |
+| Opening Night (5) | up from 3: an Unload of **8+ Rum at the High Society Venue in the holder's home Borough** |
+| Union Dues (5) | up from 3, same trigger |
+| Room 349, The Last Hand | cut |
+| The One-Way Ride (3) | "Move your Boss and 4+ Rum across the **Queensboro Bridge**" (East Harlem to Astoria) |
+| A Bridge to Sell (3, new) | "Move your Boss and 4+ Rum across the **Brooklyn Bridge**" (the Bowery to Red Hook) |
+| The Eviction (3, back) | "Take over a rival's Safehouse": any takeover on your own Play |
+
+The bridge cards read as Hell's Highway does: the Move carries the Boss and 4+ Rum across, whatever the
+fight at the far end does. Bots: The Eviction and Union Dues want a takeover, not a raze.
+
+**Ported the same day** (mk-online c2e8116, branch `claude/respect-jobs-folding-8lhwdv`): the cards in
+`jobs.ts`, the evaluators (`homeRoomOf` for Opening Night, `tookOverRivalSafehouse` for The Eviction, one
+`bridgeRun` for the three Bridges), bot plans for the new cards, and `scripts/jobs-check.ts`.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

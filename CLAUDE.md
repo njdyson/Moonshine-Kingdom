@@ -156,18 +156,20 @@ written out above the card table in `tools/gen_deck.py`:
   Tenement Army's described your own home Ward, so it was free on Day 2, and two had no answer for
   a tie.
 
-**The Smuggler's Run is a 3** (same day; Union Dues went to 5 with it, and back to 3 on 2026-10-11).
+**The Smuggler's Run is a 3** (same day; Union Dues went to 5 with it, back to 3 on 2026-10-11, and
+to 5 again on 2026-10-13).
 The Smuggler's Run Seizes a Dock, every mainland Dock is in a bounty Borough, and a firefight is part
 of the Move that starts it, so as a 5 it could pay beside a bounty 5 on one Play. Run
 `tools/overlap_audit.py` before moving any card that can Seize into the 5s: it models a Move
 and its fight as one Play, and it refuses to run until each card's printed objective matches its
 model.
 
-**A Fold is a Seize, and every 5 is a Seize** (Nick, 2026-10-13, after the opus-vs-bots-1 playtest in
-mk-online's `harness/transcripts/`). Until then the 5s read "Kill ...", and a Fold denied all eight:
-of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every lone Boss
-Folded. Now the 5s read "Seize a District from 5+ rival Runners in X" and "Seize a District from a
-rival Boss in X", so the Occupier stands and makes the Invader win it, or runs and pays him 5 anyway.
+**A Fold is a Seize, and the fight 5s are Seizes** (Nick, 2026-10-13, after the opus-vs-bots-1
+playtest in mk-online's `harness/transcripts/`). Until then the 5s read "Kill ...", and a Fold denied
+all eight: of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every lone
+Boss Folded. Now the body counts read "Seize a District from 5+ rival Runners in X" and The Toll Booth
+Trap "Seize a District from a rival Boss", so the Occupier stands and makes the Invader win it, or runs
+and pays him 5 anyway.
 The crew is counted as it met the Invader at the door (the Rulebook's Pulling It Off, its one home).
 A kill in a fight the Invader loses pays nothing. Don't bring back "Kill", and don't add "or kill":
 the Fold was the hole, and one verb is the house style. No Job reads kills now, so the Glossary has
@@ -191,16 +193,21 @@ once. The deck is 36 cards, 16 / 12 / 8:
   barrels at <bar> in <District>"), and eight singles for the landmarks, the Docks and
   Staten Island.
 - **3s**: **the Extort set**, *Extort while you Control all three Speakeasies in* Manhattan (Empire
-  State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); The Five
-  Families and Cuban Prince (4+ Docks) as Extort cards too; and six singles.
-- **5s**: taking a District from a big crew, and nothing else. A **body count** per Borough ("Seize a
-  District from 5+ rival Runners in X") and a **Boss** per Borough ("Seize a District from a rival
-  Boss in X"). They are the one allowed exception to "never two 5s on one Play" (Nick, 2026-10-12):
-  paying both takes a District held by a Boss and five Runners, and holding both stakes 6 of at most
-  10 markers. A Fold there pays 10, so the Occupier stands, and the Invader has to beat a Boss and
-  five. Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a target.
-  Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs and fails
-  any other.
+  State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); Cuban
+  Prince (4+ Docks) as an Extort card too; **the bridge set** since 2026-10-13, *Move your Boss and 4+
+  Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
+  (A Bridge to Sell); and singles, The Eviction back among them.
+- **5s**: no longer one set (Nick, 2026-10-13: "more variety is likely better to avoid a stale
+  standard ending"). A **body count** per Borough ("Seize a District from 5+ rival Runners in X"),
+  **The Toll Booth Trap** ("Seize a District from a rival Boss", anywhere), **The Five Families**,
+  **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough") and **Union
+  Dues**. Opening Night is home-only so the pour can't be made in the room its holder crowns in. A body
+  count and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
+  2026-10-12): paying both takes a District held by a Boss and five Runners, and holding both stakes
+  6 of at most 10 markers. A Fold there pays 10, so the Occupier stands, and the Invader has to beat a
+  Boss and five. Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a
+  target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs
+  and fails any other.
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
 Borough; the Deeds' removal ended that objection, so don't cut them on it again. The overlap model
@@ -354,8 +361,8 @@ still pays its Kickbacks; it just can't win you the game.
 Watch in playtest: **Williamsburg** is one Move from both the Manhattan and Queens home Wards (by
 the bridge from Five Points, and from Corona), so Brooklyn hosts the endgame; Brooklyn's nearest
 room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is three or more Moves from
-every other home, so the Bronx's room becomes a backwater. Each Borough's two 5-Respect bounties now
-mostly hit whoever is invading that Borough's room. At three players the unclaimed Borough's room
+every other home, so the Bronx's room becomes a backwater. Each Borough's body count now
+mostly hits whoever is invading that Borough's room. At three players the unclaimed Borough's room
 has no landlord.
 
 ## High Society buys Rum only; elsewhere the barrel sets the price

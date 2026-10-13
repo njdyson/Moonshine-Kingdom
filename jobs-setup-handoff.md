@@ -1,9 +1,71 @@
-# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes (2026-10-13)
+# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes and Variety (2026-10-13)
 
 Two passes on one day, made on the `claude/job-deck-balance-57zjc0` branch and on main since
 2026-10-12 (Nick: "it will still need more work afterwards"). **Round 2 is the
-live deck, with round 3's wording on the 5s** (2026-10-13); round 1 is the record of how it got there,
-and its card tables describe a deck that has since changed again.
+live deck, with rounds 3 and 4 (2026-10-13) changing the 5s and three 3s**; round 1 is the record of
+how it got there, and its card tables describe a deck that has since changed again.
+
+## Round 4: the 5s break up (later on 2026-10-13)
+
+Nick, the same evening:
+
+> I also think that dropping the set of 8 would make sense here. More variety is likely better to avoid
+> a stale standard ending. I think the kill a rival boss 4 should be changed, just keeping the toll booth
+> trap as "kill a rival boss" anywhere. Then create 3 more 5s. I'd promote the five family's back up to a
+> 5 as that's tough. And perhaps opening night but change it to "in your home borough" to stop a player
+> completing this and taking the crown in the same day.
+
+**Applied.** Still 36 cards, 16 / 12 / 8.
+
+| Tier | Change |
+| --- | --- |
+| 5 | The body counts stay, one per Borough, as Seizes (round 3). |
+| 5 | **The Toll Booth Trap**: "Seize a District from a rival Boss." Anywhere. |
+| 5 | **The Five Families** up from 3, text unchanged. |
+| 5 | **Opening Night** up from 3: "Unload 8+ Rum at the High Society Venue in your home Borough." |
+| 5 | **Union Dues** up from 3, text unchanged. |
+| cut | Room 349 and The Last Hand. |
+| 3 | **The One-Way Ride** (its name and art kept): "Move your Boss and 4+ Rum across the Queensboro Bridge." |
+| 3 | **A Bridge to Sell** (new; art `Night Mayor.jpg`): "Move your Boss and 4+ Rum across the Brooklyn Bridge." |
+| 3 | **The Eviction** back: "Take over a rival's Safehouse." (art `Crimson Coup.jpg`) |
+
+### My calls, for review
+
+1. **"Seize", not "Kill", on The Toll Booth Trap.** Nick's message calls it "kill a rival boss", the old
+   set's name, but round 3's reason (a lone Boss Folds for free) applies to it most of all. One word to
+   change if he meant the kill.
+2. **Union Dues is the third 5.** It went down to 3 on 2026-10-11 only so the 5s could be murder alone,
+   and it was the best-scoring 3 (hard and contested). A Recruit never shares a Play with a fight, so it
+   meets no other 5. It also chains with The Eviction: take his Safehouse over, then hire in his Ward.
+3. **The 3s refill.** Three 3s went up, so three came in, to keep the print's blocks of four. The bridge
+   set puts Hell's Highway's wording on the board's other two Bridges (the Williamsburg stays The Milk
+   Run's, a 1, since its far end is a police-locked room). The Eviction was cut in round 2, unrated, only
+   to fit twelve 3s. Names and art are proposals; the Queensboro is the bridge Gatsby drives over, and
+   George C. Parker sold the Brooklyn Bridge to the newly landed.
+
+### What it does
+
+- **Never two 5s**: PASS. The Toll Booth Trap pairs with each body count on a District held by a Boss and
+  5+ Runners (the four allowed pairs, as before but now one card against four). The three promoted 5s are
+  an Extort, an Unload and a Recruit, so they meet no fight. Top stacks are still 13 at stake 8.
+- **Opening Night at home** stops the pour in the room you crown in, since no boss crowns at home. It does
+  not rule out a same-Day crown: a boss who holds his home room and an away room can pour at home, take
+  the Kickbacks, and crown away that afternoon. It is every seat's friendly 5 alike. Round 2 took it
+  down for being "a win/win" with its Kickbacks; those still pay.
+- **The Five Families**: `difficulty_audit.py` scores it the easiest 5 by a distance (7 against 11 to
+  13) and the solitaire test calls it thin, as it did at 3. Those scores are judgement: Nick's call is
+  that it's tough, and the audit can't see how hard Staten Island and four mainland blocks are to hold
+  at once. Watch it.
+- **Seat balance**: one body count per seat, and the other four 5s aim at every seat alike. The weighted
+  spread is 4 (Manhattan +8, the Bronx +7, Queens +6, Brooklyn +4), up from 3, because Manhattan touches
+  three of the four Bridges. Brooklyn is still the worst seat; a Brooklyn-only 3 would close it.
+
+### Watch in playtest
+
+1. Whether the endgame still runs one way. The Toll Booth Trap and the bridge set both put Bosses on
+   the road, and the body counts punish stacks; The Five Families pulls players out to Staten Island.
+2. Opening Night pours and the crown on the same Day, for a boss who holds two rooms.
+3. The Five Families at 5.
 
 ## Round 3: the 5s are Seizes (2026-10-13)
 
@@ -56,6 +118,21 @@ Mayor's $1,250 a point outweighs every pile in its table); lesson 11 describes t
 four allowed pairs, the same top stacks. `difficulty_audit.py`: the body counts keep 13 and the Boss cards
 12, but RIVAL drops to 2 (a Fold no longer dodges), BLOCK rises to 2 and DEFEND to 3, so all eight move from
 "hard and solitaire" (the body counts) to "hard and contested".
+
+### Bots
+
+mk-online's heuristic bots, 24 games at 4 players to Day 60 on the same seeds, before and after (the
+bots' Fold test now adds the Respect a Fold would hand over):
+
+| | Kill wording | Seize wording |
+| --- | --- | --- |
+| 5s completed | 10 (all Boss cards) | 28 (all Boss cards) |
+| Standoffs ending in a Fold | 49% | 47% |
+| Games crowned by Day 60 | 17 | 17 |
+| Median Day crowned | 39 | 37 |
+
+The bots never complete a body count either way: they rarely build a stack of five, and never take one.
+That is the bots' weakness at setup, not the card.
 
 ### Watch in playtest
 

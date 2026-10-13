@@ -3,8 +3,8 @@
 
 Enumerates every Play a player could make (Play x target District x board state x
 what the Play did there) and reports which Jobs co-fire. Enforces handoff §3:
-    - HARD RULE: never two 5s on one Play, except a Borough's two 5s together, on a District
-      taken from a Boss and 5+ Runners (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
+    - HARD RULE: never two 5s on one Play, except a body count and The Toll Booth Trap together,
+      on a District taken from a Boss and 5+ Runners (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
     - Watch:     a 5 plus small change is fine; big 3-stacks are suspect.
 
 breadth_audit.py imports this module, so the model lives in one place.
@@ -75,6 +75,11 @@ EAST_RIVER = {'East Harlem', 'Astoria', 'Williamsburg', 'Red Hook'}   # 4 Speake
 JAMAICA_BAY = {'Canarsie', 'Jamaica'}                                  # 2 Docks
 WILLIAMSBURG_BRIDGE = {'Five Points', 'Williamsburg'}
 HELL_GATE_BRIDGE = {'Hunts Point', 'Astoria'}
+QUEENSBORO_BRIDGE = {'East Harlem', 'Astoria'}
+BROOKLYN_BRIDGE = {'The Bowery', 'Red Hook'}
+# A Move across a Bridge: its route name and the two Districts it joins.
+BRIDGES = {'wburg': WILLIAMSBURG_BRIDGE, 'hellgate': HELL_GATE_BRIDGE,
+           'qboro': QUEENSBORO_BRIDGE, 'bklyn': BROOKLYN_BRIDGE}
 
 
 # --- THE JOBS ----------------------------------------------------------------
@@ -139,7 +144,7 @@ JOBS = [
     J('The Black Hand', 3, ['Extort'],
       'Extort while you Control all three Speakeasies in Brooklyn.',
       lambda p, d: BK in p['bars']),
-    J('The Five Families', 3, ['Extort'],
+    J('The Five Families', 5, ['Extort'],
       'Extort while you Control a District in all five Boroughs.',
       lambda p, d: p['all5']),
     J('Cuban Prince', 3, ['Extort'],
@@ -158,36 +163,44 @@ JOBS = [
     J('The Copper Heist', 3, ['Move'],
       'Seize a District with a Pressure 5 Still.',
       lambda p, d: p['seize'] and d.press == 5),
-    J('Opening Night', 3, ['Unload'],
-      'Unload 8+ Rum at a High Society Venue.',
-      lambda p, d: p['barrels'] >= 8 and d.has('highSociety')),
-    J('Union Dues', 3, ['Recruit'],
+    # The bridge set (2026-10-13): Hell's Highway's wording on the Queensboro and Brooklyn Bridges.
+    J('The One-Way Ride', 3, ['Move'],
+      'Move your Boss and 4+ Rum across the Queensboro Bridge.',
+      lambda p, d: p['route'] == 'qboro' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
+    J('A Bridge to Sell', 3, ['Move'],
+      'Move your Boss and 4+ Rum across the Brooklyn Bridge.',
+      lambda p, d: p['route'] == 'bklyn' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
+    # Back 2026-10-13: a takeover comes with a Seize (a won fight, a Fold, or an unguarded walk-in).
+    J('The Eviction', 3, ['Move'],
+      "Take over a rival's Safehouse.",
+      lambda p, d: p['seize'] and p['sh'] == 'takeover'),
+    J('Opening Night', 5, ['Unload'],
+      'Unload 8+ Rum at the High Society Venue in your home Borough.',
+      lambda p, d: p['barrels'] >= 8 and d.has('highSociety') and p['home'] == 'own'),
+    J('Union Dues', 5, ['Recruit'],
       "Recruit 4+ Runners in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
-    # --- 5 Respect: the murder sets (2026-10-11, round 2), Seizes since 2026-10-13 ---
+    # --- 5 Respect: the body counts (2026-10-11), Seizes since 2026-10-13 ---
     # `def_runners` and `def_boss` are the crew that met the Move at the door, so a Fold pays
-    # as a won fight does. A Borough's two 5s meet only on a District taken from its Boss and
-    # 5+ Runners: see ALLOWED_DOUBLE_FIVES.
+    # as a won fight does. The Five Families, Opening Night and Union Dues (5s since the
+    # Variety Pass, 2026-10-13) are above.
 ] + [J(n, 5, ['Move'], f'Seize a District from 5+ rival Runners in {label}.',
        (lambda b: lambda p, d: p['seize'] and p['def_runners'] >= 5 and d.boro == b)(b))
      for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
                          ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
-    J(n, 5, ['Move'], f'Seize a District from a rival Boss in {label}.',
-      (lambda b: lambda p, d: p['seize'] and p['def_boss'] and d.boro == b)(b))
-    for n, label, b in (('Room 349', 'Manhattan', M), ('The One-Way Ride', 'the Bronx', BX),
-                        ('The Toll Booth Trap', 'Queens', Q), ('The Last Hand', 'Brooklyn', BK))]
+    # The one Boss card left, anywhere (2026-10-13). It meets each body count on a District
+    # held by a Boss and 5+ Runners: see ALLOWED_DOUBLE_FIVES.
+    J('The Toll Booth Trap', 5, ['Move'], 'Seize a District from a rival Boss.',
+      lambda p, d: p['seize'] and p['def_boss'])]
 
-# The one exception to "never two 5s" (Nick, 2026-10-12): a Borough's body count and its Boss
-# card together, on a District taken from a Boss and five or more Runners. Since 2026-10-13 a
-# Fold there pays both, so the Occupier stands, and the Invader must beat a Boss and five with
-# the 4 markers left after staking 6 of at most 10; and the Offers deal one card a Day. Any
-# other pair of 5s still fails the audit.
-ALLOWED_DOUBLE_FIVES = {
-    frozenset(('Bloody Sunday', 'Room 349')),
-    frozenset(('Over the Top', 'The One-Way Ride')),
-    frozenset(('Rum Wars', 'The Toll Booth Trap')),
-    frozenset(("The Butcher's Ledger", 'The Last Hand')),
-}
+# The one exception to "never two 5s" (Nick, 2026-10-12): a body count and the Boss card
+# together, on a District taken from a Boss and five or more Runners. Since 2026-10-13 a Fold
+# there pays both, so the Occupier stands, and the Invader must beat a Boss and five with the
+# 4 markers left after staking 6 of at most 10; and the Offers deal one card a Day. The Boss
+# card was one per Borough until the Variety Pass left The Toll Booth Trap alone, anywhere, so
+# it now pairs with each body count. Any other pair of 5s still fails the audit.
+ALLOWED_DOUBLE_FIVES = {frozenset(('The Toll Booth Trap', n)) for n in (
+    'Bloody Sunday', 'Over the Top', 'Rum Wars', "The Butcher's Ledger")}
 
 STAKE = {1: 1, 3: 2, 5: 3}
 VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat')
@@ -258,10 +271,8 @@ def _plays(verb, d, state, home):
             else:
                 shs = ('torch',) if out == 'torch' else ('none',)
             for sh in shs:
-                for route in ('land', 'wburg', 'hellgate', 'water'):
-                    if route == 'wburg' and d.name not in WILLIAMSBURG_BRIDGE:
-                        continue
-                    if route == 'hellgate' and d.name not in HELL_GATE_BRIDGE:
+                for route in ('land', 'water') + tuple(BRIDGES):
+                    if route in BRIDGES and d.name not in BRIDGES[route]:
                         continue
                     if route == 'water' and not d.has('dock'):
                         continue

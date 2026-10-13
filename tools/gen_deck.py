@@ -291,15 +291,6 @@ THREES = [
     ("The Black Hand", "Black Hand.jpg", "Extort",
      "Extort while you Control <b>all three Speakeasies</b> in <b>Brooklyn</b>.",
      "The letter had a hand drawn on it. The shop paid by noon."),
-    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
-    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
-    # record the Deed-era reasoning.
-    # SETS PASS 2026-10-11: DOWN TO 3, where the Extort set lives, so the 5s can be murder alone.
-    # New art (Nick: Accord was washed out and showed four men): Scheme, three men over a city map.
-    # One Extort can pay it beside Borough cards and Cuban Prince; all are 3s, so no hard-rule issue.
-    ("The Five Families", "Scheme.jpg", "Extort",
-     "Extort while you Control a District in <b>all five Boroughs</b>.",
-     "Not the richest table in town. Just the widest."),
     # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's
     # Extort card: four of the eight Docks, held at once. Holding four almost always makes you the
     # Harbormaster too. Was "Move 3+ Rum into Red Hook", cut on the setup pass as a Brooklyn chore.
@@ -422,57 +413,35 @@ THREES = [
     ("The Copper Heist", "Copper Heist.jpg", "Open Fire",
      "Seize a District with a <b>Pressure 5 Still</b>.",
      "The good boilers run hot. So do the men who own them."),
-    # "of Rum" is redundant with the rules (High Society pours nothing else) but
-    # says the quiet part out loud on the card: 8 barrels means the whole Trade
-    # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.
-    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
-    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
-    # record the Deed-era reasoning.
-    # AUDIT 2026-10-10: "of Rum" and "a single" cut; the room buys Rum only and an Unload is
-    # always at one bar. "in one Play" is what the count needed.
-    # SETS PASS 2026-10-11: DOWN TO 3 (Nick: $4,000 and the Kickbacks as well as 5 Respect was too
-    # much of a win/win). Text unchanged.
-    ("Opening Night", "Jimmy.jpg", "Unload",
-     "Unload <b>8+ Rum</b> at a <b>High Society Venue</b>.",
-     "The band plays till four. Nobody asks a thing."),
-    # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
-    # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
-    # Dues" restores an old-deck name and its art (a queue of working men, a fist
-    # of cash): the mob ran the locals, so taking a Ward's union is how you own
-    # the men on that block.
-    # The hard half, and Safehouse-only Recruit is what makes it hard: hiring
-    # happens ONLY at your Safehouse, so this forces you to Secure your Safehouse
-    # out of your own power base and into one specific district, that Borough's
-    # Ward. That is the prep, and it is the friction the Recruit change created.
-    # 5+ here, 4+ on Union Dues. The pair is separated by the DEED, which is
-    # perfectly disjoint, so the magnitudes only have to keep the two feeling
-    # different. Was 6+, dropped to 5+ (Nick, 2026-07-19) to trim the hidden SWEEP
-    # TAX: your home Ward already holds a Boss and 2 Runners, so hiring 6 put 9
-    # Mobsters on one block and the Reckoning Sweep culled 4 of them. At 5 it culls
-    # 3, and the bill drops from $2,400 to $2,000. The tax cannot be removed
-    # entirely without making the card trivial -- disperse with a Move before the
-    # Reckoning, or pay it. NOTE the Sicilians are Untouchable and pay neither.
-    # Union Dues is LATER (cash flows, Runner slots don't), so 4+ there respects
-    # the 15-RUNNER CAP, which is the real constraint mid-game, not money.
-    # "in one Play" added to match the model (and Tenement Army): without it the
-    # Runners could be banked across several days, far easier than its Stake 3.
-    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
-    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
-    # record the Deed-era reasoning.
-    # AUDIT 2026-10-10: PROMOTED TO 5, and re-objectived. The Borough count that replaced
-    # the Deed had a hole on a tie, and the Sweep tax above is dead (no Sweep since v0.9.8).
-    # It swaps tiers with The Smuggler's Run, which could pay beside a bounty 5 on one Move.
-    # A Recruit never shares a Play with a fight, so this 5 cannot break the hard rule. To
-    # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
-    # wait for him to leave it. Every rival sees it coming and garrisons home.
-    # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
-    ("Union Dues", "Union Dues.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
-     "They line up at dawn. You decide who works."),
+    # THE BRIDGE SET (VARIETY PASS, 2026-10-13). Hell's Highway's wording on the board's other two
+    # Bridges, so each 3 sends a Boss over the water with a Rum run behind him and points the table at
+    # both ends. The Williamsburg Bridge stays The Milk Run's, a 1, since its far end is a police-locked
+    # room. The Queensboro joins two empty bars (East Harlem and Astoria), next door to three home
+    # Wards; the Brooklyn Bridge joins Manhattan's starting Dock (the Bowery) to Brooklyn's starting
+    # bar (Red Hook), so it ends in a fight unless the far side Folds. A Boss on a bridge is also The
+    # Toll Booth Trap's target.
+    # The One-Way Ride keeps its name and art from the Boss set (a tommy gun from a running car), and
+    # the Queensboro is the bridge Gatsby drives into Manhattan over: a nod, not a lesson.
+    ("The One-Way Ride", "Gatsby.jpg", "Move",
+     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Queensboro Bridge</b>.",
+     "Get in the car. Nobody asks where it is going."),
+    # Named for the oldest con in the city: George C. Parker sold the Brooklyn Bridge to the newly
+    # landed, more than once. Art: a deal at night, a wad of cash, a hotel bar behind.
+    ("A Bridge to Sell", "Night Mayor.jpg", "Move",
+     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Brooklyn Bridge</b>.",
+     "He sold it to a rube on Tuesday. Tonight he is using it."),
+    # BACK (VARIETY PASS, 2026-10-13). Round 1 kept it ("an assault on the most defended block a rival
+    # has"); round 2 cut it, unrated, only to fit twelve 3s, and a refill of the 3s is the reason it
+    # returns. Since the Fold became a Seize a Fold pays it, as it always did. It meets the body counts
+    # and The Toll Booth Trap on a home Ward (a 5 and this, or the allowed pair and this: 13, stake 8),
+    # and The Copper Heist on a starting bar with a Safehouse; and it is the first half of Union Dues.
+    ("The Eviction", "Crimson Coup.jpg", "Open Fire",
+     "Take over a rival&rsquo;s <b>Safehouse</b>.",
+     "Nice place. He won&rsquo;t be needing it."),
 ]
 
 FIVES = [
-    # THE MURDER SETS (Nick, 2026-10-11, round 2; Seizes since 2026-10-13, below). Two sets of four, one
+    # THE MURDER SETS (Nick, 2026-10-11, round 2; Seizes, then the Variety Pass, 2026-10-13, below). Two sets of four, one
     # card per mainland Borough each: a body count ("Kill 5+ rival Runners in X") and a Boss ("Kill
     # a rival Boss in X"). Each seat is hunted by two 5s in its own Borough.
     # TWO 5s ON ONE PLAY: one Play is in one Borough, so only that Borough's two cards can meet, and
@@ -492,6 +461,12 @@ FIVES = [
     # you lose pays nothing now: the Sicilian Hit still strips a Boss's +1, but has to finish the job.
     # A Borough's pair still meets only on a Boss with 5+ Runners, and a Fold there pays 10; nobody
     # Folds that stack if he can stand, so it stays the fight Nick priced on 2026-10-12.
+    # THE VARIETY PASS (Nick, later on 2026-10-13): "dropping the set of 8 would make sense here. More
+    # variety is likely better to avoid a stale standard ending." The body counts stay a set of four;
+    # the Boss set goes but for The Toll Booth Trap, now anywhere; The Five Families, Opening Night
+    # (in your home Borough) and Union Dues come up from the 3s. So the 5s are four fights, a Boss
+    # hunt, an Extort, a pour and a Recruit. The only two that can meet on one Play are The Toll Booth
+    # Trap and a body count, on a District held by a Boss and 5+ Runners: the allowed pairs.
     # MANHATTAN'S BOUNTY: the 4th and last, so every mainland seat is hunted by
     # exactly one 5. Five Points is Manhattan's Ward and home turf: Safehouse, Boss
     # and 2 Runners from setup, so this is a campaign against a garrison behind the
@@ -530,16 +505,6 @@ FIVES = [
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
      "Seize a District from <b>5+ rival Runners</b> in <b>Brooklyn</b>.",
      "Every name in it is crossed out but one."),
-    # SETS PASS 2026-10-11: Manhattan's Boss. A nod, not a lesson: the Park Central room where the
-    # story starts, unnamed. Art: a man dead in a hotel bed, two men in the doorway.
-    ("Room 349", "The Big Sleep.jpg", "Open Fire",
-     "Seize a District from a <b>rival Boss</b> in <b>Manhattan</b>.",
-     "He went upstairs to talk business. They carried him down."),
-    # SETS PASS 2026-10-11: the Bronx's Boss. "Taken for a ride" was the 1920s phrase for a gangland
-    # killing. Art: a tommy gun from a running car.
-    ("The One-Way Ride", "Gatsby.jpg", "Open Fire",
-     "Seize a District from a <b>rival Boss</b> in <b>the Bronx</b>.",
-     "Get in the car. Nobody asks where it is going."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
     # and exists purely to kill Bosses: the old wording locked the boss-killing mob
     # out of using its boss-killing power on the deck's only boss-kill card. Worded
@@ -550,13 +515,79 @@ FIVES = [
     # real trade rather than a tax.
     # SETS PASS 2026-10-11: Queens' Boss. "with your own Boss in the fight" cut (Nick: niche enough
     # without it).
+    # VARIETY PASS 2026-10-13 (Nick): the one Boss card left, anywhere. The other three are cut and
+    # the 5s are no longer one set: "more variety is likely better to avoid a stale standard ending".
+    # It meets each body count on a District held by a Boss and 5+ Runners (the four allowed pairs).
     ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
-     "Seize a District from a <b>rival Boss</b> in <b>Queens</b>.",
+     "Seize a District from a <b>rival Boss</b>.",
      "A toll is a toll. Somebody always pays it."),
-    # SETS PASS 2026-10-11: Brooklyn's Boss. Art: a man taken by the collar at a card table.
-    ("The Last Hand", "Debt Collector.jpg", "Open Fire",
-     "Seize a District from a <b>rival Boss</b> in <b>Brooklyn</b>.",
-     "He was holding aces. It did not help."),
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
+    # SETS PASS 2026-10-11: DOWN TO 3, where the Extort set lives, so the 5s can be murder alone.
+    # New art (Nick: Accord was washed out and showed four men): Scheme, three men over a city map.
+    # One Extort can pay it beside Borough cards and Cuban Prince; all are 3s, so no hard-rule issue.
+    # VARIETY PASS 2026-10-13 (Nick): BACK UP TO 5, "as that's tough": a District in every Borough at
+    # once, Staten Island included, is whack-a-mole the whole table can see. No other 5 is an Extort, so
+    # it meets the 3s only (two Borough cards and this: 11 Respect, stake 7).
+    ("The Five Families", "Scheme.jpg", "Extort",
+     "Extort while you Control a District in <b>all five Boroughs</b>.",
+     "Not the richest table in town. Just the widest."),
+    # "of Rum" is redundant with the rules (High Society pours nothing else) but
+    # says the quiet part out loud on the card: 8 barrels means the whole Trade
+    # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
+    # AUDIT 2026-10-10: "of Rum" and "a single" cut; the room buys Rum only and an Unload is
+    # always at one bar. "in one Play" is what the count needed.
+    # SETS PASS 2026-10-11: DOWN TO 3 (Nick: $4,000 and the Kickbacks as well as 5 Respect was too
+    # much of a win/win). Text unchanged.
+    # VARIETY PASS 2026-10-13 (Nick): BACK UP TO 5, in your home Borough's room, "to stop a player
+    # completing this and taking the crown in the same day". No boss crowns at home, so the pour can't
+    # be made in the room he crowns in: a same-Day crown now needs two rooms held, the home room and an
+    # away one. It doesn't rule one out. Every seat has one home room, so the card is every seat's
+    # friendly 5 alike. The Kickbacks that made it "a win/win" at 5 on 2026-10-11 are still paid.
+    ("Opening Night", "Jimmy.jpg", "Unload",
+     "Unload <b>8+ Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.",
+     "The band plays till four. Nobody asks a thing."),
+    # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
+    # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
+    # Dues" restores an old-deck name and its art (a queue of working men, a fist
+    # of cash): the mob ran the locals, so taking a Ward's union is how you own
+    # the men on that block.
+    # The hard half, and Safehouse-only Recruit is what makes it hard: hiring
+    # happens ONLY at your Safehouse, so this forces you to Secure your Safehouse
+    # out of your own power base and into one specific district, that Borough's
+    # Ward. That is the prep, and it is the friction the Recruit change created.
+    # 5+ here, 4+ on Union Dues. The pair is separated by the DEED, which is
+    # perfectly disjoint, so the magnitudes only have to keep the two feeling
+    # different. Was 6+, dropped to 5+ (Nick, 2026-07-19) to trim the hidden SWEEP
+    # TAX: your home Ward already holds a Boss and 2 Runners, so hiring 6 put 9
+    # Mobsters on one block and the Reckoning Sweep culled 4 of them. At 5 it culls
+    # 3, and the bill drops from $2,400 to $2,000. The tax cannot be removed
+    # entirely without making the card trivial -- disperse with a Move before the
+    # Reckoning, or pay it. NOTE the Sicilians are Untouchable and pay neither.
+    # Union Dues is LATER (cash flows, Runner slots don't), so 4+ there respects
+    # the 15-RUNNER CAP, which is the real constraint mid-game, not money.
+    # "in one Play" added to match the model (and Tenement Army): without it the
+    # Runners could be banked across several days, far easier than its Stake 3.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
+    # AUDIT 2026-10-10: PROMOTED TO 5, and re-objectived. The Borough count that replaced
+    # the Deed had a hole on a tie, and the Sweep tax above is dead (no Sweep since v0.9.8).
+    # It swaps tiers with The Smuggler's Run, which could pay beside a bounty 5 on one Move.
+    # A Recruit never shares a Play with a fight, so this 5 cannot break the hard rule. To
+    # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
+    # wait for him to leave it. Every rival sees it coming and garrisons home.
+    # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
+    # VARIETY PASS 2026-10-13: BACK UP TO 5, the third 5 Nick asked for. It went down only so the 5s
+    # could be murder alone, and they no longer are. Still the deck's best-scoring 3 (hard and
+    # contested), and a Recruit never shares a Play with a fight, so it meets no other 5.
+    ("Union Dues", "Union Dues.jpg", "Recruit",
+     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
+     "They line up at dawn. You decide who works."),
 ]
 
 PIPS = {1: 1, 3: 2, 5: 3}

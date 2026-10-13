@@ -128,8 +128,6 @@ CARDS = [
      "Queens' three bars. Squad's clean step: Jamaica or Corona."),
     ("The Black Hand", 3, "Extort", 3, 1, 0, 1, 3, 3, 3, 2,
      "Brooklyn's three bars. Clean step only onto Brownsville."),
-    ("The Five Families", 3, "Extort", 3, 0, 0, 0, 1, 3, 0, 1,
-     "WHACK-A-MOLE: 5 boroughs held at once, publicly, each separately deniable."),
     ("Cuban Prince", 3, "Extort", 3, 0, 0, 1, 0, 3, 1, 1,
      "4 of 8 Docks held at once; nearly always the Harbormaster too."),
     ("Hell's Highway", 3, "Move", 3, 0, 1, 1, 0, 2, 3, 2,
@@ -140,10 +138,13 @@ CARDS = [
      "A 3 since 2026-10-10: Seize a Dock off Staten with 4 Rum. Hardest 3."),
     ("The Copper Heist", 3, "Open Fire", 1, 1, 1, 1, 0, 2, 2, 2,
      "REWRITTEN 2026-10-11: the five Pressure 5 Stills (starting bars)."),
-    ("Opening Night", 3, "Unload", 3, 1, 0, 3, 3, 2, 2, 0,
-     "4 venues but Raid-gated: whichever opens, everyone sees it open."),
-    ("Union Dues", 3, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
-     "A rival's home Ward: take it or wait him out. Every seat guards home."),
+    # The Variety Pass (2026-10-13): the bridge set and The Eviction refill the 3s.
+    ("The One-Way Ride", 3, "Move", 3, 0, 1, 1, 0, 2, 3, 1,
+     "Queensboro: two empty bars, beside three home Wards. Rum chain and a Boss."),
+    ("A Bridge to Sell", 3, "Move", 3, 0, 1, 1, 0, 2, 3, 2,
+     "Brooklyn Bridge: Manhattan's Dock to Brooklyn's bar, a fight at the far end."),
+    ("The Eviction", 3, "Open Fire", 2, 1, 2, 2, 1, 2, 2, 3,
+     "Back: a rival's Safehouse, usually his home Ward. A Fold pays it."),
     # ------------------------------- 5 RESPECT -------------------------------
     # The murder sets (2026-10-11), Seizes since 2026-10-13. A Fold pays them now, so the
     # target can't dodge for free: RIVAL drops to 2 (he must still present the crew), BLOCK
@@ -158,14 +159,19 @@ CARDS = [
      "5+ Runners in Queens: stand and lose, or Fold, and it pays."),
     ("The Butcher's Ledger", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
      "5+ Runners in Brooklyn: stand and lose, or Fold, and it pays."),
-    ("Room 349", 5, "Open Fire", 2, 2, 2, 2, 2, 2, 3, 3,
-     "A Boss in Manhattan: alone he Folds and pays; escorted, a fight."),
-    ("The One-Way Ride", 5, "Open Fire", 2, 2, 2, 2, 2, 2, 3, 3,
-     "A Boss in the Bronx: alone he Folds and pays; escorted, a fight."),
-    ("The Toll Booth Trap", 5, "Open Fire", 2, 2, 2, 2, 2, 2, 3, 3,
-     "A Boss in Queens: alone he Folds and pays; escorted, a fight."),
-    ("The Last Hand", 5, "Open Fire", 2, 2, 2, 2, 2, 2, 3, 3,
-     "A Boss in Brooklyn: alone he Folds and pays; escorted, a fight."),
+    # The Variety Pass (2026-10-13): one Boss card, anywhere, and three 5s up from the 3s. The
+    # Toll Booth Trap names no place now (NAMES 1, WINDOW 1: some rival Boss is always out).
+    # Opening Night names the holder's own room (NAMES 3), which is every rival's crown room, so
+    # it is contested by the people walking in (BLOCK 2). The Five Families and Union Dues keep
+    # the scores they had as 3s.
+    ("The Toll Booth Trap", 5, "Open Fire", 2, 2, 2, 2, 1, 2, 1, 3,
+     "Any rival Boss: alone he Folds and pays; escorted, a fight."),
+    ("The Five Families", 5, "Extort", 3, 0, 0, 0, 1, 3, 0, 1,
+     "WHACK-A-MOLE: 5 boroughs held at once, publicly, each separately deniable."),
+    ("Opening Night", 5, "Unload", 3, 1, 0, 3, 3, 2, 3, 0,
+     "Your home room: Raid-gated, and every rival's crown room."),
+    ("Union Dues", 5, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
+     "A rival's home Ward: take it or wait him out. Every seat guards home."),
 ]
 
 AXES = ("setup", "rival", "dice", "mass", "window", "block")
