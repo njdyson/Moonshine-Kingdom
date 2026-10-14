@@ -167,11 +167,28 @@ model.
 **A Fold is a Seize, and the body counts are Seizes** (Nick, 2026-10-13, after the opus-vs-bots-1
 playtest in mk-online's `harness/transcripts/`). Until then all eight 5s read "Kill ...", and a Fold
 denied them all: of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every
-lone Boss Folded. Now the body counts read "Seize a District from 5+ rival Mobsters in X" (Mobsters,
+lone Boss Folded. Now the body count reads "Seize a District from 5+ rival Mobsters" (Mobsters,
 so a Boss and four Runners are five), so the
 Occupier stands and makes the Invader win it, or runs and pays him 5 anyway.
 The crew is counted as it met the Invader at the door (the Rulebook's Pulling It Off, its one home).
 A kill in a fight the Invader loses pays nothing on them.
+
+**One body count, any Borough** (Nick, 2026-10-14, after the opus-vs-bots-3 playtest). There were four,
+one per Borough (Bloody Sunday, Over the Top, Rum Wars, The Butcher's Ledger). Nobody stacked five
+Mobsters in one District, so from about Day 25 the four sat in the Market for fifteen Days and kept
+newer Jobs out. **The Butcher's Ledger** stays, naming no Borough ("Seize a District from 5+ rival
+Mobsters"; Nick's favourite of the four themes). Three brew-and-sell 5s replaced the others, to pull
+toward the Still now that Extort pays $100 a District:
+
+- **The Real McCoy**: Trade 8+ Moonshine at a Dock.
+- **The Noble Experiment**: Unload 8+ Moonshine outside your home Borough.
+- **The Warehouse**: Secure your Safehouse in a District holding 10+ barrels.
+
+Each is a stockpile built in public, and its counterplay is the Raid (a pile that size is the Big
+Bust's pick) and taking the District first. Weighed and not taken the same day: **Over the Top** as
+"Move across a bridge with ..." (too easy, and it overlapped the bridge 3s). Nick's "Seize a Pressure 6
+Still" (a High Society Venue) is open: it would be a ninth 5, and the tier must stay a multiple of
+four.
 
 **The Toll Booth Trap stays a Kill** ("Kill a rival Boss.", anywhere; Nick, the same evening): "a
 situational strong arm. You can corner him so he can't fold, or use it as a decoy if you want them to
@@ -203,15 +220,16 @@ once. The deck is 36 cards, 16 / 12 / 8:
   Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
   (A Bridge to Sell); and singles, The Eviction back among them.
 - **5s**: no longer one set (Nick, 2026-10-13: "more variety is likely better to avoid a stale
-  standard ending"). A **body count** per Borough ("Seize a District from 5+ rival Mobsters in X"),
+  standard ending"). **The Butcher's Ledger** ("Seize a District from 5+ rival Mobsters", anywhere),
   **The Toll Booth Trap** ("Kill a rival Boss", anywhere), **The Five Families**,
-  **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough") and **Union
-  Dues**. Opening Night is home-only so the pour can't be made in the room its holder crowns in. A body
-  count and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
+  **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough"), **Union
+  Dues**, and since 2026-10-14 the three brew-and-sell 5s (**The Real McCoy**, **The Noble
+  Experiment**, **The Warehouse**). Opening Night is home-only so the pour can't be made in the room
+  its holder crowns in. The Butcher's Ledger and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
   2026-10-12): paying both takes a fight that kills the Boss and takes a District held by five
-  Mobsters, and holding both stakes 6 of at most 10 markers. A Fold there pays the body count alone.
-  Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a
-  target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs
+  Mobsters, and holding both stakes 6 of at most 10 markers. A Fold there pays the Ledger alone.
+  Nick likes the body count as a stand-in for the cut Sweep: any stack of five is a
+  target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly this pair
   and fails any other.
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
@@ -366,8 +384,7 @@ still pays its Kickbacks; it just can't win you the game.
 Watch in playtest: **Williamsburg** is one Move from both the Manhattan and Queens home Wards (by
 the bridge from Five Points, and from Corona), so Brooklyn hosts the endgame; Brooklyn's nearest
 room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is three or more Moves from
-every other home, so the Bronx's room becomes a backwater. Each Borough's body count now
-mostly hits whoever is invading that Borough's room. At three players the unclaimed Borough's room
+every other home, so the Bronx's room becomes a backwater. At three players the unclaimed Borough's room
 has no landlord.
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
@@ -517,17 +534,13 @@ used to draw Heat always, so a fight's first shot plus a Torch put two markers d
 could take the track from 4 to 6. Now no Play draws more than one marker. In a fight the Invader rolls
 **Red** and the Occupier **White**, so nobody has to remember who rolled which; Red also brews.
 
-Collect is stated as what it is: a marker spent on $100, which Laying Low would pay anyway, so it buys a
-turn longer on the street. What that does to tomorrow's Turn Token is The Almanac's to teach (lesson 2);
-the Rulebook entry describing it through tokens read as a token procedure and was cut.
-
 ## Extort and the Greed Tax: loud at 5+
 
 Since 2026-10-14 (Nick, on the opus-vs-bots-1 takeaway "Raids are too frequent and too punishing").
 An Extort draws Heat only when it squeezes **5+ Districts**, and the Greed Tax starts at **5+ barrels**
 Unloaded in one Play (it was 4+). One number for both: five in one Play is loud. Extort is otherwise
-unchanged (Power Play, once a Day, $200 per District you Control). State the threshold in Districts,
-never as "$1,000", so the rule keeps one unit.
+unchanged (Power Play; its pay and daily limit changed the same day, see *Extort at $100, and no Collect*).
+State the threshold in Districts, never as a dollar figure, so the rule keeps one unit.
 
 Why: Extort laid 54 of that game's 83 Heat markers, and every seat made it most Days, so a Raid landed
 on whoever happened to Extort last. In a bot sweep on matched seeds (18 games a rule, a scratch copy of
@@ -543,7 +556,7 @@ Weighed and not taken:
 - **Extort as a 1-Influence Play at $100 per Speakeasy you Control, no Heat, replacing Collect** (Nick's
   first idea): a Raid every 4.9 Days, but Extort income fell by two-thirds and the fourth Bribe came a
   week later. At $200 a bar the economy held, but staying up would pay a bar-holder more than Laying Low,
-  which breaks The Almanac's Reverse Snake ("It isn't money"). Collect stays.
+  which breaks The Almanac's Reverse Snake ("It isn't money"). Collect stayed (until later the same day).
 - **Heat at 4+ Districts** (83% of the bots' Extorts stayed loud; a Raid every 1.8 Days) and **at 6+** (a
   Raid every 2.7 Days).
 
@@ -556,6 +569,34 @@ Watch in playtest:
 - **The Nightcap** (lesson 12): a 4-Rum pour at a room nets +2 Plays without Heat, even on five clear
   markers (`tools/sim_kickback_ledger.js`), so the quiet Kickback engine is a Play richer per pour.
 - The Volstead Act (shelved) keeps its Greed Tax at 3+, now "down from 5+".
+
+## Extort at $100, and no Collect
+
+Since 2026-10-14 (Nick, after the opus-vipers playtest in mk-online). **Extort** pays **$100 per District
+you Control**, as often as your Ledger pays for it (it was $200, once a Day). **Collect is cut.** Heat is
+unchanged: one marker when it squeezes 5+ Districts.
+
+Why: Extort paid 65 to 71% of the winner's cash, and three of four families had all four Bribes by Day 19.
+Nick: "the game should rely on the brew engine and the extort path should be a secondary source." At $100
+a District, two Extorts cost four markers to earn what one did, so the daily limit was only a rule to
+remember. Collect was niche (0.1% of bot cash): a marker spent on $100 that Laying Low pays anyway, so all
+it bought was a turn longer on the street, and any small Play does that. A Trade split in two is the
+Almanac's example (lesson 2).
+
+In mk-online, on matched seeds (12 bot games a rule set): Extort's share of cash fell from 66% to 40% and
+Unload's rose from 32% to 58%. Extorts per boss per Day stayed at 0.46, because the Ledger is the limit.
+The Bribe ladder slowed by half (median Day bought: Alderman 6 to 12, Judge 11 to 22, Mayor 18 to 35)
+and Raids eased from 0.48 to 0.39 a Day. An Opus-vs-bots game crowned on Day 41 (the two before it on the
+old economy: Days 15 and 22).
+
+Watch in playtest:
+
+- **Game length.** Bribes were half of every winner's Respect, so slower Bribes slow the race unless Jobs
+  make it up. Nick's next levers: Bribe prices, or more pull for brew and Unload (Unload at 1 Influence was
+  floated; it also makes Kickbacks stronger).
+- **The Rum pour.** A Venue pour of 4 and then 3 Rum in two Plays dodges the Greed Tax, and the Kickbacks
+  refund more markers than the two Unloads spent. In that game it paid for a Judge and a Mayor in three
+  Days.
 
 ## A Safehouse is taken over or destroyed
 

@@ -491,29 +491,36 @@ FIVES = [
     # ("a rival Safehouse in the District is destroyed, unless you take it over").
     # Always co-fires with The Eviction (5+3=8, legal); mutually exclusive with
     # The Copper Heist, which forbids a Safehouse.
-    # SETS PASS 2026-10-11: Manhattan's body count (Nick: the Safehouse wording was unclear).
-    ("Bloody Sunday", "Bloody Sunday.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Mobsters</b> in <b>Manhattan</b>.",
-     "By Monday there was nothing left to come home to."),
-    # "the Bronx" is load-bearing: it keeps the four Open Fire 5s borough-disjoint,
-    # so two 5s can NEVER fire on one Play. "and no Safehouse" was ALSO here to block
-    # The Eviction: now REDUNDANT and removed (solver-verified: The Copper Heist's own
-    # "no Safehouse" already makes it and The Eviction mutually exclusive, which is what
-    # actually closed cluster 3). Max stack unchanged at 9.
-    # SETS PASS 2026-10-11: the Bronx's body count. A Fold now denies it, as it does the others.
-    ("Over the Top", "Old Guard.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Mobsters</b> in <b>the Bronx</b>.",
-     "These boys went over the top in France. This is a street."),
-    # SETS PASS 2026-10-11: Queens' body count. The Toll Booth Trap moved to the Boss set, where it
-    # started. Art: a gunfight on a burning pier.
-    ("Rum Wars", "Rum Wars.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Mobsters</b> in <b>Queens</b>.",
-     "Nobody counted the bodies. Everybody counted the crates."),
-    # BROOKLYN'S BOUNTY. Stays in Brooklyn: Murder, Inc. ran out of Brownsville.
-    # SETS PASS 2026-10-11: Brooklyn's body count, and the model for the set (Nick).
+    # ONE BODY COUNT (Nick, 2026-10-14, after the opus-vs-bots-3 playtest in mk-online): the four
+    # Borough body counts sat in the Market for 15+ Days, because nobody stacks five Mobsters in one
+    # District often enough to be taken. Bloody Sunday, Over the Top and Rum Wars are cut; The
+    # Butcher's Ledger, Nick's favourite theme for it, stays as the one body count, anywhere. It still
+    # meets The Toll Booth Trap on a fight that kills the Boss and takes a District held by 5+
+    # Mobsters (the one allowed pair); a Fold pays the body count alone.
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Mobsters</b> in <b>Brooklyn</b>.",
+     "Seize a District from <b>5+ rival Mobsters</b>.",
      "Every name in it is crossed out but one."),
+    # THE BREW 5s (Nick, 2026-10-14): three cards for the brew engine, in place of the three cut body
+    # counts, after Extort fell to $100 a District. Each has a verb no other 5 has (Trade, Unload of
+    # Moonshine, Secure), so none can pay beside another 5 on one Play.
+    # The Real McCoy: Bill McCoy ran Rum Row off the coast, and his whisky was "the real McCoy".
+    # Eight Moonshine at one Dock is a stockpile the table sees coming, and a Raid target. It meets
+    # Rum Row on a Staten Island Dock and The Dutchman's Deal at West Side (1s).
+    ("The Real McCoy", "Rum Row 3.jpg", "Trade",
+     "Trade <b>8+ Moonshine</b> at a <b>Dock</b>.",
+     "Straight off Rum Row, and nobody cut it."),
+    # The Noble Experiment: Hoover's name for Prohibition. Outside your home Borough so it is never a
+    # home chore (every seat starts on its home bar), and eight barrels always draw the Greed Tax, so
+    # the pour is loud. Moonshine, so it never meets Opening Night (Rum, at home); it meets a bar 1.
+    ("The Noble Experiment", "Full Steam.jpg", "Unload",
+     "Unload <b>8+ Moonshine</b> outside your <b>home Borough</b>.",
+     "Hoover called it noble. The bars call it Tuesday."),
+    # The Warehouse: ten barrels under one roof, then the Safehouse moves in. Secure needs the
+    # District Safe, so the barrels were brought or brewed there first, in plain sight. It meets Last
+    # One Standing (a 3) in Astoria and The Beachhead (a 1).
+    ("The Warehouse", "Gin Pipeline.jpg", "Secure",
+     "Secure your Safehouse in a District holding <b>10+ barrels</b>.",
+     "Ten barrels, one roof, and every cop can smell it."),
     # "with an Open Fire Play" DELETED: Hit is the Sicilians' Signature Play (Cost 2)
     # and exists purely to kill Bosses: the old wording locked the boss-killing mob
     # out of using its boss-killing power on the deck's only boss-kill card. Worded
@@ -530,8 +537,8 @@ FIVES = [
     # corner him so he can't fold, or use it as a decoy if you want them to fold (earning its name
     # 'trap')." A Boss with no Connected Safe District to Scram to can't Fold, so the hunter's work is
     # the cornering; and a face-up Toll Booth Trap makes a Boss run, which hands over the block.
-    # It meets each body count only on a fight that kills the Boss and takes a District held by 5+
-    # Mobsters (the four allowed pairs); a Fold pays the body count alone.
+    # It meets The Butcher's Ledger only on a fight that kills the Boss and takes a District held by 5+
+    # Mobsters (the one allowed pair); a Fold pays the Ledger alone.
     ("The Toll Booth Trap", "Toll Booth Trap.jpg", "Open Fire",
      "Kill a <b>rival Boss</b>.",
      "A toll is a toll. Somebody always pays it."),

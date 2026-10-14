@@ -1,9 +1,36 @@
-# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes and Variety (2026-10-13)
+# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes and Variety (2026-10-13), then Brew (2026-10-14)
 
 Two passes on one day, made on the `claude/job-deck-balance-57zjc0` branch and on main since
 2026-10-12 (Nick: "it will still need more work afterwards"). **Round 2 is the
-live deck, with rounds 3 and 4 (2026-10-13) changing the 5s and three 3s**; round 1 is the record of
+live deck, with rounds 3 and 4 (2026-10-13) and 5 (2026-10-14) changing the 5s and three 3s**; round 1 is the record of
 how it got there, and its card tables describe a deck that has since changed again.
+
+## Round 5: one body count, three brew 5s (2026-10-14)
+
+After the opus-vs-bots-3 playtest (mk-online `harness/transcripts/`; write-up in the project's
+`playtests/new-economy-2026-10-14.md`). From about Day 25 the four body counts sat in the Market for
+fifteen Days: nobody stacked five Mobsters in one District, so nobody could claim them. Nick:
+
+> I think we may have to kill the seize 5 from 5+ and perhaps replace it with a single generic one (any
+> borough) (butchers ledger is my favourite theme for it) plus a couple of replacements.
+
+He took three of the four replacements offered ("over the top is too easy, and overlaps with the other
+bridge jobs"). Still 36 cards, 16 / 12 / 8.
+
+| Card | Now |
+| --- | --- |
+| **The Butcher's Ledger** | "Seize a District from 5+ rival Mobsters." Any Borough. |
+| Bloody Sunday, Over the Top, Rum Wars | cut |
+| **The Real McCoy** (new; art `Rum Row 3.jpg`) | "Trade 8+ Moonshine at a Dock." |
+| **The Noble Experiment** (new; art `Full Steam.jpg`) | "Unload 8+ Moonshine outside your home Borough." |
+| **The Warehouse** (new; art `Gin Pipeline.jpg`) | "Secure your Safehouse in a District holding 10+ barrels." |
+
+The three pull toward the Still now that Extort pays $100 a District. Their counterplay is the Raid (a
+pile of eight or ten is the Big Bust's pick) and taking the District first; `difficulty_audit.py` rates
+The Real McCoy and The Warehouse "thin" on that test, so watch them in playtest. Audits: never two 5s
+PASS with one allowed pair (the Ledger and The Toll Booth Trap); all 36 cards live; the weighted seat
+spread unchanged at 4, now with no Borough bounties. Open: Nick's "Seize a Pressure 6 Still" (a High
+Society Venue), which would be a ninth 5.
 
 ## Round 4: the 5s break up (later on 2026-10-13)
 
