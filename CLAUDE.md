@@ -273,8 +273,10 @@ Rat and Bribe went to one line each.
 Move then handed rival turf to the reverse ("Into rival turf: see reverse"), which carries a **Rival
 Safehouse** line (walk in unguarded, or win the District by Fold or fight, then take it over or
 destroy it) under the Pinned note, and the **Handshake** as a rule panel at its foot like the
-Faction Trait: it is not a Play, so no 0-cost socket. Every card now keeps two lines or more spare
-in its 925px print box.
+Faction Trait: it is not a Play, so no 0-cost socket. Since 2026-10-14 the room Collect's row
+freed went to the fronts' rows (5px padding, 11.5px text, 12.5px names; Nick: "more breathing room
+... up the font a touch"), which leaves the busiest front about one line (18px) spare in its 925px
+print box. A new front row needs that room back from somewhere.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
 That free final betrayal is Nick's call, on purpose ("cleaner and more brutal"); do not patch
