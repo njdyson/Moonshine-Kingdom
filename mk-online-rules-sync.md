@@ -956,6 +956,10 @@ Collecting. Strings: the Plays panel, the play reference, the harness's options 
 **To port:** the cards in `jobs.ts`, the evaluators (Trade and Unload counts, the home Borough, the
 barrels in the District a Safehouse is Secured in), bot plans, `scripts/jobs-check.ts` and RULES-AI.md.
 
+**Ported the same day** (mk-online PR #10, f995fe7, branch `claude/project-thread-szf9e2`): all of the
+above. The bots plan The Real McCoy and The Noble Experiment as staged sales and The Warehouse as a
+pile stacked out of a Squad's reach, then a Secure onto it.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
