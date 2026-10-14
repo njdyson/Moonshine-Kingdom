@@ -941,6 +941,21 @@ Extort's Heat is unchanged (one marker at 5+ Districts), and so is Lay Low's $10
 `LAY_LOW_CASH`), and the bots' tempo-hold (§8.4, now `stayOutScore`) lifts a quiet Play instead of
 Collecting. Strings: the Plays panel, the play reference, the harness's options and RULES-AI.md.
 
+## 36. One body count; three brew 5s (2026-10-14, Nick)
+
+`jobs-setup-handoff.md`, Round 5. Still 36 cards, 16 / 12 / 8.
+
+| Card | Now |
+| --- | --- |
+| The Butcher's Ledger (5) | "Seize a District from 5+ rival Mobsters": **any Borough** |
+| Bloody Sunday, Over the Top, Rum Wars | cut |
+| The Real McCoy (5, new) | "Trade 8+ Moonshine at a Dock" |
+| The Noble Experiment (5, new) | "Unload 8+ Moonshine outside your home Borough" |
+| The Warehouse (5, new) | "Secure your Safehouse in a District holding 10+ barrels" |
+
+**To port:** the cards in `jobs.ts`, the evaluators (Trade and Unload counts, the home Borough, the
+barrels in the District a Safehouse is Secured in), bot plans, `scripts/jobs-check.ts` and RULES-AI.md.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

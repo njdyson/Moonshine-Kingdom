@@ -111,11 +111,12 @@ CARDS = [
     ('A Bridge to Sell',      3, 'Move',      {'dock', 'speakeasy', 'press5'}, {M: 'friendly', BK: 'friendly'}),
     # A rival's Safehouse: aimed at every seat alike.
     ('The Eviction',          3, 'Open Fire', {'ward'},                     {}),
-    # --- 5 Respect: the body counts, one per seat; the rest aimed at every seat alike ---
-    ('Bloody Sunday',         5, 'Open Fire', {'any'},                      {M: 'hostile'}),
-    ('Over the Top',          5, 'Open Fire', {'any'},                      {BX: 'hostile'}),
-    ('Rum Wars',              5, 'Open Fire', {'any'},                      {Q: 'hostile'}),
-    ("The Butcher's Ledger",  5, 'Open Fire', {'any'},                      {BK: 'hostile'}),
+    # --- 5 Respect: aimed at every seat alike since 2026-10-14 (one body count, any Borough) ---
+    ("The Butcher's Ledger",  5, 'Open Fire', {'any'},                      {}),
+    ('The Real McCoy',        5, 'Trade',     {'dock'},                     {}),
+    # Any ordinary bar outside your home Borough: every seat's away bars alike.
+    ('The Noble Experiment',  5, 'Unload',    {'speakeasy'},                {}),
+    ('The Warehouse',         5, 'Secure',    {'any'},                      {}),
     ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {}),
     # Each seat's own room, so every seat's friendly 5 alike.
     ('Opening Night',         5, 'Unload',    {'highSociety', 'speakeasy'}, {}),
@@ -182,8 +183,10 @@ print()
 print('  Bounty symmetry: is every mainland borough equally hunted?')
 for b in (M, BX, Q, BK):
     ho = [x[0] for x in CARDS if x[4].get(b) == 'hostile']
-    # One body count per seat since 2026-10-13 (two, with a Boss card each, before).
-    mark = 'ok' if len(ho) == 1 else ('NO BOUNTY, safest seat' if not ho else 'over-targeted')
+    # No Borough bounties since 2026-10-14: the one body count names no Borough. Fair while every
+    # seat has the same number (one each 2026-10-13, two with a Boss card each before).
+    mark = 'ok' if all(sum(1 for x in CARDS if x[4].get(o) == 'hostile') == len(ho)
+                       for o in (M, BX, Q, BK)) else 'over-targeted'
     print(f'    {b:11} {len(ho)} hostile card(s)   {mark}')
 
 print()
@@ -208,4 +211,4 @@ print()
 print(f'  WEIGHTED SPREAD: {wspread}   '
       f'(best {max(wnets, key=wnets.get)}, worst {min(wnets, key=wnets.get)})')
 print('  ' + ('FLAT' if wspread == 0 else
-              'residual: every seat has 1 friendly + 1 bounty, but not at matching tiers'))
+              'residual: the friendly cards differ by seat (no Borough bounties since 2026-10-14)'))

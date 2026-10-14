@@ -167,11 +167,28 @@ model.
 **A Fold is a Seize, and the body counts are Seizes** (Nick, 2026-10-13, after the opus-vs-bots-1
 playtest in mk-online's `harness/transcripts/`). Until then all eight 5s read "Kill ...", and a Fold
 denied them all: of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every
-lone Boss Folded. Now the body counts read "Seize a District from 5+ rival Mobsters in X" (Mobsters,
+lone Boss Folded. Now the body count reads "Seize a District from 5+ rival Mobsters" (Mobsters,
 so a Boss and four Runners are five), so the
 Occupier stands and makes the Invader win it, or runs and pays him 5 anyway.
 The crew is counted as it met the Invader at the door (the Rulebook's Pulling It Off, its one home).
 A kill in a fight the Invader loses pays nothing on them.
+
+**One body count, any Borough** (Nick, 2026-10-14, after the opus-vs-bots-3 playtest). There were four,
+one per Borough (Bloody Sunday, Over the Top, Rum Wars, The Butcher's Ledger). Nobody stacked five
+Mobsters in one District, so from about Day 25 the four sat in the Market for fifteen Days and kept
+newer Jobs out. **The Butcher's Ledger** stays, naming no Borough ("Seize a District from 5+ rival
+Mobsters"; Nick's favourite of the four themes). Three brew-and-sell 5s replaced the others, to pull
+toward the Still now that Extort pays $100 a District:
+
+- **The Real McCoy**: Trade 8+ Moonshine at a Dock.
+- **The Noble Experiment**: Unload 8+ Moonshine outside your home Borough.
+- **The Warehouse**: Secure your Safehouse in a District holding 10+ barrels.
+
+Each is a stockpile built in public, and its counterplay is the Raid (a pile that size is the Big
+Bust's pick) and taking the District first. Weighed and not taken the same day: **Over the Top** as
+"Move across a bridge with ..." (too easy, and it overlapped the bridge 3s). Nick's "Seize a Pressure 6
+Still" (a High Society Venue) is open: it would be a ninth 5, and the tier must stay a multiple of
+four.
 
 **The Toll Booth Trap stays a Kill** ("Kill a rival Boss.", anywhere; Nick, the same evening): "a
 situational strong arm. You can corner him so he can't fold, or use it as a decoy if you want them to
@@ -203,15 +220,16 @@ once. The deck is 36 cards, 16 / 12 / 8:
   Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
   (A Bridge to Sell); and singles, The Eviction back among them.
 - **5s**: no longer one set (Nick, 2026-10-13: "more variety is likely better to avoid a stale
-  standard ending"). A **body count** per Borough ("Seize a District from 5+ rival Mobsters in X"),
+  standard ending"). **The Butcher's Ledger** ("Seize a District from 5+ rival Mobsters", anywhere),
   **The Toll Booth Trap** ("Kill a rival Boss", anywhere), **The Five Families**,
-  **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough") and **Union
-  Dues**. Opening Night is home-only so the pour can't be made in the room its holder crowns in. A body
-  count and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
+  **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough"), **Union
+  Dues**, and since 2026-10-14 the three brew-and-sell 5s (**The Real McCoy**, **The Noble
+  Experiment**, **The Warehouse**). Opening Night is home-only so the pour can't be made in the room
+  its holder crowns in. The Butcher's Ledger and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
   2026-10-12): paying both takes a fight that kills the Boss and takes a District held by five
-  Mobsters, and holding both stakes 6 of at most 10 markers. A Fold there pays the body count alone.
-  Nick likes the body counts as a stand-in for the cut Sweep: any stack of five is a
-  target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly these four pairs
+  Mobsters, and holding both stakes 6 of at most 10 markers. A Fold there pays the Ledger alone.
+  Nick likes the body count as a stand-in for the cut Sweep: any stack of five is a
+  target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly this pair
   and fails any other.
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
@@ -366,8 +384,7 @@ still pays its Kickbacks; it just can't win you the game.
 Watch in playtest: **Williamsburg** is one Move from both the Manhattan and Queens home Wards (by
 the bridge from Five Points, and from Corona), so Brooklyn hosts the endgame; Brooklyn's nearest
 room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is three or more Moves from
-every other home, so the Bronx's room becomes a backwater. Each Borough's body count now
-mostly hits whoever is invading that Borough's room. At three players the unclaimed Borough's room
+every other home, so the Bronx's room becomes a backwater. At three players the unclaimed Borough's room
 has no landlord.
 
 ## High Society buys Rum only; elsewhere the barrel sets the price

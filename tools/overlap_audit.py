@@ -3,7 +3,7 @@
 
 Enumerates every Play a player could make (Play x target District x board state x
 what the Play did there) and reports which Jobs co-fire. Enforces handoff §3:
-    - HARD RULE: never two 5s on one Play, except a body count and The Toll Booth Trap together,
+    - HARD RULE: never two 5s on one Play, except The Butcher's Ledger and The Toll Booth Trap together,
       on a fight that kills the Boss and takes a District held by 5+ Mobsters
       (ALLOWED_DOUBLE_FIVES; Nick, 2026-10-12).
     - Watch:     a 5 plus small change is fine; big 3-stacks are suspect.
@@ -181,29 +181,33 @@ JOBS = [
     J('Union Dues', 5, ['Recruit'],
       "Recruit 4+ Runners in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
-    # --- 5 Respect: the body counts (2026-10-11), Seizes since 2026-10-13 ---
-    # `def_runners` and `def_boss` are the crew that met the Move at the door, so a Fold pays
-    # as a won fight does. The Five Families, Opening Night and Union Dues (5s since the
-    # Variety Pass, 2026-10-13) are above.
-] + [J(n, 5, ['Move'], f'Seize a District from 5+ rival Mobsters in {label}.',
-       (lambda b: lambda p, d: p['seize'] and p['def_runners'] + p['def_boss'] >= 5
-        and d.boro == b)(b))
-     for n, label, b in (('Bloody Sunday', 'Manhattan', M), ('Over the Top', 'the Bronx', BX),
-                         ('Rum Wars', 'Queens', Q), ("The Butcher's Ledger", 'Brooklyn', BK))] + [
-    # The one Boss card left, anywhere, and a Kill (2026-10-13): a Fold denies it. It meets each
+    # --- 5 Respect: the body count (2026-10-11), a Seize since 2026-10-13, one card for any
+    # Borough since 2026-10-14 (Nick: the four sat unclaimed in the Market). `def_runners` and
+    # `def_boss` are the crew that met the Move at the door, so a Fold pays as a won fight does.
+    J("The Butcher's Ledger", 5, ['Move'], 'Seize a District from 5+ rival Mobsters.',
+      lambda p, d: p['seize'] and p['def_runners'] + p['def_boss'] >= 5),
+    # --- 5 Respect: the brew-and-sell 5s (Nick, 2026-10-14), replacing three body counts ---
+    J('The Real McCoy', 5, ['Trade'], 'Trade 8+ Moonshine at a Dock.',
+      lambda p, d: p['barrels'] >= 8),
+    J('The Noble Experiment', 5, ['Unload'], 'Unload 8+ Moonshine outside your home Borough.',
+      lambda p, d: p['barrels'] >= 8 and not p['rum'] and p['home'] != 'own'),
+    J('The Warehouse', 5, ['Secure'], 'Secure your Safehouse in a District holding 10+ barrels.',
+      lambda p, d: p['barrels'] >= 10),
+    # The one Boss card left, anywhere, and a Kill (2026-10-13): a Fold denies it. It meets the
     # body count only on a fight that kills the Boss and takes a District held by 5+ Mobsters:
     # see ALLOWED_DOUBLE_FIVES.
     J('The Toll Booth Trap', 5, ['Move'], 'Kill a rival Boss.',
-      lambda p, d: p['boss_killed'])]
+      lambda p, d: p['boss_killed']),
+]
 
 # The one exception to "never two 5s" (Nick, 2026-10-12): a body count and the Boss card
 # together, on a fight that kills the Boss and takes a District held by five or more Mobsters.
 # A Fold pays the body count alone, so the Invader must beat a Boss and four with the 4 markers
 # left after staking 6 of at most 10; and the Offers deal one card a Day. The Boss card was one
-# per Borough until the Variety Pass left The Toll Booth Trap alone, anywhere, so it now pairs
-# with each body count. Any other pair of 5s still fails the audit.
-ALLOWED_DOUBLE_FIVES = {frozenset(('The Toll Booth Trap', n)) for n in (
-    'Bloody Sunday', 'Over the Top', 'Rum Wars', "The Butcher's Ledger")}
+# per Borough until the Variety Pass left The Toll Booth Trap alone, anywhere; the body counts
+# were one per Borough until 2026-10-14 left The Butcher's Ledger alone. Any other pair of 5s
+# still fails the audit.
+ALLOWED_DOUBLE_FIVES = {frozenset(('The Toll Booth Trap', "The Butcher's Ledger"))}
 
 STAKE = {1: 1, 3: 2, 5: 3}
 VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat')
@@ -212,7 +216,7 @@ VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat'
 # --- THE PLAYS -----------------------------------------------------------------
 # Every distinct Play on a District, as the facts a Job can read. The board's own
 # rules prune the impossible ones, so a co-fire reported here is one a player can
-# actually make. Grids straddle every threshold the deck prints (3, 4, 6, 8 barrels;
+# actually make. Grids straddle every threshold the deck prints (3, 4, 6, 8, 10 barrels;
 # 4 Runners; 4 and 5 defending Runners, with and without their Boss): a silent zero is not a pass.
 #
 # District state before the Play:
@@ -225,7 +229,7 @@ VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat'
 # or the unclaimed Borough at three players)?
 STATES = ('empty', 'control', 'hostile', 'hostile_sh', 'unguarded')
 HOMES = ('own', 'rival', 'none')
-BARRELS = (0, 3, 4, 6, 8)
+BARRELS = (0, 3, 4, 6, 8, 10)
 
 
 def _p(**kw):

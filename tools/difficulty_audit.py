@@ -146,19 +146,23 @@ CARDS = [
     ("The Eviction", 3, "Open Fire", 2, 1, 2, 2, 1, 2, 2, 3,
      "Back: a rival's Safehouse, usually his home Ward. A Fold pays it."),
     # ------------------------------- 5 RESPECT -------------------------------
-    # The murder sets (2026-10-11), Seizes since 2026-10-13. A Fold pays them now, so the
+    # The murder sets (2026-10-11), Seizes since 2026-10-13, one card since 2026-10-14. A Fold pays them now, so the
     # target can't dodge for free: RIVAL drops to 2 (he must still present the crew), BLOCK
     # rises to 2 (thin the stack, or garrison it to win the stand) and DEFEND to 3. A Boss card
     # needs MASS 2: his owner escorts him, since a lone Boss Folds and pays. Body counts keep
     # DICE 3: a stack of 5+ stands only when it likes the fight, and you must wipe it.
-    ("Bloody Sunday", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Mobsters in Manhattan: stand and lose, or Fold, and it pays."),
-    ("Over the Top", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Mobsters in the Bronx: stand and lose, or Fold, and it pays."),
-    ("Rum Wars", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Mobsters in Queens: stand and lose, or Fold, and it pays."),
-    ("The Butcher's Ledger", 5, "Open Fire", 2, 2, 3, 2, 2, 2, 3, 3,
-     "5+ Mobsters in Brooklyn: stand and lose, or Fold, and it pays."),
+    # One body count since 2026-10-14, any Borough (NAMES 1, WINDOW 1: any stack of five will do).
+    ("The Butcher's Ledger", 5, "Open Fire", 2, 2, 3, 2, 1, 2, 1, 3,
+     "5+ Mobsters anywhere: stand and lose, or Fold, and it pays."),
+    # The brew-and-sell 5s (2026-10-14), scored on first reading, before any playtest. Each is a
+    # stockpile built in public: BLOCK comes from the Raid (a pile that size is the Big Bust's
+    # pick) and from taking the District before the Play.
+    ("The Real McCoy", 5, "Trade", 3, 0, 0, 1, 1, 2, 1, 1,
+     "8 Moonshine at any Dock: a public stockpile, Raid bait while it builds."),
+    ("The Noble Experiment", 5, "Unload", 3, 0, 1, 2, 1, 3, 2, 2,
+     "8 Moonshine at a bar in a rival's Borough: hold it, haul to it, sell."),
+    ("The Warehouse", 5, "Secure", 3, 0, 0, 1, 1, 2, 1, 2,
+     "10 barrels under one roof, then a Safehouse on them: Raid bait."),
     # The Variety Pass (2026-10-13): one Boss card, anywhere, and three 5s up from the 3s. The
     # Toll Booth Trap names no place now (NAMES 1, WINDOW 1: some rival Boss is always out), and
     # is a Kill on purpose (Nick): he Folds out of it unless cornered (RIVAL 3, DEFEND 2), and a
