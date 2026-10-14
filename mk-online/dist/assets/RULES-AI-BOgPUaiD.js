@@ -97,9 +97,9 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
 | Collect (collect) | 1 | Spend a marker on +$100, which Laying Low would pay for it anyway, so it buys a turn longer on the street. |
 | Lay Low (layLow) | 0 | See §3. |
-| Unload (unload) | 2 | At a Speakeasy you Control, sell your barrels there: **Moonshine $300, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. **Greed Tax**: 4+ barrels in one Play = H. |
+| Unload (unload) | 2 | At a Speakeasy you Control, sell your barrels there: **Moonshine $300, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. **Greed Tax**: 5+ barrels in one Play = H. |
 | Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
-| Extort (extort) | 2, H | **$200 per District you Control**. Once per Day; draws one Heat marker. |
+| Extort (extort) | 2, H at 5+ | **$200 per District you Control**. Once per Day; draws one Heat marker only when you Control **5+ Districts**. |
 | Rat (rat) | 2 | An immediate Raid (§7). Take the Rat Card (−3 Respect) from the supply or its holder. You cannot Rat while you hold it; it leaves you only when a rival Rats. |
 | Rise (rise) | 2 | Boss off the board only: place him in any **Safe Ward**. |
 | Take the Crown (takeTheCrown) | 2 | See §1. |
