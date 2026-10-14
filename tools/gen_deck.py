@@ -48,32 +48,34 @@ ONES = [
     # AUDIT 2026-10-10: "of Moonshine" cut. It answered the split market (note above), and
     # every ordinary bar has bought both liquors since 2026-09-22.
     # SETS PASS 2026-10-11: 3+ became 4+, the bar set's one count.
+    # RETIER 2026-10-14: 5+ on all eight (Nick). With the Greed Tax at 5+ a 4-barrel sale was quiet,
+    # so the home bars paid a point for an Unload you'd make anyway; at 5+ every one draws Heat.
     ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b>.",
+     "Unload <b>5+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b>.",
      "What the angels take, the house bills you for anyway."),
     # Manhattan's starting bar (The Haymarket). Art: bootleggers with bottles, the ghosts behind
     # them drawn from the smoke.
     ("High Spirits", "High Spirits.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b>.",
+     "Unload <b>5+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b>.",
      "It never closes. It only gets quieter."),
     # The Bronx's empty bar. Belmont is the Bronx's Little Italy; Arthur Avenue is its high street.
     ("Bathtub Gin", "Bathtub Chemistry.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b>.",
+     "Unload <b>5+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b>.",
      "Mixed in a tub off Arthur Avenue. Poured like champagne."),
     # The Bronx's starting bar (The Penny Whistle). "Coffin varnish" was 1920s slang for liquor
     # that might kill you; the art is a man cutting a jar of it.
     ("Coffin Varnish", "Cutting.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Penny Whistle</b> in <b>Fordham</b>.",
+     "Unload <b>5+ barrels</b> at <b>The Penny Whistle</b> in <b>Fordham</b>.",
      "Two parts water, one part kerosene, all of it profit."),
     # Queens' empty bar (Bohemian Hall). "Giggle water" is period slang for any drink. The art was
     # The Grand Tour's: a handshake over a crate of bottles.
     ("Giggle Water", "Cobble Hill.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b>.",
+     "Unload <b>5+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b>.",
      "Poured by the pitcher, and nobody asks what is in it."),
     # Queens' starting bar (Paradise Alley). Back as a 1 on its own art: it was a 3 at 6+ until the
     # setup pass cut it as a home chore. As a 1, a home sale is the right size.
     ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b>.",
+     "Unload <b>5+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b>.",
      "One bad batch and the whole city stops drinking."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
@@ -89,13 +91,13 @@ ONES = [
     # Speakeasy; it is the empty block beside two Brooklyn starts (Red Hook, Canarsie).
     # SETS PASS 2026-10-11: one of the bar set; text unchanged.
     ("Last Call", "Last Call.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Ruby&rsquo;s Joint</b> in <b>Coney Island</b>.",
+     "Unload <b>5+ barrels</b> at <b>Ruby&rsquo;s Joint</b> in <b>Coney Island</b>.",
      "Pour till the taps run dry and the sirens start up."),
     # Brooklyn's starting bar (Sunny's Bar). "Off the Boat" was Cuban Prince's first name. Switch.jpg
     # (boats unloading under a suspension bridge) left Night Landing because Jamaica Bay had no bridge;
     # Red Hook sits at the Brooklyn Bridge's end, so it fits here.
     ("Off the Boat", "Switch.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b>.",
+     "Unload <b>5+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b>.",
      "Unloaded at midnight, poured by one, gone by two."),
     # THE SINGLES: landmarks, Docks and Staten Island, which no Borough set can carry.
     ("The Milk Run", "The Milk Run.jpg", "Move",
@@ -252,7 +254,10 @@ ONES = [
      "He struck the match himself. Slept fine after."),
 ]
 
-THREES = [
+TWOS = [
+    # THE 1/2/3 RETIER (Nick, 2026-10-14; jobs-setup-handoff.md round 6). A 5 was too swingy, so
+    # every Job pays its Stake: 1, 2 or 3. The bar stays 20, and the Jobs get a touch easier to make
+    # up for it.
     # THE EXTORT SET (Nick, 2026-10-11; jobs-setup-handoff.md). One card per mainland
     # Borough, each its seat's friendly 3, replacing the four home-bar 3s (Cuban Prince,
     # The Big Squeeze, Hell's Highway, Poison Panic). Since 2026-10-07 every seat starts on
@@ -310,6 +315,23 @@ THREES = [
     ("Hell&rsquo;s Highway", "Hells Highway.jpg", "Move",
      "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Hell Gate Bridge</b>.",
      "Forty miles of bad road and worse intentions."),
+    # THE BRIDGE SET (VARIETY PASS, 2026-10-13). Hell's Highway's wording on the board's other two
+    # Bridges, so each 3 sends a Boss over the water with a Rum run behind him and points the table at
+    # both ends. The Williamsburg Bridge stays The Milk Run's, a 1, since its far end is a police-locked
+    # room. The Queensboro joins two empty bars (East Harlem and Astoria), next door to three home
+    # Wards; the Brooklyn Bridge joins Manhattan's starting Dock (the Bowery) to Brooklyn's starting
+    # bar (Red Hook), so it ends in a fight unless the far side Folds. A Boss on a bridge is also The
+    # Toll Booth Trap's target.
+    # The One-Way Ride keeps its name and art from the Boss set (a tommy gun from a running car), and
+    # the Queensboro is the bridge Gatsby drives into Manhattan over: a nod, not a lesson.
+    ("The One-Way Ride", "Gatsby.jpg", "Move",
+     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Queensboro Bridge</b>.",
+     "Get in the car. Nobody asks where it is going."),
+    # Named for the oldest con in the city: George C. Parker sold the Brooklyn Bridge to the newly
+    # landed, more than once. Art: a deal at night, a wad of cash, a hotel bar behind.
+    ("A Bridge to Sell", "Night Mayor.jpg", "Move",
+     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Brooklyn Bridge</b>.",
+     "He sold it to a rube on Tuesday. Tonight he is using it."),
     # RE-VERBED Rise -> Secure (Nick, 2026-07-19). Two problems solved by one edit,
     # with no change to the 12/12/8 tier counts:
     #   1. BOTH Rise cards paid you for being decapitated, reopening the incentive
@@ -347,57 +369,6 @@ THREES = [
     ("Last One Standing", "Last One Standing.jpg", "Secure",
      "Secure your Safehouse in <b>Astoria</b> holding <b>6+ Rum</b>.",
      "The last man at the table gets the chair."),
-    # Moonshine -> RUM (Nick). A setup hedge: Rum only exists via Trade at a Dock you
-    # Control, and Staten's own boilers are hopeless (Westerleigh Pressure 1,
-    # Tottenville 3), so the moonshine must be hauled IN, Traded, then run out.
-    # Roughly doubles the setup. Bonus: now mutually exclusive with Gin Pipeline
-    # (Moonshine), which it used to be able to co-fire with.
-    # COUNTERPLAY PASS (2026-08-04). SOLITAIRE FAILURE at 5 Respect: diff 8, engagement 2
-    # -- the lowest-difficulty 5 once counterplay is scored, and unblockable BY DESIGN
-    # ("nobody watches Staten Island" is the card's own flavour line). A long private
-    # haul is not a headline job.
-    # ⚠ "to a Dock a rival Controls" WAS TRIED AND IS IMPOSSIBLE -- the THIRD card this
-    # pass to die on its own Play's rules, and the subtlest. A Move into rival turf can
-    # never END with your barrels sitting in their District:
-    #   FOLD      -> "The Invader immediately claims Control" -- no longer rival-held.
-    #   AMBUSH    -> win and you take Control; lose and "any [barrels] left in a rival's
-    #                District become theirs" -- they are no longer YOUR barrels.
-    #   HOLD FIRE -> "You cannot end your Play Pinned"; you Open Fire (as above) or
-    #                Advance to a Connected SAFE District, carrying the cargo back out.
-    # No branch satisfies the objective at the checkpoint. LESSON: for a card that
-    # delivers goods, "into rival turf" is never a legal destination -- combat resolution
-    # always changes either who holds the District or who owns the barrels.
-    #
-    # THE FIX IS NICK'S (2026-08-04): deliver AND take the District in the same Play.
-    # "Move 4+ Rum into a rival-Controlled Dock, and take Control of the District."
-    # Why this is better than the three alternatives I drafted:
-    #   - It closes the barrels-alone hole by construction. Nick's correction: barrels
-    #     CAN travel alone ("Your MOBSTERS are Pinned" -- send none, nothing to Pin), so
-    #     the plain rival-turf version was legal but a GIFT: the delivery always lands,
-    #     the Job pays via "it stays done even if the deed didn't survive the Play", and
-    #     the rival just pockets 6 Rum without a decision. Requiring Control forces
-    #     Mobsters into the District, which forces the Standoff. The rival now CHOOSES.
-    #   - It is opportunistic, which is the play pattern the deck wants: you watch for
-    #     the moment their Dock is thinly garrisoned and hit it. High risk, self-timed.
-    #   - Taking Control means the barrels are yours at the checkpoint, so the "any left
-    #     in a rival's District become theirs" clause never bites. No rules friction.
-    # 6+ -> 4+ because the card now buys a firefight as well as a haul.
-    # NOT Staten-specific, and Nick flagged exactly this ("or elsewhere if SI is
-    # overrepresented"): setup RETURNS STATEN'S DEED TO THE BOX and nobody starts there,
-    # so "a rival-Controlled Staten Dock" would depend on a rival having first bothered
-    # to go take one -- rare, and it would make the card dead for long stretches. Any
-    # Dock keeps it live; the origin clause already guarantees the Staten leg.
-    # AUDIT 2026-10-10: DEMOTED TO 3. It Seizes a Dock, and every mainland Dock is in a
-    # bounty Borough, so one Move could pay it with Over the Top (Throggs Neck), The Toll
-    # Booth Trap (Whitestone, Jamaica), The Butcher's Ledger (Canarsie) or Bloody Sunday (the
-    # Manhattan Docks): two 5s. A Fold pays both at Throggs Neck and the Manhattan Docks. The
-    # old overlap model kept Move and Open Fire apart and never saw it. "Seize" says "into a
-    # Dock a rival Controls, and take Control of it" in one word.
-    # SETS PASS 2026-10-11 (Nick: the barrels don't Seize anything, the fight does). Same trigger,
-    # worded as the Move and then the Seize.
-    ("The Smuggler&rsquo;s Run", "Quiet Drop.jpg", "Move",
-     "Move <b>4+ Rum</b> from <b>Staten Island</b> into a rival&rsquo;s <b>Dock</b>, and Seize it.",
-     "Nobody watches Staten Island. Every Dock touches it."),
     # "and no Safehouse" is the guard that closes handoff §3 cluster 3 for good.
     # The Eviction REQUIRES a rival Safehouse; this now FORBIDS one, so the two
     # can never ride the same Seize. Without it, one Open Fire on Richmond Hill
@@ -419,34 +390,69 @@ THREES = [
     ("The Copper Heist", "Copper Heist.jpg", "Open Fire",
      "Seize a District with a <b>Pressure 5 Still</b>.",
      "The good boilers run hot. So do the men who own them."),
-    # THE BRIDGE SET (VARIETY PASS, 2026-10-13). Hell's Highway's wording on the board's other two
-    # Bridges, so each 3 sends a Boss over the water with a Rum run behind him and points the table at
-    # both ends. The Williamsburg Bridge stays The Milk Run's, a 1, since its far end is a police-locked
-    # room. The Queensboro joins two empty bars (East Harlem and Astoria), next door to three home
-    # Wards; the Brooklyn Bridge joins Manhattan's starting Dock (the Bowery) to Brooklyn's starting
-    # bar (Red Hook), so it ends in a fight unless the far side Folds. A Boss on a bridge is also The
-    # Toll Booth Trap's target.
-    # The One-Way Ride keeps its name and art from the Boss set (a tommy gun from a running car), and
-    # the Queensboro is the bridge Gatsby drives into Manhattan over: a nod, not a lesson.
-    ("The One-Way Ride", "Gatsby.jpg", "Move",
-     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Queensboro Bridge</b>.",
-     "Get in the car. Nobody asks where it is going."),
-    # Named for the oldest con in the city: George C. Parker sold the Brooklyn Bridge to the newly
-    # landed, more than once. Art: a deal at night, a wad of cash, a hotel bar behind.
-    ("A Bridge to Sell", "Night Mayor.jpg", "Move",
-     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Brooklyn Bridge</b>.",
-     "He sold it to a rube on Tuesday. Tonight he is using it."),
-    # BACK (VARIETY PASS, 2026-10-13). Round 1 kept it ("an assault on the most defended block a rival
-    # has"); round 2 cut it, unrated, only to fit twelve 3s, and a refill of the 3s is the reason it
-    # returns. Since the Fold became a Seize a Fold pays it, as it always did. It meets the body counts
-    # and The Toll Booth Trap on a home Ward (a 5 and this, or the allowed pair and this: 13, stake 8),
-    # and The Copper Heist on a starting bar with a Safehouse; and it is the first half of Union Dues.
-    ("The Eviction", "Crimson Coup.jpg", "Open Fire",
-     "Take over a rival&rsquo;s <b>Safehouse</b>.",
-     "Nice place. He won&rsquo;t be needing it."),
+    # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
+    # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
+    # Dues" restores an old-deck name and its art (a queue of working men, a fist
+    # of cash): the mob ran the locals, so taking a Ward's union is how you own
+    # the men on that block.
+    # The hard half, and Safehouse-only Recruit is what makes it hard: hiring
+    # happens ONLY at your Safehouse, so this forces you to Secure your Safehouse
+    # out of your own power base and into one specific district, that Borough's
+    # Ward. That is the prep, and it is the friction the Recruit change created.
+    # 5+ here, 4+ on Union Dues. The pair is separated by the DEED, which is
+    # perfectly disjoint, so the magnitudes only have to keep the two feeling
+    # different. Was 6+, dropped to 5+ (Nick, 2026-07-19) to trim the hidden SWEEP
+    # TAX: your home Ward already holds a Boss and 2 Runners, so hiring 6 put 9
+    # Mobsters on one block and the Reckoning Sweep culled 4 of them. At 5 it culls
+    # 3, and the bill drops from $2,400 to $2,000. The tax cannot be removed
+    # entirely without making the card trivial -- disperse with a Move before the
+    # Reckoning, or pay it. NOTE the Sicilians are Untouchable and pay neither.
+    # Union Dues is LATER (cash flows, Runner slots don't), so 4+ there respects
+    # the 15-RUNNER CAP, which is the real constraint mid-game, not money.
+    # "in one Play" added to match the model (and Tenement Army): without it the
+    # Runners could be banked across several days, far easier than its Stake 3.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
+    # AUDIT 2026-10-10: PROMOTED TO 5, and re-objectived. The Borough count that replaced
+    # the Deed had a hole on a tie, and the Sweep tax above is dead (no Sweep since v0.9.8).
+    # It swaps tiers with The Smuggler's Run, which could pay beside a bounty 5 on one Move.
+    # A Recruit never shares a Play with a fight, so this 5 cannot break the hard rule. To
+    # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
+    # wait for him to leave it. Every rival sees it coming and garrisons home.
+    # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
+    # VARIETY PASS 2026-10-13: BACK UP TO 5, the third 5 Nick asked for. It went down only so the 5s
+    # could be murder alone, and they no longer are. Still the deck's best-scoring 3 (hard and
+    # contested), and a Recruit never shares a Play with a fight, so it meets no other 5.
+    # RETIER 2026-10-14: DOWN TO 2. The bots finished it 20 times in 25, and the opus-vs-bots-3
+    # game was won by it in two Plays (a lone Runner Folded the Ward, the Safehouse was taken over, then
+    # the hire). Still a reason to garrison your home Ward.
+    ("Union Dues", "Union Dues.jpg", "Recruit",
+     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
+     "They line up at dawn. You decide who works."),
+    # "of Rum" is redundant with the rules (High Society pours nothing else) but
+    # says the quiet part out loud on the card: 8 barrels means the whole Trade
+    # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.
+    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
+    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
+    # record the Deed-era reasoning.
+    # AUDIT 2026-10-10: "of Rum" and "a single" cut; the room buys Rum only and an Unload is
+    # always at one bar. "in one Play" is what the count needed.
+    # SETS PASS 2026-10-11: DOWN TO 3 (Nick: $4,000 and the Kickbacks as well as 5 Respect was too
+    # much of a win/win). Text unchanged.
+    # VARIETY PASS 2026-10-13 (Nick): BACK UP TO 5, in your home Borough's room, "to stop a player
+    # completing this and taking the crown in the same day". No boss crowns at home, so the pour can't
+    # be made in the room he crowns in: a same-Day crown now needs two rooms held, the home room and an
+    # away one. It doesn't rule one out. Every seat has one home room, so the card is every seat's
+    # friendly 5 alike. The Kickbacks that made it "a win/win" at 5 on 2026-10-11 are still paid.
+    # RETIER 2026-10-14: DOWN TO 2, at 5+ Rum (Nick likes the card; fewer barrels to drop its tier).
+    # Five is where the Greed Tax starts, so the pour always draws Heat: a cost beside the Kickbacks.
+    ("Opening Night", "Jimmy.jpg", "Unload",
+     "Unload <b>5+ Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.",
+     "The band plays till four. Nobody asks a thing."),
 ]
 
-FIVES = [
+THREES = [
     # THE MURDER SETS (Nick, 2026-10-11, round 2; Seizes, then the Variety Pass, 2026-10-13, below). Two sets of four, one
     # card per mainland Borough each: a body count ("Kill 5+ rival Runners in X") and a Boss ("Kill
     # a rival Boss in X"). Each seat is hunted by two 5s in its own Borough.
@@ -497,18 +503,87 @@ FIVES = [
     # Butcher's Ledger, Nick's favourite theme for it, stays as the one body count, anywhere. It still
     # meets The Toll Booth Trap on a fight that kills the Boss and takes a District held by 5+
     # Mobsters (the one allowed pair); a Fold pays the body count alone.
+    # RETIER 2026-10-14: 4+, not 5+ (Nick). Nobody stacks five, so it sat in the Market; a Boss and
+    # three is what a dug-in room or home garrison looks like.
     ("The Butcher&rsquo;s Ledger", "Butchers Ledger.jpg", "Open Fire",
-     "Seize a District from <b>5+ rival Mobsters</b>.",
+     "Seize a District from <b>4+ rival Mobsters</b>.",
      "Every name in it is crossed out but one."),
+    # Moonshine -> RUM (Nick). A setup hedge: Rum only exists via Trade at a Dock you
+    # Control, and Staten's own boilers are hopeless (Westerleigh Pressure 1,
+    # Tottenville 3), so the moonshine must be hauled IN, Traded, then run out.
+    # Roughly doubles the setup. Bonus: now mutually exclusive with Gin Pipeline
+    # (Moonshine), which it used to be able to co-fire with.
+    # COUNTERPLAY PASS (2026-08-04). SOLITAIRE FAILURE at 5 Respect: diff 8, engagement 2
+    # -- the lowest-difficulty 5 once counterplay is scored, and unblockable BY DESIGN
+    # ("nobody watches Staten Island" is the card's own flavour line). A long private
+    # haul is not a headline job.
+    # ⚠ "to a Dock a rival Controls" WAS TRIED AND IS IMPOSSIBLE -- the THIRD card this
+    # pass to die on its own Play's rules, and the subtlest. A Move into rival turf can
+    # never END with your barrels sitting in their District:
+    #   FOLD      -> "The Invader immediately claims Control" -- no longer rival-held.
+    #   AMBUSH    -> win and you take Control; lose and "any [barrels] left in a rival's
+    #                District become theirs" -- they are no longer YOUR barrels.
+    #   HOLD FIRE -> "You cannot end your Play Pinned"; you Open Fire (as above) or
+    #                Advance to a Connected SAFE District, carrying the cargo back out.
+    # No branch satisfies the objective at the checkpoint. LESSON: for a card that
+    # delivers goods, "into rival turf" is never a legal destination -- combat resolution
+    # always changes either who holds the District or who owns the barrels.
+    #
+    # THE FIX IS NICK'S (2026-08-04): deliver AND take the District in the same Play.
+    # "Move 4+ Rum into a rival-Controlled Dock, and take Control of the District."
+    # Why this is better than the three alternatives I drafted:
+    #   - It closes the barrels-alone hole by construction. Nick's correction: barrels
+    #     CAN travel alone ("Your MOBSTERS are Pinned" -- send none, nothing to Pin), so
+    #     the plain rival-turf version was legal but a GIFT: the delivery always lands,
+    #     the Job pays via "it stays done even if the deed didn't survive the Play", and
+    #     the rival just pockets 6 Rum without a decision. Requiring Control forces
+    #     Mobsters into the District, which forces the Standoff. The rival now CHOOSES.
+    #   - It is opportunistic, which is the play pattern the deck wants: you watch for
+    #     the moment their Dock is thinly garrisoned and hit it. High risk, self-timed.
+    #   - Taking Control means the barrels are yours at the checkpoint, so the "any left
+    #     in a rival's District become theirs" clause never bites. No rules friction.
+    # 6+ -> 4+ because the card now buys a firefight as well as a haul.
+    # NOT Staten-specific, and Nick flagged exactly this ("or elsewhere if SI is
+    # overrepresented"): setup RETURNS STATEN'S DEED TO THE BOX and nobody starts there,
+    # so "a rival-Controlled Staten Dock" would depend on a rival having first bothered
+    # to go take one -- rare, and it would make the card dead for long stretches. Any
+    # Dock keeps it live; the origin clause already guarantees the Staten leg.
+    # AUDIT 2026-10-10: DEMOTED TO 3. It Seizes a Dock, and every mainland Dock is in a
+    # bounty Borough, so one Move could pay it with Over the Top (Throggs Neck), The Toll
+    # Booth Trap (Whitestone, Jamaica), The Butcher's Ledger (Canarsie) or Bloody Sunday (the
+    # Manhattan Docks): two 5s. A Fold pays both at Throggs Neck and the Manhattan Docks. The
+    # old overlap model kept Move and Open Fire apart and never saw it. "Seize" says "into a
+    # Dock a rival Controls, and take Control of it" in one word.
+    # SETS PASS 2026-10-11 (Nick: the barrels don't Seize anything, the fight does). Same trigger,
+    # worded as the Move and then the Seize.
+    # RETIER 2026-10-14: UP TO 3 (Nick), one of the two 2s promoted to keep eight 3s. Hard and
+    # contested. It can now pay beside The Butcher's Ledger or The Toll Booth Trap on one Play: the
+    # audit reports top-tier pairs as a watch item since the retier, not a failure.
+    ("The Smuggler&rsquo;s Run", "Quiet Drop.jpg", "Move",
+     "Move <b>4+ Rum</b> from <b>Staten Island</b> into a rival&rsquo;s <b>Dock</b>, and Seize it.",
+     "Nobody watches Staten Island. Every Dock touches it."),
+    # BACK (VARIETY PASS, 2026-10-13). Round 1 kept it ("an assault on the most defended block a rival
+    # has"); round 2 cut it, unrated, only to fit twelve 3s, and a refill of the 3s is the reason it
+    # returns. Since the Fold became a Seize a Fold pays it, as it always did. It meets the body counts
+    # and The Toll Booth Trap on a home Ward (a 5 and this, or the allowed pair and this: 13, stake 8),
+    # and The Copper Heist on a starting bar with a Safehouse; and it is the first half of Union Dues.
+    # RETIER 2026-10-14: UP TO 3 (Nick), the other promotion. It meets the Ledger, the Trap and
+    # High Roller on a fight; Union Dues, now a 2, is still its second half.
+    ("The Eviction", "Crimson Coup.jpg", "Open Fire",
+     "Take over a rival&rsquo;s <b>Safehouse</b>.",
+     "Nice place. He won&rsquo;t be needing it."),
+    # NEW 2026-10-14 (Nick's parked "Seize a Pressure 6 Still"). The name and art are the old High
+    # Roller's (a pistol on the big table). It pays for taking a crown room off the boss holding it,
+    # and makes no money. Taken last, it can bring the Respect and walk the Boss in on one Play; Take
+    # the Crown is still a Play of its own, so the table gets a round to answer, and the holder has
+    # to stand rather than Fold (Nick: "it would create a final battle"). It meets the Ledger, the
+    # Trap and The Eviction in a room. It breaks a rival's Extort set too.
+    ("High Roller", "High Roller.jpg", "Open Fire",
+     "Seize a <b>High Society Venue</b>.",
+     "Everyone at the big table brought a stake. He brought a pistol."),
     # THE BREW 5s (Nick, 2026-10-14): three cards for the brew engine, in place of the three cut body
     # counts, after Extort fell to $100 a District. Each has a verb no other 5 has (Trade, Unload of
     # Moonshine, Secure), so none can pay beside another 5 on one Play.
-    # The Real McCoy: Bill McCoy ran Rum Row off the coast, and his whisky was "the real McCoy".
-    # Eight Moonshine at one Dock is a stockpile the table sees coming, and a Raid target. It meets
-    # Rum Row on a Staten Island Dock and The Dutchman's Deal at West Side (1s).
-    ("The Real McCoy", "Rum Row 3.jpg", "Trade",
-     "Trade <b>8+ Moonshine</b> at a <b>Dock</b>.",
-     "Straight off Rum Row, and nobody cut it."),
     # The Noble Experiment: Hoover's name for Prohibition. Outside your home Borough so it is never a
     # home chore (every seat starts on its home bar), and eight barrels always draw the Greed Tax, so
     # the pour is loud. Moonshine, so it never meets Opening Night (Rum, at home); it meets a bar 1.
@@ -555,65 +630,10 @@ FIVES = [
     ("The Five Families", "Scheme.jpg", "Extort",
      "Extort a District in <b>all five Boroughs</b>.",
      "Not the richest table in town. Just the widest."),
-    # "of Rum" is redundant with the rules (High Society pours nothing else) but
-    # says the quiet part out loud on the card: 8 barrels means the whole Trade
-    # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.
-    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
-    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
-    # record the Deed-era reasoning.
-    # AUDIT 2026-10-10: "of Rum" and "a single" cut; the room buys Rum only and an Unload is
-    # always at one bar. "in one Play" is what the count needed.
-    # SETS PASS 2026-10-11: DOWN TO 3 (Nick: $4,000 and the Kickbacks as well as 5 Respect was too
-    # much of a win/win). Text unchanged.
-    # VARIETY PASS 2026-10-13 (Nick): BACK UP TO 5, in your home Borough's room, "to stop a player
-    # completing this and taking the crown in the same day". No boss crowns at home, so the pour can't
-    # be made in the room he crowns in: a same-Day crown now needs two rooms held, the home room and an
-    # away one. It doesn't rule one out. Every seat has one home room, so the card is every seat's
-    # friendly 5 alike. The Kickbacks that made it "a win/win" at 5 on 2026-10-11 are still paid.
-    ("Opening Night", "Jimmy.jpg", "Unload",
-     "Unload <b>8+ Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.",
-     "The band plays till four. Nobody asks a thing."),
-    # Renamed off "Five Points Hustle": Five Points IS Manhattan's Ward, so for a
-    # Manhattan player the old name named the one Ward the card EXCLUDES. "Union
-    # Dues" restores an old-deck name and its art (a queue of working men, a fist
-    # of cash): the mob ran the locals, so taking a Ward's union is how you own
-    # the men on that block.
-    # The hard half, and Safehouse-only Recruit is what makes it hard: hiring
-    # happens ONLY at your Safehouse, so this forces you to Secure your Safehouse
-    # out of your own power base and into one specific district, that Borough's
-    # Ward. That is the prep, and it is the friction the Recruit change created.
-    # 5+ here, 4+ on Union Dues. The pair is separated by the DEED, which is
-    # perfectly disjoint, so the magnitudes only have to keep the two feeling
-    # different. Was 6+, dropped to 5+ (Nick, 2026-07-19) to trim the hidden SWEEP
-    # TAX: your home Ward already holds a Boss and 2 Runners, so hiring 6 put 9
-    # Mobsters on one block and the Reckoning Sweep culled 4 of them. At 5 it culls
-    # 3, and the bill drops from $2,400 to $2,000. The tax cannot be removed
-    # entirely without making the card trivial -- disperse with a Move before the
-    # Reckoning, or pay it. NOTE the Sicilians are Untouchable and pay neither.
-    # Union Dues is LATER (cash flows, Runner slots don't), so 4+ there respects
-    # the 15-RUNNER CAP, which is the real constraint mid-game, not money.
-    # "in one Play" added to match the model (and Tenement Army): without it the
-    # Runners could be banked across several days, far easier than its Stake 3.
-    # FOLDED BACK 2026-09-23 from the printed deck, which moved on when v0.9.7 cut the
-    # Borough Deeds and v0.9.8 fixed High Society to the four #7 Venues. The notes above
-    # record the Deed-era reasoning.
-    # AUDIT 2026-10-10: PROMOTED TO 5, and re-objectived. The Borough count that replaced
-    # the Deed had a hole on a tie, and the Sweep tax above is dead (no Sweep since v0.9.8).
-    # It swaps tiers with The Smuggler's Run, which could pay beside a bounty 5 on one Move.
-    # A Recruit never shares a Play with a fight, so this 5 cannot break the hard rule. To
-    # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
-    # wait for him to leave it. Every rival sees it coming and garrisons home.
-    # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
-    # VARIETY PASS 2026-10-13: BACK UP TO 5, the third 5 Nick asked for. It went down only so the 5s
-    # could be murder alone, and they no longer are. Still the deck's best-scoring 3 (hard and
-    # contested), and a Recruit never shares a Play with a fight, so it meets no other 5.
-    ("Union Dues", "Union Dues.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
-     "They line up at dawn. You decide who works."),
 ]
 
-PIPS = {1: 1, 3: 2, 5: 3}
-CLS = {1: "gig", 3: "racket", 5: "score"}
+PIPS = {1: 1, 2: 2, 3: 3}
+CLS = {1: "gig", 2: "racket", 3: "score"}
 
 # Back reads "Job", singular and unbroken: it is the back of ONE card, and the
 # two-line "The/Jobs" set the title band taller than the Rat and Marks backs in
@@ -666,7 +686,7 @@ def blocks(cards, respect):
     return "\n".join(out)
 
 
-total = len(ONES) + len(THREES) + len(FIVES)
+total = len(ONES) + len(TWOS) + len(THREES)
 
 # Resolve against the REPO ROOT (this script's parent), not the shell's cwd. A bare
 # relative path made the integrity check depend on where you launched from: it threw
@@ -689,7 +709,7 @@ body = f'''<body>
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
   <div class="masthead-title">The Jobs Deck</div>
-  <div class="masthead-sub">{VERSION} &middot; Complete Deck &middot; {total} Cards &middot; {len(ONES)} / {len(THREES)} / {len(FIVES)}</div>
+  <div class="masthead-sub">{VERSION} &middot; Complete Deck &middot; {total} Cards &middot; {len(ONES)} / {len(TWOS)} / {len(THREES)}</div>
   <p class="masthead-note">
     Every Job is an <b>event</b>, not a board state: a verb, an object, and a moment.
     The Play is the unit: at the end of each of your own Plays, check whether that Play did the thing.
@@ -700,10 +720,10 @@ body = f'''<body>
 
 {tier_head("1 RESPECT", f"Stake 1 &middot; an evening&rsquo;s work, little setup &middot; {len(ONES)} cards")}
 {blocks(ONES, 1)}
-{tier_head("3 RESPECT", f"Stake 2 &middot; one Play, real turf behind it &middot; {len(THREES)} cards")}
+{tier_head("2 RESPECT", f"Stake 2 &middot; one Play, real turf behind it &middot; {len(TWOS)} cards")}
+{blocks(TWOS, 2)}
+{tier_head("3 RESPECT", f"Stake 3 &middot; one Play, and a campaign to earn it &middot; {len(THREES)} cards")}
 {blocks(THREES, 3)}
-{tier_head("5 RESPECT", f"Stake 3 &middot; one Play, and a campaign to earn it &middot; {len(FIVES)} cards")}
-{blocks(FIVES, 5)}
 
 </body>'''
 
@@ -740,5 +760,5 @@ else:
     open(path, 'w', encoding='utf-8').write(new)
     print(f"WROTE {path}")
 
-print(f"ones {len(ONES)}  threes {len(THREES)}  fives {len(FIVES)}  total {total}")
+print(f"ones {len(ONES)}  twos {len(TWOS)}  threes {len(THREES)}  total {total}")
 print(f"print pages: {total // 4 * 2}")

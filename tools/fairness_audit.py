@@ -85,42 +85,43 @@ CARDS = [
     ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),
     ('Rum Row',               1, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Insurance Job',     1, 'Rat',       {'any'},                      {}),
-    # --- 3 Respect: the Extort set, one per seat, each its seat's friendly 3 ---
+    # --- 2 Respect: the Extort set, one per seat, each its seat's friendly 2 ---
     # 'press5': each set holds its seat's starting bar (Pressure 5) and its room (6).
-    ('Empire State',          3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {M: 'friendly'}),
-    ('The Big Squeeze',       3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BX: 'friendly'}),
-    ('King of Queens',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {Q: 'friendly'}),
-    ('The Black Hand',        3, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BK: 'friendly'}),
-    ('The Five Families',     5, 'Extort',    {'any'},
+    ('Empire State',          2, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {M: 'friendly'}),
+    ('The Big Squeeze',       2, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BX: 'friendly'}),
+    ('King of Queens',        2, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {Q: 'friendly'}),
+    ('The Black Hand',        2, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BK: 'friendly'}),
+    ('The Five Families',     3, 'Extort',    {'any'},
      {M: 'neutral', BX: 'neutral', Q: 'neutral', BK: 'neutral', ST: 'neutral'}),
-    ('Cuban Prince',          3, 'Extort',    {'dock'},                     {}),
-    # --- 3 Respect: singles ---
+    ('Cuban Prince',          2, 'Extort',    {'dock'},                     {}),
+    # --- 2 Respect: singles ---
     # The Hell Gate runs from Hunts Point (the Bronx's home Ward) to Astoria: the Bronx
     # starts on its near end with its Boss; anyone else crosses into the Bronx garrison.
-    ("Hell's Highway",        3, 'Move',      {'any'},                      {BX: 'friendly'}),
+    ("Hell's Highway",        2, 'Move',      {'any'},                      {BX: 'friendly'}),
     # Astoria, Queens' empty bar, three Plays from Whitestone.
-    ('Last One Standing',     3, 'Secure',    {'speakeasy'},                {Q: 'friendly'}),
-    ("The Smuggler's Run",    3, 'Move',      {'dock'},                     {ST: 'neutral'}),
+    ('Last One Standing',     2, 'Secure',    {'speakeasy'},                {Q: 'friendly'}),
     # The five Pressure 5 Stills: every seat's starting bar and Stapleton, so it is
     # aimed at every seat alike.
-    ('The Copper Heist',      3, 'Open Fire', {'press5'},                   {}),
+    ('The Copper Heist',      2, 'Open Fire', {'press5'},                   {}),
     # The bridge set (2026-10-13). The Queensboro's ends are empty bars: East Harlem beside the
     # Manhattan and Bronx home Wards, Astoria beside three Queens starts and the Bronx's Ward. The Brooklyn
     # Bridge joins Manhattan's starting Dock to Brooklyn's starting bar.
-    ('The One-Way Ride',      3, 'Move',      {'speakeasy'},                {M: 'friendly', BX: 'friendly', Q: 'friendly'}),
-    ('A Bridge to Sell',      3, 'Move',      {'dock', 'speakeasy', 'press5'}, {M: 'friendly', BK: 'friendly'}),
+    ('The One-Way Ride',      2, 'Move',      {'speakeasy'},                {M: 'friendly', BX: 'friendly', Q: 'friendly'}),
+    ('A Bridge to Sell',      2, 'Move',      {'dock', 'speakeasy', 'press5'}, {M: 'friendly', BK: 'friendly'}),
+    # Each seat's own room, so every seat's friendly 2 alike.
+    ('Opening Night',         2, 'Unload',    {'highSociety', 'speakeasy'}, {}),
+    ('Union Dues',            2, 'Recruit',   {'ward'},                     {}),
+    # --- 3 Respect (the top tier since the 1/2/3 retier, 2026-10-14): aimed at every seat alike ---
+    ("The Butcher's Ledger",  3, 'Open Fire', {'any'},                      {}),
+    ("The Smuggler's Run",    3, 'Move',      {'dock'},                     {ST: 'neutral'}),
     # A rival's Safehouse: aimed at every seat alike.
     ('The Eviction',          3, 'Open Fire', {'ward'},                     {}),
-    # --- 5 Respect: aimed at every seat alike since 2026-10-14 (one body count, any Borough) ---
-    ("The Butcher's Ledger",  5, 'Open Fire', {'any'},                      {}),
-    ('The Real McCoy',        5, 'Trade',     {'dock'},                     {}),
+    # Any of the four rooms, from whoever holds it.
+    ('High Roller',           3, 'Open Fire', {'highSociety', 'speakeasy'}, {}),
     # Any ordinary bar outside your home Borough: every seat's away bars alike.
-    ('The Noble Experiment',  5, 'Unload',    {'speakeasy'},                {}),
-    ('The Warehouse',         5, 'Secure',    {'any'},                      {}),
-    ('The Toll Booth Trap',   5, 'Open Fire', {'any'},                      {}),
-    # Each seat's own room, so every seat's friendly 5 alike.
-    ('Opening Night',         5, 'Unload',    {'highSociety', 'speakeasy'}, {}),
-    ('Union Dues',            5, 'Recruit',   {'ward'},                     {}),
+    ('The Noble Experiment',  3, 'Unload',    {'speakeasy'},                {}),
+    ('The Warehouse',         3, 'Secure',    {'any'},                      {}),
+    ('The Toll Booth Trap',   3, 'Open Fire', {'any'},                      {}),
 ]
 
 TYPE_COUNT = {
