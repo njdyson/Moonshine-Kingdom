@@ -64,9 +64,43 @@ are partly the bots. Opus did finish a Toll Booth Trap.
   Nick: a feature, "it would create a final battle".
 - **Seat balance**: weighted spread 3 (Manhattan +10, the Bronx +9, Queens +8, Brooklyn +7), from 4.
 
+### Bots on the new deck
+
+**Crown day**, mk-online `scripts/cash-sources.ts`, 16 games at 4 players to Day 110, this branch against
+`main` on the same seeds. Every game crowned on both.
+
+| | Crown days | Median |
+| --- | --- | --- |
+| `main` (1/3/5) | 23 26 29 30 34 34 35 39 39 39 41 45 46 48 56 60 | 39 |
+| 1/2/3 | 34 35 39 41 43 47 53 53 55 56 59 60 60 62 73 78 | 54 |
+
+So for the bots the easier Jobs do not make up for the smaller pay: the game runs about two weeks longer.
+The fastest 1/2/3 game crowned on Day 34, the median old game's pace. The bots lean harder on Bribes to
+close: the Mayor was bought 52 times (34 on `main`, median Day 35 against 30) and the Judge 61 (48).
+Cash per game rose about a third, only because the games ran longer. Bot limits apply (they never plan
+the bridge set or The Smuggler's Run), but those limits were the same on `main`.
+
+**Completion** (`jobdiag.ts`, 24 games to Day 90, completed / claimed): 462 Jobs in all (19.3 a game).
+
+| Card | Done / claimed | Card | Done / claimed |
+| --- | --- | --- | --- |
+| Union Dues (2) | 22 / 30 | High Roller (3) | 16 / 43 |
+| Cuban Prince (2) | 19 / 36 | The Noble Experiment (3) | 15 / 40 |
+| The Extort set (2) | 8 to 13 / 31 to 42 | The Warehouse (3) | 15 / 49 |
+| Opening Night (2) | 8 / 51 | The Eviction (3) | 13 / 55 |
+| The Copper Heist (2) | 7 / 49 | The Five Families (3) | 8 / 50 |
+| The bridge set, Last One Standing (2) | 2 to 4 / ~53 | The Toll Booth Trap (3) | 7 / 62 |
+| The bar 1s | 10 to 18 / 32 to 50 | The Butcher's Ledger (3) | 1 / 61 |
+| | | The Smuggler's Run (3) | 0 / 50 |
+
+Union Dues is still the easiest card above a 1. Opening Night now completes (8, from 0). The Ledger at 4+
+still almost never does, and High Roller completed 16 times without the bots ever planning it: they
+take rooms they were fighting over anyway, which reads as a windfall for the bots at least.
+
 ### Watch in playtest
 
-1. Game length at 20 with smaller Jobs. Nick's bet is that easier Jobs make up the difference.
+1. Game length at 20 with smaller Jobs. Nick's bet was that easier Jobs make up the difference; the bots
+   say they don't (median crown Day 39 to 54, above). The levers: the bar, more 3s, or easier 3s.
 2. The Warehouse and The Five Families score "easy" for the top tier on `difficulty_audit.py`, yet the
    bots almost never finish The Five Families.
 3. Folds against the Ledger: a Fold now hands over 3, not 5.
