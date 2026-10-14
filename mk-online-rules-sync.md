@@ -922,6 +922,25 @@ Heat penalty only at 5+ Districts.
 `scripts/heat-five-check.ts` runs Extorts of 4 and 5 Districts and Unloads of 4 and 5 barrels (the 4s
 drew Heat before the change).
 
+## 35. Extort at $100 a District, any number a Day; Collect is gone (2026-10-14, Nick)
+
+After the opus-vipers playtest showed Extort paying 65 to 71% of the winner's cash. Nick: "the game
+should rely on the brew engine and the extort path should be a secondary source." The numbers are in
+CLAUDE.md, *Extort at $100, and no Collect*.
+
+| Rule | Was | Now |
+| --- | --- | --- |
+| Extort's pay | $200 per District you Control | **$100** per District you Control |
+| Extort's limit | once a Day | none: as often as the Ledger pays for it |
+| Collect | Standard Play, 1 Influence, $100 | **cut** |
+
+Extort's Heat is unchanged (one marker at 5+ Districts), and so is Lay Low's $100 per unspent marker.
+
+**Ported the same day** (mk-online PR #10, 43b1302, branch `claude/project-thread-szf9e2`):
+`EXTORT_PER_DISTRICT` is 100, `extortedThisDay` is gone, the `collect` move is gone (its $100 is
+`LAY_LOW_CASH`), and the bots' tempo-hold (§8.4, now `stayOutScore`) lifts a quiet Play instead of
+Collecting. Strings: the Plays panel, the play reference, the harness's options and RULES-AI.md.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -1048,3 +1067,4 @@ drew Heat before the change).
 - [x] **The Jobs deck in sets: 36 cards, every 5 a killing** (§30; supersedes §28's card list)
 - [x] **Respect is the only score: crown at 20, Bribe cards, Mark -2, Rat -3** (§31; the Blood Oath's 40 waits on the variant, which mk-online doesn't have)
 - [x] **Extort draws Heat only at 5+ Districts; the Greed Tax at 5+ barrels** (§34)
+- [x] **Extort at $100 per District, any number a Day; Collect cut** (§35)
