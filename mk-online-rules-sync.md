@@ -960,6 +960,29 @@ barrels in the District a Safehouse is Secured in), bot plans, `scripts/jobs-che
 above. The bots plan The Real McCoy and The Noble Experiment as staged sales and The Warehouse as a
 pile stacked out of a Squad's reach, then a Secure onto it.
 
+## 37. Jobs pay 1, 2 or 3 (2026-10-14, Nick)
+
+`jobs-setup-handoff.md`, Round 6. Still 36 cards, 16 / 12 / 8. Every Job's Respect equals its Stake;
+the crown stays at 20.
+
+| Card | Was | Now |
+| --- | --- | --- |
+| The eight bar 1s | Unload 4+ barrels at <bar> | Unload **5+** barrels at <bar> |
+| Every 3 (old scale) | 3 Respect, Stake 2 | **2** Respect, Stake 2 |
+| The Smuggler's Run, The Eviction | 3, Stake 2 | **3**, Stake **3** (promoted) |
+| Union Dues | 5, Stake 3 | **2**, Stake **2** |
+| Opening Night | 5: Unload 8+ Rum at your home room | **2**: Unload **5+** Rum at your home room |
+| The Butcher's Ledger | 5: from 5+ rival Mobsters | **3**: from **4+** rival Mobsters |
+| The Toll Booth Trap, The Five Families, The Noble Experiment, The Warehouse | 5, Stake 3 | **3**, Stake 3 |
+| The Real McCoy | 5 | cut |
+| **High Roller** (new) | | **3**, Stake 3: "Seize a High Society Venue." |
+
+"Never two 5s on one Play" is retired: a Play can only pay what its Jobs staked.
+
+**To port:** the cards in `jobs.ts`, the evaluators (the 5+ counts, 4+ defenders, a Seize of a High
+Society Venue), bot plans and any Respect thresholds that assumed a 5, the Market's setup split (the
+3s shuffled in after the opening Market), `scripts/jobs-check.ts` and RULES-AI.md.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -1087,3 +1110,4 @@ pile stacked out of a Squad's reach, then a Secure onto it.
 - [x] **Respect is the only score: crown at 20, Bribe cards, Mark -2, Rat -3** (§31; the Blood Oath's 40 waits on the variant, which mk-online doesn't have)
 - [x] **Extort draws Heat only at 5+ Districts; the Greed Tax at 5+ barrels** (§34)
 - [x] **Extort at $100 per District, any number a Day; Collect cut** (§35)
+- [ ] **Jobs pay 1, 2 or 3; High Roller in, The Real McCoy out** (§37)
