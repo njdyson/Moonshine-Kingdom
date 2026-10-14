@@ -32,9 +32,10 @@ ONES = [
     # Every seat starts on one of its Borough's two (the Tenderloin, Fordham, Flushing, Red Hook)
     # and is one Move from the other (East Harlem, Belmont, Astoria, Coney Island), so the set is
     # two friendly 1s per seat by construction. The High Society Venues are left out: they buy Rum
-    # only and are Opening Night's. Four or more barrels is the Greed Tax, so every one of these is
-    # a noisy sale. The set replaces The Grand Tour, whose "East River" invited an argument about
-    # Coney Island (Nick's round-1 note).
+    # only and are Opening Night's. Four barrels was the Greed Tax when the set was drawn, so every
+    # one was a noisy sale; since 2026-10-14 the Tax starts at five and a 4-barrel sale is quiet.
+    # The set replaces The Grand Tour, whose "East River" invited an argument about Coney Island
+    # (Nick's round-1 note).
     # COUNTERPLAY PASS (2026-08-04). Was "a $300 Speakeasy" = 8 venues, BLOCK 1, and it
     # was ALSO the deck's widest flagged overlap: Last Call + Angel's Share co-fired
     # across FIVE districts (breadth_audit). Naming one venue each fixes the engagement
@@ -261,7 +262,8 @@ THREES = [
     #   card is dead until a Raid moves the Squad, and dead again whenever the Squad stands
     #   on any of the three. The holder steers the Squad (Follow the Smoke, then the Big Bust:
     #   be the freshest noise in reach, with the most barrels where you can afford the cops),
-    #   then holds three Districts at once and spends a Power Play that always draws Heat.
+    #   then holds three Districts at once and spends a Power Play, loud at 5+ Districts (it
+    #   always drew Heat until 2026-10-14).
     #   Rivals can break any of the three, or plant barrels to pull the Squad back onto one.
     #   The home seat starts holding one of the three and borders the other two, so the card
     #   is his friendly; for anyone else it is an invasion that ends next to a crown room.

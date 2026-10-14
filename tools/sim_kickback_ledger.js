@@ -12,7 +12,8 @@ function run(engine) {
   free += L;
   return { free, delta: free - 5, cash, heat, lost };
 }
-const unload = (n, liquor, hs) => ({ cost: 2, k: hs ? n : 0, cash: n * (liquor === 'rum' ? 500 : 300), heat: n >= 4 });
+// The Greed Tax bites at 5+ barrels (2026-10-14; it was 4+).
+const unload = (n, liquor, hs) => ({ cost: 2, k: hs ? n : 0, cash: n * (liquor === 'rum' ? 500 : 300), heat: n >= 5 });
 const move = { cost: 1 }, trade = { cost: 1 };
 const S = {
   'CURRENT  2 stacks, Unload Moonshine in place':      [unload(4,'m',1), unload(4,'m',1)],

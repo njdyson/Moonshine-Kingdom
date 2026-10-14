@@ -899,6 +899,29 @@ comes back for The Toll Booth Trap (`killedRivalBoss`, set only by the Invader's
 `jobs.ts`, the evaluators (`homeRoomOf` for Opening Night, `tookOverRivalSafehouse` for The Eviction, one
 `bridgeRun` for the three Bridges), bot plans for the new cards, and `scripts/jobs-check.ts`.
 
+## 34. Extort and the Greed Tax: loud at 5+ (2026-10-14, Nick)
+
+A rule change after the opus-vs-bots-1 playtest ("Raids are too frequent and too punishing"). The
+reasoning and the bot numbers are in CLAUDE.md, *Extort and the Greed Tax: loud at 5+*.
+
+| Rule | Was | Now |
+| --- | --- | --- |
+| Extort's Heat | always, one marker | only when it squeezes **5+ Districts**, one marker |
+| Greed Tax | 4+ barrels Unloaded in one Play | **5+ barrels** Unloaded in one Play |
+
+Extort is otherwise unchanged (Power Play, once a Day, $200 per District), and so is Peddle (never the
+Greed Tax). The bar 1s keep "Unload 4+ barrels", which is now a quiet sale.
+
+**To port:** `GREED_TAX_THRESHOLD` to 5, an Extort Heat threshold of 5 Districts, and the log's flame
+only on a loud Extort. Strings: the Plays panel's Heat flags and Unload form, the play reference's Extort
+and Unload rows, the harness's Extort option and RULES-AI.md's Extort row and Heat list. Bots: Extort's
+Heat penalty only at 5+ Districts.
+
+**Ported the same day** (mk-online 1eb3a5c, branch `claude/raid-frequency-heat-balance-5mtr7n`):
+`GREED_TAX_THRESHOLD` is 5 and `EXTORT_HEAT_DISTRICTS` is 5; the strings and the bots as above.
+`scripts/heat-five-check.ts` runs Extorts of 4 and 5 Districts and Unloads of 4 and 5 barrels (the 4s
+drew Heat before the change).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -1024,3 +1047,4 @@ comes back for The Toll Booth Trap (`killedRivalBoss`, set only by the Invader's
 - [x] **Borough cards: no crown in your home Borough** (§29; the Nod half retired with §31)
 - [x] **The Jobs deck in sets: 36 cards, every 5 a killing** (§30; supersedes §28's card list)
 - [x] **Respect is the only score: crown at 20, Bribe cards, Mark -2, Rat -3** (§31; the Blood Oath's 40 waits on the variant, which mk-online doesn't have)
+- [x] **Extort draws Heat only at 5+ Districts; the Greed Tax at 5+ barrels** (§34)
