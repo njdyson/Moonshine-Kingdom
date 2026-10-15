@@ -127,9 +127,11 @@ JOBS = [
     J('Rum Row', 1, ['Trade'],
       'Trade 4+ barrels at a Staten Island Dock.',
       lambda p, d: p['barrels'] >= 4 and d.boro == ST),
-    # Modelled on the District the Raid padlocks, which must be yours.
-    J('The Insurance Job', 1, ['Rat'],
-      'Rat, and have the Raid padlock a Pressure 1 or 2 Still you Control.',
+    # Modelled on the District the Raid padlocks, which must be yours. A 2 since 2026-10-15, on any
+    # Raid your Play sets off. Only the Rat route is modelled: a 5th-marker Raid padlocks a District
+    # other than the one the Play acted on, and this model places a Play in one District.
+    J('The Insurance Job', 2, ['Rat'],
+      'Set off a Raid that padlocks a Pressure 1 or 2 Still you Control.',
       lambda p, d: d.press <= 2),
     # --- 2 Respect ---
     # The Extort cards read the whole map, so an Extort is modelled once (see _extort).
@@ -179,7 +181,7 @@ JOBS = [
     J('Opening Night', 2, ['Unload'],
       'Unload 5+ Rum at the High Society Venue in your home Borough.',
       lambda p, d: p['barrels'] >= 5 and d.has('highSociety') and p['home'] == 'own'),
-    J('Union Dues', 2, ['Recruit'],
+    J('Union Dues', 1, ['Recruit'],
       "Recruit 4+ Runners in a rival's home Ward.",
       lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
     # --- 3 Respect: the body count (2026-10-11), a Seize since 2026-10-13, one card for any

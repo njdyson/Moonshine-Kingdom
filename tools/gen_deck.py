@@ -221,6 +221,24 @@ ONES = [
     ("Rum Row", "Rum Row.jpg", "Trade",
      "Trade <b>4+ barrels</b> at a <b>Staten Island Dock</b>.",
      "Forty ships past the three-mile line, waiting on a lamp."),
+    # A Recruit never shares a Play with a fight, so this 5 cannot break the hard rule. To
+    # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
+    # wait for him to leave it. Every rival sees it coming and garrisons home.
+    # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
+    # VARIETY PASS 2026-10-13: BACK UP TO 5, the third 5 Nick asked for. It went down only so the 5s
+    # could be murder alone, and they no longer are. Still the deck's best-scoring 3 (hard and
+    # contested), and a Recruit never shares a Play with a fight, so it meets no other 5.
+    # RETIER 2026-10-14: DOWN TO 2. The bots finished it 20 times in 25, and the opus-vs-bots-3
+    # game was won by it in two Plays (a lone Runner Folded the Ward, the Safehouse was taken over, then
+    # the hire). Still a reason to garrison your home Ward.
+    # DOWN TO 1 (Nick, 2026-10-15), the easiest 2 in 24 bot games (24 of 31 claims finished; next,
+    # Cuban Prince, 21 of 41), to make room for The Insurance Job at 2.
+    ("Union Dues", "Union Dues.jpg", "Recruit",
+     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
+     "They line up at dawn. You decide who works."),
+]
+
+TWOS = [
     # WAS "Have a Police Raid Condemn ..." with verb Raid, which had no checkpoint:
     # a Raid is an INTERRUPT, not a Play, and "The Play Is the Unit" only checks
     # Jobs when a Play ends. A Raid fires two ways (5th Heat marker, or a Rat), so
@@ -249,12 +267,15 @@ ONES = [
     # kicking the wrong door. Also gives low-Pressure turf its first payoff.
     # SETS PASS 2026-10-11: DOWN TO 1 (Nick: a niche 1). Ratting hands you the Rat Card (-2 Respect then; -3 since 2026-10-12),
     # so at 1 this is a rebate on a Rat you meant to make anyway, not a profit.
-    ("The Insurance Job", "Insurance Job.jpg", "Rat",
-     "<b>Rat</b>, and have the Raid <b>padlock</b> a <b>Pressure 1 or 2 Still</b> you Control.",
+    # ANY RAID, UP TO 2 (Nick, 2026-10-15). At 1 it was a trap: the Rat Card cost 3, and the Raid took
+    # the District, its barrels and any Safehouse there. Now any Raid your own Play sets off counts, the
+    # 5th Heat marker or a Rat, so it no longer forces the Rat Card. The Play Is the Unit already counts
+    # the Raid a Play sets off, so there is still one checkpoint. The table sees it coming (you sit on
+    # four markers with barrels piled on a weak Still) and can answer by landing the fifth marker first
+    # or by making fresher noise. Union Dues went down to 1 to keep the deck 16 / 12 / 8.
+    ("The Insurance Job", "Insurance Job.jpg", "Raid",
+     "Set off a Raid that <b>padlocks</b> a <b>Pressure 1 or 2 Still</b> you Control.",
      "He struck the match himself. Slept fine after."),
-]
-
-TWOS = [
     # THE 1/2/3 RETIER (Nick, 2026-10-14; jobs-setup-handoff.md round 6). A 5 was too swingy, so
     # every Job pays its Stake: 1, 2 or 3. The bar stays 20, and the Jobs get a touch easier to make
     # up for it.
@@ -417,19 +438,6 @@ TWOS = [
     # AUDIT 2026-10-10: PROMOTED TO 5, and re-objectived. The Borough count that replaced
     # the Deed had a hole on a tie, and the Sweep tax above is dead (no Sweep since v0.9.8).
     # It swaps tiers with The Smuggler's Run, which could pay beside a bounty 5 on one Move.
-    # A Recruit never shares a Play with a fight, so this 5 cannot break the hard rule. To
-    # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
-    # wait for him to leave it. Every rival sees it coming and garrisons home.
-    # SETS PASS 2026-10-11: DOWN TO 3 so the 5s can be murder alone. Text unchanged.
-    # VARIETY PASS 2026-10-13: BACK UP TO 5, the third 5 Nick asked for. It went down only so the 5s
-    # could be murder alone, and they no longer are. Still the deck's best-scoring 3 (hard and
-    # contested), and a Recruit never shares a Play with a fight, so it meets no other 5.
-    # RETIER 2026-10-14: DOWN TO 2. The bots finished it 20 times in 25, and the opus-vs-bots-3
-    # game was won by it in two Plays (a lone Runner Folded the Ward, the Safehouse was taken over, then
-    # the hire). Still a reason to garrison your home Ward.
-    ("Union Dues", "Union Dues.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
-     "They line up at dawn. You decide who works."),
     # "of Rum" is redundant with the rules (High Society pours nothing else) but
     # says the quiet part out loud on the card: 8 barrels means the whole Trade
     # chain, not 8 barrels of swill. Folded back from a hand edit, 2026-07-24.

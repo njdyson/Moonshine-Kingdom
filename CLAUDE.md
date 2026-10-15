@@ -232,14 +232,18 @@ once. The deck is 36 cards, 16 / 12 / 8:
 
 - **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 5+
   barrels at <bar> in <District>"), and eight singles for the landmarks, the Docks and
-  Staten Island.
+  Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Ward"; a 1 since
+  2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished).
 - **2s**: **the Extort set**, *Extort all of the Speakeasies in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); Cuban
   Prince (4+ Docks) as an Extort card too; **the bridge set** since 2026-10-13, *Move your Boss and 4+
   Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
-  (A Bridge to Sell); and singles, Last One Standing, The Copper Heist, **Union Dues** and
+  (A Bridge to Sell); and singles, Last One Standing, The Copper Heist, **The Insurance Job** and
   **Opening Night** ("Unload 5+ Rum at the High Society Venue in your home Borough"). Opening Night
-  is home-only so the pour can't be made in the room its holder crowns in.
+  is home-only so the pour can't be made in the room its holder crowns in. The Insurance Job reads
+  "Set off a Raid that padlocks a Pressure 1 or 2 Still you Control" (Nick, 2026-10-15): any Raid
+  your own Play sets off, the 5th Heat marker or a Rat, so it no longer forces the Rat Card. It
+  stays the deck's one Rat-shaped card by Nick's call (`jobs-system-handoff.md` §4).
 - **3s**: no set (Nick, 2026-10-13: "more variety is likely better to avoid a stale standard
   ending"). **The Butcher's Ledger** ("Seize a District from 4+ rival Mobsters", anywhere), **The
   Toll Booth Trap** ("Kill a rival Boss", anywhere), **High Roller** ("Seize a High Society Venue"),

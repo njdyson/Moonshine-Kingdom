@@ -1032,6 +1032,27 @@ walk-in), and the jobs checks.
 `scripts/jobs-check.ts` covers a Fold then a takeover (pays), a Fold then destroying it, a walk-in and a
 Secure (none pay).
 
+## 40. The Insurance Job up to 2 on any Raid; Union Dues down to 1 (2026-10-15, Nick)
+
+**The Insurance Job** (now 2) reads "Set off a Raid that padlocks a Pressure 1 or 2 Still you
+Control." Any Raid the holder's own Play sets off counts: a Rat, or the 5th Heat marker landing as
+the Play ends (The Play Is the Unit already counts the Raid a Play sets off, 14.1). The Rat is no
+longer required, so the card no longer forces the Rat Card's 3 Respect. **Union Dues** goes down to 1
+(text unchanged) to keep the deck 16 / 12 / 8.
+
+Why: at 1 the card cost the Rat Card's 3 Respect plus the District, its barrels and any Safehouse
+there. Union Dues was the easiest 2 in 24 bot games (24 of 31 claims finished; next was Cuban
+Prince, 21 of 41).
+
+**To port:** both cards' tiers and text, the Raid record (any Raid the active player's Play sets
+off, not only a Rat), and the jobs checks.
+
+### Ported 2026-10-15 (mk-online, this change)
+
+`raidPadlockedStillDistrictIds` (was `ratPadlockedStillDistrictIds`) records the mover's padlocked
+Stills on any Raid during his Play; `scripts/jobs-check.ts` covers both routes. The bots still plan
+only the Rat route.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
