@@ -216,6 +216,26 @@ rivals do (the Ledger makes them stand rather than Fold). A Job about a rival Sa
 (a Seize then destroy, or a Torch, both count), never "Torch": only one mob has it. **No Market churn rule** (discarding an unclaimed Job): Nick will decide that
 separately, with a bounty idea he has parked.
 
+## Easy 1s, open bars
+
+Since 2026-10-15 (Nick, after the game-length sweep in the project's `reviews/game-length-2026-10-15.md`
+and an agent playtest that crowned on Day 23). Two card changes:
+
+- **The Extort set reads "Extort every open Speakeasy in X"**. A Squad starts on each High Society Venue,
+  so "all of the Speakeasies" was impossible until it moved, and dead again whenever a Raid parked a Squad
+  on a bar; in the playtest the Market sat frozen for four Days on these cards. A Borough has one Squad,
+  so two of its three bars are always open and the card needs no floor. At home it is your starting bar
+  and the next one: the answer is **denial**, a rival taking the card in the Offers, where for him it is
+  a real Job. Weighed and not taken: "outside your home Borough" (a card one boss can never claim).
+- **The bar 1s ask 4+ barrels** (5+ from 2026-10-14). The pour drops under the Greed Tax, so the 1s
+  carry no Heat; Nick accepts that.
+
+Why: one Offer a morning is the bottleneck, so an easy card is still a race to claim it at the right
+time, and the easier the cards, the sharper the Lay Low race and the Reverse Snake. The ladder Nick
+agreed: **1s quick and easy, 2s a setup the table can see, 3s hard and planned**. Don't make the 3s
+easier on this argument. In bot runs (40 games, random styles): Extort-set claims finished 35% to 64%,
+the bars 30% to 41%, median crown Day 46 to 39.5, runner-up still about 3 Respect behind at the crown.
+
 ## Jobs: sets, and setup
 
 Since 2026-10-11 (Nick; `jobs-setup-handoff.md`). Two rules shape the deck.
@@ -230,11 +250,11 @@ other gate.
 **Most cards come in symmetric sets**, one card per place in one wording, so a player reads a set
 once. The deck is 36 cards, 16 / 12 / 8:
 
-- **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 5+
-  barrels at <bar> in <District>"), and eight singles for the landmarks, the Docks and
+- **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
+  barrels at <bar> in <District>"; 4+ since 2026-10-15, see *Easy 1s, open bars*), and eight singles for the landmarks, the Docks and
   Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Ward"; a 1 since
   2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished).
-- **2s**: **the Extort set**, *Extort all of the Speakeasies in* Manhattan (Empire
+- **2s**: **the Extort set**, *Extort every open Speakeasy in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); Cuban
   Prince (4+ Docks) as an Extort card too; **the bridge set** since 2026-10-13, *Move your Boss and 4+
   Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
@@ -617,7 +637,8 @@ Watch in playtest:
 
 - **The cliff.** A boss on four Districts Extorts quietly and on five loudly, and Extort squeezes
   everything you Control, so the quiet play is to Extort before you take the fifth block.
-- **The bar 1s** read 5+ barrels since the 1/2/3 retier, so each one still costs a Heat marker.
+- **The bar 1s** read 4+ barrels since 2026-10-15, so a bar 1 is a quiet pour (Nick accepts the 1s
+  carrying no Heat).
 - **The Nightcap** (lesson 12): a 4-Rum pour at a room nets +2 Plays without Heat, even on five clear
   markers (`tools/sim_kickback_ledger.js`), so the quiet Kickback engine is a Play richer per pour.
 - The Volstead Act (shelved) keeps its Greed Tax at 3+, now "down from 5+".
@@ -671,6 +692,9 @@ is one of three, each with one word, and Control says whose:
 | No rival Mobsters, no Squad (yours, or nobody's; barrels and a lone Safehouse don't count) | **Safe** |
 | Rival Mobsters | **Hostile** |
 | A Police Squad | **Padlocked** |
+
+A Speakeasy that isn't Padlocked is **open** (since 2026-10-15, for the Extort set: "open for business").
+It is a word for bars only, not a fourth District state.
 
 You **Control** a District your Mobsters stand on. Retired the same day: **Empty** (no job left once
 Safe is defined directly), **unguarded** (a lone rival Safehouse is just Safe), and **Impassable**

@@ -1053,6 +1053,28 @@ off, not only a Rat), and the jobs checks.
 Stills on any Raid during his Play; `scripts/jobs-check.ts` covers both routes. The bots still plan
 only the Rat route.
 
+## 41. The Extort set takes the open Speakeasies; the bar 1s ask 4+ (2026-10-15, Nick)
+
+**The Extort set** (Empire State, The Big Squeeze, King of Queens, The Black Hand) reads "Extort every
+open Speakeasy in X". **Open** means not Padlocked (new in the Glossary and in Territory's Blue Wall).
+A Borough has one Squad, so two of its three bars are always open. **The bar 1s** read "Unload 4+
+barrels at <bar> in <District>" (5+ from 2026-10-14), so a bar 1 is a quiet pour under the Greed Tax.
+
+Why: the Squads start on the High Society Venues, so "all of the Speakeasies" was impossible until a
+Squad moved, and the Market froze on these cards in an agent playtest. One Offer a morning is the
+bottleneck, so easier 1s and 2s sharpen the Lay Low race rather than handing out points. Bot runs
+(40 games, random styles): Extort-set claims finished 35% to 64%, bars 30% to 41%, median crown Day 46
+to 39.5.
+
+**To port:** the five texts, the Extort-set check (skip a Padlocked Speakeasy), the bar count, and the
+bots' plans for both.
+
+### Ported 2026-10-15 (mk-online, this change)
+
+The card texts in `jobs.ts`; `allBarsIn` skips a Padlocked Speakeasy and the bar 1s count 4+
+(`objectives.ts`); the bots plan both; `scripts/jobs-check.ts` covers a Padlocked room and a
+Raid-padlocked bar. `RULES-AI.md` defines open.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
