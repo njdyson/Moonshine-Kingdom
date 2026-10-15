@@ -1017,6 +1017,21 @@ The engine also makes volleys simultaneous, so both crews can fall. A Torch leav
 Invader carried in. A Fold onto the Invader's lone Safehouse lets the Scramming crew choose first.
 `scripts/control-check.ts` covers the Control and take-over cases.
 
+## 39. The Eviction is a Seize (2026-10-15, Nick)
+
+**The Eviction** (3) now reads "Seize a District with a rival's Safehouse, and take it over." Win the
+District by fight or Fold, then take the Safehouse over; destroying it pays nothing. Since §38 a walk
+onto a lone rival Safehouse is no Seize, and neither is a Secure onto one, so neither pays it. Why:
+after §38 a $500 Secure from anywhere paid three Respect, and the card lost the assault it was kept for.
+
+**To port:** the card text, its evaluator (a takeover on a Play that Seized), the bot's plan (no
+walk-in), and the jobs checks.
+
+### Ported 2026-10-15 (mk-online, this change)
+
+`scripts/jobs-check.ts` covers a Fold then a takeover (pays), a Fold then destroying it, a walk-in and a
+Secure (none pay).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

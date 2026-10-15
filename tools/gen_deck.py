@@ -569,8 +569,12 @@ THREES = [
     # and The Copper Heist on a starting bar with a Safehouse; and it is the first half of Union Dues.
     # RETIER 2026-10-14: UP TO 3 (Nick), the other promotion. It meets the Ledger, the Trap and
     # High Roller on a fight; Union Dues, now a 2, is still its second half.
+    # A SEIZE SINCE 2026-10-15 (Nick). Once a Safehouse alone held nothing (rules-sync §38), a $500
+    # Secure onto any lone rival Safehouse paid it from anywhere. Now it is the assault round 1 kept
+    # it for: win the District by fight or Fold, then take the Safehouse over (destroying it pays
+    # nothing). A walk onto a lone one is no Seize, so it pays nothing either.
     ("The Eviction", "Crimson Coup.jpg", "Open Fire",
-     "Take over a rival&rsquo;s <b>Safehouse</b>.",
+     "Seize a District with a rival&rsquo;s <b>Safehouse</b>, and take it over.",
      "Nice place. He won&rsquo;t be needing it."),
     # NEW 2026-10-14 (Nick's parked "Seize a Pressure 6 Still"). The name and art are the old High
     # Roller's (a pistol on the big table). It pays for taking a crown room off the boss holding it,
