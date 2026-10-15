@@ -1110,4 +1110,4 @@ Society Venue), bot plans and any Respect thresholds that assumed a 5, the Marke
 - [x] **Respect is the only score: crown at 20, Bribe cards, Mark -2, Rat -3** (§31; the Blood Oath's 40 waits on the variant, which mk-online doesn't have)
 - [x] **Extort draws Heat only at 5+ Districts; the Greed Tax at 5+ barrels** (§34)
 - [x] **Extort at $100 per District, any number a Day; Collect cut** (§35)
-- [ ] **Jobs pay 1, 2 or 3; High Roller in, The Real McCoy out** (§37)
+- [x] **Jobs pay 1, 2 or 3; High Roller in, The Real McCoy out** (§37; mk-online PR #11)
