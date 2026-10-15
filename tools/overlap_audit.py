@@ -171,11 +171,11 @@ JOBS = [
     J('A Bridge to Sell', 2, ['Move'],
       'Move your Boss and 4+ Rum across the Brooklyn Bridge.',
       lambda p, d: p['route'] == 'bklyn' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
-    # Back 2026-10-13. Since 2026-10-15 a Safehouse alone holds nothing, so a takeover needs no
-    # Seize: a won fight or a Fold, a walk onto a lone one (Move or Rise), or a Secure onto it.
-    J('The Eviction', 3, ['Move', 'Secure', 'Rise'],
-      "Take over a rival's Safehouse.",
-      lambda p, d: p['sh'] == 'takeover'),
+    # Back 2026-10-13. A Seize since 2026-10-15 (rules-sync §39): a won fight or a Fold, then the
+    # takeover. A walk onto a lone Safehouse (Move or Rise) or a Secure onto one is no Seize.
+    J('The Eviction', 3, ['Move'],
+      "Seize a District with a rival's Safehouse, and take it over.",
+      lambda p, d: p['seize'] and p['sh'] == 'takeover'),
     J('Opening Night', 2, ['Unload'],
       'Unload 5+ Rum at the High Society Venue in your home Borough.',
       lambda p, d: p['barrels'] >= 5 and d.has('highSociety') and p['home'] == 'own'),

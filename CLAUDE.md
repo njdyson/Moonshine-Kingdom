@@ -243,7 +243,9 @@ once. The deck is 36 cards, 16 / 12 / 8:
 - **3s**: no set (Nick, 2026-10-13: "more variety is likely better to avoid a stale standard
   ending"). **The Butcher's Ledger** ("Seize a District from 4+ rival Mobsters", anywhere), **The
   Toll Booth Trap** ("Kill a rival Boss", anywhere), **High Roller** ("Seize a High Society Venue"),
-  **The Smuggler's Run**, **The Eviction**, **The Five Families**, **The Noble Experiment** and
+  **The Smuggler's Run**, **The Eviction** ("Seize a District with a rival's Safehouse, and take it
+  over"; Nick, 2026-10-15: once a Safehouse alone held nothing, a $500 Secure onto a lone one paid it
+  from anywhere, so a walk-in or a Secure no longer counts), **The Five Families**, **The Noble Experiment** and
   **The Warehouse**. Nick likes the body count as a stand-in for the cut Sweep: any fat stack is a
   target. Don't add a "but no Boss" clause back.
   High Roller taken last brings the Respect and walks the Boss into the room on one Play. Take the
@@ -554,10 +556,6 @@ Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the r
 
 Watch in playtest:
 
-- **The Eviction** (3) can be paid by a Secure onto any lone rival Safehouse, from anywhere, for
-  $500. If it proves a windfall, Claude's suggested fix is "Seize a District holding a rival's
-  Safehouse, and take it over". `overlap_audit.py` also lists The Eviction + The Warehouse as a new
-  top-tier pair (one Secure onto a lone Safehouse sitting on 10+ barrels).
 - **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss, three and
   a Safehouse from 8% to 17%; on four, two bursts take it 43% against 11%
   (`tools/sim_almanac_combat.js`). Firepower's free die used to make it about 33% on three.
