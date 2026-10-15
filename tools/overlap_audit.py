@@ -119,7 +119,7 @@ JOBS = [
       'Seize a Dock.',
       lambda p, d: p['seize'] and d.has('dock')),
     J('The Beachhead', 1, ['Secure'],
-      'Secure your Safehouse in a District Land Connected to a rival Safehouse.',
+      'Secure your Safehouse in a District Adjacent to a rival Safehouse.',
       lambda p, d: p['adj_rival_sh']),
     J('Tenement Army', 1, ['Recruit'],
       'Recruit 4+ Runners at Stapleton.',
@@ -171,10 +171,11 @@ JOBS = [
     J('A Bridge to Sell', 2, ['Move'],
       'Move your Boss and 4+ Rum across the Brooklyn Bridge.',
       lambda p, d: p['route'] == 'bklyn' and p['own_boss'] and p['barrels'] >= 4 and p['rum']),
-    # Back 2026-10-13: a takeover comes with a Seize (a won fight, a Fold, or an unguarded walk-in).
-    J('The Eviction', 3, ['Move'],
+    # Back 2026-10-13. Since 2026-10-15 a Safehouse alone holds nothing, so a takeover needs no
+    # Seize: a won fight or a Fold, a walk onto a lone one (Move or Rise), or a Secure onto it.
+    J('The Eviction', 3, ['Move', 'Secure', 'Rise'],
       "Take over a rival's Safehouse.",
-      lambda p, d: p['seize'] and p['sh'] == 'takeover'),
+      lambda p, d: p['sh'] == 'takeover'),
     J('Opening Night', 2, ['Unload'],
       'Unload 5+ Rum at the High Society Venue in your home Borough.',
       lambda p, d: p['barrels'] >= 5 and d.has('highSociety') and p['home'] == 'own'),
@@ -215,10 +216,10 @@ VERBS = ('Move', 'Secure', 'Rise', 'Recruit', 'Unload', 'Trade', 'Extort', 'Rat'
 #   control    yours
 #   hostile    rival Mobsters, no Safehouse
 #   hostile_sh rival Mobsters and a rival Safehouse
-#   unguarded  a rival Safehouse alone
+#   lone_sh    a rival Safehouse alone: Safe, and nobody's since 2026-10-15 (Mobsters-only Control)
 # home: is the District in your home Borough, a rival's, or nobody's (Staten Island,
 # or the unclaimed Borough at three players)?
-STATES = ('empty', 'control', 'hostile', 'hostile_sh', 'unguarded')
+STATES = ('empty', 'control', 'hostile', 'hostile_sh', 'lone_sh')
 HOMES = ('own', 'rival', 'none')
 BARRELS = (0, 3, 4, 5, 6, 8, 10)
 
@@ -229,7 +230,7 @@ def _p(**kw):
              from_staten=False, sh='none', adj_rival_sh=False, all5=False, bars=frozenset(),
              docks4=False)
     p.update(kw)
-    p['rival_sh'] = p['state'] in ('hostile_sh', 'unguarded')
+    p['rival_sh'] = p['state'] in ('hostile_sh', 'lone_sh')
     return p
 
 
@@ -249,23 +250,22 @@ def plays(verb, d):
 def _plays(verb, d, state, home):
     if verb == 'Move':
         # What the Play did to the District:
-        #   walk   moved into your own or an Empty District
+        #   walk   moved into your own or a nobody's District (a lone rival Safehouse included:
+        #          a crew takes it over or destroys it, barrels alone leave it standing)
         #   gift   barrels alone into rival turf: no Standoff, they become his
         #   held   a fight the Occupier kept (you Fell Back, lost, or Advanced on)
         #   seize  you took it, by winning or by his Fold
         #   torch  you burned his Safehouse and he kept the District (Knights)
-        if state in ('empty', 'control'):
+        if state in ('empty', 'control', 'lone_sh'):
             outcomes = ('walk',)
-        elif state == 'unguarded':
-            outcomes = ('gift', 'seize')
         else:
             outcomes = ('gift', 'held', 'seize') + (('torch',) if state == 'hostile_sh' else ())
         for out in outcomes:
-            fight = out in ('held', 'seize', 'torch') and state != 'unguarded'
+            fight = out in ('held', 'seize', 'torch')
             # Take a District holding his Safehouse and it can't stay: take it over or
             # destroy it. Torch destroys it while he keeps the District.
-            if out == 'seize' and state in ('hostile_sh', 'unguarded'):
-                shs = ('takeover', 'destroy')
+            if (out == 'seize' and state == 'hostile_sh') or state == 'lone_sh':
+                shs = ('takeover', 'destroy', 'none')   # 'none': barrels alone, no crew
             else:
                 shs = ('torch',) if out == 'torch' else ('none',)
             for sh in shs:
@@ -286,17 +286,24 @@ def _plays(verb, d, state, home):
                                              (False,) if out == 'gift' else (True,)):
                                     if not crew and not barrels:
                                         continue
+                                    if state == 'lone_sh' and crew != (sh != 'none'):
+                                        continue
                                     yield from _fight(fight, state, home, out, sh, route,
                                                       from_staten, barrels, rum, crew)
     elif verb in ('Secure', 'Rise'):
-        if state not in ('empty', 'control'):
+        if state not in ('empty', 'control', 'lone_sh'):
             return          # Secure and Rise target a Safe District only
         if verb == 'Rise' and not d.has('ward'):
             return
-        for barrels in BARRELS:
-            for rum in _liquor(barrels):
-                for adj in (False, True):
-                    yield _p(state=state, home=home, barrels=barrels, rum=rum, adj_rival_sh=adj)
+        # Onto a lone rival Safehouse: a Secure takes it over; a Rise takes Control, so it goes.
+        shs = (('none',) if state != 'lone_sh' else ('takeover',) if verb == 'Secure'
+               else ('takeover', 'destroy'))
+        for sh in shs:
+            for barrels in BARRELS:
+                for rum in _liquor(barrels):
+                    for adj in (False, True):
+                        yield _p(state=state, home=home, barrels=barrels, rum=rum,
+                                 adj_rival_sh=adj, sh=sh)
     elif verb == 'Recruit':
         if state == 'control':  # only where your Safehouse stands
             for runners in (0, 4):

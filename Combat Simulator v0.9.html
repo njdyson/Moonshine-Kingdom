@@ -409,10 +409,9 @@
                 <label class="label" for="invKit">Mob Kit</label>
                 <select id="invKit">
                   <option value="none">Baseline: Open Fire</option>
-                  <option value="irish">Irish: Firepower (+1 attack die)</option>
-                  <option value="plunder">Irish: Plunder raid (steal barrels)</option>
+                  <option value="tommy">Irish: Tommy Gun (+1 die, +1 Threat, cost 2)</option>
                   <option value="sicilian">Sicilian: Hit (Boss-snipe, cost 2)</option>
-                  <option value="stealth">Vipers: Stealth (no Ambush, max 5)</option>
+                  <option value="stealth">Vipers: Stealth (no Standoff, max 5)</option>
                   <option value="torch">Knights: Torch first (cost 1 + 1 Runner)</option>
                 </select>
               </div>
@@ -433,10 +432,6 @@
                 <input id="occSafehouse" type="checkbox" checked>
                 <span>Safehouse</span>
               </label>
-              <div class="field is-hidden" id="occBarrelsField">
-                <label class="label" for="occBarrels">Occupier Barrels (Plunder target)</label>
-                <input id="occBarrels" type="number" min="0" max="12" step="1" value="3">
-              </div>
               <div class="kit-note">There is no Sweep: raise the Runner count to model a larger garrison. The Muscle Ratio still caps combat dice at 5.</div>
               <div class="mobster-total">
                 <span>Total Mobsters</span>
@@ -462,14 +457,11 @@
             <summary>How each trial resolves</summary>
             <div class="acc-body">
             Each trial: opening Ambush (unless Stealth), then the Pinned invader spends Influence per volley until it runs out:
-            <strong>Open Fire costs 1</strong>, <strong>Hit costs 2</strong>, <strong>Torch costs 1</strong> plus a sacrificed Runner.
+            <strong>Open Fire costs 1</strong>, <strong>Hit</strong> and <strong>Tommy Gun cost 2</strong>, <strong>Torch costs 1</strong> plus a sacrificed Runner.
             At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, barrels lost).
-            A <strong>Plunder</strong> raid always keeps 1 Influence back to <strong>Advance</strong> out with the loot
-            (Fall Back would drop it). Firepower is the free Irish Trait: it boosts the invader's Open Fire volleys only,
-            never an Ambush or any defence.
             <strong>Heat:</strong> only the first shot counts. A firefight adds <strong>one</strong> marker, to whoever
-            fired first: here the occupier's Ambush, so the invader who storms in draws none. (If Stealth denies the
-            ambush, the invader fires first and takes it.) The model assumes an occupier with a Ledger marker in hand who
+            fired first: here the occupier's Ambush, so the invader who storms in draws none. (Stealth gets no Standoff,
+            so the invader fires first and takes it.) The model assumes an occupier with a Ledger marker in hand who
             always Ambushes; a spent-out or laid-low defender forfeits the shot.
             </div>
           </details>
@@ -503,10 +495,10 @@
             <div id="mutualCount" class="summary-sub">-</div>
           </div>
           <div class="summary-card">
-            <div class="summary-title" id="withdrawTitle">Fall Back (Out of Influence)</div>
+            <div class="summary-title">Fall Back (Out of Influence)</div>
             <div id="unresolvedRate" class="summary-value warn">-</div>
             <div id="unresolvedCount" class="summary-sub">-</div>
-            <div class="summary-sub muted" id="withdrawSub" style="margin-top:2px; font-size:0.75rem;">Mobsters survive; barrels left behind</div>
+            <div class="summary-sub muted" style="margin-top:2px; font-size:0.75rem;">Mobsters survive; barrels left behind</div>
           </div>
         </div>
 
@@ -539,10 +531,6 @@
                 <td>Rival Boss Killed</td>
                 <td id="bossKillRate" class="occ">-</td>
               </tr>
-              <tr id="stolenRow" class="is-hidden">
-                <td>Barrels Stolen per Trial (kept on Advance)</td>
-                <td id="avgStolen" class="ok">-</td>
-              </tr>
               <tr>
                 <td>Heat marker</td>
                 <td id="attackerHeatRate" class="ok">-</td>
@@ -569,8 +557,6 @@
       invMobsterTotal: document.getElementById("invMobsterTotal"),
       occBoss: document.getElementById("occBoss"),
       occSafehouse: document.getElementById("occSafehouse"),
-      occBarrelsField: document.getElementById("occBarrelsField"),
-      occBarrels: document.getElementById("occBarrels"),
       occMobsterTotal: document.getElementById("occMobsterTotal"),
       trials: document.getElementById("trials"),
       maxRounds: document.getElementById("maxRounds"),
@@ -585,25 +571,20 @@
       mutualCount: document.getElementById("mutualCount"),
       unresolvedRate: document.getElementById("unresolvedRate"),
       unresolvedCount: document.getElementById("unresolvedCount"),
-      withdrawTitle: document.getElementById("withdrawTitle"),
-      withdrawSub: document.getElementById("withdrawSub"),
       avgRounds: document.getElementById("avgRounds"),
       avgInvaderLosses: document.getElementById("avgInvaderLosses"),
       avgOccupierLosses: document.getElementById("avgOccupierLosses"),
       ambushCasTrials: document.getElementById("ambushCasTrials"),
       bossKillRate: document.getElementById("bossKillRate"),
-      stolenRow: document.getElementById("stolenRow"),
-      avgStolen: document.getElementById("avgStolen"),
       attackerHeatRate: document.getElementById("attackerHeatRate"),
       totalActionsUsed: document.getElementById("totalActionsUsed")
     };
 
     const KIT_NOTES = {
       none: "Standard assault: Move in, eat the Ambush, then trade Open Fire volleys at 1 Influence each.",
-      irish: "Firepower Trait: +1 attack die (max 5) on every Open Fire volley. Free. Invading only, never on an Ambush or when defending.",
-      plunder: "Each of your hits steals 1 barrel instead of killing; the Occupier's hits still kill. No Heat, ever. Keeps 1 Influence back to Advance out with the loot.",
+      tommy: "Tommy Gun (cost 2): an Open Fire with +1 attack die (max 5) at +1 Threat (max Level 4). Falls back to Open Fire once Influence dips below 2. Heat only if you shoot first.",
       sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat only if you shoot first.",
-      stealth: "The Occupier cannot Ambush; this models one who Holds Fire and stands. Crew capped at 5 mobsters, no barrels carried.",
+      stealth: "No Standoff: the Occupier can neither Ambush nor Fold, so he Holds Fire and stands. Crew capped at 5 mobsters, no barrels carried.",
       torch: "Spends 1 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +1 Threat) before the volleys start. Heat only if it's the fight's first shot."
     };
 
@@ -670,9 +651,9 @@
       return kills;
     }
 
-    function invaderAttackDice(inv) {
+    function invaderAttackDice(inv, tommy) {
       const base = diceFromMobsters(mobsterCount(inv));
-      return inv.kit === "irish" ? clamp(base + 1, 0, 5) : base;
+      return tommy ? clamp(base + 1, 0, 5) : base;
     }
 
     function readConfig() {
@@ -695,8 +676,7 @@
         occupier: {
           runners: clamp(Number(els.occRunners.value || 0), 0, 15),
           bosses: els.occBoss.checked ? 1 : 0,
-          safehouse: !!els.occSafehouse.checked,
-          barrels: clamp(Number(els.occBarrels.value || 0), 0, 12)
+          safehouse: !!els.occSafehouse.checked
         },
         trials: clamp(Number(els.trials.value || 1), 1, 200000),
         influence: clamp(Number(els.maxRounds.value || 1), 1, 10),
@@ -713,10 +693,8 @@
       const occ = {
         runners: config.occupier.runners,
         bosses: config.occupier.bosses,
-        safehouse: config.occupier.safehouse,
-        barrels: config.occupier.barrels
+        safehouse: config.occupier.safehouse
       };
-      const plunder = inv.kit === "plunder";
 
       const invaderStart = mobsterCount(inv);
       const occupierStart = mobsterCount(occ);
@@ -727,7 +705,6 @@
       let ambushKills = 0;
       let heat = false;       // invader draws Heat (fires at all)
       let occHeat = false;    // occupier draws Heat (Ambush fires), costs 1 from the Ledger
-      let stolen = 0;
 
       if (inv.kit !== "stealth" && alive(inv) && alive(occ)) {
         const threat = clamp(1 + occ.bosses + 1 + (occ.safehouse ? 1 : 0), 1, 4);
@@ -745,32 +722,24 @@
       }
 
       while (alive(inv) && alive(occ)) {
-        if (plunder && occ.barrels <= 0) break;
-
         const useHit = inv.kit === "sicilian" && occ.bosses > 0 &&
           config.influence - spent >= 2;
-        const cost = useHit ? 2 : 1;
-        const reserve = plunder ? 1 : 0;
-        if (config.influence - spent - reserve < cost) break;
+        const useTommy = inv.kit === "tommy" && config.influence - spent >= 2;
+        const cost = useHit || useTommy ? 2 : 1;
+        if (config.influence - spent < cost) break;
         spent += cost;
         rounds += 1;
 
-        const invDice = invaderAttackDice(inv);
-        const invThreat = clamp(1 + inv.bosses, 1, 4);
+        const invDice = invaderAttackDice(inv, useTommy);
+        const invThreat = clamp(1 + inv.bosses + (useTommy ? 1 : 0), 1, 4);
         const occDice = diceFromMobsters(mobsterCount(occ));
         const occThreat = clamp(1 + occ.bosses + (occ.safehouse ? 1 : 0), 1, 4);
 
         const invHits = rollHits(invDice, invThreat);
         const occHits = rollHits(occDice, occThreat);
 
-        if (plunder) {
-          const grab = Math.min(invHits, occ.barrels);
-          stolen += grab;
-          occ.barrels -= grab;
-        } else {
-          const kills = applyCasualties(occ, invHits, useHit);
-          if (!occHeat) heat = true;   // invader draws Heat only if he fired first (no Ambush)
-        }
+        applyCasualties(occ, invHits, useHit);
+        if (!occHeat) heat = true;   // invader draws Heat only if he fired first (no Ambush)
         applyCasualties(inv, occHits, false);
       }
 
@@ -781,9 +750,6 @@
         outcome = "take";
       } else if (!alive(inv)) {
         outcome = "hold";
-        if (plunder) stolen = 0;   // wiped: the loot never leaves the district
-      } else if (plunder) {
-        spent += 1;                // Advance out with the loot
       }
 
       return {
@@ -795,8 +761,7 @@
         ambushCasualties: ambushKills,
         heat,
         heatMarkers: (heat ? 1 : 0) + (occHeat ? 1 : 0),   // one marker per fight, to the first shooter (mutually exclusive)
-        bossKilled: occBossStart - occ.bosses > 0,
-        stolen
+        bossKilled: occBossStart - occ.bosses > 0
       };
     }
 
@@ -823,7 +788,6 @@
       els.avgOccupierLosses.textContent = "-";
       els.ambushCasTrials.textContent = "-";
       els.bossKillRate.textContent = "-";
-      els.avgStolen.textContent = "-";
       els.attackerHeatRate.textContent = "-";
       els.totalActionsUsed.textContent = "-";
     }
@@ -841,15 +805,6 @@
     function syncKitUI() {
       const kit = els.invKit.value;
       els.invKitNote.textContent = KIT_NOTES[kit] || "";
-      els.occBarrelsField.classList.toggle("is-hidden", kit !== "plunder");
-      els.stolenRow.classList.toggle("is-hidden", kit !== "plunder");
-      if (kit === "plunder") {
-        els.withdrawTitle.textContent = "Advanced Out (Loot Kept)";
-        els.withdrawSub.textContent = "Invader withdraws with the stolen barrels";
-      } else {
-        els.withdrawTitle.textContent = "Fall Back (Out of Influence)";
-        els.withdrawSub.textContent = "Mobsters survive; barrels left behind";
-      }
     }
 
     function runSimulation() {
@@ -870,7 +825,6 @@
         bossKillTrials: 0,
         heatTrials: 0,
         heatMarkers: 0,
-        stolen: 0,
         spent: 0
       };
 
@@ -889,7 +843,6 @@
         if (result.bossKilled) totals.bossKillTrials += 1;
         if (result.heat) totals.heatTrials += 1;
         totals.heatMarkers += result.heatMarkers;
-        totals.stolen += result.stolen;
         totals.spent += result.spent;
       }
 
@@ -910,7 +863,6 @@
       els.avgOccupierLosses.textContent = formatNum(totals.occupierLosses / config.trials, 2);
       els.ambushCasTrials.textContent = formatPct(totals.ambushCasTrials, config.trials) + " (" + totals.ambushCasTrials.toLocaleString() + " trials)";
       els.bossKillRate.textContent = formatPct(totals.bossKillTrials, config.trials) + " (" + totals.bossKillTrials.toLocaleString() + " trials)";
-      els.avgStolen.textContent = formatNum(totals.stolen / config.trials, 2) + " barrels";
       els.attackerHeatRate.textContent = formatNum(totals.heatMarkers / config.trials, 2) + " per fight, to the first shooter (invader takes it " + formatPct(totals.heatTrials, config.trials) + ")";
       els.totalActionsUsed.textContent = formatNum(totals.spent / config.trials, 2) + " / trial";
 
@@ -934,7 +886,6 @@
       els.invKit.value = "none";
       els.occBoss.checked = true;
       els.occSafehouse.checked = true;
-      els.occBarrels.value = 3;
       els.trials.value = 20000;
       els.maxRounds.value = 3;
       updateMobsterTotals();

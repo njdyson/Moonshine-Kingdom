@@ -9,7 +9,7 @@
  * casualties) rather than copying them:
  *   - the Occupier's answer: Ambush, or Hold Fire (the "duck" line); a Fold is priced
  *     against Hold Fire in section 4
- *   - the Invader's volley budget, the Sicilian Hit, and the Knights' Torch
+ *   - the Invader's volley budget, the Sicilian Hit, the Irish Tommy Gun, and the Knights' Torch
  * Section 0 checks the rebuilt loop against simulateTrial before anything else runs.
  */
 
@@ -19,11 +19,11 @@ const C = combat();
 const QUICK = process.argv.includes("--quick");
 const N = QUICK ? 20000 : 200000;
 
-// One fight. inv: {r, b, irish, hit, torch}; occ: {r, b, safe}; answer: "ambush" | "hold".
-// The Invader fires up to `volleys` times (a Hit costs 2 of them) or until a side is gone.
+// One fight. inv: {r, b, tommy, hit, torch}; occ: {r, b, safe}; answer: "ambush" | "hold".
+// The Invader spends up to `volleys` markers (a Hit or a Tommy Gun costs 2) or until a side is gone.
 // A Knight with `torch` spends the first of them, and a Runner, burning the Safehouse.
 function fight(inv0, occ0, answer, volleys) {
-  const inv = { runners: inv0.r, bosses: inv0.b ? 1 : 0, kit: inv0.irish ? "irish" : "none" };
+  const inv = { runners: inv0.r, bosses: inv0.b ? 1 : 0, kit: inv0.tommy ? "tommy" : "none" };
   const occ = { runners: occ0.r, bosses: occ0.b ? 1 : 0 };
   let safe = occ0.safe ? 1 : 0;
   const invStart = C.mobsterCount(inv);
@@ -43,10 +43,12 @@ function fight(inv0, occ0, answer, volleys) {
 
   while (C.alive(inv) && C.alive(occ)) {
     const useHit = inv0.hit && occ.bosses > 0 && volleys - spent >= 2;
-    const cost = useHit ? 2 : 1;
+    const useTommy = inv0.tommy && volleys - spent >= 2;
+    const cost = useHit || useTommy ? 2 : 1;
     if (volleys - spent < cost) break;
     spent += cost;
-    const invHits = C.rollHits(C.invaderAttackDice(inv), C.clamp(1 + inv.bosses, 1, 4));
+    const invHits = C.rollHits(C.invaderAttackDice(inv, useTommy),
+      C.clamp(1 + inv.bosses + (useTommy ? 1 : 0), 1, 4));
     const occHits = C.rollHits(C.diceFromMobsters(C.mobsterCount(occ)),
       C.clamp(1 + occ.bosses + safe, 1, 4));
     C.applyCasualties(occ, invHits, useHit);
@@ -76,7 +78,7 @@ function run(inv, occ, answer, volleys, n = N) {
 
 const pct = (x) => `${(x * 100).toFixed(0).padStart(3)}%`;
 const num = (x) => x.toFixed(1);
-const crew = (s) => (s.b ? `Boss+${s.r}` : `${s.r}R`) + (s.irish ? " Irish" : "") + (s.hit ? " Hit" : "") + (s.torch ? " Torch" : "");
+const crew = (s) => (s.b ? `Boss+${s.r}` : `${s.r}R`) + (s.tommy ? " Tommy" : "") + (s.hit ? " Hit" : "") + (s.torch ? " Torch" : "");
 const post = (s) => (s.b ? `Boss+${s.r}` : `${s.r}R`) + (s.safe ? "+SH" : "");
 
 // ---------------------------------------------------------------------------
@@ -274,7 +276,7 @@ function section8() {
 }
 
 // ---------------------------------------------------------------------------
-// The 2026-10-06 pass: the family figures in lesson 20 and the crewed Still in lesson 15.
+// The 2026-10-06 pass (Tommy Gun 2026-10-15): the family figures in lesson 19 and the crewed Still in lesson 15.
 function section9() {
   console.log("\n9. FAMILY EDGES AND THE FIVE-MAN STILL (3 volleys)");
   console.log("   raid               defender   answer | take  his Boss dies  your Boss dies");
@@ -283,15 +285,17 @@ function section9() {
     console.log(`   ${crew(inv).padEnd(18)} ${post(occ).padStart(9)}   ${ans.padEnd(6)} | ${pct(x.take)}       ${occ.b ? pct(x.occBossDead) : "   -"}           ${inv.b ? pct(x.invBossDead) : "   -"}`);
   };
   const fortress = { r: 3, b: 1, safe: true };
-  console.log("   Irish Firepower (lesson 20: about 8% to about 33%)");
+  console.log("   Irish Tommy Gun: the same three markers, two of them on one Tommy Gun volley (lesson 19)");
   row({ r: 4, b: 1 }, fortress, "ambush");
-  row({ r: 4, b: 1, irish: true }, fortress, "ambush");
-  console.log("   Sicilian Hit into the fortress (lesson 20: four times in five)");
+  row({ r: 4, b: 1, tommy: true }, fortress, "ambush");
+  console.log("   ...and with four markers, two Tommy Gun volleys against four Open Fires");
+  console.log("   " + ["plain", "tommy"].map((k) => `${k} ${pct(run({ r: 4, b: 1, tommy: k === "tommy" }, fortress, "ambush", 4).take)}`).join("   "));
+  console.log("   Sicilian Hit into the fortress (lesson 19: four times in five)");
   for (const r of [4, 5, 6]) row({ r, b: 1, hit: true }, fortress, "ambush");
-  console.log("   Vipers Stealth (no Ambush: the Occupier Holds Fire and stands) vs the front door (lesson 20)");
+  console.log("   Vipers Stealth (no Standoff: the Occupier Holds Fire and can't Fold) vs the front door (lesson 19)");
   row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "hold");
   row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "ambush");
-  console.log("   Knights Torch: the same three markers, one of them spent on the match (lesson 20)");
+  console.log("   Knights Torch: the same three markers, one of them spent on the match (lesson 19)");
   for (const r of [5, 6]) {
     row({ r, b: 1 }, fortress, "ambush");
     row({ r, b: 1, torch: true }, fortress, "ambush");
