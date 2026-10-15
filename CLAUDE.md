@@ -111,15 +111,16 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
 - The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
 - There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
-- Sicilian <b>Untouchable</b> means Police Squads never enter their Safehouse District. A Squad selects the next legal target in reach or stays put.
+- No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
 ## Everything is on the table
 
 Since 2026-09-26 cash is open information: it sits on the table in front of you and anyone may
 ask for a count (the Rulebook's Cash entry). Everything else already was: Jobs and their
 stakes, Respect and the Bribe cards behind it, barrels, Heat and Ledgers. The one hidden thing in the game is the
-top card of the Jobs deck, which Whispers lets the Vipers read (since 2026-09-30; before that
-Whispers claimed it face-down).
+top card of the Jobs deck, which the Vipers read with their Whispers Play (a Play since
+2026-10-15, when it also became a claim: a Job claimed with it goes face-up like any other; a
+peek at any time from 2026-09-30, a face-down claim before that).
 
 ## The Market restocks after the Offers
 
@@ -151,7 +152,7 @@ written out above the card table in `tools/gen_deck.py`:
 - Name the **District**, the big word on the board's sign. A bar card names the bar too, from the
   small line under it: "at the Haymarket in the Tenderloin" (Nick, 2026-10-11). The bar is the theme;
   the District is what the table finds.
-- Use the defined word: Seize, Empty, take over, **home Borough** and **home Ward** (in the Glossary
+- Use the defined word: Seize, Safe, take over, **home Borough** and **home Ward** (in the Glossary
   since the same day). Never a count of Districts across a Borough. Those were the Deeds' stand-ins:
   Tenement Army's described your own home Ward, so it was free on Day 2, and two had no answer for
   a tie.
@@ -268,8 +269,7 @@ what matters: a rival's dug-in stronghold, or the High Society room his Boss is 
 is a second answer to the room-as-fortress worry under "Watch in playtest".
 
 Do not restrict lone barrels to your own turf, and do not split them into a Play of their own
-("Shift" or "Distribute" was floated and set aside as rule bloat). Tunnel's edge is reach
-(Connected or not); its card dropped "(no Mobsters)", which read as if the Vipers owned the power.
+("Shift" or "Distribute" was floated and set aside as rule bloat).
 
 ## The crown is a Play: Take the Crown at 20 Respect
 
@@ -288,12 +288,13 @@ to the Borough card for the rooms. To make room the fronts dropped their "Mob Pl
 kicker (the enamel band keeps the colour; the backs' "Combat Reference" went too, to match) and Beg,
 Rat and Bribe went to one line each.
 Move then handed rival turf to the reverse ("Into rival turf: see reverse"), which carries a **Rival
-Safehouse** line (walk in unguarded, or win the District by Fold or fight, then take it over or
-destroy it) under the Pinned note, and the **Handshake** as a rule panel at its foot like the
-Faction Trait: it is not a Play, so no 0-cost socket. Since 2026-10-14 the room Collect's row
-freed went to the fronts' rows (5px padding, 11.5px text, 12.5px names; Nick: "more breathing room
-... up the font a touch"), which leaves the busiest front about one line (18px) spare in its 925px
-print box. A new front row needs that room back from somewhere.
+Safehouse** line (with no Mobsters beside it, walk in; guarded, win the District by Fold or fight;
+then take it over or destroy it; a Secure onto it takes it over) under the Pinned note, and the
+**Handshake** as a rule panel at its foot: it is not a Play, so no 0-cost socket. Since 2026-10-14
+the room Collect's row freed went to the fronts' rows (5px padding, 11.5px text, 12.5px names; Nick: "more breathing room
+... up the font a touch"). On 2026-10-15 the Faction Trait panel went from the fronts and its room
+went to the rows too (8px padding), which leaves the busiest front (the Knights) about 20px spare in
+its 925px print box. A new front row needs that room back from somewhere.
 
 The game ends mid-Day and **nothing else is settled**: a promise due at Sunset dies unpaid.
 That free final betrayal is Nick's call, on purpose ("cleaner and more brutal"); do not patch
@@ -460,8 +461,7 @@ and §27.)
 
 The Rum pool is **20** barrels, and Trade at a Dock (1:1 from Moonshine) is the only way Rum
 enters the game. Trade is worth **$200 a barrel** in cash, plus the Kickback if the Rum is
-poured at High Society. The Knights' free Rum on every Trade makes them the natural Kickback
-crew; watch that in playtest.
+poured at High Society.
 
 History, so nobody rebuilds it: 2026-08-22 had the address set the price and Rum carry the
 Kickback at any address; 2026-09-01 reversed that to "any barrel, only at The Hotspot"; v0.9.8
@@ -478,7 +478,7 @@ are, the art notes for the Bribe cards, and what to watch in playtest.
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
 Ear). It is not implemented and should not be without Nick asking. The universal Sweep and
-the Sicilians' **Untouchable** trait still read as they always have. Read the file before
+the Sicilian Playbook still read as they always have (Untouchable was cut on 2026-10-15). Read the file before
 touching the Sweep, the Sicilian Playbook, or the player-count setup.
 
 The older `deed-sweep-handoff.md` proposal (let the Sweep skip Boroughs whose Deed you hold)
@@ -521,36 +521,68 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 
 - **Skiff is a Move on your own turn, nothing more.** The escape by boat on a Fold or Advance
   was cut; don't bring it back.
-- **Stealth is a Move where the Occupier cannot Ambush** (since 2026-10-08; see below). Hold
-  Fire and Fold stay open, and the Pin is the standard one, free Fall Back included.
+- **Stealth skips the Standoff** (since 2026-10-15; see below): no Ambush and no Fold, the
+  Occupier Holds Fire, and the Pin is the standard one, free Fall Back included.
 - **Loose barrels belong to nobody**: whoever takes Control of the District takes them.
 - **The raided crew's owner picks** which Connected Safe District it runs to (by water too since
   2026-10-07; see below).
 - **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
-- **Whispers is peek-only**: the Vipers may look at the top card of the Jobs deck at any time.
-  The face-down claim is gone. Nick rates the peek the higher-skill play: they can prepare for a
-  Job before it reaches the Market.
+- **Whispers is a Play** since 2026-10-15: look at the top card of the Jobs deck in secret, and
+  claim it at once or leave it on top. From 2026-09-30 it was a peek at any time (Nick then rated
+  the peek the higher-skill play); the 2026-10-15 cut of the passive Traits made it a Play.
 - **Starting Boroughs are random** (the reverse-order pick is gone). Since 2026-10-10 they are
   dealt as the four Borough cards (see Borough cards, above).
 
-## Stealth blocks the Ambush, not the Fold
+## Mobsters hold turf; two Signature Plays a family
 
-Since 2026-10-08 (Nick). From 2026-09-30 a Stealth left the Occupier only Hold Fire. Barring the
-Fold made the plain Move a tell: a Viper who wanted the block without a fight had to come by the
-front door to leave the Fold open, and that told the Occupier to Ambush. Now the Occupier answers a
-Stealth as he would any Move, less the Ambush, so the way a Viper comes in says nothing about what
-he wants.
+Since 2026-10-15 (Nick; `mk-online-rules-sync.md` §38).
 
-Watch in playtest: Stealth now beats a plain Move for any Viper crew of five or fewer with no
-barrels, and a thin block facing one will usually Fold (The Almanac's lesson 19: a Boss and four on
-a Stealth take a Boss, two Runners and a Safehouse three times in four if he stands). So the Vipers
-take more blocks and kill fewer Bosses than they did. Do not bring back "never Fold".
+**Only Mobsters Control a District.** A Safehouse alone holds nothing, so its District is nobody's:
+its barrels are anyone's who walks in, its Still is not active for its owner (a lone Safehouse
+brewed nothing before either, at Muscle Ratio 0), and it counts for no Extort or Harbormaster. A
+District holding only a rival Safehouse is Safe: walk in, no Standoff, take it over or destroy it.
+Secure can land on it, and that is a takeover. Secure no longer grants Control, so a new base is two
+Plays (Secure, then Recruit). Walking onto a lone Safehouse is not a Seize: nobody Controlled it.
+The Rulebook's Key Concepts and Territory carry it (A Rival Safehouse is the Secure's one home).
+
+**No passive Traits.** Each family has exactly two Signature Plays: the Sicilians Hit and
+Consigliere; the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
+and Peddle; the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
+the top Job in secret, claim it at once or leave it); the Knights Skiff and Torch (which now burns
+the District's barrels too). Gone: Untouchable, Firepower, Network, passive Whispers, Plunder and
+Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the rows.
+
+Watch in playtest:
+
+- **The Eviction** (3) can be paid by a Secure onto any lone rival Safehouse, from anywhere, for
+  $500. If it proves a windfall, Claude's suggested fix is "Seize a District holding a rival's
+  Safehouse, and take it over". `overlap_audit.py` also lists The Eviction + The Warehouse as a new
+  top-tier pair (one Secure onto a lone Safehouse sitting on 10+ barrels).
+- **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss, three and
+  a Safehouse from 8% to 17%; on four, two bursts take it 43% against 11%
+  (`tools/sim_almanac_combat.js`). Firepower's free die used to make it about 33% on three.
+- **Whispers** claims outside the Offers, so the Vipers can take a 3 off the deck on Day 1.
+
+## Stealth skips the Standoff
+
+Since 2026-10-15 (Nick, with the Traits' cut: the Vipers are the assassins). A Stealth gets no
+Standoff: the Occupier can neither Ambush nor Fold, he Holds Fire, and the Vipers are Pinned. This
+reverses 2026-10-08, when the Fold was opened again because barring it made the plain Move a tell (a
+Viper who wanted the block without a fight had to come by the front door, and that told the
+Occupier to Ambush). Nick accepts the tell now: the plain Move is how a Viper asks for a Fold, and the
+Stealth is how he comes to kill.
+
+Watch in playtest: a Boss and four on a Stealth take a Boss, two Runners and a Safehouse three times
+in four (The Almanac's lesson 19), and a lone Boss caught by one can't run, so the Vipers are the
+natural hunters for The Toll Booth Trap.
 
 ## Torch is a shot; Red dice for the Invader
 
 Since 2026-10-09 (Nick). Torch draws the fight's Heat only if it is the first shot, as Hit does. It
 used to draw Heat always, so a fight's first shot plus a Torch put two markers down in one Play and
-could take the track from 4 to 6. Now no Play draws more than one marker. In a fight the Invader rolls
+could take the track from 4 to 6. Now no Play draws more than one marker. Since 2026-10-15 Torch
+also sends every barrel in the District to the Supply (it left them unharmed), so it answers a
+stockpile as the Raid does. In a fight the Invader rolls
 **Red** and the Occupier **White**, so nobody has to remember who rolled which; Red also brews.
 
 ## Extort and the Greed Tax: loud at 5+
@@ -624,25 +656,25 @@ Since 2026-10-10 (Nick). One mechanical verb: a Safehouse sent back to its owner
 The printed Bloody Sunday card already said "Destroy". The choice has one home, **A Rival Safehouse**
 in Territory: take Control of a block holding one and it can't stay, so **take it over** (yours moves
 in from wherever it stood, free) or **destroy** it. Move, Skiff, the Fold and Victory point there. Do
-not call the takeover a Secure: it read as costing a Play or $500.
+not call the free takeover a Secure: it read as costing a Play or $500. Since 2026-10-15 a Secure
+onto a lone rival Safehouse is a takeover too, the paid one (see *Mobsters hold turf*).
 
-## District words: Empty, Hostile, unguarded; barrels, not Liquor
+## District words: Safe, Hostile, Padlocked; barrels, not Liquor
 
-Since 2026-10-10 (Nick). A District is in one of five states, each with one word:
+Since 2026-10-15 (Nick; it was five states from 2026-10-10). Once only Mobsters hold turf, a District
+is one of three, each with one word, and Control says whose:
 
 | On the District | Word |
 | --- | --- |
-| Your Mobster or Safehouse | you **Control** it |
-| No Mobsters, no Safehouse, no Squad (barrels don't count) | **Empty** |
+| No rival Mobsters, no Squad (yours, or nobody's; barrels and a lone Safehouse don't count) | **Safe** |
 | Rival Mobsters | **Hostile** |
-| A rival Safehouse with no Mobsters | **unguarded** |
-| A Police Squad | **Impassable** |
+| A Police Squad | **Padlocked** |
 
-**Safe** is yours or Empty. "Empty" replaced **Defenseless**, which read as "a rival block nobody
-guards", the unguarded case, which it never included; the same Districts, so the Jobs that used it
-(The Empty Casket, Squatter's Rights) are unchanged in play. "Undefended HQ", "standing alone" and
-"Empty rival Safehouse" are all **unguarded** now. Where a rule depends on rival Mobsters, say
-**Hostile**, not "rival turf": an unguarded Safehouse is rival turf and gets no Standoff.
+You **Control** a District your Mobsters stand on. Retired the same day: **Empty** (no job left once
+Safe is defined directly), **unguarded** (a lone rival Safehouse is just Safe), and **Impassable**
+(Padlocked names both the District and its shut bar and Still). Before them, "Empty" had replaced
+**Defenseless**. Where a rule depends on rival Mobsters, say **Hostile**, not "rival turf". Rule
+prose says "a District nobody Controls" where it needs the nobody's case.
 
 Rule sentences say **District**, not block, and **barrels**, not Liquor. "Block" and "liquor" stay in
 flavour (italics, scene-setting, the Almanac's voice), and "Liquor Barrels" stays as the component's
@@ -685,9 +717,9 @@ the shared terms carry the rules:
   not simplify this to "all of them": leaving barrels is a play (Nick). A rival who Ambushed you
   holds the freshest Heat marker, so the barrels you leave make his block the Big Bust. The
   Rulebook's Advance entry carries that as its flavour line; mk-online's Advance has steppers.
-- **Stealth targets a Hostile District** (the defined term: guarded by rival Mobsters). An
-  unguarded Safehouse is a plain Move's job, and the engine always refused a Stealth there.
-- **Skiff is otherwise a Move**: a Standoff in Hostile turf, take over or destroy an unguarded
+- **Stealth targets a Hostile District** (the defined term: guarded by rival Mobsters). A lone
+  rival Safehouse is a plain Move's job, and the engine always refused a Stealth there.
+- **Skiff is otherwise a Move**: a Standoff in Hostile turf, take over or destroy a lone rival
   Safehouse. Its entry names the four inland Districts (Fordham, Corona, Flushing, Richmond Hill),
   which mk-online's `NON_COASTAL` holds and `scripts/boardcheck.ts` checks against the board.
 - The Playbooks' **Fall Back** row says the carried barrels stay for the Occupier and that an
@@ -712,9 +744,10 @@ Raid can hand it a free Move across the map and swing the Harbormaster.
 
 The places a crew can still be boxed with one road left are not Docks: Coney Island (Squad on Red
 Hook or Canarsie) and Morris Park (Squad on Fordham or Throggs Neck). The Almanac's lesson 21 names
-those two. Do not restore "on foot" or "Land Connected" to the Scatter.
+those two. Do not restore "on foot" or "Adjacent" to the Scatter.
 
-**Squads walk** (same day). A Squad's reach is the Districts directly **Land Connected** to it
+**Squads walk** (same day). A Squad's reach is the Districts directly **Adjacent** to it (Land
+Connected until 2026-10-15)
 inside its own Borough. The Rulebook had said "Connected", which let a Squad hop by water between
 the two Docks of one Borough (West Side and the Bowery, Whitestone and Jamaica), as mk-online did
 until it took the ruling the same day. Nick ruled it out as a hop nobody would spot; the (now

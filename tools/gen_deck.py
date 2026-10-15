@@ -20,7 +20,7 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 # District, the big word on the board's sign. A bar card also names the bar on the small line
 # under it, as "at <bar> in <District>" (Nick, 2026-10-11): the bar is the theme, the District is
 # what the table finds on the board.
-# Use the defined word (Seize, Empty, take over, home Borough) rather than spelling out
+# Use the defined word (Seize, Safe, take over, home Borough) rather than spelling out
 # its meaning, and never ask for a count of Districts across a Borough: those were the
 # Deeds' stand-ins, and they could not be checked at a glance or settle a tie.
 ONES = [
@@ -174,7 +174,7 @@ ONES = [
      "Seize a <b>Dock</b>.",
      "The pier belongs to whoever is still standing on it."),
     ("The Beachhead", "Beachhead.jpg", "Secure",
-     "Secure your Safehouse in a District <b>Land Connected</b> to a rival <b>Safehouse</b>.",
+     "Secure your Safehouse in a District <b>Adjacent</b> to a rival <b>Safehouse</b>.",
      "You should meet the neighbours. They&rsquo;d rather not."),
     # "a Ward" made this a strict SUPERSET of Union Dues (also "Recruit 6+ in a
     # Ward"), so Union Dues could never fire without paying this too: a guaranteed

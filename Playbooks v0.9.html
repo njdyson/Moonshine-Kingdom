@@ -202,7 +202,6 @@ a:hover{color:var(--gold-bright)}
    rule that ends on a small diamond
    ============================================================ */
 .sec{display:flex;align-items:center;gap:8px;margin:8px 0 4px}
-.sec--trait{margin-bottom:4px}
 .sec--res{margin-bottom:5px}
 .sec--flow{margin:16px 0 6px}
 .sec--sig{margin:5px 0 4px}
@@ -214,7 +213,7 @@ a:hover{color:var(--gold-bright)}
 .sec-rule::after{content:"";width:4px;height:4px;margin-left:3px;background:var(--gold-dim);transform:rotate(45deg);opacity:.7}
 
 /* ============================================================
-   TRAIT + SIGNATURE PANELS
+   RULE + SIGNATURE PANELS
    Lacquer panels in a gilt keyline, cut on the Deco chamfer (the
    board's plaques), where they were rounded boxes.
    ============================================================ */
@@ -237,8 +236,8 @@ a:hover{color:var(--gold-bright)}
 /* The last panel sits on the card's foot, so every card in the set ends on one line */
 .sig{--c:9px;margin-top:9px;padding:6px 13px 9px}
 .sig:last-child{margin-top:auto}
-/* The Handshake sits on the back's foot as a rule panel, the Faction Trait's twin: it is
-   not a Play, so it carries no cost socket (2026-10-12; it was a 0-cost row) */
+/* The Handshake sits on the back's foot as a rule panel: it is not a Play, so it carries
+   no cost socket (2026-10-12; it was a 0-cost row) */
 .trait--foot{margin-top:auto;padding:8px 14px}
 /* the old 9px gap, kept above it however full the card */
 .card>:nth-last-child(2){margin-bottom:9px}
@@ -246,11 +245,11 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    PLAY ROWS
    ============================================================ */
-/* Fronts are row-count-bound: 14 rows, so every 1px here costs ~28px of card. Collect's
-   row went on 2026-10-14 and its room went to the rows: 5px padding and the larger type
-   below leave the busiest mob 16px spare in the 925 print box (Chromium), a buffer for
-   Safari's looser wrap. */
-.play{display:flex;gap:11px;align-items:flex-start;padding:5px 2px;border-bottom:1px solid var(--rule)}
+/* Fronts are row-count-bound: 16 rows, so every 1px here costs ~32px of card. Collect's
+   row went on 2026-10-14 and the Faction Trait panel on 2026-10-15, and their room went to
+   the rows: 8px padding and the larger type below leave the busiest mob (the Knights) about 20px spare in
+   the 925 print box (Chromium), a buffer for Safari's looser wrap. */
+.play{display:flex;gap:11px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--rule)}
 /* The backs are not row-bound (they share one layout and have room), so their rows breathe */
 .act{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
@@ -286,6 +285,8 @@ a:hover{color:var(--gold-bright)}
 .desc{flex:1;font:400 11px/1.4 Barlow;color:var(--body);padding-top:3px}
 .play .desc{font-size:11.5px}
 .play .name{font-size:12.5px}
+/* room for "Tommy Gun" and its Heat flame on one line */
+.sig .name{flex-basis:88px;white-space:nowrap}
 .desc--sm{padding-top:1px}
 
 /* ============================================================
@@ -368,9 +369,6 @@ a:hover{color:var(--gold-bright)}
       <div class="mob-tag">Old money. Longer memory.</div>
     </div>
 
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
-    <div class="trait"><span class="trait-name">Untouchable.</span> <span class="trait-body">The precinct captains are on the payroll. Police Squads never enter your <b>Safehouse</b> District during a Raid; if it would be targeted, they choose the next most wanted legal District in reach.</span></div>
-
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
       <div class="cost">1</div>
@@ -414,7 +412,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>.</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>. Alone, it holds nothing.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -519,7 +517,7 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it. A Secure onto it takes it over.</div>
 
     <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
@@ -531,9 +529,6 @@ a:hover{color:var(--gold-bright)}
       <div class="plate"><span class="mob-name">East Side Vipers</span></div>
       <div class="mob-tag">They hear it before you say it.</div>
     </div>
-
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
-    <div class="trait"><span class="trait-name">Whispers.</span> <span class="trait-body">You may look at the <b>top card of the Jobs deck</b> at any time. Keep it to yourself.</span></div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
@@ -578,7 +573,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>.</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>. Alone, it holds nothing.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -609,12 +604,12 @@ a:hover{color:var(--gold-bright)}
       <div class="play">
         <div class="cost">1</div>
         <div class="name">Stealth</div>
-        <div class="desc">Move up to 5 Mobsters (no barrels) into a Connected Hostile District. The Occupier cannot <b>Ambush</b>.</div>
+        <div class="desc">Move up to 5 Mobsters (no barrels) into a Connected Hostile District. <b>No Standoff:</b> the Occupier can't Ambush or Fold, and you are Pinned.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
-        <div class="name">Tunnel</div>
-        <div class="desc">Move up to 5 barrels between your <b>Safehouse</b> and any District you Control, <b>Connected or not</b>, either way.</div>
+        <div class="name">Whispers</div>
+        <div class="desc">Look at the <b>top card of the Jobs deck</b> in secret. You may claim it at once, staking from your Reserves; it goes face-up. Leave it, and it stays on top.</div>
       </div>
     </div>
   </div>
@@ -683,7 +678,7 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it. A Secure onto it takes it over.</div>
 
     <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
@@ -695,9 +690,6 @@ a:hover{color:var(--gold-bright)}
       <div class="plate"><span class="mob-name">Harlem Knights</span></div>
       <div class="mob-tag">Every pier from Havana to Harlem.</div>
     </div>
-
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
-    <div class="trait"><span class="trait-name">Network.</span> <span class="trait-body">Friends on every pier from Havana to Harlem. Whenever you <b>Trade</b> at a Dock, gain <b>1 extra barrel</b> of Havana Rum free, if one's left in the supply.</span></div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
@@ -742,7 +734,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>.</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>. Alone, it holds nothing.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -778,7 +770,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play play--end">
         <div class="cost">1</div>
         <div class="name">Torch <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse. Rival Mobsters and barrels are unharmed. Heat only if it's the fight's first shot.</div>
+        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse <b>and every barrel there</b>. Rival Mobsters are unharmed. Heat only if it's the fight's first shot.</div>
       </div>
     </div>
   </div>
@@ -847,7 +839,7 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it. A Secure onto it takes it over.</div>
 
     <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
@@ -859,9 +851,6 @@ a:hover{color:var(--gold-bright)}
       <div class="plate"><span class="mob-name">Hell's Kitchen Irish</span></div>
       <div class="mob-tag">They always come heavy.</div>
     </div>
-
-    <div class="sec sec--trait"><span class="sec-dia"></span><span class="sec-name">Faction Trait</span><span class="sec-rule"></span></div>
-    <div class="trait"><span class="trait-name">Firepower.</span> <span class="trait-body">They always come heavy. When you <b>Open Fire</b>, roll <b>1 extra attack die</b> (max 5). Invading only, never on defence, not even an Ambush.</span></div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Logistics</span><span class="sec-rule"></span></div>
     <div class="play">
@@ -906,7 +895,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">1</div>
       <div class="name">Secure</div>
-      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>.</div>
+      <div class="desc"><b>Place</b> your <b>one</b> Safehouse in any Safe District for <b>$500</b>. Alone, it holds nothing.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -935,9 +924,9 @@ a:hover{color:var(--gold-bright)}
     <div class="sig">
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Signature Plays</span><span class="sec-rule"></span></div>
       <div class="play">
-        <div class="cost">1</div>
-        <div class="name">Plunder</div>
-        <div class="desc"><b>Special Attack:</b> Roll Muscle; each hit steals 1 barrel instead of killing (Occupier hits still kill). Carried off on Advance, dropped on Fall Back. No Heat.</div>
+        <div class="cost">2</div>
+        <div class="name">Tommy Gun <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+        <div class="desc">While Pinned in a rival District, Open Fire with <b>1 extra die</b> (max 5) at <b>+1 Threat</b>. Heat as per Open Fire: only if it's the fight's first shot.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
@@ -1011,7 +1000,7 @@ a:hover{color:var(--gold-bright)}
     <div class="act"><div class="cost cost--sm">1</div><div class="name name--sm">Advance</div><div class="desc desc--sm">Move Pinned Mobsters to a Safe District Connected to this one, with as many of their barrels as you like; the rest are the Occupier's.</div></div>
     <div class="act act--end"><div class="cost cost--sm cost--free">0</div><div class="name name--sm">Fall Back</div><div class="desc desc--sm">Invader only. Retreat all Pinned units to the District they came from, leaving their barrels to the Occupier. Ledger empty? You must.</div></div>
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
-    <div class="back-rule"><b>Rival Safehouse.</b> Walk in on an unguarded one (no Standoff), or win its District by Fold or fight: then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
+    <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it. A Secure onto it takes it over.</div>
 
     <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>

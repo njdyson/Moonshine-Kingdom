@@ -983,6 +983,34 @@ the crown stays at 20.
 Society Venue), bot plans and any Respect thresholds that assumed a 5, the Market's setup split (the
 3s shuffled in after the opening Market), `scripts/jobs-check.ts` and RULES-AI.md.
 
+## 38. Mobsters hold turf; two Signature Plays a family, no Traits (2026-10-15, Nick)
+
+**Control.** Only Mobsters (Boss or Runners) Control a District. A Safehouse alone holds nothing: its
+District is nobody's, so its barrels are nobody's when a Play ends, its Still is not active, and it
+counts for no Extort or Harbormaster. A District holding only a rival Safehouse is **Safe**: walk in
+with no Standoff, then take it over or destroy it as before. **Secure** may target it, and a Secure
+there is a take over. Secure no longer grants Control. Walking onto a lone rival Safehouse is not a
+Seize (nobody Controlled the District). If both crews fall in one volley, nobody Controls the District
+and its Safehouse stays.
+
+**Words.** Safe = no rival Mobsters and no Police Squad. Hostile = rival Mobsters. **Padlocked**
+replaces Impassable for a District holding a Squad. **Adjacent** replaces Land Connected (same
+meaning). Empty and unguarded are retired.
+
+**Traits removed:** Untouchable (Squads may now take the Sicilian Safehouse District), Firepower,
+Whispers as a passive peek, Network. **Plays removed:** Plunder, Tunnel.
+
+| Family | Signature Plays |
+| --- | --- |
+| Sicilians | Hit (2, In a Firefight), Consigliere (1): unchanged |
+| Irish | **Tommy Gun** (2, In a Firefight): Open Fire with 1 extra die (max 5) at +1 Threat; Heat only on the first shot. Peddle (1): unchanged |
+| Vipers | **Stealth** (1): up to 5 Mobsters, no barrels, into a Connected Hostile District; no Standoff (no Ambush, no Fold), the Occupier Holds Fire. **Whispers** (1, a Play): look at the top card of the Jobs deck in secret; may claim it at once, staking from Reserves; it goes face-up. Left, it stays on top |
+| Knights | Skiff (1): unchanged. **Torch** (1, In a Firefight): also sends every barrel in the District to the Supply |
+
+**To port:** Control and every check built on it (brew, Extort, Harbormaster, Unload, Trade, Peddle,
+barrel ownership at Play end, Seize), Secure's targets, the Squads' reach (no Untouchable), the four
+families' plays and the removed Traits, the bots, the harness options and codec, the UI and RULES-AI.md.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
