@@ -1075,6 +1075,15 @@ The card texts in `jobs.ts`; `allBarsIn` skips a Padlocked Speakeasy and the bar
 (`objectives.ts`); the bots plan both; `scripts/jobs-check.ts` covers a Padlocked room and a
 Raid-padlocked bar. `RULES-AI.md` defines open.
 
+## 42. Territory wording: the Golden Rule, Adjacent and Connected (2026-10-15, Nick)
+
+Wording only. The Golden Rule of Turf reads "at the end of every Play" (it named Shadows and Sunset).
+Connection is two terms, Adjacent (border or Bridge) and Connected (Adjacent, or Dock to Dock); "Water
+Connected" is gone. A Rival Safehouse and the Playbooks no longer mention Secure; the Rulebook's Secure
+row says a rival's Safehouse there is destroyed. The Blue Wall drops its restatement of Squad movement.
+
+**To port:** nothing. `RULES-AI.md` already says all of it.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
