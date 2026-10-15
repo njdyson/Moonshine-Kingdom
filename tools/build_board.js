@@ -652,7 +652,7 @@ function piers(list) {
 }
 
 // Harbour lamps (2026-10-07): a gilt lamp on the end of every pier, with a little light on
-// the water, so the eight Docks, each Water Connected to all the rest, catch the eye from
+// the water, so the eight Docks, each Connected to all the rest, catch the eye from
 // across the table. The piers keep their Dock's colour, so they still read as its land.
 // Drawn over the leather, so the hide's grain doesn't print across the light.
 const LAMP = { r: 2.7, glow: 15 };

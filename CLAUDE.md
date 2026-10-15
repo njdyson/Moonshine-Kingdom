@@ -315,7 +315,7 @@ kicker (the enamel band keeps the colour; the backs' "Combat Reference" went too
 Rat and Bribe went to one line each.
 Move then handed rival turf to the reverse ("Into rival turf: see reverse"), which carries a **Rival
 Safehouse** line (with no Mobsters beside it, walk in; guarded, win the District by Fold or fight;
-then take it over or destroy it; a Secure onto it takes it over) under the Pinned note, and the
+then take it over, free, or destroy it) under the Pinned note, and the
 **Handshake** as a rule panel at its foot: it is not a Play, so no 0-cost socket. Since 2026-10-14
 the room Collect's row freed went to the fronts' rows (5px padding, 11.5px text, 12.5px names; Nick: "more breathing room
 ... up the font a touch"). On 2026-10-15 the Faction Trait panel went from the fronts and its room
@@ -567,9 +567,11 @@ Since 2026-10-15 (Nick; `mk-online-rules-sync.md` §38).
 its barrels are anyone's who walks in, its Still is not active for its owner (a lone Safehouse
 brewed nothing before either, at Muscle Ratio 0), and it counts for no Extort or Harbormaster. A
 District holding only a rival Safehouse is Safe: walk in, no Standoff, take it over or destroy it.
-Secure can land on it, and that is a takeover. Secure no longer grants Control, so a new base is two
+Secure can land on it, and the rival's is destroyed (the Secure row says so; since 2026-10-15 no
+Territory line or Playbook calls it a takeover, because naming Secure beside the free takeover made
+the takeover read as paid). Secure no longer grants Control, so a new base is two
 Plays (Secure, then Recruit). Walking onto a lone Safehouse is not a Seize: nobody Controlled it.
-The Rulebook's Key Concepts and Territory carry it (A Rival Safehouse is the Secure's one home).
+The Rulebook's Key Concepts and Territory carry it.
 
 **No passive Traits.** Each family has exactly two Signature Plays: the Sicilians Hit and
 Consigliere; the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
@@ -728,6 +730,14 @@ Invader; a Raid destroys the Safehouse and sends the barrels to the Supply. Nowh
 Fold, but an arrest in a Raid. The Raid step stays **The Scatter**; Scram is the run inside it.
 Scram is explained inline where it happens (the Fold entry, the Scatter), not as a Territory
 entry: Nick's call. "Scram" is 1928 slang.
+
+## Territory wording (2026-10-15, Nick)
+
+- **The Golden Rule of Turf** says "at the end of every Play". It named Shadows and Sunset, which
+  read as though two mobs could share a District across several Plays.
+- **Two connection terms, no third**: **Adjacent** (a border or a Bridge) and **Connected** (Adjacent,
+  or Dock to Dock across the water). Don't bring back "Water Connected" or "Land Connected".
+- The Blue Wall no longer restates how Squads move: Police Raids is its home.
 
 ## Movement reads as one family
 
