@@ -1011,6 +1011,12 @@ Whispers as a passive peek, Network. **Plays removed:** Plunder, Tunnel.
 barrel ownership at Play end, Seize), Secure's targets, the Squads' reach (no Untouchable), the four
 families' plays and the removed Traits, the bots, the harness options and codec, the UI and RULES-AI.md.
 
+### Ported 2026-10-15 (mk-online 2caaf66, PR #12)
+
+The engine also makes volleys simultaneous, so both crews can fall. A Torch leaves barrels the
+Invader carried in. A Fold onto the Invader's lone Safehouse lets the Scramming crew choose first.
+`scripts/control-check.ts` covers the Control and take-over cases.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
