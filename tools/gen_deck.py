@@ -50,32 +50,35 @@ ONES = [
     # SETS PASS 2026-10-11: 3+ became 4+, the bar set's one count.
     # RETIER 2026-10-14: 5+ on all eight (Nick). With the Greed Tax at 5+ a 4-barrel sale was quiet,
     # so the home bars paid a point for an Unload you'd make anyway; at 5+ every one draws Heat.
+    # OPEN PASS 2026-10-15: back to 4+ (Nick). A quiet pour again, and Nick doesn't mind the 1s carrying
+    # no Heat: one Offer a morning is the bottleneck, so easier 1s sharpen the Lay Low race. In bot
+    # runs the bars went from 30% to 41% of claims finished.
     ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b>.",
+     "Unload <b>4+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b>.",
      "What the angels take, the house bills you for anyway."),
     # Manhattan's starting bar (The Haymarket). Art: bootleggers with bottles, the ghosts behind
     # them drawn from the smoke.
     ("High Spirits", "High Spirits.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b>.",
+     "Unload <b>4+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b>.",
      "It never closes. It only gets quieter."),
     # The Bronx's empty bar. Belmont is the Bronx's Little Italy; Arthur Avenue is its high street.
     ("Bathtub Gin", "Bathtub Chemistry.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b>.",
+     "Unload <b>4+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b>.",
      "Mixed in a tub off Arthur Avenue. Poured like champagne."),
     # The Bronx's starting bar (The Penny Whistle). "Coffin varnish" was 1920s slang for liquor
     # that might kill you; the art is a man cutting a jar of it.
     ("Coffin Varnish", "Cutting.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>The Penny Whistle</b> in <b>Fordham</b>.",
+     "Unload <b>4+ barrels</b> at <b>The Penny Whistle</b> in <b>Fordham</b>.",
      "Two parts water, one part kerosene, all of it profit."),
     # Queens' empty bar (Bohemian Hall). "Giggle water" is period slang for any drink. The art was
     # The Grand Tour's: a handshake over a crate of bottles.
     ("Giggle Water", "Cobble Hill.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b>.",
+     "Unload <b>4+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b>.",
      "Poured by the pitcher, and nobody asks what is in it."),
     # Queens' starting bar (Paradise Alley). Back as a 1 on its own art: it was a 3 at 6+ until the
     # setup pass cut it as a home chore. As a 1, a home sale is the right size.
     ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b>.",
+     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b>.",
      "One bad batch and the whole city stops drinking."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
@@ -91,13 +94,13 @@ ONES = [
     # Speakeasy; it is the empty block beside two Brooklyn starts (Red Hook, Canarsie).
     # SETS PASS 2026-10-11: one of the bar set; text unchanged.
     ("Last Call", "Last Call.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>Ruby&rsquo;s Joint</b> in <b>Coney Island</b>.",
+     "Unload <b>4+ barrels</b> at <b>Ruby&rsquo;s Joint</b> in <b>Coney Island</b>.",
      "Pour till the taps run dry and the sirens start up."),
     # Brooklyn's starting bar (Sunny's Bar). "Off the Boat" was Cuban Prince's first name. Switch.jpg
     # (boats unloading under a suspension bridge) left Night Landing because Jamaica Bay had no bridge;
     # Red Hook sits at the Brooklyn Bridge's end, so it fits here.
     ("Off the Boat", "Switch.jpg", "Unload",
-     "Unload <b>5+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b>.",
+     "Unload <b>4+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b>.",
      "Unloaded at midnight, poured by one, gone by two."),
     # THE SINGLES: landmarks, Docks and Staten Island, which no Borough set can carry.
     ("The Milk Run", "The Milk Run.jpg", "Move",
@@ -305,22 +308,27 @@ TWOS = [
     #   WORDING 2026-10-13 (Nick): "Extort all of the Speakeasies in X". "I don't think that can be
     #   misinterpreted and it reads much cleaner." An Extort collects from every District you
     #   Control, so extorting a Speakeasy means holding it; "all of the" still takes in the room.
+    #   OPEN PASS 2026-10-15 (Nick): "Extort every open Speakeasy in X". Open = not Padlocked. A Squad
+    #   starts on each room, so "all of the" was impossible until it moved and dead again whenever a
+    #   Raid parked a Squad on a bar; one Squad a Borough means two bars are always open. In bot runs
+    #   claims finished went from 35% to 64%. At home it is your starting bar and the next one: Nick's
+    #   answer is denial (a rival takes the card in the Offers, for him a real Job).
     ("Empire State", "Empire State.jpg", "Extort",
-     "Extort <b>all of the Speakeasies</b> in <b>Manhattan</b>.",
+     "Extort <b>every open Speakeasy</b> in <b>Manhattan</b>.",
      "From Sugar Hill to the Tenderloin, every till pays one man."),
     # The name and art came off Manhattan's old home-bar 3 (Unload 6+ at The Tenderloin),
     # which had restored them from the cut Extort card. Back on an Extort, where a squeeze
     # belongs; the art (the wagons at the door mid-count) is Extort's Heat drawn as a picture.
     ("The Big Squeeze", "Big Squeeze.jpg", "Extort",
-     "Extort <b>all of the Speakeasies</b> in the <b>Bronx</b>.",
+     "Extort <b>every open Speakeasy</b> in the <b>Bronx</b>.",
      "The whole Bronx pays on Friday. Nobody has to ask twice."),
     ("King of Queens", "King of Queens.jpg", "Extort",
-     "Extort <b>all of the Speakeasies</b> in <b>Queens</b>.",
+     "Extort <b>every open Speakeasy</b> in <b>Queens</b>.",
      "Every glass poured in Queens, the King takes a sip."),
     # The Black Hand letters (an inked palm, a sum, a threat) were the shakedown of the
     # Italian blocks in Brooklyn and East Harlem. The art is a butcher reading one.
     ("The Black Hand", "Black Hand.jpg", "Extort",
-     "Extort <b>all of the Speakeasies</b> in <b>Brooklyn</b>.",
+     "Extort <b>every open Speakeasy</b> in <b>Brooklyn</b>.",
      "The letter had a hand drawn on it. The shop paid by noon."),
     # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's
     # Extort card: four of the eight Docks, held at once. Holding four almost always makes you the

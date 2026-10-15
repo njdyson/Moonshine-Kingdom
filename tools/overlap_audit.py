@@ -95,8 +95,8 @@ def J(name, respect, verbs, text, fn):
 JOBS = [
     # --- 1 Respect ---
     # The bar set (2026-10-11, round 2): one Unload card per ordinary Speakeasy.
-] + [J(n, 1, ['Unload'], f'Unload 5+ barrels at {venue} in {bar}.',
-       (lambda bar: lambda p, d: p['barrels'] >= 5 and d.name == bar)(bar))
+] + [J(n, 1, ['Unload'], f'Unload 4+ barrels at {venue} in {bar}.',
+       (lambda bar: lambda p, d: p['barrels'] >= 4 and d.name == bar)(bar))
      for n, venue, bar in (("The Angel's Share", 'The Silver Dollar', 'East Harlem'),
                            ('High Spirits', 'The Haymarket', 'The Tenderloin'),
                            ('Bathtub Gin', "DeLillo's", 'Belmont'),
@@ -136,16 +136,16 @@ JOBS = [
     # --- 2 Respect ---
     # The Extort cards read the whole map, so an Extort is modelled once (see _extort).
     J('Empire State', 2, ['Extort'],
-      'Extort all of the Speakeasies in Manhattan.',
+      'Extort every open Speakeasy in Manhattan.',
       lambda p, d: M in p['bars']),
     J('The Big Squeeze', 2, ['Extort'],
-      'Extort all of the Speakeasies in the Bronx.',
+      'Extort every open Speakeasy in the Bronx.',
       lambda p, d: BX in p['bars']),
     J('King of Queens', 2, ['Extort'],
-      'Extort all of the Speakeasies in Queens.',
+      'Extort every open Speakeasy in Queens.',
       lambda p, d: Q in p['bars']),
     J('The Black Hand', 2, ['Extort'],
-      'Extort all of the Speakeasies in Brooklyn.',
+      'Extort every open Speakeasy in Brooklyn.',
       lambda p, d: BK in p['bars']),
     J('The Five Families', 3, ['Extort'],
       'Extort a District in all five Boroughs.',
@@ -352,7 +352,7 @@ def _fight(fight, state, home, out, sh, route, from_staten, barrels, rum, crew):
 # map, not the District it is made from. Modelling it per District (as before 2026-10-11)
 # reported The Five Families as firing in 25 places, and would have reported every pair of
 # Extort Jobs as a 25-District overlap. It is one Play-space, THE_MAP, enumerated over what
-# you hold: all five Boroughs or not, and which Boroughs' three Speakeasies are all yours.
+# you hold: all five Boroughs or not, and which Boroughs' open Speakeasies are all yours.
 # Judge an Extort stack by what it needs held and staked, not by a District count.
 THE_MAP = D(('the whole map (Extort)', None, set(), 7))
 MAINLAND = (M, BX, Q, BK)
