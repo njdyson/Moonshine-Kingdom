@@ -84,7 +84,7 @@ CARDS = [
     ('The Beachhead',         1, 'Secure',    {'any'},                      {}),
     ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),
     ('Rum Row',               1, 'Trade',     {'dock'},                     {ST: 'neutral'}),
-    ('The Insurance Job',     1, 'Rat',       {'any'},                      {}),
+    ('The Insurance Job',     2, 'Raid',      {'any'},                      {}),
     # --- 2 Respect: the Extort set, one per seat, each its seat's friendly 2 ---
     # 'press5': each set holds its seat's starting bar (Pressure 5) and its room (6).
     ('Empire State',          2, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {M: 'friendly'}),
@@ -110,7 +110,7 @@ CARDS = [
     ('A Bridge to Sell',      2, 'Move',      {'dock', 'speakeasy', 'press5'}, {M: 'friendly', BK: 'friendly'}),
     # Each seat's own room, so every seat's friendly 2 alike.
     ('Opening Night',         2, 'Unload',    {'highSociety', 'speakeasy'}, {}),
-    ('Union Dues',            2, 'Recruit',   {'ward'},                     {}),
+    ('Union Dues',            1, 'Recruit',   {'ward'},                     {}),
     # --- 3 Respect (the top tier since the 1/2/3 retier, 2026-10-14): aimed at every seat alike ---
     ("The Butcher's Ledger",  3, 'Open Fire', {'any'},                      {}),
     ("The Smuggler's Run",    3, 'Move',      {'dock'},                     {ST: 'neutral'}),

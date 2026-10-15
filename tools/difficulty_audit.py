@@ -117,8 +117,10 @@ CARDS = [
      "Stapleton: Secure to Staten first, then hire. A parked Runner denies it."),
     ("Rum Row", 1, "Trade", 2, 0, 0, 2, 1, 1, 1, 0,
      "Staten is uncontested, which is exactly why it is not blockable."),
-    ("The Insurance Job", 1, "Rat", 3, 0, 0, 0, 2, 1, 0, 0,
-     "Engineering the Raid onto yourself is private. Nobody interferes."),
+    # A 2 on any Raid your Play sets off since 2026-10-15: rivals can land the fifth marker first or
+    # make fresher noise, so it gains a rival point.
+    ("The Insurance Job", 2, "Raid", 3, 1, 0, 0, 2, 1, 0, 0,
+     "Steer your own Raid onto a weak Still. Rivals can fire the fifth marker first."),
     # ------------------------------- 3 RESPECT -------------------------------
     ("Empire State", 2, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
      "Manhattan's three bars. Squad's clean step: West Side."),
@@ -177,10 +179,10 @@ CARDS = [
     ("The Five Families", 3, "Extort", 3, 0, 0, 0, 1, 3, 0, 1,
      "WHACK-A-MOLE: 5 boroughs held at once, publicly, each separately deniable."),
     # The 1/2/3 retier (2026-10-14): Opening Night down to 2 at 5+ Rum (MASS 2), and Union Dues down
-    # to 2 on the bots' 20 completions in 25. The Smuggler's Run and The Eviction keep their scores as 3s.
+    # to 2 on the bots' 20 completions in 25 (to 1 on 2026-10-15: 24 claims in 31 finished). The Smuggler's Run and The Eviction keep their scores as 3s.
     ("Opening Night", 2, "Unload", 3, 1, 0, 2, 3, 2, 3, 0,
      "Your home room, 5+ Rum: Raid-gated, loud, every rival's crown room."),
-    ("Union Dues", 2, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
+    ("Union Dues", 1, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
      "A rival's home Ward: take it or wait him out. Every seat guards home."),
 ]
 
