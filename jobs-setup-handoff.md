@@ -1,9 +1,109 @@
-# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes and Variety (2026-10-13), then Brew (2026-10-14)
+# Jobs Deck: Setup, then Sets (2026-10-11), then Seizes and Variety (2026-10-13), then Brew and 1/2/3 (2026-10-14)
 
 Two passes on one day, made on the `claude/job-deck-balance-57zjc0` branch and on main since
 2026-10-12 (Nick: "it will still need more work afterwards"). **Round 2 is the
-live deck, with rounds 3 and 4 (2026-10-13) and 5 (2026-10-14) changing the 5s and three 3s**; round 1 is the record of
+live deck, with rounds 3 and 4 (2026-10-13), 5 and 6 (2026-10-14) changing the top tier and its values**; round 1 is the record of
 how it got there, and its card tables describe a deck that has since changed again.
+
+## Round 6: Jobs pay 1, 2 or 3 (2026-10-14)
+
+Nick, after the review in the project's `reviews/jobs-balance-2026-10-14.md`:
+
+> I think based on the bot playtest feedback, the strongest lever we have to get game length right is
+> job difficulty. [...] I dislike compounding jobs where say trading 8 barrels both scores 5 respect and
+> boosts you financially it's a win/win.
+
+> One suggestion also could be to change the tiers to 1/2/3 respect, which would allow dropping the
+> difficulty overall.
+
+> I think the 1/2/3 structure is good because 5 is too swingy. I don't like changing the bar to 18, I
+> want it to be a round number. Hopefully making jobs a touch easier will compensate for the lower
+> rewards and it'll even out.
+
+**Applied.** Respect now equals Stake on every card. Still 36 cards, 16 / 12 / 8; the crown stays at 20.
+
+| Card | Was | Now | Why |
+| --- | --- | --- | --- |
+| The eight bar 1s | Unload 4+ | Unload **5+** | 4 was quiet once the Greed Tax moved to 5+; now each costs Heat |
+| Union Dues | 5 | **2** | easiest card in the deck for bots (20 of 25); Opus won with it in two Plays |
+| Opening Night | 5, 8+ Rum | **2, 5+ Rum** | never set up (0 of 30); Nick likes it, so fewer barrels and a tier down; 5+ draws the Greed Tax |
+| The Butcher's Ledger | 5, 5+ Mobsters | **3, 4+ Mobsters** | 0 of 34: nobody builds five |
+| The Real McCoy | 5 | **cut** | a win/win: Trade draws no Heat (16 of 29) |
+| High Roller (new; art `High Roller.jpg`) | | **3**: "Seize a High Society Venue." | Nick's parked "Seize a Pressure 6 Still" |
+| The Smuggler's Run, The Eviction | 3 (Stake 2) | **3 (Stake 3)** | promoted to keep eight 3s (Nick's pick on a decision card) |
+| The rest of the old 3s | 3 | **2** | |
+| The rest of the old 5s | 5 | **3** | |
+
+Not taken: bar 18 (Nick wants a round number); a Market churn rule (Nick is thinking about it separately,
+with a parked bounty idea); "Up in Smoke" (destroy a rival's Safehouse in his home Ward) and "The
+Frame-Up" (Move 6+ barrels into a District holding a rival's Safehouse), both offered as new 2s and not
+needed once Opening Night stayed. A Safehouse Job must say destroy, not Torch: only one mob has Torch.
+
+### Bot completion before the retier (24 games, 4 players, to Day 90; mk-online `scripts/jobdiag.ts`)
+
+| Card | Done / held | Card | Done / held |
+| --- | --- | --- | --- |
+| Union Dues (5) | 20 / 25 | The Toll Booth Trap (5) | 2 / 40 |
+| The Real McCoy (5) | 16 / 29 | The Five Families (5) | 1 / 38 |
+| The Noble Experiment (5) | 11 / 36 | The Butcher's Ledger (5) | 0 / 34 |
+| The Warehouse (5) | 8 / 42 | Opening Night (5) | 0 / 30 |
+| Cuban Prince (3) | 17 / 32 | The bridge set, The Smuggler's Run (3) | 0 / ~40 |
+
+The bots never plan a Boss + Rum trip, a stack attack or a cornered Boss, so the zeros on those cards
+are partly the bots. Opus did finish a Toll Booth Trap.
+
+### What it does
+
+- **Top-tier pairs.** "Never two 5s" is retired: a Play pays at most what its Jobs staked, so the
+  biggest Play is 8 (stake 8 of at most 10), down from 13. `overlap_audit.py` now lists the pairs of
+  3s that meet: High Roller with the Ledger, the Trap or The Eviction in a room; The Smuggler's Run
+  with any of those three on a Dock; and the Ledger, the Trap and The Eviction together on any home
+  Ward or fortified block.
+- **High Roller as the closer.** Taken last, it brings the twentieth point and the Boss into the room on
+  one Play. Take the Crown is its own Play, so the table gets a round; the holder must stand, not Fold.
+  Nick: a feature, "it would create a final battle".
+- **Seat balance**: weighted spread 3 (Manhattan +10, the Bronx +9, Queens +8, Brooklyn +7), from 4.
+
+### Bots on the new deck
+
+**Crown day**, mk-online `scripts/cash-sources.ts`, 16 games at 4 players to Day 110, this branch against
+`main` on the same seeds. Every game crowned on both.
+
+| | Crown days | Median |
+| --- | --- | --- |
+| `main` (1/3/5) | 23 26 29 30 34 34 35 39 39 39 41 45 46 48 56 60 | 39 |
+| 1/2/3 | 34 35 39 41 43 47 53 53 55 56 59 60 60 62 73 78 | 54 |
+
+So for the bots the easier Jobs do not make up for the smaller pay: the game runs about two weeks longer.
+The fastest 1/2/3 game crowned on Day 34, the median old game's pace. The bots lean harder on Bribes to
+close: the Mayor was bought 52 times (34 on `main`, median Day 35 against 30) and the Judge 61 (48).
+Cash per game rose about a third, only because the games ran longer. Bot limits apply (they never plan
+the bridge set or The Smuggler's Run), but those limits were the same on `main`.
+
+**Completion** (`jobdiag.ts`, 24 games to Day 90, completed / claimed): 462 Jobs in all (19.3 a game).
+
+| Card | Done / claimed | Card | Done / claimed |
+| --- | --- | --- | --- |
+| Union Dues (2) | 22 / 30 | High Roller (3) | 16 / 43 |
+| Cuban Prince (2) | 19 / 36 | The Noble Experiment (3) | 15 / 40 |
+| The Extort set (2) | 8 to 13 / 31 to 42 | The Warehouse (3) | 15 / 49 |
+| Opening Night (2) | 8 / 51 | The Eviction (3) | 13 / 55 |
+| The Copper Heist (2) | 7 / 49 | The Five Families (3) | 8 / 50 |
+| The bridge set, Last One Standing (2) | 2 to 4 / ~53 | The Toll Booth Trap (3) | 7 / 62 |
+| The bar 1s | 10 to 18 / 32 to 50 | The Butcher's Ledger (3) | 1 / 61 |
+| | | The Smuggler's Run (3) | 0 / 50 |
+
+Union Dues is still the easiest card above a 1. Opening Night now completes (8, from 0). The Ledger at 4+
+still almost never does, and High Roller completed 16 times without the bots ever planning it: they
+take rooms they were fighting over anyway, which reads as a windfall for the bots at least.
+
+### Watch in playtest
+
+1. Game length at 20 with smaller Jobs. Nick's bet was that easier Jobs make up the difference; the bots
+   say they don't (median crown Day 39 to 54, above). The levers: the bar, more 3s, or easier 3s.
+2. The Warehouse and The Five Families score "easy" for the top tier on `difficulty_audit.py`, yet the
+   bots almost never finish The Five Families.
+3. Folds against the Ledger: a Fold now hands over 3, not 5.
 
 ## Round 5: one body count, three brew 5s (2026-10-14)
 

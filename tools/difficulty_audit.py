@@ -120,28 +120,28 @@ CARDS = [
     ("The Insurance Job", 1, "Rat", 3, 0, 0, 0, 2, 1, 0, 0,
      "Engineering the Raid onto yourself is private. Nobody interferes."),
     # ------------------------------- 3 RESPECT -------------------------------
-    ("Empire State", 3, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
+    ("Empire State", 2, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
      "Manhattan's three bars. Squad's clean step: West Side."),
-    ("The Big Squeeze", 3, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
+    ("The Big Squeeze", 2, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
      "The Bronx's three bars. Squad's clean step: Throggs Neck."),
-    ("King of Queens", 3, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
+    ("King of Queens", 2, "Extort", 3, 1, 0, 1, 2, 3, 3, 2,
      "Queens' three bars. Squad's clean step: Jamaica or Corona."),
-    ("The Black Hand", 3, "Extort", 3, 1, 0, 1, 3, 3, 3, 2,
+    ("The Black Hand", 2, "Extort", 3, 1, 0, 1, 3, 3, 3, 2,
      "Brooklyn's three bars. Clean step only onto Brownsville."),
-    ("Cuban Prince", 3, "Extort", 3, 0, 0, 1, 0, 3, 1, 1,
+    ("Cuban Prince", 2, "Extort", 3, 0, 0, 1, 0, 3, 1, 1,
      "4 of 8 Docks held at once; nearly always the Harbormaster too."),
-    ("Hell's Highway", 3, "Move", 3, 0, 1, 1, 0, 2, 3, 2,
+    ("Hell's Highway", 2, "Move", 3, 0, 1, 1, 0, 2, 3, 2,
      "Rum chain plus a Boss on the bridge; the Bronx holds the near end."),
-    ("Last One Standing", 3, "Secure", 3, 0, 0, 2, 0, 2, 3, 1,
+    ("Last One Standing", 2, "Secure", 3, 0, 0, 2, 0, 2, 3, 1,
      "REWRITTEN 2026-10-11: + 6 Rum. Brew, Trade, haul, then Secure."),
     ("The Smuggler's Run", 3, "Move", 3, 1, 0, 3, 1, 3, 2, 2,
      "A 3 since 2026-10-10: Seize a Dock off Staten with 4 Rum. Hardest 3."),
-    ("The Copper Heist", 3, "Open Fire", 1, 1, 1, 1, 0, 2, 2, 2,
+    ("The Copper Heist", 2, "Open Fire", 1, 1, 1, 1, 0, 2, 2, 2,
      "REWRITTEN 2026-10-11: the five Pressure 5 Stills (starting bars)."),
     # The Variety Pass (2026-10-13): the bridge set and The Eviction refill the 3s.
-    ("The One-Way Ride", 3, "Move", 3, 0, 1, 1, 0, 2, 3, 1,
+    ("The One-Way Ride", 2, "Move", 3, 0, 1, 1, 0, 2, 3, 1,
      "Queensboro: two empty bars, beside three home Wards. Rum chain and a Boss."),
-    ("A Bridge to Sell", 3, "Move", 3, 0, 1, 1, 0, 2, 3, 2,
+    ("A Bridge to Sell", 2, "Move", 3, 0, 1, 1, 0, 2, 3, 2,
      "Brooklyn Bridge: Manhattan's Dock to Brooklyn's bar, a fight at the far end."),
     ("The Eviction", 3, "Open Fire", 2, 1, 2, 2, 1, 2, 2, 3,
      "Back: a rival's Safehouse, usually his home Ward. A Fold pays it."),
@@ -152,16 +152,18 @@ CARDS = [
     # needs MASS 2: his owner escorts him, since a lone Boss Folds and pays. Body counts keep
     # DICE 3: a stack of 5+ stands only when it likes the fight, and you must wipe it.
     # One body count since 2026-10-14, any Borough (NAMES 1, WINDOW 1: any stack of five will do).
-    ("The Butcher's Ledger", 5, "Open Fire", 2, 2, 3, 2, 1, 2, 1, 3,
-     "5+ Mobsters anywhere: stand and lose, or Fold, and it pays."),
+    ("The Butcher's Ledger", 3, "Open Fire", 2, 2, 3, 2, 1, 2, 1, 3,
+     "4+ Mobsters anywhere: stand and lose, or Fold, and it pays."),
+    # New 2026-10-14: a crown room off its holder. The room opens only when a Raid moves its Squad
+    # (WINDOW 2), and its holder is usually a leader dug in to crown (RIVAL 2, DEFEND 3).
+    ("High Roller", 3, "Open Fire", 2, 2, 2, 2, 2, 2, 3, 3,
+     "Any High Society room, taken off the boss holding it."),
     # The brew-and-sell 5s (2026-10-14), scored on first reading, before any playtest. Each is a
     # stockpile built in public: BLOCK comes from the Raid (a pile that size is the Big Bust's
     # pick) and from taking the District before the Play.
-    ("The Real McCoy", 5, "Trade", 3, 0, 0, 1, 1, 2, 1, 1,
-     "8 Moonshine at any Dock: a public stockpile, Raid bait while it builds."),
-    ("The Noble Experiment", 5, "Unload", 3, 0, 1, 2, 1, 3, 2, 2,
+    ("The Noble Experiment", 3, "Unload", 3, 0, 1, 2, 1, 3, 2, 2,
      "8 Moonshine at a bar in a rival's Borough: hold it, haul to it, sell."),
-    ("The Warehouse", 5, "Secure", 3, 0, 0, 1, 1, 2, 1, 2,
+    ("The Warehouse", 3, "Secure", 3, 0, 0, 1, 1, 2, 1, 2,
      "10 barrels under one roof, then a Safehouse on them: Raid bait."),
     # The Variety Pass (2026-10-13): one Boss card, anywhere, and three 5s up from the 3s. The
     # Toll Booth Trap names no place now (NAMES 1, WINDOW 1: some rival Boss is always out), and
@@ -170,13 +172,15 @@ CARDS = [
     # Opening Night names the holder's own room (NAMES 3), which is every rival's crown room, so
     # it is contested by the people walking in (BLOCK 2). The Five Families and Union Dues keep
     # the scores they had as 3s.
-    ("The Toll Booth Trap", 5, "Open Fire", 2, 3, 2, 2, 1, 2, 1, 2,
+    ("The Toll Booth Trap", 3, "Open Fire", 2, 3, 2, 2, 1, 2, 1, 2,
      "Any rival Boss, killed: he Folds unless cornered. Or a decoy."),
-    ("The Five Families", 5, "Extort", 3, 0, 0, 0, 1, 3, 0, 1,
+    ("The Five Families", 3, "Extort", 3, 0, 0, 0, 1, 3, 0, 1,
      "WHACK-A-MOLE: 5 boroughs held at once, publicly, each separately deniable."),
-    ("Opening Night", 5, "Unload", 3, 1, 0, 3, 3, 2, 3, 0,
-     "Your home room: Raid-gated, and every rival's crown room."),
-    ("Union Dues", 5, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
+    # The 1/2/3 retier (2026-10-14): Opening Night down to 2 at 5+ Rum (MASS 2), and Union Dues down
+    # to 2 on the bots' 20 completions in 25. The Smuggler's Run and The Eviction keep their scores as 3s.
+    ("Opening Night", 2, "Unload", 3, 1, 0, 2, 3, 2, 3, 0,
+     "Your home room, 5+ Rum: Raid-gated, loud, every rival's crown room."),
+    ("Union Dues", 2, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
      "A rival's home Ward: take it or wait him out. Every seat guards home."),
 ]
 
@@ -202,7 +206,7 @@ for r in R:
 print("=" * 100)
 print("DIFFICULTY BY TIER   (S=setup R=rival D=dice M=mass W=window B=block; 18 = max)")
 print("=" * 100)
-for tier in (1, 3, 5):
+for tier in (1, 2, 3):
     band = sorted(by_tier[tier], key=lambda r: -r['diff'])
     scores = [r['diff'] for r in band]
     mean = sum(scores) / len(scores)
@@ -226,9 +230,9 @@ print("=" * 100)
 print("THE SOLITAIRE TEST   (Nick: 'all of the bigger jobs should involve counterplay')")
 print("=" * 100)
 print("  A high-Respect Job must be hard because it is CONTESTED, not because it is a long")
-print("  private errand. Test: block + provocation. Low on both at 5 Respect = MIS-TIERED.")
+print("  private errand. Test: block + provocation. Low on both at 3 Respect = MIS-TIERED.")
 print()
-for tier in (5, 3):
+for tier in (3, 2):
     print(f"  --- {tier} RESPECT ---")
     for r in sorted(by_tier[tier], key=lambda r: (r['block'] + r['prov'])):
         engage = r['block'] + r['prov']
@@ -284,7 +288,7 @@ for label, test in (
      lambda r: r['diff'] > med_d and r['block'] + r['prov'] <= med_e),
     ("HARD + CONTESTED  (the deck's best cards)",
      lambda r: r['diff'] > med_d and r['block'] + r['prov'] > med_e),
-    ("EASY + CONTESTED  (ideal at 1-3 Respect)",
+    ("EASY + CONTESTED  (ideal at 1-2 Respect)",
      lambda r: r['diff'] <= med_d and r['block'] + r['prov'] > med_e),
     ("EASY + SOLITAIRE  (filler)",
      lambda r: r['diff'] <= med_d and r['block'] + r['prov'] <= med_e),

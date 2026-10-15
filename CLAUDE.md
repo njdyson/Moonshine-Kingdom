@@ -124,7 +124,7 @@ Whispers claimed it face-down).
 ## The Market restocks after the Offers
 
 Since 2026-10-07. A Job taken at the Offers leaves its gap empty; once every boss has chosen,
-deal a fresh Job into each gap. The opening Market (Player Count + 1, 1s and 3s, the 5s shuffled in
+deal a fresh Job into each gap. The opening Market (Player Count + 1, 1s and 2s, the 3s shuffled in
 after) is dealt **face-down** at setup and turns face-up at Day 1's restock, so **Day 1 has no
 Offers**. The rule's one home is Grease the Wheels; the Town Planner restates it.
 
@@ -134,7 +134,7 @@ while the low token takes what's left (a sharper Reverse Snake), and Day 1 is le
 instead of over five cards of prose. Whispers loses a little (the table gets a Day's notice too, and
 the Vipers see only the first card of tomorrow's restock); Nick accepts it, and the buff on file is
 a fixed top two cards. Don't restore the immediate refill. The Speakeasy grid (a Job per Controlled
-Speakeasy, tiered 1/3/5 by bar) is parked in `jobs-system-handoff.md` §2b with the problems to solve
+Speakeasy, tiered by bar) is parked in `jobs-system-handoff.md` §2b with the problems to solve
 first.
 
 ## Jobs: one verb, one place
@@ -156,39 +156,36 @@ written out above the card table in `tools/gen_deck.py`:
   Tenement Army's described your own home Ward, so it was free on Day 2, and two had no answer for
   a tie.
 
-**The Smuggler's Run is a 3** (same day; Union Dues went to 5 with it, back to 3 on 2026-10-11, and
-to 5 again on 2026-10-13).
-The Smuggler's Run Seizes a Dock, every mainland Dock is in a bounty Borough, and a firefight is part
-of the Move that starts it, so as a 5 it could pay beside a bounty 5 on one Play. Run
-`tools/overlap_audit.py` before moving any card that can Seize into the 5s: it models a Move
-and its fight as one Play, and it refuses to run until each card's printed objective matches its
-model.
+**The Smuggler's Run** Seizes a Dock, and a firefight is part of the Move that starts it, so it can pay
+beside any other Seize Job on one Play. Run `tools/overlap_audit.py` before moving any card that can
+Seize into the 3s: it models a Move and its fight as one Play, and it refuses to run until each card's
+printed objective matches its model.
 
 **A Fold is a Seize, and the body counts are Seizes** (Nick, 2026-10-13, after the opus-vs-bots-1
 playtest in mk-online's `harness/transcripts/`). Until then all eight 5s read "Kill ...", and a Fold
 denied them all: of 69 Standoffs, 40 ended in a Fold, six 5s were claimed and none completed, and every
 lone Boss Folded. Now the body count reads "Seize a District from 5+ rival Mobsters" (Mobsters,
 so a Boss and four Runners are five), so the
-Occupier stands and makes the Invader win it, or runs and pays him 5 anyway.
+Occupier stands and makes the Invader win it, or runs and pays him anyway.
 The crew is counted as it met the Invader at the door (the Rulebook's Pulling It Off, its one home).
 A kill in a fight the Invader loses pays nothing on them.
 
 **One body count, any Borough** (Nick, 2026-10-14, after the opus-vs-bots-3 playtest). There were four,
 one per Borough (Bloody Sunday, Over the Top, Rum Wars, The Butcher's Ledger). Nobody stacked five
 Mobsters in one District, so from about Day 25 the four sat in the Market for fifteen Days and kept
-newer Jobs out. **The Butcher's Ledger** stays, naming no Borough ("Seize a District from 5+ rival
-Mobsters"; Nick's favourite of the four themes). Three brew-and-sell 5s replaced the others, to pull
+newer Jobs out. **The Butcher's Ledger** stays, naming no Borough (Nick's favourite of the four themes;
+4+ Mobsters since the retier, below, since nobody built five). Three brew-and-sell 5s replaced the others, to pull
 toward the Still now that Extort pays $100 a District:
 
-- **The Real McCoy**: Trade 8+ Moonshine at a Dock.
+- **The Real McCoy**: Trade 8+ Moonshine at a Dock. Cut at the retier the same day: Trade draws no Heat,
+  so it paid 5 Respect for a profitable Trade you'd make anyway.
 - **The Noble Experiment**: Unload 8+ Moonshine outside your home Borough.
 - **The Warehouse**: Secure your Safehouse in a District holding 10+ barrels.
 
 Each is a stockpile built in public, and its counterplay is the Raid (a pile that size is the Big
 Bust's pick) and taking the District first. Weighed and not taken the same day: **Over the Top** as
 "Move across a bridge with ..." (too easy, and it overlapped the bridge 3s). Nick's "Seize a Pressure 6
-Still" (a High Society Venue) is open: it would be a ninth 5, and the tier must stay a multiple of
-four.
+Still" (a High Society Venue) went in at the retier as **High Roller**.
 
 **The Toll Booth Trap stays a Kill** ("Kill a rival Boss.", anywhere; Nick, the same evening): "a
 situational strong arm. You can corner him so he can't fold, or use it as a decoy if you want them to
@@ -197,11 +194,32 @@ hunter's work is the cornering, and a face-up Trap that makes a Boss run hands o
 the deck's one kill Job, so the Rulebook keeps its kill lines ("a Raid makes arrests, not kills", "your
 Ambush or return fire completes nothing") and the Glossary its Kill entry. Don't make it a Seize.
 
+## Jobs pay 1, 2 or 3
+
+Since 2026-10-14 (Nick; `jobs-setup-handoff.md` round 6, and the review behind it in the project's
+`reviews/jobs-balance-2026-10-14.md`). A Job pays its **Stake**: 1, 2 or 3 Respect. "5 is too swingy":
+one card was a quarter of the bar, and a Fold handed over five points at once. **The bar stays 20**
+(Nick: a round number; 18 was weighed and not taken), and the Jobs are a touch easier to make up for it.
+
+Because a Play can only pay what its Jobs staked, and the Ledger holds ten markers at most, "never two
+5s on one Play" (2026-10-12 to 2026-10-14) is retired. `overlap_audit.py` lists the top-tier pairs (two
+3s on one Play) to watch, and fails only if a card leaves the 1/2/3 scale.
+
+The bots' completion rates on the 1/3/5 deck drove the moves (24 games): Union Dues was the easiest card
+in the deck (20 of 25) and went down to 2; The Real McCoy (16 of 29, and a win/win) was cut; The
+Butcher's Ledger (0 of 34) went to 4+ Mobsters; Opening Night (0 of 30) went down to 2 at 5+ Rum, so the
+pour always draws the Greed Tax; the bar 1s went to 5+ barrels for the same reason. Nick likes Opening
+Night: don't cut it. Nick dislikes **compounding** Jobs, a card that pays Respect for a Play that
+already pays well (8 barrels Traded is a win/win), and likes Jobs whose secondary purpose changes what
+rivals do (the Ledger makes them stand rather than Fold). A Job about a rival Safehouse says **destroy**
+(a Seize then destroy, or a Torch, both count), never "Torch": only one mob has it. **No Market churn rule** (discarding an unclaimed Job): Nick will decide that
+separately, with a bounty idea he has parked.
+
 ## Jobs: sets, and setup
 
 Since 2026-10-11 (Nick; `jobs-setup-handoff.md`). Two rules shape the deck.
 
-**A 3 or a 5 needs setup**: Plays spent for it alone, before the Play that scores it, that the table
+**A 2 or a 3 needs setup**: Plays spent for it alone, before the Play that scores it, that the table
 can see coming. Two ways to fail: a **home chore** (on your starting turf, unreachable, what you'd do
 anyway) and a **windfall** (a target so common that a fight or sale you'd make anyway pays it).
 Every seat starts on its Pressure 5 bar, and Secure reaches any Safe District on the map for $500,
@@ -211,26 +229,25 @@ other gate.
 **Most cards come in symmetric sets**, one card per place in one wording, so a player reads a set
 once. The deck is 36 cards, 16 / 12 / 8:
 
-- **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
+- **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 5+
   barrels at <bar> in <District>"), and eight singles for the landmarks, the Docks and
   Staten Island.
-- **3s**: **the Extort set**, *Extort all of the Speakeasies in* Manhattan (Empire
+- **2s**: **the Extort set**, *Extort all of the Speakeasies in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); Cuban
   Prince (4+ Docks) as an Extort card too; **the bridge set** since 2026-10-13, *Move your Boss and 4+
   Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
-  (A Bridge to Sell); and singles, The Eviction back among them.
-- **5s**: no longer one set (Nick, 2026-10-13: "more variety is likely better to avoid a stale
-  standard ending"). **The Butcher's Ledger** ("Seize a District from 5+ rival Mobsters", anywhere),
-  **The Toll Booth Trap** ("Kill a rival Boss", anywhere), **The Five Families**,
-  **Opening Night** ("Unload 8+ Rum at the High Society Venue in your home Borough"), **Union
-  Dues**, and since 2026-10-14 the three brew-and-sell 5s (**The Real McCoy**, **The Noble
-  Experiment**, **The Warehouse**). Opening Night is home-only so the pour can't be made in the room
-  its holder crowns in. The Butcher's Ledger and The Toll Booth Trap are the one allowed exception to "never two 5s on one Play" (Nick,
-  2026-10-12): paying both takes a fight that kills the Boss and takes a District held by five
-  Mobsters, and holding both stakes 6 of at most 10 markers. A Fold there pays the Ledger alone.
-  Nick likes the body count as a stand-in for the cut Sweep: any stack of five is a
-  target. Don't add a "but no Boss" clause back; `overlap_audit.py` allows exactly this pair
-  and fails any other.
+  (A Bridge to Sell); and singles, Last One Standing, The Copper Heist, **Union Dues** and
+  **Opening Night** ("Unload 5+ Rum at the High Society Venue in your home Borough"). Opening Night
+  is home-only so the pour can't be made in the room its holder crowns in.
+- **3s**: no set (Nick, 2026-10-13: "more variety is likely better to avoid a stale standard
+  ending"). **The Butcher's Ledger** ("Seize a District from 4+ rival Mobsters", anywhere), **The
+  Toll Booth Trap** ("Kill a rival Boss", anywhere), **High Roller** ("Seize a High Society Venue"),
+  **The Smuggler's Run**, **The Eviction**, **The Five Families**, **The Noble Experiment** and
+  **The Warehouse**. Nick likes the body count as a stand-in for the cut Sweep: any fat stack is a
+  target. Don't add a "but no Boss" clause back.
+  High Roller taken last brings the Respect and walks the Boss into the room on one Play. Take the
+  Crown is still its own Play, so the table gets a round to answer, and the room's holder has to
+  stand rather than Fold. Nick: a feature, "it would create a final battle".
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
 Borough; the Deeds' removal ended that objection, so don't cut them on it again. The overlap model
@@ -258,7 +275,7 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 
 Since 2026-09-25; Respect became the only score on 2026-10-12 (Nick; `respect-endgame-handoff.md`
 holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds, Titles,
-or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 3 or 5) and Bribe cards
+or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
 (1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold and **1** per Welsher. The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a High Society Venue outside his home Borough**, and you win
@@ -566,8 +583,7 @@ Watch in playtest:
 
 - **The cliff.** A boss on four Districts Extorts quietly and on five loudly, and Extort squeezes
   everything you Control, so the quiet play is to Extort before you take the fifth block.
-- **The bar 1s** ("Unload 4+ barrels at <bar>") were set at 4+ when four was the Greed Tax, so each was a
-  noisy sale; now they pay in silence. Moving them to 5+ is Nick's call.
+- **The bar 1s** read 5+ barrels since the 1/2/3 retier, so each one still costs a Heat marker.
 - **The Nightcap** (lesson 12): a 4-Rum pour at a room nets +2 Plays without Heat, even on five clear
   markers (`tools/sim_kickback_ledger.js`), so the quiet Kickback engine is a Play richer per pour.
 - The Volstead Act (shelved) keeps its Greed Tax at 3+, now "down from 5+".
@@ -731,7 +747,7 @@ Watch in playtest:
 
 - **Each Borough now starts on its orphan Speakeasy**, the one `jobs-system-handoff.md` built the
   four 3-Respect friendly Jobs on. That made all four home chores, and on 2026-10-11 the Extort set
-  replaced them (see *Jobs: the 3s and 5s need setup*).
+  replaced them (see *Jobs: sets, and setup*).
 - **Night Landing** (a Dock on Jamaica Bay) suited Queens and Brooklyn, who both started on one;
   now only Brooklyn does. `tools/fairness_audit.py` puts Queens last on the weighted seat balance
   (weighted spread 1 to 2).
@@ -758,7 +774,7 @@ mk-online needs the same update again (`mk-online-board-handoff.md`).
 
 ## Respect shields are generated SVG
 
-Since 2026-10-12 every Respect badge (the Jobs deck's 1, 3 and 5; the Cards sheet's Bribes 1 to 4,
+Since 2026-10-12 every Respect badge (the Jobs deck's 1, 2 and 3; the Cards sheet's Bribes 1 to 4,
 Welsher -1, Mark -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
 `minus1.svg` to `minus3.svg`), drawn by `tools/build_shields.py` (`pip install fonttools`): one
 shield traced from the old PNGs, Cinzel Black numerals (the card titles' face, and the board's for
