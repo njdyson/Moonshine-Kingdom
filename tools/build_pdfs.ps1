@@ -59,6 +59,7 @@ $chrome = @(
 if (-not $chrome) { throw 'Chrome not found. Edit $chrome in tools/build_pdfs.ps1.' }
 
 if (-not (Test-Path $outDir)) { New-Item -ItemType Directory -Path $outDir | Out-Null }
+$profileDir = Join-Path $env:TEMP 'mk_pdf_chrome_profile'
 
 function Get-PdfInfo($path) {
     # NOTE: r"..." not r'...': a name with an apostrophe (as "Kingpin's Guide" had)
@@ -78,18 +79,30 @@ foreach ($d in $docs) {
 
     $printPdf = Join-Path $outDir ("{0} (Print).pdf" -f $d.Name)
     $tmp = Join-Path $env:TEMP ("mk_{0}.pdf" -f ([guid]::NewGuid().ToString('N')))
-    $uri = ([uri](Resolve-Path $src).Path).AbsoluteUri
+    $uri = [System.Uri]::new((Resolve-Path $src).Path).AbsoluteUri
 
     Write-Host "`n=== $($d.Name) ===" -ForegroundColor Cyan
     Write-Host "  rendering $($d.Src)"
     # --print-to-pdf needs a literal absolute Windows path; it silently writes
     # nothing if the path is assembled awkwardly, hence the explicit temp file.
-    # --virtual-time-budget lets the web fonts and the A5 sheets' page-building
-    # script settle before Chrome prints; without it a card sheet can print
-    # before its pages exist, or in fallback fonts that overflow the card.
-    & $chrome --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=15000 `
-        --print-to-pdf-no-header "--print-to-pdf=$tmp" $uri 2>$null | Out-Null
-    if (-not (Test-Path $tmp)) { Write-Warning "  render produced nothing for $($d.Name)"; continue }
+    # Its own --user-data-dir keeps it apart from any Chrome you have open:
+    # sharing your normal profile can hand the job to that window and write
+    # nothing. Chrome may also finish writing just after it exits, so wait.
+    $chromeArgs = @('--headless=new', '--disable-gpu', '--no-first-run',
+        '--no-default-browser-check', "--user-data-dir=$profileDir",
+        '--no-pdf-header-footer', '--print-to-pdf-no-header',
+        "--print-to-pdf=$tmp", $uri)
+    $ErrorActionPreference = 'Continue'
+    $chromeOut = & $chrome @chromeArgs 2>&1 | Out-String
+    $ErrorActionPreference = 'Stop'
+    for ($i = 0; $i -lt 60 -and -not (Test-Path $tmp); $i++) { Start-Sleep -Milliseconds 500 }
+    if (Test-Path $tmp) {
+        do { $len = (Get-Item $tmp).Length; Start-Sleep -Milliseconds 500 } while ((Get-Item $tmp).Length -ne $len)
+    } else {
+        Write-Warning "  render produced nothing for $($d.Name). Chrome said:"
+        ($chromeOut -split "`n" | Where-Object { $_.Trim() } | Select-Object -Last 8) | ForEach-Object { Write-Host "    $_" }
+        continue
+    }
 
     Move-Item -Force $tmp $printPdf
     $mb = (Get-Item $printPdf).Length / 1MB
