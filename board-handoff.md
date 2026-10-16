@@ -659,12 +659,12 @@ keeps them on a re-trace.
 - **New Jersey is plain leather** (Nick, 2026-10-16). Its fill had a 45-degree hatch under the
   grain, which read as diagonal lines on the print; it is now the flat off-board colour with the
   hide's pebble alone.
-- **The Heat corner's foot is mitred on the shore** (Nick, 2026-10-16). New Jersey's shore leaves
-  the corner at 45 degrees, which is also the corner's mitre, so the map's hairline is cut on that
-  line through the diamond instead of squared round it, the seam stops short of it at both ends,
-  and New Jersey's water rings stop square to the shore at the corner instead of wrapping up the
-  Heat corner's side. Before, the squared hairline and seam boxed the shore's start and the rings
-  bent round it. The Heat Track's sockets and frame are unchanged (39 mm, the Ledger's chips).
+- **Nothing frames the Heat corner from outside** (Nick, 2026-10-16). New Jersey's shore leaves
+  the corner's diamond at 45 degrees. The map's hairline and seam used to step round the corner,
+  squared, and boxed the shore's start; a mitre on the shore line was tried the same day, and then
+  both lines were cut there instead, so they stop at the corner's gold edge and the gold edge is
+  the border. New Jersey's water rings stop square to the shore at the corner instead of wrapping
+  up the corner's side. The Heat Track's sockets and frame are unchanged (39 mm, the Ledger's chips).
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are generated** (`tools/still_art.js`, since 2026-10-07; Nick: he likes the design,

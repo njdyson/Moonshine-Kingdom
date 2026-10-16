@@ -911,17 +911,13 @@ function sidePanels() {
   return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
 }
 
-// The seam round the board, between the gilt edge and the hairline, stepping in
-// round the Heat corner (whose own seam is stitched with its ground).
-// New Jersey's shore leaves the Heat corner's corner at 45 degrees, on the same line as a
-// mitre there, so the hairline is mitred on it (through the diamond) rather than squared
-// round it, and the shore runs on as the mitre (Nick, 2026-10-16: the squared lines
-// boxed the shore's start).
+// The seam round the board, between the gilt edge and the hairline. It stops at the Heat
+// corner's gilt edge rather than stepping round it (Nick, 2026-10-16): the corner's own
+// seam is stitched with its ground, and New Jersey's shore leaves the corner's diamond at
+// 45 degrees, where lines squared round the corner boxed its start.
 function seams() {
   const W = 1080, a = (FRAME_OUT + FRAME_IN) / 2, [ex, ey] = HEAT.edge.map(v => f(v));
-  // At the Heat corner's foot the seam stops short of the hairline's mitre, which runs on
-  // the shore's line through the corner's diamond.
-  return stitch(`M${f(ex + 3.4)} ${f(ey - 6)} V${a} H${W - a} V${W - a} H${a} V${f(ey + 3.4)} H${f(ex - 6)}`);
+  return stitch(`M${f(ex + 3.4)} ${a} H${W - a} V${W - a} H${a} V${f(ey + 3.4)}`);
 }
 
 // New Jersey's shore at height y: its furthest point east.
@@ -968,14 +964,14 @@ function fan(x, y, a0, r) {
 
 function frame() {
   // The gold edge, stepping in around the Heat corner; the hairline inside it
-  // follows, with a Deco step at each corner.
+  // follows, with a Deco step at each corner, and stops at the Heat corner's gold edge.
   const o = FRAME_OUT, i = FRAME_IN, W = 1080, st = 10, [ex, ey] = HEAT.edge.map(v => f(v));
   const hair = d => `<path d="${d}" fill="none" stroke="${C.goldLine}" stroke-opacity=".8" stroke-width="1"/>`;
   const diamond = (x, y, r) => `<rect x="${f(x - r)}" y="${f(y - r)}" width="${2 * r}" height="${2 * r}" transform="rotate(45 ${f(x)} ${f(y)})" fill="${C.goldBright}"/>`;
   let s = `<path d="M0 0H${W}V${W}H0Z M${o} ${o}V${W - o}H${W - o}V${o}Z" fill="#0b0907" fill-rule="evenodd"/>`;
   s += `<rect x="${o}" y="${o}" width="${W - 2 * o}" height="${W - 2 * o}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
   s += `<path d="M${ex} ${o} V${ey} H${o}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
-  s += hair(`M${ex + 6} ${i} H${W - i - st} V${i + st} H${W - i} V${W - i - st} H${W - i - st} V${W - i} H${i + st} V${W - i - st} H${i} V${ey + 6} H${f(ex - 6)} L${f(ex + 6)} ${f(ey - 6)} Z`);
+  s += hair(`M${ex} ${i} H${W - i - st} V${i + st} H${W - i} V${W - i - st} H${W - i - st} V${W - i} H${i + st} V${W - i - st} H${i} V${ey}`);
   s += hair(`M${i + st} ${i} H${ex - 6} V${ey - 6} H${i} V${i + st} H${i + st} Z`);
   for (const [x, y] of [[o, o], [W - o, o], [o, W - o], [W - o, W - o]]) s += diamond(x, y, 3.5);
   s += diamond(ex, ey, 3.5);
