@@ -89,7 +89,7 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   weighed on 2026-09-26 and not taken: it promises a nominator and a vote still to come, and nobody
   votes.
 - **History is a nod, not a lesson.** Most players won't know it. The Rulebook names
-  Rothstein once, in the scene that opens A Day in the Life, and stops; the front page is a hook,
+  Rothstein once, in Setting the Scene (its lore page, which replaced A Day in the Life on 2026-10-16), and stops; the front page is a hook,
   not a history. **The Almanac** is the prequel and the
   player-facing strategy book: Rothstein's advice to a young Charlie Lucania at Lindy's on
   4 November 1928, the night he was shot. It carries the scene, not the history.
