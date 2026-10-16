@@ -34,10 +34,18 @@ $outDir = Join-Path $repo 'V0.9 PDFs'
 $docs = @(
     @{ Name = 'Rulebook';        Src = 'Rulebook v0.9.html';        Screen = $true  }
     @{ Name = 'The Almanac';     Src = 'The Almanac v0.9.html';     Screen = $true  }
+    @{ Name = 'Playbooks';       Src = 'Playbooks v0.9.html';       Screen = $false }
+    @{ Name = 'Town Planner';    Src = 'Town Planner v0.9.html';    Screen = $false }
+    @{ Name = 'Cards';           Src = 'Cards v0.9.html';           Screen = $true  }
+    @{ Name = 'Jobs Cards';      Src = 'Jobs Cards v0.9.html';      Screen = $true  }
+    @{ Name = 'Still Tokens';    Src = 'Still Tokens v0.9.html';    Screen = $false }
+    @{ Name = 'Turn Tokens';     Src = 'Turn Tokens v0.9.html';     Screen = $false }
+    @{ Name = 'The Ledger';      Src = 'The Ledger v0.9.html';      Screen = $false }
+    @{ Name = 'Federal Crackdown Tracker'; Src = 'Federal Crackdown Tracker v0.9.html'; Screen = $false }
 )
 
 if ($List) {
-    $docs | ForEach-Object { "{0,-18} <- {1}  (screen build: {2})" -f $_.Name, $_.Src, $_.Screen }
+    $docs | ForEach-Object { "{0,-26} <- {1}  (screen build: {2})" -f $_.Name, $_.Src, $_.Screen }
     return
 }
 if ($Only) { $docs = $docs | Where-Object { $_.Name -like "*$Only*" } }
@@ -76,7 +84,10 @@ foreach ($d in $docs) {
     Write-Host "  rendering $($d.Src)"
     # --print-to-pdf needs a literal absolute Windows path; it silently writes
     # nothing if the path is assembled awkwardly, hence the explicit temp file.
-    & $chrome --headless=new --disable-gpu --no-pdf-header-footer `
+    # --virtual-time-budget lets the web fonts and the A5 sheets' page-building
+    # script settle before Chrome prints; without it a card sheet can print
+    # before its pages exist, or in fallback fonts that overflow the card.
+    & $chrome --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=15000 `
         --print-to-pdf-no-header "--print-to-pdf=$tmp" $uri 2>$null | Out-Null
     if (-not (Test-Path $tmp)) { Write-Warning "  render produced nothing for $($d.Name)"; continue }
 
