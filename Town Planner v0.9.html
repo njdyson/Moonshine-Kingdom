@@ -819,7 +819,10 @@ table.lg{width:100%;border-collapse:collapse}
     });
     document.body.appendChild(pages);
   }
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(build); else setTimeout(build,400);
+  /* Build now, not only once the web fonts land: headless --print-to-pdf can
+     print before fonts.ready resolves, and an empty #__printpages prints blank. */
+  build();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(build);
   window.addEventListener('beforeprint',build);
 })();
 </script>
