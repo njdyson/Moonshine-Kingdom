@@ -418,8 +418,12 @@ function waterLining() {
   const land = [...DISTRICTS.map(d => FULL[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
   const bg = lift(C.sea[1]);
   const rings = [[22, C.goldLine, 0.06], [18.5, bg, 1], [13.5, C.goldLine, 0.09], [10.5, bg, 1], [6.5, C.goldLine, 0.15], [4, bg, 1]];
-  return rings.map(([w, col, op]) =>
-    `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
+  // New Jersey's east edge runs up under the Heat corner's frame, so its rings are cut off
+  // square to the shore at the corner (njRings) and only the shore itself is lined.
+  const [ex, ey] = HEAT.edge, F = 1080;
+  const clip = `<clipPath id="njRings"><path d="M${f(ex - ey - F)} ${-F} L${f(ex + F)} ${f(ey + F)} L${-F} ${f(ey + F)} Z"/></clipPath>`;
+  return clip + rings.map(([w, col, op]) =>
+    `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map((q, i) => `<path d="${poly(q)}"${i >= DISTRICTS.length ? ' clip-path="url(#njRings)"' : ''}/>`).join('')}</g>`).join('');
 }
 
 // The land, lit from the upper left like the leather, casts a soft shadow on the water,
@@ -907,11 +911,13 @@ function sidePanels() {
   return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
 }
 
-// The seam round the board, between the gilt edge and the hairline, stepping in
-// round the Heat corner (whose own seam is stitched with its ground).
+// The seam round the board, between the gilt edge and the hairline. It stops at the Heat
+// corner's gilt edge rather than stepping round it (Nick, 2026-10-16): the corner's own
+// seam is stitched with its ground, and New Jersey's shore leaves the corner's diamond at
+// 45 degrees, where lines squared round the corner boxed its start.
 function seams() {
   const W = 1080, a = (FRAME_OUT + FRAME_IN) / 2, [ex, ey] = HEAT.edge.map(v => f(v));
-  return stitch(`M${ex + 3.4} ${a} H${W - a} V${W - a} H${a} V${ey + 3.4} H${ex + 3.4} Z`);
+  return stitch(`M${f(ex + 3.4)} ${a} H${W - a} V${W - a} H${a} V${f(ey + 3.4)}`);
 }
 
 // New Jersey's shore at height y: its furthest point east.
@@ -958,14 +964,14 @@ function fan(x, y, a0, r) {
 
 function frame() {
   // The gold edge, stepping in around the Heat corner; the hairline inside it
-  // follows, with a Deco step at each corner.
+  // follows, with a Deco step at each corner, and stops at the Heat corner's gold edge.
   const o = FRAME_OUT, i = FRAME_IN, W = 1080, st = 10, [ex, ey] = HEAT.edge.map(v => f(v));
   const hair = d => `<path d="${d}" fill="none" stroke="${C.goldLine}" stroke-opacity=".8" stroke-width="1"/>`;
   const diamond = (x, y, r) => `<rect x="${f(x - r)}" y="${f(y - r)}" width="${2 * r}" height="${2 * r}" transform="rotate(45 ${f(x)} ${f(y)})" fill="${C.goldBright}"/>`;
   let s = `<path d="M0 0H${W}V${W}H0Z M${o} ${o}V${W - o}H${W - o}V${o}Z" fill="#0b0907" fill-rule="evenodd"/>`;
   s += `<rect x="${o}" y="${o}" width="${W - 2 * o}" height="${W - 2 * o}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
   s += `<path d="M${ex} ${o} V${ey} H${o}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
-  s += hair(`M${ex + 6} ${i} H${W - i - st} V${i + st} H${W - i} V${W - i - st} H${W - i - st} V${W - i} H${i + st} V${W - i - st} H${i} V${ey + 6} H${ex + 6} Z`);
+  s += hair(`M${ex} ${i} H${W - i - st} V${i + st} H${W - i} V${W - i - st} H${W - i - st} V${W - i} H${i + st} V${W - i - st} H${i} V${ey}`);
   s += hair(`M${i + st} ${i} H${ex - 6} V${ey - 6} H${i} V${i + st} H${i + st} Z`);
   for (const [x, y] of [[o, o], [W - o, o], [o, W - o], [W - o, W - o]]) s += diamond(x, y, 3.5);
   s += diamond(ex, ey, 3.5);
@@ -1002,7 +1008,6 @@ function defs(fontCss, mode) {
   s += `<linearGradient id="heatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${GILT[2]}"/><stop offset=".5" stop-color="${GILT[1]}"/><stop offset="1" stop-color="${GILT[0]}"/></linearGradient>`;
   s += `<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.panelA}"/><stop offset="1" stop-color="${C.panelB}"/></linearGradient>`;
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${lift(C.sea[0])}"/><stop offset="1" stop-color="${lift(C.sea[1])}"/></radialGradient>`;
-  s += `<pattern id="offboard" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${lift(C.offboard)}"/><line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-opacity=".22" stroke-width="1.6"/></pattern>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   const H = WARD_HATCH, shade = MODE === 'print' ? PRINT_LIFT.wardShade : H.shade;
   s += `<pattern id="wardHatch" patternUnits="userSpaceOnUse" width="${H.pitch}" height="${H.pitch}" patternTransform="rotate(45)"><rect width="${H.pitch}" height="${H.pitch}" fill="#000" fill-opacity="${shade}"/><path d="M0 0 V${H.pitch}" stroke="${C.goldLine}" stroke-opacity="${H.gold}" stroke-width="${H.line}"/></pattern>`;
@@ -1206,7 +1211,7 @@ function buildSvg(fontCss, mode, placed) {
   MODE = mode;
   const water = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining() + landShadow();
   const pierList = placePiers();
-  const land = OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="url(#offboard)"/>`).join('')
+  const land = OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="${lift(C.offboard)}"/>`).join('')
     + districtFills() + borders() + piers(pierList) + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
   const side = sidePanels(), b = mode === 'print' ? BLEED : 0, S = 1080 + 2 * b;

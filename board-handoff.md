@@ -656,6 +656,15 @@ keeps them on a re-trace.
   on 2026-10-07, when Sugar Hill / Belmont was set square to the coast (see The four-way corner),
   with Manhattan wider than any lift had made it; Belmont is 48, and gave Hunts Point its top.
 
+- **New Jersey is plain leather** (Nick, 2026-10-16). Its fill had a 45-degree hatch under the
+  grain, which read as diagonal lines on the print; it is now the flat off-board colour with the
+  hide's pebble alone.
+- **Nothing frames the Heat corner from outside** (Nick, 2026-10-16). New Jersey's shore leaves
+  the corner's diamond at 45 degrees. The map's hairline and seam used to step round the corner,
+  squared, and boxed the shore's start; a mitre on the shore line was tried the same day, and then
+  both lines were cut there instead, so they stop at the corner's gold edge and the gold edge is
+  the border. New Jersey's water rings stop square to the shore at the corner instead of wrapping
+  up the corner's side. The Heat Track's sockets and frame are unchanged (39 mm, the Ledger's chips).
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are generated** (`tools/still_art.js`, since 2026-10-07; Nick: he likes the design,
