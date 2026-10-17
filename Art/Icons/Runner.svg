@@ -1,8 +1,10 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-  <!-- Flat cap -->
-  <path d="M34 26 C40 18 60 18 64 26 L70 30 L30 30 Z"/>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#000000" fill-rule="evenodd">
+  <!-- A Runner: flat cap, rolled turtleneck, heavy shoulders. -->
+  <!-- Flat cap: a low, flat crown wider than the head, pulled down over the eyes -->
+  <path d="M25 38 C23 33 24 28 30 26 C40 23 60 22 70 25 C76 27 78 31 78 35 L80 37 C80 39 78 40 74 40 L60 42 C48 43 35 42 25 38 Z"/>
   <!-- Head -->
-  <circle cx="50" cy="36" r="9"/>
-  <!-- Body / coat (broad-shouldered muscle) -->
-  <path d="M32 84 L32 58 C32 50 40 46 50 46 C60 46 68 50 68 58 L68 84 L58 84 L58 64 L42 64 L42 84 Z"/>
+  <path d="M35 43 C40 45 60 45 65 43 L64 49 C62 57 57 61 50 61 C43 61 38 57 36 49 Z"/>
+  <!-- Heavy, hunched shoulders in a sweater, its rolled collar cut out -->
+  <path d="M4 94 C4 74 16 66 34 62 L40 60 C46 63 54 63 60 60 L66 62 C84 66 96 74 96 94 Z
+           M39 64.5 C46 68 54 68 61 64.5 L62 68 C54 72 46 72 38 68 Z"/>
 </svg>

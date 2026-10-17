@@ -1,9 +1,17 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-  <!-- Roof (filled triangle with eave) -->
-  <path d="M50 16 L88 48 L78 48 L50 25 L22 48 L12 48 Z"/>
-  <!-- House body -->
-  <path d="M24 46 L76 46 L76 84 L58 84 L58 60 L42 60 L42 84 L24 84 Z"/>
-  <!-- Window -->
-  <rect x="30" y="52" width="10" height="10"/>
-  <rect x="60" y="52" width="10" height="10"/>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#000000" fill-rule="evenodd">
+  <!-- The Safehouse: a brownstone with a heavy cornice, shuttered windows, and a door with a peephole. -->
+  <!-- Cornice -->
+  <path d="M12 12 L88 12 L88 18 L84 22 L16 22 L12 18 Z"/>
+  <!-- Facade, with its windows and doorway cut out -->
+  <path d="M18 24 L82 24 L82 84 L18 84 Z
+           M26 31 L38 31 L38 46 L26 46 Z
+           M44 31 L56 31 L56 46 L44 46 Z
+           M62 31 L74 31 L74 46 L62 46 Z
+           M26 55 L38 55 L38 70 L26 70 Z
+           M62 55 L74 55 L74 70 L62 70 Z
+           M42 84 L42 58 C42 53 58 53 58 58 L58 84 Z"/>
+  <!-- Door, set back in the doorway, with its peephole slot cut out -->
+  <path d="M45 84 L45 60 C45 57 55 57 55 60 L55 84 Z M47.5 63 L52.5 63 L52.5 65.5 L47.5 65.5 Z"/>
+  <!-- Stoop -->
+  <path d="M36 84 L64 84 L64 88 L36 88 Z M32 89 L68 89 L68 93 L32 93 Z"/>
 </svg>
