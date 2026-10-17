@@ -418,12 +418,10 @@ function waterLining() {
   const land = [...DISTRICTS.map(d => FULL[d.id]), ...OFFBOARD.map(k => geo.regions[k])];
   const bg = lift(C.sea[1]);
   const rings = [[22, C.goldLine, 0.06], [18.5, bg, 1], [13.5, C.goldLine, 0.09], [10.5, bg, 1], [6.5, C.goldLine, 0.15], [4, bg, 1]];
-  // New Jersey's east edge runs up under the Heat corner's frame, so its rings are cut off
-  // square to the shore at the corner (njRings) and only the shore itself is lined.
-  const [ex, ey] = HEAT.edge, F = 1080;
-  const clip = `<clipPath id="njRings"><path d="M${f(ex - ey - F)} ${-F} L${f(ex + F)} ${f(ey + F)} L${-F} ${f(ey + F)} Z"/></clipPath>`;
-  return clip + rings.map(([w, col, op]) =>
-    `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map((q, i) => `<path d="${poly(q)}"${i >= DISTRICTS.length ? ' clip-path="url(#njRings)"' : ''}/>`).join('')}</g>`).join('');
+  // New Jersey's east edge runs up the Heat corner's side, so its rings follow the corner up to
+  // the frame, as a shore (Nick, 2026-10-17; cut off square at the corner for a day before).
+  return rings.map(([w, col, op]) =>
+    `<g fill="none" stroke="${col}" stroke-opacity="${op}" stroke-width="${w}" stroke-linejoin="round">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g>`).join('');
 }
 
 // The land, lit from the upper left like the leather, casts a soft shadow on the water,

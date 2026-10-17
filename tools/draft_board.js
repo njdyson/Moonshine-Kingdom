@@ -110,6 +110,7 @@ const SETTINGS = {
   bronxRow: 185, // Fordham and Morris Park / Throggs Neck, level to the east shore
   huntsTop: 150, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
+  sugarHillTop: 100, // Sugar Hill / Belmont, level from the upright shore north of Manhattan (Nick, 2026-10-17)
   corner: [608, 198], // the four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point)
   manhattan: [298, 415, 540], // level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
@@ -202,9 +203,16 @@ function draft(S) {
   const riverFoot = y => { const q = [atY(ER_MN, y)[0] - FOOT * Math.SQRT2, y]; return [q, meet(line(q, [1, 1]), ER_MN)]; };
   const CROOK = atY(ER_BW, BOWERY_BANK); // where the Bowery's shore turns from the river's level turn down the harbour reach
   const WB_J = meet(line([BK_COL, S.williamsburgSouth], [1, 1]), ER_QN); // Williamsburg / Red Hook, square to the East River
-  // Sugar Hill / Belmont runs from the four-way corner square to the west coast, at 45
-  // degrees; Manhattan's tip is where it meets the coast
-  const CORNER = S.corner, TIPB = meet(MN_WEST, line(CORNER, [-1, -1]));
+  // The shore north of Manhattan's west coast stands upright a Hudson's width off the Heat
+  // corner, so the river runs on round the corner at one width (Nick, 2026-10-17: it opened to
+  // twice that). Manhattan's west coast turns upright onto it at MN_UP; Sugar Hill's shore runs up
+  // it to Sugar Hill's level top (sugarHillTop), and Belmont's above that, to the frame. Sugar
+  // Hill / Belmont runs level from that shore, then at 45 degrees down to the four-way corner
+  // (until 2026-10-17 it ran at 45 degrees all the way, from the tip at 503, 93, so Sugar Hill's
+  // top was a peak).
+  const CORNER = S.corner, MN_UP = atX(MN_WEST, HEAT_CORNER[0] + HUDSON), TIPB = [MN_UP[0], S.sugarHillTop];
+  const SHOULDER = atY(line(CORNER, [-1, -1]), TIPB[1]);
+  if (TIPB[1] > MN_UP[1] - 3 || SHOULDER[0] < TIPB[0] + MIN_BORDER) throw new Error('Sugar Hill\'s top must sit above the coast\'s turn, with a level run to Belmont');
   // The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point): East Harlem /
   // Hunts Point runs out at 45 degrees to the knee, then upright onto the crook where the Hell Gate
   // meets the East River, so East Harlem's shore is the East River's alone (until 2026-10-10 the
@@ -274,6 +282,8 @@ function draft(S) {
   const REPLACE = {
     // the Bronx: Belmont's shore upright from Manhattan's tip to the frame; Throggs Neck square
     'water|belmont': [[TIPB[0], W], TIPB],
+    'belmont|sugar_hill': [TIPB, SHOULDER, CORNER],
+    'water|sugar_hill': [TIPB, MN_UP, MF[0][0]],
     'throggs_neck|water': [[BRONX_EAST, S.bronxRow], TIP, BEND],
     'east_harlem|hunts_point': [CORNER, KNEE, EH_SHORE],
     'east_harlem|water': [EH_SHORE, EB_J],
