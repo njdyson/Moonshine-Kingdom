@@ -8,7 +8,7 @@ empty south) and the Bowery's foot and Staten Island rose. Then the borders roun
 four-way corner were straightened, gently (an all-straight version with a true vertical for
 East Harlem was tried and reverted), and the title went small and level under the panels. See
 Manhattan is one width, Straightening round the four-way corner, The look and Decisions. On
-2026-10-10 East Harlem's corner on the Hell Gate was cut off (see East Harlem's corner cut). mk-online serves it too (`mk-online/dist/board.svg`, the 2026-10-10 board, from mk-online 32418fc),
+2026-10-10 East Harlem's corner on the Hell Gate was cut off (see East Harlem's corner cut). mk-online serves it too (`mk-online/dist/board.svg`, the 2026-10-17 board, from mk-online 02f3e3c),
 with clickable Districts, piece spots and its connection graph taken from `board-geometry.json`;
 after a redraw, `mk-online-board-handoff.md` is the brief for catching it up. The Affinity export (`Art/Board (Large).png`) is untouched.
 
@@ -821,10 +821,9 @@ keeps them on a re-trace.
 
 ## Open
 
-- **mk-online is one redraw behind** (2026-10-17): Sugar Hill and Belmont's shore round the Heat
-  corner, New Jersey's plain fill and the Heat corner's frame. Connections are unchanged, so it
-  needs the screen SVG, `board-geometry.json`, and Sugar Hill's and Belmont's click areas and piece
-  spots (`mk-online-board-handoff.md`).
+- ~~**mk-online is one redraw behind** (2026-10-17): the Hudson round the Heat corner.~~ Caught up
+  the same day (mk-online 02f3e3c): the screen SVG, `board-geometry.json`, and Sugar Hill's and
+  Belmont's click areas and piece spots regenerated; `boardcheck.ts` passes, 44 connections, 21 Coastal.
 - ~~**mk-online is one redraw behind** (2026-10-10): East Harlem's corner cut.~~ Caught up the same
   day (mk-online 32418fc): the screen SVG, `board-geometry.json`, and East Harlem's and Hunts Point's
   click areas and piece spots regenerated; `boardcheck.ts` passes, 44 connections, 21 Coastal.
