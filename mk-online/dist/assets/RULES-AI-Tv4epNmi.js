@@ -1,6 +1,6 @@
 var e=`# Moonshine Kingdom: Rules for an AI Player
 
-3–4 players. Engine move names in parentheses. The harness lists every legal option at each decision, so you never need to test legality yourself; the rules below are for judging which option is best.
+3–4 players. Engine move names in parentheses. The harness lists every legal option at each decision, so you never need to test legality yourself; the rules below are for judging which option is best. Fight decisions also carry **FIGHT ODDS**: the exact chance to take the District and the average Mobsters lost and killed, assuming the Invader Opens Fire every volley his Ledger pays for. Read them rather than working out the dice yourself.
 
 ## 1. Goal: Take the Crown
 
@@ -14,7 +14,7 @@ Your **home Borough** is the one you were dealt at setup, and its Ward is your *
 
 The game ends mid-Day on the spot. Nothing else is settled.
 
-**Respect** = completed Jobs (1, 3 or 5 each) plus Bribe cards (1 to 4 each), **−3** while you hold the Rat Card, **−2** per Shylock's Mark you hold, **−1** per Welsher card. All of it is public.
+**Respect** = completed Jobs (1, 2 or 3 each) plus Bribe cards (1 to 4 each), **−3** while you hold the Rat Card, **−2** per Shylock's Mark you hold, **−1** per Welsher card. All of it is public.
 
 ## 2. Components and currencies
 
@@ -38,7 +38,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 2. **Draft and brew** (draftDice): in Turn Order, each player takes exactly one Red die and brews at once.
    - Brew Number = Mash + Red.
    - Every active Still you Control with that number (Mobsters present, no Squad) makes **Moonshine = that District's Muscle Ratio**, taken from the supply. Each Still fires at most once a Day.
-3. **Split the Batch** (chooseRelay): if the Still in your Boss's District fired, one other active Still you Control that is Land Connected (border or bridge, not water) to the Boss's District also fires, whatever its number, at its own Muscle Ratio.
+3. **Split the Batch** (chooseRelay): if the Still in your Boss's District fired, one other active Still you Control that is Adjacent (border or bridge, not water) to the Boss's District also fires, whatever its number, at its own Muscle Ratio.
    - It fires automatically when there is one candidate.
    - With 2+ candidates you choose one.
 4. **Blowback**: the one undrafted Red + Mash gives the Blowback Number.
@@ -66,15 +66,15 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 **Jobs**:
 
-- Stakes and Respect are paired: **Stake 1 pays 1**, **Stake 2 pays 3**, **Stake 3 pays 5**.
+- A Job pays its Stake: **1, 2 or 3 Respect**.
 - The Market shows players + 1 cards.
 - A Job completes at the end of **your own Play** that did the deed (including the fight it started and any Raid it set off). Its stake returns to Reserves and the card scores.
-- "Seize" means Control must change hands from a rival (a won fight, a Fold, or walking onto an unguarded Safehouse).
-- The body counts Seize **from** a crew: "Seize a District from 5+ rival Mobsters in X" (a Boss counts). The crew is counted as it met your Move at the door, so a Fold pays the Job as surely as winning the fight; only a stand that holds the District denies it.
+- "Seize" means Control must change hands from a rival (a won fight or a Fold). Walking in on a rival Safehouse with no Mobsters is no Seize: nobody Controlled the District.
+- The Butcher's Ledger Seizes **from** a crew: "Seize a District from 4+ rival Mobsters" (anywhere; a Boss counts). The crew is counted as it met your Move at the door, so a Fold pays the Job as surely as winning the fight; only a stand that holds the District denies it.
 - The Toll Booth Trap is a kill: "Kill a rival Boss" (anywhere). A "kill" is a rival Mobster shot dead in your own Play's fight; a Raid's arrests are not kills. It pays even if you then lose the fight, and a Fold denies it, so a Boss with no Safe District to Scram to is the target.
 - Your Ambush or return fire on a rival's Play completes nothing.
 - A count is what one Play did: "4+ barrels" means four in a single Play.
-- The deck is 36 cards (16 / 12 / 8): an Unload card for each of the eight ordinary Speakeasies, an Extort card for each mainland Borough's Speakeasies ("Extort all of the Speakeasies in X"), a Boss and 4+ Rum across each of three Bridges (Hell Gate, Queensboro, Brooklyn), and among the 5s a body count for each mainland Borough, The Toll Booth Trap, The Five Families, Opening Night (your home Borough's High Society Venue) and Union Dues. The eight 5s are kept out of the opening Market.
+- The deck is 36 cards (16 / 12 / 8): an Unload card for each of the eight ordinary Speakeasies ("Unload 4+ barrels at <bar> in <District>"), an Extort card for each mainland Borough's Speakeasies ("Extort every open Speakeasy in X": every one there that isn't Padlocked), a Boss and 4+ Rum across each of three Bridges (Hell Gate, Queensboro, Brooklyn), and among the 2s Opening Night (Unload 5+ Rum at your home Borough's High Society Venue) and The Insurance Job (set off a Raid, by the 5th Heat marker or a Rat on your own Play, that padlocks a Pressure 1 or 2 Still you Control). Union Dues (Recruit 4+ Runners in a rival's home Ward) is a 1. The eight 3s are The Butcher's Ledger, The Toll Booth Trap, High Roller (Seize a High Society Venue), The Smuggler's Run, The Eviction (Seize a District with a rival's Safehouse, by fight or Fold, and take the Safehouse over; a walk-in or a Secure is no Seize), The Noble Experiment (Unload 8+ Moonshine outside your home Borough), The Warehouse (Secure your Safehouse in a District holding 10+ barrels) and The Five Families. The eight 3s are kept out of the opening Market.
 - A staked marker never reaches the Ledger, so while you hold Jobs you fund fewer Plays.
 
 **Deals**:
@@ -89,31 +89,31 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 
 | Play (engine) | Cost | Effect and restrictions |
 |---|---|---|
-| Move (movePlay) | 1 | Any Mobsters and/or barrels from a District you Control to one Connected District. Never into a Squad's District. Into a Hostile District (rival Mobsters): Standoff (§6). Barrels alone into rival turf become theirs. Onto an unguarded rival Safehouse (no Mobsters): take it over (evictTakeOver) or destroy it (evictRaze), no fight. |
-| Recruit (recruit) | 1 | Hire Runners into your Safehouse District at **$300 each**. Needs the Safehouse on the board. |
-| Secure (secure) | 1 | **$500**: place or relocate your one Safehouse into any Safe District. You gain Control at once. |
+| Move (movePlay) | 1 | Any Mobsters and/or barrels from a District you Control to one Connected District. Never into a Padlocked District (a Squad's). Into a Hostile District (rival Mobsters): Standoff (§6). Barrels alone belong to whoever Controls the District they land in: a rival's become his, and in one nobody Controls they are nobody's. Mobsters into a District where a rival Safehouse stands with no Mobsters: no Standoff; take it over (evictTakeOver) or destroy it (evictRaze). |
+| Recruit (recruit) | 1 | Hire Runners into your Safehouse District at **$300 each**. Needs the Safehouse on the board, not Control; the new Runners take Control. |
+| Secure (secure) | 1 | **$500**: place or relocate your one Safehouse into any Safe District. On a rival Safehouse it is a take over: theirs is destroyed (back to its owner's supply) and yours moves in. A Safehouse grants no Control by itself. |
 | Trade (trade) | 1 | At a Dock you Control, swap Moonshine there for Rum 1:1 (limited by the Rum supply). This is the only source of Rum. |
 | Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
-| Collect (collect) | 1 | Spend a marker on +$100, which Laying Low would pay for it anyway, so it buys a turn longer on the street. |
 | Lay Low (layLow) | 0 | See §3. |
 | Unload (unload) | 2 | At a Speakeasy you Control, sell your barrels there: **Moonshine $300, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. **Greed Tax**: 5+ barrels in one Play = H. |
 | Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
-| Extort (extort) | 2, H at 5+ | **$200 per District you Control**. Once per Day; draws one Heat marker only when you Control **5+ Districts**. |
+| Extort (extort) | 2, H at 5+ | **$100 per District you Control**. As often as your Ledger pays for it; each Extort draws one Heat marker only when you Control **5+ Districts**. |
 | Rat (rat) | 2 | An immediate Raid (§7). Take the Rat Card (−3 Respect) from the supply or its holder. You cannot Rat while you hold it; it leaves you only when a rival Rats. |
 | Rise (rise) | 2 | Boss off the board only: place him in any **Safe Ward**. |
 | Take the Crown (takeTheCrown) | 2 | See §1. |
 
 ## 5. Movement and Control
 
-- **Control**: you have a Mobster or your Safehouse in the District. It is checked at the end of each Play: walk onto an empty block and it is yours, walk off and it is not.
-- **Loose barrels**: barrels left on a block nobody Controls belong to nobody. Whoever takes Control of the block takes them.
+- **Control**: your Boss or a Runner stands in the District. **A Safehouse alone holds nothing**: a District with no Mobsters is Controlled by nobody, so its Still does not brew for you, it does not count for Extort or the Harbormaster, and you cannot Unload, Trade, Peddle or Move barrels there. It is checked at the end of each Play: walk in and it is yours, walk off and it is not.
+- **Barrels belong to whoever Controls the District** at the end of a Play. Barrels in a District nobody Controls belong to nobody; whoever takes Control takes them.
 - **Golden Rule**: no two mobs share a District at the end of a Play.
-- **Connected**:
-  - Land (shared border or bridge);
-  - Water: every **Dock** connects to every other Dock.
-- **Safe District**: yours, or **Empty** (no Mobsters, no Safehouse, no Squad). Barrels do not count. A rival Safehouse with no Mobsters is **unguarded**: neither Safe nor Hostile.
-- **Squad Districts** are impassable. Their Still and Speakeasy are padlocked: no brewing, no Blowback, no sales. The four High Society Venues start under Squads.
+- **Adjacent**: a shared border or a bridge.
+- **Connected**: Adjacent, or Dock to Dock (every **Dock** connects to every other Dock by water).
+- **Safe District**: no rival Mobsters and no Police Squad. Barrels and Safehouses do not count, so a District where only a rival Safehouse stands is Safe.
+- **Hostile District**: rival Mobsters stand in it.
+- **A rival Safehouse**: whoever takes Control of a District holding one (Move, Skiff, Advance, Scram, Rise, a won fight, a Fold) must take it over (yours moves in, free) or destroy it (back to its owner's supply). Walking in on one with no Mobsters starts no Standoff.
+- **Padlocked**: a District holding a Police Squad. Nobody enters it; its Still and Speakeasy are shut: no brewing, no Blowback, no sales. The four High Society Venues start under Squads. Every other Speakeasy is **open**.
 - **District kinds**: Speakeasy (12, four of them High Society), Dock, Ward (engine tag \`ghetto\`). Every District has a Still numbered 2–12.
 - **Still Pressure** = 6 − |7 − number|, so the 7 is hottest and gets 6.
 
@@ -124,6 +124,7 @@ A fight happens inside the Move that started it. Each option costs the chooser's
 **Dice** = Muscle Ratio (max 5). **Threat** starts at 1 and gains +1 for each of these, max 4:
 
 - Boss in the fight;
+- the Irish Tommy Gun (the Invader's volley only);
 - the Occupier defending the District holding its own Safehouse;
 - the Occupier's Ambush roll only.
 
@@ -135,7 +136,7 @@ Hits remove **Runners first**, then the Boss.
 
 - **Ambush** (1): only the Occupier rolls, at +1 Threat. This is the fight's Heat marker, and it pins the Invader. It needs a Ledger marker and is not allowed once you have Laid Low.
 - **Hold Fire** (0): the Invader is pinned and no one rolls.
-- **Fold** (0): the Occupier's Mobsters **Scram**: they run to one Connected Safe District, never the one the Invader came from, leaving the barrels. The Invader takes Control, the barrels, and the choice to take over or destroy the Safehouse. It is not allowed with nowhere Safe to Scram.
+- **Fold** (0): the Occupier's Mobsters **Scram**: they run to one Connected Safe District, never the one the Invader came from, leaving the barrels. The Invader takes Control, the barrels, and the choice to take over or destroy the Safehouse. It is not allowed with nowhere Safe to Scram, nor against a Stealth.
 
 **Step 2: Pinned.** The Invader repeats until the fight resolves:
 
@@ -143,51 +144,53 @@ Hits remove **Runners first**, then the Boss.
 - **Advance** (1): move the pinned crew to a Safe District Connected to this one, with as many of its carried barrels as you choose; the rest are left for the Occupier (a way to plant evidence on a rival who Ambushed you, since his Heat marker is now the freshest).
 - **Fall Back** (fallBack, 0): return to the origin District. Carried barrels are left for the Occupier. You must Fall Back if your Ledger is empty.
 
-**Heat**: a fight draws exactly **one** Heat marker, owned by whoever fired first (the Ambusher, or the Invader on his first Open Fire, Hit or Torch). The Boiling Point is checked after the fight ends.
+**Heat**: a fight draws exactly **one** Heat marker, owned by whoever fired first (the Ambusher, or the Invader on his first Open Fire, Hit, Tommy Gun or Torch). The Boiling Point is checked after the fight ends.
 
 **End of the fight**:
 
 - If the Occupier is wiped out, the Invader takes Control and **all** barrels there.
 - A rival Safehouse there is taken over (yours relocates into it for free) or destroyed (back to its owner's supply).
 - If the Invader is wiped out, the Occupier keeps its barrels and any the Invader carried.
-- If both sides are wiped out and no Safehouse remains, the District is empty.
+- If both sides are wiped out in one volley, nobody Controls the District; any Safehouse stays where it is.
 
 ## 7. Police
 
-- **Heat**: a Play marked H, a fight's first shot (Ambush, Open Fire, Hit or Torch), and a Greed Tax Unload each add 1 marker (the spent marker itself).
+- **Heat**: a Play marked H, a fight's first shot (Ambush, Open Fire, Hit, Tommy Gun or Torch), and a Greed Tax Unload each add 1 marker (the spent marker itself).
 - **The Raid** is triggered when the **5th marker** lands, once the Play that placed it has fully resolved (a sale completes first; a fight ends first), or at once by Rat.
 - **Squad order**: the four Squads (Staten Island has none) resolve one at a time, Manhattan, Bronx, Queens, Brooklyn.
-- **Reach**: Districts directly Land Connected to the Squad (border or bridge, never water) inside its own Borough. It must be held by a mob and have no Squad. **The Sicilian Safehouse District is never in reach.**
-- **Target mob**: among mobs holding a District in reach, the one whose marker sits **furthest right** on the Heat Track. If none of them has a marker, the Squad stays put.
+- **Reach**: Districts directly Adjacent to the Squad (border or bridge, never water) inside its own Borough. It must be Controlled by a mob (Mobsters there) and have no Squad.
+- **Target mob**: among mobs Controlling a District in reach, the one whose marker sits **furthest right** on the Heat Track. If none of them has a marker, the Squad stays put.
 - **Target District**: that mob's reachable District with the **most barrels**; ties go to the highest Still Pressure.
 - **Scatter**: the Squad moves in.
-  - The Safehouse there burns (back to supply) and all barrels there go to the supply.
-  - Mobsters **Scram**, as from a Fold: to one Connected Safe District, never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low.
+  - The Safehouse there is destroyed (back to supply) and all barrels there go to the supply.
+  - Mobsters **Scram**, as from a Fold: to one Connected Safe District, never the Squad's origin. With two or more, the crew's owner picks (chooseScatter), even out of turn or Laid Low. Scramming onto a rival Safehouse, he must take it over or destroy it.
   - With no such District they are all arrested (back to supply, Boss included).
-  - The Squad now holds and padlocks the District.
+  - The Squad now holds the District: it is Padlocked.
 - **Aftermath**: all Heat markers return to their owners' Reserves.
 
-## 8. The families (Trait + two signature Plays)
+## 8. The families (two signature Plays each, no Traits)
 
-**Sicilian Syndicate: Untouchable.** Squads never target or enter their Safehouse District.
+A Play marked "in a fight" is made while Pinned as the Invader: it costs Influence but not a turn.
 
-- **Hit** (hit, 2, in a fight while pinned): an Open Fire where, if you score any hits, the rival Boss takes the first. It draws Heat only as the fight's first shot.
+**Sicilian Syndicate**
+
+- **Hit** (hit, 2, in a fight): an Open Fire where, if you score any hits, the rival Boss takes the first. It draws Heat only as the fight's first shot.
 - **Consigliere** (consigliere, 1): remove any one Heat marker (you choose it by index) and return it to its owner's Reserves.
 
-**Hell's Kitchen Irish: Firepower.** +1 die on their own Open Fire as the Invader (max 5). It never applies on defence or to Plunder.
+**Hell's Kitchen Irish**
 
-- **Plunder** (plunder, 1, in a fight while pinned): roll as for Open Fire, but each hit steals 1 barrel (pickPlunder) instead of killing. The Occupier's hits still kill. No Heat. Stolen barrels leave with an Advance and are dropped on a Fall Back.
+- **Tommy Gun** (tommyGun, 2, in a fight): Open Fire with 1 extra attack die (max 5) at +1 Threat (max 4). The Occupier returns fire as normal. Heat only as the fight's first shot.
 - **Peddle** (peddle, 1): sell **Moonshine only** in a **Ward** you Control at the **$200** street rate. Never the Greed Tax, however many barrels: a big pile goes out quietly in one Play, while a small batch fetches more by Unload at a bar ($300).
 
-**East Side Vipers: Whispers.** They may look at the top card of the Jobs deck at any time (your state shows it). It is the first card dealt at the next restock, so a gap left at the Offers brings it in (claimable the morning after).
+**East Side Vipers**
 
-- **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **Hostile** District (rival Mobsters on it). The Occupier cannot Ambush: they Hold Fire (you are Pinned as usual: Open Fire, Advance or Fall Back) or Fold.
-- **Tunnel** (tunnel, 1): move 1–5 barrels, no Mobsters, between your Safehouse District and any other District you Control, in either direction.
+- **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **Hostile** District (rival Mobsters on it). The Occupier gets no Standoff choice: no Ambush, no Fold. He Holds Fire and you are Pinned as usual (Open Fire, Advance or Fall Back).
+- **Whispers** (whispers, 1, costs the turn): look at the top card of the Jobs deck (only you see it), then claim it at once (whispersChoice true), staking Influence from your Reserves equal to its Stake, or let it lie on top of the deck (whispersChoice false). A claimed Job is held like any other; it is outside the once-a-morning Offers limit.
 
-**Harlem Knights: Network.** Each Trade gives +1 free Rum, if the supply has one.
+**Harlem Knights**
 
-- **Skiff** (skiff, 1): up to 5 Mobsters, no barrels, from a Coastal District you Control to any other Coastal District (every District but Fordham, Corona, Flushing and Richmond Hill). Not into a Squad District. A Hostile District gives a normal Standoff; an unguarded rival Safehouse gives take over or destroy.
-- **Torch** (torch, 1, in a fight while pinned): sacrifice one pinned Runner to destroy the rival Safehouse there. It is a shot: Heat only if it is the fight's first. The fight continues.
+- **Skiff** (skiff, 1): up to 5 Mobsters, no barrels, from a Coastal District you Control to any other Coastal District (every District but Fordham, Corona, Flushing and Richmond Hill). Not into a Padlocked District. A Hostile District gives a normal Standoff; a rival Safehouse with no Mobsters gives take over or destroy.
+- **Torch** (torch, 1, in a fight): sacrifice one pinned Runner to destroy the rival Safehouse there and send **every barrel in the District to the Supply**. The rival keeps Control and the fight continues. It is a shot: Heat only if it is the fight's first.
 
 ## 9. Strategic notes
 

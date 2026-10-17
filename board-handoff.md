@@ -8,7 +8,7 @@ empty south) and the Bowery's foot and Staten Island rose. Then the borders roun
 four-way corner were straightened, gently (an all-straight version with a true vertical for
 East Harlem was tried and reverted), and the title went small and level under the panels. See
 Manhattan is one width, Straightening round the four-way corner, The look and Decisions. On
-2026-10-10 East Harlem's corner on the Hell Gate was cut off (see East Harlem's corner cut). mk-online serves it too (`mk-online/dist/board.svg`, the 2026-10-10 board, from mk-online 32418fc),
+2026-10-10 East Harlem's corner on the Hell Gate was cut off (see East Harlem's corner cut). mk-online serves it too (`mk-online/dist/board.svg`, the 2026-10-17 board, from mk-online 2c69fc2),
 with clickable Districts, piece spots and its connection graph taken from `board-geometry.json`;
 after a redraw, `mk-online-board-handoff.md` is the brief for catching it up. The Affinity export (`Art/Board (Large).png`) is untouched.
 
@@ -81,9 +81,8 @@ works better"), so this makes the angles deliberate instead.
   District's id became `canarsie` on 2026-10-01, in the traced map, the tools and mk-online's engine together; the drawing did not change. The drafting reports any corner under 80 degrees; there are none.
 - **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point
   (`corner`), and the borders that leave it run at 45 degrees (see Straightening round the
-  four-way corner). Sugar Hill / Belmont runs level, then at 45 degrees down to the corner
-  (see The Hudson round the Heat corner; until 2026-10-17 it ran at 45 degrees all the way to the
-  coast, so Sugar Hill's top was a right-angled peak like Williamsburg's).
+  four-way corner). Sugar Hill / Belmont runs at 45 degrees from the corner to the coast, so
+  Sugar Hill's top is a right-angled peak like Williamsburg's.
   East Harlem / Hunts Point runs out to a knee and drops upright onto the crook where the Hell
   Gate meets the East River (`EH_SHORE`), so Hunts Point has the whole of the Hell Gate's Bronx
   bank and the Hell Gate Bridge lands near its middle (`BRIDGE_SHIFT`; see East Harlem's corner
@@ -93,8 +92,8 @@ works better"), so this makes the angles deliberate instead.
 - **No Westchester or Nassau** (Nick: sit the Districts flush against the border). The Bronx runs
   up to the frame and Queens out to it, under it to the board's edge as New Jersey does; the
   build clips them at the frame's hairline (`insideFrame()`) for everything but their fill. The
-  water east of the Bronx stays, and the Hudson runs on round the Heat corner to the frame at its
-  own width, between the Heat corner and the upright shore of Sugar Hill and Belmont. **Staten Island keeps its shore all round** (Nick: it should read as
+  water east of the Bronx stays, and so does the open water north of Manhattan's tip, between
+  the Heat corner and Belmont (see The Hudson round the Heat corner). **Staten Island keeps its shore all round** (Nick: it should read as
   an island; running it to the frame was tried and cut).
 - **The Queens / Brooklyn line is two straight runs** (Nick, 2026-09-29: he likes clean
   borders between Boroughs, and the old one zigzagged). It leaves the East River square (45
@@ -184,7 +183,7 @@ Sugar Hill and East Harlem diamond-topped and pushed Manhattan's rows down. Git 
 the rows) was replaced the same day by the bricks, below; the rest stands:
 
 - **Sugar Hill / Belmont runs from the four-way corner square to the coast, at 45 degrees**
-  (`corner`; since 2026-10-17 only its lower stretch, see The Hudson round the Heat corner), so Sugar Hill's top is a right-angled peak like Williamsburg's and its sign hangs
+  (`corner`), so Sugar Hill's top is a right-angled peak like Williamsburg's and its sign hangs
   centred under it, on 38 (the first pass's 77). Sugar Hill / East Harlem happens to run at 45
   degrees too. The corner needs x + y of at least about 801, or the peak is too narrow for the
   sign and its plate drops under it.
@@ -415,16 +414,16 @@ Harlem's shore is the East River's alone. The crook sets the knee, so `ehKnee` i
 
 ### The Hudson round the Heat corner
 
-Nick, 2026-10-17: the water north of Manhattan's tip, between the Heat corner and Belmont, opened
-to about twice the Hudson's width and read as wasted space. The shore there now stands upright a
-Hudson's width (44) off the Heat corner, so the river runs from New Jersey's shore round the corner
-to the frame at one width. Manhattan's west coast turns upright onto it (`MN_UP`); Sugar Hill's
-shore runs up it to Sugar Hill's level top (`sugarHillTop`, 100) and Belmont's from there to the
-frame. Sugar Hill / Belmont runs level from the shore to the 45-degree line it always took into
-the four-way corner. Both gained: Sugar Hill's room 62 to 66 cm², Belmont's 51 to 63. A level top
-lower down, at Manhattan's turn (138), was tried first: Belmont took the whole gain and Sugar Hill
-lost room (56). Under 100 the level run is too short to read as a border (`MIN_BORDER`). Every
-connection is unchanged. New Jersey's water rings follow the Heat corner's side up to the frame.
+Nick, 2026-10-17: the water north of Manhattan's tip, between the Heat corner and Belmont, opens
+to about twice the Hudson's width. For a few hours that day the shore there stood upright a
+Hudson's width off the Heat corner, so the river ran round the corner at one width, with Sugar
+Hill's top made level (Sugar Hill's room 62 to 66 cm², Belmont's 51 to 63; mk-online PR #21
+carried it). Seen on the board, the two Districts read too big and the top-middle lost its
+breathing space, so Nick chose the old shapes back: the open water reads as harbour beside the
+Heat Track. What stayed is New Jersey's water rings, which follow the Heat corner's side up to the
+frame (`waterLining()` in `build_board.js`). A halfway river (1.5 times the Hudson, Sugar Hill
+level at Manhattan's turn) was also rendered and not taken: Sugar Hill's sign hung low (hangers 90).
+Git history (d416e75) has the one-width version.
 
 ### Room for pieces, and the tuner
 
@@ -821,10 +820,12 @@ keeps them on a re-trace.
 
 ## Open
 
-- **mk-online is one redraw behind** (2026-10-17): Sugar Hill and Belmont's shore round the Heat
-  corner, New Jersey's plain fill and the Heat corner's frame. Connections are unchanged, so it
-  needs the screen SVG, `board-geometry.json`, and Sugar Hill's and Belmont's click areas and piece
-  spots (`mk-online-board-handoff.md`).
+- ~~**mk-online is one redraw behind** (2026-10-17): Sugar Hill and Belmont back to their old
+  shapes.~~ Caught up the same day (mk-online 2c69fc2, PR #22): the screen SVG, `board-geometry.json`,
+  and their click areas and piece spots regenerated; `boardcheck.ts` passes, 44 connections, 21 Coastal.
+- ~~**mk-online is one redraw behind** (2026-10-17): the Hudson round the Heat corner.~~ Caught up
+  the same day (mk-online 02f3e3c): the screen SVG, `board-geometry.json`, and Sugar Hill's and
+  Belmont's click areas and piece spots regenerated; `boardcheck.ts` passes, 44 connections, 21 Coastal.
 - ~~**mk-online is one redraw behind** (2026-10-10): East Harlem's corner cut.~~ Caught up the same
   day (mk-online 32418fc): the screen SVG, `board-geometry.json`, and East Harlem's and Hunts Point's
   click areas and piece spots regenerated; `boardcheck.ts` passes, 44 connections, 21 Coastal.
