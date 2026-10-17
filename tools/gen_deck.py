@@ -103,9 +103,6 @@ ONES = [
      "Unload <b>4+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b>.",
      "Unloaded at midnight, poured by one, gone by two."),
     # THE SINGLES: landmarks, Docks and Staten Island, which no Borough set can carry.
-    ("The Milk Run", "The Milk Run.jpg", "Move",
-     "Move <b>4+ barrels</b> across the <b>Williamsburg Bridge</b>.",
-     "Every copper watches that bridge. Wave as you go."),
     # Briefly restricted to "a mainland Dock" to stop Rum Row paying this card
     # too, then REVERTED (Nick, 2026-07-19): that stack fires only at Westerleigh
     # and Tottenville (2 districts), and a 2-district overlap you had to draft
@@ -123,22 +120,15 @@ ONES = [
     ("The Dutchman's Deal", "Dutchman.jpg", "Trade",
      "Trade <b>3+ barrels</b> at <b>West Side</b>.",
      "He never gives a name. The windmill on the sack says plenty."),
-    # RENAMED from "The Riverside Switch" and re-arted (Nick, 2026-07-19). The old
-    # art (Switch.png) has RIVERSIDE STORAGE painted across a moonlit suspension
-    # bridge, which fought the objective twice over: Jamaica Bay is a bay, and in
-    # 1929 it had no major bridge at all (Marine Parkway is 1937, Cross Bay 1939).
-    # Skiff.png is two men running a LIQUOR crate across black water in the rain,
-    # harbour lights behind: the flavour line drawn as a picture. At 13 characters
-    # the new name also clears the 16-char title--long threshold.
-    # LANDMARK: "on Jamaica Bay" is labelled on the board and holds exactly two
-    # Docks: Canarsie (Bk) and Jamaica (Q). Coney Island sits on that water
-    # but carries no anchor, so there is nothing to argue about. This was the fix
-    # for the deck's other big geographic swing: this card was a strict
-    # SUBSET of The Smuggler's Run (Staten -> mainland at 6+ barrels IS "4+ across
-    # water into a Dock"), paying 6 Respect across 6 Docks. Now 2.
-    ("Night Landing", "Skiff.jpg", "Move",
-     "Move <b>4+ barrels</b> across water into a <b>Jamaica Bay Dock</b>.",
-     "Two boats, one lantern, and nobody the wiser."),
+    # MARKET PASS 2026-10-17 (Nick: more Trade cards, to pull boards toward the Rum Trade once the
+    # bridges and Last One Standing stopped asking for Rum; reviews/jobs-market-stuck-2026-10-17.md).
+    # Jamaica is the one Dock that is nobody's start and that no other card named, so it is a 1 with a
+    # trip behind it, like The Dutchman's Deal at West Side. It replaces Night Landing, which pointed at
+    # the same water. "Jamaica ginger" was the patent tonic sold by the case under Prohibition.
+    # Art: Rum Row 3 (the rainier sibling of Rum Row's painting), provisional.
+    ("Jamaica Ginger", "Rum Row 3.jpg", "Trade",
+     "Trade <b>4+ barrels</b> at <b>Jamaica</b>.",
+     "Sold by the case as a tonic. Nobody asks what ails you."),
     # "a Pier 6 brawl" was real period slang for an all-out waterfront fight.
     # TRIED AND REVERTED: pinning this to Jamaica Bay as the hostile mirror of
     # Night Landing. It balanced the seats by CARD COUNT and then broke them by
@@ -224,6 +214,15 @@ ONES = [
     ("Rum Row", "Rum Row.jpg", "Trade",
      "Trade <b>4+ barrels</b> at a <b>Staten Island Dock</b>.",
      "Forty ships past the three-mile line, waiting on a lamp."),
+    # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's
+    # Extort card: four of the eight Docks, held at once. Holding four almost always makes you the
+    # Harbormaster too. Was "Move 3+ Rum into Red Hook", cut on the setup pass as a Brooklyn chore.
+    # WORDING 2026-10-13 (Nick): "Extort 4+ Docks", in the Extort set's new style.
+    # MARKET PASS 2026-10-17: DOWN TO 1, the easiest 2 in the bot runs (62 of 99 claims finished),
+    # so The Milk Run could join the bridge set and the tiers stay 16 / 12 / 8.
+    ("Cuban Prince", "Cuban Prince.jpg", "Extort",
+     "Extort <b>4+ Docks</b>.",
+     "Every boat from Havana ties up at one of his piers."),
     # A Recruit never shares a Play with a fight, so this 5 cannot break the hard rule. To
     # Recruit in another boss's home Ward your Safehouse must be there: take over his, or
     # wait for him to leave it. Every rival sees it coming and garrisons home.
@@ -330,19 +329,23 @@ TWOS = [
     ("The Black Hand", "Black Hand.jpg", "Extort",
      "Extort <b>every open Speakeasy</b> in <b>Brooklyn</b>.",
      "The letter had a hand drawn on it. The shop paid by noon."),
-    # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's
-    # Extort card: four of the eight Docks, held at once. Holding four almost always makes you the
-    # Harbormaster too. Was "Move 3+ Rum into Red Hook", cut on the setup pass as a Brooklyn chore.
-    # WORDING 2026-10-13 (Nick): "Extort 4+ Docks", in the Extort set's new style.
-    ("Cuban Prince", "Cuban Prince.jpg", "Extort",
-     "Extort <b>4+ Docks</b>.",
-     "Every boat from Havana ties up at one of his piers."),
+    # THE BRIDGE SET, MARKET PASS 2026-10-17 (reviews/jobs-market-stuck-2026-10-17.md). The set took The
+    # Milk Run's wording, and The Milk Run joined it as the fourth bridge. "Your Boss and 4+ Rum" put two
+    # scarce things on one bridge end: the bots finished the three on 3 to 6 of about 75 claims each and
+    # they sat in the Market for days, and agent seats left them face-up to the end. Rum rarely stands
+    # anywhere (2 to 5 barrels on the whole board on an average Day), since it is Traded and poured at
+    # a Venue in short order. As "4+ barrels" they finish 25 to 40% of claims, like the working 2s.
+    # The Milk Run was already "4+ barrels" at a 1 and lingered too: the Williamsburg Bridge ends in a
+    # High Society Venue that starts Padlocked, so it is a setup the table can see, a 2's job.
+    ("The Milk Run", "The Milk Run.jpg", "Move",
+     "Move <b>4+ barrels</b> across the <b>Williamsburg Bridge</b>.",
+     "Every copper watches that bridge. Wave as you go."),
     # SETS PASS 2026-10-11 (Nick's wording). The Hell Gate joins Hunts Point (the Bronx's home Ward) and
     # Astoria, so it is the Bronx's friendly 3, the seat with the fewest cards aimed its way. The Rum
     # chain and a Boss on the road are the setup; a hostile far end makes it a fight. Was "Move 6+
     # barrels into Fordham", cut on the setup pass as a Bronx chore.
     ("Hell&rsquo;s Highway", "Hells Highway.jpg", "Move",
-     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Hell Gate Bridge</b>.",
+     "Move <b>4+ barrels</b> across the <b>Hell Gate Bridge</b>.",
      "Forty miles of bad road and worse intentions."),
     # THE BRIDGE SET (VARIETY PASS, 2026-10-13). Hell's Highway's wording on the board's other two
     # Bridges, so each 3 sends a Boss over the water with a Rum run behind him and points the table at
@@ -354,12 +357,12 @@ TWOS = [
     # The One-Way Ride keeps its name and art from the Boss set (a tommy gun from a running car), and
     # the Queensboro is the bridge Gatsby drives into Manhattan over: a nod, not a lesson.
     ("The One-Way Ride", "Gatsby.jpg", "Move",
-     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Queensboro Bridge</b>.",
+     "Move <b>4+ barrels</b> across the <b>Queensboro Bridge</b>.",
      "Get in the car. Nobody asks where it is going."),
     # Named for the oldest con in the city: George C. Parker sold the Brooklyn Bridge to the newly
     # landed, more than once. Art: a deal at night, a wad of cash, a hotel bar behind.
     ("A Bridge to Sell", "Night Mayor.jpg", "Move",
-     "Move your <b>Boss</b> and <b>4+ Rum</b> across the <b>Brooklyn Bridge</b>.",
+     "Move <b>4+ barrels</b> across the <b>Brooklyn Bridge</b>.",
      "He sold it to a rube on Tuesday. Tonight he is using it."),
     # RE-VERBED Rise -> Secure (Nick, 2026-07-19). Two problems solved by one edit,
     # with no change to the 12/12/8 tier counts:
@@ -395,8 +398,11 @@ TWOS = [
     # Six Rum on the block is also the Big Bust's favourite door. Secure-only Jobs can't meet
     # it: High Roller is the rooms, Fortress Staten is Staten Island, and The Beachhead pays
     # beside it only while a rival Safehouse stands in Corona.
+    # MARKET PASS 2026-10-17: "4+ barrels" (was 6+ Rum). Six Rum was a pile nobody built outside a
+    # Venue: 2 of 70 claims finished in bot runs, and it sat face-up for days. At 4+ barrels it
+    # finished 23 of 62. Astoria still brews almost nothing, so the barrels are hauled in.
     ("Last One Standing", "Last One Standing.jpg", "Secure",
-     "Secure your Safehouse in <b>Astoria</b> holding <b>6+ Rum</b>.",
+     "Secure your Safehouse in <b>Astoria</b> holding <b>4+ barrels</b>.",
      "The last man at the table gets the chair."),
     # "and no Safehouse" is the guard that closes handoff §3 cluster 3 for good.
     # The Eviction REQUIRES a rival Safehouse; this now FORBIDS one, so the two

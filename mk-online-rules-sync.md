@@ -1084,6 +1084,31 @@ row says a rival's Safehouse there is destroyed. The Blue Wall drops its restate
 
 **To port:** nothing. `RULES-AI.md` already says all of it.
 
+## 43. The Market pass: barrel bridges, Last One Standing at 4+, Jamaica Ginger (2026-10-17, Nick)
+
+**The bridge set** reads "Move 4+ barrels across the <Bridge>" and has four cards at 2: The Milk Run
+(Williamsburg, up from 1), Hell's Highway (Hell Gate), The One-Way Ride (Queensboro) and A Bridge to
+Sell (Brooklyn). No Boss, any barrels. **Last One Standing** reads "Secure your Safehouse in Astoria
+holding 4+ barrels" (6+ Rum before). **Cuban Prince** drops to 1. **Night Landing** is cut, and
+**Jamaica Ginger** (1) reads "Trade 4+ barrels at Jamaica". The deck stays 36, 16 / 12 / 8.
+
+Why: eight cards held 48% of the Market's slot-Days in 74 bot games and finished under 15% of claims;
+agent seats left the Rum bridges and Last One Standing face-up to the end. Rum rarely stands anywhere
+(2 to 5 barrels on the whole board on an average Day), so "your Boss and 4+ Rum" on one bridge end was
+two scarce things in one place. As barrels the four finish 25 to 40% of claims and sit no longer than
+other cards. Jamaica Ginger (Nick's idea) keeps a pull toward the Dock Trade, at the one Dock that is
+nobody's start. Cuban Prince was the easiest 2 (62 of 99). The Smuggler's Run and The Butcher's Ledger
+still sit; they are open. Review: the project's `reviews/jobs-market-stuck-2026-10-17.md`.
+
+**To port:** the card texts and tiers, the bridge check (no Boss, any barrels), Last One Standing's
+count, the Jamaica Ginger check, and the bots' plans.
+
+### Ported 2026-10-17 (mk-online, this change)
+
+`jobs.ts` (texts, tiers, Night Landing out, Jamaica Ginger in); `objectives.ts` (`bridgeRun` for all
+four bridges, Last One Standing at 4+ barrels, `jamaica-ginger`); the bot plans the bridges without a
+Boss and Last One Standing on any barrels; `scripts/jobs-check.ts` covers them.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -1212,3 +1237,4 @@ row says a rival's Safehouse there is destroyed. The Blue Wall drops its restate
 - [x] **Extort draws Heat only at 5+ Districts; the Greed Tax at 5+ barrels** (§34)
 - [x] **Extort at $100 per District, any number a Day; Collect cut** (§35)
 - [x] **Jobs pay 1, 2 or 3; High Roller in, The Real McCoy out** (§37; mk-online PR #11)
+- [x] **The Market pass: barrel bridges with The Milk Run, Last One Standing 4+, Cuban Prince 1, Jamaica Ginger for Night Landing** (§43)
