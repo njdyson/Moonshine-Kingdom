@@ -236,6 +236,30 @@ agreed: **1s quick and easy, 2s a setup the table can see, 3s hard and planned**
 easier on this argument. In bot runs (40 games, random styles): Extort-set claims finished 35% to 64%,
 the bars 30% to 41%, median crown Day 46 to 39.5, runner-up still about 3 Respect behind at the crown.
 
+## The Market pass: barrels on the bridges
+
+Since 2026-10-17 (Nick; the project's `reviews/jobs-market-stuck-2026-10-17.md`). The goal is a deck in
+which no card is reliably ignored. Eight cards held 48% of the Market's slot-Days in 74 bot games and
+finished under 15% of claims, and agent seats left the Rum cards face-up to the end. The cure is the
+house style: one verb, one place, one condition. A card dies when it asks for two scarce things in one
+place, a target only a rival builds, or a place that starts Padlocked.
+
+- **Rum is the gate.** Rum rarely stands anywhere (2 to 5 barrels on the whole board on an average Day):
+  it is Traded and poured at a Venue in short order. So the bridge set dropped "your Boss and 4+ Rum" for
+  "4+ barrels", The Milk Run joined it at 2 (its bridge ends in a Venue that starts Padlocked), and Last
+  One Standing asks 4+ barrels. All four now finish 25 to 40% of claims. Don't put Rum back on a card
+  that names one place.
+- **The pull toward the Trade** comes from Trade cards instead: The Dutchman's Deal, Rum Row and Jamaica
+  Ginger. A Trade card at a starting Dock is a home chore, and a big "Trade N+ anywhere" is The Real
+  McCoy, cut for compounding.
+- **Churn** (Nick, 2026-10-17): not against "a clever, subtle or occasional churn that adds to the game",
+  but against cards that don't stick around, since players would turtle and wait for a card that suits.
+  Walk Away already lets a boss clear a card he holds. A Raid that discards the oldest Job was tested and
+  ends long stalls, but fires about 15 times a game.
+- **Still open:** The Smuggler's Run ("Seize a Dock holding 4+ Rum" was tried and still sat) and The
+  Butcher's Ledger (3+ barely helped bots). The weighted seat spread went from 3 to 4 (Manhattan gained
+  The Milk Run's extra point).
+
 ## Jobs: sets, and setup
 
 Since 2026-10-11 (Nick; `jobs-setup-handoff.md`). Two rules shape the deck.
@@ -253,12 +277,16 @@ once. The deck is 36 cards, 16 / 12 / 8:
 - **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
   barrels at <bar> in <District>"; 4+ since 2026-10-15, see *Easy 1s, open bars*), and eight singles for the landmarks, the Docks and
   Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Ward"; a 1 since
-  2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished).
+  2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished), **Cuban Prince** ("Extort
+  4+ Docks"; a 1 since 2026-10-17, the easiest 2, 62 of 99) and **Jamaica Ginger** ("Trade 4+ barrels
+  at Jamaica"; 2026-10-17, Nick: more Trade cards to pull toward the Rum Trade; Jamaica is the one Dock
+  that is nobody's start, and it replaced Night Landing).
 - **2s**: **the Extort set**, *Extort every open Speakeasy in* Manhattan (Empire
-  State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand); Cuban
-  Prince (4+ Docks) as an Extort card too; **the bridge set** since 2026-10-13, *Move your Boss and 4+
-  Rum across* the Hell Gate (Hell's Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge
-  (A Bridge to Sell); and singles, Last One Standing, The Copper Heist, **The Insurance Job** and
+  State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand);
+  **the bridge set**, *Move 4+ barrels across* the Williamsburg (The Milk Run), the Hell Gate (Hell's
+  Highway), the Queensboro (The One-Way Ride) or the Brooklyn Bridge (A Bridge to Sell); and singles,
+  **Last One Standing** ("Secure your Safehouse in Astoria holding 4+ barrels"), The Copper Heist,
+  **The Insurance Job** and
   **Opening Night** ("Unload 5+ Rum at the High Society Venue in your home Borough"). Opening Night
   is home-only so the pour can't be made in the room its holder crowns in. The Insurance Job reads
   "Set off a Raid that padlocks a Pressure 1 or 2 Still you Control" (Nick, 2026-10-15): any Raid
@@ -818,8 +846,8 @@ Watch in playtest:
   four 3-Respect friendly Jobs on. That made all four home chores, and on 2026-10-11 the Extort set
   replaced them (see *Jobs: sets, and setup*).
 - **Night Landing** (a Dock on Jamaica Bay) suited Queens and Brooklyn, who both started on one;
-  now only Brooklyn does. `tools/fairness_audit.py` puts Queens last on the weighted seat balance
-  (weighted spread 1 to 2).
+  then only Brooklyn did. It was cut on 2026-10-17 for Jamaica Ginger, which Queens and Brooklyn both
+  reach.
 - **Manhattan's start no longer touches Sugar Hill**: on Day 1 its Squad has nothing in reach and
   its Crown room is two blocks off. The Bronx, Queens and Brooklyn each start with two Districts
   beside their Squad and their room.

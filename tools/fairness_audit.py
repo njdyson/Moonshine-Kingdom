@@ -75,11 +75,11 @@ CARDS = [
     # --- 1 Respect: singles ---
     # Not Brooklyn-friendly: the bridge runs from Manhattan's home Ward to Brooklyn's
     # police-locked room, so Manhattan hauls from turf it already owns.
-    ('The Milk Run',          1, 'Move',      {'any'},                      {M: 'friendly', BK: 'neutral'}),
+    ('The Milk Run',          2, 'Move',      {'any'},                      {M: 'friendly', BK: 'neutral'}),
     # West Side: the empty Manhattan Dock beside Five Points and the Tenderloin.
     ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {M: 'friendly'}),
-    # Jamaica Bay = Canarsie (Brooklyn's starting Dock) and Jamaica.
-    ('Night Landing',         1, 'Move',      {'dock'},                     {BK: 'friendly'}),
+    # Jamaica: Queens' second Dock, next door to Brooklyn's home Ward (2026-10-17, replaced Night Landing).
+    ('Jamaica Ginger',        1, 'Trade',     {'dock'},                     {Q: 'friendly', BK: 'friendly'}),
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
     ('The Beachhead',         1, 'Secure',    {'any'},                      {}),
     ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),
@@ -93,7 +93,7 @@ CARDS = [
     ('The Black Hand',        2, 'Extort',    {'speakeasy', 'highSociety', 'press5'}, {BK: 'friendly'}),
     ('The Five Families',     3, 'Extort',    {'any'},
      {M: 'neutral', BX: 'neutral', Q: 'neutral', BK: 'neutral', ST: 'neutral'}),
-    ('Cuban Prince',          2, 'Extort',    {'dock'},                     {}),
+    ('Cuban Prince',          1, 'Extort',    {'dock'},                     {}),
     # --- 2 Respect: singles ---
     # The Hell Gate runs from Hunts Point (the Bronx's home Ward) to Astoria: the Bronx
     # starts on its near end with its Boss; anyone else crosses into the Bronx garrison.
