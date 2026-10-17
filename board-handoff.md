@@ -81,8 +81,9 @@ works better"), so this makes the angles deliberate instead.
   District's id became `canarsie` on 2026-10-01, in the traced map, the tools and mk-online's engine together; the drawing did not change. The drafting reports any corner under 80 degrees; there are none.
 - **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point
   (`corner`), and the borders that leave it run at 45 degrees (see Straightening round the
-  four-way corner). Sugar Hill / Belmont runs square to the coast, so Sugar Hill's top is a
-  right-angled peak, like Williamsburg's, and its sign hangs centred under it from both slopes.
+  four-way corner). Sugar Hill / Belmont runs level, then at 45 degrees down to the corner
+  (see The Hudson round the Heat corner; until 2026-10-17 it ran at 45 degrees all the way to the
+  coast, so Sugar Hill's top was a right-angled peak like Williamsburg's).
   East Harlem / Hunts Point runs out to a knee and drops upright onto the crook where the Hell
   Gate meets the East River (`EH_SHORE`), so Hunts Point has the whole of the Hell Gate's Bronx
   bank and the Hell Gate Bridge lands near its middle (`BRIDGE_SHIFT`; see East Harlem's corner
@@ -92,8 +93,8 @@ works better"), so this makes the angles deliberate instead.
 - **No Westchester or Nassau** (Nick: sit the Districts flush against the border). The Bronx runs
   up to the frame and Queens out to it, under it to the board's edge as New Jersey does; the
   build clips them at the frame's hairline (`insideFrame()`) for everything but their fill. The
-  water east of the Bronx stays, and Belmont's shore runs straight up from Manhattan's tip, so
-  the Hudson keeps a mouth. **Staten Island keeps its shore all round** (Nick: it should read as
+  water east of the Bronx stays, and the Hudson runs on round the Heat corner to the frame at its
+  own width, between the Heat corner and the upright shore of Sugar Hill and Belmont. **Staten Island keeps its shore all round** (Nick: it should read as
   an island; running it to the frame was tried and cut).
 - **The Queens / Brooklyn line is two straight runs** (Nick, 2026-09-29: he likes clean
   borders between Boroughs, and the old one zigzagged). It leaves the East River square (45
@@ -183,7 +184,7 @@ Sugar Hill and East Harlem diamond-topped and pushed Manhattan's rows down. Git 
 the rows) was replaced the same day by the bricks, below; the rest stands:
 
 - **Sugar Hill / Belmont runs from the four-way corner square to the coast, at 45 degrees**
-  (`corner`), so Sugar Hill's top is a right-angled peak like Williamsburg's and its sign hangs
+  (`corner`; since 2026-10-17 only its lower stretch, see The Hudson round the Heat corner), so Sugar Hill's top is a right-angled peak like Williamsburg's and its sign hangs
   centred under it, on 38 (the first pass's 77). Sugar Hill / East Harlem happens to run at 45
   degrees too. The corner needs x + y of at least about 801, or the peak is too narrow for the
   sign and its plate drops under it.
@@ -411,6 +412,19 @@ Harlem's shore is the East River's alone. The crook sets the knee, so `ehKnee` i
   narrows the strip above it by more than the corner adds, so its room reads 51.7 to 51.3.
 - **The Hell Gate Bridge stays put** (x 758). Its 30-unit shift was made to land clear of East
   Harlem's stub; it now sits near the middle of Hunts Point's shore (x 700 to 824).
+
+### The Hudson round the Heat corner
+
+Nick, 2026-10-17: the water north of Manhattan's tip, between the Heat corner and Belmont, opened
+to about twice the Hudson's width and read as wasted space. The shore there now stands upright a
+Hudson's width (44) off the Heat corner, so the river runs from New Jersey's shore round the corner
+to the frame at one width. Manhattan's west coast turns upright onto it (`MN_UP`); Sugar Hill's
+shore runs up it to Sugar Hill's level top (`sugarHillTop`, 100) and Belmont's from there to the
+frame. Sugar Hill / Belmont runs level from the shore to the 45-degree line it always took into
+the four-way corner. Both gained: Sugar Hill's room 62 to 66 cm², Belmont's 51 to 63. A level top
+lower down, at Manhattan's turn (138), was tried first: Belmont took the whole gain and Sugar Hill
+lost room (56). Under 100 the level run is too short to read as a border (`MIN_BORDER`). Every
+connection is unchanged. New Jersey's water rings follow the Heat corner's side up to the frame.
 
 ### Room for pieces, and the tuner
 
@@ -663,8 +677,8 @@ keeps them on a re-trace.
   the corner's diamond at 45 degrees. The map's hairline and seam used to step round the corner,
   squared, and boxed the shore's start; a mitre on the shore line was tried the same day, and then
   both lines were cut there instead, so they stop at the corner's gold edge and the gold edge is
-  the border. New Jersey's water rings stop square to the shore at the corner instead of wrapping
-  up the corner's side. The Heat Track's sockets and frame are unchanged (39 mm, the Ledger's chips).
+  the border. New Jersey's water rings follow the corner's side up to the
+  frame as a shore (Nick, 2026-10-17; for a day they stopped square at the corner). The Heat Track's sockets and frame are unchanged (39 mm, the Ledger's chips).
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are generated** (`tools/still_art.js`, since 2026-10-07; Nick: he likes the design,
@@ -807,6 +821,10 @@ keeps them on a re-trace.
 
 ## Open
 
+- **mk-online is one redraw behind** (2026-10-17): Sugar Hill and Belmont's shore round the Heat
+  corner, New Jersey's plain fill and the Heat corner's frame. Connections are unchanged, so it
+  needs the screen SVG, `board-geometry.json`, and Sugar Hill's and Belmont's click areas and piece
+  spots (`mk-online-board-handoff.md`).
 - ~~**mk-online is one redraw behind** (2026-10-10): East Harlem's corner cut.~~ Caught up the same
   day (mk-online 32418fc): the screen SVG, `board-geometry.json`, and East Harlem's and Hunts Point's
   click areas and piece spots regenerated; `boardcheck.ts` passes, 44 connections, 21 Coastal.
