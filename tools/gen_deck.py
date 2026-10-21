@@ -117,8 +117,9 @@ ONES = [
     # starting Dock since 2026-10-07, so it had become a home chore. West Side is the empty
     # Manhattan Dock beside Sugar Hill, and every starting Dock reaches it by water. "for
     # Rum" cut: Trade only ever makes Rum.
+    # 2026-10-21 (Nick): 4+, not 3+. The sets pass took every other 1 to 4+ and missed this one.
     ("The Dutchman's Deal", "Dutchman.jpg", "Trade",
-     "Trade <b>3+ barrels</b> at <b>West Side</b>.",
+     "Trade <b>4+ barrels</b> at <b>West Side</b>.",
      "He never gives a name. The windmill on the sack says plenty."),
     # MARKET PASS 2026-10-17 (Nick: more Trade cards, to pull boards toward the Rum Trade once the
     # bridges and Last One Standing stopped asking for Rum; reviews/jobs-market-stuck-2026-10-17.md).
