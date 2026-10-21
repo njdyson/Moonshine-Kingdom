@@ -280,7 +280,8 @@ once. The deck is 36 cards, 16 / 12 / 8:
   2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished), **Cuban Prince** ("Extort
   4+ Docks"; a 1 since 2026-10-17, the easiest 2, 62 of 99) and **Jamaica Ginger** ("Trade 4+ barrels
   at Jamaica"; 2026-10-17, Nick: more Trade cards to pull toward the Rum Trade; Jamaica is the one Dock
-  that is nobody's start, and it replaced Night Landing).
+  that is nobody's start, and it replaced Night Landing). Every barrel count on a 1 is 4+, The
+  Dutchman's Deal at West Side included (3+ until 2026-10-21, a card the sets pass missed).
 - **2s**: **the Extort set**, *Extort every open Speakeasy in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand);
   **the bridge set**, *Move 4+ barrels across* the Williamsburg (The Milk Run), the Hell Gate (Hell's

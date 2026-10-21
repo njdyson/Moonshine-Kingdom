@@ -1109,6 +1109,19 @@ count, the Jamaica Ginger check, and the bots' plans.
 four bridges, Last One Standing at 4+ barrels, `jamaica-ginger`); the bot plans the bridges without a
 Boss and Last One Standing on any barrels; `scripts/jobs-check.ts` covers them.
 
+## 44. The Dutchman's Deal at 4+ barrels (2026-10-21, Nick)
+
+**The Dutchman's Deal** (1) reads "Trade 4+ barrels at West Side" (3+ before). Every other barrel 1
+asks 4+ (the bars, Rum Row, Jamaica Ginger); the sets pass of 2026-10-11 moved the bars from 3+ and
+missed this card, which went on to sit beside Jamaica Ginger as the only 3.
+
+**To port:** the card text, the `dutchmans-deal` check, the bot's plan, and `scripts/jobs-check.ts`.
+
+### Ported 2026-10-21 (mk-online, this change)
+
+`jobs.ts`, `objectives.ts` and the bot's `planTradeAt` call at 4; `scripts/jobs-check.ts` checks 4
+passes and 3 fails.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

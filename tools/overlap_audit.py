@@ -106,8 +106,8 @@ JOBS = [
                            ('Last Call', "Ruby's Joint", 'Coney Island'),
                            ('Off the Boat', "Sunny's Bar", 'Red Hook'))] + [
     J("The Dutchman's Deal", 1, ['Trade'],
-      'Trade 3+ barrels at West Side.',
-      lambda p, d: p['barrels'] >= 3 and d.name == 'West Side'),
+      'Trade 4+ barrels at West Side.',
+      lambda p, d: p['barrels'] >= 4 and d.name == 'West Side'),
     J('Jamaica Ginger', 1, ['Trade'],
       'Trade 4+ barrels at Jamaica.',
       lambda p, d: p['barrels'] >= 4 and d.name == 'Jamaica'),
