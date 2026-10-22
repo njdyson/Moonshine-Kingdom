@@ -323,8 +323,13 @@ Big Bust. Follow the Smoke still picks the mob, so planting only picks the door,
 what matters: a rival's dug-in stronghold, or the High Society room his Boss is walking to. It
 is a second answer to the room-as-fortress worry under "Watch in playtest".
 
-Do not restrict lone barrels to your own turf, and do not split them into a Play of their own
-("Shift" or "Distribute" was floated and set aside as rule bloat).
+Do not restrict lone barrels to your own turf. Splitting them into a Play of their own ("Shift" or
+"Distribute") was floated and set aside as rule bloat, then reopened by Nick on 2026-10-22: he is on
+the fence, feeling Move carries too much. For now the Move row was reworded instead (Rulebook,
+Playbooks, mk-online's play reference): the Move only carries pieces, and what happens on arrival
+belongs to them. **Mobsters** walking into a Hostile District meet the Standoff; **barrels** belong
+to whoever Controls their District when the Play ends. The Standoff is the Mobsters' doing, so no
+rule says lone barrels start none (Nick: "of course a barrel of rum doesn't shoot").
 
 ## The crown is a Play: Take the Crown at 20 Respect
 
