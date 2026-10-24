@@ -21,8 +21,10 @@
    physical 10-Respect award for reaching 10 Influence, were
    renamed The Nod on 2026-09-23, and became the four Borough cards
    on 2026-10-10: dealt at setup, each names its boss's home Borough
-   and carries Take the Crown, naming the three High Society Venues
-   outside its Borough.
+   and, until 2026-10-24, the three High Society Venues outside it
+   where he could Take the Crown. Since 2026-10-24 the Crown is taken
+   in a rival's home Ward, so each card names its own Ward: the room
+   its holder defends and every rival crowns in.
    On 2026-10-12 the Nod retired (respect-endgame-handoff.md): Respect
    is the only score, 20 Takes the Crown, and Bribes buy the sixteen
    Bribe cards (Precinct Captain 1, Alderman 2, Judge 3, Mayor 4
@@ -216,7 +218,7 @@ body{
 }
 /* Since 2026-10-13 every card prints one short line here and no rule
    text: "+1 Influence", "Square Up: $2,000", "No Rat till a rival
-   Rats", "Forever", or a Borough's three crown rooms. The Respect is
+   Rats", "Forever", or a Borough's home Ward. The Respect is
    on the shield and the rules live in the Playbooks and the Rulebook.
    The text stays wrapped in a single <span> (see the Jobs deck's
    note), so the band can flex it to the centre. */
@@ -231,8 +233,9 @@ body{
   text-align:center;
   text-wrap:balance;               /* the Rat's line breaks evenly, not with "Rats" alone */
 }
-/* three room names, one to a line */
-.card--borough .rules > span{font-size:10.5pt;line-height:1.25}
+/* the home Ward, and under it whose crown room it is (2026-10-24) */
+.card--borough .rules > span{line-height:1.15}
+.card--borough .rules small{display:block;margin-top:.9mm;font:italic 400 7pt Barlow;letter-spacing:0;color:var(--body)}
 
 /* --- flavour : fixed 5mm, ONE line, nowrap. Anything past ~52
    characters is CLIPPED, silently. Count before you write. --- */
@@ -444,8 +447,8 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="masthead-sub">v0.9 &middot; 36 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
   <p class="masthead-note">
     The Jobs deck pays you Respect for what you <b>do</b>. These cards pay it for who you <b>own</b>
-    and charge it for who owns <b>you</b>, and the Borough card names the home turf you leave to take
-    the crown on another man's.
+    and charge it for who owns <b>you</b>, and the Borough card names your home Ward, the heart of
+    your turf and the room every rival must take to wear the crown.
   </p>
 </div>
 
@@ -670,47 +673,48 @@ body.trim .card,body.trim .back{border-radius:0}
 <!-- =============================================================
      SHEET 5: the four Borough cards (2026-10-10; they replace the
      four Nods). Deal one to each boss at setup: it names his home
-     Borough and carries Take the Crown, naming the three
-     High Society Venues outside its Borough: no boss crowns at home.
+     Borough and its Ward, his home Ward, where his rivals Take the
+     Crown (2026-10-24; it named the three away High Society Venues
+     before). No boss crowns at home.
      Dealt face-down at random, so all four backs are identical and
      duplex mirroring is moot. The art is the archived Deed plates.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE BOROUGHS</span>
-  <span class="meta">one dealt to each boss &middot; your home turf, and the crown away from home &middot; sheet 5 of 9</span>
+  <span class="meta">one dealt to each boss &middot; your home Ward, where your rivals crown &middot; sheet 5 of 9</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
   <div class="card card--borough">
-    <div class="tier"><span class="kicker">Home Ward: Five Points</span></div>
+    <div class="tier"><span class="kicker">Home Borough</span></div>
     <h2 class="title">Manhattan</h2>
     <div class="art"><img src="Art/Cards/Manhattan.jpg" alt=""></div>
-    <div class="rules-label">The Crown</div>
-    <div class="rules"><span>Morris Park<br>Richmond Hill<br>Williamsburg</span></div>
+    <div class="rules-label">Home Ward</div>
+    <div class="rules"><span>Five Points<small>where your rivals crown</small></span></div>
     <div class="flavour">The money lives here. So do the men who count it.</div>
   </div>
   <div class="card card--borough">
-    <div class="tier"><span class="kicker">Home Ward: Hunts Point</span></div>
+    <div class="tier"><span class="kicker">Home Borough</span></div>
     <h2 class="title">The Bronx</h2>
     <div class="art"><img src="Art/Cards/Bronx.jpg" alt=""></div>
-    <div class="rules-label">The Crown</div>
-    <div class="rules"><span>Sugar Hill<br>Richmond Hill<br>Williamsburg</span></div>
+    <div class="rules-label">Home Ward</div>
+    <div class="rules"><span>Hunts Point<small>where your rivals crown</small></span></div>
     <div class="flavour">Up past the El, the ballpark and the Jockey Club.</div>
   </div>
   <div class="card card--borough">
-    <div class="tier"><span class="kicker">Home Ward: Corona</span></div>
+    <div class="tier"><span class="kicker">Home Borough</span></div>
     <h2 class="title">Queens</h2>
     <div class="art"><img src="Art/Cards/Queens.jpg" alt=""></div>
-    <div class="rules-label">The Crown</div>
-    <div class="rules"><span>Sugar Hill<br>Morris Park<br>Williamsburg</span></div>
+    <div class="rules-label">Home Ward</div>
+    <div class="rules"><span>Corona<small>where your rivals crown</small></span></div>
     <div class="flavour">Rail yards, back roads, and a bridge to the money.</div>
   </div>
   <div class="card card--borough">
-    <div class="tier"><span class="kicker">Home Ward: Brownsville</span></div>
+    <div class="tier"><span class="kicker">Home Borough</span></div>
     <h2 class="title">Brooklyn</h2>
     <div class="art"><img src="Art/Cards/Brooklyn.jpg" alt=""></div>
-    <div class="rules-label">The Crown</div>
-    <div class="rules"><span>Sugar Hill<br>Morris Park<br>Richmond Hill</span></div>
+    <div class="rules-label">Home Ward</div>
+    <div class="rules"><span>Brownsville<small>where your rivals crown</small></span></div>
     <div class="flavour">The bridge brings the money. The docks keep it.</div>
   </div>
 </div>

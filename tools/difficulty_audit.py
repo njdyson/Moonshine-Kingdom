@@ -158,6 +158,8 @@ CARDS = [
      "4+ Mobsters anywhere: stand and lose, or Fold, and it pays."),
     # New 2026-10-14: a crown room off its holder. The room opens only when a Raid moves its Squad
     # (WINDOW 2), and its holder is usually a leader dug in to crown (RIVAL 2, DEFEND 3).
+    # Since 2026-10-24 the Crown is taken in a rival's home Ward, so nobody digs in here to crown;
+    # DEFEND 3 is due a re-rate.
     ("High Roller", 3, "Open Fire", 2, 2, 2, 2, 2, 2, 3, 3,
      "Any High Society room, taken off the boss holding it."),
     # The brew-and-sell 5s (2026-10-14), scored on first reading, before any playtest. Each is a
@@ -172,7 +174,8 @@ CARDS = [
     # is a Kill on purpose (Nick): he Folds out of it unless cornered (RIVAL 3, DEFEND 2), and a
     # holder who wants the block uses it to make him run.
     # Opening Night names the holder's own room (NAMES 3), which is every rival's crown room, so
-    # it is contested by the people walking in (BLOCK 2). The Five Families and Union Dues keep
+    # it is contested by the people walking in (BLOCK 2). (Not a crown room since 2026-10-24: the
+    # Crown moved to the home Wards, so BLOCK 2 is due a re-rate.) The Five Families and Union Dues keep
     # the scores they had as 3s.
     ("The Toll Booth Trap", 3, "Open Fire", 2, 3, 2, 2, 1, 2, 1, 2,
      "Any rival Boss, killed: he Folds unless cornered. Or a decoy."),
@@ -181,7 +184,7 @@ CARDS = [
     # The 1/2/3 retier (2026-10-14): Opening Night down to 2 at 5+ Rum (MASS 2), and Union Dues down
     # to 2 on the bots' 20 completions in 25 (to 1 on 2026-10-15: 24 claims in 31 finished). The Smuggler's Run and The Eviction keep their scores as 3s.
     ("Opening Night", 2, "Unload", 3, 1, 0, 2, 3, 2, 3, 0,
-     "Your home room, 5+ Rum: Raid-gated, loud, every rival's crown room."),
+     "Your home room, 5+ Rum: Raid-gated, loud."),
     ("Union Dues", 1, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
      "A rival's home Ward: take it or wait him out. Every seat guards home."),
 ]

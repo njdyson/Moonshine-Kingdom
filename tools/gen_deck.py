@@ -296,6 +296,7 @@ TWOS = [
     #   Rivals can break any of the three, or plant barrels to pull the Squad back onto one.
     #   The home seat starts holding one of the three and borders the other two, so the card
     #   is his friendly; for anyone else it is an invasion that ends next to a crown room.
+    #   (Since 2026-10-24 the crown rooms are the rivals' home Wards, not the Venues.)
     #   The Squad's clean first step differs by Borough: Throggs Neck for the Bronx, West Side
     #   for Manhattan, Jamaica or Corona for Queens, and only Brownsville (Brooklyn's own home
     #   Ward) for Brooklyn, whose card is the stiffest. Watch it in playtest.
@@ -468,6 +469,8 @@ TWOS = [
     # be made in the room he crowns in: a same-Day crown now needs two rooms held, the home room and an
     # away one. It doesn't rule one out. Every seat has one home room, so the card is every seat's
     # friendly 5 alike. The Kickbacks that made it "a win/win" at 5 on 2026-10-11 are still paid.
+    # WARD CROWN 2026-10-24: the Crown moved to the rivals' home Wards, so this card is no longer
+    # crown-related and the home-room clause guards nothing about the crown. Text unchanged.
     # RETIER 2026-10-14: DOWN TO 2, at 5+ Rum (Nick likes the card; fewer barrels to drop its tier).
     # Five is where the Greed Tax starts, so the pour always draws Heat: a cost beside the Kickbacks.
     ("Opening Night", "Jimmy.jpg", "Unload",
@@ -596,6 +599,8 @@ THREES = [
     # Secure onto any lone rival Safehouse paid it from anywhere. Now it is the assault round 1 kept
     # it for: win the District by fight or Fold, then take the Safehouse over (destroying it pays
     # nothing). A walk onto a lone one is no Seize, so it pays nothing either.
+    # WARD CROWN 2026-10-24: every rival Safehouse starts in his home Ward, which is now a crown room,
+    # so this card and the Crown point at the same doors. Text unchanged.
     ("The Eviction", "Crimson Coup.jpg", "Open Fire",
      "Seize a District with a rival&rsquo;s <b>Safehouse</b>, and take it over.",
      "Nice place. He won&rsquo;t be needing it."),
@@ -605,6 +610,9 @@ THREES = [
     # the Crown is still a Play of its own, so the table gets a round to answer, and the holder has
     # to stand rather than Fold (Nick: "it would create a final battle"). It meets the Ledger, the
     # Trap and The Eviction in a room. It breaks a rival's Extort set too.
+    # WARD CROWN 2026-10-24: the Crown moved to the rivals' home Wards, so a Venue is no longer a crown
+    # room and this card no longer walks the Boss in. Kept as printed: the Venues are still the best
+    # real estate on the board.
     ("High Roller", "High Roller.jpg", "Open Fire",
      "Seize a <b>High Society Venue</b>.",
      "Everyone at the big table brought a stake. He brought a pistol."),
