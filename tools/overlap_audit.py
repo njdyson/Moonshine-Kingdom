@@ -190,6 +190,7 @@ JOBS = [
     J("The Butcher's Ledger", 3, ['Move'], 'Seize a District from 4+ rival Mobsters.',
       lambda p, d: p['seize'] and p['def_runners'] + p['def_boss'] >= 4),
     # New 2026-10-14 (Nick's parked "Seize a Pressure 6 Still"): a crown room taken off its holder.
+    # (Not a crown room since 2026-10-24, when the Crown moved to the home Wards.)
     J('High Roller', 3, ['Move'], 'Seize a High Society Venue.',
       lambda p, d: p['seize'] and d.has('highSociety')),
     # The brew-and-sell cards (Nick, 2026-10-14). The Real McCoy went at the retier the same day.

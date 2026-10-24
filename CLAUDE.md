@@ -63,8 +63,9 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
 - **The Crown is the prize; the Commission is the judge** (since 2026-09-26). You fight over
   **the Crown** (the Play, the board's crown icons, the cards' crown shields all say so). **The
   Commission** is the table where the families settle their business: they set the terms the
-  Crown's conditions answer, and the High Society Venues are where they drink with the
-  judges, so that is where it is taken. They *accept* the new man; he does not found or head
+  Crown's conditions answer: they want the man who can stand in another family's home Ward,
+  so that is where it is taken (since 2026-10-24; it was the High Society Venues, where they
+  drink with the judges). They *accept* the new man; he does not found or head
   the Commission (an earlier draft said so and read too strong, so no "Boss of Bosses"), and
   at the climax they "rise to their feet". **Never call the prize a seat or a chair**: "seat"
   already means a turn-order position ("the first seat brews richest", "Hold your seat",
@@ -73,7 +74,7 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   as muddle. "The crown of this town has lain in the gutter since November" nods to Rothstein
   without naming him.
 - **The endgame reads in one order everywhere**: the crown, then what the families want (a name:
-  **20 Respect**, earned by Jobs and bought by Bribes), then the walk into a High Society Venue and
+  **20 Respect**, earned by Jobs and bought by Bribes), then the walk into a rival's home Ward and
   the Play. The Rulebook's Goal page is "Respect: Earn It or Buy It" (it was "Your Goal: The Crown of New York" until 2026-10-13, when the title moved to what the page teaches; the Crown has its one home on Winning the Game), with **Jobs: Forge Your Legend** and
   **Bribes: Buy the City** as its two sections (it was "Influence: Buy the City" until 2026-10-12,
   "The Nod: Buy the City" before that, and "Earning Respect" before that). Buy the City's one-line
@@ -289,7 +290,8 @@ once. The deck is 36 cards, 16 / 12 / 8:
   **Last One Standing** ("Secure your Safehouse in Astoria holding 4+ barrels"), The Copper Heist,
   **The Insurance Job** and
   **Opening Night** ("Unload 5+ Rum at the High Society Venue in your home Borough"). Opening Night
-  is home-only so the pour can't be made in the room its holder crowns in. The Insurance Job reads
+  was made home-only so the pour couldn't be made in the room its holder crowned in; since the Crown
+  moved to the Wards (2026-10-24) it is not crown-related, and the text stands. The Insurance Job reads
   "Set off a Raid that padlocks a Pressure 1 or 2 Still you Control" (Nick, 2026-10-15): any Raid
   your own Play sets off, the 5th Heat marker or a Rat, so it no longer forces the Rat Card. It
   stays the deck's one Rat-shaped card by Nick's call (`jobs-system-handoff.md` §4).
@@ -301,9 +303,10 @@ once. The deck is 36 cards, 16 / 12 / 8:
   from anywhere, so a walk-in or a Secure no longer counts), **The Five Families**, **The Noble Experiment** and
   **The Warehouse**. Nick likes the body count as a stand-in for the cut Sweep: any fat stack is a
   target. Don't add a "but no Boss" clause back.
-  High Roller taken last brings the Respect and walks the Boss into the room on one Play. Take the
-  Crown is still its own Play, so the table gets a round to answer, and the room's holder has to
-  stand rather than Fold. Nick: a feature, "it would create a final battle".
+  From 2026-10-14 to 2026-10-23, High Roller taken last brought the Respect and walked the Boss into
+  the room on one Play (Nick: a feature, "it would create a final battle"). Since the Crown moved to
+  the Wards it is an assault on the best real estate on the board, no longer a crown card. The same
+  final battle now comes from The Eviction, whose target starts in a crown room.
 
 The Extort names were Extort cards once, cut because the Borough Deed already paid for holding a
 Borough; the Deeds' removal ended that objection, so don't cut them on it again. The overlap model
@@ -333,13 +336,13 @@ holds the reasoning, every option weighed, and the watch list). There are no Bor
 or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
 (1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold and **1** per Welsher. The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
-with **20+ Respect** and your **Boss in a High Society Venue outside his home Borough**, and you win
-on the spot. It lives on the Winning the Game page (a heading and a two-item list: the Name, the
-Room) and since 2026-10-12 on the Playbooks (Nick: "these are all of the
+with **20+ Respect** and your **Boss in a rival's home Ward** (since 2026-10-24; see *The Crown in
+the Wards*), and you win on the spot. It lives on the Winning the Game page (a heading and a two-item
+list: the Name, the Ward) and since 2026-10-12 on the Playbooks (Nick: "these are all of the
 actions you can take, play that one and you win the game"). Keep it out of the Rulebook's standard
 Power Plays table. On the Playbooks it is not one of the rows: listed beside Bribe and Rise it read
-as an ordinary Play, so it closes the Plays as a gilt capstone after Lay Low, in one line that points
-to the Borough card for the rooms. To make room the fronts dropped their "Mob Playbook: colour"
+as an ordinary Play, so it closes the Plays as a gilt capstone after Lay Low, in one line that names
+the room (a rival's home Ward; until 2026-10-24 it pointed to the Borough card for the rooms). To make room the fronts dropped their "Mob Playbook: colour"
 kicker (the enamel band keeps the colour; the backs' "Combat Reference" went too, to match) and Beg,
 Rat and Bribe went to one line each.
 Move then handed rival turf to the reverse ("Into rival turf: see reverse"), which carries a **Rival
@@ -384,7 +387,8 @@ three rooms). The Respect is on the shield, so no card restates it.
 
 In the Blood Oath, an Alliance races to **40 combined Respect** (lower, and an Alliance could form
 already past the bar, so the Truce would hand it the game), and **either partner** Takes the Crown
-with his own Boss in a High Society Venue his own Borough card names; whoever crowns is the Capo.
+with his own Boss in a home Ward of the opposing Alliance (since 2026-10-24; see *The Crown in the
+Wards*); whoever crowns is the Capo.
 The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown Tracker, and The Almanac must
 agree on these values.
 
@@ -394,23 +398,25 @@ without a special rule. Respect is public, and the Crown's two markers mean a bo
 reaching 20 waits for tomorrow.
 
 **Where the crown is won** (since 2026-09-24; it was "Boss on the board"). The Boss must be
-standing in a High Society Venue outside his home Borough (since 2026-10-10; see Borough cards,
-below) when he Takes the Crown, and a fallen Boss still
-**Rises only in a Safe Ward**. The gap between the two is the point: it gives the endgame a
-third act, where the leader's Boss is the table's target and a kill costs him a Rise, a walk
-and the Crown: five markers at least, a whole Ledger. Rivals get two kinds of denial, both visible and paid for: kill the Boss and hold the
-Wards (five on the board), or sit in the room he needs. A full Ward lockout is a feature, not
-a hole: Recruit, Unload and Jobs still run, and it lasts only while rivals keep a Runner on
-every Ward.
+standing in a **rival's home Ward** when he Takes the Crown (since 2026-10-24; from 2026-10-10 a
+High Society Venue outside his home Borough, before that any High Society Venue), and a fallen Boss
+**Rises only in a Safe District of his home Borough** (any Safe Ward until 2026-10-24). The gap
+between the two is the point: it gives the endgame a third act, where the leader's Boss is the
+table's target and a kill sends him home, costing him a Rise, a walk and the Crown: five markers at
+least, a whole Ledger. Rivals get two kinds of denial, both visible and paid for: kill the Boss and
+crowd his home Borough, or hold the Ward he needs (its landlord already does). A full lockout (rival
+Mobsters or the Squad on every District of his home Borough) is a feature, not a hole: Recruit,
+Unload and Jobs still run, and it lasts only while rivals hold all of it.
 
 Rejected on the way, so nobody rebuilds them:
 
 - **Rise at the Safehouse** (mirroring Recruit). Players Secure their most valuable District,
-  which will be the High Society room, so a killed Boss would respawn on the winning square.
+  which will be the crown room, so a killed Boss would respawn on the winning square.
   Any "Boss in a place" win needs Rise somewhere the value isn't.
 - **Crown in a Ward** (start in a Ward, end in a Ward). Rise lands in a Ward, so a kill hands
   the leader the win. A "Risen Boss lies on his side for a Day" patch fixed it and was cut as
-  too fiddly.
+  too fiddly. Taken on 2026-10-24 in another shape: the crown room is a *rival's* home Ward and
+  Rise is confined to your own home Borough, so a kill sends the Boss home, never into a crown room.
 - **Last Call**, the variable ending (`last-call-handoff.md`): extra time only gives the table
   longer to bash the leader.
 - **The Coronation** (sudden death, 2026-09-25): win at the end of any Play of yours that meets
@@ -426,8 +432,9 @@ Watch in playtest:
 
 - The room doubles as the leader's fortress (Boss, Safehouse, Ambush, and the Recruit point on
   one square). The counters in the rules are the Raid (the Big Bust goes for the most barrels,
-  and a Rum stockpile there is Raid bait) and, since 2026-10-10, the away crown: the fortress
-  has to be built in another boss's Borough, next door to his home Ward.
+  and a Rum stockpile there is Raid bait) and the away crown: since 2026-10-24 the fortress
+  has to be built in another boss's home Ward, his own headquarters, which his whole family
+  defends and next to which he Rises. A Ward has no bar, so the fortress earns only its brew.
 - **The last boss up.** Rivals who have Laid Low get no turns and can't Ambush, so a boss with
   three markers left after them can walk in and crown back to back.
 - **Cash's share of the crown**: up to 10 of the 20. If it proves too strong, 1 / 2 / 2 / 3 caps it
@@ -435,18 +442,62 @@ Watch in playtest:
 - **Shylock**: a boss with Respect to spare can carry a Mark to the Crown.
 - Game length: Bribes are optional, but the bar is 20. Untimed.
 
-## Borough cards: the crown away from home
+## The Crown in the Wards
+
+Since 2026-10-24 (Nick; mk-online's `harness/WARD-CROWN-RULES-HANDOFF.md`, and the engine, bots and
+AI harness on its `claude/ward-crown`). Two rules changed, nothing else:
+
+- **Take the Crown in a rival's home Ward**: the Ward of a Borough another boss was dealt. Never your
+  own. At three players the boxed Borough's Ward is nobody's home and crowns nobody, so a boss has
+  three crown rooms at four players and two at three. It was a High Society Venue outside your home
+  Borough (2026-10-10 to 2026-10-23).
+- **Rise in any Safe District of your home Borough.** It was any Safe Ward. This is what stops a boss
+  from taking a rival's Ward with Runners and Rising straight into it, one Play from the Crown.
+
+Unchanged: the 20 bar, the Play's 2 markers, Bribe cards, setup, and the High Society Venues
+themselves (Squads at the start, Rum only, Kickbacks, the #7 Stills), Opening Night and High Roller.
+
+The theme (Nick): **the Wards are the centre of mob power, deep behind the glitz.** Your Boss starts in
+your home Ward and comes back in your home Borough, and your rivals must come there to crown. The
+Venues are where the money is made. The Rulebook states the two consequences once, on Winning the
+Game: every rival's home Ward starts as his headquarters (Boss and Safehouse inside), so the crown is
+usually taken by a fight; and a Ward has no bar, so a crew dug in to wait earns only its Still's brew.
+
+Words: the Rulebook's Winning list is **the Name, the Ward** (it was the Room). "Crown room" is the
+engine's and harness's word; player text says "a rival's home Ward". The Borough card names its own
+Ward under "Home Ward", with "where your rivals crown".
+
+**The Blood Oath** crowns in a home Ward of the **opposing Alliance**. This was a call made in the
+rules pass, not by Nick, and is his to confirm: a partner's Ward would let the pair hand the room over
+by agreement (he steps out, you walk in), which skips the fight the rule is built on, and "Nothing on
+Your Books" already makes a partner worth nothing on the Jobs.
+
+The interactions, all with unchanged text: **Union Dues** (Recruit 4+ in a rival's home Ward) now
+builds a garrison in a crown room; **The Eviction** points at the same doors as the Crown, since every
+rival Safehouse starts in his home Ward, and the two chain (take his house over, then Recruit there);
+**High Roller** and **Opening Night** are no longer crown-related.
+
+Still to follow: **the board** (its crown marks sit on the High Society medallions, and the key's Ward
+row says "Boss Rises"), and Nick's proposal to **swap Corona and Flushing** so Flushing is Queens' home
+Ward. Today Corona and Brownsville, two home Wards, border each other, so in a Queens-vs-Brooklyn game
+each Boss starts one Move from a crown room. With Flushing as the Ward no two home Wards touch (every
+pair is two Moves apart, Five Points and Flushing three), Queens' Ward sits beside its starting Dock,
+and the starting Stills stay 4, 5 and 6. The swap moves a Speakeasy, so it touches the Jobs bar card
+for Flushing, the Town Planner, the Borough card, the board and mk-online's data.
+
+## Borough cards: your home Ward
 
 Since 2026-10-10 (Nick). The four **Borough cards** replace the four Nod cards in the Cards sheet,
 using the archived Deed plates (`Art/Cards/Manhattan.jpg` and its three siblings). Deal one to each
 boss at setup, face-up: it is his **home Borough** (three players: box the fourth, and that Borough
 is nobody's home). Each card carries:
 
-- Under "The Crown", the **three High Society Venues outside its Borough**, one to a line, in the
-  positive (Manhattan's: Morris Park, Richmond Hill, Williamsburg). The Play itself is on the
-  Playbooks, which point here for the rooms; until 2026-10-13 the card printed the whole Play.
-  **No boss crowns in his own Borough.** The Blood Oath's crowning partner uses his own card.
-- Its home Ward, in the kicker, for Union Dues, the Job that names one.
+- Under "Home Ward", its own Ward (Manhattan's: Five Points) and "where your rivals crown"
+  (since 2026-10-24). The card in front of each rival names a room you can crown in; yours names
+  the one you defend. **No boss crowns in his own home Ward.** From 2026-10-10 to 2026-10-23 the
+  card listed, under "The Crown", the three High Society Venues outside its Borough, with its home
+  Ward in the kicker; the kicker now reads "Home Borough". Until 2026-10-13 it printed the whole
+  Play; the Play lives on the Playbooks.
 
 From 2026-10-10 to 2026-10-12 the card also held the boss's four unbought Influence markers in a
 stack and stated the Nod; both went with the Nod, and the markers wait in the supply.
@@ -454,13 +505,13 @@ stack and stated the Nod; both went with the Nod, and the markers wait in the su
 Why: "home Borough" had no reminder on the table, and how to draw Boroughs was open. The away crown
 ends the home fortress (Boss, Safehouse, Ambush and Recruit point on one square behind the home
 garrison): every room now has a landlord who can't crown there but lives next door. The home room
-still pays its Kickbacks; it just can't win you the game.
+still pays its Kickbacks; it just can't win you the game. Since 2026-10-24 the crown room is the
+landlord's own home Ward, so he no longer lives next door: he lives there.
 
-Watch in playtest: **Williamsburg** is one Move from both the Manhattan and Queens home Wards (by
-the bridge from Five Points, and from Corona), so Brooklyn hosts the endgame; Brooklyn's nearest
-room is Richmond Hill, the Bronx's are two Moves off; and **Morris Park** is three or more Moves from
-every other home, so the Bronx's room becomes a backwater. At three players the unclaimed Borough's room
-has no landlord.
+The 2026-10-10 watch list (Williamsburg hosting the endgame, Morris Park a backwater) was about the
+away Venues and went with them. Watch now: **Corona and Brownsville** border each other (see *The
+Crown in the Wards* for the proposed swap), and at three players the boxed Borough's Ward crowns
+nobody.
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
@@ -850,8 +901,8 @@ Watch in playtest:
   then only Brooklyn did. It was cut on 2026-10-17 for Jamaica Ginger, which Queens and Brooklyn both
   reach.
 - **Manhattan's start no longer touches Sugar Hill**: on Day 1 its Squad has nothing in reach and
-  its Crown room is two blocks off. The Bronx, Queens and Brooklyn each start with two Districts
-  beside their Squad and their room.
+  its High Society Venue is two blocks off. The Bronx, Queens and Brooklyn each start with two
+  Districts beside their Squad and their Venue.
 - The Brooklyn Bridge now joins two starting Districts (the Bowery and Red Hook); the Hell Gate
   Bridge (Hunts Point to Astoria) no longer does.
 

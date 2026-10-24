@@ -279,7 +279,9 @@ b.silver{color:var(--silver)}
    The zone roundels are the board's (roundel() in tools/build_board.js):
    a lacquer disc in a gold ring for the Speakeasy, Dock and Ward, and a
    gold disc with the martini for High Society. The board's crown over the
-   martini marks where the Crown is taken; the roster marks the type alone.
+   martini marked where the Crown was taken until 2026-10-24, when it moved to
+   the rivals' home Wards (the board's marks are still to follow); the roster
+   marks the type alone, and its Home Ward tag says where rivals crown.
    ============================================================ */
 .ico{display:inline-block;width:1em;height:1em;fill:currentColor;vertical-align:middle}
 .ico--crown{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
@@ -528,7 +530,7 @@ table.lg{width:100%;border-collapse:collapse}
     <div class="final plaque">
       <div class="plaque-face">
         <div class="final-title"><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg>The Crown &amp; Sunset<svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></div>
-        <div class="final-row"><span class="final-label">Take the Crown</span><span class="final-text">On your turn, with <b>20+ Respect</b> and your <b>Boss</b> in a <b>High Society Venue</b> your Borough card names, make this Power Play and win on the spot.</span></div>
+        <div class="final-row"><span class="final-label">Take the Crown</span><span class="final-text">On your turn, with <b>20+ Respect</b> and your <b>Boss</b> in a <b>rival's home Ward</b>, make this Power Play and win on the spot.</span></div>
         <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low, each unmet promise earns its breaker a <b>Welsher</b>, and today's tokens become tomorrow's Turn Order.</span></div>
       </div>
     </div>
@@ -567,7 +569,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">10</span></td>
             <td class="lg-press"><i class="gauge p3"></i></td>
-            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+            <td class="lg-setup"><span class="tag tag-home">Home Ward</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Sugar Hill</td>
@@ -613,7 +615,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">9</span></td>
             <td class="lg-press"><i class="gauge p4"></i></td>
-            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+            <td class="lg-setup"><span class="tag tag-home">Home Ward</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Morris Park</td>
@@ -652,7 +654,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">4</span></td>
             <td class="lg-press"><i class="gauge p3"></i></td>
-            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+            <td class="lg-setup"><span class="tag tag-home">Home Ward</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Richmond Hill</td>
@@ -698,7 +700,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">5</span></td>
             <td class="lg-press"><i class="gauge p4"></i></td>
-            <td class="lg-setup"><span class="tag tag-home">Home Turf</span></td>
+            <td class="lg-setup"><span class="tag tag-home">Home Ward</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Williamsburg</td>
@@ -762,7 +764,7 @@ table.lg{width:100%;border-collapse:collapse}
           <span class="key-item"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="key-name key-name--hs">High Society</span><span><span class="cube cube--rum"></span>Rum only, $500</span><span class="key-sep">·</span><span class="kick">+1</span><span>Kickback a barrel</span></span>
         </div>
         <div class="key-setup">
-          <span class="key-item"><span class="tag tag-home">Home Turf</span>Safehouse, Boss &amp; 2 Runners</span>
+          <span class="key-item"><span class="tag tag-home">Home Ward</span>Safehouse, Boss &amp; 2 Runners: rivals crown here</span>
           <span class="key-item"><span class="tag tag-run">3 Runners</span></span>
           <span class="key-item"><span class="tag tag-squad">Police Squad</span>padlocked until a Raid moves it</span>
         </div>

@@ -1122,6 +1122,25 @@ missed this card, which went on to sit beside Jamaica Ginger as the only 3.
 `jobs.ts`, `objectives.ts` and the bot's `planTradeAt` call at 4; `scripts/jobs-check.ts` checks 4
 passes and 3 fails.
 
+## 45. The Crown in the Wards; Rise in your home Borough (2026-10-24, Nick)
+
+**Take the Crown** needs your Boss in **a rival's home Ward** (it was a High Society Venue outside your
+home Borough), and **Rise** places your Boss in **any Safe District of your home Borough** (it was any
+Safe Ward). The reasoning and the wording are in CLAUDE.md's *The Crown in the Wards*.
+
+This time mk-online went first: the engine (`crownRooms()`, `rise`), the bots and the AI harness
+landed on its `claude/ward-crown` (merged as PR #26), with `harness/WARD-CROWN-RULES-HANDOFF.md`
+listing the written rules to follow.
+
+### Ported 2026-10-24 (both repos, the rules pass)
+
+Here: the Rulebook (Setting the Scene, Components, the Map's Venue and Ward entries, Setup, Rise,
+Winning the Game, the Blood Oath, the Glossary), the Playbooks' Rise and Take the Crown rows, the
+Borough cards, the Town Planner, The Almanac's crown lessons, and notes in the deck tools. In
+mk-online: `playReference.ts`, the District tooltips in `BoardMap.tsx`, `harness/README.md`,
+`harness/MULTI-AGENT-HANDOFF.md`, and `scripts/crowntrace.ts` and `denialdiag.ts`.
+**Not yet:** the board's crown marks and key, and the Blood Oath in mk-online (it has none).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
