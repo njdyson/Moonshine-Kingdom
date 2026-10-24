@@ -714,8 +714,8 @@ keeps them on a re-trace.
   moved to the rivals' home Wards (CLAUDE.md, *The Crown in the Wards*); Nick moved the crown
   to the key's Ward row, in place of "Boss Rises". The map's Ward medallions carry no crown
   (Staten Island's Stapleton is a Ward and nobody's crown room).
-- **Flushing is Queens' Ward** (Nick, 2026-10-24), and Corona its Speakeasy, with the 6 and
-  Paradise Alley. The two swapped type, Still and bar so that no two home Wards touch; the
+- **Flushing is Queens' Ward** (Nick, 2026-10-24), and Corona its Speakeasy, with the 6 and a
+  new bar, The Junction (Flushing's was Paradise Alley). The two swapped type, Still and bar so that no two home Wards touch; the
   geometry, graph and Coastal list are unchanged.
 - **No setup marks on the board** (Nick, 2026-09-28): he wants to playtest other setups
   without the print committing to one. The marks (ghosted pieces in a dashed tray, no words,

@@ -479,8 +479,9 @@ rival Safehouse starts in his home Ward, and the two chain (take his house over,
 
 **The board followed the same day** (Nick). The High Society medallions lost their crowns (a gilt disc
 and the martini), and the key's Ward row shows the crown where it said "Boss Rises". And **Flushing is
-Queens' home Ward**, with Corona its starting Speakeasy: the two swapped type, Still and bar (Paradise
-Alley moved to Corona with its 6; Flushing took the 4). Corona and Brownsville, two home Wards, had
+Queens' home Ward**, with Corona its starting Speakeasy: the two swapped type and Still (Corona took
+the 6, Flushing the 4). Flushing's bar was Paradise Alley (a real Flushing bar, opened in 1979); Corona's
+is **The Junction** (Nick), for Junction Boulevard and the elevated line, and Poison Panic names it. Corona and Brownsville, two home Wards, had
 bordered each other, so in a Queens-vs-Brooklyn game each Boss started one Move from a crown room. Now
 no two home Wards touch (every pair is two Moves apart, Five Points and Flushing three), Queens' Ward
 sits beside its starting Dock, and every home Ward stands on a Pressure 3 or 4 Still (10, 9, 4, 5), so

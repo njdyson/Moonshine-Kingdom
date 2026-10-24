@@ -115,7 +115,7 @@ const DISTRICTS = [
   { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'speak', still: 11, venue: 'DeLillo’s' },
   { id: 'fordham', name: 'Fordham', boro: 'BX', zone: 'speak', still: 8, venue: 'The Penny Whistle', setup: 'runners' },
   { id: 'throggs_neck', name: 'Throggs Neck', boro: 'BX', zone: 'dock', still: 10, setup: 'runners' },
-  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'speak', still: 6, venue: 'Paradise Alley', setup: 'runners' },
+  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'speak', still: 6, venue: 'The Junction', setup: 'runners' },
   { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', setup: 'squad' },
   { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 2, venue: 'Bohemian Hall' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },

@@ -102,7 +102,7 @@ JOBS = [
                            ('Bathtub Gin', "DeLillo's", 'Belmont'),
                            ('Coffin Varnish', 'The Penny Whistle', 'Fordham'),
                            ('Giggle Water', 'Bohemian Hall', 'Astoria'),
-                           ('Poison Panic', 'Paradise Alley', 'Corona'),
+                           ('Poison Panic', 'The Junction', 'Corona'),
                            ('Last Call', "Ruby's Joint", 'Coney Island'),
                            ('Off the Boat', "Sunny's Bar", 'Red Hook'))] + [
     J("The Dutchman's Deal", 1, ['Trade'],

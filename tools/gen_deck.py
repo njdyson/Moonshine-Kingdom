@@ -75,11 +75,13 @@ ONES = [
     ("Giggle Water", "Cobble Hill.jpg", "Unload",
      "Unload <b>4+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b>.",
      "Poured by the pitcher, and nobody asks what is in it."),
-    # Queens' starting bar (Paradise Alley). Back as a 1 on its own art: it was a 3 at 6+ until the
-    # setup pass cut it as a home chore. As a 1, a home sale is the right size. In Corona since
-    # 2026-10-24, when Flushing became Queens' Ward and the bar and its 6 moved next door.
+    # Queens' starting bar. Back as a 1 on its own art: it was a 3 at 6+ until the setup pass cut
+    # it as a home chore. As a 1, a home sale is the right size. In Corona since 2026-10-24, when
+    # Flushing became Queens' Ward and the bar and its 6 moved next door. The bar was Paradise Alley
+    # (a real Flushing bar, but opened in 1979); in Corona it is The Junction (Nick), for Junction
+    # Boulevard and the elevated line over it.
     ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Corona</b>.",
+     "Unload <b>4+ barrels</b> at <b>The Junction</b> in <b>Corona</b>.",
      "One bad batch and the whole city stops drinking."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
