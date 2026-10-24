@@ -477,13 +477,15 @@ builds a garrison in a crown room; **The Eviction** points at the same doors as 
 rival Safehouse starts in his home Ward, and the two chain (take his house over, then Recruit there);
 **High Roller** and **Opening Night** are no longer crown-related.
 
-Still to follow: **the board** (its crown marks sit on the High Society medallions, and the key's Ward
-row says "Boss Rises"), and Nick's proposal to **swap Corona and Flushing** so Flushing is Queens' home
-Ward. Today Corona and Brownsville, two home Wards, border each other, so in a Queens-vs-Brooklyn game
-each Boss starts one Move from a crown room. With Flushing as the Ward no two home Wards touch (every
-pair is two Moves apart, Five Points and Flushing three), Queens' Ward sits beside its starting Dock,
-and the starting Stills stay 4, 5 and 6. The swap moves a Speakeasy, so it touches the Jobs bar card
-for Flushing, the Town Planner, the Borough card, the board and mk-online's data.
+**The board followed the same day** (Nick). The High Society medallions lost their crowns (a gilt disc
+and the martini), and the key's Ward row shows the crown where it said "Boss Rises". And **Flushing is
+Queens' home Ward**, with Corona its starting Speakeasy: the two swapped type and Still (Corona took
+the 6, Flushing the 4). Flushing's bar was Paradise Alley (a real Flushing bar, opened in 1979); Corona's
+is **The Junction** (Nick), for Junction Boulevard and the elevated line, and Poison Panic names it. Corona and Brownsville, two home Wards, had
+bordered each other, so in a Queens-vs-Brooklyn game each Boss started one Move from a crown room. Now
+no two home Wards touch (every pair is two Moves apart, Five Points and Flushing three), Queens' Ward
+sits beside its starting Dock, and every home Ward stands on a Pressure 3 or 4 Still (10, 9, 4, 5), so
+camping in one pays little. Nick wants it that way: less incentive to sit in a crown room.
 
 ## Borough cards: your home Ward
 
@@ -509,9 +511,9 @@ still pays its Kickbacks; it just can't win you the game. Since 2026-10-24 the c
 landlord's own home Ward, so he no longer lives next door: he lives there.
 
 The 2026-10-10 watch list (Williamsburg hosting the endgame, Morris Park a backwater) was about the
-away Venues and went with them. Watch now: **Corona and Brownsville** border each other (see *The
-Crown in the Wards* for the proposed swap), and at three players the boxed Borough's Ward crowns
-nobody.
+away Venues and went with them. Watch now: at three players the boxed Borough's Ward crowns nobody,
+and Queens' Corona bar borders Brownsville, so Queens starts three Runners one Move from Brooklyn's
+crown room (its Boss starts two Moves off, in Flushing).
 
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
@@ -536,7 +538,7 @@ Peak cash is unchanged, since the Rum run always existed. Barring swill from tho
 came next (same day): it states the room's job in one line instead of two clauses, empties
 the stack's till in place, and gives the **ordinary Speakeasy next door** a reason to be
 held and taken. Every High Society room has one adjacent (Sugar Hill to East Harlem, Morris
-Park to Fordham, Richmond Hill to Flushing, Williamsburg to Red Hook or Astoria), so the
+Park to Fordham, Richmond Hill to Corona, Williamsburg to Red Hook, Astoria or Corona), so the
 Moonshine is never stranded: it walks one block, or Trades up at the Dock. Numbers and reasoning are in
 `kickback-blowback-handoff.md`; `tools/sim_kickback_ledger.js` reproduces them.
 
@@ -884,11 +886,13 @@ North starts on its 8, 9 and 10 and the South on its 4, 5 and 6:
 | --- | --- | --- | --- |
 | Manhattan | Five Points 10 | The Tenderloin 8 | The Bowery 9 |
 | The Bronx | Hunts Point 9 | Fordham 8 | Throggs Neck 10 |
-| Queens | Corona 4 | Flushing 6 | Whitestone 5 |
+| Queens | Flushing 4 | Corona 6 | Whitestone 5 |
 | Brooklyn | Brownsville 5 | Red Hook 6 | Canarsie 4 |
 
 The two sides mirror each other round the 7, so every Borough's starting Stills total the same
-Pressure, 12 (it was 6 in Manhattan and Queens, 9 in the Bronx and Brooklyn). The list's one home is
+Pressure, 12 (it was 6 in Manhattan and Queens, 9 in the Bronx and Brooklyn). Queens' Ward and bar
+swapped places on 2026-10-24 (Corona was the Ward, Flushing the bar), Stills and all, so the numbers
+held; see *The Crown in the Wards*. The list's one home is
 the Town Planner's Setup column: the Rulebook's Setup defers to it, the board build's roster copies
 it (undrawn), and mk-online's `STARTING_TURF` follows it.
 
@@ -914,9 +918,8 @@ The board is generated vector art. `tools/draft_board.js` redraws the traced map
 copied from the Town Planner, each District with a hanging sign. Read `board-handoff.md` before
 touching it: it holds the build commands, the 24-inch print spec (Heat Track sockets are the
 Ledger's 39 mm chips), the decisions Nick has made so far, and the next pass he has in mind.
-mk-online serves a snapshot of this board (`mk-online/dist/board.svg`, the 2026-10-17 board with
-Sugar Hill and Belmont in their old shapes and New Jersey's water lines round the Heat corner,
-from mk-online 2c69fc2). Its click areas, piece
+mk-online serves a snapshot of this board (`mk-online/dist/board.svg`, the 2026-10-24 board:
+Flushing the Queens Ward, the crown on the key's Ward row). Its click areas, piece
 spots and sockets are generated by mk-online's `scripts/board-ui-geometry.mjs` from
 `board-geometry.json`, the screen SVG and the build's sign report, and its `scripts/boardcheck.ts`
 checks the connection graph against a copy of `board-geometry.json`. Redraw the board and

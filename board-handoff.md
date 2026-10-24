@@ -708,9 +708,15 @@ keeps them on a re-trace.
   were tried beside it the same day: the olive read muddy beside Brooklyn's bronze, and the
   teal drifted towards the water and the Squads' blue. Verdigris is bluer than the Bronx's
   forest green, and the two Boroughs are a board apart.
-- **High Society Venues:** the martini (`Art/Icons/Gin.svg`) under a crown on the sign's
+- **High Society Venues:** the martini (`Art/Icons/Gin.svg`) on a gilt disc on the sign's
   medallion, and the Deco double keyline (see The look), which replaced a gold sunburst.
-  Speakeasies keep the tumbler.
+  Speakeasies keep the tumbler. The medallion wore a crown until 2026-10-24, when the Crown
+  moved to the rivals' home Wards (CLAUDE.md, *The Crown in the Wards*); Nick moved the crown
+  to the key's Ward row, in place of "Boss Rises". The map's Ward medallions carry no crown
+  (Staten Island's Stapleton is a Ward and nobody's crown room).
+- **Flushing is Queens' Ward** (Nick, 2026-10-24), and Corona its Speakeasy, with the 6 and a
+  new bar, The Junction (Flushing's was Paradise Alley). The two swapped type, Still and bar so that no two home Wards touch; the
+  geometry, graph and Coastal list are unchanged.
 - **No setup marks on the board** (Nick, 2026-09-28): he wants to playtest other setups
   without the print committing to one. The marks (ghosted pieces in a dashed tray, no words,
   and a Setup row in the key) only ever drew beside the centred labels, so their switch went
@@ -793,8 +799,8 @@ keeps them on a re-trace.
   a polished gilt edge with a dark seat inside it, a hairline, a small diamond on each Deco
   chamfer, and a soft shadow lifting them off the hide. The Mash and Turn Token sockets (in
   the Tomorrow panel) are recessed in the Heat Track's lacquer and gilt, their names engraved
-  above them. **The key's row pitch** (19 units) leaves the High Society crown clear of the
-  Speakeasy medallion above it. Saddle stitching runs round the board
+  above them. **The key's row pitch** (19 units) was set to leave the High Society crown clear of the
+  Speakeasy medallion above it; the crown has gone, and the pitch stayed. Saddle stitching runs round the board
   edge and inside the Heat corner. The **screen** build carries the pebbles faintly
   (Nick, 2026-10-07: he wanted the leather on screen too, just not overpowering). From
   2026-09-29 it had dropped them, keeping only wrinkles and dye, because the crease grain of
@@ -842,7 +848,8 @@ keeps them on a re-trace.
   off the board. The Rulebook's component list says "High Society Venues (Martini Glass)", its
   map legend shows the martini, and the Town Planner's roster and key carry the board's gold
   disc and martini without the crown. The crown means where the Crown is taken, not the type, so
-  it stays on the board's sign and nowhere else marks a District with it.
+  it stays on the board's sign and nowhere else marks a District with it. Since 2026-10-24 it is
+  on no sign: the Crown is taken in a rival's home Ward, and the key's Ward row carries it.
 - ~~**Rulebook wording.**~~ Fixed 2026-09-28: the Big Bust tiebreak reads "ranked highest on its
   Still's Pressure Strip", matching the Town Planner. (The Kingpin's Guide still says "the
   Borough's Pressure Strip"; it lags by design.)

@@ -115,10 +115,10 @@ const DISTRICTS = [
   { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'speak', still: 11, venue: 'DeLillo’s' },
   { id: 'fordham', name: 'Fordham', boro: 'BX', zone: 'speak', still: 8, venue: 'The Penny Whistle', setup: 'runners' },
   { id: 'throggs_neck', name: 'Throggs Neck', boro: 'BX', zone: 'dock', still: 10, setup: 'runners' },
-  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
+  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'speak', still: 6, venue: 'The Junction', setup: 'runners' },
   { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', setup: 'squad' },
   { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 2, venue: 'Bohemian Hall' },
-  { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'speak', still: 6, venue: 'Paradise Alley', setup: 'runners' },
+  { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
   { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
   { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3 },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
@@ -244,14 +244,13 @@ function still(n, x, y, h) {
   return `<g transform="translate(${f(x - TOKEN_BOX[0] * s)} ${f(y - TOKEN_BOX[1] * s)}) scale(${f(s, 4)})">${STILL.stillBody(n)}</g>`;
 }
 
-// Zone roundel: the same mark on the map and in the key. A High Society Venue is
-// a Speakeasy with a crown on it; its glass is the martini, not the tumbler.
+// Zone roundel: the same mark on the map and in the key. A High Society Venue is a
+// gilt disc with the martini, not the tumbler. It wore a crown until 2026-10-24, when
+// the Crown moved to the rivals' home Wards; the key's Ward row carries it now.
 function roundel(zone, cx, cy, r) {
   if (zone === 'hs') {
-    const ky = cy - r - r * 0.3, ks = r * 1.3;
     return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
-      + icon('martini', cx, cy + r * 0.06, r * 1.08, '#2a1d0c')
-      + icon('crown', cx, ky, ks, C.shadow, 5.5) + icon('crown', cx, ky, ks, C.goldBright);
+      + icon('martini', cx, cy + r * 0.06, r * 1.08, '#2a1d0c');
   }
   return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="#140e09" fill-opacity=".85" stroke="${C.gold}" stroke-width="1.2"/>`
     + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
@@ -843,8 +842,9 @@ function tomorrow(x, y) {
 // medallion on the map is named; from 2026-09-29 it was the price list alone, Speakeasy and
 // High Society). The selling rows are a venue and what it buys, a barrel and a price: the
 // High Society row has only Rum, which says "Rum only" without the words. The Dock Trades
-// Moonshine up to Rum, one for one: a grey cube to a brown one. The Ward is where a Boss
-// Rises. A barrel is drawn as the cube that stands for it on the table (Nick: grey
+// Moonshine up to Rum, one for one: a grey cube to a brown one. The Ward carries the crown
+// (Nick, 2026-10-24): a boss's home Ward is where his rivals Take the Crown. It said "Boss
+// Rises" until the Rise moved to the home Borough. A barrel is drawn as the cube that stands for it on the table (Nick: grey
 // Moonshine, brown Rum).
 const CUBE = { moonshine: '#9b9892', rum: '#7b4a26' };
 function cube(liquor, cx, cy, size) {
@@ -860,12 +860,13 @@ function kickChip(cx, cy) {
     + text('+1', cx, cy, { family: 'Barlow Condensed', weight: 700, size: 7.6, spacing: 0 }, { fill: C.goldBright, anchor: 'middle', middle: true });
 }
 const KICK_R = 6.5, KICK_GAP = 4, TRADE_W = 8 + 14 + 8; // a Trade: cube, arrow, cube
+const KEY_CROWN = 13; // the Ward row's crown
 // [roundel, name, what it does]: chips of [barrel, price, Kickback?], a Trade, or words
 const KEY_ROWS = [
   ['speak', 'Speakeasy', [['moonshine', '$300'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500', true]]],
   ['dock', 'Dock', { trade: ['moonshine', 'rum'] }],
-  ['ward', 'Ward', { words: 'Boss Rises' }],
+  ['ward', 'Ward', { crown: true }],
 ];
 // Moonshine becomes Rum: a cube, a gilt arrow, a cube.
 function tradeArrow(x0, cy) {
@@ -876,10 +877,10 @@ function key(x, y) {
   const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const chipsX = 28 + headW + 10, CHIP_GAP = 9;
   const chipW = (p, kick) => 12 + width(TYPE.price, p) + (kick ? KICK_GAP + 2 * KICK_R : 0);
-  const rowW = what => what.trade ? TRADE_W : what.words ? width(TYPE.price, what.words)
+  const rowW = what => what.trade ? TRADE_W : what.crown ? KEY_CROWN : what.words ? width(TYPE.price, what.words)
     : what.reduce((a, [, p, k]) => a + chipW(p, k), 0) + Math.max(0, what.length - 1) * CHIP_GAP;
   const chipsW = Math.max(...KEY_ROWS.map(([, , what]) => rowW(what)));
-  // Roomy enough that the High Society crown clears the Speakeasy medallion above it.
+  // The pitch was set for the crown the High Society medallion wore until 2026-10-24.
   const PITCH = 19, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
   let s = panel(x, y, w, h);
   KEY_ROWS.forEach(([k, t, what], i) => {
@@ -889,6 +890,9 @@ function key(x, y) {
     let cx = x + chipsX;
     if (what.trade) {
       s += cube(what.trade[0], cx + 4, cy, 8) + tradeArrow(cx + 10, cy) + cube(what.trade[1], cx + TRADE_W - 4, cy, 8);
+    } else if (what.crown) {
+      const kx = cx + KEY_CROWN / 2;
+      s += icon('crown', kx, cy, KEY_CROWN, C.shadow, 5) + icon('crown', kx, cy, KEY_CROWN, C.goldBright);
     } else if (what.words) {
       s += text(what.words, cx, cy, TYPE.price, { fill: C.body, middle: true });
     } else for (const [liquor, price, kick] of what) {
@@ -1192,7 +1196,7 @@ function allText() {
   for (const [, t, what] of KEY_ROWS) {
     add(TYPE.keyHead, upper(t));
     if (what.words) add(TYPE.price, what.words);
-    else if (!what.trade) for (const [, p] of what) add(TYPE.price, p);
+    else if (!what.trade && !what.crown) for (const [, p] of what) add(TYPE.price, p);
   }
   add(TYPE.panelHead, 'HEAT');
   add(TYPE.titleCity, 'NEW YORK');
