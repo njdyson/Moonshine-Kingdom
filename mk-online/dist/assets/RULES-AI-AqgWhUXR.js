@@ -7,10 +7,10 @@ var e=`# Moonshine Kingdom: Rules for an AI Player
 You win the instant you make **Take the Crown** (takeTheCrown), a Power Play costing 2 Influence, no Heat, on your own turn, with all of these true:
 
 - **20+ Respect**;
-- your **Boss stands in a High Society Venue outside your home Borough** (one of the four Speakeasies on a #7 Still; your Borough card names the three away ones, and no boss crowns in his own Borough);
+- your **Boss stands in a rival's home Ward** (the Ward of a rival boss's home Borough; no boss crowns in his own home Ward, and at three players the Ward of the Borough nobody was dealt is nobody's crown room);
 - 2 markers in your Ledger.
 
-Your **home Borough** is the one you were dealt at setup, and its Ward is your **home Ward**. At three players one Borough is nobody's home.
+Your **home Borough** is the one you were dealt at setup, and its Ward is your **home Ward**: where your Boss starts, and where your rivals crown. At three players one Borough is nobody's home.
 
 The game ends mid-Day on the spot. Nothing else is settled.
 
@@ -100,7 +100,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
 | Extort (extort) | 2, H at 5+ | **$100 per District you Control**. As often as your Ledger pays for it; each Extort draws one Heat marker only when you Control **5+ Districts**. |
 | Rat (rat) | 2 | An immediate Raid (§7). Take the Rat Card (−3 Respect) from the supply or its holder. You cannot Rat while you hold it; it leaves you only when a rival Rats. |
-| Rise (rise) | 2 | Boss off the board only: place him in any **Safe Ward**. |
+| Rise (rise) | 2 | Boss off the board only: place him in any **Safe District of your home Borough**. |
 | Take the Crown (takeTheCrown) | 2 | See §1. |
 
 ## 5. Movement and Control
@@ -198,7 +198,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 - **Drafting is also defence.** The die you leave in the pool may burst your own best Still. The last seat drafts from what is left but picks first at The Offers.
 - **Laying Low early wins tempo.** You draft first tomorrow and brew before the supply runs thin. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
-- **The Crown takes visible steps:** 20 Respect, then the walk into an away Venue, then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise in a Ward plus the walk back.
+- **The Crown takes visible steps:** 20 Respect, then the walk into a rival's home Ward (usually a fight, since it is his turf), then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise back in his home Borough plus the walk back out to a rival's Ward.
 - **The Crown ends the game before Sunset.** Promises due at Sunset go unpaid, so plan for betrayal.
 - **Raids go for barrels.** A Raid hits a mob's District with the most barrels, so a Rum stockpile in your Venue is Raid bait.
 `;export{e as default};
