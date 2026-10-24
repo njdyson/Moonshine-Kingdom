@@ -15,7 +15,9 @@ after a redraw, `mk-online-board-handoff.md` is the brief for catching it up. Th
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
 node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each,
-                                    # and the Still tokens' SVGs and PNGs (Art/Still Tokens)
+                                    # and the Still tokens' SVGs and PNGs (Art/Still Tokens);
+                                    # it also stamps the City Map page's image links with
+                                    # ?v=<board hash>, so browsers fetch a new board (commit it)
 node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the City Map page links it), and,
                                     # git-ignored: its 7280px PNG, a 4320px screen JPEG, and any --dpi=200
                                     # proof; two to three minutes. Rerun it whenever the board changes.
