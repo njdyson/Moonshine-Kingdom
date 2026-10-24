@@ -29,7 +29,7 @@ ONES = [
     # one Play". The bar is the venue on the board's sign (Nick: more thematic than the District
     # alone); the District stays so the table can find it. The 2026-10-10 audit had dropped the venue
     # names off three cards; these put them back on all eight.
-    # Every seat starts on one of its Borough's two (the Tenderloin, Fordham, Flushing, Red Hook)
+    # Every seat starts on one of its Borough's two (the Tenderloin, Fordham, Corona, Red Hook)
     # and is one Move from the other (East Harlem, Belmont, Astoria, Coney Island), so the set is
     # two friendly 1s per seat by construction. The High Society Venues are left out: they buy Rum
     # only and are Opening Night's. Four barrels was the Greed Tax when the set was drawn, so every
@@ -76,9 +76,10 @@ ONES = [
      "Unload <b>4+ barrels</b> at <b>Bohemian Hall</b> in <b>Astoria</b>.",
      "Poured by the pitcher, and nobody asks what is in it."),
     # Queens' starting bar (Paradise Alley). Back as a 1 on its own art: it was a 3 at 6+ until the
-    # setup pass cut it as a home chore. As a 1, a home sale is the right size.
+    # setup pass cut it as a home chore. As a 1, a home sale is the right size. In Corona since
+    # 2026-10-24, when Flushing became Queens' Ward and the bar and its 6 moved next door.
     ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Flushing</b>.",
+     "Unload <b>4+ barrels</b> at <b>Paradise Alley</b> in <b>Corona</b>.",
      "One bad batch and the whole city stops drinking."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
@@ -298,8 +299,9 @@ TWOS = [
     #   is his friendly; for anyone else it is an invasion that ends next to a crown room.
     #   (Since 2026-10-24 the crown rooms are the rivals' home Wards, not the Venues.)
     #   The Squad's clean first step differs by Borough: Throggs Neck for the Bronx, West Side
-    #   for Manhattan, Jamaica or Corona for Queens, and only Brownsville (Brooklyn's own home
-    #   Ward) for Brooklyn, whose card is the stiffest. Watch it in playtest.
+    #   for Manhattan, Jamaica or Flushing for Queens (Corona until 2026-10-24, when the two swapped
+    #   Ward and bar), and only Brownsville (Brooklyn's own home Ward) for Brooklyn, whose card is
+    #   the stiffest. Watch it in playtest.
     #   History: these four names were Extort cards once ("hold N Districts in one Borough")
     #   and were cut because the Borough Deed already paid for holding a Borough (handoff §3,
     #   cluster 2). The Deeds went on 2026-09-10, and the objection with them. They come back
