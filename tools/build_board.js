@@ -1375,4 +1375,17 @@ async function printPdf(browser, svg) {
   await stillTokens(browser, fontCss);
   if (full) await printPdf(browser, print);
   await browser.close();
+  stampCityMap(screen + print);
 })();
+
+// The City Map page links the board's images by a fixed name, and the site sends no
+// cache headers, so a browser could keep showing an old board after a rebuild (Nick,
+// 2026-10-24: the Print toggle showed the old one). Each link carries ?v= and a hash of
+// the board, so the URLs change only when the board does.
+function stampCityMap(svgs) {
+  const page = path.join(ROOT, 'City Map v0.9.html');
+  const v = require('crypto').createHash('sha1').update(svgs).digest('hex').slice(0, 10);
+  const html = fs.readFileSync(page, 'utf8');
+  const out = html.replace(/(Art\/Board\/Board%20v0\.9%20\((?:screen|print%20preview|print)\)\.(?:jpg|pdf))(\?v=\w+)?/g, `$1?v=${v}`);
+  if (out !== html) { fs.writeFileSync(page, out); console.log('stamped City Map v0.9.html, v=' + v); }
+}
