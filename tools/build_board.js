@@ -427,8 +427,11 @@ function landShadow() {
   return `<g opacity=".55" filter="url(#landShadow)"><g transform="translate(1.4 2.4)" fill="#000">${land.map(q => `<path d="${poly(q)}"/>`).join('')}</g></g>`;
 }
 
-function wardMark(d, p) {
-  const k = insetRing(straightRing(geo.regions[d.id]), WARD_HATCH.band);
+// The hatched band runs round the part inside the frame, as the keyline does, so a Ward that runs
+// under the frame (Flushing) is hatched along the frame too (until 2026-10-25 it ran round the
+// whole shape, and that side lay under the frame).
+function wardMark(d) {
+  const p = geo.regions[d.id], k = insetRing(straightRing(p), WARD_HATCH.band);
   return `<path d="${poly(p)}" fill="none" stroke="url(#wardHatch)" stroke-width="${2 * WARD_HATCH.band}" stroke-linejoin="miter"/>`
     + `<path d="${ringPath(k)}" fill="none" stroke="${C.goldLine}" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="miter"/>`;
 }
@@ -459,7 +462,7 @@ function districtFills() {
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/>`
-      + (d.zone === 'ward' ? wardMark(d, p) : '') + '</g>';
+      + (d.zone === 'ward' ? wardMark(d) : '') + '</g>';
     if (d.zone === 'dock') s += dockMark(geo.regions[d.id]);
     s += decoFrame(d, geo.regions[d.id]);
   }
