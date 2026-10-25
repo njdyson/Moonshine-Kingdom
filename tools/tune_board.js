@@ -49,7 +49,7 @@ const KNOBS = [
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
   ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
   ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90], ['southShore', 990, 1020],
-  ['boweryBottom', 640, 690], ['stapletonTop', 672, 715], ['staten.0', 800, 850], ['staten.1', 895, 950],
+  ['boweryBottom', 650, 710], ['boweryTip', 60, 140], ['stapletonTop', 690, 760], ['staten.border', 800, 880], ['staten.tip', 40, 100],
 ];
 
 // ---------------------------------------------------------------- geometry
@@ -142,7 +142,7 @@ function ground(p) { // cm² at least 6 units in from every border
 // ---------------------------------------------------------------- scoring
 const length = pts => pts.slice(1).reduce((s, q, i) => s + Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]), 0);
 function evaluate(S) {
-  if (S.stapletonTop - S.boweryBottom < 32) return null; // the Kill van Kull as wide as the Narrows
+  if (S.stapletonTop - S.boweryBottom < 44) return null; // the Kill van Kull as wide as the Narrows (32 until 2026-10-25)
   if (S.queensRows[1] > S.coronaBottom) return null; // Flushing's bottom never below Corona's
   let m;
   try { m = build(S); } catch (e) { return null; }

@@ -205,6 +205,8 @@ ONES = [
     # on Day 2 for $1,200, and it had no answer for a tie. Now one named Ward: Stapleton,
     # the one nobody starts in, so the Safehouse has to travel first. Disjoint from Union
     # Dues (a rival's home Ward) by construction.
+    # STATEN IN TWO 2026-10-25: Stapleton is a Dock now (Westerleigh merged into it), still the
+    # one place nobody starts that this card can name. Text unchanged.
     ("Tenement Army", "Tenament Army.jpg", "Recruit",
      "Recruit <b>4+ Runners</b> at <b>Stapleton</b>.",
      "Word goes round by supper. By dark, you have a crew."),
@@ -262,7 +264,7 @@ TWOS = [
     # freezes you out of the Market until you buy the brand off.
     # Padlocking your worst boiler is a proportionate price. Nick proposed
     # Pressure 1; widened to <=2 because P1 is only East Harlem (M), Astoria (Q)
-    # and Westerleigh (ST), and Staten has NO Squad (one per MAINLAND Borough),
+    # and Westerleigh (ST; Stapleton and Tottenville since 2026-10-25), and Staten has NO Squad (one per MAINLAND Borough),
     # so P1 was a 2-district, Manhattan/Queens-only card = borough bias, the one
     # kind Nick rules out. P2 adds West Side (M), Belmont (Bx), Jamaica (Q) and
     # Coney Island (Bk): exactly one per mainland Borough. "you Control" is
@@ -428,6 +430,8 @@ TWOS = [
     # SETS PASS 2026-10-11 (Nick): "a Pressure 5 Still", not the rooms, which are contested enough.
     # There are five, one per Borough: the four starting bars and Stapleton, so it is a standing
     # reason to garrison home. No Safehouse guard now that The Eviction is cut.
+    # STATEN IN TWO 2026-10-25: Stapleton's Still went 8 to 12, so the Pressure 5 Stills are the
+    # four starting bars alone, each a seat's home bar. Text unchanged; a call for Nick.
     ("The Copper Heist", "Copper Heist.jpg", "Open Fire",
      "Seize a District with a <b>Pressure 5 Still</b>.",
      "The good boilers run hot. So do the men who own them."),
@@ -539,8 +543,9 @@ THREES = [
      "Seize a District from <b>4+ rival Mobsters</b>.",
      "Every name in it is crossed out but one."),
     # Moonshine -> RUM (Nick). A setup hedge: Rum only exists via Trade at a Dock you
-    # Control, and Staten's own boilers are hopeless (Westerleigh Pressure 1,
-    # Tottenville 3), so the moonshine must be hauled IN, Traded, then run out.
+    # Control, and Staten's own boilers are hopeless (Stapleton and Tottenville both Pressure 1
+    # since 2026-10-25; Westerleigh 1 and Tottenville 3 before), so the moonshine must be hauled
+    # IN, Traded, then run out.
     # Roughly doubles the setup. Bonus: now mutually exclusive with Gin Pipeline
     # (Moonshine), which it used to be able to co-fire with.
     # COUNTERPLAY PASS (2026-08-04). SOLITAIRE FAILURE at 5 Respect: diff 8, engagement 2

@@ -14,8 +14,7 @@ after a redraw, `mk-online-board-handoff.md` is the brief for catching it up. Th
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
-node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each,
-                                    # and the Still tokens' SVGs and PNGs (Art/Still Tokens);
+node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each;
                                     # it also stamps the City Map page's image links with
                                     # ?v=<board hash>, so browsers fetch a new board (commit it)
 node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the City Map page links it), and,
@@ -466,6 +465,38 @@ smallest (39), is 46 since the Sound went level.
   Tottenville 44 to 41, the three smallest on the board, until Manhattan widened the same day
   and the whole channel moved up 16 (see Manhattan is one width).
 
+### Staten Island in two (2026-10-25)
+
+Nick asked to see Staten Island as two Districts, with more water round it and a bottom that
+tapers like the real island. Taken the same day, with the rules pages, the audits and mk-online.
+
+- **Westerleigh is gone**, merged into Stapleton (`MERGES` in `draft_board.js`, which drops the
+  border and joins the two shores into one chain). The island is **Stapleton** (Dock, Still 12)
+  over **Tottenville** (Dock, Still 2), level at `staten.border` 856. Stapleton is the brewery
+  town on the Narrows; Tottenville is the island's south-west tip. That gives every Still number
+  two Districts but the 7s, which keep four.
+- **Shape**: Stapleton's north corners keep the harbour `CUT`; Tottenville's south-east shore runs
+  at 45 degrees from the Narrows down to the tip (`staten.tip` 72 wide, its outer corner cut).
+- **More water**: the Narrows 32 to 44 (`NARROWS_GAP`), the Kill van Kull 32 to 44, and the
+  west shore 8 further from the frame (`staten.west` 44).
+- **The Bowery takes a point** (Nick: Manhattan's bottom felt abrupt). Its foot drops from 652 to
+  680 (`boweryBottom`) and runs 120 from the harbour reach (`boweryTip`); its west shore turns
+  down to it at 45 degrees, so Manhattan ends in a blunt point, as the Battery does. The Bowery
+  grew 8%, and Stapleton's top went down with it (`stapletonTop` 684 to 724). A foot at 690 was
+  tried and gave too much of the island to the Bowery (Nick). The Bowery's piers now stand on
+  the 45-degree shore, its longest clear stretch, not on the foot.
+- **STATEN ISLAND** runs at 45 degrees along the south-east shore in the Lower Bay, as MANHATTAN
+  runs along the Hudson. Nudged up the shore towards the Narrows, it hung out into the channel
+  (Nick), so it sits midway along the shore.
+- Room: the Bowery 63 cm² (56 before), Stapleton 53 and Tottenville 51 (the three were 50, 49
+  and 49; Nick found a first draft's Stapleton, at 63, too big).
+
+Stapleton is no longer a Ward, so the game has four Wards, every one a home Ward. The board has 24
+Districts. The south strip under Brooklyn and Queens stays open water: stretching the two south
+would only grow Coney Island, Canarsie and Jamaica, already among the largest, while the two
+smallest, Whitestone and Corona, are held by the Astoria / Flushing border (see Evening out the
+sizes). Nick floated the Federal Crackdown Tracker for that strip; not taken.
+
 ## The look
 
 - **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take
@@ -650,7 +681,9 @@ keeps them on a re-trace.
   *Update 2026-10-06:* Stapleton's Still became an 8 on 2026-09-30 (it was a 6), which made two
   more touching brackets on Staten Island: Stapleton's 8 with Westerleigh's 2 and with
   Tottenville's 4. Red Hook and the Bowery remain the only one on the mainland. The Almanac's
-  lesson 4 names both.
+  lesson 4 names both. *Update 2026-10-25:* Staten Island is two Docks, Tottenville's 2 beside
+  Stapleton's 12, which is no bracket (only a Mash of 1 or 6 lights either), so Red Hook and the
+  Bowery are the only one again. Lesson 4 now warns against taking Staten's pair for one.
 - **The Milk Run** names the Williamsburg Bridge again ("across the Williamsburg Bridge"). It
   had dropped the name only because no component printed it. The Almanac now names the Brooklyn
   Bridge too. Both rely on this board, so they should merge with it.
@@ -683,10 +716,10 @@ keeps them on a re-trace.
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are generated** (`tools/still_art.js`, since 2026-10-07; Nick: he likes the design,
-  and was open to a generated version). The board's signs and the prototype tokens are one
-  drawing: the build draws each sign's Still from `stillBody()` and writes the token SVGs and
-  1000 x 1080 PNGs (`Art/Still Tokens`) on every run, with the board's embedded Bebas Neue, so
-  the two can't disagree and nothing is edited by hand. The Pressure gauge is lit from the
+  and was open to a generated version). The build draws each sign's Still from `stillBody()`,
+  with the board's embedded Bebas Neue, so nothing is edited by hand. It also wrote the
+  prototype Still tokens' art (`Art/Still Tokens`) until 2026-10-25, when Nick retired the
+  Still Tokens sheet: the board prints every Still, so the tokens had no job. The Pressure gauge is lit from the
   rule, 6 - |Still - 7|. It redraws the eleven hand-made SVGs exactly (checked element by
   element, gauges included) bar two things, for a more prominent number (Nick): **the numeral
   is 54** in the token's 100 x 108 box, centred on the boiler, where it was 37 and set left of
@@ -715,7 +748,8 @@ keeps them on a re-trace.
   Speakeasies keep the tumbler. The medallion wore a crown until 2026-10-24, when the Crown
   moved to the rivals' home Wards (CLAUDE.md, *The Crown in the Wards*); Nick moved the crown
   to the key's Ward row, in place of "Boss Rises". The map's Ward medallions carry no crown
-  (Staten Island's Stapleton is a Ward and nobody's crown room).
+  (Staten Island's Stapleton was a Ward and nobody's crown room until 2026-10-25, when it became
+  a Dock: the four home Wards are the only Wards).
 - **Flushing is Queens' Ward** (Nick, 2026-10-24), and Corona its Speakeasy, with the 6 and a
   new bar, The Junction (Flushing's was Paradise Alley). The two swapped type, Still and bar so that no two home Wards touch; the
   geometry, graph and Coastal list are unchanged.

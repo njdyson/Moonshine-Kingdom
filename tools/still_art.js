@@ -1,7 +1,7 @@
 // The Still: a riveted boiler carrying its number, a handle on top, two feet, and the
-// Pressure gauge piped to its side. One drawing for the board's signs (tools/build_board.js
-// draws each Still from stillBody) and for the prototype tokens (the build writes
-// Art/Still Tokens/SVG and PNG from stillSvg), so the two can never disagree.
+// Pressure gauge piped to its side, for the board's signs (tools/build_board.js draws each
+// Still from stillBody). It drew the prototype Still tokens too, until Nick retired them on
+// 2026-10-25.
 //
 // Drawn in a 100 x 108 box. Until 2026-10-07 the art was eleven hand-made SVGs; this
 // redraws them exactly (Nick: he likes the design) bar the numeral, which is larger and
@@ -56,8 +56,4 @@ function stillBody(n) {
   return s;
 }
 
-// A standalone token: the numeral is live text, so a PNG of it needs Bebas Neue loaded
-// (an SVG shown through <img> can't fetch a webfont; the Still Tokens page uses the PNGs).
-const stillSvg = n => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 108" width="200" height="216">\n  ${stillBody(n)}\n</svg>\n`;
-
-module.exports = { stillBody, stillSvg, pressure, setInk, BOX, NUM };
+module.exports = { stillBody, pressure, setInk, BOX, NUM };

@@ -1,4 +1,4 @@
-# mk-online: take the new board (2026-09-29, last done 2026-10-24)
+# mk-online: take the new board (2026-09-29, last done 2026-10-25)
 
 For an agent updating the online game (`njdyson/mk-online`) to the board in this repo. Read
 `DEPLOY.md` first: mk-online is its own repo, CI commits its build to its own `dist/`, and this
@@ -9,8 +9,10 @@ the change in the mk-online source, let it build, then mirror `dist/` in as `DEP
 
 The game shows `public/board.svg` (a copy of `Art/Board/Board v0.9 (screen).svg`) as an `<img>`,
 with clickable Districts, piece strips and live Heat, Mash and Turn Order drawn over it. Since
-2026-10-24 that is the 2026-10-24 board: Flushing the Queens Ward and Corona its bar, no crown on
-the High Society medallions, and the crown on the key's Ward row. Its overlay data, `src/ui/boardGeometry.ts`, is generated, and its connection
+2026-10-25 that is the 2026-10-25 board (mk-online 17a8a4e): Staten Island as two Docks,
+Stapleton (12) over Tottenville (2), Westerleigh gone, and the Bowery's pointed foot. Before it,
+the 2026-10-24 board: Flushing the Queens Ward and Corona its bar, no crown on the High Society
+medallions, and the crown on the key's Ward row. Its overlay data, `src/ui/boardGeometry.ts`, is generated, and its connection
 graph is `ADJACENCY_PAIRS` in `src/game/data.ts`.
 
 ## Catching it up after a redraw

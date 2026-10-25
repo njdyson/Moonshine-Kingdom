@@ -4,7 +4,7 @@
 // through Playwright's Chromium.
 //
 //   node tools/build_board.js           print and screen SVGs, 2160px previews of each (the
-//                                       City Map page shows them) and the Still tokens
+//                                       City Map page shows them)
 //   node tools/build_board.js --print   also the files to open or send without an SVG
 //                                       editor: a 24in PDF at 300dpi, committed, since the
 //                                       City Map page links it (--dpi=N for another, named with it and
@@ -26,9 +26,8 @@
 //
 // The roster must match the Town Planner's District Roster: zone, Still number,
 // venue and Setup mark for every District, Borough numbers in Raid order.
-// Stills are drawn by tools/still_art.js, which also gives the prototype tokens their
-// art (this build writes Art/Still Tokens/SVG and PNG), so the printed board and the
-// tokens can never disagree.
+// Stills are drawn by tools/still_art.js. (It also drew the prototype Still tokens until
+// 2026-10-25, when Nick retired the sheet: the board prints every Still.)
 //
 // Each District carries a hanging sign (placeSign): its type's medallion, name and
 // venue on a small plaque hung from the border above, with the Still on a plate
@@ -47,7 +46,6 @@ const OUT = {
   screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
   printPng: path.join(DIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(DIR, `Board v0.9 (print${dpiTag()}).pdf`),
   screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
-  tokens: path.join(ROOT, 'Art', 'Still Tokens'), // SVG/still-NN.svg and PNG/still-NN.png
 };
 const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
@@ -126,9 +124,8 @@ const DISTRICTS = [
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint' },
   { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar', setup: 'runners' },
   { id: 'canarsie', name: 'Canarsie', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
-  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'ward', still: 8 },
-  { id: 'westerleigh', name: 'Westerleigh', boro: 'SI', zone: 'dock', still: 2 },
-  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 4 },
+  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'dock', still: 12 },
+  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 2 },
 ];
 const OFFBOARD = ['nj']; // New Jersey: land, off the board
 
@@ -164,7 +161,7 @@ const TYPE = {
   signVenue: { family: 'Barlow', weight: 500, size: 7.8, spacing: 0.2, italic: true },
   tomorrow: { family: 'Cinzel', weight: 700, size: 8.6, spacing: 1.1 },
 };
-// The faces TYPE uses, plus Bebas Neue for the numbers in the Still tokens' own SVGs.
+// The faces TYPE uses, plus Bebas Neue for the Stills' numbers.
 const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@1,500&family=Barlow+Condensed:ital,wght@0,700;1,600&family=Bebas+Neue&family=Cinzel:wght@700&display=block';
 
 // ---------------------------------------------------------------- helpers
@@ -1308,22 +1305,6 @@ async function render(browser, outputs) {
   }
 }
 
-// The prototype Still tokens (Still Tokens v0.9.html): an SVG and a 1000 x 1080 PNG per
-// number, drawn by tools/still_art.js like the board's. The page shows the PNGs, since an
-// SVG through <img> can't load the numeral's webfont; here it renders with the board's.
-async function stillTokens(browser, fontCss) {
-  const page = await browser.newPage({ viewport: { width: 1000, height: 1080 } });
-  for (let n = 2; n <= 12; n++) {
-    const name = `still-${String(n).padStart(2, '0')}`, svg = STILL.stillSvg(n);
-    fs.writeFileSync(path.join(OUT.tokens, 'SVG', `${name}.svg`), svg);
-    await page.setContent(`<!doctype html><html><head><style>${fontCss} html,body{margin:0;background:transparent}</style></head><body>${svg.replace('width="200" height="216"', 'width="1000" height="1080"')}</body></html>`);
-    await page.evaluate(async () => { await document.fonts.load('50px "Bebas Neue"'); await document.fonts.ready; });
-    await page.screenshot({ path: path.join(OUT.tokens, 'PNG', `${name}.png`), omitBackground: true, clip: { x: 0, y: 0, width: 1000, height: 1080 } });
-  }
-  await page.close();
-  console.log('wrote', path.relative(ROOT, OUT.tokens), 'SVG and PNG, 2 to 12');
-}
-
 // The print PDF: one 24in page holding the 300dpi render as a JPEG. Printing the SVG
 // straight to PDF would rasterise its filters at the browser's own, lower resolution.
 async function printPdf(browser, svg) {
@@ -1372,7 +1353,6 @@ async function printPdf(browser, svg) {
   const full = process.argv.includes('--print');
   if (full) outputs.push([OUT.printPng, BOARD_PX / 1080, print], [OUT.screenLarge, 4, screen]);
   await render(browser, outputs);
-  await stillTokens(browser, fontCss);
   if (full) await printPdf(browser, print);
   await browser.close();
   stampCityMap(screen + print);
