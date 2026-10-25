@@ -473,16 +473,22 @@ tapers like the real island. On branch `claude/staten-island-two-districts-kapjn
 
 - **Westerleigh is gone**, merged into Stapleton (`MERGES` in `draft_board.js`, which drops the
   border and joins the two shores into one chain). The island is **Stapleton** (Dock, Still 12)
-  over **Tottenville** (Dock, Still 2), level at `staten.border` 842. Stapleton is the brewery
+  over **Tottenville** (Dock, Still 2), level at `staten.border` 862. Stapleton is the brewery
   town on the Narrows; Tottenville is the island's south-west tip. That gives every Still number
   two Districts but the 7s, which keep four.
 - **Shape**: Stapleton's north corners keep the harbour `CUT`; Tottenville's south-east shore runs
-  at 45 degrees from the Narrows down to the tip (`staten.tip` 62 wide, its outer corner cut).
-- **More water**: the Narrows 32 to 44 (`NARROWS_GAP`), the Kill van Kull 32 to 44
-  (`stapletonTop` 684 to 696), and the west shore 8 further from the frame (`staten.west` 44).
+  at 45 degrees from the Narrows down to the tip (`staten.tip` 72 wide, its outer corner cut).
+- **More water**: the Narrows 32 to 44 (`NARROWS_GAP`), the Kill van Kull 32 to 44, and the
+  west shore 8 further from the frame (`staten.west` 44).
+- **The Bowery takes a point** (Nick: Manhattan's bottom felt abrupt). Its foot drops from 652 to
+  690 (`boweryBottom`) and runs 120 from the harbour reach (`boweryTip`); its west shore turns
+  down to it at 45 degrees, so Manhattan ends in a blunt point, as the Battery does. The Bowery
+  grew 17%, and Stapleton's top went down with it (`stapletonTop` 684 to 734).
 - **STATEN ISLAND** runs at 45 degrees along the south-east shore in the Lower Bay, as MANHATTAN
-  runs along the Hudson.
-- Room: Stapleton 63 cm², Tottenville 56 (the three were 50, 49 and 49).
+  runs along the Hudson. Nudged up the shore towards the Narrows, it hung out into the channel
+  (Nick), so it sits midway along the shore.
+- Room: the Bowery 71 cm² (56 before), Stapleton 51 and Tottenville 47 (the three were 50, 49
+  and 49; Nick found a first draft's Stapleton, at 63, too big).
 
 Not yet done, if Nick keeps it: Stapleton is no longer a Ward, so the game has four Wards. Still
 to update: the Town Planner, Rulebook, The Almanac, the Jobs that name Staten Island, the

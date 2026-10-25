@@ -154,10 +154,11 @@ const SETTINGS = {
   redHookSouth: 796, // Red Hook's level south side
   rhStub: 30, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
   coneyEast: 474, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
-  boweryBottom: 652, stapletonTop: 696, // the Kill van Kull between them, as wide as the Narrows (684 until 2026-10-25, when Staten Island went to two Districts and took more water round it; 668 and 700 until 2026-10-07)
+  boweryBottom: 690, stapletonTop: 734, // the Kill van Kull between them, as wide as the Narrows (652 and 684 until 2026-10-25, when Staten Island went to two Districts and the Bowery took a point; 668 and 700 until 2026-10-07)
+  boweryTip: 120, // the Bowery's level foot: its west shore turns at 45 degrees down to it, so Manhattan ends in a blunt point (level the whole way across until 2026-10-25)
   // Staten Island (2026-10-25, two Districts): its west shore, upright; Stapleton | Tottenville, level;
   // the tip's level foot, which the south-east shore leaves at 45 degrees up to the Narrows
-  staten: { west: 44, border: 842, tip: 62 }, // three rows of 116 until 2026-10-25: Westerleigh | Stapleton | Tottenville at 800 and 916
+  staten: { west: 44, border: 862, tip: 72 }, // three rows of 116 until 2026-10-25: Westerleigh | Stapleton | Tottenville at 800 and 916
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
   rockaways: true, // Jamaica's strip of shore under Jamaica Bay (Nick, 2026-10-07: a feature, not usable space; it keeps the bay a bay)
@@ -214,6 +215,10 @@ function draft(S) {
   const BOWERY_WEST = S.boweryWest, SOUTH_SHORE = S.southShore, LIFT = 1020 - SOUTH_SHORE; // Jamaica Bay's foot and Canarsie's spit rise with the shore
   const MN_TURN = atX(MN_WEST, BOWERY_WEST), NJ_TOP = HEAT_CORNER, NJ_END = atX(NJ, 0);
   if (MN_TURN[1] < m2 + FOOT) throw new Error('The Hudson turns upright above the Tenderloin: Manhattan is too wide');
+  // The Bowery's point: its foot level at boweryBottom, boweryTip long, from the harbour reach; its
+  // west shore turns down to it at 45 degrees (BW_BEVEL)
+  const BW_TIP = [[atY(ER_BW, S.boweryBottom)[0] - S.boweryTip, S.boweryBottom], atY(ER_BW, S.boweryBottom)];
+  const BW_BEVEL = [BOWERY_WEST, S.boweryBottom - (BW_TIP[0][0] - BOWERY_WEST)];
   // A level border meeting a slanted line at a tight corner gets a foot: its last FOOT
   // units turned to meet the line square. From P, where it met the line, running along
   // the line's direction d away from the tight corner: [where the foot lands, where it leaves the level].
@@ -285,7 +290,7 @@ function draft(S) {
     '290,360': MF[1][0], '523,357': [FPX, m2],
     '220,452': TB_W, '509,453': [EHX, EHY], '533,477': EB_J, '150,548': [FPX, m3],
     '466,549': CROOK, '694,328': EH_SHORE,
-    '307,696': atY(ER_BW, S.boweryBottom), '171,686': [BOWERY_WEST, S.boweryBottom],
+    '307,696': BW_TIP[1], '171,686': BW_TIP[0],
     // The Bronx: an upright east shore, level blocks
     '715,53': [b1, W], '715,160': [b1, S.huntsTop], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
     '1029,231': [BRONX_EAST, S.bronxRow], '829,299': BEND, '1022,330': atX(SOUND_BX, BRONX_EAST),
@@ -338,7 +343,7 @@ function draft(S) {
     'west_side|tenderloin': [MF[1][0], MF[1][1], [FPX, m2]],
     'five_points|bowery': [[FPX, m3], CROOK],
     'five_points|water': [EB_J, atY(ER_MN, BOWERY_BANK), CROOK],
-    'water|bowery': [TB_W, ...(onCoast ? [MN_TURN] : []), [BOWERY_WEST, S.boweryBottom], atY(ER_BW, S.boweryBottom), CROOK],
+    'water|bowery': [TB_W, ...(onCoast ? [MN_TURN] : []), BW_BEVEL, ...BW_TIP, CROOK],
     // New Jersey: parallel to Manhattan's west coast, from under the Heat corner to the board's edge
     'nj|water': [[NJ_TOP[0], 0], NJ_TOP, NJ_END],
     // Astoria / Corona on a foot at the Queens / Brooklyn line; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows
@@ -366,9 +371,8 @@ function draft(S) {
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       // Brooklyn and Queens each BORO_GAP under its own south shore (the Bronx's sits as far off its
       // east shore), centred under it: Brooklyn under Coney Island and Canarsie, Queens under the Rockaways
-      // Staten Island's lies along its south-east shore, in the Lower Bay, nudged up the shore
-      // towards the Narrows so it clears the tip
-      SI: [r1((SI_TIP + SI_E) / 2 + SI_GAP + 12), r1((SI_FOOT + SI_SE[1]) / 2 + SI_GAP - 12), -45],
+      // Staten Island's lies along its south-east shore, in the Lower Bay
+      SI: [r1((SI_TIP + SI_E) / 2 + SI_GAP), r1((SI_FOOT + SI_SE[1]) / 2 + SI_GAP), -45],
       BK: [(NARROWS[1] + CUT + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, SOUTH_SHORE + BORO_GAP, 0],
       QN: [((S.rockaways ? 708 : 856 + B) + 1080 - FRAME_IN) / 2, SOUTH_SHORE + BORO_GAP, 0],
     },

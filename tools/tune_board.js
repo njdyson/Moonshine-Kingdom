@@ -49,7 +49,7 @@ const KNOBS = [
   ['astoriaCorona', 515, 560], ['queensCol', 790, 920], ['queensRows.0', 430, 525], ['queensRows.1', 560, 720],
   ['queensRows.2', 720, 840], ['wbTop', 575, 610], ['coronaBottom', 660, 740],
   ['williamsburgSouth', 700, 780], ['redHookSouth', 770, 850], ['coneyEast', 400, 480], ['bayEast', 0, 90], ['southShore', 990, 1020],
-  ['boweryBottom', 640, 690], ['stapletonTop', 672, 715], ['staten.border', 800, 880], ['staten.tip', 40, 100],
+  ['boweryBottom', 650, 710], ['boweryTip', 60, 140], ['stapletonTop', 690, 760], ['staten.border', 800, 880], ['staten.tip', 40, 100],
 ];
 
 // ---------------------------------------------------------------- geometry
