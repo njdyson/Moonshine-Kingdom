@@ -14,8 +14,7 @@ after a redraw, `mk-online-board-handoff.md` is the brief for catching it up. Th
 
 ```
 node tools/draft_board.js           # the traced map -> Art/Board/board-geometry.json, checked
-node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each,
-                                    # and the Still tokens' SVGs and PNGs (Art/Still Tokens);
+node tools/build_board.js           # print and screen SVGs, a 2160px JPEG of each;
                                     # it also stamps the City Map page's image links with
                                     # ?v=<board hash>, so browsers fetch a new board (commit it)
 node tools/build_board.js --print   # also the 24in print PDF at 300dpi, committed (the City Map page links it), and,
@@ -717,10 +716,10 @@ keeps them on a re-trace.
 - **Hanging signs, not centred labels** (see The look). Centred labels (Nick, 2026-09-28) and
   an edge placer came before them; both were removed from the build on 2026-09-29.
 - **Stills are generated** (`tools/still_art.js`, since 2026-10-07; Nick: he likes the design,
-  and was open to a generated version). The board's signs and the prototype tokens are one
-  drawing: the build draws each sign's Still from `stillBody()` and writes the token SVGs and
-  1000 x 1080 PNGs (`Art/Still Tokens`) on every run, with the board's embedded Bebas Neue, so
-  the two can't disagree and nothing is edited by hand. The Pressure gauge is lit from the
+  and was open to a generated version). The build draws each sign's Still from `stillBody()`,
+  with the board's embedded Bebas Neue, so nothing is edited by hand. It also wrote the
+  prototype Still tokens' art (`Art/Still Tokens`) until 2026-10-25, when Nick retired the
+  Still Tokens sheet: the board prints every Still, so the tokens had no job. The Pressure gauge is lit from the
   rule, 6 - |Still - 7|. It redraws the eleven hand-made SVGs exactly (checked element by
   element, gauges included) bar two things, for a more prominent number (Nick): **the numeral
   is 54** in the token's 100 x 108 box, centred on the boiler, where it was 37 and set left of

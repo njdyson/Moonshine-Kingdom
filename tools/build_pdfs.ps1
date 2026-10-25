@@ -38,7 +38,6 @@ $docs = @(
     @{ Name = 'Town Planner';    Src = 'Town Planner v0.9.html';    Screen = $false }
     @{ Name = 'Cards';           Src = 'Cards v0.9.html';           Screen = $true  }
     @{ Name = 'Jobs Cards';      Src = 'Jobs Cards v0.9.html';      Screen = $true  }
-    @{ Name = 'Still Tokens';    Src = 'Still Tokens v0.9.html';    Screen = $false }
     @{ Name = 'Turn Tokens';     Src = 'Turn Tokens v0.9.html';     Screen = $false }
     @{ Name = 'The Ledger';      Src = 'The Ledger v0.9.html';      Screen = $false }
     @{ Name = 'Federal Crackdown Tracker'; Src = 'Federal Crackdown Tracker v0.9.html'; Screen = $false }
