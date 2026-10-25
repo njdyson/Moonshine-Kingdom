@@ -58,7 +58,7 @@ const FLIPS = [['tenderloin', 'east_harlem'], ['water', 'five_points', '220,452'
 // with the Bowery's foot, Belmont, Fordham and Hunts Point, rebalanced round the four-way
 // corner, and Canarsie (canarsie), which gave Coney Island the width for its name
 // (coneyEast) and took Brownsville's corner on the bay.
-const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville', 'sugar_hill', 'tenderloin', 'five_points', 'bowery', 'westerleigh', 'stapleton', 'tottenville', 'hunts_point', 'belmont', 'fordham']);
+const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville', 'sugar_hill', 'tenderloin', 'five_points', 'bowery', 'stapleton', 'tottenville', 'hunts_point', 'belmont', 'fordham']);
 function flip(g, [A, B, J]) {
   const i = g.chains.findIndex(c => c.sides.includes(A) && c.sides.includes(B) && (!J || [c.pts[0], c.pts[c.pts.length - 1]].some(q => key(q) === J))), c = g.chains[i];
   const [J1, J2] = [c.pts[0], c.pts[c.pts.length - 1]].map(key);
@@ -86,6 +86,38 @@ function flip(g, [A, B, J]) {
   for (const id of [A, B, X, Y]) RESHAPED.add(id);
 }
 for (const f of FLIPS) flip(geo, f);
+
+// Staten Island in two (Nick, 2026-10-25: a draft): Westerleigh joins Stapleton, so the island
+// is Stapleton over Tottenville. A merge drops the border between two Districts and gives the
+// second's ground to the first; their shores on either side of the dropped border join into
+// one chain.
+const MERGES = [['stapleton', 'westerleigh']];
+function merge(g, [keep, gone]) {
+  const i = g.chains.findIndex(c => c.sides.includes(keep) && c.sides.includes(gone)), c = g.chains[i];
+  g.chains.splice(i, 1);
+  const J = [c.pts[0], c.pts[c.pts.length - 1]].map(key), on = new Set(c.pts.map(key));
+  // a ring's run from junction `from` round to the other junction, away from the border (the
+  // traced rings don't all wind the same way, so each is walked whichever way leaves the border)
+  const run = (r, from) => {
+    const n = r.length, s = r.findIndex(q => key(q) === from), dir = on.has(key(r[(s + 1) % n])) ? -1 : 1, out = [];
+    for (let k = 0; k < n; k++) { const q = r[(s + dir * k + n * n) % n]; out.push(q); if (k && J.includes(key(q))) break; }
+    return out;
+  };
+  const a = run(g.regions[keep], J[0]), b = run(g.regions[gone], key(a[a.length - 1]));
+  g.regions[keep] = [...a, ...b.slice(1, -1)];
+  delete g.regions[gone];
+  for (const d of g.chains) d.sides = d.sides.map(x => x === gone ? keep : x);
+  // join the chains that now meet end to end with the same two sides
+  for (const j of J) {
+    const at = g.chains.filter(d => [d.pts[0], d.pts[d.pts.length - 1]].some(q => key(q) === j));
+    if (at.length !== 2 || at[0].sides.slice().sort().join() !== at[1].sides.slice().sort().join()) continue;
+    const [x, y] = at, xp = key(x.pts[x.pts.length - 1]) === j ? x.pts : x.pts.slice().reverse();
+    const yp = key(y.pts[0]) === j ? y.pts : y.pts.slice().reverse();
+    x.pts = [...xp, ...yp.slice(1)];
+    g.chains.splice(g.chains.indexOf(y), 1);
+  }
+}
+for (const m of MERGES) merge(geo, m);
 
 // ---------------------------------------------------------------- lines
 const unit = (x, y) => { const l = Math.hypot(x, y); return [x / l, y / l]; };
@@ -122,8 +154,10 @@ const SETTINGS = {
   redHookSouth: 796, // Red Hook's level south side
   rhStub: 30, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
   coneyEast: 474, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
-  boweryBottom: 652, stapletonTop: 684, // the Kill van Kull between them, as wide as the Narrows (668 and 700 until 2026-10-07: the widened Bowery gave height to Staten Island)
-  staten: [800, 916], // level borders: Westerleigh | Stapleton | Tottenville, three rows of 116 (801 and 913 until 2026-10-07)
+  boweryBottom: 652, stapletonTop: 696, // the Kill van Kull between them, as wide as the Narrows (684 until 2026-10-25, when Staten Island went to two Districts and took more water round it; 668 and 700 until 2026-10-07)
+  // Staten Island (2026-10-25, two Districts): its west shore, upright; Stapleton | Tottenville, level;
+  // the tip's level foot, which the south-east shore leaves at 45 degrees up to the Narrows
+  staten: { west: 44, border: 842, tip: 62 }, // three rows of 116 until 2026-10-25: Westerleigh | Stapleton | Tottenville at 800 and 916
   bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
   rockaways: true, // Jamaica's strip of shore under Jamaica Bay (Nick, 2026-10-07: a feature, not usable space; it keeps the bay a bay)
@@ -134,8 +168,8 @@ const RIVER = 49; // the East River's width, Hell Gate and the Sound included
 const EAST_EDGE = 1080; // Queens runs to the board's edge, under the frame
 const BRONX_EAST = 1030; // the Bronx's east shore, upright
 const FOOT = 24; // a border's foot: its last stretch turned to meet a slanted shore or border square
-const NARROWS_GAP = 32; // the Narrows, Staten Island to Brooklyn
-const CUT = 37; // the harbour's 45-degree corners: Staten Island's four and Coney Island's on the Narrows
+const NARROWS_GAP = 44; // the Narrows, Staten Island to Brooklyn (32 until 2026-10-25)
+const CUT = 37; // the harbour's 45-degree corners: Staten Island's and Coney Island's on the Narrows
 const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its shore
 // Bridges moved along their rivers: the Hell Gate to about the middle of Hunts Point's shore, the
 // Queensboro up the East River onto East Harlem's shore, which ends at Manhattan's row, a little
@@ -166,7 +200,12 @@ function draft(S) {
   const QN_NORTH = atX(SOUND_QN, EAST_EDGE);
   const RH_STUB = atY(ER_RH, S.redHookSouth - S.rhStub); // Red Hook's shore turns upright here, in line with Coney Island's
   const NARROWS = [RH_STUB[0] - NARROWS_GAP, RH_STUB[0]]; // Staten Island's east shore, Brooklyn's
-  const [m1, m2, m3] = S.manhattan, [b1, b2] = S.bronxCols, W = 0, [s1, s2] = S.staten;
+  // Staten Island: west and east shores, Stapleton | Tottenville, the tip's foot and where its
+  // south-east shore meets the Narrows
+  const SI_W = S.staten.west, SI_E = NARROWS[0], SI_B = S.staten.border, SI_FOOT = 1032, SI_TIP = SI_W + S.staten.tip;
+  const SI_SE = [SI_E, SI_FOOT - (SI_E - SI_TIP)], TIP_CUT = Math.min(CUT, S.staten.tip / 2), SI_GAP = 15;
+  if (SI_SE[1] < SI_B + FOOT) throw new Error('Staten Island\'s south-east shore reaches the Narrows above Stapleton | Tottenville');
+  const [m1, m2, m3] = S.manhattan, [b1, b2] = S.bronxCols, W = 0;
   const [q1, q2, q3] = S.queensRows, qc = S.queensCol, cb = S.coronaBottom;
   const QN_TURN = meet(HG_QN, SOUND_QN), AW = qc <= QN_TURN[0] ? atX(HG_QN, qc) : atX(SOUND_QN, qc); // Astoria / Whitestone on the shore
   // Manhattan's west coast turns upright to the Bowery's west shore at MN_TURN. New Jersey's
@@ -266,8 +305,8 @@ function draft(S) {
     '451,787': [S.coneyEast, S.redHookSouth], '437,983': [S.coneyEast, SOUTH_SHORE],
     // Jamaica Bay: a 45-degree octagon (its Canarsie and Jamaica sides are in REPLACE)
     '709,848': [680, 853], '793,857': [bv, 853],
-    // Staten Island: an octagon (see REPLACE), level borders
-    '37,816': [36, s1], '261,837': [NARROWS[0], s1], '30,910': [36, s2], '272,932': [NARROWS[0], s2],
+    // Staten Island: Stapleton | Tottenville, level (see REPLACE)
+    '30,910': [SI_W, SI_B], '272,932': [SI_E, SI_B],
   };
   const T = S.stapletonTop, B = S.bayEast;
   const TIP = atX(SOUND_BX, BRONX_EAST);
@@ -292,7 +331,7 @@ function draft(S) {
     'canarsie|water': S.rockaways ? [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975 - LIFT], [BK_COL + 26.5, 1001.5 - LIFT], [BK_COL + 26.5, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]]
       : [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Brooklyn's south shore level, in line with the Rockaways', Coney Island's corner on the Narrows
-    // turned at 45 degrees from where Tottenville's turns, so the Narrows open evenly to the sea
+    // turned at 45 degrees
     'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], SOUTH_SHORE - CUT], [NARROWS[1] + CUT, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'sugar_hill|west_side': [MF[0][0], MF[0][1], [EHX, m1]],
@@ -311,9 +350,12 @@ function draft(S) {
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
     'water|jamaica': S.rockaways ? [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]]
       : [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
-    // Staten Island: an octagon, its four corners cut alike (27, 37, 27 and 49 until 2026-10-07)
-    'water|westerleigh': [[36, s1], [36, T + CUT], [36 + CUT, T], [NARROWS[0] - CUT, T], [NARROWS[0], T + CUT], [NARROWS[0], s1]],
-    'water|tottenville': [[36, s2], [36, 1032 - CUT], [36 + CUT, 1032], [NARROWS[0] - CUT, 1032], [NARROWS[0], 1032 - CUT], [NARROWS[0], s2]],
+    // Staten Island tapers to the south-west, roughly as it does: Stapleton's two north corners cut
+    // like the harbour's; Tottenville's south-east shore runs at 45 degrees from the Narrows to the
+    // tip, whose outer corner is cut too. Until 2026-10-25 the island was an octagon of three
+    // level rows, its four corners cut alike.
+    'water|stapleton': [[SI_W, SI_B], [SI_W, T + CUT], [SI_W + CUT, T], [SI_E - CUT, T], [SI_E, T + CUT], [SI_E, SI_B]],
+    'water|tottenville': [[SI_W, SI_B], [SI_W, SI_FOOT - TIP_CUT], [SI_W + TIP_CUT, SI_FOOT], [SI_TIP, SI_FOOT], SI_SE, [SI_E, SI_B]],
   };
   // Where the labels in the water sit on this map: midway between shores, at their angle.
   const labels = {
@@ -322,10 +364,11 @@ function draft(S) {
       // its far end clear of West Side's piers
       MN: [...atY(shift(MN_WEST, HUDSON / 2), 405).map(r1), -45],
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
-      // Staten Island, Brooklyn and Queens each BORO_GAP under its own south shore (the Bronx's sits
-      // as far off its east shore), centred under it: Staten Island under the island, Brooklyn under
-      // Coney Island and Canarsie, Queens under the Rockaways
-      SI: [(36 + NARROWS[0]) / 2, 1032 + BORO_GAP, 0],
+      // Brooklyn and Queens each BORO_GAP under its own south shore (the Bronx's sits as far off its
+      // east shore), centred under it: Brooklyn under Coney Island and Canarsie, Queens under the Rockaways
+      // Staten Island's lies along its south-east shore, in the Lower Bay, nudged up the shore
+      // towards the Narrows so it clears the tip
+      SI: [r1((SI_TIP + SI_E) / 2 + SI_GAP + 12), r1((SI_FOOT + SI_SE[1]) / 2 + SI_GAP - 12), -45],
       BK: [(NARROWS[1] + CUT + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, SOUTH_SHORE + BORO_GAP, 0],
       QN: [((S.rockaways ? 708 : 856 + B) + 1080 - FRAME_IN) / 2, SOUTH_SHORE + BORO_GAP, 0],
     },
@@ -339,7 +382,7 @@ const DROP = [
   '803,243', '969,205', '1025,313', '951,342', // the Bronx
   '764,355', '813,340', '834,336', '1028,383', '1036,385', '1061,392', '497,570', // Queens
   '375,665', '287,788', '447,786', '367,809', '469,786', '282,808', // Brooklyn
-  '157,820', '263,839', // Staten Island
+  '263,839', // Staten Island
 ];
 
 // ---------------------------------------------------------------- apply

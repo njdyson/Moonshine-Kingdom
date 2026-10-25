@@ -466,6 +466,30 @@ smallest (39), is 46 since the Sound went level.
   Tottenville 44 to 41, the three smallest on the board, until Manhattan widened the same day
   and the whole channel moved up 16 (see Manhattan is one width).
 
+### Staten Island in two (draft, 2026-10-25)
+
+Nick asked to see Staten Island as two Districts, with more water round it and a bottom that
+tapers like the real island. On branch `claude/staten-island-two-districts-kapjn4`; not on `main`.
+
+- **Westerleigh is gone**, merged into Stapleton (`MERGES` in `draft_board.js`, which drops the
+  border and joins the two shores into one chain). The island is **Stapleton** (Dock, Still 12)
+  over **Tottenville** (Dock, Still 2), level at `staten.border` 842. Stapleton is the brewery
+  town on the Narrows; Tottenville is the island's south-west tip. That gives every Still number
+  two Districts but the 7s, which keep four.
+- **Shape**: Stapleton's north corners keep the harbour `CUT`; Tottenville's south-east shore runs
+  at 45 degrees from the Narrows down to the tip (`staten.tip` 62 wide, its outer corner cut).
+- **More water**: the Narrows 32 to 44 (`NARROWS_GAP`), the Kill van Kull 32 to 44
+  (`stapletonTop` 684 to 696), and the west shore 8 further from the frame (`staten.west` 44).
+- **STATEN ISLAND** runs at 45 degrees along the south-east shore in the Lower Bay, as MANHATTAN
+  runs along the Hudson.
+- Room: Stapleton 63 cm², Tottenville 56 (the three were 50, 49 and 49).
+
+Not yet done, if Nick keeps it: Stapleton is no longer a Ward, so the game has four Wards. Still
+to update: the Town Planner, Rulebook, The Almanac, the Jobs that name Staten Island, the
+Still Tokens sheet, the audits' rosters (`overlap_audit.py`, `fairness_audit.py`), the print
+PDF (`--print`), and mk-online (`STARTING_TURF` is untouched, but its board snapshot, piece
+spots and `boardcheck.ts` all need the new geometry).
+
 ## The look
 
 - **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take
