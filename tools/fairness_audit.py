@@ -43,9 +43,8 @@ BOARD = [
     ('Red Hook', BK, {'speakeasy'}, 6, 'start-speak'),
     ('Canarsie', BK, {'dock'}, 4, 'start-dock'),
     ('Brownsville', BK, {'ward'}, 5, 'home'),
-    ('Stapleton', ST, {'ward'}, 8, ''),
-    ('Westerleigh', ST, {'dock'}, 2, ''),
-    ('Tottenville', ST, {'dock'}, 4, ''),
+    ('Stapleton', ST, {'dock'}, 12, ''),
+    ('Tottenville', ST, {'dock'}, 2, ''),
 ]
 
 
@@ -100,8 +99,8 @@ CARDS = [
     ("Hell's Highway",        2, 'Move',      {'any'},                      {BX: 'friendly'}),
     # Astoria, Queens' empty bar, three Plays from Whitestone.
     ('Last One Standing',     2, 'Secure',    {'speakeasy'},                {Q: 'friendly'}),
-    # The five Pressure 5 Stills: every seat's starting bar and Stapleton, so it is
-    # aimed at every seat alike.
+    # The four Pressure 5 Stills: every seat's starting bar (Stapleton's 8 made five until
+    # 2026-10-25), so it is aimed at every seat alike.
     ('The Copper Heist',      2, 'Open Fire', {'press5'},                   {}),
     # The bridge set (2026-10-13). The Queensboro's ends are empty bars: East Harlem beside the
     # Manhattan and Bronx home Wards, Astoria beside three Queens starts and the Bronx's Ward. The Brooklyn

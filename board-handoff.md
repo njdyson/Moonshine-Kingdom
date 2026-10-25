@@ -466,10 +466,10 @@ smallest (39), is 46 since the Sound went level.
   Tottenville 44 to 41, the three smallest on the board, until Manhattan widened the same day
   and the whole channel moved up 16 (see Manhattan is one width).
 
-### Staten Island in two (draft, 2026-10-25)
+### Staten Island in two (2026-10-25)
 
 Nick asked to see Staten Island as two Districts, with more water round it and a bottom that
-tapers like the real island. On branch `claude/staten-island-two-districts-kapjn4`; not on `main`.
+tapers like the real island. Taken the same day, with the rules pages, the audits and mk-online.
 
 - **Westerleigh is gone**, merged into Stapleton (`MERGES` in `draft_board.js`, which drops the
   border and joins the two shores into one chain). The island is **Stapleton** (Dock, Still 12)
@@ -492,11 +492,11 @@ tapers like the real island. On branch `claude/staten-island-two-districts-kapjn
 - Room: the Bowery 63 cm² (56 before), Stapleton 53 and Tottenville 51 (the three were 50, 49
   and 49; Nick found a first draft's Stapleton, at 63, too big).
 
-Not yet done, if Nick keeps it: Stapleton is no longer a Ward, so the game has four Wards. Still
-to update: the Town Planner, Rulebook, The Almanac, the Jobs that name Staten Island, the
-Still Tokens sheet, the audits' rosters (`overlap_audit.py`, `fairness_audit.py`), the print
-PDF (`--print`), and mk-online (`STARTING_TURF` is untouched, but its board snapshot, piece
-spots and `boardcheck.ts` all need the new geometry).
+Stapleton is no longer a Ward, so the game has four Wards, every one a home Ward. The board has 24
+Districts. The south strip under Brooklyn and Queens stays open water: stretching the two south
+would only grow Coney Island, Canarsie and Jamaica, already among the largest, while the two
+smallest, Whitestone and Corona, are held by the Astoria / Flushing border (see Evening out the
+sizes). Nick floated the Federal Crackdown Tracker for that strip; not taken.
 
 ## The look
 
@@ -682,7 +682,9 @@ keeps them on a re-trace.
   *Update 2026-10-06:* Stapleton's Still became an 8 on 2026-09-30 (it was a 6), which made two
   more touching brackets on Staten Island: Stapleton's 8 with Westerleigh's 2 and with
   Tottenville's 4. Red Hook and the Bowery remain the only one on the mainland. The Almanac's
-  lesson 4 names both.
+  lesson 4 names both. *Update 2026-10-25:* Staten Island is two Docks, Tottenville's 2 beside
+  Stapleton's 12, which is no bracket (only a Mash of 1 or 6 lights either), so Red Hook and the
+  Bowery are the only one again. Lesson 4 now warns against taking Staten's pair for one.
 - **The Milk Run** names the Williamsburg Bridge again ("across the Williamsburg Bridge"). It
   had dropped the name only because no component printed it. The Almanac now names the Brooklyn
   Bridge too. Both rely on this board, so they should merge with it.
@@ -747,7 +749,8 @@ keeps them on a re-trace.
   Speakeasies keep the tumbler. The medallion wore a crown until 2026-10-24, when the Crown
   moved to the rivals' home Wards (CLAUDE.md, *The Crown in the Wards*); Nick moved the crown
   to the key's Ward row, in place of "Boss Rises". The map's Ward medallions carry no crown
-  (Staten Island's Stapleton is a Ward and nobody's crown room).
+  (Staten Island's Stapleton was a Ward and nobody's crown room until 2026-10-25, when it became
+  a Dock: the four home Wards are the only Wards).
 - **Flushing is Queens' Ward** (Nick, 2026-10-24), and Corona its Speakeasy, with the 6 and a
   new bar, The Junction (Flushing's was Paradise Alley). The two swapped type, Still and bar so that no two home Wards touch; the
   geometry, graph and Coastal list are unchanged.
