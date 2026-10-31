@@ -692,6 +692,12 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
+- **The Powder Keg** (Nick, 2026-10-31). The four factory Docks (West Side, Jamaica, Stapleton,
+  Tottenville) carry `keg: true` in the roster, and `cluster()` hangs the bomb (mark B of
+  `tools/mock_powder_keg.js`, bare) off the sign's lower edge under the medallion, its spark nudged
+  clear of the rim. No key row or panel (Nick: the rule on the Town Planner's turn structure and in
+  the Rulebook is enough); a panel under the key was drawn and taken out the same day. Proof the bomb at 24 inches: it is black on a dark sign, so its gilt outline does the work.
+
 - **Every connection is the traced map's but Manhattan's three.** `FLIPS` in `draft_board.js`
   changes one (it gives a border to the two Districts at its ends; the traced map is untouched).
   It holds two since 2026-10-07, Manhattan laid like bricks (see that section). Astoria /

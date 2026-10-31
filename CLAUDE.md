@@ -577,17 +577,62 @@ deleted the Hotspot tokens and Titles and fixed the Kickback to the four High So
 The rule that let the Night Mayor **strand** goods (one liquor to a room) stays dead: nothing
 in the game bricks a paid-for asset.
 
+## The Powder Keg: a barrel that goes off
+
+Since 2026-10-31 (Nick; `powder-keg-handoff.md` holds the design, the two mk-online trials and what
+was weighed). One black barrel. **Its one home is the Rulebook's *The Powder Keg*** (on the Shadows
+page, after The Harbormaster); the Brew step, Sunset, Components and the Glossary point to it, the
+Town Planner restates it, and the board carries only the mark (no key row: Nick, the turn
+structure and the Rulebook are enough).
+
+- **Made at the Brew, free and optional.** When a Still marked with the bomb pours for you, you may
+  take the keg from the Supply as well as your barrels. The factories are the four Docks nobody starts
+  on, which are the four Pressure 1 Stills: Jamaica and Tottenville on **2**, West Side and Stapleton
+  on **12**. To make that so, **West Side and East Harlem swapped Stills** (12 and 11) and **Jamaica
+  and Astoria** (2 and 3) the same day (Nick: easier to teach, symmetrical, and two bosses holding the
+  same number race for the one Red that fires it). Every Still number still appears on two Districts,
+  each Borough's Pressure total is unchanged, and the Insurance Job's Pressure 1 or 2 Stills are the
+  same four pairs.
+- **A barrel in every way** (Nick: "minimise complexity"): it Moves, belongs to whoever Controls its
+  District, counts toward Jobs and the Big Bust, and goes back to the Supply wherever barrels do (a
+  Raid's Scatter, a Torch). The one exception: **nobody buys it**, so no Unload, Trade or Peddle. It
+  counts on six Jobs: the four bridge cards, Last One Standing and The Warehouse; the bar 1s and the
+  Trade cards are sales, so it never counts there.
+- **It goes off at Sunset**, after the Welshers and before the Turn Tokens: its District rolls its
+  Muscle Ratio in dice, a Mobster dead per **2+**; each Adjacent District the same on **4+**. Runners
+  first, any mob, the holder's included. Then back to the Supply. No Heat. A Crown before Sunset ends
+  the game, so it never goes off on the last Day.
+
+Nick's calls, so nobody reopens them:
+
+- **More teeth than the first draft** (4+ in its District, the keg in place of a barrel). The first
+  trial found it weak to take and feeble late. 3+ / 5+ came next, then 2+ / 4+ once the factories moved
+  to 2 and 12 and kegs grew rarer (Nick). **One die per Mobster** was rejected, since it kills an
+  escorted Boss and gets round the cap of five.
+- **A lone Boss is fair game.** Muscle Ratio dice never kill a Boss with a Runner beside him; walking
+  him alone is bad play, not a flaw in the keg.
+- **No anti-ping-pong rule.** It would pull the keg away from "it Moves like a barrel". Smart players
+  send it where it can't come back (a rival with no Influence left).
+- **The Harbormaster's keg stays.** Only a Mash of 1 or 6 lights a factory (a Red 1 for the 2s, a Red 6
+  for the 12s), so naming one is the Harbormaster's choice to let the keg out, and the first to Lay Low
+  drafts first. Split the Batch fires a factory whatever the Mash (West Side borders Manhattan's home
+  Ward and starting bar, Jamaica Brooklyn's home Ward): in the bots' games about a third of kegs came
+  that way.
+- The Heat Track's flavour line now calls it "a 5-space fuse" (it said "powder keg"): one name, one thing.
+
+Watch in playtest: how often it comes out (the bots brewed a median of 8 a game, one every 5 Days,
+more than Nick's "once or twice": they named a Mash of 1 or 6 on about half the Days), and a
+Harbormaster holding a factory. Game length showed no measurable change on the swapped board. If kegs
+come too often, Staten Island's pair alone is the fallback (no Split the Batch route to either).
+
 ## Open design threads
 
 `respect-endgame-handoff.md` (2026-10-12, shipped the same day) holds the endgame redesign that
 retired the Nod (see *The crown is a Play*): every option weighed, why the numbers are what they
 are, the art notes for the Bribe cards, and what to watch in playtest.
 
-`powder-keg-handoff.md` (2026-10-31) is a proposal, not implemented: a black barrel brewed at a
-few marked Docks that goes off at Sunset, splashing the Adjacent Districts (it began as "the
-pineapple"). The design is settled (four factories, the board mark, no Heat, a universal rule
-printed on the board); what's left is a print proof, a bot run and the rules pass. Read it before
-resuming; don't put any of it in the player-facing set until Nick asks.
+`powder-keg-handoff.md` (2026-10-31) holds the Powder Keg's design, both trials and every option
+weighed (see *The Powder Keg*, below, for the rule as written).
 
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's

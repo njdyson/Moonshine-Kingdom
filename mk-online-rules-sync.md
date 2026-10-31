@@ -1141,6 +1141,25 @@ mk-online: `playReference.ts`, the District tooltips in `BoardMap.tsx`, `harness
 `harness/MULTI-AGENT-HANDOFF.md`, and `scripts/crowntrace.ts` and `denialdiag.ts`.
 **Not yet:** the board's crown marks and key, and the Blood Oath in mk-online (it has none).
 
+## 46. The Powder Keg (2026-10-31, Nick)
+
+A black barrel brewed free at the four bomb-marked Docks (the Stills on 2 and 12, once West Side and
+East Harlem swapped Stills, and Jamaica and Astoria), a barrel in every way but sale, that goes off at
+Sunset (Muscle Ratio dice, 2+ in its District, 4+ next door, Runners first). The rule as written
+is the Rulebook's *The Powder Keg*; CLAUDE.md's *The Powder Keg* holds Nick's calls.
+
+mk-online went first again, as a trial: `src/game/keg.ts` on its `claude/powder-keg-trial`, behind
+`setPowderKeg(factories, opts)` (play-file: `new keg=main`), whose defaults are the written rule. It
+counts on the bridge cards, Last One Standing and The Warehouse, defuses in the Scatter and a Torch,
+and counts for the Big Bust; the harness lists `+TAKE KEG` drafts and keg Moves with expected losses.
+On the same branch the still swap is mk-online's default (`data.ts`), and `public/board.svg` is the
+2026-10-31 board (the swapped Stills and the bombs; `boardGeometry.ts` regenerated, `boardcheck` passes).
+Since the same evening the keg is **on by default** in the web app, with its UI: the bomb stands on the
+board with the barrels (draggable by whoever Controls it), the draft and Split the Batch offer to take it
+when a factory pours, both Move dialogs can send it, and a recap shows the blast at Sunset. **Not yet:**
+an Advance carrying the keg on (it stays in the fight's District), and the deploy (merge mk-online's
+branch, let CI rebuild `dist/`, then mirror it here as `DEPLOY.md` says).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
