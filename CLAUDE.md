@@ -599,17 +599,21 @@ structure and the Rulebook are enough).
   Raid's Scatter, a Torch). The one exception: **nobody buys it**, so no Unload, Trade or Peddle. It
   counts on six Jobs: the four bridge cards, Last One Standing and The Warehouse; the bar 1s and the
   Trade cards are sales, so it never counts there.
-- **It goes off at Sunset**, after the Welshers and before the Turn Tokens: **its own District takes a
-  Blowback** (its Muscle Ratio in Mobsters, no roll, Runners first; the Boss only with no Runner left),
-  and each Adjacent District rolls its Muscle Ratio in dice, a Mobster dead per **4+**, Runners first.
-  Any mob, the holder's included (Nick, 2026-11-01: one way things blow up, not two; it was 2+ / 4+ dice). Then back to the Supply. No Heat. A Crown before Sunset ends
+- **It goes off at Sunset**, after the Welshers and before the Turn Tokens: **its own District loses its
+  Muscle Ratio in Mobsters**, no roll, Runners first, "the same as a Blowback" (the Boss only with no
+  Runner left), and each Adjacent District rolls its Muscle Ratio in dice, a Mobster dead per **4+**,
+  Runners first. Any mob, the holder's included (Nick, 2026-11-01: one way things blow up, not two; it
+  was 2+ / 4+ dice). **It kills Mobsters and nothing else**: barrels and Safehouses are untouched, and
+  the Rulebook says so (Nick). **Never say it "takes a Blowback"** (Nick): the mechanics match, but a
+  planted bomb is not a boiler's failure, so the Rulebook compares the two ("the same as a Blowback")
+  and keeps the Blowback's name for the morning. Then back to the Supply. No Heat. A Crown before Sunset ends
   the game, so it never goes off on the last Day.
 
 Nick's calls, so nobody reopens them:
 
 - **More teeth than the first draft** (4+ in its District, the keg in place of a barrel). The first
   trial found it weak to take and feeble late. 3+ / 5+ came next, then 2+ / 4+ once the factories moved
-  to 2 and 12 and kegs grew rarer, then a Blowback in its own District (Nick). **One die per Mobster** was rejected, since it kills an
+  to 2 and 12 and kegs grew rarer, then its Muscle Ratio dead in its own District (Nick). **One die per Mobster** was rejected, since it kills an
   escorted Boss and gets round the cap of five.
 - **A lone Boss is fair game.** Muscle Ratio dice never kill a Boss with a Runner beside him; walking
   him alone is bad play, not a flaw in the keg.
