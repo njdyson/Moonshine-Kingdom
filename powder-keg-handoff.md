@@ -1,7 +1,8 @@
 # The Powder Keg: handoff
 
-Status: **written into the rules 2026-10-31** (Nick: a net positive "despite adding complexity"), on
-the `claude/powder-keg-trial` branch for him to read. The rule as written is the Rulebook's *The Powder
+Status: **in the main game since 2026-11-01, on probation** (Nick: "I'm not 100% certain this makes the
+cut ... it may be extra complexity for not enough gain"; CLAUDE.md's *The Powder Keg* lists what comes
+out if it is cut). Written into the rules 2026-10-31 (Nick: a net positive "despite adding complexity"). The rule as written is the Rulebook's *The Powder
 Keg*, and CLAUDE.md's *The Powder Keg* records it and Nick's calls: factories on 2 and 12 (West Side and
 East Harlem swapped Stills, and Jamaica and Astoria), free on top of the brew, its Muscle Ratio dead in its
 District (no roll, the same as a Blowback; since 2026-11-01, on the Rulebook's new Sunset page), 4+ next door, and a barrel in every way but sale. Nick: "the main game; we'll tweak if it becomes a

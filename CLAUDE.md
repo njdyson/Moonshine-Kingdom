@@ -626,6 +626,16 @@ Nick's calls, so nobody reopens them:
   that way.
 - The Heat Track's flavour line now calls it "a 5-space fuse" (it said "powder keg"): one name, one thing.
 
+**On probation** (Nick, 2026-11-01, merging it into the main game): "I'm not 100% certain this makes the
+cut. I like it, and it could be good for the game, but equally it may be extra complexity for not enough
+gain." Treat it as a candidate the playtests have to earn, not a settled rule. If it is cut, it comes out
+cleanly: the Sunset page's Powder Keg and Blast sections and its example and tip (the page's opening
+keeps Sunset's other two steps), the Brew step's line, the Components line, the Glossary entry and the
+Sunset entry's clause, the Heat Track can stay a "fuse"; the Town Planner's Brew line, Sunset clause, tags
+and key row; the board's `keg: true` flags (the bombs); and in mk-online, `setPowderKeg`'s default (set it
+to null) and the UI hides itself. The Still swap (West Side 12 / East Harlem 11, Jamaica 2 / Astoria 3)
+was made for the keg but is neutral without it; whether to keep it then is Nick's call.
+
 Watch in playtest: how often it comes out (the bots brewed a median of 8 a game, one every 5 Days,
 more than Nick's "once or twice": they named a Mash of 1 or 6 on about half the Days), and a
 Harbormaster holding a factory. Game length showed no measurable change on the swapped board. If kegs
