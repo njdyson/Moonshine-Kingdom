@@ -282,12 +282,22 @@ Free doubles the kegs (the bots take one at nearly every pour), and that is what
 probably by 4 or 5 Days at Nick's numbers. In the Opus game (Opus crowned Day 16) the keg was taken 8
 times, all by one bot, and killed 12 in 6 blasts. Two things to settle:
 
-- **Ping-pong.** Two bosses bounced it four times between their Docks, each pass making it the other's,
+- **Ping-pong.** Two bosses (bots) bounced it four times between their Docks, each pass making it the other's,
   until one had the last marker. Opus called it the one thing that felt off and suggested "it can't go
   back to the District it came from that Day" or "each boss Moves it once a Day".
 - **The Harbormaster's keg.** A Harbormaster who holds a factory names the Mash that lights it (Mash 1
   lights Jamaica and Tottenville) and takes a keg most mornings; Split the Batch lights West Side for a
   boss brewing next door at the Tenderloin.
+
+**Nick's calls on both (2026-10-31): no new rule for either.**
+
+- **No anti-ping-pong rule**: it would pull the keg away from "it Moves like a barrel". Smart players will
+  bounce it less, since they know it only comes back: they send it another way, or wait until the rival
+  has no Influence left. The bots' bouncing is bot play.
+- **The Harbormaster's keg stays**: it feeds the Lay Low race. A boss holding a high factory and a low
+  one gets a keg whichever end of the dice the Harbormaster names, and the first to Lay Low drafts first.
+  The Harbormaster's one shut-out is a Mash of 3 or 4, which lights no factory (Split the Batch aside),
+  and the drafter still needs the right Red in the pool.
 
 Also seen: a splash can strip a Boss's last Runner and leave the next Blowback to kill him, and the keg
 plays no part on the closing Day, since the Crown ends the game before Sunset.
