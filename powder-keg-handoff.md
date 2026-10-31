@@ -90,17 +90,40 @@ Dock in each home Borough" hands those two bosses a factory on Day 1, 3 Runners 
 while Manhattan and Queens have to go and take theirs. And every candidate borders a home Ward,
 two of them Brooklyn's (Jamaica and Canarsie both border Brownsville).
 
-The options, for Nick:
+The options weighed:
 
 1. **Accept it**: West Side, Throggs Neck, Jamaica, Canarsie. Two home factories, two to fight
-   for, and Brownsville is the board's most exposed Ward.
-2. **The four Docks nobody starts on**: West Side, Jamaica, Stapleton, Tottenville. Nobody
-   starts with a factory, all four are low-Pressure backwaters that gain a reason to be taken,
-   and Staten Island (nobody's home, two Pressure 1 Stills) gets a job. It breaks "one per
-   Borough": two on Staten Island, none in the Bronx or Brooklyn. **Recommended**, because of the
-   next point.
-3. **Four home Boroughs plus Staten Island**: five factories. More kegs on offer, and the two
-   home factories remain.
+   for, and Brownsville borders two of them.
+2. **The four Docks nobody starts on**: West Side, Jamaica, Stapleton, Tottenville.
+3. **Four home Boroughs plus Staten Island**: five factories, and the two home factories remain.
+4. **Staten Island alone**: Stapleton and Tottenville.
+
+**Nick's call (2026-10-31): option 2, the two spare mainland Docks plus Staten Island's two.**
+Nobody starts with a factory, all four are low-Pressure backwaters that gain a reason to be taken,
+and Staten Island (nobody's home) gets a job. It sets aside "one per Borough": two factories on
+Staten Island, none in the Bronx or Brooklyn.
+
+Option 4 stays the fallback if kegs come too often. Both Staten Island Stills are Pressure 1 and
+light only on a Mash of 1 (Tottenville) or 6 (Stapleton), so kegs would be rare and the Harbormaster
+would all but decide them. And a keg there splashes only the other Staten Island Dock until someone
+sails it out.
+
+### Which Mash lights which factory
+
+All four factories sit on 2, 3, 11 or 12, so only a low or high Mash lights any of them:
+
+| Mash | Factories in reach (Red needed) |
+| --- | --- |
+| 1 | Tottenville (1), Jamaica (2) |
+| 2 | Jamaica (1) |
+| 3 or 4 | none |
+| 5 | West Side (6) |
+| 6 | West Side (5), Stapleton (6) |
+
+So the Harbormaster can shut the factories for a Day with a Mash of 3 or 4, or pick which end of
+the board brews a keg (low lights Queens and Staten Island's south, high lights Manhattan and
+Staten Island's north). Split the Batch is the one way round it: a Boss whose Still fires can
+fire an Adjacent factory whatever its number.
 
 **Location matters less than it looks, because the keg sails.** A Move goes to any Connected
 District, and every Dock is Connected to every other (the Rulebook's Connected entry). A keg
@@ -108,8 +131,8 @@ brewed at a Dock factory can be sent to any Dock on the map in one Move. And **e
 Dock borders its own home Ward** (the Bowery and Five Points, Throggs Neck and Hunts Point,
 Whitestone and Flushing, Canarsie and Brownsville). So any keg can reach a rival's starting
 Dock, three Runners and all, with his headquarters in the splash. Who a factory borders matters
-on the Brew morning; after one Move, any HQ is in range. That is why option 2's lack of a Bronx
-or Brooklyn factory costs little, and why Staten Island's island-only adjacency doesn't strand
+on the Brew morning; after one Move, any HQ is in range. That is why having no Bronx or
+Brooklyn factory costs little, and why Staten Island's island-only adjacency doesn't strand
 its kegs.
 
 ### How often kegs appear: unknown
@@ -143,7 +166,7 @@ Nick, 2026-10-31: use a small explosion symbol or similar, not a keg, so it can'
 with the liquor barrels.
 
 Mockups: `Art/Board/Mockups/powder-keg-marks.jpg`, made by `node tools/mock_powder_keg.js` (it
-pins each candidate mark on the six candidate Docks of the built screen board; it is not part of
+pins each candidate mark on the four factory Docks of the built screen board; it is not part of
 the board build). Four marks, each in a gilt-rimmed disc and bare:
 
 - **A, Starburst**: red-orange burst with a yellow core. Reads best at sign size: bright, and
@@ -195,7 +218,7 @@ and a row in the key ("Powder Keg brewed here" or similar).
 
 ## Open questions for Nick
 
-1. Which factory set (options 1 to 3 above; 2 recommended).
+1. ~~Which factory set~~: settled, option 2 (Nick, 2026-10-31).
 2. The board mark (A recommended) and whether it sits in a disc.
 3. Does the keg count for the Big Bust's "most barrels"?
 4. Should the blast draw Heat, and whose?
@@ -209,7 +232,12 @@ and a row in the key ("Powder Keg brewed here" or similar).
   CLAUDE.md watch list for the Crown). The keg rewards staying up late, which costs tomorrow's
   seat, and punishes Laying Low early with crews next to the keg. Possibly good; watch it.
 - **Kegs per game** (see above).
-- **Brownsville** under option 1: two factories border it.
+- **Neighbours on the Brew morning.** West Side borders Five Points and the Tenderloin
+  (Manhattan's Ward and starting bar), and Jamaica borders Brownsville (Brooklyn's Ward), so
+  Manhattan and Brooklyn live next to a factory and the Bronx and Queens don't. The keg sails, so
+  this matters only until its first Move.
+- **Traffic at Jamaica and West Side.** Each already has a 1 that sends players there (Jamaica
+  Ginger, The Dutchman's Deal); a factory adds a second reason.
 
 ## If adopted: files to touch
 

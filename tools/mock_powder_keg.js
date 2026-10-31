@@ -1,5 +1,5 @@
 // Powder Keg board-mark mockups (powder-keg-handoff.md). Not part of the board build:
-// it takes the built screen board, pins a candidate mark on the chosen Docks' signs, and
+// it takes the built screen board, pins a candidate mark on the factory Docks' signs, and
 // renders a comparison sheet to Art/Board/Mockups/powder-keg-marks.jpg.
 //   node tools/mock_powder_keg.js
 const fs = require('fs'), path = require('path');
@@ -8,8 +8,8 @@ const ROOT = path.join(__dirname, '..');
 const BOARD = fs.readFileSync(path.join(ROOT, 'Art/Board/Board v0.9 (screen).svg'), 'utf8');
 const OUT = path.join(ROOT, 'Art/Board/Mockups/powder-keg-marks.jpg');
 
-// The candidate factory Docks: the weakest Dock Still in each home Borough, and Staten Island's pair.
-const DOCKS = ['WEST SIDE', 'THROGGS NECK', 'JAMAICA', 'CANARSIE', 'STAPLETON', 'TOTTENVILLE'];
+// The factory Docks (Nick, 2026-10-31): the two Docks nobody starts on, and Staten Island's pair.
+const DOCKS = ['WEST SIDE', 'JAMAICA', 'STAPLETON', 'TOTTENVILLE'];
 
 // Where a sign's medallion sits, from its name (build_board.js cluster(): the name starts
 // pad + 2sr + G1 = 26.5 in from the sign's left, centred on the sign's middle).
@@ -84,7 +84,7 @@ function boardWith(markSvg, disc) {
 
   const sheet = `<html><body style="margin:0;background:#1a140f;color:#efe3cd;font:16px 'Barlow Condensed',sans-serif;padding:24px;width:1500px">
     <h1 style="margin:0 0 4px;font-size:30px">Powder Keg: board marks (mockup)</h1>
-    <p style="margin:0 0 18px;color:#c9b48a">Pinned on the six candidate factory Docks. Crops at 2.5x, West Side and Jamaica. Bottom: mark A in a disc on the whole board.</p>
+    <p style="margin:0 0 18px;color:#c9b48a">Pinned on the four factory Docks. Crops at 2.5x, West Side and Jamaica. Bottom: mark A in a disc on the whole board.</p>
     ${shots.map(s => `<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
       <div style="width:220px;font-size:20px">${s.label}</div>
       ${s.row.map(r => `<img src="data:image/png;base64,${r.b64}" style="width:600px;border:1px solid #5a4a30">`).join('')}
