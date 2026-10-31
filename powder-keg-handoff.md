@@ -1,6 +1,6 @@
 # The Powder Keg: handoff
 
-Status: **design settled, not implemented.** Nothing in the player-facing set mentions it.
+Status: **design settled, not in the player-facing set; trialled in mk-online 2026-10-31** (see *First trial*). Nothing in the player-facing set mentions it.
 Written 2026-10-31 from a design conversation with Nick, to resume later. Every question raised
 that day is settled (see *Settled*, below); what's left is a print proof, a bot run, and the
 rules pass when Nick asks for it. Nick's calls are marked as his.
@@ -245,6 +245,26 @@ and a row in the key ("Powder Keg brewed here" or similar).
 - **A bot run** in mk-online: kegs per game, kills per keg, how often it's passed, how often a
   Raid defuses it.
 - **The rules pass**, when Nick asks: see *If adopted: files to touch*.
+
+## First trial (2026-10-31)
+
+Modelled in mk-online behind a switch (branch `claude/powder-keg-trial`; write-up in its
+`harness/POWDER-KEG-TRIAL.md`). 40 paired bot games at 4 players, then one Opus-vs-bots game
+(`keg-opus-1`, Opus crowned Day 20).
+
+- **Frequency**: a keg about every 7 Days (bots took it at 43% of factory pours).
+- **Damage**: about 1.4 dead a blast; 77% of kegs were Moved once or not at all; a Raid defused 5%.
+- **Game length**: median crown Day 37.5 without, 39.5 with; paired, inside the noise.
+- **The lone Boss**: 56 of 308 dead were Bosses (1.4 a game), each one alone. Runners first gives a
+  Boss with no Runner no cover, so the keg is the cheapest crown-denial weapon on the board against a
+  Boss walking to a rival's home Ward. This is the one result that argues with the design above.
+- **Opus's view**: a real hot potato once it is out (the last boss with a spare marker aims it), but
+  weak to take, feeble late when crews are small, and in the Harbormaster's gift (Mash 1 to 2 lights
+  only Jamaica and Tottenville, 5 to 6 only West Side and Stapleton). Opus declined it all four times
+  it was offered; it went off twice in the game for 2 Runners and never touched the endgame.
+
+Open for Nick: protect the Boss (casualties stop at Runners, or the Boss falls only in the keg's own
+District), then decide whether it wants more teeth (Muscle Ratio + 1 dice, or the taker keeps his barrel).
 
 ## Watch in playtest
 
