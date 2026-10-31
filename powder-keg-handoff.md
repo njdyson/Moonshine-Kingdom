@@ -297,7 +297,8 @@ times, all by one bot, and killed 12 in 6 blasts. Two things to settle:
 - **The Harbormaster's keg stays**: it feeds the Lay Low race. A boss holding a high factory and a low
   one gets a keg whichever end of the dice the Harbormaster names, and the first to Lay Low drafts first.
   The Harbormaster's one shut-out is a Mash of 3 or 4, which lights no factory (Split the Batch aside),
-  and the drafter still needs the right Red in the pool.
+  and the drafter still needs the right Red in the pool. Nick: that is a feature, a reason to name
+  something other than 1 or 6.
 
 Also seen: a splash can strip a Boss's last Runner and leave the next Blowback to kill him, and the keg
 plays no part on the closing Day, since the Crown ends the game before Sunset.
