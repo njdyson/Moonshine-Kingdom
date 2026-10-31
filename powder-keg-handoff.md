@@ -263,8 +263,34 @@ Modelled in mk-online behind a switch (branch `claude/powder-keg-trial`; write-u
   only Jamaica and Tottenville, 5 to 6 only West Side and Stapleton). Opus declined it all four times
   it was offered; it went off twice in the game for 2 Runners and never touched the endgame.
 
-Open for Nick: protect the Boss (casualties stop at Runners, or the Boss falls only in the keg's own
-District), then decide whether it wants more teeth (Muscle Ratio + 1 dice, or the taker keeps his barrel).
+**Nick's response (2026-10-31)**: walking a Boss alone is bad play, since the Muscle Ratio never kills a
+Boss with a Runner beside him, so the lone-Boss result is the bots' play, not a flaw in the keg. The keg
+wants more teeth. His intuition: **free and optional on top of the brew** ("still a decision, as it may
+hamper your plans or be hard to get rid of"), **Muscle Ratio dice at 3+ in its District and 5+ next
+door**. One die per Mobster was weighed and not swept: it can kill an escorted Boss and gets round the
+cap of five.
+
+**Second round** (same 40 seeds, then `keg-opus-2`):
+
+| | Off | As above | Free, 3+ / 5+ | Free, 3+ / 4+ |
+| --- | --- | --- | --- | --- |
+| Kegs | | 1 every 7.1 Days | 1 every 3.6 Days | 1 every 3.6 Days |
+| Dead per blast | | 1.4 | 1.55 | 1.9 |
+| Median crown Day | 37.5 | 39.5 | 42 | 43.5 |
+
+Free doubles the kegs (the bots take one at nearly every pour), and that is what stretches the game,
+probably by 4 or 5 Days at Nick's numbers. In the Opus game (Opus crowned Day 16) the keg was taken 8
+times, all by one bot, and killed 12 in 6 blasts. Two things to settle:
+
+- **Ping-pong.** Two bosses bounced it four times between their Docks, each pass making it the other's,
+  until one had the last marker. Opus called it the one thing that felt off and suggested "it can't go
+  back to the District it came from that Day" or "each boss Moves it once a Day".
+- **The Harbormaster's keg.** A Harbormaster who holds a factory names the Mash that lights it (Mash 1
+  lights Jamaica and Tottenville) and takes a keg most mornings; Split the Batch lights West Side for a
+  boss brewing next door at the Tenderloin.
+
+Also seen: a splash can strip a Boss's last Runner and leave the next Blowback to kill him, and the keg
+plays no part on the closing Day, since the Crown ends the game before Sunset.
 
 ## Watch in playtest
 
