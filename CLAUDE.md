@@ -583,6 +583,11 @@ in the game bricks a paid-for asset.
 retired the Nod (see *The crown is a Play*): every option weighed, why the numbers are what they
 are, the art notes for the Bribe cards, and what to watch in playtest.
 
+`powder-keg-handoff.md` (2026-10-31) is a proposal, not implemented: a black barrel brewed at a
+few marked Docks that goes off at Sunset, splashing the Adjacent Districts (it began as "the
+pineapple"). It holds Nick's calls so far, the factory options, the board-mark mockups and the open
+questions. Read it before resuming; don't put any of it in the player-facing set until Nick asks.
+
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
 Ear). It is not implemented and should not be without Nick asking. The universal Sweep and
