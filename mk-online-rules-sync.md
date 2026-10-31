@@ -1154,9 +1154,11 @@ counts on the bridge cards, Last One Standing and The Warehouse, defuses in the 
 and counts for the Big Bust; the harness lists `+TAKE KEG` drafts and keg Moves with expected losses.
 On the same branch the still swap is mk-online's default (`data.ts`), and `public/board.svg` is the
 2026-10-31 board (the swapped Stills and the bombs; `boardGeometry.ts` regenerated, `boardcheck` passes).
-**Not yet:** the keg on by default in the web app, which waits on the UI (no keg piece on the board, no
-tooltip, nothing in `playReference.ts`), and an Advance carrying the keg on (it stays in the fight's
-District).
+Since the same evening the keg is **on by default** in the web app, with its UI: the bomb stands on the
+board with the barrels (draggable by whoever Controls it), the draft and Split the Batch offer to take it
+when a factory pours, both Move dialogs can send it, and a recap shows the blast at Sunset. **Not yet:**
+an Advance carrying the keg on (it stays in the fight's District), and the deploy (merge mk-online's
+branch, let CI rebuild `dist/`, then mirror it here as `DEPLOY.md` says).
 
 ## Checklist
 
