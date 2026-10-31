@@ -582,7 +582,8 @@ in the game bricks a paid-for asset.
 Since 2026-10-31 (Nick; `powder-keg-handoff.md` holds the design, the two mk-online trials and what
 was weighed). One black barrel. **Its one home is the Rulebook's *The Powder Keg*** (on the Shadows
 page, after The Harbormaster); the Brew step, Sunset, Components and the Glossary point to it, the
-Town Planner restates it, and the board carries the mark and a panel.
+Town Planner restates it, and the board carries only the mark (no key row: Nick, the turn
+structure and the Rulebook are enough).
 
 - **Made at the Brew, free and optional.** When a Still marked with the bomb pours for you, you may
   take the keg from the Supply as well as your barrels. The factories are the four Docks nobody starts

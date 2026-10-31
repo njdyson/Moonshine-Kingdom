@@ -929,28 +929,13 @@ function key(x, y) {
   return { fg: s, w, h };
 }
 
-// The Powder Keg is a rule printed on the board (Nick, 2026-10-31), so it has its own small
-// panel under the key: the bomb that marks the factories, and when and how hard it goes off.
-// The rest (who owns it, Runners first, the Big Bust) is the Rulebook's. A fifth row in the
-// key ran into the Hudson, which narrows the corner as it falls.
-const KEG_LINES = ['Free with the brew.', 'Goes off at Sunset:', '3+ here, 5+ next door.'];
-function kegPanel(x, y) {
-  const head = upper('Powder Keg'), lw = Math.max(...KEG_LINES.map(t => width(TYPE.price, t)));
-  const w = Math.max(24 + width(TYPE.keyHead, head) + 9, lw + 22), h = 29 + (KEG_LINES.length - 1) * 12 + 13;
-  let s = panel(x, y, w, h) + bomb(x + 13, y + 13.6, 0.62);
-  s += text(head, x + 24, y + 13, TYPE.keyHead, { fill: C.ink, middle: true });
-  KEG_LINES.forEach((t, i) => { s += text(t, x + 11, y + 29 + i * 12, TYPE.price, { fill: C.body, middle: true }); });
-  if (x + w + 6 > njShore(y + h)) throw new Error('The Powder Keg panel runs into the Hudson');
-  return { fg: s, w, h };
-}
-
-// Under the Heat corner: the Tomorrow panel, the key beside it, the Powder Keg under the key,
-// the title below them.
+// Under the Heat corner: the Tomorrow panel, the key beside it, the title below them. The
+// Powder Keg has no panel (Nick, 2026-10-31): the bomb marks the factories, and its rule lives
+// on the Town Planner's turn structure and in the Rulebook.
 const PANELS_Y = () => HEAT.edge[1] + 12;
 function sidePanels() {
   const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
-  const g = kegPanel(HEAT.tx + t.w + 10, y + k.h + 8);
-  return { bg: heat.bg, fg: heat.fg + t.fg + k.fg + g.fg, top: heat.top };
+  return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
 }
 
 // The seam round the board, between the gilt edge and the hairline. It stops at the Heat
@@ -1238,8 +1223,6 @@ function allText() {
     if (what.words) add(TYPE.price, what.words);
     else if (!what.trade && !what.crown) for (const [, p] of what) add(TYPE.price, p);
   }
-  add(TYPE.keyHead, upper('Powder Keg'));
-  for (const t of KEG_LINES) add(TYPE.price, t);
   add(TYPE.panelHead, 'HEAT');
   add(TYPE.titleCity, 'NEW YORK');
   add(TYPE.titleYear, '1929');
