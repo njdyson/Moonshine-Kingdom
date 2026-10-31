@@ -167,18 +167,22 @@ with the liquor barrels.
 
 Mockups: `Art/Board/Mockups/powder-keg-marks.jpg`, made by `node tools/mock_powder_keg.js` (it
 pins each candidate mark on the four factory Docks of the built screen board; it is not part of
-the board build). Four marks, each in a gilt-rimmed disc and bare:
+the board build). Four marks, each in a gilt-rimmed disc and bare.
 
-- **A, Starburst**: red-orange burst with a yellow core. Reads best at sign size: bright, and
-  unlike anything else on the board. In the disc it matches the sign's medallion. **The
-  recommended starting point.**
-- **B, Bomb and fuse**: the anarchist's round bomb. Reads as a bomb, but it's black on a dark
-  sign and nearly disappears.
+**Nick's pick (2026-10-31): B, the bomb and fuse, bare** (no disc): the round black bomb with a
+gilt outline, a lit fuse and an orange spark, hanging off the sign under the medallion. The
+others, kept for reference:
+
+- **A, Starburst**: red-orange burst with a yellow core. The brightest of the four; I'd
+  recommended it before Nick chose.
+- **B, Bomb and fuse**: the anarchist's round bomb. The one concern is that it's black on a
+  dark sign, so its gilt outline does all the work. Check it on a print proof at 24 inches, and
+  if it sinks, thicken the outline or brighten the spark rather than change the mark.
 - **C, Dynamite**: three red sticks and a lit fuse. Clear in the crops, fussy at print size.
 - **D, Fuse spark**: a four-point flash. Clean, but could read as a sparkle or a star.
 
-The mark currently hangs off the sign's lower edge under the medallion. If adopted, it wants a
-proper home in `tools/build_board.js` (a `keg: true` on the roster entries, drawn in `cluster()`)
+Polish before it goes on the board: in the mockup the fuse's spark touches the medallion's rim,
+so it wants a small nudge clear. If adopted, the mark wants a proper home in `tools/build_board.js` (a `keg: true` on the roster entries, drawn in `cluster()`)
 and a row in the key ("Powder Keg brewed here" or similar).
 
 ## Interactions, checked against the current rules
@@ -219,7 +223,7 @@ and a row in the key ("Powder Keg brewed here" or similar).
 ## Open questions for Nick
 
 1. ~~Which factory set~~: settled, option 2 (Nick, 2026-10-31).
-2. The board mark (A recommended) and whether it sits in a disc.
+2. ~~The board mark~~: settled, B bare (Nick, 2026-10-31). Proof it in print.
 3. Does the keg count for the Big Bust's "most barrels"?
 4. Should the blast draw Heat, and whose?
 5. Friendly fire is in (it hits every mob in range, the keg's owner included). Confirm.
