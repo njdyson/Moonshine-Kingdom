@@ -173,8 +173,8 @@ the board build). Four marks, each in a gilt-rimmed disc and bare.
 gilt outline, a lit fuse and an orange spark, hanging off the sign under the medallion. The
 others, kept for reference:
 
-- **A, Starburst**: red-orange burst with a yellow core. The brightest of the four; I'd
-  recommended it before Nick chose.
+- **A, Starburst**: red-orange burst with a yellow core. The brightest of the four, and
+  the recommendation before Nick chose.
 - **B, Bomb and fuse**: the anarchist's round bomb. The one concern is that it's black on a
   dark sign, so its gilt outline does all the work. Check it on a print proof at 24 inches, and
   if it sinks, thicken the outline or brighten the spark rather than change the mark.
