@@ -1145,7 +1145,8 @@ mk-online: `playReference.ts`, the District tooltips in `BoardMap.tsx`, `harness
 
 A black barrel brewed free at the four bomb-marked Docks (the Stills on 2 and 12, once West Side and
 East Harlem swapped Stills, and Jamaica and Astoria), a barrel in every way but sale, that goes off at
-Sunset (Muscle Ratio dice, 2+ in its District, 4+ next door, Runners first). The rule as written
+Sunset (a Blowback in its District, no roll, since 2026-11-01; Muscle Ratio dice at 4+ next door; Runners
+first). The rule as written
 is the Rulebook's *The Powder Keg*; CLAUDE.md's *The Powder Keg* holds Nick's calls.
 
 mk-online went first again, as a trial: `src/game/keg.ts` on its `claude/powder-keg-trial`, behind

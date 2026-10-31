@@ -580,9 +580,10 @@ in the game bricks a paid-for asset.
 ## The Powder Keg: a barrel that goes off
 
 Since 2026-10-31 (Nick; `powder-keg-handoff.md` holds the design, the two mk-online trials and what
-was weighed). One black barrel. **Its one home is the Rulebook's *The Powder Keg*** (on the Shadows
-page, after The Harbormaster); the Brew step, Sunset, Components and the Glossary point to it, the
-Town Planner restates it, and the board carries only the mark (no key row: Nick, the turn
+was weighed). One black barrel. **Its one home is the Rulebook's *Sunset: Lights Out*** page (since
+2026-11-01, after Mob Signature Plays; it was a section on the Shadows page, and read as a second
+explosion beside the Blowback, Nick); the Brew step's one line, Components and the Glossary point to
+it, the Hustle page ends on a pointer to it, the Town Planner restates it, and the board carries only the mark (no key row: Nick, the turn
 structure and the Rulebook are enough).
 
 - **Made at the Brew, free and optional.** When a Still marked with the bomb pours for you, you may
@@ -598,16 +599,17 @@ structure and the Rulebook are enough).
   Raid's Scatter, a Torch). The one exception: **nobody buys it**, so no Unload, Trade or Peddle. It
   counts on six Jobs: the four bridge cards, Last One Standing and The Warehouse; the bar 1s and the
   Trade cards are sales, so it never counts there.
-- **It goes off at Sunset**, after the Welshers and before the Turn Tokens: its District rolls its
-  Muscle Ratio in dice, a Mobster dead per **2+**; each Adjacent District the same on **4+**. Runners
-  first, any mob, the holder's included. Then back to the Supply. No Heat. A Crown before Sunset ends
+- **It goes off at Sunset**, after the Welshers and before the Turn Tokens: **its own District takes a
+  Blowback** (its Muscle Ratio in Mobsters, no roll, Runners first; the Boss only with no Runner left),
+  and each Adjacent District rolls its Muscle Ratio in dice, a Mobster dead per **4+**, Runners first.
+  Any mob, the holder's included (Nick, 2026-11-01: one way things blow up, not two; it was 2+ / 4+ dice). Then back to the Supply. No Heat. A Crown before Sunset ends
   the game, so it never goes off on the last Day.
 
 Nick's calls, so nobody reopens them:
 
 - **More teeth than the first draft** (4+ in its District, the keg in place of a barrel). The first
   trial found it weak to take and feeble late. 3+ / 5+ came next, then 2+ / 4+ once the factories moved
-  to 2 and 12 and kegs grew rarer (Nick). **One die per Mobster** was rejected, since it kills an
+  to 2 and 12 and kegs grew rarer, then a Blowback in its own District (Nick). **One die per Mobster** was rejected, since it kills an
   escorted Boss and gets round the cap of five.
 - **A lone Boss is fair game.** Muscle Ratio dice never kill a Boss with a Runner beside him; walking
   him alone is bad play, not a flaw in the keg.
