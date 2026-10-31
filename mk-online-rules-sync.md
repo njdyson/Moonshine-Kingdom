@@ -1143,16 +1143,20 @@ mk-online: `playReference.ts`, the District tooltips in `BoardMap.tsx`, `harness
 
 ## 46. The Powder Keg (2026-10-31, Nick)
 
-A black barrel brewed free at the four bomb-marked Docks, a barrel in every way but sale, that goes
-off at Sunset (Muscle Ratio dice, 3+ in its District, 5+ next door, Runners first). The rule as written
+A black barrel brewed free at the four bomb-marked Docks (the Stills on 2 and 12, once West Side and
+East Harlem swapped Stills, and Jamaica and Astoria), a barrel in every way but sale, that goes off at
+Sunset (Muscle Ratio dice, 2+ in its District, 4+ next door, Runners first). The rule as written
 is the Rulebook's *The Powder Keg*; CLAUDE.md's *The Powder Keg* holds Nick's calls.
 
 mk-online went first again, as a trial: `src/game/keg.ts` on its `claude/powder-keg-trial`, behind
 `setPowderKeg(factories, opts)` (play-file: `new keg=main`), whose defaults are the written rule. It
 counts on the bridge cards, Last One Standing and The Warehouse, defuses in the Scatter and a Torch,
 and counts for the Big Bust; the harness lists `+TAKE KEG` drafts and keg Moves with expected losses.
-**Not yet:** on by default, the UI (no keg piece on the board, no tooltip), `playReference.ts`, and an
-Advance carrying the keg on (it stays in the fight's District).
+On the same branch the still swap is mk-online's default (`data.ts`), and `public/board.svg` is the
+2026-10-31 board (the swapped Stills and the bombs; `boardGeometry.ts` regenerated, `boardcheck` passes).
+**Not yet:** the keg on by default in the web app, which waits on the UI (no keg piece on the board, no
+tooltip, nothing in `playReference.ts`), and an Advance carrying the keg on (it stays in the fight's
+District).
 
 ## Checklist
 

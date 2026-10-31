@@ -102,13 +102,15 @@ const fillId = d => `fill-${d.boro}`;
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
 // keg: a Powder Keg factory (Nick, 2026-10-31: the two Docks nobody starts on, and Staten
-// Island's pair), marked with the bomb under the sign's medallion.
+// Island's pair), marked with the bomb under the sign's medallion. The same day West Side and
+// East Harlem swapped Stills (12 and 11), and Jamaica and Astoria (2 and 3), so the four
+// factories are the four Pressure 1 Stills: two on 2, two on 12.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
   { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
-  { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 12, venue: 'The Silver Dollar' },
+  { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 11, venue: 'The Silver Dollar' },
   { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket', setup: 'runners' },
-  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 11, keg: true },
+  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 12, keg: true },
   { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 9, setup: 'runners' },
   { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, setup: 'home' },
   { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', setup: 'squad' },
@@ -117,10 +119,10 @@ const DISTRICTS = [
   { id: 'throggs_neck', name: 'Throggs Neck', boro: 'BX', zone: 'dock', still: 10, setup: 'runners' },
   { id: 'corona', name: 'Corona', boro: 'QN', zone: 'speak', still: 6, venue: 'The Junction', setup: 'runners' },
   { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', setup: 'squad' },
-  { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 2, venue: 'Bohemian Hall' },
+  { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 3, venue: 'Bohemian Hall' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
   { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
-  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3, keg: true },
+  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 2, keg: true },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
   { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint' },

@@ -4,8 +4,8 @@ const d6 = () => 1 + Math.floor(Math.random() * 6);
 const N = 1e6, P = 4;
 const EMPIRE = [
   { name: 'Sugar Hill 7 (HS)', num: 7, mob: 7 }, { name: 'Morris Park 7 (HS)', num: 7, mob: 7 },
-  { name: 'West Side 11 (Dock)', num: 11, mob: 3 }, { name: 'Five Points 10 (Ward)', num: 10, mob: 3 },
-  { name: 'East Harlem 12 (Speak)', num: 12, mob: 3 },
+  { name: 'West Side 12 (Dock)', num: 12, mob: 3 }, { name: 'Five Points 10 (Ward)', num: 10, mob: 3 },
+  { name: 'East Harlem 11 (Speak)', num: 11, mob: 3 },
 ];
 const yieldAt = n => EMPIRE.reduce((b, s) => b + (s.num === n ? ratio(s.mob) : 0), 0);
 const deadAt = n => yieldAt(n); // casualties use the same Muscle Ratio
