@@ -101,12 +101,14 @@ const fillId = d => `fill-${d.boro}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
+// keg: a Powder Keg factory (Nick, 2026-10-31: the two Docks nobody starts on, and Staten
+// Island's pair), marked with the bomb under the sign's medallion.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
   { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
   { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 12, venue: 'The Silver Dollar' },
   { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket', setup: 'runners' },
-  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 11 },
+  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 11, keg: true },
   { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 9, setup: 'runners' },
   { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, setup: 'home' },
   { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', setup: 'squad' },
@@ -118,14 +120,14 @@ const DISTRICTS = [
   { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 2, venue: 'Bohemian Hall' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
   { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
-  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3 },
+  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3, keg: true },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
   { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint' },
   { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar', setup: 'runners' },
   { id: 'canarsie', name: 'Canarsie', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
-  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'dock', still: 12 },
-  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 2 },
+  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'dock', still: 12, keg: true },
+  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 2, keg: true },
 ];
 const OFFBOARD = ['nj']; // New Jersey: land, off the board
 
@@ -253,6 +255,24 @@ function roundel(zone, cx, cy, r) {
     + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
 }
 
+// The Powder Keg's mark (Nick, 2026-10-31: mark B of tools/mock_powder_keg.js, the bomb and
+// fuse, bare): a round black bomb with a gilt outline, a lit fuse and an orange spark, drawn
+// in a 20-unit box about (cx, cy) and scaled by s. Not a keg, so it can't be read as a barrel.
+function bomb(cx, cy, s) {
+  const burst = (n, r1, r2) => Array.from({ length: n * 2 }, (_, i) => {
+    const a = (i * Math.PI) / n, r = i % 2 ? r2 : r1;
+    return `${f(Math.cos(a) * r)},${f(Math.sin(a) * r)}`;
+  }).join(' ');
+  return `<g transform="translate(${f(cx)} ${f(cy)}) scale(${f(s, 3)})">`
+    + `<circle cx="-.4" cy="3.4" r="7.4" fill="#000" fill-opacity=".5" filter="url(#blur2)"/>`
+    + `<circle cx="-1.2" cy="2" r="7" fill="#17110c" stroke="${C.goldBright}" stroke-width="1.1"/>`
+    + `<rect x="1.6" y="-6.6" width="4.2" height="3.4" rx=".6" transform="rotate(40 3.7 -4.9)" fill="#17110c" stroke="${C.goldBright}" stroke-width=".8"/>`
+    + `<path d="M5.4 -6.6 Q 7.6 -9.6 6.2 -11" fill="none" stroke="${C.goldBright}" stroke-width=".9" stroke-linecap="round"/>`
+    + `<polygon points="${burst(6, 3.2, 1.2)}" transform="translate(6.4 -11.4)" fill="#f2a12c" stroke="#c8361d" stroke-width=".5"/>`
+    + `<ellipse cx="-3.6" cy="-.6" rx="1.7" ry="1.1" fill="#fff" fill-opacity=".35" transform="rotate(-35 -3.6 -.6)"/>`
+    + `</g>`;
+}
+
 // ---------------------------------------------------------------- signs
 // A hanging sign: a small plaque with the type's medallion and the name (and venue),
 // hung from the border above it, and the Still on its own plate bolted to the sign's
@@ -312,6 +332,9 @@ function cluster(d, opts = {}) {
         s += `<circle cx="${f(bx)}" cy="${f(by)}" r="1.45" fill="url(#bezelGilt)" stroke="#000" stroke-opacity=".55" stroke-width=".35"/>`
           + `<path d="M${f(bx - 0.8)} ${f(by)} H${f(bx + 0.8)}" stroke="#000" stroke-opacity=".5" stroke-width=".35"/>`;
       s += `<g filter="url(#lift)">${still(d.still, PX + pp, PY + pp, sh)}</g>`;
+      // a Powder Keg factory: the bomb hangs off the sign's lower edge under the medallion,
+      // its spark nudged clear of the medallion's rim (the mockup's touched it)
+      if (d.keg) { const [mx, my] = medal(x, yy); s += bomb(mx + 5, my + 17.5, 0.78); }
       return s;
     },
   };
@@ -906,11 +929,28 @@ function key(x, y) {
   return { fg: s, w, h };
 }
 
-// Under the Heat corner: the Tomorrow panel, the key beside it, the title below them.
+// The Powder Keg is a rule printed on the board (Nick, 2026-10-31), so it has its own small
+// panel under the key: the bomb that marks the factories, and when and how hard it goes off.
+// The rest (who owns it, Runners first, the Big Bust) is the Rulebook's. A fifth row in the
+// key ran into the Hudson, which narrows the corner as it falls.
+const KEG_LINES = ['Free with the brew.', 'Goes off at Sunset:', '3+ here, 5+ next door.'];
+function kegPanel(x, y) {
+  const head = upper('Powder Keg'), lw = Math.max(...KEG_LINES.map(t => width(TYPE.price, t)));
+  const w = Math.max(24 + width(TYPE.keyHead, head) + 9, lw + 22), h = 29 + (KEG_LINES.length - 1) * 12 + 13;
+  let s = panel(x, y, w, h) + bomb(x + 13, y + 13.6, 0.62);
+  s += text(head, x + 24, y + 13, TYPE.keyHead, { fill: C.ink, middle: true });
+  KEG_LINES.forEach((t, i) => { s += text(t, x + 11, y + 29 + i * 12, TYPE.price, { fill: C.body, middle: true }); });
+  if (x + w + 6 > njShore(y + h)) throw new Error('The Powder Keg panel runs into the Hudson');
+  return { fg: s, w, h };
+}
+
+// Under the Heat corner: the Tomorrow panel, the key beside it, the Powder Keg under the key,
+// the title below them.
 const PANELS_Y = () => HEAT.edge[1] + 12;
 function sidePanels() {
   const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
-  return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
+  const g = kegPanel(HEAT.tx + t.w + 10, y + k.h + 8);
+  return { bg: heat.bg, fg: heat.fg + t.fg + k.fg + g.fg, top: heat.top };
 }
 
 // The seam round the board, between the gilt edge and the hairline. It stops at the Heat
@@ -1198,6 +1238,8 @@ function allText() {
     if (what.words) add(TYPE.price, what.words);
     else if (!what.trade && !what.crown) for (const [, p] of what) add(TYPE.price, p);
   }
+  add(TYPE.keyHead, upper('Powder Keg'));
+  for (const t of KEG_LINES) add(TYPE.price, t);
   add(TYPE.panelHead, 'HEAT');
   add(TYPE.titleCity, 'NEW YORK');
   add(TYPE.titleYear, '1929');

@@ -396,6 +396,7 @@ table.lg{width:100%;border-collapse:collapse}
 .tag-home{color:var(--tag-home);border-color:rgba(217,138,106,.55);background:rgba(217,138,106,.10)}
 .tag-run{color:var(--gold-bright);border-color:rgba(232,204,114,.45);background:rgba(232,204,114,.07)}
 .tag-squad{color:var(--tag-squad);border-color:rgba(143,176,216,.55);background:rgba(143,176,216,.10)}
+.tag-keg{color:#f2a12c;border-color:rgba(242,161,44,.55);background:rgba(242,161,44,.10)}
 
 /* ============================================================
    KEY: the board's key, in the roster's foot
@@ -484,7 +485,7 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-label">The Brew</div>
-        <div class="step-body"><span class="sub"><b>Roll the pool:</b> Turn Token #1 rolls the <b>Red</b> dice: one per player, plus one. The Mash die already shows today's Mash.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews at once, before the next boss drafts. Every Still you Control numbered <b>Mash + Red</b> pours Moonshine: one barrel per point of its District's Muscle Ratio.</span><span class="sub"><b>Split the Batch:</b> If the Still in your Boss's District fires, you may also fire one <b>Adjacent</b> Still you Control, whatever its number.</span></div>
+        <div class="step-body"><span class="sub"><b>Roll the pool:</b> Turn Token #1 rolls the <b>Red</b> dice: one per player, plus one. The Mash die already shows today's Mash.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews at once, before the next boss drafts. Every Still you Control numbered <b>Mash + Red</b> pours Moonshine: one barrel per point of its District's Muscle Ratio.</span><span class="sub"><b>Split the Batch:</b> If the Still in your Boss's District fires, you may also fire one <b>Adjacent</b> Still you Control, whatever its number.</span><span class="sub"><b>Powder Keg:</b> a Still with the bomb may pour you the keg too, free.</span></div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
@@ -499,7 +500,7 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="step">
         <span class="step-num">4</span>
         <div class="step-label">The Harbormaster</div>
-        <div class="step-body"><span class="sub"><b>Set tomorrow's Mash:</b> Whoever Controls the most <b>Docks</b> turns the Mash die to any face <span class="nowrap">(1&ndash;6)</span>. A tied lead <b>rolls</b> it instead.</span><span class="sub">It stays on the board all Day, so everyone plays knowing tomorrow's Mash.</span></div>
+        <div class="step-body"><span class="sub"><b>Set tomorrow's Mash:</b> Whoever Controls the most <b>Docks</b> turns the Mash die to any face <span class="nowrap">(1&ndash;6)</span>, where it stays all Day. A tied lead <b>rolls</b> it.</span></div>
       </div>
     </div>
 
@@ -531,7 +532,7 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="plaque-face">
         <div class="final-title"><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg>The Crown &amp; Sunset<svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></div>
         <div class="final-row"><span class="final-label">Take the Crown</span><span class="final-text">On your turn, with <b>20+ Respect</b> and your <b>Boss</b> in a <b>rival's home Ward</b>, make this Power Play and win on the spot.</span></div>
-        <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low, each unmet promise earns its breaker a <b>Welsher</b>, and today's tokens become tomorrow's Turn Order.</span></div>
+        <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low: <b>Welshers</b> for unmet promises, the <b>Powder Keg</b> goes off (<b>3+</b> there, <b>5+</b> next door), and today's tokens set tomorrow's order.</span></div>
       </div>
     </div>
   </div>
@@ -597,7 +598,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">11</span></td>
             <td class="lg-press"><i class="gauge p2"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-keg">Powder Keg</span></td>
           </tr>
           <tr>
             <td class="lg-dist">The Bowery</td>
@@ -689,7 +690,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">3</span></td>
             <td class="lg-press"><i class="gauge p2"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-keg">Powder Keg</span></td>
           </tr>
         </tbody>
 
@@ -739,14 +740,14 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">12</span></td>
             <td class="lg-press"><i class="gauge p1"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-keg">Powder Keg</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Tottenville</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">2</span></td>
             <td class="lg-press"><i class="gauge p1"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-keg">Powder Keg</span></td>
           </tr>
         </tbody>
       </table>
@@ -760,6 +761,9 @@ table.lg{width:100%;border-collapse:collapse}
           <span class="key-item"><span class="tag tag-home">Home Ward</span>Safehouse, Boss &amp; 2 Runners: rivals crown here</span>
           <span class="key-item"><span class="tag tag-run">3 Runners</span></span>
           <span class="key-item"><span class="tag tag-squad">Police Squad</span>padlocked until a Raid moves it</span>
+        </div>
+        <div class="key-setup">
+          <span class="key-item"><span class="tag tag-keg">Powder Keg</span>the bomb on the board: when this Still pours for you, the keg is yours free if you want it</span>
         </div>
       </div>
     </div>

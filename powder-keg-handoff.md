@@ -1,9 +1,11 @@
 # The Powder Keg: handoff
 
-Status: **design settled, not in the player-facing set; trialled in mk-online 2026-10-31** (see *First trial*). Nothing in the player-facing set mentions it.
-Written 2026-10-31 from a design conversation with Nick, to resume later. Every question raised
-that day is settled (see *Settled*, below); what's left is a print proof, a bot run, and the
-rules pass when Nick asks for it. Nick's calls are marked as his.
+Status: **written into the rules 2026-10-31** (Nick: a net positive "despite adding complexity"), on
+the `claude/powder-keg-trial` branch for him to read. The rule as written is the Rulebook's *The Powder
+Keg*, and CLAUDE.md's *The Powder Keg* records it and Nick's calls: free on top of the brew, 3+ in its
+District, 5+ next door, and a barrel in every way but sale. Everything below is the design record and
+both trials, so its earlier numbers (4+, in place of a barrel, "in the box") are history. Still to do: the
+board's print proof, mk-online's board snapshot and rules sync, and an Almanac lesson.
 
 ## Where it came from
 

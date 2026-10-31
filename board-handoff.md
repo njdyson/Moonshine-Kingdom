@@ -692,6 +692,14 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
+- **The Powder Keg** (Nick, 2026-10-31). The four factory Docks (West Side, Jamaica, Stapleton,
+  Tottenville) carry `keg: true` in the roster, and `cluster()` hangs the bomb (mark B of
+  `tools/mock_powder_keg.js`, bare) off the sign's lower edge under the medallion, its spark nudged
+  clear of the rim. The rule is printed in its own small panel under the key (`kegPanel`): a fifth
+  key row made the key taller and ran it into the Hudson, which narrows the corner as it falls. The
+  panel says "Free with the brew. Goes off at Sunset: 3+ here, 5+ next door." and the Rulebook says
+  the rest. Proof the bomb at 24 inches: it is black on a dark sign, so its gilt outline does the work.
+
 - **Every connection is the traced map's but Manhattan's three.** `FLIPS` in `draft_board.js`
   changes one (it gives a border to the two Districts at its ends; the traced map is untouched).
   It holds two since 2026-10-07, Manhattan laid like bricks (see that section). Astoria /
