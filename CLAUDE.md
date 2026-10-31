@@ -585,8 +585,9 @@ are, the art notes for the Bribe cards, and what to watch in playtest.
 
 `powder-keg-handoff.md` (2026-10-31) is a proposal, not implemented: a black barrel brewed at a
 few marked Docks that goes off at Sunset, splashing the Adjacent Districts (it began as "the
-pineapple"). It holds Nick's calls so far, the factory options, the board-mark mockups and the open
-questions. Read it before resuming; don't put any of it in the player-facing set until Nick asks.
+pineapple"). The design is settled (four factories, the board mark, no Heat, a universal rule
+printed on the board); what's left is a print proof, a bot run and the rules pass. Read it before
+resuming; don't put any of it in the player-facing set until Nick asks.
 
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's

@@ -1,8 +1,9 @@
 # The Powder Keg: handoff
 
-Status: **proposal, not implemented.** Nothing in the player-facing set mentions it. Written
-2026-10-31 from a design conversation with Nick, to resume later. Nick's calls are marked as his;
-everything else is a recommendation for him to confirm.
+Status: **design settled, not implemented.** Nothing in the player-facing set mentions it.
+Written 2026-10-31 from a design conversation with Nick, to resume later. Every question raised
+that day is settled (see *Settled*, below); what's left is a print proof, a bot run, and the
+rules pass when Nick asks for it. Nick's calls are marked as his.
 
 ## Where it came from
 
@@ -22,8 +23,10 @@ turn out".
 > to whoever Controls its District, but it can't be Unloaded, Traded or Peddled. At Sunset it
 > goes off: its District rolls its Muscle Ratio in dice and loses a Mobster for each 4+, and
 > each Adjacent District does the same on 5+, Runners first. Then it goes back in the box.
+> For the Big Bust, it counts as a barrel.
 
-One new component: a **black barrel**. No new Play, no card, no tracking.
+One new component: a **black barrel**. No new Play, no card, no tracking. It is a **universal
+rule, printed on the board** (Nick): not a Signature Play, so every family keeps its two.
 
 ### How it plays
 
@@ -188,8 +191,9 @@ and a row in the key ("Powder Keg brewed here" or similar).
 ## Interactions, checked against the current rules
 
 - **Raid**: the Scatter sends the District's barrels to the Supply, so a Raid defuses the keg
-  (back to the box). Whether the keg counts toward the Big Bust's "most barrels" is open;
-  recommended yes, as the obvious thing for the Squads to go after.
+  (back to the box). **The keg counts toward the Big Bust's "most barrels"** (Nick). So a keg
+  planted on a rival makes his District likelier to be the Squad's pick, and the Squad that picks
+  it defuses it: a boss on the Heat Track may find the cops take the keg off his hands.
 - **Torch** burns every barrel in the District, so it defuses the keg too.
 - **Fold**: the Occupier leaves his barrels to the Invader, keg included.
 - **Advance**: the Invader takes as many carried barrels as he likes; the keg is one of them.
@@ -201,8 +205,10 @@ and a row in the key ("Powder Keg brewed here" or similar).
   then Rises as usual on a later Day.
 - **A Crown before Sunset**: the game ends mid-Day and nothing else is settled, so the keg never
   goes off. Consistent with the unpaid promise.
-- **Heat**: the keg is not a Play, so it draws none. Whether the blast should is open; nothing
-  tracks whose it was, so there's no obvious owner for the marker.
+- **Heat: none** (Nick). The keg is not a Play and the blast draws nothing: there's no clean
+  way to say whose it was, and a Heat marker on top of the casualties would punish twice.
+- **Friendly fire** (Nick): the blast hits every Mobster in its path, whatever his mob, the
+  keg's owner and the boss whose factory brewed it included.
 
 ## Rejected on the way, so nobody rebuilds them
 
@@ -220,15 +226,25 @@ and a row in the key ("Powder Keg brewed here" or similar).
   more reason to sit in a crown room, which Nick has been taking away.
 - **Factories at Speakeasies.** The bar already lets its brew be Unloaded on the spot (Nick).
 
-## Open questions for Nick
+## Settled (Nick, 2026-10-31)
 
-1. ~~Which factory set~~: settled, option 2 (Nick, 2026-10-31).
-2. ~~The board mark~~: settled, B bare (Nick, 2026-10-31). Proof it in print.
-3. Does the keg count for the Big Bust's "most barrels"?
-4. Should the blast draw Heat, and whose?
-5. Friendly fire is in (it hits every mob in range, the keg's owner included). Confirm.
-6. Signature Play or universal rule? As written it's universal: the factories and the single
-   black barrel do the limiting, and every family keeps its two Signature Plays.
+1. **Factories**: West Side, Jamaica, Stapleton, Tottenville (option 2).
+2. **Board mark**: B, the bomb and fuse, bare. Proof it in print.
+3. **The Big Bust**: the keg counts as a barrel.
+4. **Heat**: none.
+5. **Friendly fire**: yes, every Mobster in the path, whatever his mob.
+6. **Universal rule, printed on the board.** Not a Signature Play.
+
+## Next steps
+
+- **The board.** The rule goes on the board, so the key needs room for it, and the key is
+  already full of rows. A candidate line to fit: "**Powder Keg** brewed here in place of a
+  barrel. Goes off at Sunset: 4+ here, 5+ next door." The rest (who owns it, no sale, Runners
+  first, the Big Bust) lives in the Rulebook. Measure the key before writing more than that.
+- **A print proof** of the mark at 24 inches (see *The board mark*).
+- **A bot run** in mk-online: kegs per game, kills per keg, how often it's passed, how often a
+  Raid defuses it.
+- **The rules pass**, when Nick asks: see *If adopted: files to touch*.
 
 ## Watch in playtest
 
@@ -245,7 +261,8 @@ and a row in the key ("Powder Keg brewed here" or similar).
 
 ## If adopted: files to touch
 
-Rulebook (a section, Sunset's order, Components, the Glossary, and the Heat Track line), the
-Playbooks (only if it becomes a Signature Play), Town Planner (the roster and the Day's phases),
-the board (`tools/build_board.js`: roster flag, mark, key row), The Almanac (a named lesson, by
+Rulebook (a section, Sunset's order, Components, the Glossary, the Big Bust's barrel count,
+and the Heat Track line), Town Planner (the roster and the Day's phases),
+the board (`tools/build_board.js`: roster flag, mark, and the rule in the key; then mk-online's
+board snapshot, per `mk-online-board-handoff.md`), The Almanac (a named lesson, by
 house style), mk-online (`mk-online-rules-sync.md` gets a section), and CLAUDE.md.
