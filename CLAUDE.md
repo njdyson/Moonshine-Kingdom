@@ -663,9 +663,9 @@ the padding can go back to 8px); the Detonator (sheet 10 of the Cards sheet); th
 key row and Heat-list clause; the board's `keg: true` flags (the bombs). The Still swap is neutral
 without it; whether to keep it then is Nick's call.
 
-**mk-online's port** (the two Plays, the card and its -2) is on its `claude/powder-keg-rule-feedback-46lnh4`
-branch, not yet merged; until it is, and its `dist/` is mirrored here, the live game runs the 2026-10-31
-rule (the keg at the Brew, the Sunset blast). `mk-online-rules-sync.md` §46 has the details.
+**mk-online follows** (the two Plays, the Detonator and its -2): merged in its PR #33 and mirrored
+here from mk-online a8ef6ba on 2026-11-01, so the live game runs this rule. `mk-online-rules-sync.md`
+§46 has the details.
 
 Watch in playtest: how often the keg is made and set off, whether the card gets hoarded, and how often
 Detonate lands on a boss who has Laid Low against one who could still answer.

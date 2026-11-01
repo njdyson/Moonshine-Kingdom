@@ -1161,8 +1161,8 @@ when a factory pours, both Move dialogs can send it, and a recap shows the blast
 an Advance carrying the keg on (it stays in the fight's District), and the deploy (merge mk-online's
 branch, let CI rebuild `dist/`, then mirror it here as `DEPLOY.md` says).
 
-**2026-11-01: the keg became two Plays (Nick); ported on mk-online's `claude/powder-keg-rule-feedback-46lnh4`,
-not yet merged or mirrored.** The rule as written
+**2026-11-01: the keg became two Plays (Nick); ported in mk-online's PR #33,
+merged and mirrored here (mk-online a8ef6ba).** The rule as written
 now (the Rulebook's *The Powder Keg: Light the Fuse*):
 
 - **Powder Keg** (standard Play, 1 Influence): at a bomb-marked District you Control, swap one of your
