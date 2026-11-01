@@ -577,69 +577,81 @@ deleted the Hotspot tokens and Titles and fixed the Kickback to the four High So
 The rule that let the Night Mayor **strand** goods (one liquor to a room) stays dead: nothing
 in the game bricks a paid-for asset.
 
-## The Powder Keg: a barrel that goes off
+## The Powder Keg: a barrel, a card, and two Plays
 
-Since 2026-10-31 (Nick; `powder-keg-handoff.md` holds the design, the two mk-online trials and what
-was weighed). One black barrel. **Its one home is the Rulebook's *Sunset: Lights Out*** page (since
-2026-11-01, after Mob Signature Plays; it was a section on the Shadows page, and read as a second
-explosion beside the Blowback, Nick); the Brew step's one line, Components and the Glossary point to
-it, the Hustle page ends on a pointer to it, the Town Planner restates it, and the board carries only the mark (no key row: Nick, the turn
-structure and the Rulebook are enough).
+Since 2026-10-31 (Nick; `powder-keg-handoff.md` holds the design, the mk-online trials and what was
+weighed). One black barrel and one card, the **Bomb**. **Since 2026-11-01 the keg is a pair of standard
+Plays, not part of the Brew or Sunset** (Nick, after sleeping on it: he liked the boost to the four
+weakest Stills, the hot potato and the "dam busting" of a fortress; he disliked the added rules, two
+kinds of explosion, and the factory's owner sitting on a free keg to sail it to any Dock on his last
+Play). **Its one home is the Rulebook's *The Powder Keg: Light the Fuse*** page, after Mob Signature
+Plays (it replaced the Sunset page, and Sunset went back to a run-in paragraph at the foot of the
+Hustle page). The Hustle's Standard Plays table has a Powder Keg row that points there, and
+Components, Setup, Drawing Heat and the Glossary carry a line each. The Playbooks carry the first
+Play, the Bomb card the second, the Town Planner a key row and Detonate in its Heat list, and the
+board only the mark.
 
-- **Made at the Brew, free and optional.** When a Still marked with the bomb pours for you, you may
-  take the keg from the Supply as well as your barrels. The factories are the four Docks nobody starts
-  on, which are the four Pressure 1 Stills: Jamaica and Tottenville on **2**, West Side and Stapleton
-  on **12**. To make that so, **West Side and East Harlem swapped Stills** (12 and 11) and **Jamaica
-  and Astoria** (2 and 3) the same day (Nick: easier to teach, symmetrical, and two bosses holding the
-  same number race for the one Red that fires it). Every Still number still appears on two Districts,
-  each Borough's Pressure total is unchanged, and the Insurance Job's Pressure 1 or 2 Stills are the
-  same four pairs.
-- **A barrel in every way** (Nick: "minimise complexity"): it Moves, belongs to whoever Controls its
-  District, counts toward Jobs and the Big Bust, and goes back to the Supply wherever barrels do (a
-  Raid's Scatter, a Torch). The one exception: **nobody buys it**, so no Unload, Trade or Peddle. It
-  counts on six Jobs: the four bridge cards, Last One Standing and The Warehouse; the bar 1s and the
-  Trade cards are sales, so it never counts there.
-- **It goes off at Sunset**, after the Welshers and before the Turn Tokens: **its own District loses its
-  Muscle Ratio in Mobsters**, no roll, Runners first, "the same as a Blowback" (the Boss only with no
-  Runner left), and each Adjacent District rolls its Muscle Ratio in dice, a Mobster dead per **4+**,
-  Runners first. Any mob, the holder's included (Nick, 2026-11-01: one way things blow up, not two; it
-  was 2+ / 4+ dice). **It kills Mobsters and nothing else**: barrels and Safehouses are untouched, and
-  the Rulebook says so (Nick). **Never say it "takes a Blowback"** (Nick): the mechanics match, but a
-  planted bomb is not a boiler's failure, so the Rulebook compares the two ("the same as a Blowback")
-  and keeps the Blowback's name for the morning. Then back to the Supply. No Heat. A Crown before Sunset ends
-  the game, so it never goes off on the last Day.
+- **Powder Keg (1)**, a standard Play on every Playbook: at a District marked with the bomb that you
+  Control, swap one of your barrels there for the keg, if it's in the Supply, and take the Bomb card.
+  The factories are the four Docks nobody starts on, which are the four Pressure 1 Stills: Jamaica and
+  Tottenville on **2**, West Side and Stapleton on **12**. To make that so, **West Side and East Harlem
+  swapped Stills** (12 and 11) and **Jamaica and Astoria** (2 and 3) on 2026-10-31 (Nick: easier to
+  teach, symmetrical). Every Still number still appears on two Districts, each Borough's Pressure total
+  is unchanged, and the Insurance Job's Pressure 1 or 2 Stills are the same four pairs.
+- **Detonate (1, Heat)**, printed on the Bomb card: its holder alone, wherever the keg stands, whoever
+  Controls its District. **That District loses its Muscle Ratio in Mobsters**, no roll, Runners first,
+  "the same as a Blowback" (the Boss only with no Runner left). **No splash**: one way things blow up
+  (Nick). It kills Mobsters and nothing else: other barrels and Safehouses are untouched. Then the keg
+  and the card go back to the Supply. **Never say it "takes a Blowback"** (Nick): the mechanics match,
+  but the Rulebook compares the two and keeps the Blowback's name for the morning.
+- **The keg is a barrel in every way** (Nick: "minimise complexity"): it Moves, belongs to whoever
+  Controls its District, counts toward Jobs and the Big Bust, and goes back to the Supply wherever
+  barrels do (a Raid's Scatter, a Torch). The one exception: **nobody buys it**, so no Unload, Trade or
+  Peddle. It counts on six Jobs: the four bridge cards, Last One Standing and The Warehouse.
+- **The card is the fuse.** It stays with the boss who made the keg wherever the keg goes, never
+  changes hands in a deal, and goes back to the Supply whenever the keg does. So the keg is whoever
+  Controls it, the match is the card holder's, and the hot potato is "don't hold the keg while the card
+  holder is still up". Nothing has to be remembered: the card on the table says who lit it.
 
 Nick's calls, so nobody reopens them:
 
-- **More teeth than the first draft** (4+ in its District, the keg in place of a barrel). The first
-  trial found it weak to take and feeble late. 3+ / 5+ came next, then 2+ / 4+ once the factories moved
-  to 2 and 12 and kegs grew rarer, then its Muscle Ratio dead in its own District (Nick). **One die per Mobster** was rejected, since it kills an
-  escorted Boss and gets round the cap of five.
-- **A lone Boss is fair game.** Muscle Ratio dice never kill a Boss with a Runner beside him; walking
-  him alone is bad play, not a flaw in the keg.
-- **No anti-ping-pong rule.** It would pull the keg away from "it Moves like a barrel". Smart players
-  send it where it can't come back (a rival with no Influence left).
-- **The Harbormaster's keg stays.** Only a Mash of 1 or 6 lights a factory (a Red 1 for the 2s, a Red 6
-  for the 12s), so naming one is the Harbormaster's choice to let the keg out, and the first to Lay Low
-  drafts first. Split the Batch fires a factory whatever the Mash (West Side borders Manhattan's home
-  Ward and starting bar, Jamaica Brooklyn's home Ward): in the bots' games about a third of kegs came
-  that way.
-- The Heat Track's flavour line now calls it "a 5-space fuse" (it said "powder keg"): one name, one thing.
+- **A Play, not the Brew.** The free keg at the Brew handed the factory's owner a risk-free weapon and
+  made the Harbormaster's Mash and Split the Batch decide how often kegs came (the bots brewed a median
+  of 8 a game). Making it costs a Play now, so there is no Mash or Split the Batch route.
+- **The last boss up may Detonate with nobody left to answer**: "a skill play" (Nick). It takes two
+  markers after everyone else is down (a Move to deliver, then Detonate) and costs tomorrow's seat.
+  The 2026-10-31 rejection of "the keg as a Play" was about exactly this; Nick accepts it now that the
+  keg costs a Play to make and a Play to set off, and draws Heat.
+- **Open to every mob.** An Irish Signature Play in place of Peddle was weighed the same day (Powder Keg
+  and Detonate as two Irish rows) and set aside: the Irish would lose their one economic Play, the
+  four bomb Docks would matter to one family only, and at three players the Irish are boxed a quarter
+  of the time, leaving dead bombs on the board.
+- **The Bomb card breaks the one-line house rule only as far as one line**: "Detonate · 1
+  Influence" in its label, "The keg's District loses its Muscle Ratio" in its band. The rule stays in
+  the Rulebook. Its art is a placeholder (`Art/Cards/Bomb.svg`, the board's bomb mark) until Nick
+  paints one.
+- **No timer.** A keg can sit on the board for Days. If a boss hoards the card to deny everyone else a
+  keg, the fallback on file is "an unspent keg goes back to the Supply at Sunset"; rivals' answers today
+  are parking the keg on the card holder's own crews, a Raid, or a Torch.
+- **A lone Boss is fair game**, and **no anti-ping-pong rule** (both from 2026-10-31, unchanged).
+- The Heat Track's flavour line calls it "a 5-space fuse" (it said "powder keg"): one name, one thing.
+- **Playbook room** (2026-11-01): the new row cost 43px on every front, paid for by row padding 8px to
+  7px and a word off the Knights' Torch row ("the first shot"), which leaves about 22px spare on the
+  Knights, Vipers and Irish and 15px on the Sicilians.
 
-**On probation** (Nick, 2026-11-01, merging it into the main game): "I'm not 100% certain this makes the
-cut. I like it, and it could be good for the game, but equally it may be extra complexity for not enough
-gain." Treat it as a candidate the playtests have to earn, not a settled rule. If it is cut, it comes out
-cleanly: the Sunset page's Powder Keg and Blast sections and its example and tip (the page's opening
-keeps Sunset's other two steps), the Brew step's line, the Components line, the Glossary entry and the
-Sunset entry's clause, the Heat Track can stay a "fuse"; the Town Planner's Brew line, Sunset clause, tags
-and key row; the board's `keg: true` flags (the bombs); and in mk-online, `setPowderKeg`'s default (set it
-to null) and the UI hides itself. The Still swap (West Side 12 / East Harlem 11, Jamaica 2 / Astoria 3)
-was made for the keg but is neutral without it; whether to keep it then is Nick's call.
+**On probation** (Nick, 2026-11-01): "I'm not 100% certain this makes the cut ... it may be extra
+complexity for not enough gain." Treat it as a candidate the playtests have to earn. If it is cut, it
+comes out cleanly: the Rulebook's Powder Keg page (Sunset needs nothing back), the Standard Plays row,
+the Components and Setup lines, the Drawing Heat bullet and the Glossary entry; the Playbooks' row (and
+the padding can go back to 8px); the Bomb card (sheet 10 of the Cards sheet); the Town Planner's tags,
+key row and Heat-list clause; the board's `keg: true` flags (the bombs). The Still swap is neutral
+without it; whether to keep it then is Nick's call.
 
-Watch in playtest: how often it comes out (the bots brewed a median of 8 a game, one every 5 Days,
-more than Nick's "once or twice": they named a Mash of 1 or 6 on about half the Days), and a
-Harbormaster holding a factory. Game length showed no measurable change on the swapped board. If kegs
-come too often, Staten Island's pair alone is the fallback (no Split the Batch route to either).
+**mk-online still runs the 2026-10-31 rule** (the keg at the Brew, the Sunset blast with its splash)
+until its engine follows: `mk-online-rules-sync.md` §46.
+
+Watch in playtest: how often the keg is made and set off, whether the card gets hoarded, and how often
+Detonate lands on a boss who has Laid Low against one who could still answer.
 
 ## Open design threads
 
@@ -647,8 +659,8 @@ come too often, Staten Island's pair alone is the fallback (no Split the Batch r
 retired the Nod (see *The crown is a Play*): every option weighed, why the numbers are what they
 are, the art notes for the Bribe cards, and what to watch in playtest.
 
-`powder-keg-handoff.md` (2026-10-31) holds the Powder Keg's design, both trials and every option
-weighed (see *The Powder Keg*, below, for the rule as written).
+`powder-keg-handoff.md` (2026-10-31, the Play version 2026-11-01) holds the Powder Keg's design, the
+trials and every option weighed (see *The Powder Keg*, above, for the rule as written).
 
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's

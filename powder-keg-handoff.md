@@ -1,14 +1,14 @@
 # The Powder Keg: handoff
 
-Status: **in the main game since 2026-11-01, on probation** (Nick: "I'm not 100% certain this makes the
-cut ... it may be extra complexity for not enough gain"; CLAUDE.md's *The Powder Keg* lists what comes
-out if it is cut). Written into the rules 2026-10-31 (Nick: a net positive "despite adding complexity"). The rule as written is the Rulebook's *The Powder
-Keg*, and CLAUDE.md's *The Powder Keg* records it and Nick's calls: factories on 2 and 12 (West Side and
-East Harlem swapped Stills, and Jamaica and Astoria), free on top of the brew, its Muscle Ratio dead in its
-District (no roll, the same as a Blowback; since 2026-11-01, on the Rulebook's new Sunset page), 4+ next door, and a barrel in every way but sale. Nick: "the main game; we'll tweak if it becomes a
-problem". Everything below is the design record and the trials (mk-online's `harness/POWDER-KEG-TRIAL.md`
-has the third), so its earlier numbers (4+, 3+ / 5+, in place of a barrel, "in the box") are history. Still to do: the
-board's print proof, mk-online's board snapshot and rules sync, and an Almanac lesson.
+Status: **in the main game since 2026-11-01, on probation, and since the same day a pair of Plays**
+(see *The keg becomes two Plays*, the last section, which supersedes the Brew, the Sunset blast and the
+splash described in the record above it). Nick on probation: "I'm not 100% certain this makes the cut
+... it may be extra complexity for not enough gain"; CLAUDE.md's *The Powder Keg* lists what comes out if
+it is cut and holds Nick's calls. The rule as written is the Rulebook's *The Powder Keg: Light the Fuse*.
+Everything before the last section is the design record and the trials (mk-online's
+`harness/POWDER-KEG-TRIAL.md` has the third), so its numbers and its Brew and Sunset timing are history.
+Still to do: the board's print proof, mk-online's engine (`mk-online-rules-sync.md` §46), Bomb card
+art, and an Almanac lesson.
 
 ## Where it came from
 
@@ -218,7 +218,9 @@ and a row in the key ("Powder Keg brewed here" or similar).
 ## Rejected on the way, so nobody rebuilds them
 
 - **The keg as a Play (arm it on your turn)**. The arming boss could light it after every rival
-  had Laid Low, leaving no answer, and the only cost was the Influence.
+  had Laid Low, leaving no answer, and the only cost was the Influence. *Taken on 2026-11-01 in
+  another shape (see the last section): Nick now calls the unanswered last Play a skill play, since
+  the keg costs a Play to make and a Play to set off, and draws Heat.*
 - **Fuse burns until its maker Lays Low.** Needs the table to remember who lit it, and nothing
   else in the game needs tracking beyond one Play (Nick). A card like the Rat Card was floated to
   carry the name, then made unnecessary.
@@ -328,3 +330,54 @@ and the Heat Track line), Town Planner (the roster and the Day's phases),
 the board (`tools/build_board.js`: roster flag, mark, and the rule in the key; then mk-online's
 board snapshot, per `mk-online-board-handoff.md`), The Almanac (a named lesson, by
 house style), mk-online (`mk-online-rules-sync.md` gets a section), and CLAUDE.md.
+
+## The keg becomes two Plays (2026-11-01)
+
+Nick slept on the Brew-and-Sunset keg. **Kept**: the four weakest Stills get a boost and the board's
+geography improves; the tension of the hot potato; its "dam busting" against a stubborn fortress.
+**Not liked**: the added rules; two kinds of explosion (the keg's dice beside the Blowback); and a keg
+spawned at a Dock, so its maker could sit on it risk-free and sail it to any Dock on his last Play.
+
+The diagnosis that steered it: the hot potato, the dam-buster and the last-move snipe are one mechanism
+(putting the keg where its owner can't answer in time). What grated was that the snipe was free and had
+the whole map in reach. Banning water was weighed and ruled out: the sail is what makes the factories
+fair (without it, Jamaica's keg can only reach Brownsville, since Richmond Hill starts Padlocked, and
+West Side's only Manhattan, so Brooklyn and Manhattan would eat every keg).
+
+Options weighed the same day:
+
+1. **A Power Play that rigs a Still for tomorrow's Blowback**, placed next to a District you Control.
+   One explosion and a siege's reach, but the planter would wait for the target to Lay Low, so the hot
+   potato shrank; set aside for Nick's two-Play idea.
+2. **An Irish Signature Play replacing Peddle** (Nick): Powder Keg (1) swaps a barrel for the keg at a
+   bomb District; Detonate (1) sets it off where it sits, Heat to the Irish. The Irish hold the fuse, and
+   the two Plays give the target a turn to answer unless he has Laid Low. Set aside: the Irish would pair
+   two violent Plays and lose their economic one, the bombs would matter to one family, Playbooks are
+   dealt at random (at three players the Irish are boxed a quarter of the time, leaving dead bombs on the
+   board), and there was a theme risk in an Irish bombing family.
+3. **Taken: the same two Plays, open to every mob, with a Bomb card as the fuse** (Nick). The Playbooks
+   carry Powder Keg; the card carries Detonate, so its holder is the only one who can set it off, and
+   nothing has to be remembered. Peddle stays, every family keeps two Signature Plays, three-player
+   games are unaffected, and the four bomb Docks matter to everyone.
+
+**What it removed**: the Brew line and its free, optional choice; the Harbormaster's keg and the Split the
+Batch keg (so the bots' median of 8 kegs a game no longer applies); the third step at Sunset (Sunset is
+back to a run-in paragraph on the Hustle page); the splash and its 4+ dice; the "no Heat" line.
+**What it added**: one Playbook row on every front, the Bomb card, and one Rulebook page.
+
+**The defaults** taken at implementation, Nick's to revisit: the card carries one line ("Detonate · 1
+Influence" in the label, "The keg's District loses its Muscle Ratio" in the band); no timer, with "an
+unspent keg goes back to the Supply at Sunset" on file as the fix if the card gets hoarded.
+
+**Playbook room**: a one-line row measured 43px on every front, against 21px spare on the Knights, 30 on
+the Sicilians and 37 on the Vipers and Irish (Chromium, 925px print box). Row padding went from 8px to
+7px (15 rows, about 30px back on every front) and the Knights' Torch row dropped "fight's" ("Heat only
+if it's the first shot"), which took it from three lines to two. Result: about 22px spare on the
+Knights, Vipers and Irish, 15px on the Sicilians.
+
+**Rulebook room**: the Hustle page took the Powder Keg row and Sunset's paragraph (a run-in, not an
+`<h4>`, to fit), and the Rulebook stays 24 pages.
+
+Watch in playtest: how often the keg is made and set off; whether the card gets hoarded; how often
+Detonate lands on a boss who has Laid Low against one who could still answer; and whether three Plays
+(make, deliver, Detonate) for up to five dead with no return fire is too cheap against a fortress.

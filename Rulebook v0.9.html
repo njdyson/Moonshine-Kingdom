@@ -98,7 +98,7 @@
                     <li class="sub-item"><a href="#hustle"><span class="toc-text">Phase 2: The Hustle</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
                     <li class="sub-item"><a href="#power-plays"><span class="toc-text">Power Plays</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
                     <li class="sub-item"><a href="#mob-plays"><span class="toc-text">Mob Signature Plays</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
-                    <li class="sub-item"><a href="#sunset"><span class="toc-text">Sunset: Lights Out</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
+                    <li class="sub-item"><a href="#powder-keg"><span class="toc-text">The Powder Keg</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
                 </ul>
             </li>
 
@@ -201,6 +201,7 @@
             <li><strong>Shylock's Marks (7):</strong> Debt, in writing. A lifeline with teeth.</li>
             <li><strong>Welsher Cards (8):</strong> A broken word, kept on file. Nobody deals for one; you earn it the hard way.</li>
             <li><strong>The Rat Card (1):</strong> The ultimate sin in cardboard form.</li>
+            <li><strong>The Bomb Card (1):</strong> The Powder Keg's fuse, in your hand.</li>
         </ul>
 
         <p><strong>Turn Tokens (8):</strong> Two sets numbered 1&ndash;4. One set runs today; the other decides tomorrow.</p>
@@ -526,7 +527,7 @@
             <li>
                 <strong>Stack the Job Deck:</strong><br>
                 Set the eight <b>3-Respect Jobs</b> aside. Shuffle the rest and deal <b>Player Count + 1</b> face-down beside the board: the <b>Jobs Market</b>, dark until Day 1's <b>Grease the Wheels</b> turns it face-up. Now shuffle the <b>3</b>s back in and set the deck face-down alongside the row. <em>The street wants a look at you first, and nobody hands a stranger the big work.</em><br><br>
-                Above the Market, lay out the <b>Bribe cards</b> in four face-up piles, one for each man. Everything else, the <b>Shylock's Marks</b>, <b>Welsher cards</b> and the <b>Rat Card</b>, waits in the Supply until it's earned.</li>
+                Above the Market, lay out the <b>Bribe cards</b> in four face-up piles, one for each man. Everything else, the <b>Shylock's Marks</b>, <b>Welsher cards</b>, the <b>Rat Card</b> and the <b>Bomb card</b>, waits in the Supply until it's earned.</li>
             <li>
                 <strong>Get Your Cut:</strong><br>
                 A rising kingpin's bankroll, in cold, dirty bills. You're gonna need it. Take <b>$1,500</b> cash, and put <b>6</b> of your 10 <b>Influence markers</b> in your <b>Reserves</b>. The other 4 wait in your supply until you <b>Bribe</b> for them. Day 1's Shadows funds your Ledger like any other morning.
@@ -553,7 +554,6 @@
             <li><strong>Read the Public Mash:</strong> The grey <b>Mash die</b> is the cheap molasses swill off the docks that every crew is cooking today. It stays put all morning and feeds every number below.</li>
             <li><strong>Draft and Brew, one boss at a time:</strong> In <b>Turn Order</b>, each boss takes <b>exactly 1 Red die</b> and <b>brews at once</b>, before the next boss drafts. Your <b>Brew Number</b> is <b>Mash + your Red</b>. Every <b>active Still you Control</b> with that number pours <b>Moonshine</b> into its District: one barrel per point of that District's <em>Muscle Ratio</em>. Rival Stills with the same number stay cold; your brew is yours alone. Take your barrels from the Supply as you brew; if it runs dry, the rest is <b>lost</b>. When several of your Stills fire at once, <b>you choose which to stock first</b>. <em>The bank pays the early riser. The man who sleeps in gets the dregs.</em></li>
             <li><strong>Split the Batch:</strong> If the Still in your <b>Boss's</b> District fires, you may also fire <b>one other active Still you Control</b> in an <b>Adjacent</b> District, whatever its number, pouring by <b>its own</b> District's Muscle Ratio. <em>Half the mash goes over the wall, and a cold boiler earns its keep.</em></li>
-            <li><strong>The Powder Keg:</strong> When a Still marked with the <b>bomb</b> pours for you, you may take the <b>Powder Keg</b> from the Supply as well, if it's there (see <em>Sunset</em>).</li>
         </ol>
 
         <h4>2. The Blowback</h4>
@@ -697,6 +697,10 @@
                 </td>
             </tr>
             <tr>
+                <td><strong>Powder Keg</strong></td>
+                <td>At a District marked with the <b>bomb</b> that you Control, swap one of your barrels for the <b>Powder Keg</b> and take the <b>Bomb card</b> (see <em>The Powder Keg</em>).</td>
+            </tr>
+            <tr>
                 <td><strong>Beg</strong></td>
                 <td>
                     <em>When the walls close in, go see Shylock.</em> One deal per visit:<br>
@@ -720,7 +724,7 @@
                 </td>
             </tr>
         </table>
-        <p class="sunset-pointer">When the final player Lays Low, it is <b>Sunset</b> (see <em>Sunset: Lights Out</em>).</p>
+        <p id="sunset"><strong>Sunset:</strong> The streetlamps come on, and the city counts what it's owed. <b>Sunset</b> is the instant the final player Lays Low, uncovering <b>SUNSET</b> under the last token. Any promise still unmet earns its breaker a <b>Welsher</b> (see <em>Cooperation</em>), and the Turn Tokens claimed today become tomorrow's Turn Order.</p>
     </div>
 
     <div class="container one-column dense-page">
@@ -845,36 +849,40 @@
         </table>
     </div>
 
-    <div class="container one-column sunset-page">
-        <h3 id="sunset">Sunset: Lights Out</h3>
+    <div class="container one-column keg-page">
+        <h3 id="powder-keg">The Powder Keg: Light the Fuse</h3>
         <div class="cover">
-            <img class="cover-sm" src="Art/Rulebook/opt/Blockade.webp" alt="Sunset" width="100%" loading="lazy">
+            <img class="cover-sm" src="Art/Rulebook/opt/Blockade.webp" alt="The Powder Keg" width="100%" loading="lazy">
         </div>
-        <p>The streetlamps come on, and the city counts what it's owed. <b>Sunset</b> is a moment, not a phase: the instant the final player Lays Low, taking the last token and uncovering <b>SUNSET</b> beneath it. Three things happen, in this order:</p>
-        <ol class="sub-section">
-            <li><strong>The books open:</strong> any promise still unmet earns its breaker a <b>Welsher</b> (see <em>Cooperation</em>).</li>
-            <li><strong>The Powder Keg goes off</strong>, if it's on the board (below).</li>
-            <li><strong>Tomorrow's order:</strong> the Turn Tokens claimed today become tomorrow's Turn Order, and the next Day's <b>Shadows</b> begins.</li>
-        </ol>
+        <p>One black barrel, and one card that says who holds the match. The keg is made at the four Docks marked with the <b>bomb</b>, the Stills on <b>2</b> and <b>12</b>: Jamaica and Tottenville, West Side and Stapleton. Two Plays work it, and any boss can make them.</p>
+        <table class="action-table">
+            <tr>
+                <th colspan="2">The Powder Keg (Cost: 1 Influence each)</th>
+            </tr>
+            <tr>
+                <td><strong>Powder Keg</strong></td>
+                <td>At a District marked with the bomb that you Control, swap one of your barrels there for the keg, if it's in the Supply: the barrel goes to the Supply, the keg takes its place. Take the <b>Bomb card</b>.</td>
+            </tr>
+            <tr>
+                <td><strong>Detonate</strong> <img src="Art/Icons/fire.svg" class="icon" alt="Heat"></td>
+                <td><b>The Bomb card's holder only.</b> The keg goes off <b>wherever it stands</b>, whoever Controls its District: that District loses its <em>Muscle Ratio</em> in Mobsters, no roll, <b>Runners first</b>, the same as a Blowback. The Boss falls only if no Runner is left beside him. Then the keg and the card go back to the Supply.</td>
+            </tr>
+        </table>
 
-        <h4 id="powder-keg">The Powder Keg</h4>
-        <p>One black barrel, brewed at the four Docks marked with the bomb, the Stills on <b>2</b> and <b>12</b>: Jamaica and Tottenville, West Side and Stapleton. When one pours for you at the Brew, you may take the keg from the Supply as well as your barrels. It costs nothing, and nobody has to.</p>
-        <p>It is a <b>barrel in every way</b>: it Moves like one, alone or with Mobsters, belongs to whoever Controls its District, counts toward Jobs and the Big Bust, and goes back to the Supply wherever barrels do. But nobody buys it: it can't be <b>Unloaded</b>, <b>Traded</b> or <b>Peddled</b>.</p>
-
-        <h4>The Blast</h4>
+        <h4>The Keg and the Fuse</h4>
         <ul class="sub-section">
-            <li><strong>Its own District</strong> loses its <em>Muscle Ratio</em> in Mobsters, no roll, Runners first, the same as a Blowback: the Boss falls only if no Runner is left beside him.</li>
-            <li><strong>Each Adjacent District</strong> rolls its Muscle Ratio in dice and loses a Mobster for each <b>4+</b>, Runners first.</li>
+            <li><strong>The keg is a barrel in every way:</strong> it Moves like one, alone or with Mobsters, belongs to whoever Controls its District, counts toward Jobs and the Big Bust, and goes back to the Supply wherever barrels do. But nobody buys it: it can't be <b>Unloaded</b>, <b>Traded</b> or <b>Peddled</b>.</li>
+            <li><strong>The card stays with you</strong> wherever the keg goes, and it never changes hands in a deal. When the keg goes back to the Supply, by Detonate, a Raid or a Torch, the card goes with it, and the next Powder Keg Play takes both.</li>
+            <li><strong>The blast</strong> hits every crew in the keg's District, the card holder's included. It kills Mobsters and nothing else: the other barrels and any Safehouse are untouched.</li>
         </ul>
-        <p>It hits every crew in its path, its holder's included, and draws no Heat. It kills Mobsters and nothing else: <b>barrels and Safehouses are untouched</b>. Then it goes back to the Supply. A Crown taken before Sunset ends the game, so the keg never goes off.</p>
 
         <div class="reference-section">
             <h4>Example: The Last Marker</h4>
-            <p>The Knights took the keg at Jamaica this morning. Late in the Hustle the Sicilians have spent their last marker, so the Knights send the keg alone across the water to the <b>Bowery</b>, where 4 Sicilian Runners stand. It is the Sicilians' now, and they can't send it back.</p>
-            <p>At Sunset it goes off. The Bowery's Muscle Ratio is 2, so <b>2 Runners</b> fall, no roll. Next door, <b>Five Points</b> (the Sicilian Boss and 2 Runners) rolls 2 dice, a 5 and a 2: <b>1 Runner</b> falls, and the Boss still has a Runner beside him. <b>The Tenderloin</b> (3 Sicilian Runners) rolls a 3 and a 1: nobody. <b>Red Hook</b>, across the Brooklyn Bridge (1 Irish Runner), rolls a 4: the Runner falls, and Red Hook is nobody's.</p>
+            <p>The Knights made the keg at Jamaica earlier in the Day and hold the Bomb card. Late in the Hustle the Sicilians Lay Low with 4 Runners on the <b>Bowery</b>, and the Knights are the last boss up. They send the keg alone across the water to the Bowery: it is the Sicilians' barrel now, but the Knights still hold the fuse.</p>
+            <p>Their next turn, they <b>Detonate</b>. The Bowery's Muscle Ratio is 2, so <b>2 Runners</b> fall, no roll. The Knights take the Heat marker, and the keg and the Bomb card go back to the Supply.</p>
         </div>
 
-        <p class="note"><strong>Kingpin's Tip:</strong> The last boss with a marker decides where the keg goes off. Hold one back and every Dock on the board is in range.</p>
+        <p class="note"><strong>Kingpin's Tip:</strong> While the card's holder is still up, don't be the one holding his keg. Move it on: to a District nobody holds, or onto his own doorstep, where he won't light it.</p>
     </div>
 
     <div class="container">
@@ -1278,6 +1286,7 @@
             <li><strong>First Shot Draws Heat:</strong> A firefight adds <b>1 marker</b> <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, and it belongs to <b>whoever fired first</b>: the Occupier if they <b>Ambush</b>, otherwise the Invader on his first <b>Open Fire</b>, <b>Hit</b>, <b>Tommy Gun</b> or <b>Torch</b>. One marker, however many volleys.</li>
             <li><strong>Shakedowns Get Loud:</strong> <b>Extorting</b> <b>5+ Districts</b> draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, one marker however many pay.</li>
             <li><strong>The Greed Tax:</strong> <b>Unloading</b> <b>5+ barrels</b> in a single Play draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, <b>wherever you sell</b>.</li>
+            <li><strong>The Bang:</strong> <b>Detonating</b> the Powder Keg draws Heat <img src="Art/Icons/fire.svg" class="icon" alt="Heat">.</li>
         </ul>
 
         <h3 id="police-raids">Police Raids: The Boiling Point</h3>
@@ -1373,7 +1382,7 @@
             <li><strong>Padlocked:</strong> Held by a Police Squad: nobody Moves or fights their way in, and its Speakeasy and Still are shut: no sales, no brew, no Blowback. (<em>Territory</em>)</li>
             <li><strong>Pinned:</strong> An Invader who must Open Fire, Advance or Fall Back until the fight resolves. No Play is made anywhere meanwhile. (<em>Combat</em>)</li>
             <li><strong>Play:</strong> Your turn's one action. Standard Plays cost 1 Influence, Power Plays 2, Lay Low nothing. (<em>The Hustle</em>)</li>
-            <li><strong>Powder Keg:</strong> The black barrel, free to take when a Still marked with the bomb pours for you. It never sells, and at Sunset it goes off: its District loses its Muscle Ratio in Mobsters, the same as a Blowback, and each District next door rolls at 4+. (<em>Sunset</em>)</li>
+            <li><strong>Powder Keg:</strong> The black barrel, made at a District marked with the bomb by the Powder Keg Play, which takes the Bomb card with it. It never sells. The card's holder may Detonate it wherever it stands: its District loses its Muscle Ratio in Mobsters, the same as a Blowback. (<em>The Powder Keg</em>)</li>
             <li><strong>Pressure:</strong> How hot a Still runs, shown on its gauge: 6 on the 7, down to 1 on the 2 and the 12. (<em>The Map</em>)</li>
             <li><strong>Raid:</strong> Set off by the 5th Heat marker or a Rat. Every Police Squad moves, one at a time, after the freshest noise in its reach. (<em>Heat</em>)</li>
             <li><strong>Respect:</strong> Your completed Jobs and Bribe cards, less 3 for the Rat Card, 2 per Mark you hold and 1 per Welsher. (<em>Winning the Game</em>)</li>
@@ -1382,7 +1391,7 @@
             <li><strong>Seize:</strong> Take Control of a District from a rival, by a won fight or his Fold. Control must change hands. (<em>Jobs</em>)</li>
             <li><strong>Stake:</strong> Influence locked on a Job from your Reserves until it resolves: as many markers as the Job pays Respect. (<em>Jobs</em>)</li>
             <li><strong>Standoff:</strong> The Occupier's answer when rival Mobsters Move into his District: Ambush, Hold Fire or Fold. A Stealth gets none. (<em>Combat</em>)</li>
-            <li><strong>Sunset:</strong> The instant the final player Lays Low. Unmet promises take their Welsher, then the Powder Keg goes off. (<em>Sunset</em>)</li>
+            <li><strong>Sunset:</strong> The instant the final player Lays Low. Unmet promises take their Welsher, then the Turn Tokens set tomorrow's order. (<em>The Hustle</em>)</li>
             <li><strong>Supply:</strong> <b>The Supply</b> is the shared stock of barrels and cards. <b>Your supply</b> is your own pieces off the board, the Influence you have yet to Bribe for among them. (<em>Components</em>)</li>
             <li><strong>Take over:</strong> Move your own Safehouse into a rival's place, free, when you take Control of his District. (<em>A Rival Safehouse</em>)</li>
             <li><strong>Threat:</strong> What a die must roll to kill: 5+ at Level 1, down to 2+ at Level 4. (<em>Combat</em>)</li>

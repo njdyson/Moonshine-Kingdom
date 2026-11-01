@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="css/card-back.css">
 <style>
 /* ============================================================
-   Cards v0.9: the 36 cards that are not Jobs:
-     16 Bribes · 4 Boroughs · 1 Rat · 7 Shylock's Marks · 8 Welshers
+   Cards v0.9: the 37 cards that are not Jobs:
+     16 Bribes · 4 Boroughs · 1 Rat · 7 Shylock's Marks · 8 Welshers · 1 Bomb
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8) and stays cut: it paid a
@@ -218,8 +218,9 @@ body{
 }
 /* Since 2026-10-13 every card prints one short line here and no rule
    text: "+1 Influence", "Square Up: $2,000", "No Rat till a rival
-   Rats", "Forever", or a Borough's home Ward. The Respect is
-   on the shield and the rules live in the Playbooks and the Rulebook.
+   Rats", "Forever", or a Borough's home Ward. The Bomb (2026-11-01)
+   is the one card that carries a Play, Detonate, still as one line.
+   The Respect is on the shield and the rules live in the Playbooks and the Rulebook.
    The text stays wrapped in a single <span> (see the Jobs deck's
    note), so the band can flex it to the centre. */
 .rules{
@@ -260,6 +261,14 @@ body{
 .card--borough .rules{flex:0 0 16mm}
 .card--debt .art{flex:0 0 38mm}
 .card--debt .rules{flex:0 0 16mm}
+/* the Bomb (2026-11-01): the debts geometry. It carries the one Play printed on a
+   card, Detonate, and the house rule of one short line makes room for it only as
+   a line: the Play's name and cost go in the label, what it does in the band, so
+   the band's type steps down to fit. The full rule is the Rulebook's Powder Keg. */
+.card--bomb .art{flex:0 0 38mm}
+.card--bomb .rules{flex:0 0 16mm}
+.card--bomb .rules > span{font-size:10pt;line-height:1.15}
+.rules-label .icon{height:1.25em;vertical-align:-.25em;margin-left:.6mm}
 
 /* --- respect badge. Bribes carry their Respect like a Job; the Rat,
    Marks and Welshers carry their negative values. The Borough cards
@@ -444,7 +453,7 @@ body.trim .card,body.trim .back{border-radius:0}
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
   <div class="masthead-title">Bribes, Boroughs, Debts &amp; Dishonor</div>
-  <div class="masthead-sub">v0.9 &middot; 36 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
+  <div class="masthead-sub">v0.9 &middot; 37 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers &middot; 1 Bomb</div>
   <p class="masthead-note">
     The Jobs deck pays you Respect for what you <b>do</b>. These cards pay it for who you <b>own</b>
     and charge it for who owns <b>you</b>, and the Borough card names your home Ward, the heart of
@@ -458,7 +467,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
-  <span class="meta">two prices &middot; the brand costs 3 Respect, the debt 2 until it's paid &middot; sheet 1 of 9</span>
+  <span class="meta">two prices &middot; the brand costs 3 Respect, the debt 2 until it's paid &middot; sheet 1 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -512,7 +521,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
-  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 2 of 9</span>
+  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 2 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -572,7 +581,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 3 of 9</span>
+  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 3 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -622,7 +631,7 @@ body.trim .card,body.trim .back{border-radius:0}
 
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 4 of 9</span>
+  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 4 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -681,7 +690,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE BOROUGHS</span>
-  <span class="meta">one dealt to each boss &middot; your home Ward, where your rivals crown &middot; sheet 5 of 9</span>
+  <span class="meta">one dealt to each boss &middot; your home Ward, where your rivals crown &middot; sheet 5 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -738,7 +747,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 6 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 6 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -787,7 +796,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 7 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 7 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -836,7 +845,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 8 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 8 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -885,7 +894,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 9 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 9 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -931,6 +940,34 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+
+<!-- =============================================================
+     SHEET 10: the Bomb (2026-11-01; powder-keg-handoff.md). One
+     card: the Powder Keg Play takes it with the keg, and its holder
+     alone may Detonate. It goes back to the Supply with the keg. The
+     art is a placeholder (Art/Cards/Bomb.svg, the board's bomb mark)
+     until Nick paints one. A part-filled sheet: the card sits top-left,
+     so its back sits top-RIGHT, behind a blank.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE BOMB</span>
+  <span class="meta">one card, one keg &middot; whoever holds it holds the fuse &middot; sheet 10 of 10</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--bomb">
+    <div class="tier"><span class="kicker">The Fuse</span></div>
+    <h2 class="title">The Bomb</h2>
+    <div class="art"><img src="Art/Cards/Bomb.svg" alt=""></div>
+    <div class="rules-label">Detonate &middot; 1 Influence<img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
+    <div class="rules"><span>The keg&rsquo;s District loses its Muscle Ratio</span></div>
+    <div class="flavour">You hold the match. The keg is anybody&rsquo;s.</div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back-blank"></div>
+  <div class="back"><div class="back-title">The Bomb</div><div class="back-sub">The Fuse</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 </body>
