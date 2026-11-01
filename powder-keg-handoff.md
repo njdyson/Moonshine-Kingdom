@@ -7,8 +7,8 @@ splash described in the record above it). Nick on probation: "I'm not 100% certa
 it is cut and holds Nick's calls. The rule as written is the Rulebook's *The Powder Keg: Light the Fuse*.
 Everything before the last section is the design record and the trials (mk-online's
 `harness/POWDER-KEG-TRIAL.md` has the third), so its numbers and its Brew and Sunset timing are history.
-Still to do: the board's print proof, mk-online's engine (`mk-online-rules-sync.md` §46), Bomb card
-art, and an Almanac lesson.
+Still to do: the board's print proof, mk-online's engine (`mk-online-rules-sync.md` §46) and an Almanac lesson. (The card was "the Bomb" until its rename the same evening; the record
+below keeps the old name where it was written.)
 
 ## Where it came from
 
@@ -381,3 +381,47 @@ Knights, Vipers and Irish, 15px on the Sicilians.
 Watch in playtest: how often the keg is made and set off; whether the card gets hoarded; how often
 Detonate lands on a boss who has Laid Low against one who could still answer; and whether three Plays
 (make, deliver, Detonate) for up to five dead with no return fire is too cheap against a fortress.
+
+## The Bomb card costs 2 Respect (2026-11-01, the same evening)
+
+Nick: holding the card is worth **-2 Respect**, so the leader can't hold it as a defence at the endgame.
+With one keg in the game, the card holder denies every rival the keg; a leader who makes it and sits on
+it keeps the dam-buster away from his own crown Ward. At -2 he needs 22 to crown while he holds it, or
+spends a Detonate (1 marker and a Heat, anywhere, even in an empty District) to shed it first.
+
+It doubles as the keg's timer with no rule of its own, so "an unspent keg goes back to the Supply at
+Sunset" is retired as the hoarding fallback. Two points cost a leader more than a trailing boss, so the
+keg leans toward catch-up, which bears on three-player kingmaking. Sized beside the Mark (-2) and under
+the Rat (-3), which only a rival can take off you; -1 would barely register against a 20 bar.
+
+**The bots before the -2** (mk-online, 20 four-player games, all crowned, median Day 44): 15 kegs made
+in 870 game-Days (one every 58), 5 Detonates (each killed a lone Boss), 6 kegs cleared by a Raid's
+Scatter, about 5 Days on the board per keg (one stayed 23). The bots only make a keg when a rival crew
+worth hitting is one Move from a factory they hold, and don't plan make, plant and Detonate across
+turns, so a table will likely use it more. The -2 will make kegs rarer still: watch whether they vanish.
+
+**The bots with the -2** (the same 20 seeds; the bots skip the keg within 4 of the bar, want a bigger
+target to make one, and shed the card when the -2 is all that keeps them off the Crown): all crowned,
+quartiles 35 / 42 / 54 (35 / 44 / 51 before); 12 kegs made (one every 73 Days, against 58); 5 Detonates
+again, each a lone Boss, one on a rival who had Laid Low; 6 cleared by a Raid; about 5.5 Days on the
+board per keg (two stayed 17 and 20). So fewer kegs, but no shorter stays: the bots only Detonate on a
+target, never just to shed the card, so this measures the bots more than the rule. Twenty games is
+inside the noise for game length.
+
+## The card is the Detonator (2026-11-01, the same evening)
+
+Nick asked whether "Powder Keg" would suit the card better than "The Bomb". Neither name, as it turned
+out: "Powder Keg" already names the barrel and the Play that makes it, so a third thing of that name
+would leave "take the Powder Keg" ambiguous, and "the bomb" already names the board's mark on the
+factories ("a District marked with the bomb"). The card is now **The Detonator**, with **Powder Keg** as
+its kicker for the theme. The title says what the card does (its holder Detonates), and plunger blasting
+boxes were standard kit by 1929. The Play keeps its name: "Powder Keg" is the one noun among the
+standard Plays, named for what it makes. The placeholder art is still the bomb; a plunger box would
+match the name.
+
+**The art** (Nick, the same evening): the card shows a T-handle plunger box with its wires running out of
+frame, which is the rule (you hold the trigger, the keg is anywhere), and its flavour line became "Your
+hand on the plunger. The keg is anybody's." (it said "You hold the match", for a lit fuse). Nick's other
+image, a lit keg of dynamite in a cellar, became the Rulebook's Powder Keg page cover in place of the
+borrowed Blockade art. The placeholder `Art/Cards/Bomb.svg` is gone.
+

@@ -672,6 +672,13 @@ img {
     object-position: center 22%;
 }
 
+/* Powder Keg cover (2026-11-01): the lit fuse and its spark sit at the top of the
+   frame, so the cropped .cover-sm height anchors near the top and gives up the
+   barrel's foot instead. */
+.keg-page .cover img {
+    object-position: center 8%;
+}
+
 
 .single-column-block {
     column-span: all;

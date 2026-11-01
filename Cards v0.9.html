@@ -30,8 +30,9 @@
    Bribe cards (Precinct Captain 1, Alderman 2, Judge 3, Mayor 4
    Respect; one of each per boss). Unbought Influence waits in the
    supply, so the Borough card no longer holds a stack. Marks cost 2
-   Respect while held and the Rat 3, so every card in this deck that
-   touches the score carries a number.
+   Respect while held and the Rat 3, and the Detonator 2 while held (since
+   2026-11-01), so every card in this deck that touches the score
+   carries a number.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
    the Welsher, −1 Respect forever. They share the debts geometry.
@@ -218,7 +219,7 @@ body{
 }
 /* Since 2026-10-13 every card prints one short line here and no rule
    text: "+1 Influence", "Square Up: $2,000", "No Rat till a rival
-   Rats", "Forever", or a Borough's home Ward. The Bomb (2026-11-01)
+   Rats", "Forever", or a Borough's home Ward. The Detonator (2026-11-01)
    is the one card that carries a Play, Detonate, still as one line.
    The Respect is on the shield and the rules live in the Playbooks and the Rulebook.
    The text stays wrapped in a single <span> (see the Jobs deck's
@@ -261,7 +262,7 @@ body{
 .card--borough .rules{flex:0 0 16mm}
 .card--debt .art{flex:0 0 38mm}
 .card--debt .rules{flex:0 0 16mm}
-/* the Bomb (2026-11-01): the debts geometry. It carries the one Play printed on a
+/* the Detonator (2026-11-01; "The Bomb" for its first evening): the debts geometry. It carries the one Play printed on a
    card, Detonate, and the house rule of one short line makes room for it only as
    a line: the Play's name and cost go in the label, what it does in the band, so
    the band's type steps down to fit. The full rule is the Rulebook's Powder Keg. */
@@ -271,8 +272,8 @@ body{
 .rules-label .icon{height:1.25em;vertical-align:-.25em;margin-left:.6mm}
 
 /* --- respect badge. Bribes carry their Respect like a Job; the Rat,
-   Marks and Welshers carry their negative values. The Borough cards
-   carry none. --- */
+   Marks, Welshers and the Detonator carry their negative values. The Borough
+   cards carry none. --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
@@ -943,31 +944,32 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEET 10: the Bomb (2026-11-01; powder-keg-handoff.md). One
+     SHEET 10: the Detonator (2026-11-01; powder-keg-handoff.md). One
      card: the Powder Keg Play takes it with the keg, and its holder
-     alone may Detonate. It goes back to the Supply with the keg. The
-     art is a placeholder (Art/Cards/Bomb.svg, the board's bomb mark)
-     until Nick paints one. A part-filled sheet: the card sits top-left,
+     alone may Detonate. It costs its holder 2 Respect (since
+     2026-11-01: the leader can't sit on the only keg for free). It goes back to the Supply with the keg. The
+     art is Nick's plunger box (Art/Cards/Detonator.jpg). A part-filled sheet: the card sits top-left,
      so its back sits top-RIGHT, behind a blank.
      ============================================================= -->
 <div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE BOMB</span>
-  <span class="meta">one card, one keg &middot; whoever holds it holds the fuse &middot; sheet 10 of 10</span>
+  <span class="dia"></span><span class="lbl">THE DETONATOR</span>
+  <span class="meta">one card, one keg &middot; whoever holds it holds the fuse, and pays 2 Respect for it &middot; sheet 10 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
   <div class="card card--bomb">
-    <div class="tier"><span class="kicker">The Fuse</span></div>
-    <h2 class="title">The Bomb</h2>
-    <div class="art"><img src="Art/Cards/Bomb.svg" alt=""></div>
+    <div class="tier"><span class="kicker">Powder Keg</span></div>
+    <h2 class="title title--long">The Detonator</h2>
+    <div class="art"><img src="Art/Cards/Detonator.jpg" alt=""></div>
     <div class="rules-label">Detonate &middot; 1 Influence<img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
     <div class="rules"><span>The keg&rsquo;s District loses its Muscle Ratio</span></div>
-    <div class="flavour">You hold the match. The keg is anybody&rsquo;s.</div>
+    <div class="flavour">Your hand on the plunger. The keg is anybody&rsquo;s.</div>
+    <div class="respect" data-respect="-2"></div>
   </div>
 </div>
 <div class="backs">
   <div class="back-blank"></div>
-  <div class="back"><div class="back-title">The Bomb</div><div class="back-sub">The Fuse</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">The Detonator</div><div class="back-sub">Powder Keg</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 </body>
