@@ -677,7 +677,7 @@ key row and Heat-list clause; the board's `keg: true` flags (the dynamite). The 
 without it; whether to keep it then is Nick's call.
 
 **mk-online follows** (the two Plays, the Detonator and its -2): merged in its PR #33 and mirrored
-here from mk-online on 2026-11-01 (a8ef6ba; 11e4006 with the Toll Booth ruling), so the live game runs this rule. `mk-online-rules-sync.md`
+here from mk-online on 2026-11-01 (latest 8380ec7: Rig without a barrel and the dynamite board), so the live game runs this rule. `mk-online-rules-sync.md`
 §46 has the details.
 
 Watch in playtest: how often the keg is made and set off, whether the card gets hoarded, and how often
