@@ -7,8 +7,7 @@ splash described in the record above it). Nick on probation: "I'm not 100% certa
 it is cut and holds Nick's calls. The rule as written is the Rulebook's *The Powder Keg: Light the Fuse*.
 Everything before the last section is the design record and the trials (mk-online's
 `harness/POWDER-KEG-TRIAL.md` has the third), so its numbers and its Brew and Sunset timing are history.
-Still to do: the board's print proof, mk-online's engine (`mk-online-rules-sync.md` §46), the Detonator's
-art, and an Almanac lesson. (The card was "the Bomb" until its rename the same evening; the record
+Still to do: the board's print proof, mk-online's engine (`mk-online-rules-sync.md` §46) and an Almanac lesson. (The card was "the Bomb" until its rename the same evening; the record
 below keeps the old name where it was written.)
 
 ## Where it came from
@@ -419,4 +418,10 @@ its kicker for the theme. The title says what the card does (its holder Detonate
 boxes were standard kit by 1929. The Play keeps its name: "Powder Keg" is the one noun among the
 standard Plays, named for what it makes. The placeholder art is still the bomb; a plunger box would
 match the name.
+
+**The art** (Nick, the same evening): the card shows a T-handle plunger box with its wires running out of
+frame, which is the rule (you hold the trigger, the keg is anywhere), and its flavour line became "Your
+hand on the plunger. The keg is anybody's." (it said "You hold the match", for a lit fuse). Nick's other
+image, a lit keg of dynamite in a cellar, became the Rulebook's Powder Keg page cover in place of the
+borrowed Blockade art. The placeholder `Art/Cards/Bomb.svg` is gone.
 

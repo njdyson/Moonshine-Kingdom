@@ -642,9 +642,10 @@ Nick's calls, so nobody reopens them:
   of the time, leaving dead bombs on the board.
 - **The Detonator breaks the one-line house rule only as far as one line**: "Detonate · 1
   Influence" in its label, "The keg's District loses its Muscle Ratio" in its band. The rule stays in
-  the Rulebook. Its art is a placeholder (`Art/Cards/Bomb.svg`, the board's bomb mark; a plunger box would
-  match the name) until Nick
-  paints one.
+  the Rulebook. Its art is Nick's plunger box (`Art/Cards/Detonator.jpg`), wires running out of frame
+  to a keg somewhere else, and its flavour line is "Your hand on the plunger. The keg is anybody's."
+  The Rulebook's Powder Keg page has his lit keg of dynamite as its cover (`Art/Rulebook/Powder Keg.png`
+  and its WebP); it borrowed the old Sunset page's Blockade art until then.
 - **No timer** beyond the card's -2. A keg can sit on the board for Days (in a 20-game bot sweep
   before the -2, about 5 on average and once 23). "An unspent keg goes back to the Supply at Sunset"
   was the fallback on file for hoarding and is superseded by the -2.
