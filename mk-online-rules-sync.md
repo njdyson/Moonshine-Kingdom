@@ -1161,7 +1161,8 @@ when a factory pours, both Move dialogs can send it, and a recap shows the blast
 an Advance carrying the keg on (it stays in the fight's District), and the deploy (merge mk-online's
 branch, let CI rebuild `dist/`, then mirror it here as `DEPLOY.md` says).
 
-**2026-11-01: the keg became two Plays (Nick); mk-online has not followed yet.** The rule as written
+**2026-11-01: the keg became two Plays (Nick); ported on mk-online's `claude/powder-keg-rule-feedback-46lnh4`,
+not yet merged or mirrored.** The rule as written
 now (the Rulebook's *The Powder Keg: Light the Fuse*):
 
 - **Powder Keg** (standard Play, 1 Influence): at a bomb-marked District you Control, swap one of your
@@ -1174,10 +1175,14 @@ now (the Rulebook's *The Powder Keg: Light the Fuse*):
 - The card stays with its holder wherever the keg goes and can't be dealt; whenever the keg goes to the
   Supply (Detonate, the Scatter, a Torch) the card goes too. **Nothing at Sunset** and no timer: a keg
   can sit for Days.
+- **The card costs its holder 2 Respect** (Nick, the same evening): `computeRespect` counts it, beside
+  the Mark's -2.
 
-To port: drop the Brew offer and the Sunset blast from `keg.ts`, add a `bombHolder` to the state, the
-two Plays (Detonate in the Heat list), the card's return beside every keg-to-Supply path, and the
-harness lines (the bots will want a reason to Detonate: expected kills, and a rival who has Laid Low).
+The port: `keg.ts` rewritten (`G.keg.holder` is the card), `powderKeg` and `detonate` in `plays.ts`,
+the Brew offer and Sunset blast gone, harness options and codec, UI buttons, bots that make, plant,
+Detonate or dump the keg, and `scripts/keg-sweep.ts` reporting Detonates and Days per keg. A Detonate
+completes no Job there for now: the Rulebook doesn't say whether a Detonate that kills a lone rival Boss
+pays The Toll Booth Trap, and that is Nick's call.
 
 ## Checklist
 

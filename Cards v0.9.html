@@ -30,8 +30,9 @@
    Bribe cards (Precinct Captain 1, Alderman 2, Judge 3, Mayor 4
    Respect; one of each per boss). Unbought Influence waits in the
    supply, so the Borough card no longer holds a stack. Marks cost 2
-   Respect while held and the Rat 3, so every card in this deck that
-   touches the score carries a number.
+   Respect while held and the Rat 3, and the Bomb 2 while held (since
+   2026-11-01), so every card in this deck that touches the score
+   carries a number.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
    the Welsher, −1 Respect forever. They share the debts geometry.
@@ -271,8 +272,8 @@ body{
 .rules-label .icon{height:1.25em;vertical-align:-.25em;margin-left:.6mm}
 
 /* --- respect badge. Bribes carry their Respect like a Job; the Rat,
-   Marks and Welshers carry their negative values. The Borough cards
-   carry none. --- */
+   Marks, Welshers and the Bomb carry their negative values. The Borough
+   cards carry none. --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
   width:12.5mm;height:12.5mm;
@@ -945,14 +946,15 @@ body.trim .card,body.trim .back{border-radius:0}
 <!-- =============================================================
      SHEET 10: the Bomb (2026-11-01; powder-keg-handoff.md). One
      card: the Powder Keg Play takes it with the keg, and its holder
-     alone may Detonate. It goes back to the Supply with the keg. The
+     alone may Detonate. It costs its holder 2 Respect (since
+     2026-11-01: the leader can't sit on the only keg for free). It goes back to the Supply with the keg. The
      art is a placeholder (Art/Cards/Bomb.svg, the board's bomb mark)
      until Nick paints one. A part-filled sheet: the card sits top-left,
      so its back sits top-RIGHT, behind a blank.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE BOMB</span>
-  <span class="meta">one card, one keg &middot; whoever holds it holds the fuse &middot; sheet 10 of 10</span>
+  <span class="meta">one card, one keg &middot; whoever holds it holds the fuse, and pays 2 Respect for it &middot; sheet 10 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -963,6 +965,7 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="rules-label">Detonate &middot; 1 Influence<img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
     <div class="rules"><span>The keg&rsquo;s District loses its Muscle Ratio</span></div>
     <div class="flavour">You hold the match. The keg is anybody&rsquo;s.</div>
+    <div class="respect" data-respect="-2"></div>
   </div>
 </div>
 <div class="backs">

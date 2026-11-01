@@ -334,7 +334,8 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 Since 2026-09-25; Respect became the only score on 2026-10-12 (Nick; `respect-endgame-handoff.md`
 holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds, Titles,
 or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
-(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold and **1** per Welsher. The
+(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold, **2** for the Bomb card
+(since 2026-11-01; see *The Powder Keg*) and **1** per Welsher. The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a rival's home Ward** (since 2026-10-24; see *The Crown in
 the Wards*), and you win on the spot. It lives on the Winning the Game page (a heading and a two-item
@@ -612,6 +613,14 @@ board only the mark.
   changes hands in a deal, and goes back to the Supply whenever the keg does. So the keg is whoever
   Controls it, the match is the card holder's, and the hot potato is "don't hold the keg while the card
   holder is still up". Nothing has to be remembered: the card on the table says who lit it.
+- **The card costs its holder 2 Respect** (Nick, 2026-11-01, the same evening): there is only one keg,
+  so a leader holding the card denies every rival the dam-buster against his crown Ward, and at -2 he
+  must reach 22 to crown while he holds it. It is the keg's timer, with no rule of its own: everyone
+  wants to use it rather than sit on it, and the holder can shed it any time by a Detonate (1 marker
+  and a Heat), even in a District nobody holds. It weighs on the leader more than on a trailing boss,
+  so it leans the keg toward catch-up. It sits beside the Mark's -2 and under the Rat's -3, which only
+  a rival can take off you. The card carries the `minus2` shield; the Rulebook's Count Your Respect
+  (The Lit Fuse), the Powder Keg row on the keg page and the Glossary's Respect entry say so.
 
 Nick's calls, so nobody reopens them:
 
@@ -630,9 +639,9 @@ Nick's calls, so nobody reopens them:
   Influence" in its label, "The keg's District loses its Muscle Ratio" in its band. The rule stays in
   the Rulebook. Its art is a placeholder (`Art/Cards/Bomb.svg`, the board's bomb mark) until Nick
   paints one.
-- **No timer.** A keg can sit on the board for Days. If a boss hoards the card to deny everyone else a
-  keg, the fallback on file is "an unspent keg goes back to the Supply at Sunset"; rivals' answers today
-  are parking the keg on the card holder's own crews, a Raid, or a Torch.
+- **No timer** beyond the card's -2. A keg can sit on the board for Days (in a 20-game bot sweep
+  before the -2, about 5 on average and once 23). "An unspent keg goes back to the Supply at Sunset"
+  was the fallback on file for hoarding and is superseded by the -2.
 - **A lone Boss is fair game**, and **no anti-ping-pong rule** (both from 2026-10-31, unchanged).
 - The Heat Track's flavour line calls it "a 5-space fuse" (it said "powder keg"): one name, one thing.
 - **Playbook room** (2026-11-01): the new row cost 43px on every front, paid for by row padding 8px to
@@ -647,8 +656,9 @@ the padding can go back to 8px); the Bomb card (sheet 10 of the Cards sheet); th
 key row and Heat-list clause; the board's `keg: true` flags (the bombs). The Still swap is neutral
 without it; whether to keep it then is Nick's call.
 
-**mk-online still runs the 2026-10-31 rule** (the keg at the Brew, the Sunset blast with its splash)
-until its engine follows: `mk-online-rules-sync.md` §46.
+**mk-online's port** (the two Plays, the card and its -2) is on its `claude/powder-keg-rule-feedback-46lnh4`
+branch, not yet merged; until it is, and its `dist/` is mirrored here, the live game runs the 2026-10-31
+rule (the keg at the Brew, the Sunset blast). `mk-online-rules-sync.md` §46 has the details.
 
 Watch in playtest: how often the keg is made and set off, whether the card gets hoarded, and how often
 Detonate lands on a boss who has Laid Low against one who could still answer.
@@ -1018,7 +1028,7 @@ lights either; The Almanac's lesson 4 says so). The same pass gave the Bowery a 
 ## Respect shields are generated SVG
 
 Since 2026-10-12 every Respect badge (the Jobs deck's 1, 2 and 3; the Cards sheet's Bribes 1 to 4,
-Welsher -1, Mark -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
+Welsher -1, Mark -2, Bomb -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
 `minus1.svg` to `minus3.svg`), drawn by `tools/build_shields.py` (`pip install fonttools`): one
 shield traced from the old PNGs, Cinzel Black numerals (the card titles' face, and the board's for
 its Borough and Heat Track numbers) as outlines, so the files need no font. Bebas Neue, the Stills'

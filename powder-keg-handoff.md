@@ -381,3 +381,22 @@ Knights, Vipers and Irish, 15px on the Sicilians.
 Watch in playtest: how often the keg is made and set off; whether the card gets hoarded; how often
 Detonate lands on a boss who has Laid Low against one who could still answer; and whether three Plays
 (make, deliver, Detonate) for up to five dead with no return fire is too cheap against a fortress.
+
+## The Bomb card costs 2 Respect (2026-11-01, the same evening)
+
+Nick: holding the card is worth **-2 Respect**, so the leader can't hold it as a defence at the endgame.
+With one keg in the game, the card holder denies every rival the keg; a leader who makes it and sits on
+it keeps the dam-buster away from his own crown Ward. At -2 he needs 22 to crown while he holds it, or
+spends a Detonate (1 marker and a Heat, anywhere, even in an empty District) to shed it first.
+
+It doubles as the keg's timer with no rule of its own, so "an unspent keg goes back to the Supply at
+Sunset" is retired as the hoarding fallback. Two points cost a leader more than a trailing boss, so the
+keg leans toward catch-up, which bears on three-player kingmaking. Sized beside the Mark (-2) and under
+the Rat (-3), which only a rival can take off you; -1 would barely register against a 20 bar.
+
+**The bots before the -2** (mk-online, 20 four-player games, all crowned, median Day 44): 15 kegs made
+in 870 game-Days (one every 58), 5 Detonates (each killed a lone Boss), 6 kegs cleared by a Raid's
+Scatter, about 5 Days on the board per keg (one stayed 23). The bots only make a keg when a rival crew
+worth hitting is one Move from a factory they hold, and don't plan make, plant and Detonate across
+turns, so a table will likely use it more. The -2 will make kegs rarer still: watch whether they vanish.
+
