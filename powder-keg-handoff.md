@@ -440,3 +440,21 @@ Detonate as one job; it also leaves "Powder Keg" naming the barrel alone. Arm (l
 fits every front. mk-online keeps the move's internal id `powderKeg` so saves stay loadable; its
 labels say Rig.
 
+## Dynamite on the board, and Rig without a barrel (2026-11-01, after keg-opus-3)
+
+Nobody made the keg in keg-opus-3's 22 Days (mk-online `harness/transcripts/keg-opus-3.keg-notes.md`).
+Nick's fixes, the same evening:
+
+- **Rig swaps no barrel.** "At a dynamite Dock you Control, take the Powder Keg and the Detonator."
+  The swap made the keg's barrel compete with the Rum Trade on the same square (both bots holding a
+  factory Traded instead), and cost a Move to bring the barrel in. Rig stays at **1 marker**: Opus's
+  zero-marker idea was not taken, since a free Play would raise "can you Rig after Laying Low?"; Lay Low
+  is the one free Play and the rules lean on that.
+- **The board mark is two sticks of dynamite** (Nick: the bomb "shows a war shell, not a powder keg").
+  A barrel with a fuse was mocked up and not taken: at sign size it reads as liquor, on the Docks.
+  Rule text calls the factories **dynamite Docks** (a Glossary entry), so "bomb" names nothing now.
+- **Next, to test before it goes in the Rulebook:** more bite. Nick leans to the splash as the same
+  explosion: the keg's District and **each Adjacent District lose their Muscle Ratio**, no roll. A die
+  per Mobster at 3+ was weighed: it kills no more Runners on average, and Boss-last means it mostly
+  softens a crew rather than reaching the Boss (Nick).
+
