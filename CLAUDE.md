@@ -589,12 +589,12 @@ weakest Stills, the hot potato and the "dam busting" of a fortress; he disliked 
 kinds of explosion, and the factory's owner sitting on a free keg to sail it to any Dock on his last
 Play). **Its one home is the Rulebook's *The Powder Keg: Light the Fuse*** page, after Mob Signature
 Plays (it replaced the Sunset page, and Sunset went back to a run-in paragraph at the foot of the
-Hustle page). The Hustle's Standard Plays table has a Powder Keg row that points there, and
+Hustle page). The Hustle's Standard Plays table has a Rig row that points there, and
 Components, Setup, Drawing Heat and the Glossary carry a line each. The Playbooks carry the first
 Play, the Detonator card the second, the Town Planner a key row and Detonate in its Heat list, and the
 board only the mark.
 
-- **Powder Keg (1)**, a standard Play on every Playbook: at a District marked with the bomb that you
+- **Rig (1)**, a standard Play on every Playbook: at a District marked with the bomb that you
   Control, swap one of your barrels there for the keg, if it's in the Supply, and take the Detonator.
   The factories are the four Docks nobody starts on, which are the four Pressure 1 Stills: Jamaica and
   Tottenville on **2**, West Side and Stapleton on **12**. To make that so, **West Side and East Harlem
@@ -617,10 +617,13 @@ board only the mark.
   Controls it, the match is the card holder's, and the hot potato is "don't hold the keg while the card
   holder is still up". Nothing has to be remembered: the card on the table says who lit it.
 - **The card is the Detonator**, with "Powder Keg" as its kicker (Nick, 2026-11-01; it was "The Bomb"
-  for its first evening). One name, one thing: "Powder Keg" already names the barrel and the Play that
-  makes it, and "the bomb" names the board's mark on the factories. The card's title says what it does
-  (the Detonator's holder Detonates), and plunger blasting boxes were standard kit by 1929. The Play
-  stays "Powder Keg", the one noun among the standard Plays, named for what it makes.
+  for its first evening). One name, one thing: "Powder Keg" names the barrel (and named the Play that
+  makes it until it became Rig), and "the bomb" names the board's mark on the factories. The card's title says what it does
+  (the Detonator's holder Detonates), and plunger blasting boxes were standard kit by 1929.
+- **The Play is Rig** (Nick, 2026-11-01, the same evening; it was "Powder Keg" for a day). A one-word
+  verb beside Move, Trade and Unload, and the pair reads as one job: you rig the keg, then Detonate it.
+  It also leaves "Powder Keg" naming only the barrel. "Bomb" was weighed for the row and not taken:
+  "the bomb" is the board's mark, and "to bomb" sounds like the explosion, which is Detonate.
 - **The card costs its holder 2 Respect** (Nick, 2026-11-01, the same evening): there is only one keg,
   so a leader holding the card denies every rival the dam-buster against his crown Ward, and at -2 he
   must reach 22 to crown while he holds it. It is the keg's timer, with no rule of its own: everyone

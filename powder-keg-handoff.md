@@ -429,3 +429,14 @@ borrowed Blockade art. The placeholder `Art/Cards/Bomb.svg` is gone.
 rival Boss it blows up is a kill. It touches only the Trap, since the body-count Jobs are Seizes. The
 Glossary's Kill entry and the keg page say so; mk-online's `scripts/keg-check.ts` tests it.
 
+## The Play is Rig (2026-11-01, the same evening)
+
+Nick didn't like a two-word Play on the Playbooks, where the other standard Plays are one-word verbs.
+"Bomb" was weighed and not taken: "the bomb" is the board's mark on the factories, and "to bomb" sounds
+like the explosion, which is Detonate. **Rig** is a verb, period ("rigging a charge"), and pairs with
+Detonate as one job; it also leaves "Powder Keg" naming the barrel alone. Arm (less vivid) and Plant
+(wrong: it suggests placing the keg at the target) were the other candidates. The Playbook row reads
+"Rig: Swap a barrel at a bomb District you Control for the Powder Keg. Take the Detonator." and still
+fits every front. mk-online keeps the move's internal id `powderKeg` so saves stay loadable; its
+labels say Rig.
+
