@@ -334,7 +334,7 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 Since 2026-09-25; Respect became the only score on 2026-10-12 (Nick; `respect-endgame-handoff.md`
 holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds, Titles,
 or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
-(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold, **2** for the Bomb card
+(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold, **2** for the Detonator
 (since 2026-11-01; see *The Powder Keg*) and **1** per Welsher. The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a rival's home Ward** (since 2026-10-24; see *The Crown in
@@ -581,7 +581,7 @@ in the game bricks a paid-for asset.
 ## The Powder Keg: a barrel, a card, and two Plays
 
 Since 2026-10-31 (Nick; `powder-keg-handoff.md` holds the design, the mk-online trials and what was
-weighed). One black barrel and one card, the **Bomb**. **Since 2026-11-01 the keg is a pair of standard
+weighed). One black barrel and one card, the **Detonator**. **Since 2026-11-01 the keg is a pair of standard
 Plays, not part of the Brew or Sunset** (Nick, after sleeping on it: he liked the boost to the four
 weakest Stills, the hot potato and the "dam busting" of a fortress; he disliked the added rules, two
 kinds of explosion, and the factory's owner sitting on a free keg to sail it to any Dock on his last
@@ -589,17 +589,17 @@ Play). **Its one home is the Rulebook's *The Powder Keg: Light the Fuse*** page,
 Plays (it replaced the Sunset page, and Sunset went back to a run-in paragraph at the foot of the
 Hustle page). The Hustle's Standard Plays table has a Powder Keg row that points there, and
 Components, Setup, Drawing Heat and the Glossary carry a line each. The Playbooks carry the first
-Play, the Bomb card the second, the Town Planner a key row and Detonate in its Heat list, and the
+Play, the Detonator card the second, the Town Planner a key row and Detonate in its Heat list, and the
 board only the mark.
 
 - **Powder Keg (1)**, a standard Play on every Playbook: at a District marked with the bomb that you
-  Control, swap one of your barrels there for the keg, if it's in the Supply, and take the Bomb card.
+  Control, swap one of your barrels there for the keg, if it's in the Supply, and take the Detonator.
   The factories are the four Docks nobody starts on, which are the four Pressure 1 Stills: Jamaica and
   Tottenville on **2**, West Side and Stapleton on **12**. To make that so, **West Side and East Harlem
   swapped Stills** (12 and 11) and **Jamaica and Astoria** (2 and 3) on 2026-10-31 (Nick: easier to
   teach, symmetrical). Every Still number still appears on two Districts, each Borough's Pressure total
   is unchanged, and the Insurance Job's Pressure 1 or 2 Stills are the same four pairs.
-- **Detonate (1, Heat)**, printed on the Bomb card: its holder alone, wherever the keg stands, whoever
+- **Detonate (1, Heat)**, printed on the Detonator: its holder alone, wherever the keg stands, whoever
   Controls its District. **That District loses its Muscle Ratio in Mobsters**, no roll, Runners first,
   "the same as a Blowback" (the Boss only with no Runner left). **No splash**: one way things blow up
   (Nick). It kills Mobsters and nothing else: other barrels and Safehouses are untouched. Then the keg
@@ -613,6 +613,11 @@ board only the mark.
   changes hands in a deal, and goes back to the Supply whenever the keg does. So the keg is whoever
   Controls it, the match is the card holder's, and the hot potato is "don't hold the keg while the card
   holder is still up". Nothing has to be remembered: the card on the table says who lit it.
+- **The card is the Detonator**, with "Powder Keg" as its kicker (Nick, 2026-11-01; it was "The Bomb"
+  for its first evening). One name, one thing: "Powder Keg" already names the barrel and the Play that
+  makes it, and "the bomb" names the board's mark on the factories. The card's title says what it does
+  (the Detonator's holder Detonates), and plunger blasting boxes were standard kit by 1929. The Play
+  stays "Powder Keg", the one noun among the standard Plays, named for what it makes.
 - **The card costs its holder 2 Respect** (Nick, 2026-11-01, the same evening): there is only one keg,
   so a leader holding the card denies every rival the dam-buster against his crown Ward, and at -2 he
   must reach 22 to crown while he holds it. It is the keg's timer, with no rule of its own: everyone
@@ -635,9 +640,10 @@ Nick's calls, so nobody reopens them:
   and Detonate as two Irish rows) and set aside: the Irish would lose their one economic Play, the
   four bomb Docks would matter to one family only, and at three players the Irish are boxed a quarter
   of the time, leaving dead bombs on the board.
-- **The Bomb card breaks the one-line house rule only as far as one line**: "Detonate · 1
+- **The Detonator breaks the one-line house rule only as far as one line**: "Detonate · 1
   Influence" in its label, "The keg's District loses its Muscle Ratio" in its band. The rule stays in
-  the Rulebook. Its art is a placeholder (`Art/Cards/Bomb.svg`, the board's bomb mark) until Nick
+  the Rulebook. Its art is a placeholder (`Art/Cards/Bomb.svg`, the board's bomb mark; a plunger box would
+  match the name) until Nick
   paints one.
 - **No timer** beyond the card's -2. A keg can sit on the board for Days (in a 20-game bot sweep
   before the -2, about 5 on average and once 23). "An unspent keg goes back to the Supply at Sunset"
@@ -652,7 +658,7 @@ Nick's calls, so nobody reopens them:
 complexity for not enough gain." Treat it as a candidate the playtests have to earn. If it is cut, it
 comes out cleanly: the Rulebook's Powder Keg page (Sunset needs nothing back), the Standard Plays row,
 the Components and Setup lines, the Drawing Heat bullet and the Glossary entry; the Playbooks' row (and
-the padding can go back to 8px); the Bomb card (sheet 10 of the Cards sheet); the Town Planner's tags,
+the padding can go back to 8px); the Detonator (sheet 10 of the Cards sheet); the Town Planner's tags,
 key row and Heat-list clause; the board's `keg: true` flags (the bombs). The Still swap is neutral
 without it; whether to keep it then is Nick's call.
 
@@ -1028,7 +1034,7 @@ lights either; The Almanac's lesson 4 says so). The same pass gave the Bowery a 
 ## Respect shields are generated SVG
 
 Since 2026-10-12 every Respect badge (the Jobs deck's 1, 2 and 3; the Cards sheet's Bribes 1 to 4,
-Welsher -1, Mark -2, Bomb -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
+Welsher -1, Mark -2, Detonator -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
 `minus1.svg` to `minus3.svg`), drawn by `tools/build_shields.py` (`pip install fonttools`): one
 shield traced from the old PNGs, Cinzel Black numerals (the card titles' face, and the board's for
 its Borough and Heat Track numbers) as outlines, so the files need no font. Bebas Neue, the Stills'

@@ -7,8 +7,9 @@ splash described in the record above it). Nick on probation: "I'm not 100% certa
 it is cut and holds Nick's calls. The rule as written is the Rulebook's *The Powder Keg: Light the Fuse*.
 Everything before the last section is the design record and the trials (mk-online's
 `harness/POWDER-KEG-TRIAL.md` has the third), so its numbers and its Brew and Sunset timing are history.
-Still to do: the board's print proof, mk-online's engine (`mk-online-rules-sync.md` §46), Bomb card
-art, and an Almanac lesson.
+Still to do: the board's print proof, mk-online's engine (`mk-online-rules-sync.md` §46), the Detonator's
+art, and an Almanac lesson. (The card was "the Bomb" until its rename the same evening; the record
+below keeps the old name where it was written.)
 
 ## Where it came from
 
@@ -407,4 +408,15 @@ again, each a lone Boss, one on a rival who had Laid Low; 6 cleared by a Raid; a
 board per keg (two stayed 17 and 20). So fewer kegs, but no shorter stays: the bots only Detonate on a
 target, never just to shed the card, so this measures the bots more than the rule. Twenty games is
 inside the noise for game length.
+
+## The card is the Detonator (2026-11-01, the same evening)
+
+Nick asked whether "Powder Keg" would suit the card better than "The Bomb". Neither name, as it turned
+out: "Powder Keg" already names the barrel and the Play that makes it, so a third thing of that name
+would leave "take the Powder Keg" ambiguous, and "the bomb" already names the board's mark on the
+factories ("a District marked with the bomb"). The card is now **The Detonator**, with **Powder Keg** as
+its kicker for the theme. The title says what the card does (its holder Detonates), and plunger blasting
+boxes were standard kit by 1929. The Play keeps its name: "Powder Keg" is the one noun among the
+standard Plays, named for what it makes. The placeholder art is still the bomb; a plunger box would
+match the name.
 

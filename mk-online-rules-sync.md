@@ -1167,8 +1167,8 @@ now (the Rulebook's *The Powder Keg: Light the Fuse*):
 
 - **Powder Keg** (standard Play, 1 Influence): at a bomb-marked District you Control, swap one of your
   barrels there for the keg (the barrel to the Supply), if the keg is in the Supply, and take the
-  **Bomb card**. Nothing at the Brew: the draft and Split the Batch no longer offer it.
-- **Detonate** (standard Play, 1 Influence, draws Heat): only the Bomb card's holder, wherever the keg
+  **Detonator** (the card; "the Bomb" for its first evening). Nothing at the Brew: the draft and Split the Batch no longer offer it.
+- **Detonate** (standard Play, 1 Influence, draws Heat): only the Detonator's holder, wherever the keg
   stands, whoever Controls its District. That District loses its Muscle Ratio in Mobsters, no roll,
   Runners first (the Boss only with no Runner left). **No splash.** Then the keg and the card go to the
   Supply.
