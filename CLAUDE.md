@@ -195,6 +195,8 @@ fold (earning its name 'trap')." A crew with no Connected Safe District to Scram
 hunter's work is the cornering, and a face-up Trap that makes a Boss run hands over his block. It is
 the deck's one kill Job, so the Rulebook keeps its kill lines ("a Raid makes arrests, not kills", "your
 Ambush or return fire completes nothing") and the Glossary its Kill entry. Don't make it a Seize.
+**A Detonate's kill counts** (Nick, 2026-11-01): it is your own Play, so a rival Boss the Powder Keg
+blows up pays the Trap. The Glossary's Kill entry and the keg page's blast bullet say so.
 
 ## Jobs pay 1, 2 or 3
 
@@ -602,7 +604,8 @@ board only the mark.
 - **Detonate (1, Heat)**, printed on the Detonator: its holder alone, wherever the keg stands, whoever
   Controls its District. **That District loses its Muscle Ratio in Mobsters**, no roll, Runners first,
   "the same as a Blowback" (the Boss only with no Runner left). **No splash**: one way things blow up
-  (Nick). It kills Mobsters and nothing else: other barrels and Safehouses are untouched. Then the keg
+  (Nick). It kills Mobsters and nothing else: other barrels and Safehouses are untouched. A rival Boss it
+  kills pays The Toll Booth Trap (Nick, 2026-11-01), and only that: the body-count Jobs are Seizes. Then the keg
   and the card go back to the Supply. **Never say it "takes a Blowback"** (Nick): the mechanics match,
   but the Rulebook compares the two and keeps the Blowback's name for the morning.
 - **The keg is a barrel in every way** (Nick: "minimise complexity"): it Moves, belongs to whoever
@@ -664,7 +667,7 @@ key row and Heat-list clause; the board's `keg: true` flags (the bombs). The Sti
 without it; whether to keep it then is Nick's call.
 
 **mk-online follows** (the two Plays, the Detonator and its -2): merged in its PR #33 and mirrored
-here from mk-online a8ef6ba on 2026-11-01, so the live game runs this rule. `mk-online-rules-sync.md`
+here from mk-online on 2026-11-01 (a8ef6ba; 11e4006 with the Toll Booth ruling), so the live game runs this rule. `mk-online-rules-sync.md`
 §46 has the details.
 
 Watch in playtest: how often the keg is made and set off, whether the card gets hoarded, and how often

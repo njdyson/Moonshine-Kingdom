@@ -1180,9 +1180,9 @@ now (the Rulebook's *The Powder Keg: Light the Fuse*):
 
 The port: `keg.ts` rewritten (`G.keg.holder` is the card), `powderKeg` and `detonate` in `plays.ts`,
 the Brew offer and Sunset blast gone, harness options and codec, UI buttons, bots that make, plant,
-Detonate or dump the keg, and `scripts/keg-sweep.ts` reporting Detonates and Days per keg. A Detonate
-completes no Job there for now: the Rulebook doesn't say whether a Detonate that kills a lone rival Boss
-pays The Toll Booth Trap, and that is Nick's call.
+Detonate or dump the keg, and `scripts/keg-sweep.ts` reporting Detonates and Days per keg. A rival
+Boss killed by a Detonate pays The Toll Booth Trap (Nick, 2026-11-01): the play event is `kind: "detonate"`
+with `killedRivalBoss`, and `scripts/keg-check.ts` proves it, and that your own Boss pays nothing.
 
 ## Checklist
 

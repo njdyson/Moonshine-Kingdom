@@ -425,3 +425,7 @@ hand on the plunger. The keg is anybody's." (it said "You hold the match", for a
 image, a lit keg of dynamite in a cellar, became the Rulebook's Powder Keg page cover in place of the
 borrowed Blockade art. The placeholder `Art/Cards/Bomb.svg` is gone.
 
+**A Detonate's kill pays The Toll Booth Trap** (Nick, the same evening): a Detonate is your own Play, so a
+rival Boss it blows up is a kill. It touches only the Trap, since the body-count Jobs are Seizes. The
+Glossary's Kill entry and the keg page say so; mk-online's `scripts/keg-check.ts` tests it.
+
