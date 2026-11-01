@@ -933,7 +933,7 @@ function key(x, y) {
 
 // Under the Heat corner: the Tomorrow panel, the key beside it, the title below them. The
 // Powder Keg has no panel (Nick, 2026-10-31): the bomb marks the factories, and its rule lives
-// on the Town Planner's turn structure and in the Rulebook.
+// on the Town Planner's key and in the Rulebook (since 2026-11-01, a Play).
 const PANELS_Y = () => HEAT.edge[1] + 12;
 function sidePanels() {
   const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);

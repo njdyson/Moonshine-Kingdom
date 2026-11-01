@@ -1161,6 +1161,24 @@ when a factory pours, both Move dialogs can send it, and a recap shows the blast
 an Advance carrying the keg on (it stays in the fight's District), and the deploy (merge mk-online's
 branch, let CI rebuild `dist/`, then mirror it here as `DEPLOY.md` says).
 
+**2026-11-01: the keg became two Plays (Nick); mk-online has not followed yet.** The rule as written
+now (the Rulebook's *The Powder Keg: Light the Fuse*):
+
+- **Powder Keg** (standard Play, 1 Influence): at a bomb-marked District you Control, swap one of your
+  barrels there for the keg (the barrel to the Supply), if the keg is in the Supply, and take the
+  **Bomb card**. Nothing at the Brew: the draft and Split the Batch no longer offer it.
+- **Detonate** (standard Play, 1 Influence, draws Heat): only the Bomb card's holder, wherever the keg
+  stands, whoever Controls its District. That District loses its Muscle Ratio in Mobsters, no roll,
+  Runners first (the Boss only with no Runner left). **No splash.** Then the keg and the card go to the
+  Supply.
+- The card stays with its holder wherever the keg goes and can't be dealt; whenever the keg goes to the
+  Supply (Detonate, the Scatter, a Torch) the card goes too. **Nothing at Sunset** and no timer: a keg
+  can sit for Days.
+
+To port: drop the Brew offer and the Sunset blast from `keg.ts`, add a `bombHolder` to the state, the
+two Plays (Detonate in the Heat list), the card's return beside every keg-to-Supply path, and the
+harness lines (the bots will want a reason to Detonate: expected kills, and a rival who has Laid Low).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

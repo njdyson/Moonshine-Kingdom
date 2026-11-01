@@ -245,11 +245,13 @@ a:hover{color:var(--gold-bright)}
 /* ============================================================
    PLAY ROWS
    ============================================================ */
-/* Fronts are row-count-bound: 16 rows, so every 1px here costs ~32px of card. Collect's
+/* Fronts are row-count-bound: 15 rows, so every 1px here costs ~30px of card. Collect's
    row went on 2026-10-14 and the Faction Trait panel on 2026-10-15, and their room went to
-   the rows: 8px padding and the larger type below leave the busiest mob (the Knights) about 20px spare in
-   the 925 print box (Chromium), a buffer for Safari's looser wrap. */
-.play{display:flex;gap:11px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--rule)}
+   the rows (8px padding and the larger type below). The Powder Keg row came on 2026-11-01
+   and took 43px back: the padding went to 7px and the Knights' Torch row lost a word to
+   drop a line, which leaves the Knights, Vipers and Irish about 22px spare in the 925 print
+   box (Chromium) and the Sicilians about 15px, a buffer for Safari's looser wrap. */
+.play{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
 /* The backs are not row-bound (they share one layout and have room), so their rows breathe */
 .act{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
@@ -381,10 +383,15 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
       <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 5+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost">1</div>
+      <div class="name">Powder Keg</div>
+      <div class="desc">Swap a barrel at a <b>bomb</b> District you Control for the keg. Take the <b>Bomb card</b>.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -542,10 +549,15 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
       <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 5+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost">1</div>
+      <div class="name">Powder Keg</div>
+      <div class="desc">Swap a barrel at a <b>bomb</b> District you Control for the keg. Take the <b>Bomb card</b>.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -703,10 +715,15 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
       <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 5+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost">1</div>
+      <div class="name">Powder Keg</div>
+      <div class="desc">Swap a barrel at a <b>bomb</b> District you Control for the keg. Take the <b>Bomb card</b>.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -771,7 +788,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play play--end">
         <div class="cost">1</div>
         <div class="name">Torch <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse <b>and every barrel there</b>. Rival Mobsters are unharmed. Heat only if it's the fight's first shot.</div>
+        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse <b>and every barrel there</b>. Rival Mobsters are unharmed. Heat only if it's the first shot.</div>
       </div>
     </div>
   </div>
@@ -864,10 +881,15 @@ a:hover{color:var(--gold-bright)}
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
       <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $300</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. 5+ barrels: Greed Tax.</div>
     </div>
-    <div class="play play--end">
+    <div class="play">
       <div class="cost">1</div>
       <div class="name">Trade</div>
       <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+    </div>
+    <div class="play play--end">
+      <div class="cost">1</div>
+      <div class="name">Powder Keg</div>
+      <div class="desc">Swap a barrel at a <b>bomb</b> District you Control for the keg. Take the <b>Bomb card</b>.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
