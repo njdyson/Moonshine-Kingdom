@@ -589,13 +589,20 @@ weakest Stills, the hot potato and the "dam busting" of a fortress; he disliked 
 kinds of explosion, and the factory's owner sitting on a free keg to sail it to any Dock on his last
 Play). **Its one home is the Rulebook's *The Powder Keg: Light the Fuse*** page, after Mob Signature
 Plays (it replaced the Sunset page, and Sunset went back to a run-in paragraph at the foot of the
-Hustle page). The Hustle's Standard Plays table has a Powder Keg row that points there, and
+Hustle page). The Hustle's Standard Plays table has a Rig row that points there, and
 Components, Setup, Drawing Heat and the Glossary carry a line each. The Playbooks carry the first
 Play, the Detonator card the second, the Town Planner a key row and Detonate in its Heat list, and the
 board only the mark.
 
-- **Powder Keg (1)**, a standard Play on every Playbook: at a District marked with the bomb that you
-  Control, swap one of your barrels there for the keg, if it's in the Supply, and take the Detonator.
+- **Rig (1)**, a standard Play on every Playbook: at a **dynamite Dock** you Control, take the keg from
+  the Supply, if it's there, and the Detonator. No barrel is swapped (Nick, 2026-11-01, after the
+  keg-opus-3 playtest: the swap made the keg's barrel compete with the Rum Trade on the same square,
+  and both bots holding a factory Traded instead). The Playbook row reads "At a dynamite Dock you
+  Control, take the Powder Keg and the Detonator."
+  **The board marks the four factories with two sticks of dynamite** (Nick, 2026-11-01: "the bomb icon
+  shows a war shell, not a powder keg"; it was the round black bomb from 2026-10-31). Rule text calls
+  them **dynamite Docks** (a Glossary entry), so "bomb" names nothing in the game now. A barrel with a
+  fuse was weighed and not taken: at sign size it reads as liquor, on the Docks where liquor moves.
   The factories are the four Docks nobody starts on, which are the four Pressure 1 Stills: Jamaica and
   Tottenville on **2**, West Side and Stapleton on **12**. To make that so, **West Side and East Harlem
   swapped Stills** (12 and 11) and **Jamaica and Astoria** (2 and 3) on 2026-10-31 (Nick: easier to
@@ -617,10 +624,13 @@ board only the mark.
   Controls it, the match is the card holder's, and the hot potato is "don't hold the keg while the card
   holder is still up". Nothing has to be remembered: the card on the table says who lit it.
 - **The card is the Detonator**, with "Powder Keg" as its kicker (Nick, 2026-11-01; it was "The Bomb"
-  for its first evening). One name, one thing: "Powder Keg" already names the barrel and the Play that
-  makes it, and "the bomb" names the board's mark on the factories. The card's title says what it does
-  (the Detonator's holder Detonates), and plunger blasting boxes were standard kit by 1929. The Play
-  stays "Powder Keg", the one noun among the standard Plays, named for what it makes.
+  for its first evening). One name, one thing: "Powder Keg" names the barrel (and named the Play that
+  makes it until it became Rig), and "the bomb" named the board's mark until it became dynamite. The card's title says what it does
+  (the Detonator's holder Detonates), and plunger blasting boxes were standard kit by 1929.
+- **The Play is Rig** (Nick, 2026-11-01, the same evening; it was "Powder Keg" for a day). A one-word
+  verb beside Move, Trade and Unload, and the pair reads as one job: you rig the keg, then Detonate it.
+  It also leaves "Powder Keg" naming only the barrel. "Bomb" was weighed for the row and not taken:
+  "the bomb" was then the board's mark, and "to bomb" sounds like the explosion, which is Detonate.
 - **The card costs its holder 2 Respect** (Nick, 2026-11-01, the same evening): there is only one keg,
   so a leader holding the card denies every rival the dam-buster against his crown Ward, and at -2 he
   must reach 22 to crown while he holds it. It is the keg's timer, with no rule of its own: everyone
@@ -628,7 +638,7 @@ board only the mark.
   and a Heat), even in a District nobody holds. It weighs on the leader more than on a trailing boss,
   so it leans the keg toward catch-up. It sits beside the Mark's -2 and under the Rat's -3, which only
   a rival can take off you. The card carries the `minus2` shield; the Rulebook's Count Your Respect
-  (The Lit Fuse), the Powder Keg row on the keg page and the Glossary's Respect entry say so.
+  (The Lit Fuse), the Rig row on the keg page and the Glossary's Respect entry say so.
 
 Nick's calls, so nobody reopens them:
 
@@ -641,8 +651,8 @@ Nick's calls, so nobody reopens them:
   keg costs a Play to make and a Play to set off, and draws Heat.
 - **Open to every mob.** An Irish Signature Play in place of Peddle was weighed the same day (Powder Keg
   and Detonate as two Irish rows) and set aside: the Irish would lose their one economic Play, the
-  four bomb Docks would matter to one family only, and at three players the Irish are boxed a quarter
-  of the time, leaving dead bombs on the board.
+  four factory Docks would matter to one family only, and at three players the Irish are boxed a quarter
+  of the time, leaving dead marks on the board.
 - **The Detonator breaks the one-line house rule only as far as one line**: "Detonate · 1
   Influence" in its label, "The keg's District loses its Muscle Ratio" in its band. The rule stays in
   the Rulebook. Its art is Nick's plunger box (`Art/Cards/Detonator.jpg`), wires running out of frame
@@ -663,11 +673,11 @@ complexity for not enough gain." Treat it as a candidate the playtests have to e
 comes out cleanly: the Rulebook's Powder Keg page (Sunset needs nothing back), the Standard Plays row,
 the Components and Setup lines, the Drawing Heat bullet and the Glossary entry; the Playbooks' row (and
 the padding can go back to 8px); the Detonator (sheet 10 of the Cards sheet); the Town Planner's tags,
-key row and Heat-list clause; the board's `keg: true` flags (the bombs). The Still swap is neutral
+key row and Heat-list clause; the board's `keg: true` flags (the dynamite). The Still swap is neutral
 without it; whether to keep it then is Nick's call.
 
 **mk-online follows** (the two Plays, the Detonator and its -2): merged in its PR #33 and mirrored
-here from mk-online on 2026-11-01 (a8ef6ba; 11e4006 with the Toll Booth ruling), so the live game runs this rule. `mk-online-rules-sync.md`
+here from mk-online on 2026-11-01 (latest 8380ec7: Rig without a barrel and the dynamite board), so the live game runs this rule. `mk-online-rules-sync.md`
 §46 has the details.
 
 Watch in playtest: how often the keg is made and set off, whether the card gets hoarded, and how often
@@ -1018,7 +1028,7 @@ copied from the Town Planner, each District with a hanging sign. Read `board-han
 touching it: it holds the build commands, the 24-inch print spec (Heat Track sockets are the
 Ledger's 39 mm chips), the decisions Nick has made so far, and the next pass he has in mind.
 mk-online serves a snapshot of this board (`mk-online/dist/board.svg`, the 2026-10-31 board:
-the Powder Keg's bombs and the swapped Stills; mk-online 396708e). Its click areas, piece
+the Powder Keg's dynamite marks and the swapped Stills, since 2026-11-01). Its click areas, piece
 spots and sockets are generated by mk-online's `scripts/board-ui-geometry.mjs` from
 `board-geometry.json`, the screen SVG and the build's sign report, and its `scripts/boardcheck.ts`
 checks the connection graph against a copy of `board-geometry.json`. Redraw the board and

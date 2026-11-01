@@ -1184,6 +1184,13 @@ Detonate or dump the keg, and `scripts/keg-sweep.ts` reporting Detonates and Day
 Boss killed by a Detonate pays The Toll Booth Trap (Nick, 2026-11-01): the play event is `kind: "detonate"`
 with `killedRivalBoss`, and `scripts/keg-check.ts` proves it, and that your own Boss pays nothing.
 
+
+**Later the same day (mk-online #35, 8380ec7):** the first Play is **Rig** (move id still `powderKeg`)
+and swaps **no barrel**: at a dynamite Dock you Control, take the keg and the Detonator. The factories
+are "dynamite Docks"; `public/board.svg` is the board with two sticks of dynamite on them, and the keg
+piece on the map is a black barrel with a lit fuse. `harness/transcripts/keg-opus-3*` is the Opus game
+that prompted it (nobody made the keg in 22 Days).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
