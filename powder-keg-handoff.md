@@ -400,3 +400,11 @@ Scatter, about 5 Days on the board per keg (one stayed 23). The bots only make a
 worth hitting is one Move from a factory they hold, and don't plan make, plant and Detonate across
 turns, so a table will likely use it more. The -2 will make kegs rarer still: watch whether they vanish.
 
+**The bots with the -2** (the same 20 seeds; the bots skip the keg within 4 of the bar, want a bigger
+target to make one, and shed the card when the -2 is all that keeps them off the Crown): all crowned,
+quartiles 35 / 42 / 54 (35 / 44 / 51 before); 12 kegs made (one every 73 Days, against 58); 5 Detonates
+again, each a lone Boss, one on a rival who had Laid Low; 6 cleared by a Raid; about 5.5 Days on the
+board per keg (two stayed 17 and 20). So fewer kegs, but no shorter stays: the bots only Detonate on a
+target, never just to shed the card, so this measures the bots more than the rule. Twenty games is
+inside the noise for game length.
+
