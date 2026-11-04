@@ -16,18 +16,19 @@ A, B and C below are done on this branch and mk-online's; D (the Opus game) has 
   and its mockup are deleted. CLAUDE.md has a *Trade Docks* section, the keg section is a short record of
   the cut, and the Day 28 limit is noted as on trial. `overlap_audit.py` models Trade at the four only
   (same output). The keg's art (`Art/Cards/Detonator.jpg`, `Art/Rulebook/Powder Keg.*`) stays, unused.
-- **B. Board: a draft for Nick** (the commit after 42590d3; `board-handoff.md`, Decisions, has the
+- **B. Board: approved by Nick (2026-11-04)** after the rounds below (`board-handoff.md`, Decisions, has the
   detail). A schooner hangs under each Trade Dock's medallion where the dynamite was; a faint dashed
   sea-green lane runs from each one's middle pier off the edge with "Rum Row" beside its arrowhead; the key
   has a Trade Dock row and its pitch went from 19 to 16 to fit. The lanes are drawn under the land, so
-  they never cross a District. **Show Nick `Art/Board/Board v0.9 (screen).jpg` before anything copies
-  it.** The print PDF is stale: `--print` died in the cloud sandbox on the 7280px screenshot ("Unable to
-  capture screenshot"), so rerun `node tools/build_board.js --print` on a bigger machine once he approves.
-  Then mk-online's `public/board.svg` follows (`mk-online-board-handoff.md`).
+  they never cross a District. The print PDF is rebuilt (a second `--print` run went through), and
+  mk-online's `public/board.svg` has it (3a2bc96 on its branch; `boardcheck` passes).
   **Nick's first round (2026-11-04):** Staten Island's label moved upright onto the west shore and
   Tottenville's piers onto the south-east shore; the lanes became curves; and he didn't love the
   sea-green, and picked **muted gilt** from four options ("more premium"). Then Manhattan's label moved
   up the Hudson above West Side, whose piers settled lower, and its lane runs down the open river.
+  Then the lanes became **one route** (West Side's down the Hudson, east above Stapleton and south down
+  the Narrows, the others joining it), **RUM ROW** went level along the bottom edge beside the arrow,
+  Stapleton's and Jamaica's piers moved west, and Stapleton joins by a short spur.
 - **C. mk-online: done** (8233b86 on its `claude/powder-keg-rule-feedback-46lnh4`, unmerged; this repo's
   `mk-online-rules-sync.md` §47). Trade Docks on and the keg off by default (`rumrow=0`, `keg=main` turn
   them back); the Commission is `commission=28`. Seats read `harness/RULES-AI.md` alone in a default game,
@@ -46,7 +47,7 @@ he will likely bring back his old "Loose Change" rule instead. The open problem 
 tracking the Day without a big extra track or an easily forgotten token. Don't write it into the
 Rulebook.
 
-Still open for Nick: approval of the board as it stands; go-ahead for the Opus game.
+Still open for Nick: go-ahead for the Opus game; merging both branches (then the deploy, `DEPLOY.md`).
 
 ## What Nick decided (2026-11-04)
 
