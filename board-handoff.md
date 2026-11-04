@@ -698,15 +698,22 @@ keeps them on a re-trace.
   (`schooner()`: a brown hull with a gilt strake, two masts, cream sails) off the sign's lower edge
   under the medallion, where the Powder Keg's dynamite hung from 2026-10-31 to 2026-11-04. Not a
   barrel: a barrel reads as liquor on the Docks where barrels move. `lanes()` draws a faint dashed
-  sea-green **shipping lane** from each Trade Dock's middle pier off the board's edge, an arrowhead
-  on the frame and "Rum Row" in the bridge type beside it; the routes are `LANES` (West Side down
-  the Hudson 8 units off New Jersey, clear of Manhattan's label; Jamaica out of Jamaica Bay's mouth
-  to the bottom edge; Stapleton up and west; Tottenville, whose pier nearly touches the frame, is
-  only the arrowhead, its label upright above the piers). The lanes sit under the land, so they can
-  never cross a District, and are paler and lighter than any border because they are not
-  Connections. The key gained a **Trade Dock** row (the schooner in a roundel, the Moonshine to Rum
-  chip the Dock row used to carry); the Dock row is bare now, and the key's pitch went from 19 to 16
-  so the fifth row stays clear of the Hudson. Proof it at 24 inches.
+  **shipping lane** from each Trade Dock's middle pier off the board's edge, as a smooth curve (a
+  Catmull-Rom spline through `LANES`' waypoints), an arrowhead on the frame and "Rum Row" in the
+  bridge type beside it: West Side down the Hudson 8 units off New Jersey, clear of Manhattan's
+  label, bending west as the river opens; Jamaica out of Jamaica Bay's mouth to the bottom edge;
+  Stapleton arcing west; Tottenville south-east through the Lower Bay to the bottom edge. The lanes
+  sit under the land, so they can never cross a District, and are lighter than any border because
+  they are not Connections. **Their colour is on trial** (Nick didn't love the first, sea-green
+  `#8fc9bd`): `LANE_COLOR=#rrggbb LANE_OPACITY=0.6 node tools/build_board.js` proofs another; the
+  options shown to him were ivory `#e6dcc4` at .55, muted gilt `#c9a437` at .6, rum amber `#d9925a`
+  at .7 and harbour blue `#9fb9d8` at .7. The key gained a **Trade Dock** row (the schooner in a
+  roundel, the Moonshine to Rum chip the Dock row used to carry); the Dock row is bare now, and the
+  key's pitch went from 19 to 16 so the fifth row stays clear of the Hudson. Proof it at 24 inches.
+- **Staten Island's label stands upright off its west shore** (Nick, 2026-11-04), as the Bronx's does
+  off its east shore (`draft_board.js`, `labels.boro.SI`; it lay along the south-east shore, in the
+  Lower Bay, until then). That freed the south-east shore, so `placePiers()` now puts Tottenville's
+  piers there (they were on the west shore, a few units off the frame), and its lane runs out to sea.
 
 - **Every connection is the traced map's but Manhattan's three.** `FLIPS` in `draft_board.js`
   changes one (it gives a border to the two Districts at its ends; the traced map is untouched).

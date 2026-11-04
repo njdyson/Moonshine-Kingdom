@@ -631,8 +631,10 @@ trials and every option weighed; the keg was cut on 2026-11-04 (see *The Powder 
 `trade-docks-handoff.md` (2026-11-04) holds the Trade Docks' evidence, the board's shipping lanes,
 mk-online's switches (Trade Docks on, keg off, the Commission's Day 28 limit) and the Opus test still
 to run. The **Day 28 limit** (if nobody has Taken the Crown by Sunset of Day 28, the Commission crowns
-the most Respect, cash breaking a tie) is Nick's optional, recommended rule on trial; it is not in the
-Rulebook until he decides after the test.
+the most Respect, cash breaking a tie, then whoever Laid Low first) is on trial in mk-online only, where
+it caps the cost of an AI game that never crowns. Nick is on the fence (2026-11-04): if it stays he will
+likely bring back his old Loose Change rule for ties, and a physical game has no easy way to track the
+Day without a big extra track or a token that gets forgotten. Keep it out of the Rulebook.
 
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's

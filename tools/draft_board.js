@@ -371,8 +371,10 @@ function draft(S) {
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       // Brooklyn and Queens each BORO_GAP under its own south shore (the Bronx's sits as far off its
       // east shore), centred under it: Brooklyn under Coney Island and Canarsie, Queens under the Rockaways
-      // Staten Island's lies along its south-east shore, in the Lower Bay
-      SI: [r1((SI_TIP + SI_E) / 2 + SI_GAP), r1((SI_FOOT + SI_SE[1]) / 2 + SI_GAP), -45],
+      // Staten Island's stands upright off its west shore (Nick, 2026-11-04), as the Bronx's does off
+      // its east shore, which frees the south-east shore for Tottenville's piers and its lane to Rum
+      // Row. It lay along the south-east shore, in the Lower Bay, until then.
+      SI: [r1((FRAME_IN + SI_W) / 2), r1((T + SI_FOOT) / 2), -90],
       BK: [(NARROWS[1] + CUT + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, SOUTH_SHORE + BORO_GAP, 0],
       QN: [((S.rockaways ? 708 : 856 + B) + 1080 - FRAME_IN) / 2, SOUTH_SHORE + BORO_GAP, 0],
     },

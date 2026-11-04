@@ -279,24 +279,36 @@ function schooner(cx, cy, s) {
 // Rum Row's shipping lanes (2026-11-04): a faint dashed line from each Trade Dock's middle pier
 // out to the edge of the board, ending in an arrowhead, toward the mother ships offshore. They
 // are scenery, not Connections (the water already carries the Dock-to-Dock links), so they are
-// drawn pale sea-green and lighter than any border, under the land, and the key says so.
-// way: the waypoints after the pier, in board units, the last on the frame's hairline (or a
-// function of the lane's start that returns them). label: "Rum Row" beside the last leg, at a
-// fraction t along it, on side +1 or -1 of its direction. West Side's lane runs down the Hudson
-// 8 units off New Jersey's shore (x + y = 534.2), to pass outside Manhattan's label and shield.
+// drawn lighter than any border and under the land, where they can never cross a District.
+// Each lane is a smooth curve (a Catmull-Rom spline, sampled) through its pier's start and its
+// waypoints, in board units, the last on the frame's hairline; way may be a function of the start.
+// label: "Rum Row" beside the curve at a fraction t of its length, on side +1 or -1 of its heading.
+// West Side's runs down the Hudson 8 units off New Jersey's shore (x + y = 534.2), to pass outside
+// Manhattan's label and shield, and bends west as the river opens.
 const HUDSON_LANE = 534.2 + 8 * Math.SQRT2;
 const LANES = {
   west_side: {
-    way: st => { const k = (st[0] + st[1] - HUDSON_LANE) / 2; return [[st[0] - k, st[1] - k], [FRAME_IN, HUDSON_LANE - FRAME_IN]]; },
-    label: { t: 0.9, side: -1 },
+    way: st => [[HUDSON_LANE - st[1] - 70, st[1] + 70], [80, HUDSON_LANE - 80], [FRAME_IN, 548]],
+    label: { t: 0.88, side: -1 },
   },
-  jamaica: { way: st => [[662, st[1]], [662, 1080 - FRAME_IN]], label: { t: 0.55, side: -1 } },
-  stapleton: { way: [[150, 690], [FRAME_IN, 690]], label: { t: 0.5, side: 1 } },
-  // Tottenville's pier is a few units off the frame: the lane is the arrowhead, and its label
-  // stands upright in the channel above the piers (at: an offset from the lane's start, r: its turn).
-  tottenville: { way: st => [[FRAME_IN, st[1]]], label: { at: [-6, -50], r: -90 } },
+  jamaica: { way: st => [[715, st[1] - 4], [668, 985], [664, 1080 - FRAME_IN]], label: { t: 0.78, side: -1 } },
+  stapleton: { way: st => [[st[0] - 30, st[1] - 16], [FRAME_IN, 682]], label: { t: 0.62, side: 1 } },
+  tottenville: { way: st => [[st[0] + 34, st[1] + 30], [276, 1080 - FRAME_IN]], label: { t: 0.6, side: 1 } },
 };
-const LANE = { color: '#8fc9bd', width: 1.3, dash: '5 4', opacity: 0.7, head: 5 };
+// The colour is on trial (Nick, 2026-11-04): LANE_COLOR=#rrggbb overrides it for a proof.
+const LANE = { color: process.env.LANE_COLOR || '#8fc9bd', width: 1.3, dash: '5 4', opacity: +(process.env.LANE_OPACITY || 0.7), head: 5 };
+function spline(pts, per = 24) {
+  const P = [pts[0], ...pts, pts[pts.length - 1]], out = [];
+  for (let i = 1; i < P.length - 2; i++) {
+    const [p0, p1, p2, p3] = [P[i - 1], P[i], P[i + 1], P[i + 2]];
+    for (let k = 0; k < per; k++) {
+      const t = k / per, t2 = t * t, t3 = t2 * t;
+      out.push([0, 1].map(c => 0.5 * (2 * p1[c] + (-p0[c] + p2[c]) * t + (2 * p0[c] - 5 * p1[c] + 4 * p2[c] - p3[c]) * t2 + (-p0[c] + 3 * p1[c] - 3 * p2[c] + p3[c]) * t3)));
+    }
+  }
+  out.push(pts[pts.length - 1]);
+  return out;
+}
 function lanes(pierList) {
   let s = '', labels = '';
   for (const [id, { way, label }] of Object.entries(LANES)) {
@@ -304,18 +316,26 @@ function lanes(pierList) {
     if (!ps.length) throw new Error(`No pier for the Trade Dock ${id}`);
     const { q, n } = ps[Math.floor((ps.length - 1) / 2)];
     const start = [q[0] + n[0] * (PIER.len + 6), q[1] + n[1] * (PIER.len + 6)];
-    const pts = [start, ...(typeof way === 'function' ? way(start) : way)];
-    const [a, b] = pts.slice(-2), L = Math.hypot(b[0] - a[0], b[1] - a[1]);
-    const ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L, h = LANE.head;
-    const tip = [b[0] - ux * 2, b[1] - uy * 2], base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
-    const line = pts.slice(0, -1).concat([base]);
+    if (process.env.LANEDBG) console.error('lane', id, start.map(v => v.toFixed(1)).join(','), n.map(v => v.toFixed(2)).join(','));
+    const curve = spline([start, ...(typeof way === 'function' ? way(start) : way)]);
+    // arc lengths, to cut the line at the arrowhead and to place the label
+    const acc = [0];
+    for (let i = 1; i < curve.length; i++) acc.push(acc[i - 1] + Math.hypot(curve[i][0] - curve[i - 1][0], curve[i][1] - curve[i - 1][1]));
+    const total = acc[acc.length - 1];
+    const at = d => { // point and unit heading at arc length d
+      let i = acc.findIndex(v => v >= d); if (i < 1) i = 1;
+      const [a, b] = [curve[i - 1], curve[i]], L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, k = (d - acc[i - 1]) / L;
+      return { p: [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k], u: [(b[0] - a[0]) / L, (b[1] - a[1]) / L] };
+    };
+    const h = LANE.head, end = at(total - 2), [ux, uy] = end.u, tip = end.p;
+    const base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
+    const line = curve.filter((_, i) => acc[i] < total - 2 - h * 1.4).concat([base]);
     s += `<path d="M${line.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')}" fill="none" stroke="${LANE.color}" stroke-opacity="${LANE.opacity}" stroke-width="${LANE.width}" stroke-dasharray="${LANE.dash}" stroke-linecap="round" stroke-linejoin="round"/>`
       + `<path d="M${f(base[0] - uy * h)} ${f(base[1] + ux * h)} L${f(tip[0])} ${f(tip[1])} L${f(base[0] + uy * h)} ${f(base[1] - ux * h)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
-    let r = Math.atan2(uy, ux) * 180 / Math.PI;
+    const m = at(total * label.t), [mx, my] = m.u;
+    let r = Math.atan2(my, mx) * 180 / Math.PI;
     if (r > 90) r -= 180; else if (r <= -90) r += 180;
-    let lx = a[0] + (b[0] - a[0]) * label.t - uy * 6 * label.side, ly = a[1] + (b[1] - a[1]) * label.t + ux * 6 * label.side;
-    if (label.at) { lx = start[0] + label.at[0]; ly = start[1] + label.at[1]; r = label.r; }
-    labels += text('Rum Row', lx, ly, TYPE.bridge, { fill: LANE.color, anchor: 'middle', rotate: r, opacity: 0.9, middle: true });
+    labels += text('Rum Row', m.p[0] - my * 6 * label.side, m.p[1] + mx * 6 * label.side, TYPE.bridge, { fill: LANE.color, anchor: 'middle', rotate: r, opacity: 0.9, middle: true });
   }
   return { lines: `<g id="lanes">${s}</g>`, labels };
 }

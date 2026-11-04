@@ -24,21 +24,29 @@ A, B and C below are done on this branch and mk-online's; D (the Opus game) has 
   it.** The print PDF is stale: `--print` died in the cloud sandbox on the 7280px screenshot ("Unable to
   capture screenshot"), so rerun `node tools/build_board.js --print` on a bigger machine once he approves.
   Then mk-online's `public/board.svg` follows (`mk-online-board-handoff.md`).
+  **Nick's first round (2026-11-04):** Staten Island's label moved upright onto the west shore and
+  Tottenville's piers onto the south-east shore; the lanes became curves; and he didn't love the
+  sea-green, so the colour is on trial (four options in `board-handoff.md`, Decisions; `LANE_COLOR`
+  proofs another). The committed board still uses the sea-green until he picks.
 - **C. mk-online: done** (8233b86 on its `claude/powder-keg-rule-feedback-46lnh4`, unmerged; this repo's
   `mk-online-rules-sync.md` §47). Trade Docks on and the keg off by default (`rumrow=0`, `keg=main` turn
   them back); the Commission is `commission=28`. Seats read `harness/RULES-AI.md` alone in a default game,
   plus one block per switch that changes the rules. All 17 check scripts, `tsc -b`, the fuzz and the lint
-  comparison are clean. Provisional, for Nick: a Respect and cash tie goes to the lower Turn Token for
-  tomorrow (whoever Laid Low first), and the seats' Commission block says so; cash is counted after the
-  last Lay Low's $100 a marker.
+  comparison are clean. A Respect and cash tie goes to whoever Laid Low first that Day (Nick: fine for
+  now; mk-online 0b029f0 dropped the "provisional"); cash is counted after the last Lay Low's $100 a marker.
 - **D. The Opus test: not run.** It costs about 3.7M subagent tokens and 3 to 5 hours, so it waits for
   Nick's go-ahead. The command is now
   `scripts/play.sh new players=3 seats=0,1,2 seed=trade-docks-3way-1 talk=1 commission=28`
   (Trade Docks on and the keg off are the defaults). The brief no longer needs a line about appended
   rules beyond the Commission's block. The rest of section D stands.
 
-Questions for Nick: approve or redirect the board; the Day 28 three-way tie (provisional above); whether
-to keep the tie-break line in what the seats read; go-ahead for the Opus game.
+**The Day 28 limit, Nick's view (2026-11-04):** on the fence. He hopes it isn't needed; for now it caps
+the online spend (an Opus game that never crowns). The tie-break is first to Lay Low; if the limit stays
+he will likely bring back his old "Loose Change" rule instead. The open problem for the physical game is
+tracking the Day without a big extra track or an easily forgotten token. Don't write it into the
+Rulebook.
+
+Still open for Nick: the lane colour, then approval of the board; go-ahead for the Opus game.
 
 ## What Nick decided (2026-11-04)
 
