@@ -217,7 +217,9 @@ ONES = [
     # 57x38mm this one reads, and the moon gives the eye somewhere to land.
     # NOT the same file as Art/Rum Row.png, which the rulebook uses on p.188.
     # SETS PASS 2026-10-11: DOWN TO 1 (Nick: too easy for a 3). Text unchanged.
-    ("Rum Row", "Rum Row.jpg", "Trade",
+    # RENAMED 2026-11-04 (Nick): it was "Rum Row" until the board named Rum Row as the line of
+    # mother ships its Trade Docks' lanes lead to. The art is the mother steamer.
+    ("The Mother Ship", "Rum Row.jpg", "Trade",
      "Trade <b>4+ barrels</b> at a <b>Staten Island Dock</b>.",
      "Forty ships past the three-mile line, waiting on a lamp."),
     # SETS PASS 2026-10-11 (Nick: keep the name and art, give it a new objective). The waterfront's

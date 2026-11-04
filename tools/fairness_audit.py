@@ -82,7 +82,7 @@ CARDS = [
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
     ('The Beachhead',         1, 'Secure',    {'any'},                      {}),
     ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),
-    ('Rum Row',               1, 'Trade',     {'dock'},                     {ST: 'neutral'}),
+    ('The Mother Ship',       1, 'Trade',     {'dock'},                     {ST: 'neutral'}),
     ('The Insurance Job',     2, 'Raid',      {'any'},                      {}),
     # --- 2 Respect: the Extort set, one per seat, each its seat's friendly 2 ---
     # 'press5': each set holds its seat's starting bar (Pressure 5) and its room (6).

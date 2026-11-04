@@ -10,7 +10,7 @@ A, B and C below are done on this branch and mk-online's; D (the Opus game) has 
 
 - **A. Rules: done** (42590d3). Trade Docks are in, stated once in the positive (the Rulebook's Trade row,
   Docks legend, Liquor line, Battle for the Docks example and a Glossary entry; the Playbooks' Trade row;
-  the Town Planner's four tags and key row, now "Trade Dock"; the Almanac's Rum run says "a Trade Dock").
+  the Town Planner's zone column, where the four read "Trade Dock" with the schooner in the medallion (since 2026-11-04 evening; they were Setup tags), and a key row; the Almanac's Rum run says "a Trade Dock").
   The keg is out of every component: the Cards sheet and the Playbooks are byte-for-byte their pre-keg
   selves (bar the Trade row), the Rulebook page, rows and Glossary lines are gone, `tools/mock_powder_keg.js`
   and its mockup are deleted. CLAUDE.md has a *Trade Docks* section, the keg section is a short record of

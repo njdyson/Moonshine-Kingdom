@@ -121,7 +121,7 @@ JOBS = [
     J('Tenement Army', 1, ['Recruit'],
       'Recruit 4+ Runners at Stapleton.',
       lambda p, d: p['runners'] >= 4 and d.name == 'Stapleton'),
-    J('Rum Row', 1, ['Trade'],
+    J('The Mother Ship', 1, ['Trade'],
       'Trade 4+ barrels at a Staten Island Dock.',
       lambda p, d: p['barrels'] >= 4 and d.boro == ST),
     # Modelled on the District the Raid padlocks, which must be yours. A 2 since 2026-10-15, on any

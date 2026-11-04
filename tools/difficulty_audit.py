@@ -115,7 +115,7 @@ CARDS = [
      "Rival can relocate the Safehouse you are creeping up on."),
     ("Tenement Army", 1, "Recruit", 2, 0, 0, 1, 0, 1, 2, 0,
      "Stapleton: Secure to Staten first, then hire. A parked Runner denies it."),
-    ("Rum Row", 1, "Trade", 2, 0, 0, 2, 1, 1, 1, 0,
+    ("The Mother Ship", 1, "Trade", 2, 0, 0, 2, 1, 1, 1, 0,
      "Staten is uncontested, which is exactly why it is not blockable."),
     # A 2 on any Raid your Play sets off since 2026-10-15: rivals can land the fifth marker first or
     # make fresher noise, so it gains a rival point.
@@ -260,7 +260,7 @@ BEFORE = {"The Milk Run": (3, 3), "The Beachhead": (4, 2), "Tenement Army": (3, 
           "Last Call": (2, 0), "The Empty Casket": (6, 0), "Fortress Staten": (1, 1),
           "The Pier Six Brawl": (8, 1), "The Dutchman's Deal": (4, 1),
           "The Angel's Share": (4, 1), "Night Landing": (6, 3), "Squatter's Rights": (4, 2),
-          "The Grand Tour": (3, 2), "Cuban Prince": (5, 6), "Rum Row": (6, 2),
+          "The Grand Tour": (3, 2), "Cuban Prince": (5, 6), "The Mother Ship": (6, 2),
           "The Eviction": (9, 4), "The Copper Heist": (6, 3), "The Insurance Job": (6, 1),
           "The Big Squeeze": (6, 6), "Hell's Highway": (6, 6), "Poison Panic": (6, 6),
           "Gin Pipeline": (5, 1), "Union Dues": (6, 3), "Last One Standing": (4, 3),
