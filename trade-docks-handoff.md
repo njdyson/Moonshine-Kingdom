@@ -35,11 +35,11 @@ A, B and C below are done on this branch and mk-online's; D (the Opus game) has 
   plus one block per switch that changes the rules. All 17 check scripts, `tsc -b`, the fuzz and the lint
   comparison are clean. A Respect and cash tie goes to whoever Laid Low first that Day (Nick: fine for
   now; mk-online 0b029f0 dropped the "provisional"); cash is counted after the last Lay Low's $100 a marker.
-- **D. The Opus test: not run.** It costs about 3.7M subagent tokens and 3 to 5 hours, so it waits for
-  Nick's go-ahead. The command is now
-  `scripts/play.sh new players=3 seats=0,1,2 seed=trade-docks-3way-1 talk=1 commission=28`
-  (Trade Docks on and the keg off are the defaults). The brief no longer needs a line about appended
-  rules beyond the Commission's block. The rest of section D stands.
+- **D. The Opus test: not run; now four players** (Nick, 2026-11-04). The brief is mk-online's
+  `harness/OPUS-4WAY-HANDOFF.md` (setup smoke-tested at four seats, the seat brief's fill-ins, shifts, saves,
+  baselines, cost and the write-up); start a fresh session there. The game:
+  `scripts/play.sh new players=4 seats=0,1,2,3 seed=trade-docks-4way-1 talk=1 commission=28`. Section D below
+  is the three-player plan it replaces.
 
 **The Day 28 limit, Nick's view (2026-11-04):** on the fence. He hopes it isn't needed; for now it caps
 the online spend (an Opus game that never crowns). The tie-break is first to Lay Low; if the limit stays
