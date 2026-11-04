@@ -4,6 +4,42 @@ For a fresh session. Nick's decisions are settled; the work is to write them int
 bring mk-online in line, and play one three-Opus game. Read CLAUDE.md first (house rules, no em dashes, one
 callout a page, "don't argue with a cut rule's ghost"), then this file.
 
+## Progress (2026-11-04, second session): start here
+
+A, B and C below are done on this branch and mk-online's; D (the Opus game) has not been run.
+
+- **A. Rules: done** (42590d3). Trade Docks are in, stated once in the positive (the Rulebook's Trade row,
+  Docks legend, Liquor line, Battle for the Docks example and a Glossary entry; the Playbooks' Trade row;
+  the Town Planner's four tags and key row, now "Trade Dock"; the Almanac's Rum run says "a Trade Dock").
+  The keg is out of every component: the Cards sheet and the Playbooks are byte-for-byte their pre-keg
+  selves (bar the Trade row), the Rulebook page, rows and Glossary lines are gone, `tools/mock_powder_keg.js`
+  and its mockup are deleted. CLAUDE.md has a *Trade Docks* section, the keg section is a short record of
+  the cut, and the Day 28 limit is noted as on trial. `overlap_audit.py` models Trade at the four only
+  (same output). The keg's art (`Art/Cards/Detonator.jpg`, `Art/Rulebook/Powder Keg.*`) stays, unused.
+- **B. Board: a draft for Nick** (the commit after 42590d3; `board-handoff.md`, Decisions, has the
+  detail). A schooner hangs under each Trade Dock's medallion where the dynamite was; a faint dashed
+  sea-green lane runs from each one's middle pier off the edge with "Rum Row" beside its arrowhead; the key
+  has a Trade Dock row and its pitch went from 19 to 16 to fit. The lanes are drawn under the land, so
+  they never cross a District. **Show Nick `Art/Board/Board v0.9 (screen).jpg` before anything copies
+  it.** The print PDF is stale: `--print` died in the cloud sandbox on the 7280px screenshot ("Unable to
+  capture screenshot"), so rerun `node tools/build_board.js --print` on a bigger machine once he approves.
+  Then mk-online's `public/board.svg` follows (`mk-online-board-handoff.md`).
+- **C. mk-online: done** (8233b86 on its `claude/powder-keg-rule-feedback-46lnh4`, unmerged; this repo's
+  `mk-online-rules-sync.md` §47). Trade Docks on and the keg off by default (`rumrow=0`, `keg=main` turn
+  them back); the Commission is `commission=28`. Seats read `harness/RULES-AI.md` alone in a default game,
+  plus one block per switch that changes the rules. All 17 check scripts, `tsc -b`, the fuzz and the lint
+  comparison are clean. Provisional, for Nick: a Respect and cash tie goes to the lower Turn Token for
+  tomorrow (whoever Laid Low first), and the seats' Commission block says so; cash is counted after the
+  last Lay Low's $100 a marker.
+- **D. The Opus test: not run.** It costs about 3.7M subagent tokens and 3 to 5 hours, so it waits for
+  Nick's go-ahead. The command is now
+  `scripts/play.sh new players=3 seats=0,1,2 seed=trade-docks-3way-1 talk=1 commission=28`
+  (Trade Docks on and the keg off are the defaults). The brief no longer needs a line about appended
+  rules beyond the Commission's block. The rest of section D stands.
+
+Questions for Nick: approve or redirect the board; the Day 28 three-way tie (provisional above); whether
+to keep the tie-break line in what the seats read; go-ahead for the Opus game.
+
 ## What Nick decided (2026-11-04)
 
 1. **Trade Docks.** Moonshine is Traded for Havana Rum only at the four **Trade Docks**: West Side, Jamaica,

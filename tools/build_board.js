@@ -101,16 +101,18 @@ const fillId = d => `fill-${d.boro}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
-// keg: a Powder Keg factory (Nick, 2026-10-31: the two Docks nobody starts on, and Staten
-// Island's pair), marked with dynamite under the sign's medallion (a bomb until 2026-11-01). The same day West Side and
-// East Harlem swapped Stills (12 and 11), and Jamaica and Astoria (2 and 3), so the four
-// factories are the four Pressure 1 Stills: two on 2, two on 12.
+// trade: a Trade Dock (Nick, 2026-11-04), the one place Moonshine is Traded for Rum: the four
+// Docks nobody starts on, which are the four Pressure 1 Stills (two on 2, two on 12, since West
+// Side and East Harlem swapped Stills, 12 and 11, and Jamaica and Astoria, 2 and 3, on
+// 2026-10-31). A schooner hangs under the sign's medallion, and a shipping lane runs from its
+// pier off the board to Rum Row (see lanes()). They were the Powder Keg's factories, marked with
+// dynamite, from 2026-10-31 until the keg was cut on 2026-11-04.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
   { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
   { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 11, venue: 'The Silver Dollar' },
   { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket', setup: 'runners' },
-  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 12, keg: true },
+  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 12, trade: true },
   { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 9, setup: 'runners' },
   { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, setup: 'home' },
   { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', setup: 'squad' },
@@ -122,14 +124,14 @@ const DISTRICTS = [
   { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 3, venue: 'Bohemian Hall' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
   { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
-  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 2, keg: true },
+  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 2, trade: true },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
   { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint' },
   { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar', setup: 'runners' },
   { id: 'canarsie', name: 'Canarsie', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
-  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'dock', still: 12, keg: true },
-  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 2, keg: true },
+  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'dock', still: 12, trade: true },
+  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 2, trade: true },
 ];
 const OFFBOARD = ['nj']; // New Jersey: land, off the board
 
@@ -257,29 +259,65 @@ function roundel(zone, cx, cy, r) {
     + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
 }
 
-// The Powder Keg's mark (Nick, 2026-11-01): two sticks of dynamite, bound with a gilt band, with
-// a lit fuse and an orange spark, drawn in a 20-unit box about (cx, cy) and scaled by s. It was
-// a round black bomb (mark B of tools/mock_powder_keg.js) from 2026-10-31: Nick, "the bomb icon
-// shows a war shell, not a powder keg". Not a barrel, so it can't be read as the liquor; red, so
-// it stands out on the dark signs where the black bomb leaned on its gilt rim.
-function dynamite(cx, cy, s) {
-  const burst = (n, r1, r2) => Array.from({ length: n * 2 }, (_, i) => {
-    const a = (i * Math.PI) / n, r = i % 2 ? r2 : r1;
-    return `${f(Math.cos(a) * r)},${f(Math.sin(a) * r)}`;
-  }).join(' ');
+// The Trade Dock's mark (2026-11-04): a rum-runner schooner, two masts under sail, drawn in a
+// 20-unit box about (cx, cy) and scaled by s. Not a barrel: a barrel reads as the liquor, on the
+// Docks where barrels move (the same reason the Powder Keg's fused barrel was turned down).
+function schooner(cx, cy, s) {
+  const sail = '#efe2c2', edge = '#2a1a0c';
   return `<g transform="translate(${f(cx)} ${f(cy)}) scale(${f(s, 3)})">`
-    + `<ellipse cx="0" cy="9.6" rx="7.5" ry="1.6" fill="#000" fill-opacity=".45"/>`
-    + `<g transform="rotate(-12)">`
-    + `<rect x="-6.6" y="-5" width="6" height="14" rx="2.2" fill="#c8361d" stroke="#2a0c06" stroke-width=".7"/>`
-    + `<rect x="0.4" y="-5" width="6" height="14" rx="2.2" fill="#b02e18" stroke="#2a0c06" stroke-width=".7"/>`
-    + `<rect x="-7" y="1.2" width="14" height="2.4" fill="${C.goldBright}" stroke="#2a0c06" stroke-width=".4"/>`
-    + `<ellipse cx="-3.6" cy="-5" rx="3" ry="1" fill="#e9c9a0" stroke="#2a0c06" stroke-width=".5"/>`
-    + `<ellipse cx="3.4" cy="-5" rx="3" ry="1" fill="#e9c9a0" stroke="#2a0c06" stroke-width=".5"/>`
-    + `<path d="M3.4 -5 Q 4.6 -9 8 -9.6" fill="none" stroke="${C.goldBright}" stroke-width=".9" stroke-linecap="round"/>`
-    + `</g>`
-    + `<polygon points="${burst(6, 3.2, 1.2)}" transform="translate(7.2 -11)" fill="#f2a12c" stroke="#c8361d" stroke-width=".5"/>`
-    + `<circle cx="7.2" cy="-11" r=".8" fill="#fff4c8"/>`
+    + `<ellipse cx="0" cy="8.6" rx="9" ry="1.5" fill="#000" fill-opacity=".45"/>`
+    + `<path d="M-9.5 3.2 H9.8 L7 7.6 H-6.6 Z" fill="#5a3418" stroke="${edge}" stroke-width=".7" stroke-linejoin="round"/>`
+    + `<path d="M-9 4.6 H9" stroke="${C.goldBright}" stroke-width=".7"/>`
+    + `<path d="M-2.6 3.2 V-9.6 M4.2 3.2 V-7.4" stroke="${edge}" stroke-width=".9" stroke-linecap="round"/>`
+    + `<path d="M-3.2 -8.8 L-8.6 1.8 H-3.2 Z" fill="${sail}" stroke="${edge}" stroke-width=".55" stroke-linejoin="round"/>`
+    + `<path d="M-1.9 -9 Q 2.4 -3.4 3.6 1.8 H-1.9 Z" fill="${sail}" stroke="${edge}" stroke-width=".55" stroke-linejoin="round"/>`
+    + `<path d="M4.9 -6.8 Q 8.4 -2.4 9.4 1.8 H4.9 Z" fill="${sail}" stroke="${edge}" stroke-width=".55" stroke-linejoin="round"/>`
+    + `<path d="M-2.6 -9.6 L0.6 -10.6 L-2.6 -11.4 Z" fill="${C.goldBright}" stroke="${edge}" stroke-width=".35"/>`
     + `</g>`;
+}
+
+// Rum Row's shipping lanes (2026-11-04): a faint dashed line from each Trade Dock's middle pier
+// out to the edge of the board, ending in an arrowhead, toward the mother ships offshore. They
+// are scenery, not Connections (the water already carries the Dock-to-Dock links), so they are
+// drawn pale sea-green and lighter than any border, under the land, and the key says so.
+// way: the waypoints after the pier, in board units, the last on the frame's hairline (or a
+// function of the lane's start that returns them). label: "Rum Row" beside the last leg, at a
+// fraction t along it, on side +1 or -1 of its direction. West Side's lane runs down the Hudson
+// 8 units off New Jersey's shore (x + y = 534.2), to pass outside Manhattan's label and shield.
+const HUDSON_LANE = 534.2 + 8 * Math.SQRT2;
+const LANES = {
+  west_side: {
+    way: st => { const k = (st[0] + st[1] - HUDSON_LANE) / 2; return [[st[0] - k, st[1] - k], [FRAME_IN, HUDSON_LANE - FRAME_IN]]; },
+    label: { t: 0.9, side: -1 },
+  },
+  jamaica: { way: st => [[662, st[1]], [662, 1080 - FRAME_IN]], label: { t: 0.55, side: -1 } },
+  stapleton: { way: [[150, 690], [FRAME_IN, 690]], label: { t: 0.5, side: 1 } },
+  // Tottenville's pier is a few units off the frame: the lane is the arrowhead, and its label
+  // stands upright in the channel above the piers (at: an offset from the lane's start, r: its turn).
+  tottenville: { way: st => [[FRAME_IN, st[1]]], label: { at: [-6, -50], r: -90 } },
+};
+const LANE = { color: '#8fc9bd', width: 1.3, dash: '5 4', opacity: 0.7, head: 5 };
+function lanes(pierList) {
+  let s = '', labels = '';
+  for (const [id, { way, label }] of Object.entries(LANES)) {
+    const ps = pierList.filter(p => p.d.id === id);
+    if (!ps.length) throw new Error(`No pier for the Trade Dock ${id}`);
+    const { q, n } = ps[Math.floor((ps.length - 1) / 2)];
+    const start = [q[0] + n[0] * (PIER.len + 6), q[1] + n[1] * (PIER.len + 6)];
+    const pts = [start, ...(typeof way === 'function' ? way(start) : way)];
+    const [a, b] = pts.slice(-2), L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L, h = LANE.head;
+    const tip = [b[0] - ux * 2, b[1] - uy * 2], base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
+    const line = pts.slice(0, -1).concat([base]);
+    s += `<path d="M${line.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')}" fill="none" stroke="${LANE.color}" stroke-opacity="${LANE.opacity}" stroke-width="${LANE.width}" stroke-dasharray="${LANE.dash}" stroke-linecap="round" stroke-linejoin="round"/>`
+      + `<path d="M${f(base[0] - uy * h)} ${f(base[1] + ux * h)} L${f(tip[0])} ${f(tip[1])} L${f(base[0] + uy * h)} ${f(base[1] - ux * h)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
+    let r = Math.atan2(uy, ux) * 180 / Math.PI;
+    if (r > 90) r -= 180; else if (r <= -90) r += 180;
+    let lx = a[0] + (b[0] - a[0]) * label.t - uy * 6 * label.side, ly = a[1] + (b[1] - a[1]) * label.t + ux * 6 * label.side;
+    if (label.at) { lx = start[0] + label.at[0]; ly = start[1] + label.at[1]; r = label.r; }
+    labels += text('Rum Row', lx, ly, TYPE.bridge, { fill: LANE.color, anchor: 'middle', rotate: r, opacity: 0.9, middle: true });
+  }
+  return { lines: `<g id="lanes">${s}</g>`, labels };
 }
 
 // ---------------------------------------------------------------- signs
@@ -341,9 +379,8 @@ function cluster(d, opts = {}) {
         s += `<circle cx="${f(bx)}" cy="${f(by)}" r="1.45" fill="url(#bezelGilt)" stroke="#000" stroke-opacity=".55" stroke-width=".35"/>`
           + `<path d="M${f(bx - 0.8)} ${f(by)} H${f(bx + 0.8)}" stroke="#000" stroke-opacity=".5" stroke-width=".35"/>`;
       s += `<g filter="url(#lift)">${still(d.still, PX + pp, PY + pp, sh)}</g>`;
-      // a Powder Keg factory: the dynamite hangs off the sign's lower edge under the medallion,
-      // its spark clear of the medallion's rim
-      if (d.keg) { const [mx, my] = medal(x, yy); s += dynamite(mx + 5, my + 17.5, 0.78); }
+      // a Trade Dock: the schooner hangs off the sign's lower edge under the medallion
+      if (d.trade) { const [mx, my] = medal(x, yy); s += schooner(mx + 5, my + 17.5, 0.95); }
       return s;
     },
   };
@@ -873,8 +910,9 @@ function tomorrow(x, y) {
 // The key says what each type of District does (Nick, 2026-10-07: all four types, so every
 // medallion on the map is named; from 2026-09-29 it was the price list alone, Speakeasy and
 // High Society). The selling rows are a venue and what it buys, a barrel and a price: the
-// High Society row has only Rum, which says "Rum only" without the words. The Dock Trades
-// Moonshine up to Rum, one for one: a grey cube to a brown one. The Ward carries the crown
+// High Society row has only Rum, which says "Rum only" without the words. The Trade Dock
+// (2026-11-04; the Dock row carried it until then) Trades Moonshine up to Rum, one for one: a
+// grey cube to a brown one. The Ward carries the crown
 // (Nick, 2026-10-24): a boss's home Ward is where his rivals Take the Crown. It said "Boss
 // Rises" until the Rise moved to the home Borough. A barrel is drawn as the cube that stands for it on the table (Nick: grey
 // Moonshine, brown Rum).
@@ -897,7 +935,8 @@ const KEY_CROWN = 13; // the Ward row's crown
 const KEY_ROWS = [
   ['speak', 'Speakeasy', [['moonshine', '$300'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500', true]]],
-  ['dock', 'Dock', { trade: ['moonshine', 'rum'] }],
+  ['dock', 'Dock', []],
+  ['trade', 'Trade Dock', { trade: ['moonshine', 'rum'] }],
   ['ward', 'Ward', { crown: true }],
 ];
 // Moonshine becomes Rum: a cube, a gilt arrow, a cube.
@@ -912,12 +951,14 @@ function key(x, y) {
   const rowW = what => what.trade ? TRADE_W : what.crown ? KEY_CROWN : what.words ? width(TYPE.price, what.words)
     : what.reduce((a, [, p, k]) => a + chipW(p, k), 0) + Math.max(0, what.length - 1) * CHIP_GAP;
   const chipsW = Math.max(...KEY_ROWS.map(([, , what]) => rowW(what)));
-  // The pitch was set for the crown the High Society medallion wore until 2026-10-24.
-  const PITCH = 19, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
+  // The pitch was 19 for the crown the High Society medallion wore until 2026-10-24, and four
+  // rows; 16 since the Trade Dock row came (2026-11-04), so the key stays clear of the Hudson.
+  const PITCH = 16, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
   let s = panel(x, y, w, h);
   KEY_ROWS.forEach(([k, t, what], i) => {
     const cy = y + 14 + i * PITCH, ix = x + 15;
-    s += roundel(k, ix, cy, 5.4);
+    if (k === 'trade') s += `<circle cx="${f(ix)}" cy="${f(cy)}" r="5.4" fill="#140e09" fill-opacity=".85" stroke="${C.gold}" stroke-width="1.2"/>` + schooner(ix, cy + 0.4, 0.4);
+    else s += roundel(k, ix, cy, 5.4);
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
     if (what.trade) {
@@ -938,9 +979,7 @@ function key(x, y) {
   return { fg: s, w, h };
 }
 
-// Under the Heat corner: the Tomorrow panel, the key beside it, the title below them. The
-// Powder Keg has no panel (Nick, 2026-10-31): the dynamite marks the factories, and its rule lives
-// on the Town Planner's key and in the Rulebook (since 2026-11-01, a Play).
+// Under the Heat corner: the Tomorrow panel, the key beside it, the title below them.
 const PANELS_Y = () => HEAT.edge[1] + 12;
 function sidePanels() {
   const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
@@ -1227,6 +1266,7 @@ function allText() {
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
   for (const [t] of WATER_LABELS) add(TYPE.water, t);
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
+  add(TYPE.bridge, 'Rum Row');
   for (const [, t, what] of KEY_ROWS) {
     add(TYPE.keyHead, upper(t));
     if (what.words) add(TYPE.price, what.words);
@@ -1246,7 +1286,7 @@ const hide = (id, filter, content) => `<g id="${id}" filter="url(#${filter})"><r
 function buildSvg(fontCss, mode, placed) {
   MODE = mode;
   const water = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining() + landShadow();
-  const pierList = placePiers();
+  const pierList = placePiers(), laneArt = lanes(pierList);
   const land = OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="${lift(C.offboard)}"/>`).join('')
     + districtFills() + borders() + piers(pierList) + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
@@ -1256,10 +1296,11 @@ function buildSvg(fontCss, mode, placed) {
     + defs(fontCss, mode)
     + (b ? `<rect x="${-b}" y="${-b}" width="${S}" height="${S}" fill="#0b0907"/>` : '')
     + hide('water', 'leatherWater', water)
+    + laneArt.lines
     + hide('map', 'leather', land + seams())
     + hide('panel-grounds', 'leatherFine', side.bg)
     + `<g id="lamps">${lamps(pierList)}</g>`
-    + `<g id="labels">${mapLabels()}${labels}</g>`
+    + `<g id="labels">${mapLabels()}${laneArt.labels}${labels}</g>`
     + `<g id="panels">${side.fg}${title()}</g>`
     + `<g id="frame">${frame()}${side.top}</g>`
     + `</svg>\n`;
