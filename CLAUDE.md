@@ -583,7 +583,8 @@ Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work
 Traded for Havana Rum only at the four **Trade Docks**: West Side, Jamaica, Stapleton and Tottenville,
 the Docks nobody starts on, which are the four Pressure 1 Stills (the 2s and 12s). Trade is otherwise
 unchanged: 1 Influence, 1:1, at a Trade Dock you Control, from the pool of 20. The board marks them with
-a rum-runner schooner and draws faint dashed **shipping lanes** from each off the edge of the map.
+a rum-runner schooner, and faint dashed gilt **shipping lanes** run from each to meet in one route out
+to sea through the Narrows.
 
 - **Words.** They are **Trade Docks** (Nick: a new player never read "Trade at any Dock", so the name
   says what they're for). **Rum Row** is where their lanes lead: the line of mother ships offshore, the

@@ -276,23 +276,26 @@ function schooner(cx, cy, s) {
     + `</g>`;
 }
 
-// Rum Row's shipping lanes (2026-11-04): a faint dashed line from each Trade Dock's middle pier
-// out to the edge of the board, ending in an arrowhead, toward the mother ships offshore. They
-// are scenery, not Connections (the water already carries the Dock-to-Dock links), so they are
-// drawn lighter than any border and under the land, where they can never cross a District.
-// Each lane is a smooth curve (a Catmull-Rom spline, sampled) through its pier's start and its
-// waypoints, in board units, the last on the frame's hairline; way may be a function of the start.
-// label: "Rum Row" beside the curve at a fraction t of its length, on side +1 or -1 of its heading.
-// West Side's runs straight down the Hudson below its piers (Manhattan's label sits above them
-// since 2026-11-04) and bends west as the river opens.
-const LANES = {
-  west_side: {
-    way: st => [[st[0] - 70, st[1] + 70], [118, st[0] + st[1] - 118], [52, 548], [FRAME_IN, 562]],
-    label: { t: 0.88, side: -1 },
-  },
-  jamaica: { way: st => [[715, st[1] - 4], [668, 985], [664, 1080 - FRAME_IN]], label: { t: 0.78, side: -1 } },
-  stapleton: { way: st => [[st[0] - 30, st[1] - 16], [FRAME_IN, 682]], label: { t: 0.62, side: 1 } },
-  tottenville: { way: st => [[st[0] + 34, st[1] + 30], [276, 1080 - FRAME_IN]], label: { t: 0.6, side: 1 } },
+// Rum Row's shipping lanes (2026-11-04): faint dashed lines from the four Trade Docks that meet in
+// one route and run out to sea through the Narrows, an arrowhead on the frame and "Rum Row" beside
+// it, toward the mother ships offshore (Nick: all heading the same way reads most clearly as a
+// shipping route; until then each Dock had its own lane to the nearest edge). They are scenery,
+// not Connections (the water already carries the Dock-to-Dock links), so they are drawn lighter
+// than any border and under the land, where they can never cross a District.
+// The trunk is West Side's lane: down the Hudson, round the Bowery's foot, east above Stapleton and
+// south down the Narrows. Every other lane is a branch that joins it, arriving along its heading
+// (or along approach, when the water leaves no room to turn), so the route reads as one.
+// Each line is a smooth curve (a Catmull-Rom spline, sampled) through its waypoints in board units,
+// and leaves from the rim of a pier's end lamp, the pier nearest its first waypoint.
+const RUM_ROUTE = {
+  trunk: { id: 'west_side', way: st => [[st[0] - 70, st[1] + 70], [96, 482], [58, 548], [58, 622], [86, 678], [150, 696], [232, 698], [274, 724], [281, 790], [281, 950], [266, 1020], [238, 1080 - FRAME_IN]] },
+  branches: [
+    { id: 'stapleton', join: [226, 698], lead: 18, way: () => [] },
+    { id: 'tottenville', join: [272, 1000], approach: [-1, -0.7], lead: 22, way: () => [] },
+    { id: 'jamaica', join: [252, 1046], approach: [1, -0.1], lead: 30,
+      way: st => [[st[0] - 60, st[1] - 6], [668, 988], [622, 1038], [560, 1050], [380, 1050]] },
+  ],
+  label: { t: 0.93, side: 1 },
 };
 // Muted gilt (Nick, 2026-11-04: "it looks more premium"), picked over sea-green, ivory, rum amber
 // and harbour blue. LANE_COLOR=#rrggbb and LANE_OPACITY override it for a proof.
@@ -309,37 +312,48 @@ function spline(pts, per = 24) {
   out.push(pts[pts.length - 1]);
   return out;
 }
+// A sampled curve with its arc lengths: at(d) gives the point and unit heading d along it.
+function arc(curve) {
+  const acc = [0];
+  for (let i = 1; i < curve.length; i++) acc.push(acc[i - 1] + Math.hypot(curve[i][0] - curve[i - 1][0], curve[i][1] - curve[i - 1][1]));
+  const total = acc[acc.length - 1];
+  const at = d => {
+    let i = acc.findIndex(v => v >= d); if (i < 1) i = 1;
+    const [a, b] = [curve[i - 1], curve[i]], L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, k = (d - acc[i - 1]) / L;
+    return { p: [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k], u: [(b[0] - a[0]) / L, (b[1] - a[1]) / L] };
+  };
+  return { curve, acc, total, at };
+}
+const dashed = pts => `<path d="M${pts.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')}" fill="none" stroke="${LANE.color}" stroke-opacity="${LANE.opacity}" stroke-width="${LANE.width}" stroke-dasharray="${LANE.dash}" stroke-linecap="round" stroke-linejoin="round"/>`;
 function lanes(pierList) {
-  let s = '', labels = '';
-  for (const [id, { way, label }] of Object.entries(LANES)) {
+  const lampEnd = ({ q, n }) => [q[0] + n[0] * (PIER.len - 1.2 + LAMP.r), q[1] + n[1] * (PIER.len - 1.2 + LAMP.r)];
+  const startFor = (id, firstAim) => {
     const ps = pierList.filter(p => p.d.id === id);
     if (!ps.length) throw new Error(`No pier for the Trade Dock ${id}`);
-    // The lane leaves from the rim of a pier's end lamp (Nick, 2026-11-04), the pier nearest its
-    // first waypoint; it began a few units out from the middle pier until then.
-    const route = st => (typeof way === 'function' ? way(st) : way);
-    const lampEnd = ({ q, n }) => [q[0] + n[0] * (PIER.len - 1.2 + LAMP.r), q[1] + n[1] * (PIER.len - 1.2 + LAMP.r)];
-    const aim = route(lampEnd(ps[Math.floor((ps.length - 1) / 2)]))[0];
-    const start = ps.map(lampEnd).sort((a, b) => Math.hypot(a[0] - aim[0], a[1] - aim[1]) - Math.hypot(b[0] - aim[0], b[1] - aim[1]))[0];
-    if (process.env.LANEDBG) console.error('lane', id, start.map(v => v.toFixed(1)).join(','));
-    const curve = spline([start, ...route(start)]);
-    // arc lengths, to cut the line at the arrowhead and to place the label
-    const acc = [0];
-    for (let i = 1; i < curve.length; i++) acc.push(acc[i - 1] + Math.hypot(curve[i][0] - curve[i - 1][0], curve[i][1] - curve[i - 1][1]));
-    const total = acc[acc.length - 1];
-    const at = d => { // point and unit heading at arc length d
-      let i = acc.findIndex(v => v >= d); if (i < 1) i = 1;
-      const [a, b] = [curve[i - 1], curve[i]], L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, k = (d - acc[i - 1]) / L;
-      return { p: [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k], u: [(b[0] - a[0]) / L, (b[1] - a[1]) / L] };
-    };
-    const h = LANE.head, end = at(total - 2), [ux, uy] = end.u, tip = end.p;
-    const base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
-    const line = curve.filter((_, i) => acc[i] < total - 2 - h * 1.4).concat([base]);
-    s += `<path d="M${line.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')}" fill="none" stroke="${LANE.color}" stroke-opacity="${LANE.opacity}" stroke-width="${LANE.width}" stroke-dasharray="${LANE.dash}" stroke-linecap="round" stroke-linejoin="round"/>`
-      + `<path d="M${f(base[0] - uy * h)} ${f(base[1] + ux * h)} L${f(tip[0])} ${f(tip[1])} L${f(base[0] + uy * h)} ${f(base[1] - ux * h)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
-    const m = at(total * label.t), [mx, my] = m.u;
-    let r = Math.atan2(my, mx) * 180 / Math.PI;
-    if (r > 90) r -= 180; else if (r <= -90) r += 180;
-    labels += text('Rum Row', m.p[0] - my * 6 * label.side, m.p[1] + mx * 6 * label.side, TYPE.bridge, { fill: LANE.color, anchor: 'middle', rotate: r, opacity: 0.9, middle: true });
+    const aim = firstAim(lampEnd(ps[Math.floor((ps.length - 1) / 2)]));
+    return ps.map(lampEnd).sort((a, b) => Math.hypot(a[0] - aim[0], a[1] - aim[1]) - Math.hypot(b[0] - aim[0], b[1] - aim[1]))[0];
+  };
+  // the trunk, with its arrowhead and label
+  const { trunk, branches, label } = RUM_ROUTE;
+  const tStart = startFor(trunk.id, st => trunk.way(st)[0]);
+  const T = arc(spline([tStart, ...trunk.way(tStart)]));
+  const h = LANE.head, end = T.at(T.total - 2), [ux, uy] = end.u, tip = end.p;
+  const base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
+  let s = dashed(T.curve.filter((_, i) => T.acc[i] < T.total - 2 - h * 1.4).concat([base]))
+    + `<path d="M${f(base[0] - uy * h)} ${f(base[1] + ux * h)} L${f(tip[0])} ${f(tip[1])} L${f(base[0] + uy * h)} ${f(base[1] - ux * h)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
+  const m = T.at(T.total * label.t), [mx, my] = m.u;
+  let r = Math.atan2(my, mx) * 180 / Math.PI;
+  if (r > 90) r -= 180; else if (r <= -90) r += 180;
+  const labels = text('Rum Row', m.p[0] - my * 6 * label.side, m.p[1] + mx * 6 * label.side, TYPE.bridge, { fill: LANE.color, anchor: 'middle', rotate: r, opacity: 0.9, middle: true });
+  // the branches, each ending on the trunk
+  for (const b of branches) {
+    let k = 0;
+    T.curve.forEach((q, i) => { if (Math.hypot(q[0] - b.join[0], q[1] - b.join[1]) < Math.hypot(T.curve[k][0] - b.join[0], T.curve[k][1] - b.join[1])) k = i; });
+    const p = T.curve[k], { u } = T.at(T.acc[k]), lead = b.lead || 12;
+    const v = b.approach ? (() => { const L = Math.hypot(...b.approach); return [b.approach[0] / L, b.approach[1] / L]; })() : [-u[0], -u[1]];
+    const tail = [[p[0] + v[0] * lead, p[1] + v[1] * lead], p];
+    const st = startFor(b.id, x => (b.way(x)[0] || tail[0]));
+    s += dashed(spline([st, ...b.way(st), ...tail]));
   }
   return { lines: `<g id="lanes">${s}</g>`, labels };
 }

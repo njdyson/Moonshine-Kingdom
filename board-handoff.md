@@ -697,14 +697,17 @@ keeps them on a re-trace.
   Tottenville) carry `trade: true` in the roster, and `cluster()` hangs a **rum-runner schooner**
   (`schooner()`: a brown hull with a gilt strake, two masts, cream sails) off the sign's lower edge
   under the medallion, where the Powder Keg's dynamite hung from 2026-10-31 to 2026-11-04. Not a
-  barrel: a barrel reads as liquor on the Docks where barrels move. `lanes()` draws a faint dashed
-  **shipping lane** off the board's edge from the rim of one pier's end lamp (the pier nearest its route; Nick, 2026-11-04), as a smooth curve (a
-  Catmull-Rom spline through `LANES`' waypoints), an arrowhead on the frame and "Rum Row" in the
-  bridge type beside it: West Side straight down the middle of the Hudson, bending west as the river
-  opens; Jamaica out of Jamaica Bay's mouth to the bottom edge;
-  Stapleton arcing west; Tottenville south-east through the Lower Bay to the bottom edge. The lanes
-  sit under the land, so they can never cross a District, and are lighter than any border because
-  they are not Connections. They are **muted gilt** (`C.gold`, `#c9a437`, at .6; Nick: "it looks more
+  barrel: a barrel reads as liquor on the Docks where barrels move. `lanes()` draws faint dashed
+  **shipping lanes** that meet in **one route** out to sea (Nick, 2026-11-04: all heading the same way
+  reads most clearly; until then each Dock had its own lane to the nearest edge). `RUM_ROUTE`'s trunk
+  is West Side's lane: down the middle of the Hudson, round the Bowery's foot, east above Stapleton's
+  piers and south down the Narrows, ending in an arrowhead on the bottom frame with "Rum Row" beside
+  it. Stapleton, Tottenville and Jamaica are branches that join it (Jamaica's out of the bay mouth and
+  west under Brooklyn's label, meeting it just above the arrow). A branch arrives along the trunk's
+  heading, or along its `approach` where the water leaves no room to turn. Each line is a smooth curve
+  (a Catmull-Rom spline through its waypoints) and leaves from the rim of a pier's end lamp, the pier
+  nearest its route. The lanes sit under the land, so they can never cross a District, and are lighter
+  than any border because they are not Connections. They are **muted gilt** (`C.gold`, `#c9a437`, at .6; Nick: "it looks more
   premium"), picked on 2026-11-04 over the first sea-green `#8fc9bd`, ivory, rum amber and harbour blue;
   `LANE_COLOR=#rrggbb LANE_OPACITY=0.6 node tools/build_board.js` proofs another. The key gained a **Trade Dock** row (the schooner in a
   roundel, the Moonshine to Rum chip the Dock row used to carry); the Dock row is bare now, and the
