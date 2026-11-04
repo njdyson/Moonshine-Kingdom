@@ -290,7 +290,7 @@ function schooner(cx, cy, s) {
 const RUM_ROUTE = {
   trunk: { id: 'west_side', way: st => [[st[0] - 70, st[1] + 70], [96, 482], [58, 548], [58, 622], [86, 678], [150, 696], [232, 698], [274, 724], [281, 790], [281, 950], [266, 1020], [238, 1080 - FRAME_IN]] },
   branches: [
-    { id: 'stapleton', join: [226, 698], lead: 18, way: () => [] },
+    { id: 'stapleton', join: [150, 697], approach: [-0.5, 1], lead: 5, way: () => [] }, // a short spur up to the route, not a long shallow merge
     { id: 'tottenville', join: [272, 1000], approach: [-1, -0.7], lead: 22, way: () => [] },
     { id: 'jamaica', join: [252, 1046], approach: [1, -0.1], lead: 30,
       way: st => [[st[0] - 34, st[1] - 6], [668, 990], [622, 1038], [560, 1050], [380, 1050]] },

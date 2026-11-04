@@ -704,7 +704,7 @@ keeps them on a re-trace.
   piers and south down the Narrows, ending in an arrowhead on the bottom frame, with **RUM ROW** level
   along the bottom edge beside it in the water labels' type (Nick: the label names what lies off the
   board; a caption along a lane was cut through by the lines). Stapleton's and Jamaica's piers sit west
-  of the middle of their shores (`PIER_WEST`, 30 and 40 units) so their lanes have room to turn. Stapleton, Tottenville and Jamaica are branches that join it (Jamaica's out of the bay mouth and
+  of the middle of their shores (`PIER_WEST`, 30 and 40 units) so their lanes have room to turn. Stapleton, Tottenville and Jamaica are branches that join it (Stapleton's as a short spur up to the route, since a long shallow merge read as a smudge of doubled dashes) (Jamaica's out of the bay mouth and
   west under Brooklyn's label, meeting it just above the arrow). A branch arrives along the trunk's
   heading, or along its `approach` where the water leaves no room to turn. Each line is a smooth curve
   (a Catmull-Rom spline through its waypoints) and leaves from the rim of a pier's end lamp, the pier
