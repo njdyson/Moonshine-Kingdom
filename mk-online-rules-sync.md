@@ -1209,7 +1209,7 @@ mk-online on its `claude/powder-keg-rule-feedback-46lnh4` (8233b86, unmerged): T
 with a provisional third tie-break (the lower Turn Token for tomorrow). Seats read `harness/RULES-AI.md`
 alone in a default game; `rulesText()` appends a block only for a switch that changes the written rules.
 `scripts/commission-check.ts` covers it. The tie-break is settled (0b029f0), and the 2026-11-04 board is in
-`public/board.svg` (3a2bc96). **Not yet:** the merge and the deploy.
+`public/board.svg` (3a2bc96). Merged in mk-online's PR #36 and deployed here from 000efde (2026-11-04).
 
 ## Checklist
 
@@ -1340,4 +1340,4 @@ alone in a default game; `rulesText()` appends a block only for a switch that ch
 - [x] **Extort at $100 per District, any number a Day; Collect cut** (§35)
 - [x] **Jobs pay 1, 2 or 3; High Roller in, The Real McCoy out** (§37; mk-online PR #11)
 - [x] **The Market pass: barrel bridges with The Milk Run, Last One Standing 4+, Cuban Prince 1, Jamaica Ginger for Night Landing** (§43)
-- [ ] **Trade Docks by default, keg off, the Commission behind a switch** (§47; mk-online 8233b86, 0b029f0 and 3a2bc96, unmerged)
+- [ ] **Trade Docks by default, keg off, the Commission behind a switch** (§47; mk-online PR #36, deployed from 000efde)

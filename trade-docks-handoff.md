@@ -47,7 +47,7 @@ he will likely bring back his old "Loose Change" rule instead. The open problem 
 tracking the Day without a big extra track or an easily forgotten token. Don't write it into the
 Rulebook.
 
-Still open for Nick: go-ahead for the Opus game; merging both branches (then the deploy, `DEPLOY.md`).
+Merged on 2026-11-04 (mk-online PR #36, deployed from 000efde). Still open for Nick: go-ahead for the Opus game.
 
 ## What Nick decided (2026-11-04)
 
