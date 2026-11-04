@@ -704,10 +704,9 @@ keeps them on a re-trace.
   opens; Jamaica out of Jamaica Bay's mouth to the bottom edge;
   Stapleton arcing west; Tottenville south-east through the Lower Bay to the bottom edge. The lanes
   sit under the land, so they can never cross a District, and are lighter than any border because
-  they are not Connections. **Their colour is on trial** (Nick didn't love the first, sea-green
-  `#8fc9bd`): `LANE_COLOR=#rrggbb LANE_OPACITY=0.6 node tools/build_board.js` proofs another; the
-  options shown to him were ivory `#e6dcc4` at .55, muted gilt `#c9a437` at .6, rum amber `#d9925a`
-  at .7 and harbour blue `#9fb9d8` at .7. The key gained a **Trade Dock** row (the schooner in a
+  they are not Connections. They are **muted gilt** (`C.gold`, `#c9a437`, at .6; Nick: "it looks more
+  premium"), picked on 2026-11-04 over the first sea-green `#8fc9bd`, ivory, rum amber and harbour blue;
+  `LANE_COLOR=#rrggbb LANE_OPACITY=0.6 node tools/build_board.js` proofs another. The key gained a **Trade Dock** row (the schooner in a
   roundel, the Moonshine to Rum chip the Dock row used to carry); the Dock row is bare now, and the
   key's pitch went from 19 to 16 so the fifth row stays clear of the Hudson. Proof it at 24 inches.
 - **Staten Island's label stands upright off its west shore** (Nick, 2026-11-04), as the Bronx's does

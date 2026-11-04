@@ -26,8 +26,8 @@ A, B and C below are done on this branch and mk-online's; D (the Opus game) has 
   Then mk-online's `public/board.svg` follows (`mk-online-board-handoff.md`).
   **Nick's first round (2026-11-04):** Staten Island's label moved upright onto the west shore and
   Tottenville's piers onto the south-east shore; the lanes became curves; and he didn't love the
-  sea-green, so the colour is on trial (four options in `board-handoff.md`, Decisions; `LANE_COLOR`
-  proofs another). The committed board still uses the sea-green until he picks.
+  sea-green, and picked **muted gilt** from four options ("more premium"). Then Manhattan's label moved
+  up the Hudson above West Side, whose piers settled lower, and its lane runs down the open river.
 - **C. mk-online: done** (8233b86 on its `claude/powder-keg-rule-feedback-46lnh4`, unmerged; this repo's
   `mk-online-rules-sync.md` §47). Trade Docks on and the keg off by default (`rumrow=0`, `keg=main` turn
   them back); the Commission is `commission=28`. Seats read `harness/RULES-AI.md` alone in a default game,
@@ -46,7 +46,7 @@ he will likely bring back his old "Loose Change" rule instead. The open problem 
 tracking the Day without a big extra track or an easily forgotten token. Don't write it into the
 Rulebook.
 
-Still open for Nick: the lane colour, then approval of the board; go-ahead for the Opus game.
+Still open for Nick: approval of the board as it stands; go-ahead for the Opus game.
 
 ## What Nick decided (2026-11-04)
 

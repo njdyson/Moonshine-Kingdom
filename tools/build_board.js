@@ -294,8 +294,9 @@ const LANES = {
   stapleton: { way: st => [[st[0] - 30, st[1] - 16], [FRAME_IN, 682]], label: { t: 0.62, side: 1 } },
   tottenville: { way: st => [[st[0] + 34, st[1] + 30], [276, 1080 - FRAME_IN]], label: { t: 0.6, side: 1 } },
 };
-// The colour is on trial (Nick, 2026-11-04): LANE_COLOR=#rrggbb overrides it for a proof.
-const LANE = { color: process.env.LANE_COLOR || '#8fc9bd', width: 1.3, dash: '5 4', opacity: +(process.env.LANE_OPACITY || 0.7), head: 5 };
+// Muted gilt (Nick, 2026-11-04: "it looks more premium"), picked over sea-green, ivory, rum amber
+// and harbour blue. LANE_COLOR=#rrggbb and LANE_OPACITY override it for a proof.
+const LANE = { color: process.env.LANE_COLOR || C.gold, width: 1.3, dash: '5 4', opacity: +(process.env.LANE_OPACITY || 0.6), head: 5 };
 function spline(pts, per = 24) {
   const P = [pts[0], ...pts, pts[pts.length - 1]], out = [];
   for (let i = 1; i < P.length - 2; i++) {
