@@ -293,9 +293,9 @@ const RUM_ROUTE = {
     { id: 'stapleton', join: [226, 698], lead: 18, way: () => [] },
     { id: 'tottenville', join: [272, 1000], approach: [-1, -0.7], lead: 22, way: () => [] },
     { id: 'jamaica', join: [252, 1046], approach: [1, -0.1], lead: 30,
-      way: st => [[st[0] - 60, st[1] - 6], [668, 988], [622, 1038], [560, 1050], [380, 1050]] },
+      way: st => [[st[0] - 34, st[1] - 6], [668, 990], [622, 1038], [560, 1050], [380, 1050]] },
   ],
-  label: { t: 0.93, side: 1 },
+  label: { text: 'RUM ROW', dx: -10, dy: -8 },
 };
 // Muted gilt (Nick, 2026-11-04: "it looks more premium"), picked over sea-green, ivory, rum amber
 // and harbour blue. LANE_COLOR=#rrggbb and LANE_OPACITY override it for a proof.
@@ -341,10 +341,9 @@ function lanes(pierList) {
   const base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
   let s = dashed(T.curve.filter((_, i) => T.acc[i] < T.total - 2 - h * 1.4).concat([base]))
     + `<path d="M${f(base[0] - uy * h)} ${f(base[1] + ux * h)} L${f(tip[0])} ${f(tip[1])} L${f(base[0] + uy * h)} ${f(base[1] - ux * h)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
-  const m = T.at(T.total * label.t), [mx, my] = m.u;
-  let r = Math.atan2(my, mx) * 180 / Math.PI;
-  if (r > 90) r -= 180; else if (r <= -90) r += 180;
-  const labels = text('Rum Row', m.p[0] - my * 6 * label.side, m.p[1] + mx * 6 * label.side, TYPE.bridge, { fill: LANE.color, anchor: 'middle', rotate: r, opacity: 0.9, middle: true });
+  // the destination, named level along the bottom edge beside the arrow (Nick, 2026-11-04), in the
+  // water labels' type: what lies off the board, not a caption on one line
+  const labels = text(label.text, tip[0] + label.dx, 1080 - FRAME_IN + label.dy, TYPE.water, { fill: LANE.color, anchor: 'end', opacity: 0.95, middle: true });
   // the branches, each ending on the trunk
   for (const b of branches) {
     let k = 0;
@@ -694,6 +693,9 @@ function bridgeGlyph(a, b, ext = 6, k = 1) { // k scales the width, for the key
 // own colour so they read as its land. Placed automatically: each must run into
 // open water, clear of other land, bridges and the water labels.
 const PIER = { len: 12, half: 2.3, gap: 15, count: 3 };
+// Piers slid west of the middle of their free shore, in board units (Nick, 2026-11-04: Stapleton's
+// and Jamaica's, so their Rum Row lanes have room to turn toward the Narrows).
+const PIER_WEST = { stapleton: 30, jamaica: 40 };
 function orientedBox(cx, cy, deg, hl, hh) {
   const t = deg * Math.PI / 180, ux = Math.cos(t), uy = Math.sin(t);
   return [[-hl, -hh], [hl, -hh], [hl, hh], [-hl, hh]].map(([a, b]) => [cx + ux * a - uy * b, cy + uy * a + ux * b]);
@@ -740,7 +742,13 @@ function placePiers() {
     if (!best || !best.run.length) continue;
     const span = (best.run.length - 1) * 3, n = Math.min(PIER.count, Math.floor(span / PIER.gap) + 1);
     const midIdx = (best.run.length - 1) / 2, [ux, uy] = best.u;
-    const c0 = best.run[Math.floor(midIdx)];
+    let ci = Math.floor(midIdx);
+    if (PIER_WEST[d.id]) { // slide the piers west along the free run, keeping all of them on it
+      const target = best.run[ci][0] - PIER_WEST[d.id], half = Math.ceil(((n - 1) / 2) * PIER.gap / 3);
+      best.run.forEach((q, i) => { if (Math.abs(q[0] - target) < Math.abs(best.run[ci][0] - target)) ci = i; });
+      ci = Math.max(half, Math.min(best.run.length - 1 - half, ci));
+    }
+    const c0 = best.run[ci];
     for (let k = 0; k < n; k++) {
       const off = (k - (n - 1) / 2) * PIER.gap;
       out.push({ d, q: [c0[0] + ux * off, c0[1] + uy * off], u: best.u, n: best.n });
@@ -1304,7 +1312,7 @@ function allText() {
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
   for (const [t] of WATER_LABELS) add(TYPE.water, t);
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
-  add(TYPE.bridge, 'Rum Row');
+  add(TYPE.water, RUM_ROUTE.label.text);
   for (const [, t, what] of KEY_ROWS) {
     add(TYPE.keyHead, upper(t));
     if (what.words) add(TYPE.price, what.words);

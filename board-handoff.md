@@ -701,8 +701,10 @@ keeps them on a re-trace.
   **shipping lanes** that meet in **one route** out to sea (Nick, 2026-11-04: all heading the same way
   reads most clearly; until then each Dock had its own lane to the nearest edge). `RUM_ROUTE`'s trunk
   is West Side's lane: down the middle of the Hudson, round the Bowery's foot, east above Stapleton's
-  piers and south down the Narrows, ending in an arrowhead on the bottom frame with "Rum Row" beside
-  it. Stapleton, Tottenville and Jamaica are branches that join it (Jamaica's out of the bay mouth and
+  piers and south down the Narrows, ending in an arrowhead on the bottom frame, with **RUM ROW** level
+  along the bottom edge beside it in the water labels' type (Nick: the label names what lies off the
+  board; a caption along a lane was cut through by the lines). Stapleton's and Jamaica's piers sit west
+  of the middle of their shores (`PIER_WEST`, 30 and 40 units) so their lanes have room to turn. Stapleton, Tottenville and Jamaica are branches that join it (Jamaica's out of the bay mouth and
   west under Brooklyn's label, meeting it just above the arrow). A branch arrives along the trunk's
   heading, or along its `approach` where the water leaves no room to turn. Each line is a smooth curve
   (a Catmull-Rom spline through its waypoints) and leaves from the rim of a pier's end lamp, the pier
