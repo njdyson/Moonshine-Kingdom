@@ -700,8 +700,8 @@ keeps them on a re-trace.
   barrel: a barrel reads as liquor on the Docks where barrels move. `lanes()` draws a faint dashed
   **shipping lane** from each Trade Dock's middle pier off the board's edge, as a smooth curve (a
   Catmull-Rom spline through `LANES`' waypoints), an arrowhead on the frame and "Rum Row" in the
-  bridge type beside it: West Side down the Hudson 8 units off New Jersey, clear of Manhattan's
-  label, bending west as the river opens; Jamaica out of Jamaica Bay's mouth to the bottom edge;
+  bridge type beside it: West Side straight down the middle of the Hudson, bending west as the river
+  opens; Jamaica out of Jamaica Bay's mouth to the bottom edge;
   Stapleton arcing west; Tottenville south-east through the Lower Bay to the bottom edge. The lanes
   sit under the land, so they can never cross a District, and are lighter than any border because
   they are not Connections. **Their colour is on trial** (Nick didn't love the first, sea-green
@@ -714,6 +714,9 @@ keeps them on a re-trace.
   off its east shore (`draft_board.js`, `labels.boro.SI`; it lay along the south-east shore, in the
   Lower Bay, until then). That freed the south-east shore, so `placePiers()` now puts Tottenville's
   piers there (they were on the west shore, a few units off the frame), and its lane runs out to sea.
+- **Manhattan's label sits north of West Side's piers** (Nick, 2026-11-04; `labels.boro.MN` at y 215,
+  it was 405, below them). With the label gone from beside the shore, `placePiers()` sets West Side's
+  piers lower on it, and the lane runs down the open river below them.
 
 - **Every connection is the traced map's but Manhattan's three.** `FLIPS` in `draft_board.js`
   changes one (it gives a border to the two Districts at its ends; the traced map is untouched).

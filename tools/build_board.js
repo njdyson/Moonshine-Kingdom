@@ -283,12 +283,11 @@ function schooner(cx, cy, s) {
 // Each lane is a smooth curve (a Catmull-Rom spline, sampled) through its pier's start and its
 // waypoints, in board units, the last on the frame's hairline; way may be a function of the start.
 // label: "Rum Row" beside the curve at a fraction t of its length, on side +1 or -1 of its heading.
-// West Side's runs down the Hudson 8 units off New Jersey's shore (x + y = 534.2), to pass outside
-// Manhattan's label and shield, and bends west as the river opens.
-const HUDSON_LANE = 534.2 + 8 * Math.SQRT2;
+// West Side's runs straight down the Hudson below its piers (Manhattan's label sits above them
+// since 2026-11-04) and bends west as the river opens.
 const LANES = {
   west_side: {
-    way: st => [[HUDSON_LANE - st[1] - 70, st[1] + 70], [80, HUDSON_LANE - 80], [FRAME_IN, 548]],
+    way: st => [[st[0] - 70, st[1] + 70], [118, st[0] + st[1] - 118], [52, 548], [FRAME_IN, 562]],
     label: { t: 0.88, side: -1 },
   },
   jamaica: { way: st => [[715, st[1] - 4], [668, 985], [664, 1080 - FRAME_IN]], label: { t: 0.78, side: -1 } },

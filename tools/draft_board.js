@@ -365,9 +365,9 @@ function draft(S) {
   // Where the labels in the water sit on this map: midway between shores, at their angle.
   const labels = {
     boro: {
-      // in the Hudson, its shield clear of the mouth (the coast turns upright at MN_TURN, y 500) and
-      // its far end clear of West Side's piers
-      MN: [...atY(shift(MN_WEST, HUDSON / 2), 405).map(r1), -45],
+      // in the Hudson, north of West Side's piers (Nick, 2026-11-04), so Rum Row's lane runs down
+      // the river below them; it sat lower, its shield clear of the mouth, until then
+      MN: [...atY(shift(MN_WEST, HUDSON / 2), 215).map(r1), -45],
       BX: [(BRONX_EAST + 1080 - FRAME_IN) / 2, r1((FRAME_IN + TIP[1]) / 2), -90], // beside the Bronx's east shore
       // Brooklyn and Queens each BORO_GAP under its own south shore (the Bronx's sits as far off its
       // east shore), centred under it: Brooklyn under Coney Island and Canarsie, Queens under the Rockaways
