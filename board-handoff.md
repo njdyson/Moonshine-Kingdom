@@ -692,13 +692,35 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
-- **The Powder Keg** (Nick, 2026-10-31). The four factory Docks (West Side, Jamaica, Stapleton,
-  Tottenville) carry `keg: true` in the roster, and `cluster()` hangs the mark off the sign's lower
-  edge under the medallion. Since 2026-11-01 the mark is **two sticks of dynamite** (`dynamite()`:
-  red sticks, a gilt band, a lit fuse; Nick: "the bomb icon shows a war shell, not a powder keg").
-  It was the round black bomb (mark B of `tools/mock_powder_keg.js`) for a day; a barrel with a fuse
-  was weighed and not taken, since at sign size it reads as liquor. No key row or panel (Nick: the
-  rule on the Town Planner and in the Rulebook is enough). Proof it at 24 inches.
+- **Trade Docks and Rum Row's lanes** (2026-11-04; `trade-docks-handoff.md`, a draft for Nick to
+  approve before mk-online copies it). The four Trade Docks (West Side, Jamaica, Stapleton,
+  Tottenville) carry `trade: true` in the roster, and `cluster()` hangs a **rum-runner schooner**
+  (`schooner()`: a brown hull with a gilt strake, two masts, cream sails) off the sign's lower edge
+  under the medallion, where the Powder Keg's dynamite hung from 2026-10-31 to 2026-11-04. Not a
+  barrel: a barrel reads as liquor on the Docks where barrels move. `lanes()` draws faint dashed
+  **shipping lanes** that meet in **one route** out to sea (Nick, 2026-11-04: all heading the same way
+  reads most clearly; until then each Dock had its own lane to the nearest edge). `RUM_ROUTE`'s trunk
+  is West Side's lane: down the middle of the Hudson, round the Bowery's foot, east above Stapleton's
+  piers and south down the Narrows, ending in an arrowhead on the bottom frame, with **RUM ROW** level
+  along the bottom edge beside it in the water labels' type (Nick: the label names what lies off the
+  board; a caption along a lane was cut through by the lines). Stapleton's and Jamaica's piers sit west
+  of the middle of their shores (`PIER_WEST`, 30 and 40 units) so their lanes have room to turn. Stapleton, Tottenville and Jamaica are branches that join it (Stapleton's as a short spur up to the route, since a long shallow merge read as a smudge of doubled dashes) (Jamaica's out of the bay mouth and
+  west under Brooklyn's label, meeting it just above the arrow). A branch arrives along the trunk's
+  heading, or along its `approach` where the water leaves no room to turn. Each line is a smooth curve
+  (a Catmull-Rom spline through its waypoints) and leaves from the rim of a pier's end lamp, the pier
+  nearest its route. The lanes sit under the land, so they can never cross a District, and are lighter
+  than any border because they are not Connections. They are **muted gilt** (`C.gold`, `#c9a437`, at .6; Nick: "it looks more
+  premium"), picked on 2026-11-04 over the first sea-green `#8fc9bd`, ivory, rum amber and harbour blue;
+  `LANE_COLOR=#rrggbb LANE_OPACITY=0.6 node tools/build_board.js` proofs another. The key gained a **Trade Dock** row (the schooner in a
+  roundel, the Moonshine to Rum chip the Dock row used to carry); the Dock row is bare now, and the
+  key's pitch went from 19 to 16 so the fifth row stays clear of the Hudson. Proof it at 24 inches.
+- **Staten Island's label stands upright off its west shore** (Nick, 2026-11-04), as the Bronx's does
+  off its east shore (`draft_board.js`, `labels.boro.SI`; it lay along the south-east shore, in the
+  Lower Bay, until then). That freed the south-east shore, so `placePiers()` now puts Tottenville's
+  piers there (they were on the west shore, a few units off the frame), and its lane runs out to sea.
+- **Manhattan's label sits north of West Side's piers** (Nick, 2026-11-04; `labels.boro.MN` at y 215,
+  it was 405, below them). With the label gone from beside the shore, `placePiers()` sets West Side's
+  piers lower on it, and the lane runs down the open river below them.
 
 - **Every connection is the traced map's but Manhattan's three.** `FLIPS` in `draft_board.js`
   changes one (it gives a border to the two Districts at its ends; the traced map is untouched).

@@ -92,7 +92,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Move (movePlay) | 1 | Any Mobsters and/or barrels from a District you Control to one Connected District. Never into a Padlocked District (a Squad's). Into a Hostile District (rival Mobsters): Standoff (§6). Barrels alone belong to whoever Controls the District they land in: a rival's become his, and in one nobody Controls they are nobody's. Mobsters into a District where a rival Safehouse stands with no Mobsters: no Standoff; take it over (evictTakeOver) or destroy it (evictRaze). |
 | Recruit (recruit) | 1 | Hire Runners into your Safehouse District at **$300 each**. Needs the Safehouse on the board, not Control; the new Runners take Control. |
 | Secure (secure) | 1 | **$500**: place or relocate your one Safehouse into any Safe District. On a rival Safehouse it is a take over: theirs is destroyed (back to its owner's supply) and yours moves in. A Safehouse grants no Control by itself. |
-| Trade (trade) | 1 | At a Dock you Control, swap Moonshine there for Rum 1:1 (limited by the Rum supply). This is the only source of Rum. |
+| Trade (trade) | 1 | At a **Trade Dock** you Control (**West Side, Jamaica, Stapleton, Tottenville**: the four Docks nobody starts on), swap Moonshine there for Havana Rum 1:1 (limited by the Rum supply). This is the only source of Rum. Barrels Move Dock to Dock across the water, so Moonshine on any Dock can be shipped to a Trade Dock in one Move. |
 | Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
 | Lay Low (layLow) | 0 | See §3. |

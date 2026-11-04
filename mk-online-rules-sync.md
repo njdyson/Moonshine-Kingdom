@@ -1191,6 +1191,26 @@ are "dynamite Docks"; `public/board.svg` is the board with two sticks of dynamit
 piece on the map is a black barrel with a lit fuse. `harness/transcripts/keg-opus-3*` is the Opus game
 that prompted it (nobody made the keg in 22 Days).
 
+## 47. Trade Docks; the Powder Keg cut; the Commission's Day 28 limit on trial (2026-11-04, Nick)
+
+The rule as written (the Rulebook's Trade row; CLAUDE.md's *Trade Docks* and *The Powder Keg: cut*;
+`trade-docks-handoff.md` for the evidence):
+
+- **Trade only at a Trade Dock you Control**: West Side, Jamaica, Stapleton, Tottenville (the four Docks
+  nobody starts on, the Pressure 1 Stills). Otherwise unchanged: 1 Influence, 1:1, the pool of 20.
+- **The Powder Keg is cut**: no Rig, no Detonate, no Detonator, no -2. The Still swap stays.
+- **The Commission** (trial only, not in the Rulebook): if nobody has Taken the Crown by Sunset of Day 28,
+  the most Respect wins, cash breaking a tie.
+
+mk-online on its `claude/powder-keg-rule-feedback-46lnh4` (8233b86, unmerged): Trade Docks on by default
+(`src/game/rumrow.ts`; `rumrow=0` turns them off), the keg off by default with its code kept
+(`src/game/keg.ts`; `keg=main` turns it on), and `setCommissionDay(n)` / `G.commissionDay` in
+`src/game/crown.ts` (`commission=28` on `play-file new`), resolved at `runSunset` after the Turn Tokens
+with a provisional third tie-break (the lower Turn Token for tomorrow). Seats read `harness/RULES-AI.md`
+alone in a default game; `rulesText()` appends a block only for a switch that changes the written rules.
+`scripts/commission-check.ts` covers it. The tie-break is settled (0b029f0), and the 2026-11-04 board is in
+`public/board.svg` (3a2bc96). Merged in mk-online's PR #36 and deployed here from 000efde (2026-11-04).
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5
@@ -1320,3 +1340,4 @@ that prompted it (nobody made the keg in 22 Days).
 - [x] **Extort at $100 per District, any number a Day; Collect cut** (§35)
 - [x] **Jobs pay 1, 2 or 3; High Roller in, The Real McCoy out** (§37; mk-online PR #11)
 - [x] **The Market pass: barrel bridges with The Milk Run, Last One Standing 4+, Cuban Prince 1, Jamaica Ginger for Night Landing** (§43)
+- [ ] **Trade Docks by default, keg off, the Commission behind a switch** (§47; mk-online PR #36, deployed from 000efde)
