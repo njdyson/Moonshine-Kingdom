@@ -36,18 +36,18 @@ M, BX, Q, BK, ST = 'Manhattan', 'Bronx', 'Queens', 'Brooklyn', 'Staten'
 # name, borough, tags, still  (pressure = 6 - |still-7|), from the Town Planner.
 DISTRICTS = [
     ('Sugar Hill', M, {'highSociety', 'speakeasy'}, 7), ('East Harlem', M, {'speakeasy'}, 11),
-    ('The Tenderloin', M, {'speakeasy'}, 8), ('West Side', M, {'dock'}, 12),
+    ('The Tenderloin', M, {'speakeasy'}, 8), ('West Side', M, {'dock', 'tradeDock'}, 12),
     ('The Bowery', M, {'dock'}, 9), ('Five Points', M, {'ward'}, 10),
     ('Morris Park', BX, {'highSociety', 'speakeasy'}, 7), ('Belmont', BX, {'speakeasy'}, 11),
     ('Fordham', BX, {'speakeasy'}, 8), ('Throggs Neck', BX, {'dock'}, 10),
     ('Hunts Point', BX, {'ward'}, 9),
     ('Richmond Hill', Q, {'highSociety', 'speakeasy'}, 7), ('Astoria', Q, {'speakeasy'}, 3),
     ('Corona', Q, {'speakeasy'}, 6), ('Whitestone', Q, {'dock'}, 5),
-    ('Jamaica', Q, {'dock'}, 2), ('Flushing', Q, {'ward'}, 4),
+    ('Jamaica', Q, {'dock', 'tradeDock'}, 2), ('Flushing', Q, {'ward'}, 4),
     ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7), ('Coney Island', BK, {'speakeasy'}, 3),
     ('Red Hook', BK, {'speakeasy'}, 6), ('Canarsie', BK, {'dock'}, 4),
     ('Brownsville', BK, {'ward'}, 5),
-    ('Stapleton', ST, {'dock'}, 12), ('Tottenville', ST, {'dock'}, 2),
+    ('Stapleton', ST, {'dock', 'tradeDock'}, 12), ('Tottenville', ST, {'dock', 'tradeDock'}, 2),
 ]
 
 
@@ -318,7 +318,8 @@ def _plays(verb, d, state, home):
                 for rum in ((True,) if d.has('highSociety') else (False, True)):
                     yield _p(state=state, home=home, barrels=barrels, rum=rum)
     elif verb == 'Trade':
-        if state == 'control' and d.has('dock'):
+        # Trade happens only at the four Trade Docks (2026-11-04).
+        if state == 'control' and d.has('tradeDock'):
             for barrels in BARRELS[1:]:
                 yield _p(state=state, home=home, barrels=barrels)
     elif verb == 'Extort':

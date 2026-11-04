@@ -195,8 +195,6 @@ fold (earning its name 'trap')." A crew with no Connected Safe District to Scram
 hunter's work is the cornering, and a face-up Trap that makes a Boss run hands over his block. It is
 the deck's one kill Job, so the Rulebook keeps its kill lines ("a Raid makes arrests, not kills", "your
 Ambush or return fire completes nothing") and the Glossary its Kill entry. Don't make it a Seize.
-**A Detonate's kill counts** (Nick, 2026-11-01): it is your own Play, so a rival Boss the Powder Keg
-blows up pays the Trap. The Glossary's Kill entry and the keg page's blast bullet say so.
 
 ## Jobs pay 1, 2 or 3
 
@@ -336,8 +334,7 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 Since 2026-09-25; Respect became the only score on 2026-10-12 (Nick; `respect-endgame-handoff.md`
 holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds, Titles,
 or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
-(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold, **2** for the Detonator
-(since 2026-11-01; see *The Powder Keg*) and **1** per Welsher. The
+(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold and **1** per Welsher. The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a rival's home Ward** (since 2026-10-24; see *The Crown in
 the Wards*), and you win on the spot. It lives on the Winning the Game page (a heading and a two-item
@@ -570,8 +567,8 @@ Tax back on it. Watch in playtest: a packed Ward is now a silent cash engine, an
 clears Raid bait without making the Irish the freshest noise. (`mk-online-rules-sync.md` §9.6
 and §27.)
 
-The Rum pool is **20** barrels, and Trade at a Dock (1:1 from Moonshine) is the only way Rum
-enters the game. Trade is worth **$200 a barrel** in cash, plus the Kickback if the Rum is
+The Rum pool is **20** barrels, and Trade at a Trade Dock (1:1 from Moonshine; see *Trade Docks*)
+is the only way Rum enters the game. Trade is worth **$200 a barrel** in cash, plus the Kickback if the Rum is
 poured at High Society.
 
 History, so nobody rebuilds it: 2026-08-22 had the address set the price and Rum carry the
@@ -580,108 +577,47 @@ deleted the Hotspot tokens and Titles and fixed the Kickback to the four High So
 The rule that let the Night Mayor **strand** goods (one liquor to a room) stays dead: nothing
 in the game bricks a paid-for asset.
 
-## The Powder Keg: a barrel, a card, and two Plays
+## Trade Docks: West Side, Jamaica, Stapleton, Tottenville
 
-Since 2026-10-31 (Nick; `powder-keg-handoff.md` holds the design, the mk-online trials and what was
-weighed). One black barrel and one card, the **Detonator**. **Since 2026-11-01 the keg is a pair of standard
-Plays, not part of the Brew or Sunset** (Nick, after sleeping on it: he liked the boost to the four
-weakest Stills, the hot potato and the "dam busting" of a fortress; he disliked the added rules, two
-kinds of explosion, and the factory's owner sitting on a free keg to sail it to any Dock on his last
-Play). **Its one home is the Rulebook's *The Powder Keg: Light the Fuse*** page, after Mob Signature
-Plays (it replaced the Sunset page, and Sunset went back to a run-in paragraph at the foot of the
-Hustle page). The Hustle's Standard Plays table has a Rig row that points there, and
-Components, Setup, Drawing Heat and the Glossary carry a line each. The Playbooks carry the first
-Play, the Detonator card the second, the Town Planner a key row and Detonate in its Heat list, and the
-board only the mark.
+Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). Moonshine is
+Traded for Havana Rum only at the four **Trade Docks**: West Side, Jamaica, Stapleton and Tottenville,
+the Docks nobody starts on, which are the four Pressure 1 Stills (the 2s and 12s). Trade is otherwise
+unchanged: 1 Influence, 1:1, at a Trade Dock you Control, from the pool of 20. The board marks them with
+a rum-runner schooner and draws faint dashed **shipping lanes** from each off the edge of the map.
 
-- **Rig (1)**, a standard Play on every Playbook: at a **dynamite Dock** you Control, take the keg from
-  the Supply, if it's there, and the Detonator. No barrel is swapped (Nick, 2026-11-01, after the
-  keg-opus-3 playtest: the swap made the keg's barrel compete with the Rum Trade on the same square,
-  and both bots holding a factory Traded instead). The Playbook row reads "At a dynamite Dock you
-  Control, take the Powder Keg and the Detonator."
-  **The board marks the four factories with two sticks of dynamite** (Nick, 2026-11-01: "the bomb icon
-  shows a war shell, not a powder keg"; it was the round black bomb from 2026-10-31). Rule text calls
-  them **dynamite Docks** (a Glossary entry), so "bomb" names nothing in the game now. A barrel with a
-  fuse was weighed and not taken: at sign size it reads as liquor, on the Docks where liquor moves.
-  The factories are the four Docks nobody starts on, which are the four Pressure 1 Stills: Jamaica and
-  Tottenville on **2**, West Side and Stapleton on **12**. To make that so, **West Side and East Harlem
-  swapped Stills** (12 and 11) and **Jamaica and Astoria** (2 and 3) on 2026-10-31 (Nick: easier to
-  teach, symmetrical). Every Still number still appears on two Districts, each Borough's Pressure total
-  is unchanged, and the Insurance Job's Pressure 1 or 2 Stills are the same four pairs.
-- **Detonate (1, Heat)**, printed on the Detonator: its holder alone, wherever the keg stands, whoever
-  Controls its District. **That District loses its Muscle Ratio in Mobsters**, no roll, Runners first,
-  "the same as a Blowback" (the Boss only with no Runner left). **No splash**: one way things blow up
-  (Nick). It kills Mobsters and nothing else: other barrels and Safehouses are untouched. A rival Boss it
-  kills pays The Toll Booth Trap (Nick, 2026-11-01), and only that: the body-count Jobs are Seizes. Then the keg
-  and the card go back to the Supply. **Never say it "takes a Blowback"** (Nick): the mechanics match,
-  but the Rulebook compares the two and keeps the Blowback's name for the morning.
-- **The keg is a barrel in every way** (Nick: "minimise complexity"): it Moves, belongs to whoever
-  Controls its District, counts toward Jobs and the Big Bust, and goes back to the Supply wherever
-  barrels do (a Raid's Scatter, a Torch). The one exception: **nobody buys it**, so no Unload, Trade or
-  Peddle. It counts on six Jobs: the four bridge cards, Last One Standing and The Warehouse.
-- **The card is the fuse.** It stays with the boss who made the keg wherever the keg goes, never
-  changes hands in a deal, and goes back to the Supply whenever the keg does. So the keg is whoever
-  Controls it, the match is the card holder's, and the hot potato is "don't hold the keg while the card
-  holder is still up". Nothing has to be remembered: the card on the table says who lit it.
-- **The card is the Detonator**, with "Powder Keg" as its kicker (Nick, 2026-11-01; it was "The Bomb"
-  for its first evening). One name, one thing: "Powder Keg" names the barrel (and named the Play that
-  makes it until it became Rig), and "the bomb" named the board's mark until it became dynamite. The card's title says what it does
-  (the Detonator's holder Detonates), and plunger blasting boxes were standard kit by 1929.
-- **The Play is Rig** (Nick, 2026-11-01, the same evening; it was "Powder Keg" for a day). A one-word
-  verb beside Move, Trade and Unload, and the pair reads as one job: you rig the keg, then Detonate it.
-  It also leaves "Powder Keg" naming only the barrel. "Bomb" was weighed for the row and not taken:
-  "the bomb" was then the board's mark, and "to bomb" sounds like the explosion, which is Detonate.
-- **The card costs its holder 2 Respect** (Nick, 2026-11-01, the same evening): there is only one keg,
-  so a leader holding the card denies every rival the dam-buster against his crown Ward, and at -2 he
-  must reach 22 to crown while he holds it. It is the keg's timer, with no rule of its own: everyone
-  wants to use it rather than sit on it, and the holder can shed it any time by a Detonate (1 marker
-  and a Heat), even in a District nobody holds. It weighs on the leader more than on a trailing boss,
-  so it leans the keg toward catch-up. It sits beside the Mark's -2 and under the Rat's -3, which only
-  a rival can take off you. The card carries the `minus2` shield; the Rulebook's Count Your Respect
-  (The Lit Fuse), the Rig row on the keg page and the Glossary's Respect entry say so.
+- **Words.** They are **Trade Docks** (Nick: a new player never read "Trade at any Dock", so the name
+  says what they're for). **Rum Row** is where their lanes lead: the line of mother ships offshore, the
+  source of the Rum. It names no District, and the lanes are not Connections (the board's key and the
+  Rulebook's Docks legend say so once each). The Job **Rum Row** (Trade 4+ at a Staten Island Dock) keeps
+  its name; it now reads as a run out toward the ships. All three Trade Jobs already name a Trade Dock.
+- **One rule sentence.** The Rulebook's Trade row says "At a Trade Dock you Control"; the Playbooks'
+  row the same. State it in the positive and stop: no "only at", "no longer", or "your home Dock
+  can't" anywhere. A new player never knew Trade happened anywhere else.
+- **Not taken, don't bring back:** an extra Rum per Trade at a Trade Dock (the old Knights trait): it
+  rewards one-barrel "micro trades" that waste Days to double up. A straight 2:1 is too strong. Counting
+  Trade Docks twice for the Harbormaster: fiddly, and Staten Island alone would make you Harbormaster.
 
-Nick's calls, so nobody reopens them:
+Why: in four three-Opus games the four already carried 59% of Rum traded, and a starting-Dock Trade was
+a small top-up. Naming them makes the Rum a supply chain the table can see (Still, Trade Dock, Venue)
+and gives the four weakest Stills a reason to be held. Watch in playtest: Kickbacks (bot sweeps showed
+them flat at four players and down at three) and game length (four players ran about 5 Days longer).
 
-- **A Play, not the Brew.** The free keg at the Brew handed the factory's owner a risk-free weapon and
-  made the Harbormaster's Mash and Split the Batch decide how often kegs came (the bots brewed a median
-  of 8 a game). Making it costs a Play now, so there is no Mash or Split the Batch route.
-- **The last boss up may Detonate with nobody left to answer**: "a skill play" (Nick). It takes two
-  markers after everyone else is down (a Move to deliver, then Detonate) and costs tomorrow's seat.
-  The 2026-10-31 rejection of "the keg as a Play" was about exactly this; Nick accepts it now that the
-  keg costs a Play to make and a Play to set off, and draws Heat.
-- **Open to every mob.** An Irish Signature Play in place of Peddle was weighed the same day (Powder Keg
-  and Detonate as two Irish rows) and set aside: the Irish would lose their one economic Play, the
-  four factory Docks would matter to one family only, and at three players the Irish are boxed a quarter
-  of the time, leaving dead marks on the board.
-- **The Detonator breaks the one-line house rule only as far as one line**: "Detonate · 1
-  Influence" in its label, "The keg's District loses its Muscle Ratio" in its band. The rule stays in
-  the Rulebook. Its art is Nick's plunger box (`Art/Cards/Detonator.jpg`), wires running out of frame
-  to a keg somewhere else, and its flavour line is "Your hand on the plunger. The keg is anybody's."
-  The Rulebook's Powder Keg page has his lit keg of dynamite as its cover (`Art/Rulebook/Powder Keg.png`
-  and its WebP); it borrowed the old Sunset page's Blockade art until then.
-- **No timer** beyond the card's -2. A keg can sit on the board for Days (in a 20-game bot sweep
-  before the -2, about 5 on average and once 23). "An unspent keg goes back to the Supply at Sunset"
-  was the fallback on file for hoarding and is superseded by the -2.
-- **A lone Boss is fair game**, and **no anti-ping-pong rule** (both from 2026-10-31, unchanged).
-- The Heat Track's flavour line calls it "a 5-space fuse" (it said "powder keg"): one name, one thing.
-- **Playbook room** (2026-11-01): the new row cost 43px on every front, paid for by row padding 8px to
-  7px and a word off the Knights' Torch row ("the first shot"), which leaves about 22px spare on the
-  Knights, Vipers and Irish and 15px on the Sicilians.
+## The Powder Keg: cut on 2026-11-04
 
-**On probation** (Nick, 2026-11-01): "I'm not 100% certain this makes the cut ... it may be extra
-complexity for not enough gain." Treat it as a candidate the playtests have to earn. If it is cut, it
-comes out cleanly: the Rulebook's Powder Keg page (Sunset needs nothing back), the Standard Plays row,
-the Components and Setup lines, the Drawing Heat bullet and the Glossary entry; the Playbooks' row (and
-the padding can go back to 8px); the Detonator (sheet 10 of the Cards sheet); the Town Planner's tags,
-key row and Heat-list clause; the board's `keg: true` flags (the dynamite). The Still swap is neutral
-without it; whether to keep it then is Nick's call.
+From 2026-10-31 to 2026-11-04 the game had one black barrel, the **Powder Keg**, and a card, the
+**Detonator**: Rig (1) took both at one of the four factory Docks, and Detonate (1, Heat) cost the
+District it stood in its Muscle Ratio in Mobsters. It was on probation from the day it became two
+Plays, and Nick cut it after the trials: in every version (the written rule, a splash and a dice keg)
+it never decided a game, and in the written rule's Opus playtest nobody Rigged it in 22 Days.
+`powder-keg-handoff.md` holds the design and everything weighed, and mk-online's
+`harness/POWDER-KEG-TRIAL.md` every trial. mk-online keeps the code behind a switch, off.
 
-**mk-online follows** (the two Plays, the Detonator and its -2): merged in its PR #33 and mirrored
-here from mk-online on 2026-11-01 (latest 8380ec7: Rig without a barrel and the dynamite board), so the live game runs this rule. `mk-online-rules-sync.md`
-§46 has the details.
-
-Watch in playtest: how often the keg is made and set off, whether the card gets hoarded, and how often
-Detonate lands on a boss who has Laid Low against one who could still answer.
+**The Still swap stays** (West Side 12 / East Harlem 11, Jamaica 2 / Astoria 3): it made the four
+spare Docks the four Pressure 1 Stills, and they are now the Trade Docks, which is the boost to the
+weakest Stills Nick liked. Its art stays in the repo, unused: the Detonator card
+(`Art/Cards/Detonator.jpg`) and the lit keg (`Art/Rulebook/Powder Keg.png` and its WebP).
+The Heat Track's flavour line still calls the track "a 5-space fuse", which names nothing else now.
+Don't bring the keg back without Nick asking.
 
 ## Open design threads
 
@@ -690,7 +626,13 @@ retired the Nod (see *The crown is a Play*): every option weighed, why the numbe
 are, the art notes for the Bribe cards, and what to watch in playtest.
 
 `powder-keg-handoff.md` (2026-10-31, the Play version 2026-11-01) holds the Powder Keg's design, the
-trials and every option weighed (see *The Powder Keg*, above, for the rule as written).
+trials and every option weighed; the keg was cut on 2026-11-04 (see *The Powder Keg: cut*).
+
+`trade-docks-handoff.md` (2026-11-04) holds the Trade Docks' evidence, the board's shipping lanes,
+mk-online's switches (Trade Docks on, keg off, the Commission's Day 28 limit) and the Opus test still
+to run. The **Day 28 limit** (if nobody has Taken the Crown by Sunset of Day 28, the Commission crowns
+the most Respect, cash breaking a tie) is Nick's optional, recommended rule on trial; it is not in the
+Rulebook until he decides after the test.
 
 `rules-streamline-handoff.md` records the v0.9.7 streamline (2026-09-07, shipped 2026-09-10)
 and the part of it still open: making the **Sweep** the Sicilians' call (The Commissioner's
@@ -1048,7 +990,7 @@ lights either; The Almanac's lesson 4 says so). The same pass gave the Bowery a 
 ## Respect shields are generated SVG
 
 Since 2026-10-12 every Respect badge (the Jobs deck's 1, 2 and 3; the Cards sheet's Bribes 1 to 4,
-Welsher -1, Mark -2, Detonator -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
+Welsher -1, Mark -2 and Rat -3) is an SVG in `Art/Shields/` (`plus1.svg` to `plus5.svg`,
 `minus1.svg` to `minus3.svg`), drawn by `tools/build_shields.py` (`pip install fonttools`): one
 shield traced from the old PNGs, Cinzel Black numerals (the card titles' face, and the board's for
 its Borough and Heat Track numbers) as outlines, so the files need no font. Bebas Neue, the Stills'
