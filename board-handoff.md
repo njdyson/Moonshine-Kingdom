@@ -698,7 +698,7 @@ keeps them on a re-trace.
   (`schooner()`: a brown hull with a gilt strake, two masts, cream sails) off the sign's lower edge
   under the medallion, where the Powder Keg's dynamite hung from 2026-10-31 to 2026-11-04. Not a
   barrel: a barrel reads as liquor on the Docks where barrels move. `lanes()` draws a faint dashed
-  **shipping lane** from each Trade Dock's middle pier off the board's edge, as a smooth curve (a
+  **shipping lane** off the board's edge from the rim of one pier's end lamp (the pier nearest its route; Nick, 2026-11-04), as a smooth curve (a
   Catmull-Rom spline through `LANES`' waypoints), an arrowhead on the frame and "Rum Row" in the
   bridge type beside it: West Side straight down the middle of the Hudson, bending west as the river
   opens; Jamaica out of Jamaica Bay's mouth to the bottom edge;

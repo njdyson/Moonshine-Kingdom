@@ -314,10 +314,14 @@ function lanes(pierList) {
   for (const [id, { way, label }] of Object.entries(LANES)) {
     const ps = pierList.filter(p => p.d.id === id);
     if (!ps.length) throw new Error(`No pier for the Trade Dock ${id}`);
-    const { q, n } = ps[Math.floor((ps.length - 1) / 2)];
-    const start = [q[0] + n[0] * (PIER.len + 6), q[1] + n[1] * (PIER.len + 6)];
-    if (process.env.LANEDBG) console.error('lane', id, start.map(v => v.toFixed(1)).join(','), n.map(v => v.toFixed(2)).join(','));
-    const curve = spline([start, ...(typeof way === 'function' ? way(start) : way)]);
+    // The lane leaves from the rim of a pier's end lamp (Nick, 2026-11-04), the pier nearest its
+    // first waypoint; it began a few units out from the middle pier until then.
+    const route = st => (typeof way === 'function' ? way(st) : way);
+    const lampEnd = ({ q, n }) => [q[0] + n[0] * (PIER.len - 1.2 + LAMP.r), q[1] + n[1] * (PIER.len - 1.2 + LAMP.r)];
+    const aim = route(lampEnd(ps[Math.floor((ps.length - 1) / 2)]))[0];
+    const start = ps.map(lampEnd).sort((a, b) => Math.hypot(a[0] - aim[0], a[1] - aim[1]) - Math.hypot(b[0] - aim[0], b[1] - aim[1]))[0];
+    if (process.env.LANEDBG) console.error('lane', id, start.map(v => v.toFixed(1)).join(','));
+    const curve = spline([start, ...route(start)]);
     // arc lengths, to cut the line at the arrowhead and to place the label
     const acc = [0];
     for (let i = 1; i < curve.length; i++) acc.push(acc[i - 1] + Math.hypot(curve[i][0] - curve[i - 1][0], curve[i][1] - curve[i - 1][1]));
