@@ -1221,6 +1221,19 @@ mk-online: `unloadDrawsHeat` / `extortDrawsHeat` in `src/game/data.ts`, with the
 `setHeadlessHeatThresholds(true)` for sweeps (`lengthdiag.ts --heatThresholds=1`); engine, bots, agent
 options, UI and `harness/RULES-AI.md` follow. `scripts/heat-five-check.ts` covers both. mk-online PR #44.
 
+## 49. The Rum economy: Moonshine $200, Trade at any Dock, Waterfront (2026-11-08, Nick)
+
+The rule as written (the Rulebook's Unload, Trade and Irish rows, Liquor Barrels, the Docks legend and the
+Glossary; CLAUDE.md's *The Rum economy*): Moonshine sells for $200 (was $300). Trade at any Dock you
+Control, 2 Moonshine for 1 Rum, or 1 for 1 at a Trade Dock. The Irish lose Peddle and gain **Waterfront**
+(1 Influence and $200: Trade 1:1 at any Dock you Control; a Trade in every other way).
+
+mk-online: `BARREL_PRICE.moonshine` 200; `tradeRate()` in `src/game/rumrow.ts` (any-Dock rate 2 by
+default, `setHeadlessAnyDockRate`); the `trade` move's count is the Rum received; `waterfront` in
+`src/game/signature.ts` replaces `peddle`; bots, agent options, `harness/RULES-AI.md` and the UI follow.
+`scripts/rumrow-check.ts` and `scripts/torch-waterfront-check.ts` cover it. The board key reads Speakeasy
+$200 and "Dock: Trade 2 for 1".
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

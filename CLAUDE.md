@@ -519,14 +519,14 @@ crown room (its Boss starts two Moves off, in Flushing).
 
 Since 2026-09-22:
 
-- **Moonshine** sells for **$300** a barrel and **Havana Rum** for **$500**, at **any of
-  the eight ordinary Speakeasies you Control**
+- **Moonshine** sells for **$200** a barrel ($300 until 2026-11-08; see *The Rum economy*) and
+  **Havana Rum** for **$500**, at **any of the eight ordinary Speakeasies you Control**
 - the **four High Society Venues buy Havana Rum and nothing else**, at $500, and every
   barrel Unloaded there pays an Influence **Kickback**. The usual limits apply: a marker in
   Reserves and an empty Ledger slot, else the Kickback is lost. ("The High Society joints
   don't buy swill.")
 - every Unload draws one Heat marker wherever you sell, since 2026-11-08 (see *Every Unload and every
-  Extort draws Heat*), and Peddle never does (see below)
+  Extort draws Heat*); Trade never does
 
 Why: the four High Society Venues sit on the four #7 Stills, which the Harbormaster can never
 lock out. When any barrel paid a Kickback, two 7-Mobster stacks could brew, Unload in place
@@ -554,20 +554,13 @@ left and five Rum poured takes the Ledger to zero, then refills it to five. The 
 entry says so in as many words (the turn box lists "Pay the cost" last, which read the other way
 without it); the Almanac's Rum table ("5 Rum, net +3") and `tools/sim_kickback_ledger.js` assume it.
 
-The one other liquor-type restriction is the Irish **Peddle**, which sells **Moonshine
-only**, and **only in Wards you Control**: Speakeasy sales belong to Unload. Since 2026-10-10
-(Nick) it pays the **$200 street rate** and **never draws Heat**, however many
-barrels. It used to sell at the bar's $300 for half the Influence, a strict discount that made
-Unload a dead Play for Irish Moonshine. Now the Irish choose: a small batch fetches more at a bar
-(three barrels: $900 by Unload, $600 by Peddle), and a big pile goes out quietly in one Play
-(ten: $2,000 and no Heat, where an Unload pays $3,000 and draws it). Do not "restore
-consistency" by opening Peddle to either liquor or to more addresses, or by putting Heat on it. Watch in playtest: a packed Ward is now a silent cash engine, and a quiet Peddle
-clears Raid bait without making the Irish the freshest noise. (`mk-online-rules-sync.md` §9.6
-and §27.)
+Peddle (the Irish sold Moonshine in their Wards at $200, with no Heat) was cut on 2026-11-08 (Nick:
+"I never liked peddle anyway"): with Moonshine at $200 at the bar, it would have beaten Unload outright.
+The Irish have **Waterfront** in its place (see *The Rum economy*). Don't bring Peddle back.
 
-The Rum pool is **20** barrels, and Trade at a Trade Dock (1:1 from Moonshine; see *Trade Docks*)
-is the only way Rum enters the game. Trade is worth **$200 a barrel** in cash, plus the Kickback if the Rum is
-poured at High Society.
+The Rum pool is **20** barrels, and Trade (2:1 at any Dock, 1:1 at a Trade Dock; see *The Rum economy*)
+is the only way Rum enters the game. At a Trade Dock it is worth **$300 a barrel** in cash, at any other
+Dock $100 a Rum, plus the Kickback if the Rum is poured at High Society.
 
 History, so nobody rebuilds it: 2026-08-22 had the address set the price and Rum carry the
 Kickback at any address; 2026-09-01 reversed that to "any barrel, only at The Hotspot"; v0.9.8
@@ -575,12 +568,40 @@ deleted the Hotspot tokens and Titles and fixed the Kickback to the four High So
 The rule that let the Night Mayor **strand** goods (one liquor to a room) stays dead: nothing
 in the game bricks a paid-for asset.
 
+## The Rum economy: Moonshine $200, Trade at any Dock, Waterfront
+
+Since 2026-11-08 (Nick, with *Every Unload and every Extort draws Heat*: "This encourages players to
+interact with rum"). Three changes, one direction:
+
+- **Moonshine sells for $200** at an ordinary Speakeasy (it was $300). Rum stays $500.
+- **Trade at any Dock you Control: 2 Moonshine for 1 Rum; at a Trade Dock, 1 for 1.** Still 1 Influence,
+  no Heat, from the pool of 20. Theme: at a Trade Dock the rum comes straight off the boats; anywhere else
+  a middleman takes half. The Rulebook's Trade row carries that line.
+- **The Irish lose Peddle and gain Waterfront** (1 Influence and $200: Trade 1:1 at any Dock you Control,
+  as at a Trade Dock; it is a Trade in every other way). Nick's words: "pay $200 to trade at ANY dock 1:1".
+  The name (the Irish ran the longshoremen) is the rules pass's, not Nick's, and his to confirm. He is
+  "not 100% sold" on the Play itself.
+
+Bot sweep (40 games an arm, mk-online `lengthdiag.ts`, `/mnt/project-files/bot-runs/log.md`), on the Heat
+rule, with a free Irish 1:1 Trade standing in for Waterfront: Rum traded rose from 20.8 to 34.1 a game,
+the crown median went from 50.5 to 44.5 (quartiles overlap), Kickbacks 7.2 to 9.2, and Extort's share of
+cash rose from 55% to 62%. Moonshine at $200 alone did most of it (28.6 Rum). Nick expects smart players to
+Extort less; his levers if the game drags are cheaper Bribes, richer brews, or cheaper Runners or Secure.
+
+Still open (Nick, 2026-11-08): the theme ("Trade Docks" when every Dock Trades; the schooners and Rum Row's
+lanes on the board), and the map. Two Trade Docks border a High Society Venue (West Side and Sugar Hill,
+Jamaica and Richmond Hill), so Manhattan and Queens have a one-Move Rum run at 1:1 and the others don't.
+Swapping the Bowery and Whitestone in as Trade Docks (Stills and starting Docks swapped with West Side and
+Jamaica) puts every Venue two Moves from one; in bots it evened the Venues but cut Kickbacks (6.9 a game).
+Williamsburg sells the least Rum in every arm, so its problem is something else; Nick floated swapping it
+with Red Hook.
+
 ## Trade Docks: West Side, Jamaica, Stapleton, Tottenville
 
-Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). Moonshine is
-Traded for Havana Rum only at the four **Trade Docks**: West Side, Jamaica, Stapleton and Tottenville,
-the Docks nobody starts on, which are the four Pressure 1 Stills (the 2s and 12s). Trade is otherwise
-unchanged: 1 Influence, 1:1, at a Trade Dock you Control, from the pool of 20. The board marks them with
+Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). The four **Trade
+Docks** are West Side, Jamaica, Stapleton and Tottenville, the Docks nobody starts on, which are the four
+Pressure 1 Stills (the 2s and 12s). From 2026-11-04 to 2026-11-07 they were the only Docks that Traded;
+since 2026-11-08 they Trade 1:1 and every other Dock 2:1 (see *The Rum economy*). The board marks them with
 a rum-runner schooner, and faint dashed gilt **shipping lanes** run from each to meet in one route out
 to sea through the Narrows.
 
@@ -590,11 +611,10 @@ to sea through the Narrows.
   Rulebook's Docks legend say so once each). The Job that was called Rum Row (Trade 4+ at a Staten
   Island Dock) is **The Mother Ship** since 2026-11-04 (Nick), so the name means one thing; its art is
   the mother steamer. All three Trade Jobs already name a Trade Dock.
-- **One rule sentence.** The Rulebook's Trade row says "At a Trade Dock you Control"; the Playbooks'
-  row the same. State it in the positive and stop: no "only at", "no longer", or "your home Dock
-  can't" anywhere. A new player never knew Trade happened anywhere else.
+- **One rule sentence.** The Rulebook's Trade row says "At a Dock you Control ... two for one, or one for
+  one at a Trade Dock"; the Playbooks' row the same. State it in the positive and stop.
 - **Not taken, don't bring back:** an extra Rum per Trade at a Trade Dock (the old Knights trait): it
-  rewards one-barrel "micro trades" that waste Days to double up. A straight 2:1 is too strong. Counting
+  rewards one-barrel "micro trades" that waste Days to double up. Two Rum for one Moonshine is too strong. Counting
   Trade Docks twice for the Harbormaster: fiddly, and Staten Island alone would make you Harbormaster.
 
 Why: in four three-Opus games the four already carried 59% of Rum traded, and a starting-Dock Trade was
@@ -710,7 +730,7 @@ The Rulebook's Key Concepts and Territory carry it.
 
 **No passive Traits.** Each family has exactly two Signature Plays: the Sicilians Hit and
 Consigliere; the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
-and Peddle; the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
+and Waterfront (Peddle until 2026-11-08); the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
 the top Job in secret, claim it at once or leave it); the Knights Skiff and Torch (which now burns
 the District's barrels too). Gone: Untouchable, Firepower, Network, passive Whispers, Plunder and
 Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the rows.
@@ -748,8 +768,8 @@ stockpile as the Raid does. In a fight the Invader rolls
 
 Since 2026-11-08 (Nick, after two agent games in mk-online where nobody laid the fifth marker and the
 first Raid came on Day 17). **Every Unload and every Extort draws one Heat marker**, however many barrels
-go or Districts pay. The Greed Tax is gone, and so is Extort's 5+ Districts threshold. Peddle and Trade
-still never draw Heat. Nick: "a play creates heat or it doesn't". Good play is batching: one big pour or
+go or Districts pay. The Greed Tax is gone, and so is Extort's 5+ Districts threshold. Trade (and the
+Irish Waterfront) never draws Heat. Nick: "a play creates heat or it doesn't". Good play is batching: one big pour or
 one big squeeze costs the same marker as a small one. He hopes it makes the Rum Trade more appealing,
 and if it proves too much, Extort is the first lever to dial back.
 
