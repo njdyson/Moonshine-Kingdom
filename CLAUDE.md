@@ -581,7 +581,9 @@ interact with rum"). Three changes, one direction:
   a middleman takes half. The Rulebook's Trade row carries that line.
 - **The Irish lose Peddle and gain Hook** (Power Play, 2 Influence, no Heat): swap barrels one for one
   between a District you Control and an **Adjacent** District a rival Controls (a border or a Bridge, not
-  the water), your Moonshine going over first and his Rum coming back first. Nick, the same evening, after
+  the water), any barrels each way: usually your Moonshine for his Rum, but sending Rum or taking his
+  Moonshine can deny a rival a Job (Nick, the same evening; the first draft fixed Moonshine out and Rum in).
+  Nick, the same evening, after
   a first draft called **Waterfront** (1 Influence and $200: Trade 1:1 at any Dock) turned out dull: a
   plain Trade already draws no Heat, so it only upgraded the Docks ("which is no fun"). He proposed the
   swap (as "Plunder", the Knights' old trait name, so it is Hook instead: one verb, slang for lifting

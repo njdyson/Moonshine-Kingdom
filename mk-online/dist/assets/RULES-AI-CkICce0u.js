@@ -180,7 +180,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 **Hell's Kitchen Irish**
 
 - **Tommy Gun** (tommyGun, 2, in a fight): Open Fire with 1 extra attack die (max 5) at +1 Threat (max 4). The Occupier returns fire as normal. Heat only as the fight's first shot.
-- **Hook** (hook, 2): from a District you Control, swap barrels **one for one** with a rival in an **Adjacent** District he Controls (a border or a Bridge, never Dock to Dock across the water). Your Moonshine goes over first, his Rum comes back first; N is how many barrels change hands. No Heat, no fight. It is not a Trade.
+- **Hook** (hook, 2): from a District you Control, swap barrels **one for one** with a rival in an **Adjacent** District he Controls (a border or a Bridge, never Dock to Dock across the water). You pick which barrels go each way: usually your Moonshine for his Rum, but sending Rum or taking his Moonshine can strip a pile a rival's Job needs. N is how many barrels change hands; the default option sends your Moonshine first and takes his Rum first, and the "other way" option sends your Rum first and takes his Moonshine first. No Heat, no fight. It is not a Trade.
 
 **East Side Vipers**
 

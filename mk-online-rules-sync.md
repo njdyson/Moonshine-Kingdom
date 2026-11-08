@@ -1389,3 +1389,12 @@ A rename, no rule change: every Dock Trades since §49, so "Trade Dock" told a n
 couldn't. The Bowery, Whitestone, Stapleton and Tottenville are **Landing Docks** (the rum lands there
 straight off Rum Row's contact boats). Player-facing strings, comments and RULES-AI.md say Landing Dock;
 identifiers (`RUM_ROW_DOCKS`, `G.rumRow`, `canTradeAt`) are unchanged.
+
+## 52. Hook: you pick which barrels go each way (2026-11-08, Nick)
+
+The swap was fixed as your Moonshine out first and his Rum in first. Now the Irish pick any barrels each
+way, as long as as many come back as go over: the usual Hook still buys his Rum with your Moonshine, but
+taking his Moonshine or sending him Rum can strip a pile a rival's Job needs. `hook(from, to, n, give?,
+take?)`: `give` and `take` are exact `{moonshine, rum}` counts or the kind that goes first. The agent
+gets a second option per target (your Rum first, his Moonshine first); the UI's Hook form has four
+steppers. Playbooks: "any barrels each way"; Rulebook: "you pick which go each way".
