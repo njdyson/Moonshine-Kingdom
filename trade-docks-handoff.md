@@ -1,5 +1,9 @@
 # Handoff: Trade Docks, the keg's cut, the board's Rum Row lanes, and an Opus test (2026-11-04)
 
+**2026-11-08:** the shipping lanes are cut (Nick: "they add clutter and confusion"); only a short arrow to
+Rum Row remains. See CLAUDE.md's *Trade Docks*. Since the same day every Dock Trades 2:1 and the Trade
+Docks 1:1 (*The Rum economy*).
+
 For a fresh session. Nick's decisions are settled; the work is to write them into the game, redraw the board,
 bring mk-online in line, and play one three-Opus game. Read CLAUDE.md first (house rules, no em dashes, one
 callout a page, "don't argue with a cut rule's ghost"), then this file.

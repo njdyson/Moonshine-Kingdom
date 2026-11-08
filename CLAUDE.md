@@ -588,8 +588,7 @@ the crown median went from 50.5 to 44.5 (quartiles overlap), Kickbacks 7.2 to 9.
 cash rose from 55% to 62%. Moonshine at $200 alone did most of it (28.6 Rum). Nick expects smart players to
 Extort less; his levers if the game drags are cheaper Bribes, richer brews, or cheaper Runners or Secure.
 
-Still open (Nick, 2026-11-08): the theme ("Trade Docks" when every Dock Trades; the schooners and Rum Row's
-lanes on the board), and the map. Two Trade Docks border a High Society Venue (West Side and Sugar Hill,
+Still open (Nick, 2026-11-08): the theme ("Trade Docks" when every Dock Trades; the schooners on the board), and the map. Two Trade Docks border a High Society Venue (West Side and Sugar Hill,
 Jamaica and Richmond Hill), so Manhattan and Queens have a one-Move Rum run at 1:1 and the others don't.
 Swapping the Bowery and Whitestone in as Trade Docks (Stills and starting Docks swapped with West Side and
 Jamaica) puts every Venue two Moves from one; in bots it evened the Venues but cut Kickbacks (6.9 a game).
@@ -602,13 +601,13 @@ Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work
 Docks** are West Side, Jamaica, Stapleton and Tottenville, the Docks nobody starts on, which are the four
 Pressure 1 Stills (the 2s and 12s). From 2026-11-04 to 2026-11-07 they were the only Docks that Traded;
 since 2026-11-08 they Trade 1:1 and every other Dock 2:1 (see *The Rum economy*). The board marks them with
-a rum-runner schooner, and faint dashed gilt **shipping lanes** run from each to meet in one route out
-to sea through the Narrows.
+a rum-runner schooner, and a short dashed gilt arrow runs out to sea through the Narrows to **Rum Row**.
+From 2026-11-04 to 2026-11-07 dashed **shipping lanes** ran to it from all four; Nick cut them on 2026-11-08
+("I do like them but they add clutter and confusion") and kept the arrow for theme. Don't bring them back.
 
 - **Words.** They are **Trade Docks** (Nick: a new player never read "Trade at any Dock", so the name
-  says what they're for). **Rum Row** is where their lanes lead: the line of mother ships offshore, the
-  source of the Rum. It names no District, and the lanes are not Connections (the board's key and the
-  Rulebook's Docks legend say so once each). The Job that was called Rum Row (Trade 4+ at a Staten
+  says what they're for). **Rum Row** is where the board's arrow points: the line of mother ships offshore,
+  the source of the Rum. It names no District. The Job that was called Rum Row (Trade 4+ at a Staten
   Island Dock) is **The Mother Ship** since 2026-11-04 (Nick), so the name means one thing; its art is
   the mother steamer. All three Trade Jobs already name a Trade Dock.
 - **One rule sentence.** The Rulebook's Trade row says "At a Dock you Control ... two for one, or one for
@@ -648,7 +647,7 @@ are, the art notes for the Bribe cards, and what to watch in playtest.
 `powder-keg-handoff.md` (2026-10-31, the Play version 2026-11-01) holds the Powder Keg's design, the
 trials and every option weighed; the keg was cut on 2026-11-04 (see *The Powder Keg: cut*).
 
-`trade-docks-handoff.md` (2026-11-04) holds the Trade Docks' evidence, the board's shipping lanes,
+`trade-docks-handoff.md` (2026-11-04) holds the Trade Docks' evidence, the board's shipping lanes (cut 2026-11-08),
 mk-online's switches (Trade Docks on, keg off, the Commission's Day 28 limit) and the Opus test still
 to run. The **Day 28 limit** (if nobody has Taken the Crown by Sunset of Day 28, the Commission crowns
 the most Respect, cash breaking a tie, then whoever Laid Low first) is on trial in mk-online only, where

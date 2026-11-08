@@ -101,11 +101,11 @@ const fillId = d => `fill-${d.boro}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
-// trade: a Trade Dock (Nick, 2026-11-04), the one place Moonshine is Traded for Rum: the four
+// trade: a Trade Dock (Nick, 2026-11-04), where Moonshine Trades for Rum 1:1 (2:1 elsewhere since 2026-11-08): the four
 // Docks nobody starts on, which are the four Pressure 1 Stills (two on 2, two on 12, since West
 // Side and East Harlem swapped Stills, 12 and 11, and Jamaica and Astoria, 2 and 3, on
-// 2026-10-31). A schooner hangs under the sign's medallion, and a shipping lane runs from its
-// pier off the board to Rum Row (see lanes()). They were the Powder Keg's factories, marked with
+// 2026-10-31). A schooner hangs under the sign's medallion (until 2026-11-08 a shipping
+// lane also ran from its pier to Rum Row; see rumRowArrow()). They were the Powder Keg's factories, marked with
 // dynamite, from 2026-10-31 until the keg was cut on 2026-11-04.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
@@ -276,25 +276,13 @@ function schooner(cx, cy, s) {
     + `</g>`;
 }
 
-// Rum Row's shipping lanes (2026-11-04): faint dashed lines from the four Trade Docks that meet in
-// one route and run out to sea through the Narrows, an arrowhead on the frame and "Rum Row" beside
-// it, toward the mother ships offshore (Nick: all heading the same way reads most clearly as a
-// shipping route; until then each Dock had its own lane to the nearest edge). They are scenery,
-// not Connections (the water already carries the Dock-to-Dock links), so they are drawn lighter
-// than any border and under the land, where they can never cross a District.
-// The trunk is West Side's lane: down the Hudson, round the Bowery's foot, east above Stapleton and
-// south down the Narrows. Every other lane is a branch that joins it, arriving along its heading
-// (or along approach, when the water leaves no room to turn), so the route reads as one.
-// Each line is a smooth curve (a Catmull-Rom spline, sampled) through its waypoints in board units,
-// and leaves from the rim of a pier's end lamp, the pier nearest its first waypoint.
+// Rum Row's arrow (2026-11-08): a short dashed gilt arrow out to sea through the Narrows, its head on
+// the frame and "Rum Row" beside it, toward the mother ships offshore. Theme only. From 2026-11-04 to
+// 2026-11-07 dashed shipping lanes ran to it from all four Trade Docks; Nick cut them on 2026-11-08 ("they
+// add clutter and confusion") and kept the arrow. It is drawn under the land, so it never crosses a
+// District. It is a smooth curve (a Catmull-Rom spline, sampled) through its waypoints in board units.
 const RUM_ROUTE = {
-  trunk: { id: 'west_side', way: st => [[st[0] - 70, st[1] + 70], [96, 482], [58, 548], [58, 622], [86, 678], [150, 696], [232, 698], [274, 724], [281, 790], [281, 950], [266, 1020], [238, 1080 - FRAME_IN]] },
-  branches: [
-    { id: 'stapleton', join: [150, 697], approach: [-0.5, 1], lead: 5, way: () => [] }, // a short spur up to the route, not a long shallow merge
-    { id: 'tottenville', join: [272, 1000], approach: [-1, -0.7], lead: 22, way: () => [] },
-    { id: 'jamaica', join: [252, 1046], approach: [1, -0.1], lead: 30,
-      way: st => [[st[0] - 34, st[1] - 6], [668, 990], [622, 1038], [560, 1050], [380, 1050]] },
-  ],
+  way: [[281, 930], [281, 960], [266, 1020], [238, 1080 - FRAME_IN]],
   label: { text: 'RUM ROW', dx: -10, dy: -8 },
 };
 // Muted gilt (Nick, 2026-11-04: "it looks more premium"), picked over sea-green, ivory, rum amber
@@ -325,36 +313,17 @@ function arc(curve) {
   return { curve, acc, total, at };
 }
 const dashed = pts => `<path d="M${pts.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')}" fill="none" stroke="${LANE.color}" stroke-opacity="${LANE.opacity}" stroke-width="${LANE.width}" stroke-dasharray="${LANE.dash}" stroke-linecap="round" stroke-linejoin="round"/>`;
-function lanes(pierList) {
-  const lampEnd = ({ q, n }) => [q[0] + n[0] * (PIER.len - 1.2 + LAMP.r), q[1] + n[1] * (PIER.len - 1.2 + LAMP.r)];
-  const startFor = (id, firstAim) => {
-    const ps = pierList.filter(p => p.d.id === id);
-    if (!ps.length) throw new Error(`No pier for the Trade Dock ${id}`);
-    const aim = firstAim(lampEnd(ps[Math.floor((ps.length - 1) / 2)]));
-    return ps.map(lampEnd).sort((a, b) => Math.hypot(a[0] - aim[0], a[1] - aim[1]) - Math.hypot(b[0] - aim[0], b[1] - aim[1]))[0];
-  };
-  // the trunk, with its arrowhead and label
-  const { trunk, branches, label } = RUM_ROUTE;
-  const tStart = startFor(trunk.id, st => trunk.way(st)[0]);
-  const T = arc(spline([tStart, ...trunk.way(tStart)]));
+function rumRowArrow() {
+  const { way, label } = RUM_ROUTE;
+  const T = arc(spline(way));
   const h = LANE.head, end = T.at(T.total - 2), [ux, uy] = end.u, tip = end.p;
   const base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
-  let s = dashed(T.curve.filter((_, i) => T.acc[i] < T.total - 2 - h * 1.4).concat([base]))
+  const s = dashed(T.curve.filter((_, i) => T.acc[i] < T.total - 2 - h * 1.4).concat([base]))
     + `<path d="M${f(base[0] - uy * h)} ${f(base[1] + ux * h)} L${f(tip[0])} ${f(tip[1])} L${f(base[0] + uy * h)} ${f(base[1] - ux * h)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
   // the destination, named level along the bottom edge beside the arrow (Nick, 2026-11-04), in the
   // water labels' type: what lies off the board, not a caption on one line
   const labels = text(label.text, tip[0] + label.dx, 1080 - FRAME_IN + label.dy, TYPE.water, { fill: LANE.color, anchor: 'end', opacity: 0.95, middle: true });
-  // the branches, each ending on the trunk
-  for (const b of branches) {
-    let k = 0;
-    T.curve.forEach((q, i) => { if (Math.hypot(q[0] - b.join[0], q[1] - b.join[1]) < Math.hypot(T.curve[k][0] - b.join[0], T.curve[k][1] - b.join[1])) k = i; });
-    const p = T.curve[k], { u } = T.at(T.acc[k]), lead = b.lead || 12;
-    const v = b.approach ? (() => { const L = Math.hypot(...b.approach); return [b.approach[0] / L, b.approach[1] / L]; })() : [-u[0], -u[1]];
-    const tail = [[p[0] + v[0] * lead, p[1] + v[1] * lead], p];
-    const st = startFor(b.id, x => (b.way(x)[0] || tail[0]));
-    s += dashed(spline([st, ...b.way(st), ...tail]));
-  }
-  return { lines: `<g id="lanes">${s}</g>`, labels };
+  return { lines: `<g id="rum-row">${s}</g>`, labels };
 }
 
 // ---------------------------------------------------------------- signs
@@ -694,7 +663,7 @@ function bridgeGlyph(a, b, ext = 6, k = 1) { // k scales the width, for the key
 // open water, clear of other land, bridges and the water labels.
 const PIER = { len: 12, half: 2.3, gap: 15, count: 3 };
 // Piers slid west of the middle of their free shore, in board units (Nick, 2026-11-04: Stapleton's
-// and Jamaica's, so their Rum Row lanes have room to turn toward the Narrows).
+// and Jamaica's, to give the Rum Row lanes, cut on 2026-11-08, room to turn; kept so the board holds still).
 const PIER_WEST = { stapleton: 30, jamaica: 40 };
 function orientedBox(cx, cy, deg, hl, hh) {
   const t = deg * Math.PI / 180, ux = Math.cos(t), uy = Math.sin(t);
@@ -1332,7 +1301,7 @@ const hide = (id, filter, content) => `<g id="${id}" filter="url(#${filter})"><r
 function buildSvg(fontCss, mode, placed) {
   MODE = mode;
   const water = `<rect width="1080" height="1080" fill="url(#sea)"/>` + waterLining() + landShadow();
-  const pierList = placePiers(), laneArt = lanes(pierList);
+  const pierList = placePiers(), laneArt = rumRowArrow();
   const land = OFFBOARD.map(k => `<path d="${poly(geo.regions[k])}" fill="${lift(C.offboard)}"/>`).join('')
     + districtFills() + borders() + piers(pierList) + bridges();
   const labels = DISTRICTS.map(d => placed[d.id].c.draw(placed[d.id].x, placed[d.id].y)).join('');
