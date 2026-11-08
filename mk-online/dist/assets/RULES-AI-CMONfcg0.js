@@ -92,11 +92,11 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Move (movePlay) | 1 | Any Mobsters and/or barrels from a District you Control to one Connected District. Never into a Padlocked District (a Squad's). Into a Hostile District (rival Mobsters): Standoff (§6). Barrels alone belong to whoever Controls the District they land in: a rival's become his, and in one nobody Controls they are nobody's. Mobsters into a District where a rival Safehouse stands with no Mobsters: no Standoff; take it over (evictTakeOver) or destroy it (evictRaze). |
 | Recruit (recruit) | 1 | Hire Runners into your Safehouse District at **$300 each**. Needs the Safehouse on the board, not Control; the new Runners take Control. |
 | Secure (secure) | 1 | **$500**: place or relocate your one Safehouse into any Safe District. On a rival Safehouse it is a take over: theirs is destroyed (back to its owner's supply) and yours moves in. A Safehouse grants no Control by itself. |
-| Trade (trade) | 1 | At a **Trade Dock** you Control (**West Side, Jamaica, Stapleton, Tottenville**: the four Docks nobody starts on), swap Moonshine there for Havana Rum 1:1 (limited by the Rum supply). This is the only source of Rum. Barrels Move Dock to Dock across the water, so Moonshine on any Dock can be shipped to a Trade Dock in one Move. |
+| Trade (trade) | 1 | At a **Dock** you Control, swap Moonshine there for Havana Rum: **2 Moonshine for 1 Rum**, or **1 for 1 at a Trade Dock** (**West Side, Jamaica, Stapleton, Tottenville**: the four Docks nobody starts on). N is the Rum you receive (limited by the Rum supply). This is the only source of Rum. No Heat. Barrels Move Dock to Dock across the water, so Moonshine on any Dock can be shipped to a Trade Dock in one Move. |
 | Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
 | Lay Low (layLow) | 0 | See §3. |
-| Unload (unload) | 2, H | At a Speakeasy you Control, sell your barrels there: **Moonshine $300, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. One Heat marker however many barrels go, so a big pour costs no more Heat than a small one. |
+| Unload (unload) | 2, H | At a Speakeasy you Control, sell your barrels there: **Moonshine $200, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. One Heat marker however many barrels go, so a big pour costs no more Heat than a small one. |
 | Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
 | Extort (extort) | 2, H | **$100 per District you Control**. As often as your Ledger pays for it; each Extort draws one Heat marker however many Districts pay. |
 | Rat (rat) | 2 | An immediate Raid (§7). Take the Rat Card (−3 Respect) from the supply or its holder. You cannot Rat while you hold it; it leaves you only when a rival Rats. |
@@ -105,7 +105,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 
 ## 5. Movement and Control
 
-- **Control**: your Boss or a Runner stands in the District. **A Safehouse alone holds nothing**: a District with no Mobsters is Controlled by nobody, so its Still does not brew for you, it does not count for Extort or the Harbormaster, and you cannot Unload, Trade, Peddle or Move barrels there. It is checked at the end of each Play: walk in and it is yours, walk off and it is not.
+- **Control**: your Boss or a Runner stands in the District. **A Safehouse alone holds nothing**: a District with no Mobsters is Controlled by nobody, so its Still does not brew for you, it does not count for Extort or the Harbormaster, and you cannot Unload, Trade or Move barrels there. It is checked at the end of each Play: walk in and it is yours, walk off and it is not.
 - **Barrels belong to whoever Controls the District** at the end of a Play. Barrels in a District nobody Controls belong to nobody; whoever takes Control takes them.
 - **Golden Rule**: no two mobs share a District at the end of a Play.
 - **Adjacent**: a shared border or a bridge.
@@ -180,7 +180,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 **Hell's Kitchen Irish**
 
 - **Tommy Gun** (tommyGun, 2, in a fight): Open Fire with 1 extra attack die (max 5) at +1 Threat (max 4). The Occupier returns fire as normal. Heat only as the fight's first shot.
-- **Peddle** (peddle, 1): sell **Moonshine only** in a **Ward** you Control at the **$200** street rate. Never draws Heat, however many barrels: a pile goes out quietly in one Play, where an Unload at a bar fetches $300 a barrel and draws Heat.
+- **Waterfront** (waterfront, 1 + $200): pay **$200** and Trade at **any Dock** you Control at **1:1**, Moonshine for Havana Rum (N is the Rum you receive). No Heat. It counts as a Trade for Jobs.
 
 **East Side Vipers**
 

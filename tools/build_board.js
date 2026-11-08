@@ -958,7 +958,7 @@ function tomorrow(x, y) {
 // High Society). The selling rows are a venue and what it buys, a barrel and a price: the
 // High Society row has only Rum, which says "Rum only" without the words. The Trade Dock
 // (2026-11-04; the Dock row carried it until then) Trades Moonshine up to Rum, one for one: a
-// grey cube to a brown one. The Ward carries the crown
+// grey cube to a brown one. Since 2026-11-08 every Dock Trades, two for one, and the Dock row says so. The Ward carries the crown
 // (Nick, 2026-10-24): a boss's home Ward is where his rivals Take the Crown. It said "Boss
 // Rises" until the Rise moved to the home Borough. A barrel is drawn as the cube that stands for it on the table (Nick: grey
 // Moonshine, brown Rum).
@@ -979,9 +979,9 @@ const KICK_R = 6.5, KICK_GAP = 4, TRADE_W = 8 + 14 + 8; // a Trade: cube, arrow,
 const KEY_CROWN = 13; // the Ward row's crown
 // [roundel, name, what it does]: chips of [barrel, price, Kickback?], a Trade, or words
 const KEY_ROWS = [
-  ['speak', 'Speakeasy', [['moonshine', '$300'], ['rum', '$500']]],
+  ['speak', 'Speakeasy', [['moonshine', '$200'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500', true]]],
-  ['dock', 'Dock', []],
+  ['dock', 'Dock', { words: 'Trade 2 for 1' }],
   ['trade', 'Trade Dock', { trade: ['moonshine', 'rum'] }],
   ['ward', 'Ward', { crown: true }],
 ];

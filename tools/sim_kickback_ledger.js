@@ -13,7 +13,7 @@ function run(engine) {
   return { free, delta: free - 5, cash, heat, lost };
 }
 // Every Unload draws one Heat marker (2026-11-08; from 2026-10-14 only 5+ barrels, the Greed Tax).
-const unload = (n, liquor, hs) => ({ cost: 2, k: hs ? n : 0, cash: n * (liquor === 'rum' ? 500 : 300), heat: true });
+const unload = (n, liquor, hs) => ({ cost: 2, k: hs ? n : 0, cash: n * (liquor === 'rum' ? 500 : 200), heat: true });
 const move = { cost: 1 }, trade = { cost: 1 };
 const S = {
   'CURRENT  2 stacks, Unload Moonshine in place':      [unload(4,'m',1), unload(4,'m',1)],
