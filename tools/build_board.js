@@ -899,7 +899,8 @@ function tomorrow(x, y) {
 // High Society row has only Rum, which says "Rum only" without the words. The Trade Dock
 // (2026-11-04; the Dock row carried it until then) Trades Moonshine up to Rum, one for one: a
 // grey cube to a brown one. Since 2026-11-08 every Dock Trades, two for one: the Dock row is two grey cubes
-// to a brown one (Nick: cubes, not words), and the two rows' arrows line up. The Ward carries the crown
+// to a brown one (Nick: cubes, not words). Every row's first symbol starts at one left edge, so the
+// symbols read as a column (Nick, 2026-11-08; the Trade rows' arrows lined up until then). The Ward carries the crown
 // (Nick, 2026-10-24): a boss's home Ward is where his rivals Take the Crown. It said "Boss
 // Rises" until the Rise moved to the home Borough. A barrel is drawn as the cube that stands for it on the table (Nick: grey
 // Moonshine, brown Rum).
@@ -950,11 +951,11 @@ function key(x, y) {
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
     if (what.trade) {
-      const [from, to, n] = what.trade, ax = cx + 10 + (TRADE_MAX - 1) * TRADE_STEP;
-      for (let j = 0; j < n; j++) s += cube(from, ax - 6 - j * TRADE_STEP, cy, 8);
-      s += tradeArrow(ax, cy) + cube(to, cx + TRADE_W - 4, cy, 8);
+      const [from, to, n] = what.trade, ax = cx + 10 + (n - 1) * TRADE_STEP;
+      for (let j = 0; j < n; j++) s += cube(from, cx + 4.5 + j * TRADE_STEP, cy, 8);
+      s += tradeArrow(ax, cy) + cube(to, ax + 14.5, cy, 8);
     } else if (what.crown) {
-      const kx = cx + KEY_CROWN / 2;
+      const kx = cx + 0.5 + KEY_CROWN / 2;
       s += icon('crown', kx, cy, KEY_CROWN, C.shadow, 5) + icon('crown', kx, cy, KEY_CROWN, C.goldBright);
     } else if (what.words) {
       s += text(what.words, cx, cy, TYPE.price, { fill: C.body, middle: true });
