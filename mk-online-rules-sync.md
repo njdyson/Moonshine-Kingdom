@@ -902,7 +902,7 @@ comes back for The Toll Booth Trap (`killedRivalBoss`, set only by the Invader's
 ## 34. Extort and the Greed Tax: loud at 5+ (2026-10-14, Nick)
 
 A rule change after the opus-vs-bots-1 playtest ("Raids are too frequent and too punishing"). The
-reasoning and the bot numbers are in CLAUDE.md, *Extort and the Greed Tax: loud at 5+*.
+reasoning and the bot numbers are in CLAUDE.md, *Every Unload and every Extort draws Heat* (its History). Superseded by §48.
 
 | Rule | Was | Now |
 | --- | --- | --- |
@@ -1210,6 +1210,16 @@ with a provisional third tie-break (the lower Turn Token for tomorrow). Seats re
 alone in a default game; `rulesText()` appends a block only for a switch that changes the written rules.
 `scripts/commission-check.ts` covers it. The tie-break is settled (0b029f0), and the 2026-11-04 board is in
 `public/board.svg` (3a2bc96). Merged in mk-online's PR #36 and deployed here from 000efde (2026-11-04).
+
+## 48. Every Unload and every Extort draws Heat (2026-11-08, Nick)
+
+The rule as written (the Rulebook's Unload and Extort rows and Drawing Heat; CLAUDE.md's *Every Unload
+and every Extort draws Heat*): every Unload and every Extort draws one Heat marker, however many barrels
+or Districts. The Greed Tax and Extort's 5+ Districts threshold (§34) are gone. Peddle never draws Heat.
+
+mk-online: `unloadDrawsHeat` / `extortDrawsHeat` in `src/game/data.ts`, with the old thresholds behind
+`setHeadlessHeatThresholds(true)` for sweeps (`lengthdiag.ts --heatThresholds=1`); engine, bots, agent
+options, UI and `harness/RULES-AI.md` follow. `scripts/heat-five-check.ts` covers both. mk-online PR #44.
 
 ## Checklist
 

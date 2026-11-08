@@ -96,9 +96,9 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
 | Lay Low (layLow) | 0 | See §3. |
-| Unload (unload) | 2 | At a Speakeasy you Control, sell your barrels there: **Moonshine $300, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. **Greed Tax**: 5+ barrels in one Play = H. |
+| Unload (unload) | 2, H | At a Speakeasy you Control, sell your barrels there: **Moonshine $300, Rum $500**. **High Society Venues buy Rum only**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. One Heat marker however many barrels go, so a big pour costs no more Heat than a small one. |
 | Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
-| Extort (extort) | 2, H at 5+ | **$100 per District you Control**. As often as your Ledger pays for it; each Extort draws one Heat marker only when you Control **5+ Districts**. |
+| Extort (extort) | 2, H | **$100 per District you Control**. As often as your Ledger pays for it; each Extort draws one Heat marker however many Districts pay. |
 | Rat (rat) | 2 | An immediate Raid (§7). Take the Rat Card (−3 Respect) from the supply or its holder. You cannot Rat while you hold it; it leaves you only when a rival Rats. |
 | Rise (rise) | 2 | Boss off the board only: place him in any **Safe District of your home Borough**. |
 | Take the Crown (takeTheCrown) | 2 | See §1. |
@@ -155,7 +155,7 @@ Hits remove **Runners first**, then the Boss.
 
 ## 7. Police
 
-- **Heat**: a Play marked H, a fight's first shot (Ambush, Open Fire, Hit, Tommy Gun or Torch), and a Greed Tax Unload each add 1 marker (the spent marker itself).
+- **Heat**: a Play marked H (Unload and Extort among them) and a fight's first shot (Ambush, Open Fire, Hit, Tommy Gun or Torch) each add 1 marker (the spent marker itself).
 - **The Raid** is triggered when the **5th marker** lands, once the Play that placed it has fully resolved (a sale completes first; a fight ends first), or at once by Rat.
 - **Squad order**: the four Squads (Staten Island has none) resolve one at a time, Manhattan, Bronx, Queens, Brooklyn.
 - **Reach**: Districts directly Adjacent to the Squad (border or bridge, never water) inside its own Borough. It must be Controlled by a mob (Mobsters there) and have no Squad.
@@ -180,7 +180,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 **Hell's Kitchen Irish**
 
 - **Tommy Gun** (tommyGun, 2, in a fight): Open Fire with 1 extra attack die (max 5) at +1 Threat (max 4). The Occupier returns fire as normal. Heat only as the fight's first shot.
-- **Peddle** (peddle, 1): sell **Moonshine only** in a **Ward** you Control at the **$200** street rate. Never the Greed Tax, however many barrels: a big pile goes out quietly in one Play, while a small batch fetches more by Unload at a bar ($300).
+- **Peddle** (peddle, 1): sell **Moonshine only** in a **Ward** you Control at the **$200** street rate. Never draws Heat, however many barrels: a pile goes out quietly in one Play, where an Unload at a bar fetches $300 a barrel and draws Heat.
 
 **East Side Vipers**
 

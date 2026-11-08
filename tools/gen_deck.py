@@ -33,7 +33,8 @@ ONES = [
     # and is one Move from the other (East Harlem, Belmont, Astoria, Coney Island), so the set is
     # two friendly 1s per seat by construction. The High Society Venues are left out: they buy Rum
     # only and are Opening Night's. Four barrels was the Greed Tax when the set was drawn, so every
-    # one was a noisy sale; since 2026-10-14 the Tax starts at five and a 4-barrel sale is quiet.
+    # one was a noisy sale; from 2026-10-14 the Tax started at five and a 4-barrel sale was quiet;
+    # since 2026-11-08 every Unload draws Heat.
     # The set replaces The Grand Tour, whose "East River" invited an argument about Coney Island
     # (Nick's round-1 note).
     # COUNTERPLAY PASS (2026-08-04). Was "a $300 Speakeasy" = 8 venues, BLOCK 1, and it
@@ -50,6 +51,7 @@ ONES = [
     # SETS PASS 2026-10-11: 3+ became 4+, the bar set's one count.
     # RETIER 2026-10-14: 5+ on all eight (Nick). With the Greed Tax at 5+ a 4-barrel sale was quiet,
     # so the home bars paid a point for an Unload you'd make anyway; at 5+ every one draws Heat.
+    # (Since 2026-11-08 every Unload draws Heat, so every bar 1 is loud again.)
     # OPEN PASS 2026-10-15: back to 4+ (Nick). A quiet pour again, and Nick doesn't mind the 1s carrying
     # no Heat: one Offer a morning is the bottleneck, so easier 1s sharpen the Lay Low race. In bot
     # runs the bars went from 30% to 41% of claims finished.
@@ -298,8 +300,8 @@ TWOS = [
     #   card is dead until a Raid moves the Squad, and dead again whenever the Squad stands
     #   on any of the three. The holder steers the Squad (Follow the Smoke, then the Big Bust:
     #   be the freshest noise in reach, with the most barrels where you can afford the cops),
-    #   then holds three Districts at once and spends a Power Play, loud at 5+ Districts (it
-    #   always drew Heat until 2026-10-14).
+    #   then holds three Districts at once and spends a Power Play that draws Heat (only at
+    #   5+ Districts from 2026-10-14 to 2026-11-07).
     #   Rivals can break any of the three, or plant barrels to pull the Squad back onto one.
     #   The home seat starts holding one of the three and borders the other two, so the card
     #   is his friendly; for anyone else it is an invasion that ends next to a crown room.
@@ -482,7 +484,8 @@ TWOS = [
     # WARD CROWN 2026-10-24: the Crown moved to the rivals' home Wards, so this card is no longer
     # crown-related and the home-room clause guards nothing about the crown. Text unchanged.
     # RETIER 2026-10-14: DOWN TO 2, at 5+ Rum (Nick likes the card; fewer barrels to drop its tier).
-    # Five is where the Greed Tax starts, so the pour always draws Heat: a cost beside the Kickbacks.
+    # Five was where the Greed Tax started, so the pour always drew Heat: a cost beside the Kickbacks.
+    # Since 2026-11-08 every Unload draws it.
     ("Opening Night", "Jimmy.jpg", "Unload",
      "Unload <b>5+ Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.",
      "The band plays till four. Nobody asks a thing."),
@@ -631,8 +634,8 @@ THREES = [
     # counts, after Extort fell to $100 a District. Each has a verb no other 5 has (Trade, Unload of
     # Moonshine, Secure), so none can pay beside another 5 on one Play.
     # The Noble Experiment: Hoover's name for Prohibition. Outside your home Borough so it is never a
-    # home chore (every seat starts on its home bar), and eight barrels always draw the Greed Tax, so
-    # the pour is loud. Moonshine, so it never meets Opening Night (Rum, at home); it meets a bar 1.
+    # home chore (every seat starts on its home bar), and every Unload draws Heat (eight barrels
+    # always drew the Greed Tax before 2026-11-08), so the pour is loud. Moonshine, so it never meets Opening Night (Rum, at home); it meets a bar 1.
     ("The Noble Experiment", "Full Steam.jpg", "Unload",
      "Unload <b>8+ Moonshine</b> outside your <b>home Borough</b>.",
      "Hoover called it noble. The bars call it Tuesday."),

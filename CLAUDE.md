@@ -228,8 +228,8 @@ and an agent playtest that crowned on Day 23). Two card changes:
   so two of its three bars are always open and the card needs no floor. At home it is your starting bar
   and the next one: the answer is **denial**, a rival taking the card in the Offers, where for him it is
   a real Job. Weighed and not taken: "outside your home Borough" (a card one boss can never claim).
-- **The bar 1s ask 4+ barrels** (5+ from 2026-10-14). The pour drops under the Greed Tax, so the 1s
-  carry no Heat; Nick accepts that.
+- **The bar 1s ask 4+ barrels** (5+ from 2026-10-14). Since 2026-11-08 every Unload draws Heat, so
+  the 1s carry it too.
 
 Why: one Offer a morning is the bottleneck, so an easy card is still a race to claim it at the right
 time, and the easier the cards, the sharper the Lay Low race and the Reverse Snake. The ladder Nick
@@ -525,9 +525,8 @@ Since 2026-09-22:
   barrel Unloaded there pays an Influence **Kickback**. The usual limits apply: a marker in
   Reserves and an empty Ledger slot, else the Kickback is lost. ("The High Society joints
   don't buy swill.")
-- the Greed Tax applies wherever you sell, at **5+ barrels** Unloaded in one Play since 2026-10-14
-  (4+ before; see *Extort and the Greed Tax: loud at 5+*), and Peddle is exempt since 2026-10-10
-  (see below)
+- every Unload draws one Heat marker wherever you sell, since 2026-11-08 (see *Every Unload and every
+  Extort draws Heat*), and Peddle never does (see below)
 
 Why: the four High Society Venues sit on the four #7 Stills, which the Harbormaster can never
 lock out. When any barrel paid a Kickback, two 7-Mobster stacks could brew, Unload in place
@@ -557,13 +556,12 @@ without it); the Almanac's Rum table ("5 Rum, net +3") and `tools/sim_kickback_l
 
 The one other liquor-type restriction is the Irish **Peddle**, which sells **Moonshine
 only**, and **only in Wards you Control**: Speakeasy sales belong to Unload. Since 2026-10-10
-(Nick) it pays the **$200 street rate** and **never draws Heat**: no Greed Tax, however many
+(Nick) it pays the **$200 street rate** and **never draws Heat**, however many
 barrels. It used to sell at the bar's $300 for half the Influence, a strict discount that made
 Unload a dead Play for Irish Moonshine. Now the Irish choose: a small batch fetches more at a bar
 (three barrels: $900 by Unload, $600 by Peddle), and a big pile goes out quietly in one Play
 (ten: $2,000 and no Heat, where an Unload pays $3,000 and draws it). Do not "restore
-consistency" by opening Peddle to either liquor or to more addresses, or by putting the Greed
-Tax back on it. Watch in playtest: a packed Ward is now a silent cash engine, and a quiet Peddle
+consistency" by opening Peddle to either liquor or to more addresses, or by putting Heat on it. Watch in playtest: a packed Ward is now a silent cash engine, and a quiet Peddle
 clears Raid bait without making the Irish the freshest noise. (`mk-online-rules-sync.md` §9.6
 and §27.)
 
@@ -746,47 +744,44 @@ also sends every barrel in the District to the Supply (it left them unharmed), s
 stockpile as the Raid does. In a fight the Invader rolls
 **Red** and the Occupier **White**, so nobody has to remember who rolled which; Red also brews.
 
-## Extort and the Greed Tax: loud at 5+
+## Every Unload and every Extort draws Heat
 
-Since 2026-10-14 (Nick, on the opus-vs-bots-1 takeaway "Raids are too frequent and too punishing").
-An Extort draws Heat only when it squeezes **5+ Districts**, and the Greed Tax starts at **5+ barrels**
-Unloaded in one Play (it was 4+). One number for both: five in one Play is loud. Extort is otherwise
-unchanged (Power Play; its pay and daily limit changed the same day, see *Extort at $100, and no Collect*).
-State the threshold in Districts, never as a dollar figure, so the rule keeps one unit.
+Since 2026-11-08 (Nick, after two agent games in mk-online where nobody laid the fifth marker and the
+first Raid came on Day 17). **Every Unload and every Extort draws one Heat marker**, however many barrels
+go or Districts pay. The Greed Tax is gone, and so is Extort's 5+ Districts threshold. Peddle and Trade
+still never draw Heat. Nick: "a play creates heat or it doesn't". Good play is batching: one big pour or
+one big squeeze costs the same marker as a small one. He hopes it makes the Rum Trade more appealing,
+and if it proves too much, Extort is the first lever to dial back.
 
-Why: Extort laid 54 of that game's 83 Heat markers, and every seat made it most Days, so a Raid landed
-on whoever happened to Extort last. In a bot sweep on matched seeds (18 games a rule, a scratch copy of
-mk-online, not committed), Extort at 5+ took Raids from one every 1.6 Days to one every 2.1 and
-destroyed Safehouses from 2.6 to 1.7 per 10 Days, with cash, the Bribe ladder and the Day 2 opening of
-the High Society rooms unchanged. The big empire's Extort stays loud, so the leader stays on the Track.
-The Greed Tax at 5+ halved its own Heat but moved Raids only to one every 2.2 Days: it is there for
-the matching number.
+State it once per page and stop: no "however small", no "even four barrels". The Playbooks' Unload and
+Extort rows say nothing about Heat beyond the flame on the name; the Rulebook's Drawing Heat list has one
+line for both (Money Talks).
 
-Weighed and not taken:
+Bot sweep on matched seeds (40 games a rule, mk-online 7d40cd2, `lengthdiag.ts --heatThresholds`;
+`/mnt/project-files/bot-runs/log.md`), new against the 5+ thresholds: Raids 0.66 a Day against 0.34;
+crown median Day 50.5 against 37.5, with 4 of 40 games uncrowned at Day 90; Kickbacks and Rum Traded
+flat (7.2 against 7.3 a game; 20.8 against 20.1 barrels); Unloads fewer and bigger (3.55 barrels against
+3.13). The bots are not retuned for it (they don't batch Extorts), so read length with care; the agent
+seats, which avoided Heat under the thresholds, are the real test.
 
-- **No Extort Heat at all**: a Raid every 3.5 Days, which Nick judged too rare.
-- **Extort as a 1-Influence Play at $100 per Speakeasy you Control, no Heat, replacing Collect** (Nick's
-  first idea): a Raid every 4.9 Days, but Extort income fell by two-thirds and the fourth Bribe came a
-  week later. At $200 a bar the economy held, but staying up would pay a bar-holder more than Laying Low,
-  which breaks The Almanac's Reverse Snake ("It isn't money"). Collect stayed (until later the same day).
-- **Heat at 4+ Districts** (83% of the bots' Extorts stayed loud; a Raid every 1.8 Days) and **at 6+** (a
-  Raid every 2.7 Days).
+History: from 2026-10-14 to 2026-11-07 an Extort drew Heat only at **5+ Districts** and the Greed Tax at
+**5+ barrels** ("five in one Play is loud"), after the opus-vs-bots-1 playtest where Extort laid 54 of 83
+Heat markers. Before that every Extort drew Heat and the Greed Tax was 4+. Weighed then and not taken:
+no Extort Heat at all (a Raid every 3.5 Days, too rare), and the thresholds at 4+ or 6+.
 
 Watch in playtest:
 
-- **The cliff.** A boss on four Districts Extorts quietly and on five loudly, and Extort squeezes
-  everything you Control, so the quiet play is to Extort before you take the fifth block.
-- **The bar 1s** read 4+ barrels since 2026-10-15, so a bar 1 is a quiet pour (Nick accepts the 1s
-  carrying no Heat).
-- **The Nightcap** (lesson 12): a 4-Rum pour at a room nets +2 Plays without Heat, even on five clear
-  markers (`tools/sim_kickback_ledger.js`), so the quiet Kickback engine is a Play richer per pour.
-- The Volstead Act (shelved) keeps its Greed Tax at 3+, now "down from 5+".
+- **Game length** (above), and whether a Raid every day and a half is fun or just punishing.
+- **The Nightcap** (lesson 12): a pour now locks one marker, so N Rum refill N slots only with N+1
+  markers clear of Jobs and the Track (`tools/sim_kickback_ledger.js`).
+- **The Volstead Act** (shelved) still prints "The Greed Tax bites at three ... (down from 5+)". The rule
+  it tightened is gone, so it needs a new twist if it returns.
 
 ## Extort at $100, and no Collect
 
 Since 2026-10-14 (Nick, after the opus-vipers playtest in mk-online). **Extort** pays **$100 per District
-you Control**, as often as your Ledger pays for it (it was $200, once a Day). **Collect is cut.** Heat is
-unchanged: one marker when it squeezes 5+ Districts.
+you Control**, as often as your Ledger pays for it (it was $200, once a Day). **Collect is cut.** Heat: one marker
+when it squeezed 5+ Districts; since 2026-11-08 every Extort (see *Every Unload and every Extort draws Heat*).
 
 Why: Extort paid 65 to 71% of the winner's cash, and three of four families had all four Bribes by Day 19.
 Nick: "the game should rely on the brew engine and the extort path should be a secondary source." At $100
@@ -806,8 +801,8 @@ Watch in playtest:
 - **Game length.** Bribes were half of every winner's Respect, so slower Bribes slow the race unless Jobs
   make it up. Nick's next levers: Bribe prices, or more pull for brew and Unload (Unload at 1 Influence was
   floated; it also makes Kickbacks stronger).
-- **The Rum pour.** A Venue pour of 4 and then 3 Rum in two Plays dodges the Greed Tax, and the Kickbacks
-  refund more markers than the two Unloads spent. In that game it paid for a Judge and a Mayor in three
+- **The Rum pour.** A Venue pour of 4 and then 3 Rum in two Plays dodged the Greed Tax (until 2026-11-08),
+  and the Kickbacks refund more markers than the two Unloads spent. In that game it paid for a Judge and a Mayor in three
   Days.
 
 ## A Safehouse is taken over or destroyed
