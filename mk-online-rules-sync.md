@@ -1382,3 +1382,10 @@ the board (Rum Row as a label and a triangle, the key's Dock row as two grey cub
 - [x] **Jobs pay 1, 2 or 3; High Roller in, The Real McCoy out** (§37; mk-online PR #11)
 - [x] **The Market pass: barrel bridges with The Milk Run, Last One Standing 4+, Cuban Prince 1, Jamaica Ginger for Night Landing** (§43)
 - [ ] **Trade Docks by default, keg off, the Commission behind a switch** (§47; mk-online PR #36, deployed from 000efde)
+
+## 51. Trade Docks are Landing Docks (2026-11-08, Nick)
+
+A rename, no rule change: every Dock Trades since §49, so "Trade Dock" told a new player the others
+couldn't. The Bowery, Whitestone, Stapleton and Tottenville are **Landing Docks** (the rum lands there
+straight off Rum Row's contact boats). Player-facing strings, comments and RULES-AI.md say Landing Dock;
+identifiers (`RUM_ROW_DOCKS`, `G.rumRow`, `canTradeAt`) are unchanged.

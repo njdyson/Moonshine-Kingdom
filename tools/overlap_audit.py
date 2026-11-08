@@ -318,7 +318,7 @@ def _plays(verb, d, state, home):
                 for rum in ((True,) if d.has('highSociety') else (False, True)):
                     yield _p(state=state, home=home, barrels=barrels, rum=rum)
     elif verb == 'Trade':
-        # Trade happens only at the four Trade Docks (2026-11-04).
+        # Trade happens only at the four Landing Docks (2026-11-04).
         if state == 'control' and d.has('tradeDock'):
             for barrels in BARRELS[1:]:
                 yield _p(state=state, home=home, barrels=barrels)
