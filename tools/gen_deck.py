@@ -123,8 +123,10 @@ ONES = [
     # Manhattan Dock beside Sugar Hill, and every starting Dock reaches it by water. "for
     # Rum" cut: Trade only ever makes Rum.
     # 2026-10-21 (Nick): 4+, not 3+. The sets pass took every other 1 to 4+ and missed this one.
+    # 2026-11-08 (Nick): the Bowery and West Side swapped roles, so the Bowery is the empty Manhattan
+    # Dock, a Trade Dock, and Manhattan starts on West Side; the card moved with the Trade Dock.
     ("The Dutchman's Deal", "Dutchman.jpg", "Trade",
-     "Trade <b>4+ barrels</b> at <b>West Side</b>.",
+     "Trade <b>4+ barrels</b> at <b>the Bowery</b>.",
      "He never gives a name. The windmill on the sack says plenty."),
     # MARKET PASS 2026-10-17 (Nick: more Trade cards, to pull boards toward the Rum Trade once the
     # bridges and Last One Standing stopped asking for Rum; reviews/jobs-market-stuck-2026-10-17.md).
@@ -132,8 +134,10 @@ ONES = [
     # trip behind it, like The Dutchman's Deal at West Side. It replaces Night Landing, which pointed at
     # the same water. "Jamaica ginger" was the patent tonic sold by the case under Prohibition.
     # Art: Rum Row 3 (the rainier sibling of Rum Row's painting), provisional.
+    # 2026-11-08 (Nick): Whitestone and Jamaica swapped roles (Whitestone the Trade Dock, Queens starts on
+    # Jamaica), so the card moved to Whitestone and kept its name: the tonic, not the place.
     ("Jamaica Ginger", "Rum Row 3.jpg", "Trade",
-     "Trade <b>4+ barrels</b> at <b>Jamaica</b>.",
+     "Trade <b>4+ barrels</b> at <b>Whitestone</b>.",
      "Sold by the case as a tonic. Nobody asks what ails you."),
     # "a Pier 6 brawl" was real period slang for an all-out waterfront fight.
     # TRIED AND REVERTED: pinning this to Jamaica Bay as the hostile mirror of

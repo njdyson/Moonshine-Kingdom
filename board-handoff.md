@@ -692,11 +692,11 @@ keeps them on a re-trace.
 
 ## Decisions, so nobody undoes them
 
-- **The lanes are cut; Rum Row keeps its arrow** (Nick, 2026-11-08: "I do like them but they add
-  clutter and confusion. I'd leave a little decorative arrow pointing to Rum Row though for theme").
-  `rumRowArrow()` draws only the last stretch of the old trunk, a short dashed gilt curve down the
-  Narrows (`RUM_ROUTE.way`) with its arrowhead on the bottom frame and **RUM ROW** beside it. `PIER_WEST`
-  stays so the piers don't move. The note below is the history of the lanes.
+- **The lanes are cut; Rum Row is a label and a triangle** (Nick, 2026-11-08: the lanes "add clutter
+  and confusion"; the short dashed arrow tried next "looks like it's broken and coming from nowhere").
+  `rumRowArrow()` draws **RUM ROW** in the water labels' type at `RUM_ROUTE.at`, low in the Narrows,
+  with a small gilt triangle under it pointing at the bottom frame. `PIER_WEST` stays so the piers
+  don't move. The note below is the history of the lanes.
 - **Trade Docks and Rum Row's lanes** (2026-11-04; `trade-docks-handoff.md`, a draft for Nick to
   approve before mk-online copies it). The four Trade Docks (West Side, Jamaica, Stapleton,
   Tottenville) carry `trade: true` in the roster, and `cluster()` hangs a **rum-runner schooner**

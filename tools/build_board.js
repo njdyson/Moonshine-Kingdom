@@ -104,16 +104,18 @@ const fillId = d => `fill-${d.boro}`;
 // trade: a Trade Dock (Nick, 2026-11-04), where Moonshine Trades for Rum 1:1 (2:1 elsewhere since 2026-11-08): the four
 // Docks nobody starts on, which are the four Pressure 1 Stills (two on 2, two on 12, since West
 // Side and East Harlem swapped Stills, 12 and 11, and Jamaica and Astoria, 2 and 3, on
-// 2026-10-31). A schooner hangs under the sign's medallion (until 2026-11-08 a shipping
-// lane also ran from its pier to Rum Row; see rumRowArrow()). They were the Powder Keg's factories, marked with
+// 2026-10-31). Since 2026-11-08 (Nick) the Bowery and Whitestone are Trade Docks in place of West Side
+// and Jamaica, the pairs swapping Stills (Bowery 12 / West Side 9, Whitestone 2 / Jamaica 5), and
+// Manhattan and Queens start on West Side and Jamaica. A schooner hangs under the sign's medallion (from 2026-11-04 to 2026-11-07 a
+// shipping lane also ran from its pier to Rum Row; see rumRowArrow()). They were the Powder Keg's factories, marked with
 // dynamite, from 2026-10-31 until the keg was cut on 2026-11-04.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
   { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
   { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 11, venue: 'The Silver Dollar' },
   { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket', setup: 'runners' },
-  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 12, trade: true },
-  { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 9, setup: 'runners' },
+  { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 9, setup: 'runners' },
+  { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 12, trade: true },
   { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, setup: 'home' },
   { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', setup: 'squad' },
   { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'speak', still: 11, venue: 'DeLillo’s' },
@@ -123,8 +125,8 @@ const DISTRICTS = [
   { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', setup: 'squad' },
   { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 3, venue: 'Bohemian Hall' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
-  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
-  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 2, trade: true },
+  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 2, trade: true },
+  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
   { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint' },
@@ -276,53 +278,22 @@ function schooner(cx, cy, s) {
     + `</g>`;
 }
 
-// Rum Row's arrow (2026-11-08): a short dashed gilt arrow out to sea through the Narrows, its head on
-// the frame and "Rum Row" beside it, toward the mother ships offshore. Theme only. From 2026-11-04 to
-// 2026-11-07 dashed shipping lanes ran to it from all four Trade Docks; Nick cut them on 2026-11-08 ("they
-// add clutter and confusion") and kept the arrow. It is drawn under the land, so it never crosses a
-// District. It is a smooth curve (a Catmull-Rom spline, sampled) through its waypoints in board units.
+// Rum Row's marker (2026-11-08): "RUM ROW" in the water labels' type, low in the Narrows, with a small
+// gilt triangle under it pointing off the bottom edge, toward the mother ships offshore. Theme only.
+// From 2026-11-04 to 2026-11-07 dashed shipping lanes ran to it from all four Trade Docks; Nick cut them
+// on 2026-11-08 ("they add clutter and confusion"), then the short dashed arrow left in their place
+// ("the line looks like it's broken and coming from nowhere"), keeping the label and a triangle.
 const RUM_ROUTE = {
-  way: [[281, 930], [281, 960], [266, 1020], [238, 1080 - FRAME_IN]],
-  label: { text: 'RUM ROW', dx: -10, dy: -8 },
+  at: [244, 1080 - FRAME_IN - 18], // the label's centre, in board units
+  label: { text: 'RUM ROW' },
 };
 // Muted gilt (Nick, 2026-11-04: "it looks more premium"), picked over sea-green, ivory, rum amber
 // and harbour blue. LANE_COLOR=#rrggbb and LANE_OPACITY override it for a proof.
-const LANE = { color: process.env.LANE_COLOR || C.gold, width: 1.3, dash: '5 4', opacity: +(process.env.LANE_OPACITY || 0.6), head: 5 };
-function spline(pts, per = 24) {
-  const P = [pts[0], ...pts, pts[pts.length - 1]], out = [];
-  for (let i = 1; i < P.length - 2; i++) {
-    const [p0, p1, p2, p3] = [P[i - 1], P[i], P[i + 1], P[i + 2]];
-    for (let k = 0; k < per; k++) {
-      const t = k / per, t2 = t * t, t3 = t2 * t;
-      out.push([0, 1].map(c => 0.5 * (2 * p1[c] + (-p0[c] + p2[c]) * t + (2 * p0[c] - 5 * p1[c] + 4 * p2[c] - p3[c]) * t2 + (-p0[c] + 3 * p1[c] - 3 * p2[c] + p3[c]) * t3)));
-    }
-  }
-  out.push(pts[pts.length - 1]);
-  return out;
-}
-// A sampled curve with its arc lengths: at(d) gives the point and unit heading d along it.
-function arc(curve) {
-  const acc = [0];
-  for (let i = 1; i < curve.length; i++) acc.push(acc[i - 1] + Math.hypot(curve[i][0] - curve[i - 1][0], curve[i][1] - curve[i - 1][1]));
-  const total = acc[acc.length - 1];
-  const at = d => {
-    let i = acc.findIndex(v => v >= d); if (i < 1) i = 1;
-    const [a, b] = [curve[i - 1], curve[i]], L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, k = (d - acc[i - 1]) / L;
-    return { p: [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k], u: [(b[0] - a[0]) / L, (b[1] - a[1]) / L] };
-  };
-  return { curve, acc, total, at };
-}
-const dashed = pts => `<path d="M${pts.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')}" fill="none" stroke="${LANE.color}" stroke-opacity="${LANE.opacity}" stroke-width="${LANE.width}" stroke-dasharray="${LANE.dash}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const LANE = { color: process.env.LANE_COLOR || C.gold, opacity: +(process.env.LANE_OPACITY || 0.8), head: 4.5 };
 function rumRowArrow() {
-  const { way, label } = RUM_ROUTE;
-  const T = arc(spline(way));
-  const h = LANE.head, end = T.at(T.total - 2), [ux, uy] = end.u, tip = end.p;
-  const base = [tip[0] - ux * h * 1.4, tip[1] - uy * h * 1.4];
-  const s = dashed(T.curve.filter((_, i) => T.acc[i] < T.total - 2 - h * 1.4).concat([base]))
-    + `<path d="M${f(base[0] - uy * h)} ${f(base[1] + ux * h)} L${f(tip[0])} ${f(tip[1])} L${f(base[0] + uy * h)} ${f(base[1] - ux * h)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
-  // the destination, named level along the bottom edge beside the arrow (Nick, 2026-11-04), in the
-  // water labels' type: what lies off the board, not a caption on one line
-  const labels = text(label.text, tip[0] + label.dx, 1080 - FRAME_IN + label.dy, TYPE.water, { fill: LANE.color, anchor: 'end', opacity: 0.95, middle: true });
+  const { at: [x, y], label } = RUM_ROUTE, h = LANE.head, top = y + 7;
+  const s = `<path d="M${f(x - h)} ${f(top)} L${f(x + h)} ${f(top)} L${f(x)} ${f(top + h * 1.3)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
+  const labels = text(label.text, x, y, TYPE.water, { fill: LANE.color, anchor: 'middle', opacity: 0.95, middle: true });
   return { lines: `<g id="rum-row">${s}</g>`, labels };
 }
 
@@ -927,7 +898,8 @@ function tomorrow(x, y) {
 // High Society). The selling rows are a venue and what it buys, a barrel and a price: the
 // High Society row has only Rum, which says "Rum only" without the words. The Trade Dock
 // (2026-11-04; the Dock row carried it until then) Trades Moonshine up to Rum, one for one: a
-// grey cube to a brown one. Since 2026-11-08 every Dock Trades, two for one, and the Dock row says so. The Ward carries the crown
+// grey cube to a brown one. Since 2026-11-08 every Dock Trades, two for one: the Dock row is two grey cubes
+// to a brown one (Nick: cubes, not words), and the two rows' arrows line up. The Ward carries the crown
 // (Nick, 2026-10-24): a boss's home Ward is where his rivals Take the Crown. It said "Boss
 // Rises" until the Rise moved to the home Borough. A barrel is drawn as the cube that stands for it on the table (Nick: grey
 // Moonshine, brown Rum).
@@ -944,14 +916,15 @@ function kickChip(cx, cy) {
     + `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(KICK_R - 2)}" fill="none" stroke="${C.goldDim}" stroke-width=".4" stroke-dasharray="1.2 1.2"/>`
     + text('+1', cx, cy, { family: 'Barlow Condensed', weight: 700, size: 7.6, spacing: 0 }, { fill: C.goldBright, anchor: 'middle', middle: true });
 }
-const KICK_R = 6.5, KICK_GAP = 4, TRADE_W = 8 + 14 + 8; // a Trade: cube, arrow, cube
+const KICK_R = 6.5, KICK_GAP = 4; // a Trade: cubes, arrow, cube
+const TRADE_MAX = 2, TRADE_STEP = 10, TRADE_W = 8 + (TRADE_MAX - 1) * TRADE_STEP + 14 + 8;
 const KEY_CROWN = 13; // the Ward row's crown
-// [roundel, name, what it does]: chips of [barrel, price, Kickback?], a Trade, or words
+// [roundel, name, what it does]: chips of [barrel, price, Kickback?], a Trade [from, to, how many], or words
 const KEY_ROWS = [
   ['speak', 'Speakeasy', [['moonshine', '$200'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500', true]]],
-  ['dock', 'Dock', { words: 'Trade 2 for 1' }],
-  ['trade', 'Trade Dock', { trade: ['moonshine', 'rum'] }],
+  ['dock', 'Dock', { trade: ['moonshine', 'rum', 2] }],
+  ['trade', 'Trade Dock', { trade: ['moonshine', 'rum', 1] }],
   ['ward', 'Ward', { crown: true }],
 ];
 // Moonshine becomes Rum: a cube, a gilt arrow, a cube.
@@ -977,7 +950,9 @@ function key(x, y) {
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
     if (what.trade) {
-      s += cube(what.trade[0], cx + 4, cy, 8) + tradeArrow(cx + 10, cy) + cube(what.trade[1], cx + TRADE_W - 4, cy, 8);
+      const [from, to, n] = what.trade, ax = cx + 10 + (TRADE_MAX - 1) * TRADE_STEP;
+      for (let j = 0; j < n; j++) s += cube(from, ax - 6 - j * TRADE_STEP, cy, 8);
+      s += tradeArrow(ax, cy) + cube(to, cx + TRADE_W - 4, cy, 8);
     } else if (what.crown) {
       const kx = cx + KEY_CROWN / 2;
       s += icon('crown', kx, cy, KEY_CROWN, C.shadow, 5) + icon('crown', kx, cy, KEY_CROWN, C.goldBright);

@@ -1234,6 +1234,24 @@ default, `setHeadlessAnyDockRate`); the `trade` move's count is the Rum received
 `scripts/rumrow-check.ts` and `scripts/torch-waterfront-check.ts` cover it. The board key reads Speakeasy
 $200 and "Dock: Trade 2 for 1".
 
+## 50. The Bowery and Whitestone are Trade Docks; the Irish Hook (2026-11-08, Nick)
+
+The rule as written (the Rulebook's Docks legend, Glossary and brew example; the Town Planner's Setup
+column; CLAUDE.md's *Trade Docks* and *Starting turf*): the four Trade Docks are the Bowery, Whitestone,
+Stapleton and Tottenville. The Bowery and West Side swap Stills (Bowery 12, West Side 9), and so do
+Whitestone and Jamaica (Whitestone 2, Jamaica 5). Manhattan starts its Dock Runners on West Side, Queens
+on Jamaica. The Dutchman's Deal reads "Trade 4+ barrels at the Bowery", Jamaica Ginger "Trade 4+ barrels
+at Whitestone". The Irish **Hook** replaces Waterfront: Power Play, 2 Influence, no Heat; swap barrels one for
+one between a District you Control and an Adjacent District a rival Controls, your Moonshine out first and
+his Rum in first.
+
+mk-online: what `setHeadlessLandingSwap(true)` did is now the default in `src/game/data.ts` (Stills),
+`src/game/setup.ts` (`STARTING_TURF`) and `src/game/rumrow.ts` (`RUM_ROW_DOCKS`, `TRADE_JOB_DOCK`), with
+the switch kept to restore the old map for sweeps; the two Trade Jobs' text, `harness/RULES-AI.md`, and
+the board (Rum Row as a label and a triangle, the key's Dock row as two grey cubes to a brown one).
+`hook(fromId, toId, n)` in `src/game/signature.ts` replaces `waterfront` (`HOOK_CASH` gone), with the bot's
+`pushHook`, the agent option, the UI's Hook form and `scripts/torch-hook-check.ts`.
+
 ## Checklist
 
 > **Audited against the build 2026-08-01, while porting §6.** Everything in §§1–5

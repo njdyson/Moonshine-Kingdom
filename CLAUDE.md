@@ -280,9 +280,11 @@ once. The deck is 36 cards, 16 / 12 / 8:
   Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Ward"; a 1 since
   2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished), **Cuban Prince** ("Extort
   4+ Docks"; a 1 since 2026-10-17, the easiest 2, 62 of 99) and **Jamaica Ginger** ("Trade 4+ barrels
-  at Jamaica"; 2026-10-17, Nick: more Trade cards to pull toward the Rum Trade; Jamaica is the one Dock
-  that is nobody's start, and it replaced Night Landing). Every barrel count on a 1 is 4+, The
-  Dutchman's Deal at West Side included (3+ until 2026-10-21, a card the sets pass missed).
+  at Whitestone"; 2026-10-17, Nick: more Trade cards to pull toward the Rum Trade; it replaced Night
+  Landing). Every barrel count on a 1 is 4+, The Dutchman's Deal at the Bowery included (3+ until
+  2026-10-21, a card the sets pass missed). The two named Trade cards sit on the empty Trade Dock of
+  Manhattan and of Queens, and moved with them on 2026-11-08 (*Trade Docks*): they were West Side and
+  Jamaica. Jamaica Ginger kept its name (the tonic, not the place); Nick may want a new one.
 - **2s**: **the Extort set**, *Extort every open Speakeasy in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand);
   **the bridge set**, *Move 4+ barrels across* the Williamsburg (The Milk Run), the Hell Gate (Hell's
@@ -556,7 +558,7 @@ without it); the Almanac's Rum table ("5 Rum, net +3") and `tools/sim_kickback_l
 
 Peddle (the Irish sold Moonshine in their Wards at $200, with no Heat) was cut on 2026-11-08 (Nick:
 "I never liked peddle anyway"): with Moonshine at $200 at the bar, it would have beaten Unload outright.
-The Irish have **Waterfront** in its place (see *The Rum economy*). Don't bring Peddle back.
+The Irish have **Hook** in its place (see *The Rum economy*). Don't bring Peddle back.
 
 The Rum pool is **20** barrels, and Trade (2:1 at any Dock, 1:1 at a Trade Dock; see *The Rum economy*)
 is the only way Rum enters the game. At a Trade Dock it is worth **$300 a barrel** in cash, at any other
@@ -568,7 +570,7 @@ deleted the Hotspot tokens and Titles and fixed the Kickback to the four High So
 The rule that let the Night Mayor **strand** goods (one liquor to a room) stays dead: nothing
 in the game bricks a paid-for asset.
 
-## The Rum economy: Moonshine $200, Trade at any Dock, Waterfront
+## The Rum economy: Moonshine $200, Trade at any Dock, Hook
 
 Since 2026-11-08 (Nick, with *Every Unload and every Extort draws Heat*: "This encourages players to
 interact with rum"). Three changes, one direction:
@@ -577,36 +579,46 @@ interact with rum"). Three changes, one direction:
 - **Trade at any Dock you Control: 2 Moonshine for 1 Rum; at a Trade Dock, 1 for 1.** Still 1 Influence,
   no Heat, from the pool of 20. Theme: at a Trade Dock the rum comes straight off the boats; anywhere else
   a middleman takes half. The Rulebook's Trade row carries that line.
-- **The Irish lose Peddle and gain Waterfront** (1 Influence and $200: Trade 1:1 at any Dock you Control,
-  as at a Trade Dock; it is a Trade in every other way). Nick's words: "pay $200 to trade at ANY dock 1:1".
-  The name (the Irish ran the longshoremen) is the rules pass's, not Nick's, and his to confirm. He is
-  "not 100% sold" on the Play itself.
+- **The Irish lose Peddle and gain Hook** (Power Play, 2 Influence, no Heat): swap barrels one for one
+  between a District you Control and an **Adjacent** District a rival Controls (a border or a Bridge, not
+  the water), your Moonshine going over first and his Rum coming back first. Nick, the same evening, after
+  a first draft called **Waterfront** (1 Influence and $200: Trade 1:1 at any Dock) turned out dull: a
+  plain Trade already draws no Heat, so it only upgraded the Docks ("which is no fun"). He proposed the
+  swap (as "Plunder", the Knights' old trait name, so it is Hook instead: one verb, slang for lifting
+  cargo) and chose Adjacent over Connected, since Dock to Dock would let it reach every pier on the map.
+  Its counterplay is not stacking Rum beside an Irish block.
 
 Bot sweep (40 games an arm, mk-online `lengthdiag.ts`, `/mnt/project-files/bot-runs/log.md`), on the Heat
-rule, with a free Irish 1:1 Trade standing in for Waterfront: Rum traded rose from 20.8 to 34.1 a game,
+rule, with a free Irish 1:1 Trade standing in for the Irish Play: Rum traded rose from 20.8 to 34.1 a game,
 the crown median went from 50.5 to 44.5 (quartiles overlap), Kickbacks 7.2 to 9.2, and Extort's share of
 cash rose from 55% to 62%. Moonshine at $200 alone did most of it (28.6 Rum). Nick expects smart players to
 Extort less; his levers if the game drags are cheaper Bribes, richer brews, or cheaper Runners or Secure.
 
-Still open (Nick, 2026-11-08): the theme ("Trade Docks" when every Dock Trades; the schooners on the board), and the map. Two Trade Docks border a High Society Venue (West Side and Sugar Hill,
-Jamaica and Richmond Hill), so Manhattan and Queens have a one-Move Rum run at 1:1 and the others don't.
-Swapping the Bowery and Whitestone in as Trade Docks (Stills and starting Docks swapped with West Side and
-Jamaica) puts every Venue two Moves from one; in bots it evened the Venues but cut Kickbacks (6.9 a game).
-Williamsburg sells the least Rum in every arm, so its problem is something else; Nick floated swapping it
-with Red Hook.
+The map followed the same day (see *Trade Docks*): West Side and Jamaica each bordered a High Society
+Venue (Sugar Hill, Richmond Hill), so Manhattan and Queens had a one-Move Rum run at 1:1 and the others
+didn't. With the Bowery and Whitestone as Trade Docks every Venue is two Moves from one; in bots that
+evened the Venues but cut Kickbacks (6.9 a game, against 9.2).
 
-## Trade Docks: West Side, Jamaica, Stapleton, Tottenville
+Still open (Nick, 2026-11-08): the theme ("Trade Docks" when every Dock Trades). Williamsburg sells the
+least Rum in every arm, so its problem is something else; Nick floated swapping it with Red Hook.
+
+## Trade Docks: the Bowery, Whitestone, Stapleton, Tottenville
 
 Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). The four **Trade
-Docks** are West Side, Jamaica, Stapleton and Tottenville, the Docks nobody starts on, which are the four
-Pressure 1 Stills (the 2s and 12s). From 2026-11-04 to 2026-11-07 they were the only Docks that Traded;
+Docks** are the Bowery, Whitestone, Stapleton and Tottenville, the Docks nobody starts on, which are the
+four Pressure 1 Stills (the 2s and 12s). Until 2026-11-08 Manhattan's and Queens' were West Side and
+Jamaica; Nick switched them that day (the Bowery takes West Side's 12 and gives it its 9, Whitestone
+takes Jamaica's 2 and gives it its 5, and Manhattan and Queens start on West Side and Jamaica), because
+West Side borders Sugar Hill and Jamaica borders Richmond Hill: a one-Move Rum run at 1:1 that only
+Manhattan and Queens had. From 2026-11-04 to 2026-11-07 they were the only Docks that Traded;
 since 2026-11-08 they Trade 1:1 and every other Dock 2:1 (see *The Rum economy*). The board marks them with
-a rum-runner schooner, and a short dashed gilt arrow runs out to sea through the Narrows to **Rum Row**.
-From 2026-11-04 to 2026-11-07 dashed **shipping lanes** ran to it from all four; Nick cut them on 2026-11-08
-("I do like them but they add clutter and confusion") and kept the arrow for theme. Don't bring them back.
+a rum-runner schooner, and "RUM ROW" sits low in the Narrows over a small gilt triangle pointing off the
+board. From 2026-11-04 to 2026-11-07 dashed **shipping lanes** ran to it from all four; Nick cut them on
+2026-11-08 ("I do like them but they add clutter and confusion"), and then the short arrow left in their
+place ("looks like it's broken and coming from nowhere"). Don't bring either back.
 
 - **Words.** They are **Trade Docks** (Nick: a new player never read "Trade at any Dock", so the name
-  says what they're for). **Rum Row** is where the board's arrow points: the line of mother ships offshore,
+  says what they're for). **Rum Row** is where the board's marker points: the line of mother ships offshore,
   the source of the Rum. It names no District. The Job that was called Rum Row (Trade 4+ at a Staten
   Island Dock) is **The Mother Ship** since 2026-11-04 (Nick), so the name means one thing; its art is
   the mother steamer. All three Trade Jobs already name a Trade Dock.
@@ -631,7 +643,8 @@ it never decided a game, and in the written rule's Opus playtest nobody Rigged i
 `powder-keg-handoff.md` holds the design and everything weighed, and mk-online's
 `harness/POWDER-KEG-TRIAL.md` every trial. mk-online keeps the code behind a switch, off.
 
-**The Still swap stays** (West Side 12 / East Harlem 11, Jamaica 2 / Astoria 3): it made the four
+**The Still swap stays** (West Side 12 / East Harlem 11, Jamaica 2 / Astoria 3; since 2026-11-08 West
+Side's 12 and Jamaica's 2 are the Bowery's and Whitestone's, see *Trade Docks*): it made the four
 spare Docks the four Pressure 1 Stills, and they are now the Trade Docks, which is the boost to the
 weakest Stills Nick liked. Its art stays in the repo, unused: the Detonator card
 (`Art/Cards/Detonator.jpg`) and the lit keg (`Art/Rulebook/Powder Keg.png` and its WebP).
@@ -729,7 +742,7 @@ The Rulebook's Key Concepts and Territory carry it.
 
 **No passive Traits.** Each family has exactly two Signature Plays: the Sicilians Hit and
 Consigliere; the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
-and Waterfront (Peddle until 2026-11-08); the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
+and **Hook** (2, swap barrels 1:1 with an Adjacent rival; Peddle until 2026-11-08); the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
 the top Job in secret, claim it at once or leave it); the Knights Skiff and Torch (which now burns
 the District's barrels too). Gone: Untouchable, Firepower, Network, passive Whispers, Plunder and
 Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the rows.
@@ -768,7 +781,7 @@ stockpile as the Raid does. In a fight the Invader rolls
 Since 2026-11-08 (Nick, after two agent games in mk-online where nobody laid the fifth marker and the
 first Raid came on Day 17). **Every Unload and every Extort draws one Heat marker**, however many barrels
 go or Districts pay. The Greed Tax is gone, and so is Extort's 5+ Districts threshold. Trade (and the
-Irish Waterfront) never draws Heat. Nick: "a play creates heat or it doesn't". Good play is batching: one big pour or
+Irish Hook) never draws Heat. Nick: "a play creates heat or it doesn't". Good play is batching: one big pour or
 one big squeeze costs the same marker as a small one. He hopes it makes the Rum Trade more appealing,
 and if it proves too much, Extort is the first lever to dial back.
 
@@ -920,7 +933,8 @@ was land-only from 2026-07-30 ("No boats; a Dock is a dead end"). Nick reversed 
 were culling too often, and because the board made one cull close to automatic: the Queens Squad
 starts on Richmond Hill beside what was then the Queens starting Dock, Jamaica, whose only other
 land exit is Brownsville, Brooklyn's home Ward. No other Borough's starting Dock was that exposed.
-(Queens has started on Whitestone since the same day; see Starting turf.)
+(Queens started on Whitestone from the same day until 2026-11-08, when it went back to Jamaica with
+the Trade Docks' switch; since crews sail, the Richmond Hill Squad no longer boxes it in. Watch it.)
 
 The 2026-07-30 case had four legs. Consistency with Skiff and Tunnel fell on 2026-09-30 (Skiff is a
 Move on your own turn; Tunnel carries no crew). The cost that remains is real and accepted: a crew
@@ -953,15 +967,16 @@ North starts on its 8, 9 and 10 and the South on its 4, 5 and 6:
 
 | Borough | Ward | Speakeasy | Dock |
 | --- | --- | --- | --- |
-| Manhattan | Five Points 10 | The Tenderloin 8 | The Bowery 9 |
+| Manhattan | Five Points 10 | The Tenderloin 8 | West Side 9 |
 | The Bronx | Hunts Point 9 | Fordham 8 | Throggs Neck 10 |
-| Queens | Flushing 4 | Corona 6 | Whitestone 5 |
+| Queens | Flushing 4 | Corona 6 | Jamaica 5 |
 | Brooklyn | Brownsville 5 | Red Hook 6 | Canarsie 4 |
 
 The two sides mirror each other round the 7, so every Borough's starting Stills total the same
 Pressure, 12 (it was 6 in Manhattan and Queens, 9 in the Bronx and Brooklyn). Queens' Ward and bar
 swapped places on 2026-10-24 (Corona was the Ward, Flushing the bar), Stills and all, so the numbers
-held; see *The Crown in the Wards*. The list's one home is
+held; see *The Crown in the Wards*. On 2026-11-08 Manhattan's Dock moved from the Bowery to West Side
+and Queens' from Whitestone to Jamaica, each taking the old Dock's Still (see *Trade Docks*). The list's one home is
 the Town Planner's Setup column: the Rulebook's Setup defers to it, the board build's roster copies
 it (undrawn), and mk-online's `STARTING_TURF` follows it.
 
@@ -973,11 +988,12 @@ Watch in playtest:
 - **Night Landing** (a Dock on Jamaica Bay) suited Queens and Brooklyn, who both started on one;
   then only Brooklyn did. It was cut on 2026-10-17 for Jamaica Ginger, which Queens and Brooklyn both
   reach.
-- **Manhattan's start no longer touches Sugar Hill**: on Day 1 its Squad has nothing in reach and
-  its High Society Venue is two blocks off. The Bronx, Queens and Brooklyn each start with two
-  Districts beside their Squad and their Venue.
-- The Brooklyn Bridge now joins two starting Districts (the Bowery and Red Hook); the Hell Gate
-  Bridge (Hunts Point to Astoria) no longer does.
+- **Manhattan's start touches Sugar Hill again** since 2026-11-08 (West Side borders it), as every
+  other Borough's start touches its Squad and Venue.
+- **Queens starts on Jamaica**, beside Brownsville (Brooklyn's home Ward, a crown room) and the
+  Richmond Hill Squad, and not beside its own Ward, Flushing. Corona already bordered Brownsville.
+- The Brooklyn Bridge joins Brooklyn's starting bar (Red Hook) to a Trade Dock (the Bowery) since
+  2026-11-08; it joined two starting Districts before.
 
 ## The board
 

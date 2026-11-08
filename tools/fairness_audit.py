@@ -24,8 +24,8 @@ BOARD = [
     ('Sugar Hill', M, {'highSociety', 'speakeasy'}, 7, 'police'),
     ('East Harlem', M, {'speakeasy'}, 11, ''),
     ('The Tenderloin', M, {'speakeasy'}, 8, 'start-speak'),
-    ('West Side', M, {'dock'}, 12, ''),
-    ('The Bowery', M, {'dock'}, 9, 'start-dock'),
+    ('West Side', M, {'dock'}, 9, 'start-dock'),
+    ('The Bowery', M, {'dock'}, 12, ''),
     ('Five Points', M, {'ward'}, 10, 'home'),
     ('Morris Park', BX, {'highSociety', 'speakeasy'}, 7, 'police'),
     ('Belmont', BX, {'speakeasy'}, 11, ''),
@@ -35,8 +35,8 @@ BOARD = [
     ('Richmond Hill', Q, {'highSociety', 'speakeasy'}, 7, 'police'),
     ('Astoria', Q, {'speakeasy'}, 3, ''),
     ('Corona', Q, {'speakeasy'}, 6, 'start-speak'),
-    ('Whitestone', Q, {'dock'}, 5, 'start-dock'),
-    ('Jamaica', Q, {'dock'}, 2, ''),
+    ('Whitestone', Q, {'dock'}, 2, ''),
+    ('Jamaica', Q, {'dock'}, 5, 'start-dock'),
     ('Flushing', Q, {'ward'}, 4, 'home'),
     ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7, 'police'),
     ('Coney Island', BK, {'speakeasy'}, 3, ''),
@@ -75,10 +75,11 @@ CARDS = [
     # Not Brooklyn-friendly: the bridge runs from Manhattan's home Ward to Brooklyn's
     # police-locked room, so Manhattan hauls from turf it already owns.
     ('The Milk Run',          2, 'Move',      {'any'},                      {M: 'friendly', BK: 'neutral'}),
-    # West Side: the empty Manhattan Dock beside Five Points and the Tenderloin.
-    ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {M: 'friendly'}),
-    # Jamaica: Queens' second Dock, next door to Brooklyn's home Ward (2026-10-17, replaced Night Landing).
-    ('Jamaica Ginger',        1, 'Trade',     {'dock'},                     {Q: 'friendly', BK: 'friendly'}),
+    # The Bowery (since 2026-11-08; West Side before): the empty Manhattan Dock, a Trade Dock beside
+    # Five Points and, over the Brooklyn Bridge, Brooklyn's starting bar.
+    ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {M: 'friendly', BK: 'friendly'}),
+    # Whitestone (since 2026-11-08; Jamaica before): Queens' empty Dock, a Trade Dock beside its home Ward.
+    ('Jamaica Ginger',        1, 'Trade',     {'dock'},                     {Q: 'friendly'}),
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
     ('The Beachhead',         1, 'Secure',    {'any'},                      {}),
     ('Tenement Army',         1, 'Recruit',   {'ward'},                     {ST: 'neutral'}),

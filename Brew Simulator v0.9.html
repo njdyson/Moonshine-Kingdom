@@ -145,7 +145,7 @@
       <button class="ghost mini" data-preset="c8">2 clumped 8s (starvable)</button>
       <button class="ghost mini" data-preset="s39">spread 3+9 (Mash-proof)</button>
       <button class="ghost mini" data-preset="s3939">spread 3/3+9/9</button>
-      <button class="ghost mini" data-preset="spine">Sugar Hill spread 7/12/11/8 (Connected)</button>
+      <button class="ghost mini" data-preset="spine">Sugar Hill spread 7/9/11/8 (Connected)</button>
       <button class="ghost mini" data-preset="bronx">Bronx block 8/11/9/10 (Connected)</button>
     </div>
   </div>
@@ -283,8 +283,8 @@ document.getElementById('addStill').addEventListener('click', () => stillRow(7, 
 //  Bridge, so the relay can reach it. It is set from the actual map below, and
 //  the map is unkind to clumps -- the four 7s are one to a Borough and NO TWO OF
 //  THEM TOUCH, so no 7-stack relays anything. Same for the two 8s (Tenderloin in
-//  Manhattan, Fordham in the Bronx) and both 3+9 spreads (Jamaica/Coney Island
-//  against Bowery/Hunts Point). Only a build bought down one street can relay.
+//  Manhattan, Fordham in the Bronx) and both 3+9 spreads (Astoria/Coney Island
+//  against West Side/Hunts Point). Only a build bought down one street can relay.
 const PRESETS = {
   // 1-3 sevens: crewed 5 apiece, the production sweet spot per boiler.
   '1':   [{num:7,mob:5}],
@@ -307,11 +307,11 @@ const PRESETS = {
   // lock out both. Only one end ever fires in a morning.
   's39': [{num:3,mob:5},{num:9,mob:5}],
   's3939':[{num:3,mob:5},{num:3,mob:5},{num:9,mob:5},{num:9,mob:5}],
-  // One street in Manhattan: Sugar Hill (7) with West Side (12) and East Harlem
-  // (11) both across the avenue. The 12 is the coldest boiler on the board (Stapleton's
-  // is the only other) and dead weight on its own; here it fires whenever the 7 does. The Tenderloin
+  // One street in Manhattan: Sugar Hill (7) with West Side (9) and East Harlem
+  // (11) both across the avenue. The 11 is one of the coldest boilers on the board
+  // and near dead weight on its own; here it fires whenever the 7 does. The Tenderloin
   // 8 is in the build but does NOT border Sugar Hill, so it cannot be relayed.
-  'spine':[{num:7,mob:5},{num:12,mob:5,conn:true},{num:11,mob:5,conn:true},{num:8,mob:1}],
+  'spine':[{num:7,mob:5},{num:9,mob:5,conn:true},{num:11,mob:5,conn:true},{num:8,mob:1}],
   // Fordham (8) with Belmont (11), Hunts Point (9) and Throggs Neck (10) all
   // touching it. Fully Connected -- and still zeroed by a hostile Mash of 1,
   // because every number is high. Connection is not armour; range is.
@@ -499,7 +499,7 @@ document.getElementById('runCompare').addEventListener('click', () => {
     ['3 clumped 8s (starvable)', PRESETS['c8']],
     ['spread 3+9 (proof)', PRESETS['s39']],
     ['spread 3/3+9/9', PRESETS['s3939']],
-    ['Sugar Hill spread 7/12/11/8', PRESETS['spine']],
+    ['Sugar Hill spread 7/9/11/8', PRESETS['spine']],
     ['Bronx block 8/11/9/10', PRESETS['bronx']],
   ];
   const results = builds.map(([name, rows]) => {

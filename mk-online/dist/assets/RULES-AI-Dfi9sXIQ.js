@@ -92,7 +92,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Move (movePlay) | 1 | Any Mobsters and/or barrels from a District you Control to one Connected District. Never into a Padlocked District (a Squad's). Into a Hostile District (rival Mobsters): Standoff (§6). Barrels alone belong to whoever Controls the District they land in: a rival's become his, and in one nobody Controls they are nobody's. Mobsters into a District where a rival Safehouse stands with no Mobsters: no Standoff; take it over (evictTakeOver) or destroy it (evictRaze). |
 | Recruit (recruit) | 1 | Hire Runners into your Safehouse District at **$300 each**. Needs the Safehouse on the board, not Control; the new Runners take Control. |
 | Secure (secure) | 1 | **$500**: place or relocate your one Safehouse into any Safe District. On a rival Safehouse it is a take over: theirs is destroyed (back to its owner's supply) and yours moves in. A Safehouse grants no Control by itself. |
-| Trade (trade) | 1 | At a **Dock** you Control, swap Moonshine there for Havana Rum: **2 Moonshine for 1 Rum**, or **1 for 1 at a Trade Dock** (**West Side, Jamaica, Stapleton, Tottenville**: the four Docks nobody starts on). N is the Rum you receive (limited by the Rum supply). This is the only source of Rum. No Heat. Barrels Move Dock to Dock across the water, so Moonshine on any Dock can be shipped to a Trade Dock in one Move. |
+| Trade (trade) | 1 | At a **Dock** you Control, swap Moonshine there for Havana Rum: **2 Moonshine for 1 Rum**, or **1 for 1 at a Trade Dock** (**the Bowery, Whitestone, Stapleton, Tottenville**: the four Docks nobody starts on). N is the Rum you receive (limited by the Rum supply). This is the only source of Rum. No Heat. Barrels Move Dock to Dock across the water, so Moonshine on any Dock can be shipped to a Trade Dock in one Move. |
 | Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
 | Lay Low (layLow) | 0 | See §3. |
@@ -180,7 +180,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 **Hell's Kitchen Irish**
 
 - **Tommy Gun** (tommyGun, 2, in a fight): Open Fire with 1 extra attack die (max 5) at +1 Threat (max 4). The Occupier returns fire as normal. Heat only as the fight's first shot.
-- **Waterfront** (waterfront, 1 + $200): pay **$200** and Trade at **any Dock** you Control at **1:1**, Moonshine for Havana Rum (N is the Rum you receive). No Heat. It counts as a Trade for Jobs.
+- **Hook** (hook, 2): from a District you Control, swap barrels **one for one** with a rival in an **Adjacent** District he Controls (a border or a Bridge, never Dock to Dock across the water). Your Moonshine goes over first, his Rum comes back first; N is how many barrels change hands. No Heat, no fight. It is not a Trade.
 
 **East Side Vipers**
 
