@@ -12,8 +12,8 @@ function run(engine) {
   free += L;
   return { free, delta: free - 5, cash, heat, lost };
 }
-// The Greed Tax bites at 5+ barrels (2026-10-14; it was 4+).
-const unload = (n, liquor, hs) => ({ cost: 2, k: hs ? n : 0, cash: n * (liquor === 'rum' ? 500 : 300), heat: n >= 5 });
+// Every Unload draws one Heat marker (2026-11-08; from 2026-10-14 only 5+ barrels, the Greed Tax).
+const unload = (n, liquor, hs) => ({ cost: 2, k: hs ? n : 0, cash: n * (liquor === 'rum' ? 500 : 300), heat: true });
 const move = { cost: 1 }, trade = { cost: 1 };
 const S = {
   'CURRENT  2 stacks, Unload Moonshine in place':      [unload(4,'m',1), unload(4,'m',1)],
@@ -26,17 +26,18 @@ const S = {
 };
 for (const [name, e] of Object.entries(S)) {
   const r = run(e);
-  console.log(`${name.padEnd(50)} Plays ${(r.delta>=0?'+':'')+r.delta}  cash $${r.cash}  GreedTax ${r.heat}  Kickbacks lost ${r.lost}`);
+  console.log(`${name.padEnd(50)} Plays ${(r.delta>=0?'+':'')+r.delta}  cash $${r.cash}  Heat ${r.heat}  Kickbacks lost ${r.lost}`);
 }
 
 // The same Day with the Reserves counted (The Almanac, lesson 13 and the Rum table, 2026-10-06).
 // A Kickback moves a marker out of Reserves, so it can only hand back markers already spent. The pool
 // is every marker clear of Jobs and the Track (Influence - staked - Heat); the Ledger starts at
-// min(5, pool), the rest wait in Reserves, and the Greed Tax locks one marker out of the pool.
+// min(5, pool), the rest wait in Reserves, and the Unload's Heat locks one marker out of the pool.
 function runPool(engine, pool) {
   let L = Math.min(5, pool), R = pool - L, free = 0, heat = 0, lost = 0;
   for (const p of engine) {
-    if (p.k) while (L - p.cost > 5 - p.k && L > p.cost) { L--; R++; free++; }
+    // Pour on your last markers (lesson 12): with the pour's Heat locking one, Reserves are the limit.
+    if (p.k) while (L > p.cost) { L--; R++; free++; }
     L -= p.cost;
     if (p.heat) { heat++; R += p.cost - 1; } else R += p.cost;
     if (p.k) { const got = Math.min(p.k, 5 - L, R); L += got; R -= got; lost += p.k - got; }
