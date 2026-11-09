@@ -124,7 +124,7 @@ ONES = [
     # Rum" cut: Trade only ever makes Rum.
     # 2026-10-21 (Nick): 4+, not 3+. The sets pass took every other 1 to 4+ and missed this one.
     # 2026-11-08 (Nick): the Bowery and West Side swapped roles, so the Bowery is the empty Manhattan
-    # Dock, a Landing Dock, and Manhattan starts on West Side; the card moved with the Landing Dock.
+    # Dock, a Contact Dock, and Manhattan starts on West Side; the card moved with the Contact Dock.
     ("The Dutchman's Deal", "Dutchman.jpg", "Trade",
      "Trade <b>4+ barrels</b> at <b>the Bowery</b>.",
      "He never gives a name. The windmill on the sack says plenty."),
@@ -134,7 +134,7 @@ ONES = [
     # trip behind it, like The Dutchman's Deal at West Side. It replaces Night Landing, which pointed at
     # the same water. "Jamaica ginger" was the patent tonic sold by the case under Prohibition.
     # Art: Rum Row 3 (the rainier sibling of Rum Row's painting), provisional.
-    # 2026-11-08 (Nick): Whitestone and Jamaica swapped roles (Whitestone the Landing Dock, Queens starts on
+    # 2026-11-08 (Nick): Whitestone and Jamaica swapped roles (Whitestone the Contact Dock, Queens starts on
     # Jamaica), so the card moved to Whitestone and kept its name: the tonic, not the place.
     ("Jamaica Ginger", "Rum Row 3.jpg", "Trade",
      "Trade <b>4+ barrels</b> at <b>Whitestone</b>.",
@@ -224,7 +224,7 @@ ONES = [
     # NOT the same file as Art/Rum Row.png, which the rulebook uses on p.188.
     # SETS PASS 2026-10-11: DOWN TO 1 (Nick: too easy for a 3). Text unchanged.
     # RENAMED 2026-11-04 (Nick): it was "Rum Row" until the board named Rum Row as the line of
-    # mother ships its Landing Docks' lanes lead to. The art is the mother steamer.
+    # mother ships its Contact Docks' lanes lead to. The art is the mother steamer.
     ("The Mother Ship", "Rum Row.jpg", "Trade",
      "Trade <b>4+ barrels</b> at a <b>Staten Island Dock</b>.",
      "Forty ships past the three-mile line, waiting on a lamp."),

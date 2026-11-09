@@ -10,7 +10,7 @@ the change in the mk-online source, let it build, then mirror `dist/` in as `DEP
 The game shows `public/board.svg` (a copy of `Art/Board/Board v0.9 (screen).svg`) as an `<img>`,
 with clickable Districts, piece strips and live Heat, Mash and Turn Order drawn over it. On its
 main since PR #36 (2026-11-04) that is the 2026-11-04 board: the Trade
-Docks' schooners, Rum Row's route and the key's Landing Dock row, with only labels moved in the
+Docks' schooners, Rum Row's route and the key's Contact Dock row, with only labels moved in the
 geometry, so `boardGeometry.ts` regenerated unchanged. From 2026-10-25 it was the 2026-10-25
 board (mk-online 17a8a4e): Staten Island as two Docks,
 Stapleton (12) over Tottenville (2), Westerleigh gone, and the Bowery's pointed foot. Before it,

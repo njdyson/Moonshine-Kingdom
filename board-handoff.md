@@ -697,8 +697,8 @@ keeps them on a re-trace.
   `rumRowArrow()` draws **RUM ROW** in the water labels' type at `RUM_ROUTE.at`, low in the Narrows,
   with a small gilt triangle under it pointing at the bottom frame. `PIER_WEST` stays so the piers
   don't move. The note below is the history of the lanes.
-- **Landing Docks and Rum Row's lanes** (2026-11-04; `trade-docks-handoff.md`, a draft for Nick to
-  approve before mk-online copies it). The four Landing Docks (West Side, Jamaica, Stapleton,
+- **Contact Docks and Rum Row's lanes** (2026-11-04; `trade-docks-handoff.md`, a draft for Nick to
+  approve before mk-online copies it). The four Contact Docks (West Side, Jamaica, Stapleton,
   Tottenville) carry `trade: true` in the roster, and `cluster()` hangs a **rum-runner schooner**
   (`schooner()`: a brown hull with a gilt strake, two masts, cream sails) off the sign's lower edge
   under the medallion, where the Powder Keg's dynamite hung from 2026-10-31 to 2026-11-04. Not a
@@ -716,7 +716,7 @@ keeps them on a re-trace.
   nearest its route. The lanes sit under the land, so they can never cross a District, and are lighter
   than any border because they are not Connections. They are **muted gilt** (`C.gold`, `#c9a437`, at .6; Nick: "it looks more
   premium"), picked on 2026-11-04 over the first sea-green `#8fc9bd`, ivory, rum amber and harbour blue;
-  `LANE_COLOR=#rrggbb LANE_OPACITY=0.6 node tools/build_board.js` proofs another. The key gained a **Landing Dock** row (the schooner in a
+  `LANE_COLOR=#rrggbb LANE_OPACITY=0.6 node tools/build_board.js` proofs another. The key gained a **Contact Dock** row (the schooner in a
   roundel, the Moonshine to Rum chip the Dock row used to carry); the Dock row is bare now, and the
   key's pitch went from 19 to 16 so the fifth row stays clear of the Hudson. Proof it at 24 inches.
 - **Staten Island's label stands upright off its west shore** (Nick, 2026-11-04), as the Bronx's does
