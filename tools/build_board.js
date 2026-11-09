@@ -285,15 +285,18 @@ function schooner(cx, cy, s) {
 // ("the line looks like it's broken and coming from nowhere"), keeping the label and a triangle.
 const RUM_ROUTE = {
   at: [244, 1080 - FRAME_IN - 18], // the label's centre, in board units
-  label: { text: 'RUM ROW' },
+  label: { text: 'RUM ROW', note: '12 MILES' },
 };
+// "12 MILES" over the label (Nick, 2026-11-09): from 1924 the treaty limit put Rum Row about twelve
+// miles offshore (one hour's steaming), so it reads as the distance the contact boats run.
 // Muted gilt (Nick, 2026-11-04: "it looks more premium"), picked over sea-green, ivory, rum amber
 // and harbour blue. LANE_COLOR=#rrggbb and LANE_OPACITY override it for a proof.
 const LANE = { color: process.env.LANE_COLOR || C.gold, opacity: +(process.env.LANE_OPACITY || 0.8), head: 4.5 };
 function rumRowArrow() {
   const { at: [x, y], label } = RUM_ROUTE, h = LANE.head, top = y + 7;
   const s = `<path d="M${f(x - h)} ${f(top)} L${f(x + h)} ${f(top)} L${f(x)} ${f(top + h * 1.3)} Z" fill="${LANE.color}" fill-opacity="${LANE.opacity}"/>`;
-  const labels = text(label.text, x, y, TYPE.water, { fill: LANE.color, anchor: 'middle', opacity: 0.95, middle: true });
+  const labels = text(label.text, x, y, TYPE.water, { fill: LANE.color, anchor: 'middle', opacity: 0.95, middle: true })
+    + (label.note ? text(label.note, x, y - 10, { ...TYPE.water, size: 6.5, spacing: 2.2 }, { fill: LANE.color, anchor: 'middle', opacity: 0.8, middle: true }) : '');
   return { lines: `<g id="rum-row">${s}</g>`, labels };
 }
 
@@ -1258,6 +1261,7 @@ function allText() {
   for (const [t] of WATER_LABELS) add(TYPE.water, t);
   for (const { name } of geo.bridges) add(TYPE.bridge, name);
   add(TYPE.water, RUM_ROUTE.label.text);
+  if (RUM_ROUTE.label.note) add({ ...TYPE.water, size: 6.5, spacing: 2.2 }, RUM_ROUTE.label.note);
   for (const [, t, what] of KEY_ROWS) {
     add(TYPE.keyHead, upper(t));
     if (what.words) add(TYPE.price, what.words);
