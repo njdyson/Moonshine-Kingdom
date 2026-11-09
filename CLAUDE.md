@@ -616,7 +616,7 @@ West Side borders Sugar Hill and Jamaica borders Richmond Hill: a one-Move Rum r
 Manhattan and Queens had. From 2026-11-04 to 2026-11-07 they were the only Docks that Traded;
 since 2026-11-08 they Trade 1:1 and every other Dock 2:1 (see *The Rum economy*). The board marks them with
 a rum-runner schooner, and "RUM ROW" sits low in the Narrows over a small gilt triangle pointing off the
-board. From 2026-11-04 to 2026-11-07 dashed **shipping lanes** ran to it from all four; Nick cut them on
+board, with "12 MILES" above it (Nick, 2026-11-09: from 1924 Rum Row lay about twelve miles out). From 2026-11-04 to 2026-11-07 dashed **shipping lanes** ran to it from all four; Nick cut them on
 2026-11-08 ("I do like them but they add clutter and confusion"), and then the short arrow left in their
 place ("looks like it's broken and coming from nowhere"). Don't bring either back.
 
