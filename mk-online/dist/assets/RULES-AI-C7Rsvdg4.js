@@ -18,7 +18,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 ## 2. Components and currencies
 
-- **Mob**: 1 Boss, 15 Runners, 1 Safehouse. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
+- **Mob**: 1 Boss, 12 Runners, 1 Safehouse. You start with your Boss, 2 Runners and your Safehouse in your home Ward, and 2 Runners each on your starting Dock and Speakeasy; the other 6 Runners wait in your supply. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
 - **Influence markers**: you own 6 at the start, and each of your four Bribe cards brings one more, so 10 at most. A marker is in one of four places:
   - **Reserves** (stash): uncommitted, and the source for Job Stakes;
   - **Ledger** (operations): max **5**, the only markers you can spend;
@@ -28,7 +28,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - **Cash**: start with **$1,500**. Cash is public.
 - **Barrels**: Moonshine (supply 30), Havana Rum (supply 20). Finite; empty supply produces nothing.
 - **Heat Track**: 5 spaces, with markers in order and the newest on the right.
-- **Muscle Ratio** (Mobsters in one District gives brew, Blowback dead and combat dice): 1–2 = 1, 3–4 = 2, 5–6 = 3, 7–8 = 4, 9+ = 5 (half, rounded up, max 5). A Safehouse alone counts 0.
+- **Muscle** (brew and combat dice): the Mobsters in one District, **max 5**: each man brews one barrel and rolls one die; a sixth man adds nothing. A Safehouse alone counts 0. Blowback dead are set by the Still's Pressure, not the crew (below).
 
 ## 3. The Day
 
@@ -37,12 +37,12 @@ The game ends mid-Day on the spot. Nothing else is settled.
 1. **Roll**: the holder of Turn Token #1 rolls **players + 1** Red dice. The **Mash** (1–6) was set yesterday; on Day 1 it is random.
 2. **Draft and brew** (draftDice): in Turn Order, each player takes exactly one Red die and brews at once.
    - Brew Number = Mash + Red.
-   - Every active Still you Control with that number (Mobsters present, no Squad) makes **Moonshine = that District's Muscle Ratio**, taken from the supply. Each Still fires at most once a Day.
-3. **Split the Batch** (chooseRelay): if the Still in your Boss's District fired, one other active Still you Control that is Adjacent (border or bridge, not water) to the Boss's District also fires, whatever its number, at its own Muscle Ratio.
+   - Every active Still you Control with that number (Mobsters present, no Squad) makes **Moonshine = that District's Muscle** (its Mobsters, max 5), taken from the supply. Each Still fires at most once a Day.
+3. **Split the Batch** (chooseRelay): if the Still in your Boss's District fired, one other active Still you Control that is Adjacent (border or bridge, not water) to the Boss's District also fires, whatever its number, at its own Muscle.
    - It fires automatically when there is one candidate.
    - With 2+ candidates you choose one.
 4. **Blowback**: the one undrafted Red + Mash gives the Blowback Number.
-   - Every Controlled, unpadlocked Still with that number bursts, **whoever owns it**, killing Muscle Ratio Mobsters there.
+   - Every Controlled, unpadlocked Still with that number bursts, **whoever owns it**, killing Mobsters there by the Still's **Pressure** (6 on the 7, one less each step away, 1 on the 2 and the 12): Pressure 1–2 kills 1, 3–4 kills 2, 5–6 kills 3.
    - Runners die first; the Boss dies only if no Runner is left there.
    - Barrels and turf are kept.
 5. **The Offers**, in **reverse** Turn Order, one action each:
@@ -122,14 +122,13 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 
 A fight happens inside the Move that started it. Each option costs the chooser's Ledger but never a turn.
 
-**Dice** = Muscle Ratio (max 5). **Threat** starts at 1 and gains +1 for each of these, max 4:
+**Dice** = Muscle: one per Mobster, max 5. **Threat** starts at 1 and gains +1 for each of these, max 3:
 
 - Boss in the fight;
 - the Irish Tommy Gun (the Invader's volley only);
-- the Occupier defending the District holding its own Safehouse;
 - the Occupier's Ambush roll only.
 
-A die kills on: Threat 1 = 5–6, Threat 2 = 4–6, Threat 3 = 3–6, Threat 4 = 2–6.
+A die kills on: Threat 1 = 5–6, Threat 2 = 4–6, Threat 3 = 3–6.
 
 Hits remove **Runners first**, then the Boss.
 
@@ -180,7 +179,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 
 **Hell's Kitchen Irish**
 
-- **Tommy Gun** (tommyGun, 2, in a fight): Open Fire with 1 extra attack die (max 5) at +1 Threat (max 4). The Occupier returns fire as normal. Heat only as the fight's first shot.
+- **Tommy Gun** (tommyGun, 2, in a fight): Open Fire with 1 extra attack die (max 5) at +1 Threat. The Occupier returns fire as normal. Heat only as the fight's first shot.
 - **Hook** (hook, 2): from a District you Control, swap barrels **one for one** with a rival in an **Adjacent** District he Controls (a border or a Bridge, never Dock to Dock across the water). You pick which barrels go each way: usually your Moonshine for his Rum, but sending Rum or taking his Moonshine can strip a pile a rival's Job needs. N is how many barrels change hands; the default option sends your Moonshine first and takes his Rum first, and the "other way" option sends your Rum first and takes his Moonshine first. No Heat, no fight. It is not a Trade.
 
 **East Side Vipers**
@@ -229,7 +228,7 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 
 **The gun**
 
-- **The Sucker Bet.** Never attack even numbers into a Safehouse; bring double or triple, plan to win in two or three volleys, and Fall Back rather than grind. Read the FIGHT ODDS.
+- **The Sucker Bet.** Never attack even numbers into a dug-in crew; bring double or triple, plan to win in two or three volleys, and Fall Back rather than grind. Read the FIGHT ODDS.
 - **The Picket.** Most blocks are held by one to three men. Pay the toll once with enough to be sure: your Boss and three take two men better than eight times in ten.
 - **The Sitting Duck.** A boss who has Laid Low or has an empty Ledger cannot Ambush. That is your afternoon: hit him then.
 - **Fold, Check or Raise.** Fold scrap corners (men cost $300 to replace). Hold Fire is the check: he pays for every volley and takes the Heat. Ambush only with three or more men. Fold what you would lose anyway, but read his Jobs first: a Fold hands him a Seize.
@@ -247,7 +246,7 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 
 - **Watch the leader's Boss, not just his count.** A rival at 16+ with a Bribe left and the cash for it, or at 19 with a Job one Play away, whose Boss is in or next to a crown room, crowns within a Day unless someone stops him. Stopping him is everyone's job: kill or chase his Boss (a kill sends him home to Rise), stand in his road, take or bust his stockpile, bury the card he needs. Say so at the table and split the work.
 - **Be the last man up.** Once the others Lay Low they get no more turns. If a rival can crown this Day, don't Lay Low before him. If you can, plan to be the one still standing.
-- **The Walk.** Take the rival Ward first, dig your Boss in (four men and a Safehouse around him, a marker kept for the Ambush), then buy the last Bribe and crown on the same afternoon. The Eviction and Union Dues pay for the walk.
+- **The Walk.** Take the rival Ward first, dig your Boss in (four men around him, a marker kept for the Ambush), then buy the last Bribe and crown on the same afternoon. The Eviction and Union Dues pay for the walk.
 - **The Wax Seal.** Promise only what you alone control ("I won't cross the river today"), never what a third boss can ruin.
 - **Cheap Paper.** A boss one Play from the Crown owes you nothing: every promise due at Sunset dies when he crowns.
 
