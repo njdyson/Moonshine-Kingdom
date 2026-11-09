@@ -125,7 +125,9 @@ threat of violence, and Nick's main goal is a game his gateway-gamer friends can
   Nick doesn't want it overdone. The start is Boss and 2 in the Ward, 2 on the Dock, 2 at the bar.
 - **Muscle**: a District's Mobsters, **max five**, one barrel and one die a man. The Muscle Ratio (half the
   crew, rounded up) is gone; a sixth man in one District adds nothing. The cap of five is what keeps a big
-  pile from mattering (Nick).
+  pile from mattering (Nick). The Rulebook doesn't use the word: since the 2026-11-09 trim, the Brew and the Rules of
+  Engagement each say "one barrel (one die) per Mobster, up to 5", and the "Muscle: Street Math" box is gone
+  (Nick: the rule reads best where it is used). Don't bring the box back.
 - **Blowback by Pressure**: 1 dead at Pressure 1&ndash;2, 2 at 3&ndash;4, 3 at 5&ndash;6, Runners first. The gauge
   gets a second job, and the 7s (where the leaders sit) hurt most. Nick wants Pressure only; a "half the
   crew, capped by tier" version was weighed and not taken. The board's gauge is drawn in **three pairs**
