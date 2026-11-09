@@ -748,7 +748,7 @@ Plays (Secure, then Recruit). Walking onto a lone Safehouse is not a Seize: nobo
 The Rulebook's Key Concepts and Territory carry it.
 
 **No passive Traits.** Each family has exactly two Signature Plays: the Sicilians Hit and
-Consigliere; the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
+Consigliere (2 markers since 2026-11-09; see below); the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
 and **Hook** (2, swap barrels 1:1 with an Adjacent rival; Peddle until 2026-11-08); the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
 the top Job in secret, claim it at once or leave it); the Knights Skiff and Torch (which now burns
 the District's barrels too). Gone: Untouchable, Firepower, Network, passive Whispers, Plunder and
@@ -760,6 +760,15 @@ Watch in playtest:
   a Safehouse from 8% to 17%; on four, two bursts take it 43% against 11%
   (`tools/sim_almanac_combat.js`). Firepower's free die used to make it about 33% on three.
 - **Whispers** claims outside the Offers, so the Vipers can take a 3 off the deck on Day 1.
+
+## Consigliere costs 2
+
+Since 2026-11-09 (Nick, after the third four-Haiku game in mk-online,
+`/mnt/project-files/playtests/haiku55-4p-2-2026-11-09.md`). Once every Extort and Unload drew Heat,
+Consigliere at 1 marker cancelled the Heat on any of them: the winning Sicilians removed 14 of the 27
+markers laid, mostly their own, as "squeeze, then pull my marker". At 2 a heatless Extort costs 4
+markers, so the clean-up is for a big squeeze or pour, and re-aiming a Raid by pulling a rival's marker
+stays the Play's other use. "Not your own marker" was weighed and not taken.
 
 ## Stealth skips the Standoff
 
