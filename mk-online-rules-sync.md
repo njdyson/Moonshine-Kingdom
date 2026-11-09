@@ -1386,8 +1386,8 @@ the board (Rum Row as a label and a triangle, the key's Dock row as two grey cub
 ## 51. Trade Docks are Landing Docks (2026-11-08, Nick)
 
 A rename, no rule change: every Dock Trades since §49, so "Trade Dock" told a new player the others
-couldn't. The Bowery, Whitestone, Stapleton and Tottenville are **Landing Docks** (the rum lands there
-straight off Rum Row's contact boats). Player-facing strings, comments and RULES-AI.md say Landing Dock;
+couldn't. The Bowery, Whitestone, Stapleton and Tottenville are **Contact Docks** (the rum lands there
+straight off Rum Row's contact boats). Player-facing strings, comments and RULES-AI.md say Contact Dock;
 identifiers (`RUM_ROW_DOCKS`, `G.rumRow`, `canTradeAt`) are unchanged.
 
 ## 52. Hook: you pick which barrels go each way (2026-11-08, Nick)
@@ -1398,3 +1398,10 @@ taking his Moonshine or sending him Rum can strip a pile a rival's Job needs. `h
 take?)`: `give` and `take` are exact `{moonshine, rum}` counts or the kind that goes first. The agent
 gets a second option per target (your Rum first, his Moonshine first); the UI's Hook form has four
 steppers. Playbooks: "any barrels each way"; Rulebook: "you pick which go each way".
+
+## 53. Landing Docks are Contact Docks (2026-11-09, Nick)
+
+A rename, no rule change: "Landing" read as though the Rum Row boats themselves tied up there. The
+Bowery, Whitestone, Stapleton and Tottenville are **Contact Docks**, the piers where Rum Row's contact
+boats run the cargo in. Player-facing strings, comments and RULES-AI.md say Contact Dock; identifiers
+are unchanged.

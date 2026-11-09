@@ -75,10 +75,10 @@ CARDS = [
     # Not Brooklyn-friendly: the bridge runs from Manhattan's home Ward to Brooklyn's
     # police-locked room, so Manhattan hauls from turf it already owns.
     ('The Milk Run',          2, 'Move',      {'any'},                      {M: 'friendly', BK: 'neutral'}),
-    # The Bowery (since 2026-11-08; West Side before): the empty Manhattan Dock, a Landing Dock beside
+    # The Bowery (since 2026-11-08; West Side before): the empty Manhattan Dock, a Contact Dock beside
     # Five Points and, over the Brooklyn Bridge, Brooklyn's starting bar.
     ("The Dutchman's Deal",   1, 'Trade',     {'dock'},                     {M: 'friendly', BK: 'friendly'}),
-    # Whitestone (since 2026-11-08; Jamaica before): Queens' empty Dock, a Landing Dock beside its home Ward.
+    # Whitestone (since 2026-11-08; Jamaica before): Queens' empty Dock, a Contact Dock beside its home Ward.
     ('Jamaica Ginger',        1, 'Trade',     {'dock'},                     {Q: 'friendly'}),
     ('The Pier Six Brawl',    1, 'Open Fire', {'dock'},                     {}),
     ('The Beachhead',         1, 'Secure',    {'any'},                      {}),

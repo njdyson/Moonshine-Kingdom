@@ -282,8 +282,8 @@ once. The deck is 36 cards, 16 / 12 / 8:
   4+ Docks"; a 1 since 2026-10-17, the easiest 2, 62 of 99) and **Jamaica Ginger** ("Trade 4+ barrels
   at Whitestone"; 2026-10-17, Nick: more Trade cards to pull toward the Rum Trade; it replaced Night
   Landing). Every barrel count on a 1 is 4+, The Dutchman's Deal at the Bowery included (3+ until
-  2026-10-21, a card the sets pass missed). The two named Trade cards sit on the empty Landing Dock of
-  Manhattan and of Queens, and moved with them on 2026-11-08 (*Landing Docks*): they were West Side and
+  2026-10-21, a card the sets pass missed). The two named Trade cards sit on the empty Contact Dock of
+  Manhattan and of Queens, and moved with them on 2026-11-08 (*Contact Docks*): they were West Side and
   Jamaica. Jamaica Ginger kept its name (the tonic, not the place); Nick may want a new one.
 - **2s**: **the Extort set**, *Extort every open Speakeasy in* Manhattan (Empire
   State), the Bronx (The Big Squeeze), Queens (King of Queens) or Brooklyn (The Black Hand);
@@ -560,8 +560,8 @@ Peddle (the Irish sold Moonshine in their Wards at $200, with no Heat) was cut o
 "I never liked peddle anyway"): with Moonshine at $200 at the bar, it would have beaten Unload outright.
 The Irish have **Hook** in its place (see *The Rum economy*). Don't bring Peddle back.
 
-The Rum pool is **20** barrels, and Trade (2:1 at any Dock, 1:1 at a Landing Dock; see *The Rum economy*)
-is the only way Rum enters the game. At a Landing Dock it is worth **$300 a barrel** in cash, at any other
+The Rum pool is **20** barrels, and Trade (2:1 at any Dock, 1:1 at a Contact Dock; see *The Rum economy*)
+is the only way Rum enters the game. At a Contact Dock it is worth **$300 a barrel** in cash, at any other
 Dock $100 a Rum, plus the Kickback if the Rum is poured at High Society.
 
 History, so nobody rebuilds it: 2026-08-22 had the address set the price and Rum carry the
@@ -576,8 +576,8 @@ Since 2026-11-08 (Nick, with *Every Unload and every Extort draws Heat*: "This e
 interact with rum"). Three changes, one direction:
 
 - **Moonshine sells for $200** at an ordinary Speakeasy (it was $300). Rum stays $500.
-- **Trade at any Dock you Control: 2 Moonshine for 1 Rum; at a Landing Dock, 1 for 1.** Still 1 Influence,
-  no Heat, from the pool of 20. Theme: at a Landing Dock the rum comes straight off the boats; anywhere else
+- **Trade at any Dock you Control: 2 Moonshine for 1 Rum; at a Contact Dock, 1 for 1.** Still 1 Influence,
+  no Heat, from the pool of 20. Theme: at a Contact Dock the rum comes straight off the boats; anywhere else
   a middleman takes half. The Rulebook's Trade row carries that line.
 - **The Irish lose Peddle and gain Hook** (Power Play, 2 Influence, no Heat): swap barrels one for one
   between a District you Control and an **Adjacent** District a rival Controls (a border or a Bridge, not
@@ -596,18 +596,18 @@ the crown median went from 50.5 to 44.5 (quartiles overlap), Kickbacks 7.2 to 9.
 cash rose from 55% to 62%. Moonshine at $200 alone did most of it (28.6 Rum). Nick expects smart players to
 Extort less; his levers if the game drags are cheaper Bribes, richer brews, or cheaper Runners or Secure.
 
-The map followed the same day (see *Landing Docks*): West Side and Jamaica each bordered a High Society
+The map followed the same day (see *Contact Docks*): West Side and Jamaica each bordered a High Society
 Venue (Sugar Hill, Richmond Hill), so Manhattan and Queens had a one-Move Rum run at 1:1 and the others
-didn't. With the Bowery and Whitestone as Landing Docks every Venue is two Moves from one; in bots that
+didn't. With the Bowery and Whitestone as Contact Docks every Venue is two Moves from one; in bots that
 evened the Venues but cut Kickbacks (6.9 a game, against 9.2).
 
-The 1:1 Docks were renamed **Landing Docks** the same evening (see *Landing Docks*). Still open (Nick,
+The 1:1 Docks were renamed **Contact Docks** (see *Contact Docks*). Still open (Nick,
 2026-11-08): Williamsburg sells the
 least Rum in every arm, so its problem is something else; Nick floated swapping it with Red Hook.
 
-## Landing Docks: the Bowery, Whitestone, Stapleton, Tottenville
+## Contact Docks: the Bowery, Whitestone, Stapleton, Tottenville
 
-Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). The four **Landing
+Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). The four **Contact
 Docks** are the Bowery, Whitestone, Stapleton and Tottenville, the Docks nobody starts on, which are the
 four Pressure 1 Stills (the 2s and 12s). Until 2026-11-08 Manhattan's and Queens' were West Side and
 Jamaica; Nick switched them that day (the Bowery takes West Side's 12 and gives it its 9, Whitestone
@@ -620,21 +620,23 @@ board. From 2026-11-04 to 2026-11-07 dashed **shipping lanes** ran to it from al
 2026-11-08 ("I do like them but they add clutter and confusion"), and then the short arrow left in their
 place ("looks like it's broken and coming from nowhere"). Don't bring either back.
 
-- **Words.** They are **Landing Docks** (Nick, 2026-11-08): the contact boats from Rum Row land here, so
-  no middleman takes his half. From 2026-11-04 they were **Trade Docks** (Nick: a new player never read
+- **Words.** They are **Contact Docks** (Nick, 2026-11-09): the mother ships stay out on Rum Row, and
+  their fast contact boats run the cargo in to these piers, so no middleman takes his half. They were
+  **Landing Docks** for a night (2026-11-08), which Nick dropped because it said the Rum Row boats
+  themselves tied up there. From 2026-11-04 they were **Trade Docks** (Nick: a new player never read
   "Trade at any Dock", so the name said what they were for); once every Dock Traded, that name told a
-  new player the other Docks couldn't. Rum Dock and Contact Dock were weighed and not taken. **Rum Row** is where the board's marker points: the line of mother ships offshore,
+  new player the other Docks couldn't. Rum Dock, Smuggler's Dock, Dark Dock and Free Dock were weighed and not taken. **Rum Row** is where the board's marker points: the line of mother ships offshore,
   the source of the Rum. It names no District. The Job that was called Rum Row (Trade 4+ at a Staten
   Island Dock) is **The Mother Ship** since 2026-11-04 (Nick), so the name means one thing; its art is
-  the mother steamer. All three Trade Jobs already name a Landing Dock.
+  the mother steamer. All three Trade Jobs already name a Contact Dock.
 - **One rule sentence.** The Rulebook's Trade row says "At a Dock you Control ... two for one, or one for
-  one at a Landing Dock"; the Playbooks' row the same. State it in the positive and stop.
-- **Not taken, don't bring back:** an extra Rum per Trade at a Landing Dock (the old Knights trait): it
+  one at a Contact Dock"; the Playbooks' row the same. State it in the positive and stop.
+- **Not taken, don't bring back:** an extra Rum per Trade at a Contact Dock (the old Knights trait): it
   rewards one-barrel "micro trades" that waste Days to double up. Two Rum for one Moonshine is too strong. Counting
-  Landing Docks twice for the Harbormaster: fiddly, and Staten Island alone would make you Harbormaster.
+  Contact Docks twice for the Harbormaster: fiddly, and Staten Island alone would make you Harbormaster.
 
 Why: in four three-Opus games the four already carried 59% of Rum traded, and a starting-Dock Trade was
-a small top-up. Naming them makes the Rum a supply chain the table can see (Still, Landing Dock, Venue)
+a small top-up. Naming them makes the Rum a supply chain the table can see (Still, Contact Dock, Venue)
 and gives the four weakest Stills a reason to be held. Watch in playtest: Kickbacks (bot sweeps showed
 them flat at four players and down at three) and game length (four players ran about 5 Days longer).
 
@@ -649,8 +651,8 @@ it never decided a game, and in the written rule's Opus playtest nobody Rigged i
 `harness/POWDER-KEG-TRIAL.md` every trial. mk-online keeps the code behind a switch, off.
 
 **The Still swap stays** (West Side 12 / East Harlem 11, Jamaica 2 / Astoria 3; since 2026-11-08 West
-Side's 12 and Jamaica's 2 are the Bowery's and Whitestone's, see *Landing Docks*): it made the four
-spare Docks the four Pressure 1 Stills, and they are now the Landing Docks, which is the boost to the
+Side's 12 and Jamaica's 2 are the Bowery's and Whitestone's, see *Contact Docks*): it made the four
+spare Docks the four Pressure 1 Stills, and they are now the Contact Docks, which is the boost to the
 weakest Stills Nick liked. Its art stays in the repo, unused: the Detonator card
 (`Art/Cards/Detonator.jpg`) and the lit keg (`Art/Rulebook/Powder Keg.png` and its WebP).
 The Heat Track's flavour line still calls the track "a 5-space fuse", which names nothing else now.
@@ -665,8 +667,8 @@ are, the art notes for the Bribe cards, and what to watch in playtest.
 `powder-keg-handoff.md` (2026-10-31, the Play version 2026-11-01) holds the Powder Keg's design, the
 trials and every option weighed; the keg was cut on 2026-11-04 (see *The Powder Keg: cut*).
 
-`trade-docks-handoff.md` (2026-11-04) holds the Landing Docks' evidence, the board's shipping lanes (cut 2026-11-08),
-mk-online's switches (Landing Docks on, keg off, the Commission's Day 28 limit) and the Opus test still
+`trade-docks-handoff.md` (2026-11-04) holds the Contact Docks' evidence, the board's shipping lanes (cut 2026-11-08),
+mk-online's switches (Contact Docks on, keg off, the Commission's Day 28 limit) and the Opus test still
 to run. The **Day 28 limit** (if nobody has Taken the Crown by Sunset of Day 28, the Commission crowns
 the most Respect, cash breaking a tie, then whoever Laid Low first) is on trial in mk-online only, where
 it caps the cost of an AI game that never crowns. Nick is on the fence (2026-11-04): if it stays he will
@@ -939,7 +941,7 @@ were culling too often, and because the board made one cull close to automatic: 
 starts on Richmond Hill beside what was then the Queens starting Dock, Jamaica, whose only other
 land exit is Brownsville, Brooklyn's home Ward. No other Borough's starting Dock was that exposed.
 (Queens started on Whitestone from the same day until 2026-11-08, when it went back to Jamaica with
-the Landing Docks' switch; since crews sail, the Richmond Hill Squad no longer boxes it in. Watch it.)
+the Contact Docks' switch; since crews sail, the Richmond Hill Squad no longer boxes it in. Watch it.)
 
 The 2026-07-30 case had four legs. Consistency with Skiff and Tunnel fell on 2026-09-30 (Skiff is a
 Move on your own turn; Tunnel carries no crew). The cost that remains is real and accepted: a crew
@@ -981,7 +983,7 @@ The two sides mirror each other round the 7, so every Borough's starting Stills 
 Pressure, 12 (it was 6 in Manhattan and Queens, 9 in the Bronx and Brooklyn). Queens' Ward and bar
 swapped places on 2026-10-24 (Corona was the Ward, Flushing the bar), Stills and all, so the numbers
 held; see *The Crown in the Wards*. On 2026-11-08 Manhattan's Dock moved from the Bowery to West Side
-and Queens' from Whitestone to Jamaica, each taking the old Dock's Still (see *Landing Docks*). The list's one home is
+and Queens' from Whitestone to Jamaica, each taking the old Dock's Still (see *Contact Docks*). The list's one home is
 the Town Planner's Setup column: the Rulebook's Setup defers to it, the board build's roster copies
 it (undrawn), and mk-online's `STARTING_TURF` follows it.
 
@@ -997,7 +999,7 @@ Watch in playtest:
   other Borough's start touches its Squad and Venue.
 - **Queens starts on Jamaica**, beside Brownsville (Brooklyn's home Ward, a crown room) and the
   Richmond Hill Squad, and not beside its own Ward, Flushing. Corona already bordered Brownsville.
-- The Brooklyn Bridge joins Brooklyn's starting bar (Red Hook) to a Landing Dock (the Bowery) since
+- The Brooklyn Bridge joins Brooklyn's starting bar (Red Hook) to a Contact Dock (the Bowery) since
   2026-11-08; it joined two starting Districts before.
 
 ## The board
@@ -1009,7 +1011,7 @@ copied from the Town Planner, each District with a hanging sign. Read `board-han
 touching it: it holds the build commands, the 24-inch print spec (Heat Track sockets are the
 Ledger's 39 mm chips), the decisions Nick has made so far, and the next pass he has in mind.
 mk-online serves a snapshot of this board (`mk-online/dist/board.svg`). The 2026-11-04 board
-(Landing Docks: schooners, Rum Row's route and a Landing Dock key row), approved by Nick, is in
+(Contact Docks: schooners, Rum Row's route and a Contact Dock key row), approved by Nick, is in
 mk-online's `public/board.svg` (its PR #36) and deployed here (latest: mk-online 6ef15ff, PR #37,
 the Job renamed The Mother Ship). Its click areas, piece
 spots and sockets are generated by mk-online's `scripts/board-ui-geometry.mjs` from

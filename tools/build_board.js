@@ -101,10 +101,10 @@ const fillId = d => `fill-${d.boro}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
-// trade: a Landing Dock (Nick, 2026-11-04), where Moonshine Trades for Rum 1:1 (2:1 elsewhere since 2026-11-08): the four
+// trade: a Contact Dock (Nick, 2026-11-04), where Moonshine Trades for Rum 1:1 (2:1 elsewhere since 2026-11-08): the four
 // Docks nobody starts on, which are the four Pressure 1 Stills (two on 2, two on 12, since West
 // Side and East Harlem swapped Stills, 12 and 11, and Jamaica and Astoria, 2 and 3, on
-// 2026-10-31). Since 2026-11-08 (Nick) the Bowery and Whitestone are Landing Docks in place of West Side
+// 2026-10-31). Since 2026-11-08 (Nick) the Bowery and Whitestone are Contact Docks in place of West Side
 // and Jamaica, the pairs swapping Stills (Bowery 12 / West Side 9, Whitestone 2 / Jamaica 5), and
 // Manhattan and Queens start on West Side and Jamaica. A schooner hangs under the sign's medallion (from 2026-11-04 to 2026-11-07 a
 // shipping lane also ran from its pier to Rum Row; see rumRowArrow()). They were the Powder Keg's factories, marked with
@@ -261,7 +261,7 @@ function roundel(zone, cx, cy, r) {
     + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
 }
 
-// The Landing Dock's mark (2026-11-04): a rum-runner schooner, two masts under sail, drawn in a
+// The Contact Dock's mark (2026-11-04): a rum-runner schooner, two masts under sail, drawn in a
 // 20-unit box about (cx, cy) and scaled by s. Not a barrel: a barrel reads as the liquor, on the
 // Docks where barrels move (the same reason the Powder Keg's fused barrel was turned down).
 function schooner(cx, cy, s) {
@@ -280,7 +280,7 @@ function schooner(cx, cy, s) {
 
 // Rum Row's marker (2026-11-08): "RUM ROW" in the water labels' type, low in the Narrows, with a small
 // gilt triangle under it pointing off the bottom edge, toward the mother ships offshore. Theme only.
-// From 2026-11-04 to 2026-11-07 dashed shipping lanes ran to it from all four Landing Docks; Nick cut them
+// From 2026-11-04 to 2026-11-07 dashed shipping lanes ran to it from all four Contact Docks; Nick cut them
 // on 2026-11-08 ("they add clutter and confusion"), then the short dashed arrow left in their place
 // ("the line looks like it's broken and coming from nowhere"), keeping the label and a triangle.
 const RUM_ROUTE = {
@@ -356,7 +356,7 @@ function cluster(d, opts = {}) {
         s += `<circle cx="${f(bx)}" cy="${f(by)}" r="1.45" fill="url(#bezelGilt)" stroke="#000" stroke-opacity=".55" stroke-width=".35"/>`
           + `<path d="M${f(bx - 0.8)} ${f(by)} H${f(bx + 0.8)}" stroke="#000" stroke-opacity=".5" stroke-width=".35"/>`;
       s += `<g filter="url(#lift)">${still(d.still, PX + pp, PY + pp, sh)}</g>`;
-      // a Landing Dock: the schooner hangs off the sign's lower edge under the medallion
+      // a Contact Dock: the schooner hangs off the sign's lower edge under the medallion
       if (d.trade) { const [mx, my] = medal(x, yy); s += schooner(mx + 5, my + 17.5, 0.95); }
       return s;
     },
@@ -896,7 +896,7 @@ function tomorrow(x, y) {
 // The key says what each type of District does (Nick, 2026-10-07: all four types, so every
 // medallion on the map is named; from 2026-09-29 it was the price list alone, Speakeasy and
 // High Society). The selling rows are a venue and what it buys, a barrel and a price: the
-// High Society row has only Rum, which says "Rum only" without the words. The Landing Dock
+// High Society row has only Rum, which says "Rum only" without the words. The Contact Dock
 // (2026-11-04; the Dock row carried it until then) Trades Moonshine up to Rum, one for one: a
 // grey cube to a brown one. Since 2026-11-08 every Dock Trades, two for one: the Dock row is two grey cubes
 // to a brown one (Nick: cubes, not words). Every row's first symbol starts at one left edge, so the
@@ -925,7 +925,7 @@ const KEY_ROWS = [
   ['speak', 'Speakeasy', [['moonshine', '$200'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500', true]]],
   ['dock', 'Dock', { trade: ['moonshine', 'rum', 2] }],
-  ['trade', 'Landing Dock', { trade: ['moonshine', 'rum', 1] }],
+  ['trade', 'Contact Dock', { trade: ['moonshine', 'rum', 1] }],
   ['ward', 'Ward', { crown: true }],
 ];
 // Moonshine becomes Rum: a cube, a gilt arrow, a cube.
@@ -935,13 +935,13 @@ function tradeArrow(x0, cy) {
 }
 function key(x, y) {
   const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
-  const chipsX = 28 + headW + 10, CHIP_GAP = 8; // 8 since "Landing Dock" (2026-11-08) widened the names
+  const chipsX = 28 + headW + 9, CHIP_GAP = 8; // gaps of 9 and 8 since the longer Dock names (2026-11-08)
   const chipW = (p, kick) => 12 + width(TYPE.price, p) + (kick ? KICK_GAP + 2 * KICK_R : 0);
   const rowW = what => what.trade ? TRADE_W : what.crown ? KEY_CROWN : what.words ? width(TYPE.price, what.words)
     : what.reduce((a, [, p, k]) => a + chipW(p, k), 0) + Math.max(0, what.length - 1) * CHIP_GAP;
   const chipsW = Math.max(...KEY_ROWS.map(([, , what]) => rowW(what)));
   // The pitch was 19 for the crown the High Society medallion wore until 2026-10-24, and four
-  // rows; 16 since the Landing Dock row came (2026-11-04), so the key stays clear of the Hudson.
+  // rows; 16 since the Contact Dock row came (2026-11-04), so the key stays clear of the Hudson.
   const PITCH = 16, w = chipsX + chipsW + 12, h = 14 + (KEY_ROWS.length - 1) * PITCH + 17;
   let s = panel(x, y, w, h);
   KEY_ROWS.forEach(([k, t, what], i) => {
