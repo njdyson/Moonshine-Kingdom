@@ -1415,3 +1415,23 @@ mk-online only, no tabletop change: **give cash** (`giveCash(to, amount)`, whole
 not a Play) brings the Rulebook's "only Cash crosses the table" online. Agent seats get it on every
 Hustle decision; humans give from a boss's Respect panel. mk-online PR #53, which also gives the agent
 seats a strategy section in RULES-AI.md drawn from The Almanac and High/Max reasoning for Claude seats.
+
+## 55. Small Mob: a dozen men, one die a man (2026-11-09, Nick)
+
+Four changes, one package (see CLAUDE.md, *Small Mob*):
+
+- **12 Runners** a family (was 15). Start: Boss, 2 Runners and the Safehouse in the home Ward, **2** Runners
+  each on the starting Speakeasy and Dock (was 3), 6 in supply.
+- **Muscle** replaces the Muscle Ratio: a District's Mobsters, **max 5**. Each man brews one barrel and
+  rolls one die (it was half the crew, rounded up).
+- **Blowback dead by Pressure**: 1 at Pressure 1&ndash;2, 2 at 3&ndash;4, 3 at 5&ndash;6, Runners first.
+  The crew size no longer sets it.
+- **No Safehouse Threat**: defending your own Safehouse adds nothing. Threat is 1 + Boss, + Ambush (the
+  Occupier's opening roll) or + Tommy Gun (the Invader's volley), max 3. Threat 4 is gone.
+
+mk-online: `G.smallMob` is true on every new game (the lobby's trial toggle from PR #62 is gone).
+`setup.ts applySmallMob` sets the switches in `data.ts` (`onePerMan`, `blowbackByPressure`,
+`safehouseThreat`) and the Runner cap and start; `migrateSavedGame` applies them from the save, so a game
+set up before this keeps the old rules, and the agent prompt tells its seats so. `blowbackDead` and
+`safehouseThreatBonus` are the one home of each rule for the engine, bots, fight odds, brew previews
+and the fight panel. `scripts/smallmob-check.ts` covers it; `lengthdiag.ts --smallMob 0` runs the old rules.

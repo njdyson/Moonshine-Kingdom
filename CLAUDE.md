@@ -111,8 +111,34 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
 - The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
 - The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
-- There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
+- There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; the Still's Pressure sets Blowback casualties (see *Small Mob*). Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
+
+## Small Mob: a dozen men, one die a man
+
+Since 2026-11-09 (Nick; the thread "Assess a 10 Runner cap", bot rows in `/mnt/project-files/bot-runs/log.md`,
+mk-online-rules-sync §55). The game's core is **a small mob holding a big city** through tactics and the
+threat of violence, and Nick's main goal is a game his gateway-gamer friends can learn. Four changes:
+
+- **12 Runners** a family (15 before). Nick chose 12 over the 10 first tried for the sound of **"a dozen
+  men"**. Use the phrase where it lands (the Rulebook's opening, The Almanac's lesson 16), not everywhere:
+  Nick doesn't want it overdone. The start is Boss and 2 in the Ward, 2 on the Dock, 2 at the bar.
+- **Muscle**: a District's Mobsters, **max five**, one barrel and one die a man. The Muscle Ratio (half the
+  crew, rounded up) is gone; a sixth man in one District adds nothing. The cap of five is what keeps a big
+  pile from mattering (Nick).
+- **Blowback by Pressure**: 1 dead at Pressure 1&ndash;2, 2 at 3&ndash;4, 3 at 5&ndash;6, Runners first. The gauge
+  gets a second job, and the 7s (where the leaders sit) hurt most. Nick wants Pressure only; a "half the
+  crew, capped by tier" version was weighed and not taken. The board's gauge is drawn in **three pairs**
+  (a wider gap between the 2nd and 3rd and the 4th and 5th segments, `tools/still_art.js`), a quiet cue.
+- **The Safehouse adds no Threat** (Nick's pick on a decision card). With one die a man, a Boss and three
+  behind a Safehouse threw back a Boss and six four times in five; without the +1 it is a coin flip.
+  Threat now tops out at 3 (Boss and Ambush, or Boss and Tommy Gun), so the Threat tables stop at Level 3.
+  The Safehouse is still the Recruit point and the Rise is still at home; it is no wall. Torch burns it and
+  the barrels but does nothing for the fight, and the Combat Simulator dropped its Safehouse box and Torch kit.
+
+Bots field about five Runners whatever the cap, so the cap and start don't show in bot runs; one die a man
+shortened the crown median (51.5 to the low 40s) and moved cash toward Unload. Turtling needs a real game.
+`tools/sim_almanac_combat.js` reproduces The Almanac's figures under these rules.
 
 ## Everything is on the table
 
@@ -756,9 +782,9 @@ Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the r
 
 Watch in playtest:
 
-- **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss, three and
-  a Safehouse from 8% to 17%; on four, two bursts take it 43% against 11%
-  (`tools/sim_almanac_combat.js`). Firepower's free die used to make it about 33% on three.
+- **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss and three
+  from 9% to 18%; on four, two bursts take it 24% against 10% (`tools/sim_almanac_combat.js`, Small Mob
+  rules).
 - **Whispers** claims outside the Offers, so the Vipers can take a 3 off the deck on Day 1.
 
 ## Consigliere costs 2
@@ -779,8 +805,8 @@ Viper who wanted the block without a fight had to come by the front door, and th
 Occupier to Ambush). Nick accepts the tell now: the plain Move is how a Viper asks for a Fold, and the
 Stealth is how he comes to kill.
 
-Watch in playtest: a Boss and four on a Stealth take a Boss, two Runners and a Safehouse three times
-in four (The Almanac's lesson 19), and a lone Boss caught by one can't run, so the Vipers are the
+Watch in playtest: a Boss and four on a Stealth take a Boss and two Runners nineteen times in twenty
+(The Almanac's lesson 19; four in ten by the front door), and a lone Boss caught by one can't run, so the Vipers are the
 natural hunters for The Toll Booth Trap.
 
 ## Torch is a shot; Red dice for the Invader
@@ -978,7 +1004,7 @@ them bunch up and leave a Borough with no police. The Borough lock is what makes
 ## Starting turf: the North on 8, 9, 10; the South on 4, 5, 6
 
 Since 2026-10-07 (Nick). Each Borough still starts with a Safehouse, its Boss and 2 Runners in its
-Ward, and 3 Runners each in one Speakeasy and one Dock, but the Speakeasy and Dock moved so that the
+Ward, and 2 Runners each in one Speakeasy and one Dock (3 until 2026-11-09; see *Small Mob*), but the Speakeasy and Dock moved so that the
 North starts on its 8, 9 and 10 and the South on its 4, 5 and 6:
 
 | Borough | Ward | Speakeasy | Dock |
