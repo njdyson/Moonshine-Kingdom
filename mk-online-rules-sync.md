@@ -1002,7 +1002,7 @@ Whispers as a passive peek, Network. **Plays removed:** Plunder, Tunnel.
 
 | Family | Signature Plays |
 | --- | --- |
-| Sicilians | Hit (2, In a Firefight), Consigliere (1): unchanged |
+| Sicilians | Hit (2, In a Firefight), Consigliere (1; 2 since §54): unchanged |
 | Irish | **Tommy Gun** (2, In a Firefight): Open Fire with 1 extra die (max 5) at +1 Threat; Heat only on the first shot. Peddle (1): unchanged |
 | Vipers | **Stealth** (1): up to 5 Mobsters, no barrels, into a Connected Hostile District; no Standoff (no Ambush, no Fold), the Occupier Holds Fire. **Whispers** (1, a Play): look at the top card of the Jobs deck in secret; may claim it at once, staking from Reserves; it goes face-up. Left, it stays on top |
 | Knights | Skiff (1): unchanged. **Torch** (1, In a Firefight): also sends every barrel in the District to the Supply |
@@ -1405,3 +1405,13 @@ A rename, no rule change: "Landing" read as though the Rum Row boats themselves 
 Bowery, Whitestone, Stapleton and Tottenville are **Contact Docks**, the piers where Rum Row's contact
 boats run the cargo in. Player-facing strings, comments and RULES-AI.md say Contact Dock; identifiers
 are unchanged.
+
+## 54. Consigliere costs 2; cash crosses the table online (2026-11-09, Nick)
+
+**Consigliere** is a Power Play at **2** markers (it was 1): at 1 it cancelled the Heat on any Extort or
+Unload (see CLAUDE.md, *Consigliere costs 2*). Rulebook, Playbooks and The Almanac say 2.
+
+mk-online only, no tabletop change: **give cash** (`giveCash(to, amount)`, whole hundreds, Hustle only,
+not a Play) brings the Rulebook's "only Cash crosses the table" online. Agent seats get it on every
+Hustle decision; humans give from a boss's Respect panel. mk-online PR #53, which also gives the agent
+seats a strategy section in RULES-AI.md drawn from The Almanac and High/Max reasoning for Claude seats.

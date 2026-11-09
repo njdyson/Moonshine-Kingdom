@@ -74,14 +74,15 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - The Toll Booth Trap is a kill: "Kill a rival Boss" (anywhere). A "kill" is a rival Mobster shot dead in your own Play's fight; a Raid's arrests are not kills. It pays even if you then lose the fight, and a Fold denies it, so a Boss with no Safe District to Scram to is the target.
 - Your Ambush or return fire on a rival's Play completes nothing.
 - A count is what one Play did: "4+ barrels" means four in a single Play.
-- The deck is 36 cards (16 / 12 / 8): an Unload card for each of the eight ordinary Speakeasies ("Unload 4+ barrels at <bar> in <District>"), an Extort card for each mainland Borough's Speakeasies ("Extort every open Speakeasy in X": every one there that isn't Padlocked), a Boss and 4+ Rum across each of three Bridges (Hell Gate, Queensboro, Brooklyn), and among the 2s Opening Night (Unload 5+ Rum at your home Borough's High Society Venue) and The Insurance Job (set off a Raid, by the 5th Heat marker or a Rat on your own Play, that padlocks a Pressure 1 or 2 Still you Control). Union Dues (Recruit 4+ Runners in a rival's home Ward) is a 1. The eight 3s are The Butcher's Ledger, The Toll Booth Trap, High Roller (Seize a High Society Venue), The Smuggler's Run, The Eviction (Seize a District with a rival's Safehouse, by fight or Fold, and take the Safehouse over; a walk-in or a Secure is no Seize), The Noble Experiment (Unload 8+ Moonshine outside your home Borough), The Warehouse (Secure your Safehouse in a District holding 10+ barrels) and The Five Families. The eight 3s are kept out of the opening Market.
+- The deck is 36 cards (16 / 12 / 8): an Unload card for each of the eight ordinary Speakeasies ("Unload 4+ barrels at <bar> in <District>"), an Extort card for each mainland Borough's Speakeasies ("Extort every open Speakeasy in X": every one there that isn't Padlocked), 4+ barrels across each of four Bridges (Williamsburg, Hell Gate, Queensboro, Brooklyn), and among the 2s Opening Night (Unload 5+ Rum at your home Borough's High Society Venue) and The Insurance Job (set off a Raid, by the 5th Heat marker or a Rat on your own Play, that padlocks a Pressure 1 or 2 Still you Control). Union Dues (Recruit 4+ Runners in a rival's home Ward) is a 1. The eight 3s are The Butcher's Ledger, The Toll Booth Trap, High Roller (Seize a High Society Venue), The Smuggler's Run, The Eviction (Seize a District with a rival's Safehouse, by fight or Fold, and take the Safehouse over; a walk-in or a Secure is no Seize), The Noble Experiment (Unload 8+ Moonshine outside your home Borough), The Warehouse (Secure your Safehouse in a District holding 10+ barrels) and The Five Families. The eight 3s are kept out of the opening Market.
 - A staked marker never reaches the Ledger, so while you hold Jobs you fund fewer Plays.
 
 **Deals**:
 
-- Handshake promises are table talk and expire at Sunset.
-- Breaking one earns a Welsher card (−1 Respect, permanent).
-- Cash may be handed over freely. Influence never changes hands.
+- A **Handshake** is a promise made in table talk ("I won't cross the river today", "I'll leave your Docks alone till Sunset"). It lasts until Sunset unless it says otherwise.
+- Breaking one earns a **Welsher** card (−1 Respect, permanent). In this online game the engine cannot see promises, so nothing deals the card automatically: a human at the table can hand it out, and every boss remembers who broke his word. Reputation is the real enforcement.
+- **Cash crosses the table freely**: on any Hustle decision, **give cash** (giveCash) hands a rival any whole hundreds. It is not a Play and costs nothing, so your turn goes on. Pay for a deal, pay a bounty on the leader's Boss, or pay up front when you don't trust a promise. Influence never changes hands.
+- Deals are worth making. Three bosses who agree to stay out of each other's way while they hit the leader all gain; a boss who stays silent fights everyone.
 
 ## 4. Plays
 
@@ -175,7 +176,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 **Sicilian Syndicate**
 
 - **Hit** (hit, 2, in a fight): an Open Fire where, if you score any hits, the rival Boss takes the first. It draws Heat only as the fight's first shot.
-- **Consigliere** (consigliere, 1): remove any one Heat marker (you choose it by index) and return it to its owner's Reserves.
+- **Consigliere** (consigliere, 2): remove any one Heat marker (you choose it by index) and return it to its owner's Reserves.
 
 **Hell's Kitchen Irish**
 
@@ -194,11 +195,66 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 
 ## 9. Strategic notes
 
-- **Influence buys capacity, not actions.** The Ledger holds 5 markers a Day. Only the High Society Rum Kickback refills it mid-Day (5 Rum poured with 2 markers left nets +3).
+- **Influence buys capacity, not actions.** The Ledger holds 5 markers a Day. Only the High Society Rum Kickback refills it mid-Day: pour on your last two markers so there are empty slots, and N Rum refills N slots only if you have N+1 markers clear of Jobs and the Heat Track (the pour's own Heat locks one away).
 - **Drafting is also defence.** The die you leave in the pool may burst your own best Still. The last seat drafts from what is left but picks first at The Offers.
 - **Laying Low early wins tempo.** You draft first tomorrow and brew before the supply runs thin. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
 - **The Crown takes visible steps:** 20 Respect, then the walk into a rival's home Ward (usually a fight, since it is his turf), then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise back in his home Borough plus the walk back out to a rival's Ward.
 - **The Crown ends the game before Sunset.** Promises due at Sunset go unpaid, so plan for betrayal.
 - **Raids go for barrels.** A Raid hits a mob's District with the most barrels, so a Rum stockpile in your Venue is Raid bait.
+
+## 10. Playing well (from The Almanac)
+
+The rules say what you may do; these say what pays. Each lesson's name is the one players use.
+
+**Every Day**
+
+- **The One Line.** Plays today = Influence − staked − Heat, up to five. Count your Plays before your money.
+- **Don't Lay Low as income.** Lay Low pays $100 a marker, which is the floor, not a plan. Turf is the investment that beats it: every District you hold pays $100 on every Extort for the rest of the game, so Recruiting Runners and spreading to more Districts pays back many times over, where a Lay Low pays once. If you have Laid Low first with five unspent markers two Days running, you are losing: the leaders are turning those markers into Respect. Spend them on what moves you toward 20 (a Job's setup, a Bribe, taking turf back, a Recruit where your next Job is). Lay Low early on purpose only for the draft (The Kill Shot, below) or when every Play left really is worth less than $100.
+- **The Reverse Snake.** The low token drafts and acts first; the high token picks first at the Offers. Laying Low first buys tomorrow's first pick but leaves every District you hold a **sitting duck** (no Ambush) for the rest of today. If a rival crew is next to your Boss, don't Lay Low first.
+- **Have a plan that reaches 20.** Write it as numbers: Respect now, which Jobs and Bribes get you to 20, which rival home Ward you will crown in and how your Boss gets there. Re-check it each Day.
+
+**Stills and the draft**
+
+- **The Magic of Seven.** No Mash can starve a 7, and the four 7s (the High Society Venues) open when a Raid moves their Squad. Elsewhere, hold a low Still and a high one (a 3 and a 9): one end is live whatever Mash is named.
+- **The Leash.** The Harbormaster names a Mash that lights his own Stills. Build on his numbers, or take the most Docks yourself.
+- **The Double.** Your Blowback risk is a second die of your number left in the pool. Draft to leave the Blowback on a rival's Still, not yours.
+
+**Jobs and Bribes**
+
+- **The Claim-Late Doctrine.** A held Job ties up its stake every Day. Build the position first, claim the morning you can finish it. Claim early only to beat a rival to it, or to bury the card that would carry a leader to 20.
+- **Eat the 1s early.** Half of them ask for what your liquor does anyway.
+- **The Cheap Rungs.** Buy the Captain and Alderman early: each brings a marker that pays for a Job's stake every Day after. Save the Mayor (the cheapest Respect, $1,250 a point) for last.
+- **The Tell.** Assemble late and fast: six barrels arriving in one Move on the morning you claim is a done deal; six arriving over four Days is an announcement.
+
+**The gun**
+
+- **The Sucker Bet.** Never attack even numbers into a Safehouse; bring double or triple, plan to win in two or three volleys, and Fall Back rather than grind. Read the FIGHT ODDS.
+- **The Picket.** Most blocks are held by one to three men. Pay the toll once with enough to be sure: your Boss and three take two men better than eight times in ten.
+- **The Sitting Duck.** A boss who has Laid Low or has an empty Ledger cannot Ambush. That is your afternoon: hit him then.
+- **Fold, Check or Raise.** Fold scrap corners (men cost $300 to replace). Hold Fire is the check: he pays for every volley and takes the Heat. Ambush only with three or more men. Fold what you would lose anyway, but read his Jobs first: a Fold hands him a Seize.
+- **Strangers Next Door.** Don't march an army. Secure your Safehouse one step from the target ($500) and Recruit there, late in the Day.
+
+**The law**
+
+- **Be loud in bulk.** One Heat marker per Extort or Unload however big, so squeeze many Districts and pour many barrels at once.
+- **The Cold Trail.** A Raid chases the newest marker in each Squad's reach, not the most markers. Be loud right after a Raid; let others shout last.
+- **Heat at 3 or 4 is not a reason to sit still.** Ask who the Raid would hit (the HEAT line tells you). If it would hit a rival, or a corner you can spare, laying the 5th marker is good: it refunds everyone's markers, moves Squads off Stills and Venues, and opens High Society rooms. **The Refund**: sometimes you want the sirens.
+- **The Decoy Warehouse.** The Squad kicks the door with the most barrels. When your name is newest, make that a corner you can lose; when a rival's is, send barrels onto the door you want kicked.
+- **The Liquor Defense.** At four Heat, if a man walks onto your block, Hold Fire: his first shot is the fifth marker, with his name on it.
+
+**The table and the Crown**
+
+- **Watch the leader's Boss, not just his count.** A rival at 16+ with a Bribe left and the cash for it, or at 19 with a Job one Play away, whose Boss is in or next to a crown room, crowns within a Day unless someone stops him. Stopping him is everyone's job: kill or chase his Boss (a kill sends him home to Rise), stand in his road, take or bust his stockpile, bury the card he needs. Say so at the table and split the work.
+- **Be the last man up.** Once the others Lay Low they get no more turns. If a rival can crown this Day, don't Lay Low before him. If you can, plan to be the one still standing.
+- **The Walk.** Take the rival Ward first, dig your Boss in (four men and a Safehouse around him, a marker kept for the Ambush), then buy the last Bribe and crown on the same afternoon. The Eviction and Union Dues pay for the walk.
+- **The Wax Seal.** Promise only what you alone control ("I won't cross the river today"), never what a third boss can ruin.
+- **Cheap Paper.** A boss one Play from the Crown owes you nothing: every promise due at Sunset dies when he crowns.
+
+**Your family's edge**
+
+- **Sicilians:** the Hit is the one gun that reliably kills a Boss dug into a Ward. Consigliere (2 markers) removes any marker: pull a rival's to re-aim a Raid, or your own before a big pour or squeeze.
+- **Irish:** the Tommy Gun wins by going through doors (two bursts take a fortress 43% against 11% for plain volleys). Hook steals Rum stacked next to your blocks, so hold blocks next to rival piles.
+- **Vipers:** Stealth takes thin blocks with no Ambush and no Fold; snipe, don't lay siege. Whispers takes a card before it reaches the Market.
+- **Knights:** Skiff lands five men on any coast, and three of the four home Wards are on the water. Torch burns a stockpile and a Safehouse.
 `;export{e as default};
