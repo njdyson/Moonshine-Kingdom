@@ -257,6 +257,12 @@ function roundel(zone, cx, cy, r) {
     return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
       + icon('martini', cx, cy + r * 0.06, r * 1.08, '#2a1d0c');
   }
+  // A Contact Dock (2026-11-09, Nick, from a Gemini read of the board): the Dock's anchor on the
+  // High Society's gilt disc, so the four 1:1 Docks stand out under the pieces and still read as Docks.
+  if (zone === 'trade') {
+    return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
+      + icon('dock', cx, cy, r * 1.2, '#2a1d0c');
+  }
   return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="#140e09" fill-opacity=".85" stroke="${C.gold}" stroke-width="1.2"/>`
     + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
 }
@@ -348,7 +354,7 @@ function cluster(d, opts = {}) {
       const sign = chamfered(X, Y, bw, bh, 3), plate = chamfered(PX, PY, pw, ph, 2);
       s += `<path d="${sign}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
         + `<path d="${sign}" fill="url(#lacquer)" fill-opacity=".92" stroke="url(#bezelGilt)" stroke-width="1.2"/>`;
-      s += `<g filter="url(#lift)">${roundel(d.zone, ...medal(x, yy), sr)}</g>`;
+      s += `<g filter="url(#lift)">${roundel(d.trade ? 'trade' : d.zone, ...medal(x, yy), sr)}</g>`;
       names.forEach((n, i) => { s += text(n, X + tx, Y + nameYs[i], TYPE.sign, { fill: nameFill, middle: true }); });
       if (d.venue) s += text(d.venue, X + tx, Y + venueY, TYPE.signVenue, { fill: C.body, middle: true });
       // the Still's plate, bolted on over the sign: its own edge and a bolt in each corner
@@ -949,8 +955,7 @@ function key(x, y) {
   let s = panel(x, y, w, h);
   KEY_ROWS.forEach(([k, t, what], i) => {
     const cy = y + 14 + i * PITCH, ix = x + 15;
-    if (k === 'trade') s += `<circle cx="${f(ix)}" cy="${f(cy)}" r="5.4" fill="#140e09" fill-opacity=".85" stroke="${C.gold}" stroke-width="1.2"/>` + schooner(ix, cy + 0.4, 0.4);
-    else s += roundel(k, ix, cy, 5.4);
+    s += roundel(k, ix, cy, 5.4);
     s += text(upper(t), x + 28, cy, TYPE.keyHead, { fill: k === 'hs' ? C.goldBright : C.ink, middle: true });
     let cx = x + chipsX;
     if (what.trade) {
