@@ -376,16 +376,17 @@ table.lg{width:100%;border-collapse:collapse}
   vertical-align:middle;
 }
 /* Pressure: the Still's own gauge laid on its side, that many segments lit from
-   the left of the token's six-step gold-to-red ramp. No numeral: one beside the
+   the left of the token's six-step gold-to-red ramp, in three pairs (1-2, 3-4, 5-6:
+   the Blowback's dead, 1, 2 or 3; since 2026-11-09). No numeral: one beside the
    Still's own read as a second Still number. */
 .gauge{
-  --p:0;position:relative;display:inline-block;vertical-align:middle;width:41px;height:8px;
-  background:linear-gradient(90deg,#e8c85a 0 7px,#dcb246 7px 14px,#d49a37 14px 21px,#cf7f33 21px 28px,#c8632e 28px 35px,#c0472a 35px);
-  -webkit-mask:repeating-linear-gradient(90deg,#000 0 5.5px,transparent 5.5px 7px);
-  mask:repeating-linear-gradient(90deg,#000 0 5.5px,transparent 5.5px 7px);
+  position:relative;display:inline-block;vertical-align:middle;width:44.5px;height:8px;
+  background:linear-gradient(90deg,#e8c85a 0px 5.5px,#dcb246 7px 12.5px,#d49a37 16px 21.5px,#cf7f33 23px 28.5px,#c8632e 32px 37.5px,#c0472a 39px 44.5px);
+  -webkit-mask:linear-gradient(90deg,#000 0px 5.5px,transparent 5.5px 7px,#000 7px 12.5px,transparent 12.5px 16px,#000 16px 21.5px,transparent 21.5px 23px,#000 23px 28.5px,transparent 28.5px 32px,#000 32px 37.5px,transparent 37.5px 39px,#000 39px 44.5px,transparent 44.5px 44.5px);
+  mask:linear-gradient(90deg,#000 0px 5.5px,transparent 5.5px 7px,#000 7px 12.5px,transparent 12.5px 16px,#000 16px 21.5px,transparent 21.5px 23px,#000 23px 28.5px,transparent 28.5px 32px,#000 32px 37.5px,transparent 37.5px 39px,#000 39px 44.5px,transparent 44.5px 44.5px);
 }
-.gauge::after{content:"";position:absolute;top:0;right:0;bottom:0;width:calc((6 - var(--p)) * 7px);background:rgba(13,0,5,.84)}
-.p1{--p:1}.p2{--p:2}.p3{--p:3}.p4{--p:4}.p5{--p:5}.p6{--p:6}
+.gauge::after{content:"";position:absolute;top:0;right:0;bottom:0;width:44.5px;background:rgba(13,0,5,.84)}
+.p1::after{width:37.5px} .p2::after{width:28.5px} .p3::after{width:21.5px} .p4::after{width:12.5px} .p5::after{width:5.5px} .p6::after{width:0}
 
 /* Setup marks */
 .tag{
@@ -487,12 +488,12 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-label">The Brew</div>
-        <div class="step-body"><span class="sub"><b>Roll the pool:</b> Turn Token #1 rolls the <b>Red</b> dice: one per player, plus one. The Mash die already shows today's Mash.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews at once, before the next boss drafts. Every Still you Control numbered <b>Mash + Red</b> pours Moonshine: one barrel per point of its District's Muscle Ratio.</span><span class="sub"><b>Split the Batch:</b> If the Still in your Boss's District fires, you may also fire one <b>Adjacent</b> Still you Control, whatever its number.</span></div>
+        <div class="step-body"><span class="sub"><b>Roll the pool:</b> Turn Token #1 rolls the <b>Red</b> dice: one per player, plus one. The Mash die already shows today's Mash.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> and brews at once, before the next boss drafts. Every Still you Control numbered <b>Mash + Red</b> pours Moonshine: one barrel per Mobster there, up to five.</span><span class="sub"><b>Split the Batch:</b> If the Still in your Boss's District fires, you may also fire one <b>Adjacent</b> Still you Control, whatever its number.</span></div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-label">The Blowback</div>
-        <div class="step-body"><span class="sub"><b>Leftover Red + Mash:</b> Every Still on that number bursts, <b>whoever Controls it</b>, and its District loses its Muscle Ratio in Mobsters, Runners first. Barrels and turf stay.</span></div>
+        <div class="step-body"><span class="sub"><b>Leftover Red + Mash:</b> Every Still on that number bursts, <b>whoever Controls it</b>, and its District loses Mobsters by the gauge: 1 at Pressure 1&ndash;2, 2 at 3&ndash;4, 3 at 5&ndash;6, Runners first. Barrels and turf stay.</span></div>
       </div>
       <div class="step">
         <span class="step-num">3</span>
@@ -593,14 +594,14 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Haymarket</span></td>
             <td class="lg-still"><span class="still">8</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">West Side</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">9</span></td>
             <td class="lg-press"><i class="gauge p4"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">The Bowery</td>
@@ -639,14 +640,14 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Penny Whistle</span></td>
             <td class="lg-still"><span class="still">8</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Throggs Neck</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">10</span></td>
             <td class="lg-press"><i class="gauge p3"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
         </tbody>
 
@@ -678,7 +679,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Junction</span></td>
             <td class="lg-still"><span class="still">6</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Whitestone</td>
@@ -692,7 +693,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">5</span></td>
             <td class="lg-press"><i class="gauge p4"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
         </tbody>
 
@@ -724,14 +725,14 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Sunny's Bar</span></td>
             <td class="lg-still"><span class="still">6</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Canarsie</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">4</span></td>
             <td class="lg-press"><i class="gauge p3"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
           </tr>
         </tbody>
 
@@ -761,7 +762,7 @@ table.lg{width:100%;border-collapse:collapse}
         </div>
         <div class="key-setup">
           <span class="key-item"><span class="tag tag-home">Home Ward</span>Safehouse, Boss &amp; 2 Runners: rivals crown here</span>
-          <span class="key-item"><span class="tag tag-run">3 Runners</span></span>
+          <span class="key-item"><span class="tag tag-run">2 Runners</span></span>
           <span class="key-item"><span class="tag tag-squad">Police Squad</span>padlocked until a Raid moves it</span>
         </div>
         <div class="key-zones key-zones--trade">

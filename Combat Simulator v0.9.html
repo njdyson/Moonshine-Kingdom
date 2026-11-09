@@ -390,11 +390,11 @@
           <div class="grid-2">
             <div class="field">
               <label class="label" for="invRunners">Invader Runners</label>
-              <input id="invRunners" type="number" min="0" max="15" step="1" value="3">
+              <input id="invRunners" type="number" min="0" max="12" step="1" value="3">
             </div>
             <div class="field">
               <label class="label" for="occRunners">Occupier Runners</label>
-              <input id="occRunners" type="number" min="0" max="15" step="1" value="3">
+              <input id="occRunners" type="number" min="0" max="12" step="1" value="3">
             </div>
           </div>
 
@@ -412,7 +412,6 @@
                   <option value="tommy">Irish: Tommy Gun (+1 die, +1 Threat, cost 2)</option>
                   <option value="sicilian">Sicilian: Hit (Boss-snipe, cost 2)</option>
                   <option value="stealth">Vipers: Stealth (no Standoff, max 5)</option>
-                  <option value="torch">Knights: Torch first (cost 1 + 1 Runner)</option>
                 </select>
               </div>
               <div id="invKitNote" class="kit-note"></div>
@@ -428,11 +427,7 @@
                 <input id="occBoss" type="checkbox" checked>
                 <span>Boss</span>
               </label>
-              <label class="check-row">
-                <input id="occSafehouse" type="checkbox" checked>
-                <span>Safehouse</span>
-              </label>
-              <div class="kit-note">There is no Sweep: raise the Runner count to model a larger garrison. The Muscle Ratio still caps combat dice at 5.</div>
+              <div class="kit-note">Raise the Runner count to model a larger garrison: each Mobster rolls one die, up to 5.</div>
               <div class="mobster-total">
                 <span>Total Mobsters</span>
                 <strong id="occMobsterTotal">0</strong>
@@ -457,7 +452,7 @@
             <summary>How each trial resolves</summary>
             <div class="acc-body">
             Each trial: opening Ambush (unless Stealth), then the Pinned invader spends Influence per volley until it runs out:
-            <strong>Open Fire costs 1</strong>, <strong>Hit</strong> and <strong>Tommy Gun cost 2</strong>, <strong>Torch costs 1</strong> plus a sacrificed Runner.
+            <strong>Open Fire costs 1</strong>, <strong>Hit</strong> and <strong>Tommy Gun cost 2</strong>.
             At 0 Influence the invader must <strong>Fall Back</strong> (mobsters survive, barrels lost).
             <strong>Heat:</strong> only the first shot counts. A firefight adds <strong>one</strong> marker, to whoever
             fired first: here the occupier's Ambush, so the invader who storms in draws none. (Stealth gets no Standoff,
@@ -556,7 +551,6 @@
       invKitNote: document.getElementById("invKitNote"),
       invMobsterTotal: document.getElementById("invMobsterTotal"),
       occBoss: document.getElementById("occBoss"),
-      occSafehouse: document.getElementById("occSafehouse"),
       occMobsterTotal: document.getElementById("occMobsterTotal"),
       trials: document.getElementById("trials"),
       maxRounds: document.getElementById("maxRounds"),
@@ -582,10 +576,9 @@
 
     const KIT_NOTES = {
       none: "Standard assault: Move in, eat the Ambush, then trade Open Fire volleys at 1 Influence each.",
-      tommy: "Tommy Gun (cost 2): an Open Fire with +1 attack die (max 5) at +1 Threat (max Level 4). Falls back to Open Fire once Influence dips below 2. Heat only if you shoot first.",
+      tommy: "Tommy Gun (cost 2): an Open Fire with +1 attack die (max 5) at +1 Threat. Falls back to Open Fire once Influence dips below 2. Heat only if you shoot first.",
       sicilian: "Hit (cost 2): both sides roll as normal, but your first hit lands on the rival Boss. Falls back to Open Fire once the Boss is dead or Influence dips below 2. Heat only if you shoot first.",
-      stealth: "No Standoff: the Occupier can neither Ambush nor Fold, so he Holds Fire and stands. Crew capped at 5 mobsters, no barrels carried.",
-      torch: "Spends 1 Influence and sacrifices 1 Pinned Runner to destroy the Safehouse (removing its +1 Threat) before the volleys start. Heat only if it's the fight's first shot."
+      stealth: "No Standoff: the Occupier can neither Ambush nor Fold, so he Holds Fire and stands. Crew capped at 5 mobsters, no barrels carried."
     };
 
     function clamp(n, min, max) {
@@ -605,12 +598,8 @@
     }
 
     function diceFromMobsters(count) {
-      if (count <= 0) return 0;
-      if (count <= 2) return 1;
-      if (count <= 4) return 2;
-      if (count <= 6) return 3;
-      if (count <= 8) return 4;
-      return 5;
+      // Muscle: one die per Mobster, up to 5 (since 2026-11-09).
+      return Math.max(0, Math.min(5, count));
     }
 
     function killThreshold(threatLevel) {
@@ -658,7 +647,7 @@
 
     function readConfig() {
       const invKit = els.invKit.value;
-      let invRunners = clamp(Number(els.invRunners.value || 0), 0, 15);
+      let invRunners = clamp(Number(els.invRunners.value || 0), 0, 12);
       const invBosses = els.invBoss.checked ? 1 : 0;
       let stealthTrimmed = false;
 
@@ -674,9 +663,8 @@
           kit: invKit
         },
         occupier: {
-          runners: clamp(Number(els.occRunners.value || 0), 0, 15),
-          bosses: els.occBoss.checked ? 1 : 0,
-          safehouse: !!els.occSafehouse.checked
+          runners: clamp(Number(els.occRunners.value || 0), 0, 12),
+          bosses: els.occBoss.checked ? 1 : 0
         },
         trials: clamp(Number(els.trials.value || 1), 1, 200000),
         influence: clamp(Number(els.maxRounds.value || 1), 1, 10),
@@ -692,8 +680,7 @@
       };
       const occ = {
         runners: config.occupier.runners,
-        bosses: config.occupier.bosses,
-        safehouse: config.occupier.safehouse
+        bosses: config.occupier.bosses
       };
 
       const invaderStart = mobsterCount(inv);
@@ -707,18 +694,10 @@
       let occHeat = false;    // occupier draws Heat (Ambush fires), costs 1 from the Ledger
 
       if (inv.kit !== "stealth" && alive(inv) && alive(occ)) {
-        const threat = clamp(1 + occ.bosses + 1 + (occ.safehouse ? 1 : 0), 1, 4);
+        const threat = clamp(1 + occ.bosses + 1, 1, 3);
         const dice = diceFromMobsters(mobsterCount(occ));
         ambushKills = applyCasualties(inv, rollHits(dice, threat), false);
         occHeat = true;       // Occupier fired first, so the Ambush marker is the fight's Heat
-      }
-
-      if (inv.kit === "torch" && occ.safehouse && alive(inv) &&
-          inv.runners >= 1 && config.influence - spent >= 1) {
-        inv.runners -= 1;
-        occ.safehouse = false;
-        spent += 1;
-        if (!occHeat) heat = true;   // the match is a shot: Heat only if nobody fired first
       }
 
       while (alive(inv) && alive(occ)) {
@@ -731,9 +710,9 @@
         rounds += 1;
 
         const invDice = invaderAttackDice(inv, useTommy);
-        const invThreat = clamp(1 + inv.bosses + (useTommy ? 1 : 0), 1, 4);
+        const invThreat = clamp(1 + inv.bosses + (useTommy ? 1 : 0), 1, 3);
         const occDice = diceFromMobsters(mobsterCount(occ));
-        const occThreat = clamp(1 + occ.bosses + (occ.safehouse ? 1 : 0), 1, 4);
+        const occThreat = clamp(1 + occ.bosses, 1, 3);
 
         const invHits = rollHits(invDice, invThreat);
         const occHits = rollHits(occDice, occThreat);
@@ -793,8 +772,8 @@
     }
 
     function updateMobsterTotals() {
-      const invRunners = clamp(Number(els.invRunners.value || 0), 0, 15);
-      const occRunners = clamp(Number(els.occRunners.value || 0), 0, 15);
+      const invRunners = clamp(Number(els.invRunners.value || 0), 0, 12);
+      const occRunners = clamp(Number(els.occRunners.value || 0), 0, 12);
       const invBosses = els.invBoss.checked ? 1 : 0;
       const occBosses = els.occBoss.checked ? 1 : 0;
 
@@ -873,9 +852,6 @@
         status += " <span class=\"warn\">Stealth caps the crew at 5 mobsters: invader trimmed to " +
           (config.invader.runners + config.invader.bosses) + ".</span>";
       }
-      if (config.invader.kit === "torch" && !config.occupier.safehouse) {
-        status += " <span class=\"warn\">No Safehouse to Torch: kit had no effect.</span>";
-      }
       els.statusLine.innerHTML = status;
     }
 
@@ -885,7 +861,6 @@
       els.invBoss.checked = true;
       els.invKit.value = "none";
       els.occBoss.checked = true;
-      els.occSafehouse.checked = true;
       els.trials.value = 20000;
       els.maxRounds.value = 3;
       updateMobsterTotals();
