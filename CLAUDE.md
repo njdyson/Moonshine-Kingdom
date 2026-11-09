@@ -129,7 +129,9 @@ threat of violence, and Nick's main goal is a game his gateway-gamer friends can
 - **Blowback by Pressure**: 1 dead at Pressure 1&ndash;2, 2 at 3&ndash;4, 3 at 5&ndash;6, Runners first. The gauge
   gets a second job, and the 7s (where the leaders sit) hurt most. Nick wants Pressure only; a "half the
   crew, capped by tier" version was weighed and not taken. The board's gauge is drawn in **three pairs**
-  (a wider gap between the 2nd and 3rd and the 4th and 5th segments, `tools/still_art.js`), a quiet cue.
+  (a wider gap between the 2nd and 3rd and the 4th and 5th segments, `tools/still_art.js`), one colour
+  a pair: gold, orange, red (Nick, the same evening: "while it doesn't look quite as good, I think it'll
+  make the rule clearer"; it was a six-step gold-to-red ramp). The Rulebook's map text names the colours.
 - **The Safehouse adds no Threat** (Nick's pick on a decision card). With one die a man, a Boss and three
   behind a Safehouse threw back a Boss and six four times in five; without the +1 it is a coin flip.
   Threat now tops out at 3 (Boss and Ambush, or Boss and Tommy Gun), so the Threat tables stop at Level 3.

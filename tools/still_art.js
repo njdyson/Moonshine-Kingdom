@@ -9,12 +9,14 @@
 // the numeral in, to the boiler's four corners.
 //
 // THE GAUGE IS NOT DECORATION. It is the Pressure reading, 6 - |Still - 7| (the Town
-// Planner's District Roster): that many segments lit from the bottom of a six-step
-// gold-to-red ramp, the rest dark. 7 runs the full six, 2 and 12 run one. The segments sit in
+// Planner's District Roster): that many segments lit from the bottom, the rest dark,
+// one colour a pair (gold, orange, red). 7 runs the full six, 2 and 12 run one. The segments sit in
 // three pairs, and the pair is how many a Blowback kills there (since 2026-11-09).
 
 const GOLD = '#d4af37', LACQUER = '#130207', TUBE = '#0d0005', RIVET = '#8a7329', NUMERAL = '#f5e9d9';
-const RAMP = ['#e8c85a', '#dcb246', '#d49a37', '#cf7f33', '#c8632e', '#c0472a']; // bottom to top
+// One colour a pair (Nick, 2026-11-09): gold, orange, red, so the colour reads the Blowback's
+// dead, 1, 2 or 3. It was a six-step gold-to-red ramp until the same day.
+const RAMP = ['#e3c04f', '#e3c04f', '#d98a2e', '#d98a2e', '#c4362a', '#c4362a']; // bottom to top
 // The numeral, in Bebas Neue: as large as fits the boiler's 51-unit width with "12" in it,
 // centred on the boiler (it was 37, set left of centre between the rivets; 50 for one day,
 // 2026-10-07, before the rivets moved). x and mid are the boiler's centre.
