@@ -444,7 +444,10 @@ three rooms). The Respect is on the shield, so no card restates it.
 In the Blood Oath, an Alliance races to **40 combined Respect** (lower, and an Alliance could form
 already past the bar, so the Truce would hand it the game), and **either partner** Takes the Crown
 with his own Boss in a home Ward of the opposing Alliance (since 2026-10-24; see *The Crown in the
-Wards*); whoever crowns is the Capo.
+Wards*). **Partners win together** (Nick, 2026-11-11): whoever crowns wears it, and both partners win. Until
+then only the one who crowned won (*One Crown, One Capo*), and in the first agent game with the Blood Oath card
+partners fought over the crown rooms nine times, killing each other's Boss twice; Nick expected real players to
+balk at working together on those terms too. Don't bring back a Capo-only win.
 The Rulebook, Town Planner, Playbooks, Cards sheet, Jobs deck (the Blood Oath card), and The Almanac must
 agree on these values.
 

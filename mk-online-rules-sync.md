@@ -1458,3 +1458,15 @@ bot and the agent options refuse to claim it. `G.crackdown` still counts Raids f
   The Supply holds **7 Welsher cards** (it was 8).
 
 mk-online: `WELSHER_SUPPLY = 7` in `data.ts`. Saved games keep the count they were set up with.
+
+## 58. Blood Oath partners win together (2026-11-11, Nick)
+
+- Whoever Takes the Crown for an Alliance wears it, and **both partners win** (it was the crowner alone, the
+  Capo). The Rulebook's section is *One Crown, One Family*.
+- Why: in the first browser game with the Blood Oath card (playtests/haiku55-4p-5-blood-oath-2026-11-11.md)
+  partners fought each other nine times over crown rooms, and every seat counted to 20 alone after the Truce.
+
+mk-online: the crown log, the game-over recap and banner, the summary's Winners line and the agents' Blood Oath
+rule say both partners win (`crown.ts`, `RecapModal.tsx`, `Board.tsx`, `gameSummary.ts`, `harness/render.ts`).
+The agents' BLOOD OATH line now adds that nobody crowns before 40 and a partner at 20 is no threat. `G.winner`
+is still the boss who crowned.
