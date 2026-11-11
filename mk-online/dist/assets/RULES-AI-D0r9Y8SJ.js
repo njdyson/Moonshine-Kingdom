@@ -51,6 +51,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
    - **Stand pat** (confirmGrease).
    - **Restock**: automatic, once everyone has chosen. A fresh Job is dealt into each gap, face-up for the whole Day before anyone can claim it.
    - **Day 1 has no Offers.** The opening Market is dealt face-down and turns face-up here instead.
+   - **The 3s come late.** No 3-Respect Job sits in the top 15 cards of the deck (the opening Market included), so the first 3 turns up after about ten Days of restocks.
 6. **Fund the Ledger**: automatic. Reserves move into the Ledger up to 5. Staked markers stay on their Jobs.
 7. **Harbormaster** (setMash): the player Controlling the **most Docks** (no tie) names tomorrow's Mash, 1–6. On a tie or with no Docks held, it is rolled.
 
@@ -185,7 +186,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 **East Side Vipers**
 
 - **Stealth** (stealth, 1): up to 5 Mobsters, no barrels, into a Connected **Hostile** District (rival Mobsters on it). The Occupier gets no Standoff choice: no Ambush, no Fold. He Holds Fire and you are Pinned as usual (Open Fire, Advance or Fall Back).
-- **Whispers** (whispers, 1, costs the turn): look at the top card of the Jobs deck (only you see it), then claim it at once (whispersChoice true), staking Influence from your Reserves equal to its Stake, or let it lie on top of the deck (whispersChoice false). A claimed Job is held like any other; it is outside the once-a-morning Offers limit.
+- **Whispers** (whispers, 1, costs the turn): look at the top card of the Jobs deck (only you see it; you may tell the table, bluff or say nothing), then claim it at once (whispersChoice true), staking Influence from your Reserves equal to its Stake, or let it lie on top of the deck (whispersChoice false). A claimed Job is held like any other; it is outside the once-a-morning Offers limit.
 
 **Harlem Knights**
 

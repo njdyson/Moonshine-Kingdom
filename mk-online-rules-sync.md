@@ -1435,3 +1435,19 @@ mk-online: `G.smallMob` is true on every new game (the lobby's trial toggle from
 set up before this keeps the old rules, and the agent prompt tells its seats so. `blowbackDead` and
 `safehouseThreatBonus` are the one home of each rule for the engine, bots, fight odds, brew previews
 and the fight panel. `scripts/smallmob-check.ts` covers it; `lengthdiag.ts --smallMob 0` runs the old rules.
+
+## 56. Late 3s; the Blood Oath card replaces the Crackdown Tracker; Whispers is open (2026-11-11, Nick)
+
+- **Stack the Job Deck**: set the eight 3s aside, shuffle the rest and count 15 off the top, shuffle the
+  3s into what's left, put the 15 back on top, then deal the Market (Player Count + 1). No 3 sits in the
+  top 15 cards.
+- **The Blood Oath**: its card goes in with the 3s. The restock that deals it strikes the Truce (rank by
+  Respect, 1st with 4th, 2nd with 3rd), it leaves the game and a Job takes its gap. It can't be claimed,
+  Whispers included. The Federal Crackdown Tracker is gone; Raids no longer count toward anything.
+- **Whispers**: no "keep it to yourself". The Viper may tell the table, bluff or say nothing.
+
+mk-online: `EASY_TOP` and `BLOOD_OATH_CARD` in `jobs.ts`; setup deals the deck that way on every new
+game (`setHeadlessEasyTop(0)` or `lengthdiag --easyTop=0` restores the old deal for sweeps); the restock
+(`shadows.ts`) strikes the Truce (`crown.ts strikeTruce`) when it draws the card; `whispersChoice`, the
+bot and the agent options refuse to claim it. `G.crackdown` still counts Raids for the status row.
+`scripts/oath-check.ts` covers it; `lengthdiag --bloodOath=1` reports `truceDay`.
