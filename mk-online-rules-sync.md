@@ -1470,3 +1470,19 @@ mk-online: the crown log, the game-over recap and banner, the summary's Winners 
 rule say both partners win (`crown.ts`, `RecapModal.tsx`, `Board.tsx`, `gameSummary.ts`, `harness/render.ts`).
 The agents' BLOOD OATH line now adds that nobody crowns before 40 and a partner at 20 is no threat. `G.winner`
 is still the boss who crowned.
+
+## 59. The Blood Oath: 30 combined, both partners crown (2026-11-11, Nick)
+
+- The Alliance target is **30 combined Respect** (it was 40), tested on **each** crown.
+- **Both partners must Take the Crown**, each in a home Ward of the opposing Alliance. The first crown wins
+  nothing: that Ward's Borough card turns face down ("their Ward has fallen") and nobody crowns there again.
+  The second partner crowns in the other Ward and both win. The first crown is permanent.
+- The universal crown rule says the rival's home Ward must have its Borough card face-up.
+- Why: a combined 40 moved the leader's finish line at the Truce; a solo 20 let the 4th-place partner win
+  carried. The Rulebook's section is *Their Ward Has Fallen*.
+
+mk-online: `ALLIANCE_RESPECT_TO_WIN = 30` (`oath.ts`); `G.fallenWards` (`{ ward, by }[]`) holds the fallen Wards;
+`crownRooms` drops them, `crownBlockers` refuses a second crown by the same boss, and `takeTheCrown` flips the
+Ward and ends the Play when the partner has not yet crowned (`crown.ts`). The status row, the crown track and
+the crown button show it; the agents' Blood Oath rule, BLOOD OATH line, CROWN line and option text say it; the
+bots' crown threat counts the Alliance total. `scripts/oath-check.ts` covers both crowns.
