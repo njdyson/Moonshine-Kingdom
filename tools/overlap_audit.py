@@ -182,8 +182,8 @@ JOBS = [
       'Unload 5+ Rum at the High Society Venue in your home Borough.',
       lambda p, d: p['barrels'] >= 5 and d.has('highSociety') and p['home'] == 'own'),
     J('Union Dues', 1, ['Recruit'],
-      "Recruit 4+ Runners in a rival's home Ward.",
-      lambda p, d: p['runners'] >= 4 and d.has('ward') and p['home'] == 'rival'),
+      "Recruit 4+ Runners in a rival's home Borough.",
+      lambda p, d: p['runners'] >= 4 and p['home'] == 'rival'),
     # --- 3 Respect: the body count (2026-10-11), a Seize since 2026-10-13, one card for any
     # Borough since 2026-10-14 (Nick: the four sat unclaimed in the Market). `def_runners` and
     # `def_boss` are the crew that met the Move at the door, so a Fold pays as a won fight does.

@@ -331,8 +331,11 @@ once. The deck is 36 cards, 16 / 12 / 8:
 
 - **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
   barrels at <bar> in <District>"; 4+ since 2026-10-15, see *Easy 1s, open bars*), and eight singles for the landmarks, the Docks and
-  Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Ward"; a 1 since
-  2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished), **Cuban Prince** ("Extort
+  Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Borough"; a 1 since
+  2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished; a rival's home Ward until
+  2026-11-11, when Nick found it too hard at the table: Recruit is only at your Safehouse, so it
+  meant Seizing his HQ and taking his Safehouse over, The Eviction plus a hire for 1; bots finished
+  it only because they leave their Wards thin), **Cuban Prince** ("Extort
   4+ Docks"; a 1 since 2026-10-17, the easiest 2, 62 of 99) and **Jamaica Ginger** ("Trade 4+ barrels
   at Whitestone"; 2026-10-17, Nick: more Trade cards to pull toward the Rum Trade; it replaced Night
   Landing). Every barrel count on a 1 is 4+, The Dutchman's Deal at the Bowery included (3+ until
@@ -540,8 +543,8 @@ rules pass, not by Nick, and is his to confirm: a partner's Ward would let the p
 by agreement (he steps out, you walk in), which skips the fight the rule is built on, and "Nothing on
 Your Books" already makes a partner worth nothing on the Jobs.
 
-The interactions, all with unchanged text: **Union Dues** (Recruit 4+ in a rival's home Ward) now
-builds a garrison in a crown room; **The Eviction** points at the same doors as the Crown, since every
+The interactions, all with unchanged text: **Union Dues** (then Recruit 4+ in a rival's home Ward;
+his home Borough since 2026-11-11) built a garrison in a crown room; **The Eviction** points at the same doors as the Crown, since every
 rival Safehouse starts in his home Ward, and the two chain (take his house over, then Recruit there);
 **High Roller** and **Opening Night** are no longer crown-related.
 

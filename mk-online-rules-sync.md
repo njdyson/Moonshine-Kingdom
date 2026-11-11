@@ -1486,3 +1486,17 @@ mk-online: `ALLIANCE_RESPECT_TO_WIN = 30` (`oath.ts`); `G.fallenWards` (`{ ward,
 Ward and ends the Play when the partner has not yet crowned (`crown.ts`). The status row, the crown track and
 the crown button show it; the agents' Blood Oath rule, BLOOD OATH line, CROWN line and option text say it; the
 bots' crown threat counts the Alliance total. `scripts/oath-check.ts` covers both crowns.
+
+## 60. Union Dues: a rival's home Borough (2026-11-11, Nick)
+
+- **Union Dues** reads "Recruit 4+ Runners in a rival's home Borough." (it was a rival's home Ward). Still a 1.
+- Why: Nick found it too hard at the table. You Recruit only at your Safehouse, so a rival's home Ward meant
+  Seizing his HQ (Boss and 2, beside his Rise), taking his Safehouse over, and still having 4 men in supply:
+  The Eviction plus a hire, for 1 Respect. The bots finished it (21 of 37 claims) only because they leave
+  their Wards thin. Now a Secure onto a Safe District in his Borough, then the hire: the shape of Tenement
+  Army, and disjoint from it, since Staten Island is nobody's home. In the Blood Oath the partner's Borough
+  is no rival's, as before.
+
+mk-online: the card text (`jobs.ts`), the check (`objectives.ts`, any District of a foe's home Borough), the
+bots' Recruit plan and takeover choice (`bot.ts`), the agents' deck line (`harness/RULES-AI.md`),
+`scripts/jobs-check.ts` and `scripts/oath-check.ts`. Bots (jobdiag, 24 games, 4p): 23 of 26 claims finished.
