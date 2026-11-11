@@ -702,6 +702,7 @@ BACK = ('  <div class="back"><div class="back-title">Job</div>'
 # forms the Alliances (the Rulebook's The Blood Oath). It replaced the Federal Crackdown Tracker,
 # so nobody can stall a Raid count to pick a partner. It is no Job: no Stake, no Respect, can't be
 # claimed (Whispers included). It prints in a block of its own, so the standard deck stays 36.
+# Nick, the same day: title, rule and flavour only (no tier band, no label), the title in red.
 OATH = ("The Blood Oath", "Omerta.jpg",
         "Can&rsquo;t be claimed. When it&rsquo;s dealt, the <b>Alliances</b> form. Deal a Job in its place.",
         "Sooner or later, enemies become brothers.")
@@ -711,10 +712,8 @@ def oath_block():
     title, art, rule, flav = OATH
     card = (
         '  <div class="card card--oath">\n'
-        '    <div class="tier"><span class="stake"><span class="stake-lbl">4-Player Team Variant</span></span></div>\n'
         f'    <h2 class="title">{title}</h2>\n'
         f'    <div class="art"><img src="Art/Jobs/{art}" alt=""></div>\n'
-        '    <div class="job-label">When It&rsquo;s Dealt</div>\n'
         f'    <div class="job"><span>{rule}</span></div>\n'
         f'    <div class="flavour">{flav}</div>\n'
         '  </div>'

@@ -201,12 +201,13 @@ body{
 .respect[data-respect="2"]{background-image:url('Art/Shields/plus2.svg')}
 .respect[data-respect="3"]{background-image:url('Art/Shields/plus3.svg')}
 
-/* --- the Blood Oath card (2026-11-11): no Stake, no Respect; the variant's name in the tier band
-   and a crimson frame, so nobody mistakes it for a Job when it turns up --- */
+/* --- the Blood Oath card (2026-11-11): title, rule and flavour only (no tier band, no label),
+   a red title and a crimson frame, so nobody mistakes it for a Job when it turns up. The title
+   and the rule take the room the two bands left. --- */
 .card--oath{border-color:#9b3a2c}
 .card--oath::after{border-color:rgba(155,58,44,.45)}
-.card--oath .stake-lbl{color:#c9846f;letter-spacing:1.4px}
-.card--oath .title{color:#efc2ad}
+.card--oath .title{flex-basis:15mm;margin-top:1mm;font-size:15pt;padding:0 2mm;color:#e0533f;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.card--oath .job{flex-basis:19mm;margin-top:1.4mm}
 .back--blank{visibility:hidden}
 
 /* --- verb tag (design aid: hidden everywhere; generator still emits it) --- */
@@ -848,10 +849,8 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="gallery gallery--single">
   <div class="card card--oath">
-    <div class="tier"><span class="stake"><span class="stake-lbl">4-Player Team Variant</span></span></div>
     <h2 class="title">The Blood Oath</h2>
     <div class="art"><img src="Art/Jobs/Omerta.jpg" alt=""></div>
-    <div class="job-label">When It&rsquo;s Dealt</div>
     <div class="job"><span>Can&rsquo;t be claimed. When it&rsquo;s dealt, the <b>Alliances</b> form. Deal a Job in its place.</span></div>
     <div class="flavour">Sooner or later, enemies become brothers.</div>
   </div>
