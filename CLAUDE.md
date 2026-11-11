@@ -441,13 +441,22 @@ the Cards sheet went the same way: **every card carries one short line and no ru
 Rat "No Rat till a rival Rats", the Mark "Square Up: $2,000", the Welsher "Forever", a Borough its
 three rooms). The Respect is on the shield, so no card restates it.
 
-In the Blood Oath, an Alliance races to **40 combined Respect** (lower, and an Alliance could form
-already past the bar, so the Truce would hand it the game), and **either partner** Takes the Crown
-with his own Boss in a home Ward of the opposing Alliance (since 2026-10-24; see *The Crown in the
-Wards*). **Partners win together** (Nick, 2026-11-11): whoever crowns wears it, and both partners win. Until
-then only the one who crowned won (*One Crown, One Capo*), and in the first agent game with the Blood Oath card
-partners fought over the crown rooms nine times, killing each other's Boss twice; Nick expected real players to
-balk at working together on those terms too. Don't bring back a Capo-only win.
+In the Blood Oath (Nick, 2026-11-11), an Alliance races to **30 combined Respect**, and **both partners** must
+Take the Crown, each with his own Boss in a home Ward of the opposing Alliance, with the Alliance at 30 each
+time (so a partner can't crown and then take Marks or break deals to pay for it). The first crown wins nothing:
+turn that Ward's Borough card face down ("their Ward has fallen"), and nobody crowns there again. The second
+partner crowns in the other Ward, still face-up, and **both partners win**. The universal crown rule reads "a
+rival's home Ward whose Borough card lies face-up" (the Rulebook's Winning list; in the standard game nothing
+flips). The Rulebook's section is *Their Ward Has Fallen*.
+
+Why: from 2026-10-12 to 2026-11-11 the target was 40 combined and either partner crowned. A combined bar moves
+the leader's finish line at the Truce (needing 4, then 15), and a solo 20 with a shared win lets the 4th-place
+partner win carried, which Nick called a shallow victory. Two crowns make each partner earn it, and the lower
+bar keeps the jump small; two crown Plays in two Wards mean no Alliance can win the moment it forms. Weighed and
+not taken: tracking the first crown with the Blood Oath card (the Borough card flip is simpler), and serial
+crowns in any Ward (the pair would queue at one door). Before the shared win (*One Crown, One Capo*, until the
+same day) only the crowner won, and in the first agent game partners fought over the crown rooms nine times.
+Don't bring back a Capo-only win.
 The Rulebook, Town Planner, Playbooks, Cards sheet, Jobs deck (the Blood Oath card), and The Almanac must
 agree on these values.
 
