@@ -10,8 +10,9 @@
 <link rel="stylesheet" href="css/card-back.css">
 <style>
 /* ============================================================
-   Cards v0.9: the 36 cards that are not Jobs:
-     16 Bribes · 4 Boroughs · 1 Rat · 7 Shylock's Marks · 8 Welshers
+   Cards v0.9: the 36 cards that are not Jobs, and the Blood Oath:
+     16 Bribes · 4 Boroughs · 1 Rat · 7 Shylock's Marks · 7 Welshers
+     · 1 Blood Oath (a Job back; it goes in the Jobs deck)
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8) and stays cut: it paid a
@@ -260,6 +261,16 @@ body{
 .card--borough .rules{flex:0 0 16mm}
 .card--debt .art{flex:0 0 38mm}
 .card--debt .rules{flex:0 0 16mm}
+/* --- the Blood Oath card (2026-11-11): title, rule and flavour only, a red title and a crimson
+   frame, so nobody mistakes it for a Job when a restock deals it. Its rule is a sentence, so it
+   takes the Jobs deck's body type, not this deck's one Cinzel line. --- */
+.card--oath{border-color:#9b3a2c}
+.card--oath::after{border-color:rgba(155,58,44,.45)}
+.card--oath .title{flex-basis:15mm;margin-top:1mm;font-size:15pt;padding:0 2mm;color:#e0533f;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.card--oath .art{flex:0 0 38mm}
+.card--oath .rules{flex:0 0 19mm;margin-top:1.4mm}
+.card--oath .rules > span{font:500 8.6pt/1.3 Barlow;color:var(--ink-2);letter-spacing:0}
+.card--oath .rules b{color:var(--gold-bright);font-weight:700}
 
 /* --- respect badge. Bribes carry their Respect like a Job; the Rat,
    Marks and Welshers carry their negative values. The Borough cards
@@ -444,7 +455,7 @@ body.trim .card,body.trim .back{border-radius:0}
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
   <div class="masthead-title">Bribes, Boroughs, Debts &amp; Dishonor</div>
-  <div class="masthead-sub">v0.9 &middot; 36 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 8 Welshers</div>
+  <div class="masthead-sub">v0.9 &middot; 36 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 7 Welshers &middot; the Blood Oath</div>
   <p class="masthead-note">
     The Jobs deck pays you Respect for what you <b>do</b>. These cards pay it for who you <b>own</b>
     and charge it for who owns <b>you</b>, and the Borough card names your home Ward, the heart of
@@ -561,11 +572,10 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEETS 5-6: the eight Welshers, added v0.9 when the
+     SHEETS 3-4: the Welshers (seven since 2026-11-11), added v0.9 when the
      broken-deal forfeit moved off the Influence ladder and onto
      Respect. Taken from the supply the moment a deal breaks;
-     never discarded. All eight fronts and backs are identical,
-     so duplex mirroring is moot on both sheets. Art is the
+     never discarded. The Welshers' fronts and backs are identical. Art is the
      Welsher plate (Art/Cards/Welsher.jpg, the torn contract,
      cropped to the deck's 898x674 landscape recipe); it retired
      the borrowed Rulebook Oath plate 2026-08-03.
@@ -620,9 +630,20 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
+<!-- =============================================================
+     SHEET 4: the last three Welshers and the Blood Oath card
+     (2026-11-11, Nick). The Oath is the 4-player team variant's
+     trigger and goes in the Jobs deck, so it wears the JOB BACK
+     (Jobs Cards' BACK, from css/card-back.css); it prints here,
+     in a Welsher's slot, so both decks stay 36 and every sheet is
+     full. Print both decks in one run on the same stock, or the
+     Oath's back can be told from a Job's. Backs mirrored: the
+     Oath sits bottom-right on the front, so its back sits
+     bottom-LEFT.
+     ============================================================= -->
 <div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">the last four &middot; not many words get broken; eight is plenty &middot; sheet 4 of 9</span>
+  <span class="dia"></span><span class="lbl">THE WELSHERS &amp; THE BLOOD OATH</span>
+  <span class="meta">the last three Welshers &middot; the Oath wears a Job&rsquo;s back and goes in the Jobs deck &middot; sheet 4 of 9</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -653,20 +674,17 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="flavour">A handshake in this town outlives the hand.</div>
     <div class="respect" data-respect="-1"></div>
   </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
+  <div class="card card--oath">
+    <h2 class="title">The Blood Oath</h2>
+    <div class="art"><img src="Art/Jobs/Omerta.jpg" alt=""></div>
+    <div class="rules"><span>Can&rsquo;t be claimed. When it&rsquo;s dealt, the <b>Alliances</b> form. Deal a Job in its place.</span></div>
+    <div class="flavour">Sooner or later, enemies become brothers.</div>
   </div>
 </div>
 <div class="backs">
   <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Job</div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 

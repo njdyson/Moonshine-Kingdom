@@ -182,8 +182,10 @@ Since 2026-11-11 (Nick). Two setup changes, one step:
 - **The Blood Oath card** replaces the Federal Crackdown Tracker (retired the same day: the page, its
   index tile and its PDF). It wears a Job's back and goes in with the 3s, so it is dealt somewhere from
   the 11th draw on; the restock that deals it forms the Alliances, and a Job takes its gap. Why: a
-  Raid count could be stalled to pick a partner, and nobody can time a card. It prints on a sheet of
-  its own in the Jobs deck (`tools/gen_deck.py`, `OATH`), so the standard deck stays 36. Art:
+  Raid count could be stalled to pick a partner, and nobody can time a card. It prints on the Cards
+  sheet, in the slot of an eighth Welsher, with the Job back (Nick, the same day: both decks stay 36
+  and every sheet is full; there are **7 Welshers**). Print both decks in one run on one stock, or its
+  back can be told from a Job's. Art:
   `Art/Jobs/Omerta.jpg` (unused until then); Nick may make a new image. It can't be claimed, so a
   Viper whose Whispers finds it leaves it on top for the next restock, and may tell the table or not.
   In 20 bot games it fired between Day 6 and Day 24. The face carries the title (in red, so it stands
