@@ -156,8 +156,8 @@ peek at any time from 2026-09-30, a face-down claim before that).
 ## The Market restocks after the Offers
 
 Since 2026-10-07. A Job taken at the Offers leaves its gap empty; once every boss has chosen,
-deal a fresh Job into each gap. The opening Market (Player Count + 1, 1s and 2s, the 3s shuffled in
-after) is dealt **face-down** at setup and turns face-up at Day 1's restock, so **Day 1 has no
+deal a fresh Job into each gap. The opening Market (Player Count + 1, off the top 15 cards, which
+hold no 3s since 2026-11-11; see *Late 3s and the Blood Oath card*) is dealt **face-down** at setup and turns face-up at Day 1's restock, so **Day 1 has no
 Offers**. The rule's one home is Grease the Wheels; the Town Planner restates it.
 
 Why: the immediate refill was a lottery that dealt the next picker a card nobody chose. Now every
@@ -168,6 +168,27 @@ the Vipers see only the first card of tomorrow's restock); Nick accepts it, and 
 a fixed top two cards. Don't restore the immediate refill. The Speakeasy grid (a Job per Controlled
 Speakeasy, tiered by bar) is parked in `jobs-system-handoff.md` §2b with the problems to solve
 first.
+
+## Late 3s and the Blood Oath card
+
+Since 2026-11-11 (Nick). Two setup changes, one step:
+
+- **The 3s come late.** Set the eight 3s aside, shuffle the rest and count 15 off the top, shuffle the
+  3s into what's left, put the 15 back on top, then deal the Market. About ten Days of restocks pass
+  before the first 3 can appear. In bot runs the 3s held 25% of the Market's slots by Day 5 and 43% by
+  Day 10 (they are hard and they sit); with the late 3s, 0% and 15%. The bots did not crown sooner
+  (median Day 49 against 43, overlapping quartiles; `bot-runs/log.md`), and Nick took it for the
+  cleaner early Market. Its one home is the Rulebook's Stack the Job Deck.
+- **The Blood Oath card** replaces the Federal Crackdown Tracker (retired the same day: the page, its
+  index tile and its PDF). It wears a Job's back and goes in with the 3s, so it is dealt somewhere from
+  the 11th draw on; the restock that deals it forms the Alliances, and a Job takes its gap. Why: a
+  Raid count could be stalled to pick a partner, and nobody can time a card. It prints on a sheet of
+  its own in the Jobs deck (`tools/gen_deck.py`, `OATH`), so the standard deck stays 36. Art:
+  `Art/Jobs/Omerta.jpg` (unused until then); Nick may make a new image. It can't be claimed, so a
+  Viper whose Whispers finds it leaves it on top for the next restock, and may tell the table or not.
+  In 20 bot games it fired between Day 6 and Day 24.
+
+The Volstead Act (shelved) still uses the Tracker as its clock; see *Open design threads*.
 
 ## Jobs: one verb, one place
 
@@ -421,7 +442,7 @@ In the Blood Oath, an Alliance races to **40 combined Respect** (lower, and an A
 already past the bar, so the Truce would hand it the game), and **either partner** Takes the Crown
 with his own Boss in a home Ward of the opposing Alliance (since 2026-10-24; see *The Crown in the
 Wards*); whoever crowns is the Capo.
-The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown Tracker, and The Almanac must
+The Rulebook, Town Planner, Playbooks, Cards sheet, Jobs deck (the Blood Oath card), and The Almanac must
 agree on these values.
 
 Why it works: the Crown is its own Play, made from a room the Boss already stands in, so the
@@ -718,7 +739,8 @@ was closed by the Deeds' removal and the file deleted; its combat modelling surv
 
 **The game is 3 to 4 players** since 2026-09-23. The 2-player North vs South mode is
 shelved, not pending, and so is **The Volstead Act** (2026-09-25). It still breaks ties on the
-Loose Change the Playbooks no longer print, so it needs a new tiebreak if it returns. Two questions are open, and both
+Loose Change the Playbooks no longer print, so it needs a new tiebreak if it returns, and its clock
+was the Federal Crackdown Tracker, retired on 2026-11-11, so it needs a new clock too. Two questions are open, and both
 belong to playtest rather than invention:
 
 - **Three-player kingmaking.** Respect is public and the win is a threshold, so at three the
@@ -758,8 +780,9 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **The raided crew's owner picks** which Connected Safe District it runs to (by water too since
   2026-10-07; see below).
 - **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
-- **Whispers is a Play** since 2026-10-15: look at the top card of the Jobs deck in secret, and
-  claim it at once or leave it on top. From 2026-09-30 it was a peek at any time (Nick then rated
+- **Whispers is a Play** since 2026-10-15: look at the top card of the Jobs deck, and claim it at
+  once or leave it on top. What the Viper tells the table is his business (Nick, 2026-11-11: "keep it
+  to yourself" was unenforceable, and sharing or bluffing makes the Play better). From 2026-09-30 it was a peek at any time (Nick then rated
   the peek the higher-skill play); the 2026-10-15 cut of the passive Traits made it a Play.
 - **Starting Boroughs are random** (the reverse-order pick is gone). Since 2026-10-10 they are
   dealt as the four Borough cards (see Borough cards, above).
@@ -781,7 +804,7 @@ The Rulebook's Key Concepts and Territory carry it.
 **No passive Traits.** Each family has exactly two Signature Plays: the Sicilians Hit and
 Consigliere (2 markers since 2026-11-09; see below); the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
 and **Hook** (2, swap barrels 1:1 with an Adjacent rival; Peddle until 2026-11-08); the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
-the top Job in secret, claim it at once or leave it); the Knights Skiff and Torch (which now burns
+the top Job, claim it at once or leave it); the Knights Skiff and Torch (which now burns
 the District's barrels too). Gone: Untouchable, Firepower, Network, passive Whispers, Plunder and
 Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the rows.
 
@@ -1101,7 +1124,7 @@ A rules change is never one file. The player-facing set is:
 
 `Rulebook`, `The Almanac`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
 `The Volstead Act` (shelved), `Turn Tokens`, `The Ledger`, `Brew Simulator`,
-`Combat Simulator`, `Federal Crackdown Tracker`, `index.html`, and the board
+`Combat Simulator`, `index.html`, and the board
 (`tools/build_board.js`: its roster and key).
 
 After changing a rule, grep the whole set for the old wording. The Town Planner and the

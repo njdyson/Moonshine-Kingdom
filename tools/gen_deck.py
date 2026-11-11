@@ -697,6 +697,34 @@ BACK = ('  <div class="back"><div class="back-title">Job</div>'
         '<div class="back-foot">New York &middot; 1929</div></div>')
 
 
+# THE BLOOD OATH CARD (2026-11-11, Nick). The 4-player team variant's trigger: it wears a Job's
+# back and is shuffled into the deck with the 3s, below the top 15, and the restock that deals it
+# forms the Alliances (the Rulebook's The Blood Oath). It replaced the Federal Crackdown Tracker,
+# so nobody can stall a Raid count to pick a partner. It is no Job: no Stake, no Respect, can't be
+# claimed (Whispers included). It prints in a block of its own, so the standard deck stays 36.
+OATH = ("The Blood Oath", "Omerta.jpg",
+        "Can&rsquo;t be claimed. When it&rsquo;s dealt, the <b>Alliances</b> form. Deal a Job in its place.",
+        "Sooner or later, enemies become brothers.")
+
+
+def oath_block():
+    title, art, rule, flav = OATH
+    card = (
+        '  <div class="card card--oath">\n'
+        '    <div class="tier"><span class="stake"><span class="stake-lbl">4-Player Team Variant</span></span></div>\n'
+        f'    <h2 class="title">{title}</h2>\n'
+        f'    <div class="art"><img src="Art/Jobs/{art}" alt=""></div>\n'
+        '    <div class="job-label">When It&rsquo;s Dealt</div>\n'
+        f'    <div class="job"><span>{rule}</span></div>\n'
+        f'    <div class="flavour">{flav}</div>\n'
+        '  </div>'
+    )
+    # One card on the sheet: its back goes in the mirrored cell (long-edge duplex flips the row),
+    # so a hidden blank holds the first cell.
+    return ('<div class="gallery gallery--single">\n' + card + '\n</div>\n'
+            '<div class="backs">\n  <div class="back back--blank"></div>\n' + BACK + '\n</div>')
+
+
 def visible_len(t):
     """Length as rendered: entities collapse to one glyph."""
     return len(re.sub(r'&[a-z]+;', 'x', t))
@@ -777,6 +805,8 @@ body = f'''<body>
 {blocks(TWOS, 2)}
 {tier_head("3 RESPECT", f"Stake 3 &middot; one Play, and a campaign to earn it &middot; {len(THREES)} cards")}
 {blocks(THREES, 3)}
+{tier_head("THE BLOOD OATH", "4-Player Team Variant only &middot; shuffled in with the 3s, below the top 15 &middot; 1 card")}
+{oath_block()}
 
 </body>'''
 
@@ -814,4 +844,4 @@ else:
     print(f"WROTE {path}")
 
 print(f"ones {len(ONES)}  twos {len(TWOS)}  threes {len(THREES)}  total {total}")
-print(f"print pages: {total // 4 * 2}")
+print(f"print pages: {total // 4 * 2 + 2} (the Blood Oath card on its own sheet)")
