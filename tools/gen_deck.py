@@ -249,8 +249,13 @@ ONES = [
     # the hire). Still a reason to garrison your home Ward.
     # DOWN TO 1 (Nick, 2026-10-15), the easiest 2 in 24 bot games (24 of 31 claims finished; next,
     # Cuban Prince, 21 of 41), to make room for The Insurance Job at 2.
+    # A RIVAL'S HOME BOROUGH (Nick, 2026-11-11, playing a game): "too hard". You Recruit only at your
+    # Safehouse, so "a rival's home Ward" meant Seizing his HQ (Boss and 2, beside his Rise), taking
+    # his Safehouse over and still having 4 men in supply: The Eviction plus a hire, for 1. Bots
+    # finished it because they leave their Wards thin. Now: Secure onto a Safe District in his Borough,
+    # then hire. The shape of Tenement Army, and disjoint from it (Staten Island is nobody's home).
     ("Union Dues", "Union Dues.jpg", "Recruit",
-     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Ward</b>.",
+     "Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Borough</b>.",
      "They line up at dawn. You decide who works."),
 ]
 

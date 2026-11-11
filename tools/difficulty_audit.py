@@ -185,8 +185,9 @@ CARDS = [
     # to 2 on the bots' 20 completions in 25 (to 1 on 2026-10-15: 24 claims in 31 finished). The Smuggler's Run and The Eviction keep their scores as 3s.
     ("Opening Night", 2, "Unload", 3, 1, 0, 2, 3, 2, 3, 0,
      "Your home room, 5+ Rum: Raid-gated, loud."),
-    ("Union Dues", 1, "Recruit", 3, 1, 1, 2, 1, 3, 2, 3,
-     "A rival's home Ward: take it or wait him out. Every seat guards home."),
+    # A rival's home Borough since 2026-11-11 (Nick: too hard as a Ward, a Seize of his HQ).
+    ("Union Dues", 1, "Recruit", 1, 0, 0, 2, 1, 1, 2, 2,
+     "A rival's home Borough: Secure on a Safe District there, then hire. He can crowd it."),
 ]
 
 AXES = ("setup", "rival", "dice", "mass", "window", "block")
