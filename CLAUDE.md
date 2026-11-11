@@ -186,7 +186,8 @@ Since 2026-11-11 (Nick). Two setup changes, one step:
   its own in the Jobs deck (`tools/gen_deck.py`, `OATH`), so the standard deck stays 36. Art:
   `Art/Jobs/Omerta.jpg` (unused until then); Nick may make a new image. It can't be claimed, so a
   Viper whose Whispers finds it leaves it on top for the next restock, and may tell the table or not.
-  In 20 bot games it fired between Day 6 and Day 24.
+  In 20 bot games it fired between Day 6 and Day 24. The face carries the title (in red, so it stands
+  out from the Jobs), the rule and the flavour only: no tier band and no label (Nick, the same day).
 
 The Volstead Act (shelved) still uses the Tracker as its clock; see *Open design threads*.
 
