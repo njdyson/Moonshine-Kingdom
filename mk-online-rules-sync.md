@@ -1451,3 +1451,10 @@ game (`setHeadlessEasyTop(0)` or `lengthdiag --easyTop=0` restores the old deal 
 (`shadows.ts`) strikes the Truce (`crown.ts strikeTruce`) when it draws the card; `whispersChoice`, the
 bot and the agent options refuse to claim it. `G.crackdown` still counts Raids for the status row.
 `scripts/oath-check.ts` covers it; `lengthdiag --bloodOath=1` reports `truceDay`.
+
+## 57. Seven Welshers (2026-11-11, Nick)
+
+- The Blood Oath card prints on the Cards sheet in an eighth Welsher's slot, so both print decks stay 36.
+  The Supply holds **7 Welsher cards** (it was 8).
+
+mk-online: `WELSHER_SUPPLY = 7` in `data.ts`. Saved games keep the count they were set up with.
