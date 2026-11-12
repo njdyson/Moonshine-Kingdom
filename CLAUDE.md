@@ -156,6 +156,9 @@ their Borough lock, Skiff, the swap Hook, the Rat Card and the Welshers, the sta
 - **Two Precincts**, East Harlem and Corona: **no Still and no business**. The North Squad starts on East Harlem,
   the South Squad on Corona, and once a Squad leaves anyone may hold the District. The High Society Venues start
   **open**.
+  Since 2026-11-12 East Harlem borders Belmont (Nick), so each Precinct reaches five Districts, three on its
+  own side and two on the other. A Precinct is drawn with a faint blue hatching, and the key marks it with the
+  Squad's blue shield. The Boroughs lost their numbers the same day; the Squads are numbered 1 (North) and 2 (South).
 - **Two Squads**, North (Manhattan, the Bronx) and South (Queens, Brooklyn). Reach is any District Adjacent on its
   own side (a Bridge inside the side counts); it never crosses to the other side. North moves first. A Squad with
   nobody in reach on the Heat Track **goes home** to its Precinct and raids whoever stands there, **Heat or none**

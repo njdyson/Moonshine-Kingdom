@@ -119,6 +119,25 @@ function merge(g, [keep, gone]) {
 }
 for (const m of MERGES) merge(geo, m);
 
+// East Harlem meets Belmont (Nick, 2026-11-12: each Precinct borders five Districts, so the
+// Bronx is no haven from the North Squad). The traced map met at one four-way point (Sugar
+// Hill, Belmont, East Harlem, Hunts Point); a split gives Hunts Point's two borders a new end
+// of their own (key `at`), and Belmont / East Harlem runs between the two points.
+const SPLITS = [{ at: '650,191', corner: '606,191', out: 'hunts_point', a: 'belmont', b: 'east_harlem' }];
+function split(g, { at, corner, out, a, b }) {
+  const P = at.split(',').map(Number), C = corner.split(',').map(Number);
+  for (const c of g.chains) if (c.sides.includes(out)) c.pts = c.pts.map(q => key(q) === corner ? P : q);
+  g.chains.push({ sides: [a, b], pts: [C, P] });
+  g.regions[out] = g.regions[out].map(q => key(q) === corner ? P : q);
+  // a and b gain the new point beside the corner, on the side out's border ran
+  for (const id of [a, b]) {
+    const r = g.regions[id], n = r.length, k = r.findIndex(q => key(q) === corner);
+    const hp = q => g.regions[out].some(v => key(v) === key(q));
+    if (hp(r[(k - 1 + n) % n])) r.splice(k, 0, P); else r.splice(k + 1, 0, P);
+  }
+}
+for (const s of SPLITS) split(geo, s);
+
 // ---------------------------------------------------------------- lines
 const unit = (x, y) => { const l = Math.hypot(x, y); return [x / l, y / l]; };
 const line = (p, d) => ({ p, d: unit(...d) });
@@ -142,7 +161,9 @@ const SETTINGS = {
   bronxRow: 185, // Fordham and Morris Park / Throggs Neck, level to the east shore
   huntsTop: 150, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
-  corner: [608, 198], // the four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point)
+  corner: [608, 198], // Sugar Hill / Belmont / East Harlem (the four-way corner, with Hunts Point, until 2026-11-12)
+  sugarTop: 0, // Sugar Hill's top squared off level here (0: its point, TIPB)
+  belmontEH: 48, // Belmont / East Harlem, level east from the corner to Hunts Point's squared-off west side
   manhattan: [298, 415, 540], // level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 824, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
@@ -249,6 +270,8 @@ function draft(S) {
   // Sugar Hill / Belmont runs from the four-way corner square to the west coast, at 45
   // degrees; Manhattan's tip is where it meets the coast
   const CORNER = S.corner, TIPB = meet(MN_WEST, line(CORNER, [-1, -1]));
+  // Sugar Hill's top squared off level at sugarTop (2026-11-12), so Belmont comes down the coast to it
+  const SQ = S.sugarTop ? [...footOf(atY(MN_WEST, S.sugarTop), [-MN_WEST.d[0], -MN_WEST.d[1]], true), atY(line(CORNER, [-1, -1]), S.sugarTop)] : null; // [the foot on the coast, where it leaves the level, the level's east end]
   // The four-way corner (Sugar Hill, Belmont, East Harlem, Hunts Point): East Harlem /
   // Hunts Point runs out at 45 degrees to the knee, then upright onto the crook where the Hell Gate
   // meets the East River, so East Harlem's shore is the East River's alone (until 2026-10-10 the
@@ -256,7 +279,13 @@ function draft(S) {
   // Hunts Point leaves the corner square to it, up to Hunts Point's top (huntsTop), which runs
   // level across Belmont and Fordham and drops to the Bronx's row at 45 degrees just short of
   // Throggs Neck.
+  const BE = [CORNER[0] + S.belmontEH, CORNER[1]]; // Belmont / East Harlem / Hunts Point: Belmont / East Harlem runs level to it
+  const BH = [BE[0], S.huntsTop]; // Belmont / Hunts Point, upright from BE to Hunts Point's top
   const EH_SHORE = meet(HG_BX, ER_MN), KNEE = atX(line(CORNER, [1, 1]), EH_SHORE[0]);
+  // Hunts Point squared off (Nick, 2026-11-12): its west side one upright at BE's column, then 45 degrees down
+  // onto the corner where the Hell Gate meets the East River, square to the river; Belmont takes the corner
+  // above BE, East Harlem the rest (a level run to the Hell Gate needed a foot, which read as a hook)
+  const HP_W = [BE[0], EH_SHORE[1] - (EH_SHORE[0] - BE[0])];
   // Manhattan laid like bricks, in rows: Sugar Hill and East Harlem, West Side and East Harlem,
   // the Tenderloin and Five Points, the Bowery. One level line (m2, the row) crosses Manhattan
   // from shore to shore. Above it East Harlem's west side is upright (EHX), from where Sugar
@@ -271,7 +300,6 @@ function draft(S) {
   const [ebFoot, EB_J] = riverFoot(EHY);
   if (FPX > EHX - 3 || ebFoot[0] < EHX + 3) throw new Error('Five Points\' upright must sit west of East Harlem\'s, and East Harlem\'s clear of the East River');
   if (m3 > BOWERY_BANK - 3) throw new Error('The Tenderloin / Bowery border must sit above the crook in the river');
-  const BH = atY(line(CORNER, [1, -1]), S.huntsTop);
   const HT = S.bronxRow - S.huntsTop, HT_DROP = [S.hpCol - HT, S.huntsTop];
   if (KNEE[1] > S.hellGate - 3) throw new Error('East Harlem / Hunts Point reaches the Hell Gate before its knee');
   if (BH[0] > b1 - 3 || HT < 0 || (HT > 0 && HT_DROP[0] < b1 + 3)) throw new Error('Hunts Point\'s top must sit at or above the Bronx row, clear of Belmont / Fordham');
@@ -282,7 +310,7 @@ function draft(S) {
   const MOVE = {
     // New Jersey (see REPLACE)
     '382,0': [NJ_TOP[0], 0], '382,165': NJ_TOP, '0,707': NJ_END,
-    '464,108': TIPB, '606,191': CORNER, // Manhattan's tip, and the four-way corner, on Sugar Hill / Belmont
+    '464,108': SQ ? SQ[0] : TIPB, '606,191': CORNER, '650,191': BE, // Manhattan's tip, and the four-way corner, on Sugar Hill / Belmont
     '544,0': [TIPB[0], 0], '533,51': [TIPB[0], W], '1056,0': [BRONX_EAST, 0], '1050,53': [BRONX_EAST, W],
     // Manhattan: level borders meeting one straight coast, each on a foot (Tenderloin / Bowery
     // meets the Bowery's upright shore square instead, once the coast has turned)
@@ -317,9 +345,10 @@ function draft(S) {
   const TIP = atX(SOUND_BX, BRONX_EAST);
   const REPLACE = {
     // the Bronx: Belmont's shore upright from Manhattan's tip to the frame; Throggs Neck square
-    'water|belmont': [[TIPB[0], W], TIPB],
+    'water|belmont': [[TIPB[0], W], TIPB, ...(SQ ? [SQ[0]] : [])],
+    ...(SQ ? { 'belmont|sugar_hill': [...SQ.filter(q => dist(q, CORNER) > 1), CORNER] } : {}),
     'throggs_neck|water': [[BRONX_EAST, S.bronxRow], TIP, BEND],
-    'east_harlem|hunts_point': [CORNER, KNEE, EH_SHORE],
+    'east_harlem|hunts_point': [BE, HP_W, EH_SHORE],
     'east_harlem|water': [EH_SHORE, EB_J],
     'sugar_hill|east_harlem': [CORNER, [EHX, m1]],
     'west_side|east_harlem': [[EHX, m1], [EHX, EHY]],
@@ -328,7 +357,7 @@ function draft(S) {
     'east_harlem|five_points': [[EHX, EHY], ebFoot, EB_J],
     'tenderloin|bowery': onCoast ? [MF[2][0], MF[2][1], [FPX, m3]] : [TB_W, [FPX, m3]],
     ...(onCoast ? {} : { 'water|tenderloin': [MF[1][0], MN_TURN, TB_W] }),
-    'belmont|hunts_point': [[b1, BH[1]], BH, CORNER],
+    'belmont|hunts_point': [[b1, S.huntsTop], BH, BE],
     'fordham|hunts_point': [[b1, S.huntsTop], ...(HT > 0 ? [HT_DROP] : []), [S.hpCol, S.bronxRow]],
     'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
     'canarsie|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],

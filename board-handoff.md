@@ -80,7 +80,17 @@ works better"), so this makes the angles deliberate instead.
   keeps its plate beside it (Brownsville's longest hanger 46 to 51).
   Past about 460, or under about 598, Canarsie's plate has to hang under its sign. The
   District's id became `canarsie` on 2026-10-01, in the traced map, the tools and mk-online's engine together; the drawing did not change. The drafting reports any corner under 80 degrees; there are none.
-- **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stays one point
+- **East Harlem borders Belmont** (Nick, 2026-11-12, so each Precinct reaches five Districts, three on its own
+  side and two on the other, and the Bronx is no haven from the North Squad). The four-way corner was split
+  (`SPLITS` in `tools/draft_board.js`): `corner` is now Sugar Hill / Belmont / East Harlem, and Belmont / East
+  Harlem runs level `belmontEH` (48) east to Hunts Point's squared-off west side, one upright from its top down to
+  where a 45-degree run takes it onto the Hell Gate's corner (`EH_SHORE`). Rooms: Hunts Point 50 cm² (51 before),
+  East Harlem 60 (61), Belmont 56 (53). Tried and not taken the same day: squaring Sugar Hill's top
+  (`sugarTop`, kept at 0; it made Belmont's edge "wobbly"), a V of 45-degree borders (Hunts Point fell to
+  about 37 cm²), and a level run to the Hell Gate (it needed a foot, which read as a hook). The Precincts
+  wear a faint police-blue hatching, no keyline (a blue keyline looked out of place), and the key's
+  Precinct row shows the Squad's blue shield (it said "Squad's home").
+- *Until 2026-11-12:* **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stayed one point
   (`corner`), and the borders that leave it run at 45 degrees (see Straightening round the
   four-way corner). Sugar Hill / Belmont runs at 45 degrees from the corner to the coast, so
   Sugar Hill's top is a right-angled peak like Williamsburg's.
@@ -571,7 +581,7 @@ sizes). Nick floated the Federal Crackdown Tracker for that strip; not taken.
   lost before that (long-winded; bridges explain themselves). The Still row stays out: the
   Still is its own plate on every sign.
 
-- **Borough numbers ride on police shields** (Nick, 2026-09-30). The number exists only to
+- **No Borough numbers** since 2026-11-12 (Nick): with two Squads (the Open City) the numbers ordered nothing, and the Squad pieces carry 1 (North) and 2 (South) instead. History: **Borough numbers rode on police shields** (Nick, 2026-09-30). The number exists only to
   order the Squads in a Raid (the Rulebook's "numbered Borough order printed on the board"),
   so it sits on a small gold shield, and **Staten Island has none**: no Squad patrols it. It
   was a gold square on all five Boroughs, 1 to 5.

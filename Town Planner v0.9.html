@@ -324,9 +324,8 @@ table.lg{width:100%;border-collapse:collapse}
 .lg tbody tr:first-child>td{border-top:1.5px solid var(--cell-strong)}
 .lg tbody:first-of-type tr:first-child>td{border-top:0}
 
-/* The Borough: its board colour, its name in gilt, and the gilt police shield
-   the board numbers it with (the order the four Squads moved in a Raid until the
-   Open City, 2026-11-11). Staten Island carries no shield, as on the board. */
+/* The Borough: its board colour and its name in gilt (a numbered police shield until
+   2026-11-12; the Squad pieces carry the numbers now). */
 .lg-boro{
   width:76px;padding:4px 3px;text-align:center;vertical-align:middle;
   font:700 12px/1.05 Cinzel,serif;letter-spacing:.5px;color:var(--gold-bright);
@@ -335,23 +334,6 @@ table.lg{width:100%;border-collapse:collapse}
   box-shadow:inset 0 0 14px rgba(0,0,0,.45);
   border-right:1px solid rgba(185,147,47,.5);
 }
-/* The board's shield (mapLabels in tools/build_board.js): a 22 x 26 badge with a
-   dipped brow, in polished gilt, the numeral cut in dark Cinzel. */
-.shield{
-  display:block;margin:0 auto 4px;
-  width:20px;height:24px;box-sizing:border-box;padding-top:3px;
-  font:700 13.5px/18px Cinzel,serif;color:#1b150e;text-shadow:0 1px 0 rgba(255,244,205,.45);
-  background:url("data:image/svg+xml,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -14 24 28.5'>\
-<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
-<stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
-<stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
-<stop offset='1' stop-color='%23f6e3a1'/></linearGradient></defs>\
-<path d='M0 -12.5Q11 -9.5 22 -12.5L22 1.5Q22 9 11 13.5Q0 9 0 1.5Z' fill='url(%23g)' stroke='%230a0705' stroke-width='1.2' stroke-linejoin='round'/>\
-</svg>") center / 100% 100% no-repeat;
-  filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.7));
-}
-.shield--inline{display:inline-block;vertical-align:middle;position:relative;top:-1px;margin:0 0 0 2px;width:13px;height:15.5px;padding-top:1.5px;font-size:9px;line-height:11px;font-style:normal}
 
 .lg-dist{font:600 10px Barlow;color:var(--ink-2);white-space:nowrap}
 .lg-zone{font:400 9.5px Barlow;text-align:left;white-space:nowrap}
@@ -569,7 +551,7 @@ table.lg{width:100%;border-collapse:collapse}
         </thead>
         <tbody class="b-mn">
           <tr>
-            <td rowspan="6" class="lg-boro"><span class="shield">1</span>Manhattan</td>
+            <td rowspan="6" class="lg-boro">Manhattan</td>
             <td class="lg-dist">Five Points</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">10</span></td>
@@ -615,7 +597,7 @@ table.lg{width:100%;border-collapse:collapse}
 
         <tbody class="b-bx">
           <tr>
-            <td rowspan="5" class="lg-boro"><span class="shield">2</span>The<br>Bronx</td>
+            <td rowspan="5" class="lg-boro">The<br>Bronx</td>
             <td class="lg-dist">Hunts Point</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">9</span></td>
@@ -654,7 +636,7 @@ table.lg{width:100%;border-collapse:collapse}
 
         <tbody class="b-qn">
           <tr>
-            <td rowspan="6" class="lg-boro"><span class="shield">3</span>Queens</td>
+            <td rowspan="6" class="lg-boro">Queens</td>
             <td class="lg-dist">Flushing</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">4</span></td>
@@ -700,7 +682,7 @@ table.lg{width:100%;border-collapse:collapse}
 
         <tbody class="b-bk">
           <tr>
-            <td rowspan="5" class="lg-boro"><span class="shield">4</span>Brooklyn</td>
+            <td rowspan="5" class="lg-boro">Brooklyn</td>
             <td class="lg-dist">Brownsville</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">5</span></td>

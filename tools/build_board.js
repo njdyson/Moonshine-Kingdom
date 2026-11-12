@@ -25,7 +25,7 @@
 // die) is sized in millimetres through MM.
 //
 // The roster must match the Town Planner's District Roster: zone, Still number,
-// venue and Setup mark for every District, Borough numbers in Raid order.
+// venue and Setup mark for every District.
 // Stills are drawn by tools/still_art.js. (It also drew the prototype Still tokens until
 // 2026-10-25, when Nick retired the sheet: the board prints every Still.)
 //
@@ -496,6 +496,13 @@ function dockMark(p) {
   return `<path d="${d}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="${DOCK_EDGE.line}" stroke-linecap="butt"/>`
     + `<g fill="${C.gold}" fill-opacity=".75">${dots}</g>`;
 }
+// A Precinct (Nick, 2026-11-12): a faint police-blue hatching over the whole District, the other way
+// from the Wards' gold band, and no keyline, so the station house reads as its own type, plainer than
+// the rooms that do business. A police-blue keyline was tried the same day and looked out of place.
+const PRECINCT_MARK = { pitch: 7, line: 1, blue: '#5f86c4', hatch: 0.26 };
+function precinctMark(d) {
+  return `<path d="${poly(geo.regions[d.id])}" fill="url(#precinctHatch)"/>`;
+}
 function districtFills() {
   let s = '';
   for (const d of DISTRICTS) {
@@ -503,7 +510,7 @@ function districtFills() {
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/>`
-      + (d.zone === 'ward' ? wardMark(d) : '') + '</g>';
+      + (d.zone === 'ward' ? wardMark(d) : '') + (d.zone === 'precinct' ? precinctMark(d) : '') + '</g>';
     if (d.zone === 'dock') s += dockMark(geo.regions[d.id]);
     s += decoFrame(d, geo.regions[d.id]);
   }
@@ -725,9 +732,9 @@ function bridges() {
 function mapLabels() {
   let s = '';
   for (const [k, [x, y, r]] of Object.entries(BORO_LABELS)) {
-    // The number orders the Squads in a Raid, so it rides on a police shield, and only
-    // where a Squad patrols: Staten Island has none, so it has no number.
-    const b = BOROUGHS[k], t = upper(b.name), badge = k !== 'SI';
+    // The Boroughs carried numbered police shields until 2026-11-12 (Nick): they ordered the four
+    // Squads in a Raid, and since the Open City the Squad pieces carry the numbers instead.
+    const b = BOROUGHS[k], t = upper(b.name), badge = false;
     const total = (badge ? 22 + 9 : 0) + width(TYPE.boro, t), left = -total / 2, L = left;
     s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`
       + (badge ? `<path d="M${f(L)} -12.5 Q${f(L + 11)} -9.5 ${f(L + 22)} -12.5 L${f(L + 22)} 1.5 Q${f(L + 22)} 9 ${f(L + 11)} 13.5 Q${f(L)} 9 ${f(L)} 1.5 Z" fill="url(#bezelGilt)" stroke="${C.shadow}" stroke-width="1.2" stroke-linejoin="round"/>`
@@ -921,8 +928,17 @@ const KEY_ROWS = [
   ['hs', 'High Society', [['rum', '$500', true]]],
   ['dock', 'Dock', { trade: ['moonshine', 'rum', 1] }],
   ['ward', 'Ward', { crown: true }],
-  ['precinct', 'Precinct', { words: 'Squad’s home' }],
+  ['precinct', 'Precinct', { shield: true }],
 ];
+// The Precinct row: the Police Squad's blue shield (Nick, 2026-11-12; it said "Squad's home" until then), the
+// online game's Squad badge, so the row reads as "the police live here".
+const KEY_SHIELD = 13;
+function squadShield(cx, cy, h) {
+  const k = h / 18, tx = cx - 9 * k, ty = cy - 10 * k;
+  return `<g transform="translate(${f(tx)} ${f(ty)}) scale(${f(k, 4)})" filter="url(#lift)">`
+    + `<path d="M9 1.2 L16.4 4 V9.6 C16.4 14.2 13.2 17.4 9 18.8 C4.8 17.4 1.6 14.2 1.6 9.6 V4 Z" fill="#2f5fa8" stroke="${C.gold}" stroke-width="1.1" stroke-linejoin="round"/>`
+    + `<path d="M9 5.4 L10.35 9.05 H14.1 L11.05 11.3 L12.25 15 L9 12.7 L5.75 15 L6.95 11.3 L3.9 9.05 H7.65 Z" fill="#f3e6c4"/></g>`;
+}
 // Moonshine becomes Rum: a cube, a gilt arrow, a cube.
 function tradeArrow(x0, cy) {
   const x1 = x0 + 10;
@@ -932,7 +948,7 @@ function key(x, y) {
   const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const chipsX = 28 + headW + 9, CHIP_GAP = 8; // gaps of 9 and 8 since the longer Dock names (2026-11-08)
   const chipW = (p, kick) => 12 + width(TYPE.price, p) + (kick ? KICK_GAP + 2 * KICK_R : 0);
-  const rowW = what => what.trade ? TRADE_W : what.crown ? KEY_CROWN : what.words ? width(TYPE.price, what.words)
+  const rowW = what => what.trade ? TRADE_W : what.crown ? KEY_CROWN : what.shield ? KEY_SHIELD : what.words ? width(TYPE.price, what.words)
     : what.reduce((a, [, p, k]) => a + chipW(p, k), 0) + Math.max(0, what.length - 1) * CHIP_GAP;
   const chipsW = Math.max(...KEY_ROWS.map(([, , what]) => rowW(what)));
   // The pitch was 19 for the crown the High Society medallion wore until 2026-10-24, and four
@@ -951,6 +967,8 @@ function key(x, y) {
     } else if (what.crown) {
       const kx = cx + 0.5 + KEY_CROWN / 2;
       s += icon('crown', kx, cy, KEY_CROWN, C.shadow, 5) + icon('crown', kx, cy, KEY_CROWN, C.goldBright);
+    } else if (what.shield) {
+      s += squadShield(cx + 0.5 + KEY_SHIELD / 2, cy, KEY_SHIELD);
     } else if (what.words) {
       s += text(what.words, cx, cy, TYPE.price, { fill: C.body, middle: true });
     } else for (const [liquor, price, kick] of what) {
@@ -1070,6 +1088,7 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${lift(C.sea[0])}"/><stop offset="1" stop-color="${lift(C.sea[1])}"/></radialGradient>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   const H = WARD_HATCH, shade = MODE === 'print' ? PRINT_LIFT.wardShade : H.shade;
+  s += `<pattern id="precinctHatch" patternUnits="userSpaceOnUse" width="${PRECINCT_MARK.pitch}" height="${PRECINCT_MARK.pitch}" patternTransform="rotate(-45)"><path d="M0 0 V${PRECINCT_MARK.pitch}" stroke="${PRECINCT_MARK.blue}" stroke-opacity="${PRECINCT_MARK.hatch}" stroke-width="${PRECINCT_MARK.line}"/></pattern>`;
   s += `<pattern id="wardHatch" patternUnits="userSpaceOnUse" width="${H.pitch}" height="${H.pitch}" patternTransform="rotate(45)"><rect width="${H.pitch}" height="${H.pitch}" fill="#000" fill-opacity="${shade}"/><path d="M0 0 V${H.pitch}" stroke="${C.goldLine}" stroke-opacity="${H.gold}" stroke-width="${H.line}"/></pattern>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   // lift: the Stills and zone roundels cast a soft shadow, like pieces on the board
@@ -1256,7 +1275,7 @@ function allText() {
   for (const [, t, what] of KEY_ROWS) {
     add(TYPE.keyHead, upper(t));
     if (what.words) add(TYPE.price, what.words);
-    else if (!what.trade && !what.crown) for (const [, p] of what) add(TYPE.price, p);
+    else if (!what.trade && !what.crown && !what.shield) for (const [, p] of what) add(TYPE.price, p);
   }
   add(TYPE.panelHead, 'HEAT');
   add(TYPE.titleCity, 'NEW YORK');
