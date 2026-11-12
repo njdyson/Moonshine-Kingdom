@@ -25,7 +25,7 @@
 // die) is sized in millimetres through MM.
 //
 // The roster must match the Town Planner's District Roster: zone, Still number,
-// venue and Setup mark for every District, Borough numbers in Raid order.
+// venue and Setup mark for every District.
 // Stills are drawn by tools/still_art.js. (It also drew the prototype Still tokens until
 // 2026-10-25, when Nick retired the sheet: the board prints every Still.)
 //
@@ -725,9 +725,9 @@ function bridges() {
 function mapLabels() {
   let s = '';
   for (const [k, [x, y, r]] of Object.entries(BORO_LABELS)) {
-    // The number orders the Squads in a Raid, so it rides on a police shield, and only
-    // where a Squad patrols: Staten Island has none, so it has no number.
-    const b = BOROUGHS[k], t = upper(b.name), badge = k !== 'SI';
+    // The Boroughs carried numbered police shields until 2026-11-12 (Nick): they ordered the four
+    // Squads in a Raid, and since the Open City the Squad pieces carry the numbers instead.
+    const b = BOROUGHS[k], t = upper(b.name), badge = false;
     const total = (badge ? 22 + 9 : 0) + width(TYPE.boro, t), left = -total / 2, L = left;
     s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`
       + (badge ? `<path d="M${f(L)} -12.5 Q${f(L + 11)} -9.5 ${f(L + 22)} -12.5 L${f(L + 22)} 1.5 Q${f(L + 22)} 9 ${f(L + 11)} 13.5 Q${f(L)} 9 ${f(L)} 1.5 Z" fill="url(#bezelGilt)" stroke="${C.shadow}" stroke-width="1.2" stroke-linejoin="round"/>`

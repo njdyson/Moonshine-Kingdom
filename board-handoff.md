@@ -571,7 +571,7 @@ sizes). Nick floated the Federal Crackdown Tracker for that strip; not taken.
   lost before that (long-winded; bridges explain themselves). The Still row stays out: the
   Still is its own plate on every sign.
 
-- **Borough numbers ride on police shields** (Nick, 2026-09-30). The number exists only to
+- **No Borough numbers** since 2026-11-12 (Nick): with two Squads (the Open City) the numbers ordered nothing, and the Squad pieces carry 1 (North) and 2 (South) instead. History: **Borough numbers rode on police shields** (Nick, 2026-09-30). The number exists only to
   order the Squads in a Raid (the Rulebook's "numbered Borough order printed on the board"),
   so it sits on a small gold shield, and **Staten Island has none**: no Squad patrols it. It
   was a gold square on all five Boroughs, 1 to 5.
