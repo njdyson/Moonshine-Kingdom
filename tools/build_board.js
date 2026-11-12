@@ -928,8 +928,17 @@ const KEY_ROWS = [
   ['hs', 'High Society', [['rum', '$500', true]]],
   ['dock', 'Dock', { trade: ['moonshine', 'rum', 1] }],
   ['ward', 'Ward', { crown: true }],
-  ['precinct', 'Precinct', { words: 'Squad’s home' }],
+  ['precinct', 'Precinct', { shield: true }],
 ];
+// The Precinct row: the Police Squad's blue shield (Nick, 2026-11-12; it said "Squad's home" until then), the
+// online game's Squad badge, so the row reads as "the police live here".
+const KEY_SHIELD = 13;
+function squadShield(cx, cy, h) {
+  const k = h / 18, tx = cx - 9 * k, ty = cy - 10 * k;
+  return `<g transform="translate(${f(tx)} ${f(ty)}) scale(${f(k, 4)})" filter="url(#lift)">`
+    + `<path d="M9 1.2 L16.4 4 V9.6 C16.4 14.2 13.2 17.4 9 18.8 C4.8 17.4 1.6 14.2 1.6 9.6 V4 Z" fill="#2f5fa8" stroke="${C.gold}" stroke-width="1.1" stroke-linejoin="round"/>`
+    + `<path d="M9 5.4 L10.35 9.05 H14.1 L11.05 11.3 L12.25 15 L9 12.7 L5.75 15 L6.95 11.3 L3.9 9.05 H7.65 Z" fill="#f3e6c4"/></g>`;
+}
 // Moonshine becomes Rum: a cube, a gilt arrow, a cube.
 function tradeArrow(x0, cy) {
   const x1 = x0 + 10;
@@ -939,7 +948,7 @@ function key(x, y) {
   const headW = Math.max(...KEY_ROWS.map(([, t]) => width(TYPE.keyHead, upper(t))));
   const chipsX = 28 + headW + 9, CHIP_GAP = 8; // gaps of 9 and 8 since the longer Dock names (2026-11-08)
   const chipW = (p, kick) => 12 + width(TYPE.price, p) + (kick ? KICK_GAP + 2 * KICK_R : 0);
-  const rowW = what => what.trade ? TRADE_W : what.crown ? KEY_CROWN : what.words ? width(TYPE.price, what.words)
+  const rowW = what => what.trade ? TRADE_W : what.crown ? KEY_CROWN : what.shield ? KEY_SHIELD : what.words ? width(TYPE.price, what.words)
     : what.reduce((a, [, p, k]) => a + chipW(p, k), 0) + Math.max(0, what.length - 1) * CHIP_GAP;
   const chipsW = Math.max(...KEY_ROWS.map(([, , what]) => rowW(what)));
   // The pitch was 19 for the crown the High Society medallion wore until 2026-10-24, and four
@@ -958,6 +967,8 @@ function key(x, y) {
     } else if (what.crown) {
       const kx = cx + 0.5 + KEY_CROWN / 2;
       s += icon('crown', kx, cy, KEY_CROWN, C.shadow, 5) + icon('crown', kx, cy, KEY_CROWN, C.goldBright);
+    } else if (what.shield) {
+      s += squadShield(cx + 0.5 + KEY_SHIELD / 2, cy, KEY_SHIELD);
     } else if (what.words) {
       s += text(what.words, cx, cy, TYPE.price, { fill: C.body, middle: true });
     } else for (const [liquor, price, kick] of what) {
@@ -1264,7 +1275,7 @@ function allText() {
   for (const [, t, what] of KEY_ROWS) {
     add(TYPE.keyHead, upper(t));
     if (what.words) add(TYPE.price, what.words);
-    else if (!what.trade && !what.crown) for (const [, p] of what) add(TYPE.price, p);
+    else if (!what.trade && !what.crown && !what.shield) for (const [, p] of what) add(TYPE.price, p);
   }
   add(TYPE.panelHead, 'HEAT');
   add(TYPE.titleCity, 'NEW YORK');

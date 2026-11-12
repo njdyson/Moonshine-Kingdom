@@ -1537,3 +1537,17 @@ objectives), `raid.ts` (side reach and homecoming), `rumrow.ts` (1:1), `plays.ts
 `scripts/opencity-check.ts`. Bots (40 games, bot-runs log 2026-11-12): crown median Day 39 against 51.5, Raids
 hit 1.9 Districts against 3.4, Kickbacks 26.8 a game against 6.6, Rum Traded 89 against 34.5, Extort 34% of
 cash against 55%.
+
+## 62. East Harlem borders Belmont; no Borough numbers (2026-11-12, Nick)
+
+- **The map**: East Harlem and Belmont share a border (the four-way corner split; Hunts Point squared off), so each
+  Precinct reaches five Districts, three on its own side and two on the other, and the Bronx is no haven from the
+  North Squad. mk-online: `ADJACENCY_PAIRS` gains `["eastHarlem", "belmont"]`; board, geometry and click areas
+  synced (`boardcheck` OK).
+- **No Borough numbers** on the board or the Town Planner. The Squad pieces are numbered 1 (North) and 2 (South)
+  and move in number order (the Rulebook's components and Police Raids). mk-online's Open City Squad badge shows
+  its number.
+- **The board**: Precincts carry a faint police-blue hatching, no keyline; the key's Precinct row shows the Squad's
+  blue shield (it said "Squad's home").
+
+mk-online #77.
