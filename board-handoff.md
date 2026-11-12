@@ -93,6 +93,9 @@ works better"), so this makes the angles deliberate instead.
 - **Queens rebalanced** (Nick, 2026-11-12, Whitestone "just a bit too small"): `queensRows` 505 / 660 / 808 (488 / 650 / 793),
   `astoriaCorona` 547 (530), `queensCol` 840 (855), so the Flushing / Astoria border keeps its 42. Rooms: Whitestone 62 cm² (45),
   Richmond Hill 77 (68), Flushing 78 (77), Astoria 72 (69), Jamaica 74 (85), Corona 36 (54; a Precinct needs little).
+- **Jamaica Bay flush with Canarsie** (Nick, 2026-11-12): Brownsville's 45-degree notch at the bay's corner is gone. The bay's
+  top (`BAY_TOP`) runs level from Canarsie's corner (`SB_BAY`), 11.5 lower than the old 853, and the longer Brownsville /
+  Jamaica border let Jamaica's top drop to 818. Rooms: Brownsville 74 cm² (69), Richmond Hill 85 (77), Jamaica 71 (74).
 - *Until 2026-11-12:* **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stayed one point
   (`corner`), and the borders that leave it run at 45 degrees (see Straightening round the
   four-way corner). Sugar Hill / Belmont runs at 45 degrees from the corner to the coast, so
