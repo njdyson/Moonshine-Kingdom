@@ -1551,3 +1551,13 @@ cash against 55%.
   blue shield (it said "Squad's home").
 
 mk-online #77.
+
+## 63. A Squad going home condemns an empty Precinct (2026-11-12, Nick's bug report)
+
+- **The rule**: a Squad that goes home raids its Precinct Heat or none, even if only a Safehouse or barrels wait
+  there: the Safehouse is destroyed and the barrels go to the Supply (the Scatter's Condemned). Until now the engine
+  raided only Mobsters, so a Safehouse Secured on an empty Precinct sat under the Squad (Nick saw one on
+  East Harlem).
+- mk-online: `raid.ts` (`condemnLeftovers` on the homecoming; the start of every Raid clears anything already under
+  a Squad, which repairs games saved before the fix), `harness/RULES-AI.md`, `scripts/opencity-check.ts`. The
+  Rulebook's Follow the Smoke and the Town Planner's Raid step say "raids it".
