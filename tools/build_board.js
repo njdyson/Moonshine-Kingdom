@@ -497,14 +497,11 @@ function dockMark(p) {
     + `<g fill="${C.gold}" fill-opacity=".75">${dots}</g>`;
 }
 // A Precinct (Nick, 2026-11-12): a faint police-blue hatching over the whole District, the other way
-// from the Wards' gold band, inside a police-blue keyline with a gilt hairline, so the station house
-// reads as its own type, flatter and plainer than the rooms that do business.
-const PRECINCT_MARK = { inset: 6, hair: 9, pitch: 7, line: 1, blue: '#5f86c4', hatch: 0.24 };
+// from the Wards' gold band, and no keyline, so the station house reads as its own type, plainer than
+// the rooms that do business. A police-blue keyline was tried the same day and looked out of place.
+const PRECINCT_MARK = { pitch: 7, line: 1, blue: '#5f86c4', hatch: 0.26 };
 function precinctMark(d) {
-  const p = geo.regions[d.id], q = straightRing(p), M = PRECINCT_MARK;
-  return `<path d="${poly(p)}" fill="url(#precinctHatch)"/>`
-    + `<path d="${ringPath(insetRing(q, M.inset))}" fill="none" stroke="${M.blue}" stroke-opacity=".85" stroke-width="1.6" stroke-linejoin="miter"/>`
-    + `<path d="${ringPath(insetRing(q, M.hair))}" fill="none" stroke="${C.goldLine}" stroke-opacity=".5" stroke-width=".7" stroke-linejoin="miter"/>`;
+  return `<path d="${poly(geo.regions[d.id])}" fill="url(#precinctHatch)"/>`;
 }
 function districtFills() {
   let s = '';
