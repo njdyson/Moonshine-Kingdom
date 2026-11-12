@@ -58,7 +58,7 @@ const FLIPS = [['tenderloin', 'east_harlem'], ['water', 'five_points', '220,452'
 // with the Bowery's foot, Belmont, Fordham and Hunts Point, rebalanced round the four-way
 // corner, and Canarsie (canarsie), which gave Coney Island the width for its name
 // (coneyEast) and took Brownsville's corner on the bay.
-const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville', 'sugar_hill', 'tenderloin', 'five_points', 'bowery', 'stapleton', 'tottenville', 'hunts_point', 'belmont', 'fordham']);
+const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville', 'sugar_hill', 'tenderloin', 'five_points', 'bowery', 'stapleton', 'tottenville', 'hunts_point', 'belmont', 'fordham', 'whitestone', 'astoria', 'corona', 'flushing', 'richmond_hill']);
 function flip(g, [A, B, J]) {
   const i = g.chains.findIndex(c => c.sides.includes(A) && c.sides.includes(B) && (!J || [c.pts[0], c.pts[c.pts.length - 1]].some(q => key(q) === J))), c = g.chains[i];
   const [J1, J2] = [c.pts[0], c.pts[c.pts.length - 1]].map(key);
@@ -165,10 +165,10 @@ const SETTINGS = {
   sugarTop: 0, // Sugar Hill's top squared off level here (0: its point, TIPB)
   belmontEH: 48, // Belmont / East Harlem, level east from the corner to Hunts Point's squared-off west side
   manhattan: [298, 415, 540], // level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
-  astoriaCorona: 530, // Astoria / Corona, level once its foot has left the Queens / Brooklyn line
+  astoriaCorona: 547, // (530 until 2026-11-12) Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 824, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
-  queensCol: 855, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (851 until 2026-10-07)
-  queensRows: [488, 650, 793], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (670 and 807 until 2026-10-07)
+  queensCol: 840, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (855 until 2026-11-12; 851 until 2026-10-07)
+  queensRows: [505, 660, 808], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew; 670 and 807 until 2026-10-07)
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
   coronaBottom: 712, // Corona / Richmond Hill, level from the Queens / Brooklyn line (700 until 2026-10-07)
   williamsburgSouth: 751, // Williamsburg's southern point, on Red Hook / Brownsville

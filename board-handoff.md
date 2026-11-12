@@ -90,6 +90,9 @@ works better"), so this makes the angles deliberate instead.
   about 37 cm²), and a level run to the Hell Gate (it needed a foot, which read as a hook). The Precincts
   wear a faint police-blue hatching, no keyline (a blue keyline looked out of place), and the key's
   Precinct row shows the Squad's blue shield (it said "Squad's home").
+- **Queens rebalanced** (Nick, 2026-11-12, Whitestone "just a bit too small"): `queensRows` 505 / 660 / 808 (488 / 650 / 793),
+  `astoriaCorona` 547 (530), `queensCol` 840 (855), so the Flushing / Astoria border keeps its 42. Rooms: Whitestone 62 cm² (45),
+  Richmond Hill 77 (68), Flushing 78 (77), Astoria 72 (69), Jamaica 74 (85), Corona 36 (54; a Precinct needs little).
 - *Until 2026-11-12:* **The four-way corner** (Sugar Hill, Belmont, East Harlem, Hunts Point) stayed one point
   (`corner`), and the borders that leave it run at 45 degrees (see Straightening round the
   four-way corner). Sugar Hill / Belmont runs at 45 degrees from the corner to the coast, so
