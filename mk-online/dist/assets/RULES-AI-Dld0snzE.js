@@ -162,7 +162,7 @@ Hits remove **Runners first**, then the Boss.
 - **Two Squads**: the North Squad (Manhattan and the Bronx) starts on the East Harlem Precinct, the South Squad (Queens and Brooklyn) on the Corona Precinct. They resolve North first.
 - **Reach**: Districts directly Adjacent to the Squad on its side of the city. A Squad never crosses a Bridge or the water, so it never leaves its side. The District must be Controlled by a mob (Mobsters there).
 - **Target mob**: among mobs Controlling a District in reach, the one whose marker sits **furthest right** on the Heat Track.
-- **Homecoming**: if none of them has a marker, the Squad goes home to its Precinct. Anyone standing on the Precinct is raided there (the Scatter below), Heat or none.
+- **Homecoming**: if none of them has a marker, the Squad goes home to its Precinct. Anyone standing on the Precinct is raided there (the Scatter below), Heat or none, and a lone Safehouse or barrels there are Condemned even with nobody home.
 - **Target District**: that mob's reachable District with the **most barrels**; ties go to the highest Still Pressure.
 - **Scatter**: the Squad moves in.
   - The Safehouse there is destroyed (back to supply) and all barrels there go to the supply.
