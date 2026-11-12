@@ -10,9 +10,13 @@
 <link rel="stylesheet" href="css/card-back.css">
 <style>
 /* ============================================================
-   Cards v0.9: the 36 cards that are not Jobs, and the Blood Oath:
-     16 Bribes · 4 Boroughs · 1 Rat · 7 Shylock's Marks · 7 Welshers
+   Cards v0.9: the 40 cards that are not Jobs, the Blood Oath among them:
+     16 Bribes · 4 Boroughs · 7 Shylock's Marks · 12 Rat cards
      · 1 Blood Oath (a Job back; it goes in the Jobs deck)
+   The Open City (2026-11-11, Nick) replaced the one Rat Card (-3, held
+   until a rival Ratted) and the seven Welshers (-1, forever) with twelve
+   Rat cards (-1 each): one for each Snitch and each broken promise, and
+   a Patsy hands one back.
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8) and stays cut: it paid a
@@ -31,7 +35,7 @@
    Bribe cards (Precinct Captain 1, Alderman 2, Judge 3, Mayor 4
    Respect; one of each per boss). Unbought Influence waits in the
    supply, so the Borough card no longer holds a stack. Marks cost 2
-   Respect while held and the Rat 3, so every card in this deck that
+   Respect while held and a Rat card 1, so every card in this deck that
    touches the score carries a number.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
@@ -53,7 +57,7 @@
       because 12 cards fan out in the Market row and any jitter
       shows. Nothing here ever fans: a Bribe never sits beside a
       Mark in play. So holdings (the Bribes) keep one geometry,
-      and debts (Rat + Marks, which share a sheet) keep another. Within a type it is frozen.
+      and debts (Rat cards + Marks) keep another. Within a type it is frozen.
         holdings : art 38mm · rules 16mm
         debts    : art 38mm · rules 16mm
       Change one band and you must take the millimetres off the
@@ -218,8 +222,8 @@ body{
   color:var(--gold-dim);text-transform:uppercase;
 }
 /* Since 2026-10-13 every card prints one short line here and no rule
-   text: "+1 Influence", "Square Up: $2,000", "No Rat till a rival
-   Rats", "Forever", or a Borough's home Ward. The Respect is
+   text: "+1 Influence", "Square Up: $2,000", "Till a Patsy takes the
+   fall", or a Borough's home Ward. The Respect is
    on the shield and the rules live in the Playbooks and the Rulebook.
    The text stays wrapped in a single <span> (see the Jobs deck's
    note), so the band can flex it to the centre. */
@@ -272,8 +276,8 @@ body{
 .card--oath .rules > span{font:500 8.6pt/1.3 Barlow;color:var(--ink-2);letter-spacing:0}
 .card--oath .rules b{color:var(--gold-bright);font-weight:700}
 
-/* --- respect badge. Bribes carry their Respect like a Job; the Rat,
-   Marks and Welshers carry their negative values. The Borough cards
+/* --- respect badge. Bribes carry their Respect like a Job; the Rat
+   cards and Marks carry their negative values. The Borough cards
    carry none. --- */
 .respect{
   position:absolute;top:.4mm;right:.4mm;z-index:5;
@@ -455,7 +459,7 @@ body.trim .card,body.trim .back{border-radius:0}
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
   <div class="masthead-title">Bribes, Boroughs, Debts &amp; Dishonor</div>
-  <div class="masthead-sub">v0.9 &middot; 36 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 1 Rat &middot; 7 Marks &middot; 7 Welshers &middot; the Blood Oath</div>
+  <div class="masthead-sub">v0.9 &middot; 40 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 7 Marks &middot; 12 Rat cards &middot; the Blood Oath</div>
   <p class="masthead-note">
     The Jobs deck pays you Respect for what you <b>do</b>. These cards pay it for who you <b>own</b>
     and charge it for who owns <b>you</b>, and the Borough card names your home Ward, the heart of
@@ -464,66 +468,12 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEET 1: the Rat + three Marks. Backs mirrored: the Rat
-     sits top-left on the front, so its back sits top-RIGHT.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE RAT &amp; THE MARKS</span>
-  <span class="meta">two prices &middot; the brand costs 3 Respect, the debt 2 until it's paid &middot; sheet 1 of 9</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Mark of the Snitch</span></div>
-    <h2 class="title">The Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>No Rat till a rival Rats</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-3"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Debt</span></div>
-    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
-    <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Square Up: $2,000</span></div>
-    <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="-2"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Debt</span></div>
-    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
-    <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Square Up: $2,000</span></div>
-    <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="-2"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Debt</span></div>
-    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
-    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
-    <div class="rules-label">The Vig</div>
-    <div class="rules"><span>Square Up: $2,000</span></div>
-    <div class="flavour">My bond cries out for its pound of flesh.</div>
-    <div class="respect" data-respect="-2"></div>
-  </div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">The Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 2: four more Marks. All backs identical, so mirroring
-     is moot here.
+     SHEET 1: four of Shylock's seven Marks. All backs identical, so
+     mirroring is moot here.
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
-  <span class="meta">the last four &middot; seven in his book; all out, nobody Begs &middot; sheet 2 of 9</span>
+  <span class="meta">the debt costs 2 Respect until it&rsquo;s paid &middot; seven in his book; all out, nobody Begs &middot; sheet 1 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -572,107 +522,47 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEETS 3-4: the Welshers (seven since 2026-11-11), added v0.9 when the
-     broken-deal forfeit moved off the Influence ladder and onto
-     Respect. Taken from the supply the moment a deal breaks;
-     never discarded. The Welshers' fronts and backs are identical. Art is the
-     Welsher plate (Art/Cards/Welsher.jpg, the torn contract,
-     cropped to the deck's 898x674 landscape recipe); it retired
-     the borrowed Rulebook Oath plate 2026-08-03.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE WELSHERS</span>
-  <span class="meta">&minus;1 Respect each, forever &middot; taken the moment a deal breaks &middot; sheet 3 of 9</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 4: the last three Welshers and the Blood Oath card
+     SHEET 2: the last three Marks and the Blood Oath card
      (2026-11-11, Nick). The Oath is the 4-player team variant's
      trigger and goes in the Jobs deck, so it wears the JOB BACK
-     (Jobs Cards' BACK, from css/card-back.css); it prints here,
-     in a Welsher's slot, so both decks stay 36 and every sheet is
-     full. Print both decks in one run on the same stock, or the
-     Oath's back can be told from a Job's. Backs mirrored: the
-     Oath sits bottom-right on the front, so its back sits
-     bottom-LEFT.
+     (Jobs Cards' BACK, from css/card-back.css); it prints here, so
+     the Jobs deck stays 36 and every sheet is full. Print both decks
+     in one run on the same stock, or the Oath's back can be told from
+     a Job's. Backs mirrored: the Oath sits bottom-right on the front,
+     so its back sits bottom-LEFT.
      ============================================================= -->
 <div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE WELSHERS &amp; THE BLOOD OATH</span>
-  <span class="meta">the last three Welshers &middot; the Oath wears a Job&rsquo;s back and goes in the Jobs deck &middot; sheet 4 of 9</span>
+  <span class="dia"></span><span class="lbl">THE MARKS &amp; THE BLOOD OATH</span>
+  <span class="meta">the last three Marks &middot; the Oath wears a Job&rsquo;s back and goes in the Jobs deck &middot; sheet 2 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
   <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
+    <div class="flavour">My bond cries out for its pound of flesh.</div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
+    <div class="flavour">My bond cries out for its pound of flesh.</div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--debt">
-    <div class="tier"><span class="kicker">Broken Word</span></div>
-    <h2 class="title">Welsher</h2>
-    <div class="art"><img src="Art/Cards/Welsher.jpg" alt=""></div>
-    <div class="rules-label">The Memory</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">A handshake in this town outlives the hand.</div>
-    <div class="respect" data-respect="-1"></div>
+    <div class="tier"><span class="kicker">Debt</span></div>
+    <h2 class="title title--long">Shylock&rsquo;s Mark</h2>
+    <div class="art"><img src="Art/Cards/Shylock.jpg" alt=""></div>
+    <div class="rules-label">The Vig</div>
+    <div class="rules"><span>Square Up: $2,000</span></div>
+    <div class="flavour">My bond cries out for its pound of flesh.</div>
+    <div class="respect" data-respect="-2"></div>
   </div>
   <div class="card card--oath">
     <h2 class="title">The Blood Oath</h2>
@@ -682,10 +572,173 @@ body.trim .card,body.trim .back{border-radius:0}
   </div>
 </div>
 <div class="backs">
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Job</div><div class="back-sub">Moonshine Kingdom</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Welsher</div><div class="back-sub">Broken Word</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Shylock&rsquo;s Mark</div><div class="back-sub">Debt</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+
+<!-- =============================================================
+     SHEETS 3-5: the twelve Rat cards (the Open City, 2026-11-11, Nick).
+     One for each Snitch and each broken promise; a Patsy hands one back.
+     They replace the single Rat Card (-3, held until a rival Ratted) and
+     the seven Welshers (-1, forever). Art is the Rat plate. Fronts and
+     backs are identical.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE RAT CARDS</span>
+  <span class="meta">&minus;1 Respect each &middot; a Snitch or a broken word &middot; twelve in the Supply; none left, nobody Snitches &middot; sheet 3 of 10</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+
+<!-- =============================================================
+     SHEET 4: four more Rat cards.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE RAT CARDS</span>
+  <span class="meta">&minus;1 Respect each &middot; a Snitch or a broken word &middot; twelve in the Supply; none left, nobody Snitches &middot; sheet 4 of 10</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+</div>
+
+<!-- =============================================================
+     SHEET 5: four more Rat cards.
+     ============================================================= -->
+<div class="tier-head">
+  <span class="dia"></span><span class="lbl">THE RAT CARDS</span>
+  <span class="meta">&minus;1 Respect each &middot; a Snitch or a broken word &middot; twelve in the Supply; none left, nobody Snitches &middot; sheet 5 of 10</span>
+  <span class="rule"></span>
+</div>
+<div class="gallery">
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+  <div class="card card--debt">
+    <div class="tier"><span class="kicker">The Brand</span></div>
+    <h2 class="title">Rat</h2>
+    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
+    <div class="rules-label">The Shame</div>
+    <div class="rules"><span>Till a Patsy takes the fall</span></div>
+    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
+    <div class="respect" data-respect="-1"></div>
+  </div>
+</div>
+<div class="backs">
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
+  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 <!-- =============================================================
@@ -699,7 +752,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE BOROUGHS</span>
-  <span class="meta">one dealt to each boss &middot; your home Ward, where your rivals crown &middot; sheet 5 of 9</span>
+  <span class="meta">one dealt to each boss &middot; your home Ward, where your rivals crown &middot; sheet 6 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -756,7 +809,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 6 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 7 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -805,7 +858,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 7 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 8 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -854,7 +907,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 8 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 9 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -903,7 +956,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 9 of 9</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 10 of 10</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">

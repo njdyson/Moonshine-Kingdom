@@ -110,7 +110,7 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, unmet promises take their Welsher, then flip Turn Tokens. Nobody wins at Sunset: the game is won mid-Day, by Take the Crown.
 - Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
 - The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
-- The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
+- The four #7 mainland Speakeasies are fixed High Society venues. They began under the Police Squads until the Open City (2026-11-11), which starts them open. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
 - There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; the Still's Pressure sets Blowback casualties (see *Small Mob*). Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
@@ -143,6 +143,49 @@ threat of violence, and Nick's main goal is a game his gateway-gamer friends can
 Bots field about five Runners whatever the cap, so the cap and start don't show in bot runs; one die a man
 shortened the crown median (51.5 to the low 40s) and moved cash toward Unload. Turtling needs a real game.
 `tools/sim_almanac_combat.js` reproduces The Almanac's figures under these rules.
+
+## The Open City: two Precincts, ten Docks, Snitch
+
+Since 2026-11-11 (Nick, after his own Day 9 game as the Irish; the thread "Ease police pressure and open up the
+map", mk-online-rules-sync §61, bot rows in `/mnt/project-files/bot-runs/log.md`). His complaints: the police
+were too oppressive (six Raids in nine Days, four Squads padlocking the Venues and the Docks), the 2:1 Trade was
+never worth the walk, nobody wanted the ordinary Speakeasies, the Rat went unused, and the Hook never had a
+chance. **This section supersedes** the older ones below where they disagree (Contact Docks, the four Squads and
+their Borough lock, Skiff, the swap Hook, the Rat Card and the Welshers, the starting bars of Queens and Brooklyn).
+
+- **Two Precincts**, East Harlem and Corona: **no Still and no business**. The North Squad starts on East Harlem,
+  the South Squad on Corona, and once a Squad leaves anyone may hold the District. The High Society Venues start
+  **open**.
+- **Two Squads**, North (Manhattan, the Bronx) and South (Queens, Brooklyn). Reach is any District Adjacent on its
+  own side (a Bridge inside the side counts); it never crosses to the other side. North moves first. A Squad with
+  nobody in reach on the Heat Track **goes home** to its Precinct and raids whoever stands there, **Heat or none**
+  (Nick: it keeps the Squads central and gives the Precincts a use after the first Raid).
+- **Ten Docks.** Belmont and Red Hook are Docks: every mainland Borough is one ordinary Speakeasy, one High
+  Society Venue, a Ward and two Docks; Staten Island two Docks. **Every Dock Trades 1:1.** The Contact Docks, their
+  schooners and medallions retire; "Rum Row" stays on the board as theme. There are **8 Speakeasies** now.
+- **Stills.** The four 7s stay (they dodge the Harbormaster); the mainland 2 and 12 go instead (Nick). The Bowery
+  11, Belmont 11, Whitestone 3, Red Hook 3; Queens' bar is **Astoria** and Brooklyn's **Coney Island**, each on the
+  6. 2 and 12 are Staten Island's alone. Every start still totals Pressure 12, and the Pressure 5 Stills are still
+  the four starting bars.
+- **Snitch** is the Rat Play renamed: Power Play, 2, **repeatable**, each one takes a **Rat card** (-1 Respect). A
+  broken promise takes a Rat card too. **Twelve Rat cards** (Nick: print 12); none left, nobody Snitches. The Rat
+  Card (-3) and the seven Welshers retire, so the Cards sheet is 40 (7 Marks, 12 Rat cards, the Blood Oath on the
+  Marks' second sheet). "Rat" still names the card, and a man who breaks his word is a rat.
+- **Patsy**: Power Play, 2 Influence and any one of your Runners (not tied to a place): he goes to your supply
+  and a Rat card goes back.
+- **Hook** (Irish): plain theft, **up to 2 barrels** from an Adjacent rival District into one you Control, 2
+  Influence, no Heat (Nick: he played the Irish and the swap never had a chance).
+- **Haul** (Knights, replaces **Skiff**, which Nick disliked, worse with more Docks): Power Play, 2. Mobsters, no
+  barrels, **two Adjacent steps**, the first **Safe**; a Standoff if the second is Hostile, with Fall Back to the
+  first. Nick floated it for all mobs ("a sprint rather than a walk") and gave it to the Knights "to start with".
+- **Jobs.** The four bar 1s whose bars went: The Angel's Share "Seize Belmont.", Poison Panic "Seize Red Hook.",
+  Bathtub Gin and Off the Boat "Trade 4+ barrels at" Belmont and Red Hook (Nick: "seize the docks. That encourages
+  combat."). Nick will do a full Jobs pass once the core rules settle, so leave the rest of the deck alone.
+
+Bots (40 games, random styles, against today's rules): crown median Day 39 against 51.5; a Raid hits 1.9 Districts
+against 3.4; Kickbacks 26.8 a game against 6.6; Rum Traded 89 against 34.5; Extort 34% of cash against 55%; fights
+flat (31 against 33); about 4.5 Snitches and 5.5 homecomings a game. Bots barely use Hook and Patsy. Deferred: new
+map connections (Hunts Point to Sugar Hill was floated) and a separate Influence sink.
 
 ## Everything is on the table
 
@@ -393,7 +436,7 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 Since 2026-09-25; Respect became the only score on 2026-10-12 (Nick; `respect-endgame-handoff.md`
 holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds, Titles,
 or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
-(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold and **1** per Welsher. The
+(1 to 4), less **2** per Shylock's Mark you hold and **1** per Rat card (the Rat Card's 3 and the Welshers' 1 until *The Open City*). The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a rival's home Ward** (since 2026-10-24; see *The Crown in
 the Wards*), and you win on the spot. It lives on the Winning the Game page (a heading and a two-item
@@ -641,6 +684,8 @@ in the game bricks a paid-for asset.
 
 ## The Rum economy: Moonshine $200, Trade at any Dock, Hook
 
+Since 2026-11-11 every Dock Trades 1:1 and the Hook is plain theft (*The Open City*). Moonshine $200 stands.
+
 Since 2026-11-08 (Nick, with *Every Unload and every Extort draws Heat*: "This encourages players to
 interact with rum"). Three changes, one direction:
 
@@ -675,6 +720,8 @@ The 1:1 Docks were renamed **Contact Docks** (see *Contact Docks*). Still open (
 least Rum in every arm, so its problem is something else; Nick floated swapping it with Red Hook.
 
 ## Contact Docks: the Bowery, Whitestone, Stapleton, Tottenville
+
+Retired on 2026-11-11 by *The Open City*: every Dock Trades 1:1. Kept as history.
 
 Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). The four **Contact
 Docks** are the Bowery, Whitestone, Stapleton and Tottenville, the Docks nobody starts on, which are the
@@ -1042,12 +1089,15 @@ the two Docks of one Borough (West Side and the Bowery, Whitestone and Jamaica),
 until it took the ruling the same day. Nick ruled it out as a hop nobody would spot; the (now
 archived) Kingpin's Guide had always said a Squad "cannot jump the water". Crews may sail, cops walk.
 
-Squads stay in their own Borough. Letting them roam was weighed on 2026-10-07 and not taken: free
+Since 2026-11-11 two Squads roam a side of the city each (*The Open City*). Before that, Squads stayed in their own Borough. Letting them roam was weighed on 2026-10-07 and not taken: free
 rein of the map sends all four after the one freshest name, and one step across Borough lines lets
 them bunch up and leave a Borough with no police. The Borough lock is what makes the existing levers
 (Heat timing, planted barrels, the Rat) readable.
 
 ## Starting turf: the North on 8, 9, 10; the South on 4, 5, 6
+
+Since 2026-11-11 Queens starts on Astoria and Brooklyn on Coney Island, each on the 6 (*The Open City*); the
+table below is the older one.
 
 Since 2026-10-07 (Nick). Each Borough still starts with a Safehouse, its Boss and 2 Runners in its
 Ward, and 2 Runners each in one Speakeasy and one Dock (3 until 2026-11-09; see *Small Mob*), but the Speakeasy and Dock moved so that the

@@ -35,19 +35,21 @@ M, BX, Q, BK, ST = 'Manhattan', 'Bronx', 'Queens', 'Brooklyn', 'Staten'
 
 # name, borough, tags, still  (pressure = 6 - |still-7|), from the Town Planner.
 DISTRICTS = [
-    ('Sugar Hill', M, {'highSociety', 'speakeasy'}, 7), ('East Harlem', M, {'speakeasy'}, 11),
+    # The Open City (2026-11-11): East Harlem and Corona are Precincts (no Still, no business; still 0
+    # here so no Pressure test matches them), Belmont and Red Hook are Docks, every Dock Trades.
+    ('Sugar Hill', M, {'highSociety', 'speakeasy'}, 7), ('East Harlem', M, {'precinct'}, 0),
     ('The Tenderloin', M, {'speakeasy'}, 8), ('West Side', M, {'dock'}, 9),
-    ('The Bowery', M, {'dock', 'tradeDock'}, 12), ('Five Points', M, {'ward'}, 10),
-    ('Morris Park', BX, {'highSociety', 'speakeasy'}, 7), ('Belmont', BX, {'speakeasy'}, 11),
+    ('The Bowery', M, {'dock'}, 11), ('Five Points', M, {'ward'}, 10),
+    ('Morris Park', BX, {'highSociety', 'speakeasy'}, 7), ('Belmont', BX, {'dock'}, 11),
     ('Fordham', BX, {'speakeasy'}, 8), ('Throggs Neck', BX, {'dock'}, 10),
     ('Hunts Point', BX, {'ward'}, 9),
-    ('Richmond Hill', Q, {'highSociety', 'speakeasy'}, 7), ('Astoria', Q, {'speakeasy'}, 3),
-    ('Corona', Q, {'speakeasy'}, 6), ('Whitestone', Q, {'dock', 'tradeDock'}, 2),
+    ('Richmond Hill', Q, {'highSociety', 'speakeasy'}, 7), ('Astoria', Q, {'speakeasy'}, 6),
+    ('Corona', Q, {'precinct'}, 0), ('Whitestone', Q, {'dock'}, 3),
     ('Jamaica', Q, {'dock'}, 5), ('Flushing', Q, {'ward'}, 4),
-    ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7), ('Coney Island', BK, {'speakeasy'}, 3),
-    ('Red Hook', BK, {'speakeasy'}, 6), ('Canarsie', BK, {'dock'}, 4),
+    ('Williamsburg', BK, {'highSociety', 'speakeasy'}, 7), ('Coney Island', BK, {'speakeasy'}, 6),
+    ('Red Hook', BK, {'dock'}, 3), ('Canarsie', BK, {'dock'}, 4),
     ('Brownsville', BK, {'ward'}, 5),
-    ('Stapleton', ST, {'dock', 'tradeDock'}, 12), ('Tottenville', ST, {'dock', 'tradeDock'}, 2),
+    ('Stapleton', ST, {'dock'}, 12), ('Tottenville', ST, {'dock'}, 2),
 ]
 
 
@@ -58,7 +60,7 @@ def pressure(still):
 class D:
     def __init__(self, row):
         self.name, self.boro, self.tags, self.still = row
-        self.press = pressure(self.still)
+        self.press = pressure(self.still) if self.still else 0
 
     def has(self, t):
         return t in self.tags
@@ -97,14 +99,15 @@ JOBS = [
     # The bar set (2026-10-11, round 2): one Unload card per ordinary Speakeasy.
 ] + [J(n, 1, ['Unload'], f'Unload 4+ barrels at {venue} in {bar}.',
        (lambda bar: lambda p, d: p['barrels'] >= 4 and d.name == bar)(bar))
-     for n, venue, bar in (("The Angel's Share", 'The Silver Dollar', 'East Harlem'),
-                           ('High Spirits', 'The Haymarket', 'The Tenderloin'),
-                           ('Bathtub Gin', "DeLillo's", 'Belmont'),
+     for n, venue, bar in (('High Spirits', 'The Haymarket', 'The Tenderloin'),
                            ('Coffin Varnish', 'The Penny Whistle', 'Fordham'),
                            ('Giggle Water', 'Bohemian Hall', 'Astoria'),
-                           ('Poison Panic', 'The Junction', 'Corona'),
-                           ('Last Call', "Ruby's Joint", 'Coney Island'),
-                           ('Off the Boat', "Sunny's Bar", 'Red Hook'))] + [
+                           ('Last Call', "Ruby's Joint", 'Coney Island'))] + [
+    # The Open City (2026-11-11): the four bar 1s whose bars went Seize or Trade at the new Docks.
+    J("The Angel's Share", 1, ['Move'], 'Seize Belmont.', lambda p, d: p['seize'] and d.name == 'Belmont'),
+    J('Poison Panic', 1, ['Move'], 'Seize Red Hook.', lambda p, d: p['seize'] and d.name == 'Red Hook'),
+    J('Bathtub Gin', 1, ['Trade'], 'Trade 4+ barrels at Belmont.', lambda p, d: p['barrels'] >= 4 and d.name == 'Belmont'),
+    J('Off the Boat', 1, ['Trade'], 'Trade 4+ barrels at Red Hook.', lambda p, d: p['barrels'] >= 4 and d.name == 'Red Hook'),
     J("The Dutchman's Deal", 1, ['Trade'],
       'Trade 4+ barrels at the Bowery.',
       lambda p, d: p['barrels'] >= 4 and d.name == 'The Bowery'),
@@ -318,8 +321,8 @@ def _plays(verb, d, state, home):
                 for rum in ((True,) if d.has('highSociety') else (False, True)):
                     yield _p(state=state, home=home, barrels=barrels, rum=rum)
     elif verb == 'Trade':
-        # Trade happens only at the four Contact Docks (2026-11-04).
-        if state == 'control' and d.has('tradeDock'):
+        # Trade happens at any Dock (the Open City, 2026-11-11; the four Contact Docks from 2026-11-04).
+        if state == 'control' and d.has('dock'):
             for barrels in BARRELS[1:]:
                 yield _p(state=state, home=home, barrels=barrels)
     elif verb == 'Extort':
