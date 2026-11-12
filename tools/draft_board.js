@@ -282,9 +282,10 @@ function draft(S) {
   const BE = [CORNER[0] + S.belmontEH, CORNER[1]]; // Belmont / East Harlem / Hunts Point: Belmont / East Harlem runs level to it
   const BH = [BE[0], S.huntsTop]; // Belmont / Hunts Point, upright from BE to Hunts Point's top
   const EH_SHORE = meet(HG_BX, ER_MN), KNEE = atX(line(CORNER, [1, 1]), EH_SHORE[0]);
-  // Hunts Point's point is squared off upright at BE's column; the corner it gave splits level between
-  // Belmont above and East Harlem below, so Hunts Point's west side is one upright (BH to HP_W)
-  const HP_W = atX(line(CORNER, [1, 1]), BE[0]);
+  // Hunts Point squared off (Nick, 2026-11-12): its west side one upright at BE's column from its top to the
+  // Hell Gate's level, then level to the shore; Belmont takes the corner above BE, East Harlem the rest
+  const HP_W = [BE[0], S.hellGate];
+  const [hpFoot, HP_S] = riverFoot(S.hellGate); // the level's foot, square onto the East River just below the Hell Gate
   // Manhattan laid like bricks, in rows: Sugar Hill and East Harlem, West Side and East Harlem,
   // the Tenderloin and Five Points, the Bowery. One level line (m2, the row) crosses Manhattan
   // from shore to shore. Above it East Harlem's west side is upright (EHX), from where Sugar
@@ -316,7 +317,7 @@ function draft(S) {
     '371,248': MF[0][0], '535,279': [EHX, m1],
     '290,360': MF[1][0], '523,357': [FPX, m2],
     '220,452': TB_W, '509,453': [EHX, EHY], '533,477': EB_J, '150,548': [FPX, m3],
-    '466,549': CROOK, '694,328': EH_SHORE,
+    '466,549': CROOK, '694,328': HP_S,
     '307,696': BW_TIP[1], '171,686': BW_TIP[0],
     // The Bronx: an upright east shore, level blocks
     '715,53': [b1, W], '715,160': [b1, S.huntsTop], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
@@ -347,8 +348,9 @@ function draft(S) {
     'water|belmont': [[TIPB[0], W], TIPB, ...(SQ ? [SQ[0]] : [])],
     ...(SQ ? { 'belmont|sugar_hill': [...SQ.filter(q => dist(q, CORNER) > 1), CORNER] } : {}),
     'throggs_neck|water': [[BRONX_EAST, S.bronxRow], TIP, BEND],
-    'east_harlem|hunts_point': [BE, HP_W, KNEE, EH_SHORE],
-    'east_harlem|water': [EH_SHORE, EB_J],
+    'east_harlem|hunts_point': [BE, HP_W, hpFoot, HP_S],
+    'east_harlem|water': [HP_S, EB_J],
+    'hunts_point|water': [BEND, EH_SHORE, HP_S],
     'sugar_hill|east_harlem': [CORNER, [EHX, m1]],
     'west_side|east_harlem': [[EHX, m1], [EHX, EHY]],
     'west_side|five_points': [[FPX, m2], [EHX, m2]],

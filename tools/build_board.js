@@ -496,6 +496,16 @@ function dockMark(p) {
   return `<path d="${d}" fill="none" stroke="${C.gold}" stroke-opacity=".75" stroke-width="${DOCK_EDGE.line}" stroke-linecap="butt"/>`
     + `<g fill="${C.gold}" fill-opacity=".75">${dots}</g>`;
 }
+// A Precinct (Nick, 2026-11-12): a faint police-blue hatching over the whole District, the other way
+// from the Wards' gold band, inside a police-blue keyline with a gilt hairline, so the station house
+// reads as its own type, flatter and plainer than the rooms that do business.
+const PRECINCT_MARK = { inset: 6, hair: 9, pitch: 7, line: 1, blue: '#5f86c4', hatch: 0.24 };
+function precinctMark(d) {
+  const p = geo.regions[d.id], q = straightRing(p), M = PRECINCT_MARK;
+  return `<path d="${poly(p)}" fill="url(#precinctHatch)"/>`
+    + `<path d="${ringPath(insetRing(q, M.inset))}" fill="none" stroke="${M.blue}" stroke-opacity=".85" stroke-width="1.6" stroke-linejoin="miter"/>`
+    + `<path d="${ringPath(insetRing(q, M.hair))}" fill="none" stroke="${C.goldLine}" stroke-opacity=".5" stroke-width=".7" stroke-linejoin="miter"/>`;
+}
 function districtFills() {
   let s = '';
   for (const d of DISTRICTS) {
@@ -503,7 +513,7 @@ function districtFills() {
     s += `<clipPath id="clip-${d.id}"><path d="${poly(p)}"/></clipPath>`;
     s += `<path d="${poly(p)}" fill="url(#${fillId(d)})"/>`;
     s += `<g clip-path="url(#clip-${d.id})"><path d="${poly(p)}" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="15" filter="url(#soft)"/>`
-      + (d.zone === 'ward' ? wardMark(d) : '') + '</g>';
+      + (d.zone === 'ward' ? wardMark(d) : '') + (d.zone === 'precinct' ? precinctMark(d) : '') + '</g>';
     if (d.zone === 'dock') s += dockMark(geo.regions[d.id]);
     s += decoFrame(d, geo.regions[d.id]);
   }
@@ -1070,6 +1080,7 @@ function defs(fontCss, mode) {
   s += `<radialGradient id="sea" cx=".55" cy=".5" r=".75"><stop offset="0" stop-color="${lift(C.sea[0])}"/><stop offset="1" stop-color="${lift(C.sea[1])}"/></radialGradient>`;
   s += `<filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4.5"/></filter>`;
   const H = WARD_HATCH, shade = MODE === 'print' ? PRINT_LIFT.wardShade : H.shade;
+  s += `<pattern id="precinctHatch" patternUnits="userSpaceOnUse" width="${PRECINCT_MARK.pitch}" height="${PRECINCT_MARK.pitch}" patternTransform="rotate(-45)"><path d="M0 0 V${PRECINCT_MARK.pitch}" stroke="${PRECINCT_MARK.blue}" stroke-opacity="${PRECINCT_MARK.hatch}" stroke-width="${PRECINCT_MARK.line}"/></pattern>`;
   s += `<pattern id="wardHatch" patternUnits="userSpaceOnUse" width="${H.pitch}" height="${H.pitch}" patternTransform="rotate(45)"><rect width="${H.pitch}" height="${H.pitch}" fill="#000" fill-opacity="${shade}"/><path d="M0 0 V${H.pitch}" stroke="${C.goldLine}" stroke-opacity="${H.gold}" stroke-width="${H.line}"/></pattern>`;
   s += `<filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>`;
   // lift: the Stills and zone roundels cast a soft shadow, like pieces on the board
