@@ -1500,3 +1500,40 @@ bots' crown threat counts the Alliance total. `scripts/oath-check.ts` covers bot
 mk-online: the card text (`jobs.ts`), the check (`objectives.ts`, any District of a foe's home Borough), the
 bots' Recruit plan and takeover choice (`bot.ts`), the agents' deck line (`harness/RULES-AI.md`),
 `scripts/jobs-check.ts` and `scripts/oath-check.ts`. Bots (jobdiag, 24 games, 4p): 23 of 26 claims finished.
+
+## 61. The Open City (2026-11-11, Nick)
+
+After his own Day 9 game: the police were too oppressive, the 2:1 Trade was never worth the walk, nobody wanted
+the ordinary Speakeasies, the Rat went unused, and the Irish Hook never had a chance.
+
+- **Precincts.** East Harlem (Manhattan) and Corona (Queens) are Precincts: no Still and no business. The North
+  Squad starts on East Harlem, the South Squad on Corona. Once a Squad leaves, anyone may hold the District.
+- **Two Squads.** North (Manhattan, the Bronx) and South (Queens, Brooklyn). A Squad's reach is any District
+  Adjacent to it on its own side; it never crosses to the other side. North moves first. A Squad with nobody in
+  reach on the Heat Track goes home to its Precinct, and raids whoever stands there, Heat or none. The High
+  Society Venues start open.
+- **Ten Docks.** Belmont and Red Hook are Docks: each mainland Borough has one ordinary Speakeasy, one High Society
+  Venue and two Docks, and Staten Island two Docks. **Every Dock Trades 1:1.** The Contact Docks retire.
+- **Stills.** The Precincts have none. The four 7s stay; the mainland 2 and 12 go. The Bowery 11, Whitestone 3,
+  Astoria 6 (Queens' starting bar), Coney Island 6 (Brooklyn's starting bar), Red Hook 3, Belmont 11. 2 and 12
+  are Staten Island's alone. Every start still totals Pressure 12.
+- **Snitch** (the Rat Play, renamed): Power Play, 2, repeatable; each one takes a **Rat card** (-1 Respect). A
+  broken promise takes a Rat card too. Twelve Rat cards; with none left, nobody Snitches. The Rat Card (-3) and
+  the Welshers retire.
+- **Patsy**: Power Play, 2. Send one of your Runners, anywhere, to your supply and return one Rat card.
+- **Hook** (Irish): steal up to 2 barrels from an Adjacent District a rival Controls into a District you Control.
+  2 Influence, no Heat.
+- **Haul** (Knights, replaces Skiff): Power Play, 2. Move Mobsters (no barrels) two steps, each to an Adjacent
+  District; the first must be Safe. Otherwise a Move into the second (a Standoff if Hostile; Fall Back goes to the
+  first step). Nick: Knights only "to start with".
+- **Jobs.** The Angel's Share "Seize Belmont.", Poison Panic "Seize Red Hook.", Bathtub Gin "Trade 4+ barrels at
+  Belmont.", Off the Boat "Trade 4+ barrels at Red Hook." (Nick: seizing encourages combat). Nick will do a full
+  Jobs pass later.
+
+mk-online: `src/game/opencity.ts` (the switch, stored on `G.openCity`; a save from before keeps the old rules, and
+`applyOpenCity()` runs at setup and on every resume), `setup.ts` (starts, Squads, Rat card supply, the four
+objectives), `raid.ts` (side reach and homecoming), `rumrow.ts` (1:1), `plays.ts` (Snitch, Patsy),
+`signature.ts` (Hook theft, Haul), `objectives.ts`, `bot.ts`, the screens, `harness/RULES-AI.md`, the board and
+`scripts/opencity-check.ts`. Bots (40 games, bot-runs log 2026-11-12): crown median Day 39 against 51.5, Raids
+hit 1.9 Districts against 3.4, Kickbacks 26.8 a game against 6.6, Rum Traded 89 against 34.5, Extort 34% of
+cash against 55%.

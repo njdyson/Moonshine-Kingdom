@@ -247,9 +247,10 @@ a:hover{color:var(--gold-bright)}
    ============================================================ */
 /* Fronts are row-count-bound: 16 rows, so every 1px here costs ~32px of card. Collect's
    row went on 2026-10-14 and the Faction Trait panel on 2026-10-15, and their room went to
-   the rows: 8px padding and the larger type below leave the busiest mob (the Knights) about 20px spare in
-   the 925 print box (Chromium), a buffer for Safari's looser wrap. */
-.play{display:flex;gap:11px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--rule)}
+   the rows. The Open City (2026-11-11) added Patsy, so the padding went from 8px to 7px and Torch to two
+   lines: the busiest front (the Sicilians) has about 15px spare in the 925 print box (Chromium), the
+   rest about 20, a buffer for Safari's looser wrap. */
+.play{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
 /* The backs are not row-bound (they share one layout and have room), so their rows breathe */
 .act{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
 .play--end,.act--end{border-bottom:0}
@@ -384,7 +385,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -395,8 +396,13 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
+      <div class="name">Snitch</div>
+      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Patsy</div>
+      <div class="desc">Send one of your Runners to your supply and hand back a Rat card.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -519,7 +525,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   <!-- ============ VIPERS FRONT ============ -->
@@ -544,7 +550,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -555,8 +561,13 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
+      <div class="name">Snitch</div>
+      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Patsy</div>
+      <div class="desc">Send one of your Runners to your supply and hand back a Rat card.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -679,7 +690,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   <!-- ============ KNIGHTS FRONT ============ -->
@@ -704,7 +715,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -715,8 +726,13 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
+      <div class="name">Snitch</div>
+      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Patsy</div>
+      <div class="desc">Send one of your Runners to your supply and hand back a Rat card.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -762,14 +778,14 @@ a:hover{color:var(--gold-bright)}
     <div class="sig">
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Signature Plays</span><span class="sec-rule"></span></div>
       <div class="play">
-        <div class="cost">1</div>
-        <div class="name">Skiff</div>
-        <div class="desc">Move up to 5 Mobsters (no barrels) from a Coastal District you Control to any other Coastal District (all but Fordham, Corona, Flushing and Richmond Hill).</div>
+        <div class="cost">2</div>
+        <div class="name">Haul</div>
+        <div class="desc">Move Mobsters (no barrels) <b>two Adjacent steps</b> from a District you Control. The first must be <b>Safe</b>.</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
         <div class="name">Torch <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse <b>and every barrel there</b>. Rival Mobsters are unharmed. Heat only if it's the fight's first shot.</div>
+        <div class="desc">Sacrifice a Pinned Runner to destroy a rival's Safehouse <b>and every barrel there</b>. His Mobsters are unharmed. Heat only as the fight's first shot.</div>
       </div>
     </div>
   </div>
@@ -839,7 +855,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   <!-- ============ IRISH FRONT ============ -->
@@ -864,7 +880,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -875,8 +891,13 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Rat</div>
-      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
+      <div class="name">Snitch</div>
+      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+    </div>
+    <div class="play">
+      <div class="cost">2</div>
+      <div class="name">Patsy</div>
+      <div class="desc">Send one of your Runners to your supply and hand back a Rat card.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -929,7 +950,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play play--end">
         <div class="cost">2</div>
         <div class="name">Hook</div>
-        <div class="desc">Swap barrels <b>1:1</b> between a District you Control and an <b>Adjacent</b> one a rival Controls, any barrels each way. <b>No Heat.</b></div>
+        <div class="desc">Steal <b>up to 2 barrels</b> from an <b>Adjacent</b> District a rival Controls, into one you Control. <b>No Heat.</b></div>
       </div>
     </div>
   </div>
@@ -999,7 +1020,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   </div>

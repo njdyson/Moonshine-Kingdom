@@ -55,8 +55,12 @@ ONES = [
     # OPEN PASS 2026-10-15: back to 4+ (Nick). A quiet pour again, and Nick doesn't mind the 1s carrying
     # no Heat: one Offer a morning is the bottleneck, so easier 1s sharpen the Lay Low race. In bot
     # runs the bars went from 30% to 41% of claims finished.
-    ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Silver Dollar</b> in <b>East Harlem</b>.",
+    # THE OPEN CITY (Nick, 2026-11-11): East Harlem and Corona became the Precincts, with no bar, and
+    # Belmont and Red Hook became Docks, so four bar 1s lost their bars. The two whose bars became
+    # Precincts Seize the new Docks and the two whose bars became Docks Trade there (Nick: "seize the
+    # docks. That encourages combat."). He will do a full Jobs pass once the core rules settle.
+    ("The Angel&rsquo;s Share", "The Angels Share.jpg", "Open Fire",
+     "Seize <b>Belmont</b>.",
      "What the angels take, the house bills you for anyway."),
     # Manhattan's starting bar (The Haymarket). Art: bootleggers with bottles, the ghosts behind
     # them drawn from the smoke.
@@ -64,8 +68,9 @@ ONES = [
      "Unload <b>4+ barrels</b> at <b>The Haymarket</b> in <b>The Tenderloin</b>.",
      "It never closes. It only gets quieter."),
     # The Bronx's empty bar. Belmont is the Bronx's Little Italy; Arthur Avenue is its high street.
-    ("Bathtub Gin", "Bathtub Chemistry.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>DeLillo&rsquo;s</b> in <b>Belmont</b>.",
+    # The Open City: Belmont is a Dock, so the card Trades there.
+    ("Bathtub Gin", "Bathtub Chemistry.jpg", "Trade",
+     "Trade <b>4+ barrels</b> at <b>Belmont</b>.",
      "Mixed in a tub off Arthur Avenue. Poured like champagne."),
     # The Bronx's starting bar (The Penny Whistle). "Coffin varnish" was 1920s slang for liquor
     # that might kill you; the art is a man cutting a jar of it.
@@ -82,8 +87,9 @@ ONES = [
     # Flushing became Queens' Ward and the bar and its 6 moved next door. The bar was Paradise Alley
     # (a real Flushing bar, but opened in 1979); in Corona it is The Junction (Nick), for Junction
     # Boulevard and the elevated line over it.
-    ("Poison Panic", "Poison Panic.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>The Junction</b> in <b>Corona</b>.",
+    # The Open City: Corona is a Precinct, so the card Seizes Red Hook, the new Dock.
+    ("Poison Panic", "Poison Panic.jpg", "Open Fire",
+     "Seize <b>Red Hook</b>.",
      "One bad batch and the whole city stops drinking."),
     # "$300" is the guard: Opening Night is High-Society-only, so the two are now
     # structurally unable to co-fire rather than merely unlikely to. That pair was
@@ -104,8 +110,9 @@ ONES = [
     # Brooklyn's starting bar (Sunny's Bar). "Off the Boat" was Cuban Prince's first name. Switch.jpg
     # (boats unloading under a suspension bridge) left Night Landing because Jamaica Bay had no bridge;
     # Red Hook sits at the Brooklyn Bridge's end, so it fits here.
-    ("Off the Boat", "Switch.jpg", "Unload",
-     "Unload <b>4+ barrels</b> at <b>Sunny&rsquo;s Bar</b> in <b>Red Hook</b>.",
+    # The Open City: Red Hook is a Dock, so the card Trades there.
+    ("Off the Boat", "Switch.jpg", "Trade",
+     "Trade <b>4+ barrels</b> at <b>Red Hook</b>.",
      "Unloaded at midnight, poured by one, gone by two."),
     # THE SINGLES: landmarks, Docks and Staten Island, which no Borough set can carry.
     # Briefly restricted to "a mainland Dock" to stop Rum Row paying this card

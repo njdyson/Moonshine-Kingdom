@@ -101,39 +101,36 @@ const fillId = d => `fill-${d.boro}`;
 
 // ---------------------------------------------------------------- roster
 // setup: the Town Planner's Setup column (kept for parity; the board doesn't draw it).
-// trade: a Contact Dock (Nick, 2026-11-04), where Moonshine Trades for Rum 1:1 (2:1 elsewhere since 2026-11-08): the four
-// Docks nobody starts on, which are the four Pressure 1 Stills (two on 2, two on 12, since West
-// Side and East Harlem swapped Stills, 12 and 11, and Jamaica and Astoria, 2 and 3, on
-// 2026-10-31). Since 2026-11-08 (Nick) the Bowery and Whitestone are Contact Docks in place of West Side
-// and Jamaica, the pairs swapping Stills (Bowery 12 / West Side 9, Whitestone 2 / Jamaica 5), and
-// Manhattan and Queens start on West Side and Jamaica. A schooner hangs under the sign's medallion (from 2026-11-04 to 2026-11-07 a
-// shipping lane also ran from its pier to Rum Row; see rumRowArrow()). They were the Powder Keg's factories, marked with
-// dynamite, from 2026-10-31 until the keg was cut on 2026-11-04.
+// The Open City (Nick, 2026-11-11): two Precincts, East Harlem and Corona, with no Still and no
+// business, where the two Squads start and come home; Belmont and Red Hook are Docks, ten in all,
+// and every Dock Trades 1:1, so the Contact Docks and their schooners retired. The mainland 2 and
+// 12 went (the Bowery 11, Whitestone 3), Astoria and Coney Island are Queens' and Brooklyn's bars
+// on the 6, and Red Hook took a 3: every start still totals Pressure 12.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
-  { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
-  { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'speak', still: 11, venue: 'The Silver Dollar' },
+  { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club' },
+  { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'precinct', still: null, venue: 'Police Precinct', setup: 'squad' },
   { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket', setup: 'runners' },
   { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 9, setup: 'runners' },
-  { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 12, trade: true },
+  { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 11 },
   { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, setup: 'home' },
-  { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', setup: 'squad' },
-  { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'speak', still: 11, venue: 'DeLillo’s' },
+  { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club' },
+  { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'dock', still: 11 },
   { id: 'fordham', name: 'Fordham', boro: 'BX', zone: 'speak', still: 8, venue: 'The Penny Whistle', setup: 'runners' },
   { id: 'throggs_neck', name: 'Throggs Neck', boro: 'BX', zone: 'dock', still: 10, setup: 'runners' },
-  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'speak', still: 6, venue: 'The Junction', setup: 'runners' },
-  { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', setup: 'squad' },
-  { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 3, venue: 'Bohemian Hall' },
+  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'precinct', still: null, venue: 'Police Precinct', setup: 'squad' },
+  { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle' },
+  { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 6, venue: 'Bohemian Hall', setup: 'runners' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
-  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 2, trade: true },
+  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 3 },
   { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
-  { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
-  { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 3, venue: 'Ruby’s Joint' },
-  { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'speak', still: 6, venue: 'Sunny’s Bar', setup: 'runners' },
+  { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer' },
+  { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 6, venue: 'Ruby’s Joint', setup: 'runners' },
+  { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'dock', still: 3 },
   { id: 'canarsie', name: 'Canarsie', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
-  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'dock', still: 12, trade: true },
-  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 2, trade: true },
+  { id: 'stapleton', name: 'Stapleton', boro: 'SI', zone: 'dock', still: 12 },
+  { id: 'tottenville', name: 'Tottenville', boro: 'SI', zone: 'dock', still: 2 },
 ];
 const OFFBOARD = ['nj']; // New Jersey: land, off the board
 
@@ -257,31 +254,19 @@ function roundel(zone, cx, cy, r) {
     return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
       + icon('martini', cx, cy + r * 0.06, r * 1.08, '#2a1d0c');
   }
-  // A Contact Dock (2026-11-09, Nick, from a Gemini read of the board): the Dock's anchor on the
-  // High Society's gilt disc, so the four 1:1 Docks stand out under the pieces and still read as Docks.
-  if (zone === 'trade') {
-    return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
-      + icon('dock', cx, cy, r * 1.2, '#2a1d0c');
+  // A Precinct (2026-11-11): the patrolman's star, gilt on police blue. The Contact Docks' gilt
+  // anchor (2026-11-09 to 2026-11-11) retired with them.
+  if (zone === 'precinct') {
+    let d = '';
+    for (let k = 0; k < 10; k++) {
+      const a = -Math.PI / 2 + k * Math.PI / 5, rr = k % 2 ? r * 0.3 : r * 0.72;
+      d += (k ? 'L' : 'M') + f(cx + rr * Math.cos(a)) + ' ' + f(cy + rr * Math.sin(a)) + ' ';
+    }
+    return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="#1d3a66" stroke="${C.gold}" stroke-width="1.2"/>`
+      + `<path d="${d}Z" fill="${C.goldBright}"/>`;
   }
   return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="#140e09" fill-opacity=".85" stroke="${C.gold}" stroke-width="1.2"/>`
     + icon(zone, cx, cy + (zone === 'speak' ? r * 0.04 : 0), r * (zone === 'ward' ? 1.3 : 1.2), C.gold);
-}
-
-// The Contact Dock's mark (2026-11-04): a rum-runner schooner, two masts under sail, drawn in a
-// 20-unit box about (cx, cy) and scaled by s. Not a barrel: a barrel reads as the liquor, on the
-// Docks where barrels move (the same reason the Powder Keg's fused barrel was turned down).
-function schooner(cx, cy, s) {
-  const sail = '#efe2c2', edge = '#2a1a0c';
-  return `<g transform="translate(${f(cx)} ${f(cy)}) scale(${f(s, 3)})">`
-    + `<ellipse cx="0" cy="8.6" rx="9" ry="1.5" fill="#000" fill-opacity=".45"/>`
-    + `<path d="M-9.5 3.2 H9.8 L7 7.6 H-6.6 Z" fill="#5a3418" stroke="${edge}" stroke-width=".7" stroke-linejoin="round"/>`
-    + `<path d="M-9 4.6 H9" stroke="${C.goldBright}" stroke-width=".7"/>`
-    + `<path d="M-2.6 3.2 V-9.6 M4.2 3.2 V-7.4" stroke="${edge}" stroke-width=".9" stroke-linecap="round"/>`
-    + `<path d="M-3.2 -8.8 L-8.6 1.8 H-3.2 Z" fill="${sail}" stroke="${edge}" stroke-width=".55" stroke-linejoin="round"/>`
-    + `<path d="M-1.9 -9 Q 2.4 -3.4 3.6 1.8 H-1.9 Z" fill="${sail}" stroke="${edge}" stroke-width=".55" stroke-linejoin="round"/>`
-    + `<path d="M4.9 -6.8 Q 8.4 -2.4 9.4 1.8 H4.9 Z" fill="${sail}" stroke="${edge}" stroke-width=".55" stroke-linejoin="round"/>`
-    + `<path d="M-2.6 -9.6 L0.6 -10.6 L-2.6 -11.4 Z" fill="${C.goldBright}" stroke="${edge}" stroke-width=".35"/>`
-    + `</g>`;
 }
 
 // Rum Row's marker (2026-11-08): "RUM ROW" in the water labels' type, low in the Narrows, with a small
@@ -315,9 +300,11 @@ function rumRowArrow() {
 // draw(x, y) for the chosen spot.
 function cluster(d, opts = {}) {
   const hs = d.zone === 'hs', nameFill = hs ? C.goldBright : C.ink;
-  const { stacked = false, drop = false } = opts;
-  const sr = 9, pad = 4.5, sh = 18.5 * MM, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pp = 5, lap = 6;
-  const pw = sw + 2 * pp, ph = sh + 2 * pp; // the Still's plate
+  const { stacked = false } = opts;
+  const bare = d.still == null; // a Precinct: no Still, so no plate, and the sign hangs alone
+  const drop = bare || !!opts.drop;
+  const sr = 9, pad = 4.5, sh = 18.5 * MM, sw = sh * TOKEN_BOX[2] / TOKEN_BOX[3], pp = 5, lap = bare ? 0 : 6;
+  const pw = bare ? 0 : sw + 2 * pp, ph = bare ? 0 : sh + 2 * pp; // the Still's plate
   const names = stacked ? upper(d.name).split(' ') : [upper(d.name)];
   const tw = Math.max(...names.map(n => width(TYPE.sign, n)), d.venue ? width(TYPE.signVenue, d.venue) : 0);
   const G1 = 4, G2 = 6; // gaps: medallion to name, name to plate (6 and 8 until 2026-09-30)
@@ -354,9 +341,10 @@ function cluster(d, opts = {}) {
       const sign = chamfered(X, Y, bw, bh, 3), plate = chamfered(PX, PY, pw, ph, 2);
       s += `<path d="${sign}" fill="#000" fill-opacity=".5" transform="translate(1 1.8)" filter="url(#blur2)"/>`
         + `<path d="${sign}" fill="url(#lacquer)" fill-opacity=".92" stroke="url(#bezelGilt)" stroke-width="1.2"/>`;
-      s += `<g filter="url(#lift)">${roundel(d.trade ? 'trade' : d.zone, ...medal(x, yy), sr)}</g>`;
+      s += `<g filter="url(#lift)">${roundel(d.zone, ...medal(x, yy), sr)}</g>`;
       names.forEach((n, i) => { s += text(n, X + tx, Y + nameYs[i], TYPE.sign, { fill: nameFill, middle: true }); });
       if (d.venue) s += text(d.venue, X + tx, Y + venueY, TYPE.signVenue, { fill: C.body, middle: true });
+      if (bare) return s;
       // the Still's plate, bolted on over the sign: its own edge and a bolt in each corner
       s += `<path d="${plate}" fill="#000" fill-opacity=".55" transform="translate(1.2 2)" filter="url(#blur2)"/>`
         + `<path d="${plate}" fill="url(#stillPlate)" stroke="url(#bezelGilt)" stroke-width="1.6"/>`
@@ -365,8 +353,6 @@ function cluster(d, opts = {}) {
         s += `<circle cx="${f(bx)}" cy="${f(by)}" r="1.45" fill="url(#bezelGilt)" stroke="#000" stroke-opacity=".55" stroke-width=".35"/>`
           + `<path d="M${f(bx - 0.8)} ${f(by)} H${f(bx + 0.8)}" stroke="#000" stroke-opacity=".5" stroke-width=".35"/>`;
       s += `<g filter="url(#lift)">${still(d.still, PX + pp, PY + pp, sh)}</g>`;
-      // a Contact Dock: the schooner hangs off the sign's lower edge under the medallion
-      if (d.trade) { const [mx, my] = medal(x, yy); s += schooner(mx + 5, my + 17.5, 0.95); }
       return s;
     },
   };
@@ -933,9 +919,9 @@ const KEY_CROWN = 13; // the Ward row's crown
 const KEY_ROWS = [
   ['speak', 'Speakeasy', [['moonshine', '$200'], ['rum', '$500']]],
   ['hs', 'High Society', [['rum', '$500', true]]],
-  ['dock', 'Dock', { trade: ['moonshine', 'rum', 2] }],
-  ['trade', 'Contact Dock', { trade: ['moonshine', 'rum', 1] }],
+  ['dock', 'Dock', { trade: ['moonshine', 'rum', 1] }],
   ['ward', 'Ward', { crown: true }],
+  ['precinct', 'Precinct', { words: 'Squad’s home' }],
 ];
 // Moonshine becomes Rum: a cube, a gilt arrow, a cube.
 function tradeArrow(x0, cy) {

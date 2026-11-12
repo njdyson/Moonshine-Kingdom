@@ -295,7 +295,7 @@ const PRESETS = {
   // so the last two boilers share what's left: 5/5/2/1 = 13 barrels.
   '4':   [{num:7,mob:5},{num:7,mob:5},{num:7,mob:2},{num:7,mob:1}],
   // Boss on the 7 (Morris Park), which borders Fordham's 8 -- so the 8 relays.
-  // The 6 (Corona / Red Hook) touches neither, hence conn stays off.
+  // The 6 (Astoria / Coney Island) touches neither, hence conn stays off.
   'm678':[{num:7,mob:5},{num:8,mob:5,conn:true},{num:6,mob:3}],
   'm78': [{num:7,mob:5},{num:8,mob:5,conn:true}],
   // A clump on a STARVABLE number: great on a rolled Mash, but a Hostile
@@ -307,8 +307,8 @@ const PRESETS = {
   // lock out both. Only one end ever fires in a morning.
   's39': [{num:3,mob:5},{num:9,mob:5}],
   's3939':[{num:3,mob:4},{num:3,mob:3},{num:9,mob:3},{num:9,mob:3}],
-  // One street in Manhattan: Sugar Hill (7) with West Side (9) and East Harlem
-  // (11) both across the avenue. The 11 is one of the coldest boilers on the board
+  // Sugar Hill (7) with West Side (9) next door and Belmont (11) across the bridge
+  // (East Harlem's 11 until the Open City, 2026-11-11). The 11 is one of the coldest boilers on the board
   // and near dead weight on its own; here it fires whenever the 7 does. The Tenderloin
   // 8 is in the build but does NOT border Sugar Hill, so it cannot be relayed.
   'spine':[{num:7,mob:5},{num:9,mob:4,conn:true},{num:11,mob:3,conn:true},{num:8,mob:1}],
