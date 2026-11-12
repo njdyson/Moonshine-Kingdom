@@ -174,8 +174,10 @@ their Borough lock, Skiff, the swap Hook, the Rat Card and the Welshers, the sta
   broken promise takes a Rat card too. **Twelve Rat cards** (Nick: print 12); none left, nobody Snitches. The Rat
   Card (-3) and the seven Welshers retire, so the Cards sheet is 40 (7 Marks, 12 Rat cards, the Blood Oath on the
   Marks' second sheet). "Rat" still names the card, and a man who breaks his word is a rat.
-- **Patsy**: Power Play, 2 Influence and any one of your Runners (not tied to a place): he goes to your supply
-  and a Rat card goes back.
+- **A Rat card is for good.** **Patsy** (Power Play, 2 Influence and any one of your Runners: he goes to your
+  supply and a Rat card goes back) shipped with the Open City and was **cut on 2026-11-12** (Nick): it turned the
+  Snitch's price into a loan, softened a broken promise, kept the twelve cards from ever running out, and was one
+  more Play to teach. It is **parked as a possible mob Signature Play** (see *Open design threads*).
 - **Hook** (Irish): plain theft, **up to 2 barrels** from an Adjacent rival District into one you Control, 2
   Influence, no Heat (Nick: he played the Irish and the swap never had a chance).
 - **Haul** (Knights, replaces **Skiff**, which Nick disliked, worse with more Docks): Power Play, 2. Mobsters, no
@@ -187,7 +189,7 @@ their Borough lock, Skiff, the swap Hook, the Rat Card and the Welshers, the sta
 
 Bots (40 games, random styles, against today's rules): crown median Day 39 against 51.5; a Raid hits 1.9 Districts
 against 3.4; Kickbacks 26.8 a game against 6.6; Rum Traded 89 against 34.5; Extort 34% of cash against 55%; fights
-flat (31 against 33); about 4.5 Snitches and 5.5 homecomings a game. Bots barely use Hook and Patsy. Deferred: new
+flat (31 against 33); about 4.5 Snitches and 5.5 homecomings a game. Bots barely used Hook and Patsy. Deferred: new
 map connections (Hunts Point to Sugar Hill was floated) and a separate Influence sink.
 
 ## Everything is on the table
@@ -779,6 +781,11 @@ The Heat Track's flavour line still calls the track "a 5-space fuse", which name
 Don't bring the keg back without Nick asking.
 
 ## Open design threads
+
+**Signature Plays under review** (Nick, 2026-11-12: "I'm still not convinced by a couple of them"). **Patsy** is
+parked as a candidate mob Play (cut from the standard Plays the same day). **Haul** was a quick replacement for
+Skiff and may be good; not proven yet. **Torch** has got much weaker since the Safehouse lost its +1 Threat (*Small
+Mob*): a burned Safehouse no longer costs the defender a die. Nothing decided; don't change them without Nick.
 
 `respect-endgame-handoff.md` (2026-10-12, shipped the same day) holds the endgame redesign that
 retired the Nod (see *The crown is a Play*): every option weighed, why the numbers are what they

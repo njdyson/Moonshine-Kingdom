@@ -1561,3 +1561,14 @@ mk-online #77.
 - mk-online: `raid.ts` (`condemnLeftovers` on the homecoming; the start of every Raid clears anything already under
   a Squad, which repairs games saved before the fix), `harness/RULES-AI.md`, `scripts/opencity-check.ts`. The
   Rulebook's Follow the Smoke and the Town Planner's Raid step say "raids it".
+
+## 64. Patsy cut; a Rat card is for good (2026-11-12, Nick)
+
+- **Patsy is gone** from the standard Plays and parked as a possible mob Signature Play. Rat cards (from a Snitch or
+  a broken promise) stay in the Respect pile to the end; twelve in the Supply, none left, nobody Snitches.
+- Rules set: the Rulebook (Power Plays row, The Brand, the Glossary, the Snitch row's "while you hold it"), the
+  Playbooks (four rows; the front rows' padding back to 8px), the Cards sheet (the Rat card's line is "Forever"),
+  The Almanac (lessons 23 and 24), CLAUDE.md.
+- mk-online: the `patsy` move, its bot, UI button, Play reference row, harness option and codec line, `RULES-AI.md`
+  and `opencity-check` go. An Open City save simply no longer offers it.
+
