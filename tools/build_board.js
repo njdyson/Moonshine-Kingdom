@@ -252,7 +252,7 @@ function still(n, x, y, h) {
 function roundel(zone, cx, cy, r) {
   if (zone === 'hs') {
     return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${C.goldBright}" stroke="${C.shadow}" stroke-width="1"/>`
-      + icon('martini', cx, cy + r * 0.06, r * 1.08, '#2a1d0c');
+      + icon('martini', cx, cy, r * 1.08, '#2a1d0c'); // centred on its box (it sat r * 0.06 low until 2026-11-12, Nick)
   }
   // A Precinct (2026-11-11): the patrolman's star, gilt on police blue. The Contact Docks' gilt
   // anchor (2026-11-09 to 2026-11-11) retired with them.
