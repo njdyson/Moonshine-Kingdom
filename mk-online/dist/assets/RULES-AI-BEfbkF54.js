@@ -81,7 +81,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 **Deals**:
 
 - A **Handshake** is a promise made in table talk ("I won't cross the river today", "I'll leave your Docks alone till Sunset"). It lasts until Sunset unless it says otherwise.
-- Breaking one earns a **Rat card** (−1 Respect, until a Patsy hands it back). In this online game the engine cannot see promises, so nothing deals the card automatically: a human at the table can hand it out, and every boss remembers who broke his word. Reputation is the real enforcement.
+- Breaking one earns a **Rat card** (−1 Respect, for good). In this online game the engine cannot see promises, so nothing deals the card automatically: a human at the table can hand it out, and every boss remembers who broke his word. Reputation is the real enforcement.
 - **Cash crosses the table freely**: on any Hustle decision, **give cash** (giveCash) hands a rival any whole hundreds. It is not a Play and costs nothing, so your turn goes on. Pay for a deal, pay a bounty on the leader's Boss, or pay up front when you don't trust a promise. Influence never changes hands.
 - Deals are worth making. Three bosses who agree to stay out of each other's way while they hit the leader all gain; a boss who stays silent fights everyone.
 
@@ -102,7 +102,6 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
 | Extort (extort) | 2, H | **$100 per District you Control**. As often as your Ledger pays for it; each Extort draws one Heat marker however many Districts pay. |
 | Snitch (rat) | 2 | An immediate Raid (§7), and you take a Rat card (−1 Respect) from the Supply. Repeatable. With no Rat card left in the Supply, nobody Snitches. |
-| Patsy (patsy) | 2 | One of your Runners anywhere on the board takes the fall (back to your supply), and one of your Rat cards goes back to the Supply. |
 | Rise (rise) | 2 | Boss off the board only: place him in any **Safe District of your home Borough**. |
 | Take the Crown (takeTheCrown) | 2 | See §1. |
 
