@@ -168,7 +168,7 @@ const SETTINGS = {
   astoriaCorona: 547, // (530 until 2026-11-12) Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 824, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 840, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (855 until 2026-11-12; 851 until 2026-10-07)
-  queensRows: [505, 660, 808], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew; 670 and 807 until 2026-10-07)
+  queensRows: [505, 660, 818], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew, and Jamaica 808 until the bay was squared off the same day; 670 and 807 until 2026-10-07)
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
   coronaBottom: 712, // Corona / Richmond Hill, level from the Queens / Brooklyn line (700 until 2026-10-07)
   williamsburgSouth: 751, // Williamsburg's southern point, on Red Hook / Brownsville
@@ -263,6 +263,9 @@ function draft(S) {
   // Canarsie / Brownsville runs at 45 degrees from Red Hook's corner down to Jamaica Bay,
   // meeting the bay's 45-degree shore square (the bay's corner itself made a 35-degree slant)
   const sbRun = (680 + 853 - BK_COL - S.redHookSouth) / 2, SB_BAY = [BK_COL + sbRun, S.redHookSouth + sbRun];
+  // Jamaica Bay's top shore, level from Canarsie's corner (2026-11-12: it was 853, which left
+  // Brownsville a 45-degree notch at the bay's corner; now the bay is flush with Canarsie's shore)
+  const BAY_TOP = SB_BAY[1];
   // a level border's foot on the East River, square to it: [where it leaves the level, where it lands]
   const riverFoot = y => { const q = [atY(ER_MN, y)[0] - FOOT * Math.SQRT2, y]; return [q, meet(line(q, [1, 1]), ER_MN)]; };
   const CROOK = atY(ER_BW, BOWERY_BANK); // where the Bowery's shore turns from the river's level turn down the harbour reach
@@ -337,7 +340,7 @@ function draft(S) {
     '639,894': SB_BAY,
     '451,787': [S.coneyEast, S.redHookSouth], '437,983': [S.coneyEast, SOUTH_SHORE],
     // Jamaica Bay: a 45-degree octagon (its Canarsie and Jamaica sides are in REPLACE)
-    '709,848': [680, 853], '793,857': [bv, 853],
+    '709,848': SB_BAY, '793,857': [bv, BAY_TOP],
     // Staten Island: Stapleton | Tottenville, level (see REPLACE)
     '30,910': [SI_W, SI_B], '272,932': [SI_E, SI_B],
   };
@@ -361,7 +364,7 @@ function draft(S) {
     'fordham|hunts_point': [[b1, S.huntsTop], ...(HT > 0 ? [HT_DROP] : []), [S.hpCol, S.bronxRow]],
     'corona|richmond_hill': [[qc, q2], ...(q2 < cb ? [[qc, cb]] : []), QB_C],
     'canarsie|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
-    'brownsville|water': [[bv, 853], [680, 853], SB_BAY],
+    'brownsville|water': [[bv, BAY_TOP], SB_BAY],
     'canarsie|water': S.rockaways ? [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, 975 - LIFT], [BK_COL + 26.5, 1001.5 - LIFT], [BK_COL + 26.5, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]]
       : [SB_BAY, [BK_COL, 853 + 680 - BK_COL], [BK_COL, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Brooklyn's south shore level, in line with the Rockaways', Coney Island's corner on the Narrows
@@ -382,8 +385,8 @@ function draft(S) {
     'water|whitestone': [AW, ...(qc < QN_TURN[0] ? [QN_TURN] : []), QN_NORTH],
     'water|red_hook': [WB_J, atY(ER_QN, RED_HOOK_BANK), atY(ER_RH, RED_HOOK_BANK), RH_STUB, [RH_STUB[0], S.redHookSouth]],
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
-    'water|jamaica': S.rockaways ? [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]]
-      : [[bv, 853], [820 + B, 853], [856 + B, 889], [856 + B, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
+    'water|jamaica': S.rockaways ? [[bv, BAY_TOP], [820 + B, BAY_TOP], [856 + B, BAY_TOP + 36], [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]]
+      : [[bv, BAY_TOP], [820 + B, BAY_TOP], [856 + B, BAY_TOP + 36], [856 + B, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
     // Staten Island tapers to the south-west, roughly as it does: Stapleton's two north corners cut
     // like the harbour's; Tottenville's south-east shore runs at 45 degrees from the Narrows to the
     // tip, whose outer corner is cut too. Until 2026-10-25 the island was an octagon of three
