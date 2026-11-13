@@ -648,7 +648,7 @@ Trade's marker. Nick first floated a Moonshine-only dive bar and chose this to k
 shipped it without waiting for bots ("they don't tell us much about how the game actually plays"); the
 A/B is in `bot-runs/log.md`. mk-online keeps the old price for older saves (`G.diveBar`).
 
-The rule sentence: "An ordinary Speakeasy pays $200 per barrel, Moonshine or Rum. A High Society Venue
+"Dive bar" is the change's working name only: the compound is later than 1929, so player text says **a dive** (the Rulebook's Unload flavour: "A dive buys anything, cheap; the swells pay a fortune, and only for the good stuff."; Nick, 2026-11-13). The rule sentence: "An ordinary Speakeasy pays $200 per barrel, Moonshine or Rum. A High Society Venue
 buys only Havana Rum, at $500." The board key's Speakeasy row is a grey and a brown cube at $200 each.
 Watch: Kickbacks (every premium barrel now pays one) and whether the Venues become the fights.
 
