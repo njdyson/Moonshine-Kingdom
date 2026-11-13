@@ -924,7 +924,7 @@ const TRADE_MAX = 2, TRADE_STEP = 10, TRADE_W = 8 + (TRADE_MAX - 1) * TRADE_STEP
 const KEY_CROWN = 13; // the Ward row's crown
 // [roundel, name, what it does]: chips of [barrel, price, Kickback?], a Trade [from, to, how many], or words
 const KEY_ROWS = [
-  ['speak', 'Speakeasy', [['moonshine', '$200'], ['rum', '$500']]],
+  ['speak', 'Speakeasy', [['moonshine', '$200'], ['rum', '$200']]], // any barrel $200 (dive bars, 2026-11-13)
   ['hs', 'High Society', [['rum', '$500', true]]],
   ['dock', 'Dock', { trade: ['moonshine', 'rum', 1] }],
   ['ward', 'Ward', { crown: true }],

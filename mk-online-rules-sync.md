@@ -1572,3 +1572,15 @@ mk-online #77.
 - mk-online: the `patsy` move, its bot, UI button, Play reference row, harness option and codec line, `RULES-AI.md`
   and `opencity-check` go. An Open City save simply no longer offers it.
 
+## 65. Dive bars: any barrel $200 at an ordinary Speakeasy (2026-11-13, Nick)
+
+- **The rule**: an ordinary Speakeasy pays $200 for any barrel, Moonshine or Rum. A High Society Venue buys only
+  Havana Rum, at $500, with its Kickback a barrel. Rum paid $500 at every bar until now.
+- Rules set: the Rulebook (Liquor Barrels, the Unload row with a flavour line, the Glossary's High Society Venue),
+  the Playbooks (four Unload rows), the Town Planner's key, the board key (`tools/build_board.js`: the Speakeasy row
+  is two cubes at $200; boards and print PDF rebuilt), The Almanac (lesson on the Hook: stolen Rum is $1,000 and two
+  Kickbacks at a High Society room), the Brew Simulator's note, CLAUDE.md.
+- mk-online: `barrelPriceAt` and `G.diveBar` (new games on; saves without it keep $500 Rum everywhere) in
+  `data.ts`, `setup.ts` and `plays.ts`; the Unload form, Play reference and District tooltip; bots keep Rum for a
+  Venue they hold and run it there; `harness/RULES-AI.md`; `scripts/dive-bar-check.ts`; `lengthdiag --diveBar=0`
+  and each seat's Borough in its output. `public/board.svg` refreshed (key only; geometry unchanged).
