@@ -634,12 +634,34 @@ away Venues and went with them. Watch now: at three players the boxed Borough's 
 and Queens' Corona bar borders Brownsville, so Queens starts three Runners one Move from Brooklyn's
 crown room (its Boss starts two Moves off, in Flushing).
 
+## Dive bars: any barrel $200; Rum $500 only at High Society
+
+Since 2026-11-13 (Nick, after the Day 17 four-Haiku game, `playtests/haiku55-4p-7-day17-2026-11-13.md`):
+an **ordinary Speakeasy pays $200 for any barrel**, Moonshine or Rum, and only a **High Society Venue**
+pays $500 for Rum (and only Rum). Theme (Nick): "a dive bar buys anything cheap and won't pay a premium,
+the glitz will only buy the good stuff and pays a fortune for it." Why: Rum paid $500 at any bar, so the
+Rum run ended at the home bar beside a Dock with no Kickback (the Brooklyn seat won both Open City agent
+games pouring Rum at Coney Island, $17,800 in five Unloads in the Day 17 game), and the Venues were
+optional. Now the Rum premium lives at the Venues, every premium barrel pays a Kickback, and Moonshine is
+the raw product. Stuck Rum still sells at $200, so nothing is stranded; dumping it loses only the
+Trade's marker. Nick first floated a Moonshine-only dive bar and chose this to keep that outlet. He
+shipped it without waiting for bots ("they don't tell us much about how the game actually plays"); the
+A/B is in `bot-runs/log.md`. mk-online keeps the old price for older saves (`G.diveBar`).
+
+The rule sentence: "An ordinary Speakeasy pays $200 per barrel, Moonshine or Rum. A High Society Venue
+buys only Havana Rum, at $500." The board key's Speakeasy row is a grey and a brown cube at $200 each.
+Watch: Kickbacks (every premium barrel now pays one) and whether the Venues become the fights.
+
+The section below is the older rule (2026-09-22 to 2026-11-12) and its reasoning; where it says Rum
+pays $500 at an ordinary Speakeasy, this section supersedes it.
+
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
 Since 2026-09-22:
 
 - **Moonshine** sells for **$200** a barrel ($300 until 2026-11-08; see *The Rum economy*) and
-  **Havana Rum** for **$500**, at **any of the eight ordinary Speakeasies you Control**
+  **Havana Rum** for **$500** (until 2026-11-13; now $200, see *Dive bars*), at **any of the eight
+  ordinary Speakeasies you Control**
 - the **four High Society Venues buy Havana Rum and nothing else**, at $500, and every
   barrel Unloaded there pays an Influence **Kickback**. The usual limits apply: a marker in
   Reserves and an empty Ledger slot, else the Kickback is lost. ("The High Society joints
