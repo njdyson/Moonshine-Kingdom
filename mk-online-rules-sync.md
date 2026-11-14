@@ -1584,3 +1584,16 @@ mk-online #77.
   `data.ts`, `setup.ts` and `plays.ts`; the Unload form, Play reference and District tooltip; bots keep Rum for a
   Venue they hold and run it there; `harness/RULES-AI.md`; `scripts/dive-bar-check.ts`; `lengthdiag --diveBar=0`
   and each seat's Borough in its output. `public/board.svg` refreshed (key only; geometry unchanged).
+
+## 66. Random Mash: no Harbormaster (2026-11-14, Nick)
+
+- **The rule**: tomorrow's Mash is rolled at random at the end of Shadows and sits on the board all Day. The most
+  Docks no longer names it, and there is no Harbormaster. The Blowback is unchanged (1 / 2 / 3 by Pressure).
+- Rules set: the Rulebook (the Docks paragraph, Ferment the First Mash, The Brew, the Shadows intro, step 4 now
+  **Ferment Tomorrow's Mash**, the worked example's setup), the Town Planner's step 4, The Almanac (lessons 3 and 4,
+  lesson 5 now **The Morning Line**, the boiler table's last column, lesson 6, What I've Seen), the Brew Simulator
+  (the Hostile Dock leader setting goes), CLAUDE.md (*Random Mash*).
+- mk-online: `G.randomMash` (new games on; saves without it keep the Harbormaster) in `data.ts`, `setup.ts`,
+  `shadows.ts` (`closeOffers` rolls), `crown.ts` (`harbormasterOf` is null), the bots' Dock bonus, the board's
+  status row and Shadows step track, the harness's state lines, `harness/RULES-AI.md` (step 7 and the Stills
+  tips: The Leash goes, Read Tomorrow's Mash comes in), `lengthdiag --randomMash=0`.

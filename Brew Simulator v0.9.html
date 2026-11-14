@@ -157,10 +157,8 @@
       <div class="fld"><label>Players</label>
         <select id="players"><option>2</option><option>3</option><option selected>4</option></select></div>
       <div class="fld"><label>The Mash die (Public Mash)</label>
-        <select id="mashmode">
-          <option value="roll" selected>Rolled (Dock lead tied or yours)</option>
-          <option value="hostile">Hostile Dock leader (a rival names the face against you)</option>
-        </select></div>
+        <div class="field-note">Rolled at random every Day.</div>
+      </div>
       <div class="fld"><label>Rival drafting</label>
         <select id="contested">
           <option value="0">Naive (random)</option>
@@ -183,11 +181,8 @@
       <summary>What these settings mean</summary>
       <p class="note">
       One focal crew (your build) drafts against <em>players</em> rivals for 1 Mash die (the Public Mash) + (players+1) Red dice, in random seat order.
-      <b>The Mash die</b> is the headline lever. <b>Rolled</b> is the classic random face, the world when no rival holds the
-      Dock lead is tied, or you hold it yourself. A <b>Hostile Dock leader</b> is the worst case: a rival names the face that
-      minimises the chance <em>any</em> of your Stills can be reached by a draftable Red (1&ndash;6), and breaks ties toward a face that also
-      threatens a Blowback. This is the pressure a clumped one-number stack now lives under, and the reason a build that spreads a low and a
-      high boiler can never be fully locked out. <b>Naive</b> keeps every rival's <em>draft</em> inattentive (random); <b>Contested</b> adds the
+      <b>The Mash die</b> is rolled at random every Day, so a boiler's odds fall away from the 7: a 7 can fire on any face, a 2 or a 12 on one.
+      A build that brackets a low and a high boiler always has one end live. <b>Naive</b> keeps every rival's <em>draft</em> inattentive (random); <b>Contested</b> adds the
       last drafter's leave-behind: it takes a safe die and leaves a Still-bursting Red as the leftover Blowback, the exact threat you
       draft the low token to dodge. Barrel value defaults to <b>$200</b> (what a Speakeasy pays for a barrel; Rum fetches $500 at a High Society Venue).
       <b>Runners take Blowback first.</b> A Boss dies only when the District has no Runner left to absorb a hit. The Boss-loss setting therefore matters only for a Boss standing alone at a Still.
@@ -207,7 +202,7 @@
     <h2>Compare the Standard Builds</h2>
     <details class="acc" open>
       <summary>About this comparison</summary>
-      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler to resist a hostile Mash choice. Flip the <b>Mash die</b> to <b>Hostile Dock leader</b> and re-run to watch the one-number stacks collapse while the spreads hold. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something. Note that the Bronx block is fully Connected and <em>still</em> zeroes under a hostile choice, because the Split needs the Boss's own Still to fire first. Use it to check strategy figures against the current economy, Dock lead, Split the Batch, and Blowback rules.</p>
+      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler, so one end is live on any Mash. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something. Note that the Bronx block is fully Connected and <em>still</em> brews nothing on a Mash of 1, because the Split needs the Boss's own Still to fire first. Use it to check strategy figures against the current economy, Split the Batch, and Blowback rules.</p>
     </details>
     <div class="row-actions"><button class="ghost" id="runCompare">Run Comparison</button></div>
     <div id="compareOut" style="margin-top:12px;"></div>
@@ -215,7 +210,7 @@
 
   <p class="note">
     A tuning model, not the rulebook: it isolates the dawn Brew and Blowback only. Jobs, Speakeasy sales, Docks, Extort and combat all layer on top.
-    Rivals are modelled only through their drafting and, when a rival controls the most Docks, their choice of the Mash face; their own Stills and turf are not simulated. See the <a href="Archive/Brew%20Engine%20Strategy%20v0.9.html">Brew Engine guide v0.8</a> for the strategy this measures.
+    Rivals are modelled only through their drafting; their own Stills and turf are not simulated. See the <a href="Archive/Brew%20Engine%20Strategy%20v0.9.html">Brew Engine guide v0.8</a> for the strategy this measures.
   </p>
 </div>
 
@@ -298,8 +293,7 @@ const PRESETS = {
   // The 6 (Astoria / Coney Island) touches neither, hence conn stays off.
   'm678':[{num:7,mob:5},{num:8,mob:5,conn:true},{num:6,mob:3}],
   'm78': [{num:7,mob:5},{num:8,mob:5,conn:true}],
-  // A clump on a STARVABLE number: great on a rolled Mash, but a Hostile
-  // A rival Dock leader names Mash 1 and it fires nothing -- net $0. The lockout, live.
+  // A clump on a STARVABLE number: a Mash of 1 fires nothing, one Day in six.
   // Two 8-boilers exist (The Tenderloin, Fordham), not touching: a starvable
   // pair, and still weaker than the 7-stack.
   'c8':  [{num:8,mob:5},{num:8,mob:5}],
@@ -313,7 +307,7 @@ const PRESETS = {
   // 8 is in the build but does NOT border Sugar Hill, so it cannot be relayed.
   'spine':[{num:7,mob:5},{num:9,mob:4,conn:true},{num:11,mob:3,conn:true},{num:8,mob:1}],
   // Fordham (8) with Belmont (11), Hunts Point (9) and Throggs Neck (10) all
-  // touching it. Fully Connected -- and still zeroed by a hostile Mash of 1,
+  // touching it. Fully Connected -- and still zeroed by a Mash of 1,
   // because every number is high. Connection is not armour; range is.
   'bronx':[{num:8,mob:5},{num:11,mob:4,conn:true},{num:9,mob:3,conn:true},{num:10,mob:1,conn:true}],
 };
@@ -329,22 +323,6 @@ function reachableCount(boilers, W) {
   let c = 0;
   nums.forEach(n => { const r = n - W; if (r >= 1 && r <= 6) c++; });
   return c;
-}
-// A hostile Dock leader names the face that reaches the FEWEST of our boiler
-// numbers (so we fire least often). Ties break toward a face that can still
-// leave a Blowback on us, then toward the lower face. Returns a Mash 1..6.
-function hostileMash(boilers) {
-  let best = 1, bestReach = Infinity, bestThreat = -1;
-  for (let W = 1; W <= 6; W++) {
-    const reach = reachableCount(boilers, W);
-    // can any draftable leftover Red 1..6 burst one of our Stills at this W?
-    let threat = 0;
-    for (let r = 1; r <= 6; r++) if (boilers.includes(W + r)) { threat = 1; break; }
-    if (reach < bestReach || (reach === bestReach && threat > bestThreat)) {
-      best = W; bestReach = reach; bestThreat = threat;
-    }
-  }
-  return best;
 }
 
 // What a given Brew Number is worth to this build, INCLUDING Split the Batch:
@@ -370,11 +348,10 @@ function brewYield(rows, bossStill, opts, brewNum) {
 
 function simulate(rows, bossStill, opts, N) {
   const boilers = rows.map(s => s.num);
-  const fixedMash = opts.mash === 'hostile' ? hostileMash(boilers) : null;
   let sumB = 0, sumNet = 0, fireDays = 0, blowDays = 0, bossLostDays = 0, relayDays = 0;
 
   for (let t = 0; t < N; t++) {
-    const W = fixedMash !== null ? fixedMash : d6();
+    const W = d6();
     const pool = Array.from({ length: opts.players + 1 }, d6);
     const focalSeat = Math.floor(Math.random() * opts.players);
     const blowsUs = r => boilers.includes(W + r); // if this Red is LEFT behind, does it burst one of ours?
@@ -439,7 +416,6 @@ function simulate(rows, bossStill, opts, N) {
 function readOpts() {
   return {
     players: +document.getElementById('players').value,
-    mash: document.getElementById('mashmode').value,
     contested: document.getElementById('contested').value === '1',
     split: document.getElementById('split').value === '1',
     barrel: +document.getElementById('barrel').value || 0,

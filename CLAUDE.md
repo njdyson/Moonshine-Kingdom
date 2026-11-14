@@ -109,10 +109,33 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 
 - The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, unmet promises take their Welsher, then flip Turn Tokens. Nobody wins at Sunset: the game is won mid-Day, by Take the Crown.
 - Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
-- The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
+- Tomorrow's Mash is rolled at random; the Harbormaster (most Docks named it) retired on 2026-11-14 (see *Random Mash*). The fourth Shadows step is **Ferment Tomorrow's Mash** (it was "The Harbormaster" from 2026-09-16, "The Morning Fix" before that).
 - The four #7 mainland Speakeasies are fixed High Society venues. They began under the Police Squads until the Open City (2026-11-11), which starts them open. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
 - There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; the Still's Pressure sets Blowback casualties (see *Small Mob*). Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
+
+## Random Mash: no Harbormaster
+
+Since 2026-11-14 (Nick; this thread's write-up is `/mnt/project-files/reviews/blowback-spread-2026-11-13.md`,
+mk-online-rules-sync §66). **Tomorrow's Mash is always rolled at random** at the end of Shadows and stays on the
+board all Day, so the table still knows it a Day ahead. **The Harbormaster is gone**: the most Docks no longer names
+it. Nick called it one of his darlings, but at the table the Harbormaster named a 1 or a 6 almost every time (North
+against South), so it was close to an automatic choice; a random face brings back the bell curve, and with it the
+reason to spread. It also takes a count and a decision out of Shadows.
+
+- The Blowback is unchanged (by Pressure, 1 / 2 / 3). Nick: with a random Mash the low-Pressure Stills fire and blow
+  less, and Split the Batch is the way to fire them.
+- **Weighed the same week and not taken** (all in the write-up, with sims): Nick's lighter tiers (1 at Pressure 1-3,
+  2 at 4-6); **last man stands** (a Blowback never takes a District's last Mobster), which Nick rejected as making no
+  thematic sense and making lone Mobsters strong: don't bring it back; every draft firing every matching Still,
+  including a 3 / 2 / 1 draft by seat with doubles dropped (it favoured the spread but flattened the draft and made
+  mirroring rivals and holding 7s the dominant play); a **trim** in the old Sweep's place (a hit District drops to 3),
+  which spares small crews but barely touches a one-Still fortress, since its owner drafts his own number.
+- The Docks keep their Trade, the Jobs that name them and Cuban Prince's Extort; they no longer carry a title.
+- The Almanac's lesson 5 is **The Morning Line** ("Read tomorrow's Mash"), replacing The Leash. The Brew Simulator lost
+  its Hostile Dock leader setting. The Volstead Act (shelved) still has its own "river rules" twist, which brings a
+  Dock leader's Mash back as a variant.
+- mk-online keeps the Harbormaster for older saves (`G.randomMash`).
 
 ## Small Mob: a dozen men, one die a man
 
