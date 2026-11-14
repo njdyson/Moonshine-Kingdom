@@ -1597,3 +1597,20 @@ mk-online #77.
   `shadows.ts` (`closeOffers` rolls), `crown.ts` (`harbormasterOf` is null), the bots' Dock bonus, the board's
   status row and Shadows step track, the harness's state lines, `harness/RULES-AI.md` (step 7 and the Stills
   tips: The Leash goes, Read Tomorrow's Mash comes in), `lengthdiag --randomMash=0`.
+
+## 67. Titles: Harbormaster and Night Mayor (2026-11-14, Nick)
+
+- **The rule**: two Title cards, 3 Respect each while held, no powers. The Harbormaster goes with the most Docks,
+  the Night Mayor with the most Speakeasies (8). Both start in the Supply. When a boss's own Play ends with more of
+  them than every other boss, he takes the card, from the Supply or its holder. Nothing else moves a card.
+- Rules set: the Rulebook (Components, Setup's Supply line, *Titles: Run the Town* under Winning the Game, Count
+  Your Respect, the Glossary's Respect and Title), the Town Planner's Make a Play step, the Cards sheet (sheet 11,
+  42 cards), The Almanac (lesson 27's *Take his Title*; lesson 27's *Leave his number in the pool* lost a stale
+  "If you hold the piers, name a Mash" left from the Random Mash change), CLAUDE.md (*Titles: Harbormaster and
+  Night Mayor*).
+- mk-online: `G.titleRespect` (3), `G.titleTiming` ("claim"), `G.titles` in `setup.ts`, `crown.ts`
+  (`awardTitles`, `awardTitlesLive` after each Play in `operations.ts`, `titleRespectOf` in the Respect
+  breakdown, `titlesSummary`), the bots' capture bonus, the board's status row, the player card's flags and
+  Crown track, the Respect breakdown, the harness state lines and `harness/RULES-AI.md` (Respect, Titles, a
+  strategy tip), `scripts/titles-check.ts`, `lengthdiag --titles=N --titleTiming=claim|live|sunset
+  --titleTie --titleLate --titleFloor` (the trial arms). Saves without `titleRespect` have no Titles.
