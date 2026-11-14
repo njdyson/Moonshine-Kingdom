@@ -51,9 +51,9 @@ function loadFrom(file, names) {
 const brew = () =>
   loadFrom("Brew Simulator v0.9.html", [
     "ratio",
+    "blowDead",
     "d6",
     "reachableCount",
-    "hostileMash",
     "brewYield",
     "simulate",
   ]);

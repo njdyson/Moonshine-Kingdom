@@ -34,7 +34,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 ### Shadows (in this order)
 
-1. **Roll**: the holder of Turn Token #1 rolls **players + 1** Red dice. The **Mash** (1–6) was set yesterday; on Day 1 it is random.
+1. **Roll**: the holder of Turn Token #1 rolls **players + 1** Red dice. The **Mash** (1–6) was rolled at random yesterday, so everyone knows it a Day ahead.
 2. **Draft and brew** (draftDice): in Turn Order, each player takes exactly one Red die and brews at once.
    - Brew Number = Mash + Red.
    - Every active Still you Control with that number (Mobsters present, no Squad) makes **Moonshine = that District's Muscle** (its Mobsters, max 5), taken from the supply. Each Still fires at most once a Day.
@@ -53,7 +53,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
    - **Day 1 has no Offers.** The opening Market is dealt face-down and turns face-up here instead.
    - **The 3s come late.** No 3-Respect Job sits in the top 15 cards of the deck (the opening Market included), so the first 3 turns up after about ten Days of restocks.
 6. **Fund the Ledger**: automatic. Reserves move into the Ledger up to 5. Staked markers stay on their Jobs.
-7. **Harbormaster** (setMash): the player Controlling the **most Docks** (no tie) names tomorrow's Mash, 1–6. On a tie or with no Docks held, it is rolled.
+7. **Tomorrow's Mash**: automatic. Tomorrow's Mash is rolled at random and stays face-up all Day. Nobody sets it.
 
 ### The Hustle
 
@@ -217,8 +217,8 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 
 **Stills and the draft**
 
-- **The Magic of Seven.** No Mash can starve a 7, and the four 7s are the High Society Venues. Elsewhere, hold a low Still and a high one (a 3 and a 9): one end is live whatever Mash is named.
-- **The Leash.** The Harbormaster names a Mash that lights his own Stills. Build on his numbers, or take the most Docks yourself.
+- **The Magic of Seven.** No Mash can starve a 7, and the four 7s are the High Society Venues. The Mash is rolled at random, so a Still's odds fall away from the 7: the 6s and 8s fire often, the 2s and 12s rarely. Hold several numbers and you fire most mornings.
+- **Read Tomorrow's Mash.** It is face-up all through the Hustle: move onto the numbers it can reach, and thin out where tomorrow's Blowback can land.
 - **The Double.** Your Blowback risk is a second die of your number left in the pool. Draft to leave the Blowback on a rival's Still, not yours.
 
 **Jobs and Bribes**
