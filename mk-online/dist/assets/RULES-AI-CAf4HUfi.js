@@ -14,7 +14,9 @@ Your **home Borough** is the one you were dealt at setup, and its Ward is your *
 
 The game ends mid-Day on the spot. Nothing else is settled.
 
-**Respect** = completed Jobs (1, 2 or 3 each) plus Bribe cards (1 to 4 each), **−1** per Rat card you hold, **−2** per Shylock's Mark you hold. All of it is public.
+**Respect** = completed Jobs (1, 2 or 3 each) plus Bribe cards (1 to 4 each) plus **3** for each Title card you hold, **−1** per Rat card you hold, **−2** per Shylock's Mark you hold. All of it is public.
+
+**Titles** (two cards, both in the Supply at the start): the **Harbormaster** (most Docks) and the **Night Mayor** (most Speakeasies; there are 8, the 4 ordinary ones and the 4 High Society Venues), **3 Respect** each while you hold it. When **your own Play** ends with you Controlling more Docks than every other boss, you take the Harbormaster, from the Supply or from whoever holds it; the same for Speakeasies and the Night Mayor. A Title moves no other way: falling behind does not lose it, a rival must pull ahead on his own Play. So a leader's Title is the one part of his Respect you can take off him before he crowns. The state view's Titles line shows the holders and the counts.
 
 ## 2. Components and currencies
 
@@ -69,7 +71,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 - A Job pays its Stake: **1, 2 or 3 Respect**.
 - The Market shows players + 1 cards.
-- A Job completes at the end of **your own Play** that did the deed (including the fight it started and any Raid it set off). Its stake returns to Reserves and the card scores.
+- A Job completes at the end of **your own Play** that did the deed (the same moment you may claim a Title) (including the fight it started and any Raid it set off). Its stake returns to Reserves and the card scores.
 - "Seize" means Control must change hands from a rival (a won fight or a Fold). Walking in on a rival Safehouse with no Mobsters is no Seize: nobody Controlled the District.
 - The Butcher's Ledger Seizes **from** a crew: "Seize a District from 4+ rival Mobsters" (anywhere; a Boss counts). The crew is counted as it met your Move at the door, so a Fold pays the Job as surely as winning the fight; only a stand that holds the District denies it.
 - The Toll Booth Trap is a kill: "Kill a rival Boss" (anywhere). A "kill" is a rival Mobster shot dead in your own Play's fight; a Raid's arrests are not kills. It pays even if you then lose the fight, and a Fold denies it, so a Boss with no Safe District to Scram to is the target.
@@ -201,6 +203,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 - **Laying Low early wins tempo.** You draft first tomorrow and brew before the supply runs thin. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
 - **The Crown takes visible steps:** 20 Respect, then the walk into a rival's home Ward (usually a fight, since it is his turf), then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise back in his home Borough plus the walk back out to a rival's Ward.
+- **Titles are Respect you can win and lose.** One more Dock or Speakeasy than everyone else, at the end of your own Play, is 3 Respect. Spreading to Docks and bars pays for itself (Extort, Trade, Unload) and pulls a Title with it. If a leader's Title is part of his 20, pass his count and claim it on your Play: he drops below the bar before his turn.
 - **The Crown ends the game before Sunset.** Promises due at Sunset go unpaid, so plan for betrayal.
 - **Raids go for barrels.** A Raid hits a mob's District with the most barrels, so a Rum stockpile in your Venue is Raid bait.
 
