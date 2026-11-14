@@ -108,11 +108,45 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
 This supersedes the older Titles, Hotspot, and Sweep notes below until they are fully retired.
 
 - The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, unmet promises take their Welsher, then flip Turn Tokens. Nobody wins at Sunset: the game is won mid-Day, by Take the Crown.
-- Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
+- The old Title cards (with powers) and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner. Two Respect-only Titles came back on 2026-11-14 (see *Titles: Harbormaster and Night Mayor*).
 - Tomorrow's Mash is rolled at random; the Harbormaster (most Docks named it) retired on 2026-11-14 (see *Random Mash*). The fourth Shadows step is **Ferment Tomorrow's Mash** (it was "The Harbormaster" from 2026-09-16, "The Morning Fix" before that).
 - The four #7 mainland Speakeasies are fixed High Society venues. They began under the Police Squads until the Open City (2026-11-11), which starts them open. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
 - There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; the Still's Pressure sets Blowback casualties (see *Small Mob*). Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
+
+## Titles: Harbormaster and Night Mayor
+
+Since 2026-11-14 (Nick; the thread "Test Harbourmaster and Night Mayor title cards", the write-up
+`/mnt/project-files/reviews/title-cards-2026-11-14.md`, bot rows in `/mnt/project-files/bot-runs/log.md`,
+mk-online-rules-sync §67). Two **Title cards**, **3 Respect** each while held, **no powers**: the
+**Harbormaster** for the most **Docks** (10) and the **Night Mayor** for the most **Speakeasies** (8: the four
+dives and the four High Society Venues). Both start in the Supply. **Claim**: when a Play of yours ends with
+you Controlling more of them than every other boss, take the card, from the Supply or its holder. Nick: it
+"works the same as jobs. After each play check if it completed a job or claimed a title." A card moves no
+other way: not on a Blowback, a Raid or a tie, and not when its holder falls behind.
+
+Why (Nick): a reason to spread and not turtle in a corner beyond Jobs, against Blowback by Pressure, which
+punishes a spread. The old Titles (2 Respect each, recounted at the end of the Day, with powers) were cut on
+2026-09-10 for paying for turf twice; a Respect-only card that pays for the *count* is the counterweight, and
+it is the one Respect a rival can take off a leader before he crowns.
+
+Weighed the same day and not taken (all with bot runs):
+- **Checked at Sunset** (Nick's first idea): calm, but a boss who reached 20 with a card kept it all the next
+  Day, and the last boss still out could grab a Dock after everyone else had Laid Low.
+- **Live** (recount after every Play): with a tie to the Supply it churned (the cards moved 2.3 times a Day);
+  with the holder keeping it on a tie, it stuck to the leader. Nick: "tied means supply is cleaner."
+- **A late start** (a Titles card shuffled in with the 3s, like the Blood Oath): Claim already keeps the early
+  game calm, and it was one more special card.
+- **A floor** ("at least 4 Docks and more than any rival"): cut the live churn by a third, no more.
+
+Where it lives: the Rulebook's **Titles: Run the Town** under Winning the Game (it would not fit the Respect
+page, which is full), Count Your Respect, Components, Setup and the Glossary; the Town Planner's Make a Play
+step; the Cards sheet's **sheet 11** (half a sheet, art `Art/Cards/Harbormaster.jpg` and `Night Mayor.jpg`,
+the cut Titles' plates); The Almanac's lesson 27 (*Take his Title*). The Playbooks stay silent: a Title is not
+a Play. Bots (40 games): crown median 31 against 37 with no Titles (quartiles overlap), the cards moved 0.8
+times a Day, 35 of 40 winners held one. Bots don't spread, so whether people turtle less is a table question.
+Watch: how sticky a leader's card is at the table, and whether 3 is too much of the 20.
+mk-online: `G.titleRespect` (3, new games), `G.titleTiming` ("claim"); older saves have no Titles.
 
 ## Random Mash: no Harbormaster
 
@@ -462,9 +496,10 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 ## The crown is a Play: Take the Crown at 20 Respect
 
 Since 2026-09-25; Respect became the only score on 2026-10-12 (Nick; `respect-endgame-handoff.md`
-holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds, Titles,
-or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
-(1 to 4), less **2** per Shylock's Mark you hold and **1** per Rat card (the Rat Card's 3 and the Welshers' 1 until *The Open City*). The
+holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds or other
+board-scoring cards, but for the two Titles (since 2026-11-14, *Titles: Harbormaster and Night Mayor*).
+**Respect is your pile**: completed Jobs (1, 2 or 3), Bribe cards (1 to 4) and the Titles you hold
+(3 each), less **2** per Shylock's Mark you hold and **1** per Rat card (the Rat Card's 3 and the Welshers' 1 until *The Open City*). The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a rival's home Ward** (since 2026-10-24; see *The Crown in
 the Wards*), and you win on the spot. It lives on the Winning the Game page (a heading and a two-item
