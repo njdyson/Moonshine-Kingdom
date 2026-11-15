@@ -1614,3 +1614,28 @@ mk-online #77.
   Crown track, the Respect breakdown, the harness state lines and `harness/RULES-AI.md` (Respect, Titles, a
   strategy tip), `scripts/titles-check.ts`, `lengthdiag --titles=N --titleTiming=claim|live|sunset
   --titleTie --titleLate --titleFloor` (the trial arms). Saves without `titleRespect` have no Titles.
+
+## 68. The Clash, and Titles at Sunset (2026-11-15, Nick)
+
+- **The rule**: the leftover-die Blowback is gone. When a Still of yours pours on your Brew Number, every
+  **rival's** active Still with the same number bursts if **3+ Mobsters** stand there (dead by the gauge, 1 / 2 / 3,
+  Runners first, the Boss only with no Runner left). Split the Batch bursts nothing. The Red pool sets aside any die
+  that repeats a face, so a number fires at most once a morning and a seat may find the pool empty (it drafts
+  nothing). The Boss starts with **1 Runner** in his Ward (7 in supply), so no starting crew can burst on Day 1.
+- **Titles** are counted at **Sunset**: the sole most Docks / Speakeasies takes the card, from the Supply or its
+  holder; a tie sends it to the Supply. Nothing moves a card at any other time.
+- Why (Nick): with Random Mash, turn order only mattered when Stills mirrored, and the Blowback punished a spread
+  ("the liquor brewed pays for the dead runners"). The Clash aims the violence at shared numbers and big crews, and
+  stops everyone camping on the 7s. Write-up: the project's `reviews/blowback-clash-2026-11-15.md`; bots in
+  `bot-runs/log.md`.
+- Rules set: the Rulebook (Stills legend, the Blue Wall, Setup's garrison, the Shadows intro, The Brew, step 2 now
+  **The Clash** with a new Kingpin's Tip, the worked example, Titles: Run the Town, Sunset, the Glossary's Clash,
+  Padlocked, Pressure, Sunset and Title), the Town Planner (Shadows steps 1 and 2, Make a Play, Sunset, the Home Ward
+  key), the Playbooks' backs ("Clash Dead"), The Almanac (lessons 3, 5, 6, 7, 8 now *Every boiler has a twin*, 14,
+  27's *Brew his number first* and *Take his Title*, What I've Seen), the Brew Simulator (the Clash model and a
+  shared-double column), the Cards sheet's sheet 11 note, `tools/still_art.js` comments, CLAUDE.md (*The Clash*).
+- mk-online: `G.clash` (5) and `G.titleTiming` "sunset" on new games; saves without `clash` keep the leftover
+  Blowback and Boss + 2, and saves on "claim" keep Claim. `data.ts` (`applyClash`, modes for sweeps), `setup.ts`
+  (Ward start), `shadows.ts` (`clashTargets`, `burstStill`, repeats set aside, an empty pool skips the rest),
+  `crown.ts`, the bots' draft, the Shadows step track and brew preview, the agents' brew helper, `render.ts` (old-rule
+  blocks), `harness/RULES-AI.md`, `scripts/clash-check.ts`, `lengthdiag --clash=0..7 --wardStart`.
