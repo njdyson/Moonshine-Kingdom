@@ -114,7 +114,7 @@
 <body>
 <div class="wrap">
   <h1>Brew Simulator</h1>
-  <p class="subtitle">Morning Brew / Clash Monte Carlo &middot; Rules v0.9</p>
+  <p class="subtitle">Morning Brew / Blowback Monte Carlo &middot; Rules v0.9</p>
 
   <!-- BUILD -->
   <div class="panel">
@@ -132,7 +132,7 @@
     </div>
     <details class="acc" open>
       <summary>How Mobsters &amp; the clump work</summary>
-      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there): each man brews one barrel, up to <b>5</b>. A Still bursts only when a rival brews its number first, and only with <b>3 or more</b> Mobsters there (tick <b>A rival holds its double?</b> for each number a rival shares). A burst kills by the boiler's Pressure, not the crew: <b>1</b> at Pressure 1&ndash;2, <b>2</b> at 3&ndash;4, <b>3</b> at 5&ndash;6. A dozen Runners and a Boss make 13 men, so a five-man Still is most of a family. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers: the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never Split.</p>
+      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there): each man brews one barrel, up to <b>5</b>. A Still gets the bad batch when a rival brews its number first, and blows only with <b>3 or more</b> Mobsters there (tick <b>A rival holds its double?</b> for each number a rival shares). A Blowback kills by the boiler's Pressure, not the crew: <b>1</b> at Pressure 1&ndash;2, <b>2</b> at 3&ndash;4, <b>3</b> at 5&ndash;6. A dozen Runners and a Boss make 13 men, so a five-man Still is most of a family. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers: the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never Split.</p>
     </details>
     <div class="presets">
       <span class="lbl">Presets:</span>
@@ -162,11 +162,11 @@
       <div class="fld"><label>Rival drafting</label>
         <select id="contested">
           <option value="0">Naive (random)</option>
-          <option value="1" selected>Contested (a rival who shares your number drafts it to burst you)</option>
+          <option value="1" selected>Contested (a rival who shares your number drafts it to blow you)</option>
         </select></div>
       <div class="fld"><label>Split the Batch (Boss's Still Splits into an Adjacent Still)</label>
         <select id="split"><option value="1" selected>On (current rule)</option><option value="0">Off (mechanic dropped)</option></select></div>
-      <div class="fld"><label>Boss in a Clash</label>
+      <div class="fld"><label>Boss in a Blowback</label>
         <div class="field-note">Runners take hits first. The Boss dies only if no Runner remains.</div>
       </div>
       <div class="fld"><label>Barrel value $</label><input type="number" id="barrel" value="200" step="50"></div>
@@ -185,7 +185,7 @@
       A build that brackets a low and a high boiler always has one end live. Each number a rival shares is held by one rival, in a random seat. <b>Naive</b> keeps every rival's <em>draft</em> inattentive (random); <b>Contested</b> has
       a rival who shares your number take the Red that brews it, if it is there when his turn comes, the exact threat you
       draft the low token to beat. Barrel value defaults to <b>$200</b> (what a Speakeasy pays for a barrel; Rum fetches $500 at a High Society Venue).
-      <b>Runners take a Clash first.</b> A Boss dies only when the District has no Runner left to absorb a hit. The Boss-loss setting therefore matters only for a Boss standing alone at a Still.
+      <b>Runners take a Blowback first.</b> A Boss dies only when the District has no Runner left to absorb a hit. The Boss-loss setting therefore matters only for a Boss standing alone at a Still.
       </p>
     </details>
   </div>
@@ -202,14 +202,14 @@
     <h2>Compare the Standard Builds</h2>
     <details class="acc" open>
       <summary>About this comparison</summary>
-      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler, so one end is live on any Mash. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something. Note that the Bronx block is fully Connected and <em>still</em> brews nothing on a Mash of 1, because the Split needs the Boss's own Still to fire first. Use it to check strategy figures against the current economy, Split the Batch, and the Clash. Every build's 7s count as shared (four 7s in town); tick the doubles yourself for anything else.</p>
+      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler, so one end is live on any Mash. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something. Note that the Bronx block is fully Connected and <em>still</em> brews nothing on a Mash of 1, because the Split needs the Boss's own Still to fire first. Use it to check strategy figures against the current economy, Split the Batch, and Blowback. Every build's 7s count as shared (four 7s in town); tick the doubles yourself for anything else.</p>
     </details>
     <div class="row-actions"><button class="ghost" id="runCompare">Run Comparison</button></div>
     <div id="compareOut" style="margin-top:12px;"></div>
   </div>
 
   <p class="note">
-    A tuning model, not the rulebook: it isolates the dawn Brew and the Clash only. Jobs, Speakeasy sales, Docks, Extort and combat all layer on top.
+    A tuning model, not the rulebook: it isolates the dawn Brew and the Blowback only. Jobs, Speakeasy sales, Docks, Extort and combat all layer on top.
     Rivals are modelled only through their drafting; their own Stills and turf are not simulated. See the <a href="Archive/Brew%20Engine%20Strategy%20v0.9.html">Brew Engine guide v0.8</a> for the strategy this measures.
   </p>
 </div>
@@ -217,7 +217,7 @@
 <script>
 // ---- Muscle: one barrel per Mobster, up to 5 (since 2026-11-09) ----
 const ratio = m => Math.min(5, m);
-// ---- Clash dead by the boiler's Pressure (6 - |n - 7|): 1-2 kills 1, 3-4 kills 2, 5-6 kills 3; only a crew of 3+ bursts ----
+// ---- Blowback dead by the boiler's Pressure (6 - |n - 7|): 1-2 kills 1, 3-4 kills 2, 5-6 kills 3; only a crew of 3+ blows ----
 const blowDead = n => Math.ceil((6 - Math.abs(n - 7)) / 2);
 const d6 = () => 1 + Math.floor(Math.random() * 6);
 
@@ -365,7 +365,7 @@ function simulate(rows, bossStill, opts, N) {
     for (let seat = 0; seat < opts.players && pool.length; seat++) {
       if (seat === focalSeat) {
         // Take the die that BREWS MOST (Split the Batch included). Ties break toward a
-        // number a rival shares: brewing it first means he can't burst it.
+        // number a rival shares: brewing it first means he can't blow it.
         let bi = 0, best = -1, bestCover = -1;
         for (let k = 0; k < pool.length; k++) {
           const y = brewYield(rows, bossStill, opts, W + pool[k]).barrels;
@@ -384,14 +384,14 @@ function simulate(rows, bossStill, opts, N) {
     }
     const brewNum = focalPick === null ? -1 : W + focalPick;
 
-    // Brew (Split the Batch is folded into brewYield). A burst Still has nothing left to brew
+    // Brew (Split the Batch is folded into brewYield). A blown Still has nothing left to brew
     // this morning only because its number's one die is gone, so the two never overlap.
     const { barrels, relayed, fired } = brewYield(rows, bossStill, opts, brewNum);
     if (fired) fireDays++;
     if (relayed) relayDays++;
     let net = barrels * opts.barrel;
 
-    // The Clash: our shared Stills on a number a rival poured first, with 3+ Mobsters, burst.
+    // Blowback: our shared Stills on a number a rival poured first get the bad batch, and blow with 3+ Mobsters.
     let blew = false, bossLost = false;
     rows.forEach((s, i) => {
       if (s.shared && burstNums.has(s.num) && s.mob >= 3) {
@@ -455,8 +455,8 @@ document.getElementById('run').addEventListener('click', () => {
       ? `<span class="good">worth +$${delta.toFixed(0)}/Day</span>`
       : `<span class="bad">costing $${Math.abs(delta).toFixed(0)}/Day</span>`;
     const risk = r.pBossLost
-      ? ` In a Clash his Runners don't cover him, and the Boss goes down about <b>${(100 * r.pBossLost).toFixed(1)}%</b> of Days.`
-      : ` Nothing here can burst the Boss: a crew under 3, an unshared number, or Runners enough to take the hit.`;
+      ? ` In a Blowback his Runners don't cover him, and the Boss goes down about <b>${(100 * r.pBossLost).toFixed(1)}%</b> of Days.`
+      : ` Nothing here can blow the Boss: a crew under 3, an unshared number, or Runners enough to take the hit.`;
     msg = `Parking the Boss is ${worth} versus leaving him off the Stills.${risk}`;
   }
   document.getElementById('verdict').innerHTML = msg;

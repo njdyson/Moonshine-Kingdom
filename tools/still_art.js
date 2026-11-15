@@ -11,10 +11,10 @@
 // THE GAUGE IS NOT DECORATION. It is the Pressure reading, 6 - |Still - 7| (the Town
 // Planner's District Roster): that many segments lit from the bottom, the rest dark,
 // one colour a pair (gold, orange, red). 7 runs the full six, 2 and 12 run one. The segments sit in
-// three pairs, and the pair is how many a Clash kills there (since 2026-11-09).
+// three pairs, and the pair is how many a Blowback kills there (since 2026-11-09).
 
 const GOLD = '#d4af37', LACQUER = '#130207', TUBE = '#0d0005', RIVET = '#8a7329', NUMERAL = '#f5e9d9';
-// One colour a pair (Nick, 2026-11-09): gold, orange, red, so the colour reads the Clash's
+// One colour a pair (Nick, 2026-11-09): gold, orange, red, so the colour reads the Blowback's
 // dead, 1, 2 or 3. It was a six-step gold-to-red ramp until the same day.
 const RAMP = ['#e3c04f', '#e3c04f', '#d98a2e', '#d98a2e', '#c4362a', '#c4362a']; // bottom to top
 // The numeral, in Bebas Neue: as large as fits the boiler's 51-unit width with "12" in it,
@@ -52,7 +52,7 @@ function stillBody(n) {
   s += numeral(n)
     + `<rect x="65" y="51" width="14" height="6" rx="2" fill="${LACQUER}" stroke="${GOLD}" stroke-width="1.6"/>`
     + `<rect x="76.5" y="18" width="13" height="76" rx="6.5" fill="${TUBE}" stroke="${GOLD}" stroke-width="2.4"/>`;
-  // Three pairs (1-2, 3-4, 5-6), a wider gap between pairs: the pair is the Clash's dead,
+  // Three pairs (1-2, 3-4, 5-6), a wider gap between pairs: the pair is the Blowback's dead,
   // 1, 2 or 3 (Nick, 2026-11-09). Segments 9 tall, 1 apart within a pair, 3 between pairs.
   RAMP.forEach((col, k) => {
     const on = k < lit;

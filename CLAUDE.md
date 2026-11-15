@@ -114,31 +114,35 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; the Still's Pressure sets Blowback casualties (see *Small Mob*). Blowback removes Runners first; the Boss dies only with no Runner left in that District.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
-## The Clash: shared numbers burst, big crews only
+## Blowback: the second Still gets the bad batch
 
 Since 2026-11-15 (Nick; the thread "Rework Blowback around contested Stills", the write-up
 `/mnt/project-files/reviews/blowback-clash-2026-11-15.md`, bot rows in `/mnt/project-files/bot-runs/log.md`,
 mk-online-rules-sync §68). **This supersedes** the Blowback wherever older sections below describe it (the leftover
-Red, "the last seat holds the match", Blowback by Pressure as a step of its own).
+Red, "the last seat holds the match", a leftover die picking the number).
 
-- **The Clash.** When a Still of yours pours on your Brew Number, every **rival's** active Still with the same number
-  bursts if **3+ Mobsters** stand there. Dead by the gauge (1 / 2 / 3, unchanged), Runners first. Split the Batch
-  bursts nothing. Theme: two crews can't cook the same batch in one town.
+- **Blowback.** When a Still of yours pours on your Brew Number, every **rival's** active Still with the same number
+  gets the **bad batch**, and it **blows** if **3+ Mobsters** stand there. Dead by the gauge (1 / 2 / 3, unchanged),
+  Runners first. Split the Batch hands out no bad batch.
+- **Words** (Nick, the same evening, after it shipped as "the Clash"): keep the name **Blowback**, and frame it as the
+  second Still on a number getting the bad batch, which is what blows it. The verb is **blows**, not "bursts". The
+  first draft's theme ("two crews can't cook the same batch in one town") and the name "the Clash" are retired; the
+  code and bot logs still say `clash` (`G.clash`, `--clash`), which is fine.
 - **Repeats are set aside.** The Red pool is still one more than the players, but any die that repeats a face goes
-  aside, so a number fires at most once a morning and nobody tracks cold Stills (Nick's call, over a "burst Still
+  aside, so a number fires at most once a morning and nobody tracks cold Stills (Nick's call, over a "blown Still
   stays cold" rule). A seat may find the pool empty: one more reason to Lay Low early. The leftover die does nothing.
 - **The Boss starts with 1 Runner** in his Ward (7 in supply). With Boss + 2 the Ward was a crew of 3, and Day 1's
-  random turn order would have burst two mobs' mirrored starts (Nick).
+  random turn order would have blown two mobs' mirrored starts (Nick).
 - Every number is printed twice (the 7 four times; the 2 and 12 once), and the starts mirror across a side
   (Manhattan and the Bronx on 8, 9, 10; Queens and Brooklyn on 4, 5, 6), so neighbours are natural rivals. The
   Almanac's lesson 8, **The Double**, is now that twin ("Every boiler has a twin, and the twin holds the gun").
-- Weighed the same evening (bots, all in the write-up): the Clash with no threshold (bloodier, Boss deaths doubled,
-  Day 1 bursts), flat 1 dead, Nick's 1 / 2 ladder, a cold-Still rule, 4+ Mobsters, and Runners-only brewing with 3+
-  Runners (Boss can never burst; a smaller brew and one more distinction to teach). The Harbourmaster choosing a
-  Blowback number was an alternative to the Clash, not a layer; Nick prefers the Clash.
-- Bots keep crews small, so bursts nearly vanish for them (0.2 a Day against 1.46); they held more turf and fought
-  more, and the crown median was flat. Watch at the table: how often stacks burst, the Venues (four 7s), and whether
-  neighbours bleed each other early.
+- Weighed the same evening (bots, all in the write-up): no crew threshold (bloodier, Boss deaths doubled, Day 1
+  Blowbacks), flat 1 dead, Nick's 1 / 2 ladder, a cold-Still rule, 4+ Mobsters, and Runners-only brewing with 3+
+  Runners (Boss can never blow; a smaller brew and one more distinction to teach). The Harbourmaster choosing a
+  Blowback number was an alternative to this, not a layer; Nick prefers this.
+- Bots keep crews small, so Blowbacks nearly vanish for them (0.2 a Day against 1.46); they held more turf and fought
+  more, and the crown median was flat (29.5 on the shipped rules). Watch at the table: how often stacks blow, the
+  Venues (four 7s), and whether neighbours bleed each other early.
 
 **Titles moved to Sunset the same day** (Nick): counted when the final player Lays Low, the sole most takes the
 card, a tie sends it to the Supply. The section below describes Claim, the rule from 2026-11-14; where it says a
