@@ -1639,3 +1639,15 @@ mk-online #77.
   (Ward start), `shadows.ts` (`clashTargets`, `burstStill`, repeats set aside, an empty pool skips the rest),
   `crown.ts`, the bots' draft, the Shadows step track and brew preview, the agents' brew helper, `render.ts` (old-rule
   blocks), `harness/RULES-AI.md`, `scripts/clash-check.ts`, `lengthdiag --clash=0..7 --wardStart`.
+
+## 69. Blowback keeps its name: the second Still gets the bad batch (2026-11-15, Nick)
+
+- **Words only, no rule change.** §68 shipped the rule as "the Clash"; Nick wants the name **Blowback** kept, and the
+  theme reframed: when your Still pours, a rival's Still on the same number gets the **bad batch**, and with 3+
+  Mobsters there it **blows**. Player text says "blows", not "bursts"; "the Clash" is retired.
+- Rules set: the Rulebook (Stills legend, the Blue Wall, the Shadows intro, step 2 **Blowback**, its Kingpin's Tip,
+  the worked example, the Glossary's Blowback, Padlocked and Pressure), the Town Planner (step 2), the Playbooks'
+  backs ("Blowback Dead"), The Almanac (lessons 3, 6, 8, 14 and 27), the Brew Simulator, `tools/still_art.js`
+  comments, CLAUDE.md (*Blowback: the second Still gets the bad batch*).
+- mk-online: the player-facing text only (the Shadows step track, prompts, log lines, the agents' brew helper and
+  `harness/RULES-AI.md`). Identifiers (`G.clash`, `clashTargets`, `--clash`) stay.
