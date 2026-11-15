@@ -16,11 +16,11 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 **Respect** = completed Jobs (1, 2 or 3 each) plus Bribe cards (1 to 4 each) plus **3** for each Title card you hold, **−1** per Rat card you hold, **−2** per Shylock's Mark you hold. All of it is public.
 
-**Titles** (two cards, both in the Supply at the start): the **Harbormaster** (most Docks) and the **Night Mayor** (most Speakeasies; there are 8, the 4 ordinary ones and the 4 High Society Venues), **3 Respect** each while you hold it. When **your own Play** ends with you Controlling more Docks than every other boss, you take the Harbormaster, from the Supply or from whoever holds it; the same for Speakeasies and the Night Mayor. A Title moves no other way: falling behind does not lose it, a rival must pull ahead on his own Play. So a leader's Title is the one part of his Respect you can take off him before he crowns. The state view's Titles line shows the holders and the counts.
+**Titles** (two cards, both in the Supply at the start): the **Harbormaster** (most Docks) and the **Night Mayor** (most Speakeasies; there are 8, the 4 ordinary ones and the 4 High Society Venues), **3 Respect** each while you hold it. They are counted **at Sunset**: the boss Controlling more Docks than every other boss takes the Harbormaster, from the Supply or from whoever holds it; the same for Speakeasies and the Night Mayor. On a tie for the most, the card goes back to the Supply. A Title moves at no other time, so a card won at Sunset is held all through the next Day, and a leader's Title is the one part of his Respect you can take off him before he crowns: pass his count before Sunset. The state view's Titles line shows the holders and the counts.
 
 ## 2. Components and currencies
 
-- **Mob**: 1 Boss, 12 Runners, 1 Safehouse. You start with your Boss, 2 Runners and your Safehouse in your home Ward, and 2 Runners each on your starting Dock and Speakeasy; the other 6 Runners wait in your supply. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
+- **Mob**: 1 Boss, 12 Runners, 1 Safehouse. You start with your Boss, 1 Runner and your Safehouse in your home Ward, and 2 Runners each on your starting Dock and Speakeasy; the other 7 Runners wait in your supply. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
 - **Influence markers**: you own 6 at the start, and each of your four Bribe cards brings one more, so 10 at most. A marker is in one of four places:
   - **Reserves** (stash): uncommitted, and the source for Job Stakes;
   - **Ledger** (operations): max **5**, the only markers you can spend;
@@ -30,23 +30,24 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - **Cash**: start with **$1,500**. Cash is public.
 - **Barrels**: Moonshine (supply 30), Havana Rum (supply 20). Finite; empty supply produces nothing.
 - **Heat Track**: 5 spaces, with markers in order and the newest on the right.
-- **Muscle** (brew and combat dice): the Mobsters in one District, **max 5**: each man brews one barrel and rolls one die; a sixth man adds nothing. A Safehouse alone counts 0. Blowback dead are set by the Still's Pressure, not the crew (below).
+- **Muscle** (brew and combat dice): the Mobsters in one District, **max 5**: each man brews one barrel and rolls one die; a sixth man adds nothing. A Safehouse alone counts 0. Clash dead are set by the Still's Pressure, not the crew (below).
 
 ## 3. The Day
 
 ### Shadows (in this order)
 
-1. **Roll**: the holder of Turn Token #1 rolls **players + 1** Red dice. The **Mash** (1–6) was rolled at random yesterday, so everyone knows it a Day ahead.
-2. **Draft and brew** (draftDice): in Turn Order, each player takes exactly one Red die and brews at once.
+1. **Roll**: the holder of Turn Token #1 rolls **players + 1** Red dice, and **any die that repeats a face is set aside** (keep one of each face). The pool can hold fewer dice than there are players. The **Mash** (1–6) was rolled at random yesterday, so everyone knows it a Day ahead.
+2. **Draft and brew** (draftDice): in Turn Order, each player takes exactly one Red die and brews at once. If the pool is empty when your turn comes, you draft nothing.
    - Brew Number = Mash + Red.
    - Every active Still you Control with that number (Mobsters present, no Squad) makes **Moonshine = that District's Muscle** (its Mobsters, max 5), taken from the supply. Each Still fires at most once a Day.
 3. **Split the Batch** (chooseRelay): if the Still in your Boss's District fired, one other active Still you Control that is Adjacent (border or bridge, not water) to the Boss's District also fires, whatever its number, at its own Muscle.
    - It fires automatically when there is one candidate.
    - With 2+ candidates you choose one.
-4. **Blowback**: the one undrafted Red + Mash gives the Blowback Number.
-   - Every Controlled, unpadlocked Still with that number bursts, **whoever owns it**, killing Mobsters there by the Still's **Pressure** (6 on the 7, one less each step away, 1 on the 2 and the 12): Pressure 1–2 kills 1, 3–4 kills 2, 5–6 kills 3.
+4. **The Clash** (part of your brew): when a Still of yours pours on your Brew Number, every **rival's** active Still with the same number bursts if **3 or more Mobsters** stand there. Every Still number is printed on two Districts (the 7 on all four High Society Venues; the 2 and the 12 on one each), so only a number you share with a rival can burst, and whoever brews it first bursts the other.
+   - Dead by the Still's **Pressure** (6 on the 7, one less each step away, 1 on the 2 and the 12): Pressure 1–2 kills 1, 3–4 kills 2, 5–6 kills 3.
    - Runners die first; the Boss dies only if no Runner is left there.
-   - Barrels and turf are kept.
+   - Barrels and turf are kept. Split the Batch causes no Clash. The die left in the pool does nothing.
+   - No starting crew has 3 Mobsters, so nothing bursts on Day 1.
 5. **The Offers**, in **reverse** Turn Order, one action each:
    - **Take a Job** (claimJob): stake Influence from **Reserves** equal to its Stake. Its gap stays empty for the rest of the Offers.
    - **Walk Away** from a held Job (walkAwayJob): the stake returns to Reserves and the card is discarded.
@@ -71,7 +72,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 - A Job pays its Stake: **1, 2 or 3 Respect**.
 - The Market shows players + 1 cards.
-- A Job completes at the end of **your own Play** that did the deed (the same moment you may claim a Title) (including the fight it started and any Raid it set off). Its stake returns to Reserves and the card scores.
+- A Job completes at the end of **your own Play** that did the deed (including the fight it started and any Raid it set off). Its stake returns to Reserves and the card scores.
 - "Seize" means Control must change hands from a rival (a won fight or a Fold). Walking in on a rival Safehouse with no Mobsters is no Seize: nobody Controlled the District.
 - The Butcher's Ledger Seizes **from** a crew: "Seize a District from 4+ rival Mobsters" (anywhere; a Boss counts). The crew is counted as it met your Move at the door, so a Fold pays the Job as surely as winning the fight; only a stand that holds the District denies it.
 - The Toll Booth Trap is a kill: "Kill a rival Boss" (anywhere). A "kill" is a rival Mobster shot dead in your own Play's fight; a Raid's arrests are not kills. It pays even if you then lose the fight, and a Fold denies it, so a Boss with no Safe District to Scram to is the target.
@@ -117,7 +118,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 - **Safe District**: no rival Mobsters and no Police Squad. Barrels and Safehouses do not count, so a District where only a rival Safehouse stands is Safe.
 - **Hostile District**: rival Mobsters stand in it.
 - **A rival Safehouse**: whoever takes Control of a District holding one (Move, Haul, Advance, Scram, Rise, a won fight, a Fold) must take it over (yours moves in, free) or destroy it (back to its owner's supply). Walking in on one with no Mobsters starts no Standoff.
-- **Padlocked**: a District holding a Police Squad. Nobody enters it; its Still and Speakeasy are shut: no brewing, no Blowback, no sales. Every other Speakeasy is **open**.
+- **Padlocked**: a District holding a Police Squad. Nobody enters it; its Still and Speakeasy are shut: no brewing, no bursting, no sales. Every other Speakeasy is **open**.
 - **District kinds**: every Borough has one ordinary Speakeasy, one High Society Venue, two Docks and its Ward (engine tag \`ghetto\`); Staten Island has two Docks. Manhattan and Queens also hold a **Precinct** (East Harlem, Corona): no Still and no business, where a Squad starts and goes home. Every other District has a Still numbered 2–12.
 - **Still Pressure** = 6 − |7 − number|, so the 7 is hottest and gets 6.
 
@@ -199,11 +200,11 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 ## 9. Strategic notes
 
 - **Influence buys capacity, not actions.** The Ledger holds 5 markers a Day. Only the High Society Rum Kickback refills it mid-Day: pour on your last two markers so there are empty slots, and N Rum refills N slots only if you have N+1 markers clear of Jobs and the Heat Track (the pour's own Heat locks one away).
-- **Drafting is also defence.** The die you leave in the pool may burst your own best Still. The last seat drafts from what is left but picks first at The Offers.
+- **Drafting is also attack and defence.** If you and a rival share a number and its die is in the pool, whoever drafts it first pours and bursts the other's crew (if 3+). The last seat drafts from what is left, sometimes nothing, but picks first at The Offers.
 - **Laying Low early wins tempo.** You draft first tomorrow and brew before the supply runs thin. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
 - **The Crown takes visible steps:** 20 Respect, then the walk into a rival's home Ward (usually a fight, since it is his turf), then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise back in his home Borough plus the walk back out to a rival's Ward.
-- **Titles are Respect you can win and lose.** One more Dock or Speakeasy than everyone else, at the end of your own Play, is 3 Respect. Spreading to Docks and bars pays for itself (Extort, Trade, Unload) and pulls a Title with it. If a leader's Title is part of his 20, pass his count and claim it on your Play: he drops below the bar before his turn.
+- **Titles are Respect you can win and lose.** One more Dock or Speakeasy than everyone else at Sunset is 3 Respect. Spreading to Docks and bars pays for itself (Extort, Trade, Unload) and pulls a Title with it. If a leader's Title is part of his 20, pass his count (or tie it) before Sunset: the card leaves him and he drops below the bar.
 - **The Crown ends the game before Sunset.** Promises due at Sunset go unpaid, so plan for betrayal.
 - **Raids go for barrels.** A Raid hits a mob's District with the most barrels, so a Rum stockpile in your Venue is Raid bait.
 
@@ -221,8 +222,8 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 **Stills and the draft**
 
 - **The Magic of Seven.** No Mash can starve a 7, and the four 7s are the High Society Venues. The Mash is rolled at random, so a Still's odds fall away from the 7: the 6s and 8s fire often, the 2s and 12s rarely. Hold several numbers and you fire most mornings.
-- **Read Tomorrow's Mash.** It is face-up all through the Hustle: move onto the numbers it can reach, and thin out where tomorrow's Blowback can land.
-- **The Double.** Your Blowback risk is a second die of your number left in the pool. Draft to leave the Blowback on a rival's Still, not yours.
+- **Read Tomorrow's Mash.** It is face-up all through the Hustle: move onto the numbers it can reach, and keep crews under 3 on numbers a rival who drafts before you also holds.
+- **Own your number.** A Still nobody else holds the number of never bursts. Take both Districts of a number and it is yours alone; take the other District of a rival's big stack and you threaten it every morning his number is in reach.
 
 **Jobs and Bribes**
 
