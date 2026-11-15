@@ -30,7 +30,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - **Cash**: start with **$1,500**. Cash is public.
 - **Barrels**: Moonshine (supply 30), Havana Rum (supply 20). Finite; empty supply produces nothing.
 - **Heat Track**: 5 spaces, with markers in order and the newest on the right.
-- **Muscle** (brew and combat dice): the Mobsters in one District, **max 5**: each man brews one barrel and rolls one die; a sixth man adds nothing. A Safehouse alone counts 0. Clash dead are set by the Still's Pressure, not the crew (below).
+- **Muscle** (brew and combat dice): the Mobsters in one District, **max 5**: each man brews one barrel and rolls one die; a sixth man adds nothing. A Safehouse alone counts 0. Blowback dead are set by the Still's Pressure, not the crew (below).
 
 ## 3. The Day
 
@@ -43,11 +43,11 @@ The game ends mid-Day on the spot. Nothing else is settled.
 3. **Split the Batch** (chooseRelay): if the Still in your Boss's District fired, one other active Still you Control that is Adjacent (border or bridge, not water) to the Boss's District also fires, whatever its number, at its own Muscle.
    - It fires automatically when there is one candidate.
    - With 2+ candidates you choose one.
-4. **The Clash** (part of your brew): when a Still of yours pours on your Brew Number, every **rival's** active Still with the same number bursts if **3 or more Mobsters** stand there. Every Still number is printed on two Districts (the 7 on all four High Society Venues; the 2 and the 12 on one each), so only a number you share with a rival can burst, and whoever brews it first bursts the other.
+4. **Blowback** (part of your brew): when a Still of yours pours on your Brew Number, every **rival's** active Still with the same number gets the **bad batch**, and it blows if **3 or more Mobsters** stand there. Every Still number is printed on two Districts (the 7 on all four High Society Venues; the 2 and the 12 on one each), so only a number you share with a rival can blow, and whoever brews it first hands the other the bad batch.
    - Dead by the Still's **Pressure** (6 on the 7, one less each step away, 1 on the 2 and the 12): Pressure 1–2 kills 1, 3–4 kills 2, 5–6 kills 3.
    - Runners die first; the Boss dies only if no Runner is left there.
-   - Barrels and turf are kept. Split the Batch causes no Clash. The die left in the pool does nothing.
-   - No starting crew has 3 Mobsters, so nothing bursts on Day 1.
+   - Barrels and turf are kept. Split the Batch hands out no bad batch. The die left in the pool does nothing.
+   - No starting crew has 3 Mobsters, so nothing blows on Day 1.
 5. **The Offers**, in **reverse** Turn Order, one action each:
    - **Take a Job** (claimJob): stake Influence from **Reserves** equal to its Stake. Its gap stays empty for the rest of the Offers.
    - **Walk Away** from a held Job (walkAwayJob): the stake returns to Reserves and the card is discarded.
@@ -118,7 +118,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 - **Safe District**: no rival Mobsters and no Police Squad. Barrels and Safehouses do not count, so a District where only a rival Safehouse stands is Safe.
 - **Hostile District**: rival Mobsters stand in it.
 - **A rival Safehouse**: whoever takes Control of a District holding one (Move, Haul, Advance, Scram, Rise, a won fight, a Fold) must take it over (yours moves in, free) or destroy it (back to its owner's supply). Walking in on one with no Mobsters starts no Standoff.
-- **Padlocked**: a District holding a Police Squad. Nobody enters it; its Still and Speakeasy are shut: no brewing, no bursting, no sales. Every other Speakeasy is **open**.
+- **Padlocked**: a District holding a Police Squad. Nobody enters it; its Still and Speakeasy are shut: no brewing, no Blowback, no sales. Every other Speakeasy is **open**.
 - **District kinds**: every Borough has one ordinary Speakeasy, one High Society Venue, two Docks and its Ward (engine tag \`ghetto\`); Staten Island has two Docks. Manhattan and Queens also hold a **Precinct** (East Harlem, Corona): no Still and no business, where a Squad starts and goes home. Every other District has a Still numbered 2–12.
 - **Still Pressure** = 6 − |7 − number|, so the 7 is hottest and gets 6.
 
@@ -200,7 +200,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 ## 9. Strategic notes
 
 - **Influence buys capacity, not actions.** The Ledger holds 5 markers a Day. Only the High Society Rum Kickback refills it mid-Day: pour on your last two markers so there are empty slots, and N Rum refills N slots only if you have N+1 markers clear of Jobs and the Heat Track (the pour's own Heat locks one away).
-- **Drafting is also attack and defence.** If you and a rival share a number and its die is in the pool, whoever drafts it first pours and bursts the other's crew (if 3+). The last seat drafts from what is left, sometimes nothing, but picks first at The Offers.
+- **Drafting is also attack and defence.** If you and a rival share a number and its die is in the pool, whoever drafts it first pours and hands the other's crew the bad batch (it blows if 3+). The last seat drafts from what is left, sometimes nothing, but picks first at The Offers.
 - **Laying Low early wins tempo.** You draft first tomorrow and brew before the supply runs thin. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
 - **The Crown takes visible steps:** 20 Respect, then the walk into a rival's home Ward (usually a fight, since it is his turf), then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise back in his home Borough plus the walk back out to a rival's Ward.
@@ -223,7 +223,7 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 
 - **The Magic of Seven.** No Mash can starve a 7, and the four 7s are the High Society Venues. The Mash is rolled at random, so a Still's odds fall away from the 7: the 6s and 8s fire often, the 2s and 12s rarely. Hold several numbers and you fire most mornings.
 - **Read Tomorrow's Mash.** It is face-up all through the Hustle: move onto the numbers it can reach, and keep crews under 3 on numbers a rival who drafts before you also holds.
-- **Own your number.** A Still nobody else holds the number of never bursts. Take both Districts of a number and it is yours alone; take the other District of a rival's big stack and you threaten it every morning his number is in reach.
+- **Own your number.** A Still nobody else holds the number of never gets the bad batch. Take both Districts of a number and it is yours alone; take the other District of a rival's big stack and you threaten it every morning his number is in reach.
 
 **Jobs and Bribes**
 
