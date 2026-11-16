@@ -1651,3 +1651,19 @@ mk-online #77.
   comments, CLAUDE.md (*Blowback: the second Still gets the bad batch*).
 - mk-online: the player-facing text only (the Shadows step track, prompts, log lines, the agents' brew helper and
   `harness/RULES-AI.md`). Identifiers (`G.clash`, `clashTargets`, `--clash`) stay.
+
+## 70. Queens starts on Whitestone (2026-11-16, Nick)
+
+- **The rule.** Queens starts on Flushing (Boss, 1 Runner, Safehouse), Astoria (2 Runners) and **Whitestone**
+  (2 Runners), and Whitestone and Jamaica swap Stills: **Whitestone 5, Jamaica 3**. Jamaica borders only Richmond
+  Hill and Brownsville, so the Jamaica pair started cut off from the family; Whitestone borders Astoria and Flushing,
+  so every Borough now starts on three Districts joined by borders. Pressure still totals 12 and the 4, 5, 6 still
+  mirror Brooklyn's. **Jamaica Ginger** reads "Trade 4+ barrels at Jamaica." (it was Whitestone), keeping it on the
+  Queens Dock nobody starts on.
+- Rules set: the Town Planner (Queens' Setup and Still rows), the board (`tools/build_board.js` roster; Stills only,
+  no geometry change), the Jobs deck (`tools/gen_deck.py`, `Jobs Cards v0.9.html`), `tools/overlap_audit.py`,
+  CLAUDE.md (*Queens starts on Whitestone*). The Rulebook, Almanac and Playbooks name neither District.
+- mk-online: `G.queensWhitestone` on new Open City games (`opencity.ts` `applyOpenCity(on, whitestone)`, Stills and
+  Jamaica Ginger's Open City entry; `setup.ts` starting Dock); Open City saves without it keep Jamaica, Jamaica 5 and
+  the card at Whitestone. `public/board.svg` re-copied. `scripts/opencity-check.ts` checks every start is joined up;
+  `lengthdiag --queensWhitestone=0` gives the old start.

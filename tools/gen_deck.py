@@ -143,8 +143,10 @@ ONES = [
     # Art: Rum Row 3 (the rainier sibling of Rum Row's painting), provisional.
     # 2026-11-08 (Nick): Whitestone and Jamaica swapped roles (Whitestone the Contact Dock, Queens starts on
     # Jamaica), so the card moved to Whitestone and kept its name: the tonic, not the place.
+    # 2026-11-16 (Nick): Queens starts on Whitestone again (joined to Astoria and Flushing), so the
+    # card went back to Jamaica, the Queens Dock nobody starts on.
     ("Jamaica Ginger", "Rum Row 3.jpg", "Trade",
-     "Trade <b>4+ barrels</b> at <b>Whitestone</b>.",
+     "Trade <b>4+ barrels</b> at <b>Jamaica</b>.",
      "Sold by the case as a tonic. Nobody asks what ails you."),
     # "a Pier 6 brawl" was real period slang for an all-out waterfront fight.
     # TRIED AND REVERTED: pinning this to Jamaica Bay as the hostile mirror of

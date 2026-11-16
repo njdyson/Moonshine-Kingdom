@@ -105,7 +105,9 @@ const fillId = d => `fill-${d.boro}`;
 // business, where the two Squads start and come home; Belmont and Red Hook are Docks, ten in all,
 // and every Dock Trades 1:1, so the Contact Docks and their schooners retired. The mainland 2 and
 // 12 went (the Bowery 11, Whitestone 3), Astoria and Coney Island are Queens' and Brooklyn's bars
-// on the 6, and Red Hook took a 3: every start still totals Pressure 12.
+// on the 6, and Red Hook took a 3: every start still totals Pressure 12. Since 2026-11-16 (Nick) Queens
+// starts on Whitestone, which borders Astoria and Flushing (Jamaica bordered neither), and the two
+// Docks swapped Stills: Whitestone 5, Jamaica 3.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
   { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club' },
@@ -122,8 +124,8 @@ const DISTRICTS = [
   { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle' },
   { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 6, venue: 'Bohemian Hall', setup: 'runners' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
-  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 3 },
-  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
+  { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
+  { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3 },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
   { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 6, venue: 'Ruby’s Joint', setup: 'runners' },
