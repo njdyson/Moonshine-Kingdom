@@ -283,6 +283,19 @@ against 3.4; Kickbacks 26.8 a game against 6.6; Rum Traded 89 against 34.5; Exto
 flat (31 against 33); about 4.5 Snitches and 5.5 homecomings a game. Bots barely used Hook and Patsy. Deferred: new
 map connections (Hunts Point to Sugar Hill was floated) and a separate Influence sink.
 
+## Queens starts on Whitestone
+
+Since 2026-11-16 (Nick; mk-online-rules-sync §70, bot rows in `/mnt/project-files/bot-runs/log.md`). Queens
+starts on **Flushing, Astoria and Whitestone**, and Whitestone and Jamaica swapped Stills: **Whitestone 5,
+Jamaica 3**. Jamaica borders only Richmond Hill and Brownsville, so the two Runners there stood apart from the
+rest of the family, an easy first kill; Whitestone borders Astoria and Flushing, so every Borough now starts on
+three Districts joined by borders. The start still totals Pressure 12 and mirrors Brooklyn's 4, 5, 6, so the
+Blowback twins are unchanged. Two side effects: Queens no longer starts beside Brooklyn's home Ward (both Wards
+are now two Moves from the other side's start), and **Jamaica Ginger** went back to Jamaica ("Trade 4+ barrels
+at Jamaica"), the Queens Dock nobody starts on, as it followed the empty Dock on 2026-11-08. Where older
+sections below say Queens starts on Jamaica, this supersedes them. mk-online: `G.queensWhitestone`; Open City
+saves without it keep the Jamaica start.
+
 ## Everything is on the table
 
 Since 2026-09-26 cash is open information: it sits on the table in front of you and anyone may
