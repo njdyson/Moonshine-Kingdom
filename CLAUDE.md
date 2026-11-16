@@ -111,7 +111,7 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - The old Title cards (with powers) and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner. Two Respect-only Titles came back on 2026-11-14 (see *Titles: Harbormaster and Night Mayor*).
 - Tomorrow's Mash is rolled at random; the Harbormaster (most Docks named it) retired on 2026-11-14 (see *Random Mash*). The fourth Shadows step is **Ferment Tomorrow's Mash** (it was "The Harbormaster" from 2026-09-16, "The Morning Fix" before that).
 - The four #7 mainland Speakeasies are fixed High Society venues. They began under the Police Squads until the Open City (2026-11-11), which starts them open. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
-- There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; the Still's Pressure sets Blowback casualties (see *Small Mob*). Blowback removes Runners first; the Boss dies only with no Runner left in that District.
+- There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; Blowback kills half the crew, rounded up, a lone man spared (since 2026-11-16; see *Blowback*). Blowback removes Runners first, so it never takes a Boss.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
 ## Blowback: the second Still gets the bad batch
@@ -122,8 +122,18 @@ mk-online-rules-sync §68). **This supersedes** the Blowback wherever older sect
 Red, "the last seat holds the match", a leftover die picking the number).
 
 - **Blowback.** When a Still of yours pours on your Brew Number, every **rival's** active Still with the same number
-  gets the **bad batch**, and it **blows** if **3+ Mobsters** stand there. Dead by the gauge (1 / 2 / 3, unchanged),
-  Runners first. Split the Batch hands out no bad batch.
+  gets the **bad batch** and **blows**: it loses **half its Mobsters, rounded up**, counting up to five (2 lose 1, 3
+  or 4 lose 2, 5+ lose 3), Runners first, and a **lone man walks away**. **No Still blows on Day 1.** Split the Batch
+  hands out no bad batch. Runners die first and a lone Boss is spared, so a Blowback never takes a Boss.
+- **Dead by crew, not Pressure** (Nick, 2026-11-16, after a first look at the 2026-11-15 rule; the write-up
+  `/mnt/project-files/reviews/blowback-ratio-2026-11-16.md`, mk-online-rules-sync §71). It shipped on 2026-11-15 as
+  "3+ Mobsters blow, dead by the gauge (1 / 2 / 3)". Nick disliked the **3-man cliff**: three men on a hot Still all
+  died while two were untouched. He suggested half the crew, rounded up; the lone man is spared because in bots
+  plain rounding up killed lone Bosses 8.5 times a game and slowed the crown ten Days. Weighed and not taken the same
+  day: half rounded up with no exception, and half rounded down (0, 1, 1, 2, 2). Bots (40 games, mode 10): crown
+  median 32 against 29.5, 0.63 Blowbacks a Day, no Boss deaths by Blowback. The gauge no longer sets the dead:
+  Pressure is only how often a Still fires (and the Big Bust tiebreak and two Jobs), and the board's three colour
+  pairs, drawn for the old dead, now only group it. Nick may want the six-step ramp back.
 - **Words** (Nick, the same evening, after it shipped as "the Clash"): keep the name **Blowback**, and frame it as the
   second Still on a number getting the bad batch, which is what blows it. The verb is **blows**, not "bursts". The
   first draft's theme ("two crews can't cook the same batch in one town") and the name "the Clash" are retired; the
@@ -131,8 +141,9 @@ Red, "the last seat holds the match", a leftover die picking the number).
 - **Repeats are set aside.** The Red pool is still one more than the players, but any die that repeats a face goes
   aside, so a number fires at most once a morning and nobody tracks cold Stills (Nick's call, over a "blown Still
   stays cold" rule). A seat may find the pool empty: one more reason to Lay Low early. The leftover die does nothing.
-- **The Boss starts with 1 Runner** in his Ward (7 in supply). With Boss + 2 the Ward was a crew of 3, and Day 1's
-  random turn order would have blown two mobs' mirrored starts (Nick).
+- **The start is Boss and 2 in the Ward again** (since 2026-11-16). From 2026-11-15 it was Boss and 1, so no
+  starting crew reached 3; with no threshold, "No Still blows on Day 1" does that job instead (the mirrored starts
+  would otherwise blow off random turn order).
 - Every number is printed twice (the 7 four times; the 2 and 12 once), and the starts mirror across a side
   (Manhattan and the Bronx on 8, 9, 10; Queens and Brooklyn on 4, 5, 6), so neighbours are natural rivals. The
   Almanac's lesson 8, **The Double**, is now that twin ("Every boiler has a twin, and the twin holds the gun").
