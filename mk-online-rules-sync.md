@@ -1667,3 +1667,20 @@ mk-online #77.
   Jamaica Ginger's Open City entry; `setup.ts` starting Dock); Open City saves without it keep Jamaica, Jamaica 5 and
   the card at Whitestone. `public/board.svg` re-copied. `scripts/opencity-check.ts` checks every start is joined up;
   `lengthdiag --queensWhitestone=0` gives the old start.
+
+## 71. Blowback kills half the crew; none on Day 1; Boss and 2 again (2026-11-16, Nick)
+
+- **The rule**: a rival Still on your Brew Number gets the bad batch and loses **half its Mobsters, rounded up**,
+  counting up to five (2 lose 1, 3 or 4 lose 2, 5+ lose 3), Runners first; a **lone man walks away**. The 3+
+  threshold and the gauge's 1 / 2 / 3 go. **No Still blows on Day 1.** The Boss starts with **2 Runners** in his
+  Ward again (6 in supply). A Blowback never takes a Boss.
+- Why (Nick): the 3-man cliff (three men on a hot Still all died, two were untouched). Write-up: the project's
+  `reviews/blowback-ratio-2026-11-16.md`; bots in `bot-runs/log.md` (crown 32 against 29.5).
+- Rules set: the Rulebook (Stills legend, Setup's garrison, step 2 and its Tip, the Day 6 example, the Glossary's
+  Blowback and Pressure), the Town Planner (step 2, the Home Ward key, the gauge comment), the Playbooks' backs
+  ("Crew / Blowback Dead": 1, 2, 3&ndash;4, 5+), The Almanac (lessons 2, 8 and 27), the Brew Simulator's model,
+  `tools/still_art.js` comments, CLAUDE.md (*Blowback*).
+- mk-online: `G.clash` 10 on new games (`blowbackDead` by crew, `clashGraceOn` for Day 1, `wardStart` back to 2);
+  saves on 5 keep the 3+ gauge rule and Boss and 1 (`render.ts` tells the agents), saves without `clash` the
+  leftover-die Blowback. `harness/RULES-AI.md`, the agents' brew helper, `scripts/clash-check.ts`, `lengthdiag
+  --clash` defaults to 10.

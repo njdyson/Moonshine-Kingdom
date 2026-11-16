@@ -132,7 +132,7 @@
     </div>
     <details class="acc" open>
       <summary>How Mobsters &amp; the clump work</summary>
-      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there): each man brews one barrel, up to <b>5</b>. A Still gets the bad batch when a rival brews its number first, and blows only with <b>3 or more</b> Mobsters there (tick <b>A rival holds its double?</b> for each number a rival shares). A Blowback kills by the boiler's Pressure, not the crew: <b>1</b> at Pressure 1&ndash;2, <b>2</b> at 3&ndash;4, <b>3</b> at 5&ndash;6. A dozen Runners and a Boss make 13 men, so a five-man Still is most of a family. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers: the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never Split.</p>
+      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there): each man brews one barrel, up to <b>5</b>. A Still gets the bad batch when a rival brews its number first (tick <b>A rival holds its double?</b> for each number a rival shares), and loses half its crew, rounded up, counting up to 5: <b>1</b> of 2, <b>2</b> of 3 or 4, <b>3</b> of 5 or more. A lone man walks away. A dozen Runners and a Boss make 13 men, so a five-man Still is most of a family. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers: the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never Split.</p>
     </details>
     <div class="presets">
       <span class="lbl">Presets:</span>
@@ -217,8 +217,8 @@
 <script>
 // ---- Muscle: one barrel per Mobster, up to 5 (since 2026-11-09) ----
 const ratio = m => Math.min(5, m);
-// ---- Blowback dead by the boiler's Pressure (6 - |n - 7|): 1-2 kills 1, 3-4 kills 2, 5-6 kills 3; only a crew of 3+ blows ----
-const blowDead = n => Math.ceil((6 - Math.abs(n - 7)) / 2);
+// ---- Blowback dead: half the crew (up to 5 counted), rounded up; a lone man is spared (since 2026-11-16) ----
+const blowDead = m => (m < 2 ? 0 : Math.ceil(Math.min(5, m) / 2));
 const d6 = () => 1 + Math.floor(Math.random() * 6);
 
 // ---- Build table UI ----
@@ -391,12 +391,12 @@ function simulate(rows, bossStill, opts, N) {
     if (relayed) relayDays++;
     let net = barrels * opts.barrel;
 
-    // Blowback: our shared Stills on a number a rival poured first get the bad batch, and blow with 3+ Mobsters.
+    // Blowback: our shared Stills on a number a rival poured first get the bad batch: half the crew dies, rounded up.
     let blew = false, bossLost = false;
     rows.forEach((s, i) => {
-      if (s.shared && burstNums.has(s.num) && s.mob >= 3) {
+      if (s.shared && burstNums.has(s.num) && blowDead(s.mob) > 0) {
         blew = true;
-        const cas = Math.min(s.mob, blowDead(s.num));
+        const cas = blowDead(s.mob);
         if (i === bossStill && cas >= s.mob) bossLost = true; // Runners absorb hits before the Boss
         net -= cas * opts.recruit;
       }
@@ -456,7 +456,7 @@ document.getElementById('run').addEventListener('click', () => {
       : `<span class="bad">costing $${Math.abs(delta).toFixed(0)}/Day</span>`;
     const risk = r.pBossLost
       ? ` In a Blowback his Runners don't cover him, and the Boss goes down about <b>${(100 * r.pBossLost).toFixed(1)}%</b> of Days.`
-      : ` Nothing here can blow the Boss: a crew under 3, an unshared number, or Runners enough to take the hit.`;
+      : ` Blowback never takes the Boss: half the crew dies, Runners first, and a lone man walks away.`;
     msg = `Parking the Boss is ${worth} versus leaving him off the Stills.${risk}`;
   }
   document.getElementById('verdict').innerHTML = msg;
