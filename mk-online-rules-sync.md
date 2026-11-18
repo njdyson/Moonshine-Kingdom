@@ -1684,3 +1684,27 @@ mk-online #77.
   saves on 5 keep the 3+ gauge rule and Boss and 1 (`render.ts` tells the agents), saves without `clash` the
   leftover-die Blowback. `harness/RULES-AI.md`, the agents' brew helper, `scripts/clash-check.ts`, `lengthdiag
   --clash` defaults to 10.
+
+## 72. The Even City (2026-11-18, Nick)
+
+- **The rule**: 15 Runners (Boss and 2, 3, 3 at the start) and the Muscle Ratio for brew and combat dice; the
+  Harbormaster names Tomorrow's Mash (a tie rolls it); no Titles; four Squads, one a Borough, starting on the High
+  Society Venues (Padlocked), reach locked to their Borough, no homecoming (a Squad with nobody in reach stays put);
+  East Harlem and Corona off the board (five Districts a Borough, 22 in all); Unload sells up to 5 and draws Heat only at a Venue; Snitch takes
+  no card; no Rat cards and no Handshakes. Everything else stands.
+- Why (Nick): reworking the rules item by item after the 2026-11-16 zoom-out; cut pieces can come back if missed.
+- Rules set: the Rulebook (Contents, the Map, Components, Setup, the Brew and its callout, step 4, Sunset, Unload,
+  Snitch, Respect, the Titles and Handshake sections, combat dice, Money Talks, Police Raids, the Glossary), the
+  Playbooks (resolution table, Unload, Snitch, the Handshake panels), the Town Planner (Brew, step 4, Heat, Sunset,
+  Raids, the roster and its shields), the Cards sheet (Rat and Title sheets cut), The Almanac (lessons 3, 5 The Leash,
+  21, 24 to 27), both simulators, CLAUDE.md (*The Even City*), and the board (Squads on the Venues, Borough shields, the 22-District map).
+- mk-online: `G.evenCity` on new games (`opencity.ts` `evenCityOn()`, Squads per Borough, Venue starts, Unload cap and
+  Heat, Snitch without a card), `smallMob`, `randomMash` and `titleRespect` off; older saves keep their rules
+  (`migrateSavedGame`). `scripts/even-city-check.ts`; older checks pin their switches. `lengthdiag --evenCity`.
+- **The map** (Nick, 2026-11-18, after eight proofs): East Harlem and Corona are gone. Manhattan is West Side and
+  Sugar Hill side by side over Five Points, the Tenderloin and the Bowery; Belmont borders West Side and Sugar Hill;
+  the Queensboro lands on Sugar Hill (The One-Way Ride follows it). Queens is Astoria and Whitestone over Richmond
+  Hill and Flushing, with Jamaica below (Flushing borders Jamaica; Astoria no longer borders Flushing). Inland:
+  Fordham, Richmond Hill, Flushing. mk-online: `setEvenCityMap()` (data.ts) lays the 22-District connections for
+  Even City games; older saves keep the 24-District board (`public/board-24.svg`, `boardGeometry24.ts`,
+  `scripts/board-geometry-24.json`; `boardcheck.ts --24`).

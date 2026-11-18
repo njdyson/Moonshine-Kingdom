@@ -236,8 +236,8 @@ a:hover{color:var(--gold-bright)}
 /* The last panel sits on the card's foot, so every card in the set ends on one line */
 .sig{--c:9px;margin-top:9px;padding:6px 13px 9px}
 .sig:last-child{margin-top:auto}
-/* The Handshake sits on the back's foot as a rule panel: it is not a Play, so it carries
-   no cost socket (2026-10-12; it was a 0-cost row) */
+/* A rule panel on the back's foot (the Handshake sat here from 2026-10-12 to 2026-11-17): it
+   carries no cost socket */
 .trait--foot{margin-top:auto;padding:8px 14px}
 /* the old 9px gap, kept above it however full the card */
 .card>:nth-last-child(2){margin-bottom:9px}
@@ -298,8 +298,8 @@ a:hover{color:var(--gold-bright)}
 .res-tbl{flex:1;border:1px solid rgba(185,147,47,.55);box-shadow:0 0 0 2px rgba(0,0,0,.35),0 0 0 3px rgba(185,147,47,.16);background:rgba(8,5,3,.35)}
 .res-grid{display:grid;grid-template-columns:1fr 1fr}
 .res-h{background:linear-gradient(#2a1f14,#140e09);color:var(--gold-label);font:700 10.5px Cinzel,serif;text-align:center;padding:6px 5px;border-bottom:1px solid var(--gold-line)}
-.res-k{text-align:center;padding:6px 4px;font:500 11.5px Barlow;color:var(--value);border-top:1px solid var(--cell)}
-.res-v{text-align:center;padding:6px 4px;font:700 11.5px Barlow;color:var(--gold-bright);border-top:1px solid var(--cell);border-left:1px solid var(--cell-strong)}
+.res-k{text-align:center;padding:4px 4px;font:500 11.5px Barlow;color:var(--value);border-top:1px solid var(--cell)}
+.res-v{text-align:center;padding:4px 4px;font:700 11.5px Barlow;color:var(--gold-bright);border-top:1px solid var(--cell);border-left:1px solid var(--cell-strong)}
 /* first data row sits flush under the header rule */
 .res-grid>:nth-child(3),.res-grid>:nth-child(4){border-top:0}
 
@@ -380,7 +380,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell up to <b>5</b> barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. Heat only at High Society.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -397,7 +397,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="desc">Trigger a Police Raid.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -468,7 +468,11 @@ a:hover{color:var(--gold-bright)}
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
           <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
+          <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
           <div class="res-h">Crew</div>
           <div class="res-h">Blowback Dead</div>
           <div class="res-k">1</div><div class="res-v">0</div>
@@ -521,7 +525,6 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   <!-- ============ VIPERS FRONT ============ -->
@@ -541,7 +544,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell up to <b>5</b> barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. Heat only at High Society.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -558,7 +561,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="desc">Trigger a Police Raid.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -629,7 +632,11 @@ a:hover{color:var(--gold-bright)}
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
           <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
+          <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
           <div class="res-h">Crew</div>
           <div class="res-h">Blowback Dead</div>
           <div class="res-k">1</div><div class="res-v">0</div>
@@ -682,7 +689,6 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   <!-- ============ KNIGHTS FRONT ============ -->
@@ -702,7 +708,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell up to <b>5</b> barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. Heat only at High Society.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -719,7 +725,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="desc">Trigger a Police Raid.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -790,7 +796,11 @@ a:hover{color:var(--gold-bright)}
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
           <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
+          <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
           <div class="res-h">Crew</div>
           <div class="res-h">Blowback Dead</div>
           <div class="res-k">1</div><div class="res-v">0</div>
@@ -843,7 +853,6 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   <!-- ============ IRISH FRONT ============ -->
@@ -863,7 +872,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell up to <b>5</b> barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot. Heat only at High Society.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
@@ -880,7 +889,7 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="desc">Trigger a Police Raid.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -951,7 +960,11 @@ a:hover{color:var(--gold-bright)}
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
           <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
+          <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
           <div class="res-h">Crew</div>
           <div class="res-h">Blowback Dead</div>
           <div class="res-k">1</div><div class="res-v">0</div>
@@ -1004,7 +1017,6 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
   </div>
 
   </div>

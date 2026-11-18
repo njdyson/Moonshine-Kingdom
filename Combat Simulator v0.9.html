@@ -390,11 +390,11 @@
           <div class="grid-2">
             <div class="field">
               <label class="label" for="invRunners">Invader Runners</label>
-              <input id="invRunners" type="number" min="0" max="12" step="1" value="3">
+              <input id="invRunners" type="number" min="0" max="15" step="1" value="3">
             </div>
             <div class="field">
               <label class="label" for="occRunners">Occupier Runners</label>
-              <input id="occRunners" type="number" min="0" max="12" step="1" value="3">
+              <input id="occRunners" type="number" min="0" max="15" step="1" value="3">
             </div>
           </div>
 
@@ -432,7 +432,7 @@
                 <span>Ambush (cost 1)</span>
               </label>
               <div id="occAmbushNote" class="kit-note"></div>
-              <div class="kit-note">Raise the Runner count to model a larger garrison: each Mobster rolls one die, up to 5.</div>
+              <div class="kit-note">Raise the Runner count to model a larger garrison: the dice are the Muscle Ratio, half the Mobsters rounded up, up to 5.</div>
               <div class="mobster-total">
                 <span>Total Mobsters</span>
                 <strong id="occMobsterTotal">0</strong>
@@ -605,8 +605,9 @@
     }
 
     function diceFromMobsters(count) {
-      // Muscle: one die per Mobster, up to 5 (since 2026-11-09).
-      return Math.max(0, Math.min(5, count));
+      // The Muscle Ratio: half the Mobsters, rounded up, up to 5 (one die a man from
+      // 2026-11-09 to 2026-11-17).
+      return Math.max(0, Math.min(5, Math.ceil(count / 2)));
     }
 
     function killThreshold(threatLevel) {
@@ -654,7 +655,7 @@
 
     function readConfig() {
       const invKit = els.invKit.value;
-      let invRunners = clamp(Number(els.invRunners.value || 0), 0, 12);
+      let invRunners = clamp(Number(els.invRunners.value || 0), 0, 15);
       const invBosses = els.invBoss.checked ? 1 : 0;
       let stealthTrimmed = false;
 
@@ -670,7 +671,7 @@
           kit: invKit
         },
         occupier: {
-          runners: clamp(Number(els.occRunners.value || 0), 0, 12),
+          runners: clamp(Number(els.occRunners.value || 0), 0, 15),
           bosses: els.occBoss.checked ? 1 : 0,
           ambush: els.occAmbush.checked
         },
@@ -780,8 +781,8 @@
     }
 
     function updateMobsterTotals() {
-      const invRunners = clamp(Number(els.invRunners.value || 0), 0, 12);
-      const occRunners = clamp(Number(els.occRunners.value || 0), 0, 12);
+      const invRunners = clamp(Number(els.invRunners.value || 0), 0, 15);
+      const occRunners = clamp(Number(els.occRunners.value || 0), 0, 15);
       const invBosses = els.invBoss.checked ? 1 : 0;
       const occBosses = els.occBoss.checked ? 1 : 0;
 
