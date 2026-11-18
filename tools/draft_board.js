@@ -175,7 +175,7 @@ const SETTINGS = {
   astoriaCorona: 545, // (530 until 2026-11-12) Astoria / Corona, level once its foot has left the Queens / Brooklyn line
   hpCol: 824, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 850, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (855 until 2026-11-12; 851 until 2026-10-07)
-  queensRows: [545, 660, 755], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew, and Jamaica 808 until the bay was squared off the same day; 670 and 807 until 2026-10-07)
+  queensRows: [545, 660, 722], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew, and Jamaica 808 until the bay was squared off the same day; 670 and 807 until 2026-10-07)
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
   queensSplit: 905, // Richmond Hill | Flushing, upright from Astoria's foot to Jamaica (Queens in five, 2026-11-18)
   coronaBottom: 712, // Corona / Richmond Hill, level from the Queens / Brooklyn line (700 until 2026-10-07)
@@ -189,7 +189,9 @@ const SETTINGS = {
   // the tip's level foot, which the south-east shore leaves at 45 degrees up to the Narrows
   staten: { west: 44, border: 856, tip: 72 }, // three rows of 116 until 2026-10-25: Westerleigh | Stapleton | Tottenville at 800 and 916
   bayTop: 830, // Jamaica Bay's top shore, level (Queens in five, 2026-11-18: raised into Brownsville)
-  bayEast: 90, // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
+  canarsieEast: 668, // Canarsie's bay shore, upright (Nick's sketch, 2026-11-18)
+  rockawaysTip: 722, // the Rockaways' west tip (700 until 2026-11-18)
+  bayEast: 75, // (90 until 2026-11-18) // Jamaica Bay's east side, moved east (Jamaica gives it the ground)
   boweryWest: 96, // the Bowery's west shore, upright (57 until 2026-10-07, a Hudson's width in from the frame: Nick cut Manhattan's south-west corner off)
   rockaways: true, // Jamaica's strip of shore under Jamaica Bay (Nick, 2026-10-07: a feature, not usable space; it keeps the bay a bay)
   southShore: 1000, // the south shore of Brooklyn and Queens, level: Coney Island, Canarsie and Jamaica (1020 until 2026-10-07)
@@ -384,7 +386,7 @@ function draft(S) {
     'brownsville|richmond_hill': [WB_E, BV_Q3],
     'canarsie|brownsville': [[BK_COL, S.redHookSouth], SB_BAY],
     'brownsville|water': [BAY_NE, BT_BEND, SB_BAY],
-    'canarsie|water': S.rockaways ? [SB_BAY, [SB_BAY[0], SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]] // Canarsie's bay shore one upright (2026-11-18)
+    'canarsie|water': S.rockaways ? [SB_BAY, ...(S.canarsieEast > SB_BAY[0] + 1 ? [[S.canarsieEast, SB_BAY[1]]] : []), [Math.max(S.canarsieEast, SB_BAY[0]), SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]] // Canarsie's bay shore one upright (2026-11-18)
       : [SB_BAY, CB_FOOT, [BK_COL, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Brooklyn's south shore level, in line with the Rockaways', Coney Island's corner on the Narrows
     // turned at 45 degrees
@@ -403,7 +405,7 @@ function draft(S) {
     'water|whitestone': [AW, ...(qc < QN_TURN[0] ? [QN_TURN] : []), QN_NORTH],
     'water|red_hook': [WB_J, atY(ER_QN, RED_HOOK_BANK), atY(ER_RH, RED_HOOK_BANK), RH_STUB, [RH_STUB[0], S.redHookSouth]],
     // Jamaica: the bay's east side as an octagon, then a level spit and shore
-    'water|jamaica': S.rockaways ? [BAY_NE, BAY_E, [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [700, 1000 - LIFT], [700, 1012 - LIFT], [708, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]]
+    'water|jamaica': S.rockaways ? [BAY_NE, BAY_E, [856 + B, 945 - LIFT], [801 + B, 1000 - LIFT], [S.rockawaysTip, 1000 - LIFT], [S.rockawaysTip, 1012 - LIFT], [S.rockawaysTip + 8, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]]
       : [BAY_NE, BAY_E, [856 + B, SOUTH_SHORE], [EAST_EDGE, SOUTH_SHORE]],
     // Staten Island tapers to the south-west, roughly as it does: Stapleton's two north corners cut
     // like the harbour's; Tottenville's south-east shore runs at 45 degrees from the Narrows to the
@@ -426,7 +428,7 @@ function draft(S) {
       // Row. It lay along the south-east shore, in the Lower Bay, until then.
       SI: [r1((FRAME_IN + SI_W) / 2), r1((T + SI_FOOT) / 2), -90],
       BK: [(NARROWS[1] + CUT + BK_COL + (S.rockaways ? 26.5 : 0)) / 2, SOUTH_SHORE + BORO_GAP, 0],
-      QN: [((S.rockaways ? 708 : 856 + B) + 1080 - FRAME_IN) / 2, SOUTH_SHORE + BORO_GAP, 0],
+      QN: [((S.rockaways ? S.rockawaysTip + 8 : 856 + B) + 1080 - FRAME_IN) / 2, SOUTH_SHORE + BORO_GAP, 0],
     },
     water: [['EAST RIVER', 403, (BOWERY_BANK + RED_HOOK_BANK) / 2, 0], ['JAMAICA BAY', 728 + B / 2, 926, 0]],
   };
