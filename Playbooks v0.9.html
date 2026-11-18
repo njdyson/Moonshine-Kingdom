@@ -247,9 +247,8 @@ a:hover{color:var(--gold-bright)}
    ============================================================ */
 /* Fronts are row-count-bound: 16 rows, so every 1px here costs ~32px of card. Collect's
    row went on 2026-10-14 and the Faction Trait panel on 2026-10-15, and their room went to
-   the rows. The Open City (2026-11-11) added Patsy and the padding went to 7px; Patsy went on
-   2026-11-12 and the padding came back to 8px: the busiest front has about 30px spare in the 925
-   print box (Chromium), the rest about 37, a buffer for Safari's looser wrap. */
+   the rows: 8px padding and the larger type below leave the busiest mob (the Knights) about 20px spare in
+   the 925 print box (Chromium), a buffer for Safari's looser wrap. */
 .play{display:flex;gap:11px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--rule)}
 /* The backs are not row-bound (they share one layout and have room), so their rows breathe */
 .act{display:flex;gap:11px;align-items:flex-start;padding:7px 2px;border-bottom:1px solid var(--rule)}
@@ -380,12 +379,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $200</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -396,8 +395,8 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="name">Rat</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -467,14 +466,12 @@ a:hover{color:var(--gold-bright)}
       <div class="res-tbl">
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
-          <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
-          <div class="res-h">Crew</div>
-          <div class="res-h">Blowback Dead</div>
-          <div class="res-k">1</div><div class="res-v">0</div>
-          <div class="res-k">2</div><div class="res-v">1</div>
+          <div class="res-h">Dice &middot; Brew &middot; Dead</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
           <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
-          <div class="res-k">5+</div><div class="res-v">3</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
         </div>
       </div>
       <div class="res-tbl">
@@ -484,12 +481,14 @@ a:hover{color:var(--gold-bright)}
           <div class="res-k">Level 1</div><div class="res-v">5&ndash;6</div>
           <div class="res-k">Level 2</div><div class="res-v">4&ndash;6</div>
           <div class="res-k">Level 3</div><div class="res-v">3&ndash;6</div>
+          <div class="res-k">Level 4</div><div class="res-v">2&ndash;6</div>
         </div>
       </div>
     </div>
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -521,7 +520,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   <!-- ============ VIPERS FRONT ============ -->
@@ -541,12 +540,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $200</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -557,8 +556,8 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="name">Rat</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -611,7 +610,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play play--end">
         <div class="cost">1</div>
         <div class="name">Whispers</div>
-        <div class="desc">Look at the <b>top card of the Jobs deck</b>. You may claim it at once, staking from your Reserves; it goes face-up. Leave it, and it stays on top.</div>
+        <div class="desc">Look at the <b>top card of the Jobs deck</b> in secret. You may claim it at once, staking from your Reserves; it goes face-up. Leave it, and it stays on top.</div>
       </div>
     </div>
   </div>
@@ -628,14 +627,12 @@ a:hover{color:var(--gold-bright)}
       <div class="res-tbl">
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
-          <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
-          <div class="res-h">Crew</div>
-          <div class="res-h">Blowback Dead</div>
-          <div class="res-k">1</div><div class="res-v">0</div>
-          <div class="res-k">2</div><div class="res-v">1</div>
+          <div class="res-h">Dice &middot; Brew &middot; Dead</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
           <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
-          <div class="res-k">5+</div><div class="res-v">3</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
         </div>
       </div>
       <div class="res-tbl">
@@ -645,12 +642,14 @@ a:hover{color:var(--gold-bright)}
           <div class="res-k">Level 1</div><div class="res-v">5&ndash;6</div>
           <div class="res-k">Level 2</div><div class="res-v">4&ndash;6</div>
           <div class="res-k">Level 3</div><div class="res-v">3&ndash;6</div>
+          <div class="res-k">Level 4</div><div class="res-v">2&ndash;6</div>
         </div>
       </div>
     </div>
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -682,7 +681,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   <!-- ============ KNIGHTS FRONT ============ -->
@@ -702,12 +701,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $200</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -718,8 +717,8 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="name">Rat</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -765,14 +764,14 @@ a:hover{color:var(--gold-bright)}
     <div class="sig">
       <div class="sec sec--sig"><span class="sec-dia"></span><span class="sec-name">Signature Plays</span><span class="sec-rule"></span></div>
       <div class="play">
-        <div class="cost">2</div>
-        <div class="name">Haul</div>
-        <div class="desc">Move Mobsters (no barrels) <b>two Adjacent steps</b> from a District you Control. The first must be <b>Safe</b>.</div>
+        <div class="cost">1</div>
+        <div class="name">Skiff</div>
+        <div class="desc">Move up to 5 Mobsters (no barrels) from a Coastal District you Control to any other Coastal District (all but Fordham, Corona, Flushing and Richmond Hill).</div>
       </div>
       <div class="play play--end">
         <div class="cost">1</div>
         <div class="name">Torch <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-        <div class="desc">Sacrifice a Pinned Runner to destroy a rival's Safehouse <b>and every barrel there</b>. His Mobsters are unharmed. Heat only as the fight's first shot.</div>
+        <div class="desc">Sacrifice a Pinned Runner in a rival District to destroy their Safehouse <b>and every barrel there</b>. Rival Mobsters are unharmed. Heat only if it's the fight's first shot.</div>
       </div>
     </div>
   </div>
@@ -789,14 +788,12 @@ a:hover{color:var(--gold-bright)}
       <div class="res-tbl">
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
-          <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
-          <div class="res-h">Crew</div>
-          <div class="res-h">Blowback Dead</div>
-          <div class="res-k">1</div><div class="res-v">0</div>
-          <div class="res-k">2</div><div class="res-v">1</div>
+          <div class="res-h">Dice &middot; Brew &middot; Dead</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
           <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
-          <div class="res-k">5+</div><div class="res-v">3</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
         </div>
       </div>
       <div class="res-tbl">
@@ -806,12 +803,14 @@ a:hover{color:var(--gold-bright)}
           <div class="res-k">Level 1</div><div class="res-v">5&ndash;6</div>
           <div class="res-k">Level 2</div><div class="res-v">4&ndash;6</div>
           <div class="res-k">Level 3</div><div class="res-v">3&ndash;6</div>
+          <div class="res-k">Level 4</div><div class="res-v">2&ndash;6</div>
         </div>
       </div>
     </div>
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -843,7 +842,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   <!-- ============ IRISH FRONT ============ -->
@@ -863,12 +862,12 @@ a:hover{color:var(--gold-bright)}
     <div class="play">
       <div class="cost">2</div>
       <div class="name">Unload <img class="icon" src="Art/Icons/fire.svg" alt="Heat"></div>
-      <div class="desc">Sell barrels at a Speakeasy you Control: <b>$200</b> a barrel. <b>High Society</b> venues buy only <b>Rum</b>, at <b>$500</b>, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
+      <div class="desc">Sell barrels at a Speakeasy you Control: <b>Moonshine $200</b>, <b>Rum $500</b>. <b>High Society</b> venues buy <b>Rum</b> only, and each barrel pays a <b>Kickback</b>: 1 Influence from Reserves into an empty Ledger slot.</div>
     </div>
     <div class="play play--end">
       <div class="cost">1</div>
       <div class="name">Trade</div>
-      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 1:1.</div>
+      <div class="desc">At a Dock you Control, swap <b>Moonshine &rarr; Havana Rum</b>, 2:1. At a <b>Contact Dock</b>, 1:1.</div>
     </div>
 
     <div class="sec"><span class="sec-dia"></span><span class="sec-name">Diplomacy</span><span class="sec-rule"></span></div>
@@ -879,8 +878,8 @@ a:hover{color:var(--gold-bright)}
     </div>
     <div class="play">
       <div class="cost">2</div>
-      <div class="name">Snitch</div>
-      <div class="desc">Trigger a Police Raid and take a <b>Rat card</b>: <b>&minus;1 Respect</b>.</div>
+      <div class="name">Rat</div>
+      <div class="desc">Trigger a Police Raid and take the Rat Card: <b>&minus;3 Respect</b>, and no Rat till a rival Rats.</div>
     </div>
     <div class="play play--end">
       <div class="cost">2</div>
@@ -933,7 +932,7 @@ a:hover{color:var(--gold-bright)}
       <div class="play play--end">
         <div class="cost">2</div>
         <div class="name">Hook</div>
-        <div class="desc">Steal <b>up to 2 barrels</b> from an <b>Adjacent</b> District a rival Controls, into one you Control. <b>No Heat.</b></div>
+        <div class="desc">Swap barrels <b>1:1</b> between a District you Control and an <b>Adjacent</b> one a rival Controls, any barrels each way. <b>No Heat.</b></div>
       </div>
     </div>
   </div>
@@ -950,14 +949,12 @@ a:hover{color:var(--gold-bright)}
       <div class="res-tbl">
         <div class="res-grid">
           <div class="res-h">Mobsters</div>
-          <div class="res-h">Dice &middot; Brew</div>
-          <div class="res-k">Each</div><div class="res-v">1, max 5</div>
-          <div class="res-h">Crew</div>
-          <div class="res-h">Blowback Dead</div>
-          <div class="res-k">1</div><div class="res-v">0</div>
-          <div class="res-k">2</div><div class="res-v">1</div>
+          <div class="res-h">Dice &middot; Brew &middot; Dead</div>
+          <div class="res-k">1&ndash;2</div><div class="res-v">1</div>
           <div class="res-k">3&ndash;4</div><div class="res-v">2</div>
-          <div class="res-k">5+</div><div class="res-v">3</div>
+          <div class="res-k">5&ndash;6</div><div class="res-v">3</div>
+          <div class="res-k">7&ndash;8</div><div class="res-v">4</div>
+          <div class="res-k">9+</div><div class="res-v">5</div>
         </div>
       </div>
       <div class="res-tbl">
@@ -967,12 +964,14 @@ a:hover{color:var(--gold-bright)}
           <div class="res-k">Level 1</div><div class="res-v">5&ndash;6</div>
           <div class="res-k">Level 2</div><div class="res-v">4&ndash;6</div>
           <div class="res-k">Level 3</div><div class="res-v">3&ndash;6</div>
+          <div class="res-k">Level 4</div><div class="res-v">2&ndash;6</div>
         </div>
       </div>
     </div>
 
     <div class="bonus">
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Boss Threat</div></div>
+      <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Safehouse (Occ.)</div></div>
       <div class="bonus-cell"><div class="bonus-num">+1</div><div class="bonus-lbl">Ambush 1st Roll</div></div>
     </div>
 
@@ -1004,7 +1003,7 @@ a:hover{color:var(--gold-bright)}
     <div class="pin-note">The Invader stays <b>Pinned</b> and keeps choosing until the fight resolves, all inside the one Play that moved in; there is no fresh Standoff, so the Occupier cannot Ambush again.</div>
     <div class="back-rule"><b>Rival Safehouse.</b> With no Mobsters beside it, its District is Safe: walk in, no Standoff. Guarded, win it by Fold or fight. Then <b>take it over</b> (yours moves in, free) or <b>destroy</b> it.</div>
 
-    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Rat card</b>: &minus;1 Respect.</span></div>
+    <div class="trait trait--foot"><span class="trait-name">Handshake.</span> <span class="trait-body">Not a Play: shake on a deal any time, terms clear, settled by <b>Sunset</b>. Fail your side for any reason, sabotage included, and take a <b>Welsher</b>: &minus;1 Respect, forever.</span></div>
   </div>
 
   </div>
