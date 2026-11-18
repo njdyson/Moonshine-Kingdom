@@ -129,11 +129,14 @@ City*'s two Squads, homecoming, Precinct Squads and Rat cards.
   and The Almanac's lesson 5 is **The Leash** again. The Brew Simulator still rolls the Mash.
 - **No Titles.** The two Title cards and the Rulebook's Titles section are gone; Respect is Jobs and Bribes, less
   Marks.
-- **Four Squads**, one a mainland Borough, numbered 1 to 4 (the Borough shields are back on the Town Planner; the board
-  follows with the Queens map pass), each starting on its Borough's **High Society Venue**, Padlocked. Reach is any District Adjacent **in its
+- **Four Squads**, one a mainland Borough, numbered 1 to 4 (the Borough shields are back on the Town Planner and the board), each starting on its Borough's **High Society Venue**, Padlocked. Reach is any District Adjacent **in its
   own Borough**; a Squad with nobody in reach on the Heat Track **stays put** (no homecoming).
-- **East Harlem and Corona** are empty ground: no Still, no business, no Squad (Nick's pick on a decision card). Nick
-  is weighing removing Corona and cutting Queens to five Districts.
+- **Five Districts a Borough** (Nick, 2026-11-18): East Harlem and Corona are gone, so the board has **22
+  Districts**. Manhattan is West Side and Sugar Hill side by side over Five Points, the Tenderloin and the Bowery;
+  Belmont borders West Side and Sugar Hill; the Queensboro lands on Sugar Hill. Queens is Astoria and Whitestone
+  over Richmond Hill and Flushing, with Jamaica below; Corona's ground went to Richmond Hill and Flushing. The
+  24-District board is in git before this pass and in `/mnt/project-files/board-proofs/five-a-borough-2026-11-18/`
+  (`original-24-districts.jpg`, with the proofs v1 to v8). Nick may come back to tweak the shapes.
 - **Unload sells up to 5 barrels**, and draws Heat **only at a High Society Venue**; a dive draws none. Extort
   still draws Heat every time.
 - **Snitch**: Power Play, 2, repeatable, and takes **no card**. The twelve Rat cards are gone, and so are
@@ -1336,7 +1339,7 @@ mk-online needs the same update again (`mk-online-board-handoff.md`).
 
 ## Staten Island: two Docks
 
-Since 2026-10-25 (Nick). The board has **24 Districts**. Westerleigh is gone, merged into
+Since 2026-10-25 (Nick). The board had **24 Districts** (22 since 2026-11-18). Westerleigh is gone, merged into
 Stapleton, and the island is **Stapleton** (Dock, Still 12) over **Tottenville** (Dock, Still 2),
 tapering to the south-west like the real island. Stapleton is no longer a Ward, so the four home
 Wards are the only Wards. Every Still number now appears on exactly two Districts, but the 7s
