@@ -324,8 +324,9 @@ table.lg{width:100%;border-collapse:collapse}
 .lg tbody tr:first-child>td{border-top:1.5px solid var(--cell-strong)}
 .lg tbody:first-of-type tr:first-child>td{border-top:0}
 
-/* The Borough: its board colour and its name in gilt (a numbered police shield until
-   2026-11-12; the Squad pieces carry the numbers now). */
+/* The Borough: its board colour, its name in gilt, and the gilt police shield
+   the board numbers it with, the order its Squad moves in a Raid. Staten Island
+   has no Squad, so, as on the board, it carries no shield. */
 .lg-boro{
   width:76px;padding:4px 3px;text-align:center;vertical-align:middle;
   font:700 12px/1.05 Cinzel,serif;letter-spacing:.5px;color:var(--gold-bright);
@@ -334,6 +335,23 @@ table.lg{width:100%;border-collapse:collapse}
   box-shadow:inset 0 0 14px rgba(0,0,0,.45);
   border-right:1px solid rgba(185,147,47,.5);
 }
+/* The board's shield (mapLabels in tools/build_board.js): a 22 x 26 badge with a
+   dipped brow, in polished gilt, the numeral cut in dark Cinzel. */
+.shield{
+  display:block;margin:0 auto 4px;
+  width:20px;height:24px;box-sizing:border-box;padding-top:3px;
+  font:700 13.5px/18px Cinzel,serif;color:#1b150e;text-shadow:0 1px 0 rgba(255,244,205,.45);
+  background:url("data:image/svg+xml,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -14 24 28.5'>\
+<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+<stop offset='0' stop-color='%23f6e3a1'/><stop offset='.28' stop-color='%23c9a437'/>\
+<stop offset='.52' stop-color='%236b5424'/><stop offset='.78' stop-color='%23c9a437'/>\
+<stop offset='1' stop-color='%23f6e3a1'/></linearGradient></defs>\
+<path d='M0 -12.5Q11 -9.5 22 -12.5L22 1.5Q22 9 11 13.5Q0 9 0 1.5Z' fill='url(%23g)' stroke='%230a0705' stroke-width='1.2' stroke-linejoin='round'/>\
+</svg>") center / 100% 100% no-repeat;
+  filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.7));
+}
+.shield--inline{display:inline-block;vertical-align:middle;position:relative;top:-1px;margin:0 0 0 2px;width:13px;height:15.5px;padding-top:1.5px;font-size:9px;line-height:11px;font-style:normal}
 
 .lg-dist{font:600 10px Barlow;color:var(--ink-2);white-space:nowrap}
 .lg-zone{font:400 9.5px Barlow;text-align:left;white-space:nowrap}
@@ -472,7 +490,7 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-label">The Brew</div>
-        <div class="step-body"><span class="sub"><b>Roll the pool:</b> Turn Token #1 rolls the <b>Red</b> dice: one per player, plus one. Set aside any die that repeats a face. The Mash die already shows today's Mash.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> (none left, none for you) and brews at once, before the next boss drafts. Every Still you Control numbered <b>Mash + Red</b> pours Moonshine: one barrel per Mobster there, up to five.</span><span class="sub"><b>Split the Batch:</b> If the Still in your Boss's District fires, you may also fire one <b>Adjacent</b> Still you Control, whatever its number.</span></div>
+        <div class="step-body"><span class="sub"><b>Roll the pool:</b> Turn Token #1 rolls the <b>Red</b> dice: one per player, plus one. Set aside any die that repeats a face. The Mash die already shows today's Mash.</span><span class="sub"><b>Draft &amp; Brew:</b> In Turn Order, each boss takes <b>1 Red</b> (none left, none for you) and brews at once, before the next boss drafts. Every Still you Control numbered <b>Mash + Red</b> pours Moonshine by its District's <b>Muscle Ratio</b>: half the Mobsters there, rounded up, five at most.</span><span class="sub"><b>Split the Batch:</b> If the Still in your Boss's District fires, you may also fire one <b>Adjacent</b> Still you Control, whatever its number.</span></div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
@@ -486,8 +504,8 @@ table.lg{width:100%;border-collapse:collapse}
       </div>
       <div class="step">
         <span class="step-num">4</span>
-        <div class="step-label">Ferment Tomorrow's Mash</div>
-        <div class="step-body"><span class="sub"><b>Roll tomorrow's Mash:</b> Roll the Mash die and leave it on the board, where it stays all Day.</span></div>
+        <div class="step-label">The Harbormaster</div>
+        <div class="step-body"><span class="sub"><b>Set tomorrow's Mash:</b> Whoever Controls the most <b>Docks</b> turns the Mash die to any face <span class="nowrap">(1&ndash;6)</span>, where it stays all Day. A tied lead <b>rolls</b> it.</span></div>
       </div>
     </div>
 
@@ -506,7 +524,7 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="step">
         <span class="step-dot"></span>
         <div class="step-label">Pay the Cost</div>
-        <div class="step-body"><span class="sub">Spent markers return from your Ledger to Reserves.</span><span class="sub">A Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Play (a fight's first shot, an Unload, an Extort) locks 1 of them on the <b>Heat Track</b> instead. The 5th marker starts a <b>Raid</b>.</span></div>
+        <div class="step-body"><span class="sub">Spent markers return from your Ledger to Reserves.</span><span class="sub">A Heat <img class="icon" src="Art/Icons/fire.svg" alt="Heat"> Play (a fight's first shot, an Extort, an Unload at High Society) locks 1 of them on the <b>Heat Track</b> instead. The 5th marker starts a <b>Raid</b>.</span></div>
       </div>
       <div class="step">
         <span class="step-dot"></span>
@@ -519,7 +537,7 @@ table.lg{width:100%;border-collapse:collapse}
       <div class="plaque-face">
         <div class="final-title"><svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg>The Crown &amp; Sunset<svg class="ico ico--crown" viewBox="0 0 24 24"><use href="#i-crown"/></svg></div>
         <div class="final-row"><span class="final-label">Take the Crown</span><span class="final-text">On your turn, with <b>20+ Respect</b> and your <b>Boss</b> in a <b>rival's home Ward</b>, make this Power Play and win on the spot.</span></div>
-        <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low: <b>Rat cards</b> for unmet promises; the <b>Titles</b> go to the sole most Docks (<b>Harbormaster</b>) and Speakeasies (<b>Night Mayor</b>), a tie to the Supply; then the tokens set tomorrow's order.</span></div>
+        <div class="final-row"><span class="final-label">Sunset</span><span class="final-text">When the final player Lays Low, the tokens set tomorrow's order.</span></div>
       </div>
     </div>
   </div>
@@ -552,7 +570,7 @@ table.lg{width:100%;border-collapse:collapse}
         </thead>
         <tbody class="b-mn">
           <tr>
-            <td rowspan="6" class="lg-boro">Manhattan</td>
+            <td rowspan="6" class="lg-boro"><span class="shield">1</span>Manhattan</td>
             <td class="lg-dist">Five Points</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">10</span></td>
@@ -564,28 +582,28 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Cotton Club</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><i class="gauge p6"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">East Harlem</td>
             <td class="lg-zone"><span class="med med--precinct"><svg class="ico"><use href="#i-star"/></svg></span><span class="z-precinct">Precinct</span></td>
             <td class="lg-still"></td>
             <td class="lg-press"></td>
-            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
+            <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">The Tenderloin</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Haymarket</span></td>
             <td class="lg-still"><span class="still">8</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">West Side</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">9</span></td>
             <td class="lg-press"><i class="gauge p4"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">The Bowery</td>
@@ -598,7 +616,7 @@ table.lg{width:100%;border-collapse:collapse}
 
         <tbody class="b-bx">
           <tr>
-            <td rowspan="5" class="lg-boro">The<br>Bronx</td>
+            <td rowspan="5" class="lg-boro"><span class="shield">2</span>The<br>Bronx</td>
             <td class="lg-dist">Hunts Point</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">9</span></td>
@@ -610,7 +628,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Jockey Club</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><i class="gauge p6"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Belmont</td>
@@ -624,20 +642,20 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">The Penny Whistle</span></td>
             <td class="lg-still"><span class="still">8</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Throggs Neck</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">10</span></td>
             <td class="lg-press"><i class="gauge p3"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
         </tbody>
 
         <tbody class="b-qn">
           <tr>
-            <td rowspan="6" class="lg-boro">Queens</td>
+            <td rowspan="6" class="lg-boro"><span class="shield">3</span>Queens</td>
             <td class="lg-dist">Flushing</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">4</span></td>
@@ -649,28 +667,28 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Triangle</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><i class="gauge p6"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Astoria</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Bohemian Hall</span></td>
             <td class="lg-still"><span class="still">6</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Corona</td>
             <td class="lg-zone"><span class="med med--precinct"><svg class="ico"><use href="#i-star"/></svg></span><span class="z-precinct">Precinct</span></td>
             <td class="lg-still"></td>
             <td class="lg-press"></td>
-            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
+            <td class="lg-setup"></td>
           </tr>
           <tr>
             <td class="lg-dist">Whitestone</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">5</span></td>
             <td class="lg-press"><i class="gauge p4"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Jamaica</td>
@@ -683,7 +701,7 @@ table.lg{width:100%;border-collapse:collapse}
 
         <tbody class="b-bk">
           <tr>
-            <td rowspan="5" class="lg-boro">Brooklyn</td>
+            <td rowspan="5" class="lg-boro"><span class="shield">4</span>Brooklyn</td>
             <td class="lg-dist">Brownsville</td>
             <td class="lg-zone"><span class="med med--ward"><svg class="ico"><use href="#i-ward"/></svg></span><span class="z-ward">Ward</span></td>
             <td class="lg-still"><span class="still">5</span></td>
@@ -695,14 +713,14 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med med--hs"><svg class="ico"><use href="#i-martini"/></svg></span><span class="z-hs">The Havemeyer</span></td>
             <td class="lg-still"><span class="still">7</span></td>
             <td class="lg-press"><i class="gauge p6"></i></td>
-            <td class="lg-setup"></td>
+            <td class="lg-setup"><span class="tag tag-squad">Police Squad</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Coney Island</td>
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-speak"/></svg></span><span class="z-speak">Ruby's Joint</span></td>
             <td class="lg-still"><span class="still">6</span></td>
             <td class="lg-press"><i class="gauge p5"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
           <tr>
             <td class="lg-dist">Red Hook</td>
@@ -716,7 +734,7 @@ table.lg{width:100%;border-collapse:collapse}
             <td class="lg-zone"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="z-dock">Dock</span></td>
             <td class="lg-still"><span class="still">4</span></td>
             <td class="lg-press"><i class="gauge p3"></i></td>
-            <td class="lg-setup"><span class="tag tag-run">2 Runners</span></td>
+            <td class="lg-setup"><span class="tag tag-run">3 Runners</span></td>
           </tr>
         </tbody>
 
@@ -746,12 +764,12 @@ table.lg{width:100%;border-collapse:collapse}
         </div>
         <div class="key-setup">
           <span class="key-item"><span class="tag tag-home">Home Ward</span>Safehouse, Boss &amp; 2 Runners: rivals crown here</span>
-          <span class="key-item"><span class="tag tag-run">2 Runners</span></span>
-          <span class="key-item"><span class="tag tag-squad">Police Squad</span>North on East Harlem, South on Corona</span>
+          <span class="key-item"><span class="tag tag-run">3 Runners</span></span>
+          <span class="key-item"><span class="tag tag-squad">Police Squad</span>one a Borough, on its High Society Venue</span>
         </div>
         <div class="key-zones key-zones--trade">
           <span class="key-item"><span class="med"><svg class="ico"><use href="#i-dock"/></svg></span><span class="key-name">Dock</span><span><span class="cube cube--moon"></span>Moonshine &rarr; <span class="cube cube--rum"></span>Rum, 1:1</span></span>
-          <span class="key-item"><span class="med med--precinct"><svg class="ico"><use href="#i-star"/></svg></span><span class="key-name">Precinct</span><span>no Still, no business: a Squad&rsquo;s home</span></span>
+          <span class="key-item"><span class="med med--precinct"><svg class="ico"><use href="#i-star"/></svg></span><span class="key-name">Precinct</span><span>no Still, no business</span></span>
         </div>
     </div>
 
@@ -760,13 +778,13 @@ table.lg{width:100%;border-collapse:collapse}
       <span class="roster-label">Police Raids</span>
       <span class="sec-rule"></span>
     </div>
-    <div class="raid-note"><span class="sub"><b>Trigger:</b> The 5th marker on the Heat Track, or the <b>Snitch</b> Play. Pause the turn.</span><span class="sub">Both Squads move, one at a time: <b>North first</b>, then South.</span></div>
+    <div class="raid-note"><span class="sub"><b>Trigger:</b> The 5th marker on the Heat Track, or the <b>Snitch</b> Play. Pause the turn.</span><span class="sub">Every Squad moves, one at a time, in <b>numbered Borough order</b>: <span class="shield shield--inline">1</span> <span class="shield shield--inline">2</span> <span class="shield shield--inline">3</span> <span class="shield shield--inline">4</span></span></div>
 
     <div class="steps steps--raid">
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-label step-label--narrow">Most Wanted</div>
-        <div class="step-body">A Squad reaches only Districts <b>directly Adjacent</b> to it <b>on its side</b>: North (Manhattan, the Bronx) or South (Queens, Brooklyn). It hunts the mob in reach whose marker sits <b>furthest right</b> on the Heat Track. None of them on it? It <b>goes home</b> to its Precinct and raids it.</div>
+        <div class="step-body">A Squad reaches only Districts <b>directly Adjacent</b> to it <b>in its own Borough</b>. It hunts the mob in reach whose marker sits <b>furthest right</b> on the Heat Track. None of them on it? It stays put.</div>
       </div>
       <div class="step">
         <span class="step-num">2</span>

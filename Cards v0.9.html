@@ -10,16 +10,12 @@
 <link rel="stylesheet" href="css/card-back.css">
 <style>
 /* ============================================================
-   Cards v0.9: the 42 cards that are not Jobs, the Blood Oath among them:
-     16 Bribes · 4 Boroughs · 7 Shylock's Marks · 12 Rat cards
+   Cards v0.9: the 28 cards that are not Jobs, the Blood Oath among them:
+     16 Bribes · 4 Boroughs · 7 Shylock's Marks
      · 1 Blood Oath (a Job back; it goes in the Jobs deck)
-     · 2 Titles (the Harbormaster and the Night Mayor, 2026-11-14, Nick:
-       3 Respect while held, claimed at the end of your own Play with
-       the most Docks or Speakeasies). They are half of sheet 11.
-   The Open City (2026-11-11, Nick) replaced the one Rat Card (-3, held
-   until a rival Ratted) and the seven Welshers (-1, forever) with twelve
-   Rat cards (-1 each): one for each Snitch and each broken promise,
-   kept for good (Patsy, which handed one back, was cut on 2026-11-12).
+   The Even City (2026-11-18, Nick) cut the twelve Rat cards (a Snitch
+   takes no card, and deals bind nobody) and the two Title cards, which
+   held sheets 3-5 and half of sheet 11. Their plates stay in Art/Cards.
    (Earlier revisions of this header claimed 8 Marks; the deck
    has always printed 7, which is Shylock's own book size.)
    Public Enemy No. 1 is CUT (v0.8) and stays cut: it paid a
@@ -38,7 +34,7 @@
    Bribe cards (Precinct Captain 1, Alderman 2, Judge 3, Mayor 4
    Respect; one of each per boss). Unbought Influence waits in the
    supply, so the Borough card no longer holds a stack. Marks cost 2
-   Respect while held and a Rat card 1, so every card in this deck that
+   Respect while held, so every card in this deck that
    touches the score carries a number.
    Welsher cards added in v0.9 when the broken-deal forfeit moved
    off the Influence ladder and onto Respect: break a deal, wear
@@ -60,7 +56,7 @@
       because 12 cards fan out in the Market row and any jitter
       shows. Nothing here ever fans: a Bribe never sits beside a
       Mark in play. So holdings (the Bribes) keep one geometry,
-      and debts (Rat cards + Marks) keep another. Within a type it is frozen.
+      and debts (the Marks) keep another. Within a type it is frozen.
         holdings : art 38mm · rules 16mm
         debts    : art 38mm · rules 16mm
       Change one band and you must take the millimetres off the
@@ -132,8 +128,7 @@ body{
    @media print rule below re-shows them as the duplex grid. Matches
    the Jobs deck. */
 .backs{display:none}
-/* The Titles sheet has three cards: the fourth cell is a blank that
-   holds its grid position on both faces and prints nothing. */
+/* A blank cell holds its grid position on both faces and prints nothing. */
 .card--blank,.back--blank{visibility:hidden;border:0;background:none;box-shadow:none}
 
 /* ============================================================
@@ -461,7 +456,7 @@ body.trim .card,body.trim .back{border-radius:0}
 <div class="masthead">
   <div class="masthead-kicker">Prohibition &middot; New York &middot; 1929</div>
   <div class="masthead-title">Bribes, Boroughs, Debts &amp; Dishonor</div>
-  <div class="masthead-sub">v0.9 &middot; 42 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 7 Marks &middot; 12 Rat cards &middot; 2 Titles &middot; the Blood Oath</div>
+  <div class="masthead-sub">v0.9 &middot; 28 Cards &middot; 16 Bribes &middot; 4 Boroughs &middot; 7 Marks &middot; the Blood Oath</div>
   <p class="masthead-note">
     The Jobs deck pays you Respect for what you <b>do</b>. These cards pay it for who you <b>own</b>
     and charge it for who owns <b>you</b>, and the Borough card names your home Ward, the heart of
@@ -475,7 +470,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">SHYLOCK&rsquo;S MARKS</span>
-  <span class="meta">the debt costs 2 Respect until it&rsquo;s paid &middot; seven in his book; all out, nobody Begs &middot; sheet 1 of 11</span>
+  <span class="meta">the debt costs 2 Respect until it&rsquo;s paid &middot; seven in his book; all out, nobody Begs &middot; sheet 1 of 7</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -535,7 +530,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE MARKS &amp; THE BLOOD OATH</span>
-  <span class="meta">the last three Marks &middot; the Oath wears a Job&rsquo;s back and goes in the Jobs deck &middot; sheet 2 of 11</span>
+  <span class="meta">the last three Marks &middot; the Oath wears a Job&rsquo;s back and goes in the Jobs deck &middot; sheet 2 of 7</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -581,170 +576,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEETS 3-5: the twelve Rat cards (the Open City, 2026-11-11, Nick).
-     One for each Snitch and each broken promise, kept for good.
-     They replace the single Rat Card (-3, held until a rival Ratted) and
-     the seven Welshers (-1, forever). Art is the Rat plate. Fronts and
-     backs are identical.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE RAT CARDS</span>
-  <span class="meta">&minus;1 Respect each &middot; a Snitch or a broken word &middot; twelve in the Supply; none left, nobody Snitches &middot; sheet 3 of 11</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 4: four more Rat cards.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE RAT CARDS</span>
-  <span class="meta">&minus;1 Respect each &middot; a Snitch or a broken word &middot; twelve in the Supply; none left, nobody Snitches &middot; sheet 4 of 11</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 5: four more Rat cards.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE RAT CARDS</span>
-  <span class="meta">&minus;1 Respect each &middot; a Snitch or a broken word &middot; twelve in the Supply; none left, nobody Snitches &middot; sheet 5 of 11</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-  <div class="card card--debt">
-    <div class="tier"><span class="kicker">The Brand</span></div>
-    <h2 class="title">Rat</h2>
-    <div class="art"><img src="Art/Cards/Rat.jpg" alt=""></div>
-    <div class="rules-label">The Shame</div>
-    <div class="rules"><span>Forever</span></div>
-    <div class="flavour">The Feds on speed dial; the street has a long memory.</div>
-    <div class="respect" data-respect="-1"></div>
-  </div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Rat</div><div class="back-sub">The Brand</div><div class="back-foot">New York &middot; 1929</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 5: the four Borough cards (2026-10-10; they replace the
+     SHEET 3: the four Borough cards (2026-10-10; they replace the
      four Nods). Deal one to each boss at setup: it names his home
      Borough and its Ward, his home Ward, where his rivals Take the
      Crown (2026-10-24; it named the three away High Society Venues
@@ -754,7 +586,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE BOROUGHS</span>
-  <span class="meta">one dealt to each boss &middot; your home Ward, where your rivals crown &middot; sheet 6 of 11</span>
+  <span class="meta">one dealt to each boss &middot; your home Ward, where your rivals crown &middot; sheet 3 of 7</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -799,7 +631,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 
 <!-- =============================================================
-     SHEETS 6-9: the sixteen Bribe cards (2026-10-12; see
+     SHEETS 4-7: the sixteen Bribe cards (2026-10-12; see
      respect-endgame-handoff.md). Laid out at setup in four face-up
      piles above the Jobs Market, one pile per man. The Bribe Play
      buys one: the card goes in the Respect pile and one Influence
@@ -811,7 +643,7 @@ body.trim .card,body.trim .back{border-radius:0}
      ============================================================= -->
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 7 of 11</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 4 of 7</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -860,7 +692,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 8 of 11</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 5 of 7</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -909,7 +741,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 9 of 11</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 6 of 7</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -958,7 +790,7 @@ body.trim .card,body.trim .back{border-radius:0}
 </div>
 <div class="tier-head">
   <span class="dia"></span><span class="lbl">THE PAYROLL</span>
-  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 10 of 11</span>
+  <span class="meta">one of each per boss &middot; dearer men pay more Respect &middot; sheet 7 of 7</span>
   <span class="rule"></span>
 </div>
 <div class="gallery">
@@ -1004,43 +836,6 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
   <div class="back"><div class="back-title">Bribe</div><div class="back-sub">On the Payroll</div><div class="back-foot">New York &middot; 1929</div></div>
-</div>
-
-<!-- =============================================================
-     SHEET 11: the two Title cards (2026-11-14, Nick). Held, not kept:
-     counted at Sunset (since 2026-11-15), the sole most Docks
-     (Harbormaster) or Speakeasies (Night Mayor) takes one, from the
-     Supply or from its holder; a tie sends it to the Supply. Half a sheet; the backs are identical, so
-     mirroring is moot.
-     ============================================================= -->
-<div class="tier-head">
-  <span class="dia"></span><span class="lbl">THE TITLES</span>
-  <span class="meta">3 Respect while you hold it &middot; most Docks, most Speakeasies &middot; sheet 11 of 11</span>
-  <span class="rule"></span>
-</div>
-<div class="gallery">
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Title</span></div>
-    <h2 class="title title--long">Harbormaster</h2>
-    <div class="art"><img src="Art/Cards/Harbormaster.jpg" alt=""></div>
-    <div class="rules-label">Most Docks</div>
-    <div class="rules"><span>Run the piers</span></div>
-    <div class="flavour">Every crate that comes ashore, he knows about it first.</div>
-    <div class="respect" data-respect="3"></div>
-  </div>
-  <div class="card card--holding">
-    <div class="tier"><span class="kicker">Title</span></div>
-    <h2 class="title title--long">Night Mayor</h2>
-    <div class="art"><img src="Art/Cards/Night Mayor.jpg" alt=""></div>
-    <div class="rules-label">Most Speakeasies</div>
-    <div class="rules"><span>Run the night</span></div>
-    <div class="flavour">After dark, every bar in town pours for him first.</div>
-    <div class="respect" data-respect="3"></div>
-  </div>
-</div>
-<div class="backs">
-  <div class="back"><div class="back-title">Title</div><div class="back-sub">Run the Town</div><div class="back-foot">New York &middot; 1929</div></div>
-  <div class="back"><div class="back-title">Title</div><div class="back-sub">Run the Town</div><div class="back-foot">New York &middot; 1929</div></div>
 </div>
 
 </body>

@@ -132,7 +132,7 @@
     </div>
     <details class="acc" open>
       <summary>How Mobsters &amp; the clump work</summary>
-      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there): each man brews one barrel, up to <b>5</b>. A Still gets the bad batch when a rival brews its number first (tick <b>A rival holds its double?</b> for each number a rival shares), and loses half its crew, rounded up, counting up to 5: <b>1</b> of 2, <b>2</b> of 3 or 4, <b>3</b> of 5 or more. A lone man walks away. A dozen Runners and a Boss make 13 men, so a five-man Still is most of a family. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers: the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never Split.</p>
+      <p class="note">Mobsters = the total crew at that Still (count the Boss if you park him there): the Still pours its <b>Muscle Ratio</b>: half the crew, rounded up, up to <b>5</b> (9 men for the full 5). A Still gets the bad batch when a rival brews its number first (tick <b>A rival holds its double?</b> for each number a rival shares), and loses half its crew, rounded up, counting up to 5: <b>1</b> of 2, <b>2</b> of 3 or 4, <b>3</b> of 5 or more. A lone man walks away. Fifteen Runners and a Boss make 16 men, so a full-pouring Still is more than half a family. The board also limits the clump: <b>7 &times;4 | 4, 6 &times;3 | 2, 3, 5, 8, 9, 10, 11 &times;2 | 12 &times;1</b>. <b>Connected to Boss?</b> drives <b>Split the Batch</b>: tick it for any Still sitting in a District Connected to the Boss's <b>by Land or Bridge</b>. Check it against the map, not the numbers: the four <b>7</b>s are one to a Borough and <b>no two of them touch</b>, so a wall of sevens can never Split.</p>
     </details>
     <div class="presets">
       <span class="lbl">Presets:</span>
@@ -157,7 +157,7 @@
       <div class="fld"><label>Players</label>
         <select id="players"><option>2</option><option>3</option><option selected>4</option></select></div>
       <div class="fld"><label>The Mash die (Public Mash)</label>
-        <div class="field-note">Rolled at random every Day.</div>
+        <div class="field-note">Rolled here at random. At the table the Harbormaster (most Docks) names it, and only a tie rolls.</div>
       </div>
       <div class="fld"><label>Rival drafting</label>
         <select id="contested">
@@ -181,7 +181,7 @@
       <summary>What these settings mean</summary>
       <p class="note">
       One focal crew (your build) drafts against <em>players</em> rivals for 1 Mash die (the Public Mash) + (players+1) Red dice, in random seat order. Any die that repeats a face is set aside, so a seat can find the pool empty.
-      <b>The Mash die</b> is rolled at random every Day, so a boiler's odds fall away from the 7: a 7 can fire on any face, a 2 or a 12 on one.
+      <b>The Mash die</b> is rolled at random here (a Harbormaster who doesn't care about your numbers), so a boiler's odds fall away from the 7: a 7 can fire on any face, a 2 or a 12 on one.
       A build that brackets a low and a high boiler always has one end live. Each number a rival shares is held by one rival, in a random seat. <b>Naive</b> keeps every rival's <em>draft</em> inattentive (random); <b>Contested</b> has
       a rival who shares your number take the Red that brews it, if it is there when his turn comes, the exact threat you
       draft the low token to beat. Barrel value defaults to <b>$200</b> (what a Speakeasy pays for a barrel; Rum fetches $500 at a High Society Venue).
@@ -202,7 +202,7 @@
     <h2>Compare the Standard Builds</h2>
     <details class="acc" open>
       <summary>About this comparison</summary>
-      <p class="note">Runs the reference builds under the settings above, sharing a ~16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler, so one end is live on any Mash. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something. Note that the Bronx block is fully Connected and <em>still</em> brews nothing on a Mash of 1, because the Split needs the Boss's own Still to fire first. Use it to check strategy figures against the current economy, Split the Batch, and Blowback. Every build's 7s count as shared (four 7s in town); tick the doubles yourself for anything else.</p>
+      <p class="note">Runs the reference builds under the settings above, sharing a 16-mobster roster across the Stills (so wider builds are crewed thinner). The clumped builds all match on 7; the <b>spread</b> builds bracket a low (3) and high (9) boiler, so one end is live on any Mash. The last two builds are the <b>Connected</b> ones, where <b>Split the Batch</b> can actually reach something. Note that the Bronx block is fully Connected and <em>still</em> brews nothing on a Mash of 1, because the Split needs the Boss's own Still to fire first. Use it to check strategy figures against the current economy, Split the Batch, and Blowback. Every build's 7s count as shared (four 7s in town); tick the doubles yourself for anything else.</p>
     </details>
     <div class="row-actions"><button class="ghost" id="runCompare">Run Comparison</button></div>
     <div id="compareOut" style="margin-top:12px;"></div>
@@ -215,8 +215,8 @@
 </div>
 
 <script>
-// ---- Muscle: one barrel per Mobster, up to 5 (since 2026-11-09) ----
-const ratio = m => Math.min(5, m);
+// ---- The Muscle Ratio: half the crew, rounded up, up to 5 (one barrel a man from 2026-11-09 to 2026-11-17) ----
+const ratio = m => Math.min(5, Math.ceil(m / 2));
 // ---- Blowback dead: half the crew (up to 5 counted), rounded up; a lone man is spared (since 2026-11-16) ----
 const blowDead = m => (m < 2 ? 0 : Math.ceil(Math.min(5, m) / 2));
 const d6 = () => 1 + Math.floor(Math.random() * 6);
@@ -265,11 +265,11 @@ function readBuild() {
 }
 document.getElementById('addStill').addEventListener('click', () => stillRow(7, 5, false, false, true));
 
-// Presets share a 13-mobster roster (12 Runners + Boss) across the Stills.
+// Presets share a 16-mobster roster (15 Runners + Boss) across the Stills.
 //
 // TWO HARD LIMITS SHAPE EVERY BUILD BELOW. Both are easy to forget:
 //
-//  1. MUSCLE caps at five: one barrel per man up to 5, and a sixth man is
+//  1. MUSCLE caps at five: the Muscle Ratio tops out at 9 men, and a tenth is
 //     garrison, not production.
 //
 //  2. THE BOILER CENSUS. The map has: 7 x4 | every other number x2.
@@ -284,34 +284,33 @@ document.getElementById('addStill').addEventListener('click', () => stillRow(7, 
 //  Manhattan, Fordham in the Bronx) and both 3+9 spreads (Astoria/Coney Island
 //  against West Side/Hunts Point). Only a build bought down one street can relay.
 const PRESETS = {
-  // 1-3 sevens: crewed 5 apiece where 13 men allow, the production cap per boiler.
-  '1':   [{num:7,mob:5}],
-  '2':   [{num:7,mob:5},{num:7,mob:5}],
-  '3':   [{num:7,mob:5},{num:7,mob:5},{num:7,mob:3}],
-  // All four 7s -- the only 4-stack on the board. 13 men won't crew four fives,
-  // so the last two boilers share what's left: 5/5/2/1 = 13 barrels.
-  '4':   [{num:7,mob:5},{num:7,mob:5},{num:7,mob:2},{num:7,mob:1}],
+  // 1-3 sevens: 9 men pour the full 5, so 16 men crew one fully and split the rest.
+  '1':   [{num:7,mob:9}],
+  '2':   [{num:7,mob:9},{num:7,mob:7}],
+  '3':   [{num:7,mob:6},{num:7,mob:5},{num:7,mob:5}],
+  // All four 7s -- the only 4-stack on the board: four crews of four, 2 barrels apiece.
+  '4':   [{num:7,mob:4},{num:7,mob:4},{num:7,mob:4},{num:7,mob:4}],
   // Boss on the 7 (Morris Park), which borders Fordham's 8 -- so the 8 relays.
   // The 6 (Astoria / Coney Island) touches neither, hence conn stays off.
-  'm678':[{num:7,mob:5},{num:8,mob:5,conn:true},{num:6,mob:3}],
-  'm78': [{num:7,mob:5},{num:8,mob:5,conn:true}],
+  'm678':[{num:7,mob:6},{num:8,mob:6,conn:true},{num:6,mob:4}],
+  'm78': [{num:7,mob:8},{num:8,mob:8,conn:true}],
   // A clump on a STARVABLE number: a Mash of 1 fires nothing, one Day in six.
   // Two 8-boilers exist (The Tenderloin, Fordham), not touching: a starvable
   // pair, and still weaker than the 7-stack.
-  'c8':  [{num:8,mob:5},{num:8,mob:5}],
+  'c8':  [{num:8,mob:8},{num:8,mob:8}],
   // Spread-defence builds: a low and a high boiler so no single Mash face can
   // lock out both. Only one end ever fires in a morning.
-  's39': [{num:3,mob:5},{num:9,mob:5}],
-  's3939':[{num:3,mob:4},{num:3,mob:3},{num:9,mob:3},{num:9,mob:3}],
+  's39': [{num:3,mob:8},{num:9,mob:8}],
+  's3939':[{num:3,mob:4},{num:3,mob:4},{num:9,mob:4},{num:9,mob:4}],
   // Sugar Hill (7) with West Side (9) next door and Belmont (11) across the bridge
   // (East Harlem's 11 until the Open City, 2026-11-11). The 11 is one of the coldest boilers on the board
   // and near dead weight on its own; here it fires whenever the 7 does. The Tenderloin
   // 8 is in the build but does NOT border Sugar Hill, so it cannot be relayed.
-  'spine':[{num:7,mob:5},{num:9,mob:4,conn:true},{num:11,mob:3,conn:true},{num:8,mob:1}],
+  'spine':[{num:7,mob:6},{num:9,mob:4,conn:true},{num:11,mob:4,conn:true},{num:8,mob:2}],
   // Fordham (8) with Belmont (11), Hunts Point (9) and Throggs Neck (10) all
   // touching it. Fully Connected -- and still zeroed by a Mash of 1,
   // because every number is high. Connection is not armour; range is.
-  'bronx':[{num:8,mob:5},{num:11,mob:4,conn:true},{num:9,mob:3,conn:true},{num:10,mob:1,conn:true}],
+  'bronx':[{num:8,mob:6},{num:11,mob:4,conn:true},{num:9,mob:4,conn:true},{num:10,mob:2,conn:true}],
 };
 document.querySelectorAll('[data-preset]').forEach(b =>
   b.addEventListener('click', () => loadBuild(PRESETS[b.dataset.preset], 0)));

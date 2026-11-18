@@ -114,6 +114,42 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; Blowback kills half the crew, rounded up, a lone man spared (since 2026-11-16; see *Blowback*). Blowback removes Runners first, so it never takes a Boss.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
+## The Even City: fifteen men, four Squads, the Harbormaster back
+
+Since 2026-11-18 (Nick, reworking the rules item by item: "They can always be reintroduced if I feel they would be
+missed"; bot rows in `/mnt/project-files/bot-runs/log.md`, mk-online-rules-sync §72). **This supersedes** the
+sections below wherever they disagree: *Titles*, *Random Mash*, *Small Mob*'s Runners and Muscle, and *The Open
+City*'s two Squads, homecoming, Precinct Squads and Rat cards.
+
+- **15 Runners** a family; the start is Boss and 2 in the Ward, **3** on the Speakeasy and **3** on the Dock. "A
+  dozen men" is retired with the 12.
+- **The Muscle Ratio** sets brew and combat dice: half a District's Mobsters, rounded up, max 5 (1&ndash;2: 1, up to
+  9+: 5). The Rulebook's "The Muscle Ratio: Street Math" box is back as the Brew page's one callout.
+- **The Harbormaster** (most Docks) names Tomorrow's Mash; a tie rolls it. Shadows step 4 is **The Harbormaster**,
+  and The Almanac's lesson 5 is **The Leash** again. The Brew Simulator still rolls the Mash.
+- **No Titles.** The two Title cards and the Rulebook's Titles section are gone; Respect is Jobs and Bribes, less
+  Marks.
+- **Four Squads**, one a mainland Borough, numbered 1 to 4 (the Borough shields are back on the Town Planner; the board
+  follows with the Queens map pass), each starting on its Borough's **High Society Venue**, Padlocked. Reach is any District Adjacent **in its
+  own Borough**; a Squad with nobody in reach on the Heat Track **stays put** (no homecoming).
+- **East Harlem and Corona** are empty ground: no Still, no business, no Squad (Nick's pick on a decision card). Nick
+  is weighing removing Corona and cutting Queens to five Districts.
+- **Unload sells up to 5 barrels**, and draws Heat **only at a High Society Venue**; a dive draws none. Extort
+  still draws Heat every time.
+- **Snitch**: Power Play, 2, repeatable, and takes **no card**. The twelve Rat cards are gone, and so are
+  **Handshakes**: deals bind nobody (The Almanac's lessons 24 and 25 say so). The Cards sheet is 28 cards in 7 sheets.
+- Kept from today's rules: the dive bars, the Blood Oath as it stands, ten Docks all 1:1, the steal Hook, Haul, the
+  Safehouse at +0 Threat, Union Dues, the late 3s, the 2026-11-16 starts, Consigliere at 2, Patsy cut, and Blowback
+  (half the crew, a lone man spared, none on Day 1). A Jobs pass comes later.
+
+Bots (20 games an arm): 15 of 20 crowned with a median Day of 61, against 20 of 20 and Day 35 on the 2026-11-16
+rules. A free Snitch gets used about 24 times a game (1.5 before), and Unloads halved. The bots aren't tuned for the
+Muscle Ratio or the Harbormaster, so read the length with care.
+
+Still to do: The Almanac's combat odds (lessons 14 to 19, 26 and 27) still assume one die a man and need rerunning
+under the Muscle Ratio (`tools/sim_almanac_combat.js`). mk-online: `G.evenCity`; Open City saves without it keep
+their rules.
+
 ## Blowback: the second Still gets the bad batch
 
 Since 2026-11-15 (Nick; the thread "Rework Blowback around contested Stills", the write-up
