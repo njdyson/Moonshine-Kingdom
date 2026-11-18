@@ -182,13 +182,14 @@ const SETTINGS = {
   coronaBottom: 712, // Corona / Richmond Hill, level from the Queens / Brooklyn line (700 until 2026-10-07)
   williamsburgSouth: 751, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 796, // Red Hook's level south side
-  rhStub: 30, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
-  coneyEast: 474, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
+  fpCol: 375, // Tenderloin / Five Points, upright (0: on the crook)
+  rhStub: 60, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
+  coneyEast: 492, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
   boweryBottom: 680, stapletonTop: 724, // the Kill van Kull between them, as wide as the Narrows (652 and 684 until 2026-10-25, when Staten Island went to two Districts and the Bowery took a point; 668 and 700 until 2026-10-07)
   boweryTip: 150, // the Bowery's level foot: its west shore turns at 45 degrees down to it, so Manhattan ends in a blunt point (level the whole way across until 2026-10-25)
   // Staten Island (2026-10-25, two Districts): its west shore, upright; Stapleton | Tottenville, level;
   // the tip's level foot, which the south-east shore leaves at 45 degrees up to the Narrows
-  staten: { west: 44, border: 856, tip: 72 }, // three rows of 116 until 2026-10-25: Westerleigh | Stapleton | Tottenville at 800 and 916
+  staten: { west: 44, border: 856, tip: 102 }, // three rows of 116 until 2026-10-25: Westerleigh | Stapleton | Tottenville at 800 and 916
   bayTop: 830, // Jamaica Bay's top shore, level (Queens in five, 2026-11-18: raised into Brownsville)
   canarsieEast: 668, // Canarsie's bay shore, upright (Nick's sketch, 2026-11-18)
   rockawaysTip: 722, // the Rockaways' west tip (700 until 2026-11-18)
@@ -312,7 +313,8 @@ function draft(S) {
   // keeps the bricks even. Five Points' upright drops straight onto the crook in the river
   // (CROOK), so Five Points runs down to it and the Bowery's top steps down there, from the
   // Tenderloin's foot (m3) to the crook.
-  const EHX = CORNER[0] - (m1 - CORNER[1]), EHY = m2, FPX = CROOK[0];
+  const EHX = CORNER[0] - (m1 - CORNER[1]), EHY = m2, FPX = S.fpCol || CROOK[0]; // Five Points' west side (east of the crook since 2026-11-18)
+  const FP_FOOT = FPX > CROOK[0] + 1 ? [FPX, BOWERY_BANK] : CROOK; // where Five Points / the Bowery meets the river
   const [ebFoot, EB_J] = riverFoot(EHY);
   // Manhattan in five, side by side (Nick, 2026-11-18): West Side on the Hudson, Sugar Hill on the East River,
   // on one upright from Belmont's level foot down to the row
@@ -343,7 +345,7 @@ function draft(S) {
     '371,248': SQ[0], '535,279': [EHX, m1],
     '290,360': MF[1][0], '523,357': [FPX, m2],
     '220,452': TB_W, '509,453': MS_ROW, '533,477': EB_J, '150,548': [FPX, m3],
-    '466,549': CROOK, '694,328': EH_SHORE,
+    '466,549': FP_FOOT, '694,328': EH_SHORE,
     '307,696': BW_TIP[1], '171,686': BW_TIP[0],
     // The Bronx: an upright east shore, level blocks
     '715,53': [b1, W], '715,160': [b1, S.huntsTop], '898,53': [b2, W], '881,199': [b2, S.bronxRow], '799,196': [S.hpCol, S.bronxRow],
@@ -382,7 +384,7 @@ function draft(S) {
     'tenderloin|five_points': [[FPX, m2], [FPX, m3]],
     'tenderloin|bowery': onCoast ? [MF[2][0], MF[2][1], [FPX, m3]] : [TB_W, [FPX, m3]],
     ...(onCoast ? {} : { 'water|tenderloin': [MF[1][0], MN_TURN, TB_W] }),
-    'belmont|hunts_point': [[b1, S.huntsTop], BH, BE],
+    'belmont|hunts_point': [[b1, S.huntsTop], [BE[0] + (BE[1] - S.huntsTop), S.huntsTop], BE], // Hunts Point's north-west corner cut at 45 degrees (Nick, 2026-11-18)
     'fordham|hunts_point': [[b1, S.huntsTop], ...(HT > 0 ? [HT_DROP] : []), [S.hpCol, S.bronxRow]],
     // Queens in five (2026-11-18): two columns, Astoria over Richmond Hill and Whitestone over
     // Flushing, on one upright from the Hell Gate to Jamaica
@@ -399,9 +401,9 @@ function draft(S) {
     'water|coney_island': [[NARROWS[1], S.redHookSouth], [NARROWS[1], SOUTH_SHORE - CUT], [NARROWS[1] + CUT, SOUTH_SHORE], [S.coneyEast, SOUTH_SHORE]],
     // Manhattan's borders on their feet; the Bowery's shore turns upright below its foot
     'west_side|tenderloin': [MF[1][0], MF[1][1], [FPX, m2]],
-    'five_points|bowery': [[FPX, m3], CROOK],
-    'five_points|water': [EB_J, atY(ER_MN, BOWERY_BANK), CROOK],
-    'water|bowery': [TB_W, ...(onCoast ? [MN_TURN] : []), BW_BEVEL, ...BW_TIP, CROOK],
+    'five_points|bowery': [[FPX, m3], FP_FOOT],
+    'five_points|water': [EB_J, atY(ER_MN, BOWERY_BANK), FP_FOOT],
+    'water|bowery': [TB_W, ...(onCoast ? [MN_TURN] : []), BW_BEVEL, ...BW_TIP, CROOK, ...(FP_FOOT === CROOK ? [] : [FP_FOOT])],
     // New Jersey: parallel to Manhattan's west coast, from under the Heat corner to the board's edge
     'nj|water': [[NJ_TOP[0], 0], NJ_TOP, NJ_END],
     // Astoria / Corona on a foot at the Queens / Brooklyn line; Red Hook's shore up the East River to Williamsburg, and upright at the Narrows
