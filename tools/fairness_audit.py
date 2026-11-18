@@ -110,7 +110,8 @@ CARDS = [
     ('A Bridge to Sell',      2, 'Move',      {'dock', 'speakeasy', 'press5'}, {M: 'friendly', BK: 'friendly'}),
     # Each seat's own room, so every seat's friendly 2 alike.
     ('Opening Night',         2, 'Unload',    {'highSociety', 'speakeasy'}, {}),
-    ('Union Dues',            1, 'Recruit',   {'ward'},                     {}),
+    # A rival's home Borough (2026-11-11): every seat has rivals' Boroughs alike.
+    ('Union Dues',            1, 'Recruit',   {'any'},                      {}),
     # --- 3 Respect (the top tier since the 1/2/3 retier, 2026-10-14): aimed at every seat alike ---
     ("The Butcher's Ledger",  3, 'Open Fire', {'any'},                      {}),
     ("The Smuggler's Run",    3, 'Move',      {'dock'},                     {ST: 'neutral'}),

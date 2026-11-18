@@ -36,27 +36,6 @@ Check before committing:
 python3 tools/check_style.py
 ```
 
-## Rolled back to 2026-11-09 (since 2026-11-18)
-
-On 2026-11-18 Nick rolled the rules back to the last version that felt close to right, to fork from
-there: **15 Runners, the Muscle Ratio for brew and combat, the Harbourmaster naming the Mash, no
-Titles**. The player-facing set, the board build and `tools/` were restored to commit `d273b22` (just
-before Small Mob), so everything below this section describes the rules as they stood that day.
-
-Undone by the rollback, in order: Small Mob (12 Runners, one die a man, Blowback by Pressure, no
-Safehouse Threat), the three-colour gauge, late 3s and the Blood Oath card (the Crackdown Tracker is
-back), the Blood Oath's shared win and two crowns at 30, Union Dues in a rival's home Borough, the Open
-City (two Precincts, two Squads, ten 1:1 Docks, Snitch and Rat cards, theft Hook, Haul), Patsy's cut,
-dive bars, Random Mash, the Titles, the Clash and every bad-batch Blowback, and Queens on Whitestone.
-Kept (they came before): Heat on every Unload and Extort, Moonshine $200 with the Contact Docks, the
-swap Hook, Consigliere at 2.
-
-**Don't bring any of it back without Nick asking.** Each idea, why it was tried and how it went is in
-the project's `reviews/ideas-tried-2026-11-09-to-18.md`; the rules as they stood before the rollback are
-in `archive/rules-2026-11-18-before-rollback/` and in git at `8ee63f2`. Re-apply an idea by rewriting
-its old PR onto these files, not by cherry-picking. `mk-online-rules-sync.md` keeps §55 to §71 as
-history; §72 records the rollback.
-
 ## Callout boxes: at most one per page
 
 Two callouts on one page is too many. If a page needs a second, the weaker one should be
@@ -129,11 +108,204 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
 This supersedes the older Titles, Hotspot, and Sweep notes below until they are fully retired.
 
 - The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, unmet promises take their Welsher, then flip Turn Tokens. Nobody wins at Sunset: the game is won mid-Day, by Take the Crown.
-- Title cards and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner.
-- The player Controlling the most Docks is <b>the Harbormaster</b> and sets tomorrow's Mash; tied lead rolls the Mash die. The fourth Shadows step is named <b>The Harbormaster</b> (it was "The Morning Fix" until 2026-09-16; the Title of that name is gone, the step keeps the theme).
-- The four #7 mainland Speakeasies are fixed High Society venues. They begin under the Police Squads. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
-- There is no Sweep. The Muscle Ratio still caps brewing, combat dice, and Blowback casualties at five. Blowback removes Runners first; the Boss dies only with no Runner left in that District.
+- The old Title cards (with powers) and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner. Two Respect-only Titles came back on 2026-11-14 (see *Titles: Harbormaster and Night Mayor*).
+- Tomorrow's Mash is rolled at random; the Harbormaster (most Docks named it) retired on 2026-11-14 (see *Random Mash*). The fourth Shadows step is **Ferment Tomorrow's Mash** (it was "The Harbormaster" from 2026-09-16, "The Morning Fix" before that).
+- The four #7 mainland Speakeasies are fixed High Society venues. They began under the Police Squads until the Open City (2026-11-11), which starts them open. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
+- There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; Blowback kills half the crew, rounded up, a lone man spared (since 2026-11-16; see *Blowback*). Blowback removes Runners first, so it never takes a Boss.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
+
+## Blowback: the second Still gets the bad batch
+
+Since 2026-11-15 (Nick; the thread "Rework Blowback around contested Stills", the write-up
+`/mnt/project-files/reviews/blowback-clash-2026-11-15.md`, bot rows in `/mnt/project-files/bot-runs/log.md`,
+mk-online-rules-sync §68). **This supersedes** the Blowback wherever older sections below describe it (the leftover
+Red, "the last seat holds the match", a leftover die picking the number).
+
+- **Blowback.** When a Still of yours pours on your Brew Number, every **rival's** active Still with the same number
+  gets the **bad batch** and **blows**: it loses **half its Mobsters, rounded up**, counting up to five (2 lose 1, 3
+  or 4 lose 2, 5+ lose 3), Runners first, and a **lone man walks away**. **No Still blows on Day 1.** Split the Batch
+  hands out no bad batch. Runners die first and a lone Boss is spared, so a Blowback never takes a Boss.
+- **Dead by crew, not Pressure** (Nick, 2026-11-16, after a first look at the 2026-11-15 rule; the write-up
+  `/mnt/project-files/reviews/blowback-ratio-2026-11-16.md`, mk-online-rules-sync §71). It shipped on 2026-11-15 as
+  "3+ Mobsters blow, dead by the gauge (1 / 2 / 3)". Nick disliked the **3-man cliff**: three men on a hot Still all
+  died while two were untouched. He suggested half the crew, rounded up; the lone man is spared because in bots
+  plain rounding up killed lone Bosses 8.5 times a game and slowed the crown ten Days. Weighed and not taken the same
+  day: half rounded up with no exception, and half rounded down (0, 1, 1, 2, 2). Bots (40 games, mode 10): crown
+  median 32 against 29.5, 0.63 Blowbacks a Day, no Boss deaths by Blowback. The gauge no longer sets the dead:
+  Pressure is only how often a Still fires (and the Big Bust tiebreak and two Jobs), and the board's three colour
+  pairs, drawn for the old dead, now only group it. Nick may want the six-step ramp back.
+- **Words** (Nick, the same evening, after it shipped as "the Clash"): keep the name **Blowback**, and frame it as the
+  second Still on a number getting the bad batch, which is what blows it. The verb is **blows**, not "bursts". The
+  first draft's theme ("two crews can't cook the same batch in one town") and the name "the Clash" are retired; the
+  code and bot logs still say `clash` (`G.clash`, `--clash`), which is fine.
+- **Repeats are set aside.** The Red pool is still one more than the players, but any die that repeats a face goes
+  aside, so a number fires at most once a morning and nobody tracks cold Stills (Nick's call, over a "blown Still
+  stays cold" rule). A seat may find the pool empty: one more reason to Lay Low early. The leftover die does nothing.
+- **The start is Boss and 2 in the Ward again** (since 2026-11-16). From 2026-11-15 it was Boss and 1, so no
+  starting crew reached 3; with no threshold, "No Still blows on Day 1" does that job instead (the mirrored starts
+  would otherwise blow off random turn order).
+- Every number is printed twice (the 7 four times; the 2 and 12 once), and the starts mirror across a side
+  (Manhattan and the Bronx on 8, 9, 10; Queens and Brooklyn on 4, 5, 6), so neighbours are natural rivals. The
+  Almanac's lesson 8, **The Double**, is now that twin ("Every boiler has a twin, and the twin holds the gun").
+- Weighed the same evening (bots, all in the write-up): no crew threshold (bloodier, Boss deaths doubled, Day 1
+  Blowbacks), flat 1 dead, Nick's 1 / 2 ladder, a cold-Still rule, 4+ Mobsters, and Runners-only brewing with 3+
+  Runners (Boss can never blow; a smaller brew and one more distinction to teach). The Harbourmaster choosing a
+  Blowback number was an alternative to this, not a layer; Nick prefers this.
+- Bots keep crews small, so Blowbacks nearly vanish for them (0.2 a Day against 1.46); they held more turf and fought
+  more, and the crown median was flat (29.5 on the shipped rules). Watch at the table: how often stacks blow, the
+  Venues (four 7s), and whether neighbours bleed each other early.
+
+**Titles moved to Sunset the same day** (Nick): counted when the final player Lays Low, the sole most takes the
+card, a tie sends it to the Supply. The section below describes Claim, the rule from 2026-11-14; where it says a
+card is taken at the end of your own Play, Sunset supersedes it. mk-online keeps Claim for saves on it.
+
+## Titles: Harbormaster and Night Mayor
+
+Since 2026-11-14 (Nick; the thread "Test Harbourmaster and Night Mayor title cards", the write-up
+`/mnt/project-files/reviews/title-cards-2026-11-14.md`, bot rows in `/mnt/project-files/bot-runs/log.md`,
+mk-online-rules-sync §67). Two **Title cards**, **3 Respect** each while held, **no powers**: the
+**Harbormaster** for the most **Docks** (10) and the **Night Mayor** for the most **Speakeasies** (8: the four
+dives and the four High Society Venues). Both start in the Supply. **Claim**: when a Play of yours ends with
+you Controlling more of them than every other boss, take the card, from the Supply or its holder. Nick: it
+"works the same as jobs. After each play check if it completed a job or claimed a title." A card moves no
+other way: not on a Blowback, a Raid or a tie, and not when its holder falls behind.
+
+Why (Nick): a reason to spread and not turtle in a corner beyond Jobs, against Blowback by Pressure, which
+punishes a spread. The old Titles (2 Respect each, recounted at the end of the Day, with powers) were cut on
+2026-09-10 for paying for turf twice; a Respect-only card that pays for the *count* is the counterweight, and
+it is the one Respect a rival can take off a leader before he crowns.
+
+Weighed the same day and not taken (all with bot runs):
+- **Checked at Sunset** (Nick's first idea): calm, but a boss who reached 20 with a card kept it all the next
+  Day, and the last boss still out could grab a Dock after everyone else had Laid Low.
+- **Live** (recount after every Play): with a tie to the Supply it churned (the cards moved 2.3 times a Day);
+  with the holder keeping it on a tie, it stuck to the leader. Nick: "tied means supply is cleaner."
+- **A late start** (a Titles card shuffled in with the 3s, like the Blood Oath): Claim already keeps the early
+  game calm, and it was one more special card.
+- **A floor** ("at least 4 Docks and more than any rival"): cut the live churn by a third, no more.
+
+Where it lives: the Rulebook's **Titles: Run the Town** under Winning the Game (it would not fit the Respect
+page, which is full), Count Your Respect, Components, Setup and the Glossary; the Town Planner's Make a Play
+step; the Cards sheet's **sheet 11** (half a sheet, art `Art/Cards/Harbormaster.jpg` and `Night Mayor.jpg`,
+the cut Titles' plates); The Almanac's lesson 27 (*Take his Title*). The Playbooks stay silent: a Title is not
+a Play. Bots (40 games): crown median 31 against 37 with no Titles (quartiles overlap), the cards moved 0.8
+times a Day, 35 of 40 winners held one. Bots don't spread, so whether people turtle less is a table question.
+Watch: how sticky a leader's card is at the table, and whether 3 is too much of the 20.
+mk-online: `G.titleRespect` (3, new games), `G.titleTiming` ("claim"); older saves have no Titles.
+
+## Random Mash: no Harbormaster
+
+Since 2026-11-14 (Nick; this thread's write-up is `/mnt/project-files/reviews/blowback-spread-2026-11-13.md`,
+mk-online-rules-sync §66). **Tomorrow's Mash is always rolled at random** at the end of Shadows and stays on the
+board all Day, so the table still knows it a Day ahead. **The Harbormaster is gone**: the most Docks no longer names
+it. Nick called it one of his darlings, but at the table the Harbormaster named a 1 or a 6 almost every time (North
+against South), so it was close to an automatic choice; a random face brings back the bell curve, and with it the
+reason to spread. It also takes a count and a decision out of Shadows.
+
+- The Blowback is unchanged (by Pressure, 1 / 2 / 3). Nick: with a random Mash the low-Pressure Stills fire and blow
+  less, and Split the Batch is the way to fire them.
+- **Weighed the same week and not taken** (all in the write-up, with sims): Nick's lighter tiers (1 at Pressure 1-3,
+  2 at 4-6); **last man stands** (a Blowback never takes a District's last Mobster), which Nick rejected as making no
+  thematic sense and making lone Mobsters strong: don't bring it back; every draft firing every matching Still,
+  including a 3 / 2 / 1 draft by seat with doubles dropped (it favoured the spread but flattened the draft and made
+  mirroring rivals and holding 7s the dominant play); a **trim** in the old Sweep's place (a hit District drops to 3),
+  which spares small crews but barely touches a one-Still fortress, since its owner drafts his own number.
+- The Docks keep their Trade, the Jobs that name them and Cuban Prince's Extort; they no longer carry a title.
+- The Almanac's lesson 5 is **The Morning Line** ("Read tomorrow's Mash"), replacing The Leash. The Brew Simulator lost
+  its Hostile Dock leader setting. The Volstead Act (shelved) still has its own "river rules" twist, which brings a
+  Dock leader's Mash back as a variant.
+- mk-online keeps the Harbormaster for older saves (`G.randomMash`).
+
+## Small Mob: a dozen men, one die a man
+
+Since 2026-11-09 (Nick; the thread "Assess a 10 Runner cap", bot rows in `/mnt/project-files/bot-runs/log.md`,
+mk-online-rules-sync §55). The game's core is **a small mob holding a big city** through tactics and the
+threat of violence, and Nick's main goal is a game his gateway-gamer friends can learn. Four changes:
+
+- **12 Runners** a family (15 before). Nick chose 12 over the 10 first tried for the sound of **"a dozen
+  men"**. Use the phrase where it lands (the Rulebook's opening, The Almanac's lesson 16), not everywhere:
+  Nick doesn't want it overdone. The start is Boss and 2 in the Ward, 2 on the Dock, 2 at the bar.
+- **Muscle**: a District's Mobsters, **max five**, one barrel and one die a man. The Muscle Ratio (half the
+  crew, rounded up) is gone; a sixth man in one District adds nothing. The cap of five is what keeps a big
+  pile from mattering (Nick). The Rulebook doesn't use the word: since the 2026-11-09 trim, the Brew and the Rules of
+  Engagement each say "one barrel (one die) per Mobster, up to 5", and the "Muscle: Street Math" box is gone
+  (Nick: the rule reads best where it is used). Don't bring the box back.
+- **Blowback by Pressure**: 1 dead at Pressure 1&ndash;2, 2 at 3&ndash;4, 3 at 5&ndash;6, Runners first. The gauge
+  gets a second job, and the 7s (where the leaders sit) hurt most. Nick wants Pressure only; a "half the
+  crew, capped by tier" version was weighed and not taken. The board's gauge is drawn in **three pairs**
+  (a wider gap between the 2nd and 3rd and the 4th and 5th segments, `tools/still_art.js`), one colour
+  a pair: gold, orange, red (Nick, the same evening: "while it doesn't look quite as good, I think it'll
+  make the rule clearer"; it was a six-step gold-to-red ramp). The Rulebook's map text names the colours.
+- **The Safehouse adds no Threat** (Nick's pick on a decision card). With one die a man, a Boss and three
+  behind a Safehouse threw back a Boss and six four times in five; without the +1 it is a coin flip.
+  Threat now tops out at 3 (Boss and Ambush, or Boss and Tommy Gun), so the Threat tables stop at Level 3.
+  The Safehouse is still the Recruit point and the Rise is still at home; it is no wall. Torch burns it and
+  the barrels but does nothing for the fight, and the Combat Simulator dropped its Safehouse box and Torch kit.
+
+Bots field about five Runners whatever the cap, so the cap and start don't show in bot runs; one die a man
+shortened the crown median (51.5 to the low 40s) and moved cash toward Unload. Turtling needs a real game.
+`tools/sim_almanac_combat.js` reproduces The Almanac's figures under these rules.
+
+## The Open City: two Precincts, ten Docks, Snitch
+
+Since 2026-11-11 (Nick, after his own Day 9 game as the Irish; the thread "Ease police pressure and open up the
+map", mk-online-rules-sync §61, bot rows in `/mnt/project-files/bot-runs/log.md`). His complaints: the police
+were too oppressive (six Raids in nine Days, four Squads padlocking the Venues and the Docks), the 2:1 Trade was
+never worth the walk, nobody wanted the ordinary Speakeasies, the Rat went unused, and the Hook never had a
+chance. **This section supersedes** the older ones below where they disagree (Contact Docks, the four Squads and
+their Borough lock, Skiff, the swap Hook, the Rat Card and the Welshers, the starting bars of Queens and Brooklyn).
+
+- **Two Precincts**, East Harlem and Corona: **no Still and no business**. The North Squad starts on East Harlem,
+  the South Squad on Corona, and once a Squad leaves anyone may hold the District. The High Society Venues start
+  **open**.
+  Since 2026-11-12 East Harlem borders Belmont (Nick), so each Precinct reaches five Districts, three on its
+  own side and two on the other. A Precinct is drawn with a faint blue hatching, and the key marks it with the
+  Squad's blue shield. The Boroughs lost their numbers the same day; the Squads are numbered 1 (North) and 2 (South).
+- **Two Squads**, North (Manhattan, the Bronx) and South (Queens, Brooklyn). Reach is any District Adjacent on its
+  own side (a Bridge inside the side counts); it never crosses to the other side. North moves first. A Squad with
+  nobody in reach on the Heat Track **goes home** to its Precinct and raids whoever stands there, **Heat or none**
+  (Nick: it keeps the Squads central and gives the Precincts a use after the first Raid).
+- **Ten Docks.** Belmont and Red Hook are Docks: every mainland Borough is one ordinary Speakeasy, one High
+  Society Venue, a Ward and two Docks; Staten Island two Docks. **Every Dock Trades 1:1.** The Contact Docks, their
+  schooners and medallions retire; "Rum Row" stays on the board as theme. There are **8 Speakeasies** now.
+- **Stills.** The four 7s stay (they dodge the Harbormaster); the mainland 2 and 12 go instead (Nick). The Bowery
+  11, Belmont 11, Whitestone 3, Red Hook 3; Queens' bar is **Astoria** and Brooklyn's **Coney Island**, each on the
+  6. 2 and 12 are Staten Island's alone. Every start still totals Pressure 12, and the Pressure 5 Stills are still
+  the four starting bars.
+- **Snitch** is the Rat Play renamed: Power Play, 2, **repeatable**, each one takes a **Rat card** (-1 Respect). A
+  broken promise takes a Rat card too. **Twelve Rat cards** (Nick: print 12); none left, nobody Snitches. The Rat
+  Card (-3) and the seven Welshers retire, so the Cards sheet is 40 (7 Marks, 12 Rat cards, the Blood Oath on the
+  Marks' second sheet). "Rat" still names the card, and a man who breaks his word is a rat.
+- **A Rat card is for good.** **Patsy** (Power Play, 2 Influence and any one of your Runners: he goes to your
+  supply and a Rat card goes back) shipped with the Open City and was **cut on 2026-11-12** (Nick): it turned the
+  Snitch's price into a loan, softened a broken promise, kept the twelve cards from ever running out, and was one
+  more Play to teach. It is **parked as a possible mob Signature Play** (see *Open design threads*).
+- **Hook** (Irish): plain theft, **up to 2 barrels** from an Adjacent rival District into one you Control, 2
+  Influence, no Heat (Nick: he played the Irish and the swap never had a chance).
+- **Haul** (Knights, replaces **Skiff**, which Nick disliked, worse with more Docks): Power Play, 2. Mobsters, no
+  barrels, **two Adjacent steps**, the first **Safe**; a Standoff if the second is Hostile, with Fall Back to the
+  first. Nick floated it for all mobs ("a sprint rather than a walk") and gave it to the Knights "to start with".
+- **Jobs.** The four bar 1s whose bars went: The Angel's Share "Seize Belmont.", Poison Panic "Seize Red Hook.",
+  Bathtub Gin and Off the Boat "Trade 4+ barrels at" Belmont and Red Hook (Nick: "seize the docks. That encourages
+  combat."). Nick will do a full Jobs pass once the core rules settle, so leave the rest of the deck alone.
+
+Bots (40 games, random styles, against today's rules): crown median Day 39 against 51.5; a Raid hits 1.9 Districts
+against 3.4; Kickbacks 26.8 a game against 6.6; Rum Traded 89 against 34.5; Extort 34% of cash against 55%; fights
+flat (31 against 33); about 4.5 Snitches and 5.5 homecomings a game. Bots barely used Hook and Patsy. Deferred: new
+map connections (Hunts Point to Sugar Hill was floated) and a separate Influence sink.
+
+## Queens starts on Whitestone
+
+Since 2026-11-16 (Nick; mk-online-rules-sync §70, bot rows in `/mnt/project-files/bot-runs/log.md`). Queens
+starts on **Flushing, Astoria and Whitestone**, and Whitestone and Jamaica swapped Stills: **Whitestone 5,
+Jamaica 3**. Jamaica borders only Richmond Hill and Brownsville, so the two Runners there stood apart from the
+rest of the family, an easy first kill; Whitestone borders Astoria and Flushing, so every Borough now starts on
+three Districts joined by borders. The start still totals Pressure 12 and mirrors Brooklyn's 4, 5, 6, so the
+Blowback twins are unchanged. Two side effects: Queens no longer starts beside Brooklyn's home Ward (both Wards
+are now two Moves from the other side's start), and **Jamaica Ginger** went back to Jamaica ("Trade 4+ barrels
+at Jamaica"), the Queens Dock nobody starts on, as it followed the empty Dock on 2026-11-08. Where older
+sections below say Queens starts on Jamaica, this supersedes them. mk-online: `G.queensWhitestone`; Open City
+saves without it keep the Jamaica start.
 
 ## Everything is on the table
 
@@ -147,8 +319,8 @@ peek at any time from 2026-09-30, a face-down claim before that).
 ## The Market restocks after the Offers
 
 Since 2026-10-07. A Job taken at the Offers leaves its gap empty; once every boss has chosen,
-deal a fresh Job into each gap. The opening Market (Player Count + 1, 1s and 2s, the 3s shuffled in
-after) is dealt **face-down** at setup and turns face-up at Day 1's restock, so **Day 1 has no
+deal a fresh Job into each gap. The opening Market (Player Count + 1, off the top 15 cards, which
+hold no 3s since 2026-11-11; see *Late 3s and the Blood Oath card*) is dealt **face-down** at setup and turns face-up at Day 1's restock, so **Day 1 has no
 Offers**. The rule's one home is Grease the Wheels; the Town Planner restates it.
 
 Why: the immediate refill was a lottery that dealt the next picker a card nobody chose. Now every
@@ -159,6 +331,30 @@ the Vipers see only the first card of tomorrow's restock); Nick accepts it, and 
 a fixed top two cards. Don't restore the immediate refill. The Speakeasy grid (a Job per Controlled
 Speakeasy, tiered by bar) is parked in `jobs-system-handoff.md` §2b with the problems to solve
 first.
+
+## Late 3s and the Blood Oath card
+
+Since 2026-11-11 (Nick). Two setup changes, one step:
+
+- **The 3s come late.** Set the eight 3s aside, shuffle the rest and count 15 off the top, shuffle the
+  3s into what's left, put the 15 back on top, then deal the Market. About ten Days of restocks pass
+  before the first 3 can appear. In bot runs the 3s held 25% of the Market's slots by Day 5 and 43% by
+  Day 10 (they are hard and they sit); with the late 3s, 0% and 15%. The bots did not crown sooner
+  (median Day 49 against 43, overlapping quartiles; `bot-runs/log.md`), and Nick took it for the
+  cleaner early Market. Its one home is the Rulebook's Stack the Job Deck.
+- **The Blood Oath card** replaces the Federal Crackdown Tracker (retired the same day: the page, its
+  index tile and its PDF). It wears a Job's back and goes in with the 3s, so it is dealt somewhere from
+  the 11th draw on; the restock that deals it forms the Alliances, and a Job takes its gap. Why: a
+  Raid count could be stalled to pick a partner, and nobody can time a card. It prints on the Cards
+  sheet, in the slot of an eighth Welsher, with the Job back (Nick, the same day: both decks stay 36
+  and every sheet is full; there are **7 Welshers**). Print both decks in one run on one stock, or its
+  back can be told from a Job's. Art:
+  `Art/Jobs/Omerta.jpg` (unused until then); Nick may make a new image. It can't be claimed, so a
+  Viper whose Whispers finds it leaves it on top for the next restock, and may tell the table or not.
+  In 20 bot games it fired between Day 6 and Day 24. The face carries the title (in red, so it stands
+  out from the Jobs), the rule and the flavour only: no tier band and no label (Nick, the same day).
+
+The Volstead Act (shelved) still uses the Tracker as its clock; see *Open design threads*.
 
 ## Jobs: one verb, one place
 
@@ -298,8 +494,11 @@ once. The deck is 36 cards, 16 / 12 / 8:
 
 - **1s**: **the bars**, one Unload card for each of the eight ordinary Speakeasies ("Unload 4+
   barrels at <bar> in <District>"; 4+ since 2026-10-15, see *Easy 1s, open bars*), and eight singles for the landmarks, the Docks and
-  Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Ward"; a 1 since
-  2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished), **Cuban Prince** ("Extort
+  Staten Island, with **Union Dues** ("Recruit 4+ Runners in a rival's home Borough"; a 1 since
+  2026-10-15, the easiest 2 in 24 bot games, 24 of 31 claims finished; a rival's home Ward until
+  2026-11-11, when Nick found it too hard at the table: Recruit is only at your Safehouse, so it
+  meant Seizing his HQ and taking his Safehouse over, The Eviction plus a hire for 1; bots finished
+  it only because they leave their Wards thin), **Cuban Prince** ("Extort
   4+ Docks"; a 1 since 2026-10-17, the easiest 2, 62 of 99) and **Jamaica Ginger** ("Trade 4+ barrels
   at Whitestone"; 2026-10-17, Nick: more Trade cards to pull toward the Rum Trade; it replaced Night
   Landing). Every barrel count on a 1 is 4+, The Dutchman's Deal at the Bowery included (3+ until
@@ -355,9 +554,10 @@ Do not restrict lone barrels to your own turf, and do not split them into a Play
 ## The crown is a Play: Take the Crown at 20 Respect
 
 Since 2026-09-25; Respect became the only score on 2026-10-12 (Nick; `respect-endgame-handoff.md`
-holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds, Titles,
-or other board-scoring cards. **Respect is your pile**: completed Jobs (1, 2 or 3) and Bribe cards
-(1 to 4), less **3** for the Rat Card, **2** per Shylock's Mark you hold and **1** per Welsher. The
+holds the reasoning, every option weighed, and the watch list). There are no Borough Deeds or other
+board-scoring cards, but for the two Titles (since 2026-11-14, *Titles: Harbormaster and Night Mayor*).
+**Respect is your pile**: completed Jobs (1, 2 or 3), Bribe cards (1 to 4) and the Titles you hold
+(3 each), less **2** per Shylock's Mark you hold and **1** per Rat card (the Rat Card's 3 and the Welshers' 1 until *The Open City*). The
 game's one ending Play is **Take the Crown** (Power Play, 2 Influence, no Heat). Make it on your turn
 with **20+ Respect** and your **Boss in a rival's home Ward** (since 2026-10-24; see *The Crown in
 the Wards*), and you win on the spot. It lives on the Winning the Game page (a heading and a two-item
@@ -408,11 +608,23 @@ the Cards sheet went the same way: **every card carries one short line and no ru
 Rat "No Rat till a rival Rats", the Mark "Square Up: $2,000", the Welsher "Forever", a Borough its
 three rooms). The Respect is on the shield, so no card restates it.
 
-In the Blood Oath, an Alliance races to **40 combined Respect** (lower, and an Alliance could form
-already past the bar, so the Truce would hand it the game), and **either partner** Takes the Crown
-with his own Boss in a home Ward of the opposing Alliance (since 2026-10-24; see *The Crown in the
-Wards*); whoever crowns is the Capo.
-The Rulebook, Town Planner, Playbooks, Cards sheet, Federal Crackdown Tracker, and The Almanac must
+In the Blood Oath (Nick, 2026-11-11), an Alliance races to **30 combined Respect**, and **both partners** must
+Take the Crown, each with his own Boss in a home Ward of the opposing Alliance, with the Alliance at 30 each
+time (so a partner can't crown and then take Marks or break deals to pay for it). The first crown wins nothing:
+turn that Ward's Borough card face down ("their Ward has fallen"), and nobody crowns there again. The second
+partner crowns in the other Ward, still face-up, and **both partners win**. The universal crown rule reads "a
+rival's home Ward whose Borough card lies face-up" (the Rulebook's Winning list; in the standard game nothing
+flips). The Rulebook's section is *Their Ward Has Fallen*.
+
+Why: from 2026-10-12 to 2026-11-11 the target was 40 combined and either partner crowned. A combined bar moves
+the leader's finish line at the Truce (needing 4, then 15), and a solo 20 with a shared win lets the 4th-place
+partner win carried, which Nick called a shallow victory. Two crowns make each partner earn it, and the lower
+bar keeps the jump small; two crown Plays in two Wards mean no Alliance can win the moment it forms. Weighed and
+not taken: tracking the first crown with the Blood Oath card (the Borough card flip is simpler), and serial
+crowns in any Ward (the pair would queue at one door). Before the shared win (*One Crown, One Capo*, until the
+same day) only the crowner won, and in the first agent game partners fought over the crown rooms nine times.
+Don't bring back a Capo-only win.
+The Rulebook, Town Planner, Playbooks, Cards sheet, Jobs deck (the Blood Oath card), and The Almanac must
 agree on these values.
 
 Why it works: the Crown is its own Play, made from a room the Boss already stands in, so the
@@ -495,8 +707,8 @@ rules pass, not by Nick, and is his to confirm: a partner's Ward would let the p
 by agreement (he steps out, you walk in), which skips the fight the rule is built on, and "Nothing on
 Your Books" already makes a partner worth nothing on the Jobs.
 
-The interactions, all with unchanged text: **Union Dues** (Recruit 4+ in a rival's home Ward) now
-builds a garrison in a crown room; **The Eviction** points at the same doors as the Crown, since every
+The interactions, all with unchanged text: **Union Dues** (then Recruit 4+ in a rival's home Ward;
+his home Borough since 2026-11-11) built a garrison in a crown room; **The Eviction** points at the same doors as the Crown, since every
 rival Safehouse starts in his home Ward, and the two chain (take his house over, then Recruit there);
 **High Roller** and **Opening Night** are no longer crown-related.
 
@@ -538,12 +750,34 @@ away Venues and went with them. Watch now: at three players the boxed Borough's 
 and Queens' Corona bar borders Brownsville, so Queens starts three Runners one Move from Brooklyn's
 crown room (its Boss starts two Moves off, in Flushing).
 
+## Dive bars: any barrel $200; Rum $500 only at High Society
+
+Since 2026-11-13 (Nick, after the Day 17 four-Haiku game, `playtests/haiku55-4p-7-day17-2026-11-13.md`):
+an **ordinary Speakeasy pays $200 for any barrel**, Moonshine or Rum, and only a **High Society Venue**
+pays $500 for Rum (and only Rum). Theme (Nick): "a dive bar buys anything cheap and won't pay a premium,
+the glitz will only buy the good stuff and pays a fortune for it." Why: Rum paid $500 at any bar, so the
+Rum run ended at the home bar beside a Dock with no Kickback (the Brooklyn seat won both Open City agent
+games pouring Rum at Coney Island, $17,800 in five Unloads in the Day 17 game), and the Venues were
+optional. Now the Rum premium lives at the Venues, every premium barrel pays a Kickback, and Moonshine is
+the raw product. Stuck Rum still sells at $200, so nothing is stranded; dumping it loses only the
+Trade's marker. Nick first floated a Moonshine-only dive bar and chose this to keep that outlet. He
+shipped it without waiting for bots ("they don't tell us much about how the game actually plays"); the
+A/B is in `bot-runs/log.md`. mk-online keeps the old price for older saves (`G.diveBar`).
+
+"Dive bar" is the change's working name only: the compound is later than 1929, so player text says **a dive** (the Rulebook's Unload flavour: "A dive buys anything, cheap; the swells pay a fortune, and only for the good stuff."; Nick, 2026-11-13). The rule sentence: "An ordinary Speakeasy pays $200 per barrel, Moonshine or Rum. A High Society Venue
+buys only Havana Rum, at $500." The board key's Speakeasy row is a grey and a brown cube at $200 each.
+Watch: Kickbacks (every premium barrel now pays one) and whether the Venues become the fights.
+
+The section below is the older rule (2026-09-22 to 2026-11-12) and its reasoning; where it says Rum
+pays $500 at an ordinary Speakeasy, this section supersedes it.
+
 ## High Society buys Rum only; elsewhere the barrel sets the price
 
 Since 2026-09-22:
 
 - **Moonshine** sells for **$200** a barrel ($300 until 2026-11-08; see *The Rum economy*) and
-  **Havana Rum** for **$500**, at **any of the eight ordinary Speakeasies you Control**
+  **Havana Rum** for **$500** (until 2026-11-13; now $200, see *Dive bars*), at **any of the eight
+  ordinary Speakeasies you Control**
 - the **four High Society Venues buy Havana Rum and nothing else**, at $500, and every
   barrel Unloaded there pays an Influence **Kickback**. The usual limits apply: a marker in
   Reserves and an empty Ledger slot, else the Kickback is lost. ("The High Society joints
@@ -593,6 +827,8 @@ in the game bricks a paid-for asset.
 
 ## The Rum economy: Moonshine $200, Trade at any Dock, Hook
 
+Since 2026-11-11 every Dock Trades 1:1 and the Hook is plain theft (*The Open City*). Moonshine $200 stands.
+
 Since 2026-11-08 (Nick, with *Every Unload and every Extort draws Heat*: "This encourages players to
 interact with rum"). Three changes, one direction:
 
@@ -628,6 +864,8 @@ least Rum in every arm, so its problem is something else; Nick floated swapping 
 
 ## Contact Docks: the Bowery, Whitestone, Stapleton, Tottenville
 
+Retired on 2026-11-11 by *The Open City*: every Dock Trades 1:1. Kept as history.
+
 Since 2026-11-04 (Nick; `trade-docks-handoff.md` holds the evidence and the work list). The four **Contact
 Docks** are the Bowery, Whitestone, Stapleton and Tottenville, the Docks nobody starts on, which are the
 four Pressure 1 Stills (the 2s and 12s). Until 2026-11-08 Manhattan's and Queens' were West Side and
@@ -636,7 +874,8 @@ takes Jamaica's 2 and gives it its 5, and Manhattan and Queens start on West Sid
 West Side borders Sugar Hill and Jamaica borders Richmond Hill: a one-Move Rum run at 1:1 that only
 Manhattan and Queens had. From 2026-11-04 to 2026-11-07 they were the only Docks that Traded;
 since 2026-11-08 they Trade 1:1 and every other Dock 2:1 (see *The Rum economy*). The board marks them with
-a rum-runner schooner, and "RUM ROW" sits low in the Narrows over a small gilt triangle pointing off the
+a gilt medallion carrying the Dock's anchor (since 2026-11-09, Nick, after a Gemini read found the corner
+schooner easy to miss; the key's Contact Dock row matches) and a rum-runner schooner under the sign, and "RUM ROW" sits low in the Narrows over a small gilt triangle pointing off the
 board, with "12 MILES" above it (Nick, 2026-11-09: from 1924 Rum Row lay about twelve miles out). From 2026-11-04 to 2026-11-07 dashed **shipping lanes** ran to it from all four; Nick cut them on
 2026-11-08 ("I do like them but they add clutter and confusion"), and then the short arrow left in their
 place ("looks like it's broken and coming from nowhere"). Don't bring either back.
@@ -681,6 +920,11 @@ Don't bring the keg back without Nick asking.
 
 ## Open design threads
 
+**Signature Plays under review** (Nick, 2026-11-12: "I'm still not convinced by a couple of them"). **Patsy** is
+parked as a candidate mob Play (cut from the standard Plays the same day). **Haul** was a quick replacement for
+Skiff and may be good; not proven yet. **Torch** has got much weaker since the Safehouse lost its +1 Threat (*Small
+Mob*): a burned Safehouse no longer costs the defender a die. Nothing decided; don't change them without Nick.
+
 `respect-endgame-handoff.md` (2026-10-12, shipped the same day) holds the endgame redesign that
 retired the Nod (see *The crown is a Play*): every option weighed, why the numbers are what they
 are, the art notes for the Bribe cards, and what to watch in playtest.
@@ -708,7 +952,8 @@ was closed by the Deeds' removal and the file deleted; its combat modelling surv
 
 **The game is 3 to 4 players** since 2026-09-23. The 2-player North vs South mode is
 shelved, not pending, and so is **The Volstead Act** (2026-09-25). It still breaks ties on the
-Loose Change the Playbooks no longer print, so it needs a new tiebreak if it returns. Two questions are open, and both
+Loose Change the Playbooks no longer print, so it needs a new tiebreak if it returns, and its clock
+was the Federal Crackdown Tracker, retired on 2026-11-11, so it needs a new clock too. Two questions are open, and both
 belong to playtest rather than invention:
 
 - **Three-player kingmaking.** Respect is public and the win is a threshold, so at three the
@@ -748,8 +993,9 @@ Nick's rulings on the differences mk-online's harness found (the list is in mk-o
 - **The raided crew's owner picks** which Connected Safe District it runs to (by water too since
   2026-10-07; see below).
 - **Split the Batch** stays "may"; the engine never offers a pass, since nobody would refuse it.
-- **Whispers is a Play** since 2026-10-15: look at the top card of the Jobs deck in secret, and
-  claim it at once or leave it on top. From 2026-09-30 it was a peek at any time (Nick then rated
+- **Whispers is a Play** since 2026-10-15: look at the top card of the Jobs deck, and claim it at
+  once or leave it on top. What the Viper tells the table is his business (Nick, 2026-11-11: "keep it
+  to yourself" was unenforceable, and sharing or bluffing makes the Play better). From 2026-09-30 it was a peek at any time (Nick then rated
   the peek the higher-skill play); the 2026-10-15 cut of the passive Traits made it a Play.
 - **Starting Boroughs are random** (the reverse-order pick is gone). Since 2026-10-10 they are
   dealt as the four Borough cards (see Borough cards, above).
@@ -771,15 +1017,15 @@ The Rulebook's Key Concepts and Territory carry it.
 **No passive Traits.** Each family has exactly two Signature Plays: the Sicilians Hit and
 Consigliere (2 markers since 2026-11-09; see below); the Irish **Tommy Gun** (2, In a Firefight: Open Fire with an extra die at +1 Threat)
 and **Hook** (2, swap barrels 1:1 with an Adjacent rival; Peddle until 2026-11-08); the Vipers Stealth (see *Stealth skips the Standoff*) and **Whispers** (1, a Play: read
-the top Job in secret, claim it at once or leave it); the Knights Skiff and Torch (which now burns
+the top Job, claim it at once or leave it); the Knights Skiff and Torch (which now burns
 the District's barrels too). Gone: Untouchable, Firepower, Network, passive Whispers, Plunder and
 Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the rows.
 
 Watch in playtest:
 
-- **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss, three and
-  a Safehouse from 8% to 17%; on four, two bursts take it 43% against 11%
-  (`tools/sim_almanac_combat.js`). Firepower's free die used to make it about 33% on three.
+- **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss and three
+  from 9% to 18%; on four, two bursts take it 24% against 10% (`tools/sim_almanac_combat.js`, Small Mob
+  rules).
 - **Whispers** claims outside the Offers, so the Vipers can take a 3 off the deck on Day 1.
 
 ## Consigliere costs 2
@@ -800,8 +1046,8 @@ Viper who wanted the block without a fight had to come by the front door, and th
 Occupier to Ambush). Nick accepts the tell now: the plain Move is how a Viper asks for a Fold, and the
 Stealth is how he comes to kill.
 
-Watch in playtest: a Boss and four on a Stealth take a Boss, two Runners and a Safehouse three times
-in four (The Almanac's lesson 19), and a lone Boss caught by one can't run, so the Vipers are the
+Watch in playtest: a Boss and four on a Stealth take a Boss and two Runners nineteen times in twenty
+(The Almanac's lesson 19; four in ten by the front door), and a lone Boss caught by one can't run, so the Vipers are the
 natural hunters for The Toll Booth Trap.
 
 ## Torch is a shot; Red dice for the Invader
@@ -991,15 +1237,18 @@ the two Docks of one Borough (West Side and the Bowery, Whitestone and Jamaica),
 until it took the ruling the same day. Nick ruled it out as a hop nobody would spot; the (now
 archived) Kingpin's Guide had always said a Squad "cannot jump the water". Crews may sail, cops walk.
 
-Squads stay in their own Borough. Letting them roam was weighed on 2026-10-07 and not taken: free
+Since 2026-11-11 two Squads roam a side of the city each (*The Open City*). Before that, Squads stayed in their own Borough. Letting them roam was weighed on 2026-10-07 and not taken: free
 rein of the map sends all four after the one freshest name, and one step across Borough lines lets
 them bunch up and leave a Borough with no police. The Borough lock is what makes the existing levers
 (Heat timing, planted barrels, the Rat) readable.
 
 ## Starting turf: the North on 8, 9, 10; the South on 4, 5, 6
 
+Since 2026-11-11 Queens starts on Astoria and Brooklyn on Coney Island, each on the 6 (*The Open City*); the
+table below is the older one.
+
 Since 2026-10-07 (Nick). Each Borough still starts with a Safehouse, its Boss and 2 Runners in its
-Ward, and 3 Runners each in one Speakeasy and one Dock, but the Speakeasy and Dock moved so that the
+Ward, and 2 Runners each in one Speakeasy and one Dock (3 until 2026-11-09; see *Small Mob*), but the Speakeasy and Dock moved so that the
 North starts on its 8, 9 and 10 and the South on its 4, 5 and 6:
 
 | Borough | Ward | Speakeasy | Dock |
@@ -1091,7 +1340,7 @@ A rules change is never one file. The player-facing set is:
 
 `Rulebook`, `The Almanac`, `Playbooks`, `Cards`, `Jobs Cards`, `Town Planner`,
 `The Volstead Act` (shelved), `Turn Tokens`, `The Ledger`, `Brew Simulator`,
-`Combat Simulator`, `Federal Crackdown Tracker`, `index.html`, and the board
+`Combat Simulator`, `index.html`, and the board
 (`tools/build_board.js`: its roster and key).
 
 After changing a rule, grep the whole set for the old wording. The Town Planner and the

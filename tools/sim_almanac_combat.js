@@ -21,7 +21,8 @@ const N = QUICK ? 20000 : 200000;
 
 // One fight. inv: {r, b, tommy, hit, torch}; occ: {r, b, safe}; answer: "ambush" | "hold".
 // The Invader spends up to `volleys` markers (a Hit or a Tommy Gun costs 2) or until a side is gone.
-// A Knight with `torch` spends the first of them, and a Runner, burning the Safehouse.
+// A Knight with `torch` spends the first of them, and a Runner, burning the Safehouse (which
+// changes nothing in the fight itself: it costs the volley and the man).
 function fight(inv0, occ0, answer, volleys) {
   const inv = { runners: inv0.r, bosses: inv0.b ? 1 : 0, kit: inv0.tommy ? "tommy" : "none" };
   const occ = { runners: occ0.r, bosses: occ0.b ? 1 : 0 };
@@ -31,7 +32,7 @@ function fight(inv0, occ0, answer, volleys) {
   let spent = 0;
 
   if (answer === "ambush" && C.alive(inv) && C.alive(occ)) {
-    const threat = C.clamp(1 + occ.bosses + 1 + safe, 1, 4);
+    const threat = C.clamp(1 + occ.bosses + 1, 1, 3); // a Safehouse adds no Threat (Small Mob, 2026-11-09)
     C.applyCasualties(inv, C.rollHits(C.diceFromMobsters(C.mobsterCount(occ)), threat), false);
   }
 
@@ -48,9 +49,9 @@ function fight(inv0, occ0, answer, volleys) {
     if (volleys - spent < cost) break;
     spent += cost;
     const invHits = C.rollHits(C.invaderAttackDice(inv, useTommy),
-      C.clamp(1 + inv.bosses + (useTommy ? 1 : 0), 1, 4));
+      C.clamp(1 + inv.bosses + (useTommy ? 1 : 0), 1, 3));
     const occHits = C.rollHits(C.diceFromMobsters(C.mobsterCount(occ)),
-      C.clamp(1 + occ.bosses + safe, 1, 4));
+      C.clamp(1 + occ.bosses, 1, 3));
     C.applyCasualties(occ, invHits, useHit);
     C.applyCasualties(inv, occHits, false);
   }
@@ -272,7 +273,7 @@ function section8() {
     return hit / T;
   };
   console.log(`\n   A given face shows twice or more in the Red pool: 4 players (5 Red) ${pct(pairs(5))}, 3 players (4 Red) ${pct(pairs(4))}`);
-  console.log("   The room's Blowback removes its Muscle Ratio, Runners first: Boss+4 keeps Boss+1, Boss+6 keeps Boss+2.");
+  console.log("   A home Ward's Blowback (Pressure 3 or 4) kills two, Runners first: Boss+4 keeps Boss+2, Boss+6 keeps Boss+4.");
 }
 
 // ---------------------------------------------------------------------------

@@ -1684,18 +1684,3 @@ mk-online #77.
   saves on 5 keep the 3+ gauge rule and Boss and 1 (`render.ts` tells the agents), saves without `clash` the
   leftover-die Blowback. `harness/RULES-AI.md`, the agents' brew helper, `scripts/clash-check.ts`, `lengthdiag
   --clash` defaults to 10.
-
-## 72. Rolled back to the 2026-11-09 rules (2026-11-18, Nick)
-
-- **The rule**: the rules return to Moonshine-Kingdom `d273b22`, just before §55 (Small Mob): 15 Runners, the
-  Muscle Ratio for brew and combat, the leftover-die Blowback, the Harbourmaster naming the Mash, no Titles, the four
-  Borough Squads, the Contact Docks, the Federal Crackdown Tracker. §55 to §71 are undone and stay below as history.
-  Heat on every Unload and Extort (§48), the Rum economy and swap Hook (§49, §50) and Consigliere at 2 stay.
-- Why (Nick): the game had drifted into a factory; this was the last version that felt close to right, and he will
-  fork from it. Ideas tried since: the project's `reviews/ideas-tried-2026-11-09-to-18.md`.
-- Rules set: every player-facing file, the board build and `tools/` restored to `d273b22`; CLAUDE.md gains
-  *Rolled back to 2026-11-09*.
-- mk-online: new games default to the pre-§55 rules (every per-game switch off: Small Mob, Open City, dive bars,
-  Random Mash, Titles, Clash, Queens on Whitestone, and the Blood Oath and Jobs changes of §57 to §60). The interface
-  work since stays. Saves keep the rules they were started on.
-
