@@ -14,13 +14,11 @@ Your **home Borough** is the one you were dealt at setup, and its Ward is your *
 
 The game ends mid-Day on the spot. Nothing else is settled.
 
-**Respect** = completed Jobs (1, 2 or 3 each) plus Bribe cards (1 to 4 each) plus **3** for each Title card you hold, **−1** per Rat card you hold, **−2** per Shylock's Mark you hold. All of it is public.
-
-**Titles** (two cards, both in the Supply at the start): the **Harbormaster** (most Docks) and the **Night Mayor** (most Speakeasies; there are 8, the 4 ordinary ones and the 4 High Society Venues), **3 Respect** each while you hold it. They are counted **at Sunset**: the boss Controlling more Docks than every other boss takes the Harbormaster, from the Supply or from whoever holds it; the same for Speakeasies and the Night Mayor. On a tie for the most, the card goes back to the Supply. A Title moves at no other time, so a card won at Sunset is held all through the next Day, and a leader's Title is the one part of his Respect you can take off him before he crowns: pass his count before Sunset. The state view's Titles line shows the holders and the counts.
+**Respect** = completed Jobs (1, 2 or 3 each) plus Bribe cards (1 to 4 each), **−2** per Shylock's Mark you hold. All of it is public.
 
 ## 2. Components and currencies
 
-- **Mob**: 1 Boss, 12 Runners, 1 Safehouse. You start with your Boss, 2 Runners and your Safehouse in your home Ward, and 2 Runners each on your starting Dock and Speakeasy; the other 6 Runners wait in your supply. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
+- **Mob**: 1 Boss, 15 Runners, 1 Safehouse. You start with your Boss, 2 Runners and your Safehouse in your home Ward, and 3 Runners each on your starting Dock and Speakeasy; the other 7 Runners wait in your supply. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
 - **Influence markers**: you own 6 at the start, and each of your four Bribe cards brings one more, so 10 at most. A marker is in one of four places:
   - **Reserves** (stash): uncommitted, and the source for Job Stakes;
   - **Ledger** (operations): max **5**, the only markers you can spend;
@@ -30,16 +28,16 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - **Cash**: start with **$1,500**. Cash is public.
 - **Barrels**: Moonshine (supply 30), Havana Rum (supply 20). Finite; empty supply produces nothing.
 - **Heat Track**: 5 spaces, with markers in order and the newest on the right.
-- **Muscle** (brew and combat dice): the Mobsters in one District, **max 5**: each man brews one barrel and rolls one die; a sixth man adds nothing. A Safehouse alone counts 0. Blowback kills half the crew (below).
+- **Muscle** (brew and combat dice): the **Muscle Ratio**, the Mobsters in one District halved, rounded up, max 5 (1-2 = 1, 3-4 = 2, 5-6 = 3, 7-8 = 4, 9+ = 5). A Safehouse alone counts 0. Blowback kills half the crew (below).
 
 ## 3. The Day
 
 ### Shadows (in this order)
 
-1. **Roll**: the holder of Turn Token #1 rolls **players + 1** Red dice, and **any die that repeats a face is set aside** (keep one of each face). The pool can hold fewer dice than there are players. The **Mash** (1–6) was rolled at random yesterday, so everyone knows it a Day ahead.
+1. **Roll**: the holder of Turn Token #1 rolls **players + 1** Red dice, and **any die that repeats a face is set aside** (keep one of each face). The pool can hold fewer dice than there are players. The **Mash** (1–6) was named yesterday (step 7), so everyone knows it a Day ahead.
 2. **Draft and brew** (draftDice): in Turn Order, each player takes exactly one Red die and brews at once. If the pool is empty when your turn comes, you draft nothing.
    - Brew Number = Mash + Red.
-   - Every active Still you Control with that number (Mobsters present, no Squad) makes **Moonshine = that District's Muscle** (its Mobsters, max 5), taken from the supply. Each Still fires at most once a Day.
+   - Every active Still you Control with that number (Mobsters present, no Squad) makes **Moonshine = that District's Muscle** (its Muscle Ratio), taken from the supply. Each Still fires at most once a Day.
 3. **Split the Batch** (chooseRelay): if the Still in your Boss's District fired, one other active Still you Control that is Adjacent (border or bridge, not water) to the Boss's District also fires, whatever its number, at its own Muscle.
    - It fires automatically when there is one candidate.
    - With 2+ candidates you choose one.
@@ -56,7 +54,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
    - **Day 1 has no Offers.** The opening Market is dealt face-down and turns face-up here instead.
    - **The 3s come late.** No 3-Respect Job sits in the top 15 cards of the deck (the opening Market included), so the first 3 turns up after about ten Days of restocks.
 6. **Fund the Ledger**: automatic. Reserves move into the Ledger up to 5. Staked markers stay on their Jobs.
-7. **Tomorrow's Mash**: automatic. Tomorrow's Mash is rolled at random and stays face-up all Day. Nobody sets it.
+7. **Tomorrow's Mash**: the **Harbourmaster**, the boss who Controls more Docks than every other boss, names tomorrow's Mash (setMash, any face 1–6). On a tie for the most Docks, or with no Docks held, it is rolled at random. It stays face-up all Day.
 
 ### The Hustle
 
@@ -83,14 +81,13 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 **Deals**:
 
-- A **Handshake** is a promise made in table talk ("I won't cross the river today", "I'll leave your Docks alone till Sunset"). It lasts until Sunset unless it says otherwise.
-- Breaking one earns a **Rat card** (−1 Respect, for good). In this online game the engine cannot see promises, so nothing deals the card automatically: a human at the table can hand it out, and every boss remembers who broke his word. Reputation is the real enforcement.
+- Deals are table talk and bind nobody: there are no Handshakes and no cards for a broken promise. Every boss remembers who broke his word, and reputation is the only enforcement.
 - **Cash crosses the table freely**: on any Hustle decision, **give cash** (giveCash) hands a rival any whole hundreds. It is not a Play and costs nothing, so your turn goes on. Pay for a deal, pay a bounty on the leader's Boss, or pay up front when you don't trust a promise. Influence never changes hands.
 - Deals are worth making. Three bosses who agree to stay out of each other's way while they hit the leader all gain; a boss who stays silent fights everyone.
 
 ## 4. Plays
 
-Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers goes to the Heat Track instead of back to Reserves. It costs no extra marker (Extort is 2 markers in all).
+Costs are in Ledger markers. **H** = draws 1 Heat (Unload: only at a High Society Venue): one of the Play's own markers goes to the Heat Track instead of back to Reserves. It costs no extra marker (Extort is 2 markers in all).
 
 | Play (engine) | Cost | Effect and restrictions |
 |---|---|---|
@@ -101,16 +98,16 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 | Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
 | Lay Low (layLow) | 0 | See §3. |
-| Unload (unload) | 2, H | At a Speakeasy you Control, sell your barrels there. An ordinary Speakeasy pays **$200 for any barrel**, Moonshine or Rum. A **High Society Venue buys only Rum, at $500**, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. One Heat marker however many barrels go, so a big pour costs no more Heat than a small one. |
+| Unload (unload) | 2, H at a Venue | At a Speakeasy you Control, sell **up to 5** of your barrels there. An ordinary Speakeasy (a dive) pays **$200 for any barrel**, Moonshine or Rum, and draws **no Heat**. A **High Society Venue buys only Rum, at $500**, draws one Heat marker, and each Rum barrel sold there gives a **Kickback**: 1 marker moves Reserves to Ledger (lost if Reserves are empty or the Ledger is full). The Unload's own 2 markers leave first. |
 | Bribe (bribe) | 2 | Buy one Bribe card you don't hold yet, in any order: **Precinct Captain $2,000 (1 Respect)**, **Alderman $3,000 (2)**, **Judge $4,000 (3)**, **Mayor $5,000 (4)**. It goes in your Respect pile and brings 1 Influence marker into Reserves. One of each per boss. Boss must be on the board. |
 | Extort (extort) | 2, H | **$100 per District you Control**. As often as your Ledger pays for it; each Extort draws one Heat marker however many Districts pay. |
-| Snitch (rat) | 2 | An immediate Raid (§7), and you take a Rat card (−1 Respect) from the Supply. Repeatable. With no Rat card left in the Supply, nobody Snitches. |
+| Snitch (rat) | 2 | An immediate Raid (§7): an anonymous tip nobody traces. No Heat, no card, repeatable. |
 | Rise (rise) | 2 | Boss off the board only: place him in any **Safe District of your home Borough**. |
 | Take the Crown (takeTheCrown) | 2 | See §1. |
 
 ## 5. Movement and Control
 
-- **Control**: your Boss or a Runner stands in the District. **A Safehouse alone holds nothing**: a District with no Mobsters is Controlled by nobody, so its Still does not brew for you, it does not count for Extort or the Harbormaster, and you cannot Unload, Trade or Move barrels there. It is checked at the end of each Play: walk in and it is yours, walk off and it is not.
+- **Control**: your Boss or a Runner stands in the District. **A Safehouse alone holds nothing**: a District with no Mobsters is Controlled by nobody, so its Still does not brew for you, it does not count for Extort or the Harbourmaster, and you cannot Unload, Trade or Move barrels there. It is checked at the end of each Play: walk in and it is yours, walk off and it is not.
 - **Barrels belong to whoever Controls the District** at the end of a Play. Barrels in a District nobody Controls belong to nobody; whoever takes Control takes them.
 - **Golden Rule**: no two mobs share a District at the end of a Play.
 - **Adjacent**: a shared border or a bridge.
@@ -119,14 +116,14 @@ Costs are in Ledger markers. **H** = draws 1 Heat: one of the Play's own markers
 - **Hostile District**: rival Mobsters stand in it.
 - **A rival Safehouse**: whoever takes Control of a District holding one (Move, Haul, Advance, Scram, Rise, a won fight, a Fold) must take it over (yours moves in, free) or destroy it (back to its owner's supply). Walking in on one with no Mobsters starts no Standoff.
 - **Padlocked**: a District holding a Police Squad. Nobody enters it; its Still and Speakeasy are shut: no brewing, no Blowback, no sales. Every other Speakeasy is **open**.
-- **District kinds**: every Borough has one ordinary Speakeasy, one High Society Venue, two Docks and its Ward (engine tag \`ghetto\`); Staten Island has two Docks. Manhattan and Queens also hold a **Precinct** (East Harlem, Corona): no Still and no business, where a Squad starts and goes home. Every other District has a Still numbered 2–12.
+- **District kinds**: every Borough has one ordinary Speakeasy, one High Society Venue on the 7, two Docks and its Ward (engine tag \`ghetto\`); Staten Island has two Docks: 22 Districts, five a mainland Borough. Every District has a Still numbered 2–12.
 - **Still Pressure** = 6 − |7 − number|, so the 7 is hottest and gets 6.
 
 ## 6. Combat
 
 A fight happens inside the Move that started it. Each option costs the chooser's Ledger but never a turn.
 
-**Dice** = Muscle: one per Mobster, max 5. **Threat** starts at 1 and gains +1 for each of these, max 3:
+**Dice** = Muscle: the Muscle Ratio (the crew halved, rounded up, max 5). **Threat** starts at 1 and gains +1 for each of these, max 3:
 
 - Boss in the fight;
 - the Irish Tommy Gun (the Invader's volley only);
@@ -159,12 +156,12 @@ Hits remove **Runners first**, then the Boss.
 
 ## 7. Police
 
-- **Heat**: a Play marked H (Unload and Extort among them) and a fight's first shot (Ambush, Open Fire, Hit, Tommy Gun or Torch) each add 1 marker (the spent marker itself).
+- **Heat**: a Play marked H (Extort, and an Unload at a High Society Venue) and a fight's first shot (Ambush, Open Fire, Hit, Tommy Gun or Torch) each add 1 marker (the spent marker itself).
 - **The Raid** is triggered when the **5th marker** lands, once the Play that placed it has fully resolved (a sale completes first; a fight ends first), or at once by Snitch.
-- **Two Squads**: the North Squad (Manhattan and the Bronx) starts on the East Harlem Precinct, the South Squad (Queens and Brooklyn) on the Corona Precinct. They resolve North first.
-- **Reach**: Districts directly Adjacent to the Squad on its side of the city. A Squad never crosses a Bridge or the water, so it never leaves its side. The District must be Controlled by a mob (Mobsters there).
+- **Four Squads**, one per mainland Borough, start on the four High Society Venues, so the Venues start Padlocked. Staten Island has none.
+- **Reach**: Districts directly Adjacent to the Squad inside its own Borough (a border or a Bridge inside the Borough; never the water). The District must be Controlled by a mob (Mobsters there).
 - **Target mob**: among mobs Controlling a District in reach, the one whose marker sits **furthest right** on the Heat Track.
-- **Homecoming**: if none of them has a marker, the Squad goes home to its Precinct. Anyone standing on the Precinct is raided there (the Scatter below), Heat or none, and a lone Safehouse or barrels there are Condemned even with nobody home.
+- If none of them has a marker, the Squad holds its corner.
 - **Target District**: that mob's reachable District with the **most barrels**; ties go to the highest Still Pressure.
 - **Scatter**: the Squad moves in.
   - The Safehouse there is destroyed (back to supply) and all barrels there go to the supply.
@@ -204,7 +201,7 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 - **Laying Low early wins tempo.** You draft first tomorrow and brew before the supply runs thin. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
 - **The Crown takes visible steps:** 20 Respect, then the walk into a rival's home Ward (usually a fight, since it is his turf), then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise back in his home Borough plus the walk back out to a rival's Ward.
-- **Titles are Respect you can win and lose.** One more Dock or Speakeasy than everyone else at Sunset is 3 Respect. Spreading to Docks and bars pays for itself (Extort, Trade, Unload) and pulls a Title with it. If a leader's Title is part of his 20, pass his count (or tie it) before Sunset: the card leaves him and he drops below the bar.
+- **The Harbourmaster names tomorrow's Mash.** Hold more Docks than anyone and you choose the face, so you can light your own Stills tomorrow (or your rival's twin, to hand him the bad batch). A tie on Docks gives a random roll.
 - **The Crown ends the game before Sunset.** Promises due at Sunset go unpaid, so plan for betrayal.
 - **Raids go for barrels.** A Raid hits a mob's District with the most barrels, so a Rum stockpile in your Venue is Raid bait.
 
@@ -242,7 +239,7 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 
 **The law**
 
-- **Be loud in bulk.** One Heat marker per Extort or Unload however big, so squeeze many Districts and pour many barrels at once.
+- **Be loud in bulk.** One Heat marker per Extort however big, so squeeze many Districts at once. A dive's Unload is quiet (no Heat, $200 a barrel); a Venue's pour draws Heat but pays $500 a Rum and a Kickback each. Five barrels is the most one Unload sells.
 - **The Cold Trail.** A Raid chases the newest marker in each Squad's reach, not the most markers. Be loud right after a Raid; let others shout last.
 - **Heat at 3 or 4 is not a reason to sit still.** Ask who the Raid would hit (the HEAT line tells you). If it would hit a rival, or a corner you can spare, laying the 5th marker is good: it refunds everyone's markers and moves the Squads on. **The Refund**: sometimes you want the sirens.
 - **The Decoy Warehouse.** The Squad kicks the door with the most barrels. When your name is newest, make that a corner you can lose; when a rival's is, send barrels onto the door you want kicked.
