@@ -107,27 +107,26 @@ const fillId = d => `fill-${d.boro}`;
 // 12 went (the Bowery 11, Whitestone 3), Astoria and Coney Island are Queens' and Brooklyn's bars
 // on the 6, and Red Hook took a 3: every start still totals Pressure 12. Since 2026-11-16 (Nick) Queens
 // starts on Whitestone, which borders Astoria and Flushing (Jamaica bordered neither), and the two
-// Docks swapped Stills: Whitestone 5, Jamaica 3.
+// Docks swapped Stills: Whitestone 5, Jamaica 3. Since 2026-11-18 (the Even City) East Harlem and Corona
+// are gone (five Districts a Borough), and a Squad starts on each High Society Venue.
 const DISTRICTS = [
   { id: 'five_points', name: 'Five Points', boro: 'MN', zone: 'ward', still: 10, setup: 'home' },
-  { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club' },
-  { id: 'east_harlem', name: 'East Harlem', boro: 'MN', zone: 'precinct', still: null, venue: 'Police Precinct', setup: 'squad' },
+  { id: 'sugar_hill', name: 'Sugar Hill', boro: 'MN', zone: 'hs', still: 7, venue: 'The Cotton Club', setup: 'squad' },
   { id: 'tenderloin', name: 'The Tenderloin', boro: 'MN', zone: 'speak', still: 8, venue: 'The Haymarket', setup: 'runners' },
   { id: 'west_side', name: 'West Side', boro: 'MN', zone: 'dock', still: 9, setup: 'runners' },
   { id: 'bowery', name: 'The Bowery', boro: 'MN', zone: 'dock', still: 11 },
   { id: 'hunts_point', name: 'Hunts Point', boro: 'BX', zone: 'ward', still: 9, setup: 'home' },
-  { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club' },
+  { id: 'morris_park', name: 'Morris Park', boro: 'BX', zone: 'hs', still: 7, venue: 'The Jockey Club', setup: 'squad' },
   { id: 'belmont', name: 'Belmont', boro: 'BX', zone: 'dock', still: 11 },
   { id: 'fordham', name: 'Fordham', boro: 'BX', zone: 'speak', still: 8, venue: 'The Penny Whistle', setup: 'runners' },
   { id: 'throggs_neck', name: 'Throggs Neck', boro: 'BX', zone: 'dock', still: 10, setup: 'runners' },
-  { id: 'corona', name: 'Corona', boro: 'QN', zone: 'precinct', still: null, venue: 'Police Precinct', setup: 'squad' },
-  { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle' },
+  { id: 'richmond_hill', name: 'Richmond Hill', boro: 'QN', zone: 'hs', still: 7, venue: 'The Triangle', setup: 'squad' },
   { id: 'astoria', name: 'Astoria', boro: 'QN', zone: 'speak', still: 6, venue: 'Bohemian Hall', setup: 'runners' },
   { id: 'flushing', name: 'Flushing', boro: 'QN', zone: 'ward', still: 4, setup: 'home' },
   { id: 'whitestone', name: 'Whitestone', boro: 'QN', zone: 'dock', still: 5, setup: 'runners' },
   { id: 'jamaica', name: 'Jamaica', boro: 'QN', zone: 'dock', still: 3 },
   { id: 'brownsville', name: 'Brownsville', boro: 'BK', zone: 'ward', still: 5, setup: 'home' },
-  { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer' },
+  { id: 'williamsburg', name: 'Williamsburg', boro: 'BK', zone: 'hs', still: 7, venue: 'The Havemeyer', setup: 'squad' },
   { id: 'coney_island', name: 'Coney Island', boro: 'BK', zone: 'speak', still: 6, venue: 'Ruby’s Joint', setup: 'runners' },
   { id: 'red_hook', name: 'Red Hook', boro: 'BK', zone: 'dock', still: 3 },
   { id: 'canarsie', name: 'Canarsie', boro: 'BK', zone: 'dock', still: 4, setup: 'runners' },
@@ -734,9 +733,9 @@ function bridges() {
 function mapLabels() {
   let s = '';
   for (const [k, [x, y, r]] of Object.entries(BORO_LABELS)) {
-    // The Boroughs carried numbered police shields until 2026-11-12 (Nick): they ordered the four
-    // Squads in a Raid, and since the Open City the Squad pieces carry the numbers instead.
-    const b = BOROUGHS[k], t = upper(b.name), badge = false;
+    // Each mainland Borough carries a numbered police shield: the order its Squad moves in a Raid. Off
+    // from 2026-11-12 to 2026-11-17, when the Open City's two Squads carried the numbers instead.
+    const b = BOROUGHS[k], t = upper(b.name), badge = k !== 'SI';
     const total = (badge ? 22 + 9 : 0) + width(TYPE.boro, t), left = -total / 2, L = left;
     s += `<g transform="translate(${f(x)} ${f(y)}) rotate(${r})">`
       + (badge ? `<path d="M${f(L)} -12.5 Q${f(L + 11)} -9.5 ${f(L + 22)} -12.5 L${f(L + 22)} 1.5 Q${f(L + 22)} 9 ${f(L + 11)} 13.5 Q${f(L)} 9 ${f(L)} 1.5 Z" fill="url(#bezelGilt)" stroke="${C.shadow}" stroke-width="1.2" stroke-linejoin="round"/>`
@@ -930,10 +929,9 @@ const KEY_ROWS = [
   ['hs', 'High Society', [['rum', '$500', true]]],
   ['dock', 'Dock', { trade: ['moonshine', 'rum', 1] }],
   ['ward', 'Ward', { crown: true }],
-  ['precinct', 'Precinct', { shield: true }],
 ];
-// The Precinct row: the Police Squad's blue shield (Nick, 2026-11-12; it said "Squad's home" until then), the
-// online game's Squad badge, so the row reads as "the police live here".
+// The Police Squad's blue shield, the online game's Squad badge. The key's Precinct row showed it from
+// 2026-11-12 until the Precincts went (2026-11-18).
 const KEY_SHIELD = 13;
 function squadShield(cx, cy, h) {
   const k = h / 18, tx = cx - 9 * k, ty = cy - 10 * k;
