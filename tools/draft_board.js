@@ -58,7 +58,7 @@ const FLIPS = [['tenderloin', 'east_harlem'], ['water', 'five_points', '220,452'
 // with the Bowery's foot, Belmont, Fordham and Hunts Point, rebalanced round the four-way
 // corner, and Canarsie (canarsie), which gave Coney Island the width for its name
 // (coneyEast) and took Brownsville's corner on the bay.
-const RESHAPED = new Set(['west_side', 'east_harlem', 'canarsie', 'brownsville', 'sugar_hill', 'tenderloin', 'five_points', 'bowery', 'stapleton', 'tottenville', 'hunts_point', 'belmont', 'fordham', 'whitestone', 'astoria', 'corona', 'flushing', 'richmond_hill']);
+const RESHAPED = new Set(['throggs_neck', 'morris_park', 'west_side', 'east_harlem', 'canarsie', 'brownsville', 'sugar_hill', 'tenderloin', 'five_points', 'bowery', 'stapleton', 'tottenville', 'hunts_point', 'belmont', 'fordham', 'whitestone', 'astoria', 'corona', 'flushing', 'richmond_hill']);
 function flip(g, [A, B, J]) {
   const i = g.chains.findIndex(c => c.sides.includes(A) && c.sides.includes(B) && (!J || [c.pts[0], c.pts[c.pts.length - 1]].some(q => key(q) === J))), c = g.chains[i];
   const [J1, J2] = [c.pts[0], c.pts[c.pts.length - 1]].map(key);
@@ -164,17 +164,17 @@ function meet(a, b) {
 // first, get what the roomy ones can spare. Since the signs, they also keep the
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
-  bronxCols: [693, 872], // Belmont | Fordham | Morris Park (Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol; 685 and 871 until the evening-out of 2026-10-07)
+  bronxCols: [680, 855], // Belmont | Fordham | Morris Park (Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol; 685 and 871 until the evening-out of 2026-10-07)
   bronxRow: 185, // Fordham and Morris Park / Throggs Neck, level to the east shore
   huntsTop: 135, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
   hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
   corner: [608, 180], // Sugar Hill / Belmont / East Harlem (the four-way corner, with Hunts Point, until 2026-11-12)
-  manhattanSplit: 480, // West Side | Sugar Hill, upright (2026-11-18)
+  manhattanSplit: 490, // West Side | Sugar Hill, upright (2026-11-18)
   sugarTop: 180, // (Manhattan in five, 2026-11-18: level, so Belmont takes East Harlem's old top) Sugar Hill's top squared off level here (0: its point, TIPB)
-  belmontEH: 20, // Belmont / East Harlem, level east from the corner to Hunts Point's squared-off west side
-  manhattan: [340, 395, 540], // (298, 415, 540 until East Harlem went, 2026-11-18) level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
+  belmontEH: -20, // Belmont / East Harlem, level east from the corner to Hunts Point's squared-off west side
+  manhattan: [340, 388, 540], // (298, 415, 540 until East Harlem went, 2026-11-18) level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 545, // (530 until 2026-11-12) Astoria / Corona, level once its foot has left the Queens / Brooklyn line
-  hpCol: 824, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
+  hpCol: 800, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 850, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (855 until 2026-11-12; 851 until 2026-10-07)
   queensRows: [545, 660, 735], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew, and Jamaica 808 until the bay was squared off the same day; 670 and 807 until 2026-10-07)
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
@@ -185,7 +185,7 @@ const SETTINGS = {
   rhStub: 30, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
   coneyEast: 474, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
   boweryBottom: 680, stapletonTop: 724, // the Kill van Kull between them, as wide as the Narrows (652 and 684 until 2026-10-25, when Staten Island went to two Districts and the Bowery took a point; 668 and 700 until 2026-10-07)
-  boweryTip: 120, // the Bowery's level foot: its west shore turns at 45 degrees down to it, so Manhattan ends in a blunt point (level the whole way across until 2026-10-25)
+  boweryTip: 150, // the Bowery's level foot: its west shore turns at 45 degrees down to it, so Manhattan ends in a blunt point (level the whole way across until 2026-10-25)
   // Staten Island (2026-10-25, two Districts): its west shore, upright; Stapleton | Tottenville, level;
   // the tip's level foot, which the south-east shore leaves at 45 degrees up to the Narrows
   staten: { west: 44, border: 856, tip: 72 }, // three rows of 116 until 2026-10-25: Westerleigh | Stapleton | Tottenville at 800 and 916
