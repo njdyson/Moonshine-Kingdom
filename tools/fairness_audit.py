@@ -119,8 +119,8 @@ CARDS = [
     ('The Eviction',          3, 'Open Fire', {'ward'},                     {}),
     # Any of the four rooms, from whoever holds it.
     ('High Roller',           3, 'Open Fire', {'highSociety', 'speakeasy'}, {}),
-    # Any ordinary bar outside your home Borough: every seat's away bars alike.
-    ('The Noble Experiment',  3, 'Unload',    {'speakeasy'},                {}),
+    # Any High Society Venue outside your home Borough: every seat's away Venues alike.
+    ('The Noble Experiment',  3, 'Unload',    {'highSociety'},              {}),
     ('The Warehouse',         3, 'Secure',    {'any'},                      {}),
     ('The Toll Booth Trap',   3, 'Open Fire', {'any'},                      {}),
 ]

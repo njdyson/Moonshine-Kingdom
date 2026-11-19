@@ -166,7 +166,7 @@ CARDS = [
     # stockpile built in public: BLOCK comes from the Raid (a pile that size is the Big Bust's
     # pick) and from taking the District before the Play.
     ("The Noble Experiment", 3, "Unload", 3, 0, 1, 2, 1, 3, 2, 2,
-     "8 Moonshine at a bar in a rival's Borough: hold it, haul to it, sell."),
+     "5 Rum at a rival's Venue: take it from its Squad, Trade, haul, pour."),
     ("The Warehouse", 3, "Secure", 3, 0, 0, 1, 1, 2, 1, 2,
      "10 barrels under one roof, then a Safehouse on them: Raid bait."),
     # The Variety Pass (2026-10-13): one Boss card, anywhere, and three 5s up from the 3s. The

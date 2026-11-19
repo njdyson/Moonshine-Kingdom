@@ -651,11 +651,12 @@ THREES = [
     # THE BREW 5s (Nick, 2026-10-14): three cards for the brew engine, in place of the three cut body
     # counts, after Extort fell to $100 a District. Each has a verb no other 5 has (Trade, Unload of
     # Moonshine, Secure), so none can pay beside another 5 on one Play.
-    # The Noble Experiment: Hoover's name for Prohibition. Outside your home Borough so it is never a
-    # home chore (every seat starts on its home bar), and every Unload draws Heat (eight barrels
-    # always drew the Greed Tax before 2026-11-08), so the pour is loud. Moonshine, so it never meets Opening Night (Rum, at home); it meets a bar 1.
+    # The Noble Experiment: Hoover's name for Prohibition. Since 2026-11-19 (Nick) the away Rum pour:
+    # a rival's Venue, which starts under its Squad, with Rum Traded and hauled in. It was 8+ Moonshine
+    # outside your home Borough, which the Even City's Unload cap of 5 made impossible. Away, so it
+    # never meets Opening Night (the same pour at home); a Venue Unload draws Heat, so the pour is loud.
     ("The Noble Experiment", "Full Steam.jpg", "Unload",
-     "Unload <b>8+ Moonshine</b> outside your <b>home Borough</b>.",
+     "Unload <b>5+ Rum</b> at a <b>High Society Venue</b> outside your <b>home Borough</b>.",
      "Hoover called it noble. The bars call it Tuesday."),
     # The Warehouse: ten barrels under one roof, then the Safehouse moves in. Secure needs the
     # District Safe, so the barrels were brought or brewed there first, in plain sight. It meets Last

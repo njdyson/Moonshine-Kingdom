@@ -1741,10 +1741,18 @@ mk-online #77.
   RULES-AI.md.
 - **The Almanac's combat odds** (lessons 13 to 19, 26 and 27) rerun under the Muscle Ratio; its boiler table now
   lists the 2 and 12 once each. No engine change.
-- **Open:** The Noble Experiment ("Unload 8+ Moonshine outside your home Borough") can't be done under the Even City's
-  Unload cap of 5. Its fix waits on Nick.
+- The Noble Experiment ("Unload 8+ Moonshine outside your home Borough") couldn't be done under the Even City's
+  Unload cap of 5; see 75.
 
-## 75. One die a man; Blowback kills half the crew, rounded down (2026-11-19)
+## 75. The Noble Experiment is the away Rum pour (2026-11-19, Nick)
+
+- The card reads "Unload 5+ Rum at a High Society Venue outside your home Borough" (Nick's pick of three, over 5+
+  Moonshine outside it, which was close to a rival's bar 1, and waiting for his Jobs pass). Still a 3.
+- mk-online: `jobs.ts`, `objectives.ts` (5+ Rum, a Venue, not your home Borough), the bot's plan (`bot.ts`, an away
+  Venue, Rum), `scripts/jobs-check.ts` and RULES-AI.md. The change applies to every save, since an away Venue pour
+  works under every rule set.
+
+## 76. One die a man; Blowback kills half the crew, rounded down (2026-11-19)
 
 - **Combat dice are one per Mobster** (Boss or Runner) in the fight, **max 5**. The Muscle Ratio is retired.
 - **A blown Still loses half its crew, rounded down**, no cap, Runners first (1 man: none, 2 or 3: 1, 4 or 5: 2,

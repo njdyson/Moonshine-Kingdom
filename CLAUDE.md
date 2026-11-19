@@ -116,7 +116,7 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 
 ## One die a man; Blowback half the crew, rounded down
 
-Since 2026-11-19 (Nick, after `/mnt/project-files/reviews/combat-dice-2026-11-19.md`; mk-online-rules-sync §75).
+Since 2026-11-19 (Nick, after `/mnt/project-files/reviews/combat-dice-2026-11-19.md`; mk-online-rules-sync §76).
 **This supersedes** every section below wherever it says the Muscle Ratio sets combat dice or Blowback dead
 (*The Boss brew* and *The Even City* included).
 
@@ -486,7 +486,9 @@ toward the Still now that Extort pays $100 a District:
 
 - **The Real McCoy**: Trade 8+ Moonshine at a Dock. Cut at the retier the same day: Trade draws no Heat,
   so it paid 5 Respect for a profitable Trade you'd make anyway.
-- **The Noble Experiment**: Unload 8+ Moonshine outside your home Borough.
+- **The Noble Experiment**: Unload 8+ Moonshine outside your home Borough. Since 2026-11-19 (Nick's pick on a
+  decision card) it reads "Unload 5+ Rum at a High Society Venue outside your home Borough": the Even City's Unload
+  cap of 5 made 8 impossible, and 5+ Moonshine was close to a rival's bar 1. It is the away Opening Night.
 - **The Warehouse**: Secure your Safehouse in a District holding 10+ barrels.
 
 Each is a stockpile built in public, and its counterplay is the Raid (a pile that size is the Big
