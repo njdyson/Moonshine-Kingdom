@@ -114,6 +114,33 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; Blowback kills half the crew, rounded up, a lone man spared (since 2026-11-16; see *Blowback*). Blowback removes Runners first, so it never takes a Boss.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
+## The Boss brew: Dock dice, every Still pours, the last seat blows
+
+Since 2026-11-19 (Nick; the thread "Ship the Dock draft Boss brew", bot rows in `/mnt/project-files/bot-runs/log.md`,
+the first write-up `/mnt/project-files/reviews/dock-brew-2026-11-19.md`, mk-online-rules-sync §73). **This
+supersedes** the sections below wherever they describe the brew, Split the Batch, the Harbormaster or the Blowback
+(*The Even City*'s Muscle Ratio brew and Harbormaster, *Blowback: the second Still*, and older).
+
+- **Tomorrow's Mash is rolled** at the end of Shadows; Shadows step 4 is **Ferment Tomorrow's Mash**. No Harbormaster:
+  Docks are the dice instead, so they carry no second perk.
+- **The Brew.** In Turn Order every boss but the last rolls **one Red die per Dock he Controls** (no Docks: no roll,
+  no brew) and picks one. **Every active Still on Mash + that die pours**, rivals' too: **1 barrel, 2 where its
+  owner's Boss stands** (Nick: "1 +1 for a boss ... same as threat"). A Still pours once a morning. No Split the Batch.
+- **Dry Taps** checks the pick once: a pick pays at most **8** (no number is on more than four Stills), so under 8 in
+  the Supply nobody brews on that pick. Nick rejected any rule that shares out the last barrels by turn order or Still
+  by Still: at the table everyone on the number takes his barrels at once.
+- **Blowback** is the last seat's pick: he rolls his Dock dice the same way (none: no Blowback). Every active Still
+  on that number, **his own too**, blows unless **its owner's Safehouse** stands there: it loses its **Muscle Ratio**
+  in Mobsters, Runners first. **A lone man dies** (Nick: don't spare him), so only a Boss standing alone dies by
+  Blowback. No Day 1 exemption. The Muscle Ratio now sets combat dice and Blowback dead, not the brew.
+- Weighed the same day (bot rows): 1 barrel a Still, 3/2/1 by pick order (fastest in bots, but its Dry Taps needed turn
+  order), the Muscle Ratio, the picker 2 and others 1, a 40 or 50 barrel Supply, Moonshine at $300. Nick puts little
+  faith in bot speed.
+- Words: "Red die" stays (the Red dice fire the boilers); the pick is a **Brew Number**, the last seat's a **Blowback
+  Number**. Don't bring back "draft", "the pool" or "the bad batch" in player text.
+- The Brew Simulator still models the old draft and says so at its top; it needs rebuilding. The Almanac's combat odds
+  rerun (below) is still open.
+
 ## The Even City: fifteen men, four Squads, the Harbormaster back
 
 Since 2026-11-18 (Nick, reworking the rules item by item: "They can always be reintroduced if I feel they would be

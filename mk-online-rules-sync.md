@@ -1708,3 +1708,27 @@ mk-online #77.
   Fordham, Richmond Hill, Flushing. mk-online: `setEvenCityMap()` (data.ts) lays the 22-District connections for
   Even City games; older saves keep the 24-District board (`public/board-24.svg`, `boardGeometry24.ts`,
   `scripts/board-geometry-24.json`; `boardcheck.ts --24`).
+
+## 73. The Boss brew: Dock dice, every Still pours, the last seat blows (2026-11-19, Nick)
+
+- **The rule**: Tomorrow's Mash is rolled (no Harbormaster). In Turn Order every boss but the last rolls one Red die
+  per Dock he Controls (none: no roll) and picks one; every active Still on Mash + die pours, rivals' too, 1 barrel,
+  2 where its owner's Boss stands; a Still pours once a morning. A pick pays at most 8, so under 8 in the Supply
+  nobody brews on that pick (Dry Taps). The last seat rolls his Dock dice the same way and picks the Blowback: every
+  active Still on that number, his own too, without its owner's Safehouse, loses its Muscle Ratio in Mobsters,
+  Runners first (a lone man dies, so a Boss alone can). No Day 1 exemption, no Split the Batch. The Muscle Ratio
+  now sets combat dice and Blowback dead, not the brew.
+- Why (Nick): a draft that brews for everyone, with denial moved to the last seat's Blowback; Docks become the dice
+  (so no second Dock perk). Dry Taps checks a pick once, against its ceiling, so the table never needs turn order to
+  share out the last barrels. The flat "1, +1 for the Boss" matches the Boss's +1 Threat. Bot runs in
+  `/mnt/project-files/bot-runs/log.md` (the Dock draft rows, 2026-11-19): Nick put little weight on bot speed and
+  turned down sparing a lone man.
+- Rules set: the Rulebook (the Boss and Stills and Docks in the Map, Components' dice, Setup's first Mash, the
+  Muscle Ratio box, Shadows steps 1, 2 and 4 and the example, the Glossary; also "22 Districts" in two places), the
+  Town Planner (Brew, Blowback, Tomorrow's Mash), the Playbooks (resolution table: one Muscle Ratio table for dice
+  and Blowback), The Almanac (lessons 2 to 8, 14, the Sicilians, the endgame's "Blow his number"), CLAUDE.md. The
+  Brew Simulator carries an out-of-date note until it is rebuilt.
+- mk-online: `G.dockBrew` 5 on new Even City games (`opencity.ts` `setDockBrew`, `shadows.ts` `dockPick`,
+  `dockBrewBoss`, `resolveBlowback`), with `G.clash` 0; older saves keep their brew (`render.ts` tells the agents).
+  Shadows panel `DockDraft`, the agents' options list each face's Stills, RULES-AI.md rewritten. Trial modes 1 to 4
+  stay for sweeps (`lengthdiag --dockBrew`, `--dryTaps`, `--moonSupply`).
