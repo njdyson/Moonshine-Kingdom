@@ -304,7 +304,7 @@ TWOS = [
     # four markers with barrels piled on a weak Still) and can answer by landing the fifth marker first
     # or by making fresher noise. Union Dues went down to 1 to keep the deck 16 / 12 / 8.
     ("The Insurance Job", "Insurance Job.jpg", "Raid",
-     "Set off a Raid that <b>padlocks</b> a <b>Pressure 1 or 2 Still</b> you Control.",
+     "Set off a Raid that <b>padlocks</b> a <b>Pressure 2 Still</b> you Control.",
      "He struck the match himself. Slept fine after."),
     # THE 1/2/3 RETIER (Nick, 2026-10-14; jobs-setup-handoff.md round 6). A 5 was too swingy, so
     # every Job pays its Stake: 1, 2 or 3. The bar stays 20, and the Jobs get a touch easier to make

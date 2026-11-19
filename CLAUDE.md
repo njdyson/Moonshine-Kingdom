@@ -139,7 +139,7 @@ supersedes** the sections below wherever they describe the brew, Split the Batch
 - Words: "Red die" stays (the Red dice fire the boilers); the pick is a **Brew Number**, the last seat's a **Blowback
   Number**. Don't bring back "draft", "the pool" or "the bad batch" in player text.
 - The Brew Simulator still models the old draft and says so at its top; it needs rebuilding. The Almanac's combat odds
-  rerun (below) is still open.
+  were rerun under the Muscle Ratio on 2026-11-19 (below).
 
 ## The Even City: fifteen men, four Squads, the Harbormaster back
 
@@ -176,8 +176,9 @@ Bots (20 games an arm): 15 of 20 crowned with a median Day of 61, against 20 of 
 rules. A free Snitch gets used about 24 times a game (1.5 before), and Unloads halved. The bots aren't tuned for the
 Muscle Ratio or the Harbormaster, so read the length with care.
 
-Still to do: The Almanac's combat odds (lessons 14 to 19, 26 and 27) still assume one die a man and need rerunning
-under the Muscle Ratio (`tools/sim_almanac_combat.js`). mk-online: `G.evenCity`; Open City saves without it keep
+The Almanac's combat odds (lessons 13 to 19, 26 and 27) were rerun under the Muscle Ratio on 2026-11-19
+(`tools/sim_almanac_combat.js`, whose section 0 check matches the Combat Simulator again). Halving the dice made
+pickets and garrisons much stronger against a raid, and a fourth volley now buys ten or fifteen points. mk-online: `G.evenCity`; Open City saves without it keep
 their rules.
 
 ## Blowback: the second Still gets the bad batch
@@ -580,7 +581,9 @@ once. The deck is 36 cards, 16 / 12 / 8:
   **Opening Night** ("Unload 5+ Rum at the High Society Venue in your home Borough"). Opening Night
   was made home-only so the pour couldn't be made in the room its holder crowned in; since the Crown
   moved to the Wards (2026-10-24) it is not crown-related, and the text stands. The Insurance Job reads
-  "Set off a Raid that padlocks a Pressure 1 or 2 Still you Control" (Nick, 2026-10-15): any Raid
+  "Set off a Raid that padlocks a Pressure 2 Still you Control" (Nick, 2026-10-15; "Pressure 1 or 2" until
+  2026-11-19, when a Gemini read noticed that the only Pressure 1 Stills are on Staten Island, where no Squad
+  goes, so the 1 could never be padlocked): any Raid
   your own Play sets off, the 5th Heat marker or a Rat, so it no longer forces the Rat Card. It
   stays the deck's one Rat-shaped card by Nick's call (`jobs-system-handoff.md` §4).
 - **3s**: no set (Nick, 2026-10-13: "more variety is likely better to avoid a stale standard
@@ -1090,8 +1093,8 @@ Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the r
 Watch in playtest:
 
 - **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss and three
-  from 9% to 18%; on four, two bursts take it 24% against 10% (`tools/sim_almanac_combat.js`, Small Mob
-  rules).
+  from 19% to 27%; on four, two bursts take it 58% against 29% (`tools/sim_almanac_combat.js`, Muscle
+  Ratio, 2026-11-19).
 - **Whispers** claims outside the Offers, so the Vipers can take a 3 off the deck on Day 1.
 
 ## Consigliere costs 2
@@ -1112,8 +1115,8 @@ Viper who wanted the block without a fight had to come by the front door, and th
 Occupier to Ambush). Nick accepts the tell now: the plain Move is how a Viper asks for a Fold, and the
 Stealth is how he comes to kill.
 
-Watch in playtest: a Boss and four on a Stealth take a Boss and two Runners nineteen times in twenty
-(The Almanac's lesson 19; four in ten by the front door), and a lone Boss caught by one can't run, so the Vipers are the
+Watch in playtest: a Boss and four on a Stealth take a Boss and two Runners nearly eight times in ten
+(The Almanac's lesson 19, Muscle Ratio; under one in two by the front door), and a lone Boss caught by one can't run, so the Vipers are the
 natural hunters for The Toll Booth Trap.
 
 ## Torch is a shot; Red dice for the Invader
