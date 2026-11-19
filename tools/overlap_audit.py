@@ -197,8 +197,8 @@ JOBS = [
     J('High Roller', 3, ['Move'], 'Seize a High Society Venue.',
       lambda p, d: p['seize'] and d.has('highSociety')),
     # The brew-and-sell cards (Nick, 2026-10-14). The Real McCoy went at the retier the same day.
-    J('The Noble Experiment', 3, ['Unload'], 'Unload 8+ Moonshine outside your home Borough.',
-      lambda p, d: p['barrels'] >= 8 and not p['rum'] and p['home'] != 'own'),
+    J('The Noble Experiment', 3, ['Unload'], 'Unload 5+ Rum at a High Society Venue outside your home Borough.',
+      lambda p, d: p['barrels'] >= 5 and p['rum'] and d.has('highSociety') and p['home'] != 'own'),
     J('The Warehouse', 3, ['Secure'], 'Secure your Safehouse in a District holding 10+ barrels.',
       lambda p, d: p['barrels'] >= 10),
     # The one Boss card left, anywhere, and a Kill (2026-10-13): a Fold denies it.
