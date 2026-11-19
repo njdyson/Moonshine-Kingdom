@@ -1732,3 +1732,14 @@ mk-online #77.
   `dockBrewBoss`, `resolveBlowback`), with `G.clash` 0; older saves keep their brew (`render.ts` tells the agents).
   Shadows panel `DockDraft`, the agents' options list each face's Stills, RULES-AI.md rewritten. Trial modes 1 to 4
   stay for sweeps (`lengthdiag --dockBrew`, `--dryTaps`, `--moonSupply`).
+
+## 74. Rules drift a Gemini read spotted (2026-11-19)
+
+- **The Insurance Job** reads "Set off a Raid that padlocks a **Pressure 2** Still you Control" (it said "Pressure 1
+  or 2"). The only Pressure 1 Stills are Staten Island's 2 and 12, where no Squad goes, so the 1 was never
+  reachable. Wording only: the engine's check (`pressure <= 2`) behaves the same. mk-online: `jobs.ts` and
+  RULES-AI.md.
+- **The Almanac's combat odds** (lessons 13 to 19, 26 and 27) rerun under the Muscle Ratio; its boiler table now
+  lists the 2 and 12 once each. No engine change.
+- **Open:** The Noble Experiment ("Unload 8+ Moonshine outside your home Borough") can't be done under the Even City's
+  Unload cap of 5. Its fix waits on Nick.

@@ -96,7 +96,7 @@ function section0() {
     for (let i = 0; i < n; i += 1) {
       const r = C.simulateTrial({
         invader: { runners: inv.r, bosses: inv.b ? 1 : 0, kit: "none" },
-        occupier: { runners: occ.r, bosses: occ.b ? 1 : 0, safehouse: !!occ.safe, barrels: 0 },
+        occupier: { runners: occ.r, bosses: occ.b ? 1 : 0, safehouse: !!occ.safe, barrels: 0, ambush: true },
         influence: 3,
       });
       if (r.outcome === "take") take += 1;
@@ -273,7 +273,7 @@ function section8() {
     return hit / T;
   };
   console.log(`\n   A given face shows twice or more in the Red pool: 4 players (5 Red) ${pct(pairs(5))}, 3 players (4 Red) ${pct(pairs(4))}`);
-  console.log("   A home Ward's Blowback (Pressure 3 or 4) kills two, Runners first: Boss+4 keeps Boss+2, Boss+6 keeps Boss+4.");
+  console.log("   A Blowback kills the Muscle Ratio, Runners first: Boss+4 (5 men) keeps Boss+1, Boss+6 (7 men) keeps Boss+2.");
 }
 
 // ---------------------------------------------------------------------------
@@ -291,7 +291,7 @@ function section9() {
   row({ r: 4, b: 1, tommy: true }, fortress, "ambush");
   console.log("   ...and with four markers, two Tommy Gun volleys against four Open Fires");
   console.log("   " + ["plain", "tommy"].map((k) => `${k} ${pct(run({ r: 4, b: 1, tommy: k === "tommy" }, fortress, "ambush", 4).take)}`).join("   "));
-  console.log("   Sicilian Hit into the fortress (lesson 19: four times in five)");
+  console.log("   Sicilian Hit into the fortress (lesson 19: better than eight times in ten)");
   for (const r of [4, 5, 6]) row({ r, b: 1, hit: true }, fortress, "ambush");
   console.log("   Vipers Stealth (no Standoff: the Occupier Holds Fire and can't Fold) vs the front door (lesson 19)");
   row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "hold");

@@ -131,7 +131,7 @@ JOBS = [
     # Raid your Play sets off. Only the Rat route is modelled: a 5th-marker Raid padlocks a District
     # other than the one the Play acted on, and this model places a Play in one District.
     J('The Insurance Job', 2, ['Rat'],
-      'Set off a Raid that padlocks a Pressure 1 or 2 Still you Control.',
+      'Set off a Raid that padlocks a Pressure 2 Still you Control.',
       lambda p, d: d.press <= 2),
     # --- 2 Respect ---
     # The Extort cards read the whole map, so an Extort is modelled once (see _extort).
