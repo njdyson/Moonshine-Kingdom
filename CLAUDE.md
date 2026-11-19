@@ -111,8 +111,29 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - The old Title cards (with powers) and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner. Two Respect-only Titles came back on 2026-11-14 (see *Titles: Harbormaster and Night Mayor*).
 - Tomorrow's Mash is rolled at random; the Harbormaster (most Docks named it) retired on 2026-11-14 (see *Random Mash*). The fourth Shadows step is **Ferment Tomorrow's Mash** (it was "The Harbormaster" from 2026-09-16, "The Morning Fix" before that).
 - The four #7 mainland Speakeasies are fixed High Society venues. They began under the Police Squads until the Open City (2026-11-11), which starts them open. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
-- There is no Sweep. Muscle (a District's Mobsters, max five) sets brewing and combat dice; Blowback kills half the crew, rounded up, a lone man spared (since 2026-11-16; see *Blowback*). Blowback removes Runners first, so it never takes a Boss.
+- There is no Sweep. Combat dice are one per Mobster, max five; Blowback kills half the crew, rounded down (since 2026-11-19; see *One die a man*). Blowback removes Runners first, so it never takes a Boss.
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
+
+## One die a man; Blowback half the crew, rounded down
+
+Since 2026-11-19 (Nick, after `/mnt/project-files/reviews/combat-dice-2026-11-19.md`; mk-online-rules-sync §75).
+**This supersedes** every section below wherever it says the Muscle Ratio sets combat dice or Blowback dead
+(*The Boss brew* and *The Even City* included).
+
+- **Combat dice**: one per Mobster in the fight, **max 5**. The Rulebook says it in the Rules of Engagement and
+  nowhere else; the "Muscle Ratio: Street Math" box, its Contents line and its Glossary entry are gone. Don't bring
+  the Muscle Ratio back as a word: nothing uses it.
+- **Blowback**: a blown Still loses **half its crew, rounded down**, no cap, Runners first. A lone man walks away,
+  so a Blowback never kills a Boss (Nick: "a touch less deadly and stops a lone boss being killed"). This reverses
+  *The Boss brew*'s "a lone man dies".
+- Why: one die a man and the Ratio pick the same winner about as often given time, but the Ledger buys about three
+  volleys, and one die a man finishes about nine fights in ten inside one Play (the Ratio about four in ten at even
+  numbers). Every man up to five counts, and a sixth only soaks hits, which favours crews of three to five spread
+  over the city over one 9-man pile. Per man also makes the Ambush, the Stealth and Boss kills stronger: watch Stealth.
+- The Almanac's combat figures (lessons 13 to 19, 26, 27) are the Small Mob's one-die numbers again (its combat is
+  the same: no Safehouse Threat, Threat max 3); `tools/sim_almanac_combat.js` reproduces them.
+- The Playbooks' resolution table is three columns (Mobsters, Dice, Blowback: 1, 2, 3, 4, 5+ with "half").
+- mk-online: `G.dieAMan`; Even City saves without it keep the Muscle Ratio.
 
 ## The Boss brew: Dock dice, every Still pours, the last seat blows
 

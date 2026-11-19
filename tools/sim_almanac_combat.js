@@ -273,7 +273,7 @@ function section8() {
     return hit / T;
   };
   console.log(`\n   A given face shows twice or more in the Red pool: 4 players (5 Red) ${pct(pairs(5))}, 3 players (4 Red) ${pct(pairs(4))}`);
-  console.log("   A Blowback kills the Muscle Ratio, Runners first: Boss+4 (5 men) keeps Boss+1, Boss+6 (7 men) keeps Boss+2.");
+  console.log("   A Blowback kills half the crew, rounded down, Runners first: Boss+4 (5 men) keeps Boss+2, Boss+6 (7 men) keeps Boss+3.");
 }
 
 // ---------------------------------------------------------------------------
@@ -301,10 +301,10 @@ function section9() {
     row({ r, b: 1 }, fortress, "ambush");
     row({ r, b: 1, torch: true }, fortress, "ambush");
   }
-  console.log("   A Still crewed with five (lesson 15: five men stand off a Boss and eight one time in three)");
+  console.log("   A Still crewed with five (lesson 14: five men stand off a Boss and eight one time in five)");
   for (const r of [6, 8]) row({ r, b: 1 }, { r: 5 }, "ambush");
-  console.log("   ...and the same Still after its Blowback leaves two");
-  row({ r: 3, b: 1 }, { r: 2 }, "ambush");
+  console.log("   ...and the same Still after its Blowback leaves three");
+  row({ r: 4, b: 1 }, { r: 3 }, "ambush");
 }
 
 section0();
