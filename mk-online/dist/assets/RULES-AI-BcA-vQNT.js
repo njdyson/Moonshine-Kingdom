@@ -28,7 +28,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - **Cash**: start with **$1,500**. Cash is public.
 - **Barrels**: Moonshine (supply 30), Havana Rum (supply 20). Finite; empty supply produces nothing.
 - **Heat Track**: 5 spaces, with markers in order and the newest on the right.
-- **Muscle** (combat dice and Blowback dead): the **Muscle Ratio**, the Mobsters in one District halved, rounded up, max 5 (1-2 = 1, 3-4 = 2, 5-6 = 3, 7-8 = 4, 9+ = 5). A Safehouse alone counts 0. A Still brews 1 barrel, 2 with its Boss, whatever the crew.
+- **Combat dice**: **one die per Mobster** (Boss or Runner) in the fight, **max 5**. A sixth man adds no die, only a body to soak hits. A Safehouse alone counts 0. A Still brews 1 barrel, 2 with its Boss, whatever the crew.
 
 ## 3. The Day
 
@@ -38,7 +38,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
    - Each Still pours at most once a morning, so a number someone already picked today brews nothing more.
    - A pick pays at most 8 barrels (a number is on four Stills at most). If the supply holds **fewer than 8** when you pick, nobody brews on that pick (**Dry Taps**).
    - There is no Split the Batch.
-2. **Blowback: the last seat.** The boss **last in Turn Order** does not brew. He rolls his Dock dice the same way (no Docks: no Blowback) and picks one: Mash + die is the Blowback number. **Every active Still on it blows, his own included, unless its owner's Safehouse stands in that District.** A blown Still loses its **Muscle Ratio** in Mobsters (1–2 men: 1, 3–4: 2, 5–6: 3, 7–8: 4, 9+: 5), **Runners first**. Runners die first, so only a Boss standing alone dies by Blowback. Barrels and turf survive if anyone is left. Day 1 is not exempt.
+2. **Blowback: the last seat.** The boss **last in Turn Order** does not brew. He rolls his Dock dice the same way (no Docks: no Blowback) and picks one: Mash + die is the Blowback number. **Every active Still on it blows, his own included, unless its owner's Safehouse stands in that District.** A blown Still loses **half its crew, rounded down**, no cap (1 man: none, 2–3: 1, 4–5: 2, 6–7: 3, and so on), **Runners first**. A lone man walks away, so a Blowback never kills a Boss. Barrels and turf survive if anyone is left. Day 1 is not exempt.
 3. **The Offers**, in **reverse** Turn Order, one action each:
    - **Take a Job** (claimJob): stake Influence from **Reserves** equal to its Stake. Its gap stays empty for the rest of the Offers.
    - **Walk Away** from a held Job (walkAwayJob): the stake returns to Reserves and the card is discarded.
@@ -116,7 +116,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat (Unload: only at a High Societ
 
 A fight happens inside the Move that started it. Each option costs the chooser's Ledger but never a turn.
 
-**Dice** = Muscle: the Muscle Ratio (the crew halved, rounded up, max 5). **Threat** starts at 1 and gains +1 for each of these, max 3:
+**Dice**: one per Mobster in the fight, max 5. **Threat** starts at 1 and gains +1 for each of these, max 3:
 
 - Boss in the fight;
 - the Irish Tommy Gun (the Invader's volley only);
