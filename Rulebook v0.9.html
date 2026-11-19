@@ -76,7 +76,6 @@
             <li><a href="#concepts"><span class="toc-text">Key Concepts: The Underworld at a Glance</span><span class="toc-dots"></span><span class="toc-page"></span></a>
                 <ul class="toc-sublist">
                     <li class="sub-item"><a href="#mob"><span class="toc-text">Your Mob: The Brains, the Brawn, and the Bastards</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
-                    <li class="sub-item"><a href="#muscle-ratio"><span class="toc-text">The Muscle Ratio: Street Math</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
                     <li class="sub-item"><a href="#map"><span class="toc-text">The Map: Know Your Turf</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
                     <li class="sub-item"><a href="#currencies"><span class="toc-text">The Currencies of the Underworld</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
                     <li class="sub-item"><a href="#logistics"><span class="toc-text">Territory: Lines in the Concrete</span><span class="toc-dots"></span><span class="toc-page"></span></a></li>
@@ -249,36 +248,6 @@
                 </div>
             </div>
 
-        </div>
-
-        <div class="muscle-ratio-callout">
-        <h3 id="muscle-ratio" class="muscle-ratio-heading">The Muscle Ratio: Street Math</h3>
-        <div class="muscle-ratio-row">
-        <div class="muscle-ratio-text">
-        <p>One rule turns headcount into results. Count the Mobsters (Boss and Runners) in a District, then <b>halve it, round up, and stop at 5</b>: that number is the dice you roll in a firefight, and the men a Still loses when it blows. <b>No Mobsters, no result.</b></p>
-        </div>
-
-        <div class="muscle-ratio-table" role="table" aria-label="The Muscle Ratio">
-            <div class="ratio-cell ratio-head" role="columnheader">Mobsters</div>
-            <div class="ratio-cell ratio-head" role="columnheader">Combat Dice</div>
-            <div class="ratio-cell ratio-head" role="columnheader">Blowback Dead</div>
-            <div class="ratio-cell" role="cell"><strong>1&ndash;2</strong></div>
-            <div class="ratio-cell" role="cell">1</div>
-            <div class="ratio-cell" role="cell">1</div>
-            <div class="ratio-cell" role="cell"><strong>3&ndash;4</strong></div>
-            <div class="ratio-cell" role="cell">2</div>
-            <div class="ratio-cell" role="cell">2</div>
-            <div class="ratio-cell" role="cell"><strong>5&ndash;6</strong></div>
-            <div class="ratio-cell" role="cell">3</div>
-            <div class="ratio-cell" role="cell">3</div>
-            <div class="ratio-cell" role="cell"><strong>7&ndash;8</strong></div>
-            <div class="ratio-cell" role="cell">4</div>
-            <div class="ratio-cell" role="cell">4</div>
-            <div class="ratio-cell" role="cell"><strong>9+</strong></div>
-            <div class="ratio-cell" role="cell">5</div>
-            <div class="ratio-cell" role="cell">5</div>
-        </div>
-        </div>
         </div>
 
     </div>
@@ -548,7 +517,7 @@
 
         <h4>2. Blowback</h4>
         <p style="margin-bottom: 15px;">
-            The boss <b>last in Turn Order</b> brews nothing: he picks the Blowback instead. He rolls one Red die per Dock he Controls and chooses one. Mash + that die is the <b>Blowback Number</b> (no Docks, no Blowback). <b>Every active Still on it blows</b>, his own included, <b>unless its owner's Safehouse stands in that District</b>. A Still that blows loses its District's <b>Muscle Ratio</b> in Mobsters, <b>Runners first</b>, and a lone man dies, Boss or not. The survivors keep their barrels and their turf. <em>Somebody always gets the bad batch. The last man up decides who.</em>
+            The boss <b>last in Turn Order</b> brews nothing: he picks the Blowback instead. He rolls one Red die per Dock he Controls and chooses one. Mash + that die is the <b>Blowback Number</b> (no Docks, no Blowback). <b>Every active Still on it blows</b>, his own included, <b>unless its owner's Safehouse stands in that District</b>. A Still that blows loses <b>half its crew, rounded down</b>, <b>Runners first</b>, so a lone man walks away. The survivors keep their barrels and their turf. <em>Somebody always gets the bad batch. The last man up decides who.</em>
         </p>
 
         <p class="note" style="margin-bottom: 15px;"><strong>Kingpin's Tip:</strong> Your pick pours for everyone on that number, so choose the face that fills your Stills and starves the leader's. The last seat brews nothing, but holds the gun and takes first pick of the morning's Jobs. A crew beside its own Safehouse never blows; any other big stack is a target.</p>
@@ -818,7 +787,7 @@
 
         <h3 id="engagement">The Rules of Engagement</h3>
         <p>
-            Violence runs on two numbers. Each side rolls its District's <strong>Muscle Ratio</strong> in dice; its
+            Violence runs on two numbers. Each side rolls <strong>one die per Mobster</strong> in the fight, up to 5; its
             <strong>Threat</strong> says what number kills.
         </p>
 
@@ -981,9 +950,9 @@
                 <tbody>
                     <tr>
                         <td><strong>Sicilians</strong><br>(Occupier)</td>
-                        <td>3 Mobsters<br>(2 Dice)</td>
+                        <td>3 Mobsters<br>(3 Dice)</td>
                         <td><strong>Level 3</strong> (Hit 3+)<br><em>(Base + Boss + Ambush)</em></td>
-                        <td>Roll: [1, 5]<br><strong>1 Hit</strong></td>
+                        <td>Roll: [1, 5, 2]<br><strong>1 Hit</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -1006,15 +975,15 @@
                 <tbody>
                     <tr>
                         <td><strong>Knights</strong><br>(Invader)</td>
-                        <td>3 Mobsters<br>(2 Dice)</td>
+                        <td>3 Mobsters<br>(3 Dice)</td>
                         <td><strong>Level 2</strong> (Hit 4+)<br><em>(Base + Boss)</em></td>
-                        <td>Roll: [4, 6]<br><strong>2 Hits</strong></td>
+                        <td>Roll: [4, 6, 2]<br><strong>2 Hits</strong></td>
                     </tr>
                     <tr>
                         <td><strong>Sicilians</strong><br>(Occupier)</td>
-                        <td>3 Mobsters<br>(2 Dice)</td>
+                        <td>3 Mobsters<br>(3 Dice)</td>
                         <td><strong>Level 2</strong> (Hit 4+)<br><em>(Base + Boss)</em></td>
-                        <td>Roll: [1, 5]<br><strong>1 Hit</strong></td>
+                        <td>Roll: [1, 5, 3]<br><strong>1 Hit</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -1043,9 +1012,9 @@
                 <tbody>
                     <tr>
                         <td><strong>Knights</strong><br>(Invader)</td>
-                        <td>2 Mobsters<br>(1 Die)</td>
+                        <td>2 Mobsters<br>(2 Dice)</td>
                         <td><strong>Level 2</strong> (Hit 4+)<br><em>(Base + Boss)</em></td>
-                        <td>Roll: [5]<br><strong>1 Hit</strong></td>
+                        <td>Roll: [5, 2]<br><strong>1 Hit</strong></td>
                     </tr>
                     <tr>
                         <td><strong>Sicilians</strong><br>(Occupier)</td>
@@ -1158,7 +1127,7 @@
         <p>The words that carry a rule, in one place. Each names the section that holds the rule in full.</p>
         <ul class="sub-section">
             <li><strong>Adjacent:</strong> Sharing a border, or joined by a Bridge. (<em>Territory</em>)</li>
-            <li><strong>Blowback:</strong> The last seat's pick at the Brew: every active Still on that number without its owner's Safehouse loses its Muscle Ratio in Mobsters, Runners first. (<em>Shadows</em>)</li>
+            <li><strong>Blowback:</strong> The last seat's pick at the Brew: every active Still on that number without its owner's Safehouse loses half its crew, rounded down, Runners first. (<em>Shadows</em>)</li>
             <li><strong>Brew Number:</strong> The Mash plus the Red die you pick from your Docks' roll. Every active Still on it pours. (<em>Shadows</em>)</li>
             <li><strong>Connected:</strong> Adjacent, or two Docks across the water. (<em>Territory</em>)</li>
             <li><strong>Control:</strong> Your Mobster on the District, settled as each Play ends. A Safehouse alone holds nothing. (<em>Territory</em>)</li>
@@ -1174,7 +1143,6 @@
             <li><strong>Kill:</strong> A rival Mobster shot dead in your own Play's fight. An arrest is not a kill. (<em>Jobs</em>)</li>
             <li><strong>Ledger, Reserves:</strong> The Ledger's five slots hold what you can spend today; the Reserves hold the rest and stake Jobs. (<em>Currencies</em>)</li>
             <li><strong>Mark:</strong> Shylock's paper, taken with a Loan: &minus;2 Respect while you hold it. (<em>Beg</em>)</li>
-            <li><strong>Muscle Ratio:</strong> The Mobsters in a District, halved, rounded up, to a maximum of 5: combat dice and Blowback dead. (<em>Key Concepts</em>)</li>
             <li><strong>Open:</strong> A Speakeasy that isn't Padlocked: open for business. (<em>Territory</em>)</li>
             <li><strong>Padlocked:</strong> Held by a Police Squad: nobody Moves or fights their way in, and its Speakeasy and Still are shut: no sales, no brew, no Blowback. (<em>Territory</em>)</li>
             <li><strong>Pinned:</strong> An Invader who must Open Fire, Advance or Fall Back until the fight resolves. No Play is made anywhere meanwhile. (<em>Combat</em>)</li>

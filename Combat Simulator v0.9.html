@@ -432,7 +432,7 @@
                 <span>Ambush (cost 1)</span>
               </label>
               <div id="occAmbushNote" class="kit-note"></div>
-              <div class="kit-note">Raise the Runner count to model a larger garrison: the dice are the Muscle Ratio, half the Mobsters rounded up, up to 5.</div>
+              <div class="kit-note">Raise the Runner count to model a larger garrison: one die per Mobster, up to 5.</div>
               <div class="mobster-total">
                 <span>Total Mobsters</span>
                 <strong id="occMobsterTotal">0</strong>
@@ -605,9 +605,9 @@
     }
 
     function diceFromMobsters(count) {
-      // The Muscle Ratio: half the Mobsters, rounded up, up to 5 (one die a man from
-      // 2026-11-09 to 2026-11-17).
-      return Math.max(0, Math.min(5, Math.ceil(count / 2)));
+      // One die a man, up to 5 (since 2026-11-19; the Muscle Ratio, half rounded up,
+      // from 2026-11-18 and before 2026-11-09).
+      return Math.max(0, Math.min(5, count));
     }
 
     function killThreshold(threatLevel) {

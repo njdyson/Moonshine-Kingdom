@@ -1751,3 +1751,22 @@ mk-online #77.
 - mk-online: `jobs.ts`, `objectives.ts` (5+ Rum, a Venue, not your home Borough), the bot's plan (`bot.ts`, an away
   Venue, Rum), `scripts/jobs-check.ts` and RULES-AI.md. The change applies to every save, since an away Venue pour
   works under every rule set.
+
+## 76. One die a man; Blowback kills half the crew, rounded down (2026-11-19)
+
+- **Combat dice are one per Mobster** (Boss or Runner) in the fight, **max 5**. The Muscle Ratio is retired.
+- **A blown Still loses half its crew, rounded down**, no cap, Runners first (1 man: none, 2 or 3: 1, 4 or 5: 2,
+  6 or 7: 3). A lone man walks away, and the dead never reach the last man, so a Blowback never kills a Boss.
+- Why (Nick, after `/mnt/project-files/reviews/combat-dice-2026-11-19.md`): strength between crews is about the same
+  under either rule, but one die a man settles about nine fights in ten inside the Play that starts them (the Ratio
+  about four in ten at even numbers), every man up to five counts, and stacks beyond five pay nothing. Rounding the
+  Blowback down makes it a touch less deadly and stops a lone Boss dying to it.
+- Rules set: the Rulebook (the Muscle Ratio box, its Contents line and Glossary entry gone; the Rules of Engagement,
+  the Battle for the Docks example, Blowback and its Glossary line), the Playbooks (the resolution table: Mobsters,
+  Dice, Blowback), the Town Planner (Blowback), the Combat Simulator (`diceFromMobsters`), The Almanac (lessons 3, 6,
+  7, 13 to 19, 26 and 27: the one-die figures from before §74 are right again, since one die a man and a Safehouse
+  with no Threat are the Small Mob's combat), `tools/sim_almanac_combat.js`, CLAUDE.md.
+- mk-online: `G.dieAMan` on new Even City games with the Boss brew (`data.ts` `combatDice`, `applyDieAMan`;
+  `shadows.ts` `dockBlowDead`); older saves keep the Muscle Ratio (`render.ts` tells the agents). RULES-AI.md, the
+  Shadows panel's Blowback line. The harness no longer shows the old draft's BREW HELPER under the Boss brew (its
+  options already preview each face). `lengthdiag --dieAMan=0` runs the old rule.
