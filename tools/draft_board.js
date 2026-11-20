@@ -164,19 +164,19 @@ function meet(a, b) {
 // first, get what the roomy ones can spare. Since the signs, they also keep the
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
-  bronxCols: [665, 855], // Belmont | Fordham | Morris Park (Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol; 685 and 871 until the evening-out of 2026-10-07)
-  bronxRow: 185, // Fordham and Morris Park / Throggs Neck, level to the east shore
-  huntsTop: 135, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees
-  hellGate: 321.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
-  corner: [608, 180], // Sugar Hill / Belmont / East Harlem (the four-way corner, with Hunts Point, until 2026-11-12)
-  manhattanSplit: 490, // West Side | Sugar Hill, upright (2026-11-18)
-  sugarTop: 180, // (Manhattan in five, 2026-11-18: level, so Belmont takes East Harlem's old top) Sugar Hill's top squared off level here (0: its point, TIPB)
+  bronxCols: [649, 854], // Belmont | Fordham | Morris Park (665 and 855 until the Bronx grew, 2026-11-20; Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol; 685 and 871 until the evening-out of 2026-10-07)
+  bronxRow: 191, // Fordham and Morris Park / Throggs Neck, level to the east shore (185 until 2026-11-20)
+  huntsTop: 159, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees (135 until 2026-11-20)
+  hellGate: 333.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (321.6 until 2026-11-20, when the Bronx took 12 from Astoria and Whitestone; it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
+  corner: [624, 196], // (608, 180 until 2026-11-20; x - y sets Manhattan's tip and so Belmont's Hudson shore, so the two move together) Sugar Hill / Belmont / East Harlem (the four-way corner, with Hunts Point, until 2026-11-12)
+  manhattanSplit: 473, // West Side | Sugar Hill, upright (2026-11-18; 490 until 2026-11-20. Further west and West Side's name wraps; further east and Sugar Hill's sign hangs lower)
+  sugarTop: 196, // (180 until 2026-11-20: the Manhattan / Bronx line dropped 16, Nick: pinch a bit from Manhattan for the Bronx) (Manhattan in five, 2026-11-18: level, so Belmont takes East Harlem's old top) Sugar Hill's top squared off level here (0: its point, TIPB)
   belmontWest: 20, // (Nick, 2026-11-18) Belmont's Hudson shore, upright this far west of Manhattan's tip
   sugarCut: 29, // (Nick, 2026-11-18) Sugar Hill's north-east corner cut at 45 degrees, the triangle to Belmont
-  belmontEH: -20, // Belmont / East Harlem, level east from the corner to Hunts Point's squared-off west side
-  manhattan: [340, 388, 540], // (298, 415, 540 until East Harlem went, 2026-11-18) level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
+  belmontEH: -44, // Belmont / East Harlem, level east from the corner to Hunts Point's squared-off west side (-20 until 2026-11-20. Hunts Point's west end is a point only while corner[1] + sugarCut = 2 x hellGate - 1022 + corner[0] + belmontEH, the East River's bank being x + y = 1022; otherwise it takes a short upright there. See board-handoff.md, The Bronx grows)
+  manhattan: [340, 394, 539], // (340, 388, 540 until 2026-11-20) (298, 415, 540 until East Harlem went, 2026-11-18) level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 545, // (530 until 2026-11-12) Astoria / Corona, level once its foot has left the Queens / Brooklyn line
-  hpCol: 800, // Hunts Point / Throggs Neck, upright (816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
+  hpCol: 808, // Hunts Point / Throggs Neck, upright (800 until 2026-11-20; Fordham / Throggs Neck, bronxCols[1] less this, must stay 45 or more; 816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 850, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (855 until 2026-11-12; 851 until 2026-10-07)
   queensRows: [545, 660, 735], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew, and Jamaica 808 until the bay was squared off the same day; 670 and 807 until 2026-10-07)
   wbTop: 593, // Williamsburg's top corner on the East River (x), where the Queens / Brooklyn line leaves it
@@ -184,7 +184,7 @@ const SETTINGS = {
   coronaBottom: 712, // Corona / Richmond Hill, level from the Queens / Brooklyn line (700 until 2026-10-07)
   williamsburgSouth: 751, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 796, // Red Hook's level south side
-  fpCol: 375, // Tenderloin / Five Points, upright (0: on the crook)
+  fpCol: 363, // Tenderloin / Five Points, upright (0: on the crook; 375 until 2026-11-20)
   rhStub: 60, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
   coneyEast: 492, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
   boweryBottom: 680, stapletonTop: 724, // the Kill van Kull between them, as wide as the Narrows (652 and 684 until 2026-10-25, when Staten Island went to two Districts and the Bowery took a point; 668 and 700 until 2026-10-07)
@@ -210,9 +210,9 @@ const CUT = 37; // the harbour's 45-degree corners: Staten Island's and Coney Is
 const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its shore
 // Bridges moved along their rivers: the Hell Gate to about the middle of Hunts Point's shore, the
 // Queensboro up the East River onto East Harlem's shore, which ends at Manhattan's row, a little
-// south of its middle so the bridge's name stays clear of the Hell Gate's bend (since 2026-10-07), and the Brooklyn up the harbour reach, mid-way along the stretch of
+// south of its middle so the bridge's name stays clear of the Hell Gate's bend (since 2026-10-07; it moved 12 down the river with the Hell Gate on 2026-11-20, or its name ran into Hunts Point's shore), and the Brooklyn up the harbour reach, mid-way along the stretch of
 // the Bowery's shore that faces Red Hook's (since 2026-10-07, when the Bowery's foot rose)
-const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [75, -75], 'Brooklyn Bridge': [16, -23] };
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [63, -63], 'Brooklyn Bridge': [16, -23] };
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it

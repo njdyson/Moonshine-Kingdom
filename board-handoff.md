@@ -513,6 +513,56 @@ would only grow Coney Island, Canarsie and Jamaica, already among the largest, w
 smallest, Whitestone and Corona, are held by the Astoria / Flushing border (see Evening out the
 sizes). Nick floated the Federal Crackdown Tracker for that strip; not taken.
 
+### The Bronx grows (2026-11-20, a proof for Nick)
+
+Nick, 2026-11-20: the Bronx's Districts are a touch smaller than Manhattan's, so pinch a bit from
+Manhattan. Measured by visible area on the 22-District board, the Bronx averaged 95 cm² a District
+against Manhattan's 109 and Queens' 115, and Fordham (87) was the smallest District on the map
+with the least room (51).
+
+- **The Manhattan / Bronx line dropped 16** (`sugarTop` and `corner[1]` 180 to 196, 9 mm), and
+  **the Hell Gate and the Sound dropped 12** (`hellGate` 321.6 to 333.6, 7 mm), so the Bronx also
+  takes from Astoria and Whitestone, the two largest Districts but Jamaica.
+- **The line alone only feeds Belmont.** Hunts Point's west end is a point where its two 45-degree
+  sides meet, and the Belmont / Hunts Point side runs up to the Belmont / Fordham upright, so that
+  upright can't move west unless the point does. The point sits where `corner[1] + sugarCut`
+  equals `2 x hellGate - 1022 + corner[0] + belmontEH`; with Sugar Hill's cut kept at 29, a line
+  drop of L and a Hell Gate drop of d put it at x = 588 + L - 2d. At 16 and 12 it moved 8 west
+  (`belmontEH` -44), which let Belmont / Fordham move 16 west (`bronxCols[0]` 649) and Hunts
+  Point's top drop 24 (`huntsTop` 159). `corner[0]` moves with `corner[1]` (624) so that Manhattan's
+  tip, and Belmont's Hudson shore with it, stays where it was.
+- The rest shares it out: `bronxRow` 191, `hpCol` 808, `bronxCols[1]` 854 (Fordham / Throggs Neck
+  is 46 long, the minimum), and in Manhattan `manhattanSplit` 473, the row 394, the Bowery's top
+  539 and `fpCol` 363.
+- **No shape and no connection changed**: Sugar Hill's cut corner, Hunts Point's point and its cut
+  top are as Nick set them on 2026-11-18, moved.
+- **The West Side / Sugar Hill upright is held by the two signs.** Both Districts are narrow at
+  the top, so each sign hangs where its District is first wide enough, and their hangers are the
+  board's longest. Moving the upright west shortens Sugar Hill's and lengthens West Side's; at 469,
+  in the 10 and 10 trial below, West Side's name wrapped. At 473 West Side's hangers are 85 as
+  before and Sugar Hill's 92 (98). A lower line shortens both and a lower Hell Gate lengthens
+  both, since it pushes Sugar Hill's slanted side in.
+- **The Queensboro Bridge moved 12 down the river** (`BRIDGE_SHIFT`) with the Hell Gate: left where
+  it was, its name ran into Hunts Point's shore.
+
+| Visible area (cm²) | Before | Proof |
+| --- | --- | --- |
+| Belmont, Fordham, Morris Park, Hunts Point, Throggs Neck | 99, 87, 96, 93, 100 | 104, 102, 100, 100, 101 |
+| Sugar Hill, West Side, Tenderloin, Five Points, the Bowery | 101, 118, 116, 103, 108 | 101, 108, 106, 106, 107 |
+| Astoria, Whitestone | 114, 121 | 109, 112 |
+
+Room: the Bronx 62 to 70 cm² (51 to 66 before; Fordham 64, Hunts Point 62), Manhattan 64 to 71
+(64 to 78). The board's smallest rooms are now 62 (Hunts Point, Stapleton); the smallest was 51.
+
+Tried on the way: the line alone, 18 down (Belmont 118, Hunts Point 83: the point slides east
+along its diagonal and Belmont takes its tip); 10 and 10 (the Bronx exactly level at 100, but West
+Side's name wrapped); 20 and 14 or 24 and 16 (a point closer overall, Belmont 107 to 111).
+
+Not done here: mk-online needs the redraw if this is taken (`mk-online-board-handoff.md`), and the
+print PDF is older still (2026-11-11, the 24-District board), so `--print` is due either way. This
+file has no section for the five-a-Borough redraw of 2026-11-18 (proofs v1 to v8); CLAUDE.md's
+*The Even City* and the comments in `draft_board.js` hold what is recorded of it.
+
 ## The look
 
 - **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take
