@@ -513,55 +513,69 @@ would only grow Coney Island, Canarsie and Jamaica, already among the largest, w
 smallest, Whitestone and Corona, are held by the Astoria / Flushing border (see Evening out the
 sizes). Nick floated the Federal Crackdown Tracker for that strip; not taken.
 
-### The Bronx grows (2026-11-20, a proof for Nick)
+### The Bronx grows, Belmont made plain (2026-11-20, proofs v9 and v10 for Nick)
 
 Nick, 2026-11-20: the Bronx's Districts are a touch smaller than Manhattan's, so pinch a bit from
 Manhattan. Measured by visible area on the 22-District board, the Bronx averaged 95 cm² a District
 against Manhattan's 109 and Queens' 115, and Fordham (87) was the smallest District on the map
 with the least room (51).
 
-- **The Manhattan / Bronx line dropped 16** (`sugarTop` and `corner[1]` 180 to 196, 9 mm), and
-  **the Hell Gate and the Sound dropped 12** (`hellGate` 321.6 to 333.6, 7 mm), so the Bronx also
-  takes from Astoria and Whitestone, the two largest Districts but Jamaica.
-- **The line alone only feeds Belmont.** Hunts Point's west end is a point where its two 45-degree
-  sides meet, and the Belmont / Hunts Point side runs up to the Belmont / Fordham upright, so that
-  upright can't move west unless the point does. The point sits where `corner[1] + sugarCut`
-  equals `2 x hellGate - 1022 + corner[0] + belmontEH`; with Sugar Hill's cut kept at 29, a line
-  drop of L and a Hell Gate drop of d put it at x = 588 + L - 2d. At 16 and 12 it moved 8 west
-  (`belmontEH` -44), which let Belmont / Fordham move 16 west (`bronxCols[0]` 649) and Hunts
-  Point's top drop 24 (`huntsTop` 159). `corner[0]` moves with `corner[1]` (624) so that Manhattan's
-  tip, and Belmont's Hudson shore with it, stays where it was.
-- The rest shares it out: `bronxRow` 191, `hpCol` 808, `bronxCols[1]` 854 (Fordham / Throggs Neck
-  is 46 long, the minimum), and in Manhattan `manhattanSplit` 473, the row 394, the Bowery's top
-  539 and `fpCol` 363.
-- **No shape and no connection changed**: Sugar Hill's cut corner, Hunts Point's point and its cut
-  top are as Nick set them on 2026-11-18, moved.
-- **The West Side / Sugar Hill upright is held by the two signs.** Both Districts are narrow at
-  the top, so each sign hangs where its District is first wide enough, and their hangers are the
-  board's longest. Moving the upright west shortens Sugar Hill's and lengthens West Side's; at 469,
-  in the 10 and 10 trial below, West Side's name wrapped. At 473 West Side's hangers are 85 as
-  before and Sugar Hill's 92 (98). A lower line shortens both and a lower Hell Gate lengthens
-  both, since it pushes Sugar Hill's slanted side in.
+**Proof v9** dropped the Manhattan / Bronx line 16 (`sugarTop` 180 to 196) and the Hell Gate and
+the Sound 12 (`hellGate` 321.6 to 333.6, 7 mm), so the Bronx also takes from Astoria and
+Whitestone, the two largest Districts but Jamaica. The line alone only fed Belmont: Hunts Point's
+west end was a point pinned between its own cut corner and Sugar Hill's, and the Belmont / Fordham
+upright could not move west past it. The Queensboro Bridge moved 12 down the river with the Hell
+Gate (`BRIDGE_SHIFT`), or its name ran into Hunts Point's shore.
+
+**Proof v10**, on Nick's marked-up v9:
+
+- **Belmont made plain** (his sketch: its shape was "a bit complex"). It had a leg down the Hudson
+  and a tooth between Hunts Point's cut north-west corner and Sugar Hill's cut north-east one. Now
+  **Belmont / West Side leaves the top of the West Side / Sugar Hill upright square to the coast**
+  (`WS_PEAK`), so West Side takes the leg and has a peaked top; **Sugar Hill's top runs level to
+  `NOSE`**, where its 45-degree side down to the Hell Gate begins; and **Belmont / Hunts Point is
+  one straight line** from there up to the foot of the Belmont / Fordham upright, so Hunts Point
+  takes the tooth. Belmont is seven points (ten before). The settings `corner`, `belmontWest`,
+  `sugarCut` and `belmontEH` are gone; `belmontShore` (492) is Belmont's Hudson shore.
+- **That line is at no exact angle** (36 degrees), and it makes Hunts Point's west corner. As
+  first drawn the corner was 66 degrees; the line dropped a further 14 (`sugarTop` 210) and Hunts
+  Point's top rose (`huntsTop` 151) to open it to 81, over the drafting's floor of 80.
+- **The Queens / Brooklyn line falls at 47 degrees** (`queensLine`; Nick: a touch more sharply,
+  but straight, to pinch width from Brownsville). It still leaves Williamsburg's top corner, so
+  Williamsburg's north-east side tilts with it and Williamsburg is 2 degrees off a square;
+  Williamsburg / Brownsville stays at 45. The feet on the line turn with it (`qbFoot`). Richmond
+  Hill passes the width on to Flushing (`queensSplit` 905 to 897; Whitestone / Richmond Hill is 47
+  long), **Jamaica's top dropped 8** (`queensRows[2]` 743, Nick: a hair), and the bay's east side
+  moved 10 east (`bayEast` 105) to take back what the line gave Jamaica on the bay.
+- **Five Points trimmed** (Nick: by eye a touch too big): `fpCol` 375 to 366 and the row 388 to 397.
+- **The bridge names print without "Bridge"** (`bridgeText` in `build_board.js`; Nick: cramped).
+  The geometry, the Jobs and the Rulebook keep the full names. Hell Gate, Williamsburg and
+  Brooklyn are also a strait, a District and a Borough; each label lies along its own bridge.
 - **Belmont's sign hangs in the middle of its top edge** (`SIGN_TOP_CENTRED` in `build_board.js`,
   mirrored in the tuner; Nick asked why it wasn't central). Every other sign centres on its
-  District's centroid. Belmont's leg down the Hudson pulls its centroid 13 west of the strip the
-  sign hangs in, so the sign sat 18 from the west shore and 38 from Fordham, and with Belmont /
-  Fordham moved west, 7 and 33. It now has 20 either side.
-- **The Queensboro Bridge moved 12 down the river** (`BRIDGE_SHIFT`) with the Hell Gate: left where
-  it was, its name ran into Hunts Point's shore.
+  District's centroid, which Belmont's old leg pulled west.
+- **West Side's sign pays for the peak.** Its hangers run straight up, and the right one now
+  meets the slanted top near its apex: 118 (85 before), the board's longest, with the sign 15
+  lower. The wrapped name tied with it at a cost of 25, so a wrap now costs 40 (`SIGN_SHAPES`) and
+  the name stays on one line. Sugar Hill's hangers are 77 (98 before v9). The West Side / Sugar
+  Hill upright (`manhattanSplit` 468) trades one sign for the other.
+- **No connection changed** in either proof: 36 land borders and the four bridges, as before.
 
-| Visible area (cm²) | Before | Proof |
-| --- | --- | --- |
-| Belmont, Fordham, Morris Park, Hunts Point, Throggs Neck | 99, 87, 96, 93, 100 | 104, 102, 100, 100, 101 |
-| Sugar Hill, West Side, Tenderloin, Five Points, the Bowery | 101, 118, 116, 103, 108 | 101, 108, 106, 106, 107 |
-| Astoria, Whitestone | 114, 121 | 109, 112 |
+| Visible area (cm²) | Before | v9 | v10 |
+| --- | --- | --- | --- |
+| Belmont, Fordham, Morris Park, Hunts Point, Throggs Neck | 99, 87, 96, 93, 100 | 104, 102, 100, 100, 101 | 102, 102, 102, 102, 102 |
+| Sugar Hill, West Side, Tenderloin, Five Points, the Bowery | 101, 118, 116, 103, 108 | 101, 108, 106, 106, 107 | 101, 109, 107, 101, 107 |
+| Astoria, Whitestone, Richmond Hill, Flushing, Jamaica | 114, 121, 103, 98, 140 | 109, 112, 103, 98, 140 | 109, 112, 106, 107, 139 |
+| Williamsburg, Red Hook, Brownsville | 102, 106, 117 | 102, 106, 117 | 100, 106, 107 |
 
-Room: the Bronx 62 to 70 cm² (51 to 66 before; Fordham 64, Hunts Point 62), Manhattan 64 to 71
-(64 to 78). The board's smallest rooms are now 62 (Hunts Point, Stapleton); the smallest was 51.
+Room in v10: the Bronx 63 to 68 cm² (51 to 66 before), Manhattan 64 to 71, Flushing 75 (67),
+Brownsville 67 (76). The smallest room on the board is Williamsburg's 60 (63 before): the steeper
+line took a sliver off its north-east side, and Red Hook / Brownsville, at 45 long, leaves its south
+corner no way down.
 
-Tried on the way: the line alone, 18 down (Belmont 118, Hunts Point 83: the point slides east
-along its diagonal and Belmont takes its tip); 10 and 10 (the Bronx exactly level at 100, but West
-Side's name wrapped); 20 and 14 or 24 and 16 (a point closer overall, Belmont 107 to 111).
+Tried on the way: the line alone, 18 down (Belmont 118, Hunts Point 83); 10 and 10 (the Bronx
+level at 100, but West Side's name wrapped); moving Williamsburg's top corner 4 up the river to
+give it its ground back (it undid the pinch: Brownsville 112, Richmond Hill 101).
 
 Not done here: mk-online needs the redraw if this is taken (`mk-online-board-handoff.md`), and the
 print PDF is older still (2026-11-11, the 24-District board), so `--print` is due either way. This
@@ -730,6 +744,7 @@ keeps them on a re-trace.
 | Williamsburg Bridge | Five Points and Williamsburg | 1903 |
 | Brooklyn Bridge | The Bowery and Red Hook | 1883 |
 
+- **The names print without "Bridge"** since 2026-11-20 (see The Bronx grows, Belmont made plain).
 - **Each name stands the same distance off its bridge** (Nick, 2026-10-07): 8 units clear of the
   crossbars (`BRIDGE_GAP` in `build_board.js`), measured from the name's real width, so a long
   name sits no closer than a short one. The gaps had run from 1.4 (Williamsburg) to 14.4 (Hell

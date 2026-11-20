@@ -143,12 +143,15 @@ const BORO_LABELS = geo.labels.boro, WATER_LABELS = geo.labels.water;
 // A bridge's name sits in the water beside it, along the river, on the side and at the angle the
 // drafting chose (geo.labels.bridges), BRIDGE_GAP clear of the bridge's crossbars, so every name
 // stands the same distance off its bridge whatever its length. Placed once the type is measured.
+// The names print without the word Bridge (Nick, 2026-11-20: the full names looked cramped in the
+// rivers). The geometry, the Jobs and the Rulebook keep the full names.
+const bridgeText = name => name.replace(/ Bridge$/, '');
 const BRIDGE_GAP = 8, BRIDGE_REACH = 7.5; // the bridge's half-width along the river, to its crossbars' outer edge
 function bridgeLabel(name) {
   const b = geo.bridges.find(q => q.name === name), [lx, ly, r] = geo.labels.bridges[name];
   const m = [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2], t = r * Math.PI / 180, u = [Math.cos(t), Math.sin(t)];
   const side = Math.sign((lx - m[0]) * u[0] + (ly - m[1]) * u[1]) || 1;
-  const k = side * (BRIDGE_REACH + BRIDGE_GAP + width(TYPE.bridge, name) / 2);
+  const k = side * (BRIDGE_REACH + BRIDGE_GAP + width(TYPE.bridge, bridgeText(name)) / 2);
   return [m[0] + u[0] * k, m[1] + u[1] * k, r];
 }
 
@@ -389,11 +392,12 @@ function rectInside([x, y, w, h], p) {
 }
 
 // The sign's shapes, each with what it costs in hanger units to use it: the usual one
-// free, a stacked name (25; 15 until 2026-09-30, Nick dislikes the wrap) where the usual one hangs much higher, and the Still's plate
+// free, a stacked name (40; 25 until 2026-11-20, when West Side's peaked top put its one-line sign on 118 and
+// the wrap tied with it; 15 until 2026-09-30, Nick dislikes the wrap) where the usual one hangs much higher, and the Still's plate
 // hung under the sign only where nothing else fits.
 const SIGN_SHAPES = d => {
   const two = d.name.includes(' ');
-  return [[{}, 0], ...(two ? [[{ stacked: true }, 25]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 75]] : [])];
+  return [[{}, 0], ...(two ? [[{ stacked: true }, 40]] : []), [{ drop: true }, 60], ...(two ? [[{ stacked: true, drop: true }, 100]] : [])];
 };
 // The sign hangs as high in the District as it fits, clear of the Speakeasy and High
 // Society keylines, and as near the District's centre line as it can: the middle of its
@@ -653,7 +657,7 @@ function pierObstacles() {
   for (const [k, [x, y, r]] of Object.entries(BORO_LABELS))
     obs.push(orientedBox(x, y, r, (31 + width(TYPE.boro, upper(BOROUGHS[k].name))) / 2 + 4, 15));
   for (const [t, x, y, r] of WATER_LABELS) obs.push(orientedBox(x, y, r, width(TYPE.water, t) / 2 + 4, 9));
-  for (const { name } of geo.bridges) { const [x, y, r] = bridgeLabel(name); obs.push(orientedBox(x, y, r, width(TYPE.bridge, name) / 2 + 4, 8)); }
+  for (const { name } of geo.bridges) { const [x, y, r] = bridgeLabel(name); obs.push(orientedBox(x, y, r, width(TYPE.bridge, bridgeText(name)) / 2 + 4, 8)); }
   for (const { a, b } of geo.bridges) {
     const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
     obs.push(orientedBox((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI, L / 2 + 14, 16));
@@ -750,7 +754,7 @@ function mapLabels() {
   for (const [t, x, y, r] of WATER_LABELS) s += text(t, x, y, TYPE.water, { fill: C.goldDim, anchor: 'middle', rotate: r, opacity: 0.85, middle: true });
   for (const { name } of geo.bridges) {
     const [x, y, r] = bridgeLabel(name);
-    s += text(name, x, y, TYPE.bridge, { fill: C.muted, anchor: 'middle', rotate: r, halo: 2.2, middle: true });
+    s += text(bridgeText(name), x, y, TYPE.bridge, { fill: C.muted, anchor: 'middle', rotate: r, halo: 2.2, middle: true });
   }
   return s;
 }
@@ -1274,7 +1278,7 @@ function allText() {
   }
   for (const b of Object.values(BOROUGHS)) add(TYPE.boro, upper(b.name));
   for (const [t] of WATER_LABELS) add(TYPE.water, t);
-  for (const { name } of geo.bridges) add(TYPE.bridge, name);
+  for (const { name } of geo.bridges) add(TYPE.bridge, bridgeText(name));
   add(TYPE.water, RUM_ROUTE.label.text);
   if (RUM_ROUTE.label.note) add({ ...TYPE.water, size: 6.5, spacing: 2.2 }, RUM_ROUTE.label.note);
   for (const [, t, what] of KEY_ROWS) {
