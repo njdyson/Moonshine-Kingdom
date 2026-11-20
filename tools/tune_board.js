@@ -114,7 +114,8 @@ function sign(id, p) {
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
   let A = 0, CX = 0;
   p.forEach((a, i) => { const b = p[(i + 1) % p.length], k = a[0] * b[1] - b[0] * a[1]; A += k; CX += (a[0] + b[0]) * k; });
-  const mid = CX / (3 * A);
+  const top = xs.filter((x, i) => ys[i] === y0);
+  const mid = id === 'belmont' ? (Math.min(...top) + Math.max(...top)) / 2 : CX / (3 * A); // SIGN_TOP_CENTRED in build_board.js
   let best = null;
   for (const { w, h, opts, cost } of SIGNS[id].shapes) for (const M of framed ? [13, 9] : [7]) {
     const drop = !!opts.drop, bh = opts.stacked ? 43 : 35, ph = 40, pw = 35.1; // the sign's and the plate's heights, the plate's width

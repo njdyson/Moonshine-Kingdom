@@ -402,6 +402,10 @@ const SIGN_SHAPES = d => {
 // Each unit off the centre line costs SIGN_CENTRE units of hanger (at 1, Canarsie's sign
 // stayed put: dropping it to the centre cost as much hanger as it saved).
 const SIGN_CENTRE = 2;
+// Belmont hangs its sign from the frame, in the strip above its leg down the Hudson. The leg pulls
+// its centroid 13 west of that strip's middle, which left the sign close against the west shore, so
+// its centre line is the middle of its top edge (Nick, 2026-11-20: why doesn't it hang centrally?)
+const SIGN_TOP_CENTRED = new Set(['belmont']);
 function placeSign(d) {
   const p = geo.regions[d.id], framed = d.zone === 'speak' || d.zone === 'hs';
   const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
@@ -411,7 +415,8 @@ function placeSign(d) {
   const clip = p.map(([x, y]) => [Math.min(Math.max(x, FRAME_IN), 1080 - FRAME_IN), y]);
   let A = 0, CX = 0;
   clip.forEach((a, i) => { const b = clip[(i + 1) % clip.length], k = a[0] * b[1] - b[0] * a[1]; A += k; CX += (a[0] + b[0]) * k; });
-  const mid = CX / (3 * A);
+  const top = xs.filter((x, i) => ys[i] === y0);
+  const mid = SIGN_TOP_CENTRED.has(d.id) ? (Math.min(...top) + Math.max(...top)) / 2 : CX / (3 * A);
   // Every shape is tried, clear of the keylines where it can be (a narrow District lets
   // it closer), at every height, and the one whose hangers and distance off the centre
   // line, with its cost, come out least wins.

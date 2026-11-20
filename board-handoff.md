@@ -542,6 +542,11 @@ with the least room (51).
   in the 10 and 10 trial below, West Side's name wrapped. At 473 West Side's hangers are 85 as
   before and Sugar Hill's 92 (98). A lower line shortens both and a lower Hell Gate lengthens
   both, since it pushes Sugar Hill's slanted side in.
+- **Belmont's sign hangs in the middle of its top edge** (`SIGN_TOP_CENTRED` in `build_board.js`,
+  mirrored in the tuner; Nick asked why it wasn't central). Every other sign centres on its
+  District's centroid. Belmont's leg down the Hudson pulls its centroid 13 west of the strip the
+  sign hangs in, so the sign sat 18 from the west shore and 38 from Fordham, and with Belmont /
+  Fordham moved west, 7 and 33. It now has 20 either side.
 - **The Queensboro Bridge moved 12 down the river** (`BRIDGE_SHIFT`) with the Hell Gate: left where
   it was, its name ran into Hunts Point's shore.
 
