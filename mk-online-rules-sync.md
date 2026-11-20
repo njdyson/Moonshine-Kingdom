@@ -1793,3 +1793,14 @@ mk-online #77.
   `canChooseBlow`; `bot.ts` blows when the kill beats the best brew by 2.5 barrels' worth). The Brew or Blow panel
   (`ShadowsControls.tsx`), agent options, RULES-AI.md; older Boss brew saves keep the last seat's Blowback
   (`render.ts` tells the agents). `scripts/blow-choice-check.ts`; `lengthdiag --blowChoice=0` runs the old rule.
+
+## 78. Brew only what the Supply can cover; any boss may pass (2026-11-20, Nick)
+
+- **Dry Taps is retired.** A boss may brew only a number whose whole pour the Supply can cover (1 barrel a Still,
+  2 with its owner's Boss); if it can't, he picks another die, blows, or passes.
+- **Pass**: any boss may pass his pick, no brew and no blow (Nick: "you don't have to blow if you only match a rival
+  Still").
+- Rules set: the Rulebook (Brew or Blow: Pick your number, Brew), the Town Planner (Brew or Blow), CLAUDE.md.
+- mk-online: `G.coverBrew` on new games (`shadows.ts` `brewCost`, `canCoverBrew`, `dockPass` on `draftDice(-1)`;
+  `bot.ts` passes when nothing can be brewed or every brew feeds rivals more). The panel's Pass button, agent options,
+  RULES-AI; brew-or-blow saves without it keep Dry Taps (`render.ts`). `lengthdiag --coverBrew=0` runs Dry Taps.

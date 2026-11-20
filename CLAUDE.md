@@ -123,7 +123,8 @@ the last seat blows instead of brewing, the Safehouse shields its Still, or the 
 - **Shadows runs Grease the Wheels, then Brew or Blow, then Ferment Tomorrow's Mash.** The Offers and Fund the Ledger
   come first, because a blow is paid from the Ledger (Nick). Day 1 still has no Offers: the Market turns up first.
 - **Brew or Blow.** In Turn Order every boss rolls his Dock dice (none: no pick) and picks one. He **brews** it (as the
-  Boss brew: every active Still on it pours, 1 barrel, 2 with its owner's Boss; Dry Taps under 8) or **blows** it: one
+  Boss brew: every active Still on it pours, 1 barrel, 2 with its owner's Boss; only a number the Supply covers, see
+  below) or **blows** it: one
   Ledger marker onto the Heat Track, and every active Still on that number, his own included, loses half its crew,
   rounded down, Runners first. A blown Still takes a **Blowback marker** (an explosion token, 10 in the box), pours
   nothing more and can't blow again that morning; the markers come off when the Brew ends. Ten always suffice: four
@@ -135,7 +136,12 @@ the last seat blows instead of brewing, the Safehouse shields its Still, or the 
 - Weighed the same day and not taken: **one Blowback a morning** (first to call it; it needs a marker to say it was
   used, and bots showed no difference); **a wreck stays blown until a Repair Play** (Nick: a frustrating yo-yo, "less
   mobster and more euro", and it needed a 4-marker floor like Dry Taps, a rule he dislikes). Don't bring them back.
-  Nick also dislikes the Dry Taps rule itself, to be solved separately.
+- **Brew only what the Supply covers; anyone may pass** (Nick, later the same morning; rules-sync §78). **Dry Taps is
+  retired**: a boss may brew only a number whose whole pour the Supply can cover (count it: 1 a Still, 2 with its
+  Boss, usually 1 to 3), else he picks another die, blows or passes. Nick: "not perfect as it requires counting, but
+  ... most of the time it's 1-3 rather than 8". When the Supply runs low the rich numbers close first. **A boss may
+  always pass** his pick: "you don't have to blow if you only match a rival Still". mk-online `G.coverBrew`; brew-or-
+  blow saves without it keep Dry Taps.
 - Words: the step is **Brew or Blow**; you **brew** a number or **blow** it. The Almanac's lesson 6, **The Kill Shot**,
   is now "Lay Low first, and blow his number": the low token picks first and can blow a number before its owner brews.
 - mk-online: `G.blowChoice` (1; 2 is the one-a-morning trial), new games; Boss brew saves without it keep the last
@@ -175,7 +181,7 @@ supersedes** the sections below wherever they describe the brew, Split the Batch
 - **The Brew.** In Turn Order every boss but the last rolls **one Red die per Dock he Controls** (no Docks: no roll,
   no brew) and picks one. **Every active Still on Mash + that die pours**, rivals' too: **1 barrel, 2 where its
   owner's Boss stands** (Nick: "1 +1 for a boss ... same as threat"). A Still pours once a morning. No Split the Batch.
-- **Dry Taps** checks the pick once: a pick pays at most **8** (no number is on more than four Stills), so under 8 in
+- **Dry Taps** (retired 2026-11-20, see *Brew or blow*) checked the pick once: a pick pays at most **8** (no number is on more than four Stills), so under 8 in
   the Supply nobody brews on that pick. Nick rejected any rule that shares out the last barrels by turn order or Still
   by Still: at the table everyone on the number takes his barrels at once.
 - **Blowback** is the last seat's pick: he rolls his Dock dice the same way (none: no Blowback). Every active Still
