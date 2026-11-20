@@ -129,8 +129,10 @@ wherever it says a family has one Safehouse, Secure costs $500, or a Still pours
   unspent markers at Lay Low out-earned every business). At $500 the bots left the extra Safehouses in the box and
   nothing changed; free, brew rose a tenth and Unload's share of cash from 36% to 45%. Blows rose a third: a house on
   a Still draws a crew, and a crew draws a blow.
-- **The name is open.** Nick likes the rule but not "Safehouse" for a thing that also brews more; a rename (Front was
-  offered) would be a text pass across the set and the art. Until he picks, it stays the Safehouse.
+- **The name is open (Nick, to think about further).** "Safehouse" fits the Recruit but not the extra barrel. Nick
+  liked the meaning of **Front** (a cover business that hires men and hides a bigger cook) but not the word: it has
+  too many meanings to be instantly clear. Hideout and Garage were offered too. It stays the Safehouse for now; a
+  rename is a text pass across the set and the art.
 - Watch: **The Warehouse** ("Secure your Safehouse in a District holding 10+ barrels") and **Last One Standing**
   (Astoria, 4+ barrels) lost their $500 gate, so both are easier. The Almanac's lesson 7, **The Sidecar**, is now "Put
   a house on a busy boiler".
