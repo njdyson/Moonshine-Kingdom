@@ -1804,3 +1804,23 @@ mk-online #77.
 - mk-online: `G.coverBrew` on new games (`shadows.ts` `brewCost`, `canCoverBrew`, `dockPass` on `draftDice(-1)`;
   `bot.ts` passes when nothing can be brewed or every brew feeds rivals more). The panel's Pass button, agent options,
   RULES-AI; brew-or-blow saves without it keep Dry Taps (`render.ts`). `lengthdiag --coverBrew=0` runs Dry Taps.
+
+## 79. Three free Safehouses, each a barrel on its Still (2026-11-20, Nick)
+
+- **Three Safehouses a family**: one starts in the home Ward, two wait in the supply. Recruit at any of yours.
+- **Secure is free**: only its Ledger marker. It places a Safehouse from your supply, or with all three out moves one.
+  A takeover puts one of yours in, free, the same way.
+- **The brew's +1 barrel comes from the Safehouse**: a Still pours 2 where its owner's Safehouse stands, not his Boss.
+  No Blowback shield.
+- Why: the haiku-4way-4 review (`/mnt/project-files/reviews/haiku-4way-4-brew-or-blow-2026-11-20.md`) found a poverty
+  spiral: 85 barrels brewed in 44 Days, Lay Low the top income. Nick: "swap the boss +1 to safehouses. They don't do
+  much else now"; then a free Secure. At $500 the bots never built the extra Safehouses and nothing moved; free, they
+  kept 1.5 a seat, brew rose 4.1 to 4.6 a Day, Unload 36% to 45% of cash, crown median Day 66.5 to 60 (40 games,
+  `bot-runs/log.md`). Blows rose a third. The piece's name is open: it now makes money as well as hiding the crew.
+- Rules set: the Rulebook (Components, the Safehouse legend, Cash, A Rival Safehouse, Setup, Brew, Recruit, Secure, the
+  Firefight's takeover, the Glossary's Take over), the Town Planner (Brew), the Playbooks (Recruit, Secure), The
+  Almanac (lessons 3, 7 The Sidecar now "Put a house on a busy boiler", 14, 16, the Knights' Torch, the Sicilians),
+  CLAUDE.md.
+- mk-online #101: `G.safehouses3`, `G.freeSecure`, `G.safeBrew` on new games (`secureCost(G)`, `dockBrewYield`'s
+  Safehouse flag; the bot values a Safehouse on a Still). Older saves keep one Safehouse, $500 and the Boss barrel, and
+  `render.ts` tells the agents. `lengthdiag --safehouses3=0 --freeSecure=0 --safeBrew=0` runs the old rules.
