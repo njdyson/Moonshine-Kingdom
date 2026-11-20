@@ -1770,3 +1770,26 @@ mk-online #77.
   `shadows.ts` `dockBlowDead`); older saves keep the Muscle Ratio (`render.ts` tells the agents). RULES-AI.md, the
   Shadows panel's Blowback line. The harness no longer shows the old draft's BREW HELPER under the Boss brew (its
   options already preview each face). `lengthdiag --dieAMan=0` runs the old rule.
+
+## 77. Brew or blow: any boss may blow his pick for 1 Heat (2026-11-20, Nick)
+
+- **Shadows order**: Grease the Wheels (the Offers, the restock, Fund the Ledger), then **Brew or Blow**, then
+  Ferment Tomorrow's Mash. Day 1 has no Offers, so the Market turns up before the Brew.
+- **Brew or Blow**: every boss with a Dock picks one die. **Brew** pours every active Still on Mash + die (unchanged).
+  **Blow** moves 1 Ledger marker to the Heat Track, and every active Still on that number, the blower's too, loses
+  half its crew, rounded down, Runners first, pours nothing more and can't blow again that morning (a Blowback
+  marker; 10 in the box). An empty Ledger can only brew. The last seat brews like everyone else.
+- **A 5th Heat marker from a blow raids at once**, before the next pick.
+- **No Safehouse shield** on a Blowback.
+- Why: every seat gets a real choice (feed myself or hurt him) at a price, turn order gains teeth (an early pick can
+  blow a number before its owner brews), and the Raid ties the Brew to the police. Weighed and not taken: one
+  Blowback a morning, and wrecks that stay until a Repair Play.
+- Rules set: the Rulebook (Shadows reordered and rewritten, the Stills legend, Components: Blowback Markers (10),
+  Drawing Heat, Police Raids, the Glossary's Blowback and Brew Number), the Town Planner (Shadows: three steps), The
+  Almanac (lessons 2, 3, 5, 6 The Kill Shot, 7, the Stills' "What I've Seen", 14, and the endgame's Blow his number),
+  the Brew Simulator's out-of-date note, CLAUDE.md. The Playbooks' resolution table is unchanged.
+- mk-online: `G.blowChoice` = 1 on new Even City games with the Boss brew (`shadows.ts`: `rollDice` goes to the
+  Offers first, `closeOffers` starts the Brew, `dockPick` blows on `draftDice(i, true)`, `blowShielded`,
+  `canChooseBlow`; `bot.ts` blows when the kill beats the best brew by 2.5 barrels' worth). The Brew or Blow panel
+  (`ShadowsControls.tsx`), agent options, RULES-AI.md; older Boss brew saves keep the last seat's Blowback
+  (`render.ts` tells the agents). `scripts/blow-choice-check.ts`; `lengthdiag --blowChoice=0` runs the old rule.

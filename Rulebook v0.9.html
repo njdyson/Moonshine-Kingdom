@@ -203,6 +203,8 @@
 
         <p><strong>Liquor Barrels (x30 Moonshine, x20 Havana Rum):</strong> The lifeblood of your operation. Barrels cycle back to the Supply when sold or Traded away, and the Supply is the ceiling: when Moonshine or Rum runs out, it's out. <em>Cheap swill and the good stuff; nothing in between.</em></p>
 
+        <p><strong>Blowback Markers (10):</strong> Explosion tokens. One goes on each Still that blows, and they all come off when the Brew ends.</p>
+
         <p><strong>The Dice (11):</strong> 5 White, 5 Red, and 1 grey <b>Mash die</b>. Red fires the boilers (a die for each Dock you hold) and the Invader's guns, White the Occupier's; the lone Mash die does one job only, and the whole table watches it.</p>
 
         <p><strong>The Bankroll (Cash):</strong> Dirty, untraceable bills in denominations of $100, $500, and $1,000. The kind that never sees a bank.</p>
@@ -310,7 +312,7 @@
                 </div>
                 <div class="legend-body">
                     <span class="legend-title">Stills</span>
-                    Every District has a boiler printed on the board, numbered <b>2&ndash;12</b>, and a gauge showing its <b>Pressure</b>: 6 on the 7, one less for each step away, down to 1 on the 2 and the 12. Every number is printed twice (the 7 four times; the 2 and the 12 once each). The moment you Control the District its Still is active: it pours whenever any boss picks its number at the Brew, and it blows when the last seat picks it (<b>Blowback</b>, see <em>Shadows</em>).
+                    Every District has a boiler printed on the board, numbered <b>2&ndash;12</b>, and a gauge showing its <b>Pressure</b>: 6 on the 7, one less for each step away, down to 1 on the 2 and the 12. Every number is printed twice (the 7 four times; the 2 and the 12 once each). The moment you Control the District its Still is active: it pours whenever any boss brews its number, and it blows when any boss blows it (<b>Blowback</b>, see <em>Shadows</em>).
                 </div>
             </div>
 
@@ -501,28 +503,9 @@
         <p>The game is played in <b>Days</b>, and no Day in this city passes quietly. A Day runs in two phases, <b>Shadows</b> and <b>The Hustle</b>, and closes at <b>Sunset</b>.</p>
 
         <h3 id="shadows">Phase 1: Shadows</h3>
-        <p>The city wakes to the hiss of steam and the churn of illegal boilers. Before your crew hits the streets, the barrels are brewed, a rival's boiler may blow, the day's work goes up for grabs, and tomorrow's mash goes on to ferment.</p>
+        <p>The city wakes to the hiss of steam and the churn of illegal boilers. Before your crew hits the streets, the day's work goes up for grabs, the barrels are brewed, a rival's boiler may blow, and tomorrow's mash goes on to ferment.</p>
 
-        <h4>1. The Brew</h4>
-        <p>
-            The <b>Mash die</b> already sits on the board, rolled at the end of yesterday's Shadows (on Day 1, at setup). The molasses comes ashore at the piers, so every <b>Dock you Control</b> is a <b>Red die</b> at the Brew.
-        </p>
-        <ol class="sub-section" style="margin-top:5px;">
-            <li><strong>Read the Public Mash:</strong> The grey <b>Mash die</b> is the cheap molasses swill off the docks that every crew is cooking today. It stays put all morning and is added to every pick below.</li>
-            <li><strong>Roll your Docks:</strong> In <b>Turn Order</b>, every boss <b>but the last</b> takes his turn at the Brew. Roll <b>one Red die per Dock you Control</b>. No Docks, no roll: you skip your pick.</li>
-            <li><strong>Pick your Brew Number:</strong> Choose <b>one</b> of your dice. <b>Mash + that die</b> is your <b>Brew Number</b>.</li>
-            <li><strong>Every Still on it pours:</strong> Every <b>active Still</b> (one in a District a boss Controls) on your Brew Number takes Moonshine from the Supply, <b>whoever owns it</b>: <b>1 barrel</b>, or <b>2</b> if its owner's <b>Boss</b> stands there. A number already picked today pours nothing more. <em>One man's mash feeds the whole street. He just picks which street.</em></li>
-            <li><strong>Dry Taps:</strong> If the Supply holds fewer than <b>8 barrels</b> when you pick, nobody brews on your pick.</li>
-        </ol>
-
-        <h4>2. Blowback</h4>
-        <p style="margin-bottom: 15px;">
-            The boss <b>last in Turn Order</b> brews nothing: he picks the Blowback instead. He rolls one Red die per Dock he Controls and chooses one. Mash + that die is the <b>Blowback Number</b> (no Docks, no Blowback). <b>Every active Still on it blows</b>, his own included, <b>unless its owner's Safehouse stands in that District</b>. A Still that blows loses <b>half its crew, rounded down</b>, <b>Runners first</b>, so a lone man walks away. The survivors keep their barrels and their turf. <em>Somebody always gets the bad batch. The last man up decides who.</em>
-        </p>
-
-        <p class="note" style="margin-bottom: 15px;"><strong>Kingpin's Tip:</strong> Your pick pours for everyone on that number, so choose the face that fills your Stills and starves the leader's. The last seat brews nothing, but holds the gun and takes first pick of the morning's Jobs. A crew beside its own Safehouse never blows; any other big stack is a target.</p>
-
-        <h4>3. Grease the Wheels</h4>
+        <h4>1. Grease the Wheels</h4>
         <p><em>Whispers in the back booths over the morning coffee: this is when the work changes hands.</em></p>
         <p><strong>The Offers:</strong> In <b>reverse Turn Order</b> (the highest token picks first), each boss does <b>one</b> of three things:</p>
         <ul class="sub-section">
@@ -534,7 +517,22 @@
         <p><strong>Restock the Market:</strong> Once every boss has chosen, deal a fresh Job into each gap <em>(deck dry? shuffle the discards into a new one)</em>. On <b>Day 1</b> the Market is still face-down, so there are no Offers: turn it face-up now. <em>Fresh word goes round the bars all day before anybody can act on it.</em></p>
         <p><strong>Fund the Ledger:</strong> Then everyone moves what's left in their <b>Reserves</b> into the <b>Ledger</b>, up to its <b>5 slots</b>. Staked markers stay locked on their Jobs, and any beyond five wait in Reserves. <em>Stake first, fund second.</em></p>
 
-        <h4>4. Ferment Tomorrow's Mash</h4>
+        <h4>2. Brew or Blow</h4>
+        <p>
+            The <b>Mash die</b> already sits on the board, rolled at the end of yesterday's Shadows (on Day 1, at setup). The molasses comes ashore at the piers, so every <b>Dock you Control</b> is a <b>Red die</b> at the Brew.
+        </p>
+        <ol class="sub-section" style="margin-top:5px;">
+            <li><strong>Read the Public Mash:</strong> The grey <b>Mash die</b> is the cheap molasses swill off the docks that every crew is cooking today. It stays put all morning and is added to every pick below.</li>
+            <li><strong>Roll your Docks:</strong> In <b>Turn Order</b>, each boss takes his turn at the Brew. Roll <b>one Red die per Dock you Control</b>. No Docks, no roll: you skip your pick.</li>
+            <li><strong>Pick your number:</strong> Choose <b>one</b> of your dice. <b>Mash + that die</b> is your number. Brew it or blow it.</li>
+            <li><strong>Brew:</strong> Every <b>active Still</b> (one in a District a boss Controls) on your number takes Moonshine from the Supply, <b>whoever owns it</b>: <b>1 barrel</b>, or <b>2</b> if its owner's <b>Boss</b> stands there. A Still pours once a morning. If the Supply holds fewer than <b>8 barrels</b> when you pick, nobody brews on your pick (<b>Dry Taps</b>). <em>One man's mash feeds the whole street. He just picks which street.</em></li>
+            <li><strong>Blow:</strong> Move <b>1 marker</b> from your <b>Ledger</b> to the <b>Heat Track</b> <img src="Art/Icons/fire.svg" class="icon" alt="Heat">. <b>Every active Still on your number blows</b>, yours included: it loses <b>half its crew, rounded down</b>, <b>Runners first</b>, so a lone man walks away. Put a <b>Blowback marker</b> on it: it pours nothing more and can't blow again this morning. The survivors keep their barrels and their turf. If that marker is the <b>5th</b> on the track, the <b>Raid</b> runs now, before the next boss picks. <em>Somebody always gets the bad batch. Today you decide who.</em></li>
+        </ol>
+        <p style="margin-bottom: 15px;">When the last boss has picked, take the Blowback markers off the board.</p>
+
+        <p class="note" style="margin-bottom: 15px;"><strong>Kingpin's Tip:</strong> Your pick pours for everyone on that number, so choose the face that fills your Stills and starves the leader's, or blow the number where his crews stand. A blow costs you a Play and the freshest Heat on the track, and it hits your own Stills on that number too. Any big stack on a Still is a target, whoever picks before its owner.</p>
+
+        <h4>3. Ferment Tomorrow's Mash</h4>
         <p><strong>Roll tomorrow's Public Mash:</strong> Roll the Mash die and leave it on the board, where it stays until tomorrow's Brew. The whole table plays the Day knowing tomorrow's Mash. <em>Whatever comes ashore tonight, the whole city cooks tomorrow.</em></p>
     </div>
 
@@ -1051,11 +1049,12 @@
         <p>Every noisy Play (marked with the flame <img src="Art/Icons/fire.svg" class="icon" alt="Heat">) adds one marker:</p>
         <ul class="sub-section">
             <li><strong>First Shot Draws Heat:</strong> A firefight adds <b>1 marker</b> <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, and it belongs to <b>whoever fired first</b>: the Occupier if they <b>Ambush</b>, otherwise the Invader on his first <b>Open Fire</b>, <b>Hit</b>, <b>Tommy Gun</b> or <b>Torch</b>. One marker, however many volleys.</li>
+            <li><strong>Blowback:</strong> A boss who blows his number at the Brew moves <b>1 marker</b> from his Ledger to the track <img src="Art/Icons/fire.svg" class="icon" alt="Heat">.</li>
             <li><strong>Money Talks:</strong> Every <b>Extort</b>, and every <b>Unload</b> at a <b>High Society Venue</b>, adds <b>1 marker</b> <img src="Art/Icons/fire.svg" class="icon" alt="Heat">, however many Districts pay or barrels go. <em>A delivery truck at the Cotton Club's back door gets noticed, whether it carries one barrel or five.</em></li>
         </ul>
 
         <h3 id="police-raids">Police Raids: The Boiling Point</h3>
-        <p>A Raid triggers two ways: the <b>5th marker</b> lands on the track, or someone makes the <b>Snitch</b> Play. Either way, pause the turn. Heat lands as the Play that drew it ends, so a firefight always finishes before the sirens start.</p>
+        <p>A Raid triggers two ways: the <b>5th marker</b> lands on the track, or someone makes the <b>Snitch</b> Play. Either way, pause the turn. Heat lands as the Play that drew it ends, so a firefight always finishes before the sirens start. A Blowback's 5th marker raids at once, in the middle of the Brew.</p>
         <p>A Raid puts every Squad on the move. Resolve them <b>one at a time, in the numbered Borough order printed on the board</b>, each finishing before the next stirs.</p>
 
         <h4>1. The Most Wanted List</h4>
@@ -1127,8 +1126,8 @@
         <p>The words that carry a rule, in one place. Each names the section that holds the rule in full.</p>
         <ul class="sub-section">
             <li><strong>Adjacent:</strong> Sharing a border, or joined by a Bridge. (<em>Territory</em>)</li>
-            <li><strong>Blowback:</strong> The last seat's pick at the Brew: every active Still on that number without its owner's Safehouse loses half its crew, rounded down, Runners first. (<em>Shadows</em>)</li>
-            <li><strong>Brew Number:</strong> The Mash plus the Red die you pick from your Docks' roll. Every active Still on it pours. (<em>Shadows</em>)</li>
+            <li><strong>Blowback:</strong> Blowing your number at the Brew, for 1 Heat: every active Still on it loses half its crew, rounded down, Runners first. (<em>Shadows</em>)</li>
+            <li><strong>Brew Number:</strong> The Mash plus the Red die you pick from your Docks' roll. Brew it and every active Still on it pours; blow it and every one blows. (<em>Shadows</em>)</li>
             <li><strong>Connected:</strong> Adjacent, or two Docks across the water. (<em>Territory</em>)</li>
             <li><strong>Control:</strong> Your Mobster on the District, settled as each Play ends. A Safehouse alone holds nothing. (<em>Territory</em>)</li>
             <li><strong>Destroy:</strong> Send a Safehouse back to its owner's supply. (<em>A Rival Safehouse</em>)</li>
