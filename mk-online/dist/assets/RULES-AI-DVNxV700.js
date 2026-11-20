@@ -18,7 +18,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 ## 2. Components and currencies
 
-- **Mob**: 1 Boss, 15 Runners, 1 Safehouse. You start with your Boss, 2 Runners and your Safehouse in your home Ward, and 3 Runners each on your starting Dock and Speakeasy; the other 7 Runners wait in your supply. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
+- **Mob**: 1 Boss, 15 Runners, 3 Safehouses. You start with your Boss, 2 Runners and one Safehouse in your home Ward (the other two wait in your supply), and 3 Runners each on your starting Dock and Speakeasy; the other 7 Runners wait in your supply. Mobsters = Boss + Runners. Dead or arrested pieces return to your supply (Boss comes back via Rise).
 - **Influence markers**: you own 6 at the start, and each of your four Bribe cards brings one more, so 10 at most. A marker is in one of four places:
   - **Reserves** (stash): uncommitted, and the source for Job Stakes;
   - **Ledger** (operations): max **5**, the only markers you can spend;
@@ -28,7 +28,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
 - **Cash**: start with **$1,500**. Cash is public.
 - **Barrels**: Moonshine (supply 30), Havana Rum (supply 20). Finite; empty supply produces nothing.
 - **Heat Track**: 5 spaces, with markers in order and the newest on the right.
-- **Combat dice**: **one die per Mobster** (Boss or Runner) in the fight, **max 5**. A sixth man adds no die, only a body to soak hits. A Safehouse alone counts 0. A Still brews 1 barrel, 2 with its Boss, whatever the crew.
+- **Combat dice**: **one die per Mobster** (Boss or Runner) in the fight, **max 5**. A sixth man adds no die, only a body to soak hits. A Safehouse alone counts 0. A Still brews 1 barrel, 2 with its owner's Safehouse there, whatever the crew.
 
 ## 3. The Day
 
@@ -43,7 +43,7 @@ The game ends mid-Day on the spot. Nothing else is settled.
    - **The 3s come late.** No 3-Respect Job sits in the top 15 cards of the deck (the opening Market included), so the first 3 turns up after about ten Days of restocks.
 2. **Fund the Ledger**: automatic. Reserves move into the Ledger up to 5. Staked markers stay on their Jobs.
 3. **Brew or Blow: Dock dice.** The **Mash** (1–6) was rolled yesterday (step 4), so everyone knows it a Day ahead. In Turn Order, each boss rolls **one die per Dock he Controls** (no Docks: no roll, no pick) and picks one. **Mash + die** is the number, and he chooses:
-   - **Brew it** (draftDice [i, false]): **every active Still on it pours, rivals' too**: **1 barrel**, or **2 if its owner's Boss stands there**, taken from the supply into that District for the Still's owner. Active means Mobsters present and no Squad. Each Still pours at most once a morning. **You may brew only a number the supply can cover in full**: count the barrels it would pour (1 a Still, 2 with its Boss); if the supply holds fewer, pick another die, blow, or pass.
+   - **Brew it** (draftDice [i, false]): **every active Still on it pours, rivals' too**: **1 barrel**, or **2 if its owner's Safehouse stands there**, taken from the supply into that District for the Still's owner. Active means Mobsters present and no Squad. Each Still pours at most once a morning. **You may brew only a number the supply can cover in full**: count the barrels it would pour (1 a Still, 2 with its Safehouse); if the supply holds fewer, pick another die, blow, or pass.
    - **Blow it** (draftDice [i, true]): put **1 Ledger marker on the Heat Track** (none in the Ledger: you can only brew). **Every active Still on that number blows, yours included.** A blown Still loses **half its crew, rounded down**, no cap (1 man: none, 2–3: 1, 4–5: 2, 6–7: 3, and so on), **Runners first**, and pours nothing more this morning. A lone man walks away, so a Blowback never kills a Boss. Barrels and turf survive if anyone is left. A Safehouse does not protect its Still. A Still blows at most once a morning. Any number of bosses may blow in one morning. Day 1 is not exempt.
    - **Pass** (draftDice [-1]): no brew, no blow. You may always pass, say when your only numbers would feed rivals.
    - **A Raid comes at once.** If a blow lays the 5th Heat marker, the Raid runs before the next boss picks, so a crew it scatters brews (or blows) where it lands.
@@ -86,8 +86,8 @@ Costs are in Ledger markers. **H** = draws 1 Heat (Unload: only at a High Societ
 | Play (engine) | Cost | Effect and restrictions |
 |---|---|---|
 | Move (movePlay) | 1 | Any Mobsters and/or barrels from a District you Control to one Connected District. Never into a Padlocked District (a Squad's). Into a Hostile District (rival Mobsters): Standoff (§6). Barrels alone belong to whoever Controls the District they land in: a rival's become his, and in one nobody Controls they are nobody's. Mobsters into a District where a rival Safehouse stands with no Mobsters: no Standoff; take it over (evictTakeOver) or destroy it (evictRaze). |
-| Recruit (recruit) | 1 | Hire Runners into your Safehouse District at **$300 each**. Needs the Safehouse on the board, not Control; the new Runners take Control. |
-| Secure (secure) | 1 | **$500**: place or relocate your one Safehouse into any Safe District. On a rival Safehouse it is a take over: theirs is destroyed (back to its owner's supply) and yours moves in. A Safehouse grants no Control by itself. |
+| Recruit (recruit) | 1 | Hire Runners into any District holding one of your Safehouses, at **$300 each**. Needs the Safehouse on the board, not Control; the new Runners take Control. |
+| Secure (secure) | 1 | **Free** (no cash): place a Safehouse from your supply in any Safe District; with all three on the board, move one of them instead (secure(district, from)). On a rival Safehouse it is a take over: theirs is destroyed (back to its owner's supply) and yours moves in. A Safehouse grants no Control by itself, but a Still in its District pours an extra barrel for you. |
 | Trade (trade) | 1 | At any **Dock** you Control, swap Moonshine there for Havana Rum **one for one**. There are ten Docks: two in every Borough and two on Staten Island. N is the Rum you receive (limited by the Rum supply). This is the only source of Rum. No Heat. |
 | Beg: Loan (takeShylockMark) | 1 | +$1,500 and a Shylock's Mark (7 in all; none while all are out). Each Mark held is −2 Respect. |
 | Beg: Square Up (repayShylockMark) | 1 | Pay $2,000 and return one Mark (its −2 Respect goes with it). |
@@ -108,7 +108,7 @@ Costs are in Ledger markers. **H** = draws 1 Heat (Unload: only at a High Societ
 - **Connected**: Adjacent, or Dock to Dock (every **Dock** connects to every other Dock by water).
 - **Safe District**: no rival Mobsters and no Police Squad. Barrels and Safehouses do not count, so a District where only a rival Safehouse stands is Safe.
 - **Hostile District**: rival Mobsters stand in it.
-- **A rival Safehouse**: whoever takes Control of a District holding one (Move, Haul, Advance, Scram, Rise, a won fight, a Fold) must take it over (yours moves in, free) or destroy it (back to its owner's supply). Walking in on one with no Mobsters starts no Standoff.
+- **A rival Safehouse**: whoever takes Control of a District holding one (Move, Haul, Advance, Scram, Rise, a won fight, a Fold) must take it over (one of yours goes in, free: from your supply, or moved from the board if all three are out) or destroy it (back to its owner's supply). Walking in on one with no Mobsters starts no Standoff.
 - **Padlocked**: a District holding a Police Squad. Nobody enters it; its Still and Speakeasy are shut: no brewing, no Blowback, no sales. Every other Speakeasy is **open**.
 - **District kinds**: every Borough has one ordinary Speakeasy, one High Society Venue on the 7, two Docks and its Ward (engine tag \`ghetto\`); Staten Island has two Docks: 22 Districts, five a mainland Borough. Every District has a Still numbered 2–12.
 - **Still Pressure** = 6 − |7 − number|, so the 7 is hottest and gets 6.
@@ -144,7 +144,7 @@ Hits remove **Runners first**, then the Boss.
 **End of the fight**:
 
 - If the Occupier is wiped out, the Invader takes Control and **all** barrels there.
-- A rival Safehouse there is taken over (yours relocates into it for free) or destroyed (back to its owner's supply).
+- A rival Safehouse there is taken over (one of yours goes in, free) or destroyed (back to its owner's supply).
 - If the Invader is wiped out, the Occupier keeps its barrels and any the Invader carried.
 - If both sides are wiped out in one volley, nobody Controls the District; any Safehouse stays where it is.
 
@@ -214,7 +214,7 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 
 - **The Magic of Seven.** No Mash can starve a 7, and the four 7s are the High Society Venues. The Mash is rolled at random, so a Still's odds fall away from the 7: the 6s and 8s fire often, the 2s and 12s rarely. Hold several numbers and you fire most mornings.
 - **Read Tomorrow's Mash.** It is face-up all through the Hustle: move onto the numbers it can reach, and keep crews under 3 on numbers a rival who drafts before you also holds.
-- **Guard your stacks.** Any big crew on a Still is a target for whoever picks its number, and a Safehouse does not save it. Spread crews of two or three over several numbers; the Boss puts an extra barrel on his Still, and a Blowback never kills him.
+- **Guard your stacks.** Any big crew on a Still is a target for whoever picks its number, and a Safehouse does not save it. Spread crews of two or three over several numbers; a Safehouse puts an extra barrel on its Still, and a Blowback never kills your Boss.
 
 **Jobs and Bribes**
 
@@ -229,7 +229,7 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 - **The Picket.** Most blocks are held by one to three men. Pay the toll once with enough to be sure: your Boss and three take two men better than eight times in ten.
 - **The Sitting Duck.** A boss who has Laid Low or has an empty Ledger cannot Ambush. That is your afternoon: hit him then.
 - **Fold, Check or Raise.** Fold scrap corners (men cost $300 to replace). Hold Fire is the check: he pays for every volley and takes the Heat. Ambush only with three or more men. Fold what you would lose anyway, but read his Jobs first: a Fold hands him a Seize.
-- **Strangers Next Door.** Don't march an army. Secure your Safehouse one step from the target ($500) and Recruit there, late in the Day.
+- **Strangers Next Door.** Don't march an army. Secure a Safehouse one step from the target and Recruit there, late in the Day.
 
 **The law**
 

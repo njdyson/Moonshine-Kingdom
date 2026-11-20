@@ -114,6 +114,28 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. Combat dice are one per Mobster, max five; Blowback kills half the crew, rounded down (since 2026-11-19; see *One die a man*). Blowback removes Runners first, so it never takes a Boss. Since 2026-11-20 any boss may blow his pick for 1 Heat (see *Brew or blow*).
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
+## Three free Safehouses, each a barrel on its Still
+
+Since 2026-11-20 (Nick, after the haiku-4way-4 review, `/mnt/project-files/reviews/haiku-4way-4-brew-or-blow-2026-11-20.md`;
+bot rows in `/mnt/project-files/bot-runs/log.md`, mk-online-rules-sync §79). **This supersedes** every section below
+wherever it says a family has one Safehouse, Secure costs $500, or a Still pours 2 with its owner's Boss.
+
+- **Three Safehouses a family**, one in the home Ward at setup and two in the supply. Recruit at any of yours.
+- **Secure is free**: the Play's marker and no cash. It places one from your supply, or with all three out moves
+  one. A takeover puts one of yours in, free, the same way.
+- **A Still pours 2 where its owner's Safehouse stands**, 1 otherwise. The Boss adds no barrel. No Blowback shield
+  (*Brew or blow* stands).
+- Why (Nick: "They don't do much else now"): the haiku-4way-4 game never built an economy (85 barrels in 44 Days;
+  unspent markers at Lay Low out-earned every business). At $500 the bots left the extra Safehouses in the box and
+  nothing changed; free, brew rose a tenth and Unload's share of cash from 36% to 45%. Blows rose a third: a house on
+  a Still draws a crew, and a crew draws a blow.
+- **The name is open.** Nick likes the rule but not "Safehouse" for a thing that also brews more; a rename (Front was
+  offered) would be a text pass across the set and the art. Until he picks, it stays the Safehouse.
+- Watch: **The Warehouse** ("Secure your Safehouse in a District holding 10+ barrels") and **Last One Standing**
+  (Astoria, 4+ barrels) lost their $500 gate, so both are easier. The Almanac's lesson 7, **The Sidecar**, is now "Put
+  a house on a busy boiler".
+- mk-online: `G.safehouses3`, `G.freeSecure`, `G.safeBrew` (#101); older saves keep their rules.
+
 ## Brew or blow: any boss may blow his pick for 1 Heat
 
 Since 2026-11-20 (Nick; the write-up `/mnt/project-files/reviews/blow-choice-2026-11-20.md`, bot rows in
