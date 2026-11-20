@@ -109,10 +109,38 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 
 - The Day has two phases only: <b>Shadows</b> and <b>The Hustle</b>. When the final player Lays Low, unmet promises take their Welsher, then flip Turn Tokens. Nobody wins at Sunset: the game is won mid-Day, by Take the Crown.
 - The old Title cards (with powers) and Hotspot tokens are removed. Wards are standard turf; Recruiting always costs $300 per Runner. Two Respect-only Titles came back on 2026-11-14 (see *Titles: Harbormaster and Night Mayor*).
-- Tomorrow's Mash is rolled at random; the Harbormaster (most Docks named it) retired on 2026-11-14 (see *Random Mash*). The fourth Shadows step is **Ferment Tomorrow's Mash** (it was "The Harbormaster" from 2026-09-16, "The Morning Fix" before that).
+- Tomorrow's Mash is rolled at random; the Harbormaster (most Docks named it) retired on 2026-11-14 (see *Random Mash*). The last Shadows step is **Ferment Tomorrow's Mash** (the third since 2026-11-20) (it was "The Harbormaster" from 2026-09-16, "The Morning Fix" before that).
 - The four #7 mainland Speakeasies are fixed High Society venues. They began under the Police Squads until the Open City (2026-11-11), which starts them open. At an unpadlocked one you Control, every barrel of Rum Unloaded pays a Kickback (see below).
-- There is no Sweep. Combat dice are one per Mobster, max five; Blowback kills half the crew, rounded down (since 2026-11-19; see *One die a man*). Blowback removes Runners first, so it never takes a Boss.
+- There is no Sweep. Combat dice are one per Mobster, max five; Blowback kills half the crew, rounded down (since 2026-11-19; see *One die a man*). Blowback removes Runners first, so it never takes a Boss. Since 2026-11-20 any boss may blow his pick for 1 Heat (see *Brew or blow*).
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
+
+## Brew or blow: any boss may blow his pick for 1 Heat
+
+Since 2026-11-20 (Nick; the write-up `/mnt/project-files/reviews/blow-choice-2026-11-20.md`, bot rows in
+`/mnt/project-files/bot-runs/log.md`, mk-online-rules-sync §77). **This supersedes** *The Boss brew* wherever it says
+the last seat blows instead of brewing, the Safehouse shields its Still, or the Offers follow the Brew.
+
+- **Shadows runs Grease the Wheels, then Brew or Blow, then Ferment Tomorrow's Mash.** The Offers and Fund the Ledger
+  come first, because a blow is paid from the Ledger (Nick). Day 1 still has no Offers: the Market turns up first.
+- **Brew or Blow.** In Turn Order every boss rolls his Dock dice (none: no pick) and picks one. He **brews** it (as the
+  Boss brew: every active Still on it pours, 1 barrel, 2 with its owner's Boss; Dry Taps under 8) or **blows** it: one
+  Ledger marker onto the Heat Track, and every active Still on that number, his own included, loses half its crew,
+  rounded down, Runners first. A blown Still takes a **Blowback marker** (an explosion token, 10 in the box), pours
+  nothing more and can't blow again that morning; the markers come off when the Brew ends. Ten always suffice: four
+  seats at most, the 7 on four Stills and every other number on two. No empty Ledger, no blow. No Day 1 exemption.
+- **A Raid comes at once.** A blow that lays the 5th Heat marker raids before the next pick, so the Track never holds
+  more than five and a crew the Raid scatters brews (or blows) where it lands (Nick).
+- **No Safehouse shield** (Nick: it took away the hard choice; "if all players turtled on 3 protected districts it
+  would be dull").
+- Weighed the same day and not taken: **one Blowback a morning** (first to call it; it needs a marker to say it was
+  used, and bots showed no difference); **a wreck stays blown until a Repair Play** (Nick: a frustrating yo-yo, "less
+  mobster and more euro", and it needed a 4-marker floor like Dry Taps, a rule he dislikes). Don't bring them back.
+  Nick also dislikes the Dry Taps rule itself, to be solved separately.
+- Words: the step is **Brew or Blow**; you **brew** a number or **blow** it. The Almanac's lesson 6, **The Kill Shot**,
+  is now "Lay Low first, and blow his number": the low token picks first and can blow a number before its owner brews.
+- mk-online: `G.blowChoice` (1; 2 is the one-a-morning trial), new games; Boss brew saves without it keep the last
+  seat's Blowback. Bots (20 games): 17 of 20 crowned, median Day 54.5, against 18 and 62.5 on the last-seat rule;
+  21 blows a game, Blowback dead 37.9 against 24.5, no Boss; Raids 23.9 against 20.7.
 
 ## One die a man; Blowback half the crew, rounded down
 
