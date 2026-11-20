@@ -34,20 +34,20 @@ The game ends mid-Day on the spot. Nothing else is settled.
 
 ### Shadows (in this order)
 
-1. **The Brew: Dock dice.** The **Mash** (1–6) was rolled yesterday (step 5), so everyone knows it a Day ahead. In Turn Order, each boss rolls **one die per Dock he Controls** (no Docks: no roll, no brew) and picks one (draftDice). **Mash + die** is the number, and **every active Still on it pours, rivals' too**: **1 barrel**, or **2 if its owner's Boss stands there**, taken from the supply into that District for the Still's owner. Active means Mobsters present and no Squad.
-   - Each Still pours at most once a morning, so a number someone already picked today brews nothing more.
-   - A pick pays at most 8 barrels (a number is on four Stills at most). If the supply holds **fewer than 8** when you pick, nobody brews on that pick (**Dry Taps**).
-   - There is no Split the Batch.
-2. **Blowback: the last seat.** The boss **last in Turn Order** does not brew. He rolls his Dock dice the same way (no Docks: no Blowback) and picks one: Mash + die is the Blowback number. **Every active Still on it blows, his own included, unless its owner's Safehouse stands in that District.** A blown Still loses **half its crew, rounded down**, no cap (1 man: none, 2–3: 1, 4–5: 2, 6–7: 3, and so on), **Runners first**. A lone man walks away, so a Blowback never kills a Boss. Barrels and turf survive if anyone is left. Day 1 is not exempt.
-3. **The Offers**, in **reverse** Turn Order, one action each:
+1. **The Offers**, in **reverse** Turn Order, one action each:
    - **Take a Job** (claimJob): stake Influence from **Reserves** equal to its Stake. Its gap stays empty for the rest of the Offers.
    - **Walk Away** from a held Job (walkAwayJob): the stake returns to Reserves and the card is discarded.
    - **Stand pat** (confirmGrease).
    - **Restock**: automatic, once everyone has chosen. A fresh Job is dealt into each gap, face-up for the whole Day before anyone can claim it.
    - **Day 1 has no Offers.** The opening Market is dealt face-down and turns face-up here instead.
    - **The 3s come late.** No 3-Respect Job sits in the top 15 cards of the deck (the opening Market included), so the first 3 turns up after about ten Days of restocks.
-4. **Fund the Ledger**: automatic. Reserves move into the Ledger up to 5. Staked markers stay on their Jobs.
-5. **Tomorrow's Mash**: rolled at random, and it stays face-up all Day. Nobody names it: Docks give Brew dice instead.
+2. **Fund the Ledger**: automatic. Reserves move into the Ledger up to 5. Staked markers stay on their Jobs.
+3. **Brew or Blow: Dock dice.** The **Mash** (1–6) was rolled yesterday (step 4), so everyone knows it a Day ahead. In Turn Order, each boss rolls **one die per Dock he Controls** (no Docks: no roll, no pick) and picks one. **Mash + die** is the number, and he chooses:
+   - **Brew it** (draftDice [i, false]): **every active Still on it pours, rivals' too**: **1 barrel**, or **2 if its owner's Boss stands there**, taken from the supply into that District for the Still's owner. Active means Mobsters present and no Squad. Each Still pours at most once a morning. A pick pays at most 8 barrels (a number is on four Stills at most); if the supply holds **fewer than 8** when you pick, nobody brews on that pick (**Dry Taps**).
+   - **Blow it** (draftDice [i, true]): put **1 Ledger marker on the Heat Track** (none in the Ledger: you can only brew). **Every active Still on that number blows, yours included.** A blown Still loses **half its crew, rounded down**, no cap (1 man: none, 2–3: 1, 4–5: 2, 6–7: 3, and so on), **Runners first**, and pours nothing more this morning. A lone man walks away, so a Blowback never kills a Boss. Barrels and turf survive if anyone is left. A Safehouse does not protect its Still. A Still blows at most once a morning. Any number of bosses may blow in one morning. Day 1 is not exempt.
+   - **A Raid comes at once.** If a blow lays the 5th Heat marker, the Raid runs before the next boss picks, so a crew it scatters brews (or blows) where it lands.
+   - There is no Split the Batch.
+4. **Tomorrow's Mash**: rolled at random, and it stays face-up all Day. Nobody names it: Docks give Brew dice instead.
 
 ### The Hustle
 
@@ -190,11 +190,11 @@ A Play marked "in a fight" is made while Pinned as the Invader: it costs Influen
 ## 9. Strategic notes
 
 - **Influence buys capacity, not actions.** The Ledger holds 5 markers a Day. Only the High Society Rum Kickback refills it mid-Day: pour on your last two markers so there are empty slots, and N Rum refills N slots only if you have N+1 markers clear of Jobs and the Heat Track (the pour's own Heat locks one away).
-- **Your pick feeds everyone on that number.** Pick a face that pours your Stills and as few of the leader's as you can. The last seat brews nothing but aims the Blowback, and picks first at The Offers.
-- **Laying Low early wins tempo.** You pick earlier tomorrow, before the supply runs thin; Laying Low last makes you tomorrow's Blowback. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
+- **Your pick feeds everyone on that number.** Pick a face that pours your Stills and as few of the leader's as you can, or blow the number where his crews stand. A blow costs a Play's marker and Heat, so blow when it kills men, and remember your own Stills on that number blow too.
+- **Laying Low early wins tempo.** You pick earlier tomorrow, before the supply runs thin, and can blow a number before a rival brews it. The cost is that you can't Ambush for the rest of the Day, so your turf becomes a sitting duck.
 - **The first shot owns the Heat,** and Raids chase the freshest marker. Hold Fire and let the Invader take the marker, or have the Sicilians' Consigliere pull yours off.
 - **The Crown takes visible steps:** 20 Respect, then the walk into a rival's home Ward (usually a fight, since it is his turf), then a Play of its own. Bribe cards can buy up to 10 of the 20 ($14,000 for all four); the Mayor is the cheapest Respect ($1,250 a point) and the natural closer, the Captain the cheapest marker. A rival at 16+ with $5,000 and the Mayor unbought is one Play from 20. Killing the leader's Boss costs him a Rise back in his home Borough plus the walk back out to a rival's Ward.
-- **Docks are your dice.** Each Dock you Control is a die at the Brew, so more Docks means more faces to choose from, and no Docks means no brew (and, in the last seat, no Blowback). Tomorrow's Mash is rolled, so plan with it.
+- **Docks are your dice.** Each Dock you Control is a die at the Brew, so more Docks means more faces to choose from, and no Docks means no brew and no Blowback. Tomorrow's Mash is rolled, so plan with it.
 - **The Crown ends the game before Sunset.** Promises due at Sunset go unpaid, so plan for betrayal.
 - **Raids go for barrels.** A Raid hits a mob's District with the most barrels, so a Rum stockpile in your Venue is Raid bait.
 
@@ -213,7 +213,7 @@ The rules say what you may do; these say what pays. Each lesson's name is the on
 
 - **The Magic of Seven.** No Mash can starve a 7, and the four 7s are the High Society Venues. The Mash is rolled at random, so a Still's odds fall away from the 7: the 6s and 8s fire often, the 2s and 12s rarely. Hold several numbers and you fire most mornings.
 - **Read Tomorrow's Mash.** It is face-up all through the Hustle: move onto the numbers it can reach, and keep crews under 3 on numbers a rival who drafts before you also holds.
-- **Guard your stacks.** A Safehouse shields its District's Still from the Blowback, so the crew beside your Safehouse is safe. Any other big crew on a Still is a target for whoever sits last, and the Boss puts an extra barrel on his Still but can die there.
+- **Guard your stacks.** Any big crew on a Still is a target for whoever picks its number, and a Safehouse does not save it. Spread crews of two or three over several numbers; the Boss puts an extra barrel on his Still, and a Blowback never kills him.
 
 **Jobs and Bribes**
 
