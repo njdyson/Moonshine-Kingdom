@@ -513,7 +513,7 @@ would only grow Coney Island, Canarsie and Jamaica, already among the largest, w
 smallest, Whitestone and Corona, are held by the Astoria / Flushing border (see Evening out the
 sizes). Nick floated the Federal Crackdown Tracker for that strip; not taken.
 
-### The Bronx grows, Belmont made plain (2026-11-20, proofs v9 and v10 for Nick)
+### The Bronx grows, Belmont made plain (2026-11-20, proofs v9 to v11 for Nick)
 
 Nick, 2026-11-20: the Bronx's Districts are a touch smaller than Manhattan's, so pinch a bit from
 Manhattan. Measured by visible area on the 22-District board, the Bronx averaged 95 cm² a District
@@ -561,6 +561,45 @@ Gate (`BRIDGE_SHIFT`), or its name ran into Hunts Point's shore.
   Hill upright (`manhattanSplit` 468) trades one sign for the other.
 - **No connection changed** in either proof: 36 land borders and the four bridges, as before.
 
+**Proof v11** (Nick, on v10: make the Bronx border a full diagonal, ideally at the Queens border's
+angle, moved up or down to space the Districts evenly). This supersedes v10's Manhattan / Bronx
+border; the rest of v10 stands.
+
+- **The Manhattan / Bronx line is one straight line** (`BXL`) from the Hudson to the corner where
+  the Hell Gate meets the East River, falling at 47 degrees (`bronxLine`, kept equal to
+  `queensLine`), so the two Borough lines run parallel. Belmont / West Side, Belmont / Sugar Hill
+  and Sugar Hill / Hunts Point all lie along it. `sugarTop` is gone.
+- **`hellGate` slides it.** The coast and the East River are parallel, so the line is the same
+  length wherever it sits and its two ends move together. At 346 (333.6 in v10, 321.6 before) the
+  Bronx, Manhattan and Astoria / Whitestone come out level; the Hell Gate and Queensboro Bridges
+  follow the Hell Gate (`BRIDGE_SHIFT` is worked out from `hellGate` now).
+- **Belmont is five points**: its Hudson shore drops straight onto the line's west end
+  (`belmontShore` 0; at 492 it kept a 30-unit run of coast), and **Belmont / Hunts Point leaves the
+  line square** for the foot of the Belmont / Fordham upright, so Hunts Point's west corner is 90
+  degrees. The shore is 22 nearer the Heat corner (57 of water, 78 before).
+- **Sugar Hill is a band, not a wedge.** With the diagonal above and a level foot it was a wedge a
+  quarter smaller than West Side (94 against 125), and West Side | Sugar Hill can't move west to
+  even them: Belmont / West Side needs its 45 of the line. So **Sugar Hill / Five Points falls to
+  the East River parallel to the line** and meets the river square, and the row rose (397 to 375)
+  to trim West Side. Five Points takes a slanted north-east side and keeps the Williamsburg Bridge.
+  This is the drafting's answer to the sizes, not something Nick drew.
+- **West Side | Sugar Hill meets the line on a foot of 34** (`splitFoot`): without one Sugar Hill's
+  top corner is 43 degrees, and 34 is what lets the upright sit far enough west.
+- **Five Points' west side is back on the crook** (`fpCol` 0). At 366, in v10, it left the Bowery
+  a 6-unit stub of shore.
+- **The signs pay.** Manhattan's top two lost their level ceiling: a level sign under a 47-degree
+  line hangs on one long hanger. Sugar Hill 139 (77 in v10, 98 before), West Side 118 (118, 85),
+  and the Tenderloin 68 (47), since the row rose above it. No name wraps.
+- **No connection changed**, and no corner is under 80 degrees.
+
+| Visible area (cm²) | v10 | v11 |
+| --- | --- | --- |
+| Belmont, Fordham, Morris Park, Hunts Point, Throggs Neck | 102, 102, 102, 102, 102 | 104, 105, 104, 104, 104 |
+| Sugar Hill, West Side, Tenderloin, Five Points, the Bowery | 101, 109, 107, 101, 107 | 106, 106, 110, 102, 109 |
+| Astoria, Whitestone | 109, 112 | 103, 104 |
+
+The v10 table:
+
 | Visible area (cm²) | Before | v9 | v10 |
 | --- | --- | --- | --- |
 | Belmont, Fordham, Morris Park, Hunts Point, Throggs Neck | 99, 87, 96, 93, 100 | 104, 102, 100, 100, 101 | 102, 102, 102, 102, 102 |
@@ -568,7 +607,7 @@ Gate (`BRIDGE_SHIFT`), or its name ran into Hunts Point's shore.
 | Astoria, Whitestone, Richmond Hill, Flushing, Jamaica | 114, 121, 103, 98, 140 | 109, 112, 103, 98, 140 | 109, 112, 106, 107, 139 |
 | Williamsburg, Red Hook, Brownsville | 102, 106, 117 | 102, 106, 117 | 100, 106, 107 |
 
-Room in v10: the Bronx 63 to 68 cm² (51 to 66 before), Manhattan 64 to 71, Flushing 75 (67),
+Room in v11: the Bronx 67 to 72 cm², Manhattan 66 to 74, Astoria 68, Whitestone 69. Room in v10: the Bronx 63 to 68 cm² (51 to 66 before), Manhattan 64 to 71, Flushing 75 (67),
 Brownsville 67 (76). The smallest room on the board is Williamsburg's 60 (63 before): the steeper
 line took a sliver off its north-east side, and Red Hook / Brownsville, at 45 long, leaves its south
 corner no way down.
