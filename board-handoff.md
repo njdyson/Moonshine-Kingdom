@@ -722,6 +722,25 @@ Sizes by visible area: 84 (Morris Park) to 114 cm² (West Side), mean 99, Jamaic
 Rockaways. Room: 48 (Morris Park) to 77, Jamaica 96. The slant makes Five Points narrow at its
 foot (86 cm², the smallest in Manhattan) and Williamsburg, Red Hook and Coney Island wide at theirs.
 
+## The Lean board: an unfinished fourth (2026-11-21)
+
+A fresh agent, briefed on the map's constraints but not shown the Squared or Angled boards, was asked
+for an independent design the same day, and was stopped when Nick chose the original. What it left is
+`tools/draft_board_lean.js` and `Art/Board/Lean/`: **unfinished and not taken**.
+
+- **The idea**: level courses with leaning avenues. Every border across the board is level, so every
+  sign has a level top; every border up the board leans north-east by 3 to 15 degrees, steepest on
+  the Hudson and upright at the east edge. The Heat corner stays; New Jersey is a wedge holding only
+  the Tomorrow panel, and the key and the title float on Long Island Sound (`"panels": { "at" }`).
+- **Where it stopped**: all 36 borders, the bridges and the Docks pass, and sizes run 84 to 116 cm².
+  It still fails one check (the water between Canarsie and Jamaica is 40 wide, not 44; the geometry
+  was written with `--force`), and its one render was never reviewed by the agent: QUEENS sits on
+  Whitestone, UPPER BAY runs under the Bowery, and no rooms or hangers were measured.
+- **What it found that bears on the board**: Belmont is the knot (its neighbours ring it as
+  Fordham, Hunts Point, Sugar Hill, West Side, with the Hudson behind); Manhattan is two rails in
+  bond, and the Tenderloin's sign sets the Hudson rail's width at about 182, so the island cannot go
+  much under 340 wide; and any level line through Richmond Hill crosses three Districts, about 455.
+
 ## The look
 
 - **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take

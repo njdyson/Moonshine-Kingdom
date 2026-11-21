@@ -1458,7 +1458,9 @@ untouched and is still what the City Map page uses; mk-online is still on the bo
 `Art/Board/Angled/`), the Squared plan with a slanted East River and a tapering lower Manhattan. **Nick chose the
 original the same day**: "the original is better than the two redesigns. They were worth exploring though." So the
 Squared and Angled boards are finished experiments, kept for reference: don't develop them, and don't offer a fresh
-geometry again unless he asks. Work on the board means `tools/draft_board.js`. `board-handoff.md` has all three.
+geometry again unless he asks. Work on the board means `tools/draft_board.js`. `board-handoff.md` has all three, and a fourth, the Lean
+board (`tools/draft_board_lean.js`), which a second agent left unfinished when Nick chose: it fails one of its own
+checks and was never reviewed.
 
 ## Staten Island: two Docks
 
