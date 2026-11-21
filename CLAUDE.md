@@ -1452,11 +1452,13 @@ mk-online needs the same update again (`mk-online-board-handoff.md`).
 board and try a fresh geometry, "more squared and abstract, yet recognisable NYC", like the London tube
 map). `tools/draft_board_squared.js` draws the same Districts, connections and bridges as rectangles on a
 grid, and `tools/build_board.js --variant=squared` renders it into `Art/Board/Squared/`. The board proper
-(proof v11, the diagonal Manhattan / Bronx line) is untouched and is still what the City Map page and
-mk-online use. The same day he found it "a bit too Minecraft" and asked for "something between, with some angles", more
+(proof v11, the diagonal Manhattan / Bronx line; Nick has not said whether he prefers it to v10's level line) is
+untouched and is still what the City Map page uses; mk-online is still on the board from before proof v9. The same day he found it "a bit too Minecraft" and asked for "something between, with some angles", more
 "authentically gangster map": that is the **Angled board** (`tools/draft_board_angled.js`, `--variant=angled`,
-`Art/Board/Angled/`), the Squared plan with a slanted East River and a tapering lower Manhattan. Nick has not
-chosen between the three: don't sync mk-online or the print PDF to any until he does. `board-handoff.md` has all of them.
+`Art/Board/Angled/`), the Squared plan with a slanted East River and a tapering lower Manhattan. **Nick chose the
+original the same day**: "the original is better than the two redesigns. They were worth exploring though." So the
+Squared and Angled boards are finished experiments, kept for reference: don't develop them, and don't offer a fresh
+geometry again unless he asks. Work on the board means `tools/draft_board.js`. `board-handoff.md` has all three.
 
 ## Staten Island: two Docks
 

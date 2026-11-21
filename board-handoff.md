@@ -623,6 +623,10 @@ file has no section for the five-a-Borough redraw of 2026-11-18 (proofs v1 to v8
 
 ## The Squared board: a second design (2026-11-21, a proof for Nick)
 
+**Not taken** (Nick, 2026-11-21, after seeing this and the Angled board below): "the original is
+better than the two redesigns. They were worth exploring though." Both stay in the repo as finished
+experiments; the board is the one `tools/draft_board.js` draws.
+
 Nick, 2026-11-21, after proof v11: the board is in a good state, but "we are tweaking what's
 there". Put a pin in it and start a fresh geometry side by side: the same map, "more squared and
 abstract, yet recognisable NYC", "a piece of art, like the London tube map", with the same colours
