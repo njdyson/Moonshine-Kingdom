@@ -679,6 +679,45 @@ turn under the Heat corner to the foot of Sugar Hill and can be no narrower than
 Not done: the print PDF, mk-online (its click areas and piece spots come from the pinned
 geometry), and the tuner, which knows only `draft_board.js`'s settings.
 
+## The Angled board: between the two (2026-11-21, a proof for Nick)
+
+Nick on the Squared board: he likes that it has no dead corner space, but it is "a bit too
+Minecraft"; "something between, with some angles" would look "more authentically gangster map".
+
+```
+node tools/draft_board_angled.js              # -> Art/Board/Angled/board-geometry.json, checked
+node tools/build_board.js --variant=angled    # its SVGs and previews, into Art/Board/Angled/
+```
+
+It is the Squared board's plan (level rows, upright borders inland, every sign under a level top,
+the same checks against the pinned board) with the water redrawn:
+
+- **The East River is one straight channel on a slant** (`eastRiver` 0.34, about 19 degrees off
+  upright) from the Hell Gate to the Upper Bay, where the Squared board steps three times. Its
+  three bridges cross it square, so they lie parallel. Sugar Hill, Five Points and the Bowery have
+  a slanted east side; Astoria, Williamsburg, Red Hook and Coney Island a slanted west side.
+- **Lower Manhattan tapers.** The Hudson's shore below West Side leans the other way (`taper`
+  0.16), so the island is narrow at the top, widest at the Tenderloin and comes to a blunt point
+  at the Bowery, as the real one does. New Jersey's lower shore runs parallel.
+- **The Sound opens to the east**: Throggs Neck's shore rises 44 from Hunts Point's foot to the
+  frame (`sound`).
+- **Staten Island tapers to the south-west** (its south-east shore is one long cut), and Coney
+  Island, the Bowery's foot and Jamaica Bay take longer cuts than the Squared board's.
+- **No slant is on a District's top**, so signs still hang short: the longest hanger is 46
+  (Williamsburg, whose top is its narrowest part), and no name wraps. The sharpest corners are
+  about 71 degrees, where a level border meets the East River's bank.
+- **Upper Manhattan is still square.** West Side's shore and the Hudson's turn under the Heat
+  corner are as on the Squared board, for the same reason: the Heat corner fixes them. A leaning
+  Manhattan with a straight Hudson was worked through and does not fit while the key, the
+  Tomorrow panel and the title stand in New Jersey under that corner.
+- **`"panels": { "at": ... }`** is new in `build_board.js` for that reason: a variant can place the
+  key, the Tomorrow panel and the title itself, as a legend on the sea. The Angled board does not
+  use it (its panels are stacked, as the Squared board's); the fresh agent's design may.
+
+Sizes by visible area: 84 (Morris Park) to 114 cm² (West Side), mean 99, Jamaica 140 with the
+Rockaways. Room: 48 (Morris Park) to 77, Jamaica 96. The slant makes Five Points narrow at its
+foot (86 cm², the smallest in Manhattan) and Williamsburg, Red Hook and Coney Island wide at theirs.
+
 ## The look
 
 - **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take

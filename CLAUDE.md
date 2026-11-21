@@ -1453,8 +1453,10 @@ board and try a fresh geometry, "more squared and abstract, yet recognisable NYC
 map). `tools/draft_board_squared.js` draws the same Districts, connections and bridges as rectangles on a
 grid, and `tools/build_board.js --variant=squared` renders it into `Art/Board/Squared/`. The board proper
 (proof v11, the diagonal Manhattan / Bronx line) is untouched and is still what the City Map page and
-mk-online use. Nick has not chosen between them: don't sync mk-online or the print PDF to either until he
-does. `board-handoff.md` has both.
+mk-online use. The same day he found it "a bit too Minecraft" and asked for "something between, with some angles", more
+"authentically gangster map": that is the **Angled board** (`tools/draft_board_angled.js`, `--variant=angled`,
+`Art/Board/Angled/`), the Squared plan with a slanted East River and a tapering lower Manhattan. Nick has not
+chosen between the three: don't sync mk-online or the print PDF to any until he does. `board-handoff.md` has all of them.
 
 ## Staten Island: two Docks
 

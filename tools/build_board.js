@@ -993,16 +993,20 @@ function key(x, y) {
     }
   });
   // the key hangs in New Jersey: it must stay clear of the Hudson's shore
-  if (x + w + 6 > njShore(y + h)) throw new Error('The key runs into the Hudson: it needs a narrower row or a shorter name');
+  if (!PANEL_AT && x + w + 6 > njShore(y + h)) throw new Error('The key runs into the Hudson: it needs a narrower row or a shorter name');
   return { fg: s, w, h };
 }
 
 // Under the Heat corner: the Tomorrow panel, the key beside it, the title below them.
 const PANELS_Y = () => HEAT.edge[1] + 12;
 const STACKED = !!(geo.panels && geo.panels.stacked), STACK_GAP = 10;
+// A variant may place the three itself, as a legend on the sea: "panels": { "at": { "key": [x, y], "tomorrow": [x, y],
+// "title": [centre x, top y] } }, each the panel's top-left corner but the title. They need no New Jersey under them then.
+const PANEL_AT = (geo.panels && geo.panels.at) || null;
 function sidePanels() {
   const y = PANELS_Y(), heat = heatTrack();
   // stacked (a variant whose New Jersey is a column): the key on top, the Tomorrow panel centred under it
+  if (PANEL_AT) { const k = key(...PANEL_AT.key), t = tomorrow(...PANEL_AT.tomorrow); return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top }; }
   if (STACKED) { const k = key(HEAT.tx, y), t = tomorrow(HEAT.tx + (k.w - TOMORROW.w) / 2, y + k.h + STACK_GAP); return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top }; }
   const t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
   return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
@@ -1042,6 +1046,7 @@ function title() {
   s += text('1929', 4, 20, TYPE.titleYear, { fill: 'url(#giltType)', anchor: 'middle', halo: 3, middle: true });
   const kd = STACKED ? key(HEAT.tx, PANELS_Y()) : null; // stacked: the title hangs under the Tomorrow panel, on the key's centre line
   const k = TITLE.w / cityW, top = PANELS_Y() + (kd ? kd.h + STACK_GAP : 0) + TOMORROW.h + TITLE.gap, foot = top + (TITLE.foot - TITLE.top) * k;
+  if (PANEL_AT) return `<g transform="translate(${f(PANEL_AT.title[0])} ${f(PANEL_AT.title[1] - TITLE.top * k)}) scale(${f(k, 4)})">${s}</g>`;
   const right = njShore(foot) - 8;
   if (right - HEAT.tx < TITLE.w) throw new Error('The title no longer fits in New Jersey under the panels');
   const x = kd ? HEAT.tx + kd.w / 2 : (HEAT.tx + right) / 2, y = top - TITLE.top * k;
