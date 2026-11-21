@@ -16,10 +16,11 @@
 //   sheared one. No District has a corner under 75 degrees.
 // - The Hudson runs out under the Heat corner as it would under the frame. Belmont hangs from the
 //   corner's lower edge, and its line with Fordham and Hunts Point starts at the corner's point.
-// - New Jersey is a wedge that tapers away down the Hudson and holds the Tomorrow panel. The key
-//   and the title float on Long Island Sound in the top right, as a legend ("panels": { "at" }).
+// - New Jersey is a wedge that tapers away down the Hudson and holds the Tomorrow panel. The
+//   title and the key float on Long Island Sound in the top right, as a legend ("panels": { "at" }).
 // - Manhattan narrows uptown and ends in feet cut square to its own axis. Long Island is a top
 //   row (Astoria, Whitestone) on three columns laid in running bond, with Jamaica Bay in the gap.
+//   Staten Island stands clear of the frame, with shore all round.
 //
 // The map is the board's: the script reads Art/Board/board-geometry.json for the connections
 // (every land border and bridge) and stops if this drawing differs from them, or if a Dock has
@@ -58,25 +59,27 @@ const PLAN = {
   yFordham: 168, // Fordham's foot (Hunts Point's top)
   yMorris: 140, // Morris Park's foot (Throggs Neck's top)
   yBronx: 295, // the Bronx's foot: Manhattan's top and the Sound's north shore
-  huntsTop: 184, // Hunts Point's level top, east from Belmont's line
+  huntsTop: 178, huntsFoot: 640, // Hunts Point's level top, east from Belmont's line, and where its foot ends on the Hell Gate
   nose: [40, 45], // Throggs Neck's nose between Fordham and Hunts Point: how far its upper and lower cuts run
-  kFordham: 0.1, kHunts: 0.12, kSound: 0.06, // Fordham's east line, Hunts Point's, and the Sound's shore
-  soundShore: 868, // where the Sound's shore meets the top edge
+  kFordham: 0.1, kSound: 0.16, // Fordham's east line, and the Sound's shore
+  soundShore: 875, // where the Sound's shore meets the top edge
   // Manhattan
   westSide: 152, sugarHill: 195, // their tops
   ySugar: 448, yWest: 495, yFive: 612, // the feet of Sugar Hill, West Side and Five Points
   yTenderloin: 650, yBowery: 775, foot: 0.17, // where the Tenderloin's and the Bowery's feet start on their west sides, and their slope
   // Long Island
   yRow: 510, // the foot of the top row (Astoria, Whitestone)
-  col1: 174, col2: 213, astoriaOver: 48, // the columns' widths at yRow, and how far Astoria runs over Richmond Hill
-  kCol1: 0.13, kCol2: 0.05,
-  yWilliamsburg: 701, yRedHook: 860, yConey: 1010, // column 1's feet
-  yRichmond: 655, yBrownsville: 795, yCanarsie: 962, // column 2's feet
-  yFlushingTop: 410, yFlushing: 609, yJamaica: 795, // column 3
-  canarsie: 196, kBay: 0.05, // Canarsie's top, and its bay shore's lean
+  col1: 170, col2: 222, astoriaOver: 48, // the columns' widths at yRow, and how far Astoria runs over Richmond Hill
+  kCol1: 0.13, kCol2: 0.05, kAstoria: 0.04, // the columns' lines, and Astoria's with Whitestone
+  yWilliamsburg: 696, yRedHook: 860, yConey: 1018, // column 1's feet
+  yRichmond: 650, yBrownsville: 785, yCanarsie: 952, // column 2's feet
+  yFlushingTop: 395, yFlushing: 604, jamaicaFoot: 0.22, // column 3: Flushing's top and foot, and the slope of Jamaica's shore on the bay
+  canarsie: 188, kBay: 0.05, // Canarsie's top, and its bay shore's lean
   coneyFoot: -0.06, // Coney Island's and Canarsie's feet slope (negative: down to the west)
   // Staten Island
-  si: { top: 872, east: 338, k: 0.15, join: 172, kJoin: 0.1 },
+  // an island: its top, its west and east shores and the line between its two Docks (each an x at the top and a lean),
+  // and its foot (where it starts on the west shore, and its slope)
+  si: { top: 842, west: [50, 0.05], join: [210, 0.1], east: [372, 0.15], foot: 1040, slope: -0.06 },
   // bridges: where each leaves its first shore (a level, or for the Hell Gate an x)
   hellGate: 594, queensboro: 388, williamsburg: 543, brooklyn: 733,
 };
@@ -96,15 +99,15 @@ function draft(P) {
   const pFord = [pNose[0] + P.nose[0], P.yMorris]; // Fordham's corner with Morris Park and Throggs Neck
   const ford = lean(pFord[0], pFord[1], P.kFordham);
   const pHunts = [pNose[0] + P.nose[1], P.yFordham + P.nose[1]]; // Hunts Point's corner under the nose
-  const hunts = lean(pHunts[0], pHunts[1], P.kHunts);
+  const pHell = [P.huntsFoot, P.yBronx]; // Hunts Point's corner with Throggs Neck on the Hell Gate
   const sound = lean(P.soundShore, 0, P.kSound);
   const R = {};
   R.nj = [[0, hy], [nj.at(hy), hy], [0, hy + nj.at(hy) / P.kHudson]];
   R.belmont = [hud.pt(hy), [hx, hy], bel.pt(P.yFordham), bel.pt(P.yBronx), mid.pt(P.yBronx), hud.pt(P.yBronx)];
   R.fordham = [[hx, 0], ford.pt(0), pFord, pNose, bel.pt(P.yFordham), [hx, hy]];
   R.morris_park = [ford.pt(0), sound.pt(0), sound.pt(P.yMorris), pFord];
-  R.hunts_point = [bel.pt(P.yFordham), pNose, pHunts, hunts.pt(P.yBronx), east.pt(P.yBronx), bel.pt(P.yBronx)];
-  R.throggs_neck = [pFord, sound.pt(P.yMorris), sound.pt(P.yBronx), hunts.pt(P.yBronx), pHunts, pNose];
+  R.hunts_point = [bel.pt(P.yFordham), pNose, pHunts, pHell, east.pt(P.yBronx), bel.pt(P.yBronx)];
+  R.throggs_neck = [pFord, sound.pt(P.yMorris), sound.pt(P.yBronx), pHell, pHunts, pNose];
 
   // Manhattan: West Side and the Tenderloin on the Hudson, Sugar Hill, Five Points and the Bowery on
   // the East River, laid in bond; the feet are cut square to the island
@@ -118,11 +121,11 @@ function draft(P) {
 
   // Long Island: the top row, then three columns
   const c1 = lean(li.at(P.yRow) + P.col1, P.yRow, P.kCol1); // column 1 | column 2
-  const ast = lean(c1.at(P.yRow) + P.astoriaOver, P.yRow, P.kCol1); // Astoria | Whitestone
+  const ast = lean(c1.at(P.yRow) + P.astoriaOver, P.yRow, P.kAstoria); // Astoria | Whitestone
   const c2 = lean(c1.at(P.yRow) + P.col2, P.yRow, P.kCol2); // column 2 | column 3, and Whitestone's shore
   const bay = lean(c1.at(P.yBrownsville) + P.canarsie, P.yBrownsville, P.kBay); // Canarsie's shore on Jamaica Bay
-  const footAt = (l, y, x0) => { // a foot from (x0, y) sloping to the line l
-    let yy = y; for (let i = 0; i < 20; i++) yy = y + P.coneyFoot * (l.at(yy) - x0); return [l.at(yy), yy];
+  const footAt = (l, y, x0, slope = P.coneyFoot) => { // a foot from (x0, y) sloping to the line l
+    let yy = y; for (let i = 0; i < 20; i++) yy = y + slope * (l.at(yy) - x0); return [l.at(yy), yy];
   };
   R.astoria = [li.pt(ySound), ast.pt(ySound), ast.pt(P.yRow), c1.pt(P.yRow), li.pt(P.yRow)];
   R.whitestone = [ast.pt(ySound), c2.pt(ySound), c2.pt(P.yFlushingTop), c2.pt(P.yRow), ast.pt(P.yRow)];
@@ -131,16 +134,17 @@ function draft(P) {
   const coneyW = li.pt(P.yConey), coneyE = footAt(c1, P.yConey, coneyW[0]);
   R.coney_island = [li.pt(P.yRedHook), c1.pt(P.yRedHook), coneyE, coneyW];
   R.richmond_hill = [c1.pt(P.yRow), c2.pt(P.yRow), c2.pt(P.yFlushing), c2.pt(P.yRichmond), c1.pt(P.yRichmond)];
-  R.brownsville = [c1.pt(P.yRichmond), c2.pt(P.yRichmond), c2.pt(P.yJamaica), bay.pt(P.yBrownsville), c1.pt(P.yBrownsville), c1.pt(P.yWilliamsburg)];
+  R.brownsville = [c1.pt(P.yRichmond), c2.pt(P.yRichmond), c2.pt(P.yBrownsville), bay.pt(P.yBrownsville), c1.pt(P.yBrownsville), c1.pt(P.yWilliamsburg)];
   const canW = [c1.at(P.yCanarsie), P.yCanarsie], canE = footAt(bay, P.yCanarsie, canW[0]);
   R.canarsie = [c1.pt(P.yBrownsville), bay.pt(P.yBrownsville), canE, canW, c1.pt(P.yRedHook)];
   R.flushing = [c2.pt(P.yFlushingTop), [W, P.yFlushingTop], [W, P.yFlushing], c2.pt(P.yFlushing), c2.pt(P.yRow)];
-  R.jamaica = [c2.pt(P.yFlushing), [W, P.yFlushing], [W, P.yJamaica], c2.pt(P.yJamaica), c2.pt(P.yRichmond)];
+  R.jamaica = [c2.pt(P.yFlushing), [W, P.yFlushing], [W, P.yBrownsville + P.jamaicaFoot * (W - c2.at(P.yBrownsville))], c2.pt(P.yBrownsville), c2.pt(P.yRichmond)];
 
   // Staten Island: Tottenville west, Stapleton east on the Narrows
-  const S = P.si, siE = lean(S.east, S.top, S.k), siJ = lean(S.join, S.top, S.kJoin);
-  R.tottenville = [[0, S.top], siJ.pt(S.top), siJ.pt(W), [0, W]];
-  R.stapleton = [siJ.pt(S.top), siE.pt(S.top), siE.pt(W), siJ.pt(W)];
+  const S = P.si, [siW, siJ, siE] = [S.west, S.join, S.east].map(([x, k]) => lean(x, S.top, k));
+  const siFoot = [siW.pt(S.foot), footAt(siJ, S.foot, siW.at(S.foot), S.slope), footAt(siE, S.foot, siW.at(S.foot), S.slope)];
+  R.tottenville = [siW.pt(S.top), siJ.pt(S.top), siFoot[1], siFoot[0]];
+  R.stapleton = [siJ.pt(S.top), siE.pt(S.top), siFoot[2], siFoot[1]];
 
   // Bridges, square to their rivers
   const cross = (y) => { const a = east.pt(y), n = 1 / across(P.kRiver); return [a, [a[0] + P.river * n, a[1] + P.river * P.kRiver * n]]; };
@@ -158,12 +162,12 @@ function draft(P) {
   const pool = (sound.at(200) + W - 13) / 2; // the middle of the Sound's pool
   const labels = {
     boro: {
-      MN: hudsonAt(455), BX: [pool, 222, 0], QN: [pool, 372, 0],
-      BK: [(coneyE[0] + canE[0]) / 2 + 20, 1043, 0], SI: [S.east / 2 + 6, S.top - 26, 0],
+      MN: hudsonAt(455), BX: [pool, 207, 0], QN: [pool, 313, 0],
+      BK: [(coneyE[0] + canE[0]) / 2 + 20, 1043, 0], SI: [(siW.at(S.top) + siE.at(S.top)) / 2, S.top - 24, 0],
     },
     water: [
-      ['HUDSON RIVER', ...hudsonAt(215)], ['EAST RIVER', ...riverAt(640)], ['UPPER BAY', 250, 742, 0],
-      ['LONG ISLAND SOUND', pool, 296, 0], ['JAMAICA BAY', (bay.at(900) + W - 13) / 2, 905, 0],
+      ['HUDSON RIVER', ...hudsonAt(215)], ['EAST RIVER', ...riverAt(640)], ['UPPER BAY', 140, 748, 0],
+      ['LONG ISLAND SOUND', pool, 260, 0], ['JAMAICA BAY', (bay.at(900) + W - 13) / 2, 905, 0],
     ],
     bridges: {
       'Hell Gate Bridge': [P.hellGate + 40, (P.yBronx + ySound) / 2, 0],
@@ -175,7 +179,7 @@ function draft(P) {
   };
   // The panels: Tomorrow in New Jersey under the Heat corner, the key and the title on the Sound
   const keyX = W - 13 - 12 - 176;
-  const panels = { at: { tomorrow: [20, hy + 12], key: [keyX, 30], title: [keyX + 88, 142] } };
+  const panels = { at: { tomorrow: [20, hy + 12], key: [keyX, 76], title: [keyX + 88, 28] } };
   return { regions: R, bridges, labels, panels };
 }
 

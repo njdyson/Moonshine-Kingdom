@@ -726,18 +726,35 @@ foot (86 cm², the smallest in Manhattan) and Williamsburg, Red Hook and Coney I
 
 A fresh agent, briefed on the map's constraints but not shown the Squared or Angled boards, was asked
 for an independent design the same day. It was stopped when Nick said the original was better than the
-redesigns; then he saw its half-finished render, liked it, and asked for it to be finished and set side
-by side with the board. It lives in `tools/draft_board_lean.js` and `Art/Board/Lean/`. The notes below
-are its state when stopped, to be replaced when it is done.
+redesigns; then he saw its half-finished render, liked it ("I actually quite like the fresh agent's
+design"), and asked for it to be finished and set side by side with the board. Finished the same day;
+**Nick has not chosen between it and the board.**
+
+```
+node tools/draft_board_lean.js              # -> Art/Board/Lean/board-geometry.json, checked
+node tools/build_board.js --variant=lean    # its SVGs and previews, into Art/Board/Lean/
+```
 
 - **The idea**: level courses with leaning avenues. Every border across the board is level, so every
   sign has a level top; every border up the board leans north-east by 3 to 15 degrees, steepest on
-  the Hudson and upright at the east edge. The Heat corner stays; New Jersey is a wedge holding only
-  the Tomorrow panel, and the key and the title float on Long Island Sound (`"panels": { "at" }`).
-- **Where it stopped**: all 36 borders, the bridges and the Docks pass, and sizes run 84 to 116 cm².
-  It still fails one check (the water between Canarsie and Jamaica is 40 wide, not 44; the geometry
-  was written with `--force`), and its one render was never reviewed by the agent: QUEENS sits on
-  Whitestone, UPPER BAY runs under the Bowery, and no rooms or hangers were measured.
+  the Hudson and upright at the east edge, so no corner is under about 75 degrees.
+- **The legend moved.** The Heat corner stays top-left, with the Hudson running out under it and
+  Belmont hanging from its lower edge; New Jersey is a wedge holding only the Tomorrow panel. The
+  title and the key float on Long Island Sound, top-right (`"panels": { "at" }`), with THE BRONX,
+  LONG ISLAND SOUND and QUEENS under them. Freeing New Jersey of the key is what let Manhattan lean:
+  it is the move the Squared and Angled boards did not make.
+- **Staten Island is side by side**, Tottenville west and Stapleton east, an island with shore all
+  round. Jamaica has no Rockaways, so Jamaica Bay is open to the sea.
+- **Numbers** (checked again after the agent's report): sizes 92 to 109 cm², mean 100, spread 5.4;
+  room 57 (Sugar Hill, Hunts Point, Morris Park) to 76; the longest hanger 20 (the Tenderloin), every
+  other sign 11 to 17, none wrapped; the sharpest corner 74.9 degrees (Belmont and West Side, on the
+  Hudson); narrowest water 46. All 36 land borders, none extra, the shortest 46.
+- **Where it is weaker**, by its own account: Manhattan is stocky (about 350 wide and 480 tall, since
+  the Tenderloin's sign sets the Hudson side's width), so it reads less as a long narrow island; four
+  borders sit at the 46 to 48 minimum; Hunts Point is a flat slab whose east side leans against the
+  grain to make room for Throggs Neck; Jamaica Bay is large and empty and New Jersey a bare wedge;
+  Staten Island has only 27 to 37 units of water to the frame, and Tottenville's piers point at it.
+  The print preview was not inspected.
 - **What it found that bears on the board**: Belmont is the knot (its neighbours ring it as
   Fordham, Hunts Point, Sugar Hill, West Side, with the Hudson behind); Manhattan is two rails in
   bond, and the Tenderloin's sign sets the Hudson rail's width at about 182, so the island cannot go
