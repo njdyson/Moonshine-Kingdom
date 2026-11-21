@@ -625,7 +625,7 @@ file has no section for the five-a-Borough redraw of 2026-11-18 (proofs v1 to v8
 
 **Not taken** (Nick, 2026-11-21, after seeing this and the Angled board below): "the original is
 better than the two redesigns. They were worth exploring though." Both stay in the repo as finished
-experiments; the board is the one `tools/draft_board.js` draws.
+experiments. The Lean board, further down, is the one he wants compared with the board.
 
 Nick, 2026-11-21, after proof v11: the board is in a good state, but "we are tweaking what's
 there". Put a pin in it and start a fresh geometry side by side: the same map, "more squared and
@@ -722,11 +722,13 @@ Sizes by visible area: 84 (Morris Park) to 114 cm² (West Side), mean 99, Jamaic
 Rockaways. Room: 48 (Morris Park) to 77, Jamaica 96. The slant makes Five Points narrow at its
 foot (86 cm², the smallest in Manhattan) and Williamsburg, Red Hook and Coney Island wide at theirs.
 
-## The Lean board: an unfinished fourth (2026-11-21)
+## The Lean board: a fresh agent's design (2026-11-21)
 
 A fresh agent, briefed on the map's constraints but not shown the Squared or Angled boards, was asked
-for an independent design the same day, and was stopped when Nick chose the original. What it left is
-`tools/draft_board_lean.js` and `Art/Board/Lean/`: **unfinished and not taken**.
+for an independent design the same day. It was stopped when Nick said the original was better than the
+redesigns; then he saw its half-finished render, liked it, and asked for it to be finished and set side
+by side with the board. It lives in `tools/draft_board_lean.js` and `Art/Board/Lean/`. The notes below
+are its state when stopped, to be replaced when it is done.
 
 - **The idea**: level courses with leaning avenues. Every border across the board is level, so every
   sign has a level top; every border up the board leans north-east by 3 to 15 degrees, steepest on
