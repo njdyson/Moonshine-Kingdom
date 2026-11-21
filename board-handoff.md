@@ -621,6 +621,64 @@ print PDF is older still (2026-11-11, the 24-District board), so `--print` is du
 file has no section for the five-a-Borough redraw of 2026-11-18 (proofs v1 to v8); CLAUDE.md's
 *The Even City* and the comments in `draft_board.js` hold what is recorded of it.
 
+## The Squared board: a second design (2026-11-21, a proof for Nick)
+
+Nick, 2026-11-21, after proof v11: the board is in a good state, but "we are tweaking what's
+there". Put a pin in it and start a fresh geometry side by side: the same map, "more squared and
+abstract, yet recognisable NYC", "a piece of art, like the London tube map", with the same colours
+and textures. "It may not work at all."
+
+```
+node tools/draft_board_squared.js              # the grid -> Art/Board/Squared/board-geometry.json, checked
+node tools/build_board.js --variant=squared    # its SVGs and previews, into Art/Board/Squared/
+SEA_CUT=0 node tools/draft_board_squared.js    # the same map with every sea corner square
+```
+
+**The board is still the board.** `Art/Board/board-geometry.json`, `tools/draft_board.js` and the
+files the City Map page and mk-online use are untouched (proof v11). The Squared board is a proof
+in its own folder; nothing reads it but `--variant=squared`.
+
+- **Nothing is traced.** `draft_board_squared.js` is a table of rectangles on named grid lines
+  (`GRID`). It works the borders out from the rectangles and reads the pinned board's geometry only
+  to check itself: every land border and bridge must match, every border must run 45 or more,
+  every Dock must have water and no water may be narrower than the Hudson. It stops otherwise.
+- **Every District is a rectangle**, so every sign has a level top to hang from: the longest
+  hanger is 28 (139 on v11, 98 on the board before it) and no name wraps.
+- **Manhattan stands upright and steps west as it goes south**, like a setback tower: West Side
+  and Sugar Hill, the Tenderloin and Five Points, then the Bowery, whose foot is cut to a blunt
+  point. The Hudson and the East River are even channels that turn in square steps beside it, and
+  Queens and Brooklyn step west with the East River, a river's width lower each time, so their
+  rows sit on Manhattan's rows.
+- **Sea corners are mitred** (`seaCut`, 16): a square corner of a shore inside one region is cut
+  at 45 degrees, and New Jersey's pockets are filled to match, so the rivers turn as a line does
+  on the Underground map. Corners where two Districts meet stay square. `SEA_CUT=0` shows it
+  without.
+- **New Jersey is the Heat corner and a column under it**, with the key, the Tomorrow panel and the
+  title stacked (`"panels": { "stacked": true }` in the geometry; the build's only new layout).
+  The Hudson comes down beside the Heat corner, turns west under it and runs down the column.
+- **The Heat corner sets the plan.** It is 414 wide, and Belmont is a Dock, so it stands on the
+  Hudson east of the corner. West Side lies west of Belmont, under the corner, and Sugar Hill under
+  Belmont; that fixes upper Manhattan between about 318 and 610 and leaves Queens 408 at the top.
+  Williamsburg, Richmond Hill and Flushing side by side need about 455, so they sit below the East
+  River's first step west. Moving the Heat Track (a band across the top, or a block at the foot)
+  would free all of it and was not tried: it is the renderer's largest fixed piece.
+- **Where the borders are offset like bricks** it is for a connection across a corner: Fordham over
+  Throggs Neck (so Morris Park and Hunts Point do not touch), West Side over Five Points, and so on
+  down Queens and Brooklyn. No border is a slant.
+- **Throggs Neck's shore sits 24 above Hunts Point's**, so the Sound is wider than the Hell Gate
+  and THE BRONX has room in it between the piers.
+- **Names**: MANHATTAN under the Bowery's foot; HUDSON and UPPER BAY are new water names.
+- **Morris Park has no shore** (it has on the board). No rule or Job turns on a coast but a Dock's;
+  mk-online's `NON_COASTAL` list would need it if this design were taken.
+
+Sizes by visible area: 86 (Morris Park) to 114 cm² (West Side), mean 97, with Jamaica 139 counting
+the Rockaways (its block is about 104). The board's proof v11 runs 95 to 110 without Jamaica. Room:
+50 (Morris Park) to 77, Jamaica 95. West Side is the large one because it runs from the Hudson's
+turn under the Heat corner to the foot of Sugar Hill and can be no narrower than its sign.
+
+Not done: the print PDF, mk-online (its click areas and piece spots come from the pinned
+geometry), and the tuner, which knows only `draft_board.js`'s settings.
+
 ## The look
 
 - **Deco style** (Nick, 2026-09-29). One colour per Borough for every District. **Wards take

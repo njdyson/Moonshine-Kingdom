@@ -41,13 +41,19 @@ const ROOT = path.resolve(__dirname, '..');
 const DIR = path.join(ROOT, 'Art', 'Board');
 const dpiTag = () => (arg('dpi') && +arg('dpi') !== 300 ? `, ${+arg('dpi')}dpi` : '');
 const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').slice(k.length + 3);
+// A second design can sit beside the board (Nick, 2026-11-21: put a pin in this one and try a fresh
+// geometry side by side). --variant=squared reads Art/Board/Squared/board-geometry.json, as
+// tools/draft_board_squared.js writes it, and writes its SVGs and previews into that folder. The
+// roster, palette, type, signs and panels are the board's own; only the map differs.
+const VARIANT = arg('variant');
+const VDIR = VARIANT ? path.join(DIR, VARIANT[0].toUpperCase() + VARIANT.slice(1)) : DIR;
 const OUT = {
-  printSvg: path.join(DIR, 'Board v0.9.svg'), screenSvg: path.join(DIR, 'Board v0.9 (screen).svg'),
-  screenJpg: path.join(DIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(DIR, 'Board v0.9 (print preview).jpg'),
-  printPng: path.join(DIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(DIR, `Board v0.9 (print${dpiTag()}).pdf`),
-  screenLarge: path.join(DIR, 'Board v0.9 (screen, large).jpg'),
+  printSvg: path.join(VDIR, 'Board v0.9.svg'), screenSvg: path.join(VDIR, 'Board v0.9 (screen).svg'),
+  screenJpg: path.join(VDIR, 'Board v0.9 (screen).jpg'), printJpg: path.join(VDIR, 'Board v0.9 (print preview).jpg'),
+  printPng: path.join(VDIR, `Board v0.9 (print${dpiTag()}).png`), printPdf: path.join(VDIR, `Board v0.9 (print${dpiTag()}).pdf`),
+  screenLarge: path.join(VDIR, 'Board v0.9 (screen, large).jpg'),
 };
-const geo = JSON.parse(fs.readFileSync(path.join(DIR, 'board-geometry.json'), 'utf8'));
+const geo = JSON.parse(fs.readFileSync(path.join(VDIR, 'board-geometry.json'), 'utf8'));
 const BOARD_IN = 24, BOARD_MM = BOARD_IN * 25.4, MM = 1080 / BOARD_MM; // 24in square
 const DPI = +arg('dpi') || 300; // print render: 300dpi unless --dpi=N
 const BOARD_PX = BOARD_IN * DPI;
@@ -279,7 +285,7 @@ function roundel(zone, cx, cy, r) {
 // on 2026-11-08 ("they add clutter and confusion"), then the short dashed arrow left in their place
 // ("the line looks like it's broken and coming from nowhere"), keeping the label and a triangle.
 const RUM_ROUTE = {
-  at: [244, 1080 - FRAME_IN - 18], // the label's centre, in board units
+  at: (geo.labels && geo.labels.rumRow) || [244, 1080 - FRAME_IN - 18], // the label's centre, in board units (a variant's geometry may place it)
   label: { text: 'RUM ROW', note: '12 MILES' },
 };
 // "12 MILES" over the label (Nick, 2026-11-09): from 1924 the treaty limit put Rum Row about twelve
@@ -420,7 +426,7 @@ function placeSign(d) {
   let A = 0, CX = 0;
   clip.forEach((a, i) => { const b = clip[(i + 1) % clip.length], k = a[0] * b[1] - b[0] * a[1]; A += k; CX += (a[0] + b[0]) * k; });
   const top = xs.filter((x, i) => ys[i] === y0);
-  const mid = SIGN_TOP_CENTRED.has(d.id) ? (Math.min(...top) + Math.max(...top)) / 2 : CX / (3 * A);
+  const mid = !VARIANT && SIGN_TOP_CENTRED.has(d.id) ? (Math.min(...top) + Math.max(...top)) / 2 : CX / (3 * A);
   // Every shape is tried, clear of the keylines where it can be (a narrow District lets
   // it closer), at every height, and the one whose hangers and distance off the centre
   // line, with its cost, come out least wins.
@@ -647,7 +653,7 @@ function bridgeGlyph(a, b, ext = 6, k = 1) { // k scales the width, for the key
 const PIER = { len: 12, half: 2.3, gap: 15, count: 3 };
 // Piers slid west of the middle of their free shore, in board units (Nick, 2026-11-04: Stapleton's
 // and Jamaica's, to give the Rum Row lanes, cut on 2026-11-08, room to turn; kept so the board holds still).
-const PIER_WEST = { stapleton: 30, jamaica: 40 };
+const PIER_WEST = VARIANT ? {} : { stapleton: 30, jamaica: 40 };
 function orientedBox(cx, cy, deg, hl, hh) {
   const t = deg * Math.PI / 180, ux = Math.cos(t), uy = Math.sin(t);
   return [[-hl, -hh], [hl, -hh], [hl, hh], [-hl, hh]].map(([a, b]) => [cx + ux * a - uy * b, cy + uy * a + ux * b]);
@@ -993,8 +999,12 @@ function key(x, y) {
 
 // Under the Heat corner: the Tomorrow panel, the key beside it, the title below them.
 const PANELS_Y = () => HEAT.edge[1] + 12;
+const STACKED = !!(geo.panels && geo.panels.stacked), STACK_GAP = 10;
 function sidePanels() {
-  const y = PANELS_Y(), heat = heatTrack(), t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
+  const y = PANELS_Y(), heat = heatTrack();
+  // stacked (a variant whose New Jersey is a column): the key on top, the Tomorrow panel centred under it
+  if (STACKED) { const k = key(HEAT.tx, y), t = tomorrow(HEAT.tx + (k.w - TOMORROW.w) / 2, y + k.h + STACK_GAP); return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top }; }
+  const t = tomorrow(HEAT.tx, y), k = key(HEAT.tx + t.w + 10, y);
   return { bg: heat.bg, fg: heat.fg + t.fg + k.fg, top: heat.top };
 }
 
@@ -1030,10 +1040,11 @@ function title() {
   s += text('NEW YORK', 2.2, -5, TYPE.titleCity, { fill: 'url(#giltType)', anchor: 'middle', halo: 3.4, middle: true });
   s += rule(20, yearW / 2 + 10);
   s += text('1929', 4, 20, TYPE.titleYear, { fill: 'url(#giltType)', anchor: 'middle', halo: 3, middle: true });
-  const k = TITLE.w / cityW, top = PANELS_Y() + TOMORROW.h + TITLE.gap, foot = top + (TITLE.foot - TITLE.top) * k;
+  const kd = STACKED ? key(HEAT.tx, PANELS_Y()) : null; // stacked: the title hangs under the Tomorrow panel, on the key's centre line
+  const k = TITLE.w / cityW, top = PANELS_Y() + (kd ? kd.h + STACK_GAP : 0) + TOMORROW.h + TITLE.gap, foot = top + (TITLE.foot - TITLE.top) * k;
   const right = njShore(foot) - 8;
   if (right - HEAT.tx < TITLE.w) throw new Error('The title no longer fits in New Jersey under the panels');
-  const x = (HEAT.tx + right) / 2, y = top - TITLE.top * k;
+  const x = kd ? HEAT.tx + kd.w / 2 : (HEAT.tx + right) / 2, y = top - TITLE.top * k;
   return `<g transform="translate(${f(x)} ${f(y)}) scale(${f(k, 4)})">${s}</g>`;
 }
 // The title's size and place: TITLE.w wide, its block's top (the diamond, -31 at full size)
@@ -1447,7 +1458,7 @@ async function printPdf(browser, svg) {
   await render(browser, outputs);
   if (full) await printPdf(browser, print);
   await browser.close();
-  stampCityMap(screen + print);
+  if (!VARIANT) stampCityMap(screen + print); // the City Map page shows the board, not a variant
 })();
 
 // The City Map page links the board's images by a fixed name, and the site sends no
