@@ -126,7 +126,8 @@ keep it.
   pours only for rivals. Its section 10 prices an option that is **not a rule** (below).
 - What the sim found, and the Almanac now says: a starting family brews 0.76 to 0.81 barrels a Day and nothing on
   48% of mornings; half of it comes off the neighbour's dice (the starts mirror, so the man on your side of the
-  river holds your twins); Turn Order moves no barrels (only the blow and a short Supply); two Secures on Day 1
+  river holds your twins); Turn Order buys denial, not barrels (a number pours the same whoever picks it, but a blow ahead of its
+  owner takes his pour, and a brew ahead of the gunman saves it); two Secures on Day 1
   lift the brew by 60%; a 7 is poor alone and the best Still in town in company (73% of mornings with four
   bosses on two Docks each); taking a neighbour's twin gains nothing and costs him a third; a blow rarely pays on
   bodies and barrels and pays before an assault, on a number the blower does not cook, or on a crew of four or more.

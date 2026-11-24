@@ -87,10 +87,24 @@ where Manhattan's and Queens' sits on a 10 or a 4). The table brews 3.16. Half o
 from his own pick and half from his neighbour's. He has no barrel at all on 48% of mornings. A Still on a 6
 or an 8 pours on 25% of mornings, a 5 or a 9 on 20%, a 4 or a 10 on 15%.
 
-**Turn Order does not move barrels.** A number pours the same whoever picks it, so the first and the last
-seat brew the same to two decimal places, at the opening and at a grown table, for a boss who brews on the
-spot and for one who counts the picks still to come. Turn Order matters at the Brew in two cases only: the
-blow (below), and a short Supply.
+**Turn Order buys denial, not barrels.** A number pours the same whoever picks it, so at a table where
+nobody blows the first and the last seat brew the same to two decimal places, at the opening and at a grown
+table, for a boss who brews on the spot and for one who counts the picks still to come. What the early pick
+buys is the blow before the brew: a blown Still pours nothing more that morning, so the boss who picks ahead
+of its owner takes the pour as well as the men, and the owner who picks ahead of the gunman has his barrels
+in before the shot. That is the whole of Turn Order's pull at the Brew, with a short Supply, and it is not
+small. A boss with no 7 and two Docks at the grown table, blowing whenever it pays him at 2.5 barrels a blow:
+
+| He picks | Three men on each 7: rivals lose a Day | Five men on each 7: rivals lose a Day |
+| --- | --- | --- |
+| 1st | 0.67 barrels, 0.58 men (0.19 blows) | 1.17 barrels, 1.83 men (0.31 blows) |
+| 2nd | 0.07 barrels, 0.08 men | 0.67 barrels, 1.65 men |
+| 3rd | nothing: he never fires | 0.31 barrels, 1.52 men |
+| 4th | nothing | 0.05 barrels, 1.38 men |
+
+The men die from any seat once the crews are fat enough to be worth a marker; the barrels are lost only
+ahead of the owners. With three men in each room the shot is worth taking only for the pour, so it is the
+first seat's alone.
 
 | Manhattan holds | Barrels a Day | Dry mornings |
 | --- | --- | --- |
@@ -305,8 +319,9 @@ Low. That is a habit to teach (the Town Planner could carry it) and one more thi
 
 **6. One Dock is no choice.** Every boss starts with one Dock, so in the first week the Brew is a roll
 and a yes or no, where the draft gave every boss a pick from Day 1. The choice of face arrives with the
-second Dock. And the low token's prize at the Brew is now the gun alone, since Turn Order moves no
-barrels: watch whether anybody still races to Lay Low on a Day he does not mean to blow.
+second Dock. And the low token's prize at the Brew is now the gun alone (the blow that takes a rival's
+pour, and his own pour in before a rival's blow): watch whether anybody still races to Lay Low on a Day
+when nobody means to blow.
 
 **7. Day 1's Wards.** The Bronx and Brooklyn open 6% ahead at the Brew because their Ward's Still is a 9 or
 a 5. It vanishes once three houses are down.
