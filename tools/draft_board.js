@@ -11,9 +11,8 @@
 // - Straight lines at a few exact angles: level, upright, 45 degrees, and the East River's
 //   harbour reach. Manhattan's west coast is one straight line, parallel to the East River,
 //   so Manhattan is one width from north to south. The rivers are even channels: the
-//   Hudson 44 wide, the East River, Hell Gate and the Sound 49. Since 2026-11-20 there is a fourth angle,
-//   Nick's: the Queens / Brooklyn line and the Manhattan / Bronx line both fall at 47 degrees (queensLine,
-//   bronxLine), Sugar Hill / Five Points runs parallel to them and Belmont / Hunts Point square to them.
+//   Hudson 44 wide, the East River, Hell Gate and the Sound 49. Two borders are off those angles since
+//   2026-11-20, both Nick's: the Queens / Brooklyn line (queensLine) and Belmont / Hunts Point.
 // - Square corners where it can be done (Nick: tight corners are dead space). A border
 //   meeting a slanted shore or border at a tight angle turns on a short foot (FOOT) to
 //   meet it square. The drafting reports any corner under 80 degrees.
@@ -166,17 +165,16 @@ function meet(a, b) {
 // first, get what the roomy ones can spare. Since the signs, they also keep the
 // signs' hangers short where a border can move without costing room.
 const SETTINGS = {
-  bronxCols: [657, 858], // Belmont | Fordham | Morris Park (665 and 855 until 2026-11-20, when the Bronx grew and then took its diagonal border; Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol; 685 and 871 until the evening-out of 2026-10-07)
-  bronxRow: 203, // Fordham and Morris Park / Throggs Neck, level to the east shore (185 until 2026-11-20)
-  huntsTop: 159, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees (135 until 2026-11-20)
-  hellGate: 346, // the Hell Gate's Bronx bank: level, in one line with the Sound (321.6 until 2026-11-20, when the Bronx took from Astoria and Whitestone: 333.6 at first, then 346 to place the diagonal Manhattan / Bronx line, whose east end is this bank's corner on the East River; it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
-  belmontShore: 0, // Belmont's Hudson shore, upright: 0 drops it straight onto the west end of the Manhattan / Bronx line, so shore, coast and line meet at one point; a number sets its x, and it follows the coast down to the line (492 until the diagonal, 2026-11-20, which would have left it a 30-unit run of coast)
-  splitFoot: 34, // the foot West Side | Sugar Hill turns on to meet the Manhattan / Bronx line square (longer than FOOT: it lets the upright sit far enough west for Sugar Hill's sign while Belmont / West Side keeps its 45)
-  manhattanSplit: 478, // West Side | Sugar Hill, upright (2026-11-18; 490 until 2026-11-20). With splitFoot it sets how much of the Manhattan / Bronx line is Belmont / West Side: 45 is the least
-  bronxLine: 47, // the Manhattan / Bronx line's fall from level, in degrees, kept the same as queensLine (Nick, 2026-11-20: one full diagonal from the Hudson to the corner where the Hell Gate meets the East River; hellGate slides it. Until then Sugar Hill's top ran level, at sugarTop, 180 and then 210)
-  manhattan: [340, 375, 535], // (340, 388, 540 until 2026-11-20; the row rose to 375 with the diagonal, to trim West Side) (298, 415, 540 until East Harlem went, 2026-11-18) level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
+  bronxCols: [647, 854], // Belmont | Fordham | Morris Park (665 and 855 until the Bronx grew, 2026-11-20; Fordham | Morris Park was 862 until 2026-09-30, moved with hpCol; 685 and 871 until the evening-out of 2026-10-07)
+  bronxRow: 195, // Fordham and Morris Park / Throggs Neck, level to the east shore (185 until 2026-11-20)
+  huntsTop: 151, // Belmont and Fordham / Hunts Point, level; above bronxRow, it drops to it at Throggs Neck at 45 degrees (135 until 2026-11-20)
+  hellGate: 333.6, // the Hell Gate's Bronx bank: level, in one line with the Sound (321.6 until 2026-11-20, when the Bronx took 12 from Astoria and Whitestone; it rose 3 degrees east to the Sound until 2026-09-30, a kink on Astoria's shore)
+  belmontShore: 492, // Belmont's Hudson shore, upright (until 2026-11-20 it hung off `corner` and `belmontWest`: 20 west of where a 45-degree line from the old four-way corner met the coast)
+  manhattanSplit: 468, // West Side | Sugar Hill, upright (2026-11-18; 490 until 2026-11-20. Further west and West Side's sign hangs lower; further east and Sugar Hill's does)
+  sugarTop: 210, // the Manhattan / Bronx line: Sugar Hill's level top, to which West Side's peak and Hunts Point's west corner are drawn (180 until 2026-11-20, when it dropped in two passes, Nick: pinch a bit from Manhattan for the Bronx) (Manhattan in five, 2026-11-18: level, so Belmont takes East Harlem's old top) Sugar Hill's top squared off level here (0: its point, TIPB)
+  manhattan: [340, 397, 540], // (340, 388, 540 until 2026-11-20) (298, 415, 540 until East Harlem went, 2026-11-18) level borders: Sugar Hill | West Side, the row across Manhattan, the Tenderloin | the Bowery (560 until 2026-10-07, across Five Points too)
   astoriaCorona: 545, // (530 until 2026-11-12) Astoria / Corona, level once its foot has left the Queens / Brooklyn line
-  hpCol: 801, // Hunts Point / Throggs Neck, upright (Fordham / Throggs Neck, bronxCols[1] less this, must stay 45 or more; 816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
+  hpCol: 800, // Hunts Point / Throggs Neck, upright (Fordham / Throggs Neck, bronxCols[1] less this, must stay 45 or more; 816 until 2026-09-30: moved east so Hunts Point's name fits on one line)
   queensCol: 850, // Astoria and Corona | Whitestone and Flushing, upright from the Hell Gate or the Sound (855 until 2026-11-12; 851 until 2026-10-07)
   queensRows: [545, 660, 743], // level borders: Whitestone | Flushing | Richmond Hill | Jamaica (Jamaica's top 735 until 2026-11-20, Nick: drop it a hair for Flushing; 488, 650 and 793 until 2026-11-12, when Whitestone and Richmond Hill grew, and Jamaica 808 until the bay was squared off the same day; 670 and 807 until 2026-10-07)
   queensLine: 47, // the Queens / Brooklyn line's fall from level, in degrees: 45 is square to the East River (2026-11-20, Nick: it could fall a touch more sharply, but straight, to pinch width from Brownsville)
@@ -185,7 +183,7 @@ const SETTINGS = {
   coronaBottom: 712, // Corona / Richmond Hill, level from the Queens / Brooklyn line (700 until 2026-10-07)
   williamsburgSouth: 751, // Williamsburg's southern point, on Red Hook / Brownsville
   redHookSouth: 796, // Red Hook's level south side
-  fpCol: 0, // Tenderloin / Five Points, upright: 0 drops it onto the crook in the East River, as from 2026-10-07 (375 from 2026-11-18, east of the crook; back on it 2026-11-20, since a few units off leaves the Bowery a stub of shore)
+  fpCol: 366, // Tenderloin / Five Points, upright (0: on the crook; 375 until 2026-11-20, when the Tenderloin and the Bowery took a strip: Nick, Five Points looked a touch too big)
   rhStub: 60, // Red Hook's shore runs upright this far above its south side: longer moves the Narrows east, widening Staten Island (10 until 2026-10-07)
   coneyEast: 492, // Coney Island / Canarsie, upright (440 until 2026-09-30, when it moved east so Coney Island's name fits on one line; 458 until 2026-10-07, when it moved with the Narrows)
   boweryBottom: 680, stapletonTop: 724, // the Kill van Kull between them, as wide as the Narrows (652 and 684 until 2026-10-25, when Staten Island went to two Districts and the Bowery took a point; 668 and 700 until 2026-10-07)
@@ -213,9 +211,7 @@ const BORO_GAP = 18; // a Borough's name, its capitals' middle, this far off its
 // Queensboro up the East River onto East Harlem's shore, which ends at Manhattan's row, a little
 // south of its middle so the bridge's name stays clear of the Hell Gate's bend (since 2026-10-07; it moved 12 down the river with the Hell Gate on 2026-11-20, or its name ran into Hunts Point's shore), and the Brooklyn up the harbour reach, mid-way along the stretch of
 // the Bowery's shore that faces Red Hook's (since 2026-10-07, when the Bowery's foot rose)
-// The Hell Gate's two follow it when hellGate moves (d, from the 321.6 the shifts were set at): the Hell Gate Bridge
-// stays in mid-channel, and the Queensboro keeps its distance down the East River from the Hell Gate's corner.
-const BRIDGE_SHIFT = S => { const d = S.hellGate - 321.6; return { 'Hell Gate Bridge': [30, d], 'Queensboro Bridge': [75 - d, -75 + d], 'Brooklyn Bridge': [16, -23] }; };
+const BRIDGE_SHIFT = { 'Hell Gate Bridge': [30, 0], 'Queensboro Bridge': [63, -63], 'Brooklyn Bridge': [16, -23] };
 const MIN_BORDER = 45; // a border that has shrunk still runs this far (25 mm), so it reads as a connection
 const GONE = ['north', 'east']; // Westchester and Nassau: the Districts meet the frame instead
 const FRAME_IN = 13; // the frame's hairline, as build_board.js draws it
@@ -289,18 +285,18 @@ function draft(S) {
   // Jamaica Bay's top shore, level from Canarsie's corner (2026-11-12: it was 853, which left
   // Brownsville a 45-degree notch at the bay's corner; now the bay is flush with Canarsie's shore)
   const BAY_TOP = SB_BAY[1];
+  // a level border's foot on the East River, square to it: [where it leaves the level, where it lands]
+  const riverFoot = y => { const q = [atY(ER_MN, y)[0] - FOOT * Math.SQRT2, y]; return [q, meet(line(q, [1, 1]), ER_MN)]; };
   const CROOK = atY(ER_BW, BOWERY_BANK); // where the Bowery's shore turns from the river's level turn down the harbour reach
   const WB_J = meet(line([BK_COL, S.williamsburgSouth], [1, 1]), ER_QN); // Williamsburg / Red Hook, square to the East River
-  // The Manhattan / Bronx line is one diagonal (Nick, 2026-11-20): BXL runs straight from the Hudson (BX_W) to
-  // the corner where the Hell Gate meets the East River, at bronxLine, the Queens / Brooklyn line's angle.
-  // Belmont / West Side, Belmont / Sugar Hill and Sugar Hill / Hunts Point all lie along it. West Side | Sugar
-  // Hill meets it on a foot (MS_TOP), or Sugar Hill's top corner would be 43 degrees, and Belmont / Hunts Point
-  // leaves it square (NOSE) for the foot of the Belmont / Fordham upright. Earlier the same day Sugar Hill's
-  // top ran level (sugarTop) between a peak on West Side and Hunts Point's west corner; before that Belmont
-  // had a leg down the Hudson and a tooth between two cut corners (sugarCut).
-  const EH_SHORE = meet(HG_BX, ER_MN), BA = (S.bronxLine || 45) * Math.PI / 180, BXL = line(EH_SHORE, [Math.cos(BA), Math.sin(BA)]);
-  const BX_W = meet(MN_WEST, BXL), NOSE = foot(BXL, [S.bronxCols[0], S.huntsTop]);
-  const BWX = S.belmontShore || BX_W[0], BW_C = atX(MN_WEST, BWX); // Belmont's shore upright, and where it meets the coast
+  // Belmont made plain (Nick's sketch, 2026-11-20: its shape was "a bit complex"). Sugar Hill's top runs
+  // level to NOSE, where its 45-degree side down to the Hell Gate begins; Belmont / Hunts Point is one straight
+  // line from there up to the foot of the Belmont / Fordham upright; and Belmont / West Side leaves the top of
+  // the West Side / Sugar Hill upright square to the coast (WS_PEAK), so West Side takes Belmont's old leg
+  // down the Hudson. Until then Belmont ran down the coast to a foot level with Sugar Hill's top, and came
+  // to a tooth between Hunts Point's cut north-west corner and Sugar Hill's cut north-east one (sugarCut).
+  const EH_SHORE = meet(HG_BX, ER_MN), NOSE = [EH_SHORE[0] - (EH_SHORE[1] - S.sugarTop), S.sugarTop];
+  const BWX = S.belmontShore, BW_C = atX(MN_WEST, BWX); // Belmont's shore upright, and where it meets the coast
   // Manhattan laid like bricks, in rows: Sugar Hill and East Harlem, West Side and East Harlem,
   // the Tenderloin and Five Points, the Bowery. One level line (m2, the row) crosses Manhattan
   // from shore to shore. Above it East Harlem's west side is upright (EHX), from where Sugar
@@ -311,19 +307,15 @@ function draft(S) {
   // keeps the bricks even. Five Points' upright drops straight onto the crook in the river
   // (CROOK), so Five Points runs down to it and the Bowery's top steps down there, from the
   // Tenderloin's foot (m3) to the crook.
-  const FPX = S.fpCol || CROOK[0]; // Five Points' west side (east of the crook since 2026-11-18)
+  const EHY = m2, FPX = S.fpCol || CROOK[0]; // Five Points' west side (east of the crook since 2026-11-18)
   const FP_FOOT = FPX > CROOK[0] + 1 ? [FPX, BOWERY_BANK] : CROOK; // where Five Points / the Bowery meets the river
-  // Sugar Hill / Five Points falls to the East River parallel to the Manhattan / Bronx line (2026-11-20), so
-  // Sugar Hill is a band between the two and meets the river square; it ran level, on a foot, until then.
-  // With the diagonal above it and a level foot, Sugar Hill was a wedge a quarter smaller than West Side.
-  const EB_J = meet(ER_MN, line([S.manhattanSplit, m2], BXL.d));
+  const [ebFoot, EB_J] = riverFoot(EHY);
   // Manhattan in five, side by side (Nick, 2026-11-18): West Side on the Hudson, Sugar Hill on the East River,
   // on one upright from Belmont's level foot down to the row
-  const MS = S.manhattanSplit, MS_ROW = [MS, m2];
-  const SF = S.splitFoot || FOOT, MS_TOP = atX(BXL, MS + SF * BXL.d[1]), MS_BEND = [MS, MS_TOP[1] + SF * BXL.d[0]]; // its foot on the Manhattan / Bronx line, and where the upright turns
-  if (FPX > MS - 3 || EB_J[0] < MS + MIN_BORDER) throw new Error('Five Points\' upright must sit west of West Side | Sugar Hill, and that clear of the East River');
-  if (BX_W[1] < BW_C[1] - 0.5) throw new Error('Belmont\'s shore must reach the coast at or above the Manhattan / Bronx line');
-  if (dist(BX_W, MS_TOP) < MIN_BORDER || NOSE[0] < MS_TOP[0] || dist(MS_TOP, NOSE) < MIN_BORDER || dist(NOSE, EH_SHORE) < MIN_BORDER || MS_BEND[1] > m2 - FOOT) throw new Error('The Manhattan / Bronx line needs 45 or more for each of Belmont / West Side, Belmont / Sugar Hill and Sugar Hill / Hunts Point');
+  const MS = S.manhattanSplit, MS_TOP = [MS, S.sugarTop], MS_ROW = [MS, m2];
+  const WS_PEAK = meet(MN_WEST, line(MS_TOP, [-1, -1])); // West Side's top corner on the Hudson
+  if (FPX > MS - 3 || ebFoot[0] < MS + 3) throw new Error('Five Points\' upright must sit west of West Side | Sugar Hill, and that clear of the East River');
+  if (WS_PEAK[1] < BW_C[1] + 3 || NOSE[0] < MS + MIN_BORDER) throw new Error('Belmont\'s shore must turn above West Side\'s top corner, and Sugar Hill\'s top run clear of West Side | Sugar Hill');
   if (m3 > BOWERY_BANK - 3) throw new Error('The Tenderloin / Bowery border must sit above the crook in the river');
   const HT = S.bronxRow - S.huntsTop, HT_DROP = [S.hpCol - HT, S.huntsTop];
   if (NOSE[0] > b1 - 3 || HT < 0 || (HT > 0 && HT_DROP[0] < b1 + 3)) throw new Error('Hunts Point\'s top must sit at or above the Bronx row, clear of Belmont / Fordham');
@@ -341,11 +333,11 @@ function draft(S) {
   const MOVE = {
     // New Jersey (see REPLACE)
     '382,0': [NJ_TOP[0], 0], '382,165': NJ_TOP, '0,707': NJ_END,
-    '464,108': MS_TOP, '606,191': NOSE, '650,191': NOSE, // the top of West Side | Sugar Hill, and Sugar Hill / Belmont / Hunts Point, both on the Manhattan / Bronx line
+    '464,108': MS_TOP, '606,191': NOSE, '650,191': NOSE, // the top of West Side | Sugar Hill, and Sugar Hill / Belmont / Hunts Point
     '544,0': [BWX, 0], '533,51': [BWX, W], '1056,0': [BRONX_EAST, 0], '1050,53': [BRONX_EAST, W],
     // Manhattan: level borders meeting one straight coast, each on a foot (Tenderloin / Bowery
     // meets the Bowery's upright shore square instead, once the coast has turned)
-    '371,248': BX_W, '535,279': [MS, m1],
+    '371,248': WS_PEAK, '535,279': [MS, m1],
     '290,360': MF[1][0], '523,357': [FPX, m2],
     '220,452': TB_W, '509,453': MS_ROW, '533,477': EB_J, '150,548': [FPX, m3],
     '466,549': FP_FOOT, '694,328': EH_SHORE,
@@ -376,18 +368,18 @@ function draft(S) {
   const TIP = atX(SOUND_BX, BRONX_EAST);
   const REPLACE = {
     // the Bronx: Belmont's shore upright from Manhattan's tip to the frame; Throggs Neck square
-    'water|belmont': [[BWX, W], ...(BX_W[1] > BW_C[1] + 3 ? [BW_C] : []), BX_W],
-    'belmont|west_side': [BX_W, MS_TOP],
+    'water|belmont': [[BWX, W], BW_C, WS_PEAK],
+    'belmont|west_side': [WS_PEAK, MS_TOP],
     'belmont|sugar_hill': [MS_TOP, NOSE],
     'throggs_neck|water': [[BRONX_EAST, S.bronxRow], TIP, BEND],
     'sugar_hill|hunts_point': [NOSE, EH_SHORE],
-    'sugar_hill|west_side': [MS_TOP, MS_BEND, MS_ROW],
+    'sugar_hill|west_side': [MS_TOP, MS_ROW],
     'west_side|five_points': [[FPX, m2], MS_ROW],
-    'sugar_hill|five_points': [MS_ROW, EB_J],
+    'sugar_hill|five_points': [MS_ROW, ebFoot, EB_J],
     'tenderloin|five_points': [[FPX, m2], [FPX, m3]],
     'tenderloin|bowery': onCoast ? [MF[2][0], MF[2][1], [FPX, m3]] : [TB_W, [FPX, m3]],
     ...(onCoast ? {} : { 'water|tenderloin': [MF[1][0], MN_TURN, TB_W] }),
-    'belmont|hunts_point': [[b1, S.huntsTop], NOSE], // one straight line, square to the Manhattan / Bronx line (a 45-degree cut across Hunts Point's corner from 2026-11-18)
+    'belmont|hunts_point': [[b1, S.huntsTop], NOSE], // one straight line (Nick's sketch, 2026-11-20; a 45-degree cut across Hunts Point's corner from 2026-11-18)
     'fordham|hunts_point': [[b1, S.huntsTop], ...(HT > 0 ? [HT_DROP] : []), [S.hpCol, S.bronxRow]],
     // Queens in five (2026-11-18): two columns, Astoria over Richmond Hill and Whitestone over
     // Flushing, on one upright from the Hell Gate to Jamaica
@@ -506,7 +498,7 @@ function regionsFrom(cs, moved) {
 }
 
 // Bridges keep their place (the old midpoint) and cross square to the new bank.
-function bridgesFor(cs, S) {
+function bridgesFor(cs) {
   const shoreOf = id => cs.filter(c => c.sides.includes(id) && c.sides.includes('water')).flatMap(c => c.pts.slice(1).map((q, k) => [c.pts[k], q]));
   const nearestSeg = (segs, q) => segs.reduce((best, s) => {
     const d = Math.min(...[0, 0.25, 0.5, 0.75, 1].map(t => dist(q, [s[0][0] + (s[1][0] - s[0][0]) * t, s[0][1] + (s[1][1] - s[0][1]) * t])));
@@ -522,7 +514,7 @@ function bridgesFor(cs, S) {
     return best && best.hit;
   };
   return geo.bridges.map(b => {
-    const [sx, sy] = BRIDGE_SHIFT(S)[b.name] || [0, 0];
+    const [sx, sy] = BRIDGE_SHIFT[b.name] || [0, 0];
     const m = [(b.a[0] + b.b[0]) / 2 + sx, (b.a[1] + b.b[1]) / 2 + sy], sa = shoreOf(b.join[0]), sb = shoreOf(b.join[1]);
     const [p, q] = nearestSeg(sa, m);
     let u = unit(-(q[1] - p[1]), q[0] - p[0]); // square to the bank
@@ -631,7 +623,7 @@ function check(cs, regions, bs) {
 // The whole map for a set of SETTINGS.
 function build(S) {
   const { chains: cs, moved } = chainsFor(S);
-  const regions = regionsFrom(cs, moved), bridges = bridgesFor(cs, S);
+  const regions = regionsFrom(cs, moved), bridges = bridgesFor(cs);
   for (const k of GONE) delete regions[k];
   return { chains: cs.filter(c => !c.sides.some(s => GONE.includes(s))), regions, bridges, labels: { ...draft(S).labels, bridges: bridgeLabels(bridges) } };
 }

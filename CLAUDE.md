@@ -1451,17 +1451,19 @@ mk-online needs the same update again (`mk-online-board-handoff.md`).
 **A second design, the Squared board, sits beside it as a proof** (Nick, 2026-11-21: put a pin in the
 board and try a fresh geometry, "more squared and abstract, yet recognisable NYC", like the London tube
 map). `tools/draft_board_squared.js` draws the same Districts, connections and bridges as rectangles on a
-grid, and `tools/build_board.js --variant=squared` renders it into `Art/Board/Squared/`. The board proper
-(proof v11, the diagonal Manhattan / Bronx line; Nick has not said whether he prefers it to v10's level line) is
-untouched and is still what the City Map page uses; mk-online is still on the board from before proof v9. The same day he found it "a bit too Minecraft" and asked for "something between, with some angles", more
+grid, and `tools/build_board.js --variant=squared` renders it into `Art/Board/Squared/`. The board proper is
+**proof v10** (the level Manhattan / Bronx line, Belmont made plain, the Queens / Brooklyn line at 47 degrees):
+Nick, 2026-11-24, "I think I want to keep v10 for now", having been torn between it and v11's diagonal line, which
+is in git (93fafc1). It is what the City Map page shows; mk-online is still on the board from before proof v9. The same day he found it "a bit too Minecraft" and asked for "something between, with some angles", more
 "authentically gangster map": that is the **Angled board** (`tools/draft_board_angled.js`, `--variant=angled`,
 `Art/Board/Angled/`), the Squared plan with a slanted East River and a tapering lower Manhattan. **Where it stands (Nick, 2026-11-21)**: of the board and my two redesigns, "the original is better than the two
 redesigns. They were worth exploring though." By "the original" he means the board itself, the version worked on
 first (proofs v9 to v11). So the Squared and Angled boards are finished experiments, kept for reference: don't
 develop them. **The Lean board is different**: a second agent drew it independently (`tools/draft_board_lean.js`,
 `--variant=lean`, `Art/Board/Lean/`: level courses, leaning avenues, the key and title as a legend on the Sound),
-and Nick "actually quite like[s]" it. He asked for it to be finished and then set side by side with the board. Until
-he picks, don't sync mk-online or the print PDF to either. `board-handoff.md` has all four.
+and Nick "actually quite like[s]" it. He asked for it to be finished and then set side by side with the board, and
+having seen them kept v10 "for now". The Lean board stays in the repo as it is. The print PDF is still the
+24-District board of 2026-11-11 and mk-online is behind too: both wait for Nick's word. `board-handoff.md` has all four.
 
 ## Staten Island: two Docks
 

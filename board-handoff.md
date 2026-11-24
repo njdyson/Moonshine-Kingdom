@@ -561,9 +561,14 @@ Gate (`BRIDGE_SHIFT`), or its name ran into Hunts Point's shore.
   Hill upright (`manhattanSplit` 468) trades one sign for the other.
 - **No connection changed** in either proof: 36 land borders and the four bridges, as before.
 
-**Proof v11** (Nick, on v10: make the Bronx border a full diagonal, ideally at the Queens border's
-angle, moved up or down to space the Districts evenly). This supersedes v10's Manhattan / Bronx
-border; the rest of v10 stands.
+**The board is v10** (Nick, 2026-11-24, after seeing v10, v11 and the Lean board side by side: "I think I
+want to keep v10 for now"). `tools/draft_board.js`, `tools/tune_board.js` and the board's files were put
+back to proof v10 that day; the map is byte for byte v10's. Proof v11, below, is in git (93fafc1) if the
+diagonal is wanted again: he was torn between the two.
+
+**Proof v11, not kept** (Nick, on v10: make the Bronx border a full diagonal, ideally at the Queens border's
+angle, moved up or down to space the Districts evenly). It replaced v10's Manhattan / Bronx border and
+kept the rest of v10.
 
 - **The Manhattan / Bronx line is one straight line** (`BXL`) from the Hudson to the corner where
   the Hell Gate meets the East River, falling at 47 degrees (`bronxLine`, kept equal to
