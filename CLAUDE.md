@@ -114,6 +114,48 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. Combat dice are one per Mobster, max five; Blowback kills half the crew, rounded down (since 2026-11-19; see *One die a man*). Blowback removes Runners first, so it never takes a Boss. Since 2026-11-20 any boss may blow his pick for 1 Heat (see *Brew or blow*).
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
+## Sunset Jobs: a third of the deck is a position held at Sunset
+
+Since 2026-11-24 (Nick; the proposal `/mnt/project-files/reviews/jobs-rework-2026-11-24.md`, bot rows in
+`/mnt/project-files/bot-runs/log.md`, rules-sync §82). **This supersedes** every Jobs section below wherever it lists
+cards, tiers or sets, or says a Job is only ever a deed (*Jobs: sets, and setup*, *Easy 1s, open bars*, *The Market
+pass*, *Jobs pay 1, 2 or 3*'s card notes).
+
+- **Two kinds of Job.** A **deed** (label "The Job") completes as your own Play ends, as before: the Rulebook's
+  *Deeds: The Play Is the Unit*. A **Sunset Job** (label "At Sunset", 15 of the 36) is a position: it completes at
+  **Sunset**, the instant the final boss Lays Low, if the board shows it then, before the Turn Tokens flip. Only that
+  instant counts, so nothing is tracked. Claimed while already held, it pays that evening and the table has a Hustle
+  to break it. All Sunset Jobs pay together; a Crown Day has no Sunset. Its one home is the Rulebook's *Sunset Jobs:
+  Hold It at Dusk*; the Sunset entry, the Glossary and the Town Planner restate it.
+- Why (Nick): Jobs had become pickups that fit a brew engine ("the winner is essentially who gets lucky with jobs").
+  He wants every Job a touch harder, a planned board puzzle, and accepts a longer game. A position held to dusk is
+  a target the table can see all Day.
+- **The deck is 12 / 16 / 8** (it was 16 / 12 / 8), every card still paying its Stake. The 1s: the four spare-Dock
+  Trades, The Pier Six Brawl, Union Dues, and six Sunset 1s (The Mother Ship, A Bridge to Sell, Cuban Prince, The
+  Beachhead, The Angel's Share, The Sit-Down). The 2s: Opening Night, The Insurance Job, Poison Panic (a Raid
+  padlocks a rival's Speakeasy), Last Call (Unload 4+ at a dive outside your home Borough), The Copper Heist, Coffin
+  Varnish (Seize where a rival Boss stands), **The Firebug** (destroy a rival's Safehouse), three bridges, and the
+  Sunset 2s: the Speakeasy set ("Control both Speakeasies in X", which replaced the Extort set, Nick's own example),
+  Tenement Army (5+ Mobsters in one District outside your home Borough) and **Three-Card Monte** (a District with
+  your Safehouse in each of three Boroughs). The 3s: The Butcher's Ledger, The Toll Booth Trap, High Roller, The Noble
+  Experiment, The Eviction (now "Seize a rival's home Ward"), and the Sunset 3s The Five Families (a District in all
+  five Boroughs), Last One Standing (3+ Districts in a rival's home Borough) and The Warehouse (8+ barrels in one
+  District).
+- **Cut:** the four dive Unload 1s (Giggle Water and High Spirits went; Last Call and Coffin Varnish kept their
+  names and art on new objectives, as did Poison Panic and The Angel's Share, the two Seize 1s), The Smuggler's Run,
+  and the Move version of A Bridge to Sell (a Sunset 1 now). The 1s that moved up: The Beachhead and Cuban Prince stay
+  1s as Sunset Jobs; Tenement Army is a Sunset 2.
+- **The Blood Oath**: "Nothing on Your Books" covers ground held as well as deeds, so a Sunset Job's "rival" is the
+  opposing Alliance.
+- Still open (the proposal's questions, unanswered): the tiers, whether King of Queens is a home puzzle, a rider for
+  the last boss up (he can grab a position after everyone else has Laid Low and cash it at once), Padlock-gated
+  bridges, and a blow Job.
+- Bots (10 games an arm, mk-online `lengthdiag --sunsetJobs=1`): 10 of 10 crowned, median Day 45.5, against 9 of 10
+  and 54 on the old deck; The Beachhead finished 9 of 9 claims, The Butcher's Ledger 0 of 13. Nick has little faith in
+  bot speed; the table is the test.
+- mk-online: `G.sunsetJobs`, `src/game/sunsetjobs.ts` (#103), a lobby checkbox, **off by default**; RULES-AI.md's base
+  text still describes the old deck. `tools/overlap_audit.py` models the old deck and was already stale.
+
 ## Turn Order runs the whole Day: #1 is first at everything
 
 Since 2026-11-24 (Nick, after the Brew or Blow review). **The Offers run in Turn Order**, as the Brew and the
