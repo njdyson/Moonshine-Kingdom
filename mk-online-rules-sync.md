@@ -1855,3 +1855,15 @@ mk-online #77.
 - Also from the same pass (wording, no rule change): a Raid that a blow sets off completes no Job (a blow is not a
   Play; the engine never counted it, since `G._playEvent` is empty at the Brew), so The Insurance Job needs a Raid from
   a Play of yours. Opening Night and The Noble Experiment read "Unload 5 Rum" (Unload sells up to 5).
+
+## 82. Sunset Jobs: the Jobs deck reworked (2026-11-24, Nick)
+
+- **The rule**: 15 of the 36 Jobs are **Sunset Jobs** (label "At Sunset"): a board position that completes at Sunset,
+  the instant the final boss Lays Low, if the board shows it then, before the Turn Tokens flip. The rest are deeds, as
+  before. The deck is 12 / 16 / 8; the full list and the cuts are in CLAUDE.md's *Sunset Jobs* section.
+- Rules set: the Jobs deck (`tools/gen_deck.py`, regenerated), the Rulebook (Pulling It Off, *Deeds: The Play Is the
+  Unit*, the new *Sunset Jobs: Hold It at Dusk*, the Sunset entry, the Blood Oath's Nothing on Your Books, the
+  Glossary), the Town Planner (Make a Play, Sunset), The Almanac (lesson 26's Eviction line), CLAUDE.md.
+- **mk-online: ported first, as a trial** (#103): `G.sunsetJobs`, `src/game/sunsetjobs.ts`, `completeSunsetJobs` in
+  `runSunset`, a lobby checkbox **off by default**. Still to do if it stays: make it the default for new games and
+  rewrite RULES-AI.md's Jobs text, which describes the old deck.
