@@ -505,7 +505,7 @@ TWOS = [
     # Five was where the Greed Tax started, so the pour always drew Heat: a cost beside the Kickbacks.
     # Since 2026-11-08 every Unload draws it.
     ("Opening Night", "Jimmy.jpg", "Unload",
-     "Unload <b>5+ Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.",
+     "Unload <b>5 Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.",
      "The band plays till four. Nobody asks a thing."),
 ]
 
@@ -656,7 +656,7 @@ THREES = [
     # outside your home Borough, which the Even City's Unload cap of 5 made impossible. Away, so it
     # never meets Opening Night (the same pour at home); a Venue Unload draws Heat, so the pour is loud.
     ("The Noble Experiment", "Full Steam.jpg", "Unload",
-     "Unload <b>5+ Rum</b> at a <b>High Society Venue</b> outside your <b>home Borough</b>.",
+     "Unload <b>5 Rum</b> at a <b>High Society Venue</b> outside your <b>home Borough</b>.",
      "Hoover called it noble. The bars call it Tuesday."),
     # The Warehouse: ten barrels under one roof, then the Safehouse moves in. Secure needs the
     # District Safe, so the barrels were brought or brewed there first, in plain sight. It meets Last

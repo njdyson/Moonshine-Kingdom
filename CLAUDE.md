@@ -145,6 +145,22 @@ Jobs first, or calls the token a trade (*The Market restocks after the Offers* a
 - mk-online is **not** changed yet: its Offers still run in reverse (`shadows.ts` `greaseOrder`), and its bots and
   RULES-AI say so. `mk-online-rules-sync.md` §80 has the port.
 
+## A Still pours every time its number is brewed
+
+Since 2026-11-24 (Nick; rules-sync §81). **This supersedes** every section below wherever it says a Still pours
+once a morning. A brew pours every active Still on its number again, so a number two bosses pick pours twice, if the
+Supply covers each pour. A blown Still pours nothing more that morning: the Blowback marker is the only thing the table
+tracks at the Brew. Why (Nick): no marker showed a Still that had poured, so the old rule was a memory test.
+
+- `tools/sim_brew_or_blow.js` models it by default (`--once` for the old rule). It lifts the opening from 0.76 to 0.81
+  barrels a Day to 0.83 to 0.89 and the grown table of section 6 from 10.47 to 13.42; dry mornings don't change. The
+  Almanac's Chapter I and its table were updated from the rerun; the review's figures below are the old rule's.
+- The same pass (wording only): **a Raid a blow sets off completes no Job** (a blow is not a Play; the Rulebook's Blow
+  line says so, and mk-online never counted it), so The Insurance Job needs a Raid from your own Play. Opening Night
+  and The Noble Experiment read "Unload 5 Rum", since Unload sells up to 5. The Rulebook's Boss blurb lost its "second
+  barrel" (the Safehouse pours it since 2026-11-20), and every component's title says v0.9.
+- mk-online: `G.repeatBrew`.
+
 ## The Brew or Blow review: lesson 4 is The Corkage
 
 Since 2026-11-24 (a deep dive Nick asked for; `brew-or-blow-review.md` holds the evidence, the strategy, the

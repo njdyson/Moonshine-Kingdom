@@ -1839,3 +1839,19 @@ mk-online #77.
   Jobs first; RULES-AI.md, the seat briefs and the Shadows panel's Offers order say "reverse". A `lengthdiag` knob
   for the old order would let the two be compared.
 
+
+## 81. A Still pours every time its number is brewed (2026-11-24, Nick)
+
+- **The rule**: a Still no longer pours once a morning. Each brew of its number pours it again, so a number two bosses
+  pick pours twice, as long as the Supply covers each pour in full. A blown Still is still spent for the morning (its
+  Blowback marker stops it pouring), so the Blowback marker is the only thing anyone has to track at the Brew.
+- Why (Nick): with only Blowback markers on the board, nothing marked a Still that had already poured, so a table
+  would have to remember which numbers were brewed; allowing the double pour removes the memory test.
+- Rules set: the Rulebook (Brew or Blow's Brew line), the Town Planner (the Brew), The Almanac (lessons 3, 4, 8 and
+  "What the morning pays"), `tools/sim_brew_or_blow.js` (now the default; `--once` models the old rule), CLAUDE.md.
+- **mk-online: ported** behind `G.repeatBrew` (new games; older saves keep once a morning). `stillSpent()` in
+  `shadows.ts` decides; `brewCost`, the Boss brew, `dockPreview` and the bot's brew score use it. RULES-AI.md says
+  so, and `scripts/blow-choice-check.ts` checks a second pour and a blown Still.
+- Also from the same pass (wording, no rule change): a Raid that a blow sets off completes no Job (a blow is not a
+  Play; the engine never counted it, since `G._playEvent` is empty at the Brew), so The Insurance Job needs a Raid from
+  a Play of yours. Opening Night and The Noble Experiment read "Unload 5 Rum" (Unload sells up to 5).
