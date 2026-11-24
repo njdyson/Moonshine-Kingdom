@@ -27,7 +27,7 @@ import uuid
 
 OPENAI_BASE = "https://api.openai.com/v1"
 GOOGLE_BASE = "https://generativelanguage.googleapis.com/v1beta"
-DEFAULT_MODELS = {"openai": "gpt-image-2", "google": "gemini-2.5-flash-image"}
+DEFAULT_MODELS = {"openai": "gpt-image-2", "google": "gemini-3.1-flash-image"}
 PLACEHOLDER = "proxy-injected"  # the cloud proxy overwrites this header
 
 
@@ -130,6 +130,27 @@ def list_models(provider):
                 print(name)
 
 
+def sniff_ext(data):
+    """The real format of image bytes, by their magic number."""
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return ".png"
+    if data[:3] == b"\xff\xd8\xff":
+        return ".jpg"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return ".webp"
+    return None
+
+
+def fix_ext(path, data):
+    """Rename to match the bytes, so a JPEG never lands in a .png file."""
+    real = sniff_ext(data)
+    stem, ext = os.path.splitext(path)
+    if real and ext.lower() not in ((real, ".jpeg") if real == ".jpg" else (real,)):
+        print(f"[note] model returned {real[1:].upper()}, saving as {stem + real}", file=sys.stderr)
+        return stem + real
+    return path
+
+
 def out_paths(out, count):
     if count == 1:
         return [out]
@@ -142,7 +163,7 @@ def main():
     ap.add_argument("prompt", nargs="?", help="what to draw")
     ap.add_argument("--out", help="output file (several images get -1, -2 ... suffixes)")
     ap.add_argument("--provider", choices=["openai", "google"], default="openai")
-    ap.add_argument("--model", help="model id (default: gpt-image-2 / gemini-2.5-flash-image)")
+    ap.add_argument("--model", help="model id (default: gpt-image-2 / gemini-3.1-flash-image)")
     ap.add_argument("--n", type=int, default=1, help="number of images")
     ap.add_argument("--ref", action="append", help="reference image to edit or match (repeatable)")
     ap.add_argument("--mask", help="OpenAI only: PNG mask, transparent where to repaint")
@@ -172,6 +193,7 @@ def main():
         sys.exit("No image came back. Try rewording the prompt.")
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     for path, img in zip(out_paths(args.out, len(images)), images):
+        path = fix_ext(path, img)
         with open(path, "wb") as f:
             f.write(img)
         print(path)
