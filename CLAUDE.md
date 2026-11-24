@@ -114,6 +114,41 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. Combat dice are one per Mobster, max five; Blowback kills half the crew, rounded down (since 2026-11-19; see *One die a man*). Blowback removes Runners first, so it never takes a Boss. Since 2026-11-20 any boss may blow his pick for 1 Heat (see *Brew or blow*).
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
+## The Brew or Blow review: lesson 4 is The Corkage
+
+Since 2026-11-24 (a deep dive Nick asked for; `brew-or-blow-review.md` holds the evidence, the strategy, the
+verdict and the watch list). **No rule changed.** The verdict: Brew or Blow is the best brew the game has had;
+keep it.
+
+- **`tools/sim_brew_or_blow.js`** is the brew's model: it reads the board from `tools/build_board.js` and
+  enumerates every Mash, Turn Order and roll, so its figures are exact. Every figure in The Almanac's Chapter I
+  comes from it. Its default boss is **stingy**: he brews what pours most for him and passes on a number that
+  pours only for rivals. Its section 10 prices an option that is **not a rule** (below).
+- What the sim found, and the Almanac now says: a starting family brews 0.76 to 0.81 barrels a Day and nothing on
+  48% of mornings; half of it comes off the neighbour's dice (the starts mirror, so the man on your side of the
+  river holds your twins); Turn Order moves no barrels (only the blow and a short Supply); two Secures on Day 1
+  lift the brew by 60%; a 7 is poor alone and the best Still in town in company (73% of mornings with four
+  bosses on two Docks each); taking a neighbour's twin gains nothing and costs him a third; a blow rarely pays on
+  bodies and barrels and pays before an assault, on a number the blower does not cook, or on a crew of four or more.
+- **The Almanac's Chapter I was rewritten.** Lesson numbers held. Lesson 4 is **The Corkage** ("Never pour another
+  man's number for nothing": the pass, and selling a pour for cash before you brew it); it replaced **The Other
+  Way Out** (bracket the ends), which was advice against a Harbormaster who chose the Mash: with a rolled Mash a
+  bracket is worth 0.04 barrels a Day, and it survives as one sentence in lesson 5. Lesson 8's maxim is "Every
+  boiler has a twin, and his dice pour yours". Lesson 2 says the low token "doesn't brew a barrel more". A table,
+  "What the morning pays", closes the chapter. Outside it, lesson 20 counts **four** sources of Heat (a blow is the
+  fourth) and lesson 23 has the blow as the Day's earliest Raid trigger.
+- Don't bring back: the Boss on the boiler (the Boss adds no barrel since 2026-11-20; two stale lines went), the
+  bracket as a lesson, or "the barrels and the gun" for the low token.
+- **Watch** (all in the review): a sensible table passes where the bots pour for rivals, so tables brew less than
+  bot runs show; at three players the boss alone on his side of the river brews half; the opening is thin; bots blow
+  far more than the arithmetic supports.
+- **On file, not a rule:** the middleman's cut (a boss whose pick pours only rivals' Stills takes 1 barrel
+  himself). It doubles the opening and closes the three-player gap. Don't add it without Nick asking; The Corkage
+  is the same idea with no rule.
+- The bot arms behind the review ran on a local mk-online 2a960b0 with two throwaway knobs (a per-seat blow price
+  and a per-seat pass); nothing was pushed to mk-online. The reviews and `bot-runs/log.md` under
+  `/mnt/project-files/` were not mounted that session, so the review's rows are not in the log.
+
 ## Three free Safehouses, each a barrel on its Still
 
 Since 2026-11-20 (Nick, after the haiku-4way-4 review, `/mnt/project-files/reviews/haiku-4way-4-brew-or-blow-2026-11-20.md`;
@@ -1456,7 +1491,7 @@ tapering to the south-west like the real island. Stapleton is no longer a Ward, 
 Wards are the only Wards. Every Still number now appears on exactly two Districts, but the 7s
 (four). Consequences, text unchanged: the Pressure 5 Stills are the four starting bars alone (The
 Copper Heist), and Staten Island's pair, a 2 beside a 12, is no bracket (only a Mash of 1 or 6
-lights either; The Almanac's lesson 4 says so). The same pass gave the Bowery a blunt point.
+lights either; The Almanac's lesson 4 said so until 2026-11-24, when The Corkage replaced it). The same pass gave the Bowery a blunt point.
 `board-handoff.md` has the geometry and its numbers.
 
 ## Respect shields are generated SVG
