@@ -1462,8 +1462,9 @@ first (proofs v9 to v11). So the Squared and Angled boards are finished experime
 develop them. **The Lean board is different**: a second agent drew it independently (`tools/draft_board_lean.js`,
 `--variant=lean`, `Art/Board/Lean/`: level courses, leaning avenues, the key and title as a legend on the Sound),
 and Nick "actually quite like[s]" it. He asked for it to be finished and then set side by side with the board, and
-having seen them kept v10 "for now". The Lean board stays in the repo as it is. The print PDF is still the
-24-District board of 2026-11-11 and mk-online is behind too: both wait for Nick's word. `board-handoff.md` has all four.
+having seen them kept v10 "for now". The Lean board stays in the repo as it is. The print PDF was rebuilt from
+v10 on 2026-11-24 (Nick asked; until then it was the 24-District board of 2026-11-11). mk-online is still behind and
+waits for his word. `board-handoff.md` has all four.
 
 ## Staten Island: two Docks
 

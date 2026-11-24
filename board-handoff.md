@@ -621,8 +621,8 @@ Tried on the way: the line alone, 18 down (Belmont 118, Hunts Point 83); 10 and 
 level at 100, but West Side's name wrapped); moving Williamsburg's top corner 4 up the river to
 give it its ground back (it undid the pinch: Brownsville 112, Richmond Hill 101).
 
-Not done here: mk-online needs the redraw if this is taken (`mk-online-board-handoff.md`), and the
-print PDF is older still (2026-11-11, the 24-District board), so `--print` is due either way. This
+The print PDF was rebuilt from v10 on 2026-11-24 (`--print`; it had been the 24-District board of
+2026-11-11). Not done: mk-online still needs the redraw (`mk-online-board-handoff.md`). This
 file has no section for the five-a-Borough redraw of 2026-11-18 (proofs v1 to v8); CLAUDE.md's
 *The Even City* and the comments in `draft_board.js` hold what is recorded of it.
 
