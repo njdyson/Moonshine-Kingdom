@@ -94,7 +94,7 @@ the war for what he left behind. Rules are unchanged; only the fiction moved:
   not a history. **The Almanac** is the prequel and the
   player-facing strategy book: Rothstein's advice to a young Charlie Lucania at Lindy's on
   4 November 1928, the night he was shot. It carries the scene, not the history.
-  Every Almanac lesson has a **name** before its maxim (The Reverse Snake, The Kill Shot, The
+  Every Almanac lesson has a **name** before its maxim (The Early Night, The Kill Shot, The
   Decoy Warehouse), mostly the Kingpin's Guide's coinages; keep them when editing, since the
   names are what players carry to the table (`almanac-review-handoff.md` 5.5).
 - The **Kingpin's Guide** was archived on 2026-10-07 and, with the rest of the repo's frozen
