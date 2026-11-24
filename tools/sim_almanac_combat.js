@@ -144,8 +144,8 @@ function section2() {
 
 // ---------------------------------------------------------------------------
 function section3() {
-  console.log("\n3. THE EVEN MAN: does the 4th and 6th body pay? (3 volleys)");
-  console.log("   Dice drop a tier when an odd crew loses one man (3 -> 2 men is 2 dice -> 1).\n");
+  console.log("\n3. THE SIXTH MAN: what each extra body buys (3 volleys)");
+  console.log("   One die a man up to five: the 6th and 7th roll nothing and only soak hits.\n");
   console.log("   raid      picket | duck take  loss | live take  loss");
   for (const occ of [{ r: 2 }, { r: 3 }, { r: 4 }]) {
     for (const r of [3, 4, 5, 6, 7]) {
@@ -189,7 +189,7 @@ function section4() {
 
 // ---------------------------------------------------------------------------
 function section5() {
-  console.log("\n5. THE LAST TURN: killing a qualified leader's Boss in his High Society room");
+  console.log("\n5. THE LAST TURN: killing a qualified leader's Boss in the rival Ward he has taken");
   console.log("   One rival, one Play (a Move and as many volleys as his Ledger holds).");
   console.log("   A Boss dies only when his Runners are gone, except to a Sicilian Hit.\n");
   console.log("   room          answer | raid          2 volleys  3 volleys  4 volleys");
@@ -215,10 +215,10 @@ function section5() {
 // ---------------------------------------------------------------------------
 function section6() {
   console.log("\n6. BRINGING THE BOSS: how often the raider's own Boss dies (live defender)");
-  console.log("   raid      defender  volleys | take  Boss dies");
+  console.log("   raid      defender  volleys | take  Boss dies  men lost");
   const row = (inv, occ, v) => {
     const x = run(inv, occ, "ambush", v);
-    console.log(`   ${crew(inv).padEnd(8)} ${post(occ).padStart(10)}  ${String(v).padStart(4)}    | ${pct(x.take)}  ${pct(x.invBossDead)}`);
+    console.log(`   ${crew(inv).padEnd(8)} ${post(occ).padStart(10)}  ${String(v).padStart(4)}    | ${pct(x.take)}  ${pct(x.invBossDead)}       ${num(x.invLoss)}`);
   };
   for (const occ of [{ r: 2 }, { r: 3 }, { r: 4 }]) {
     for (const r of [1, 2, 3, 4, 5]) row({ r, b: 1 }, occ, 3);
@@ -262,22 +262,12 @@ function section8() {
       console.log(`   Boss+${r}  ${String(p).padStart(4)}R  |     ${pct(dead / N)}        ${num(lost / N)}`);
     }
   }
-  const pairs = (dice) => {
-    let hit = 0;
-    const T = QUICK ? 200000 : 2000000;
-    for (let i = 0; i < T; i += 1) {
-      let c = 0;
-      for (let d = 0; d < dice; d += 1) if (C.d6() === 1) c += 1;
-      if (c >= 2) hit += 1;
-    }
-    return hit / T;
-  };
-  console.log(`\n   A given face shows twice or more in the Red pool: 4 players (5 Red) ${pct(pairs(5))}, 3 players (4 Red) ${pct(pairs(4))}`);
+  console.log("");
   console.log("   A Blowback kills half the crew, rounded down, Runners first: Boss+4 (5 men) keeps Boss+2, Boss+6 (7 men) keeps Boss+3.");
 }
 
 // ---------------------------------------------------------------------------
-// The 2026-10-06 pass (Tommy Gun 2026-10-15): the family figures in lesson 19 and the crewed Still in lesson 15.
+// The 2026-10-06 pass (Tommy Gun 2026-10-15): the family figures in lesson 19 and the crewed Still in lesson 14.
 function section9() {
   console.log("\n9. FAMILY EDGES AND THE FIVE-MAN STILL (3 volleys)");
   console.log("   raid               defender   answer | take  his Boss dies  your Boss dies");
@@ -291,7 +281,7 @@ function section9() {
   row({ r: 4, b: 1, tommy: true }, fortress, "ambush");
   console.log("   ...and with four markers, two Tommy Gun volleys against four Open Fires");
   console.log("   " + ["plain", "tommy"].map((k) => `${k} ${pct(run({ r: 4, b: 1, tommy: k === "tommy" }, fortress, "ambush", 4).take)}`).join("   "));
-  console.log("   Sicilian Hit into the fortress (lesson 19: better than eight times in ten)");
+  console.log("   Sicilian Hit into the fortress (lesson 19: his Boss dies nearly nine times in ten to a Boss and five)");
   for (const r of [4, 5, 6]) row({ r, b: 1, hit: true }, fortress, "ambush");
   console.log("   Vipers Stealth (no Standoff: the Occupier Holds Fire and can't Fold) vs the front door (lesson 19)");
   row({ r: 4, b: 1 }, { r: 2, b: 1, safe: true }, "hold");

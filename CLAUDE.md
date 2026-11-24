@@ -225,7 +225,12 @@ Since 2026-11-19 (Nick, after `/mnt/project-files/reviews/combat-dice-2026-11-19
   numbers). Every man up to five counts, and a sixth only soaks hits, which favours crews of three to five spread
   over the city over one 9-man pile. Per man also makes the Ambush, the Stealth and Boss kills stronger: watch Stealth.
 - The Almanac's combat figures (lessons 13 to 19, 26, 27) are the Small Mob's one-die numbers again (its combat is
-  the same: no Safehouse Threat, Threat max 3); `tools/sim_almanac_combat.js` reproduces them.
+  the same: no Safehouse Threat, Threat max 3); `tools/sim_almanac_combat.js` reproduces them. **Rechecked figure
+  by figure on 2026-11-24**: every table and odds line matched. Two lines of prose were Muscle Ratio leftovers and
+  went (lesson 14's picket cost "two or three volleys", now "a volley or two"; lesson 19's Tommy Gun now says its
+  extra die is for a crew short of five), and the sim lost three stale labels (the "even man" dice tier, the Red
+  pool's odds, the High Society crown room) and now prints lesson 13's losses. Lesson 18's piles on a 1 to 3% hold
+  wobble a few hundred dollars between runs; that is sampling, not drift.
 - The Playbooks' resolution table is three columns (Mobsters, Dice, Blowback: 1, 2, 3, 4, 5+ with "half").
 - mk-online: `G.dieAMan`; Even City saves without it keep the Muscle Ratio.
 
@@ -1210,8 +1215,8 @@ Tunnel. The Playbooks lost their Faction Trait panel, and its room went to the r
 Watch in playtest:
 
 - **The Tommy Gun** costs a volley: on three markers it lifts a Boss and four into a Boss and three
-  from 19% to 27%; on four, two bursts take it 58% against 29% (`tools/sim_almanac_combat.js`, Muscle
-  Ratio, 2026-11-19).
+  from 9% to 18%; on four, two bursts take it 24% against 10% (`tools/sim_almanac_combat.js`, one die a
+  man, rechecked 2026-11-24). Its extra die stops at five, so a crew of five gets the Threat alone.
 - **Whispers** claims outside the Offers, so the Vipers can take a 3 off the deck on Day 1.
 
 ## Consigliere costs 2
@@ -1232,8 +1237,8 @@ Viper who wanted the block without a fight had to come by the front door, and th
 Occupier to Ambush). Nick accepts the tell now: the plain Move is how a Viper asks for a Fold, and the
 Stealth is how he comes to kill.
 
-Watch in playtest: a Boss and four on a Stealth take a Boss and two Runners nearly eight times in ten
-(The Almanac's lesson 19, Muscle Ratio; under one in two by the front door), and a lone Boss caught by one can't run, so the Vipers are the
+Watch in playtest: a Boss and four on a Stealth take a Boss and two Runners nineteen times in twenty
+(The Almanac's lesson 19, one die a man; four times in ten by the front door), and a lone Boss caught by one can't run, so the Vipers are the
 natural hunters for The Toll Booth Trap.
 
 ## Torch is a shot; Red dice for the Invader
