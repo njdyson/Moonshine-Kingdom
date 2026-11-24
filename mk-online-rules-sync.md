@@ -1824,3 +1824,18 @@ mk-online #77.
 - mk-online #101: `G.safehouses3`, `G.freeSecure`, `G.safeBrew` on new games (`secureCost(G)`, `dockBrewYield`'s
   Safehouse flag; the bot values a Safehouse on a Still). Older saves keep one Safehouse, $500 and the Boss barrel, and
   `render.ts` tells the agents. `lengthdiag --safehouses3=0 --freeSecure=0 --safeBrew=0` runs the old rules.
+
+## 80. Turn Order runs the Offers too: #1 is first at everything (2026-11-24, Nick)
+
+- **The rule**: the Offers run in **Turn Order** (they ran in reverse, the highest token first). The Brew and the
+  Hustle already ran in Turn Order, so Turn Token #1, the first boss to Lay Low, is first at all three.
+- Why (Nick): under Dock dice a number pours the same whoever picks it, so the low token's side of the old snake was
+  nearly empty and the last man up was paid twice. An early Lay Low is now a bid in Plays for first pick. Reversing
+  the Brew as well was weighed and not taken: it splits the first blow from the first move.
+- Rules set: the Rulebook (the Offers; Lay Low's token line), the Town Planner (the Offers; Lay Low), The Almanac
+  (lesson 2 is The Early Night, replacing The Reverse Snake; lesson 9), CLAUDE.md.
+- **mk-online: not ported.** To do: `shadows.ts` `greaseOrder` returns Turn Order for new games behind a switch (older
+  saves keep the reverse order); the bot's Lay Low timing and Offers valuation (`bot.ts`) assume the high token picks
+  Jobs first; RULES-AI.md, the seat briefs and the Shadows panel's Offers order say "reverse". A `lengthdiag` knob
+  for the old order would let the two be compared.
+

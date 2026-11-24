@@ -323,6 +323,10 @@ second Dock. And the low token's prize at the Brew is now the gun alone (the blo
 pour, and his own pour in before a rival's blow): watch whether anybody still races to Lay Low on a Day
 when nobody means to blow.
 
+Later the same day Nick answered this one: the Offers now run in Turn Order too, so the first boss to Lay
+Low is first at the Offers, the Brew and the Hustle (CLAUDE.md, *Turn Order runs the whole Day*). Where this
+file says the high token picks Jobs first, that was the rule when it was written.
+
 **7. Day 1's Wards.** The Bronx and Brooklyn open 6% ahead at the Brew because their Ward's Still is a 9 or
 a 5. It vanishes once three houses are down.
 

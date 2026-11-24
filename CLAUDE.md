@@ -114,6 +114,37 @@ This supersedes the older Titles, Hotspot, and Sweep notes below until they are 
 - There is no Sweep. Combat dice are one per Mobster, max five; Blowback kills half the crew, rounded down (since 2026-11-19; see *One die a man*). Blowback removes Runners first, so it never takes a Boss. Since 2026-11-20 any boss may blow his pick for 1 Heat (see *Brew or blow*).
 - No family has a passive Trait since 2026-10-15 (see *Mobsters hold turf; two Signature Plays a family*): Untouchable is gone, so a Squad may take any District in its reach.
 
+## Turn Order runs the whole Day: #1 is first at everything
+
+Since 2026-11-24 (Nick, after the Brew or Blow review). **The Offers run in Turn Order**, as the Brew and the
+Hustle already did, so Turn Token #1 (the first boss to Lay Low) is first at the Offers, the Brew and the Hustle.
+**This supersedes** every section below wherever it says the Offers run in reverse Turn Order, the high token picks
+Jobs first, or calls the token a trade (*The Market restocks after the Offers* and *Easy 1s, open bars* among them).
+
+- Why (Nick): the Reverse Snake "died along with the changed brew". The low token's old prize was first pick of a
+  shared pool of dice, which was barrels; under Dock dice a number pours the same whoever picks it, so the snake
+  paid the last man up twice (more Plays unanswered, and first pick of Jobs) and the early Lay Low almost nothing.
+  Now an early Lay Low is a bid in Plays for first pick tomorrow, anyone can make it, and it is "a rubber band to
+  the leader": a boss short of Plays that Day goes home first for nothing. Nick liked the old mechanic and judges
+  the new brew worth it.
+- **Weighed the same day and not taken: the Brew in reverse** (the last to Lay Low picks first at the Brew). It kept
+  the token a trade and gave the table a dawn answer to an early Lay Low, but it split the first blow from the first
+  move, which is the blow's best use (softening a garrison before your own assault). Don't bring it back.
+- The price of #1 is paid the night before: the Plays not made (a marker goes home for $100), no Ambush until
+  morning, and the tell (the Market is face-up all Day, so going home with markers says you want a card or a shot).
+  The table's answer is that evening, not the next morning.
+- Words: **"reverse Turn Order" is gone from the set**; the Rulebook's Offers say "In Turn Order" and its Lay Low
+  entry says Turn Order runs the whole Day ("First home, first up"). Don't write "the high token picks first", "the
+  low token shops from what's left" or "your token's a trade". The Almanac's lesson 2 is **The Early Night** ("The
+  first man home is the first man up"); **The Reverse Snake retired** with the rule, so don't bring the name back.
+  Lesson 9 says to go home first the night before the morning you claim.
+- Watch: **#1 defends itself** (the boss who moves first runs out of Plays first, so with equal markers he keeps the
+  token, and taking it costs a Play); **claim and fire** (the first claimant also moves first, so a Seize Job can be
+  claimed and done before anyone reacts that morning); and whether Days shorten as bosses go home early for a card.
+  Untested: no bot run and no table yet.
+- mk-online is **not** changed yet: its Offers still run in reverse (`shadows.ts` `greaseOrder`), and its bots and
+  RULES-AI say so. `mk-online-rules-sync.md` §80 has the port.
+
 ## The Brew or Blow review: lesson 4 is The Corkage
 
 Since 2026-11-24 (a deep dive Nick asked for; `brew-or-blow-review.md` holds the evidence, the strategy, the
@@ -135,11 +166,12 @@ keep it.
   man's number for nothing": the pass, and selling a pour for cash before you brew it); it replaced **The Other
   Way Out** (bracket the ends), which was advice against a Harbormaster who chose the Mash: with a rolled Mash a
   bracket is worth 0.04 barrels a Day, and it survives as one sentence in lesson 5. Lesson 8's maxim is "Every
-  boiler has a twin, and his dice pour yours". Lesson 2 says the low token "doesn't brew a barrel more". A table,
+  boiler has a twin, and his dice pour yours". Lesson 2 said the low token "doesn't brew a barrel more" (it was
+  rewritten later the same day as The Early Night; see above). A table,
   "What the morning pays", closes the chapter. Outside it, lesson 20 counts **four** sources of Heat (a blow is the
   fourth) and lesson 23 has the blow as the Day's earliest Raid trigger.
 - Don't bring back: the Boss on the boiler (the Boss adds no barrel since 2026-11-20; two stale lines went), the
-  bracket as a lesson, or "the barrels and the gun" for the low token.
+  bracket as a lesson, or "the barrels" as a prize of picking first at the Brew.
 - **Watch** (all in the review): a sensible table passes where the bots pour for rivals, so tables brew less than
   bot runs show; at three players the boss alone on his side of the river brews half; the opening is thin; bots blow
   far more than the arithmetic supports.
