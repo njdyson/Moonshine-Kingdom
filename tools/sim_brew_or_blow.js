@@ -5,8 +5,10 @@
  * Models Shadows step 2 as the Rulebook states it (since 2026-11-20): the Mash is on the
  * board, each boss in Turn Order rolls one Red die per Dock he Controls and picks one, then
  * brews Mash + die (every active Still on it pours, whoever owns it: 1 barrel, 2 beside its
- * owner's Safehouse, once a morning), blows it (every active Still on it loses half its crew,
- * rounded down, and pours nothing more) or passes.
+ * owner's Safehouse, every time its number is brewed, since 2026-11-24), blows it (every active
+ * Still on it loses half its crew, rounded down, and pours nothing more) or passes.
+ *
+ *   node tools/sim_brew_or_blow.js --once   the rule before 2026-11-24: a Still pours once a morning
  *
  * Nothing is sampled. Every Mash face, every Turn Order and every roll of every boss's dice
  * is enumerated, so the figures are exact for the position and the policy and don't wobble
@@ -62,6 +64,8 @@ const mashFaces = (n) => 6 - Math.abs(7 - n);
 
 // ------------------------------------------------------------------ one morning
 const blowDead = (crew) => Math.floor(crew / 2);
+// Since 2026-11-24 a Still pours each time its number is brewed; --once models the old rule.
+const ONCE = process.argv.includes("--once");
 
 /* A policy is a set of prices, in barrels:
  *   rival     what a barrel poured for a rival costs me (0: I don't care; 1/3: I'm racing three men)
@@ -122,7 +126,7 @@ function morning(pos, policies = {}, { orders, supply = 30, cut = 0 } = {}) {
     for (let j = 0; j < ids.length; j++) {
       if (N[j] !== n || (st.blown & (1 << j))) continue;
       if (type === "blow") { nx.blown |= 1 << j; nx.acc[2 * S + OWN[j]] += DEAD[j]; }
-      else if (!(st.poured & (1 << j))) {
+      else if (!ONCE || !(st.poured & (1 << j))) {
         nx.poured |= 1 << j; nx.supply -= POUR[j];
         nx.acc[OWN[j]] += POUR[j];
         if (OWN[j] === seat) nx.acc[S + seat] += POUR[j];
@@ -134,7 +138,7 @@ function morning(pos, policies = {}, { orders, supply = 30, cut = 0 } = {}) {
   function pourOf(st, seat, n) {
     let own = 0, other = 0;
     for (let j = 0; j < ids.length; j++) {
-      if (N[j] !== n || ((st.blown | st.poured) & (1 << j))) continue;
+      if (N[j] !== n || ((st.blown | (ONCE ? st.poured : 0)) & (1 << j))) continue;
       if (OWN[j] === seat) own += POUR[j]; else other += POUR[j];
     }
     if (own + other === 0 || own + other > st.supply) return null;
