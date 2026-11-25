@@ -142,8 +142,7 @@ def visible_len(t):
 def card(entry, respect):
     title, art, verb, obj, flav = entry[:5]
     sunset = len(entry) > 5 and entry[5]
-    # A Sunset Job reads "At Sunset" where a deed reads "The Job", and its text ends "at Sunset".
-    label = 'At Sunset' if sunset else 'The Job'
+    # A Sunset Job carries no label: its text ends "at Sunset", which says which kind it is.
     if sunset:
         obj = obj.rstrip('.') + ' at <b>Sunset</b>.'
     pips = "".join('<span class="pip"></span>' for _ in range(PIPS[respect]))
@@ -153,7 +152,6 @@ def card(entry, respect):
         f'    <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span>{pips}</span></div>\n'
         f'    <h2 class="title{longcls}">{title}</h2>\n'
         f'    <div class="art"><img src="Art/Jobs/{art}" alt=""></div>\n'
-        f'    <div class="job-label">{label}</div>\n'
         f'    <div class="job"><span>{obj}</span></div>\n'
         f'    <div class="flavour">{flav}</div>\n'
         f'    <div class="respect" data-respect="{respect}"></div>\n'
@@ -206,10 +204,10 @@ body = f'''<body>
   <div class="masthead-title">The Jobs Deck</div>
   <div class="masthead-sub">{VERSION} &middot; Complete Deck &middot; {total} Cards &middot; {len(ONES)} / {len(TWOS)} / {len(THREES)}</div>
   <p class="masthead-note">
-    Two kinds of Job. A <b>deed</b> (&ldquo;The Job&rdquo;) completes as your own Play ends, if that Play did it:
+    Two kinds of Job. A <b>deed</b> completes as your own Play ends, if that Play did it:
     a count is what that one Play did, and what happened during the Play counts even if undone before it ended.
-    A <b>Sunset Job</b> (&ldquo;At Sunset&rdquo;) is a position: it completes at Sunset, the instant the final boss
-    Lays Low, if the board shows it then.
+    A <b>Sunset Job</b>, whose text ends &ldquo;at Sunset&rdquo;, is a position: it completes at Sunset, the
+    instant the final boss Lays Low, if the board shows it then.
   </p>
 </div>
 
