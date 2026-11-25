@@ -148,24 +148,16 @@ body{
   pointer-events:none;
 }
 
-/* --- the job : fixed 13mm, so 1-line and 3-line cards match --- */
-.job-label{
-  flex:0 0 auto;
-  margin:1.8mm 0 .9mm;
-  text-align:center;
-  font:700 5.4pt Barlow;letter-spacing:2.2px;
-  color:var(--gold-dim);text-transform:uppercase;
-}
-/* A Sunset Job (2026-11-24): a position checked at Sunset, not a deed. Its label reads
-   "At Sunset" in bright gold under a small setting sun, so the two kinds sort at a glance. */
-.card--sunset .job-label{color:var(--gold-bright)}
-.card--sunset .job-label::before{content:"\25D2\00A0";font-size:6.4pt;letter-spacing:0}
+/* --- the job : at least 13mm, centred between the art and the flavour, so 1-line and
+   3-line cards match. No label above it (Nick, 2026-11-25): a Sunset Job's text ends
+   "at Sunset", which is all the card needs to say. --- */
 /* The text MUST stay wrapped in a single <span>. Flexing .job directly
    would make every <b> its own flex item and swallow the whitespace
    between them ("Move4+ Barrelsacross aBridge"). One child = safe,
    and lets the text centre in a fixed box so the art never shifts. */
 .job{
-  flex:0 0 13mm;
+  flex:1 0 13mm;
+  margin-top:1mm;
   display:flex;align-items:center;justify-content:center;
   padding:0 .4mm;
 }
@@ -384,10 +376,10 @@ body.trim .card,body.trim .back{border-radius:0}
   <div class="masthead-title">The Jobs Deck</div>
   <div class="masthead-sub">v0.9 &middot; Complete Deck &middot; 36 Cards &middot; 12 / 16 / 8</div>
   <p class="masthead-note">
-    Two kinds of Job. A <b>deed</b> (&ldquo;The Job&rdquo;) completes as your own Play ends, if that Play did it:
+    Two kinds of Job. A <b>deed</b> completes as your own Play ends, if that Play did it:
     a count is what that one Play did, and what happened during the Play counts even if undone before it ended.
-    A <b>Sunset Job</b> (&ldquo;At Sunset&rdquo;) is a position: it completes at Sunset, the instant the final boss
-    Lays Low, if the board shows it then.
+    A <b>Sunset Job</b>, whose text ends &ldquo;at Sunset&rdquo;, is a position: it completes at Sunset, the
+    instant the final boss Lays Low, if the board shows it then.
   </p>
 </div>
 
@@ -401,7 +393,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">Jamaica Ginger</h2>
     <div class="art"><img src="Art/Jobs/Rum Row 3.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Trade <b>4+ barrels</b> at <b>Jamaica</b>.</span></div>
     <div class="flavour">Sold by the case as a tonic. Nobody asks what ails you.</div>
     <div class="respect" data-respect="1"></div>
@@ -411,7 +402,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Dutchman's Deal</h2>
     <div class="art"><img src="Art/Jobs/Dutchman.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Trade <b>4+ barrels</b> at <b>the Bowery</b>.</span></div>
     <div class="flavour">He never gives a name. The windmill on the sack says plenty.</div>
     <div class="respect" data-respect="1"></div>
@@ -421,7 +411,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">Bathtub Gin</h2>
     <div class="art"><img src="Art/Jobs/Bathtub Chemistry.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Trade <b>4+ barrels</b> at <b>Belmont</b>.</span></div>
     <div class="flavour">Mixed in a tub off Arthur Avenue. Poured like champagne.</div>
     <div class="respect" data-respect="1"></div>
@@ -431,7 +420,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">Off the Boat</h2>
     <div class="art"><img src="Art/Jobs/Switch.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Trade <b>4+ barrels</b> at <b>Red Hook</b>.</span></div>
     <div class="flavour">Unloaded at midnight, poured by one, gone by two.</div>
     <div class="respect" data-respect="1"></div>
@@ -449,7 +437,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Pier Six Brawl</h2>
     <div class="art"><img src="Art/Jobs/Dock Domination.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Seize a <b>Dock</b>.</span></div>
     <div class="flavour">The pier belongs to whoever is still standing on it.</div>
     <div class="respect" data-respect="1"></div>
@@ -459,7 +446,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">Union Dues</h2>
     <div class="art"><img src="Art/Jobs/Union Dues.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Recruit <b>4+ Runners</b> in a rival&rsquo;s <b>home Borough</b>.</span></div>
     <div class="flavour">They line up at dawn. You decide who works.</div>
     <div class="respect" data-respect="1"></div>
@@ -469,7 +455,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">The Mother Ship</h2>
     <div class="art"><img src="Art/Jobs/Rum Row.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control <b>both Staten Island Docks</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">Forty ships past the three-mile line, waiting on a lamp.</div>
     <div class="respect" data-respect="1"></div>
@@ -479,7 +464,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title title--long">A Bridge to Sell</h2>
     <div class="art"><img src="Art/Jobs/Night Mayor.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control <b>both ends</b> of the <b>Brooklyn Bridge</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">He sold it to a rube on Tuesday. Tonight he charges the toll.</div>
     <div class="respect" data-respect="1"></div>
@@ -497,7 +481,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">Cuban Prince</h2>
     <div class="art"><img src="Art/Jobs/Cuban Prince.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control a <b>Dock</b> in <b>three Boroughs</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">Every boat from Havana ties up at one of his piers.</div>
     <div class="respect" data-respect="1"></div>
@@ -507,7 +490,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">The Beachhead</h2>
     <div class="art"><img src="Art/Jobs/Beachhead.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control a District Adjacent to a rival&rsquo;s <b>home Ward</b>, with <b>your Safehouse</b> in it at <b>Sunset</b>.</span></div>
     <div class="flavour">You should meet the neighbours. They&rsquo;d rather not.</div>
     <div class="respect" data-respect="1"></div>
@@ -517,7 +499,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Angel&rsquo;s Share</h2>
     <div class="art"><img src="Art/Jobs/The Angels Share.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Have <b>3+ Rum</b> in one District you Control at <b>Sunset</b>.</span></div>
     <div class="flavour">What the angels take, the house bills you for anyway.</div>
     <div class="respect" data-respect="1"></div>
@@ -527,7 +508,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span></span></div>
     <h2 class="title">The Sit-Down</h2>
     <div class="art"><img src="Art/Jobs/High Spirits.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Your <b>Boss</b> stands in a rival&rsquo;s <b>home Borough</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">He came alone, sat down, and ordered for both of them.</div>
     <div class="respect" data-respect="1"></div>
@@ -550,7 +530,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">Opening Night</h2>
     <div class="art"><img src="Art/Jobs/Jimmy.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Unload <b>5 Rum</b> at the <b>High Society Venue</b> in your <b>home Borough</b>.</span></div>
     <div class="flavour">The band plays till four. Nobody asks a thing.</div>
     <div class="respect" data-respect="2"></div>
@@ -560,7 +539,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Insurance Job</h2>
     <div class="art"><img src="Art/Jobs/Insurance Job.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Set off a Raid that <b>padlocks</b> a <b>Pressure 2 Still</b> you Control.</span></div>
     <div class="flavour">He struck the match himself. Slept fine after.</div>
     <div class="respect" data-respect="2"></div>
@@ -570,7 +548,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">Poison Panic</h2>
     <div class="art"><img src="Art/Jobs/Poison Panic.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Set off a Raid that <b>padlocks</b> a rival&rsquo;s <b>Speakeasy</b>.</span></div>
     <div class="flavour">One bad batch and the whole city stops drinking.</div>
     <div class="respect" data-respect="2"></div>
@@ -580,7 +557,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">Last Call</h2>
     <div class="art"><img src="Art/Jobs/Last Call.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Unload <b>4+ barrels</b> at a <b>dive</b> outside your <b>home Borough</b>.</span></div>
     <div class="flavour">Pour till the taps run dry and the sirens start up.</div>
     <div class="respect" data-respect="2"></div>
@@ -598,7 +574,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Copper Heist</h2>
     <div class="art"><img src="Art/Jobs/Copper Heist.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Seize a District with a <b>Pressure 5 Still</b>.</span></div>
     <div class="flavour">The good boilers run hot. So do the men who own them.</div>
     <div class="respect" data-respect="2"></div>
@@ -608,7 +583,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">Coffin Varnish</h2>
     <div class="art"><img src="Art/Jobs/Cutting.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Seize a District where a <b>rival Boss</b> stands.</span></div>
     <div class="flavour">He was drinking with the wrong man. Briefly.</div>
     <div class="respect" data-respect="2"></div>
@@ -618,7 +592,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">The Firebug</h2>
     <div class="art"><img src="Art/Jobs/Cobble Hill.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Destroy a rival&rsquo;s <b>Safehouse</b>.</span></div>
     <div class="flavour">Nobody saw a thing. Everybody smelled it.</div>
     <div class="respect" data-respect="2"></div>
@@ -628,7 +601,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">The Milk Run</h2>
     <div class="art"><img src="Art/Jobs/The Milk Run.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Move <b>4+ barrels</b> across the <b>Williamsburg Bridge</b>.</span></div>
     <div class="flavour">Every copper watches that bridge. Wave as you go.</div>
     <div class="respect" data-respect="2"></div>
@@ -646,7 +618,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">Hell&rsquo;s Highway</h2>
     <div class="art"><img src="Art/Jobs/Hells Highway.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Move <b>4+ barrels</b> across the <b>Hell Gate Bridge</b>.</span></div>
     <div class="flavour">Forty miles of bad road and worse intentions.</div>
     <div class="respect" data-respect="2"></div>
@@ -656,7 +627,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">The One-Way Ride</h2>
     <div class="art"><img src="Art/Jobs/Gatsby.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Move <b>4+ barrels</b> across the <b>Queensboro Bridge</b>.</span></div>
     <div class="flavour">Get in the car. Nobody asks where it is going.</div>
     <div class="respect" data-respect="2"></div>
@@ -666,7 +636,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">Empire State</h2>
     <div class="art"><img src="Art/Jobs/Empire State.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control <b>both Speakeasies</b> in <b>Manhattan</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">From Sugar Hill to the Tenderloin, every till pays one man.</div>
     <div class="respect" data-respect="2"></div>
@@ -676,7 +645,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">The Big Squeeze</h2>
     <div class="art"><img src="Art/Jobs/Big Squeeze.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control <b>both Speakeasies</b> in <b>the Bronx</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">The whole Bronx pays on Friday. Nobody has to ask twice.</div>
     <div class="respect" data-respect="2"></div>
@@ -694,7 +662,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">King of Queens</h2>
     <div class="art"><img src="Art/Jobs/King of Queens.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control <b>both Speakeasies</b> in <b>Queens</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">Every glass poured in Queens, the King takes a sip.</div>
     <div class="respect" data-respect="2"></div>
@@ -704,7 +671,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">The Black Hand</h2>
     <div class="art"><img src="Art/Jobs/Black Hand.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control <b>both Speakeasies</b> in <b>Brooklyn</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">The letter had a hand drawn on it. The shop paid by noon.</div>
     <div class="respect" data-respect="2"></div>
@@ -714,7 +680,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">Tenement Army</h2>
     <div class="art"><img src="Art/Jobs/Tenament Army.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Have <b>5+ of your Mobsters</b> in one District outside your <b>home Borough</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">Word goes round by supper. By dark, you have a crew.</div>
     <div class="respect" data-respect="2"></div>
@@ -724,7 +689,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">Three-Card Monte</h2>
     <div class="art"><img src="Art/Jobs/Quiet Drop.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>In each of <b>three Boroughs</b>, Control a District with <b>your Safehouse</b> in it at <b>Sunset</b>.</span></div>
     <div class="flavour">Follow the house. Find the house. Lose your shirt.</div>
     <div class="respect" data-respect="2"></div>
@@ -747,7 +711,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Butcher&rsquo;s Ledger</h2>
     <div class="art"><img src="Art/Jobs/Butchers Ledger.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Seize a District from <b>4+ rival Mobsters</b>.</span></div>
     <div class="flavour">Every name in it is crossed out but one.</div>
     <div class="respect" data-respect="3"></div>
@@ -757,7 +720,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Toll Booth Trap</h2>
     <div class="art"><img src="Art/Jobs/Toll Booth Trap.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Kill a <b>rival Boss</b>.</span></div>
     <div class="flavour">A toll is a toll. Somebody always pays it.</div>
     <div class="respect" data-respect="3"></div>
@@ -767,7 +729,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">High Roller</h2>
     <div class="art"><img src="Art/Jobs/High Roller.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Seize a <b>High Society Venue</b>.</span></div>
     <div class="flavour">Everyone at the big table brought a stake. He brought a pistol.</div>
     <div class="respect" data-respect="3"></div>
@@ -777,7 +738,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Noble Experiment</h2>
     <div class="art"><img src="Art/Jobs/Full Steam.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Unload <b>5 Rum</b> at a <b>High Society Venue</b> outside your <b>home Borough</b>.</span></div>
     <div class="flavour">Hoover called it noble. The bars call it Tuesday.</div>
     <div class="respect" data-respect="3"></div>
@@ -795,7 +755,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">The Eviction</h2>
     <div class="art"><img src="Art/Jobs/Crimson Coup.jpg" alt=""></div>
-    <div class="job-label">The Job</div>
     <div class="job"><span>Seize a rival&rsquo;s <b>home Ward</b>.</span></div>
     <div class="flavour">Nice place. He won&rsquo;t be needing it.</div>
     <div class="respect" data-respect="3"></div>
@@ -805,7 +764,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">The Five Families</h2>
     <div class="art"><img src="Art/Jobs/Scheme.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control a District in <b>all five Boroughs</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">Not the richest table in town. Just the widest.</div>
     <div class="respect" data-respect="3"></div>
@@ -815,7 +773,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title title--long">Last One Standing</h2>
     <div class="art"><img src="Art/Jobs/Last One Standing.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Control <b>3+ Districts</b> in a rival&rsquo;s <b>home Borough</b> at <b>Sunset</b>.</span></div>
     <div class="flavour">The last man at the table gets the chair.</div>
     <div class="respect" data-respect="3"></div>
@@ -825,7 +782,6 @@ body.trim .card,body.trim .back{border-radius:0}
     <div class="tier"><span class="stake"><span class="stake-lbl">Stake</span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
     <h2 class="title">The Warehouse</h2>
     <div class="art"><img src="Art/Jobs/Gin Pipeline.jpg" alt=""></div>
-    <div class="job-label">At Sunset</div>
     <div class="job"><span>Have <b>8+ barrels</b> in one District you Control at <b>Sunset</b>.</span></div>
     <div class="flavour">Eight barrels, one roof, and every cop can smell it.</div>
     <div class="respect" data-respect="3"></div>

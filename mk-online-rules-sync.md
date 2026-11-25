@@ -1858,7 +1858,7 @@ mk-online #77.
 
 ## 82. Sunset Jobs: the Jobs deck reworked (2026-11-24, Nick)
 
-- **The rule**: 15 of the 36 Jobs are **Sunset Jobs** (label "At Sunset"): a board position that completes at Sunset,
+- **The rule**: 15 of the 36 Jobs are **Sunset Jobs** (the text ends "at Sunset"; the cards carry no label): a board position that completes at Sunset,
   the instant the final boss Lays Low, if the board shows it then, before the Turn Tokens flip. The rest are deeds, as
   before. The deck is 12 / 16 / 8; the full list and the cuts are in CLAUDE.md's *Sunset Jobs* section.
 - Rules set: the Jobs deck (`tools/gen_deck.py`, regenerated), the Rulebook (Pulling It Off, *Deeds: The Play Is the

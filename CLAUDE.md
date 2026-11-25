@@ -121,8 +121,8 @@ Since 2026-11-24 (Nick; the proposal `/mnt/project-files/reviews/jobs-rework-202
 cards, tiers or sets, or says a Job is only ever a deed (*Jobs: sets, and setup*, *Easy 1s, open bars*, *The Market
 pass*, *Jobs pay 1, 2 or 3*'s card notes).
 
-- **Two kinds of Job.** A **deed** (label "The Job") completes as your own Play ends, as before: the Rulebook's
-  *Deeds: The Play Is the Unit*. A **Sunset Job** (label "At Sunset", 15 of the 36) is a position: it completes at
+- **Two kinds of Job.** A **deed** completes as your own Play ends, as before: the Rulebook's
+  *Deeds: The Play Is the Unit*. A **Sunset Job** (15 of the 36; its text ends "at Sunset", and since 2026-11-25 no card carries a label, Nick: "keep the card clean") is a position: it completes at
   **Sunset**, the instant the final boss Lays Low, if the board shows it then, before the Turn Tokens flip. Only that
   instant counts, so nothing is tracked. Claimed while already held, it pays that evening and the table has a Hustle
   to break it. All Sunset Jobs pay together; a Crown Day has no Sunset. Its one home is the Rulebook's *Sunset Jobs:
